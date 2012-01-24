@@ -2,6 +2,9 @@ from django.shortcuts import render_to_response
 from django.template import RequestContext
 from django.utils import importlib
 from django.views.decorators.cache import never_cache
+from django.http import HttpResponseRedirect
+from django.core.urlresolvers import reverse
+
 import settings
 import types
 
@@ -9,6 +12,9 @@ import types
 def index(request):
 
   page_name = request.META["PATH_INFO"][1:]
+
+  if page_name == '' or page_name == None:
+      return HttpResponseRedirect(reverse("landing", args=()))
 
   page_module_name = 'pages.'+page_name+'.page_settings'
   page_settings = importlib.import_module(page_module_name)
