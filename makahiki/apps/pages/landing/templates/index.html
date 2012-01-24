@@ -1,0 +1,17 @@
+{% extends setting_objects.BASE_TEMPLATE %}
+
+{% load class_tags %}
+
+{% block page_title %}
+    {{ setting_objects.PAGE_TITLE }}
+{% endblock %}
+
+{% block extra_head %}
+    {% import_page_css setting_objects.CSS STATIC_URL CSS_THEME %}
+{% endblock %}
+
+{% block body %}
+    <div>
+        {% include "gamelets/landing/templates/index.html" %}
+    </div>
+{% endblock %}
