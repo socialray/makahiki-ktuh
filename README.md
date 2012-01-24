@@ -12,11 +12,11 @@ This README describes how to set up your computer for Makahiki Development.
 * Pip. Check if it is installed by typing `pip help`. If not, install it by typing `easy_install pip`. If you do not have easy_install, download and follow the instructions [here](http://pypi.python.org/pypi/setuptools).
 * _Optional but recommended_ [Virtualenvwrapper](http://www.doughellmann.com/docs/virtualenvwrapper/). Virtualenv and Virtualenvwrapper allow you to install libraries separately from your global Python path. Follow the steps in the introduction and make a virtualenv for Makahiki (i.e. `mkvirtualenv makahiki`). You may also want to define $WORKON_HOME to your shell startup file in addition to adding the virtualenv startup script (it uses `~/.virtualenv` by default).
 
-## Obtaining the Kukui Cup Pinax source
-* If you only wish to download the source, you can check out using the read-only URL.  Type `git clone git://github.com/keokilee/makahiki.git` to get the source.
-* If you wish to commit to the Kukui Cup Pinax project, you will need to create an account at [GitHub](http://github.com).  Then, you will need to set up your [SSH keys](http://help.github.com/key-setup-redirect) and your [email settings](http://help.github.com/git-email-settings/).
+## Obtaining the Makahiki source
+* If you only wish to download the source, you can check out using the read-only URL.  Type `git clone git://github.com/csdl/makahiki.git` to get the source.
+* If you wish to commit to the Makahiki project, you will need to create an account at [GitHub](http://github.com).  Then, you will need to set up your [SSH keys](http://help.github.com/key-setup-redirect) and your [email settings](http://help.github.com/git-email-settings/).
 * Once those are set up, send me your Git username so that you can be added as a collaborator.
-* When you are added as a collaborator, you should be able to check out the code by using the private url.  Type `git clone git@github.com:keokilee/makahiki.git` to check out the code.  This will create the new folder and download the code from the repository.
+* When you are added as a collaborator, you should be able to check out the code by using the private url.  Type `git clone git@github.com:csdl/makahiki.git` to check out the code.  This will create the new folder and download the code from the repository.
 
 ## Grabbing External Dependencies
 The following steps are to download additional libraries and upgrade some of the default ones.
@@ -29,12 +29,8 @@ The following steps are to download additional libraries and upgrade some of the
 * If you used virtualenvwrapper, activate the virtual environment by typing `workon <environment-name>`.
 * Update makahiki_settings.py with the settings related to the competition.  Important settings include the CAS authentication server for your organization and your time zone.
 * Copy example\_settings/local\_settings.py.dev to local\_settings.py.  This file provides additional modules for testing and can be used to override previously defined settings.  For example, you can specify a different database in this file.
-* Type `python manage.py syncdb` to create the database.
-* It will ask you if you want to create a superuser.  Say "no", as this will be done in a later step.
+* Type `python manage.py syncdb --noinput` to create the database.
 * Run `python manage.py migrate` to sync the migrations.
-* Run `python manage.py createsuperuser` to create a user.
-* IMPORTANT: If you are using CAS, use your CAS username as your username.  This is so that you can authenticate via the CAS login server.
-* Type in a valid email address and any password you like (you probably won't use the password, but emails might be activated later).
 * To load some sample data into the application, type `./scripts/load_data.sh`.  If you are on Windows, you can use `scripts\load_data.bat`.
 
 ## Running the server
@@ -54,13 +50,6 @@ FACEBOOK_SECRET_KEY = '&lt;SECRET_KEY&gt;'
 
 These can be found in your application's page within the Facebook Developer page.
 
-## Troubleshooting
-If you visit http://localhost:8000 and a NoneType exception appears, it is isn't your fault!  Django/Pinax has an issue with dumping and loading fixtures that depend on foreign keys.  In this case, it is the foreign key that connects the django\_generic\_flatblocks\_genericflatblock table to the django\_content\_type table.  There are several ways of fixing this.
-
-The most straightforward way to fix this is to use [SQLite Database Browser](http://sqlitebrowser.sourceforge.net/) to update the tables.  Open the database file (by default, it is "dev.db") and browse the data of the "django\_generic\_flatblocks\_genericflatblock" table.  Note the values of the website header field (which is of type "title"), the website footer field (type "text"), the website image field (type "image"), and the homepage\_content\_1 field (type "titleandtext"). Next, browse the contents of the "django\_content\_type" table.  Find the app_label "gblocks" and the names "title", "text", "image", and "titleandtext".  What you need to do is execute SQL to update the entries in the "django\_generic\_flatblocks\_genericflatblock" table.  An example statement is:
-
-`UPDATE django_generic_flatblocks_genericflatblock SET content_type_id=<value in django_content_type> WHERE content_type_id=<value in django_generic_flatblocks_genericflatblock>;`
-
 ## Running tests
 While Django/Pinax has support for running tests, some of the out of the box tests fail (as of Pinax 0.7.1).  You can run the tests using `python manage.py test`.  I created my own script to only run my own tests in the system.  You can run those tests by typing `python runtests.py`.  These are the same tests that are run by our continuous integration server.
 
@@ -77,4 +66,4 @@ The following tutorials may be helpful when learning about Django and the variou
 * [South Tutorial](http://south.aeracode.org/docs/tutorial/part1.html)
 
 ## Further documentation
-For information on editing views, consult the [Editing Views wiki](http://wiki.github.com/keokilee/makahiki/editing-views).
+Consult the [Wiki] (https://github.com/csdl/makahiki/wiki).

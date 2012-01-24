@@ -77,10 +77,10 @@
   </div>
 </div>
 
-{% include "notifications/list.html" %}
+{#    {% include "notifications/list.html" %} #}
 
 {% block quests %}
-  {% include "quests/quest_box.html" %}
+ {#  {% include "quests/quest_box.html" %}  #}
 {% endblock %}
 
 {% if messages %}
@@ -96,7 +96,8 @@
 {% endblock %}
 
 {% block extra_body_base %}
-{% include "ask_admin/feedback_dialog.html" %}
+
+{#   {% include "ask_admin/feedback_dialog.html" %} #}
 
 <div id="widget-help-dialog" title="Help" style="display: none">
 </div>

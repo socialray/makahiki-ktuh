@@ -117,17 +117,17 @@ MIDDLEWARE_CLASSES = (
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     # 'account.middleware.LocaleMiddleware',
     'django.middleware.doc.XViewMiddleware',
-    'pagination.middleware.PaginationMiddleware',
+    #'pagination.middleware.PaginationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     #'django.middleware.csrf.CsrfResponseMiddleware',
     'lib.django_cas.middleware.CASMiddleware',
-    'pages.home.middleware.CompetitionMiddleware',
-    'lib.minidetector.Middleware',
-    'components.makahiki_profiles.middleware.LoginTrackingMiddleware',
-    'pages.home.middleware.CheckSetupMiddleware',
-    'components.logging.middleware.LoggingMiddleware',
-    'django.middleware.cache.FetchFromCacheMiddleware',
+#    'pages.home.middleware.CompetitionMiddleware',
+#    'lib.minidetector.Middleware',
+#    'services.player_mgr.middleware.LoginTrackingMiddleware',
+#    'pages.home.middleware.CheckSetupMiddleware',
+#    'components.logging.middleware.LoggingMiddleware',
+#    'django.middleware.cache.FetchFromCacheMiddleware',
 )
 
 # Cache settings
@@ -144,14 +144,14 @@ CACHE_MIDDLEWARE_SECONDS = 600
 
 AUTHENTICATION_BACKENDS = (
     'django.contrib.auth.backends.ModelBackend',
-    'components.makahiki_auth.models.MakahikiCASBackend',
+    'services.auth_mgr.models.MakahikiCASBackend',
 )
 
 ROOT_URLCONF = 'urls'
 
 TEMPLATE_DIRS = (
     os.path.join(os.path.dirname(__file__), "templates"),
-    # os.path.join(PINAX_ROOT, "templates", PINAX_THEME),
+    os.path.join(PROJECT_ROOT, "apps"),
 )
 
 TEMPLATE_CONTEXT_PROCESSORS = (
@@ -166,52 +166,37 @@ TEMPLATE_CONTEXT_PROCESSORS = (
     # "account.context_processors.openid",
     # "account.context_processors.account",
     
-    "components.makahiki_base.context_processors.competition",
-    "components.makahiki_themes.context_processors.css_selector",
+    "services.context_processors.competition",
+#    "components.makahiki_themes.context_processors.css_selector",
 )
 
 INSTALLED_APPS = (
     # Makahiki pages
-    'pages.view_activities',
-    'pages.view_profile',
-    'pages.view_energy',
-    'pages.view_help',
-    'pages.view_canopy',
-    'pages.home',
-    'pages.landing',
-    'pages.news',
-    'pages.mobile',
-    'pages.view_prizes',
-    'pages.status',
-    
+    'pages',
+
     # Makahiki components
-    'components.activities',
-    'components.analytics',
-    'components.api',
-    'components.ask_admin',
-    'components.canopy',
-    'components.energy_goals',
-    'components.floors',
-    'components.help_topics',
-    'components.logging',
-    'components.makahiki_auth',
-    'components.makahiki_avatar',
-    'components.makahiki_badges',
-    'components.makahiki_base',
-    'components.makahiki_facebook',
-    'components.makahiki_notifications',
-    'components.makahiki_profiles',
-    'components.makahiki_themes',
-    'components.prizes',
-    'components.quests',
-    'components.resources',
-    'components.standings',
-    
+    'services',
+    'services.auth_mgr',
+    'services.avatar_mgr',
+    'services.base_mgr',
+    'services.team_mgr',
+    'services.player_mgr',
+    'services.cache_mgr',
+
+    'gamelets.prizes',
+    'gamelets.smartgrid_game',
+    'gamelets.energy_game',
+    'gamelets.quests',
+    'gamelets.upcoming_events',
+    'gamelets.badges',
+    'gamelets.notifications',
+
+
     # 3rd party libraries
     'lib.django_cas',
     'lib.brabeion',
     'lib.minidetector',
-    
+
     # Django and Pinax apps
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -224,15 +209,15 @@ INSTALLED_APPS = (
     # external
     # 'notification', # must be first
     # 'django_openid',
-    'emailconfirmation',
-    'mailer',
-    'pagination',
-    'timezones',
-    'ajax_validation',
-    'uni_form',
-    'dbtemplates',
+#    'emailconfirmation',
+#    'mailer',
+#    'pagination',
+#    'timezones',
+#    'ajax_validation',
+#    'uni_form',
+#    'dbtemplates',
     'staticfiles',
-    'django_extensions',
+#    'django_extensions',
     
     # internal (for now)
     # 'basic_profiles',
@@ -241,19 +226,19 @@ INSTALLED_APPS = (
     'django.contrib.admindocs',
     
     # project specific
-    'sorl.thumbnail',
-    'frontendadmin',
-    'attachments',
+#    'sorl.thumbnail',
+#    'frontendadmin',
+#    'attachments',
     'django.contrib.markup',
     'django_generic_flatblocks',
     'django_generic_flatblocks.contrib.gblocks',
     
     # Dependencies for Sentry (http://justcramer.com/django-sentry/install.html)
     # Used for error tracking.
-    'indexer',
-    'paging',
-    'sentry',
-    'sentry.client',
+#    'indexer',
+#    'paging',
+#    'sentry',
+#    'sentry.client',
     
     # migration support. comment out if module is not installed.
     'south',
@@ -306,12 +291,7 @@ LOG_FILE = './makahiki.log'
 
 # Load additional settings files
 try:
-  from makahiki_settings import *
-except ImportError:
-  pass
-    
-try:
-  from competition_settings import *
+  from game_settings import *
 except ImportError:
   pass
   
@@ -323,18 +303,6 @@ except ImportError:
 try:
     INSTALLED_APPS += LOCAL_INSTALLED_APPS
 except:
-    pass
-
-# Note that the following settings override the previous settings.
-if DEMO:
-  try:
-    from demo.local_settings import *
-  except ImportError:
-    pass
-
-  try:
-    from demo.competition_settings import *
-  except ImportError:
     pass
     
 # Logging is defined down here to give local_settings a chance to override 
@@ -360,11 +328,11 @@ LOGGING = {
             'level':'DEBUG',
             'class':'django.utils.log.NullHandler',
         },
-        'sentry': {
-            'level': 'DEBUG',
-            'class': 'sentry.client.handlers.SentryHandler',
-            'formatter': 'verbose'
-        },
+#        'sentry': {
+#            'level': 'DEBUG',
+#            'class': 'sentry.client.handlers.SentryHandler',
+#            'formatter': 'verbose'
+#        },
         'console':{
             'level':'DEBUG',
             'class':'logging.StreamHandler',
@@ -382,11 +350,11 @@ LOGGING = {
         }
     },
     'loggers': {
-        'sentry.errors': {
-            'level': 'DEBUG',
-            'handlers': ['console'],
-            'propagate': False,
-        },
+#        'sentry.errors': {
+#            'level': 'DEBUG',
+#            'handlers': ['console'],
+#            'propagate': False,
+#        },
         'django': {
             'handlers':['null'],
             'propagate': True,

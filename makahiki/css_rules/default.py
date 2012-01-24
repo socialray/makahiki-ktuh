@@ -21,7 +21,7 @@ PAGE_CSS_IMPORT = {
   "landing": '<link rel="stylesheet" href="{0}css/{1}/pages/landing.css">',
   "mobile": '<link rel="stylesheet" href="{0}css/{1}/pages/mobile.css">',
   "news": '<link rel="stylesheet" href="{0}css/{1}/pages/news.css">\n<script src="{0}js/news.js" type="text/javascript"></script>',
-  "view_activities": '<link rel="stylesheet" href="{0}css/{1}/pages/view_activities.css">',
+  "getnutz": '<link rel="stylesheet" href="{0}css/{1}/pages/getnutz.css">',
   "view_energy": '<link rel="stylesheet" href="{0}css/{1}/pages/view_energy.css">\n<script src="{0}js/news.js" type="text/javascript"></script>',
   "view_help": '<link rel="stylesheet" href="{0}css/{1}/pages/view_help.css">',
   "view_prizes": '<link rel="stylesheet" href="{0}css/{1}/pages/view_prizes.css">',

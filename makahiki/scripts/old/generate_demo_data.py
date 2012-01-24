@@ -3,7 +3,7 @@ import string
 from django.db import IntegrityError
 
 def generate_floors():
-  from components.floors.models import Dorm, Floor
+  from services.team_mgr.models import Dorm, Floor
   dorms = Dorm.objects.all()
   floors = ["3-4", "5-6", "7-8", "9-10", "11-12"]
   for dorm in dorms:
@@ -14,7 +14,7 @@ def generate_floors():
 
 def generate_names():
   from django.contrib.auth.models import User
-  from components.floors.models import Floor
+  from services.team_mgr.models import Floor
 
   names = ["alana", "maile", "makani", "kalena", "ikaika", "pono", "kanani", "kanoe", "kahea", "kawika", "makena", "keoni", "keoki", "anuhea", "kealii"]
   initials = "abcdefghijklmnopqrstuvwxyz"
@@ -39,7 +39,7 @@ def generate_names():
 def generate_from_csdl():
   from components.makahiki_avatar.models import Avatar
   from django.contrib.auth.models import User
-  from components.floors.models import Floor
+  from services.team_mgr.models import Floor
   avatar_base = "avatars/sample/"
 
   members = {
@@ -100,7 +100,7 @@ def generate_from_csdl():
 def generate_csdl_for_floor(floor):
   from components.makahiki_avatar.models import Avatar
   from components.django.contrib.auth.models import User
-  from components.floors.models import Floor
+  from services.team_mgr.models import Floor
   avatar_base = "avatars/sample/"
 
   members = {
