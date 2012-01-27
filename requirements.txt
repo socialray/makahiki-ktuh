@@ -13,6 +13,7 @@ django-generic-flatblocks==0.9.1
 elementtree==1.2.7-20070827-preview
 django-staticfiles==0.1.2
 django-markup==0.3
+psycopg2=2.4.2
 #BeautifulSoup==3.0.7a
 #Fabric==1.0.1
 #CherryPy==3.2.0
