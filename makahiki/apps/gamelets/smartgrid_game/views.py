@@ -108,10 +108,10 @@ def __get_categories(user):
             smartgrid_game_activitybase.slug,
             smartgrid_game_activitybase.name,
             smartgrid_game_activity.event_date,
-            smartgrid_game_activity.point_value as 'activity_point_value',
+            smartgrid_game_activity.point_value as activity_point_value,
             smartgrid_game_activity.point_range_start,
             smartgrid_game_activity.point_range_end,
-            smartgrid_game_commitment.point_value as 'commitment_point_value'
+            smartgrid_game_commitment.point_value as commitment_point_value
           FROM smartgrid_game_activitybase
           LEFT JOIN smartgrid_game_activity
             ON (smartgrid_game_activity.activitybase_ptr_id = smartgrid_game_activitybase.id)
