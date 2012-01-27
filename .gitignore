@@ -37,3 +37,5 @@ htmlcov/
 # Ignore log file
 RoundONE.log
 
+# Ignore pycharm files
+.idea/
