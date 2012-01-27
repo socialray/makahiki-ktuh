@@ -55,7 +55,7 @@
   }, 
   {
     "pk": 929, 
-    "model": "makahiki_profiles.scoreboardentry", 
+    "model": "player_mgr.scoreboardentry",
     "fields": {
       "profile": 660, 
       "round_name": "Round 1", 
@@ -65,7 +65,7 @@
   }, 
   {
     "pk": 931, 
-    "model": "makahiki_profiles.scoreboardentry", 
+    "model": "player_mgr.scoreboardentry",
     "fields": {
       "profile": 662, 
       "round_name": "Round 1", 
@@ -75,7 +75,7 @@
   }, 
   {
     "pk": 932, 
-    "model": "makahiki_profiles.scoreboardentry", 
+    "model": "player_mgr.scoreboardentry",
     "fields": {
       "profile": 663, 
       "round_name": "Round 1", 
@@ -85,7 +85,7 @@
   }, 
   {
     "pk": 660, 
-    "model": "makahiki_profiles.profile", 
+    "model": "player_mgr.profile",
     "fields": {
       "last_visit_date": "2011-09-22", 
       "first_name": null, 
@@ -109,7 +109,7 @@
   }, 
   {
     "pk": 662, 
-    "model": "makahiki_profiles.profile", 
+    "model": "player_mgr.profile",
     "fields": {
       "last_visit_date": "2011-09-27", 
       "first_name": "", 
@@ -133,7 +133,7 @@
   }, 
   {
     "pk": 663, 
-    "model": "makahiki_profiles.profile", 
+    "model": "player_mgr.profile",
     "fields": {
       "last_visit_date": "2011-09-27", 
       "first_name": "", 
@@ -157,7 +157,7 @@
   }, 
   {
     "pk": 9, 
-    "model": "makahiki_profiles.pointstransaction", 
+    "model": "player_mgr.pointstransaction",
     "fields": {
       "submission_date": "2011-09-22 14:22:22", 
       "object_id": null, 
@@ -169,7 +169,7 @@
   }, 
   {
     "pk": 18, 
-    "model": "makahiki_profiles.pointstransaction", 
+    "model": "player_mgr.pointstransaction",
     "fields": {
       "submission_date": "2011-09-22 19:02:23", 
       "object_id": null, 
@@ -181,7 +181,7 @@
   }, 
   {
     "pk": 19, 
-    "model": "makahiki_profiles.pointstransaction", 
+    "model": "player_mgr.pointstransaction",
     "fields": {
       "submission_date": "2011-09-22 19:09:21", 
       "object_id": null, 
@@ -193,7 +193,7 @@
   }, 
   {
     "pk": 20, 
-    "model": "makahiki_profiles.pointstransaction", 
+    "model": "player_mgr.pointstransaction",
     "fields": {
       "submission_date": "2011-09-27 17:09:38", 
       "object_id": null, 
@@ -205,7 +205,7 @@
   }, 
   {
     "pk": 21, 
-    "model": "makahiki_profiles.pointstransaction", 
+    "model": "player_mgr.pointstransaction",
     "fields": {
       "submission_date": "2011-09-27 17:10:02", 
       "object_id": 1, 
@@ -217,7 +217,7 @@
   }, 
   {
     "pk": 22, 
-    "model": "makahiki_profiles.pointstransaction", 
+    "model": "player_mgr.pointstransaction",
     "fields": {
       "submission_date": "2011-09-27 17:09:47", 
       "object_id": 1, 
@@ -229,7 +229,7 @@
   }, 
   {
     "pk": 23, 
-    "model": "makahiki_profiles.pointstransaction", 
+    "model": "player_mgr.pointstransaction",
     "fields": {
       "submission_date": "2011-09-27 17:10:58", 
       "object_id": 1, 

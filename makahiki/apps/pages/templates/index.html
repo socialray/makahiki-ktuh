@@ -6,10 +6,25 @@
     {{ setting_objects.PAGE_TITLE }}
 {% endblock %}
 
+{% block selected_icon %}selected-{{ settings_objects.PAGE_NAME }}{% endblock %}
+
 {% block extra_head %}
     {% import_page_css setting_objects.CSS STATIC_URL CSS_THEME %}
+    <style> {{ setting_objects.RESPONSIVE_CSS }}</style>
 {% endblock %}
 
 {% block body %}
-    {% include setting_objects.PAGE_NAME %}
+    <table width="100%">
+        {%  for row in page_layouts.DEFAULT %}
+            <tr><td>
+                {% for column in row %}
+                    {% if column %}
+                        <div id = '{{ column.id }}' >
+                            {%  include column.template %}
+                        </div>
+                    {% endif %}
+                {%  endfor %}
+            </td></tr>
+        {% endfor %}
+    </table>
 {% endblock %}

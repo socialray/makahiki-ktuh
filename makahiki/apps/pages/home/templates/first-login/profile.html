@@ -21,7 +21,7 @@
           <p>Upload a new picture (optional):</p>
           {{form.avatar}}
           <div id="profile-picture-facebook">
-            {% include "home/first-login/profile-facebook.html" %}
+            {% include "pages/home/templates/first-login/profile-facebook.html" %}
           </div>
         </div>
         <div style="clear: both"></div>
@@ -48,5 +48,5 @@
 <div {% get_id_and_classes "progressbar" %}></div>
 
 <script type="text/javascript">
-  {% include "home/first-login/profile.js" %}
+  {% include "pages/home/templates/first-login/profile.js" %}
 </script>

@@ -122,10 +122,10 @@ MIDDLEWARE_CLASSES = (
     'django.middleware.csrf.CsrfViewMiddleware',
     #'django.middleware.csrf.CsrfResponseMiddleware',
     'lib.django_cas.middleware.CASMiddleware',
-#    'pages.home.middleware.CompetitionMiddleware',
-#    'lib.minidetector.Middleware',
-#    'services.player_mgr.middleware.LoginTrackingMiddleware',
-#    'pages.home.middleware.CheckSetupMiddleware',
+    'pages.home.middleware.CompetitionMiddleware',
+    'lib.minidetector.Middleware',
+    'services.player_mgr.middleware.LoginTrackingMiddleware',
+    'pages.home.middleware.CheckSetupMiddleware',
 #    'components.logging.middleware.LoggingMiddleware',
 #    'django.middleware.cache.FetchFromCacheMiddleware',
 )
@@ -166,7 +166,7 @@ TEMPLATE_CONTEXT_PROCESSORS = (
     # "account.context_processors.openid",
     # "account.context_processors.account",
     
-    "services.context_processors.competition",
+    "services.base_mgr.context_processors.competition",
 #    "components.makahiki_themes.context_processors.css_selector",
 )
 
@@ -261,7 +261,7 @@ MARKUP_CHOICES = (
 )
 WIKI_MARKUP_CHOICES = MARKUP_CHOICES
 
-AUTH_PROFILE_MODULE = 'makahiki_profiles.Profile'
+AUTH_PROFILE_MODULE = 'player_mgr.Profile'
 # NOTIFICATION_LANGUAGE_MODULE = 'account.Account'
 
 # ACCOUNT_OPEN_SIGNUP is not used by this project, but it acts as if it was

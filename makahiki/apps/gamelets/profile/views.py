@@ -11,11 +11,11 @@ from django.views.decorators.cache import never_cache
 
 from pages.view_profile.forms import ProfileForm
 from pages.view_profile import get_completed_members, get_in_progress_members
-from components.makahiki_facebook.models import FacebookProfile
+from services.facebook_mgr.models import FacebookProfile
 from services.player_mgr.models import Profile
 from gamelets.smartgrid_game.models import ActivityMember, CommitmentMember
 from gamelets.smartgrid_game import get_current_commitment_members
-import components.makahiki_facebook.facebook as facebook
+import services.facebook_mgr.facebook as facebook
 
 from lib.brabeion import badges
 from lib.brabeion.models import BadgeAward

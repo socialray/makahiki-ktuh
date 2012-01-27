@@ -10,8 +10,8 @@ from django.db.models import signals
 from lib.brabeion import badges
 
 from gamelets.smartgrid_game.models import Activity, ActivityMember, Commitment, CommitmentMember, Category
-from components.makahiki_avatar import create_default_thumbnails
-from components.makahiki_avatar.models import Avatar, avatar_file_path
+from services.avatar_mgr import create_default_thumbnails
+from services.avatar_mgr.models import Avatar, avatar_file_path
 from gamelets.quests import *
 from gamelets.quests.models import Quest, QuestMember
 from gamelets.prizes.models import RaffleDeadline, RafflePrize, RaffleTicket

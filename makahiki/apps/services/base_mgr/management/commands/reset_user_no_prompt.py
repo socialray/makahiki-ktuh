@@ -6,7 +6,7 @@ from django.core import management
 from django.conf import settings
 from django.contrib.auth.models import User
 
-from components.makahiki_facebook.models import FacebookProfile
+from services.facebook_mgr.models import FacebookProfile
 
 class Command(management.base.BaseCommand):
   help = 'Resets the user(s) as if they never took part in the competition.'

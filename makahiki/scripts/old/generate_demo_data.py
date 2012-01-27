@@ -37,7 +37,7 @@ def generate_names():
     profile.save()
     
 def generate_from_csdl():
-  from components.makahiki_avatar.models import Avatar
+  from services.avatar_mgr.models import Avatar
   from django.contrib.auth.models import User
   from services.team_mgr.models import Floor
   avatar_base = "avatars/sample/"
@@ -98,7 +98,7 @@ def generate_from_csdl():
     avatar.save()
     
 def generate_csdl_for_floor(floor):
-  from components.makahiki_avatar.models import Avatar
+  from services.avatar_mgr.models import Avatar
   from components.django.contrib.auth.models import User
   from services.team_mgr.models import Floor
   avatar_base = "avatars/sample/"

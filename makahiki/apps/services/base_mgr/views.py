@@ -30,7 +30,7 @@
 #     return HttpResponseRedirect(reverse("mobile_index"))
 #   # Check if a user is logged in and a valid participant.
 #   elif user.is_authenticated() and user.get_profile().floor:
-#     return HttpResponseRedirect(reverse("makahiki_profiles.views.profile", args=(request.user.id,)))
+#     return HttpResponseRedirect(reverse("player_mgr.views.profile", args=(request.user.id,)))
 #   else:
 #     return homepage(request)
 #   
