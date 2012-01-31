@@ -19,7 +19,7 @@ sys.path.insert(0, join(settings.PINAX_ROOT, "apps"))
 sys.path.insert(0, join(settings.PROJECT_ROOT, "apps"))
 
     
-from services.team_mgr.models import Floor
+from managers.team_mgr.models import Floor
         
 def competition_summary():
   """

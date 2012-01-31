@@ -6,8 +6,8 @@ from django.core.urlresolvers import reverse
 from django.contrib.auth.models import User
 from django.conf import settings
 
-from gamelets.smartgrid_game.models import Activity, ActivityMember
-from services.player_mgr.models import Profile
+from widgets.smartgrid.models import Activity, ActivityMember
+from managers.player_mgr.models import Profile
 
 class HomeFunctionalTestCase(TestCase):
   def testIndex(self):

@@ -30,7 +30,7 @@ sys.path.insert(0, join(settings.PROJECT_ROOT, "apps"))
 from django.contrib.auth.models import User
 
 from components.analytics.models import MakahikiLog
-from services.player_mgr.models import ScoreboardEntry, Profile
+from managers.player_mgr.models import ScoreboardEntry, Profile
 
 def raffle_allocation():
     raffle_file = open('raffle_allocation.csv', 'w')

@@ -18,11 +18,11 @@ from django.views.decorators.csrf import csrf_exempt
 from django.core.urlresolvers import reverse
 from django.db import IntegrityError
 
-from gamelets.smartgrid_game.models import Activity, ActivityMember
-from services.avatar_mgr.models import avatar_file_path, Avatar
-import services.facebook_mgr.facebook as facebook
+from widgets.smartgrid.models import Activity, ActivityMember
+from managers.avatar_mgr.models import avatar_file_path, Avatar
+import managers.facebook_mgr.facebook as facebook
 from pages.home.forms import FacebookForm, ProfileForm, ReferralForm
-from services.help_mgr.models import HelpTopic
+from managers.help_mgr.models import HelpTopic
 
 @never_cache
 @login_required

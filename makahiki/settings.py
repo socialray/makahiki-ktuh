@@ -124,7 +124,7 @@ MIDDLEWARE_CLASSES = (
     'lib.django_cas.middleware.CASMiddleware',
     'pages.home.middleware.CompetitionMiddleware',
     'lib.minidetector.Middleware',
-    'services.player_mgr.middleware.LoginTrackingMiddleware',
+    'managers.player_mgr.middleware.LoginTrackingMiddleware',
     'pages.home.middleware.CheckSetupMiddleware',
 #    'components.logging.middleware.LoggingMiddleware',
 #    'django.middleware.cache.FetchFromCacheMiddleware',
@@ -144,7 +144,7 @@ CACHE_MIDDLEWARE_SECONDS = 600
 
 AUTHENTICATION_BACKENDS = (
     'django.contrib.auth.backends.ModelBackend',
-    'services.auth_mgr.models.MakahikiCASBackend',
+    'managers.auth_mgr.models.MakahikiCASBackend',
 )
 
 ROOT_URLCONF = 'urls'
@@ -166,30 +166,31 @@ TEMPLATE_CONTEXT_PROCESSORS = (
     # "account.context_processors.openid",
     # "account.context_processors.account",
     
-    "services.base_mgr.context_processors.competition",
+    "managers.base_mgr.context_processors.competition",
 #    "components.makahiki_themes.context_processors.css_selector",
 )
 
 INSTALLED_APPS = (
     # Makahiki pages
+    'apps',
     'pages',
 
     # Makahiki components
-    'services',
-    'services.auth_mgr',
-    'services.avatar_mgr',
-    'services.base_mgr',
-    'services.team_mgr',
-    'services.player_mgr',
-    'services.cache_mgr',
+    'managers',
+    'managers.auth_mgr',
+    'managers.avatar_mgr',
+    'managers.base_mgr',
+    'managers.team_mgr',
+    'managers.player_mgr',
+    'managers.cache_mgr',
 
-    'gamelets.prizes',
-    'gamelets.smartgrid_game',
-    'gamelets.energy_game',
-    'gamelets.quests',
-    'gamelets.upcoming_events',
-    'gamelets.badges',
-    'gamelets.notifications',
+    'widgets.prizes',
+    'widgets.smartgrid',
+    'widgets.energy',
+    'widgets.quests',
+    'widgets.upcoming_events',
+    'widgets.badges',
+    'widgets.notifications',
 
 
     # 3rd party libraries
@@ -294,7 +295,12 @@ try:
   from game_settings import *
 except ImportError:
   pass
-  
+
+try:
+    from page_settings import *
+except ImportError:
+    pass
+
 try:
   from local_settings import *
 except ImportError:

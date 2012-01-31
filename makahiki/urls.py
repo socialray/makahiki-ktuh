@@ -12,14 +12,14 @@ urlpatterns = patterns('',
     # Main pages.
     url(r'^$', "pages.views.root_index", name="root_index"),
 
-    url(r'^getnutz', "pages.views.index", name = "getnutz_index"),
+    url(r'^actions', "pages.views.index", name = "actions_index"),
     url(r'^energy', "pages.views.index", name = "energy_index"),
     url(r'^news', "pages.views.index", name = "news_index"),
     url(r'^prizes', "pages.views.index", name = "prizes_index"),
     url(r'^profile', "pages.views.index", name = "profile_index"),
     url(r'^help', "pages.views.index", name = "help_index"),
 
-    url(r'^getnutz/', include('gamelets.smartgrid_game.urls')),
+    url(r'^actions/', include('widgets.smartgrid.urls')),
 
     # system level
     url(r'^home/', include('pages.home.urls')),
@@ -48,7 +48,7 @@ urlpatterns = patterns('',
     # pinax provided
     # (r'^account/', include('account.urls')),
 #    (r'^admin/status/', include('pages.status.urls'),),
-    (r'^admin/login-as/(?P<user_id>\d+)/$', 'services.auth_mgr.views.login_as'),
+    (r'^admin/login-as/(?P<user_id>\d+)/$', 'managers.auth_mgr.views.login_as'),
     (r'^admin/doc/', include('django.contrib.admindocs.urls')),
     (r'^admin/', include(admin.site.urls)),
     # (r'^notifications/', include('notification.urls')),

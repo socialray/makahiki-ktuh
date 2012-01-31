@@ -4,7 +4,7 @@ from django import forms
 from django.conf import settings
 from django.contrib.auth.models import User
 
-from services.player_mgr.models import Profile
+from managers.player_mgr.models import Profile
   
 class FacebookForm(forms.Form):
   can_post = forms.BooleanField(

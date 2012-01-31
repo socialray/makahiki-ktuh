@@ -186,7 +186,7 @@ img {
 	background: transparent url(/site_media/static/css/default/images/icon-scoreboard-over.png) top left no-repeat;
 }
 
-.selected-getnutz #header-nav-links a.activities h4 {
+.selected-actions #header-nav-links a.activities h4 {
   color: #FCE988;
 }
 

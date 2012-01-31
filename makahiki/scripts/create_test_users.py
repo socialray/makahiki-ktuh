@@ -1,7 +1,7 @@
 from django.contrib.auth.models import User
 import datetime
 
-from services.team_mgr.models import Floor
+from managers.team_mgr.models import Floor
 
 def create_users():
   floor_count = Floor.objects.count()

@@ -27,11 +27,11 @@ setup_environ(settings_mod)
 sys.path.insert(0, join(settings.PINAX_ROOT, "apps"))
 sys.path.insert(0, join(settings.PROJECT_ROOT, "apps"))
 
-from services.player_mgr.models import *
-from services.player_mgr import *
-from gamelets.smartgrid_game.models import *
-from gamelets.notifications.models import UserNotification, NoticeTemplate
-from services.base_mgr import in_competition, get_round_info
+from managers.player_mgr.models import *
+from managers.player_mgr import *
+from widgets.smartgrid.models import *
+from widgets.notifications.models import UserNotification, NoticeTemplate
+from managers.base_mgr import in_competition, get_round_info
 from django.db.models import Q
 
 def notify_round_started():

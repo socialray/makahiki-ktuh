@@ -20,21 +20,21 @@ def root_index(request):
 def index(request):
   page_name = request.path[1:]
 
-  page_module_name = 'pages.'+page_name+'.page_settings'
-  page_settings = importlib.import_module(page_module_name)
+  page_settings = settings.PAGE_SETTINGS[page_name]
+  page_settings["PAGE_NAME"] = page_name
 
   view_objects = {}
-  default_layout = page_settings.LAYOUTS["DEFAULT"]
+  default_layout = page_settings["LAYOUTS"]["DEFAULT"]
   for row in default_layout:
     for columns in row:
       if isinstance(columns, types.TupleType):
           gamelet = columns[0]
-          view_module_name = 'apps.gamelets.'+gamelet+'.views'
+          view_module_name = 'apps.widgets.'+gamelet+'.views'
           page_views = importlib.import_module(view_module_name)
           view_objects[gamelet] = page_views.supply(request)
       else:
           gamelet = columns
-          view_module_name = 'apps.gamelets.'+gamelet+'.views'
+          view_module_name = 'apps.widgets.'+gamelet+'.views'
           page_views = importlib.import_module(view_module_name)
           view_objects[gamelet] = page_views.supply(request)
           break
@@ -43,7 +43,7 @@ def index(request):
   page_layouts["DEFAULT"] = []
   responsive_css = ""
 
-  for layout in page_settings.LAYOUTS.items():
+  for layout in page_settings["LAYOUTS"].items():
     if layout[0] == "PHONE_PORTRAIT":
         responsive_css += "\n@media screen and (max-width: 1000px) {\n"
 
@@ -67,7 +67,7 @@ def index(request):
 
               if layout[0] == "DEFAULT":
                 gamelet_layout["id"] = id
-                gamelet_layout["template"] = "gamelets/%s/templates/index.html" % gamelet
+                gamelet_layout["template"] = "widgets/%s/templates/index.html" % gamelet
                 column_layout += [gamelet_layout]
           else:                                      # (gamelet, 100%)
               gamelet = columns
@@ -78,7 +78,7 @@ def index(request):
               if layout[0] == "DEFAULT":
                 gamelet_layout = {}
                 gamelet_layout["id"] = gamelet
-                gamelet_layout["template"] = "gamelets/%s/templates/index.html" % gamelet
+                gamelet_layout["template"] = "widgets/%s/templates/index.html" % gamelet
                 column_layout += [gamelet_layout]
                 column_layout += [{}]
 
@@ -91,10 +91,10 @@ def index(request):
         responsive_css += "\n}"
 
   setting_objects = {
-      "PAGE_NAME" : page_settings.PAGE_NAME,
-      "PAGE_TITLE" : page_settings.PAGE_TITLE,
-      "BASE_TEMPLATE" : page_settings.BASE_TEMPLATE,
-      "CSS" : page_settings.PAGE_NAME,
+      "PAGE_NAME" : page_settings["PAGE_NAME"],
+      "PAGE_TITLE" : page_settings["PAGE_TITLE"],
+      "BASE_TEMPLATE" : page_settings["BASE_TEMPLATE"],
+      "CSS" : page_settings["PAGE_NAME"],
       "RESPONSIVE_CSS" : responsive_css,
       }
 
