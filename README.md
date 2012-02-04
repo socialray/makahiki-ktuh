@@ -12,6 +12,7 @@ This README describes how to set up your computer for Makahiki Development.
 * Pip. Check if it is installed by typing `pip help`. If not, install it by typing `easy_install pip`. If you do not have easy_install, download and follow the instructions [here](http://pypi.python.org/pypi/setuptools).
 * _Optional but recommended_ [Virtualenvwrapper](http://www.doughellmann.com/docs/virtualenvwrapper/). Virtualenv and Virtualenvwrapper allow you to install libraries separately from your global Python path. Follow the steps in the introduction and make a virtualenv for Makahiki (i.e. `mkvirtualenv makahiki`). You may also want to define $WORKON_HOME to your shell startup file in addition to adding the virtualenv startup script (it uses `~/.virtualenv` by default).
 
+
 ## Obtaining the Makahiki source
 * If you only wish to download the source, you can check out using the read-only URL.  Type `git clone git://github.com/csdl/makahiki.git` to get the source.
 * If you wish to commit to the Makahiki project, you will need to create an account at [GitHub](http://github.com).  Then, you will need to set up your [SSH keys](http://help.github.com/key-setup-redirect) and your [email settings](http://help.github.com/git-email-settings/).
@@ -23,7 +24,7 @@ The following steps are to download additional libraries and upgrade some of the
 
 * cd into the makahiki/makahiki folder.
 * If you used virtualenvwrapper, start the virtual environment by typing `workon <environment-name>`.
-* Type `pip install -r requirements.txt` from the application root.  This will load the dependencies in requirements.txt.
+* Type `pip install -r requirements.txt` from the application root.  This will load the dependencies in requirements.txt. (Currently this will fail unless you have postgres installed. More info later.)
 
 ## Setting up Makahiki
 * If you used virtualenvwrapper, activate the virtual environment by typing `workon <environment-name>`.
