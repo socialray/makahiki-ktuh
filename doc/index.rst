@@ -24,15 +24,16 @@ Fall, 2011.  Some of the goals of the Kukui Cup challenge are to support:
   * Social networks, both physical (residence hall floors) and virtual (Facebook).
   * Activities to raise player consciousness and literacy regarding energy issues.
 
-Makahiki 2 is intended to build upon the prior version by introducing the
-following new features:
+Makahiki 2 builds upon the prior version with the following new features:
 
-  * The ability to adapt the system for use by new organizations.
+  * The ability to tailor system functionality to support the requirements
+    of different organizations.
   * Support for PaaS services such as `Heroku`_.  This enables
-    organizations to create and deploy challenges using Makahiki without obtaining
+    organizations to create and deploy challenges  without obtaining
     physical hardware and its requisite IT support.
-  * The ability to extend the framework with new modules to support other
-    sustainable resources such as water, food, and waste.
+  * The ability to extend the framework with new modules to support 
+    sustainable resource challenges such as water, food, and waste in
+    addition to energy.
   * The use of HTML5/CSS3 "responsive" design techniques for support of laptop, tablet, and smart phone interfaces. 
 
 Related Projects
