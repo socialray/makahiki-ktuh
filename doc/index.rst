@@ -33,8 +33,7 @@ following new features:
     physical hardware and its requisite IT support.
   * The ability to extend the framework with new modules to support other
     sustainable resources such as water, food, and waste.
-  * The use of "responsive" UI techniques to enable challenges built using
-    Makahiki to adapt to laptop, tablet, and smart phone interfaces. 
+  * The use of HTML5/CSS3 "responsive" design techniques for support of laptop, tablet, and smart phone interfaces. 
 
 Related Projects
 ----------------
