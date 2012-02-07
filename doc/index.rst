@@ -55,14 +55,17 @@ environments. In addition, neither of these systems are open source.
 .. _Oberlin Campus Resource Monitoring System: http://www.oberlin.edu/dormenergy
 
 
-Documentation Chapters
-----------------------
+Developer Guide
+---------------
 
 .. toctree::
    :maxdepth: 1
 
    How to download and install Makahiki <installation>
    Appendix A: Custom management commands <management-commands>
+   Appendix B: Settings files <settings-files>
+   Appendix C: The administrator interface <admin-interface>
+   Appendix D: Developing and running tests <testing>
 
 Contact Us
 ----------

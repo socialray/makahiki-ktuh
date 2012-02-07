@@ -1,8 +1,8 @@
 Installation
 ============
 
-Prerequisites
--------------
+Prerequisite Software
+---------------------
 
 `Python`_ 2.6 or higher (but not Python 3). On Windows machines, it
 is recommended that you use the 32 bit version, as using the 64 bit
@@ -54,63 +54,73 @@ is on $PATH so that ``pg_config`` is defined.
 .. _Virtualenvwrapper: http://www.doughellmann.com/docs/virtualenvwrapper/
 .. _PostgreSQL: http://www.postgresql.org/
 
-Obtaining the Makahiki source
------------------------------
+Downloading the Makahiki source
+-------------------------------
 
--  If you only wish to download the source, you can check out using the
-   read-only URL. Type ``git clone git://github.com/csdl/makahiki.git``
-   to get the source.
--  If you wish to commit to the Makahiki project, you will need to
-   create an account at `GitHub`_. Then, you will need to set up your
-   `SSH keys`_ and your `email settings`_.
--  Once those are set up, send me your Git username so that you can be
-   added as a collaborator.
--  When you are added as a collaborator, you should be able to check out
-   the code by using the private url. Type
-   ``git clone git@github.com:csdl/makahiki.git`` to check out the code.
-   This will create the new folder and download the code from the
-   repository.
+If you only wish to download the source and not edit it, you can check out using the
+read-only URL. Type the following to get a read-only version of the
+source:: 
 
-Grabbing External Dependencies
+  git clone git://github.com/csdl/makahiki.git
+
+
+If you wish to commit to the Makahiki project, you will need to
+create an account at `GitHub`_. Then, you will need to set up your
+`SSH keys`_ and your `email settings`_.
+
+Once those are set up, send a Makahiki developer your Git username so that you can be
+added as a collaborator.
+
+Once you are added as a collaborator, you should be able to check out
+the code by using the private url. Type the following to check out the
+code::
+
+  git clone git@github.com:csdl/makahiki.git
+
+This will create the new folder and download the code from the repository.
+
+Downloading required libraries
 ------------------------------
 
-The following steps are to download additional libraries and upgrade
-some of the default ones.
+The following steps will download additional libraries and upgrade some of the default ones.
 
 -  cd into the makahiki/makahiki folder.
--  If you used virtualenvwrapper, start the virtual environment by
-   typing ``workon <environment-name>``.
--  Type ``pip install -r requirements.txt`` from the application root.
-   This will load the dependencies in requirements.txt. (Currently this
-   will fail unless you have postgres installed. More info later.)
+-  Start your virtual environment by typing ``workon <environment-name>``.
+-  Type ``pip install -r requirements.txt``.
+   This will load the dependencies in requirements.txt. 
 
 .. _GitHub: http://github.com
 .. _SSH keys: http://help.github.com/key-setup-redirect
 .. _email settings: http://help.github.com/git-email-settings/
 
-Setting up Makahiki
--------------------
+Basic Makahiki configuration
+-----------------------------
 
--  If you used virtualenvwrapper, activate the virtual environment by
-   typing ``workon <environment-name>``.
--  Update makahiki\_settings.py with the settings related to the
-   competition. Important settings include the CAS authentication server
-   for your organization and your time zone.
--  Copy example\_settings/local\_settings.py.dev to local\_settings.py.
+Start your virtual environment by typing ``workon <environment-name>``.
+
+Update makahiki_settings.py with the settings related to the
+competition. Important settings include the CAS authentication server
+for your organization and your time zone.
+
+Copy example_settings/local_settings.py.dev to local_settings.py.
    This file provides additional modules for testing and can be used to
    override previously defined settings. For example, you can specify a
    different database in this file.
--  Type ``python manage.py syncdb --noinput`` to create the database.
--  Run ``python manage.py migrate`` to sync the migrations.
--  To load some sample data into the application, type
-   ``./scripts/load_data.sh``. If you are on Windows, you can use
-   ``scripts\load_data.bat``.
+
+Type ``python manage.py syncdb --noinput`` to create the database.
+
+Run ``python manage.py migrate`` to sync the migrations.
+
+To load some sample data into the application, type
+``./scripts/load_data.sh``. If you are on Windows, you can use
+``scripts\load_data.bat``.
 
 Running the server
 ------------------
 
--  Type ``python manage.py runserver`` to start the web server.
--  Open a browser and go to http://localhost:8000 to see the website.
+Type ``python manage.py runserver`` to start the web server.
+
+Open a browser and go to http://localhost:8000 to see the website.
 
 Adding Facebook Integration
 ---------------------------
@@ -123,15 +133,11 @@ settings can be added to settings.py, but be aware that a) this file is
 in public version control, and you don’t want others knowing your secret
 keys and b) subsequent updates may reset the settings.py file.
 
-.. raw:: html
-
-   <pre>
-   <code>
-   FACEBOOK_APP_ID = '&lt;APP_ID&gt;'
-   FACEBOOK_API_KEY = '&lt;API_KEY&gt;'
-   FACEBOOK_SECRET_KEY = '&lt;SECRET_KEY&gt;'
-   </code>
-   </pre>
+::
+   
+   FACEBOOK_APP_ID = '<APP_ID>'
+   FACEBOOK_API_KEY = '<API_KEY>'
+   FACEBOOK_SECRET_KEY = '<SECRET_KEY>'
 
 These can be found in your application’s page within the Facebook
 Developer page.
