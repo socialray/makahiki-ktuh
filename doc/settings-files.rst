@@ -10,14 +10,14 @@ the contents of this file may change as new modules are developed.
 However, in production, this file should not change unless it is to
 remove modules.
 
-makahiki_settings.py
+game_settings.py
 ---------------------
 
 This file contains settings specific to this instance of Makahiki. These
 include CAS authentication settings, the name of the competition, and
 theme settings.
 
-competition_settings.py
+local_settings.py
 ------------------------
 
 This file contains settings that are used to specify a particular

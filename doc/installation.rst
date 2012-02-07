@@ -98,14 +98,13 @@ Basic Makahiki configuration
 
 Start your virtual environment by typing ``workon <environment-name>``.
 
-Update makahiki_settings.py with the settings related to the
-competition. Important settings include the CAS authentication server
+Update game_settings.py with the settings related to the
+game. Important settings include the CAS authentication server
 for your organization and your time zone.
 
-Copy example_settings/local_settings.py.dev to local_settings.py.
-   This file provides additional modules for testing and can be used to
-   override previously defined settings. For example, you can specify a
-   different database in this file.
+update local_settings.py with any additional settings can be used to
+override previously defined settings. For example, you can specify a
+different database in this file.
 
 Type ``python manage.py syncdb --noinput`` to create the database.
 
