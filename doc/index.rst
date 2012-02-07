@@ -62,10 +62,18 @@ Developer Guide
    :maxdepth: 1
 
    How to download and install Makahiki <installation>
-   Appendix A: Custom management commands <management-commands>
-   Appendix B: Settings files <settings-files>
-   Appendix C: The administrator interface <admin-interface>
-   Appendix D: Developing and running tests <testing>
+   Makahiki's architecture <architecture>
+   Configuration and customization <configuration>
+   Deployment: locally or to the cloud <deployment>
+   Running a sustainability challenge <execution>
+   Data logging and analysis <logging-and-analysis>
+   Developing a new game plugin <plugin-development>
+   Appendix A: Module reference <module-guide>
+   Appendix B: Management command reference <management-commands>
+   Appendix C: Settings files <settings-files>
+   Appendix D: The administrator interface <admin-interface>
+   Appendix E: Developing and running tests <testing>
+   
 
 Contact Us
 ----------
