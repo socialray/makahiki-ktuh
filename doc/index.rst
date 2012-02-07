@@ -61,7 +61,7 @@ Developer Guide
 .. toctree::
    :maxdepth: 1
 
-   How to download and install Makahiki <installation>
+   Downloading and installation <installation>
    Makahiki's architecture <architecture>
    Configuration and customization <configuration>
    Deployment: locally or to the cloud <deployment>
