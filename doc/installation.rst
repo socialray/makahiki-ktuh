@@ -168,11 +168,6 @@ the various packages used by the system.
 -  `Django Tutorial`_
 -  `South Tutorial`_
 
-Further documentation
----------------------
-
-Consult the [Wiki] (https://github.com/csdl/makahiki/wiki).
-
 .. _Developer Site: http://developers.facebook.com/
 .. _Learn Python the Hard Way: http://learnpythonthehardway.org/index
 .. _Django Tutorial: http://docs.djangoproject.com/en/dev/intro/tutorial01/
