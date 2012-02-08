@@ -34,7 +34,13 @@ Makahiki 2 builds upon the prior version with the following new features:
   * The ability to extend the framework with new modules to support 
     sustainable resource challenges such as water, food, and waste in
     addition to energy.
-  * The use of HTML5/CSS3 "responsive" design techniques for support of laptop, tablet, and smart phone interfaces. 
+  * The use of HTML5/CSS3 "responsive" design techniques for support of
+    laptop, tablet, and smart phone interfaces. 
+  * Real-time game analytics to help assess the impact of game mechanics
+    during challenges.
+  * A-B testing to support research evaluation of components by deploying
+    alternative versions to subsets of the population.
+
 
 Related Projects
 ----------------
