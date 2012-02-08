@@ -7,7 +7,7 @@ External architecture
 Let's begin by illustrating how Makahiki fits into the broader system context.
 
 .. figure:: figs/system-architecture.png
-   :scale: 40 %
+   :width: 600 px
    :align: center
 
 As the figure above shows, Makahiki interfaces with the outside environment in four different ways. 
@@ -35,7 +35,7 @@ Internal architecture
 The following figure provides a perspective on Makahiki's architecture in terms of three kinds of "components": Django-related infrastructure, Widgets, and Managers.
 
 .. figure:: figs/system-internal-architecture.png
-   :scale: 40 %
+   :width: 600 px
    :align: center
 
 This categorization is intended to provide the following conceptual understanding.
