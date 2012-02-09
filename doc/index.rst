@@ -28,7 +28,7 @@ Makahiki 2 builds upon the prior version with the following new features:
 
   * The ability to tailor system functionality to support the requirements
     of different organizations.
-  * Support for PaaS services such as `Heroku`_.  This enables
+  * Support for PaaS (`Platform as a Service`_) facilities such as `Heroku`_.  This enables
     organizations to create and deploy challenges  without obtaining
     physical hardware and its requisite IT support.
   * The ability to extend the framework with new modules to support 
@@ -61,6 +61,8 @@ environments. In addition, neither of these systems are open source.
 .. _Heroku: http://heroku.com
 .. _Campus Conservation Nationals: http://www.competetoreduce.org/
 .. _Oberlin Campus Resource Monitoring System: http://www.oberlin.edu/dormenergy
+.. _Platform as a Service: http://en.wikipedia.org/wiki/Platform_as_a_service
+
 
 
 Developer Guide
