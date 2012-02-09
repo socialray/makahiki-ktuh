@@ -45,7 +45,7 @@ def restricted(request):
     if today < start:
         before = True
 
-    return render_to_response("home/restricted.html", {
+    return render_to_response("pages/home/templates/restricted.html", {
         "before": before,
         "start": start,
         "end": end,

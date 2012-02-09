@@ -14,7 +14,7 @@
 {% block selected_icon %}selected-activities{% endblock %}
 
 {% block extra_head %}
-  {% import_page_css "view_activities" STATIC_URL CSS_THEME %}
+  {% import_page_css "actions" STATIC_URL CSS_THEME %}
 {% endblock %}
 
 {% block body %}
@@ -94,7 +94,7 @@
      {% endwith %}
      
      {% if task.type == "event" or task.type == "excursion" %}
-     {% include "view_activities/reminder.html" %}
+     {% include "reminder.html" %}
      {% endif %}
      
      <p/><p/>
@@ -305,7 +305,7 @@
 
 {% block extra_body %}
 <div id="setup-dialog" title="{{form_title}}" style="visibility: hidden;">
-    {% include "view_activities/task_form.html" %}
+    {% include "task_form.html" %}
 </div>
 
 <script type="text/javascript"> 

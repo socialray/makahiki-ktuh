@@ -6,9 +6,7 @@ Prerequisite Software
 
 `Python`_ 2.6 or higher (but not Python 3). On Windows machines, it
 is recommended that you use the 32 bit version, as using the 64 bit
-version appears to have issues. Verify that you have it installed by
-typing ``python`` at the command prompt. The interpreter should
-launch. Close the interpreter by typing ``exit()``.
+version appears to have issues. 
 
 Apple Developer Tools (OS/X only). If on Mac OS X, make sure that the Apple Developer Tools are
 installed (which is bundled with XCode). You can either get this from
@@ -84,7 +82,7 @@ Downloading required libraries
 
 The following steps will download additional libraries and upgrade some of the default ones.
 
--  cd into the makahiki/makahiki folder.
+-  cd into the makahiki folder.
 -  Start your virtual environment by typing ``workon <environment-name>``.
 -  Type ``pip install -r requirements.txt``.
    This will load the dependencies in requirements.txt. 
@@ -144,12 +142,7 @@ Developer page.
 Running tests
 -------------
 
-While Django/Pinax has support for running tests, some of the out of the
-box tests fail (as of Pinax 0.7.1). You can run the tests using
-``python manage.py test``. I created my own script to only run my own
-tests in the system. You can run those tests by typing
-``python runtests.py``. These are the same tests that are run by our
-continuous integration server.
+You can run the tests using ``python manage.py test``.
 
 Other resources
 ---------------

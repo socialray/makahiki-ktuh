@@ -7,7 +7,7 @@ from django.contrib.sites.models import Site
 from django.conf import settings
 from django.core.urlresolvers import reverse
 
-from components.ask_admin.forms import FeedbackForm
+from widgets.ask_admin.forms import FeedbackForm
 
 FROM_EMAIL = settings.MANAGERS[0][1]
 

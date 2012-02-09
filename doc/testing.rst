@@ -3,6 +3,12 @@ Testing
 
 This document contains notes on writing and executing tests.
 
+Run ``python manage.py test`` to run all of the tests.
+
+You can also run tests for individual apps by passing in those apps as
+parameters. For example, ``python manage.py test widgets.profile`` will
+run the tests in ``apps/widgets/profile``.
+
 Creating Selenium Tests Using Selenium IDE
 ------------------------------------------
 
@@ -127,8 +133,3 @@ Python Selenium tests from the command line.
    [[http://seleniumhq.org/download/]]. Once downloaded, it can be
    started using ``java -jar selenium-server.jar``.
 
-After that, you can run the tests by using a Python script that adds the
-required parameters. Run ``python runtests.py`` to run all of the tests.
-You can also run tests for individual apps by passing in those apps as
-parameters. For example, ``python runtests.py pages.view_profile`` will
-run the tests in ``apps/pages/view_profile``, including Selenium tests.

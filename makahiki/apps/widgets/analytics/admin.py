@@ -1,5 +1,5 @@
 from django.contrib import admin
-from apps.components.analytics.models import ApacheLog, MakahikiLog
+from widgets.analytics.models import ApacheLog, MakahikiLog
 
 class ApacheLogAdmin(admin.ModelAdmin):
     # ...

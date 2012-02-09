@@ -8,7 +8,7 @@ from django.conf import settings
 
 from managers.base_mgr.models import Article
 from managers.base_mgr import get_round_info, get_theme, get_current_round
-from managers.base_mgr.templatetags.class_tags import insert_classes, get_id_and_classes
+from templatetags.class_tags import insert_classes, get_id_and_classes
 from css_rules import default
 
 class ContextProcessorFunctionalTestCase(TestCase):

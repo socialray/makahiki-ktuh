@@ -9,8 +9,8 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
 from django.views.decorators.cache import never_cache
 
-from pages.view_profile.forms import ProfileForm
-from pages.view_profile import get_completed_members, get_in_progress_members
+from widgets.profile.forms import ProfileForm
+from widgets.profile import get_completed_members, get_in_progress_members
 from managers.facebook_mgr.models import FacebookProfile
 from managers.player_mgr.models import Profile
 from widgets.smartgrid.models import ActivityMember, CommitmentMember
@@ -20,9 +20,8 @@ import managers.facebook_mgr.facebook as facebook
 from lib.brabeion import badges
 from lib.brabeion.models import BadgeAward
 
-@never_cache
-@login_required
-def index(request):
+
+def supply(request):
   user = request.user
   form = None
   if request.method == "POST":
@@ -61,13 +60,14 @@ def index(request):
       form.message = "Your avatar has been updated."
   
   points_logs = user.pointstransaction_set.order_by("-submission_date").all()
-  return render_to_response("view_profile/index.html", {
+
+  return {
     "form": form,
     "in_progress_members": get_in_progress_members(user),
     "commitment_members": get_current_commitment_members(user),
     "points_logs": points_logs,
     # "notifications": user.usernotification_set.order_by("-created_at"),
-  }, context_instance=RequestContext(request))
+   }
 
 @login_required
 def badge_catalog(request):

@@ -2,7 +2,7 @@
 
 <div {% get_id_and_classes "activity-scoreboard-box" %}>
     <div {% get_id_and_classes "activity-scoreboard-title" %}>
-        {{current_round}} Scoreboard
+        {{view_objects.scoreboard.current_round}} Scoreboard
         <a href="#" style="float: right">
             <img src="{{ STATIC_URL}}/css/default/images/icon-help-sm.png" width="20" align="center"
                  title="Click to get help about this window"
@@ -18,12 +18,12 @@
                 <th style="text-align: right;">Overall</th></tr>
             </thead>
             <tbody>
-                {% for f in floor_standings %}
+                {% for f in view_objects.scoreboard.floor_standings %}
                 <tr><td>{{forloop.counter}}</td>
-                <td style="width: 150px; {% if f == floor %}font-weight: bold{% endif %}">
+                <td style="width: 150px; {% if f == view_objects.scoreboard.floor %}font-weight: bold{% endif %}">
                   {{f}}
                 </td>
-                <td style="width: 110px; text-align:right;{% if f == floor %}font-weight: bold{% endif %}">
+                <td style="width: 110px; text-align:right;{% if f == view_objects.scoreboard.floor %}font-weight: bold{% endif %}">
                   {{f.points}}
                 </td>
                 {% endfor %}
@@ -37,12 +37,12 @@
                 <th style="text-align: right">Overall</th></tr>
             </thead>
             <tbody>
-                {% for p in profile_standings %}
+                {% for p in view_objects.scoreboard.profile_standings %}
                 <tr><td>{{forloop.counter}}</td>
-              <td style="width: 150px; {% if p == profile %}font-weight: bold{% endif %}">
+              <td style="width: 150px; {% if p == view_objects.scoreboard.profile %}font-weight: bold{% endif %}">
                   {{p.name}}
                 </td>
-                 <td style="width: 110px; text-align:right;{% if p == profile %}font-weight: bold{% endif %}">
+                 <td style="width: 110px; text-align:right;{% if p == view_objects.scoreboard.profile %}font-weight: bold{% endif %}">
                   {{p.current_round_points}}
                 </td>
                 {% endfor %}
@@ -53,15 +53,15 @@
             <thead><tr>
                 <th>Rank</th>
                 <th>Individual</th>
-                <th style="text-align: right">{{ floor }}</th></tr>
+                <th style="text-align: right">{{ view_objects.scoreboard.floor }}</th></tr>
             </thead>
             <tbody>
-                {% for p in user_floor_standings %}
+                {% for p in view_objects.scoreboard.user_floor_standings %}
                 <tr><td>{{forloop.counter}}</td>
-              <td style="width: 150px; {% if p == profile %}font-weight: bold{% endif %}">
+              <td style="width: 150px; {% if p == view_objects.scoreboard.profile %}font-weight: bold{% endif %}">
                   {{p.name}}
                 </td>
-                <td style="width: 110px; text-align:right;{% if p == profile %}font-weight: bold{% endif %}">
+                <td style="width: 110px; text-align:right;{% if p == view_objects.scoreboard.profile %}font-weight: bold{% endif %}">
                  {{p.current_round_points}}
                 </td>
                 {% endfor %}
@@ -75,12 +75,12 @@
                 <th style="text-align: right">Participation</th></tr>
             </thead>
             <tbody>
-                {% for f in floor_participation %}
+                {% for f in view_objects.scoreboard.floor_participation %}
                 <tr><td>{{forloop.counter}}</td>
-              <td style="width: 150px; {% if f == floor %}font-weight: bold{% endif %}">
+              <td style="width: 150px; {% if f == view_objects.scoreboard.floor %}font-weight: bold{% endif %}">
                   {{ f }}
                 </td>
-                 <td style="width: 110px; text-align:right;{% if f == floor %}font-weight: bold{% endif %}">
+                 <td style="width: 110px; text-align:right;{% if f == view_objects.scoreboard.floor %}font-weight: bold{% endif %}">
                   {{ f.active_participation }}%
                 </td>
                 {% endfor %}

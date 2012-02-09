@@ -20,7 +20,7 @@ class CheckSetupMiddleware(object):
     if is_mobile and needs_setup and not pattern.match(path):
       return HttpResponseRedirect(reverse("mobile_setup"))
     elif needs_setup and not pattern.match(path):
-      return HttpResponseRedirect(reverse("home_index"))
+      return HttpResponseRedirect("/")
     return None
 
 class CompetitionMiddleware(object):

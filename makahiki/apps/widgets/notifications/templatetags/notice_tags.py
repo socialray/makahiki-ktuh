@@ -3,7 +3,7 @@ from datetime import datetime
 
 from django.template import Library
 
-from components.logging import create_server_log
+from managers.log_mgr import create_server_log
 
 register = Library()
   

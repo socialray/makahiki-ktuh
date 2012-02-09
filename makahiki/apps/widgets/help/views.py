@@ -7,18 +7,18 @@ from django.shortcuts import get_object_or_404
 from django.http import Http404, HttpResponse
 
 from managers.help_mgr.models import HelpTopic
-from components.ask_admin.forms import FeedbackForm
+from widgets.ask_admin.forms import FeedbackForm
 
 @login_required
-def index(request):
+def supply(request):
   form = FeedbackForm(auto_id="help_%s")
   rules = HelpTopic.objects.filter(category="rules", parent_topic__isnull=True)
   faqs = HelpTopic.objects.filter(category="faq", parent_topic__isnull=True)
-  return render_to_response("help/index.html", {
+  return {
       "form": form,
       "rules": rules,
       "faqs": faqs,
-  }, context_instance=RequestContext(request))
+  }
 
 @login_required
 def topic(request, category, slug):

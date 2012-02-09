@@ -18,6 +18,7 @@ from django.core.cache import cache
 from managers.base_mgr import get_current_round
 from widgets.smartgrid.models import *
 from widgets.smartgrid import *
+from widgets.smartgrid.forms import *
 from managers.team_mgr.models import *
 from managers.team_mgr import *
 from managers.player_mgr.models import *
@@ -75,7 +76,7 @@ def __get_categories(user):
   categories = cache.get('smartgrid-categories-%s' % user.username)
   if not categories:
       cursor = connection.cursor()
-      """
+
       cursor.execute('''SELECT  smartgrid_activitymember.activity_id,
             smartgrid_activitybase.slug as slug,
             smartgrid_commonactivityuser.approval_status,
@@ -99,7 +100,7 @@ def __get_categories(user):
           WHERE smartgrid_commitmentmember.user_id = %s ''' % (user.id))
 
       commitment_members = _dictfetchall(cursor)
-      """
+
       cursor.execute('''SELECT smartgrid_activitybase.category_id,
             smartgrid_activitybase.id,
             smartgrid_activitybase.type,
@@ -121,7 +122,7 @@ def __get_categories(user):
 
       tasks = _dictfetchall(cursor)
       for task in tasks:
-          annotate_simple_task_status(user, task, {}, {})
+          annotate_simple_task_status(user, task, activity_members, commitment_members)
 
       categories = Category.objects.all()
       for cat in categories:
@@ -162,7 +163,7 @@ def view_codes(request, activity_type, slug):
   if len(codes) == 0:
     raise Http404
   
-  return render_to_response("view_activities/view_codes.html", {
+  return render_to_response("view_codes.html", {
     "activity": activity,
     "codes": codes,
     "per_page": per_page,
@@ -181,7 +182,7 @@ def view_rsvps(request, activity_type, slug):
       approval_status='pending'
   ).order_by('user__last_name', 'user__first_name')
   
-  return render_to_response("view_activities/rsvps.html", {
+  return render_to_response("rsvps.html", {
       "activity": activity,
       "rsvps": rsvps,
   }, context_instance=RequestContext(request))
@@ -267,7 +268,7 @@ def __add_commitment(request, commitment):
   if request.method == "POST":
     form = CommitmentCommentForm(request.POST, request=request, activity=commitment)
     if not form.is_valid():
-        return render_to_response("view_activities/task.html", {
+        return render_to_response("task.html", {
         "task":commitment,
         "pau":True,
         "form":form,
@@ -389,7 +390,7 @@ def __add_activity(request, activity):
           value = activity.point_value
           
       else:   # form not valid
-        return render_to_response("view_activities/task.html", {
+        return render_to_response("task.html", {
             "task":activity,
             "pau":False,
             "form":form,
@@ -528,7 +529,7 @@ def __request_activity_points(request, activity):
       ##if question:
       ##  form = ActivityTextForm(initial={"question" : question.pk}, question_id=question.pk)
       
-    return render_to_response("view_activities/task.html", {
+    return render_to_response("task.html", {
     "task":activity,
     "pau":False,
     "form":form,
@@ -563,7 +564,7 @@ def task(request, activity_type, slug):
   social_email2 = None
 
   if is_unlock_from_cache(user, task) != True:
-    return HttpResponseRedirect(reverse("pages.view_activities.views.index", args=()))
+    return HttpResponseRedirect(reverse("widgets.smartgrid.views.index", args=()))
   
   if task.type != "commitment":
     task = task.activity
@@ -681,7 +682,7 @@ def task(request, activity_type, slug):
     
   display_form = True if request.GET.has_key("display_form") else False
 
-  return render_to_response("view_activities/task.html", {
+  return render_to_response("task.html", {
     "task":task,
     "pau":pau,
     "approval":approval,
@@ -791,7 +792,7 @@ def reminder(request, activity_type, slug):
           
         return HttpResponse(json.dumps({"success": True}), mimetype="application/json")
         
-      template = render_to_string("view_activities/reminder_form.html", {
+      template = render_to_string("reminder_form.html", {
           "reminders": {"form": form},
           "task": task,
       })

@@ -1,7 +1,6 @@
 {% extends "base.html" %}
 
 {% load class_tags %}
-{% load generic_flatblocks %}
 {% load markup %}
 
 {% block extra_head_base %}
@@ -77,10 +76,10 @@
   </div>
 </div>
 
-{#    {% include "notifications/list.html" %} #}
+{% include "notifications/list.html" %}
 
 {% block quests %}
- {#  {% include "quests/quest_box.html" %}  #}
+{% include "quests/quest_box.html" %}
 {% endblock %}
 
 {% if messages %}
@@ -97,7 +96,7 @@
 
 {% block extra_body_base %}
 
-{#   {% include "ask_admin/feedback_dialog.html" %} #}
+{% include "feedback_dialog.html" %}
 
 <div id="widget-help-dialog" title="Help" style="display: none">
 </div>
@@ -141,7 +140,11 @@
         energyRank.draw("round-energy-rank", "round-energy-value", info);
         {% endif %}
       {% endif %}
-      
+
+        if (document.getElementById('{{key|slugify}}-energy-scoreboard') !== null) {
+            energyRank.drawCompleteStandings("{{key|slugify}}-energy-scoreboard", "{{user.get_profile.floor.floor_identifier}}", usage);
+        }
+
       {% block extra_round_energy %}{% endblock %}
     {% endfor %}
   }

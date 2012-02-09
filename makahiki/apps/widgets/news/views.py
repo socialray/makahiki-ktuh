@@ -11,14 +11,12 @@ from django.contrib.auth.models import User
 from managers.team_mgr.models import Post
 from widgets.smartgrid import get_available_events, get_current_commitment_members, get_popular_tasks
 from managers.player_mgr.models import Profile
-from pages.news.forms import WallForm
-from pages.view_activities.forms import EventCodeForm
+from widgets.news.forms import WallForm
+from widgets.smartgrid.forms import EventCodeForm
 
-from pages.news import DEFAULT_POST_COUNT
+from widgets.news import DEFAULT_POST_COUNT
 
-@never_cache
-@login_required
-def index(request):
+def supply(request):
   floor_id = request.user.get_profile().floor_id
   
   # Get floor posts.
@@ -44,7 +42,7 @@ def index(request):
   
   form = EventCodeForm()
     
-  return render_to_response("news/index.html", {
+  return {
     "posts": posts,
     "events": events,
     "wall_form": WallForm(),
@@ -53,7 +51,7 @@ def index(request):
     "floor_members": floor_members,
     "popular_tasks": get_popular_tasks(),
     "event_form":form,
-  }, context_instance=RequestContext(request))
+  }
 
 @never_cache
 @login_required
@@ -105,11 +103,14 @@ def more_posts(request):
     post_count = posts.count
     posts = posts[:DEFAULT_POST_COUNT]
     more_posts = True if post_count > DEFAULT_POST_COUNT else False
-    
+
+    view_objects = {}
+    view_objects["news"] = {"posts": posts,
+                            "wall_form": WallForm(),
+                            "more_posts": more_posts,}
+
     template = render_to_string("news/news_posts.html", {
-        "posts": posts,
-        "wall_form": WallForm(),
-        "more_posts": more_posts,
+        "view_objects" : view_objects,
     }, context_instance=RequestContext(request))
 
     return HttpResponse(json.dumps({

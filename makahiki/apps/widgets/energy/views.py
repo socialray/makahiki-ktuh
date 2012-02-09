@@ -1,7 +1,6 @@
 import simplejson as json
 
-from django.http import HttpResponse, HttpResponseRedirect, Http404
-from django.shortcuts import get_object_or_404
+from django.http import  HttpResponseRedirect
 from django.core.urlresolvers import reverse
 from django.contrib import messages
 
@@ -9,7 +8,69 @@ from widgets.energy import generate_chart_url
 from widgets.energy.models import EnergyGoal, EnergyGoalVote
 from widgets.energy.forms import EnergyGoalVotingForm
 
-# Create your views here.
+from django.shortcuts import render_to_response
+from django.template import RequestContext
+from django.contrib.auth.decorators import login_required
+from django.http import Http404, HttpResponse
+from django.views.decorators.cache import never_cache
+from django.shortcuts import get_object_or_404
+from django.db.models import Count, F
+
+from widgets.smartgrid.models import *
+from widgets.smartgrid import *
+from managers.team_mgr.models import *
+from managers.team_mgr import *
+from widgets.energy import *
+from managers.base_mgr import get_round_info
+from widgets.news.forms import WallForm
+
+@login_required
+@never_cache
+def index(request):
+    view_objects = {}
+    view_objects["energy"] = supply(request)
+
+    return render_to_response("energy.html", {
+        "view_objects" : view_objects,
+        }, context_instance=RequestContext(request))
+
+def supply(request):
+    user = request.user
+    floor = user.get_profile().floor
+    golow_activities = get_available_golow_activities(user)
+    golow_posts = Post.objects.filter(floor=floor, style_class="user_post").select_related('user__profile').order_by("-id")[:5]
+
+    standings = []
+
+    rounds = get_round_info()
+    scoreboard_rounds = []
+    today = datetime.datetime.today()
+    for key in rounds.keys():
+        # Check if this round happened already or if it is in progress.
+        # We don't care if the round happens in the future.
+        if today >= datetime.datetime.strptime(rounds[key]["start"], "%Y-%m-%d"):
+            scoreboard_rounds.append(key)
+
+    # Generate the scoreboard for energy goals.
+    # We could aggregate the energy goals in floors, but there's a bug in Django.
+    # See https://code.djangoproject.com/ticket/13461
+    goals_scoreboard = FloorEnergyGoal.objects.filter(
+        actual_usage__lte=F("goal_usage")
+    ).values(
+        "floor__number",
+        "floor__dorm__name"
+    ).annotate(completions=Count("floor")).order_by("-completions")
+
+
+    return {
+        "floor": floor,
+        "scoreboard_rounds":scoreboard_rounds,
+        "golow_activities":golow_activities,
+        "posts":golow_posts,
+        "wall_form": WallForm(),
+        "goals_scoreboard": goals_scoreboard,
+        }
+
 
 def vote(request, goal_id):
   """Adds the user's vote to the goal."""

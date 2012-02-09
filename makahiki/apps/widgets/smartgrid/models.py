@@ -641,7 +641,7 @@ class ActivityMember(CommonActivityUser):
       post.save()
       
     elif self.activity.is_canopy:
-      from components.canopy.models import Post as CanopyPost
+      from widgets.canopy.models import Post as CanopyPost
       
       message = " has been awarded %d karma points for completing \"%s\"." % (
         points,

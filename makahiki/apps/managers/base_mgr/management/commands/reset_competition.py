@@ -7,7 +7,7 @@ from django.conf import settings
 
 from managers.player_mgr.models import Profile, PointsTransaction
 from managers.team_mgr.models import Post
-from components.canopy.models import Post as CanopyPost
+from widgets.canopy.models import Post as CanopyPost
 from widgets.smartgrid.models import EmailReminder, TextReminder, ActivityMember, CommitmentMember
 from widgets.quests.models import QuestMember
 from widgets.prizes.models import RaffleTicket

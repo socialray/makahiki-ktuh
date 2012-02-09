@@ -8,7 +8,7 @@ from django.contrib.auth.models import User
 
 from managers.team_mgr.models import Dorm, Floor
 from managers.player_mgr.models import Profile, ScoreboardEntry
-from components.standings import get_standings_for_user, get_floor_standings, get_individual_standings, MAX_INDIVIDUAL_STANDINGS
+from managers.standings_mgr import get_standings_for_user, get_floor_standings, get_individual_standings, MAX_INDIVIDUAL_STANDINGS
     
 class UserFloorStandingsTest(TestCase):
   """Tests the generation of standings that check a user's placement in a floor."""
@@ -288,7 +288,7 @@ class FloorStandingsTest(TestCase):
     
     # Grab the last place floor as the test floor.
     self.test_floor = Floor.objects.annotate(
-                          points=Sum("profile__points"), 
+                          points=Sum("profile__points") if Sum("profile__points") != None else 0,
                           last_awarded_submission=Max("profile__last_awarded_submission")
                       ).order_by("points", "last_awarded_submission")[0]
                       
@@ -356,6 +356,8 @@ class FloorStandingsTest(TestCase):
     first_label = decoded_standings["info"][0]["label"]
                         
     floor_points = self.test_floor.points
+    if floor_points == None:
+        floor_points = 0
     point_diff = decoded_standings["info"][0]["points"] - floor_points
     profile = self.test_floor.profile_set.all()[0]
     profile.points += point_diff + 1 # Should move this floor ahead.
@@ -376,6 +378,8 @@ class FloorStandingsTest(TestCase):
     first_label = decoded_standings["info"][0]["label"]
 
     floor_points = self.test_floor.points
+    if floor_points == None:
+        floor_points = 0
     point_diff = decoded_standings["info"][0]["points"] - floor_points
     profile = self.test_floor.profile_set.all()[0]
     profile.points += point_diff # Should move this floor into a tie.

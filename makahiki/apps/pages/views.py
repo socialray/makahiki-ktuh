@@ -18,7 +18,7 @@ def root_index(request):
 @never_cache
 @login_required
 def index(request):
-  page_name = request.path[1:]
+  page_name = request.path[1:][:-1]
 
   page_settings = settings.PAGE_SETTINGS[page_name]
   page_settings["PAGE_NAME"] = page_name

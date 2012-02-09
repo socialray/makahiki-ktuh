@@ -126,8 +126,8 @@ MIDDLEWARE_CLASSES = (
     'lib.minidetector.Middleware',
     'managers.player_mgr.middleware.LoginTrackingMiddleware',
     'pages.home.middleware.CheckSetupMiddleware',
-#    'components.logging.middleware.LoggingMiddleware',
-#    'django.middleware.cache.FetchFromCacheMiddleware',
+    'managers.log_mgr.middleware.LoggingMiddleware',
+    'django.middleware.cache.FetchFromCacheMiddleware',
 )
 
 # Cache settings
@@ -174,15 +174,19 @@ INSTALLED_APPS = (
     # Makahiki pages
     'apps',
     'pages',
-
+    'pages.home',
+    
     # Makahiki components
-    'managers',
     'managers.auth_mgr',
     'managers.avatar_mgr',
     'managers.base_mgr',
     'managers.team_mgr',
     'managers.player_mgr',
     'managers.cache_mgr',
+    'managers.facebook_mgr',
+    'managers.help_mgr',
+    'managers.score_mgr',
+    'managers.standings_mgr',
 
     'widgets.prizes',
     'widgets.smartgrid',
@@ -191,7 +195,12 @@ INSTALLED_APPS = (
     'widgets.upcoming_events',
     'widgets.badges',
     'widgets.notifications',
-
+    'widgets.ask_admin',
+    'widgets.profile',
+    'widgets.help',
+    'widgets.news',
+    'widgets.canopy',
+    'widgets.analytics',
 
     # 3rd party libraries
     'lib.django_cas',
@@ -231,8 +240,8 @@ INSTALLED_APPS = (
 #    'frontendadmin',
 #    'attachments',
     'django.contrib.markup',
-    'django_generic_flatblocks',
-    'django_generic_flatblocks.contrib.gblocks',
+#    'django_generic_flatblocks',
+#    'django_generic_flatblocks.contrib.gblocks',
     
     # Dependencies for Sentry (http://justcramer.com/django-sentry/install.html)
     # Used for error tracking.

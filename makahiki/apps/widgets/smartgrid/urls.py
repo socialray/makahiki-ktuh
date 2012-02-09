@@ -2,6 +2,7 @@ from django.conf.urls.defaults import *
 
 urlpatterns = patterns('',
 
+    url(r'^$', "pages.views.index", name = "actions_index"),
     url(r'^(?P<activity_type>[\w]+)/(?P<slug>[\w\d\-]+)/$', 'widgets.smartgrid.views.task', name='activity_task'),
     url(r'^(?P<activity_type>[\w]+)/(?P<slug>[\w\d\-]+)/add/$', 'widgets.smartgrid.views.add_task', name='activity_add_task'),
     url(r'^(?P<activity_type>[\w]+)/(?P<slug>[\w\d\-]+)/drop/$', 'widgets.smartgrid.views.drop_task', name='activity_drop_task'),

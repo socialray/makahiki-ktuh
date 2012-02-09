@@ -7,7 +7,7 @@ from django.contrib.auth.models import User
 from managers.team_mgr.models import Floor
 from widgets.smartgrid.models import Activity, ActivityMember, Commitment, CommitmentMember
 from widgets.quests.models import Quest
-from pages.view_profile.forms import ProfileForm
+from widgets.profile.forms import ProfileForm
 
 class ProfileFunctionalTestCase(TestCase):
   fixtures = ["base_floors.json"]

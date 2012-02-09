@@ -6,7 +6,7 @@ from django.contrib.auth.models import User
 
 from widgets.smartgrid.models import Commitment, CommitmentMember
 from managers.team_mgr.models import Floor, Post
-from pages.news import DEFAULT_POST_COUNT
+from widgets.news import DEFAULT_POST_COUNT
 
 class NewsFunctionalTestCase(TestCase):
   fixtures = ["base_floors.json"]
