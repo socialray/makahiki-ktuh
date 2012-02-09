@@ -29,9 +29,7 @@ from django.db import connection
 MAX_INDIVIDUAL_STANDINGS = 10
 smartgrid_COL_COUNT = 3
 
-@never_cache
-@login_required
-def index(request):
+def supply(request):
   user = request.user
 
   floor = user.get_profile().floor
@@ -42,21 +40,29 @@ def index(request):
   floor_standings = Floor.floor_points_leaders(num_results=10, round_name=round_name)
   profile_standings = Profile.points_leaders(num_results=10, round_name=round_name)
   if floor:
-    user_floor_standings = floor.points_leaders(num_results=10, round_name=round_name)
+      user_floor_standings = floor.points_leaders(num_results=10, round_name=round_name)
+
+  categories_list = __get_categories(user)
+
+  hide_about = False
+  ##TODO Check for the about cookie.
+  ##if request.COOKIES.has_key("grid-hide-about"):
+  ##  hide_about = True
+
+  form = EventCodeForm()
 
   # Calculate active participation.
   floor_participation = Floor.objects.filter(profile__points__gte=50).annotate(
       user_count=Count('profile'),
   ).order_by('-user_count').select_related('dorm')[:10]
-  
+
   for f in floor_participation:
-    f.active_participation = (f.user_count * 100) / f.profile_set.count()
+      f.active_participation = (f.user_count * 100) / f.profile_set.count()
     
-  return render_to_response("view_activities/index.html", {
-    "events": events,
+  return {
     "profile":user.get_profile(),
     "floor": floor,
-    "categories":categories_list,
+    "categories": __get_categories(user),
     "current_round": round_name or "Overall",
     "floor_standings": floor_standings,
     "profile_standings": profile_standings,
@@ -64,12 +70,7 @@ def index(request):
     "floor_participation": floor_participation,
     "hide_about": hide_about,
     "event_form": form,
-  }, context_instance=RequestContext(request))
-
-def supply(request):
-    user = request.user
-    categories_list = __get_categories(user)
-    return {"categories" : categories_list}
+  }
 
 ## new design, return the category list with the tasks info
 def __get_categories(user):
@@ -564,7 +565,7 @@ def task(request, activity_type, slug):
   social_email2 = None
 
   if is_unlock_from_cache(user, task) != True:
-    return HttpResponseRedirect(reverse("widgets.smartgrid.views.index", args=()))
+    return HttpResponseRedirect(reverse("actions_index", args=()))
   
   if task.type != "commitment":
     task = task.activity
