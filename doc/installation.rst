@@ -8,10 +8,9 @@ Prerequisite Software
 is recommended that you use the 32 bit version, as using the 64 bit
 version appears to have issues. 
 
-Apple Developer Tools (OS/X only). If on Mac OS X, make sure that the Apple Developer Tools are
-installed (which is bundled with XCode). You can either get this from
-your Mac’s install DVD or from Apple’s `site`_. Note that you need an
-Apple developer account (which is free) to download from Apple.
+`Apple Developer Tools`_ (OS/X only). If on Mac OS X, install
+Apple Developer Tools (i.e. XCode 4). This is required in order to 
+build certain libraries (PIL, etc.) that require GCC (which is bundled with XCode).
 
 `Python Imaging Library`_ (PIL). If you are on OSX, it is easier to
 install via `Homebrew`_. Once Homebrew is installed, install PIL by
@@ -43,7 +42,6 @@ installed, be sure that your PostgreSQL installation's bin/ directory
 is on $PATH so that ``pg_config`` is defined.
 
 .. _Python: http://www.python.org/download/
-.. _site: http://developer.apple.com/technologies/xcode.html
 .. _Python Imaging Library: http://www.pythonware.com/products/pil/
 .. _Homebrew: http://mxcl.github.com/homebrew/
 .. _GitHub install wiki: http://help.github.com/git-installation-redirect
@@ -51,6 +49,7 @@ is on $PATH so that ``pg_config`` is defined.
 .. _here: http://pypi.python.org/pypi/setuptools
 .. _Virtualenvwrapper: http://www.doughellmann.com/docs/virtualenvwrapper/
 .. _PostgreSQL: http://www.postgresql.org/
+.. _Apple Developer Tools: https://developer.apple.com/technologies/mac/
 
 Downloading the Makahiki source
 -------------------------------
