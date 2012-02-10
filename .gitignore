@@ -14,7 +14,7 @@ fabfile.py
 local_settings.py
 
 # Ignore the test files.
-makahiki.log
+log/makahiki.log
 site_media
 
 # Ignore the apache configuration
@@ -34,8 +34,8 @@ pip-log.txt
 coverage.xml
 htmlcov/
 
-# Ignore log file
-RoundONE.log
+#Ignore Sphinx build
+doc/_build
 
 # Ignore pycharm files
 .idea/
