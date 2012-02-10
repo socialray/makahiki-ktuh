@@ -1,0 +1,218 @@
+
+managers
+========
+
+managers.base_mgr
+------------------
+.. automodule:: managers.base_mgr
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
+.. automodule:: managers.base_mgr.models
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
+managers.cache_mgr
+------------------
+.. automodule:: managers.cache_mgr.utils
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
+managers.help_mgr
+------------------
+.. automodule:: managers.help_mgr.models
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
+managers.player_mgr
+--------------------
+.. automodule:: managers.player_mgr
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
+.. automodule:: managers.player_mgr.models
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
+managers.score_mgr
+------------------
+.. automodule:: managers.score_mgr
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
+managers.team_mgr
+------------------
+.. automodule:: managers.team_mgr
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
+.. automodule:: managers.team_mgr.models
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
+widgets
+=======
+
+widgets.analytics
+-----------------
+.. automodule:: widgets.analytics
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
+.. automodule:: widgets.analytics.models
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
+.. automodule:: widgets.analytics.views
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
+widgets.badges
+------------------
+.. automodule:: widgets.badges.models
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
+.. automodule:: widgets.badges.views
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
+widgets.canopy
+-----------------
+.. automodule:: widgets.canopy
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
+.. automodule:: widgets.canopy.models
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
+.. automodule:: widgets.canopy.views
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
+widgets.energy
+-----------------
+.. automodule:: widgets.energy
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
+.. automodule:: widgets.energy.models
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
+.. automodule:: widgets.energy.views
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
+widgets.help
+-----------------
+.. automodule:: widgets.help.views
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
+widgets.news
+-----------------
+.. automodule:: widgets.news.views
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
+widgets.notifications
+----------------------
+.. automodule:: widgets.notifications
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
+.. automodule:: widgets.notifications.models
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
+.. automodule:: widgets.notifications.views
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
+widgets.prizes
+------------------
+.. automodule:: widgets.prizes.models
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
+.. automodule:: widgets.prizes.views
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
+widgets.profile
+-----------------
+.. automodule:: widgets.profile.views
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
+widgets.quests
+-----------------
+.. automodule:: widgets.quests
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
+.. automodule:: widgets.quests.models
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
+.. automodule:: widgets.quests.views
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
+widgets.smartgrid
+-----------------
+.. automodule:: widgets.smartgrid
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
+.. automodule:: widgets.smartgrid.models
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
+.. automodule:: widgets.smartgrid.views
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
+widgets.upcoming_events
+------------------------
+.. automodule:: widgets.upcoming_events.views
+    :members:
+    :undoc-members:
+    :show-inheritance:
+

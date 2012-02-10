@@ -8,7 +8,7 @@ from django.contrib.auth.models import User
 
 from managers.team_mgr.models import Dorm, Floor
 from managers.player_mgr.models import Profile, ScoreboardEntry
-from managers.standings_mgr import get_standings_for_user, get_floor_standings, get_individual_standings, MAX_INDIVIDUAL_STANDINGS
+from managers.score_mgr import get_standings_for_user, get_floor_standings, get_individual_standings, MAX_INDIVIDUAL_STANDINGS
     
 class UserFloorStandingsTest(TestCase):
   """Tests the generation of standings that check a user's placement in a floor."""

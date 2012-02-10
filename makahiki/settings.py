@@ -165,7 +165,6 @@ INSTALLED_APPS = (
     'managers.facebook_mgr',
     'managers.help_mgr',
     'managers.score_mgr',
-    'managers.standings_mgr',
 
     'widgets.prizes',
     'widgets.smartgrid',
