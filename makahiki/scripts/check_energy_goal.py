@@ -5,12 +5,6 @@ from decimal import *
 
 from os.path import abspath, dirname, join
 
-try:
-    import pinax
-except ImportError:
-    sys.stderr.write("Error: Can't import Pinax. Make sure you have it installed or use pinax-boot.py to properly create a virtual environment.")
-    sys.exit(1)
-
 from django.conf import settings
 from django.core.management import setup_environ
 
@@ -37,7 +31,6 @@ import string
 # setup the environment before we start accessing things in the settings.
 setup_environ(settings_mod)
 
-sys.path.insert(0, join(settings.PINAX_ROOT, "apps"))
 sys.path.insert(0, join(settings.PROJECT_ROOT, "apps"))
 
 from managers.player_mgr.models import *

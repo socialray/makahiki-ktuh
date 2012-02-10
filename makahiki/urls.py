@@ -46,7 +46,6 @@ urlpatterns = patterns('',
 #    (r'^attachments/', include('attachments.urls')),
 #    (r'^sentry/', include('sentry.urls')),
 
-    # pinax provided
     # (r'^account/', include('account.urls')),
     (r'^admin/status/', include('widgets.analytics.urls'),),
     (r'^admin/login-as/(?P<user_id>\d+)/$', 'managers.auth_mgr.views.login_as'),

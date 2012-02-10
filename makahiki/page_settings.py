@@ -1,3 +1,28 @@
+# page_settings.py
+# This file contains settings for the page layouts.
+
+###############################################
+# PAGE LAYOUT GLOBALs
+###############################################
+WIDTHS = {
+    "DEFAULT"          : 1024,
+    "LARGE"            : 2048,
+    "TABLET_PORTRAIT"  : 500,
+    "TABLET_LANDSCAPE" : 768,
+    "PHONE_PORTRAIT"   : 240,
+    "PHONE_LANDSCAPE"  : 320,
+    }
+
+###############################################
+# PAGE LAYOUT SETTINGS
+###############################################
+# each page's layout is defined in a dictionary with the page name as the key, and another dictionary
+# as the layout settings for the page. The settings dictionary includes keys such as "PAGE_TITLE",
+# "BASE_TEMPLATE", and "LAYOUTS". LAYOUTS is another dictionary to include layouts for different device widths
+# defined above.
+# An LAYOUTS example is:
+#    { "<WIDTHS>" : ( (("row1_widget1", "40%"), ("row1_widget2", "60%")),
+#                     ("row2_widget", "100%") ) }
 PAGE_SETTINGS = {
     # actions page
     "actions" : 

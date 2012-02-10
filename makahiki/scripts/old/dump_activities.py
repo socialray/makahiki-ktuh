@@ -9,7 +9,6 @@ setup_environ(settings)
 import sys
 from os.path import join
 
-sys.path.insert(0, join(settings.PINAX_ROOT, "apps"))
 sys.path.insert(0, join(settings.PROJECT_ROOT, "apps"))
 
 from activities.models import Activity, Commitment

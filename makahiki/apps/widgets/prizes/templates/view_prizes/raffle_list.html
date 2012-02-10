@@ -36,7 +36,7 @@
         });
       </script>
     </td>
-    <td class="{% insert_classes "prize-number" %}">${{prize.value}}</td>
+    <td class="{% insert_classes "prize-number" %}">{{prize.value|currency}}</td>
     <td class="{% insert_classes "prize-number" %} user-tickets">{{user_tickets}}</td>
     <td class="{% insert_classes "prize-number" %} total-tickets">{{prize.allocated_tickets}}</td>
     <td class="{% insert_classes "prize-number" %} user-odds">{# {{prize|user_odds:user}} #}</td>
