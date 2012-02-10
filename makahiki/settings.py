@@ -40,7 +40,7 @@ CACHE_MIDDLEWARE_SECONDS = 600
 PROJECT_ROOT = os.path.abspath(os.path.dirname(__file__))
 
 # Default log file location.
-LOG_FILE = './makahiki.log'
+LOG_FILE = '../log/makahiki.log'
 
 # Absolute path to the directory that holds media.
 # Example: "/home/media/media.lawrence.com/"
