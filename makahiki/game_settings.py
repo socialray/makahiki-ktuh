@@ -90,7 +90,7 @@ TIME_ZONE = 'Pacific/Honolulu'
 LANGUAGE_CODE = 'en'
 
 # Locale setting for currency conversion.
-LOCALE_SETTING = 'en_US'
+LOCALE_SETTING = ''
 
 ###################
 # THEME
