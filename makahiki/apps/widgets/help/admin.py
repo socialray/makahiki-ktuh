@@ -1,7 +1,7 @@
 from django.contrib import admin
 from django import forms
 
-from managers.help_mgr.models import HelpTopic
+from widgets.help.models import HelpTopic
 
 class HelpAdminForm(forms.ModelForm):
     class Meta:

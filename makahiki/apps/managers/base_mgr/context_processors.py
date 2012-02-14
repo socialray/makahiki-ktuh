@@ -1,3 +1,6 @@
+""" It provides competition settings in the request context to be used within
+ a template. It mainly retrieve the settings from settings files.
+"""
 from django.conf import settings
 from managers.base_mgr import get_floor_label, get_rounds_for_header, \
         get_current_round, get_current_round_info, in_competition

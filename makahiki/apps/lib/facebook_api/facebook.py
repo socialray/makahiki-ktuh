@@ -32,7 +32,6 @@ usage of this module might look like this:
         friends = graph.get_connections("me", "friends")
 
 """
-# pylint: disable-all
 
 import cgi
 import hashlib

@@ -1025,7 +1025,7 @@
       "question": 58, 
       "activity": 53
     }
-  }, 
+  },
   {
     "pk": 1, 
     "model": "smartgrid.activitybase", 

@@ -31,7 +31,7 @@ urlpatterns = patterns('',
     url(r'^account/cas/logout/$', 'lib.django_cas.views.logout'),
 
     url(r'^ask-admin/', include('widgets.ask_admin.urls')),
-    url(r'^avatar/', include('managers.avatar_mgr.urls')),
+    url(r'^avatar/', include('widgets.avatar.urls')),
     # url(r'^resources/', include('components.resources.urls')),
 #    url(r'^themes/', include('components.makahiki_themes.urls')),
     url(r'^quest/', include('widgets.quests.urls')),

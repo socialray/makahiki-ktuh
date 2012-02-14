@@ -11,8 +11,8 @@ from lib.brabeion import badges
 from widgets.quests import possibly_completed_quests, get_quests, has_task, completed_task, num_tasks_completed, badge_awarded, has_points, set_profile_pic
 
 from widgets.smartgrid.models import Activity, ActivityMember, Commitment, CommitmentMember, Category
-from managers.avatar_mgr import create_default_thumbnails
-from managers.avatar_mgr.models import Avatar, avatar_file_path
+from widgets.avatar import create_default_thumbnails
+from widgets.avatar.models import Avatar, avatar_file_path
 from widgets.quests.models import Quest
 from widgets.prizes.models import RaffleDeadline, RafflePrize, RaffleTicket
 

@@ -1,9 +1,10 @@
 import urllib2
 import simplejson as json
 
-from managers.avatar_mgr.models import Avatar, avatar_file_path
-from managers.avatar_mgr.forms import PrimaryAvatarForm, DeleteAvatarForm, FacebookPictureForm
-import managers.facebook_mgr.facebook as facebook
+from widgets.avatar.models import Avatar, avatar_file_path
+from widgets.avatar.forms import PrimaryAvatarForm, DeleteAvatarForm, FacebookPictureForm
+import lib.facebook_api.facebook as facebook
+
 from django.http import HttpResponse, HttpResponseRedirect, Http404
 from django.shortcuts import render_to_response
 from django.template import RequestContext

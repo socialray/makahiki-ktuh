@@ -6,7 +6,7 @@ from django.contrib.auth.decorators import login_required
 from django.shortcuts import get_object_or_404
 from django.http import  HttpResponse
 
-from managers.help_mgr.models import HelpTopic
+from widgets.help.models import HelpTopic
 from widgets.ask_admin.forms import FeedbackForm
 
 @login_required

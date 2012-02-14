@@ -145,15 +145,13 @@ INSTALLED_APPS = (
 
     # Makahiki components
     'managers.auth_mgr',
-    'managers.avatar_mgr',
     'managers.base_mgr',
     'managers.team_mgr',
     'managers.player_mgr',
     'managers.cache_mgr',
-    'managers.facebook_mgr',
-    'managers.help_mgr',
     'managers.score_mgr',
 
+    'widgets.avatar',
     'widgets.prizes',
     'widgets.smartgrid',
     'widgets.energy',
@@ -171,6 +169,7 @@ INSTALLED_APPS = (
     # 3rd party libraries
     'lib.django_cas',
     'lib.brabeion',
+    'lib.facebook_api',
 
     # Django apps
     'django.contrib.auth',

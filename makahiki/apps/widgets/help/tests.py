@@ -3,7 +3,7 @@ from django.core.urlresolvers import reverse
 from django.contrib.auth.models import User
 
 from managers.team_mgr.models import Floor
-from managers.help_mgr.models import HelpTopic
+from widgets.help.models import HelpTopic
 
 class HelpFunctionalTestCase(TestCase):
     fixtures = ["base_floors.json"]

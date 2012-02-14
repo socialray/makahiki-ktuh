@@ -17,8 +17,8 @@ from django.views.decorators.csrf import csrf_exempt
 from django.core.urlresolvers import reverse
 
 from widgets.smartgrid.models import Activity, ActivityMember
-from managers.avatar_mgr.models import avatar_file_path, Avatar
-import managers.facebook_mgr.facebook as facebook
+from widgets.avatar.models import avatar_file_path, Avatar
+import lib.facebook_api.facebook as facebook
 from pages.home.forms import  ProfileForm, ReferralForm
 
 @never_cache

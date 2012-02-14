@@ -1,3 +1,6 @@
+"""
+BASE Manager package
+"""
 import datetime
 from django.conf import settings
 
