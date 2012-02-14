@@ -16,9 +16,9 @@ managers.cache_mgr
     :undoc-members:
     :show-inheritance:
 
-managers.help_mgr
+widgets.help
 ------------------
-.. automodule:: managers.help_mgr.models
+.. automodule:: widgets.help.models
     :members:
     :undoc-members:
     :show-inheritance:
@@ -31,13 +31,6 @@ managers.player_mgr
     :show-inheritance:
 
 .. automodule:: managers.player_mgr.models
-    :members:
-    :undoc-members:
-    :show-inheritance:
-
-managers.score_mgr
-------------------
-.. automodule:: managers.score_mgr
     :members:
     :undoc-members:
     :show-inheritance:

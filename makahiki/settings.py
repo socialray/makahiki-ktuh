@@ -149,7 +149,6 @@ INSTALLED_APPS = (
     'managers.team_mgr',
     'managers.player_mgr',
     'managers.cache_mgr',
-    'managers.score_mgr',
 
     'widgets.avatar',
     'widgets.prizes',
