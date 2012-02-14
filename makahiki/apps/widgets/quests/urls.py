@@ -1,4 +1,4 @@
-from django.conf.urls.defaults import *
+from django.conf.urls.defaults import url, patterns
 
 urlpatterns = patterns('',
     url(r'^(?P<slug>[-\w]+)/accept/$', 'widgets.quests.views.accept', name="quests_accept"),

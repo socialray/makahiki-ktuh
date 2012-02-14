@@ -3,7 +3,6 @@ import json
 import datetime
 import urllib2
 
-from django.shortcuts import get_object_or_404
 from django.conf import settings
 from django.shortcuts import render_to_response
 from django.template import RequestContext
@@ -16,13 +15,11 @@ from django.core.files.temp import NamedTemporaryFile
 from django.views.decorators.cache import never_cache
 from django.views.decorators.csrf import csrf_exempt
 from django.core.urlresolvers import reverse
-from django.db import IntegrityError
 
 from widgets.smartgrid.models import Activity, ActivityMember
 from managers.avatar_mgr.models import avatar_file_path, Avatar
 import managers.facebook_mgr.facebook as facebook
-from pages.home.forms import FacebookForm, ProfileForm, ReferralForm
-from managers.help_mgr.models import HelpTopic
+from pages.home.forms import  ProfileForm, ReferralForm
 
 @never_cache
 @login_required
@@ -30,7 +27,9 @@ def index(request):
     """
     Directs the user to the home page.
     """
-    return render_to_response("pages/home/templates/index.html", {}, context_instance=RequestContext(request))
+    return render_to_response("pages/home/templates/index.html", {},
+        context_instance=RequestContext(request))
+
 
 @login_required
 def restricted(request):
@@ -51,6 +50,7 @@ def restricted(request):
         "end": end,
         }, context_instance=RequestContext(request))
 
+
 @never_cache
 @login_required
 def setup_welcome(request):
@@ -58,7 +58,8 @@ def setup_welcome(request):
     Uses AJAX to display the initial setup page.
     """
     if request.is_ajax():
-        response = render_to_string("pages/home/templates/first-login/welcome.html", {}, context_instance=RequestContext(request))
+        response = render_to_string("pages/home/templates/first-login/welcome.html", {},
+            context_instance=RequestContext(request))
 
         return HttpResponse(json.dumps({
             "title": "Introduction: Step 1 of 7",
@@ -66,6 +67,7 @@ def setup_welcome(request):
             }), mimetype='application/json')
 
     raise Http404
+
 
 @never_cache
 @login_required
@@ -75,7 +77,6 @@ def terms(request):
     """
     if request.is_ajax():
         response = render_to_string("pages/home/templates/first-login/terms.html", {
-            'is_mobile': request.mobile,
             }, context_instance=RequestContext(request))
 
         return HttpResponse(json.dumps({
@@ -84,6 +85,7 @@ def terms(request):
             }), mimetype='application/json')
 
     raise Http404
+
 
 @login_required
 def referral(request):
@@ -98,7 +100,8 @@ def referral(request):
             form = ReferralForm(request.POST, user=request.user)
             if form.is_valid():
                 cleaned_data = form.cleaned_data
-                if cleaned_data.has_key('referrer_email') and len(cleaned_data['referrer_email']) > 0:
+                if cleaned_data.has_key('referrer_email') and len(
+                    cleaned_data['referrer_email']) > 0:
                     profile.referring_user = User.objects.get(email=cleaned_data['referrer_email'])
                 else:
                     # Double check just in case user comes back and deletes the email.
@@ -126,6 +129,7 @@ def referral(request):
 
     raise Http404
 
+
 @never_cache
 @login_required
 def profile_facebook(request):
@@ -133,7 +137,8 @@ def profile_facebook(request):
     Connect to Facebook to get the user's facebook photo..
     """
     if request.is_ajax():
-        fb_user = facebook.get_user_from_cookie(request.COOKIES, settings.FACEBOOK_APP_ID, settings.FACEBOOK_SECRET_KEY)
+        fb_user = facebook.get_user_from_cookie(request.COOKIES, settings.FACEBOOK_APP_ID,
+            settings.FACEBOOK_SECRET_KEY)
         fb_id = None
         if not fb_user:
             return HttpResponse(json.dumps({
@@ -166,6 +171,7 @@ def profile_facebook(request):
 
     raise Http404
 
+
 @never_cache
 @login_required
 def setup_profile(request):
@@ -193,12 +199,12 @@ def setup_profile(request):
                 path = avatar_file_path(user=request.user,
                     filename=request.FILES['avatar'].name)
                 avatar = Avatar(
-                    user = request.user,
-                    primary = True,
-                    avatar = path,
+                    user=request.user,
+                    primary=True,
+                    avatar=path,
                 )
                 # print "saving avatar to " + path
-                new_file = avatar.avatar.storage.save(path, request.FILES['avatar'])
+                avatar.avatar.storage.save(path, request.FILES['avatar'])
                 avatar.save()
 
             elif form.cleaned_data["use_fb_photo"] and form.cleaned_data["facebook_photo"]:
@@ -212,12 +218,12 @@ def setup_profile(request):
                 path = avatar_file_path(user=request.user,
                     filename="fb_photo.jpg")
                 avatar = Avatar(
-                    user = request.user,
-                    primary = True,
-                    avatar = path,
+                    user=request.user,
+                    primary=True,
+                    avatar=path,
                 )
                 # print "saving facebook photo to " + path
-                new_file = avatar.avatar.storage.save(path, File(photo_temp))
+                avatar.avatar.storage.save(path, File(photo_temp))
                 avatar.save()
 
             return HttpResponseRedirect(reverse("setup_activity"))
@@ -226,14 +232,16 @@ def setup_profile(request):
 
     raise Http404
 
+
 @never_cache
 def _get_profile_form(request, form=None, non_xhr=False):
     """
     Helper method to render the profile form.
     """
     try:
-        fb_user = facebook.get_user_from_cookie(request.COOKIES, settings.FACEBOOK_APP_ID, settings.FACEBOOK_SECRET_KEY)
-    except:
+        fb_user = facebook.get_user_from_cookie(request.COOKIES, settings.FACEBOOK_APP_ID,
+            settings.FACEBOOK_SECRET_KEY)
+    except:  # pylint: disable=W0702
         fb_user = None
 
     fb_id = None
@@ -271,11 +279,13 @@ def _get_profile_form(request, form=None, non_xhr=False):
             "contents": response,
             }), mimetype='application/json')
 
+
 @never_cache
 @login_required
 def setup_activity(request):
     if request.is_ajax():
-        template = render_to_string("pages/home/templates/first-login/activity.html", {}, context_instance=RequestContext(request))
+        template = render_to_string("pages/home/templates/first-login/activity.html", {},
+            context_instance=RequestContext(request))
 
         response = HttpResponse(json.dumps({
             "title": "Introduction: Step 5 of 7",
@@ -285,7 +295,8 @@ def setup_activity(request):
         return response
 
     else:
-        template = render_to_string("pages/home/templates/first-login/activity.html", {}, context_instance=RequestContext(request))
+        template = render_to_string("pages/home/templates/first-login/activity.html", {},
+            context_instance=RequestContext(request))
 
         response = HttpResponse("<textarea>" + json.dumps({
             "title": "Introduction: Step 5 of 7",
@@ -294,11 +305,13 @@ def setup_activity(request):
 
         return response
 
+
 @never_cache
 @login_required
 def setup_question(request):
     if request.is_ajax():
-        template = render_to_string("pages/home/templates/first-login/question.html", {}, context_instance=RequestContext(request))
+        template = render_to_string("pages/home/templates/first-login/question.html", {},
+            context_instance=RequestContext(request))
 
         response = HttpResponse(json.dumps({
             "title": "Introduction: Step 6 of 7",
@@ -307,6 +320,7 @@ def setup_question(request):
 
         return response
     raise Http404
+
 
 @never_cache
 @login_required
@@ -320,7 +334,8 @@ def setup_complete(request):
             activity_name = settings.SETUP_WIZARD_ACTIVITY_NAME
             try:
                 activity = Activity.objects.get(name=activity_name)
-                ActivityMember.objects.get_or_create(activity=activity, user=profile.user, approval_status="approved")
+                ActivityMember.objects.get_or_create(activity=activity, user=profile.user,
+                    approval_status="approved")
                 # If this was created, it's automatically saved.
             except Activity.DoesNotExist:
                 # profile.add_points(15, datetime.datetime.today(), "First login activity")
@@ -329,7 +344,8 @@ def setup_complete(request):
         profile.setup_complete = True
         profile.completion_date = datetime.datetime.today()
         profile.save()
-        template = render_to_string("pages/home/templates/first-login/complete.html", {}, context_instance=RequestContext(request))
+        template = render_to_string("pages/home/templates/first-login/complete.html", {},
+            context_instance=RequestContext(request))
 
         response = HttpResponse(json.dumps({
             "title": "Introduction: Step 7 of 7",
@@ -338,19 +354,3 @@ def setup_complete(request):
 
         return response
     raise Http404
-
-@never_cache
-@login_required
-def mobile_tc(request):
-    topic = get_object_or_404(HelpTopic, slug='terms-and-conditions', category='rules')
-    if request.is_ajax():
-        contents = render_to_string("help/dialog.html", {"topic": topic})
-        return HttpResponse(json.dumps({
-            "title": topic.title,
-            "contents": contents,
-            }), mimetype="application/json")
-    return render_to_response("pages/home/templates/first-login/mobile_TC.html", {
-        "topic": topic,
-        }, context_instance=RequestContext(request))
- 
-

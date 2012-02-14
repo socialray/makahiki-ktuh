@@ -1,6 +1,6 @@
-from django.conf.urls.defaults import *
+from django.conf.urls.defaults import url, patterns
 
 urlpatterns = patterns('',
-    url(r'^send-feedback/$', 
+    url(r'^send-feedback/$',
         'widgets.ask_admin.views.send_feedback', name="ask_admin_feedback"),
 )

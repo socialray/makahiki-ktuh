@@ -14,7 +14,8 @@
 
     <div {% get_id_and_classes "landing-page" %}>
         <div {% get_id_and_classes "landing-logo" %}>
-            <a href="{% url landing %}"><img src="{{STATIC_URL}}css/default/images/old-logo.png"/></a>
+            <a href="{% url landing %}"><img
+                    src="{{STATIC_URL}}css/default/images/old-logo.png"/></a>
         </div>
         <div {% get_id_and_classes "landing-title" %}>
             <h2>The Kukui Cup: Lights out, game on!</h2>
@@ -22,18 +23,23 @@
     </div>
 
     <div {% get_id_and_classes "landing-intro" %}>
-        Aloha! The Kukui Cup is an energy challenge that can be played by all first year UH students living in the Hale Aloha residence halls.
-        <p> <p>
-
-        <button {% get_id_and_classes "landing-button-participant" %} onclick='javascript:location.href="{% url home_index %}"'>
-            <h3>I live in Hale Aloha</h3>
-            <h5>You will be prompted for your <br>
-                UH username and password, it's safe</h5>
-        </button>
+        Aloha! The Kukui Cup is an energy challenge that can be played by all first year UH students
+        living in the Hale Aloha residence halls.
+        <p>
 
         <p>
 
-            <button {% get_id_and_classes "landing-button-non-participant" %} onclick="javascript:location.href='{% url about %}'">
+            <button {% get_id_and_classes "landing-button-participant" %}
+                    onclick='javascript:location.href="{% url home_index %}"'>
+                <h3>I live in Hale Aloha</h3>
+                <h5>You will be prompted for your <br>
+                    UH username and password, it's safe</h5>
+            </button>
+
+        <p>
+
+            <button {% get_id_and_classes "landing-button-non-participant" %}
+                    onclick="javascript:location.href='{% url about %}'">
                 <h3>I don't live in these residence halls</h3>
                 <h5>but I'd like to know more about the Kukui Cup</h5>
             </button>
@@ -41,11 +47,11 @@
     </div>
 
     <script>
-        jQuery(document).ready(function($) {
+        jQuery(document).ready(function ($) {
             // Check if the browser supports opacity as another check for an up to date browser.
-            if(!jQuery.support.opacity) {
-                $('#landing-button-participant').unbind('click').click(function() {
-                    location.href='{% url browser_check %}';
+            if (!jQuery.support.opacity) {
+                $('#landing-button-participant').unbind('click').click(function () {
+                    location.href = '{% url browser_check %}';
                 });
             }
         });
@@ -81,11 +87,17 @@
             Sponsored by:
         </div>
         <div {% get_id_and_classes "landing-sponsors-list" %}>
-            <a href="http://csdl.ics.hawaii.edu"><img src="{{STATIC_URL}}images/sponsors/logo.csdl.gif" /></a>
-            <a href="http://reis.manoa.hawaii.edu"><img src="{{STATIC_URL}}images/sponsors/logo.reis.2.png" /></a>
-            <a href="http://manoa.hawaii.edu/housing/"><img src="{{STATIC_URL}}images/sponsors/logo.manoa.2.png" /></a>
-            <a href="http://www.nsf.gov/"><img src="http://www.nsf.gov/images/logos/nsf1sm.gif" width="75px"/></a>
-            <a href="http://energy.hawaii.gov"><img src="{{STATIC_URL}}images/sponsors/dbedt-logo.jpg" style="padding-top: 10px"/></a>
+            <a href="http://csdl.ics.hawaii.edu"><img
+                    src="{{STATIC_URL}}images/sponsors/logo.csdl.gif"/></a>
+            <a href="http://reis.manoa.hawaii.edu"><img
+                    src="{{STATIC_URL}}images/sponsors/logo.reis.2.png"/></a>
+            <a href="http://manoa.hawaii.edu/housing/"><img
+                    src="{{STATIC_URL}}images/sponsors/logo.manoa.2.png"/></a>
+            <a href="http://www.nsf.gov/"><img src="http://www.nsf.gov/images/logos/nsf1sm.gif"
+                                               width="75px"/></a>
+            <a href="http://energy.hawaii.gov"><img
+                    src="{{STATIC_URL}}images/sponsors/dbedt-logo.jpg"
+                    style="padding-top: 10px"/></a>
         </div>
     </div>
     <a href="mailto:{{ CONTACT_EMAIL }}">Contact the Kukui Cup administrators</a>

@@ -92,11 +92,8 @@ TEMPLATE_DIRS = (
 
 # List of callables that know how to import templates from various sources.
 TEMPLATE_LOADERS = (
-    #'django.template.loaders.filesystem.load_template_source',
     'django.template.loaders.filesystem.Loader',
-    #'django.template.loaders.app_directories.load_template_source',
     'django.template.loaders.app_directories.Loader',
-    # 'dbtemplates.loader.load_template_source',
     )
 
 TEMPLATE_CONTEXT_PROCESSORS = (
@@ -106,12 +103,7 @@ TEMPLATE_CONTEXT_PROCESSORS = (
     "django.core.context_processors.media",
     "django.core.context_processors.request",
     'django.contrib.messages.context_processors.messages',
-    # "notification.context_processors.notification",
-    # "account.context_processors.openid",
-    # "account.context_processors.account",
-
     "managers.base_mgr.context_processors.competition",
-    #    "components.makahiki_themes.context_processors.css_selector",
     )
 
 ######################
@@ -123,20 +115,16 @@ MIDDLEWARE_CLASSES = (
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.transaction.TransactionMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
-    # 'account.middleware.LocaleMiddleware',
     'django.middleware.doc.XViewMiddleware',
-    #'pagination.middleware.PaginationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
-    #'django.middleware.csrf.CsrfResponseMiddleware',
     'lib.django_cas.middleware.CASMiddleware',
     'pages.home.middleware.CompetitionMiddleware',
-    'lib.minidetector.Middleware',
     'managers.player_mgr.middleware.LoginTrackingMiddleware',
     'pages.home.middleware.CheckSetupMiddleware',
     'managers.log_mgr.middleware.LoggingMiddleware',
     'django.middleware.cache.FetchFromCacheMiddleware',
-)
+    )
 
 ######################
 # AUTH settings
@@ -144,7 +132,7 @@ MIDDLEWARE_CLASSES = (
 AUTHENTICATION_BACKENDS = (
     'django.contrib.auth.backends.ModelBackend',
     'managers.auth_mgr.models.MakahikiCASBackend',
-)
+    )
 
 #########################
 # INSTALLED_APPS settings
@@ -154,7 +142,7 @@ INSTALLED_APPS = (
     'apps',
     'pages',
     'pages.home',
-    
+
     # Makahiki components
     'managers.auth_mgr',
     'managers.avatar_mgr',
@@ -183,7 +171,6 @@ INSTALLED_APPS = (
     # 3rd party libraries
     'lib.django_cas',
     'lib.brabeion',
-    'lib.minidetector',
 
     # Django apps
     'django.contrib.auth',
@@ -192,44 +179,28 @@ INSTALLED_APPS = (
     'django.contrib.sites',
     'django.contrib.humanize',
     'django.contrib.messages',
-    
+
     # external
-    # 'notification', # must be first
-    # 'django_openid',
-#    'emailconfirmation',
-#    'mailer',
-#    'pagination',
-#    'timezones',
-#    'ajax_validation',
-#    'uni_form',
-#    'dbtemplates',
     'staticfiles',
-#    'django_extensions',
-    
-    # internal (for now)
-    # 'basic_profiles',
-    # 'account',
+    'django_nose',
+
+    # internal
     'django.contrib.admin',
     'django.contrib.admindocs',
-    
-    # project specific
-#    'sorl.thumbnail',
-#    'frontendadmin',
-#    'attachments',
     'django.contrib.markup',
-#    'django_generic_flatblocks',
-#    'django_generic_flatblocks.contrib.gblocks',
-    
-    # Dependencies for Sentry (http://justcramer.com/django-sentry/install.html)
-    # Used for error tracking.
-#    'indexer',
-#    'paging',
-#    'sentry',
-#    'sentry.client',
-    
+
     # migration support. comment out if module is not installed.
     'south',
-)
+    )
+
+################
+# TEST settings
+################
+# South
+SOUTH_TESTS_MIGRATE = False
+
+# Use Nose as the test runner.
+TEST_RUNNER = 'django_nose.NoseTestSuiteRunner'
 
 ################
 # DEBUG settings
@@ -275,29 +246,30 @@ ACCOUNT_EMAIL_VERIFICATION = False
 # Load additional settings files
 ################################
 try:
-  from game_settings import *
-except ImportError:
-  pass
-
-try:
-    from page_settings import *
+    from game_settings import *  # pylint: disable=W0401,W0614
 except ImportError:
     pass
 
 try:
-  from local_settings import *
+    from page_settings import *  # pylint: disable=W0401,W0614
 except ImportError:
-  pass
+    pass
+
+LOCAL_INSTALLED_APPS = ()
+try:
+    from local_settings import *  # pylint: disable=W0401,W0614, F0401
+except ImportError:
+    pass
 
 try:
-    INSTALLED_APPS += LOCAL_INSTALLED_APPS
-except:
+    INSTALLED_APPS += LOCAL_INSTALLED_APPS  # pylint: disable=E0602
+except NameError:
     pass
 
 ##############################
 # LOGGING settings
 ##############################
-# Logging is defined down here to give local_settings a chance to override 
+# Logging is defined down here to give local_settings a chance to override
 # the default log file location.
 LOGGING = {
     'version': 1,
@@ -309,42 +281,42 @@ LOGGING = {
         'simple': {
             'format': '%(levelname)s %(message)s'
         },
-    },
+        },
     'handlers': {
         'null': {
-            'level':'DEBUG',
-            'class':'django.utils.log.NullHandler',
-        },
-        'console':{
-            'level':'DEBUG',
-            'class':'logging.StreamHandler',
+            'level': 'DEBUG',
+            'class': 'django.utils.log.NullHandler',
+            },
+        'console': {
+            'level': 'DEBUG',
+            'class': 'logging.StreamHandler',
             'formatter': 'simple'
         },
         'mail_admins': {
             'level': 'ERROR',
             'class': 'django.utils.log.AdminEmailHandler',
-        },
+            },
         'file': {
             'level': 'INFO',
             'class': 'logging.FileHandler',
             'filename': LOG_FILE,
             'formatter': 'simple',
-        }
+            }
     },
     'loggers': {
         'django': {
-            'handlers':['null'],
+            'handlers': ['null'],
             'propagate': True,
-            'level':'INFO',
-        },
+            'level': 'INFO',
+            },
         'django.request': {
             'handlers': ['mail_admins'],
             'level': 'ERROR',
             'propagate': False,
-        },
+            },
         'makahiki_logger': {
             'handlers': ['file'],
             'level': 'INFO',
-        }
+            }
     }
 }

@@ -1,7 +1,6 @@
+from widgets.smartgrid.forms import EventCodeForm
+from widgets.smartgrid import get_available_events
 from django.core.cache import cache
-
-from widgets.smartgrid.models import *
-from widgets.smartgrid.forms import *
 
 def supply(request):
     user = request.user
@@ -14,5 +13,5 @@ def supply(request):
 
     event_form = EventCodeForm()
 
-    return  { "events" : events,
-              "event_form" : event_form }
+    return  {"events": events,
+             "event_form": event_form}

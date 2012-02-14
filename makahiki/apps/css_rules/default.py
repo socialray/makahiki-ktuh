@@ -19,7 +19,6 @@ LOGGED_IN_CSS_IMPORT = '<link rel="stylesheet" href="{0}css/{1}/logged_in_base.c
 PAGE_CSS_IMPORT = {
   "home": '<link rel="stylesheet" href="{0}css/{1}/pages/home.css">',
   "landing": '<link rel="stylesheet" href="{0}css/{1}/pages/landing.css">',
-  "mobile": '<link rel="stylesheet" href="{0}css/{1}/pages/mobile.css">',
   "news": '<link rel="stylesheet" href="{0}css/{1}/pages/news.css">\n<script src="{0}js/news.js" type="text/javascript"></script>',
   "actions": '<link rel="stylesheet" href="{0}css/{1}/pages/actions.css">',
   "energy": '<link rel="stylesheet" href="{0}css/{1}/pages/energy.css">\n<script src="{0}js/news.js" type="text/javascript"></script>',
@@ -32,23 +31,23 @@ PAGE_CSS_IMPORT = {
 CSS_IDS = {
   "landing-sponsors": "content-box",
   "landing-sponsors-title": "content-box-title",
-  
+
   "quest-list": "quest-list",
-  
+
   "home-energy": "home-item",
   "home-activities": "home-item",
   "home-news": "home-item",
   "home-prizes": "home-item",
   "home-help": "home-item",
   "home-profile": "home-item",
-  
+
   "energy-power": "content-box",
   "energy-scoreboard-box": "content-box",
   "energy-status-box": "content-box",
   "energy-power-title": "content-box-title",
   "energy-scoreboard-title": "content-box-title",
   "energy-status-title": "content-box-title",
-  
+
   "activity-events-box": "content-box",
   "activity-scoreboard-box": "content-box",
   "activity-categories-box": "content-box",
@@ -59,7 +58,7 @@ CSS_IDS = {
   "activity-scoreboard-title": "content-box-title",
   "activity-task-stats-title": "content-box-title",
   "activity-task-details-title": "content-box-title",
-  
+
   "news-wall": "content-box",
   "news-events": "content-box",
   "news-commitments": "content-box",
@@ -72,7 +71,7 @@ CSS_IDS = {
   "news-members-title": "content-box-title",
   "floor-members": "content-box",
   "floor-members-title": "content-box-title",
-  
+
   "help-video": "content-box",
   "help-rules": "content-box",
   "help-faq": "content-box",
@@ -87,7 +86,7 @@ CSS_IDS = {
   "help-rules-content": "content-box-contents",
   "help-faq-content": "content-box-contents",
   "help-topic-content": "content-box-contents",
-  
+
   "profile-form-box": "content-box",
   "profile-badges-box": "content-box",
   "profile-history-box": "content-box",
@@ -108,18 +107,18 @@ CSS_IDS = {
   "profile-form-fb-profile-label": "profile-form-label",
   "profile-form-contact-email-label": "profile-form-label",
   "profile-form-contact-text-label": "profile-form-label",
-  
+
   "badge-catalog-box": "content-box",
   "badge-catalog-title": "content-box-title",
-  
+
   "avatar-change": "content-box",
   "avatar-change-title": "content-box-title",
-  
+
   "prizes-list": "content-box",
   "prizes-raffle": "content-box",
   "prizes-raffle-title": "content-box-title",
   "prizes-list-title": "content-box-title",
-  
+
   "canopy-quests": "content-box",
   "canopy-quests-title": "content-box-title",
   "canopy-viz": "content-box",

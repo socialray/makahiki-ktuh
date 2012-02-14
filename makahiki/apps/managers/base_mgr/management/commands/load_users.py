@@ -1,112 +1,133 @@
 from django.core import management
 from django.contrib.auth.models import User
-from apps.managers.team_mgr.models import Floor
+from django.core.exceptions import ObjectDoesNotExist
+from managers.team_mgr.models import Floor
 from django.db.utils import IntegrityError
 
 class Command(management.base.BaseCommand):
-  help = 'load and create the users from a csv file containing lounge, name, and email, if the second argument is RA, the csv file is the RA list, consists of name, email, lounge.'
+    help = 'load and create the users from a csv file containing lounge, name, and email, if the second argument is RA, the csv file is the RA list, consists of name, email, lounge.'
 
-  def handle(self, *args, **options):
-    """
-    Load and create the users from a csv file containing lounge, name, and email
-    """
-    if len(args) == 0:
-      self.stdout.write("the csv file name missing.\n")
-      return
-
-    error_count = 0
-    load_count = 0
-    filename = args[0]
-    try:
-        file = open(filename)
-    except:
-        self.stdout.write("Can not open the file: %s , Aborting.\n" % (filename))
-        return
-
+    lastname = None
+    firstname = None
+    username = None
+    email = None
+    lounge = None
     is_ra = False
-    if len(args) > 1:
-      if args[1] == 'RA':
-        is_ra = True
-      else:
-        self.stdout.write("the second argument can only be RA.\n")
-        return 
-    
-    for line in file:
+
+    def handle(self, *args, **options):
+        """
+        Load and create the users from a csv file containing lounge, name, and email
+        """
+        if len(args) == 0:
+            self.stdout.write("the csv file name missing.\n")
+            return
+
+        filename = args[0]
+        try:
+            infile = open(filename)
+        except IOError:
+            self.stdout.write(
+                "Can not open the file: %s , Aborting.\n" % (filename))
+            return
+
+        if len(args) > 1:
+            if args[1] == 'RA':
+                self.is_ra = True
+            else:
+                self.stdout.write("the second argument can only be RA.\n")
+                return
+
+        error_count = 0
+        load_count = 0
+        for line in infile:
+            if not self.parse_ok(line):
+                error_count += 1
+            else:
+                self.create_user()
+                load_count += 1
+
+        infile.close()
+        print "---- total loaded: %d , errors: %d" % (load_count, error_count)
+
+    def parse_ok(self, line):
         items = line.split(":")
 
-        if is_ra:
-          names = items[0].split(",")
-          lastname = names[0].strip().capitalize()
-          firstname = names[1].strip().capitalize()
-          username = items[1].strip()
-          email = username + "@hawaii.edu"
-          
-          lounge_items = items[2].split()
-          lounge = self.get_lounge(lounge_items[0].strip(), lounge_items[1].strip().zfill(4)[:2])
-        else:
-          lounge_items = items[0].split()
+        if self.is_ra:
+            names = items[0].split(",")
+            self.lastname = names[0].strip().capitalize()
+            self.firstname = names[1].strip().capitalize()
+            self.username = items[1].strip()
+            self.email = self.username + "@hawaii.edu"
 
-          lounge = self.get_lounge(lounge_items[2], lounge_items[3])
-
-          firstname = items[1].strip().capitalize()
-          middlename = items[2].strip().capitalize()
-          if middlename:
-            firstname += " " + middlename
-        
-          lastname = items[3].strip().capitalize()
-          email = items[4].strip()
-          username = email.split("@")[0]
-        
-        print "%s,%s,%s,%s,%s" % (lounge, firstname, lastname, email, username)
-        if not email.endswith("@hawaii.edu"):
-          print "==== ERROR ==== non-hawaii edu email: %s" % (email)
-          error_count += 1
+            lounge_items = items[2].split()
+            self.lounge = get_lounge(lounge_items[0].strip(),
+                lounge_items[1].strip().zfill(4)[:2])
         else:
-          try:
-            user = User.objects.get(username=username)
+            lounge_items = items[0].split()
+
+            self.lounge = get_lounge(lounge_items[2], lounge_items[3])
+
+            self.firstname = items[1].strip().capitalize()
+            middlename = items[2].strip().capitalize()
+            if middlename:
+                self.firstname += " " + middlename
+
+            self.lastname = items[3].strip().capitalize()
+            self.email = items[4].strip()
+            self.username = self.email.split("@")[0]
+
+        print "%s,%s,%s,%s,%s" % (
+            self.lounge, self.firstname, self.lastname, self.email,
+            self.username)
+
+        if not self.email.endswith("@hawaii.edu"):
+            print "==== ERROR ==== non-hawaii edu email: %s" % (self.email)
+            return False
+        else:
+            return True
+
+        def get_lounge(dorm, floor):
+            return get_dorm(dorm) + '-' + get_floor(floor)
+
+        def get_dorm(dorm):
+            return {
+                'LE': 'Lehua',
+                'MO': 'Mokihana',
+                'IL': 'Ilima',
+                'LO': 'Lokelani'}[dorm]
+
+        def get_floor(floor):
+            return {
+                '03': 'A',
+                '04': 'A',
+                '05': 'B',
+                '06': 'B',
+                '07': 'C',
+                '08': 'C',
+                '09': 'D',
+                '10': 'D',
+                '11': 'E',
+                '12': 'E'}[floor]
+
+    def create_user(self):
+        try:
+            user = User.objects.get(username=self.username)
             user.delete()
-          except:
-            None
-            
-          user = User.objects.create_user(username, email)
-          user.first_name = firstname
-          user.last_name = lastname
-          user.save()
-        
-          profile = user.get_profile()
-          profile.first_name = firstname
-          profile.last_name = lastname
-          profile.name = firstname + " " + lastname[:1] + "."
-          profile.floor = Floor.objects.get(floor_identifier=lounge)
-          try:
+        except ObjectDoesNotExist:
+            pass
+
+        user = User.objects.create_user(self.username, self.email)
+        user.first_name = self.firstname
+        user.last_name = self.lastname
+        user.save()
+
+        profile = user.get_profile()
+        profile.first_name = self.firstname
+        profile.last_name = self.lastname
+        profile.name = self.firstname + " " + self.lastname[:1] + "."
+        profile.floor = Floor.objects.get(floor_identifier=self.lounge)
+        try:
             profile.save()
-          except IntegrityError:
-            profile.name = firstname + " " + lastname
-            profile.save()
-            
-          load_count += 1
-    file.close()
-    print "---- total loaded: %d , errors: %d" % (load_count, error_count)
-
-  def get_lounge(self, dorm, floor):
-    if dorm == 'LE':
-        dorm = 'Lehua'
-    elif dorm == 'MO':
-        dorm = 'Mokihana'
-    elif dorm == 'IL':
-        dorm = 'Ilima'
-    elif dorm == 'LO':
-        dorm = 'Lokelani'
-
-    if floor == '03' or floor == '04':
-        floor = 'A'
-    elif floor == '05' or floor == '06':
-        floor = 'B'
-    elif floor == '07' or floor == '08':
-        floor = 'C'
-    elif floor == '09' or floor == '10':
-        floor = 'D'
-    elif floor == '11' or floor == '12':
-        floor = 'E'
-
-    return dorm + '-' + floor
+        except IntegrityError:
+            profile.name = self.firstname + " " + self.lastname
+            profile.save() 

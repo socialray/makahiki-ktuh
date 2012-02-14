@@ -1,28 +1,23 @@
-import simplejson as json
-
-from django.http import  HttpResponseRedirect
-from django.core.urlresolvers import reverse
+import datetime
 from django.contrib import messages
-
-from widgets.energy import generate_chart_url
-from widgets.energy.models import EnergyGoal, EnergyGoalVote
-from widgets.energy.forms import EnergyGoalVotingForm
-
-from django.shortcuts import render_to_response
-from django.template import RequestContext
 from django.contrib.auth.decorators import login_required
-from django.http import Http404, HttpResponse
+from django.core.urlresolvers import reverse
+from django.db.models import F
+from django.db.models.aggregates import Count
+from django.http import HttpResponseRedirect, Http404, HttpResponse
+from django.shortcuts import get_object_or_404, render_to_response
+from django.template import RequestContext
 from django.views.decorators.cache import never_cache
-from django.shortcuts import get_object_or_404
-from django.db.models import Count, F
 
-from widgets.smartgrid.models import *
-from widgets.smartgrid import *
-from managers.team_mgr.models import *
-from managers.team_mgr import *
-from widgets.energy import *
 from managers.base_mgr import get_round_info
+from managers.team_mgr.models import Post
+from widgets.energy import generate_chart_url
+from widgets.energy.forms import EnergyGoalVotingForm
+from widgets.energy.models import FloorEnergyGoal, EnergyGoal, EnergyGoalVote
 from widgets.news.forms import WallForm
+
+import simplejson as json
+from widgets.smartgrid import get_available_golow_activities
 
 @login_required
 @never_cache
@@ -31,16 +26,16 @@ def index(request):
     view_objects["energy"] = supply(request)
 
     return render_to_response("energy.html", {
-        "view_objects" : view_objects,
+        "view_objects": view_objects,
         }, context_instance=RequestContext(request))
+
 
 def supply(request):
     user = request.user
     floor = user.get_profile().floor
     golow_activities = get_available_golow_activities(user)
-    golow_posts = Post.objects.filter(floor=floor, style_class="user_post").select_related('user__profile').order_by("-id")[:5]
-
-    standings = []
+    golow_posts = Post.objects.filter(floor=floor, style_class="user_post").select_related(
+        'user__profile').order_by("-id")[:5]
 
     rounds = get_round_info()
     scoreboard_rounds = []
@@ -61,47 +56,47 @@ def supply(request):
         "floor__dorm__name"
     ).annotate(completions=Count("floor")).order_by("-completions")
 
-
     return {
         "floor": floor,
-        "scoreboard_rounds":scoreboard_rounds,
-        "golow_activities":golow_activities,
-        "posts":golow_posts,
+        "scoreboard_rounds": scoreboard_rounds,
+        "golow_activities": golow_activities,
+        "posts": golow_posts,
         "wall_form": WallForm(),
         "goals_scoreboard": goals_scoreboard,
         }
 
 
 def vote(request, goal_id):
-  """Adds the user's vote to the goal."""
-  if request.method != "POST":
-    return Http404
-  
-  goal = get_object_or_404(EnergyGoal, pk=goal_id)
-  user = request.user
-  
-  form = EnergyGoalVotingForm(request.POST, instance=EnergyGoalVote(user=user, goal=goal))
-  if form.is_valid():
-    form.save()
-    messages.info(request, 'Thank you for your vote!')
-  
-  if request.META.has_key("HTTP_REFERER"):
-    return HttpResponseRedirect(request.META["HTTP_REFERER"]) 
-    
-  else:
-    return HttpResponseRedirect(reverse("profile_detail", args=(user.pk,)))
-  
+    """Adds the user's vote to the goal."""
+    if request.method != "POST":
+        return Http404
+
+    goal = get_object_or_404(EnergyGoal, pk=goal_id)
+    user = request.user
+
+    form = EnergyGoalVotingForm(request.POST, instance=EnergyGoalVote(user=user, goal=goal))
+    if form.is_valid():
+        form.save()
+        messages.info(request, 'Thank you for your vote!')
+
+    if request.META.has_key("HTTP_REFERER"):
+        return HttpResponseRedirect(request.META["HTTP_REFERER"])
+
+    else:
+        return HttpResponseRedirect(reverse("profile_detail", args=(user.pk,)))
+
+
 def voting_results(request, goal_id):
-  """Get the voting results for the user's floor."""
-  goal = get_object_or_404(EnergyGoal, pk=goal_id)
-  
-  profile = request.user.get_profile()
-  results = goal.get_floor_results(profile.floor)
-  url = generate_chart_url(results)
-  
-  return HttpResponse(json.dumps({
-      "results": list(results), # Needed to convert results from a queryset.
-      "url": url,
-  }), mimetype='application/json')
+    """Get the voting results for the user's floor."""
+    goal = get_object_or_404(EnergyGoal, pk=goal_id)
+
+    profile = request.user.get_profile()
+    results = goal.get_floor_results(profile.floor)
+    url = generate_chart_url(results)
+
+    return HttpResponse(json.dumps({
+        "results": list(results), # Needed to convert results from a queryset.
+        "url": url,
+        }), mimetype='application/json')
 
   

@@ -1,0 +1,53 @@
+# local_settings.py
+# This file contains settings for the local deployment or for testing.
+# These settings include the secret key info, credentials, and testing/debug settings.
+
+from settings import *  # pylint: disable=W0401,W0614
+
+########################
+# SECRET_KEYs
+########################
+# Override for the secret key setting.
+# Make this unique, and don't share it with anybody.
+# SECRET_KEY = "<SECRET_KEY>"
+
+########################
+# FACEBOOK
+########################
+# FACEBOOK_APP_ID = '<APP ID>'
+# FACEBOOK_API_KEY = '<API_KEY>'
+# FACEBOOK_SECRET_KEY = '<SECRET_KEY>'
+
+
+#######################
+# DEBUG settings
+#######################
+LOCAL_INSTALLED_APPS = (
+	#'debug_toolbar',
+)
+
+# Django Debug Toolbar
+MIDDLEWARE_CLASSES += (
+  #'debug_toolbar.middleware.DebugToolbarMiddleware',
+)
+
+# for debug tool bar
+# INTERNAL_IPS = ('127.0.0.1',)
+
+##################
+# GData settings
+##################
+GDATA_EMAIL = "EMAIL"
+GDATA_PASSWORD = 'PASSWORD'
+GDATA_KEY = 'KEY'
+
+################
+# EMAIL settings
+################
+EMAIL_HOST = "smtp.gmail.com"
+EMAIL_USE_TLS = True
+EMAIL_PORT = 587
+EMAIL_HOST_USER = "USER"
+EMAIL_HOST_PASSWORD = "PASSWORD"
+# This prints sent emails out to the console.  If you want to actually send email, comment this out.
+EMAIL_BACKEND = "django.core.mail.backends.console.EmailBackend"

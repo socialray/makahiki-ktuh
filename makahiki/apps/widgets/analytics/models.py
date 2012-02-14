@@ -11,6 +11,7 @@ class ApacheLog(models.Model):
     referral = models.CharField(max_length=1000)
     agent = models.CharField(max_length=300)
 
+
 class MakahikiLog(models.Model):
     level = models.CharField(max_length=10)
     request_time = models.CharField(max_length=100)

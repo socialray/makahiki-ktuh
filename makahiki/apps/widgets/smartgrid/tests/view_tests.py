@@ -1,17 +1,16 @@
 import datetime
-
-from django.test import TestCase
 from django.core.urlresolvers import reverse
-from django.conf import settings
-
+from django.test import TestCase
 from django.contrib.auth.models import User
+from django.conf import settings
 from managers.team_mgr.models import Floor
+from widgets.smartgrid.models import  EmailReminder, ActivityMember, \
+                                     Activity, TextReminder, Commitment, ConfirmationCode
 from managers.player_mgr.models import Profile
-from widgets.smartgrid.models import *
-from widgets.quests.models import Quest
 
 class ActivitiesFunctionalTest(TestCase):
     fixtures = ["base_floors.json"]
+
     def setUp(self):
         self.user = User.objects.create_user("user", "user@test.com", password="changeme")
         floor = Floor.objects.all()[0]
@@ -44,19 +43,23 @@ class ActivitiesFunctionalTest(TestCase):
         activity.save()
         ConfirmationCode.generate_codes_for_activity(activity, 5)
 
-        response = self.client.get(reverse('activity_view_codes', args=(activity.type, activity.slug)))
+        response = self.client.get(
+            reverse('activity_view_codes', args=(activity.type, activity.slug)))
         self.failUnlessEqual(response.status_code, 404)
-        response = self.client.get(reverse('activity_view_rsvps', args=(activity.type, activity.slug)))
+        response = self.client.get(
+            reverse('activity_view_rsvps', args=(activity.type, activity.slug)))
         self.assertEqual(response.status_code, 404)
 
         self.user.is_staff = True
         self.user.save()
 
-        response = self.client.get(reverse('activity_view_codes', args=(activity.type, activity.slug)))
+        response = self.client.get(
+            reverse('activity_view_codes', args=(activity.type, activity.slug)))
         self.assertEqual(response.status_code, 200)
         self.assertTemplateUsed(response, 'view_codes.html')
 
-        response = self.client.get(reverse('activity_view_rsvps', args=(activity.type, activity.slug)))
+        response = self.client.get(
+            reverse('activity_view_rsvps', args=(activity.type, activity.slug)))
         self.assertEqual(response.status_code, 200)
         self.assertTemplateUsed(response, 'rsvps.html')
 
@@ -67,7 +70,7 @@ class ActivitiesFunctionalTest(TestCase):
         end = start + datetime.timedelta(days=7)
 
         settings.COMPETITION_ROUNDS = {
-            "Round 1" : {
+            "Round 1": {
                 "start": start.strftime("%Y-%m-%d"),
                 "end": end.strftime("%Y-%m-%d"),
                 },
@@ -81,17 +84,23 @@ class ActivitiesFunctionalTest(TestCase):
         response = self.client.get(reverse("actions_index"))
         self.assertContains(response, "Round 1 Scoreboard", count=1,
             msg_prefix="This should display the current round scoreboard.")
-        self.assertEqual(response.context["view_objects"]["smartgrid"]["floor_standings"][0], profile.floor,
+        self.assertEqual(response.context["view_objects"]["smartgrid"]["floor_standings"][0],
+            profile.floor,
             "The user's floor should be leading.")
-        self.assertEqual(response.context["view_objects"]["smartgrid"]["profile_standings"][0], profile,
+        self.assertEqual(response.context["view_objects"]["smartgrid"]["profile_standings"][0],
+            profile,
             "The user's should be leading the overall standings.")
-        self.assertEqual(response.context["view_objects"]["smartgrid"]["user_floor_standings"][0], profile,
+        self.assertEqual(response.context["view_objects"]["smartgrid"]["user_floor_standings"][0],
+            profile,
             "The user should be leading in their own floor.")
-        self.assertEqual(response.context["view_objects"]["smartgrid"]["floor_standings"][0].points, 10,
+        self.assertEqual(response.context["view_objects"]["smartgrid"]["floor_standings"][0].points,
+            10,
             "The user's floor should have 10 points this round.")
-        self.assertEqual(response.context["view_objects"]["smartgrid"]["profile_standings"][0].current_round_points(), 10,
+        self.assertEqual(response.context["view_objects"]["smartgrid"]["profile_standings"][
+                         0].current_round_points(), 10,
             "The user should have 10 points this round.")
-        self.assertEqual(response.context["view_objects"]["smartgrid"]["user_floor_standings"][0].current_round_points(), 10,
+        self.assertEqual(response.context["view_objects"]["smartgrid"]["user_floor_standings"][
+                         0].current_round_points(), 10,
             "The user should have 10 points this round.")
 
         # Get points outside of the round and see if affects the standings.
@@ -99,11 +108,14 @@ class ActivitiesFunctionalTest(TestCase):
         profile.save()
 
         response = self.client.get(reverse("actions_index"))
-        self.assertEqual(response.context["view_objects"]["smartgrid"]["floor_standings"][0].points, 10,
+        self.assertEqual(response.context["view_objects"]["smartgrid"]["floor_standings"][0].points,
+            10,
             "Test that the user's floor still has 10 points.")
-        self.assertEqual(response.context["view_objects"]["smartgrid"]["profile_standings"][0].current_round_points(), 10,
+        self.assertEqual(response.context["view_objects"]["smartgrid"]["profile_standings"][
+                         0].current_round_points(), 10,
             "The user still should have 10 points this round.")
-        self.assertEqual(response.context["view_objects"]["smartgrid"]["user_floor_standings"][0].current_round_points(), 10,
+        self.assertEqual(response.context["view_objects"]["smartgrid"]["user_floor_standings"][
+                         0].current_round_points(), 10,
             "The user still should have 10 points this round.")
 
         # Try without a round.
@@ -112,11 +124,14 @@ class ActivitiesFunctionalTest(TestCase):
         response = self.client.get(reverse("actions_index"))
         self.assertContains(response, "Overall Scoreboard", count=1,
             msg_prefix="This should display the overall scoreboard.")
-        self.assertEqual(response.context["view_objects"]["smartgrid"]["floor_standings"][0].points, 20,
+        self.assertEqual(response.context["view_objects"]["smartgrid"]["floor_standings"][0].points,
+            20,
             "The user's floor should have 20 points overall.")
-        self.assertEqual(response.context["view_objects"]["smartgrid"]["profile_standings"][0].current_round_points(), 20,
+        self.assertEqual(response.context["view_objects"]["smartgrid"]["profile_standings"][
+                         0].current_round_points(), 20,
             "The user should have 20 points overall.")
-        self.assertEqual(response.context["view_objects"]["smartgrid"]["user_floor_standings"][0].current_round_points(), 20,
+        self.assertEqual(response.context["view_objects"]["smartgrid"]["user_floor_standings"][
+                         0].current_round_points(), 20,
             "The user should have 20 points overall.")
 
         # Don't forget to clean up.
@@ -149,9 +164,11 @@ class ActivitiesFunctionalTest(TestCase):
             }, follow=True)
 
         self.failUnlessEqual(response.status_code, 200)
-        self.assertEqual(ConfirmationCode.objects.filter(activity=activity, is_active=False).count(), 1)
+        self.assertEqual(ConfirmationCode.objects.filter(activity=activity, is_active=False).count()
+            , 1)
         code = ConfirmationCode.objects.filter(activity=activity)[0]
-        self.assertTrue(activity in self.user.activity_set.filter(activitymember__award_date__isnull=False))
+        self.assertTrue(
+            activity in self.user.activity_set.filter(activitymember__award_date__isnull=False))
 
         # Try submitting the code again and check if we have an error message.
         code = ConfirmationCode.objects.filter(activity=activity)[1]
@@ -178,10 +195,11 @@ class ActivitiesFunctionalTest(TestCase):
         activity.save()
         ConfirmationCode.generate_codes_for_activity(activity, 1)
 
-        response = self.client.post(reverse("activity_add_task", args=("event", "test-activity2")), {
-            "response": code.code,
-            "code": 1,
-            }, follow=True)
+        response = self.client.post(reverse("activity_add_task", args=("event", "test-activity2")),
+                {
+                "response": code.code,
+                "code": 1,
+                }, follow=True)
         self.assertContains(response, "This confirmation code is not valid for this activity.")
 
     def testRejectedActivity(self):
@@ -228,48 +246,16 @@ class ActivitiesFunctionalTest(TestCase):
         )
         commitment.save()
 
-        response = self.client.post(reverse("activity_add_task", args=(commitment.type, commitment.slug,)), follow=True)
+        response = self.client.post(
+            reverse("activity_add_task", args=(commitment.type, commitment.slug,)), follow=True)
         self.failUnlessEqual(response.status_code, 200)
 
         points = Profile.objects.get(user=self.user).points
-        response = self.client.post(reverse("activity_add_task", args=(commitment.type, commitment.slug,)), follow=True)
+        response = self.client.post(
+            reverse("activity_add_task", args=(commitment.type, commitment.slug,)), follow=True)
         self.failUnlessEqual(response.status_code, 200)
 
         self.assertEqual(points, Profile.objects.get(user=self.user).points)
-
-    """ TODO. no more mobile redirect, but need some test for mobile
-    def testMobileRedirect(self):
-        ### Tests that the mobile redirection and the cookie that forces the desktop version.
-        category = Category.objects.create(
-            name="test category",
-            slug="test-category",
-        )
-        commitment = Commitment(
-            title="Test commitment",
-            slug="test-commitment",
-            description="A commitment!",
-            point_value=10,
-            type="commitment",
-            category=category,
-        )
-        commitment.save()
-
-        response = self.client.get(reverse("activity_task", args=(commitment.type, commitment.slug)),
-            HTTP_USER_AGENT="Mozilla/5.0 (iPod; U; CPU like Mac OS X; en) AppleWebKit/420.1 (KHTML, like Gecko) Version/3.0 Mobile/3A100a",
-            follow=True
-        )
-        # self.failUnlessEqual(response.status_code, 302, "Mobile device should redirect.")
-        self.assertTemplateUsed(response, "mobile/smartgrid/index.html")
-
-        self.client.cookies['mobile-desktop'] = True
-
-        response = self.client.get(reverse("activity_task", args=(commitment.type, commitment.slug)),
-            HTTP_USER_AGENT="Mozilla/5.0 (iPod; U; CPU like Mac OS X; en) AppleWebKit/420.1 (KHTML, like Gecko) Version/3.0 Mobile/3A100a",
-            follow=True
-        )
-        # self.failUnlessEqual(response.status_code, 200, "Mobile device should not redirect.")
-        self.assertTemplateUsed(response, "view_activities/index.html")
-    """
 
     def testAddEmailReminder(self):
         """
@@ -302,7 +288,8 @@ class ActivitiesFunctionalTest(TestCase):
         self.failUnlessEqual(response.status_code, 200)
         self.assertContains(response, "A valid email address is required.",
             count=1, msg_prefix="Error text should be displayed.")
-        self.assertEqual(self.user.emailreminder_set.count(), reminders, "Should not have added a reminder")
+        self.assertEqual(self.user.emailreminder_set.count(), reminders,
+            "Should not have added a reminder")
 
         response = self.client.post(reverse("activity_reminder", args=(event.type, event.slug,)), {
             "send_email": True,
@@ -314,7 +301,8 @@ class ActivitiesFunctionalTest(TestCase):
         self.failUnlessEqual(response.status_code, 200)
         self.assertContains(response, "A valid email address is required.",
             count=1, msg_prefix="Error text should be displayed.")
-        self.assertEqual(self.user.emailreminder_set.count(), reminders, "Should not have added a reminder")
+        self.assertEqual(self.user.emailreminder_set.count(), reminders,
+            "Should not have added a reminder")
 
         # Test valid form
         response = self.client.post(reverse("activity_reminder", args=(event.type, event.slug,)), {
@@ -326,8 +314,10 @@ class ActivitiesFunctionalTest(TestCase):
             }, HTTP_X_REQUESTED_WITH="XMLHttpRequest")
         self.failUnlessEqual(response.status_code, 200)
         profile = Profile.objects.get(user=self.user)
-        self.assertEqual(profile.contact_email, "foo@test.com", "Profile should now have a contact email.")
-        self.assertEqual(self.user.emailreminder_set.count(), reminders + 1, "Should have added a reminder")
+        self.assertEqual(profile.contact_email, "foo@test.com",
+            "Profile should now have a contact email.")
+        self.assertEqual(self.user.emailreminder_set.count(), reminders + 1,
+            "Should have added a reminder")
 
     def testChangeEmailReminder(self):
         """
@@ -368,10 +358,13 @@ class ActivitiesFunctionalTest(TestCase):
 
         reminder = self.user.emailreminder_set.get(activity=event)
         profile = Profile.objects.get(user=self.user)
-        self.assertEqual(reminder.email_address, "foo@test.com", "Email address should have changed.")
-        self.assertEqual(profile.contact_email, "foo@test.com", "Profile email address should have changed.")
+        self.assertEqual(reminder.email_address, "foo@test.com",
+            "Email address should have changed.")
+        self.assertEqual(profile.contact_email, "foo@test.com",
+            "Profile email address should have changed.")
         self.assertNotEqual(reminder.send_at, original_date, "Send time should have changed.")
-        self.assertEqual(self.user.emailreminder_set.count(), reminder_count, "No new reminders should have been created.")
+        self.assertEqual(self.user.emailreminder_set.count(), reminder_count,
+            "No new reminders should have been created.")
 
     def testRemoveEmailReminder(self):
         """
@@ -409,7 +402,8 @@ class ActivitiesFunctionalTest(TestCase):
             }, HTTP_X_REQUESTED_WITH="XMLHttpRequest")
         self.failUnlessEqual(response.status_code, 200)
 
-        self.assertEqual(self.user.emailreminder_set.count(), reminder_count - 1, "User should not have a reminder.")
+        self.assertEqual(self.user.emailreminder_set.count(), reminder_count - 1,
+            "User should not have a reminder.")
 
     def testAddTextReminder(self):
         """
@@ -444,7 +438,8 @@ class ActivitiesFunctionalTest(TestCase):
         self.failUnlessEqual(response.status_code, 200)
         self.assertContains(response, "A valid phone number is required.",
             count=1, msg_prefix="Error text should be displayed.")
-        self.assertEqual(self.user.textreminder_set.count(), reminders, "Should not have added a reminder")
+        self.assertEqual(self.user.textreminder_set.count(), reminders,
+            "Should not have added a reminder")
 
         response = self.client.post(reverse("activity_reminder", args=(event.type, event.slug,)), {
             "send_email": False,
@@ -458,7 +453,8 @@ class ActivitiesFunctionalTest(TestCase):
         self.failUnlessEqual(response.status_code, 200)
         self.assertContains(response, "A valid phone number is required.",
             count=1, msg_prefix="Error text should be displayed.")
-        self.assertEqual(self.user.textreminder_set.count(), reminders, "Should not have added a reminder")
+        self.assertEqual(self.user.textreminder_set.count(), reminders,
+            "Should not have added a reminder")
 
         # Test valid form
         response = self.client.post(reverse("activity_reminder", args=(event.type, event.slug,)), {
@@ -472,10 +468,13 @@ class ActivitiesFunctionalTest(TestCase):
             }, HTTP_X_REQUESTED_WITH="XMLHttpRequest")
 
         self.failUnlessEqual(response.status_code, 200)
-        self.assertEqual(self.user.textreminder_set.count(), reminders + 1, "Should have added a reminder")
+        self.assertEqual(self.user.textreminder_set.count(), reminders + 1,
+            "Should have added a reminder")
         profile = Profile.objects.get(user=self.user)
-        self.assertEqual(profile.contact_text, "808-555-1234", "Check that the user now has a contact number.")
-        self.assertEqual(profile.contact_carrier, "att", "Check that the user now has a contact carrier.")
+        self.assertEqual(profile.contact_text, "808-555-1234",
+            "Check that the user now has a contact number.")
+        self.assertEqual(profile.contact_carrier, "att",
+            "Check that the user now has a contact carrier.")
 
     def testChangeTextReminder(self):
         """
@@ -521,9 +520,11 @@ class ActivitiesFunctionalTest(TestCase):
         # print profile.contact_text
         profile = Profile.objects.get(user=self.user)
         self.assertEqual(reminder.text_number, "808-555-6789", "Text number should have updated.")
-        self.assertEqual(profile.contact_text, "808-555-6789", "Profile text number should have updated.")
+        self.assertEqual(profile.contact_text, "808-555-6789",
+            "Profile text number should have updated.")
         self.assertNotEqual(reminder.send_at, original_date, "Send time should have changed.")
-        self.assertEqual(self.user.textreminder_set.count(), reminder_count, "No new reminders should have been created.")
+        self.assertEqual(self.user.textreminder_set.count(), reminder_count,
+            "No new reminders should have been created.")
 
     def testRemoveTextReminder(self):
         """
@@ -564,4 +565,5 @@ class ActivitiesFunctionalTest(TestCase):
             }, HTTP_X_REQUESTED_WITH="XMLHttpRequest")
 
         self.failUnlessEqual(response.status_code, 200)
-        self.assertEqual(self.user.textreminder_set.count(), reminder_count - 1, "User should not have a reminder.")
+        self.assertEqual(self.user.textreminder_set.count(), reminder_count - 1,
+            "User should not have a reminder.")

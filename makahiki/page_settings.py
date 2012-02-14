@@ -5,12 +5,12 @@
 # PAGE LAYOUT GLOBALs
 ###############################################
 WIDTHS = {
-    "DEFAULT"          : 1024,
-    "LARGE"            : 2048,
-    "TABLET_PORTRAIT"  : 500,
-    "TABLET_LANDSCAPE" : 768,
-    "PHONE_PORTRAIT"   : 240,
-    "PHONE_LANDSCAPE"  : 320,
+    "DEFAULT": 1024,
+    "LARGE": 2048,
+    "TABLET_PORTRAIT": 500,
+    "TABLET_LANDSCAPE": 768,
+    "PHONE_PORTRAIT": 240,
+    "PHONE_LANDSCAPE": 320,
     }
 
 ###############################################
@@ -25,15 +25,15 @@ WIDTHS = {
 #                     ("row2_widget", "100%") ) }
 PAGE_SETTINGS = {
     # actions page
-    "actions" : 
-        { "PAGE_TITLE" : "Actions",
-          "BASE_TEMPLATE" : "logged_in_base.html",
-          "LAYOUTS" :
-              {"DEFAULT" :
+    "actions":
+        {"PAGE_TITLE": "Actions",
+         "BASE_TEMPLATE": "logged_in_base.html",
+          "LAYOUTS":
+              {"DEFAULT":
                  (
-                  (("upcoming_events", "40%"), ("smartgrid", "60%"),("scoreboard", "40%"),),
+                  (("upcoming_events", "40%"), ("smartgrid", "60%"), ("scoreboard", "40%"),),
                  ),
-               "PHONE_PORTRAIT" :
+               "PHONE_PORTRAIT":
                  (("upcoming_events", "100%"),
                   ("smartgrid", "100%"),
                   ("scoreboard", "100%"),
@@ -42,15 +42,15 @@ PAGE_SETTINGS = {
         },
 
     # profile page
-    "profile" :
-        { "PAGE_TITLE" : "Profile",
-          "BASE_TEMPLATE" : "logged_in_base.html",
-          "LAYOUTS" :
-              { "DEFAULT" :
+    "profile":
+        {"PAGE_TITLE": "Profile",
+          "BASE_TEMPLATE": "logged_in_base.html",
+          "LAYOUTS":
+              {"DEFAULT":
                 (
                   ("profile", "100%"),
                 ),
-                "PHONE_PORTRAIT" :
+                "PHONE_PORTRAIT":
                 (
                   ("profile", "100%"),
                 ),
@@ -58,15 +58,15 @@ PAGE_SETTINGS = {
         },
 
     # news page
-    "news" :
-        { "PAGE_TITLE" : "News",
-          "BASE_TEMPLATE" : "logged_in_base.html",
-          "LAYOUTS" :
-              { "DEFAULT" :
+    "news":
+        {"PAGE_TITLE": "News",
+          "BASE_TEMPLATE": "logged_in_base.html",
+          "LAYOUTS":
+              {"DEFAULT":
                 (
                   ("news", "100%"),
                 ),
-                "PHONE_PORTRAIT" :
+                "PHONE_PORTRAIT":
                 (
                   ("news", "100%"),
                 ),
@@ -74,15 +74,15 @@ PAGE_SETTINGS = {
         },
 
     # help page
-    "help" :
-        { "PAGE_TITLE" : "Help",
-          "BASE_TEMPLATE" : "logged_in_base.html",
-          "LAYOUTS" :
-              { "DEFAULT" :
+    "help":
+        {"PAGE_TITLE": "Help",
+          "BASE_TEMPLATE": "logged_in_base.html",
+          "LAYOUTS":
+              {"DEFAULT":
                 (
                   ("help", "100%"),
                 ),
-                "PHONE_PORTRAIT" :
+                "PHONE_PORTRAIT":
                 (
                   ("help", "100%"),
                 ),
@@ -90,15 +90,15 @@ PAGE_SETTINGS = {
         },
 
     # energy page
-    "energy" :
-        { "PAGE_TITLE" : "Energy",
-          "BASE_TEMPLATE" : "logged_in_base.html",
-          "LAYOUTS" :
-              { "DEFAULT" :
+    "energy":
+        {"PAGE_TITLE": "Energy",
+          "BASE_TEMPLATE": "logged_in_base.html",
+          "LAYOUTS":
+              {"DEFAULT":
                 (
                   ("energy", "100%"),
                 ),
-                "PHONE_PORTRAIT" :
+                "PHONE_PORTRAIT":
                 (
                   ("energy", "100%"),
                 ),
@@ -106,15 +106,15 @@ PAGE_SETTINGS = {
         },
 
     # prizes page
-    "prizes" :
-        { "PAGE_TITLE" : "Prizes",
-          "BASE_TEMPLATE" : "logged_in_base.html",
-          "LAYOUTS" :
-              { "DEFAULT" :
+    "prizes":
+        {"PAGE_TITLE": "Prizes",
+          "BASE_TEMPLATE": "logged_in_base.html",
+          "LAYOUTS":
+              {"DEFAULT":
                 (
                   ("prizes", "100%"),
                 ),
-                "PHONE_PORTRAIT" :
+                "PHONE_PORTRAIT":
                 (
                   ("prizes", "100%"),
                 ),

@@ -32,17 +32,6 @@
 <div class="container">
   <div class="container-top">
   <div class="container-bottom">
-  {% if ENABLE_CSS_SELECTOR %}
-    <form action="/themes/change_theme/" method="post">
-      {{CSS_SELECT_FORM.as_p}}
-    </form>
-    
-    <script type="text/javascript">
-      $("#id_css_theme").change(function() {
-        this.form.submit();
-      })
-    </script>
-  {% endif %}
   
   <div {% get_id_and_classes "header" %}>
     {% block header %}{% endblock %}

@@ -18,15 +18,15 @@ def avatar_url(user, size=80):
     avatars = user.avatar_set.order_by('-date_uploaded')
     primary = avatars.filter(primary=True)
     if primary.count() > 0:
-        avatar = primary[0]
+        avt = primary[0]
     elif avatars.count() > 0:
-        avatar = avatars[0]
+        avt = avatars[0]
     else:
-        avatar = None
-    if avatar is not None:
-        if not avatar.thumbnail_exists(size):
-            avatar.create_thumbnail(size)
-        return avatar.avatar_url(size)
+        avt = None
+    if avt is not None:
+        if not avt.thumbnail_exists(size):
+            avt.create_thumbnail(size)
+        return avt.avatar_url(size)
     else:
         if AVATAR_GRAVATAR_BACKUP:
             return "http://www.gravatar.com/avatar/%s/?%s" % (
@@ -52,9 +52,9 @@ def avatar(user, size=80):
         size, size)
 register.simple_tag(avatar)
 
-def render_avatar(avatar, size=80):
-    if not avatar.thumbnail_exists(size):
-        avatar.create_thumbnail(size)
+def render_avatar(avt, size=80):
+    if not avt.thumbnail_exists(size):
+        avt.create_thumbnail(size)
     return """<img src="%s" alt="%s" width="%s" height="%s" />""" % (
-        avatar.avatar_url(size), str(avatar), size, size)
+        avt.avatar_url(size), str(avatar), size, size)
 register.simple_tag(render_avatar)

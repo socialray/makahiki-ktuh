@@ -32,6 +32,7 @@ usage of this module might look like this:
         friends = graph.get_connections("me", "friends")
 
 """
+# pylint: disable-all
 
 import cgi
 import hashlib
@@ -41,14 +42,17 @@ import urllib
 # Find a JSON parser
 try:
     import json
+
     _parse_json = lambda s: json.loads(s)
 except ImportError:
     try:
         import simplejson
+
         _parse_json = lambda s: simplejson.loads(s)
     except ImportError:
         # For Google AppEngine
         from django.utils import simplejson
+
         _parse_json = lambda s: simplejson.loads(s)
 
 
@@ -80,6 +84,7 @@ class GraphAPI(object):
     get_user_from_cookie() method below to get the OAuth access token
     for the active user from the cookie saved by the SDK.
     """
+
     def __init__(self, access_token=None):
         self.access_token = access_token
 
@@ -123,7 +128,8 @@ class GraphAPI(object):
         extended permissions.
         """
         assert self.access_token, "Write operations require an access token"
-        return self.request(parent_object + "/" + connection_name, post_args=data)
+        return self.request(parent_object + "/" + connection_name,
+            post_args=data)
 
     def put_wall_post(self, message, attachment={}, profile_id="me"):
         """Writes a wall post to the given profile's wall.
@@ -141,7 +147,8 @@ class GraphAPI(object):
              "picture": "http://www.example.com/thumbnail.jpg"}
 
         """
-        return self.put_object(profile_id, "feed", message=message, **attachment)
+        return self.put_object(profile_id, "feed", message=message,
+            **attachment)
 
     def put_comment(self, object_id, message):
         """Writes the given comment on the given post."""
@@ -161,7 +168,8 @@ class GraphAPI(object):
         We translate args to a valid query string. If post_args is given,
         we send a POST request to the given path with the given arguments.
         """
-        if not args: args = {}
+        if not args: 
+            args = {}
         if self.access_token:
             if post_args is not None:
                 post_args["access_token"] = self.access_token
@@ -176,7 +184,7 @@ class GraphAPI(object):
             file.close()
         if response.get("error"):
             raise GraphAPIError(response["error"]["type"],
-                                response["error"]["message"])
+                response["error"]["message"])
         return response
 
 
@@ -202,10 +210,11 @@ def get_user_from_cookie(cookies, app_id, app_secret):
     authentication at http://developers.facebook.com/docs/authentication/.
     """
     cookie = cookies.get("fbs_" + app_id, "")
-    if not cookie: return None
+    if not cookie: 
+        return None
     args = dict((k, v[-1]) for k, v in cgi.parse_qs(cookie.strip('"')).items())
     payload = "".join(k + "=" + args[k] for k in sorted(args.keys())
-                      if k != "sig")
+    if k != "sig")
     sig = hashlib.md5(payload + app_secret).hexdigest()
     expires = int(args["expires"])
     if sig == args.get("sig") and (expires == 0 or time.time() < expires):

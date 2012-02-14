@@ -1,13 +1,7 @@
-from django.shortcuts import  render_to_response
-from django.db.models import Count
-
+from django.db.models.aggregates import Count
 from managers.base_mgr import get_current_round
-from widgets.smartgrid.models import *
-from widgets.smartgrid import *
-from managers.team_mgr.models import *
-from managers.team_mgr import *
-from managers.player_mgr.models import *
-from managers.player_mgr import *
+from managers.player_mgr.models import Profile
+from managers.team_mgr.models import Floor
 
 def supply(request):
     user = request.user
@@ -31,7 +25,7 @@ def supply(request):
         f.active_participation = (f.user_count * 100) / f.profile_set.count()
 
     return {
-        "profile":user.get_profile(),
+        "profile": user.get_profile(),
         "floor": floor,
         "current_round": round_name or "Overall",
         "floor_standings": floor_standings,

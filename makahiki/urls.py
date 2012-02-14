@@ -1,12 +1,9 @@
-from django.conf.urls.defaults import *
 from django.conf import settings
-
+from django.conf.urls.defaults import url, patterns, include
+from django.contrib import admin
 from django.views.generic.simple import direct_to_template
 
-from django.contrib import admin
 admin.autodiscover()
-
-import os
 
 urlpatterns = patterns('',
     # Main page.
@@ -20,7 +17,7 @@ urlpatterns = patterns('',
     url(r'^news/', include('widgets.news.urls')),
     url(r'^prizes/', include('widgets.prizes.urls')),
     url(r'^canopy/', include('widgets.canopy.urls')),
-    
+
     # system level
     url(r'^home/', include('pages.home.urls')),
     url(r'^landing/$', direct_to_template, {'template': 'landing.html'}, name='landing'),

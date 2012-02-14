@@ -1,18 +1,15 @@
-import simplejson as json
 from django.conf import settings
-
-from widgets.notifications import get_unread_notifications
-from managers.base_mgr import get_floor_label, get_rounds_for_header, get_theme, get_current_round, get_current_round_info, get_competition_dates, in_competition
+from managers.base_mgr import get_floor_label, get_rounds_for_header, \
+        get_current_round, get_current_round_info, in_competition
 from managers.player_mgr.models import Profile
 from managers.team_mgr.models import Floor
+from widgets.notifications import get_unread_notifications
 from widgets.quests import get_quests
+
 
 def competition(request):
     """Provides access to standard competition constants within a template."""
     user = request.user
-
-    # We may want to retrieve theme settings for insertion into CSS.
-    theme_name, theme_dict = get_theme()
 
     # Get user-specific information.
     floor_count = Floor.objects.count()
@@ -41,8 +38,7 @@ def competition(request):
         "COMPETITION_NAME": settings.COMPETITION_NAME,
         "COMPETITION_POINT_NAME": settings.COMPETITION_POINT_NAME or "point",
         "CSS_THEME": settings.CSS_THEME,
-        "THEME_NAME": theme_name,
-        "THEME": theme_dict,
+        "THEME_NAME": settings.MAKAHIKI_THEME,
         "FLOOR_COUNT": floor_count,
         "FLOOR_MEMBER_COUNT": floor_member_count,
         "OVERALL_MEMBER_COUNT": overall_member_count,

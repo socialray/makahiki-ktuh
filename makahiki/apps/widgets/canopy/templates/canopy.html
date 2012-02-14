@@ -9,7 +9,12 @@
                 <a id="canopy-hide-about" href="javascript:void(0);">Close</a>
             </div>
             <p>
-                Welcome to the canopy! As one of the top players of the Kukui Cup, you now have exclusive access to this advanced area that provides: advanced energy visualizations, missions, and a private Wall for communication among Canopy members as well as the administrators of the Kukui Cup.  Use the Canopy to gain greater insight into the Hale Aloha energy usage and how you can help your lounge as well as all of the students play the Kukui Cup more effectively.
+                Welcome to the canopy! As one of the top players of the Kukui Cup, you now have
+                exclusive access to this advanced area that provides: advanced energy
+                visualizations, missions, and a private Wall for communication among Canopy members
+                as well as the administrators of the Kukui Cup. Use the Canopy to gain greater
+                insight into the Hale Aloha energy usage and how you can help your lounge as well as
+                all of the students play the Kukui Cup more effectively.
             </p>
         </div>
     {% endif %}
@@ -18,7 +23,8 @@
         <div {% get_id_and_classes "canopy-viz-title" %}>
             Advanced Visualizations
             <a href="#" style="float: right">
-                <img src="{{ STATIC_URL}}/css/default/images/icon-help-sm.png" width="20" align="center"
+                <img src="{{ STATIC_URL}}/css/default/images/icon-help-sm.png" width="20"
+                     align="center"
                      title="Click to get help about this window"
                      onclick="toggleHelp('widget', 'advanced-visualizations'); return false;"
                         /></a>
@@ -33,7 +39,8 @@
             <div {% get_id_and_classes "canopy-feed-title" %}>
                 Canopy Feed
                 <a href="#" style="float: right">
-                    <img src="{{ STATIC_URL}}/css/default/images/icon-help-sm.png" width="20" align="center"
+                    <img src="{{ STATIC_URL}}/css/default/images/icon-help-sm.png" width="20"
+                         align="center"
                          title="Click to get help about this window"
                          onclick="toggleHelp('widget', 'canopy-feed'); return false;"
                             /></a>
@@ -47,12 +54,13 @@
             <div {% get_id_and_classes "canopy-karma-title" %}>
                 Canopy Karma Scoreboard
                 <a href="#" style="float: right">
-                    <img src="{{ STATIC_URL}}/css/default/images/icon-help-sm.png" width="20" align="center"
+                    <img src="{{ STATIC_URL}}/css/default/images/icon-help-sm.png" width="20"
+                         align="center"
                          title="Click to get help about this window"
                          onclick="toggleHelp('widget', 'canopy-karma'); return false;"/>
                 </a>
             </div>
-            <div {% get_id_and_classes "canopy-karma-content"%}>
+            <div {% get_id_and_classes "canopy-karma-content" %}>
                 {% include "canopy/karma_scoreboard.html" %}
             </div>
         </div>
@@ -61,7 +69,8 @@
             <div {% get_id_and_classes "canopy-members-title" %}>
                 Canopy Members
                 <a href="#" style="float: right">
-                    <img src="{{ STATIC_URL}}/css/default/images/icon-help-sm.png" width="20" align="center"
+                    <img src="{{ STATIC_URL}}/css/default/images/icon-help-sm.png" width="20"
+                         align="center"
                          title="Click to get help about this window"
                          onclick="toggleHelp('widget', 'canopy-directory'); return false;"
                             /></a>

@@ -36,7 +36,7 @@ COMPETITION_END = (datetime.date.today() + datetime.timedelta(days=6)).strftime(
 # End means the competition will end at midnight of that date.
 # This means that a round that ends on "2010-08-02" will end at 11:59pm of August 1st.
 COMPETITION_ROUNDS = {
-    "Round 1" : {
+    "Round 1": {
         "start": (datetime.date.today() - datetime.timedelta(days=3)).strftime("%Y-%m-%d"),
         "end": (datetime.date.today() - datetime.timedelta(days=1)).strftime("%Y-%m-%d"),
         },
@@ -90,45 +90,13 @@ TIME_ZONE = 'Pacific/Honolulu'
 LANGUAGE_CODE = 'en'
 
 # Locale setting for currency conversion.
-LOCALE_SETTING = ''
+LOCALE_SETTING = 'en_US'
 
 ###################
 # THEME
 ###################
-# Enable the CSS theme selector at the top of the page.
-ENABLE_CSS_SELECTOR = False
 
 # The theme to use as default. This corresponds to a folder in media that contains the CSS.
 MAKAHIKI_THEME = "default"
 
 CSS_THEME = "default"
-
-# Theme settings for Makahiki.  Used to aid in styling the Javascript widgets.
-# The system will insert the colors based on the selected theme.  If an entry
-# for a theme does not exist, default will be used.
-MAKAHIKI_THEME_SETTINGS = {
-    "default" : {
-        "widgetBackgroundColor" : 'F5F3E5',
-        "widgetHeaderColor" : '459E00',
-        "widgetHeaderTextColor" : 'white',
-        "widgetTextColor" : '312E25',
-        "widgetTextFont" : 'Ariel, sans serif',
-        "windowNavBarColor" : '2F6B00',
-        },
-    "cupertino" : {
-        "widgetBackgroundColor" : 'F2F5F7',
-        "widgetHeaderColor" : '459E00',
-        "widgetHeaderTextColor" : 'white',
-        "widgetTextColor" : '312E25',
-        "widgetTextFont" : 'Ariel, sans serif',
-        "windowNavBarColor" : '2F6B00',
-        },
-    "start" : {
-        "widgetBackgroundColor" : 'fff',
-        "widgetHeaderColor" : '459E00',
-        "widgetHeaderTextColor" : 'white',
-        "widgetTextColor" : '312E25',
-        "widgetTextFont" : 'Ariel, sans serif',
-        "windowNavBarColor" : '2F6B00',
-        },
-    }

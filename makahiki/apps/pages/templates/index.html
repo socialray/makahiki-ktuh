@@ -15,16 +15,18 @@
 
 {% block body %}
     <table width="100%">
-        {%  for row in page_layouts.DEFAULT %}
-            <tr><td>
-                {% for column in row %}
-                    {% if column %}
-                        <div id = '{{ column.id }}' >
-                            {%  include column.template %}
-                        </div>
-                    {% endif %}
-                {%  endfor %}
-            </td></tr>
+        {% for row in page_layouts.DEFAULT %}
+            <tr>
+                <td>
+                    {% for column in row %}
+                        {% if column %}
+                            <div id='{{ column.id }}'>
+                                {% include column.template %}
+                            </div>
+                        {% endif %}
+                    {% endfor %}
+                </td>
+            </tr>
         {% endfor %}
     </table>
 {% endblock %}
