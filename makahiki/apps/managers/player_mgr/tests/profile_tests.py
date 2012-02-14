@@ -202,7 +202,7 @@ class ProfileUnitTests(TestCase):
         user.save()
         dorm = Dorm(name="Test dorm")
         dorm.save()
-        team = Team(number="A", dorm=dorm)
+        team = Team(name="A", dorm=dorm)
         team.save()
 
         profile = user.get_profile()
@@ -246,7 +246,7 @@ class ProfileUnitTests(TestCase):
         user.save()
         dorm = Dorm(name="Test dorm")
         dorm.save()
-        team = Team(number="A", dorm=dorm)
+        team = Team(name="A", dorm=dorm)
         team.save()
 
         profile = user.get_profile()
@@ -382,7 +382,7 @@ class ProfileUnitTests(TestCase):
 
         dorm = Dorm(name="Test dorm")
         dorm.save()
-        team = Team(number="A", dorm=dorm)
+        team = Team(name="A", dorm=dorm)
         team.save()
 
         user = User(username="test_user", password="changeme")

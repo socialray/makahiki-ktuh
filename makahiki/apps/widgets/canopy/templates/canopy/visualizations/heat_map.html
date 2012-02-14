@@ -10,7 +10,7 @@
                    onchange="updatePeriod();"/> {{ dorm.name }}
 
             {% for lounge in dorm.teams %}
-                <input id="{{ lounge.team_identifier}}" name="heatmap-lounge-{{ dorm.name }}"
+                <input id="{{ lounge.name}}" name="heatmap-lounge-{{ dorm.name }}"
                        type="hidden"/>
             {% endfor %}
 

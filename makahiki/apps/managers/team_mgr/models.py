@@ -53,23 +53,17 @@ class Dorm(models.Model):
 
 
 class Team(models.Model):
-    prepopulated_fields = {"slug": ("number",)}
+    prepopulated_fields = {"slug": ("name",)}
 
-    number = models.CharField(
-        help_text="The team number in the dorm. Can be a string value",
-        max_length=10)
-    slug = models.SlugField(max_length=10,
+    name = models.CharField(
+        help_text="The team name",
+        max_length=50)
+    slug = models.SlugField(max_length=50,
         help_text="Automatically generated if left blank.")
     dorm = models.ForeignKey(Dorm, help_text="The dorm this team belongs to.")
-    team_identifier = models.CharField(
-        max_length=200,
-        blank=True,
-        null=True,
-        help_text="Name of the source used in WattDepot to refer to this team."
-    )
 
     def __unicode__(self):
-        return "%s: %s %s" % (self.dorm.name, get_team_label(), self.number)
+        return self.name
 
     @staticmethod
     def team_points_leaders(num_results=10, round_name=None):
@@ -173,7 +167,7 @@ class Team(models.Model):
     def save(self, *args, **kwargs):
         """Custom save method to generate slug and set created_at/updated_at."""
         if not self.slug:
-            self.slug = slugify(self.number)
+            self.slug = slugify(self.name)
 
         super(Team, self).save(*args, **kwargs)
 

@@ -19,9 +19,9 @@
                     <select id='lounge_{{ forloop.counter }}'
                             onchange="updateLounge('{{ forloop.counter }}');">
                         {% for lounge in all_lounges %}
-                            <option {% if team == lounge or team == lounge.team_identifier %}
+                            <option {% if team == lounge or team == lounge.name %}
                                 selected {% endif %}
-                                value='{{ lounge.team_identifier}}'>{{ lounge.team_identifier }}
+                                value='{{ lounge.name}}'>{{ lounge.name }}
                             </option>
                         {% endfor %}
                     </select>

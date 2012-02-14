@@ -63,11 +63,11 @@ def supply(request):
 
     viz = request.REQUEST.get("viz", None)
 
-    all_lounges = Team.objects.order_by('team_identifier').all()
+    all_lounges = Team.objects.order_by('name').all()
     all_dorms = Dorm.objects.order_by('name').all()
 
     for dorm in all_dorms:
-        dorm.teams = dorm.team_set.order_by('-team_identifier').all()
+        dorm.teams = dorm.team_set.order_by('-name').all()
 
     if request.user.get_profile().team:
         dorm_lounges = request.user.get_profile().team.dorm.team_set.all()

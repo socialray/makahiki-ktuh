@@ -125,7 +125,7 @@ class Command(management.base.BaseCommand):
         profile.first_name = self.firstname
         profile.last_name = self.lastname
         profile.name = self.firstname + " " + self.lastname[:1] + "."
-        profile.team = Team.objects.get(team_identifier=self.lounge)
+        profile.team = Team.objects.get(name=self.lounge)
         try:
             profile.save()
         except IntegrityError:

@@ -17,7 +17,7 @@
             var loader = new org.wattdepot.gdata.GDataLoader(displayEnergy, spreadsheetUrl, refreshInterval);
 
             function displayEnergy(datatable) {
-                var source = '{{user.get_profile.team.dorm.name}}-{{user.get_profile.team.number}}';
+                var source = '{{user.get_profile.team.name}}';
                 var options = {width:200,
                     title:source,
                     captionStyle:{fontSize:'0.70em'},

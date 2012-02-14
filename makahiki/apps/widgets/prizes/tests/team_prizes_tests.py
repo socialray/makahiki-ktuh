@@ -47,7 +47,7 @@ class DormTeamPrizeTests(TestCase):
         self.dorms = [Dorm(name="Test Dorm %d" % i) for i in range(0, 2)]
         _ = [d.save() for d in self.dorms]
 
-        self.teams = [Team(number=str(i), dorm=self.dorms[i % 2]) for i in range(0, 4)]
+        self.teams = [Team(name=str(i), dorm=self.dorms[i % 2]) for i in range(0, 4)]
         _ = [f.save() for f in self.teams]
 
         self.users = [User.objects.create_user("test%d" % i, "test@test.com") for i in range(0, 4)]
@@ -188,7 +188,7 @@ class OverallTeamPrizeTest(TestCase):
         self.dorm = Dorm(name="Test Dorm")
         self.dorm.save()
 
-        self.teams = [Team(number=str(i), dorm=self.dorm) for i in range(0, 2)]
+        self.teams = [Team(name=str(i), dorm=self.dorm) for i in range(0, 2)]
         _ = [f.save() for f in self.teams]
 
         self.users = [User.objects.create_user("test%d" % i, "test@test.com") for i in range(0, 4)]

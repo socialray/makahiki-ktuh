@@ -64,7 +64,7 @@
                     <table {% get_id_and_classes "energy-status-how-table" %}>
                         <tr {% get_id_and_classes "energy-status-how-calculator" %}>
                             <td {% get_id_and_classes "energy-status-how-activities-content" %}>
-                                The following activities can help your {{ FLOOR_LABEL.lower }}
+                                The following activities can help your {{ TEAM_LABEL.lower }}
                                 conserve energy, and you earn points!
                                 {% include "energy/golow_activities.html" %}
                             </td>
@@ -73,8 +73,8 @@
                 </fieldset>
 
                 <fieldset {% get_id_and_classes "energy-status-posts" %}>
-                    <legend>Organize with your {{ FLOOR_LABEL.lower }} peeps</legend>
-                    Got ideas on how to conserve energy? Share it on the {{ FLOOR_LABEL.lower }}
+                    <legend>Organize with your {{ TEAM_LABEL.lower }} peeps</legend>
+                    Got ideas on how to conserve energy? Share it on the {{ TEAM_LABEL.lower }}
                     wall:<br>
 
                     <div {% get_id_and_classes "news-wall-content" %}>

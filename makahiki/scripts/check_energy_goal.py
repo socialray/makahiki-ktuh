@@ -87,7 +87,7 @@ class GDataGoal:
 
   def award_point(self, source, goal, actual):
     try:
-      team = Team.objects.get(team_identifier=source)
+      team = Team.objects.get(name=source)
       goal = TeamEnergyGoal(
           team=team,
           goal_usage=goal,

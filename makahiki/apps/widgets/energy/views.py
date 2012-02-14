@@ -52,8 +52,7 @@ def supply(request):
     goals_scoreboard = TeamEnergyGoal.objects.filter(
         actual_usage__lte=F("goal_usage")
     ).values(
-        "team__number",
-        "team__dorm__name"
+        "team__name"
     ).annotate(completions=Count("team")).order_by("-completions")
 
     return {

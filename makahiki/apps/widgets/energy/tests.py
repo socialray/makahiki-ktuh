@@ -54,8 +54,7 @@ class EnergyFunctionalTestCase(TestCase):
         response = self.client.get(reverse("energy_index"))
         goals = response.context["view_objects"]["energy"]["goals_scoreboard"]
         for team in goals:
-            if team["team__number"] == self.team.number and team[
-                                                               "team__dorm__name"] == self.team.dorm.name:
+            if team["team__name"] == self.team.name:
                 # print team.teamenergygoal_set.all()
                 self.assertEqual(team["completions"], 1,
                     "User's team should have completed 1 goal, but completed %d" % team[
@@ -70,7 +69,7 @@ class TeamEnergyGoalTest(TestCase):
         dorm.save()
         self.team = Team.objects.create(
             dorm=dorm,
-            number="A"
+            name="A"
         )
 
         self.user = User.objects.create_user("user", "user@test.com")

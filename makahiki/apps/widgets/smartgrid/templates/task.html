@@ -77,9 +77,9 @@
                 {% with team_members|length as member_team %}
                     {{ member_team }}
                     {% if member_team == 1 %}
-                        person in your {{ FLOOR_LABEL.lower }} has
+                        person in your {{ TEAM_LABEL.lower }} has
                     {% else %}
-                        people in your {{ FLOOR_LABEL.lower }} have
+                        people in your {{ TEAM_LABEL.lower }} have
                     {% endif %}
                     {% if task.type == "event" or task.type == "excursion" %}
                         signed up.

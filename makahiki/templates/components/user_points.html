@@ -11,7 +11,7 @@
   </div>
   <div {% get_id_and_classes "header-user-rank" %}>
     <h3>#{{profile.current_round_team_rank}}</h3>
-    <div {% get_id_and_classes "header-text" %}>out of {{FLOOR_MEMBER_COUNT}} in {{profile.team.dorm.name}}-{{profile.team.number}}</div>
+    <div {% get_id_and_classes "header-text" %}>out of {{TEAM_MEMBER_COUNT}} in {{profile.team.name}}</div>
   </div>
 </div>
 <!-- Second slideshow element -->
@@ -35,7 +35,7 @@
   </div>
   <div {% get_id_and_classes "header-user-rank" %}>
     <h3>#{{profile.team_rank}}</h3>
-    <div {% get_id_and_classes "header-text" %}>out of {{FLOOR_MEMBER_COUNT}} in {{profile.team.dorm.name}}-{{profile.team.number}}</div>
+    <div {% get_id_and_classes "header-text" %}>out of {{TEAM_MEMBER_COUNT}} in {{profile.team.name}}</div>
   </div>
 </div>
 <!-- Fourth slideshow element -->

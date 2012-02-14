@@ -492,7 +492,7 @@ class QuestConditionsTest(TestCase):
         from widgets.quests import posted_to_wall
 
         dorm = Dorm.objects.create(name="test", slug="test")
-        team = Team.objects.create(number="a", slug="a", dorm=dorm)
+        team = Team.objects.create(name="a", slug="a", dorm=dorm)
         profile = self.user.get_profile()
         profile.team = team
         profile.save()

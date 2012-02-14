@@ -13,7 +13,7 @@ class DormUnitTestCase(TestCase):
         # map(lambda d: d.save(), self.dorms)
         _ = [d.save() for d in self.dorms]  # rewrite the above to avoid plint warning of using built-in function 'map'
 
-        self.teams = [Team(number=str(i), dorm=self.dorms[i % 2]) for i in
+        self.teams = [Team(name=str(i), dorm=self.dorms[i % 2]) for i in
                        range(0, 4)]
         # map(lambda f: f.save(), self.teams)
         _ = [f.save() for f in self.teams]  # rewrite the above to avoid plint warning of using built-in function 'map'
@@ -149,7 +149,7 @@ class TeamLeadersTestCase(TestCase):
         self.dorm = Dorm(name="Test Dorm")
         self.dorm.save()
 
-        self.teams = [Team(number=str(i), dorm=self.dorm) for i in
+        self.teams = [Team(name=str(i), dorm=self.dorm) for i in
                        range(0, 2)]
         # map(lambda f: f.save(), self.teams)
         _ = [f.save() for f in self.teams]  # rewrite the above to avoid plint warning of using built-in function 'map'
@@ -324,7 +324,7 @@ class TeamsUnitTestCase(TestCase):
     def setUp(self):
         self.dorm = Dorm(name="Test dorm")
         self.dorm.save()
-        self.test_team = Team(number="A", dorm=self.dorm)
+        self.test_team = Team(name="A", dorm=self.dorm)
         self.test_team.save()
 
     def testOverallPoints(self):
@@ -419,7 +419,7 @@ class TeamsUnitTestCase(TestCase):
             "Check the team is now ranked number 1.")
 
         # Create a test user on a different team.
-        test_team2 = Team(number="B", dorm=self.dorm)
+        test_team2 = Team(name="B", dorm=self.dorm)
         test_team2.save()
 
         user2 = User(username="test_user1", password="test_password")
@@ -462,7 +462,7 @@ class TeamsUnitTestCase(TestCase):
         self.assertEqual(self.test_team.current_round_rank(), 1,
             "Check the team is now ranked number 1.")
 
-        test_team2 = Team(number="B", dorm=self.dorm)
+        test_team2 = Team(name="B", dorm=self.dorm)
         test_team2.save()
 
         user2 = User(username="test_user1", password="test_password")
@@ -496,7 +496,7 @@ class TeamsUnitTestCase(TestCase):
         user.get_profile().save()
 
         # Create a test user on a different team.
-        test_team2 = Team(number="B", dorm=self.dorm)
+        test_team2 = Team(name="B", dorm=self.dorm)
         test_team2.save()
 
         user = User(username="test_user1", password="test_password")

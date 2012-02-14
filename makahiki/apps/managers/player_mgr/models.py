@@ -138,7 +138,7 @@ class Profile(models.Model):
         return self.name
 
     def get_lounge_name(self):
-        return self.team.dorm.name + '-' + self.team.number
+        return self.team.name
 
     @staticmethod
     def points_leaders(num_results=10, round_name=None):

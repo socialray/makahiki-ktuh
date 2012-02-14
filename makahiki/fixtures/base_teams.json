@@ -34,149 +34,119 @@
     "model": "team_mgr.team",
     "fields": {
       "dorm": 1, 
-      "team_identifier": "Lehua-A",
-      "number": "A", 
-      "slug": "3-4"
+      "name": "Lehua-A"
     }
-  }, 
+  },
   {
-    "pk": 2, 
+    "pk": 2,
     "model": "team_mgr.team",
     "fields": {
-      "dorm": 2, 
-      "team_identifier": "Ilima-A",
-      "number": "A", 
-      "slug": "3-4"
+      "dorm": 2,
+      "name": "Ilima-A"
     }
-  }, 
+  },
   {
-    "pk": 3, 
+    "pk": 3,
     "model": "team_mgr.team",
     "fields": {
-      "dorm": 3, 
-      "team_identifier": "Mokihana-A",
-      "number": "A", 
-      "slug": "3-4"
+      "dorm": 3,
+      "name": "Mokihana-A"
     }
-  }, 
+  },
   {
-    "pk": 4, 
+    "pk": 4,
     "model": "team_mgr.team",
     "fields": {
-      "dorm": 1, 
-      "team_identifier": "Lehua-B",
-      "number": "B", 
-      "slug": "5-6"
+      "dorm": 1,
+      "name": "Lehua-B"
     }
-  }, 
+  },
   {
-    "pk": 5, 
+    "pk": 5,
     "model": "team_mgr.team",
     "fields": {
-      "dorm": 1, 
-      "team_identifier": "Lehua-C",
-      "number": "C", 
-      "slug": "7-8"
+      "dorm": 1,
+      "name": "Lehua-C"
     }
-  }, 
+  },
   {
-    "pk": 6, 
+    "pk": 6,
     "model": "team_mgr.team",
     "fields": {
-      "dorm": 1, 
-      "team_identifier": "Lehua-D",
-      "number": "D", 
-      "slug": "9-10"
+      "dorm": 1,
+      "name": "Lehua-D"
     }
-  }, 
+  },
   {
-    "pk": 7, 
+    "pk": 7,
     "model": "team_mgr.team",
     "fields": {
-      "dorm": 1, 
-      "team_identifier": "Lehua-E",
-      "number": "E", 
-      "slug": "11-12"
+      "dorm": 1,
+      "name": "Lehua-E"
     }
-  }, 
+  },
   {
-    "pk": 8, 
+    "pk": 8,
     "model": "team_mgr.team",
     "fields": {
-      "dorm": 2, 
-      "team_identifier": "Ilima-B",
-      "number": "B", 
-      "slug": "5-6"
+      "dorm": 2,
+      "name": "Ilima-B"
     }
-  }, 
+  },
   {
-    "pk": 9, 
+    "pk": 9,
     "model": "team_mgr.team",
     "fields": {
-      "dorm": 2, 
-      "team_identifier": "Ilima-C",
-      "number": "C", 
-      "slug": "7-8"
+      "dorm": 2,
+      "name": "Ilima-C"
     }
-  }, 
+  },
   {
-    "pk": 10, 
+    "pk": 10,
     "model": "team_mgr.team",
     "fields": {
-      "dorm": 2, 
-      "team_identifier": "Ilima-D",
-      "number": "D", 
-      "slug": "9-10"
+      "dorm": 2,
+      "name": "Ilima-D"
     }
-  }, 
+  },
   {
-    "pk": 11, 
+    "pk": 11,
     "model": "team_mgr.team",
     "fields": {
-      "dorm": 2, 
-      "team_identifier": "Ilima-E",
-      "number": "E", 
-      "slug": "11-12"
+      "dorm": 2,
+      "name": "Ilima-E"
     }
-  }, 
+  },
   {
-    "pk": 12, 
+    "pk": 12,
     "model": "team_mgr.team",
     "fields": {
-      "dorm": 3, 
-      "team_identifier": "Mokihana-B",
-      "number": "B", 
-      "slug": "5-6"
+      "dorm": 3,
+      "name": "Mokihana-B"
     }
-  }, 
+  },
   {
-    "pk": 13, 
+    "pk": 13,
     "model": "team_mgr.team",
     "fields": {
-      "dorm": 3, 
-      "team_identifier": "Mokihana-C",
-      "number": "C", 
-      "slug": "7-8"
+      "dorm": 3,
+      "name": "Mokihana-C"
     }
-  }, 
+  },
   {
-    "pk": 14, 
+    "pk": 14,
     "model": "team_mgr.team",
     "fields": {
-      "dorm": 3, 
-      "team_identifier": "Mokihana-D",
-      "number": "D", 
-      "slug": "9-10"
+      "dorm": 3,
+      "name": "Mokihana-D"
     }
-  }, 
+  },
   {
-    "pk": 15, 
+    "pk": 15,
     "model": "team_mgr.team",
     "fields": {
-      "dorm": 3, 
-      "team_identifier": "Mokihana-E",
-      "number": "E", 
-      "slug": "11-12"
+      "dorm": 3,
+      "name": "Mokihana-E"
     }
   }
 ]

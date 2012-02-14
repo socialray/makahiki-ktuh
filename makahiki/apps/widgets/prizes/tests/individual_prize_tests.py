@@ -176,7 +176,7 @@ class TeamPrizeTest(TestCase):
         self.dorm = Dorm(name="Test Dorm")
         self.dorm.save()
 
-        self.teams = [Team(number=str(i), dorm=self.dorm) for i in range(0, 2)]
+        self.teams = [Team(name=str(i), dorm=self.dorm) for i in range(0, 2)]
         _ = [f.save() for f in self.teams]
 
         self.users = [User.objects.create_user("test%d" % i, "test@test.com") for i in range(0, 4)]

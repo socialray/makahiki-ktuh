@@ -21,7 +21,7 @@ def invalidate_info_bar_cache(user):
     invalidate_template_cache("infobar", user.username)
     team = user.get_profile().team
     if team:
-        invalidate_template_cache("infobar", team.dorm.name, team.number)
+        invalidate_template_cache("infobar", team.name)
 
 
 def invalidate_team_avatar_cache(task, user):

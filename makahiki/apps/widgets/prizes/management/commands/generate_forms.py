@@ -69,7 +69,7 @@ class Command(management.base.BaseCommand):
                         'round': round_name,
                         })
 
-                    filename = '%s-%s-%s.txt' % (team.dorm.name, team.number, leader.username)
+                    filename = '%s-%s.txt' % (team.name, leader.username)
                     f = open('%s/%s' % (round_dir, filename), 'w')
                     f.write(contents)
 
