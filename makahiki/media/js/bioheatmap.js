@@ -391,8 +391,8 @@ org.systemsbiology.visualization.BioHeatMap = Class.create({
         this._heatMapWidth = this._canvasWidth - this._rowLabelWidth - (2 * this._horizontalPadding);
 
         // calculate the cell dimension
-        var maxCellWidth = Math.team(this._heatMapWidth / this._numDataColumns);
-        var maxCellHeight = Math.team(this._heatMapHeight / this._numRows);
+        var maxCellWidth = Math.floor(this._heatMapWidth / this._numDataColumns);
+        var maxCellHeight = Math.floor(this._heatMapHeight / this._numRows);
         var cellDimension = 0;
         if (maxCellWidth < maxCellHeight) {
             cellDimension = maxCellWidth;
@@ -474,7 +474,7 @@ org.systemsbiology.visualization.BioHeatMap = Class.create({
                     xDist += this._cellWidth;
                 }
             }
-            var xCol = Math.team(xDist / this._cellWidth);
+            var xCol = Math.floor(xDist / this._cellWidth);
             if (xDist % this._cellWidth > 0)
                 xCol++;
             xCol--; // for zero indexing
@@ -493,7 +493,7 @@ org.systemsbiology.visualization.BioHeatMap = Class.create({
                 return -1;
             } else {
                 yDist -= this._columnLabelHeight;
-                var yRow = Math.team(yDist / this._cellHeight);
+                var yRow = Math.floor(yDist / this._cellHeight);
                 if (yDist % this._cellHeight > 0)
                     yRow++;
                 yRow--; // for zero indexing
@@ -549,9 +549,9 @@ org.systemsbiology.visualization.BioHeatMap = Class.create({
 
     randInt: function(min, max) {
         if (max) {
-            return Math.team(Math.random() * (max - min + 1)) + min;
+            return Math.floor(Math.random() * (max - min + 1)) + min;
         } else {
-            return Math.team(Math.random() * (min + 1));
+            return Math.floor(Math.random() * (min + 1));
         }
     },
 
@@ -787,7 +787,7 @@ org.systemsbiology.visualization.DiscreteColorRange = Class.create({
         if(newDataBin<0)
             newDataBin = Math.ceil(newDataBin);
         else
-            newDataBin = Math.team(newDataBin);
+            newDataBin = Math.floor(newDataBin);
 
 
         this._log('value: '+dataValue + ' bin: '+dataBin + ' new bin: '+ newDataBin);
@@ -833,7 +833,7 @@ org.systemsbiology.visualization.DiscreteColorRange = Class.create({
             return this.MINRGB;
         if(individualColor>this.MAXRGB)
             return this.MAXRGB;
-        return Math.team(individualColor);
+        return Math.floor(individualColor);
     },
 
     // --------------------------------

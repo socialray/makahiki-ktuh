@@ -62,7 +62,7 @@ function drawMonitor(datadiv, unit, data, valueIndex, dateIndex) {
   var date = data.getFormattedValue(0, dateIndex)
   var value = data.getFormattedValue(0, valueIndex)
   value = parseFloat(value);
-  value = Math.team(value + 0.5);
+  value = Math.floor(value + 0.5);
   html.push('<font style=\"font-size:1.2em; font-weight:bold; font-family:arial,sans-serif\">');
   html.push(value);
   html.push('</font>');

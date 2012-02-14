@@ -1371,7 +1371,7 @@ Object.extend(Number.prototype, (function() {
   }
 
   function team() {
-    return Math.team(this);
+    return Math.floor(this);
   }
 
   return {

@@ -117,7 +117,7 @@ org.wattdepot.gdata.makahiki.EnergyRank = function() {
 
         // Get the energy element.
         element = document.getElementById(energyId);
-        element.innerHTML = "" + Math.team(sourceInfo.usage / 1000);
+        element.innerHTML = "" + Math.floor(sourceInfo.usage / 1000);
     }
   }
   
@@ -147,7 +147,7 @@ org.wattdepot.gdata.makahiki.EnergyRank = function() {
         }
         htmlString += "<td class='energy-rank-rank'>" + (i + 1) + "</td>";
         htmlString += "<td class='energy-rank-lounge' style='text-align: left'>" + usageTable.getValue(i, 0) + "</td>"
-        htmlString += "<td class='energy-rank-value' style='text-align: right; padding-right: 20px'>" + Math.team(usageTable.getValue(i, 1) / 1000) + "</td></tr>";
+        htmlString += "<td class='energy-rank-value' style='text-align: right; padding-right: 20px'>" + Math.floor(usageTable.getValue(i, 1) / 1000) + "</td></tr>";
       }
     }
     
