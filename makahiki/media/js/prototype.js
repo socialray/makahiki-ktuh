@@ -1370,8 +1370,8 @@ Object.extend(Number.prototype, (function() {
     return Math.ceil(this);
   }
 
-  function floor() {
-    return Math.floor(this);
+  function team() {
+    return Math.team(this);
   }
 
   return {
@@ -1382,7 +1382,7 @@ Object.extend(Number.prototype, (function() {
     abs:            abs,
     round:          round,
     ceil:           ceil,
-    floor:          floor
+    team:          team
   };
 })());
 

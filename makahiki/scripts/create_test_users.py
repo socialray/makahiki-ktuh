@@ -1,10 +1,10 @@
 from django.contrib.auth.models import User
 import datetime
 
-from managers.team_mgr.models import Floor
+from managers.team_mgr.models import Team
 
 def create_users():
-  floor_count = Floor.objects.count()
+  team_count = Team.objects.count()
   for i in range(0, 1000):
     # create group one and group two.
     username = "user%d-%d" % (i / 500, i % 500)
@@ -12,7 +12,7 @@ def create_users():
     profile = user.get_profile()
     profile.setup_complete = True
     profile.setup_profile = True
-    profile.floor = Floor.objects.all()[i % floor_count]
+    profile.team = Team.objects.all()[i % team_count]
     profile.add_points(25, datetime.datetime.today(), 'test points for raffle')
     profile.save()
 

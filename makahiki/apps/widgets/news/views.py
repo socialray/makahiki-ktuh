@@ -17,11 +17,11 @@ from widgets.smartgrid.forms import EventCodeForm
 from widgets.news import DEFAULT_POST_COUNT
 
 def supply(request):
-    floor_id = request.user.get_profile().floor_id
+    team_id = request.user.get_profile().team_id
 
-    # Get floor posts.
+    # Get team posts.
     posts = Post.objects.filter(
-        floor=floor_id
+        team=team_id
     ).order_by("-id").select_related('user__profile')
 
     post_count = posts.count
@@ -34,8 +34,8 @@ def supply(request):
     # Get the user's current commitments.
     commitment_members = get_current_commitment_members(request.user).select_related("commitment")
 
-    # Get the floor members.
-    members = Profile.objects.filter(floor=floor_id).order_by(
+    # Get the team members.
+    members = Profile.objects.filter(team=team_id).order_by(
         "-points",
         "-last_awarded_submission"
     ).select_related('user')[:12]
@@ -48,7 +48,7 @@ def supply(request):
         "wall_form": WallForm(),
         "more_posts": is_more_posts,
         "commitment_members": commitment_members,
-        "floor_members": members,
+        "team_members": members,
         "popular_tasks": get_popular_tasks(),
         "event_form": form,
         }
@@ -56,14 +56,14 @@ def supply(request):
 
 @never_cache
 @login_required
-def floor_members(request):
-    members = User.objects.filter(profile__floor=request.user.get_profile().floor).order_by(
+def team_members(request):
+    members = User.objects.filter(profile__team=request.user.get_profile().team).order_by(
         "-profile__points",
         "-profile__last_awarded_submission",
     )
 
-    return render_to_response("news/directory/floor_members.html", {
-        "floor_members": members,
+    return render_to_response("news/directory/team_members.html", {
+        "team_members": members,
         }, context_instance=RequestContext(request))
 
 
@@ -74,7 +74,7 @@ def post(request):
         if form.is_valid():
             wall_post = Post(
                 user=request.user,
-                floor=request.user.get_profile().floor,
+                team=request.user.get_profile().team,
                 text=form.cleaned_data["post"]
             )
             wall_post.save()
@@ -97,12 +97,12 @@ def post(request):
 @login_required
 def more_posts(request):
     if request.is_ajax():
-        floor = request.user.get_profile().floor
+        team = request.user.get_profile().team
         if request.GET.has_key("last_post"):
-            posts = Post.objects.filter(floor=floor, id__lt=int(request.GET["last_post"])).order_by(
+            posts = Post.objects.filter(team=team, id__lt=int(request.GET["last_post"])).order_by(
                 "-id")
         else:
-            posts = Post.objects.filter(floor=floor).order_by("-id")
+            posts = Post.objects.filter(team=team).order_by("-id")
 
         post_count = posts.count
         posts = posts[:DEFAULT_POST_COUNT]

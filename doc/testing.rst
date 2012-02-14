@@ -83,8 +83,8 @@ Things that need to be changed:
    case) and SeleniumTestCaseMixin. It should read something like
    ``class sample_test(TestCase, SeleniumTestCaseMixin):``.
 -  You can import fixtures from the database. For example, to load the
-   floors and users fixtures, add the line
-   ``selenium_fixtures = ["fixtures/base_floors.json", "fixtures/test_users.json"]``.
+   teams and users fixtures, add the line
+   ``selenium_fixtures = ["fixtures/base_teams.json", "fixtures/test_users.json"]``.
 -  In setUp, remove the selenium initialization and
    ``self.selenium.start()``. This will be handled by the mixin.
 -  In tearDown, remove ``self.selenium.stop()``.

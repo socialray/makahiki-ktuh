@@ -6,14 +6,14 @@ from django.core.urlresolvers import reverse
 from django.contrib.auth.models import User
 from django.conf import settings
 
-from managers.team_mgr.models import Floor
+from managers.team_mgr.models import Team
 from widgets.prizes.models import RafflePrize, RaffleDeadline
 
 class RafflePrizesTestCase(TestCase):
-    fixtures = ["base_floors.json"]
+    fixtures = ["base_teams.json"]
 
     def setUp(self):
-        """Set up rounds, floor, and a user."""
+        """Set up rounds, team, and a user."""
         # Set up rounds.
         self.saved_rounds = settings.COMPETITION_ROUNDS
         self.saved_start = settings.COMPETITION_START
@@ -37,9 +37,9 @@ class RafflePrizesTestCase(TestCase):
 
         # Set up user
         self.user = User.objects.create_user("user", "user@test.com", password="changeme")
-        floor = Floor.objects.all()[0]
+        team = Team.objects.all()[0]
         profile = self.user.get_profile()
-        profile.floor = floor
+        profile.team = team
         profile.setup_complete = True
         profile.setup_profile = True
         profile.save()

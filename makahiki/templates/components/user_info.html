@@ -17,16 +17,16 @@
   </div>
   {% endwith %}
   
-  {% with user.get_profile.floor as floor %}
-  <div {% get_id_and_classes "header-floor-info" %}>
-    <div {% get_id_and_classes "header-floor-name" %}>
-      {{floor}}
+  {% with user.get_profile.team as team %}
+  <div {% get_id_and_classes "header-team-info" %}>
+    <div {% get_id_and_classes "header-team-name" %}>
+      {{team}}
     </div>
-    <div {% get_id_and_classes "floor-cycle" %}> 
-      {% include "components/floor_points.html" %}
+    <div {% get_id_and_classes "team-cycle" %}>
+      {% include "components/team_points.html" %}
     </div>
   </div>
-  <div {% get_id_and_classes "header-floor-image" %}>
+  <div {% get_id_and_classes "header-team-image" %}>
     <img src="{{STATIC_URL}}images/hale.ilima.jpg"/>
   </div>
   {% endwith %}

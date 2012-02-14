@@ -48,7 +48,7 @@ class Command(management.base.BaseCommand):
         * staff/superuser status
         * display_name
         * First and last name
-        * Floor/lounge
+        * Team/lounge
         """
         username = user.username
         email = user.email
@@ -59,7 +59,7 @@ class Command(management.base.BaseCommand):
         d_name = profile.name
         f_name = profile.first_name
         l_name = profile.last_name
-        floor = profile.floor
+        team = profile.team
 
         # Delete the user and create a new one.
         user.delete()
@@ -73,6 +73,6 @@ class Command(management.base.BaseCommand):
         profile.name = d_name
         profile.first_name = f_name
         profile.last_name = l_name
-        profile.floor = floor
+        profile.team = team
 
         profile.save()

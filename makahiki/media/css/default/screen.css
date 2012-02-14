@@ -310,31 +310,31 @@ img {
 	padding-right: 5px;
 }
 
-#header-floor-info {
+#header-team-info {
 	width: 120px;
 	float: left;
     margin-left: 4px;
 }
 
-#header-floor-name {
+#header-team-name {
 	white-space: nowrap;
 	font-weight: bold;
 	text-decoration: underline;
 	font-size: .9em;
 }
 
-#header-floor-points, #header-floor-rank, #header-floor-energy {
+#header-team-points, #header-team-rank, #header-team-energy {
 	font-size: .9em;
 	width: 120px;
 	margin-top: 5px;
 	text-align: left;
 }
 
-#header-floor-rank {
+#header-team-rank {
   clear: both;
 }
 
-#header-floor-points h3, #header-floor-rank h3, #header-floor-energy h3 {
+#header-team-points h3, #header-team-rank h3, #header-team-energy h3 {
 	float: left;
 	font: bold 18pt Arial, Helvetica, sans-serif;
 	color: #FF0000;
@@ -342,12 +342,12 @@ img {
 	padding-right: 5px;
 }
 
-#header-floor-image {
+#header-team-image {
 	float: right;
 	margin-right: 10px;
 }
 
-#header-floor-image img {
+#header-team-image img {
 	width: 50px;
 	margin-left: 5px;
 }

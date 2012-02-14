@@ -38,8 +38,8 @@ from managers.player_mgr import *
 from widgets.smartgrid.models import *
 from widgets.notifications.models import UserNotification, NoticeTemplate
 from managers.base_mgr import in_competition, get_round_info
-from widgets.energy.models import FloorEnergyGoal
-from managers.team_mgr.models import Floor
+from widgets.energy.models import TeamEnergyGoal
+from managers.team_mgr.models import Team
 from django.db.models import Q
 
 
@@ -87,15 +87,15 @@ class GDataGoal:
 
   def award_point(self, source, goal, actual):
     try:
-      floor = Floor.objects.get(floor_identifier=source)
-      goal = FloorEnergyGoal(
-          floor=floor,
+      team = Team.objects.get(team_identifier=source)
+      goal = TeamEnergyGoal(
+          team=team,
           goal_usage=goal,
           actual_usage=actual,
       )
       goal.save()
-    except Floor.DoesNotExist:
-      print 'floor with identifier %s does not exist' % source
+    except Team.DoesNotExist:
+      print 'team with identifier %s does not exist' % source
     
   def Run(self):
     self._checkCellGoal()

@@ -4,7 +4,7 @@ from django.contrib.auth.models import User
 
 from managers.base_mgr import get_round_info
 from managers.player_mgr.models import Profile
-from managers.team_mgr.models import Dorm, Floor
+from managers.team_mgr.models import Dorm, Team
 
 class Prize(models.Model):
     """
@@ -13,10 +13,10 @@ class Prize(models.Model):
     ROUND_CHOICES = ((round_name, round_name) for round_name in get_round_info().keys())
     AWARD_TO_CHOICES = (
         ("individual_overall", "Individual (Overall)"),
-        ("individual_floor", "Individual (" + settings.COMPETITION_GROUP_NAME + ")"),
+        ("individual_team", "Individual (" + settings.COMPETITION_GROUP_NAME + ")"),
         # ("individual_dorm", "Individual (Dorm)"),
-        ("floor_overall", settings.COMPETITION_GROUP_NAME + " (Overall)"),
-        ("floor_dorm", settings.COMPETITION_GROUP_NAME + " (Dorm)"),
+        ("team_overall", settings.COMPETITION_GROUP_NAME + " (Overall)"),
+        ("team_dorm", settings.COMPETITION_GROUP_NAME + " (Dorm)"),
         # ("dorm", "Dorm"), # Not implemented yet.
         )
     AWARD_CRITERIA_CHOICES = (
@@ -59,51 +59,51 @@ class Prize(models.Model):
     class Meta:
         unique_together = ("round_name", "award_to", "competition_type")
 
-    def num_awarded(self, floor=None):
+    def num_awarded(self, team=None):
         """
         Returns the number of prizes that will be awarded for this prize.
         """
-        _ = floor
-        if self.award_to in ("individual_overall", "floor_overall", "dorm"):
+        _ = team
+        if self.award_to in ("individual_overall", "team_overall", "dorm"):
             # For overall prizes, it is only possible to award one.
             return 1
 
-        elif self.award_to in ("floor_dorm", "individual_dorm"):
+        elif self.award_to in ("team_dorm", "individual_dorm"):
             # For dorm prizes, this is just the number of dorms.
             return Dorm.objects.count()
 
-        elif self.award_to == "individual_floor":
-            # This is awarded to each floor.
-            return Floor.objects.count()
+        elif self.award_to == "individual_team":
+            # This is awarded to each team.
+            return Team.objects.count()
 
         raise Exception("Unknown award_to value '%s'" % self.award_to)
 
-    def leader(self, floor=None):
+    def leader(self, team=None):
         if self.competition_type == "points":
-            return self._points_leader(floor)
+            return self._points_leader(team)
         else:
-            return self._energy_leader(floor)
+            return self._energy_leader(team)
 
-    def _points_leader(self, floor=None):
+    def _points_leader(self, team=None):
         round_name = None if self.round_name == "Overall" else self.round_name
         if self.award_to == "individual_overall":
             return Profile.points_leaders(num_results=1, round_name=round_name)[0]
 
-        elif self.award_to == "floor_dorm":
-            return floor.dorm.floor_points_leaders(num_results=1, round_name=round_name)[0]
+        elif self.award_to == "team_dorm":
+            return team.dorm.team_points_leaders(num_results=1, round_name=round_name)[0]
 
-        elif self.award_to == "floor_overall":
-            return Floor.floor_points_leaders(num_results=1, round_name=round_name)[0]
+        elif self.award_to == "team_overall":
+            return Team.team_points_leaders(num_results=1, round_name=round_name)[0]
 
-        elif self.award_to == "individual_floor":
-            if floor:
-                return floor.points_leaders(num_results=1, round_name=round_name)[0]
+        elif self.award_to == "individual_team":
+            if team:
+                return team.points_leaders(num_results=1, round_name=round_name)[0]
             return None
 
         raise Exception("'%s' is not implemented yet." % self.award_to)
 
-    def _energy_leader(self, floor):
-        _ = floor
+    def _energy_leader(self, team):
+        _ = team
         raise Exception(
             "Energy leader information is not implemented here.  Needs to be implemented at view/controller layer.")
 

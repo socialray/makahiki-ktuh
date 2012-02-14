@@ -10,8 +10,8 @@
     <div {% get_id_and_classes "header-text" %}>{{COMPETITION_POINT_NAME}}s in {{CURRENT_ROUND.title}}</div>
   </div>
   <div {% get_id_and_classes "header-user-rank" %}>
-    <h3>#{{profile.current_round_floor_rank}}</h3>
-    <div {% get_id_and_classes "header-text" %}>out of {{FLOOR_MEMBER_COUNT}} in {{profile.floor.dorm.name}}-{{profile.floor.number}}</div>
+    <h3>#{{profile.current_round_team_rank}}</h3>
+    <div {% get_id_and_classes "header-text" %}>out of {{FLOOR_MEMBER_COUNT}} in {{profile.team.dorm.name}}-{{profile.team.number}}</div>
   </div>
 </div>
 <!-- Second slideshow element -->
@@ -28,14 +28,14 @@
 {% endif %}
 
 <!-- Third slideshow element -->
-<div id="header-user-floor-rank3" {% if CURRENT_ROUND %}style="display:none"{% endif %}>
+<div id="header-user-team-rank3" {% if CURRENT_ROUND %}style="display:none"{% endif %}>
   <div {% get_id_and_classes "header-user-points" %}>
     <h3>{{profile.points}}</h3>
     <div {% get_id_and_classes "header-text" %}>{{COMPETITION_POINT_NAME}}s</div>
   </div>
   <div {% get_id_and_classes "header-user-rank" %}>
-    <h3>#{{profile.floor_rank}}</h3>
-    <div {% get_id_and_classes "header-text" %}>out of {{FLOOR_MEMBER_COUNT}} in {{profile.floor.dorm.name}}-{{profile.floor.number}}</div>
+    <h3>#{{profile.team_rank}}</h3>
+    <div {% get_id_and_classes "header-text" %}>out of {{FLOOR_MEMBER_COUNT}} in {{profile.team.dorm.name}}-{{profile.team.number}}</div>
   </div>
 </div>
 <!-- Fourth slideshow element -->

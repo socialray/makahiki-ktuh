@@ -17,7 +17,7 @@ setup_environ(settings_mod)
 
 sys.path.insert(0, join(settings.PROJECT_ROOT, "apps"))
     
-from managers.team_mgr.models import Floor
+from managers.team_mgr.models import Team
         
 def competition_summary():
   """
@@ -33,10 +33,10 @@ def competition_summary():
     exit()
     
   with open(sys.argv[1], "w") as out:
-    for floor in Floor.objects.all():
-      posts = floor.post_set.filter(style_class="user_post").count()
-      canopy_members = floor.profile_set.filter(canopy_member=True).count()
-      out.write("%s,%s,%d,%d,%d\n" % (floor.dorm.name, floor.number, floor.points(), posts, canopy_members))
+    for team in Team.objects.all():
+      posts = team.post_set.filter(style_class="user_post").count()
+      canopy_members = team.profile_set.filter(canopy_member=True).count()
+      out.write("%s,%s,%d,%d,%d\n" % (team.dorm.name, team.number, team.points(), posts, canopy_members))
     
 
 if __name__ == "__main__":

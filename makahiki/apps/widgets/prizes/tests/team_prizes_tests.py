@@ -7,11 +7,11 @@ from django.core.files.images import ImageFile
 from django.contrib.auth.models import User
 
 from widgets.prizes.models import Prize
-from managers.team_mgr.models import Dorm, Floor
+from managers.team_mgr.models import Dorm, Team
 
-class DormFloorPrizeTests(TestCase):
+class DormTeamPrizeTests(TestCase):
     """
-    Tests awarding a prize to a dorm floor points winner.
+    Tests awarding a prize to a dorm team points winner.
     """
 
     def setUp(self):
@@ -26,7 +26,7 @@ class DormFloorPrizeTests(TestCase):
             short_description="A test prize",
             long_description="A test prize",
             image=image,
-            award_to="floor_dorm",
+            award_to="team_dorm",
             competition_type="points",
             value=5,
         )
@@ -43,18 +43,18 @@ class DormFloorPrizeTests(TestCase):
                 },
             }
 
-        # Create test dorms, floors, and users.
+        # Create test dorms, teams, and users.
         self.dorms = [Dorm(name="Test Dorm %d" % i) for i in range(0, 2)]
         _ = [d.save() for d in self.dorms]
 
-        self.floors = [Floor(number=str(i), dorm=self.dorms[i % 2]) for i in range(0, 4)]
-        _ = [f.save() for f in self.floors]
+        self.teams = [Team(number=str(i), dorm=self.dorms[i % 2]) for i in range(0, 4)]
+        _ = [f.save() for f in self.teams]
 
         self.users = [User.objects.create_user("test%d" % i, "test@test.com") for i in range(0, 4)]
 
-        # Assign users to floors.
+        # Assign users to teams.
         for index, user in enumerate(self.users):
-            user.get_profile().floor = self.floors[index % 4]
+            user.get_profile().team = self.teams[index % 4]
             user.get_profile().save()
 
     def testNumAwarded(self):
@@ -64,7 +64,7 @@ class DormFloorPrizeTests(TestCase):
         self.prize.round_name = "Round 1"
         self.prize.save()
 
-        self.assertEqual(self.prize.num_awarded(self.floors[0]), len(self.dorms),
+        self.assertEqual(self.prize.num_awarded(self.teams[0]), len(self.dorms),
             "One prize should be awarded to each of the dorms in the competition.")
 
     def testRoundLeader(self):
@@ -79,8 +79,8 @@ class DormFloorPrizeTests(TestCase):
         profile.add_points(10, datetime.datetime.today() - datetime.timedelta(minutes=1), "test")
         profile.save()
 
-        self.assertEqual(self.prize.leader(profile.floor), profile.floor,
-            "The user's floor is not leading in the prize.")
+        self.assertEqual(self.prize.leader(profile.team), profile.team,
+            "The user's team is not leading in the prize.")
 
         # Test a user in a different dorm.
         profile1 = self.users[1].get_profile()
@@ -88,20 +88,20 @@ class DormFloorPrizeTests(TestCase):
             datetime.datetime.today() - datetime.timedelta(minutes=1), "test")
         profile1.save()
 
-        self.assertEqual(self.prize.leader(profile.floor), profile.floor,
+        self.assertEqual(self.prize.leader(profile.team), profile.team,
             "The leader for this prize in first users dorm should not change.")
-        self.assertEqual(self.prize.leader(profile1.floor), profile1.floor,
+        self.assertEqual(self.prize.leader(profile1.team), profile1.team,
             "The leader in profile1's dorm is not profile1.")
 
-        # Test that a user in a different floor but same dorm changes the leader for the original user.
+        # Test that a user in a different team but same dorm changes the leader for the original user.
         profile2 = self.users[2].get_profile()
         profile2.add_points(profile.points + 1,
             datetime.datetime.today() - datetime.timedelta(minutes=1), "test")
         profile2.save()
 
-        self.assertEqual(self.prize.leader(profile.floor), profile2.floor,
+        self.assertEqual(self.prize.leader(profile.team), profile2.team,
             "The leader for this prize did not change.")
-        self.assertEqual(self.prize.leader(profile1.floor), profile1.floor,
+        self.assertEqual(self.prize.leader(profile1.team), profile1.team,
             "The leader in profile1's dorm is not profile1.")
 
     def testOverallLeader(self):
@@ -116,8 +116,8 @@ class DormFloorPrizeTests(TestCase):
         profile.add_points(10, datetime.datetime.today() - datetime.timedelta(minutes=1), "test")
         profile.save()
 
-        self.assertEqual(self.prize.leader(profile.floor), profile.floor,
-            "The user's floor is not leading in the prize.")
+        self.assertEqual(self.prize.leader(profile.team), profile.team,
+            "The user's team is not leading in the prize.")
 
         # Test a user in a different dorm.
         profile1 = self.users[1].get_profile()
@@ -125,20 +125,20 @@ class DormFloorPrizeTests(TestCase):
             datetime.datetime.today() - datetime.timedelta(minutes=1), "test")
         profile1.save()
 
-        self.assertEqual(self.prize.leader(profile.floor), profile.floor,
+        self.assertEqual(self.prize.leader(profile.team), profile.team,
             "The leader for this prize in first users dorm should not change.")
-        self.assertEqual(self.prize.leader(profile1.floor), profile1.floor,
+        self.assertEqual(self.prize.leader(profile1.team), profile1.team,
             "The leader in profile1's dorm is not profile1.")
 
-        # Test that a user in a different floor but same dorm changes the leader for the original user.
+        # Test that a user in a different team but same dorm changes the leader for the original user.
         profile2 = self.users[2].get_profile()
         profile2.add_points(profile.points + 1,
             datetime.datetime.today() - datetime.timedelta(minutes=1), "test")
         profile2.save()
 
-        self.assertEqual(self.prize.leader(profile.floor), profile2.floor,
+        self.assertEqual(self.prize.leader(profile.team), profile2.team,
             "The leader for this prize did not change.")
-        self.assertEqual(self.prize.leader(profile1.floor), profile1.floor,
+        self.assertEqual(self.prize.leader(profile1.team), profile1.team,
             "The leader in profile1's dorm is not profile1.")
 
     def tearDown(self):
@@ -150,9 +150,9 @@ class DormFloorPrizeTests(TestCase):
         self.prize.delete()
 
 
-class OverallFloorPrizeTest(TestCase):
+class OverallTeamPrizeTest(TestCase):
     """
-    Tests awarding a prize to a dorm floor points winner.
+    Tests awarding a prize to a dorm team points winner.
     """
 
     def setUp(self):
@@ -167,7 +167,7 @@ class OverallFloorPrizeTest(TestCase):
             short_description="A test prize",
             long_description="A test prize",
             image=image,
-            award_to="floor_overall",
+            award_to="team_overall",
             competition_type="points",
             value=5,
         )
@@ -184,18 +184,18 @@ class OverallFloorPrizeTest(TestCase):
                 },
             }
 
-        # Create test dorms, floors, and users.
+        # Create test dorms, teams, and users.
         self.dorm = Dorm(name="Test Dorm")
         self.dorm.save()
 
-        self.floors = [Floor(number=str(i), dorm=self.dorm) for i in range(0, 2)]
-        _ = [f.save() for f in self.floors]
+        self.teams = [Team(number=str(i), dorm=self.dorm) for i in range(0, 2)]
+        _ = [f.save() for f in self.teams]
 
         self.users = [User.objects.create_user("test%d" % i, "test@test.com") for i in range(0, 4)]
 
-        # Assign users to floors.
+        # Assign users to teams.
         for index, user in enumerate(self.users):
-            user.get_profile().floor = self.floors[index % 2]
+            user.get_profile().team = self.teams[index % 2]
             user.get_profile().save()
 
     def testNumAwarded(self):
@@ -220,16 +220,16 @@ class OverallFloorPrizeTest(TestCase):
         profile.add_points(10, datetime.datetime.today() - datetime.timedelta(minutes=1), "test")
         profile.save()
 
-        self.assertEqual(self.prize.leader(profile.floor), profile.floor,
-            "The user's floor is not leading in the prize.")
+        self.assertEqual(self.prize.leader(profile.team), profile.team,
+            "The user's team is not leading in the prize.")
 
-        # Test that a user in a different floor changes the leader for the original user.
+        # Test that a user in a different team changes the leader for the original user.
         profile2 = self.users[2].get_profile()
         profile2.add_points(profile.points + 1,
             datetime.datetime.today() - datetime.timedelta(minutes=1), "test")
         profile2.save()
 
-        self.assertEqual(self.prize.leader(profile.floor), profile2.floor,
+        self.assertEqual(self.prize.leader(profile.team), profile2.team,
             "The leader for this prize did not change.")
 
     def testOverallLeader(self):
@@ -244,16 +244,16 @@ class OverallFloorPrizeTest(TestCase):
         profile.add_points(10, datetime.datetime.today() - datetime.timedelta(minutes=1), "test")
         profile.save()
 
-        self.assertEqual(self.prize.leader(profile.floor), profile.floor,
-            "The user's floor is not leading in the prize.")
+        self.assertEqual(self.prize.leader(profile.team), profile.team,
+            "The user's team is not leading in the prize.")
 
-        # Test that a user in a different floor but same dorm changes the leader for the original user.
+        # Test that a user in a different team but same dorm changes the leader for the original user.
         profile2 = self.users[2].get_profile()
         profile2.add_points(profile.points + 1,
             datetime.datetime.today() - datetime.timedelta(minutes=1), "test")
         profile2.save()
 
-        self.assertEqual(self.prize.leader(profile.floor), profile2.floor,
+        self.assertEqual(self.prize.leader(profile.team), profile2.team,
             "The leader for this prize did not change.")
 
     def tearDown(self):

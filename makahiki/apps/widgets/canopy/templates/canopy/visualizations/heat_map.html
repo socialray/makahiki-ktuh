@@ -6,11 +6,11 @@
         Dorm :
         {% for dorm in all_dorms %}
             <input type="radio" name="heatmap-dorm" value="{{ dorm.name }}"
-                    {% if user.get_profile.floor.dorm == dorm %} checked="checked" {% endif %}
+                    {% if user.get_profile.team.dorm == dorm %} checked="checked" {% endif %}
                    onchange="updatePeriod();"/> {{ dorm.name }}
 
-            {% for lounge in dorm.floors %}
-                <input id="{{ lounge.floor_identifier}}" name="heatmap-lounge-{{ dorm.name }}"
+            {% for lounge in dorm.teams %}
+                <input id="{{ lounge.team_identifier}}" name="heatmap-lounge-{{ dorm.name }}"
                        type="hidden"/>
             {% endfor %}
 

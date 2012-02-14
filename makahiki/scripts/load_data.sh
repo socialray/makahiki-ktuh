@@ -7,7 +7,7 @@ if [ "$#" -eq 1 ]
     var="$1"
 fi
 
-python manage.py loaddata $var/base_floors.json 
+python manage.py loaddata $var/base_teams.json
 python manage.py loaddata $var/base_activities.json 
 python manage.py loaddata $var/base_quests.json 
 python manage.py loaddata $var/base_help.json 

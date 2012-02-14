@@ -8,7 +8,7 @@ from widgets.canopy.models import Post as CanopyPost
 from widgets.smartgrid.models import EmailReminder, TextReminder, ActivityMember, CommitmentMember
 from widgets.quests.models import QuestMember
 from widgets.prizes.models import RaffleTicket
-from widgets.energy.models import FloorEnergyGoal
+from widgets.energy.models import TeamEnergyGoal
 from lib.brabeion.models import BadgeAward
 
 class Command(management.base.BaseCommand):
@@ -56,7 +56,7 @@ class Command(management.base.BaseCommand):
         PointsTransaction.objects.all().delete()
 
     def _delete_posts(self):
-        self.stdout.write('Deleting floor posts.\n')
+        self.stdout.write('Deleting team posts.\n')
         Post.objects.all().delete()
         self.stdout.write('Deleting canopy posts.\n')
         CanopyPost.objects.all().delete()
@@ -81,7 +81,7 @@ class Command(management.base.BaseCommand):
 
     def _delete_energy_goals(self):
         self.stdout.write('Deleting energy goals.\n')
-        FloorEnergyGoal.objects.all().delete()
+        TeamEnergyGoal.objects.all().delete()
 
     def _delete_badges(self):
         self.stdout.write('Deleting badge awarded objects.\n')

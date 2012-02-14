@@ -520,9 +520,9 @@ function supportMultiTransitions(opts) {
 	}
 	if (opts.multiFx && opts.randomizeEffects) {
 		// munge the fxs array to make effect selection random
-		var r1 = Math.floor(Math.random() * 20) + 30;
+		var r1 = Math.team(Math.random() * 20) + 30;
 		for (i = 0; i < r1; i++) {
-			var r2 = Math.floor(Math.random() * opts.fxs.length);
+			var r2 = Math.team(Math.random() * opts.fxs.length);
 			opts.fxs.push(opts.fxs.splice(r2,1)[0]);
 		}
 		debug('randomized fx sequence: ',opts.fxs);

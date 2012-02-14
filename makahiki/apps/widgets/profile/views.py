@@ -73,15 +73,15 @@ def badge_catalog(request):
     locked_badges = registry.values()
 
     # For each badge, get the number of people who have the badge.
-    floor = request.user.get_profile().floor
+    team = request.user.get_profile().team
     for badge in awarded_badges:
         badge.total_users = BadgeAward.objects.filter(slug=badge.slug).count()
-        badge.floor_users = User.objects.filter(badges_earned__slug=badge.slug,
-            profile__floor=floor)
+        badge.team_users = User.objects.filter(badges_earned__slug=badge.slug,
+            profile__team=team)
     for badge in locked_badges:
         badge.total_users = BadgeAward.objects.filter(slug=badge.slug).count()
-        badge.floor_users = User.objects.filter(badges_earned__slug=badge.slug,
-            profile__floor=floor)
+        badge.team_users = User.objects.filter(badges_earned__slug=badge.slug,
+            profile__team=team)
 
     return render_to_response("view_profile/badge-catalog.html", {
         "awarded_badges": awarded_badges,

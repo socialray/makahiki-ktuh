@@ -23,7 +23,7 @@ COMPETITION_NAME = "Kukui Cup"
 # Optional setting to specify a special name for the points. Default is "points".
 COMPETITION_POINT_NAME = "point"
 
-# The name of a standard competition grouping.  Defaults to "Floor" if this is not provided.
+# The name of a standard competition grouping.  Defaults to "Team" if this is not provided.
 COMPETITION_GROUP_NAME = "Lounge"
 
 # This include start and end dates along with round information.

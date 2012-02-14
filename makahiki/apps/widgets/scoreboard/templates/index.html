@@ -11,7 +11,7 @@
     </div>
     <div {% get_id_and_classes "activity-scoreboard-content" %}>
 
-        <table {% get_id_and_classes "activities-scoreboard-table-floor" %} style="width: 100%">
+        <table {% get_id_and_classes "activities-scoreboard-table-team" %} style="width: 100%">
             <thead>
             <tr>
                 <th style="width: 20px">Rank</th>
@@ -20,15 +20,15 @@
             </tr>
             </thead>
             <tbody>
-            {% for f in view_objects.scoreboard.floor_standings %}
+            {% for f in view_objects.scoreboard.team_standings %}
                 <tr>
                 <td>{{ forloop.counter }}</td>
                 <td style="width: 150px;
-                        {% if f == view_objects.scoreboard.floor %}font-weight: bold{% endif %}">
+                        {% if f == view_objects.scoreboard.team %}font-weight: bold{% endif %}">
                     {{ f }}
                 </td>
                 <td style="width: 110px; text-align:right;
-                        {% if f == view_objects.scoreboard.floor %}font-weight: bold{% endif %}">
+                        {% if f == view_objects.scoreboard.team %}font-weight: bold{% endif %}">
                     {{ f.points }}
                 </td>
             {% endfor %}
@@ -60,17 +60,17 @@
             </tbody>
         </table>
 
-        <table {% get_id_and_classes "activities-scoreboard-table-floor-profile" %}
+        <table {% get_id_and_classes "activities-scoreboard-table-team-profile" %}
                 style="width: 100%; display: none">
             <thead>
             <tr>
                 <th>Rank</th>
                 <th>Individual</th>
-                <th style="text-align: right">{{ view_objects.scoreboard.floor }}</th>
+                <th style="text-align: right">{{ view_objects.scoreboard.team }}</th>
             </tr>
             </thead>
             <tbody>
-            {% for p in view_objects.scoreboard.user_floor_standings %}
+            {% for p in view_objects.scoreboard.user_team_standings %}
                 <tr>
                 <td>{{ forloop.counter }}</td>
                 <td style="width: 150px;
@@ -95,15 +95,15 @@
             </tr>
             </thead>
             <tbody>
-            {% for f in view_objects.scoreboard.floor_participation %}
+            {% for f in view_objects.scoreboard.team_participation %}
                 <tr>
                 <td>{{ forloop.counter }}</td>
                 <td style="width: 150px;
-                        {% if f == view_objects.scoreboard.floor %}font-weight: bold{% endif %}">
+                        {% if f == view_objects.scoreboard.team %}font-weight: bold{% endif %}">
                     {{ f }}
                 </td>
                 <td style="width: 110px; text-align:right;
-                        {% if f == view_objects.scoreboard.floor %}font-weight: bold{% endif %}">
+                        {% if f == view_objects.scoreboard.team %}font-weight: bold{% endif %}">
                     {{ f.active_participation }}%
                 </td>
             {% endfor %}

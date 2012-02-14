@@ -3,19 +3,19 @@ from django.core.urlresolvers import reverse
 from django.test import TestCase
 from django.contrib.auth.models import User
 from django.conf import settings
-from managers.team_mgr.models import Floor
+from managers.team_mgr.models import Team
 from widgets.smartgrid.models import  EmailReminder, ActivityMember, \
                                      Activity, TextReminder, Commitment, ConfirmationCode
 from managers.player_mgr.models import Profile
 
 class ActivitiesFunctionalTest(TestCase):
-    fixtures = ["base_floors.json"]
+    fixtures = ["base_teams.json"]
 
     def setUp(self):
         self.user = User.objects.create_user("user", "user@test.com", password="changeme")
-        floor = Floor.objects.all()[0]
+        team = Team.objects.all()[0]
         profile = self.user.get_profile()
-        profile.floor = floor
+        profile.team = team
         profile.setup_complete = True
         profile.setup_profile = True
         profile.save()
@@ -84,22 +84,22 @@ class ActivitiesFunctionalTest(TestCase):
         response = self.client.get(reverse("actions_index"))
         self.assertContains(response, "Round 1 Scoreboard", count=1,
             msg_prefix="This should display the current round scoreboard.")
-        self.assertEqual(response.context["view_objects"]["smartgrid"]["floor_standings"][0],
-            profile.floor,
-            "The user's floor should be leading.")
+        self.assertEqual(response.context["view_objects"]["smartgrid"]["team_standings"][0],
+            profile.team,
+            "The user's team should be leading.")
         self.assertEqual(response.context["view_objects"]["smartgrid"]["profile_standings"][0],
             profile,
             "The user's should be leading the overall standings.")
-        self.assertEqual(response.context["view_objects"]["smartgrid"]["user_floor_standings"][0],
+        self.assertEqual(response.context["view_objects"]["smartgrid"]["user_team_standings"][0],
             profile,
-            "The user should be leading in their own floor.")
-        self.assertEqual(response.context["view_objects"]["smartgrid"]["floor_standings"][0].points,
+            "The user should be leading in their own team.")
+        self.assertEqual(response.context["view_objects"]["smartgrid"]["team_standings"][0].points,
             10,
-            "The user's floor should have 10 points this round.")
+            "The user's team should have 10 points this round.")
         self.assertEqual(response.context["view_objects"]["smartgrid"]["profile_standings"][
                          0].current_round_points(), 10,
             "The user should have 10 points this round.")
-        self.assertEqual(response.context["view_objects"]["smartgrid"]["user_floor_standings"][
+        self.assertEqual(response.context["view_objects"]["smartgrid"]["user_team_standings"][
                          0].current_round_points(), 10,
             "The user should have 10 points this round.")
 
@@ -108,13 +108,13 @@ class ActivitiesFunctionalTest(TestCase):
         profile.save()
 
         response = self.client.get(reverse("actions_index"))
-        self.assertEqual(response.context["view_objects"]["smartgrid"]["floor_standings"][0].points,
+        self.assertEqual(response.context["view_objects"]["smartgrid"]["team_standings"][0].points,
             10,
-            "Test that the user's floor still has 10 points.")
+            "Test that the user's team still has 10 points.")
         self.assertEqual(response.context["view_objects"]["smartgrid"]["profile_standings"][
                          0].current_round_points(), 10,
             "The user still should have 10 points this round.")
-        self.assertEqual(response.context["view_objects"]["smartgrid"]["user_floor_standings"][
+        self.assertEqual(response.context["view_objects"]["smartgrid"]["user_team_standings"][
                          0].current_round_points(), 10,
             "The user still should have 10 points this round.")
 
@@ -124,13 +124,13 @@ class ActivitiesFunctionalTest(TestCase):
         response = self.client.get(reverse("actions_index"))
         self.assertContains(response, "Overall Scoreboard", count=1,
             msg_prefix="This should display the overall scoreboard.")
-        self.assertEqual(response.context["view_objects"]["smartgrid"]["floor_standings"][0].points,
+        self.assertEqual(response.context["view_objects"]["smartgrid"]["team_standings"][0].points,
             20,
-            "The user's floor should have 20 points overall.")
+            "The user's team should have 20 points overall.")
         self.assertEqual(response.context["view_objects"]["smartgrid"]["profile_standings"][
                          0].current_round_points(), 20,
             "The user should have 20 points overall.")
-        self.assertEqual(response.context["view_objects"]["smartgrid"]["user_floor_standings"][
+        self.assertEqual(response.context["view_objects"]["smartgrid"]["user_team_standings"][
                          0].current_round_points(), 20,
             "The user should have 20 points overall.")
 

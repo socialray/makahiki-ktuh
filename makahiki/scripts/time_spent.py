@@ -37,7 +37,7 @@ SESSION_HEADER = 'user id,a_21_visits_0-5,a_22_visits_5-10,a_23_visits_10-15,a_2
 
 def calculate_days_spent():
     users_file = open('days_spent.csv', 'w')
-    users = User.objects.filter(profile__points__gt=0, profile__floor__isnull=False).order_by('-profile__points', 'id')
+    users = User.objects.filter(profile__points__gt=0, profile__team__isnull=False).order_by('-profile__points', 'id')
     counter = 1
     user_count = users.count()
     users_file.write(DAYS_HEADER)
@@ -66,7 +66,7 @@ def calculate_days_spent():
     
 def calculate_sessions():
     users_file = open('sessions.csv', 'w')
-    users = User.objects.filter(profile__points__gt=0, profile__floor__isnull=False).order_by('-profile__points', 'id')
+    users = User.objects.filter(profile__points__gt=0, profile__team__isnull=False).order_by('-profile__points', 'id')
     counter = 1
     user_count = users.count()
     users_file.write(SESSION_HEADER)
@@ -102,7 +102,7 @@ def calculate_sessions():
 def calculate_user_time():
     users_file = open('time_spent_users.csv', 'w')
     lounge_file = open('time_spent_lounge.csv', 'w')
-    users = User.objects.filter(profile__points__gt=0, profile__floor__isnull=False).order_by('-profile__points', 'id')
+    users = User.objects.filter(profile__points__gt=0, profile__team__isnull=False).order_by('-profile__points', 'id')
     lounges = {}
     counter = 1
     user_count = users.count()
@@ -124,7 +124,7 @@ def calculate_user_time():
         
         users_file.write('%d,%d,%d,%d,%d,%d,%d,%d,%d,%d\n' % (user.id, total, home_time, activity_time, energy_time, 
                 prize_time, news_time, profile_time, help_time, canopy_time))
-        lounge = str(user.get_profile().floor)
+        lounge = str(user.get_profile().team)
         lounges[lounge] = lounges.get(lounge, {})
         lounges[lounge]['total'] = lounges[lounge].get('total', 0) + total
         lounges[lounge]['home'] = lounges[lounge].get('home', 0) + home_time

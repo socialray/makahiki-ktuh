@@ -14,7 +14,7 @@ from widgets.canopy.models import Mission, Post, MissionMember
 from managers.player_mgr.models import Profile
 from widgets.canopy.decorators import can_access_canopy
 from widgets.canopy.forms import WallForm
-from managers.team_mgr.models import Floor, Dorm
+from managers.team_mgr.models import Team, Dorm
 
 # Number of posts to load at a time.
 
@@ -63,14 +63,14 @@ def supply(request):
 
     viz = request.REQUEST.get("viz", None)
 
-    all_lounges = Floor.objects.order_by('floor_identifier').all()
+    all_lounges = Team.objects.order_by('team_identifier').all()
     all_dorms = Dorm.objects.order_by('name').all()
 
     for dorm in all_dorms:
-        dorm.floors = dorm.floor_set.order_by('-floor_identifier').all()
+        dorm.teams = dorm.team_set.order_by('-team_identifier').all()
 
-    if request.user.get_profile().floor:
-        dorm_lounges = request.user.get_profile().floor.dorm.floor_set.all()
+    if request.user.get_profile().team:
+        dorm_lounges = request.user.get_profile().team.dorm.team_set.all()
     else:
         dorm_lounges = all_lounges[:5]
 

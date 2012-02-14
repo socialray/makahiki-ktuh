@@ -26,7 +26,7 @@ from widgets.smartgrid.forms import EventCodeForm, SurveyForm, CommitmentComment
                                     ActivityCodeForm, ActivityFreeResponseForm, \
                                     ActivityImageForm, ActivityTextForm, \
                                     ActivityFreeResponseImageForm, ReminderForm
-from managers.team_mgr.models import Floor
+from managers.team_mgr.models import Team
 from managers.player_mgr.models import Profile
 
 from django.db import connection
@@ -37,15 +37,15 @@ smartgrid_COL_COUNT = 3
 def supply(request):
     user = request.user
 
-    floor = user.get_profile().floor
-    user_floor_standings = None
+    team = user.get_profile().team
+    user_team_standings = None
 
     current_round = get_current_round()
     round_name = current_round if current_round else None
-    floor_standings = Floor.floor_points_leaders(num_results=10, round_name=round_name)
+    team_standings = Team.team_points_leaders(num_results=10, round_name=round_name)
     profile_standings = Profile.points_leaders(num_results=10, round_name=round_name)
-    if floor:
-        user_floor_standings = floor.points_leaders(num_results=10, round_name=round_name)
+    if team:
+        user_team_standings = team.points_leaders(num_results=10, round_name=round_name)
 
     hide_about = False
 
@@ -55,22 +55,22 @@ def supply(request):
     form = EventCodeForm()
 
     # Calculate active participation.
-    floor_participation = Floor.objects.filter(profile__points__gte=50).annotate(
+    team_participation = Team.objects.filter(profile__points__gte=50).annotate(
         user_count=Count('profile'),
     ).order_by('-user_count').select_related('dorm')[:10]
 
-    for f in floor_participation:
+    for f in team_participation:
         f.active_participation = (f.user_count * 100) / f.profile_set.count()
 
     return {
         "profile": user.get_profile(),
-        "floor": floor,
+        "team": team,
         "categories": __get_categories(user),
         "current_round": round_name or "Overall",
-        "floor_standings": floor_standings,
+        "team_standings": team_standings,
         "profile_standings": profile_standings,
-        "user_floor_standings": user_floor_standings,
-        "floor_participation": floor_participation,
+        "user_team_standings": user_team_standings,
+        "team_participation": team_participation,
         "hide_about": hide_about,
         "event_form": form,
         }
@@ -287,7 +287,7 @@ def __add_commitment(request, commitment):
                 "form": form,
                 "question": None,
                 "member_all": 0,
-                "member_floor": 0,
+                "member_team": 0,
                 "display_form": True,
                 "form_title": "Get your points",
                 }, context_instance=RequestContext(request))
@@ -570,7 +570,7 @@ def __request_activity_points(request, activity):
             "form": form,
             "question": question,
             "member_all": 0,
-            "member_floor": 0,
+            "member_team": 0,
             "display_form": True,
             "form_title": "Get your points",
             }, context_instance=RequestContext(request))
@@ -717,7 +717,7 @@ def view_task(request, activity_type, slug):
 
     user = request.user
 
-    floor = user.get_profile().floor
+    team = user.get_profile().team
     pau = False
     question = None
     form = None
@@ -743,7 +743,7 @@ def view_task(request, activity_type, slug):
         "form": form,
         "question": question,
         "member_all": member_all.count(),
-        "floor_members": member_all.select_related('user__profile').filter(user__profile__floor=floor),
+        "team_members": member_all.select_related('user__profile').filter(user__profile__team=team),
         "display_form": display_form,
         "form_title": form_title,
         "can_commit": can_commit,

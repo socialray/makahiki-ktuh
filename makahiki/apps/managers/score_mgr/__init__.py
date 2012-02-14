@@ -5,9 +5,9 @@ from django.conf import settings
 from django.contrib.auth.models import User
 from django.db.models import Sum, Max
 
-from managers.base_mgr import get_floor_label
+from managers.base_mgr import get_team_label
 from managers.player_mgr.models import Profile, ScoreboardEntry
-from managers.team_mgr.models import Floor
+from managers.team_mgr.models import Team
 
 # Default number of individuals to retrieve standings for when tracking across all dorms.
 MAX_INDIVIDUAL_STANDINGS = 10
@@ -31,26 +31,26 @@ def _compare_rounds(a, b):
     return cmp(a_start, b_start)
 
 
-def get_all_standings(dorm=None, grouping="floor",
+def get_all_standings(dorm=None, grouping="team",
                       count=MAX_INDIVIDUAL_STANDINGS):
-    """Retrieves standings across all floors for all rounds. Can be grouped by floor or by individual."""
+    """Retrieves standings across all teams for all rounds. Can be grouped by team or by individual."""
 
     standings = []
     keys = settings.COMPETITION_ROUNDS.keys()
     keys.sort(_compare_rounds)
 
     for round_name in keys:
-        if grouping == "floor":
+        if grouping == "team":
             standings.append(
-                get_floor_standings(dorm=dorm, round_name=round_name, ))
+                get_team_standings(dorm=dorm, round_name=round_name, ))
         else:
             standings.append(
                 get_individual_standings(dorm=dorm, round_name=round_name,
                     count=count))
 
     # Append overall standings.
-    if grouping == "floor":
-        standings.append(get_floor_standings(dorm=dorm, ))
+    if grouping == "team":
+        standings.append(get_team_standings(dorm=dorm, ))
     else:
         standings.append(get_individual_standings(dorm=dorm, count=count))
 
@@ -59,15 +59,15 @@ def get_all_standings(dorm=None, grouping="floor",
 
 def get_individual_standings(dorm=None, round_name=None,
                              count=MAX_INDIVIDUAL_STANDINGS):
-    """Retrieves standings across all floors for individual users."""
+    """Retrieves standings across all teams for individual users."""
 
-    floor_label = get_floor_label()
-    title = floor_label.capitalize() + " vs. " + floor_label.capitalize() + ": "
+    team_label = get_team_label()
+    title = team_label.capitalize() + " vs. " + team_label.capitalize() + ": "
 
     # Build up the query set.
     profiles = Profile.objects
     if dorm:
-        profiles = profiles.filter(floor__dorm=dorm)
+        profiles = profiles.filter(team__dorm=dorm)
         title = "%s: " % dorm.name
 
     if round_name:
@@ -92,11 +92,11 @@ def get_individual_standings(dorm=None, round_name=None,
             initials = profile.name[0]
 
         label = ""
-        if profile.floor:
+        if profile.team:
             label = "%s: %s %s (%s)" % (
-                profile.floor.dorm.name,
-                floor_label,
-                profile.floor.number,
+                profile.team.dorm.name,
+                team_label,
+                profile.team.number,
                 initials,
                 )
 
@@ -112,21 +112,21 @@ def get_individual_standings(dorm=None, round_name=None,
         })
 
 
-def get_floor_standings(dorm=None, round_name=None):
-    """Retrieves standings across all floors grouped by floor."""
+def get_team_standings(dorm=None, round_name=None):
+    """Retrieves standings across all teams grouped by team."""
 
-    floor_label = get_floor_label()
+    team_label = get_team_label()
 
-    title = floor_label.capitalize() + " vs. " + floor_label.capitalize() + ": "
+    title = team_label.capitalize() + " vs. " + team_label.capitalize() + ": "
 
     # Build up the query set.
-    floors = Floor.objects
+    teams = Team.objects
     if dorm:
-        floors = floors.filter(dorm=dorm)
+        teams = teams.filter(dorm=dorm)
         title = "%s: " % dorm.name
 
     if round_name:
-        floors = floors.filter(
+        teams = teams.filter(
             profile__scoreboardentry__round_name=round_name).annotate(
             points=Sum("profile__scoreboardentry__points"),
             last_awarded_submission=Max(
@@ -134,7 +134,7 @@ def get_floor_standings(dorm=None, round_name=None):
         ).order_by("-points", "-last_awarded_submission")
         title += round_name
     else:
-        floors = floors.annotate(
+        teams = teams.annotate(
             points=Sum("profile__points"),
             last_awarded_submission=Max("profile__last_awarded_submission")
         ).order_by("-points", "-last_awarded_submission")
@@ -142,14 +142,14 @@ def get_floor_standings(dorm=None, round_name=None):
 
     # Construct the standings info dictionary.
     info = []
-    for i, floor in enumerate(floors):
+    for i, team in enumerate(teams):
         if dorm:
             # We don't need to put the dorm name if it's standings for a dorm.
-            label = floor.number
+            label = team.number
         else:
-            label = "%s: %s %s" % (floor.dorm.name, floor_label, floor.number)
+            label = "%s: %s %s" % (team.dorm.name, team_label, team.number)
         info.append({
-            "points": floor.points,
+            "points": team.points,
             "rank": i + 1,
             "label": label,
             })
@@ -160,9 +160,9 @@ def get_floor_standings(dorm=None, round_name=None):
         })
 
 
-def get_all_standings_for_user(user, is_me=True, group="floor"):
+def get_all_standings_for_user(user, is_me=True, group="team"):
     """Uses get_standings_for_user to generate standings for each round and the overall
-standings for users in the user's floor.  Returns an array of the different standings."""
+standings for users in the user's team.  Returns an array of the different standings."""
 
     standings = []
 
@@ -180,24 +180,24 @@ standings for users in the user's floor.  Returns an array of the different stan
     return standings
 
 
-def get_standings_for_user(user, group="floor", round_name=None, is_me=True):
+def get_standings_for_user(user, group="team", round_name=None, is_me=True):
     """Generates standings for a user to be used in the standings widget.
-Generates either floor-wide standings or standings based on all users.
+Generates either team-wide standings or standings based on all users.
 Returns a json structure for insertion into the javascript code."""
 
     _ = is_me
     standings_type = "individual"
 
     # Check for valid standings parameter.
-    if group != "floor" and group != "all":
+    if group != "team" and group != "all":
         raise StandingsException(
-            "Unknown standings type %s. Valid types are 'all' and 'floor'." % standings_type)
+            "Unknown standings type %s. Valid types are 'all' and 'team'." % standings_type)
 
     user_profile = Profile.objects.get(user=user)
 
-    if not user_profile.floor:
+    if not user_profile.team:
         # Nothing we can do.
-        raise StandingsException("User has no floor for standings.")
+        raise StandingsException("User has no team for standings.")
 
     title = user_entry = entries = None
     if round_name:
@@ -210,13 +210,13 @@ Returns a json structure for insertion into the javascript code."""
             # Nothing we can do again.
             raise StandingsException("Unknown round name %s" % round_name)
 
-        if group == "floor":
+        if group == "team":
             entries = ScoreboardEntry.objects.filter(
-                profile__floor=user_profile.floor,
+                profile__team=user_profile.team,
                 round_name=round_name,
             ).order_by("-points", "-last_awarded_submission")
             title = "Your standings in %s %s, %s" % (
-            get_floor_label(), user_profile.floor.number, round_name)
+            get_team_label(), user_profile.team.number, round_name)
         else:
             entries = ScoreboardEntry.objects.filter(
                 round_name=round_name).order_by("-points",
@@ -227,10 +227,10 @@ Returns a json structure for insertion into the javascript code."""
         # Calculate overall standings.
         user_entry = user_profile
 
-        if group == "floor":
-            entries = Profile.objects.filter(floor=user_profile.floor).order_by(
+        if group == "team":
+            entries = Profile.objects.filter(team=user_profile.team).order_by(
                 "-points", "-last_awarded_submission")
-            title = "Individual standings, %s" % user_profile.floor
+            title = "Individual standings, %s" % user_profile.team
 
         else:
             entries = Profile.objects.all().order_by("-points",
@@ -308,12 +308,12 @@ Returns dictionary of points and the index of the user."""
 def generate_standings_for_profile(user, is_me):
     return_dict = {"user_standings": []}
 
-    floor_standings = get_all_standings_for_user(user, is_me, "floor")
+    team_standings = get_all_standings_for_user(user, is_me, "team")
     all_standings = get_all_standings_for_user(user, is_me, "all")
-    # length of floor_standings and all standings should be identical.
-    for index in range(0, len(floor_standings)):
+    # length of team_standings and all standings should be identical.
+    for index in range(0, len(team_standings)):
         return_dict["user_standings"].append(
-                {"floor": floor_standings[index], "all": all_standings[index]})
+                {"team": team_standings[index], "all": all_standings[index]})
 
     # Default selected tab to overall.
     return_dict["selected_tab"] = len(return_dict["user_standings"]) - 1

@@ -5,7 +5,7 @@ from django.contrib.auth.models import User
 from django.template.defaultfilters import slugify
 from django.db.models import Sum, Max
 
-from managers.base_mgr import get_floor_label, get_current_round
+from managers.base_mgr import get_team_label, get_current_round
 
 # Create your models here.
 
@@ -22,19 +22,19 @@ class Dorm(models.Model):
     def __unicode__(self):
         return self.name
 
-    def floor_points_leaders(self, num_results=10, round_name=None):
+    def team_points_leaders(self, num_results=10, round_name=None):
         """
         Returns the top points leaders for the given dorm.
         """
         if round_name:
-            return self.floor_set.filter(
+            return self.team_set.filter(
                 profile__scoreboardentry__round_name=round_name
             ).annotate(
                 points=Sum("profile__scoreboardentry__points"),
                 last=Max("profile__scoreboardentry__last_awarded_submission")
             ).order_by("-points", "-last")[:num_results]
 
-        return self.floor_set.annotate(
+        return self.team_set.annotate(
             points=Sum("profile__points"),
             last=Max("profile__last_awarded_submission")
         ).order_by("-points", "-last")[:num_results]
@@ -52,46 +52,46 @@ class Dorm(models.Model):
         super(Dorm, self).save(*args, **kwargs)
 
 
-class Floor(models.Model):
+class Team(models.Model):
     prepopulated_fields = {"slug": ("number",)}
 
     number = models.CharField(
-        help_text="The floor number in the dorm. Can be a string value",
+        help_text="The team number in the dorm. Can be a string value",
         max_length=10)
     slug = models.SlugField(max_length=10,
         help_text="Automatically generated if left blank.")
-    dorm = models.ForeignKey(Dorm, help_text="The dorm this floor belongs to.")
-    floor_identifier = models.CharField(
+    dorm = models.ForeignKey(Dorm, help_text="The dorm this team belongs to.")
+    team_identifier = models.CharField(
         max_length=200,
         blank=True,
         null=True,
-        help_text="Name of the source used in WattDepot to refer to this floor."
+        help_text="Name of the source used in WattDepot to refer to this team."
     )
 
     def __unicode__(self):
-        return "%s: %s %s" % (self.dorm.name, get_floor_label(), self.number)
+        return "%s: %s %s" % (self.dorm.name, get_team_label(), self.number)
 
     @staticmethod
-    def floor_points_leaders(num_results=10, round_name=None):
+    def team_points_leaders(num_results=10, round_name=None):
         """
-        Returns the floor points leaders across all dorms.
+        Returns the team points leaders across all dorms.
         """
         if round_name:
-            return Floor.objects.select_related('dorm').filter(
+            return Team.objects.select_related('dorm').filter(
                 profile__scoreboardentry__round_name=round_name
             ).annotate(
                 points=Sum("profile__scoreboardentry__points"),
                 last=Max("profile__scoreboardentry__last_awarded_submission")
             ).order_by("-points", "-last")[:num_results]
 
-        return Floor.objects.select_related('dorm').annotate(
+        return Team.objects.select_related('dorm').annotate(
             points=Sum("profile__points"),
             last=Max("profile__last_awarded_submission")
         ).order_by("-points", "-last")[:num_results]
 
     def points_leaders(self, num_results=10, round_name=None):
         """
-        Gets the individual points leaders for the floor.
+        Gets the individual points leaders for the team.
         """
         if round_name:
             return self.profile_set.select_related('scoreboardentry').filter(
@@ -109,24 +109,24 @@ class Floor(models.Model):
         return None
 
     def rank(self, round_name=None):
-        """Returns the rank of the floor across all dorms."""
+        """Returns the rank of the team across all dorms."""
         if round_name:
             from managers.player_mgr.models import ScoreboardEntry
 
             aggregate = ScoreboardEntry.objects.filter(
-                profile__floor=self,
+                profile__team=self,
                 round_name=round_name
             ).aggregate(points=Sum("points"),
                 last=Max("last_awarded_submission"))
 
             points = aggregate["points"] or 0
             last_awarded_submission = aggregate["last"]
-            # Group by floors, filter out other rounds, and annotate.
-            annotated_floors = ScoreboardEntry.objects.values(
-                "profile__floor").filter(
+            # Group by teams, filter out other rounds, and annotate.
+            annotated_teams = ScoreboardEntry.objects.values(
+                "profile__team").filter(
                 round_name=round_name
             ).annotate(
-                floor_points=Sum("points"),
+                team_points=Sum("points"),
                 last_awarded=Max("last_awarded_submission")
             )
         else:
@@ -135,16 +135,16 @@ class Floor(models.Model):
             points = aggregate["points"] or 0
             last_awarded_submission = aggregate["last"]
 
-            annotated_floors = Floor.objects.annotate(
-                floor_points=Sum("profile__points"),
+            annotated_teams = Team.objects.annotate(
+                team_points=Sum("profile__points"),
                 last_awarded_submission=Max("profile__last_awarded_submission")
             )
 
-        count = annotated_floors.filter(floor_points__gt=points).count()
+        count = annotated_teams.filter(team_points__gt=points).count()
         # If there was a submission, tack that on to the count.
         if last_awarded_submission:
-            count = count + annotated_floors.filter(
-                floor_points=points,
+            count = count + annotated_teams.filter(
+                team_points=points,
                 last_awarded_submission__gt=last_awarded_submission
             ).count()
 
@@ -159,11 +159,11 @@ class Floor(models.Model):
         return None
 
     def points(self, round_name=None):
-        """Returns the total number of points for the floor.  Takes an optional parameter for a round."""
+        """Returns the total number of points for the team.  Takes an optional parameter for a round."""
         if round_name:
             from managers.player_mgr.models import ScoreboardEntry
 
-            dictionary = ScoreboardEntry.objects.filter(profile__floor=self,
+            dictionary = ScoreboardEntry.objects.filter(profile__team=self,
                 round_name=round_name).aggregate(Sum("points"))
         else:
             dictionary = self.profile_set.aggregate(Sum("points"))
@@ -175,20 +175,20 @@ class Floor(models.Model):
         if not self.slug:
             self.slug = slugify(self.number)
 
-        super(Floor, self).save(*args, **kwargs)
+        super(Team, self).save(*args, **kwargs)
 
 
 class Post(models.Model):
     """Represents a wall post on a user's wall."""
     user = models.ForeignKey(User)
-    floor = models.ForeignKey(Floor)
+    team = models.ForeignKey(Team)
     text = models.TextField()
     style_class = models.CharField(max_length=50,
         default="user_post") #CSS class to apply to this post.
     created_at = models.DateTimeField(editable=False)
 
     def __unicode__(self):
-        return "%s (%s): %s" % (self.floor, self.user.username, self.text)
+        return "%s (%s): %s" % (self.team, self.user.username, self.text)
 
     def date_string(self):
         """Formats the created date into a pretty string."""

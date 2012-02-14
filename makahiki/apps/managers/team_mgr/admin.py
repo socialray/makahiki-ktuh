@@ -1,11 +1,11 @@
 from django.contrib import admin
-from managers.team_mgr.models import Dorm, Floor, Post
+from managers.team_mgr.models import Dorm, Team, Post
 
 admin.site.register(Dorm)
-admin.site.register(Floor)
+admin.site.register(Team)
 
 class PostAdmin(admin.ModelAdmin):
-    list_filter = ["style_class", "floor"]
+    list_filter = ["style_class", "team"]
     actions = ["delete_selected"]
 
     def delete_selected(self, request, queryset):

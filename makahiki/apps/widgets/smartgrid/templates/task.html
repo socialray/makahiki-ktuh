@@ -74,9 +74,9 @@
                     done this.
                 {% endif %}
                 <p/>
-                {% with floor_members|length as member_floor %}
-                    {{ member_floor }}
-                    {% if member_floor == 1 %}
+                {% with team_members|length as member_team %}
+                    {{ member_team }}
+                    {% if member_team == 1 %}
                         person in your {{ FLOOR_LABEL.lower }} has
                     {% else %}
                         people in your {{ FLOOR_LABEL.lower }} have
@@ -87,8 +87,8 @@
                         done this.
                     {% endif %}
                     <br/>
-                    {% cache 3600000 floor_avatar task.id user.get_profile.floor_id %}
-                        {% for member in floor_members %}
+                    {% cache 3600000 team_avatar task.id user.get_profile.team_id %}
+                        {% for member in team_members %}
                             <img src="{% avatar_url member.user 40 %}"
                                  title="{{member.user.get_profile.name}}"/>
                         {% endfor %}

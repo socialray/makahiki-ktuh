@@ -3,18 +3,18 @@ from django.contrib.auth.models import User
 from django.core.urlresolvers import reverse
 from django.core import mail
 
-from managers.team_mgr.models import Floor
+from managers.team_mgr.models import Team
 
 
 class AskAdminFunctionalTests(TestCase):
-    fixtures = ["base_floors.json"]
+    fixtures = ["base_teams.json"]
 
     def setUp(self):
         self.user = User.objects.create_user("user", "user@test.com", password="bogus")
-        floor = Floor.objects.all()[0]
+        team = Team.objects.all()[0]
         profile = self.user.get_profile()
         profile.name = 'test'
-        profile.floor = floor
+        profile.team = team
         profile.setup_complete = True
         profile.setup_profile = True
         profile.save()

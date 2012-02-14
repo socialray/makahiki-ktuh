@@ -19,18 +19,18 @@ def invalidate_info_bar_cache(user):
     Invalidates the user and lounge caches of the info bar.
     """
     invalidate_template_cache("infobar", user.username)
-    floor = user.get_profile().floor
-    if floor:
-        invalidate_template_cache("infobar", floor.dorm.name, floor.number)
+    team = user.get_profile().team
+    if team:
+        invalidate_template_cache("infobar", team.dorm.name, team.number)
 
 
-def invalidate_floor_avatar_cache(task, user):
+def invalidate_team_avatar_cache(task, user):
     """
     Invalidates task completed avatar list cache.
     """
-    if task and user and user.get_profile() and user.get_profile().floor:
-        invalidate_template_cache("floor_avatar", task.id,
-            user.get_profile().floor.id)
+    if task and user and user.get_profile() and user.get_profile().team:
+        invalidate_template_cache("team_avatar", task.id,
+            user.get_profile().team.id)
 
 
 def invalidate_commitments_cache(user):

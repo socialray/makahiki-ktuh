@@ -1,6 +1,6 @@
 heroku run python makahiki/manage.py syncdb --noinput
 
-heroku run python makahiki/manage.py loaddata makahiki/fixtures/base_floors.json 
+heroku run python makahiki/manage.py loaddata makahiki/fixtures/base_teams.json
 heroku run python makahiki/manage.py loaddata makahiki/fixtures/test_users.json 
 heroku run python makahiki/manage.py loaddata makahiki/fixtures/base_activities.json 
 heroku run python makahiki/manage.py loaddata makahiki/fixtures/base_quests.json 

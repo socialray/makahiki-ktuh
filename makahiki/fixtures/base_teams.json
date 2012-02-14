@@ -31,150 +31,150 @@
   }, 
   {
     "pk": 1, 
-    "model": "team_mgr.floor", 
+    "model": "team_mgr.team",
     "fields": {
       "dorm": 1, 
-      "floor_identifier": "Lehua-A", 
+      "team_identifier": "Lehua-A",
       "number": "A", 
       "slug": "3-4"
     }
   }, 
   {
     "pk": 2, 
-    "model": "team_mgr.floor", 
+    "model": "team_mgr.team",
     "fields": {
       "dorm": 2, 
-      "floor_identifier": "Ilima-A", 
+      "team_identifier": "Ilima-A",
       "number": "A", 
       "slug": "3-4"
     }
   }, 
   {
     "pk": 3, 
-    "model": "team_mgr.floor", 
+    "model": "team_mgr.team",
     "fields": {
       "dorm": 3, 
-      "floor_identifier": "Mokihana-A", 
+      "team_identifier": "Mokihana-A",
       "number": "A", 
       "slug": "3-4"
     }
   }, 
   {
     "pk": 4, 
-    "model": "team_mgr.floor", 
+    "model": "team_mgr.team",
     "fields": {
       "dorm": 1, 
-      "floor_identifier": "Lehua-B", 
+      "team_identifier": "Lehua-B",
       "number": "B", 
       "slug": "5-6"
     }
   }, 
   {
     "pk": 5, 
-    "model": "team_mgr.floor", 
+    "model": "team_mgr.team",
     "fields": {
       "dorm": 1, 
-      "floor_identifier": "Lehua-C", 
+      "team_identifier": "Lehua-C",
       "number": "C", 
       "slug": "7-8"
     }
   }, 
   {
     "pk": 6, 
-    "model": "team_mgr.floor", 
+    "model": "team_mgr.team",
     "fields": {
       "dorm": 1, 
-      "floor_identifier": "Lehua-D", 
+      "team_identifier": "Lehua-D",
       "number": "D", 
       "slug": "9-10"
     }
   }, 
   {
     "pk": 7, 
-    "model": "team_mgr.floor", 
+    "model": "team_mgr.team",
     "fields": {
       "dorm": 1, 
-      "floor_identifier": "Lehua-E", 
+      "team_identifier": "Lehua-E",
       "number": "E", 
       "slug": "11-12"
     }
   }, 
   {
     "pk": 8, 
-    "model": "team_mgr.floor", 
+    "model": "team_mgr.team",
     "fields": {
       "dorm": 2, 
-      "floor_identifier": "Ilima-B", 
+      "team_identifier": "Ilima-B",
       "number": "B", 
       "slug": "5-6"
     }
   }, 
   {
     "pk": 9, 
-    "model": "team_mgr.floor", 
+    "model": "team_mgr.team",
     "fields": {
       "dorm": 2, 
-      "floor_identifier": "Ilima-C", 
+      "team_identifier": "Ilima-C",
       "number": "C", 
       "slug": "7-8"
     }
   }, 
   {
     "pk": 10, 
-    "model": "team_mgr.floor", 
+    "model": "team_mgr.team",
     "fields": {
       "dorm": 2, 
-      "floor_identifier": "Ilima-D", 
+      "team_identifier": "Ilima-D",
       "number": "D", 
       "slug": "9-10"
     }
   }, 
   {
     "pk": 11, 
-    "model": "team_mgr.floor", 
+    "model": "team_mgr.team",
     "fields": {
       "dorm": 2, 
-      "floor_identifier": "Ilima-E", 
+      "team_identifier": "Ilima-E",
       "number": "E", 
       "slug": "11-12"
     }
   }, 
   {
     "pk": 12, 
-    "model": "team_mgr.floor", 
+    "model": "team_mgr.team",
     "fields": {
       "dorm": 3, 
-      "floor_identifier": "Mokihana-B", 
+      "team_identifier": "Mokihana-B",
       "number": "B", 
       "slug": "5-6"
     }
   }, 
   {
     "pk": 13, 
-    "model": "team_mgr.floor", 
+    "model": "team_mgr.team",
     "fields": {
       "dorm": 3, 
-      "floor_identifier": "Mokihana-C", 
+      "team_identifier": "Mokihana-C",
       "number": "C", 
       "slug": "7-8"
     }
   }, 
   {
     "pk": 14, 
-    "model": "team_mgr.floor", 
+    "model": "team_mgr.team",
     "fields": {
       "dorm": 3, 
-      "floor_identifier": "Mokihana-D", 
+      "team_identifier": "Mokihana-D",
       "number": "D", 
       "slug": "9-10"
     }
   }, 
   {
     "pk": 15, 
-    "model": "team_mgr.floor", 
+    "model": "team_mgr.team",
     "fields": {
       "dorm": 3, 
-      "floor_identifier": "Mokihana-E", 
+      "team_identifier": "Mokihana-E",
       "number": "E", 
       "slug": "11-12"
     }

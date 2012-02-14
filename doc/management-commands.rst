@@ -48,10 +48,10 @@ displayed in a user notification.
 *Implemented in apps/components/makahiki_base/management/add_points.py*
 
 
-add_points residence-hall floor-number points short-message long-message
+add_points residence-hall team-number points short-message long-message
 -------------------------------------------------------------------------
 
-Give the members of the residence-hall and floor-number additional
+Give the members of the residence-hall and team-number additional
 points. short-message is stored in the PointTransaction log and
 displayed in ‘My Achievements’. long-message is displayed in a user
 notification.
@@ -82,7 +82,7 @@ reset_user username1 (username2 …)
 
 Takes usernames as arguments and resets each user, preserving their
 username, first and last name, email address, display name, admin
-status, and floor/lounge.
+status, and team/lounge.
 
 Example usage::
 

@@ -3,7 +3,7 @@ import datetime
 from django.db import models
 from django.contrib.auth.models import User
 
-from managers.team_mgr.models import Floor
+from managers.team_mgr.models import Team
 
 # Create your models here.
 
@@ -61,10 +61,10 @@ class EnergyGoal(models.Model):
 
         return True
 
-    def get_floor_results(self, floor):
-        """Get the floor's voting results for this goal."""
+    def get_team_results(self, team):
+        """Get the team's voting results for this goal."""
         votes = self.energygoalvote_set.filter(
-            user__profile__floor=floor,
+            user__profile__team=team,
         ).values("percent_reduction").annotate(votes=models.Count('id')).order_by("-votes",
             "-percent_reduction")
 
@@ -82,11 +82,11 @@ class EnergyGoalVote(models.Model):
         unique_together = ("user", "goal")
 
 
-class FloorEnergyGoal(models.Model):
+class TeamEnergyGoal(models.Model):
     # The amount of points to award for completing a goal.
     GOAL_POINTS = 20
 
-    floor = models.ForeignKey(Floor)
+    team = models.ForeignKey(Team)
     goal = models.ForeignKey(EnergyGoal, null=True, blank=True)
     percent_reduction = models.IntegerField(default=0, editable=False)
     goal_usage = models.DecimalField(decimal_places=2, max_digits=10, editable=False)
@@ -96,15 +96,15 @@ class FloorEnergyGoal(models.Model):
     updated_at = models.DateTimeField(editable=False, auto_now=True)
 
     def save(self, *args, **kwargs):
-        """Overrided save method to award the goal's points to members of the floor."""
+        """Overrided save method to award the goal's points to members of the team."""
         goal_completed = self.goal_usage and self.actual_usage and (
         self.actual_usage <= self.goal_usage)
-        super(FloorEnergyGoal, self).save(*args, **kwargs)
+        super(TeamEnergyGoal, self).save(*args, **kwargs)
 
-        if self.floor and goal_completed:
+        if self.team and goal_completed:
             count = 0
-            # Award points to the members of the floor.
-            for profile in self.floor.profile_set.all():
+            # Award points to the members of the team.
+            for profile in self.team.profile_set.all():
                 if profile.setup_complete:
                     today = datetime.datetime.today()
                     # Hack to get around executing this script at midnight.  We want to award
@@ -113,7 +113,7 @@ class FloorEnergyGoal(models.Model):
                         today = today - datetime.timedelta(hours=1)
 
                     date = "%d/%d/%d" % (today.month, today.day, today.year)
-                    profile.add_points(self.GOAL_POINTS, today, "Floor Energy Goal for %s" % date,
+                    profile.add_points(self.GOAL_POINTS, today, "Team Energy Goal for %s" % date,
                         self)
                     profile.save()
                     count = count + 1

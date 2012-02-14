@@ -136,24 +136,24 @@ a#wall-post-submit {
   min-height: 80px;
 }
 
-/**** Floor members list styles *******/
-#floor-members {
+/**** Team members list styles *******/
+#team-members {
   margin: 0 15px;
 }
 
-#floor-members-content {
+#team-members-content {
   text-align: left;
   margin: 0;
   padding: 5px 20px;
 }
 
-#floor-member-list {
+#team-member-list {
   list-style: none;
   margin: 0;
   padding: 0;
 }
 
-#floor-member-list li {
+#team-member-list li {
   float: left;
   width: 60px;
   margin: 0;
@@ -161,44 +161,44 @@ a#wall-post-submit {
   text-align: center;
 }
 
-#floor-member-list li img {
+#team-member-list li img {
   padding: 2px;
 }
 
-#floor-member-detail-list, #floor-member-details {
+#team-member-detail-list, #team-member-details {
   list-style: none;
   margin: 0;
   padding: 0;
 }
 
-#floor-member-detail-list>li {
+#team-member-detail-list>li {
   padding: 5px 0;
 }
 
-#floor-member-detail-list>li .member-image {
+#team-member-detail-list>li .member-image {
   padding: 4px 2px;
   float: left;
 }
 
-#floor-member-details {
+#team-member-details {
   float: left;
   margin-left: 5px;
 }
 
-#floor-member-details>li {
+#team-member-details>li {
   padding: 2px 0;
 }
 
-#floor-member-details .floor-member-name {
+#team-member-details .team-member-name {
   font-weight: bold;
   font-size: 1.0em;
 }
 
-#floor-member-details .member-badges {
+#team-member-details .member-badges {
   vertical-align: middle;
   padding-left: 2px;
 }
 
-#floor-member-details .floor-member-admin {
+#team-member-details .team-member-admin {
   font-style: italic;
 }

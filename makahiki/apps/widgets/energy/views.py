@@ -13,7 +13,7 @@ from managers.base_mgr import get_round_info
 from managers.team_mgr.models import Post
 from widgets.energy import generate_chart_url
 from widgets.energy.forms import EnergyGoalVotingForm
-from widgets.energy.models import FloorEnergyGoal, EnergyGoal, EnergyGoalVote
+from widgets.energy.models import TeamEnergyGoal, EnergyGoal, EnergyGoalVote
 from widgets.news.forms import WallForm
 
 import simplejson as json
@@ -32,9 +32,9 @@ def index(request):
 
 def supply(request):
     user = request.user
-    floor = user.get_profile().floor
+    team = user.get_profile().team
     golow_activities = get_available_golow_activities(user)
-    golow_posts = Post.objects.filter(floor=floor, style_class="user_post").select_related(
+    golow_posts = Post.objects.filter(team=team, style_class="user_post").select_related(
         'user__profile').order_by("-id")[:5]
 
     rounds = get_round_info()
@@ -47,17 +47,17 @@ def supply(request):
             scoreboard_rounds.append(key)
 
     # Generate the scoreboard for energy goals.
-    # We could aggregate the energy goals in floors, but there's a bug in Django.
+    # We could aggregate the energy goals in teams, but there's a bug in Django.
     # See https://code.djangoproject.com/ticket/13461
-    goals_scoreboard = FloorEnergyGoal.objects.filter(
+    goals_scoreboard = TeamEnergyGoal.objects.filter(
         actual_usage__lte=F("goal_usage")
     ).values(
-        "floor__number",
-        "floor__dorm__name"
-    ).annotate(completions=Count("floor")).order_by("-completions")
+        "team__number",
+        "team__dorm__name"
+    ).annotate(completions=Count("team")).order_by("-completions")
 
     return {
-        "floor": floor,
+        "team": team,
         "scoreboard_rounds": scoreboard_rounds,
         "golow_activities": golow_activities,
         "posts": golow_posts,
@@ -87,11 +87,11 @@ def vote(request, goal_id):
 
 
 def voting_results(request, goal_id):
-    """Get the voting results for the user's floor."""
+    """Get the voting results for the user's team."""
     goal = get_object_or_404(EnergyGoal, pk=goal_id)
 
     profile = request.user.get_profile()
-    results = goal.get_floor_results(profile.floor)
+    results = goal.get_team_results(profile.team)
     url = generate_chart_url(results)
 
     return HttpResponse(json.dumps({

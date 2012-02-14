@@ -1,5 +1,5 @@
 
-python manage.py loaddata fixtures/base_floors.json
+python manage.py loaddata fixtures/base_teams.json
 python manage.py loaddata fixtures/base_activities.json
 python manage.py loaddata fixtures/base_quests.json
 python manage.py loaddata fixtures/base_help.json

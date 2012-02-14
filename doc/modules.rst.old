@@ -9,11 +9,6 @@ managers.base_mgr
     :undoc-members:
     :show-inheritance:
 
-.. automodule:: managers.base_mgr.models
-    :members:
-    :undoc-members:
-    :show-inheritance:
-
 managers.cache_mgr
 ------------------
 .. automodule:: managers.cache_mgr.utils

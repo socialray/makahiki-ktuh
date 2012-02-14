@@ -10,8 +10,8 @@ from django.db.models import Count, F, Min
 
 from widgets.smartgrid import get_popular_activities, get_popular_commitments, get_popular_events
 from widgets.smartgrid.models import ActivityBase, Activity, ActivityMember
-from widgets.energy.models import FloorEnergyGoal
-from managers.team_mgr.models import Floor
+from widgets.energy.models import TeamEnergyGoal
+from managers.team_mgr.models import Team
 from managers.player_mgr.models import Profile, ScoreboardEntry
 from widgets.prizes.models import RaffleDeadline
 from widgets.quests.models import Quest
@@ -31,7 +31,7 @@ def points_scoreboard(request):
         canopy_member=True,
     ).order_by("-canopy_karma").values("name", "canopy_karma")
 
-    floor_standings = Floor.floor_points_leaders(num_results=20)
+    team_standings = Team.team_points_leaders(num_results=20)
 
     # Find referrals.
     referrals = Profile.objects.filter(
@@ -41,7 +41,7 @@ def points_scoreboard(request):
     )
 
     round_individuals = {}
-    round_floors = {}
+    round_teams = {}
     for round_name in settings.COMPETITION_ROUNDS:
         round_individuals[round_name] = ScoreboardEntry.objects.filter(
             points__gt=0,
@@ -49,38 +49,38 @@ def points_scoreboard(request):
         ).order_by("-points", "-last_awarded_submission").values("profile__name", "points",
             'profile__user__username')
 
-        round_floors[round_name] = Floor.floor_points_leaders(
+        round_teams[round_name] = Team.team_points_leaders(
             num_results=20,
             round_name=round_name
         )
 
     # Calculate active participation.
-    floor_participation = Floor.objects.filter(profile__points__gte=50).annotate(
+    team_participation = Team.objects.filter(profile__points__gte=50).annotate(
         user_count=Count('profile'),
     ).order_by('-user_count').select_related('dorm')
 
-    for floor in floor_participation:
-        floor.active_participation = (floor.user_count * 100) / floor.profile_set.count()
+    for team in team_participation:
+        team.active_participation = (team.user_count * 100) / team.profile_set.count()
 
     return render_to_response("status/points.html", {
         "profiles": profiles,
         "canopy_members": canopy_members,
         "round_individuals": round_individuals,
-        "floor_standings": floor_standings,
-        "round_floors": round_floors,
-        "floor_participation": floor_participation,
+        "team_standings": team_standings,
+        "round_teams": round_teams,
+        "team_participation": team_participation,
         "referrals": referrals,
         }, context_instance=RequestContext(request))
 
 
 @user_passes_test(lambda u: u.is_staff, login_url="/account/cas/login")
 def energy_scoreboard(request):
-    goals_scoreboard = FloorEnergyGoal.objects.filter(
+    goals_scoreboard = TeamEnergyGoal.objects.filter(
         actual_usage__lte=F("goal_usage")
     ).values(
-        "floor__number",
-        "floor__dorm__name"
-    ).annotate(completions=Count("floor")).order_by("-completions")
+        "team__number",
+        "team__dorm__name"
+    ).annotate(completions=Count("team")).order_by("-completions")
 
     return render_to_response("status/energy.html", {
         "goals_scoreboard": goals_scoreboard,

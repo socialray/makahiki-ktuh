@@ -16,9 +16,8 @@ from widgets.badges import user_badges
 from lib.brabeion import badges
 
 from managers.team_mgr.models import Post
-from managers.base_mgr.models import Like
 from widgets.notifications.models import UserNotification
-from managers.cache_mgr.utils import invalidate_floor_avatar_cache, invalidate_commitments_cache
+from managers.cache_mgr.utils import invalidate_team_avatar_cache, invalidate_commitments_cache
 
 MARKDOWN_LINK = "http://daringfireball.net/projects/markdown/syntax"
 MARKDOWN_TEXT = "Uses <a href=\"" + MARKDOWN_LINK + "\" target=\"_blank\">Markdown</a> formatting."
@@ -119,7 +118,6 @@ class ActivityBase(models.Model):
         help_text="Orders the activities in the available activities list. " +
                   "Activities with lower values (higher priority) will be listed first."
     )
-    likes = generic.GenericRelation(Like)
     depends_on = models.CharField(max_length=400, null=True, blank=True, )
     depends_on_text = models.CharField(max_length=400, null=True, blank=True, )
     energy_related = models.BooleanField(default=False)
@@ -376,12 +374,12 @@ class CommitmentMember(CommonBase):
             self.completion_date = datetime.date.today() + datetime.timedelta(
                 days=self.commitment.duration)
 
-        if not self.pk and profile.floor:
+        if not self.pk and profile.team:
             # User is adding the commitment.
             message = "is participating in the commitment \"%s\"." % (
                 self.commitment.title,
                 )
-            post = Post(user=self.user, floor=profile.floor, text=message,
+            post = Post(user=self.user, team=profile.team, text=message,
                 style_class="system_post")
             post.save()
 
@@ -418,20 +416,20 @@ class CommitmentMember(CommonBase):
                         social_message, self)
                     ref_profile.save()
 
-            if profile.floor:
+            if profile.team:
                 # Construct the points
                 message = "has completed the commitment \"%s\"." % (
                     self.commitment.title,
                     )
 
-                post = Post(user=self.user, floor=self.user.get_profile().floor, text=message,
+                post = Post(user=self.user, team=self.user.get_profile().team, text=message,
                     style_class="system_post")
                 post.save()
 
         # Invalidate the categories cache.
         cache.delete('smartgrid-categories-%s' % self.user.username)
         cache.delete('user_events-%s' % self.user.username)
-        invalidate_floor_avatar_cache(self.commitment, self.user)
+        invalidate_team_avatar_cache(self.commitment, self.user)
         invalidate_commitments_cache(self.user)
         super(CommitmentMember, self).save()
 
@@ -446,18 +444,18 @@ class CommitmentMember(CommonBase):
             title = "Commitment: %s (Removed)" % self.commitment.title
             profile.remove_points(self.commitment.point_value, self.award_date, title, self)
             profile.save()
-        elif profile.floor:
+        elif profile.team:
             message = "is no longer participating in \"%s\"." % (
                 self.commitment.title,
                 )
-            post = Post(user=self.user, floor=self.user.get_profile().floor, text=message,
+            post = Post(user=self.user, team=self.user.get_profile().team, text=message,
                 style_class="system_post")
             post.save()
 
         # Invalidate the categories cache.
         cache.delete('smartgrid-categories-%s' % self.user.username)
         cache.delete('user_events-%s' % self.user.username)
-        invalidate_floor_avatar_cache(self.commitment, self.user)
+        invalidate_team_avatar_cache(self.commitment, self.user)
         invalidate_commitments_cache(self.user)
         super(CommitmentMember, self).delete()
 
@@ -550,7 +548,7 @@ class ActivityMember(CommonActivityUser):
         # Invalidate the categories cache.
         cache.delete('smartgrid-categories-%s' % self.user.username)
         cache.delete('user_events-%s' % self.user.username)
-        invalidate_floor_avatar_cache(self.activity, self.user)
+        invalidate_team_avatar_cache(self.activity, self.user)
         super(ActivityMember, self).save()
 
         # We check here for approved and rejected items because the object needs to be saved first.
@@ -609,10 +607,10 @@ class ActivityMember(CommonActivityUser):
 
 
     def _post_to_wall(self, profile, points):
-        if profile.floor and not self.activity.is_canopy: # Post on the user's floor wall.
+        if profile.team and not self.activity.is_canopy: # Post on the user's team wall.
             message = " has been awarded %d points for completing \"%s\"." % (points, 
                 self.activity.title)
-            post = Post(user=self.user, floor=profile.floor, text=message, 
+            post = Post(user=self.user, team=profile.team, text=message,
                 style_class="system_post")
             post.save()
         elif self.activity.is_canopy:
@@ -735,7 +733,7 @@ class ActivityMember(CommonActivityUser):
         # Invalidate the categories cache.
         cache.delete('smartgrid-categories-%s' % self.user.username)
         cache.delete('user_events-%s' % self.user.username)
-        invalidate_floor_avatar_cache(self.activity, self.user)
+        invalidate_team_avatar_cache(self.activity, self.user)
         super(ActivityMember, self).delete()
 
 #------ Reminders --------#

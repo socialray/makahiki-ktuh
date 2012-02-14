@@ -4,7 +4,7 @@ from django.conf import settings
 from django.test import TestCase
 from django.contrib.auth.models import User
 from widgets.smartgrid.models import Activity, ActivityMember
-from managers.team_mgr.models import Dorm, Floor
+from managers.team_mgr.models import Dorm, Team
 from managers.player_mgr.models import Profile, ScoreboardEntry
 
 class ScoreboardEntryUnitTests(TestCase):
@@ -149,16 +149,16 @@ class ScoreboardEntryUnitTests(TestCase):
             self.current_round), 2,
             "Check user is now second.")
 
-    def testUserFloorRoundRankWithPoints(self):
-        """Tests that the floor rank calculation for a round is correct based on points."""
+    def testUserTeamRoundRankWithPoints(self):
+        """Tests that the team rank calculation for a round is correct based on points."""
         # Setup dorm
         dorm = Dorm(name="Test dorm")
         dorm.save()
-        floor = Floor(number="A", dorm=dorm)
-        floor.save()
+        team = Team(number="A", dorm=dorm)
+        team.save()
 
         profile = self.user.get_profile()
-        profile.floor = floor
+        profile.team = team
         profile.save()
 
         # Set up entry
@@ -173,14 +173,14 @@ class ScoreboardEntryUnitTests(TestCase):
         entry.save()
 
         self.assertEqual(
-            ScoreboardEntry.user_round_floor_rank(self.user, self.current_round)
+            ScoreboardEntry.user_round_team_rank(self.user, self.current_round)
             , 1,
             "Check user is ranked #1 for the current round.")
 
         user2 = User(username="test_user2", password="changeme")
         user2.save()
         profile2 = user2.get_profile()
-        profile2.floor = floor
+        profile2.team = team
         profile2.save()
 
         entry2 = ScoreboardEntry.objects.get_or_create(
@@ -192,21 +192,21 @@ class ScoreboardEntryUnitTests(TestCase):
         entry2.save()
 
         self.assertEqual(
-            ScoreboardEntry.user_round_floor_rank(self.user, self.current_round)
+            ScoreboardEntry.user_round_team_rank(self.user, self.current_round)
             , 2,
             "Check user is now second.")
 
-    def testUserFloorRoundRankWithSubmissionDate(self):
-        """Tests that the floor rank calculation for a round is correct based on points."""
+    def testUserTeamRoundRankWithSubmissionDate(self):
+        """Tests that the team rank calculation for a round is correct based on points."""
         # Set up dorm
         dorm = Dorm(name="Test dorm")
         dorm.save()
-        floor = Floor(number="A", dorm=dorm)
-        floor.save()
+        team = Team(number="A", dorm=dorm)
+        team.save()
 
         # Create the entry for the test user
         profile = self.user.get_profile()
-        profile.floor = floor
+        profile.team = team
         profile.save()
         top_entry = ScoreboardEntry.objects.filter(round_name=self.current_round).order_by(
             "-points")[0]
@@ -223,7 +223,7 @@ class ScoreboardEntryUnitTests(TestCase):
         user2 = User(username="test_user2", password="changeme")
         user2.save()
         profile2 = user2.get_profile()
-        profile2.floor = floor
+        profile2.team = team
         profile2.save()
 
         entry2 = ScoreboardEntry.objects.get_or_create(
@@ -235,7 +235,7 @@ class ScoreboardEntryUnitTests(TestCase):
         entry2.save()
 
         self.assertEqual(
-            ScoreboardEntry.user_round_floor_rank(self.user, self.current_round)
+            ScoreboardEntry.user_round_team_rank(self.user, self.current_round)
             , 2,
             "Check user is now second.")
 
@@ -243,21 +243,21 @@ class ScoreboardEntryUnitTests(TestCase):
         """Tests that the overall rank calculation is correct even if a user has not done anything yet."""
         dorm = Dorm(name="Test dorm")
         dorm.save()
-        floor = Floor(number="A", dorm=dorm)
-        floor.save()
+        team = Team(number="A", dorm=dorm)
+        team.save()
 
         # Rank will be the number of users who have points plus one.
         overall_rank = Profile.objects.filter(points__gt=0).count() + 1
-        floor_rank = Profile.objects.filter(points__gt=0,
-            floor=floor).count() + 1
+        team_rank = Profile.objects.filter(points__gt=0,
+            team=team).count() + 1
 
         self.assertEqual(ScoreboardEntry.user_round_overall_rank(self.user,
             self.current_round), overall_rank,
             "Check user is last overallfor the current round.")
         self.assertEqual(
-            ScoreboardEntry.user_round_floor_rank(self.user, self.current_round)
-            , floor_rank,
-            "Check user is last in their floor for the current round.")
+            ScoreboardEntry.user_round_team_rank(self.user, self.current_round)
+            , team_rank,
+            "Check user is last in their team for the current round.")
 
         user2 = User(username="test_user2", password="changeme")
         user2.save()
@@ -269,16 +269,16 @@ class ScoreboardEntryUnitTests(TestCase):
         )
         entry2.points = 10
         entry2.last_awarded_submission = datetime.datetime.today()
-        entry2.floor = floor
+        entry2.team = team
         entry2.save()
 
         self.assertEqual(ScoreboardEntry.user_round_overall_rank(self.user,
             self.current_round), overall_rank + 1,
             "Check that the user's overall rank has moved down.")
         self.assertEqual(
-            ScoreboardEntry.user_round_floor_rank(self.user, self.current_round)
-            , floor_rank + 1,
-            "Check that the user's floor rank has moved down.")
+            ScoreboardEntry.user_round_team_rank(self.user, self.current_round)
+            , team_rank + 1,
+            "Check that the user's team rank has moved down.")
 
     def tearDown(self):
         """Restore the saved settings."""

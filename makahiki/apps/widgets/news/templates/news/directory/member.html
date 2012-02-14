@@ -4,8 +4,8 @@
 <img class="member-image" src="{% avatar_url member 40 %}"
      alt="Photo of {{ member.get_profile.name }}" title="Photo of {{ member.get_profile.name }}"
      align="top"/>
-<ul {% get_id_and_classes "floor-member-details" %}>
-    <li class="floor-member-name">
+<ul {% get_id_and_classes "team-member-details" %}>
+    <li class="team-member-name">
         <a name="{{member.get_profile.name|slugify}}">
             {{ member.get_profile.name }}
 
@@ -19,7 +19,7 @@
 
     {% if member.is_superuser or member.is_staff %}
         <!-- Downloaded from http://www.iconarchive.com/show/silk-icons-by-famfamfam/award-star-gold-3-icon.html -->
-        <li class="floor-member-admin"><img src="{{STATIC_URL}}images/award-star-gold-3-icon.png">Administrator
+        <li class="team-member-admin"><img src="{{STATIC_URL}}images/award-star-gold-3-icon.png">Administrator
         </li>
     {% endif %}
 
@@ -32,8 +32,8 @@
         {% endif %}
     </li>
 
-    {# Check if the user is a participant or an admin without a floor #}
-    {% if member.get_profile.floor and member.get_profile.points > 0 %}
+    {# Check if the user is a participant or an admin without a team #}
+    {% if member.get_profile.team and member.get_profile.points > 0 %}
         <li>
             {% if CURRENT_ROUND %}
                 Points: {{ member.get_profile.current_round_points }} points in {{ CURRENT_ROUND }}
@@ -49,7 +49,7 @@
     {% with member.commitmentmember_set.active as commitment_members %}
         {% if commitment_members.count > 0 %}
             <h4 style="margin: 0; padding: 0">{{ member.get_profile.name }}&apos;s Commitments</h4>
-            <ul {% get_id_and_classes "floor-member-commitments" %}>
+            <ul {% get_id_and_classes "team-member-commitments" %}>
                 {% for commitment_member in commitment_members %}
                     <li>
                         <a href="{% url activity_task 'commitment' commitment_member.commitment.slug %}">{{ commitment_member.commitment }}</a>

@@ -55,7 +55,7 @@
 
         <div class="content-box" style="float: left; margin: 15px">
             <div class="content-box-title">
-                Overall Floors
+                Overall Teams
             </div>
             <div class="content-body">
                 <table style='padding: 15px; width: 300px'>
@@ -64,21 +64,21 @@
                         <th>{{ FLOOR_LABEL }}</th>
                         <th>Points</th>
                     </tr>
-                    {% for floor in floor_standings %}
+                    {% for team in team_standings %}
                         <tr>
                             <td>{{ forloop.counter }}</td>
-                            <td>{{ floor }}</td>
-                            <td>{{ floor.points }}</td>
+                            <td>{{ team }}</td>
+                            <td>{{ team.points }}</td>
                         </tr>
                     {% endfor %}
                 </table>
             </div>
         </div>
 
-        {% for name, floors in round_floors.items %}
+        {% for name, teams in round_teams.items %}
             <div class="content-box" style="float: left; margin: 15px">
                 <div class="content-box-title">
-                    {{ name }} Floors
+                    {{ name }} Teams
                 </div>
                 <div class="content-body">
                     <table style="padding: 15px; width: 300px">
@@ -87,11 +87,11 @@
                             <th>{{ FLOOR_LABEL }}</th>
                             <th>Points</th>
                         </tr>
-                        {% for floor in floors %}
+                        {% for team in teams %}
                             <tr>
                                 <td>{{ forloop.counter }}</td>
-                                <td>{{ floor }}</td>
-                                <td>{{ floor.points }}</td>
+                                <td>{{ team }}</td>
+                                <td>{{ team.points }}</td>
                             </tr>
                         {% endfor %}
                     </table>
@@ -136,11 +136,11 @@
                         <th>{{ FLOOR_IDENTIFIER }}</th>
                         <th>Participants</th>
                     </tr>
-                    {% for floor in floor_participation %}
+                    {% for team in team_participation %}
                         <tr>
                             <td>{{ forloop.counter }}</td>
-                            <td>{{ floor }}</td>
-                            <td>{{ floor.active_participation }}%</td>
+                            <td>{{ team }}</td>
+                            <td>{{ team.active_participation }}%</td>
                         </tr>
                     {% endfor %}
                 </table>

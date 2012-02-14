@@ -12,7 +12,7 @@ from django.core.exceptions import ObjectDoesNotExist
 
 from django.contrib.localflavor.us.models import PhoneNumberField
 
-from managers.team_mgr.models import Floor
+from managers.team_mgr.models import Team
 from managers.base_mgr import get_current_round
 from widgets.prizes import POINTS_PER_TICKET
 from managers.cache_mgr.utils import invalidate_info_bar_cache
@@ -69,8 +69,8 @@ class ScoreboardEntry(models.Model):
         ).count() + 1
 
     @staticmethod
-    def user_round_floor_rank(user, round_name):
-        floor = user.get_profile().floor
+    def user_round_team_rank(user, round_name):
+        team = user.get_profile().team
         entry, _ = ScoreboardEntry.objects.get_or_create(
             profile=user.get_profile(),
             round_name=round_name
@@ -81,13 +81,13 @@ class ScoreboardEntry(models.Model):
                 Q(points__gt=entry.points) |
                 Q(points=entry.points,
                     last_awarded_submission__gt=entry.last_awarded_submission),
-                profile__floor=floor,
+                profile__team=team,
                 round_name=round_name,
             ).count() + 1
         else:
             return ScoreboardEntry.objects.filter(
                 points__gt=entry.points,
-                profile__floor=floor,
+                profile__team=team,
                 round_name=round_name,
             ).count() + 1
 
@@ -111,7 +111,7 @@ class Profile(models.Model):
     points = models.IntegerField(default=0, editable=False)
     last_awarded_submission = models.DateTimeField(null=True, blank=True,
         editable=False)
-    floor = models.ForeignKey(Floor, null=True, blank=True)
+    team = models.ForeignKey(Team, null=True, blank=True)
     contact_email = models.EmailField(null=True, blank=True)
     contact_text = PhoneNumberField(null=True, blank=True)
     contact_carrier = models.CharField(max_length=50, null=True, blank=True)
@@ -138,7 +138,7 @@ class Profile(models.Model):
         return self.name
 
     def get_lounge_name(self):
-        return self.floor.dorm.name + '-' + self.floor.number
+        return self.team.dorm.name + '-' + self.team.number
 
     @staticmethod
     def points_leaders(num_results=10, round_name=None):
@@ -179,34 +179,34 @@ class Profile(models.Model):
 
         return None
 
-    def current_round_floor_rank(self):
-        """Returns the rank of the user for the current round in their own floor."""
+    def current_round_team_rank(self):
+        """Returns the rank of the user for the current round in their own team."""
         current_round = get_current_round()
         if current_round:
-            return self.floor_rank(round_name=current_round)
+            return self.team_rank(round_name=current_round)
 
         return None
 
-    def floor_rank(self, round_name=None):
-        """Returns the rank of the user in their own floor."""
+    def team_rank(self, round_name=None):
+        """Returns the rank of the user in their own team."""
         if round_name:
-            return ScoreboardEntry.user_round_floor_rank(self.user, round_name)
+            return ScoreboardEntry.user_round_team_rank(self.user, round_name)
 
-        # Calculate the rank.  This counts the number of people who are on the floor that have more points
+        # Calculate the rank.  This counts the number of people who are on the team that have more points
         # OR have the same amount of points but a later submission date
         if self.last_awarded_submission:
             return Profile.objects.filter(
                 Q(points__gt=self.points) |
                 Q(points=self.points,
                     last_awarded_submission__gt=self.last_awarded_submission),
-                floor=self.floor,
+                team=self.team,
                 user__is_staff=False,
                 user__is_superuser=False,
             ).count() + 1
 
         return Profile.objects.filter(
             points__gt=self.points,
-            floor=self.floor,
+            team=self.team,
             user__is_staff=False,
             user__is_superuser=False,
         ).count() + 1

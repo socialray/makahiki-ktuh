@@ -5,7 +5,7 @@
 
 </div>
 
-{% if user.get_profile.floor %}
+{% if user.get_profile.team %}
     <script type="text/javascript">
         // Wrap this code in an anonymous self-invoking function to avoid polluting global namespace.
         (function () {
@@ -16,7 +16,7 @@
             var loader = new org.wattdepot.gdata.GDataLoader(displayEnergy, spreadsheetUrl, refreshInterval);
 
             function displayEnergy(datatable) {
-                var source = '{{user.get_profile.floor.dorm.name}}-{{user.get_profile.floor.number}}';
+                var source = '{{user.get_profile.team.dorm.name}}-{{user.get_profile.team.number}}';
                 var options = {};  // no options currently supported.
                 var energyChart = new org.wattdepot.gdata.makahiki.EnergyGoalGame();
                 energyChart.draw('EnergyGoalGame-visualization', source, datatable, options);

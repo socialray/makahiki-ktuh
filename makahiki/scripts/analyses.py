@@ -17,9 +17,9 @@ for key, value in data.iteritems():
     print '%s,%d' % (key, value)
     
 # lounge goals and points   
-for floor in Floor.objects.order_by('dorm__name', 'number'):
-    goals = floor.floorenergygoal_set.count()
-    print '%s,%d,%d' % (floor, goals, floor.points())
+for team in Team.objects.order_by('dorm__name', 'number'):
+    goals = team.teamenergygoal_set.count()
+    print '%s,%d,%d' % (team, goals, team.points())
     
 # raffle information
 # 25-100: 13.24% (27/204)

@@ -62,9 +62,9 @@
     </div>
     <div {% get_id_and_classes "news-members-content" %}>
         <ul {% get_id_and_classes "news-members-list" %}>
-            {% for member in view_objects.news.floor_members %}
+            {% for member in view_objects.news.team_members %}
                 <li>
-                    <a href="{% url news_floor_members %}#{{member.name|slugify}}">
+                    <a href="{% url news_team_members %}#{{member.name|slugify}}">
                         <img src="{% avatar_url member.user 40 %}" alt="Photo of {{ member.name }}"
                              title="Photo of {{ member.name }}" align="top"/>
 
@@ -79,7 +79,7 @@
             {% endfor %}
         </ul>
         <div style="text-align: center">
-            <a href="{% url news_floor_members %}">View all members</a>
+            <a href="{% url news_team_members %}">View all members</a>
         </div>
     </div>
 </div>

@@ -1,7 +1,7 @@
 from django.core import management
 from django.contrib.auth.models import User
 from django.core.exceptions import ObjectDoesNotExist
-from managers.team_mgr.models import Floor
+from managers.team_mgr.models import Team
 from django.db.utils import IntegrityError
 
 class Command(management.base.BaseCommand):
@@ -86,8 +86,8 @@ class Command(management.base.BaseCommand):
         else:
             return True
 
-        def get_lounge(dorm, floor):
-            return get_dorm(dorm) + '-' + get_floor(floor)
+        def get_lounge(dorm, team):
+            return get_dorm(dorm) + '-' + get_team(team)
 
         def get_dorm(dorm):
             return {
@@ -96,7 +96,7 @@ class Command(management.base.BaseCommand):
                 'IL': 'Ilima',
                 'LO': 'Lokelani'}[dorm]
 
-        def get_floor(floor):
+        def get_team(team):
             return {
                 '03': 'A',
                 '04': 'A',
@@ -107,7 +107,7 @@ class Command(management.base.BaseCommand):
                 '09': 'D',
                 '10': 'D',
                 '11': 'E',
-                '12': 'E'}[floor]
+                '12': 'E'}[team]
 
     def create_user(self):
         try:
@@ -125,7 +125,7 @@ class Command(management.base.BaseCommand):
         profile.first_name = self.firstname
         profile.last_name = self.lastname
         profile.name = self.firstname + " " + self.lastname[:1] + "."
-        profile.floor = Floor.objects.get(floor_identifier=self.lounge)
+        profile.team = Team.objects.get(team_identifier=self.lounge)
         try:
             profile.save()
         except IntegrityError:

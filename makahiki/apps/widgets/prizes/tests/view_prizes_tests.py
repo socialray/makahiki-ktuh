@@ -5,18 +5,18 @@ from django.core.urlresolvers import reverse
 from django.contrib.auth.models import User
 from django.conf import settings
 
-from managers.team_mgr.models import Floor
+from managers.team_mgr.models import Team
 from widgets.prizes.models import Prize
 
 class PrizesFunctionalTestCase(TestCase):
-    fixtures = ["base_floors.json", "test_prizes.json"]
+    fixtures = ["base_teams.json", "test_prizes.json"]
 
     def setUp(self):
-        """Set up a floor and log in."""
+        """Set up a team and log in."""
         self.user = User.objects.create_user("user", "user@test.com", password="changeme")
-        floor = Floor.objects.all()[0]
+        team = Team.objects.all()[0]
         profile = self.user.get_profile()
-        profile.floor = floor
+        profile.team = team
         profile.setup_complete = True
         profile.setup_profile = True
         profile.save()
@@ -56,14 +56,14 @@ class PrizesFunctionalTestCase(TestCase):
         profile = self.user.get_profile()
         profile.name = "Test User"
         profile.add_points(10, datetime.datetime.today(), "test")
-        floor = profile.floor
+        team = profile.team
         profile.save()
 
         response = self.client.get(reverse("prizes_index"))
         self.assertContains(response, "Current leader: " + str(profile), count=2,
             msg_prefix="Individual prizes should have user as the leader.")
-        self.assertContains(response, "Current leader: " + str(floor), count=2,
-            msg_prefix="Floor points prizes should have floor as the leader")
+        self.assertContains(response, "Current leader: " + str(team), count=2,
+            msg_prefix="Team points prizes should have team as the leader")
         self.assertContains(response, "Current leader: <span id='round-1-leader'></span>", count=1,
             msg_prefix="Span for round 1 energy prize should be inserted.")
         self.assertNotContains(response, "Current leader: <span id='round-2-leader'></span>",
@@ -111,7 +111,7 @@ class PrizesFunctionalTestCase(TestCase):
         profile = self.user.get_profile()
         profile.add_points(10, datetime.datetime.today(), "test")
         profile.name = "Test User"
-        floor = profile.floor
+        team = profile.team
         profile.save()
 
         response = self.client.get(reverse("prizes_index"))
@@ -121,8 +121,8 @@ class PrizesFunctionalTestCase(TestCase):
             msg_prefix="Individual prizes should have user as the leader.")
         self.assertContains(response, "Current leader: <span id='round-2-leader'></span>", count=1,
             msg_prefix="Span for round 2 energy prize should be inserted.")
-        self.assertContains(response, "Current leader: " + str(floor), count=2,
-            msg_prefix="Floor points prizes should have floor as the leader")
+        self.assertContains(response, "Current leader: " + str(team), count=2,
+            msg_prefix="Team points prizes should have team as the leader")
 
         # Test XSS vulnerability.
         profile.name = '<div id="xss-script"></div>'

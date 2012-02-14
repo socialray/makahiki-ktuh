@@ -8,7 +8,7 @@ from django.contrib.auth.models import User
 
 from managers.player_mgr.models import Profile
 from widgets.prizes.models import Prize
-from managers.team_mgr.models import Dorm, Floor
+from managers.team_mgr.models import Dorm, Team
 
 class OverallPrizeTest(TestCase):
     """
@@ -138,9 +138,9 @@ class OverallPrizeTest(TestCase):
         self.prize.delete()
 
 
-class FloorPrizeTest(TestCase):
+class TeamPrizeTest(TestCase):
     """
-    Tests awarding a prize to the individual on each floor with the most points.
+    Tests awarding a prize to the individual on each team with the most points.
     """
 
     def setUp(self):
@@ -155,7 +155,7 @@ class FloorPrizeTest(TestCase):
             short_description="A test prize",
             long_description="A test prize",
             image=image,
-            award_to="individual_floor",
+            award_to="individual_team",
             competition_type="points",
             value=5,
         )
@@ -172,29 +172,29 @@ class FloorPrizeTest(TestCase):
                 },
             }
 
-        # Create test dorms, floors, and users.
+        # Create test dorms, teams, and users.
         self.dorm = Dorm(name="Test Dorm")
         self.dorm.save()
 
-        self.floors = [Floor(number=str(i), dorm=self.dorm) for i in range(0, 2)]
-        _ = [f.save() for f in self.floors]
+        self.teams = [Team(number=str(i), dorm=self.dorm) for i in range(0, 2)]
+        _ = [f.save() for f in self.teams]
 
         self.users = [User.objects.create_user("test%d" % i, "test@test.com") for i in range(0, 4)]
 
-        # Assign users to floors.
+        # Assign users to teams.
         for index, user in enumerate(self.users):
-            user.get_profile().floor = self.floors[index % 2]
+            user.get_profile().team = self.teams[index % 2]
             user.get_profile().save()
 
     def testNumAwarded(self):
         """
-        Tests that the number of prizes awarded corresponds to the number of floors.
+        Tests that the number of prizes awarded corresponds to the number of teams.
         """
         self.prize.round_name = "Round 1"
         self.prize.save()
 
-        self.assertEqual(self.prize.num_awarded(), len(self.floors),
-            "This should correspond to the number of floors.")
+        self.assertEqual(self.prize.num_awarded(), len(self.teams),
+            "This should correspond to the number of teams.")
 
     def testRoundLeader(self):
         """
@@ -208,33 +208,33 @@ class FloorPrizeTest(TestCase):
         profile.add_points(10, datetime.datetime.today(), "test")
         profile.save()
 
-        self.assertEqual(self.prize.leader(floor=profile.floor), profile,
+        self.assertEqual(self.prize.leader(team=profile.team), profile,
             "Current prize leader is not the leading user.")
 
-        # Have a user on the same floor move ahead in points.
+        # Have a user on the same team move ahead in points.
         profile3 = self.users[2].get_profile()
         profile3.add_points(11, datetime.datetime.today(), "test")
         profile3.save()
 
-        self.assertEqual(self.prize.leader(floor=profile.floor), profile3,
+        self.assertEqual(self.prize.leader(team=profile.team), profile3,
             "User 3 should be the the leader.")
 
         # Have the first user earn more points outside of the round.
         profile.add_points(2, datetime.datetime.today() - datetime.timedelta(days=2), "test")
         profile.save()
 
-        self.assertEqual(self.prize.leader(floor=profile.floor), profile3,
+        self.assertEqual(self.prize.leader(team=profile.team), profile3,
             "User 3 should still be the leading profile.")
 
-        # Try a user on a different floor.
+        # Try a user on a different team.
         profile2 = self.users[1].get_profile()
         profile2.add_points(20, datetime.datetime.today(), "test")
         profile2.save()
 
-        self.assertEqual(self.prize.leader(floor=profile.floor), profile3,
-            "User 3 should be the leading profile on user 1's floor.")
-        self.assertEqual(self.prize.leader(floor=profile2.floor), profile2,
-            "User 2 should be the leading profile on user 2's floor.")
+        self.assertEqual(self.prize.leader(team=profile.team), profile3,
+            "User 3 should be the leading profile on user 1's team.")
+        self.assertEqual(self.prize.leader(team=profile2.team), profile2,
+            "User 2 should be the leading profile on user 2's team.")
 
     def testOverallLeader(self):
         """
@@ -248,26 +248,26 @@ class FloorPrizeTest(TestCase):
         profile.add_points(10, datetime.datetime.today(), "test")
         profile.save()
 
-        self.assertEqual(self.prize.leader(floor=profile.floor), profile,
+        self.assertEqual(self.prize.leader(team=profile.team), profile,
             "Current prize leader is not the leading user.")
 
-        # Have a user on the same floor move ahead in points.
+        # Have a user on the same team move ahead in points.
         profile3 = self.users[2].get_profile()
         profile3.add_points(11, datetime.datetime.today(), "test")
         profile3.save()
 
-        self.assertEqual(self.prize.leader(floor=profile.floor), profile3,
+        self.assertEqual(self.prize.leader(team=profile.team), profile3,
             "User 3 should be the the leader.")
 
-        # Try a user on a different floor.
+        # Try a user on a different team.
         profile2 = self.users[1].get_profile()
         profile2.add_points(20, datetime.datetime.today(), "test")
         profile2.save()
 
-        self.assertEqual(self.prize.leader(floor=profile.floor), profile3,
-            "User 3 should be the leading profile on user 1's floor.")
-        self.assertEqual(self.prize.leader(floor=profile2.floor), profile2,
-            "User 2 should be the leading profile on user 2's floor.")
+        self.assertEqual(self.prize.leader(team=profile.team), profile3,
+            "User 3 should be the leading profile on user 1's team.")
+        self.assertEqual(self.prize.leader(team=profile2.team), profile2,
+            "User 2 should be the leading profile on user 2's team.")
 
     def tearDown(self):
         """

@@ -5,17 +5,17 @@ from django.core.urlresolvers import reverse
 from django.contrib.auth.models import User
 
 from widgets.smartgrid.models import Commitment, CommitmentMember
-from managers.team_mgr.models import Floor, Post
+from managers.team_mgr.models import Team, Post
 from widgets.news import DEFAULT_POST_COUNT
 
 class NewsFunctionalTestCase(TestCase):
-    fixtures = ["base_floors.json"]
+    fixtures = ["base_teams.json"]
 
     def setUp(self):
         self.user = User.objects.create_user("user", "user@test.com", password="changeme")
-        self.floor = Floor.objects.all()[0]
+        self.team = Team.objects.all()[0]
         profile = self.user.get_profile()
-        profile.floor = self.floor
+        profile.team = self.team
         profile.setup_complete = True
         profile.setup_profile = True
         profile.save()
@@ -29,7 +29,7 @@ class NewsFunctionalTestCase(TestCase):
 
     def testIndexCommitment(self):
         """Tests that a commitment shows up in public commitments and in the wall."""
-        posts = self.floor.post_set.count()
+        posts = self.team.post_set.count()
         # Create a commitment that will appear on the news page.
         commitment = Commitment(
             type="commitment",
@@ -44,14 +44,14 @@ class NewsFunctionalTestCase(TestCase):
 
         response = self.client.get(reverse("news_index"))
         self.failUnlessEqual(response.status_code, 200)
-        self.assertEqual(posts + 1, self.floor.post_set.count(),
+        self.assertEqual(posts + 1, self.team.post_set.count(),
             "One post should have been posted to the wall (public commitment).")
         self.assertContains(response, commitment.title, 2,
             msg_prefix="Commitment title should only appear in the wall and the public commitments box."
         )
 
     def testIndexMostPopular(self):
-        posts = self.floor.post_set.count()
+        posts = self.team.post_set.count()
         commitment = Commitment(
             type="commitment",
             title="Test commitment",
@@ -66,7 +66,7 @@ class NewsFunctionalTestCase(TestCase):
 
         response = self.client.get(reverse("news_index"))
         self.failUnlessEqual(response.status_code, 200)
-        self.assertEqual(posts + 2, self.floor.post_set.count(),
+        self.assertEqual(posts + 2, self.team.post_set.count(),
             "Two posts should have been posted to the wall (commit and award).")
         self.assertContains(response, commitment.title, 3,
             msg_prefix="""
@@ -77,7 +77,7 @@ class NewsFunctionalTestCase(TestCase):
     def testPost(self):
         """Test that we can add new post via AJAX."""
         # Test posting an empty post.
-        posts = Post.objects.filter(floor=self.floor)
+        posts = Post.objects.filter(team=self.team)
         count = posts.count()
         response = self.client.post(reverse("news_post"), {"post": ""},
             HTTP_X_REQUESTED_WITH='XMLHttpRequest')
@@ -99,7 +99,7 @@ class NewsFunctionalTestCase(TestCase):
         # Generate test posts.
         for i in range(0, DEFAULT_POST_COUNT + 1):
             text = "Testing AJAX response %d." % i
-            post = Post(user=self.user, floor=self.floor, text=text)
+            post = Post(user=self.user, team=self.team, text=text)
             post.save()
 
         second_post = Post.objects.all().order_by("-pk")[0]

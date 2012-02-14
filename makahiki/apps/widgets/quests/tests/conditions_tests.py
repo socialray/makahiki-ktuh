@@ -488,17 +488,17 @@ class QuestConditionsTest(TestCase):
         """
         Tests that this predicate is completed when the user posts something to their wall.
         """
-        from managers.team_mgr.models import Dorm, Floor, Post
+        from managers.team_mgr.models import Dorm, Team, Post
         from widgets.quests import posted_to_wall
 
         dorm = Dorm.objects.create(name="test", slug="test")
-        floor = Floor.objects.create(number="a", slug="a", dorm=dorm)
+        team = Team.objects.create(number="a", slug="a", dorm=dorm)
         profile = self.user.get_profile()
-        profile.floor = floor
+        profile.team = team
         profile.save()
 
         self.assertFalse(posted_to_wall(self.user), "User should not have posted to their wall.")
-        post = Post.objects.create(user=self.user, floor=floor, text="text")
+        post = Post.objects.create(user=self.user, team=team, text="text")
         self.assertTrue(posted_to_wall(self.user), "User should have posted to their own wall.")
 
         # Test within context of a quest.
@@ -519,7 +519,7 @@ class QuestConditionsTest(TestCase):
         self.assertTrue(self.quest not in possibly_completed_quests(self.user),
             "User should not be able to complete this quest.")
 
-        post = Post.objects.create(user=self.user, floor=floor, text="text")
+        post = Post.objects.create(user=self.user, team=team, text="text")
         self.assertTrue(self.quest in possibly_completed_quests(self.user),
             "User should have completed this quest.")
 

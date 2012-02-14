@@ -69,8 +69,8 @@ CSS_IDS = {
   "news-commitments-title": "content-box-title",
   "news-most-popular-title": "content-box-title",
   "news-members-title": "content-box-title",
-  "floor-members": "content-box",
-  "floor-members-title": "content-box-title",
+  "team-members": "content-box",
+  "team-members-title": "content-box-title",
 
   "help-video": "content-box",
   "help-rules": "content-box",

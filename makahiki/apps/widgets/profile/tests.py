@@ -4,18 +4,18 @@ from django.test import TestCase
 from django.core.urlresolvers import reverse
 from django.contrib.auth.models import User
 
-from managers.team_mgr.models import Floor
+from managers.team_mgr.models import Team
 from widgets.smartgrid.models import Activity, ActivityMember, Commitment, CommitmentMember
 from widgets.quests.models import Quest
 
 class ProfileFunctionalTestCase(TestCase):
-    fixtures = ["base_floors.json"]
+    fixtures = ["base_teams.json"]
 
     def setUp(self):
         self.user = User.objects.create_user("user", "user@test.com", password="changeme")
-        self.floor = Floor.objects.all()[0]
+        self.team = Team.objects.all()[0]
         profile = self.user.get_profile()
-        profile.floor = self.floor
+        profile.team = self.team
         profile.setup_complete = True
         profile.setup_profile = True
         profile.save()

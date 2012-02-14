@@ -6,7 +6,7 @@ from django.template.loader import render_to_string
 from django.template.defaultfilters import slugify
 from django.core import management
 
-from managers.team_mgr.models import Floor
+from managers.team_mgr.models import Team
 from managers.player_mgr.models import Profile
 from widgets.prizes.models import RaffleDeadline, RafflePrize, Prize
 
@@ -51,17 +51,17 @@ class Command(management.base.BaseCommand):
 
     def __generate_prize_forms(self, round_dir, round_name):
         prizes = Prize.objects.filter(
-            Q(award_to='individual_floor') | Q(award_to='individual_overall'),
+            Q(award_to='individual_team') | Q(award_to='individual_overall'),
             round_name=round_name,
         )
 
         round_name = round_name if round_name != 'Overall' else None
         # Need to calculate winners for each prize.
         for prize in prizes:
-            if prize.award_to == 'individual_floor':
-                # Need to calculate floor winners for each floor.
-                for floor in Floor.objects.all():
-                    leader = floor.points_leaders(1, round_name)[0].user
+            if prize.award_to == 'individual_team':
+                # Need to calculate team winners for each team.
+                for team in Team.objects.all():
+                    leader = team.points_leaders(1, round_name)[0].user
                     prize.winner = leader
                     contents = render_to_string('view_prizes/form.txt', {
                         'raffle': False,
@@ -69,7 +69,7 @@ class Command(management.base.BaseCommand):
                         'round': round_name,
                         })
 
-                    filename = '%s-%s-%s.txt' % (floor.dorm.name, floor.number, leader.username)
+                    filename = '%s-%s-%s.txt' % (team.dorm.name, team.number, leader.username)
                     f = open('%s/%s' % (round_dir, filename), 'w')
                     f.write(contents)
 

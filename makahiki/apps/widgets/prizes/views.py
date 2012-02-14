@@ -13,8 +13,8 @@ from widgets.prizes import POINTS_PER_TICKET
 from widgets.prizes.models import Prize, RafflePrize, RaffleDeadline
 
 def supply(request):
-    floor = request.user.get_profile().floor
-    prizes = _get_prizes(floor)
+    team = request.user.get_profile().team
+    prizes = _get_prizes(team)
     raffle_dict = _get_raffle_prizes(request.user)
 
     return {
@@ -78,10 +78,10 @@ def raffle_form(request, prize_id):
     }, mimetype='text/plain')
 
 
-def _get_prizes(floor):
+def _get_prizes(team):
     """
     Private method to process the prizes half of the page.
-    Takes the user's floor and returns a dictionary to be used in the template.
+    Takes the user's team and returns a dictionary to be used in the template.
     """
     prizes = Prize.objects.all()
     rounds = get_round_info()
@@ -97,9 +97,9 @@ def _get_prizes(floor):
             elif prize.competition_type == "points":
                 # If we are in the middle of the round, display the current leader.
                 if today < datetime.datetime.strptime(rounds[key]["end"], "%Y-%m-%d"):
-                    prize.current_leader = prize.leader(floor)
+                    prize.current_leader = prize.leader(team)
                 else:
-                    prize.winner = prize.leader(floor)
+                    prize.winner = prize.leader(team)
 
             # Else, this is an energy competition prize.
             else:

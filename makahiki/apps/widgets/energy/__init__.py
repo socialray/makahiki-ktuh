@@ -1,9 +1,9 @@
 import datetime
 
-from widgets.energy.models import EnergyGoal, EnergyGoalVote, FloorEnergyGoal
+from widgets.energy.models import EnergyGoal, EnergyGoalVote, TeamEnergyGoal
 from widgets.energy.forms import EnergyGoalVotingForm
 
-from managers.team_mgr.models import Floor
+from managers.team_mgr.models import Team
 
 def get_info_for_user(user):
     """Generates a return dictionary for use in rendering the user profile."""
@@ -23,7 +23,7 @@ def get_info_for_user(user):
                 }
         elif in_voting:
             profile = user.get_profile()
-            results = current_goal.get_floor_results(profile.floor)
+            results = current_goal.get_team_results(profile.team)
             results_url = generate_chart_url(results)
             return {
                 "goal": current_goal,
@@ -31,14 +31,14 @@ def get_info_for_user(user):
                 }
 
         else:
-            floor = user.get_profile().floor
+            team = user.get_profile().team
             try:
-                floor_goal = floor.floorenergygoal_set.get(goal=current_goal)
+                team_goal = team.teamenergygoal_set.get(goal=current_goal)
                 return {
                     "goal": current_goal,
-                    "floor_goal": floor_goal,
+                    "team_goal": team_goal,
                     }
-            except FloorEnergyGoal.DoesNotExist:
+            except TeamEnergyGoal.DoesNotExist:
                 pass
 
     return None
@@ -75,18 +75,18 @@ def generate_chart_url(results):
     return base_url + data + label + data_range + bg_color + data_color
 
 
-def generate_floor_goals():
-    """Called by a cron task to generate the floor goals for a floor."""
+def generate_team_goals():
+    """Called by a cron task to generate the team goals for a team."""
     goal = EnergyGoal.get_current_goal()
     today = datetime.date.today()
-    if goal and goal.voting_end_date <= today and goal.floorenergygoal_set.count() == 0:
-        # Go through the votes and create energy goals for the floor.
-        for floor in Floor.objects.all():
-            results = goal.get_floor_results(floor)
+    if goal and goal.voting_end_date <= today and goal.teamenergygoal_set.count() == 0:
+        # Go through the votes and create energy goals for the team.
+        for team in Team.objects.all():
+            results = goal.get_team_results(team)
             percent_reduction = 0
             if len(results) > 0:
                 percent_reduction = results[0]["percent_reduction"]
 
-            floor_goal = FloorEnergyGoal(floor=floor, goal=goal,
+            team_goal = TeamEnergyGoal(team=team, goal=goal,
                 percent_reduction=percent_reduction)
-            floor_goal.save()
+            team_goal.save()

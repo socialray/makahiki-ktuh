@@ -4,7 +4,7 @@
 {% load avatar_tags %}
 
 {% block page_title %}
-    Floor Members
+    Team Members
 {% endblock %}
 
 {% block selected_icon %}selected-news{% endblock %}
@@ -14,14 +14,14 @@
 {% endblock %}
 
 {% block body %}
-    <div {% get_id_and_classes "floor-members" %}>
-        <div {% get_id_and_classes "floor-members-title" %}>
+    <div {% get_id_and_classes "team-members" %}>
+        <div {% get_id_and_classes "team-members-title" %}>
             {{ FLOOR_LABEL }} Members
         </div>
-        <div {% get_id_and_classes "floor-members-content" %}>
+        <div {% get_id_and_classes "team-members-content" %}>
             <a href="{% url news_index %}">Back to the news page</a>
-            <ul {% get_id_and_classes "floor-member-detail-list" %}>
-                {% for member in floor_members %}
+            <ul {% get_id_and_classes "team-member-detail-list" %}>
+                {% for member in team_members %}
                     <!-- {% cycle 'alt-row' '' as cycle_class %} -->
                     <li class="{{cycle_class}}">
                         {% include "news/directory/member.html" %}

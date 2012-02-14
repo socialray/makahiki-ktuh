@@ -3,7 +3,7 @@ import datetime
 from django.core import management
 from django.contrib.auth.models import User
 
-from managers.team_mgr.models import Floor
+from managers.team_mgr.models import Team
 from widgets.notifications.models import UserNotification
 
 class Command(management.base.BaseCommand):
@@ -11,7 +11,7 @@ class Command(management.base.BaseCommand):
   Awards points to a username or a building and lounge.\n
   Usage is either:\n
   'python manage.py add_points <username> <points> <short-message> <long-message>' or\n
-  'python manage.py add_points <residence-hall> <floor-number> <points> <short-message> <long-message>'\n
+  'python manage.py add_points <residence-hall> <team-number> <points> <short-message> <long-message>'\n
   """
 
     def handle(self, *args, **options):
@@ -19,13 +19,13 @@ class Command(management.base.BaseCommand):
         Awards points to a user or a building and lounge.
         Format of the command is either:
           python manage.py add_points <username> <points> <short-message> <long-message>
-          python manage.py add_points <residence-hall> <floor-number> <points> <short-message> <long-message>
+          python manage.py add_points <residence-hall> <team-number> <points> <short-message> <long-message>
         """
         if len(args) < 4 or len(args) > 5:
             usage = """
       Usage is either:\n
       'python manage.py add_points <username> <points> <short-message> <long-message>' or\n
-      'python manage.py add_points <residence-hall> <floor-number> <points> <short-message> <long-message>'\n
+      'python manage.py add_points <residence-hall> <team-number> <points> <short-message> <long-message>'\n
       """
             self.stderr.write(usage)
             return 1
@@ -47,8 +47,8 @@ class Command(management.base.BaseCommand):
 
         else:
             try:
-                floor = Floor.objects.get(dorm__name=args[0], number=args[1])
-                for profile in floor.profile_set.all():
+                team = Team.objects.get(dorm__name=args[0], number=args[1])
+                for profile in team.profile_set.all():
                     profile = user.get_profile()
                     profile.add_points(int(args[2]), datetime.datetime.today(),
                         args[3])
@@ -57,9 +57,9 @@ class Command(management.base.BaseCommand):
                     UserNotification.create_success_notification(profile.user,
                         args[4])
 
-            except Floor.DoesNotExist:
+            except Team.DoesNotExist:
                 self.stderr.write(
-                    "Floor with building name %s and floor %s does not exist" % (
+                    "Team with building name %s and team %s does not exist" % (
                         args[0], args[1]))
                 return 1
     

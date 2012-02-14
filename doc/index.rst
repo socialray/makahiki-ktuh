@@ -19,9 +19,9 @@ first `Kukui Cup`_ energy challenge held at the University of Hawaii in
 Fall, 2011.  Some of the goals of the Kukui Cup challenge are to support:
 
   * A synergistic mixture of real-world and virtual world activities. 
-  * Real-time feedback on energy consumption by residence hall floors.
+  * Real-time feedback on energy consumption by residence hall teams.
   * Incentives in the form of prizes and raffle games. 
-  * Social networks, both physical (residence hall floors) and virtual (Facebook).
+  * Social networks, both physical (residence hall teams) and virtual (Facebook).
   * Activities to raise player consciousness and literacy regarding energy issues.
 
 Makahiki 2 builds upon the prior version with the following new features:

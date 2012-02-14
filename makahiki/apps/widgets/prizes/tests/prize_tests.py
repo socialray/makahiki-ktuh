@@ -61,7 +61,7 @@ class PrizeTest(TestCase):
             self.fail("IntegrityError exception should not be thrown.")
 
         prize2.competition_type = "points"
-        prize2.award_to = "floor_overall"
+        prize2.award_to = "team_overall"
         try:
             prize2.save()
         except IntegrityError:

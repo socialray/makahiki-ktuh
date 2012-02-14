@@ -1,7 +1,7 @@
 from django.contrib import admin
 from django import forms
 
-from widgets.energy.models import EnergyGoal, FloorEnergyGoal
+from widgets.energy.models import EnergyGoal, TeamEnergyGoal
 
 class EnergyGoalAdminForm(forms.ModelForm):
     class Meta:
@@ -61,8 +61,8 @@ class EnergyGoalAdmin(admin.ModelAdmin):
 
 admin.site.register(EnergyGoal, EnergyGoalAdmin)
 
-class FloorEnergyGoalAdmin(admin.ModelAdmin):
-    list_display = ["floor", "goal", ]
-    readonly_fields = ("percent_reduction", "goal", "floor")
+class TeamEnergyGoalAdmin(admin.ModelAdmin):
+    list_display = ["team", "goal", ]
+    readonly_fields = ("percent_reduction", "goal", "team")
 
-admin.site.register(FloorEnergyGoal, FloorEnergyGoalAdmin)
+admin.site.register(TeamEnergyGoal, TeamEnergyGoalAdmin)

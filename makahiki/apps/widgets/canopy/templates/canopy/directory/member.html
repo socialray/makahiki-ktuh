@@ -23,7 +23,7 @@
         </li>
     {% endif %}
 
-    {% if member.get_profile.floor and member.get_profile.points > 0 %}
+    {% if member.get_profile.team and member.get_profile.points > 0 %}
         <li>
             {% if CURRENT_ROUND and CURRENT_ROUND != 'Overall' %}
                 Ranked #{{ member.get_profile.current_round_overall_rank }} in {{ CURRENT_ROUND }}
@@ -33,7 +33,7 @@
             {% endif %}
         </li>
 
-        {# Check if the user is a participant or an admin without a floor #}
+        {# Check if the user is a participant or an admin without a team #}
         <li>
             {% if CURRENT_ROUND and CURRENT_ROUND != 'Overall' %}
                 Points: {{ member.get_profile.current_round_points }} points in {{ CURRENT_ROUND }}

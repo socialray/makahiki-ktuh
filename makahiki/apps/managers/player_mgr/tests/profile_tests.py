@@ -6,7 +6,7 @@ from django.contrib.auth.models import User
 from django.db import IntegrityError
 
 from widgets.smartgrid.models import Activity, ActivityMember
-from managers.team_mgr.models import Dorm, Floor
+from managers.team_mgr.models import Dorm, Team
 from managers.player_mgr.models import Profile
 
 class ProfileLeadersTests(TestCase):
@@ -196,22 +196,22 @@ class ProfileUnitTests(TestCase):
         self.assertEqual(Profile.objects.get(user=user1).points, 55)
         self.assertEqual(Profile.objects.get(user=user2).points, 45)
 
-    def testFloorRankWithPoints(self):
-        """Tests that the floor_rank method accurately computes the rank based on points."""
+    def testTeamRankWithPoints(self):
+        """Tests that the team_rank method accurately computes the rank based on points."""
         user = User(username="test_user", password="changeme")
         user.save()
         dorm = Dorm(name="Test dorm")
         dorm.save()
-        floor = Floor(number="A", dorm=dorm)
-        floor.save()
+        team = Team(number="A", dorm=dorm)
+        team.save()
 
         profile = user.get_profile()
-        profile.floor = floor
+        profile.team = team
 
         # Check that the user is ranked last if they haven't done anything.
-        rank = Profile.objects.filter(floor=floor,
+        rank = Profile.objects.filter(team=team,
             points__gt=profile.points).count() + 1
-        self.assertEqual(profile.floor_rank(), rank,
+        self.assertEqual(profile.team_rank(), rank,
             "Check that the user is ranked last.")
 
         # Make the user number 1 overall.
@@ -220,7 +220,7 @@ class ProfileUnitTests(TestCase):
             "Test")
         profile.save()
 
-        self.assertEqual(profile.floor_rank(), 1,
+        self.assertEqual(profile.team_rank(), 1,
             "Check that the user is number 1.")
 
         user2 = User(username="test_user2", password="changeme")
@@ -231,32 +231,32 @@ class ProfileUnitTests(TestCase):
             "Test")
         profile2.save()
 
-        self.assertEqual(profile.floor_rank(), 1,
-            "Check that the user is still number 1 if the new profile is not on the same floor.")
+        self.assertEqual(profile.team_rank(), 1,
+            "Check that the user is still number 1 if the new profile is not on the same team.")
 
-        profile2.floor = floor
+        profile2.team = team
         profile2.save()
 
-        self.assertEqual(profile.floor_rank(), 2,
+        self.assertEqual(profile.team_rank(), 2,
             "Check that the user is now rank 2.")
 
-    def testFloorRankWithSubmissionDate(self):
-        """Tests that the floor_rank method accurately computes the rank when users have the same number of points."""
+    def testTeamRankWithSubmissionDate(self):
+        """Tests that the team_rank method accurately computes the rank when users have the same number of points."""
         user = User(username="test_user", password="changeme")
         user.save()
         dorm = Dorm(name="Test dorm")
         dorm.save()
-        floor = Floor(number="A", dorm=dorm)
-        floor.save()
+        team = Team(number="A", dorm=dorm)
+        team.save()
 
         profile = user.get_profile()
-        profile.floor = floor
+        profile.team = team
         top_user = Profile.objects.all().order_by("-points")[0]
         profile.add_points(top_user.points + 1,
             datetime.datetime.today() - datetime.timedelta(minutes=1), "Test")
         profile.save()
 
-        self.assertEqual(profile.floor_rank(), 1,
+        self.assertEqual(profile.team_rank(), 1,
             "Check that the user is number 1.")
 
         user2 = User(username="test_user2", password="changeme")
@@ -266,11 +266,11 @@ class ProfileUnitTests(TestCase):
         profile2.add_points(profile.points, datetime.datetime.today(), "Test")
         profile2.save()
 
-        profile2.floor = floor
+        profile2.team = team
         profile2.save()
         print profile.points
         print profile2.points
-        self.assertEqual(profile.floor_rank(), 2,
+        self.assertEqual(profile.team_rank(), 2,
             "Check that the user is now rank 2.")
 
     def testOverallRankWithPoints(self):
@@ -367,7 +367,7 @@ class ProfileUnitTests(TestCase):
         # Restore saved rounds.
         settings.COMPETITION_ROUNDS = saved_rounds
 
-    def testFloorRankForCurrentRound(self):
+    def testTeamRankForCurrentRound(self):
         """Test that we can retrieve the rank for the user in the current round."""
         saved_rounds = settings.COMPETITION_ROUNDS
         start = datetime.date.today()
@@ -382,8 +382,8 @@ class ProfileUnitTests(TestCase):
 
         dorm = Dorm(name="Test dorm")
         dorm.save()
-        floor = Floor(number="A", dorm=dorm)
-        floor.save()
+        team = Team(number="A", dorm=dorm)
+        team.save()
 
         user = User(username="test_user", password="changeme")
         user.save()
@@ -392,10 +392,10 @@ class ProfileUnitTests(TestCase):
         top_user = Profile.objects.all().order_by("-points")[0]
         profile.add_points(top_user.points + 1, datetime.datetime.today(),
             "Test")
-        profile.floor = floor
+        profile.team = team
         profile.save()
 
-        self.assertEqual(profile.current_round_floor_rank(), 1,
+        self.assertEqual(profile.current_round_team_rank(), 1,
             "Check that the user is number 1.")
 
         user2 = User(username="test_user2", password="changeme")
@@ -404,10 +404,10 @@ class ProfileUnitTests(TestCase):
         profile2 = user2.get_profile()
         profile2.add_points(profile.points + 1, datetime.datetime.today(),
             "Test")
-        profile2.floor = floor
+        profile2.team = team
         profile2.save()
 
-        self.assertEqual(profile.current_round_floor_rank(), 2,
+        self.assertEqual(profile.current_round_team_rank(), 2,
             "Check that the user is now number 2.")
 
         # Restore saved rounds.
