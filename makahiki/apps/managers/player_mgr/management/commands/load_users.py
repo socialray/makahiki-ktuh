@@ -1,3 +1,7 @@
+"""
+load and create the users from a csv file containing lounge, name, and email,
+if the second argument is RA, the csv file is the RA list, consists of name, email, lounge.
+"""
 from django.core import management
 from django.contrib.auth.models import User
 from django.core.exceptions import ObjectDoesNotExist
@@ -5,7 +9,9 @@ from managers.team_mgr.models import Team
 from django.db.utils import IntegrityError
 
 class Command(management.base.BaseCommand):
-    help = 'load and create the users from a csv file containing lounge, name, and email, if the second argument is RA, the csv file is the RA list, consists of name, email, lounge.'
+    """load user command"""
+    help = """load and create the users from a csv file containing lounge, name, and email,
+    if the second argument is RA, the csv file is the RA list, consists of name, email, lounge."""
 
     lastname = None
     firstname = None
@@ -50,6 +56,8 @@ class Command(management.base.BaseCommand):
         print "---- total loaded: %d , errors: %d" % (load_count, error_count)
 
     def parse_ok(self, line):
+        """ parse the line, return false if there is an error
+        """
         items = line.split(":")
 
         if self.is_ra:
@@ -87,9 +95,11 @@ class Command(management.base.BaseCommand):
             return True
 
         def get_lounge(dorm, team):
+            """returns the lounge name"""
             return get_dorm(dorm) + '-' + get_team(team)
 
         def get_dorm(dorm):
+            """returns the dorm name"""
             return {
                 'LE': 'Lehua',
                 'MO': 'Mokihana',
@@ -97,6 +107,8 @@ class Command(management.base.BaseCommand):
                 'LO': 'Lokelani'}[dorm]
 
         def get_team(team):
+            """ returns the team name
+            """
             return {
                 '03': 'A',
                 '04': 'A',
@@ -110,6 +122,8 @@ class Command(management.base.BaseCommand):
                 '12': 'E'}[team]
 
     def create_user(self):
+        """ create a user
+        """
         try:
             user = User.objects.get(username=self.username)
             user.delete()

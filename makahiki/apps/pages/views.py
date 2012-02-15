@@ -1,3 +1,6 @@
+"""
+main views module to render pages.
+"""
 from django.shortcuts import render_to_response
 from django.template import RequestContext
 from django.utils import importlib
@@ -11,6 +14,9 @@ import types
 
 @never_cache
 def root_index(request):
+    """
+    hanlde the landing page.
+    """
     if request.user.is_authenticated():
         return HttpResponseRedirect(reverse("home_index"))
     return HttpResponseRedirect(reverse("landing", args=()))
@@ -19,6 +25,9 @@ def root_index(request):
 @never_cache
 @login_required
 def index(request):
+    """
+    handle dynamically lay-outed pages defined in page_settings.
+    """
     page_name = request.path[1:][:-1]
 
     page_settings = settings.PAGE_SETTINGS[page_name]

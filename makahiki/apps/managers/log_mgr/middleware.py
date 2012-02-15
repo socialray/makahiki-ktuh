@@ -1,21 +1,27 @@
+"""
+Server log middleware to log any request from logged in users. write a log entry in server log.
+"""
 import logging
 import re
 from time import strftime # Timestamp
 
 
 # Filter out requests to media and site_media.
-media_regexp = r'^\/(site_)?media'
-sentry_regexp = r'^\/sentry\/'
-url_filter = ("/favicon.ico", "/admin/jsi18n/",)
+MEDIA_REGEXP = r'^\/(site_)?media'
+SENTRY_REGEXP = r'^\/sentry\/'
+URL_FILTER = ("/favicon.ico", "/admin/jsi18n/",)
 
 class LoggingMiddleware(object):
+    """
+    middleware class for logging
+    """
     def process_response(self, request, response):
         """
         Log the actions of logged in users.
         """
         # Filter out the following paths.  Logs will not be created for these paths.
-        if re.match(media_regexp, request.path) or re.match(sentry_regexp,
-            request.path) or request.path in url_filter:
+        if re.match(MEDIA_REGEXP, request.path) or re.match(SENTRY_REGEXP,
+            request.path) or request.path in URL_FILTER:
             return response
 
         # Retrieve the username either from a cookie (when logging out) or the authenticated user.
@@ -35,12 +41,14 @@ class LoggingMiddleware(object):
         return response
 
     def __write_log_entry(self, username, request, response=None):
+        """
+        write a log entry.
+        """
         path = request.get_full_path()
         code = response.status_code if response else 500
         method = request.method
         ip_addr = request.META["REMOTE_ADDR"] if request.META.has_key(
             "REMOTE_ADDR") else "no-ip"
-        # Timestamp yyyy-mm-dd Time
         timestamp = strftime("%Y-%m-%d %H:%M:%S")
 
         # Create the log entry.

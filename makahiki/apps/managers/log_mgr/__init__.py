@@ -1,7 +1,13 @@
+"""
+Logging Manager
+"""
 import logging
 from time import strftime # Timestamp
 
 def create_server_log(request, path=None):
+    """
+    create a log entry for cases that logging middleware did not apply.
+    """
     username = None
     if hasattr(request, "user") and request.user.is_authenticated():
         username = request.user.username

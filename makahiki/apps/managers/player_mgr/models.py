@@ -1,98 +1,27 @@
-import os
+"""
+Player Manager Models
+"""
 import datetime
 
 from django.db import models
 from django.db.models import Q
 from django.conf import settings
 from django.contrib.auth.models import User
-from django.contrib.contenttypes import generic
-from django.contrib.contenttypes.models import ContentType
 from django.db.models.signals import post_save
 from django.core.exceptions import ObjectDoesNotExist
 
 from django.contrib.localflavor.us.models import PhoneNumberField
+from managers.score_mgr.models import ScoreboardEntry, PointsTransaction
 
 from managers.team_mgr.models import Team
 from managers.settings_mgr import get_current_round
 from widgets.prizes import POINTS_PER_TICKET
 from managers.cache_mgr.utils import invalidate_info_bar_cache
 
-class InvalidRoundException(Exception):
-    def __init__(self, value):
-        self.value = value
-        super(InvalidRoundException, self).__init__(value)
-
-    def __str__(self):
-        return repr(self.value)
-
-
-def _get_rounds():
-    """Retrieves the rounds from the competition settings in a format that can be used in the ScoreboardEntry model."""
-
-    return ((key, key) for key in settings.COMPETITION_ROUNDS.keys())
-
-
-class ScoreboardEntry(models.Model):
-    """Defines a class that tracks the user's scores in the rounds of the competition."""
-
-    profile = models.ForeignKey("Profile", editable=False)
-    round_name = models.CharField(max_length="30", choices=_get_rounds(),
-        editable=False)
-    points = models.IntegerField(default=0, editable=False)
-    last_awarded_submission = models.DateTimeField(null=True, blank=True,
-        editable=False)
-
-    class Meta:
-        unique_together = (("profile", "round_name",),)
-        ordering = ("round_name",)
-
-    @staticmethod
-    def user_round_overall_rank(user, round_name):
-        entry, _ = ScoreboardEntry.objects.get_or_create(
-            profile=user.get_profile(),
-            round_name=round_name
-        )
-
-        # Check if the user has done anything.
-        if entry.last_awarded_submission:
-            return ScoreboardEntry.objects.filter(
-                Q(points__gt=entry.points) |
-                Q(points=entry.points,
-                    last_awarded_submission__gt=entry.last_awarded_submission),
-                round_name=round_name,
-            ).count() + 1
-
-        # Users who have not done anything yet are assumed to be last.
-        return ScoreboardEntry.objects.filter(
-            points__gt=entry.points,
-            round_name=round_name,
-        ).count() + 1
-
-    @staticmethod
-    def user_round_team_rank(user, round_name):
-        team = user.get_profile().team
-        entry, _ = ScoreboardEntry.objects.get_or_create(
-            profile=user.get_profile(),
-            round_name=round_name
-        )
-
-        if entry.last_awarded_submission:
-            return ScoreboardEntry.objects.filter(
-                Q(points__gt=entry.points) |
-                Q(points=entry.points,
-                    last_awarded_submission__gt=entry.last_awarded_submission),
-                profile__team=team,
-                round_name=round_name,
-            ).count() + 1
-        else:
-            return ScoreboardEntry.objects.filter(
-                points__gt=entry.points,
-                profile__team=team,
-                round_name=round_name,
-            ).count() + 1
-
-
 class Profile(models.Model):
+    """
+    Profile represents a player's profile info, and his points, and other book keeping.
+    """
     user = models.ForeignKey(User, unique=True, verbose_name='user',
         related_name='profile')
     name = models.CharField('name', unique=True, max_length=50)
@@ -181,7 +110,8 @@ class Profile(models.Model):
         if round_name:
             return ScoreboardEntry.user_round_team_rank(self.user, round_name)
 
-        # Calculate the rank.  This counts the number of people who are on the team that have more points
+        # Calculate the rank.
+        # This counts the number of people who are on the team that have more points
         # OR have the same amount of points but a later submission date
         if self.last_awarded_submission:
             return Profile.objects.filter(
@@ -202,6 +132,7 @@ class Profile(models.Model):
 
 
     def overall_rank(self, round_name=None):
+        """Returns the overall rank of the user."""
         if round_name:
             return ScoreboardEntry.user_round_overall_rank(self.user,
                 round_name)
@@ -235,6 +166,7 @@ class Profile(models.Model):
             }
 
     def _is_canopy_activity(self, related_object):
+        """check if the related_object is a canopy activity"""
         return related_object != None and\
                ((hasattr(related_object,
                    "activity") and related_object.activity.is_canopy)
@@ -273,12 +205,14 @@ class Profile(models.Model):
 
             current_round = self._get_round(submission_date)
 
-            # If we have a round, then update the scoreboard entry.  Otherwise, this just counts towards overall.
+            # If we have a round, then update the scoreboard entry.
+            # Otherwise, this just counts towards overall.
             if current_round:
                 entry, _ = ScoreboardEntry.objects.get_or_create(
                     profile=self, round_name=current_round)
                 entry.points += points
-                if not entry.last_awarded_submission or submission_date > entry.last_awarded_submission:
+                if not entry.last_awarded_submission or \
+                   submission_date > entry.last_awarded_submission:
                     entry.last_awarded_submission = submission_date
                 entry.save()
 
@@ -310,7 +244,8 @@ class Profile(models.Model):
             self.points -= points
 
             current_round = self._get_round(submission_date)
-            # If we have a round, then update the scoreboard entry.  Otherwise, this just counts towards overall.
+            # If we have a round, then update the scoreboard entry.
+            # Otherwise, this just counts towards overall.
             if current_round:
                 try:
                     entry = ScoreboardEntry.objects.get(profile=self,
@@ -324,15 +259,15 @@ class Profile(models.Model):
                     entry.save()
                 except ObjectDoesNotExist:
                     # This should not happen once the competition is rolling.
-                    raise InvalidRoundException(
-                        "Attempting to remove points from a round when the user has no points in that round.")
+                    raise
 
             if self.last_awarded_submission == submission_date:
                 self.last_awarded_submission = self._last_submitted_before(
                     submission_date)
 
     def _get_round(self, submission_date):
-        """Get the round that the submission date corresponds to.  Returns None if it doesn't correspond to anything."""
+        """Get the round that the submission date corresponds to.
+        Returns None if it doesn't correspond to anything."""
 
         rounds = settings.COMPETITION_ROUNDS
 
@@ -347,7 +282,8 @@ class Profile(models.Model):
 
     def _last_submitted_before(self, submission_date):
         """
-        Time of the last task that was completed before the submission date.  Returns None if there are no other tasks.
+        Time of the last task that was completed before the submission date.
+        Returns None if there are no other tasks.
         """
 
         from widgets.smartgrid.models import CommitmentMember, ActivityMember
@@ -397,11 +333,15 @@ class Profile(models.Model):
             referrer.save()
 
     class Meta:
+        """ Meta
+        """
         verbose_name = 'profile'
         verbose_name_plural = 'profiles'
 
 
 def create_profile(sender, instance=None, **kwargs):
+    """ create a profile automatically when creating a user.
+    """
     _ = sender
     if (kwargs.get('created', True) and not kwargs.get('raw', False)):
         profile, _ = Profile.objects.get_or_create(user=instance,
@@ -411,28 +351,3 @@ def create_profile(sender, instance=None, **kwargs):
                 profile=profile, round_name=key)
 
 post_save.connect(create_profile, sender=User)
-
-class PointsTransaction(models.Model):
-    """
-    Entries that track points awarded to users.
-    """
-    user = models.ForeignKey(User)
-    points = models.IntegerField()
-    submission_date = models.DateTimeField()
-    message = models.CharField(max_length=255)
-    object_id = models.PositiveIntegerField(null=True)
-    content_type = models.ForeignKey(ContentType, null=True)
-    related_object = generic.GenericForeignKey("content_type", "object_id")
-
-    @staticmethod
-    def get_transaction_for_object(related_object, points):
-        try:
-            content_type = ContentType.objects.get_for_model(related_object)
-            return PointsTransaction.objects.filter(
-                points=points,
-                object_id=related_object.id,
-                content_type=content_type,
-            )[0]
-
-        except IndexError:
-            return None

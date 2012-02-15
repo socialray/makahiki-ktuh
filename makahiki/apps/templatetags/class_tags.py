@@ -1,3 +1,6 @@
+"""
+template tags used in all templates
+"""
 from django.utils import importlib
 
 from django.template import Library

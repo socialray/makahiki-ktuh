@@ -1,3 +1,6 @@
+"""
+team mgr models
+"""
 import datetime
 
 from django.db import models
@@ -5,11 +8,14 @@ from django.contrib.auth.models import User
 from django.template.defaultfilters import slugify
 from django.db.models import Sum, Max
 
-from managers.settings_mgr import get_team_label, get_current_round
+from managers.settings_mgr import get_current_round
 
 # Create your models here.
 
 class Group(models.Model):
+    """
+    defines the group that a team belongs to.
+    """
     # Automatically populate slug field when the name is added.
     prepopulated_fields = {"slug": ("name",)}
 
@@ -46,6 +52,9 @@ class Group(models.Model):
 
 
 class Team(models.Model):
+    """
+    represents a team that a player belongs to.
+    """
     prepopulated_fields = {"slug": ("name",)}
 
     name = models.CharField(
@@ -89,6 +98,8 @@ class Team(models.Model):
         return self.profile_set.all().order_by("-points", "-last_awarded_submission")[:num_results]
 
     def current_round_rank(self):
+        """ current round rank
+        """
         current_round = get_current_round()
         if current_round:
             return self.rank(round_name=current_round)
@@ -98,7 +109,7 @@ class Team(models.Model):
     def rank(self, round_name=None):
         """Returns the rank of the team across all groups."""
         if round_name:
-            from managers.player_mgr.models import ScoreboardEntry
+            from managers.score_mgr.models import ScoreboardEntry
 
             aggregate = ScoreboardEntry.objects.filter(
                 profile__team=self,
@@ -146,7 +157,8 @@ class Team(models.Model):
         return None
 
     def points(self, round_name=None):
-        """Returns the total number of points for the team.  Takes an optional parameter for a round."""
+        """Returns the total number of points for the team.  Takes an optional parameter for a
+        round."""
         if round_name:
             from managers.player_mgr.models import ScoreboardEntry
 
@@ -189,6 +201,7 @@ class Post(models.Model):
 
 
 class PostComment(models.Model):
+    """represent the structure for comments in a post"""
     user = models.ForeignKey(User)
     post = models.ForeignKey(Post)
     text = models.TextField()

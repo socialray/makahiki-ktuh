@@ -1,15 +1,23 @@
+"""
+test scoreboard
+"""
+# pylint: disable=C0103
 import datetime
 
 from django.conf import settings
 from django.test import TestCase
 from django.contrib.auth.models import User
+from test_utils import TestUtils
 from widgets.smartgrid.models import Activity, ActivityMember
 from managers.team_mgr.models import Group, Team
-from managers.player_mgr.models import Profile, ScoreboardEntry
+from managers.player_mgr.models import Profile
+from managers.score_mgr.models import ScoreboardEntry
 
 class ScoreboardEntryUnitTests(TestCase):
+    """scoreboard test"""
     def setUp(self):
-        """Generate test user and activity. Set the competition settings to the current date for testing."""
+        """Generate test user and activity. Set the competition settings to the current date for
+        testing."""
         self.user = User(username="test_user", password="changeme")
         self.user.save()
         self.activity = Activity(
@@ -25,15 +33,7 @@ class ScoreboardEntryUnitTests(TestCase):
 
         self.saved_rounds = settings.COMPETITION_ROUNDS
         self.current_round = "Round 1"
-        start = datetime.date.today()
-        end = start + datetime.timedelta(days=7)
-
-        settings.COMPETITION_ROUNDS = {
-            "Round 1": {
-                "start": start.strftime("%Y-%m-%d"),
-                "end": end.strftime("%Y-%m-%d"),
-                },
-            }
+        TestUtils.set_competition_round()
 
     def testRoundsUpdate(self):
         """Test that the score for the round updates when an activity is approved."""
@@ -61,7 +61,8 @@ class ScoreboardEntryUnitTests(TestCase):
             entry.last_awarded_submission)
 
     def testRoundDoesNotUpdate(self):
-        """Test that the score for the round does not update for an activity submitted outside of the round."""
+        """Test that the score for the round does not update for an activity submitted outside of
+        the round."""
         entry = ScoreboardEntry.objects.get_or_create(
             profile=self.user.get_profile(),
             round_name=self.current_round,
@@ -85,7 +86,8 @@ class ScoreboardEntryUnitTests(TestCase):
         self.assertEqual(round_submission_date, entry.last_awarded_submission)
 
     def testUserOverallRoundRankWithPoints(self):
-        """Tests that the overall rank calculation for a user in a round is correct based on points."""
+        """Tests that the overall rank calculation for a user in a round is correct based on
+        points."""
         top_entry = ScoreboardEntry.objects.filter(round_name=self.current_round).order_by(
             "-points")[0]
         entry = ScoreboardEntry.objects.get_or_create(
@@ -117,7 +119,8 @@ class ScoreboardEntryUnitTests(TestCase):
             "Check user is now second.")
 
     def testUserOverallRoundRankWithSubmissionDate(self):
-        """Tests that the overall rank calculation for a user in a round is correct based on submission date."""
+        """Tests that the overall rank calculation for a user in a round is correct based on
+        submission date."""
         top_entry = ScoreboardEntry.objects.filter(round_name=self.current_round).order_by(
             "-points")[0]
         entry = ScoreboardEntry.objects.get_or_create(
@@ -240,7 +243,8 @@ class ScoreboardEntryUnitTests(TestCase):
             "Check user is now second.")
 
     def testRoundRankWithoutEntry(self):
-        """Tests that the overall rank calculation is correct even if a user has not done anything yet."""
+        """Tests that the overall rank calculation is correct even if a user has not done
+        anything yet."""
         group = Group(name="Test group")
         group.save()
         team = Team(number="A", group=group)

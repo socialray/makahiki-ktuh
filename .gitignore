@@ -15,6 +15,7 @@ local_settings.py
 
 # Ignore the test files.
 log/makahiki.log
+makahiki.log
 site_media
 
 # Ignore the apache configuration

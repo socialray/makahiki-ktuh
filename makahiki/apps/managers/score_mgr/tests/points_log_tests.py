@@ -1,3 +1,7 @@
+"""
+test point transaction log
+"""
+#pylint: disable=C0103
 import datetime
 
 from django.test import TestCase
@@ -6,6 +10,7 @@ from django.contrib.auth.models import User
 from managers.player_mgr.models import PointsTransaction
 
 class PointsLogTest(TestCase):
+    """test points log"""
     def setUp(self):
         self.user = User.objects.create_user("test", "test@test.com")
 
@@ -24,5 +29,3 @@ class PointsLogTest(TestCase):
         self.assertEqual(log.points, 10, "Points should have been awarded.")
         self.assertEqual(log.message, "Hello world",
             "Message should have been added.")
-        # self.assertEqual(profile.last_awarded_submission, log.submission_date, "Submission dates should be the same.")
-    

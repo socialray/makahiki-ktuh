@@ -1,6 +1,7 @@
 """
-BASE Manager package
+Settings Manager package
 """
+
 import datetime
 from django.conf import settings
 
@@ -120,7 +121,8 @@ def get_competition_dates():
 
 
 def restricted(request, message=None):
-    """Helper method to return a error message when a user accesses a page they are not allowed to view."""
+    """Helper method to return a error message when a user accesses a page they are not
+    allowed to view."""
 
     if not message:
         message = "You are not allowed to view this page."

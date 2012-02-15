@@ -1,4 +1,5 @@
-""" It provides competition settings in the request context to be used within
+"""
+ provides competition settings in the request context to be used within
  a template. It mainly retrieve the settings from settings files.
 """
 from django.conf import settings

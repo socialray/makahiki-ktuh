@@ -1,4 +1,4 @@
-from managers.player_mgr.models import ScoreboardEntry
+from managers.score_mgr.models import ScoreboardEntry
 from widgets.quests.models import Quest, QuestMember
 from widgets.smartgrid import is_pau
 from widgets.smartgrid.models import ActivityBase, ActivityMember, CommitmentMember, Category

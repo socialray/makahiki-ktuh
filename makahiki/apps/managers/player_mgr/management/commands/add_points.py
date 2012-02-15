@@ -1,3 +1,9 @@
+"""
+Awards points to a username or a building and lounge.\n
+Usage is either:\n
+'python manage.py add_points <username> <points> <short-message> <long-message>' or\n
+'python manage.py add_points <residence-hall> <team-name> <points> <short-message> <long-message>'\n
+"""
 import datetime
 
 from django.core import management
@@ -7,11 +13,12 @@ from managers.team_mgr.models import Team
 from widgets.notifications.models import UserNotification
 
 class Command(management.base.BaseCommand):
+    """ add point command """
     help = """
-  Awards points to a username or a building and lounge.\n
-  Usage is either:\n
-  'python manage.py add_points <username> <points> <short-message> <long-message>' or\n
-  'python manage.py add_points <residence-hall> <team-name> <points> <short-message> <long-message>'\n
+Awards points to a username or a building and lounge.\n
+Usage is either:\n
+'python manage.py add_points <username> <points> <short-message> <long-message>' or\n
+'python manage.py add_points <residence-hall> <team-name> <points> <short-message> <long-message>'\n
   """
 
     def handle(self, *args, **options):

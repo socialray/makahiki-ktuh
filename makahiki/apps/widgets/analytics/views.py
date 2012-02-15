@@ -12,7 +12,8 @@ from widgets.smartgrid import get_popular_activities, get_popular_commitments, g
 from widgets.smartgrid.models import ActivityBase, Activity, ActivityMember
 from widgets.energy.models import TeamEnergyGoal
 from managers.team_mgr.models import Team
-from managers.player_mgr.models import Profile, ScoreboardEntry
+from managers.player_mgr.models import Profile
+from managers.score_mgr.models import ScoreboardEntry
 from widgets.prizes.models import RaffleDeadline
 from widgets.quests.models import Quest
 

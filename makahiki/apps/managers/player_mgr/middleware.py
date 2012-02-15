@@ -1,3 +1,7 @@
+"""
+This middleware tracks how many days in a row the user has come to the site.
+"""
+
 import datetime
 
 from widgets.badges import user_badges

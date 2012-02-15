@@ -1,6 +1,7 @@
 """
-tests
+test settings
 """
+#pylint: disable=C0103
 import datetime
 
 from django.test import TestCase
@@ -80,6 +81,7 @@ def tearDown(self):
 
 
 class BaseUnitTestCase(TestCase):
+    """basic setting test"""
     def testCurrentRound(self):
         """Tests that the current round retrieval is correct."""
         saved_rounds = settings.COMPETITION_ROUNDS
@@ -117,6 +119,8 @@ class BaseUnitTestCase(TestCase):
 
 
 class ClassTagsUnitTests(TestCase):
+    """ test class tags
+    """
     def setUp(self):
         """Stores the current values of the CSS keys so that we can modify them."""
         self.saved_classes = default.CSS_CLASSES

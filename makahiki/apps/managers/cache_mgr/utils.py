@@ -1,3 +1,6 @@
+"""
+Caching Utilities
+"""
 from django.core.cache import cache
 from django.utils.hashcompat import md5_constructor
 from django.utils.http import urlquote

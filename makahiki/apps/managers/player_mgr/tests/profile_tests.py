@@ -1,30 +1,31 @@
+"""
+profile tests
+"""
+#pylint: disable=C0103
 import datetime
 
 from django.conf import settings
 from django.test import TestCase
 from django.contrib.auth.models import User
 from django.db import IntegrityError
+from test_utils import TestUtils
 
 from widgets.smartgrid.models import Activity, ActivityMember
 from managers.team_mgr.models import Group, Team
 from managers.player_mgr.models import Profile
 
 class ProfileLeadersTests(TestCase):
+    """profile leader tests"""
     def setUp(self):
+        """
+        test case setup
+        """
         self.users = [User.objects.create_user("test%d" % i, "test@test.com")
                       for i in range(0, 3)]
 
         self.saved_rounds = settings.COMPETITION_ROUNDS
         self.current_round = "Round 1"
-        start = datetime.date.today()
-        end = start + datetime.timedelta(days=7)
-
-        settings.COMPETITION_ROUNDS = {
-            "Round 1": {
-                "start": start.strftime("%Y-%m-%d"),
-                "end": end.strftime("%Y-%m-%d"),
-                },
-            }
+        TestUtils.set_competition_round()
 
     def testLeadersInRound(self):
         """
@@ -106,7 +107,11 @@ class ProfileLeadersTests(TestCase):
 
 
 class ProfileUnitTests(TestCase):
+    """profile unit test"""
     def testDisplayNameUnique(self):
+        """
+        test displayname uniqueness.
+        """
         user1 = User(username="test_user", password="changeme")
         user1.save()
         user2 = User(username="test_user1", password="changeme")
@@ -166,6 +171,7 @@ class ProfileUnitTests(TestCase):
             'User 1 should not be given the referral bonus again.')
 
     def testReferralLoop(self):
+        """test referral loop"""
         user1 = User.objects.create_user("test_user", 'user@test.com',
             password="changeme")
         user1.save()
@@ -241,7 +247,8 @@ class ProfileUnitTests(TestCase):
             "Check that the user is now rank 2.")
 
     def testTeamRankWithSubmissionDate(self):
-        """Tests that the team_rank method accurately computes the rank when users have the same number of points."""
+        """Tests that the team_rank method accurately computes the rank when users have the same
+        number of points."""
         user = User(username="test_user", password="changeme")
         user.save()
         group = Group(name="Test group")
@@ -305,7 +312,8 @@ class ProfileUnitTests(TestCase):
             "Check that the user is now rank 2.")
 
     def testOverallRankWithSubmissionDate(self):
-        """Tests that the overall_rank method accurately computes the rank when two users have the same number of points."""
+        """Tests that the overall_rank method accurately computes the rank when two users have
+        the same number of points."""
         user = User(username="test_user", password="changeme")
         user.save()
 
@@ -331,15 +339,7 @@ class ProfileUnitTests(TestCase):
     def testOverallRankForCurrentRound(self):
         """Test that we can retrieve the rank for the user in the current round."""
         saved_rounds = settings.COMPETITION_ROUNDS
-        start = datetime.date.today()
-        end = start + datetime.timedelta(days=7)
-
-        settings.COMPETITION_ROUNDS = {
-            "Round 1": {
-                "start": start.strftime("%Y-%m-%d"),
-                "end": end.strftime("%Y-%m-%d"),
-                },
-            }
+        TestUtils.set_competition_round()
 
         user = User(username="test_user", password="changeme")
         user.save()
@@ -370,15 +370,7 @@ class ProfileUnitTests(TestCase):
     def testTeamRankForCurrentRound(self):
         """Test that we can retrieve the rank for the user in the current round."""
         saved_rounds = settings.COMPETITION_ROUNDS
-        start = datetime.date.today()
-        end = start + datetime.timedelta(days=7)
-
-        settings.COMPETITION_ROUNDS = {
-            "Round 1": {
-                "start": start.strftime("%Y-%m-%d"),
-                "end": end.strftime("%Y-%m-%d"),
-                },
-            }
+        TestUtils.set_competition_round()
 
         group = Group(name="Test group")
         group.save()
@@ -417,15 +409,7 @@ class ProfileUnitTests(TestCase):
         """Tests that we can retrieve the points for the user in the current round."""
         # Save the round information and set up a test round.
         saved_rounds = settings.COMPETITION_ROUNDS
-        start = datetime.date.today()
-        end = start + datetime.timedelta(days=7)
-
-        settings.COMPETITION_ROUNDS = {
-            "Round 1": {
-                "start": start.strftime("%Y-%m-%d"),
-                "end": end.strftime("%Y-%m-%d"),
-                },
-            }
+        TestUtils.set_competition_round()
 
         user = User(username="test_user", password="changeme")
         user.save()
@@ -442,7 +426,8 @@ class ProfileUnitTests(TestCase):
             datetime.datetime.today() - datetime.timedelta(days=1), "Test")
 
         self.assertEqual(profile.current_round_points(), points + 10,
-            "Check that the number of points did not change when points are awarded outside of a round.")
+            "Check that the number of points did not change when points are awarded " +
+            "outside of a round.")
 
         # Restore saved rounds.
         settings.COMPETITION_ROUNDS = saved_rounds
@@ -456,10 +441,10 @@ class ProfileUnitTests(TestCase):
             title="Test activity",
             slug="test-activity",
             description="Testing!",
-            duration=10,
-            point_value=10,
             pub_date=datetime.datetime.today(),
             expire_date=datetime.datetime.today() + datetime.timedelta(days=7),
+            duration=10,
+            point_value=10,
             confirm_type="text",
             type="activity",
         )
@@ -502,6 +487,3 @@ class ProfileUnitTests(TestCase):
 
         # Verify that we rolled back to the previous activity.
         self.assertEqual(points, user.get_profile().points)
-        # TODO: Rolling back last awarded submission is broken.  May be fixed when we implement
-        # a points transaction log.
-        # self.assertTrue(abs(submit_date - user.get_profile().last_awarded_submission) < datetime.timedelta(minutes=1))

@@ -1,3 +1,8 @@
+"""
+team manager tests
+"""
+
+#pylint: disable=C0103
 import datetime
 
 from django.test import TestCase
@@ -5,18 +10,19 @@ from django.contrib.auth.models import User
 from django.conf import settings
 from django.db.models import Sum, Max
 
+from test_utils import TestUtils
 from managers.team_mgr.models import Group, Team
 
 class DormUnitTestCase(TestCase):
+    """dorm test"""
+
     def setUp(self):
         self.groups = [Group(name="Test Group %d" % i) for i in range(0, 2)]
-        # map(lambda d: d.save(), self.groups)
-        _ = [d.save() for d in self.groups]  # rewrite the above to avoid plint warning of using built-in function 'map'
+        _ = [d.save() for d in self.groups]
 
         self.teams = [Team(name=str(i), group=self.groups[i % 2]) for i in
                        range(0, 4)]
-        # map(lambda f: f.save(), self.teams)
-        _ = [f.save() for f in self.teams]  # rewrite the above to avoid plint warning of using built-in function 'map'
+        _ = [f.save() for f in self.teams]
 
         self.users = [User.objects.create_user("test%d" % i, "test@test.com")
                       for i in range(0, 4)]
@@ -28,15 +34,7 @@ class DormUnitTestCase(TestCase):
 
         self.saved_rounds = settings.COMPETITION_ROUNDS
         self.current_round = "Round 1"
-        start = datetime.date.today()
-        end = start + datetime.timedelta(days=7)
-
-        settings.COMPETITION_ROUNDS = {
-            "Round 1": {
-                "start": start.strftime("%Y-%m-%d"),
-                "end": end.strftime("%Y-%m-%d"),
-                },
-            }
+        TestUtils.set_competition_round()
 
     def testTeamPointsInRound(self):
         """
@@ -52,7 +50,8 @@ class DormUnitTestCase(TestCase):
             , profile.team,
             "The user's team is not leading in the prize.")
 
-        # Test that a user in a different team but same dorm changes the leader for the original user.
+        # Test that a user in a different team but same dorm changes the leader for the original
+        # user.
         profile2 = self.users[2].get_profile()
         profile2.add_points(profile.points + 1,
             datetime.datetime.today() - datetime.timedelta(minutes=1), "test")
@@ -73,7 +72,8 @@ class DormUnitTestCase(TestCase):
             , profile2.team,
             "The leader of the team should not change.")
 
-        # Test that adding points to a user in a different dorm does not change affect these standings.
+        # Test that adding points to a user in a different dorm does not change affect these
+        # standings.
         profile1 = self.users[1].get_profile()
         profile1.add_points(profile.points + 1,
             datetime.datetime.today() - datetime.timedelta(minutes=1), "test")
@@ -109,7 +109,8 @@ class DormUnitTestCase(TestCase):
         self.assertEqual(self.groups[0].team_points_leaders()[0], profile.team,
             "The user's team is not leading in the prize.")
 
-        # Test that a user in a different team but same dorm changes the leader for the original user.
+        # Test that a user in a different team but same dorm changes the leader for the original
+        # user.
         profile2 = self.users[2].get_profile()
         profile2.add_points(profile.points + 1,
             datetime.datetime.today() - datetime.timedelta(minutes=1), "test")
@@ -128,7 +129,8 @@ class DormUnitTestCase(TestCase):
         self.assertEqual(self.groups[0].team_points_leaders()[0], profile.team,
             "The leader of the team should have changed back.")
 
-        # Test that adding points to a user in a different dorm does not change affect these standings.
+        # Test that adding points to a user in a different dorm does not change affect these
+        # standings.
         profile1 = self.users[1].get_profile()
         profile1.add_points(profile.points + 1,
             datetime.datetime.today() - datetime.timedelta(minutes=1), "test")
@@ -145,14 +147,14 @@ class DormUnitTestCase(TestCase):
 
 
 class TeamLeadersTestCase(TestCase):
+    """test team leader"""
     def setUp(self):
         self.group = Group(name="Test Group")
         self.group.save()
 
         self.teams = [Team(name=str(i), group=self.group) for i in
                        range(0, 2)]
-        # map(lambda f: f.save(), self.teams)
-        _ = [f.save() for f in self.teams]  # rewrite the above to avoid plint warning of using built-in function 'map'
+        _ = [f.save() for f in self.teams]
 
         self.users = [User.objects.create_user("test%d" % i, "test@test.com")
                       for i in range(0, 4)]
@@ -164,15 +166,7 @@ class TeamLeadersTestCase(TestCase):
 
         self.saved_rounds = settings.COMPETITION_ROUNDS
         self.current_round = "Round 1"
-        start = datetime.date.today()
-        end = start + datetime.timedelta(days=7)
-
-        settings.COMPETITION_ROUNDS = {
-            "Round 1": {
-                "start": start.strftime("%Y-%m-%d"),
-                "end": end.strftime("%Y-%m-%d"),
-                },
-            }
+        TestUtils.set_competition_round()
 
     def testTeamPointsInRound(self):
         """
@@ -188,7 +182,8 @@ class TeamLeadersTestCase(TestCase):
             profile.team,
             "The user's team is not leading in the prize.")
 
-        # Test that a user in a different team but same dorm changes the leader for the original user.
+        # Test that a user in a different team but same dorm changes the leader for the original
+        # user.
         profile2 = self.users[2].get_profile()
         profile2.add_points(profile.points + 1,
             datetime.datetime.today() - datetime.timedelta(minutes=1), "test")
@@ -232,7 +227,8 @@ class TeamLeadersTestCase(TestCase):
             profile,
             "The user should be in the lead in his own team.")
 
-        # Test that a user in a different team but same dorm does not change the leader for the original team.
+        # Test that a user in a different team but same dorm does not change the leader for the
+        # original team.
         profile1 = self.users[1].get_profile()
         profile1.add_points(15,
             datetime.datetime.today() - datetime.timedelta(minutes=1), "test")
@@ -289,7 +285,8 @@ class TeamLeadersTestCase(TestCase):
         self.assertEqual(profile.team.points_leaders()[0], profile,
             "The user should be in the lead in his own team.")
 
-        # Test that a user in a different team but same dorm does not change the leader for the original team.
+        # Test that a user in a different team but same dorm does not change the leader for the
+        # original team.
         profile1 = self.users[1].get_profile()
         profile1.add_points(15,
             datetime.datetime.today() - datetime.timedelta(minutes=1), "test")
@@ -321,6 +318,7 @@ class TeamLeadersTestCase(TestCase):
 
 
 class TeamsUnitTestCase(TestCase):
+    """team tests"""
     def setUp(self):
         self.group = Group(name="Test group")
         self.group.save()
@@ -360,15 +358,7 @@ class TeamsUnitTestCase(TestCase):
         """Tests that we can accurately compute the amount of points in a round."""
         # Save the round information and set up a test round.
         saved_rounds = settings.COMPETITION_ROUNDS
-        start = datetime.date.today()
-        end = start + datetime.timedelta(days=7)
-
-        settings.COMPETITION_ROUNDS = {
-            "Round 1": {
-                "start": start.strftime("%Y-%m-%d"),
-                "end": end.strftime("%Y-%m-%d"),
-                },
-            }
+        TestUtils.set_competition_round()
 
         user = User(username="test_user", password="test_password")
         user.save()
@@ -436,15 +426,7 @@ class TeamsUnitTestCase(TestCase):
         """Check that the rank calculation is correct for the current round."""
         # Save the round information and set up a test round.
         saved_rounds = settings.COMPETITION_ROUNDS
-        start = datetime.date.today()
-        end = start + datetime.timedelta(days=7)
-
-        settings.COMPETITION_ROUNDS = {
-            "Round 1": {
-                "start": start.strftime("%Y-%m-%d"),
-                "end": end.strftime("%Y-%m-%d"),
-                },
-            }
+        TestUtils.set_competition_round()
 
         # Create a test user.
         user = User(username="test_user", password="test_password")

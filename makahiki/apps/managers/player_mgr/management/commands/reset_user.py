@@ -1,9 +1,12 @@
-import string
+"""
+Resets the user(s) as if they never took part in the competition.
+"""
 
 from django.core import management
 from django.contrib.auth.models import User
 
 class Command(management.base.BaseCommand):
+    """reset user command"""
     help = 'Resets the user(s) as if they never took part in the competition.'
 
     def handle(self, *args, **options):
@@ -16,7 +19,7 @@ class Command(management.base.BaseCommand):
 
         self.stdout.write(
             "WARNING: This command will reset the following user(s):\n%s" % (
-                string.join(args, "\n")
+                args.join("\n")
                 ))
         self.stdout.write("\n\nThis process is irreversible.\n")
         value = raw_input("Do you wish to continue (Y/n)? ")
