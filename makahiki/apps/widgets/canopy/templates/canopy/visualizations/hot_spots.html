@@ -7,7 +7,7 @@
         Hot Spot Analysis : Lounge
         <select id='lounge' onchange='updateLounge();'>
             {% for lounge in view_objects.canopy.all_lounges %}
-                <option {% if user.get_profile.get_lounge_name == lounge.name %}
+                <option {% if user.get_profile.team.name == lounge.name %}
                     selected {% endif %}
                     value='{{ lounge.name}}'>{{ lounge.name }}
                 </option>

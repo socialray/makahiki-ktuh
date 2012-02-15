@@ -45,7 +45,7 @@ class LoggingMiddleware(object):
 
         # Create the log entry.
         entry = "%s %s %s %s %s %d" % (
-        timestamp, ip_addr, username, method, path, code)
+            timestamp, ip_addr, username, method, path, code)
         if request.method == "POST":
             # Dump the POST parameters, but we don't need the CSRF token.
             query_dict = request.POST.copy()

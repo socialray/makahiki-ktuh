@@ -72,7 +72,7 @@
       "category": "rules", 
       "parent_topic": null, 
       "slug": "performing-activities", 
-      "contents": "Some of the activites in the Smart Grid Game involve you to watch a video, attend an event, or do certain activities around the dorms. To do an activity, go to the Get Nutz page and find an activity that you would like to perform. After performing an activity, there will be either questions, code inputs, or image uploads that you will have to provide to prove that you have done the activity. After an Admin approves the activity you done, you will get your points!!! ", 
+      "contents": "Some of the activites in the Smart Grid Game involve you to watch a video, attend an event, or do certain activities around the groups. To do an activity, go to the Get Nutz page and find an activity that you would like to perform. After performing an activity, there will be either questions, code inputs, or image uploads that you will have to provide to prove that you have done the activity. After an Admin approves the activity you done, you will get your points!!! ",
       "title": "Performing Activities"
     }
   }, 
@@ -105,7 +105,7 @@
       "category": "rules", 
       "parent_topic": null, 
       "slug": "award-categories-and-prizes", 
-      "contents": "Round 1 Awards:\r\nCategory\tAward\r\nIndividual on each team who gained the most points. \t$25 gift certif.\r\nTeam that gained the most points (across all dorms). \tIce cream party\r\nTeam that reduced energy use the most (across all dorms). \tIce cream party\r\nRound 2 Awards:\r\nCategory\tAward\r\nIndividual on each team who gained the most points. \t$25 gift certif.\r\nTeam that gained the most points (across all dorms). \tIce cream party\r\nTeam that reduced energy use the most (across all dorms). \tIce cream party\r\nGrand Prize Awards:\r\nCategory\tAward\r\nIndividual per dorm with highest number of points. \tiPod touch\r\nTeam with highest number of points. \tPizza party\r\nTeam that reduced energy use the most. \tPizza party",
+      "contents": "Round 1 Awards:\r\nCategory\tAward\r\nIndividual on each team who gained the most points. \t$25 gift certif.\r\nTeam that gained the most points (across all groups). \tIce cream party\r\nTeam that reduced energy use the most (across all groups). \tIce cream party\r\nRound 2 Awards:\r\nCategory\tAward\r\nIndividual on each team who gained the most points. \t$25 gift certif.\r\nTeam that gained the most points (across all groups). \tIce cream party\r\nTeam that reduced energy use the most (across all groups). \tIce cream party\r\nGrand Prize Awards:\r\nCategory\tAward\r\nIndividual per dorm with highest number of points. \tiPod touch\r\nTeam with highest number of points. \tPizza party\r\nTeam that reduced energy use the most. \tPizza party",
       "title": "Award Categories and Prizes"
     }
   }, 
@@ -127,7 +127,7 @@
       "category": "faq", 
       "parent_topic": null, 
       "slug": "how-do-you-figure-out-baseline", 
-      "contents": "The baseline is based on the average usage from the months before the competition. I.E. the months when the students have moved into the dorms and have situated themselves within the dorms. ", 
+      "contents": "The baseline is based on the average usage from the months before the competition. I.E. the months when the students have moved into the groups and have situated themselves within the groups. ",
       "title": "How do you figure out the baseline?"
     }
   }, 

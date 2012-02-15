@@ -488,11 +488,11 @@ class QuestConditionsTest(TestCase):
         """
         Tests that this predicate is completed when the user posts something to their wall.
         """
-        from managers.team_mgr.models import Dorm, Team, Post
+        from managers.team_mgr.models import Group, Team, Post
         from widgets.quests import posted_to_wall
 
-        dorm = Dorm.objects.create(name="test", slug="test")
-        team = Team.objects.create(name="a", slug="a", dorm=dorm)
+        group = Group.objects.create(name="test", slug="test")
+        team = Team.objects.create(name="a", slug="a", group=group)
         profile = self.user.get_profile()
         profile.team = team
         profile.save()

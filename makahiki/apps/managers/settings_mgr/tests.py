@@ -7,7 +7,7 @@ from django.test import TestCase
 from django.core.urlresolvers import reverse
 from django.conf import settings
 
-from managers.base_mgr import  get_current_round
+from managers.settings_mgr import  get_current_round
 from templatetags.class_tags import insert_classes, get_id_and_classes
 from css_rules import default
 

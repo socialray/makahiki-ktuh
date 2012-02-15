@@ -13,7 +13,7 @@ from django.core.exceptions import ObjectDoesNotExist
 from django.contrib.localflavor.us.models import PhoneNumberField
 
 from managers.team_mgr.models import Team
-from managers.base_mgr import get_current_round
+from managers.settings_mgr import get_current_round
 from widgets.prizes import POINTS_PER_TICKET
 from managers.cache_mgr.utils import invalidate_info_bar_cache
 
@@ -92,14 +92,6 @@ class ScoreboardEntry(models.Model):
             ).count() + 1
 
 
-def _get_available_themes():
-    """Retrieves the available themes from the media folder."""
-
-    theme_dir = os.path.join(settings.PROJECT_ROOT, "media", "css")
-    # Returns a list of tuples representing the name of the theme and the directory of the theme
-    return ((item, item) for item in os.listdir(theme_dir))
-
-
 class Profile(models.Model):
     user = models.ForeignKey(User, unique=True, verbose_name='user',
         related_name='profile')
@@ -136,9 +128,6 @@ class Profile(models.Model):
 
     def __unicode__(self):
         return self.name
-
-    def get_lounge_name(self):
-        return self.team.name
 
     @staticmethod
     def points_leaders(num_results=10, round_name=None):

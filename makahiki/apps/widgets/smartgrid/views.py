@@ -15,7 +15,7 @@ from django.db.models import Count
 from django.contrib import messages
 from django.core.cache import cache
 
-from managers.base_mgr import get_current_round
+from managers.settings_mgr import get_current_round
 from widgets.smartgrid.models import TextPromptQuestion, EmailReminder, ActivityMember, \
                                      CommitmentMember, Category, ActivityBase, Activity, \
                                      ConfirmationCode, TextReminder, activity_image_file_path
@@ -57,7 +57,7 @@ def supply(request):
     # Calculate active participation.
     team_participation = Team.objects.filter(profile__points__gte=50).annotate(
         user_count=Count('profile'),
-    ).order_by('-user_count').select_related('dorm')[:10]
+    ).order_by('-user_count').select_related('group')[:10]
 
     for f in team_participation:
         f.active_participation = (f.user_count * 100) / f.profile_set.count()

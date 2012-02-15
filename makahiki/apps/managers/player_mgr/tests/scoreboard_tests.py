@@ -4,7 +4,7 @@ from django.conf import settings
 from django.test import TestCase
 from django.contrib.auth.models import User
 from widgets.smartgrid.models import Activity, ActivityMember
-from managers.team_mgr.models import Dorm, Team
+from managers.team_mgr.models import Group, Team
 from managers.player_mgr.models import Profile, ScoreboardEntry
 
 class ScoreboardEntryUnitTests(TestCase):
@@ -152,9 +152,9 @@ class ScoreboardEntryUnitTests(TestCase):
     def testUserTeamRoundRankWithPoints(self):
         """Tests that the team rank calculation for a round is correct based on points."""
         # Setup dorm
-        dorm = Dorm(name="Test dorm")
-        dorm.save()
-        team = Team(number="A", dorm=dorm)
+        group = Group(name="Test group")
+        group.save()
+        team = Team(number="A", group=group)
         team.save()
 
         profile = self.user.get_profile()
@@ -199,9 +199,9 @@ class ScoreboardEntryUnitTests(TestCase):
     def testUserTeamRoundRankWithSubmissionDate(self):
         """Tests that the team rank calculation for a round is correct based on points."""
         # Set up dorm
-        dorm = Dorm(name="Test dorm")
-        dorm.save()
-        team = Team(number="A", dorm=dorm)
+        group = Group(name="Test group")
+        group.save()
+        team = Team(number="A", group=group)
         team.save()
 
         # Create the entry for the test user
@@ -241,9 +241,9 @@ class ScoreboardEntryUnitTests(TestCase):
 
     def testRoundRankWithoutEntry(self):
         """Tests that the overall rank calculation is correct even if a user has not done anything yet."""
-        dorm = Dorm(name="Test dorm")
-        dorm.save()
-        team = Team(number="A", dorm=dorm)
+        group = Group(name="Test group")
+        group.save()
+        team = Team(number="A", group=group)
         team.save()
 
         # Rank will be the number of users who have points plus one.

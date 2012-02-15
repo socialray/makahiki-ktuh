@@ -7,7 +7,7 @@ from django.core.files.images import ImageFile
 from django.contrib.auth.models import User
 
 from widgets.prizes.models import Prize
-from managers.team_mgr.models import Dorm, Team
+from managers.team_mgr.models import Group, Team
 
 class DormTeamPrizeTests(TestCase):
     """
@@ -26,7 +26,7 @@ class DormTeamPrizeTests(TestCase):
             short_description="A test prize",
             long_description="A test prize",
             image=image,
-            award_to="team_dorm",
+            award_to="team_group",
             competition_type="points",
             value=5,
         )
@@ -43,11 +43,11 @@ class DormTeamPrizeTests(TestCase):
                 },
             }
 
-        # Create test dorms, teams, and users.
-        self.dorms = [Dorm(name="Test Dorm %d" % i) for i in range(0, 2)]
-        _ = [d.save() for d in self.dorms]
+        # Create test groups, teams, and users.
+        self.groups = [Group(name="Test Group %d" % i) for i in range(0, 2)]
+        _ = [d.save() for d in self.groups]
 
-        self.teams = [Team(name=str(i), dorm=self.dorms[i % 2]) for i in range(0, 4)]
+        self.teams = [Team(name=str(i), group=self.groups[i % 2]) for i in range(0, 4)]
         _ = [f.save() for f in self.teams]
 
         self.users = [User.objects.create_user("test%d" % i, "test@test.com") for i in range(0, 4)]
@@ -59,13 +59,13 @@ class DormTeamPrizeTests(TestCase):
 
     def testNumAwarded(self):
         """
-        Checks that the number of prizes to award for this prize is the same as the number of dorms.
+        Checks that the number of prizes to award for this prize is the same as the number of groups.
         """
         self.prize.round_name = "Round 1"
         self.prize.save()
 
-        self.assertEqual(self.prize.num_awarded(self.teams[0]), len(self.dorms),
-            "One prize should be awarded to each of the dorms in the competition.")
+        self.assertEqual(self.prize.num_awarded(self.teams[0]), len(self.groups),
+            "One prize should be awarded to each of the groups in the competition.")
 
     def testRoundLeader(self):
         """
@@ -82,7 +82,7 @@ class DormTeamPrizeTests(TestCase):
         self.assertEqual(self.prize.leader(profile.team), profile.team,
             "The user's team is not leading in the prize.")
 
-        # Test a user in a different dorm.
+        # Test a user in a different group.
         profile1 = self.users[1].get_profile()
         profile1.add_points(profile.points + 1,
             datetime.datetime.today() - datetime.timedelta(minutes=1), "test")
@@ -119,7 +119,7 @@ class DormTeamPrizeTests(TestCase):
         self.assertEqual(self.prize.leader(profile.team), profile.team,
             "The user's team is not leading in the prize.")
 
-        # Test a user in a different dorm.
+        # Test a user in a different group.
         profile1 = self.users[1].get_profile()
         profile1.add_points(profile.points + 1,
             datetime.datetime.today() - datetime.timedelta(minutes=1), "test")
@@ -184,11 +184,11 @@ class OverallTeamPrizeTest(TestCase):
                 },
             }
 
-        # Create test dorms, teams, and users.
-        self.dorm = Dorm(name="Test Dorm")
-        self.dorm.save()
+        # Create test groups, teams, and users.
+        self.group = Group(name="Test Group")
+        self.group.save()
 
-        self.teams = [Team(name=str(i), dorm=self.dorm) for i in range(0, 2)]
+        self.teams = [Team(name=str(i), group=self.group) for i in range(0, 2)]
         _ = [f.save() for f in self.teams]
 
         self.users = [User.objects.create_user("test%d" % i, "test@test.com") for i in range(0, 4)]

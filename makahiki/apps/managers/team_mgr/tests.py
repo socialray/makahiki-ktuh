@@ -5,15 +5,15 @@ from django.contrib.auth.models import User
 from django.conf import settings
 from django.db.models import Sum, Max
 
-from managers.team_mgr.models import Dorm, Team
+from managers.team_mgr.models import Group, Team
 
 class DormUnitTestCase(TestCase):
     def setUp(self):
-        self.dorms = [Dorm(name="Test Dorm %d" % i) for i in range(0, 2)]
-        # map(lambda d: d.save(), self.dorms)
-        _ = [d.save() for d in self.dorms]  # rewrite the above to avoid plint warning of using built-in function 'map'
+        self.groups = [Group(name="Test Group %d" % i) for i in range(0, 2)]
+        # map(lambda d: d.save(), self.groups)
+        _ = [d.save() for d in self.groups]  # rewrite the above to avoid plint warning of using built-in function 'map'
 
-        self.teams = [Team(name=str(i), dorm=self.dorms[i % 2]) for i in
+        self.teams = [Team(name=str(i), group=self.groups[i % 2]) for i in
                        range(0, 4)]
         # map(lambda f: f.save(), self.teams)
         _ = [f.save() for f in self.teams]  # rewrite the above to avoid plint warning of using built-in function 'map'
@@ -48,7 +48,7 @@ class DormUnitTestCase(TestCase):
         profile.save()
 
         self.assertEqual(
-            self.dorms[0].team_points_leaders(round_name=self.current_round)[0]
+            self.groups[0].team_points_leaders(round_name=self.current_round)[0]
             , profile.team,
             "The user's team is not leading in the prize.")
 
@@ -59,7 +59,7 @@ class DormUnitTestCase(TestCase):
         profile2.save()
 
         self.assertEqual(
-            self.dorms[0].team_points_leaders(round_name=self.current_round)[0]
+            self.groups[0].team_points_leaders(round_name=self.current_round)[0]
             , profile2.team,
             "The user's team should have changed.")
 
@@ -69,7 +69,7 @@ class DormUnitTestCase(TestCase):
         profile.save()
 
         self.assertEqual(
-            self.dorms[0].team_points_leaders(round_name=self.current_round)[0]
+            self.groups[0].team_points_leaders(round_name=self.current_round)[0]
             , profile2.team,
             "The leader of the team should not change.")
 
@@ -80,11 +80,11 @@ class DormUnitTestCase(TestCase):
         profile1.save()
 
         self.assertEqual(
-            self.dorms[0].team_points_leaders(round_name=self.current_round)[0]
+            self.groups[0].team_points_leaders(round_name=self.current_round)[0]
             , profile2.team,
             "The leader of the team should not change.")
         self.assertEqual(
-            self.dorms[1].team_points_leaders(round_name=self.current_round)[0]
+            self.groups[1].team_points_leaders(round_name=self.current_round)[0]
             , profile1.team,
             "The leader in the second dorm should be profile1's team.")
 
@@ -93,7 +93,7 @@ class DormUnitTestCase(TestCase):
         profile.save()
 
         self.assertEqual(
-            self.dorms[0].team_points_leaders(round_name=self.current_round)[0]
+            self.groups[0].team_points_leaders(round_name=self.current_round)[0]
             , profile.team,
             "The leader of the team should have changed back.")
 
@@ -106,7 +106,7 @@ class DormUnitTestCase(TestCase):
             datetime.datetime.today() - datetime.timedelta(minutes=1), "test")
         profile.save()
 
-        self.assertEqual(self.dorms[0].team_points_leaders()[0], profile.team,
+        self.assertEqual(self.groups[0].team_points_leaders()[0], profile.team,
             "The user's team is not leading in the prize.")
 
         # Test that a user in a different team but same dorm changes the leader for the original user.
@@ -115,7 +115,7 @@ class DormUnitTestCase(TestCase):
             datetime.datetime.today() - datetime.timedelta(minutes=1), "test")
         profile2.save()
 
-        self.assertEqual(self.dorms[0].team_points_leaders()[0], profile2.team
+        self.assertEqual(self.groups[0].team_points_leaders()[0], profile2.team
             ,
             "The user's team should have changed.")
 
@@ -125,7 +125,7 @@ class DormUnitTestCase(TestCase):
 
         self.assertEqual(profile.points, profile2.points,
             "The two profiles should have identical points.")
-        self.assertEqual(self.dorms[0].team_points_leaders()[0], profile.team,
+        self.assertEqual(self.groups[0].team_points_leaders()[0], profile.team,
             "The leader of the team should have changed back.")
 
         # Test that adding points to a user in a different dorm does not change affect these standings.
@@ -134,9 +134,9 @@ class DormUnitTestCase(TestCase):
             datetime.datetime.today() - datetime.timedelta(minutes=1), "test")
         profile1.save()
 
-        self.assertEqual(self.dorms[0].team_points_leaders()[0], profile.team,
+        self.assertEqual(self.groups[0].team_points_leaders()[0], profile.team,
             "The leader of the team should not change.")
-        self.assertEqual(self.dorms[1].team_points_leaders()[0], profile1.team
+        self.assertEqual(self.groups[1].team_points_leaders()[0], profile1.team
             ,
             "The leader in the second dorm should be profile1's team.")
 
@@ -146,10 +146,10 @@ class DormUnitTestCase(TestCase):
 
 class TeamLeadersTestCase(TestCase):
     def setUp(self):
-        self.dorm = Dorm(name="Test Dorm")
-        self.dorm.save()
+        self.group = Group(name="Test Group")
+        self.group.save()
 
-        self.teams = [Team(name=str(i), dorm=self.dorm) for i in
+        self.teams = [Team(name=str(i), group=self.group) for i in
                        range(0, 2)]
         # map(lambda f: f.save(), self.teams)
         _ = [f.save() for f in self.teams]  # rewrite the above to avoid plint warning of using built-in function 'map'
@@ -322,9 +322,9 @@ class TeamLeadersTestCase(TestCase):
 
 class TeamsUnitTestCase(TestCase):
     def setUp(self):
-        self.dorm = Dorm(name="Test dorm")
-        self.dorm.save()
-        self.test_team = Team(name="A", dorm=self.dorm)
+        self.group = Group(name="Test group")
+        self.group.save()
+        self.test_team = Team(name="A", group=self.group)
         self.test_team.save()
 
     def testOverallPoints(self):
@@ -419,7 +419,7 @@ class TeamsUnitTestCase(TestCase):
             "Check the team is now ranked number 1.")
 
         # Create a test user on a different team.
-        test_team2 = Team(name="B", dorm=self.dorm)
+        test_team2 = Team(name="B", group=self.group)
         test_team2.save()
 
         user2 = User(username="test_user1", password="test_password")
@@ -462,7 +462,7 @@ class TeamsUnitTestCase(TestCase):
         self.assertEqual(self.test_team.current_round_rank(), 1,
             "Check the team is now ranked number 1.")
 
-        test_team2 = Team(name="B", dorm=self.dorm)
+        test_team2 = Team(name="B", group=self.group)
         test_team2.save()
 
         user2 = User(username="test_user1", password="test_password")
@@ -496,7 +496,7 @@ class TeamsUnitTestCase(TestCase):
         user.get_profile().save()
 
         # Create a test user on a different team.
-        test_team2 = Team(name="B", dorm=self.dorm)
+        test_team2 = Team(name="B", group=self.group)
         test_team2.save()
 
         user = User(username="test_user1", password="test_password")

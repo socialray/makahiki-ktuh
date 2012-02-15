@@ -103,7 +103,7 @@ TEMPLATE_CONTEXT_PROCESSORS = (
     "django.core.context_processors.media",
     "django.core.context_processors.request",
     'django.contrib.messages.context_processors.messages',
-    "managers.base_mgr.context_processors.competition",
+    "managers.settings_mgr.context_processors.competition",
     )
 
 ######################
@@ -119,10 +119,10 @@ MIDDLEWARE_CLASSES = (
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'lib.django_cas.middleware.CASMiddleware',
-    'pages.home.middleware.CompetitionMiddleware',
     'managers.player_mgr.middleware.LoginTrackingMiddleware',
-    'pages.home.middleware.CheckSetupMiddleware',
     'managers.log_mgr.middleware.LoggingMiddleware',
+    'pages.home.middleware.CompetitionMiddleware',
+    'pages.home.middleware.CheckSetupMiddleware',
     'django.middleware.cache.FetchFromCacheMiddleware',
     )
 
@@ -145,7 +145,7 @@ INSTALLED_APPS = (
 
     # Makahiki components
     'managers.auth_mgr',
-    'managers.base_mgr',
+    'managers.settings_mgr',
     'managers.team_mgr',
     'managers.player_mgr',
     'managers.cache_mgr',

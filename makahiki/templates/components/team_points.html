@@ -1,7 +1,7 @@
 {% load class_tags %}
 {% load cache %}
 
-{% if team and team.dorm %}
+{% if team and team.group %}
 {% cache 600 infobar team.name %}
 {% if CURRENT_ROUND and CURRENT_ROUND != 'Overall' %}
 <!-- First slideshow element -->
@@ -12,7 +12,7 @@
   </div>
   <div {% get_id_and_classes "header-team-rank" %}>
     <h3>#{{team.current_round_rank}}</h3>
-    <div {% get_id_and_classes "header-text" %}>out of {{TEAM_COUNT}} in all dorms</div>
+    <div {% get_id_and_classes "header-text" %}>out of {{TEAM_COUNT}} in all teams</div>
   </div>
 </div>
 
@@ -23,7 +23,7 @@
   </div>
   <div {% get_id_and_classes "header-team-rank" %}>
     <h3 id="round-energy-rank"></h3> 
-    <div {% get_id_and_classes "header-text" %}>out of {{TEAM_COUNT}} in all dorms</div>
+    <div {% get_id_and_classes "header-text" %}>out of {{TEAM_COUNT}} in all teams</div>
   </div>
 </div>
 {% endif %}
@@ -35,7 +35,7 @@
   </div>
   <div {% get_id_and_classes "header-team-rank" %}>
     <h3>#{{team.rank}}</h3>
-    <div {% get_id_and_classes "header-text" %}>out of {{TEAM_COUNT}} in all dorms</div>
+    <div {% get_id_and_classes "header-text" %}>out of {{TEAM_COUNT}} in all teams</div>
   </div>
 </div>
 
@@ -46,7 +46,7 @@
   </div>
   <div {% get_id_and_classes "header-team-rank" %}>
     <h3 id="overall-energy-rank"></h3> 
-    <div {% get_id_and_classes "header-text" %}>out of {{TEAM_COUNT}} in all dorms</div>
+    <div {% get_id_and_classes "header-text" %}>out of {{TEAM_COUNT}} in all teams</div>
   </div>
 </div>
 {% endcache %}

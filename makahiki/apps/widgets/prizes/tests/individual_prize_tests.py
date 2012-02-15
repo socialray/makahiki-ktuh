@@ -8,7 +8,7 @@ from django.contrib.auth.models import User
 
 from managers.player_mgr.models import Profile
 from widgets.prizes.models import Prize
-from managers.team_mgr.models import Dorm, Team
+from managers.team_mgr.models import Group, Team
 
 class OverallPrizeTest(TestCase):
     """
@@ -172,11 +172,11 @@ class TeamPrizeTest(TestCase):
                 },
             }
 
-        # Create test dorms, teams, and users.
-        self.dorm = Dorm(name="Test Dorm")
-        self.dorm.save()
+        # Create test groups, teams, and users.
+        self.group = Group(name="Test Group")
+        self.group.save()
 
-        self.teams = [Team(name=str(i), dorm=self.dorm) for i in range(0, 2)]
+        self.teams = [Team(name=str(i), group=self.group) for i in range(0, 2)]
         _ = [f.save() for f in self.teams]
 
         self.users = [User.objects.create_user("test%d" % i, "test@test.com") for i in range(0, 4)]

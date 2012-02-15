@@ -8,7 +8,7 @@ from django.contrib.auth.decorators import login_required, user_passes_test
 from django.core.urlresolvers import reverse
 from django.views.decorators.cache import never_cache
 
-from managers.base_mgr import get_round_info, get_current_round
+from managers.settings_mgr import get_round_info, get_current_round
 from widgets.prizes import POINTS_PER_TICKET
 from widgets.prizes.models import Prize, RafflePrize, RaffleDeadline
 

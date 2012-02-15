@@ -24,11 +24,11 @@ google.setOnLoadCallback(initialize);
 /* Parses the user preferences and generates the Query to WattDepot and displays the BioHeatMap. */
 function initialize() {
 
-    var dorms = document.getElementsByName("heatmap-dorm");
+    var groups = document.getElementsByName("heatmap-dorm");
     var dorm;
-    for (i = 0; i < dorms.length; i++)
-        if (dorms[i].checked)
-            dorm = dorms[i].value;
+    for (i = 0; i < groups.length; i++)
+        if (groups[i].checked)
+            dorm = groups[i].value;
 
     var lounges = document.getElementsByName("heatmap-lounge-" + dorm);
 

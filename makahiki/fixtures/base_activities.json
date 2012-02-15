@@ -229,7 +229,7 @@
     "pk": 23, 
     "model": "smartgrid.textpromptquestion", 
     "fields": {
-      "answer": "Hale Aloha dorms, or Lehua, Ilima, Mokihana", 
+      "answer": "Hale Aloha groups, or Lehua, Ilima, Mokihana",
       "question": "Where is the Kukui Cup taking place?", 
       "activity": 14
     }
@@ -1443,7 +1443,7 @@
       "mobile_restricted": false, 
       "type": "activity", 
       "slug": "dorm-energy-audit", 
-      "name": "Dorm Energy Audit"
+      "name": "Group Energy Audit"
     }
   }, 
   {
@@ -1613,7 +1613,7 @@
       "category": 2, 
       "energy_related": true, 
       "depends_on_text": null, 
-      "description": "<center>![Dorm bed](/site_media/media/gblocks/dorm-bed.jpg)</center>\r\n\r\nCommit to turning off all appliances in your room (computer, TVs, DVD players, game consoles) every night before you go to sleep. Appliances use a significant amount of electricity, so turning them off when you definitely won't be using them (like when you are asleep) will save energy.", 
+      "description": "<center>![Group bed](/site_media/media/gblocks/dorm-bed.jpg)</center>\r\n\r\nCommit to turning off all appliances in your room (computer, TVs, DVD players, game consoles) every night before you go to sleep. Appliances use a significant amount of electricity, so turning them off when you definitely won't be using them (like when you are asleep) will save energy.",
       "title": "I will turn off all appliances every night before going to sleep", 
       "depends_on": "completed(\"power-energy\")",
       "created_at": "2011-02-17 10:35:30", 
@@ -2766,7 +2766,7 @@
     "pk": 19, 
     "model": "smartgrid.activity", 
     "fields": {
-      "event_location": "All dorms", 
+      "event_location": "All groups",
       "confirm_type": "code", 
       "point_range_start": null, 
       "confirm_prompt": "Enter in the minimum value you saw for your Lounge's power usage, with everything turned off.", 

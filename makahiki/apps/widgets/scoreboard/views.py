@@ -1,5 +1,5 @@
 from django.db.models.aggregates import Count
-from managers.base_mgr import get_current_round
+from managers.settings_mgr import get_current_round
 from managers.player_mgr.models import Profile
 from managers.team_mgr.models import Team
 
@@ -19,7 +19,7 @@ def supply(request):
     # Calculate active participation.
     team_participation = Team.objects.filter(profile__points__gte=50).annotate(
         user_count=Count('profile'),
-    ).order_by('-user_count').select_related('dorm')[:10]
+    ).order_by('-user_count').select_related('group')[:10]
 
     for f in team_participation:
         f.active_participation = (f.user_count * 100) / f.profile_set.count()

@@ -2,7 +2,7 @@
  a template. It mainly retrieve the settings from settings files.
 """
 from django.conf import settings
-from managers.base_mgr import get_team_label, get_rounds_for_header, \
+from managers.settings_mgr import get_team_label, get_rounds_for_header, \
         get_current_round, get_current_round_info, in_competition
 from managers.player_mgr.models import Profile
 from managers.team_mgr.models import Team

@@ -17,7 +17,7 @@ for key, value in data.iteritems():
     print '%s,%d' % (key, value)
     
 # lounge goals and points   
-for team in Team.objects.order_by('dorm__name', 'number'):
+for team in Team.objects.order_by('group__name', 'name'):
     goals = team.teamenergygoal_set.count()
     print '%s,%d,%d' % (team, goals, team.points())
     

@@ -57,7 +57,7 @@ def points_scoreboard(request):
     # Calculate active participation.
     team_participation = Team.objects.filter(profile__points__gte=50).annotate(
         user_count=Count('profile'),
-    ).order_by('-user_count').select_related('dorm')
+    ).order_by('-user_count').select_related('group')
 
     for team in team_participation:
         team.active_participation = (team.user_count * 100) / team.profile_set.count()
@@ -78,8 +78,7 @@ def energy_scoreboard(request):
     goals_scoreboard = TeamEnergyGoal.objects.filter(
         actual_usage__lte=F("goal_usage")
     ).values(
-        "team__number",
-        "team__dorm__name"
+        "team__name",
     ).annotate(completions=Count("team")).order_by("-completions")
 
     return render_to_response("status/energy.html", {

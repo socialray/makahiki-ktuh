@@ -1,4 +1,4 @@
-from managers.team_mgr.models import Dorm
+from managers.team_mgr.models import Group
 from managers.player_mgr.models import Profile
 
 from django.test import TestCase
@@ -65,10 +65,10 @@ class EnergyFunctionalTestCase(TestCase):
 
 class TeamEnergyGoalTest(TestCase):
     def setUp(self):
-        dorm = Dorm.objects.create(name="Test Dorm")
-        dorm.save()
+        group = Group.objects.create(name="Test Group")
+        group.save()
         self.team = Team.objects.create(
-            dorm=dorm,
+            group=group,
             name="A"
         )
 

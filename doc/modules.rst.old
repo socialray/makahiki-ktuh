@@ -2,9 +2,9 @@
 managers
 ========
 
-managers.base_mgr
+managers.settings_mgr
 ------------------
-.. automodule:: managers.base_mgr
+.. automodule:: managers.settings_mgr
     :members:
     :undoc-members:
     :show-inheritance:

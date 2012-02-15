@@ -10,7 +10,7 @@
         Lounge : <br/>
         {% for lounge in view_objects.canopy.all_lounges %}
             <input type="checkbox" name="lounge" value="{{ lounge.name}}"
-                    {% if user.get_profile.get_lounge_name == lounge.name %}
+                    {% if user.get_profile.team.name == lounge.name %}
                    checked="checked" {% endif %}
                    onchange='update();'/>
             {{ lounge.name }}

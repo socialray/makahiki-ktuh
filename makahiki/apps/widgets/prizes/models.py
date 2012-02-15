@@ -2,9 +2,9 @@ from django.db import models
 from django.conf import settings
 from django.contrib.auth.models import User
 
-from managers.base_mgr import get_round_info
+from managers.settings_mgr import get_round_info
 from managers.player_mgr.models import Profile
-from managers.team_mgr.models import Dorm, Team
+from managers.team_mgr.models import Group, Team
 
 class Prize(models.Model):
     """
@@ -14,10 +14,10 @@ class Prize(models.Model):
     AWARD_TO_CHOICES = (
         ("individual_overall", "Individual (Overall)"),
         ("individual_team", "Individual (" + settings.COMPETITION_GROUP_NAME + ")"),
-        # ("individual_dorm", "Individual (Dorm)"),
+        # ("individual_group", "Individual (Group)"),
         ("team_overall", settings.COMPETITION_GROUP_NAME + " (Overall)"),
-        ("team_dorm", settings.COMPETITION_GROUP_NAME + " (Dorm)"),
-        # ("dorm", "Dorm"), # Not implemented yet.
+        ("team_group", settings.COMPETITION_GROUP_NAME + " (Group)"),
+        # ("group", "Group"), # Not implemented yet.
         )
     AWARD_CRITERIA_CHOICES = (
         ("points", "Points"),
@@ -64,13 +64,13 @@ class Prize(models.Model):
         Returns the number of prizes that will be awarded for this prize.
         """
         _ = team
-        if self.award_to in ("individual_overall", "team_overall", "dorm"):
+        if self.award_to in ("individual_overall", "team_overall", "group"):
             # For overall prizes, it is only possible to award one.
             return 1
 
-        elif self.award_to in ("team_dorm", "individual_dorm"):
-            # For dorm prizes, this is just the number of dorms.
-            return Dorm.objects.count()
+        elif self.award_to in ("team_group", "individual_group"):
+            # For dorm prizes, this is just the number of groups.
+            return Group.objects.count()
 
         elif self.award_to == "individual_team":
             # This is awarded to each team.
@@ -89,8 +89,8 @@ class Prize(models.Model):
         if self.award_to == "individual_overall":
             return Profile.points_leaders(num_results=1, round_name=round_name)[0]
 
-        elif self.award_to == "team_dorm":
-            return team.dorm.team_points_leaders(num_results=1, round_name=round_name)[0]
+        elif self.award_to == "team_group":
+            return team.group.team_points_leaders(num_results=1, round_name=round_name)[0]
 
         elif self.award_to == "team_overall":
             return Team.team_points_leaders(num_results=1, round_name=round_name)[0]

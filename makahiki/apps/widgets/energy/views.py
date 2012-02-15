@@ -9,7 +9,7 @@ from django.shortcuts import get_object_or_404, render_to_response
 from django.template import RequestContext
 from django.views.decorators.cache import never_cache
 
-from managers.base_mgr import get_round_info
+from managers.settings_mgr import get_round_info
 from managers.team_mgr.models import Post
 from widgets.energy import generate_chart_url
 from widgets.energy.forms import EnergyGoalVotingForm

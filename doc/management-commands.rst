@@ -48,10 +48,10 @@ displayed in a user notification.
 *Implemented in apps/components/makahiki_base/management/add_points.py*
 
 
-add_points residence-hall team-number points short-message long-message
+add_points residence-hall team-name points short-message long-message
 -------------------------------------------------------------------------
 
-Give the members of the residence-hall and team-number additional
+Give the members of the residence-hall and team-name additional
 points. short-message is stored in the PointTransaction log and
 displayed in ‘My Achievements’. long-message is displayed in a user
 notification.

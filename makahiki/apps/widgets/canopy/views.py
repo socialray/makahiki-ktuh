@@ -14,7 +14,7 @@ from widgets.canopy.models import Mission, Post, MissionMember
 from managers.player_mgr.models import Profile
 from widgets.canopy.decorators import can_access_canopy
 from widgets.canopy.forms import WallForm
-from managers.team_mgr.models import Team, Dorm
+from managers.team_mgr.models import Team, Group
 
 # Number of posts to load at a time.
 
@@ -64,15 +64,15 @@ def supply(request):
     viz = request.REQUEST.get("viz", None)
 
     all_lounges = Team.objects.order_by('name').all()
-    all_dorms = Dorm.objects.order_by('name').all()
+    all_groups = Group.objects.order_by('name').all()
 
-    for dorm in all_dorms:
-        dorm.teams = dorm.team_set.order_by('-name').all()
+    for group in all_groups:
+        group.teams = group.team_set.order_by('-name').all()
 
     if request.user.get_profile().team:
-        dorm_lounges = request.user.get_profile().team.dorm.team_set.all()
+        group_lounges = request.user.get_profile().team.group.team_set.all()
     else:
-        dorm_lounges = all_lounges[:5]
+        group_lounges = all_lounges[:5]
 
     return  {
         "in_canopy": True,
@@ -85,8 +85,8 @@ def supply(request):
         "viz": viz,
         "karma_scoreboard": karma_scoreboard,
         "all_lounges": all_lounges,
-        "dorm_lounges": dorm_lounges,
-        "all_dorms": all_dorms,
+        "group_lounges": group_lounges,
+        "all_groups": all_groups,
         }
 
 ### User methods -------------------------

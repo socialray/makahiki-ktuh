@@ -7,7 +7,7 @@ if [ "$#" -eq 1 ]
     var="$1"
 fi
 
-python manage.py dumpdata --indent=2 teams.dorm teams.team > $var/base_teams.json
+python manage.py dumpdata --indent=2 teams.group teams.team > $var/base_teams.json
 
 python manage.py dumpdata --indent=2 activities > $var/base_activities.json
 

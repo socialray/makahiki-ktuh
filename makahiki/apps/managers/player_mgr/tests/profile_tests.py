@@ -6,7 +6,7 @@ from django.contrib.auth.models import User
 from django.db import IntegrityError
 
 from widgets.smartgrid.models import Activity, ActivityMember
-from managers.team_mgr.models import Dorm, Team
+from managers.team_mgr.models import Group, Team
 from managers.player_mgr.models import Profile
 
 class ProfileLeadersTests(TestCase):
@@ -200,9 +200,9 @@ class ProfileUnitTests(TestCase):
         """Tests that the team_rank method accurately computes the rank based on points."""
         user = User(username="test_user", password="changeme")
         user.save()
-        dorm = Dorm(name="Test dorm")
-        dorm.save()
-        team = Team(name="A", dorm=dorm)
+        group = Group(name="Test group")
+        group.save()
+        team = Team(name="A", group=group)
         team.save()
 
         profile = user.get_profile()
@@ -244,9 +244,9 @@ class ProfileUnitTests(TestCase):
         """Tests that the team_rank method accurately computes the rank when users have the same number of points."""
         user = User(username="test_user", password="changeme")
         user.save()
-        dorm = Dorm(name="Test dorm")
-        dorm.save()
-        team = Team(name="A", dorm=dorm)
+        group = Group(name="Test group")
+        group.save()
+        team = Team(name="A", group=group)
         team.save()
 
         profile = user.get_profile()
@@ -380,9 +380,9 @@ class ProfileUnitTests(TestCase):
                 },
             }
 
-        dorm = Dorm(name="Test dorm")
-        dorm.save()
-        team = Team(name="A", dorm=dorm)
+        group = Group(name="Test group")
+        group.save()
+        team = Team(name="A", group=group)
         team.save()
 
         user = User(username="test_user", password="changeme")

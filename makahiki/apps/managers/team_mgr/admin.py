@@ -1,7 +1,7 @@
 from django.contrib import admin
-from managers.team_mgr.models import Dorm, Team, Post
+from managers.team_mgr.models import Group, Team, Post
 
-admin.site.register(Dorm)
+admin.site.register(Group)
 admin.site.register(Team)
 
 class PostAdmin(admin.ModelAdmin):

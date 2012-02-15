@@ -11,7 +11,7 @@ class Command(management.base.BaseCommand):
   Awards points to a username or a building and lounge.\n
   Usage is either:\n
   'python manage.py add_points <username> <points> <short-message> <long-message>' or\n
-  'python manage.py add_points <residence-hall> <team-number> <points> <short-message> <long-message>'\n
+  'python manage.py add_points <residence-hall> <team-name> <points> <short-message> <long-message>'\n
   """
 
     def handle(self, *args, **options):
@@ -19,13 +19,13 @@ class Command(management.base.BaseCommand):
         Awards points to a user or a building and lounge.
         Format of the command is either:
           python manage.py add_points <username> <points> <short-message> <long-message>
-          python manage.py add_points <residence-hall> <team-number> <points> <short-message> <long-message>
+          python manage.py add_points <residence-hall> <team-name> <points> <short-message> <long-message>
         """
         if len(args) < 4 or len(args) > 5:
             usage = """
       Usage is either:\n
       'python manage.py add_points <username> <points> <short-message> <long-message>' or\n
-      'python manage.py add_points <residence-hall> <team-number> <points> <short-message> <long-message>'\n
+      'python manage.py add_points <residence-hall> <team-name> <points> <short-message> <long-message>'\n
       """
             self.stderr.write(usage)
             return 1
@@ -47,7 +47,7 @@ class Command(management.base.BaseCommand):
 
         else:
             try:
-                team = Team.objects.get(dorm__name=args[0], number=args[1])
+                team = Team.objects.get(group__name=args[0], name=args[1])
                 for profile in team.profile_set.all():
                     profile = user.get_profile()
                     profile.add_points(int(args[2]), datetime.datetime.today(),

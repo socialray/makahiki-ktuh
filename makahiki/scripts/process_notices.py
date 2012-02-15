@@ -24,7 +24,7 @@ from managers.player_mgr.models import *
 from managers.player_mgr import *
 from widgets.smartgrid.models import *
 from widgets.notifications.models import UserNotification, NoticeTemplate
-from managers.base_mgr import in_competition, get_round_info
+from managers.settings_mgr import in_competition, get_round_info
 from django.db.models import Q
 
 def notify_round_started():
