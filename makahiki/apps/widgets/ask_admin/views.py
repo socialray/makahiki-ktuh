@@ -1,3 +1,6 @@
+"""
+views handler for ask admin page rendering.
+"""
 import simplejson as json
 
 from django.http import Http404, HttpResponse, HttpResponseRedirect
@@ -10,7 +13,16 @@ from widgets.ask_admin.forms import FeedbackForm
 
 FROM_EMAIL = settings.MANAGERS[0][1]
 
+def supply(request):
+    """ supply view_objects for widget rendering."""
+    _ = request
+    form = FeedbackForm(auto_id="help_%s")
+    return {
+        "form": form,
+        }
+
 def send_feedback(request):
+    """send feedbacl"""
     if request.method == "POST":
         form = FeedbackForm(request.POST)
         if form.is_valid():
@@ -34,9 +46,6 @@ def send_feedback(request):
 
             mail.attach_alternative(html_message, 'text/html')
             mail.send()
-
-            # mail_admins("[%s] Message for admins" % current_site.domain,
-            #           message, html_message=html_message, headers={'Reply-To': request.user.email})
 
             if request.is_ajax():
                 return HttpResponse(json.dumps({"success": True}), mimetype="application/json")

@@ -1,0 +1,31 @@
+{% load class_tags %}
+
+<div {% get_id_and_classes "help-ask" %}>
+    <div {% get_id_and_classes "help-ask-box" %}>
+        <div {% get_id_and_classes "help-ask-title" %}>
+            Ask an Admin
+        </div>
+        <div {% get_id_and_classes "help-ask-content" %}>
+            Got a question that's not answered here? Type it below and an admin will email you
+            the answer.
+            <form {% get_id_and_classes "help-ask-form" %} action="{% url ask_admin_feedback %}"
+                                                           method="POST">
+                {% csrf_token %}
+                {{ view_objects.ask_admin.form.url }}
+                {% if view_objects.ask_adminform.question.errors %}
+                    {{ view_objects.ask_admin.form.question.errors }}
+                {% endif %}
+                {{ view_objects.ask_admin.form.question }}
+                <div {% get_id_and_classes "help-ask-submit" %}>
+                    <input type="submit" value="Send"/>
+            <span id="help-ask-spinner" style="display:none">
+              Sending
+              <img src="{{STATIC_URL}}images/spinner.gif"/>
+            </span>
+
+                    <div style="clear: both"></div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
