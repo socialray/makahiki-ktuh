@@ -1,0 +1,17 @@
+{% load class_tags %}
+
+    <div {% get_id_and_classes "help-faq" %}>
+        <div {% get_id_and_classes "help-faq-box" %}>
+            <div {% get_id_and_classes "help-faq-title" %}>
+                Frequently Asked Questions
+            </div>
+            <div {% get_id_and_classes "help-faq-content" %}>
+                <ul>
+                    {% for topic in view_objects.help_faq.faqs %}
+                        {% include "help/topic-item.html" %}
+                    {% endfor %}
+                </ul>
+            </div>
+        </div>
+    </div>
+

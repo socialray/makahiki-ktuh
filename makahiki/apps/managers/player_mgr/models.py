@@ -15,7 +15,6 @@ from managers.score_mgr.models import ScoreboardEntry, PointsTransaction
 
 from managers.team_mgr.models import Team
 from managers.settings_mgr import get_current_round
-from widgets.prizes import POINTS_PER_TICKET
 from managers.cache_mgr.utils import invalidate_info_bar_cache
 
 class Profile(models.Model):
@@ -75,7 +74,7 @@ class Profile(models.Model):
         """
         Returns the number of raffle tickets the user has available.
         """
-        total_tickets = self.points / POINTS_PER_TICKET
+        total_tickets = self.points / settings.POINTS_PER_TICKET
         allocated_tickets = self.user.raffleticket_set.count()
 
         return total_tickets - allocated_tickets
@@ -223,6 +222,31 @@ class Profile(models.Model):
         If the submission date is the same as the last_awarded_submission field, we rollback
         to a previously completed task.
         """
+
+        # Invalidate info bar cache.
+        invalidate_info_bar_cache(self.user)
+
+        self.points -= points
+
+        current_round = self._get_round(submission_date)
+        # If we have a round, then update the scoreboard entry.
+        # Otherwise, this just counts towards overall.
+        if current_round:
+            try:
+                entry = ScoreboardEntry.objects.get(profile=self, round_name=current_round)
+                entry.points -= points
+                if entry.last_awarded_submission == submission_date:
+                    # Need to find the previous update.
+                    entry.last_awarded_submission = self._last_submitted_before(submission_date)
+
+                entry.save()
+            except ObjectDoesNotExist:
+                # This should not happen once the competition is rolling.
+                raise
+
+        if self.last_awarded_submission == submission_date:
+            self.last_awarded_submission = self._last_submitted_before(submission_date)
+
         # Log the transaction.
         transaction = PointsTransaction(
             user=self.user,
@@ -234,36 +258,6 @@ class Profile(models.Model):
             transaction.related_object = related_object
 
         transaction.save()
-
-        # Invalidate info bar cache.
-        invalidate_info_bar_cache(self.user)
-
-        if self._is_canopy_activity(related_object):
-            self.canopy_karma -= points
-        else:
-            self.points -= points
-
-            current_round = self._get_round(submission_date)
-            # If we have a round, then update the scoreboard entry.
-            # Otherwise, this just counts towards overall.
-            if current_round:
-                try:
-                    entry = ScoreboardEntry.objects.get(profile=self,
-                        round_name=current_round)
-                    entry.points -= points
-                    if entry.last_awarded_submission == submission_date:
-                        # Need to find the previous update.
-                        entry.last_awarded_submission = self._last_submitted_before(
-                            submission_date)
-
-                    entry.save()
-                except ObjectDoesNotExist:
-                    # This should not happen once the competition is rolling.
-                    raise
-
-            if self.last_awarded_submission == submission_date:
-                self.last_awarded_submission = self._last_submitted_before(
-                    submission_date)
 
     def _get_round(self, submission_date):
         """Get the round that the submission date corresponds to.
@@ -285,33 +279,12 @@ class Profile(models.Model):
         Time of the last task that was completed before the submission date.
         Returns None if there are no other tasks.
         """
-
-        from widgets.smartgrid.models import CommitmentMember, ActivityMember
-
-        last_date = None
         try:
-            # In the case of commitments, the award date is the same as the submission date.
-            last_commitment = CommitmentMember.objects.filter(
+            return PointsTransaction.objects.filter(
                 user=self.user,
-                award_date__isnull=False,
-                award_date__lt=submission_date
-            ).latest("award_date").award_date
-            last_date = last_commitment
-        except CommitmentMember.DoesNotExist:
-            pass
-
-        try:
-            last_activity = ActivityMember.objects.filter(
-                user=self.user,
-                approval_status=u"approved",
-                submission_date__lt=submission_date
-            ).latest("submission_date").submission_date
-            if not last_date or last_date < last_activity:
-                last_date = last_activity
-        except ActivityMember.DoesNotExist:
-            pass
-
-        return last_date
+                submission_date__lt=submission_date).latest("submission_date").submission_date
+        except ObjectDoesNotExist:
+            return None
 
     def save(self, *args, **kwargs):
         """

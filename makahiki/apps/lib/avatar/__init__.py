@@ -20,7 +20,7 @@ AVATAR_DEFAULT_URL = getattr(settings, 'AVATAR_DEFAULT_URL',
     settings.STATIC_URL + os.path.join('images', 'default_avatar.png'))
 
 from django.db.models import signals
-from widgets.avatar.models import Avatar
+from lib.avatar.models import Avatar
 
 def create_default_thumbnails(instance=None, created=False, **kwargs):
     _ = kwargs

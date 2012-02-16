@@ -1,3 +1,6 @@
+"""
+home page middleware to check if setup completed and restricted page re-direction.
+"""
 import re
 import datetime
 
@@ -9,9 +12,11 @@ class CheckSetupMiddleware(object):
     """This middleware checks if the logged in user has completed the setup process."""
 
     def process_request(self, request):
+        """ check to see if setup completed."""
         user = request.user
         path = request.path
-        # We need to check if the user is going to the home page so we don't get caught in a redirect loop.
+        # We need to check if the user is going to the home page so we don't get caught
+        # in a redirect loop.
         # We do need to filter out requests for CSS and other resources.
         pattern = re.compile(
             "^/(m\/admin|m\/setup|admin|log|account|home|site_media|tc|media|favicon.ico)/")

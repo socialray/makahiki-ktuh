@@ -1,8 +1,8 @@
 import urllib2
 import simplejson as json
 
-from widgets.avatar.models import Avatar, avatar_file_path
-from widgets.avatar.forms import PrimaryAvatarForm, DeleteAvatarForm, FacebookPictureForm
+from lib.avatar.models import Avatar, avatar_file_path
+from lib.avatar.forms import PrimaryAvatarForm, DeleteAvatarForm, FacebookPictureForm
 import lib.facebook_api.facebook as facebook
 
 from django.http import HttpResponse, HttpResponseRedirect, Http404

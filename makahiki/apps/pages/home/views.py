@@ -1,3 +1,6 @@
+"""
+Handles home page rendering.
+"""
 import cgi
 import json
 import datetime
@@ -16,8 +19,7 @@ from django.views.decorators.cache import never_cache
 from django.views.decorators.csrf import csrf_exempt
 from django.core.urlresolvers import reverse
 
-from widgets.smartgrid.models import Activity, ActivityMember
-from widgets.avatar.models import avatar_file_path, Avatar
+from lib.avatar.models import avatar_file_path, Avatar
 import lib.facebook_api.facebook as facebook
 from pages.home.forms import  ProfileForm, ReferralForm
 
@@ -33,6 +35,7 @@ def index(request):
 
 @login_required
 def restricted(request):
+    """handle restricted url"""
     today = datetime.datetime.today()
     start = datetime.datetime.strptime(settings.COMPETITION_START, "%Y-%m-%d")
     end = datetime.datetime.strptime(settings.COMPETITION_END, "%Y-%m-%d")
@@ -283,6 +286,7 @@ def _get_profile_form(request, form=None, non_xhr=False):
 @never_cache
 @login_required
 def setup_activity(request):
+    """handles setup activity url"""
     if request.is_ajax():
         template = render_to_string("pages/home/templates/first-login/activity.html", {},
             context_instance=RequestContext(request))
@@ -309,6 +313,7 @@ def setup_activity(request):
 @never_cache
 @login_required
 def setup_question(request):
+    """handles setup questions"""
     if request.is_ajax():
         template = render_to_string("pages/home/templates/first-login/question.html", {},
             context_instance=RequestContext(request))
@@ -326,20 +331,9 @@ def setup_question(request):
 @login_required
 @csrf_exempt
 def setup_complete(request):
+    """handles setup complete"""
     if request.is_ajax():
         profile = request.user.get_profile()
-        if request.method == "POST":
-            # User got the question right.
-            # Originally, we added the points directly, but now we're going to link it to an activity.
-            activity_name = settings.SETUP_WIZARD_ACTIVITY_NAME
-            try:
-                activity = Activity.objects.get(name=activity_name)
-                ActivityMember.objects.get_or_create(activity=activity, user=profile.user,
-                    approval_status="approved")
-                # If this was created, it's automatically saved.
-            except Activity.DoesNotExist:
-                # profile.add_points(15, datetime.datetime.today(), "First login activity")
-                pass # Don't add anything if we can't link to the activity.
 
         profile.setup_complete = True
         profile.completion_date = datetime.datetime.today()

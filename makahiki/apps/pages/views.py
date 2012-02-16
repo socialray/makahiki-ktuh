@@ -56,8 +56,8 @@ def index(request):
         "page_layouts": page_layouts,
         }, context_instance=RequestContext(request))
 
-
 def _get_view_objects(request, page_settings):
+    """ Returns view_objects supplied widgets defined in page_settings.py. """
     view_objects = {}
     default_layout = page_settings["LAYOUTS"]["DEFAULT"]
     for row in default_layout:
@@ -78,19 +78,22 @@ def _get_view_objects(request, page_settings):
 
 
 def _create_responsive_css(row, idx, gid, percent, responsive_css):
+    """Returns the responsive CSS."""
     if idx == 0:
         responsive_css += "#%s { float: left; width: %d%%; }" % (gid, percent)
     elif idx == len(row) - 1:
         if idx == 1: # second column of the two columns layout
             responsive_css += "#%s { float: right; width: %d%%; }" % (gid, percent)
         else:
-            responsive_css += "#%s { float: left; width: %d%%; }" % (gid, percent) # last column of the three columns layout
+            # last column of the three columns layout
+            responsive_css += "#%s { float: left; width: %d%%; }" % (gid, percent)
     else:
         responsive_css += "#%s { float: right; width: %d%%; }" % (gid, percent)
     return responsive_css
 
 
 def _get_layout(page_layouts, layout, responsive_css):
+    """Returns the page_layouts definitions from page_settings.py."""
     if layout[0] == "PHONE_PORTRAIT":
         responsive_css += "\n@media screen and (max-width: 1000px) {\n"
     for row in layout[1]:

@@ -1,10 +1,15 @@
+"""
+admin for help widget models
+"""
 from django.contrib import admin
 from django import forms
 
-from widgets.help.models import HelpTopic
+from managers.help_mgr.models import HelpTopic
 
 class HelpAdminForm(forms.ModelForm):
+    """admin form"""
     class Meta:
+        """meta"""
         model = HelpTopic
 
     def clean_parent_topic(self):
@@ -23,6 +28,7 @@ class HelpAdminForm(forms.ModelForm):
 
 
 class HelpTopicAdmin(admin.ModelAdmin):
+    """help topic admin"""
     # Automatically populates the slug field.
     prepopulated_fields = {"slug": ("title",)}
     list_filter = ["category", ]

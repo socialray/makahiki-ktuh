@@ -1,7 +1,9 @@
-# game_settings.py
-# This file contains organizational-level settings for the game.
-# These settings include the name of the game, competition start/end date, authentication,
-# and theme settings.
+"""
+ game_settings.py
+ This file contains organizational-level settings for the game.
+ These settings include the name of the game, competition start/end date, authentication,
+ and theme settings.
+"""
 
 import datetime
 
@@ -42,6 +44,8 @@ COMPETITION_ROUNDS = {
         },
     }
 
+POINTS_PER_TICKET = 20
+
 ###################
 # Authentication
 ###################
@@ -67,12 +71,15 @@ CAN_ACCESS_OUTSIDE_COMPETITION = False
 SETUP_WIZARD_ACTIVITY_NAME = "Intro video"
 
 # This is the url to the last 30 days spreadsheet.
-ENERGY_THIRTY_DAYS_URL = "https://spreadsheets.google.com/spreadsheet/tq?key=0An9ynmXUoikYdHhxeW1xRURQZUlGd1oxVERnQktsWXc"
+ENERGY_THIRTY_DAYS_URL = "https://spreadsheets.google.com/spreadsheet/tq?key=" \
+                         "0An9ynmXUoikYdHhxeW1xRURQZUlGd1oxVERnQktsWXc"
 
 # This is the url to th energy goal game spreadsheet.
-ENERGY_GOAL_URL = "https://spreadsheets.google.com/spreadsheet/tq?key=0An9ynmXUoikYdEdmU21FaWtlSlNSSnQ3YmNxUFBWaFE"
+ENERGY_GOAL_URL = "https://spreadsheets.google.com/spreadsheet/tq?key=" \
+                  "0An9ynmXUoikYdEdmU21FaWtlSlNSSnQ3YmNxUFBWaFE"
 
-POWER_GAUGE_URL = "https://spreadsheets.google.com/tq?key=0An9ynmXUoikYdEx3TkRkYjdwdHZkTUo4OGI4NVZ3cmc"
+POWER_GAUGE_URL = "https://spreadsheets.google.com/tq?key=" \
+                  "0An9ynmXUoikYdEx3TkRkYjdwdHZkTUo4OGI4NVZ3cmc"
 
 ###################
 # TIME_ZONE

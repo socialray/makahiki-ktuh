@@ -619,7 +619,7 @@
     },
   {
     "pk": 1,
-    "model": "player_mgr.scoreboardentry",
+    "model": "score_mgr.scoreboardentry",
     "fields": {
       "profile": 1,
       "round_name": "Round 1",
@@ -629,7 +629,7 @@
   },
   {
     "pk": 2,
-    "model": "player_mgr.scoreboardentry",
+    "model": "score_mgr.scoreboardentry",
     "fields": {
       "profile": 1,
       "round_name": "Round 2",
@@ -639,7 +639,7 @@
   },
   {
     "pk": 3,
-    "model": "player_mgr.scoreboardentry",
+    "model": "score_mgr.scoreboardentry",
     "fields": {
       "profile": 2,
       "round_name": "Round 1",
@@ -649,7 +649,7 @@
   },
   {
     "pk": 4,
-    "model": "player_mgr.scoreboardentry",
+    "model": "score_mgr.scoreboardentry",
     "fields": {
       "profile": 2,
       "round_name": "Round 2",
@@ -659,7 +659,7 @@
   },
   {
     "pk": 5,
-    "model": "player_mgr.scoreboardentry",
+    "model": "score_mgr.scoreboardentry",
     "fields": {
       "profile": 3,
       "round_name": "Round 1",
@@ -669,7 +669,7 @@
   },
   {
     "pk": 6,
-    "model": "player_mgr.scoreboardentry",
+    "model": "score_mgr.scoreboardentry",
     "fields": {
       "profile": 3,
       "round_name": "Round 2",
@@ -679,7 +679,7 @@
   },
   {
     "pk": 7,
-    "model": "player_mgr.scoreboardentry",
+    "model": "score_mgr.scoreboardentry",
     "fields": {
       "profile": 4,
       "round_name": "Round 1",
@@ -689,7 +689,7 @@
   },
   {
     "pk": 8,
-    "model": "player_mgr.scoreboardentry",
+    "model": "score_mgr.scoreboardentry",
     "fields": {
       "profile": 4,
       "round_name": "Round 2",
@@ -699,7 +699,7 @@
   },
   {
     "pk": 9,
-    "model": "player_mgr.scoreboardentry",
+    "model": "score_mgr.scoreboardentry",
     "fields": {
       "profile": 5,
       "round_name": "Round 1",
@@ -709,7 +709,7 @@
   },
   {
     "pk": 10,
-    "model": "player_mgr.scoreboardentry",
+    "model": "score_mgr.scoreboardentry",
     "fields": {
       "profile": 5,
       "round_name": "Round 2",
@@ -719,7 +719,7 @@
   },
   {
     "pk": 11,
-    "model": "player_mgr.scoreboardentry",
+    "model": "score_mgr.scoreboardentry",
     "fields": {
       "profile": 6,
       "round_name": "Round 1",
@@ -729,7 +729,7 @@
   },
   {
     "pk": 12,
-    "model": "player_mgr.scoreboardentry",
+    "model": "score_mgr.scoreboardentry",
     "fields": {
       "profile": 6,
       "round_name": "Round 2",
@@ -739,7 +739,7 @@
   },
   {
     "pk": 13,
-    "model": "player_mgr.scoreboardentry",
+    "model": "score_mgr.scoreboardentry",
     "fields": {
       "profile": 7,
       "round_name": "Round 1",
@@ -749,7 +749,7 @@
   },
   {
     "pk": 14,
-    "model": "player_mgr.scoreboardentry",
+    "model": "score_mgr.scoreboardentry",
     "fields": {
       "profile": 7,
       "round_name": "Round 2",
@@ -759,7 +759,7 @@
   },
   {
     "pk": 15,
-    "model": "player_mgr.scoreboardentry",
+    "model": "score_mgr.scoreboardentry",
     "fields": {
       "profile": 8,
       "round_name": "Round 1",
@@ -769,7 +769,7 @@
   },
   {
     "pk": 16,
-    "model": "player_mgr.scoreboardentry",
+    "model": "score_mgr.scoreboardentry",
     "fields": {
       "profile": 8,
       "round_name": "Round 2",
@@ -779,7 +779,7 @@
   },
   {
     "pk": 17,
-    "model": "player_mgr.scoreboardentry",
+    "model": "score_mgr.scoreboardentry",
     "fields": {
       "profile": 9,
       "round_name": "Round 1",
@@ -789,7 +789,7 @@
   },
   {
     "pk": 18,
-    "model": "player_mgr.scoreboardentry",
+    "model": "score_mgr.scoreboardentry",
     "fields": {
       "profile": 9,
       "round_name": "Round 2",
@@ -799,7 +799,7 @@
   },
     {
         "pk": 19,
-        "model": "player_mgr.scoreboardentry",
+        "model": "score_mgr.scoreboardentry",
         "fields": {
             "profile": 10,
             "round_name": "Round 1",
@@ -809,7 +809,7 @@
     },
     {
         "pk": 20,
-        "model": "player_mgr.scoreboardentry",
+        "model": "score_mgr.scoreboardentry",
         "fields": {
             "profile": 10,
             "round_name": "Round 2",
@@ -819,7 +819,7 @@
     },
     {
         "pk": 21,
-        "model": "player_mgr.scoreboardentry",
+        "model": "score_mgr.scoreboardentry",
         "fields": {
             "profile": 11,
             "round_name": "Round 1",
@@ -829,7 +829,7 @@
     },
     {
         "pk": 22,
-        "model": "player_mgr.scoreboardentry",
+        "model": "score_mgr.scoreboardentry",
         "fields": {
             "profile": 11,
             "round_name": "Round 2",
@@ -839,7 +839,7 @@
     },
     {
         "pk": 23,
-        "model": "player_mgr.scoreboardentry",
+        "model": "score_mgr.scoreboardentry",
         "fields": {
             "profile": 12,
             "round_name": "Round 1",
@@ -849,7 +849,7 @@
     },
     {
         "pk": 24,
-        "model": "player_mgr.scoreboardentry",
+        "model": "score_mgr.scoreboardentry",
         "fields": {
             "profile": 12,
             "round_name": "Round 2",
@@ -859,7 +859,7 @@
     },
     {
         "pk": 25,
-        "model": "player_mgr.scoreboardentry",
+        "model": "score_mgr.scoreboardentry",
         "fields": {
             "profile": 13,
             "round_name": "Round 1",
@@ -869,7 +869,7 @@
     },
     {
         "pk": 26,
-        "model": "player_mgr.scoreboardentry",
+        "model": "score_mgr.scoreboardentry",
         "fields": {
             "profile": 13,
             "round_name": "Round 2",
@@ -879,7 +879,7 @@
     },
     {
         "pk": 27,
-        "model": "player_mgr.scoreboardentry",
+        "model": "score_mgr.scoreboardentry",
         "fields": {
             "profile": 14,
             "round_name": "Round 1",
@@ -889,7 +889,7 @@
     },
     {
         "pk": 28,
-        "model": "player_mgr.scoreboardentry",
+        "model": "score_mgr.scoreboardentry",
         "fields": {
             "profile": 14,
             "round_name": "Round 2",
@@ -899,7 +899,7 @@
     },
     {
         "pk": 29,
-        "model": "player_mgr.scoreboardentry",
+        "model": "score_mgr.scoreboardentry",
         "fields": {
             "profile": 15,
             "round_name": "Round 1",
@@ -909,7 +909,7 @@
     },
     {
         "pk": 30,
-        "model": "player_mgr.scoreboardentry",
+        "model": "score_mgr.scoreboardentry",
         "fields": {
             "profile": 15,
             "round_name": "Round 2",

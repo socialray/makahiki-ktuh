@@ -1,3 +1,6 @@
+"""
+Help models
+"""
 from django.db import models
 
 MARKDOWN_LINK = "http://daringfireball.net/projects/markdown/syntax"
@@ -27,6 +30,7 @@ class HelpTopic(models.Model):
 
     @models.permalink
     def get_absolute_url(self):
+        """returns absolute url for a help page"""
         return ('help_topic', [self.category, self.slug])
 
     def __unicode__(self):

@@ -8,7 +8,6 @@ from django.conf import settings
 from django.test import TestCase
 from django.contrib.auth.models import User
 from test_utils import TestUtils
-from widgets.smartgrid.models import Activity, ActivityMember
 from managers.team_mgr.models import Group, Team
 from managers.player_mgr.models import Profile
 from managers.score_mgr.models import ScoreboardEntry
@@ -16,74 +15,14 @@ from managers.score_mgr.models import ScoreboardEntry
 class ScoreboardEntryUnitTests(TestCase):
     """scoreboard test"""
     def setUp(self):
-        """Generate test user and activity. Set the competition settings to the current date for
+        """Generate test. Set the competition settings to the current date for
         testing."""
         self.user = User(username="test_user", password="changeme")
         self.user.save()
-        self.activity = Activity(
-            title="Test activity",
-            description="Testing!",
-            duration=10,
-            point_value=10,
-            pub_date=datetime.datetime.today(),
-            expire_date=datetime.datetime.today() + datetime.timedelta(days=7),
-            confirm_type="text",
-        )
-        self.activity.save()
 
         self.saved_rounds = settings.COMPETITION_ROUNDS
         self.current_round = "Round 1"
         TestUtils.set_competition_round()
-
-    def testRoundsUpdate(self):
-        """Test that the score for the round updates when an activity is approved."""
-        entry = ScoreboardEntry.objects.get_or_create(
-            profile=self.user.get_profile(),
-            round_name=self.current_round,
-        )
-        round_points = entry.points
-        round_submission_date = entry.last_awarded_submission
-
-        activity_points = self.activity.point_value
-
-        activity_member = ActivityMember(user=self.user, activity=self.activity)
-        activity_member.approval_status = "approved"
-        activity_member.save()
-
-        # Verify that the points for the round has been updated.
-        entry = ScoreboardEntry.objects.get_or_create(
-            profile=self.user.get_profile(),
-            round_name=self.current_round,
-        )
-
-        self.assertEqual(round_points + activity_points, entry.points)
-        self.assertNotEqual(round_submission_date,
-            entry.last_awarded_submission)
-
-    def testRoundDoesNotUpdate(self):
-        """Test that the score for the round does not update for an activity submitted outside of
-        the round."""
-        entry = ScoreboardEntry.objects.get_or_create(
-            profile=self.user.get_profile(),
-            round_name=self.current_round,
-        )
-        round_points = entry.points
-        round_submission_date = entry.last_awarded_submission
-
-        activity_member = ActivityMember(user=self.user, activity=self.activity)
-        activity_member.approval_status = "approved"
-        activity_member.submission_date = datetime.datetime.today() - datetime.timedelta(
-            days=1)
-        activity_member.save()
-
-        # Verify that the points for the round has not been updated.
-        entry = ScoreboardEntry.objects.get_or_create(
-            profile=self.user.get_profile(),
-            round_name=self.current_round,
-        )
-
-        self.assertEqual(round_points, entry.points)
-        self.assertEqual(round_submission_date, entry.last_awarded_submission)
 
     def testUserOverallRoundRankWithPoints(self):
         """Tests that the overall rank calculation for a user in a round is correct based on

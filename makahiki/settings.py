@@ -1,9 +1,9 @@
-## -*- coding: utf-8 -*-
-
-# settings.py
-# This file contains system level settings.
-# Settings include database, cache, path, middleware, and installed apps and logging.
-# New settings should not be added here.
+"""
+ settings.py
+ This file contains system level settings.
+ Settings include database, cache, path, middleware, and installed apps and logging.
+ New settings should not be added here.
+"""
 
 import os.path
 import posixpath
@@ -150,26 +150,29 @@ INSTALLED_APPS = (
     'managers.player_mgr',
     'managers.score_mgr',
     'managers.cache_mgr',
+    'managers.help_mgr',
 
-    'widgets.avatar',
-    'widgets.prizes',
-    'widgets.smartgrid',
-    'widgets.energy',
-    'widgets.quests',
-    'widgets.upcoming_events',
-    'widgets.badges',
-    'widgets.notifications',
+    'widgets.help_intro',
+    'widgets.help_faq',
+    'widgets.help_rule',
     'widgets.ask_admin',
-    'widgets.profile',
-    'widgets.help',
-    'widgets.news',
-    'widgets.canopy',
-    'widgets.analytics',
+    #'widgets.prizes',
+    #'widgets.smartgrid',
+    #'widgets.energy',
+    #'widgets.quests',
+    #'widgets.upcoming_events',
+    #'widgets.badges',
+    #'widgets.notifications',
+    #'widgets.profile',
+    #'widgets.news',
+    #'widgets.canopy',
+    #'widgets.analytics',
 
     # 3rd party libraries
     'lib.django_cas',
     'lib.brabeion',
     'lib.facebook_api',
+    'lib.avatar',
 
     # Django apps
     'django.contrib.auth',

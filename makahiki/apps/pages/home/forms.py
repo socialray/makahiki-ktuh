@@ -1,3 +1,6 @@
+"""
+Forms for home setup page
+"""
 import re
 
 from django import forms
@@ -7,22 +10,27 @@ from django.contrib.auth.models import User
 from managers.player_mgr.models import Profile
 
 class FacebookForm(forms.Form):
+    """Form about can post to facebook."""
     can_post = forms.BooleanField(
         required=False,
         initial=True,
-        label="%s can post to my Facebook feed (at most 2 posts per day)" % settings.COMPETITION_NAME
+        label="%s can post to my Facebook feed (at most 2 posts per day)" %
+              (settings.COMPETITION_NAME)
     )
 
 
 class ReferralForm(forms.Form):
+    """Form for referrer. """
     referrer_email = forms.EmailField(
         required=False,
         label='Referrer Email (Optional)'
     )
 
     def __init__(self, *args, **kwargs):
+        """
+        Override for init to take a user argument.
+        """
         self.user = kwargs.pop('user', None)
-
         super(ReferralForm, self).__init__(*args, **kwargs)
 
     def clean(self):
@@ -51,9 +59,11 @@ class ReferralForm(forms.Form):
 
 
 class ProfileForm(forms.Form):
+    """Form for modified profile info"""
     display_name = forms.CharField(
         max_length=20,
-        help_text="This name will be shown in scoreboards and on your profile instead of your UH username."
+        help_text="This name will be shown in scoreboards and on your profile " \
+                  "instead of your UH username."
     )
     facebook_photo = forms.URLField(widget=forms.HiddenInput, required=False)
     use_fb_photo = forms.BooleanField(required=False)
@@ -67,6 +77,7 @@ class ProfileForm(forms.Form):
         super(ProfileForm, self).__init__(*args, **kwargs)
 
     def clean_display_name(self):
+        """clean the display name"""
         name = self.cleaned_data['display_name'].strip()
         # Remove extra whitespace from the name.
         spaces = re.compile(r'\s+')

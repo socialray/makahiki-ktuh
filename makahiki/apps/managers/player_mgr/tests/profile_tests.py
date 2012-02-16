@@ -10,7 +10,6 @@ from django.contrib.auth.models import User
 from django.db import IntegrityError
 from test_utils import TestUtils
 
-from widgets.smartgrid.models import Activity, ActivityMember
 from managers.team_mgr.models import Group, Team
 from managers.player_mgr.models import Profile
 
@@ -432,58 +431,3 @@ class ProfileUnitTests(TestCase):
         # Restore saved rounds.
         settings.COMPETITION_ROUNDS = saved_rounds
 
-    def testAwardRollback(self):
-        """Tests that the last_awarded_submission field rolls back to a previous task."""
-        user = User(username="test_user", password="changeme")
-        user.save()
-
-        activity1 = Activity(
-            title="Test activity",
-            slug="test-activity",
-            description="Testing!",
-            pub_date=datetime.datetime.today(),
-            expire_date=datetime.datetime.today() + datetime.timedelta(days=7),
-            duration=10,
-            point_value=10,
-            confirm_type="text",
-            type="activity",
-        )
-        activity1.save()
-
-        activity2 = Activity(
-            title="Test activity 2",
-            slug="test-activity-2",
-            description="Testing!",
-            duration=10,
-            point_value=15,
-            pub_date=datetime.datetime.today(),
-            expire_date=datetime.datetime.today() + datetime.timedelta(days=7),
-            confirm_type="text",
-            type="activity",
-        )
-        activity2.save()
-        activities = [activity1, activity2]
-
-        # Submit the first activity.  This is what we're going to rollback to.
-        activity_member = ActivityMember(user=user, activity=activities[0],
-            submission_date=datetime.datetime.today())
-        activity_member.approval_status = "approved"
-        activity_member.submission_date = datetime.datetime.today() - datetime.timedelta(
-            days=1)
-        activity_member.save()
-
-        points = user.get_profile().points
-
-        # Submit second activity.
-        activity_member = ActivityMember(user=user, activity=activities[1],
-            submission_date=datetime.datetime.today())
-        activity_member.approval_status = "approved"
-        activity_member.submission_date = datetime.datetime.today()
-        activity_member.save()
-
-        activity_member.approval_status = "rejected"
-        activity_member.submission_date = datetime.datetime.today()
-        activity_member.save()
-
-        # Verify that we rolled back to the previous activity.
-        self.assertEqual(points, user.get_profile().points)

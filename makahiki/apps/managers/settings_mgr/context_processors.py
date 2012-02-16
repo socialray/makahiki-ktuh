@@ -7,26 +7,17 @@ from managers.settings_mgr import get_team_label, get_rounds_for_header, \
         get_current_round, get_current_round_info, in_competition
 from managers.player_mgr.models import Profile
 from managers.team_mgr.models import Team
-from widgets.notifications import get_unread_notifications
-from widgets.quests import get_quests
-
 
 def competition(request):
     """Provides access to standard competition constants within a template."""
-    user = request.user
-
     # Get user-specific information.
+    user = request.user
+    team_member_count = None
+    if user.is_authenticated() and user.get_profile().team:
+        team_member_count = user.get_profile().team.profile_set.count()
+
     team_count = Team.objects.count()
     overall_member_count = Profile.objects.count()
-    team_member_count = None
-    quests = None
-    notifications = None
-
-    if user.is_authenticated():
-        quests = get_quests(user)
-        notifications = get_unread_notifications(user, limit=3)
-        if user.get_profile().team:
-            team_member_count = user.get_profile().team.profile_set.count()
 
     # Get current round info.
     current_round = get_current_round() or "Overall"
@@ -51,8 +42,6 @@ def competition(request):
         "CURRENT_ROUND": current_round,
         "CURRENT_ROUND_INFO": get_current_round_info(),
         "FACEBOOK_APP_ID": facebook_app_id,
-        "QUESTS": quests,
-        "NOTIFICATIONS": notifications,
         "IN_COMPETITION": in_competition(),
         "SPREADSHEETS": {
             "THIRTY_DAYS": settings.ENERGY_THIRTY_DAYS_URL,

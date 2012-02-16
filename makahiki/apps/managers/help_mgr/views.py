@@ -1,3 +1,6 @@
+"""
+views for Help
+"""
 import simplejson as json
 from django.shortcuts import render_to_response
 from django.template import RequestContext
@@ -6,26 +9,13 @@ from django.contrib.auth.decorators import login_required
 from django.shortcuts import get_object_or_404
 from django.http import  HttpResponse
 
-from widgets.help.models import HelpTopic
-from widgets.ask_admin.forms import FeedbackForm
-
-@login_required
-def supply(request):
-    _ = request
-    form = FeedbackForm(auto_id="help_%s")
-    rules = HelpTopic.objects.filter(category="rules", parent_topic__isnull=True)
-    faqs = HelpTopic.objects.filter(category="faq", parent_topic__isnull=True)
-    return {
-        "form": form,
-        "rules": rules,
-        "faqs": faqs,
-        }
-
+from managers.help_mgr.models import HelpTopic
 
 @login_required
 def topic(request, category, slug):
     """
-    Shows a help topic.  This method handles both a regular request and an AJAX request for dialog boxes.
+    Shows a help topic.  This method handles both a regular request and an AJAX request
+    for dialog boxes.
     """
     help_topic = get_object_or_404(HelpTopic, slug=slug, category=category)
     if request.is_ajax():

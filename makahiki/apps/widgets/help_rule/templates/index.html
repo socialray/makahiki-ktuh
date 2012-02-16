@@ -1,0 +1,16 @@
+{% load class_tags %}
+
+<div {% get_id_and_classes "help-rules" %}>
+    <div {% get_id_and_classes "help-rules-box" %}>
+        <div {% get_id_and_classes "help-rules-title" %}>
+            Rules of the competition
+        </div>
+        <div {% get_id_and_classes "help-rules-content" %}>
+            <ul>
+                {% for topic in view_objects.help_rule.rules %}
+                    {% include "help/topic-item.html" %}
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
+</div>

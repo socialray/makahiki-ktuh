@@ -1,6 +1,6 @@
 from django.conf.urls.defaults import patterns, url
 
-urlpatterns = patterns('widgets.avatar.views',
+urlpatterns = patterns('lib.avatar.views',
     url('^change/$', 'change', name='avatar_change'),
     url('^delete/$', 'delete', name='avatar_delete'),
     url(r'^change/get-fb-photo/$', 'get_facebook_photo', name="avatar_get_fb"),

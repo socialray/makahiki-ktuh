@@ -1,3 +1,9 @@
+"""
+home page tests
+"""
+
+#pylint: disable=C0103
+
 import json
 import datetime
 
@@ -6,10 +12,10 @@ from django.core.urlresolvers import reverse
 from django.contrib.auth.models import User
 from django.conf import settings
 
-from widgets.smartgrid.models import Activity, ActivityMember
 from managers.player_mgr.models import Profile
 
 class HomeFunctionalTestCase(TestCase):
+    """Home page test cases"""
     def testIndex(self):
         """Check that we can load the index."""
         User.objects.create_user("user", "user@test.com", password="changeme")
@@ -20,6 +26,7 @@ class HomeFunctionalTestCase(TestCase):
 
 
 class CompetitionMiddlewareTestCase(TestCase):
+    """competition middleware test."""
     def setUp(self):
         User.objects.create_user("user", "user@test.com", password="changeme")
         self.client.login(username="user", password="changeme")
@@ -64,6 +71,7 @@ class CompetitionMiddlewareTestCase(TestCase):
 
 
 class SetupWizardFunctionalTestCase(TestCase):
+    """setup widzard test cases."""
     def setUp(self):
         self.user = User.objects.create_user("user", "user@test.com", password="changeme")
         self.client.login(username="user", password="changeme")
@@ -291,23 +299,8 @@ class SetupWizardFunctionalTestCase(TestCase):
         self.assertTrue(user.get_profile().setup_complete,
             "Check that the user has completed the profile setup.")
 
-        # Create the activity to link to.
-        activity = Activity(
-            title="Test activity",
-            name=settings.SETUP_WIZARD_ACTIVITY_NAME,
-            description="Testing!",
-            duration=10,
-            point_value=15,
-            pub_date=datetime.datetime.today(),
-            expire_date=datetime.datetime.today() + datetime.timedelta(days=7),
-            confirm_type="text",
-            type="activity",
-        )
-        activity.save()
-
         # Test a normal POST request (answer was correct).
         profile = user.get_profile()
-        points = profile.points
         profile.setup_complete = False
         profile.save()
 
@@ -322,8 +315,4 @@ class SetupWizardFunctionalTestCase(TestCase):
         user = User.objects.get(username="user")
         self.assertTrue(user.get_profile().setup_complete,
             "Check that the user has completed the profile setup.")
-        self.assertEqual(points + 15, user.get_profile().points,
-            "Check that the user has been awarded points as well.")
-        member = ActivityMember.objects.get(user=user, activity=activity)
-        self.assertEqual(member.approval_status, "approved",
-            "Test that the user completed the linked activity.")
+

@@ -1,3 +1,8 @@
+"""
+url def for home page and setup wizard.
+"""
+
+#pylint: disable=C0103
 from django.conf.urls.defaults import url, patterns
 
 urlpatterns = patterns('',

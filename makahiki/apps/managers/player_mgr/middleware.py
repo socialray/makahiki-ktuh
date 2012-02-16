@@ -4,9 +4,6 @@ This middleware tracks how many days in a row the user has come to the site.
 
 import datetime
 
-from widgets.badges import user_badges
-from lib.brabeion import badges
-
 class LoginTrackingMiddleware(object):
     """
     This middleware tracks how many days in a row the user has come to the site.
@@ -26,10 +23,6 @@ class LoginTrackingMiddleware(object):
                 profile.last_visit_date = today
                 profile.daily_visit_count += 1
                 profile.save()
-                if user.badges_earned.filter(slug="dailyvisitor").count() == 0:
-                    badges.possibly_award_badge(
-                        user_badges.DailyVisitorBadge.slug, user=request.user)
-
             elif not last_visit or (today - last_visit) > datetime.timedelta(
                 days=1):
                 # Reset the daily login count.

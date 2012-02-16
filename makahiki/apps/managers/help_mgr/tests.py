@@ -1,11 +1,16 @@
+"""
+tests for Help
+"""
+#pylint: disable=C0103
 from django.test import TestCase
 from django.core.urlresolvers import reverse
 from django.contrib.auth.models import User
 
 from managers.team_mgr.models import Team
-from widgets.help.models import HelpTopic
+from managers.help_mgr.models import HelpTopic
 
 class HelpFunctionalTestCase(TestCase):
+    """test cases"""
     fixtures = ["base_teams.json"]
 
     def setUp(self):
