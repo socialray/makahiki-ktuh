@@ -16,13 +16,6 @@ managers.cache_mgr
     :undoc-members:
     :show-inheritance:
 
-widgets.help
-------------------
-.. automodule:: widgets.help.models
-    :members:
-    :undoc-members:
-    :show-inheritance:
-
 managers.player_mgr
 --------------------
 .. automodule:: managers.player_mgr
@@ -109,13 +102,6 @@ widgets.energy
     :show-inheritance:
 
 .. automodule:: widgets.energy.views
-    :members:
-    :undoc-members:
-    :show-inheritance:
-
-widgets.help
------------------
-.. automodule:: widgets.help.views
     :members:
     :undoc-members:
     :show-inheritance:
