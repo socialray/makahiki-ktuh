@@ -82,6 +82,7 @@
 {% endblock %}
 
 {% block footer %}
+<div {% get_id_and_classes "footer" %}>
     <div {% get_id_and_classes "landing-sponsors" %}>
         <div {% get_id_and_classes "landing-sponsors-title" %}>
             Sponsored by:
@@ -101,4 +102,5 @@
         </div>
     </div>
     <a href="mailto:{{ CONTACT_EMAIL }}">Contact the Kukui Cup administrators</a>
+</div>
 {% endblock %}

@@ -42,9 +42,7 @@
     {% block body %}{% endblock %}
   </div>
   
-  <div {% get_id_and_classes "footer" %}>
-      {% block footer %}{% endblock %}
-  </div>
+  {% block footer %}{% endblock %}
   
   {% block extra_body_base %}
       {% block extra_body %}{% endblock %}
