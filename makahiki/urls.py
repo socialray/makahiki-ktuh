@@ -45,6 +45,7 @@ urlpatterns = patterns('',
     url(r'^coming-soon/$', direct_to_template, {'template': 'coming_soon.html'}, name='coming_soon'),
 
     # service views.
+    url(r'^account/login/$', 'managers.auth_mgr.views.login', name='auth_login'),
     url(r'^account/cas/login/$', 'lib.django_cas.views.login'),
     url(r'^account/cas/logout/$', 'lib.django_cas.views.logout'),
 )

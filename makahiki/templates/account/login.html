@@ -1,7 +1,6 @@
 {% extends "site_base.html" %}
 
 {% load class_tags %}
-{% load uni_form %}
 
 {% block page_title %}
   Welcome to KukuiCup!
@@ -24,21 +23,16 @@
 
 <h1>Log In</h1>
 
-<div style="margin: 0 auto; width: 650px; padding-top: 20px">
-  <form class="login uniForm" method="POST" action="{% url acct_login %}">
+<div style="margin: 0 auto; width: 650px; padding-top: 20px;">
+  <form class="login" method="POST" action="{% url auth_login %}">
       <fieldset class="inlineLabels">
 	  {% csrf_token %}
-          {# <div class="form_block"> #}
-          {#     <a href="{% url acct_passwd_reset %}">Forgot your password?</a> #}
-          {# </div> #}
-          {{ form|as_uni_form }}
+          {{ form.as_p }}
           <div class="form_block">
               <input type="submit" value="Log in &raquo;" />
           </div>
       </fieldset>
   </form>
 </div>
-
-<p>If you have any trouble logging in to your account, contact us at <a href="mailto:{{ CONTACT_EMAIL }}">{{ CONTACT_EMAIL }}</a>.</p>
 
 {% endblock %}
