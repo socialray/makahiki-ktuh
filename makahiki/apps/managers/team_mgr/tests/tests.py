@@ -2,7 +2,7 @@
 team manager tests
 """
 
-#pylint: disable=C0103
+
 import datetime
 
 from django.test import TestCase

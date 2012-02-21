@@ -241,11 +241,8 @@ def _get_profile_form(request, form=None, non_xhr=False):
     """
     Helper method to render the profile form.
     """
-    try:
-        fb_user = facebook.get_user_from_cookie(request.COOKIES, settings.FACEBOOK_APP_ID,
-            settings.FACEBOOK_SECRET_KEY)
-    except:  # pylint: disable=W0702
-        fb_user = None
+    fb_user = facebook.get_user_from_cookie(request.COOKIES, settings.FACEBOOK_APP_ID,
+        settings.FACEBOOK_SECRET_KEY)
 
     fb_id = None
     facebook_photo = None

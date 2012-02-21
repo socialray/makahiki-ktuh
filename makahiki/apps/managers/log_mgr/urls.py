@@ -1,7 +1,7 @@
 """
 url for logging
 """
-#pylint: disable=C0103
+
 from django.conf.urls.defaults import patterns, url
 
 urlpatterns = patterns('',

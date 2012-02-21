@@ -1,7 +1,7 @@
 """
 urls for ask admin
 """
-#pylint: disable=C0103
+
 from django.conf.urls.defaults import url, patterns
 
 urlpatterns = patterns('',

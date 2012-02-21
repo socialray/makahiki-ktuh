@@ -1,7 +1,7 @@
 """
 test settings
 """
-#pylint: disable=C0103
+
 import datetime
 
 from django.test import TestCase

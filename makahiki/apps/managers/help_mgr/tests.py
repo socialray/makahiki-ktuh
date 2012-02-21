@@ -1,7 +1,7 @@
 """
 tests for Help
 """
-#pylint: disable=C0103
+
 from django.test import TestCase
 from django.core.urlresolvers import reverse
 from django.contrib.auth.models import User

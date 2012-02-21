@@ -2,7 +2,7 @@
 ask admin tests.
 """
 
-#pylint: disable=C0103
+
 
 from django.test import TestCase
 from django.contrib.auth.models import User

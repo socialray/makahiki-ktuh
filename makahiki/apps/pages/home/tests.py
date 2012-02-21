@@ -2,7 +2,7 @@
 home page tests
 """
 
-#pylint: disable=C0103
+
 
 import json
 import datetime

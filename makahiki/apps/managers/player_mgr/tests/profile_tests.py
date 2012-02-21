@@ -1,7 +1,7 @@
 """
 profile tests
 """
-#pylint: disable=C0103
+
 import datetime
 
 from django.conf import settings
