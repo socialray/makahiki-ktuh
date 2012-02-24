@@ -269,7 +269,24 @@
             "date_joined": "2011-04-23 15:30:54"
         }
     },
-
+    {
+    "pk": 20, 
+    "model": "auth.user", 
+    "fields": {
+      "username": "cmoore", 
+      "first_name": "Cam", 
+      "last_name": "Moore", 
+      "is_active": true, 
+      "is_superuser": true, 
+      "is_staff": true, 
+      "last_login": "2012-02-22 11:25:06", 
+      "groups": [], 
+      "user_permissions": [], 
+      "password": "sha1$7c360$6fccb69328988b8a57b5debf73b2704b1917c26c", 
+      "email": "cammymoore07@gmail.com", 
+      "date_joined": "2012-02-15 22:01:32"
+    }
+  },
   {
     "pk": 1, 
     "model": "player_mgr.profile", 
@@ -617,6 +634,29 @@
             "enable_help": true
         }
     },
+  {
+    "pk": 20, 
+    "model": "player_mgr.profile", 
+    "fields": {
+      "last_visit_date": "2011-07-26", 
+      "first_name": "Cam", 
+      "last_name": "Moore", 
+      "name": "Cam", 
+      "team": 11,
+      "canopy_member": false, 
+      "daily_visit_count": 3, 
+      "last_awarded_submission": "2012-02-20 14:05:39", 
+      "completion_date": "2012-02-18 13:12:48", 
+      "setup_complete": true, 
+      "contact_text": "", 
+      "points": 5, 
+      "contact_email": "cammymoore07@gmail.com", 
+      "user": 20, 
+      "contact_carrier": null, 
+      "setup_profile": true, 
+      "enable_help": true
+    }
+  }, 
   {
     "pk": 1,
     "model": "score_mgr.scoreboardentry",
