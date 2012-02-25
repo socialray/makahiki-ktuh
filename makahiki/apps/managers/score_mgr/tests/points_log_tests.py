@@ -9,6 +9,7 @@ from django.contrib.auth.models import User
 
 from managers.player_mgr.models import PointsTransaction
 
+
 class PointsLogTest(TestCase):
     """test points log"""
     def setUp(self):

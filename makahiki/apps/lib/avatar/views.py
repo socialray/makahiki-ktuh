@@ -16,19 +16,21 @@ from django.core.urlresolvers import reverse
 
 from django.conf import settings
 
+
 def _get_next(request):
     """
-    The part that's the least straightforward about views in this module is how they 
-    determine their redirects after they have finished computation.
+    The part that's the least straightforward about views in this module is
+    how they determine their redirects after they have finished computation.
 
-    In short, they will try and determine the next place to go in the following order:
+    In short, they will try and determine the next place to go in the
+    following order:
 
-    1. If there is a variable named ``next`` in the *POST* parameters, the view will
-    redirect to that variable's value.
-    2. If there is a variable named ``next`` in the *GET* parameters, the view will
-    redirect to that variable's value.
-    3. If Django can determine the previous page from the HTTP headers, the view will
-    redirect to that previous page.
+    1. If there is a variable named ``next`` in the *POST* parameters,
+    the view will redirect to that variable's value.
+    2. If there is a variable named ``next`` in the *GET* parameters,
+    the view will redirect to that variable's value.
+    3. If Django can determine the previous page from the HTTP headers,
+    the view will redirect to that previous page.
     """
     next_req = request.POST.get('next',
         request.GET.get('next', request.META.get('HTTP_REFERER', None)))
@@ -57,14 +59,14 @@ def get_facebook_photo(request):
             fb_id = graph_profile["id"]
         except facebook.GraphAPIError:
             return HttpResponse(json.dumps({
-                "contents": "Facebook is not available at the moment, please try later"
-                ,
+                "contents": "Facebook is not available at the moment, "
+                            "please try later",
                 }), mimetype='application/json')
-
 
         # Insert the form into the response.
         form = FacebookPictureForm(initial={
-            "facebook_photo": "http://graph.facebook.com/%s/picture?type=large" % fb_id
+            "facebook_photo":
+                "http://graph.facebook.com/%s/picture?type=large" % fb_id
         })
 
         response = render_to_string("avatar_mgr/avatar_facebook.html", {
@@ -181,7 +183,8 @@ def change(request, extra_context=None, next_override=None):
             pass
 
     fb_form = FacebookPictureForm(initial={
-        "facebook_photo": "http://graph.facebook.com/%s/picture?type=large" % fb_id
+        "facebook_photo":
+            "http://graph.facebook.com/%s/picture?type=large" % fb_id
     })
     return render_to_response(
         'avatar_mgr/change.html',
@@ -222,7 +225,7 @@ def delete(request, extra_context=None, next_override=None):
                         break
             Avatar.objects.filter(id__in=ids).delete()
             # request.user.message_set.create(
-            #                 message=_("Successfully deleted the requested avatars."))
+            #     message=_("Successfully deleted the requested avatars."))
             return HttpResponseRedirect(next_override or _get_next(request))
     return render_to_response(
         'avatar/confirm_delete.html',

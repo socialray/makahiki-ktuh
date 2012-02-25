@@ -5,9 +5,11 @@ from django.core.cache import cache
 from django.utils.hashcompat import md5_constructor
 from django.utils.http import urlquote
 
+
 def invalidate_template_cache(fragment_name, *variables):
     """
-    Takes the name of the cache as well as additional arguments to invalidate the
+    Takes the name of the cache as well as additional arguments to invalidate
+     the
     cache for the template.
 
     Credit to http://djangosnippets.org/snippets/1593/
@@ -33,7 +35,7 @@ def invalidate_team_avatar_cache(task, user):
     """
     if task and user and user.get_profile() and user.get_profile().team:
         invalidate_template_cache("team_avatar", task.id,
-            user.get_profile().team.id)
+                                  user.get_profile().team.id)
 
 
 def invalidate_commitments_cache(user):
@@ -41,5 +43,3 @@ def invalidate_commitments_cache(user):
     Invalidates the cache of the commitments list for the user.
     """
     invalidate_template_cache("commitments", user.username)
-  
-  

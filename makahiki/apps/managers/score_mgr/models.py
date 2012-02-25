@@ -8,15 +8,17 @@ from django.contrib.auth.models import User
 from django.contrib.contenttypes import generic
 from django.contrib.contenttypes.models import ContentType
 
+
 def _get_rounds():
-    """Retrieves the rounds from the competition settings in a format that can be used in the
-    ScoreboardEntry model."""
+    """Retrieves the rounds from the competition settings in a format that
+    can be used in the ScoreboardEntry model."""
 
     return ((key, key) for key in settings.COMPETITION_ROUNDS.keys())
 
 
 class ScoreboardEntry(models.Model):
-    """Defines a class that tracks the user's scores in the rounds of the competition."""
+    """Defines a class that tracks the user's scores in the rounds of the
+    competition."""
 
     profile = models.ForeignKey("player_mgr.Profile", editable=False)
     round_name = models.CharField(max_length="30", choices=_get_rounds(),

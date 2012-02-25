@@ -2,8 +2,6 @@
 home page tests
 """
 
-
-
 import json
 import datetime
 
@@ -13,6 +11,7 @@ from django.contrib.auth.models import User
 from django.conf import settings
 
 from managers.player_mgr.models import Profile
+
 
 class HomeFunctionalTestCase(TestCase):
     """Home page test cases"""
@@ -42,11 +41,13 @@ class CompetitionMiddlewareTestCase(TestCase):
         start = datetime.date.today() + datetime.timedelta(days=1)
         settings.COMPETITION_START = start.strftime("%Y-%m-%d %H:%M:%S")
         settings.COMPETITION_END = (start +
-                                    datetime.timedelta(days=7)).strftime("%Y-%m-%d %H:%M:%S")
+                                    datetime.timedelta(days=7)).\
+                                    strftime("%Y-%m-%d %H:%M:%S")
 
         response = self.client.get(reverse("home_index"), follow=True)
         self.failUnlessEqual(response.status_code, 200)
-        self.assertTemplateUsed(response, "widgets/home/templates/restricted.html")
+        self.assertTemplateUsed(response,
+                                "widgets/home/templates/restricted.html")
         self.assertContains(response, "The competition starts in")
 
     def testAfterCompetition(self):
@@ -56,11 +57,13 @@ class CompetitionMiddlewareTestCase(TestCase):
         start = datetime.date.today() - datetime.timedelta(days=8)
         settings.COMPETITION_START = start.strftime("%Y-%m-%d %H:%M:%S")
         settings.COMPETITION_END = (start +
-                                    datetime.timedelta(days=7)).strftime("%Y-%m-%d %H:%M:%S")
+                                    datetime.timedelta(days=7)).\
+                                    strftime("%Y-%m-%d %H:%M:%S")
 
         response = self.client.get(reverse("home_index"), follow=True)
         self.failUnlessEqual(response.status_code, 200)
-        self.assertTemplateUsed(response, "widgets/home/templates/restricted.html")
+        self.assertTemplateUsed(response,
+                                "widgets/home/templates/restricted.html")
         self.assertContains(response, "The 2011 Kukui Cup is now over")
 
     def tearDown(self):
@@ -71,7 +74,9 @@ class CompetitionMiddlewareTestCase(TestCase):
 class SetupWizardFunctionalTestCase(TestCase):
     """setup widzard test cases."""
     def setUp(self):
-        self.user = User.objects.create_user("user", "user@test.com", password="changeme")
+        self.user = User.objects.create_user("user",
+                                             "user@test.com",
+                                             password="changeme")
         self.client.login(username="user", password="changeme")
 
     def testDisplaySetupWizard(self):
@@ -80,7 +85,8 @@ class SetupWizardFunctionalTestCase(TestCase):
         self.failUnlessEqual(response.status_code, 200)
         self.assertContains(response, "Introduction: Step 1 of 6")
 
-        # Check that the user is redirected to the setup wizard even if they visit another page.
+        # Check that the user is redirected to the setup wizard even if they
+        # visit another page
         response = self.client.get(reverse("profile_index"))
         #self.assertRedirects(response, reverse("home_index"))
 
@@ -89,7 +95,8 @@ class SetupWizardFunctionalTestCase(TestCase):
         response = self.client.get(reverse("setup_terms"), {},
             HTTP_X_REQUESTED_WITH='XMLHttpRequest')
         self.assertTemplateUsed(response, "first-login/terms.html")
-        self.assertContains(response, "/account/cas/logout?next=" + reverse("about"))
+        self.assertContains(response, "/account/cas/logout?next=" +
+                                      reverse("about"))
         try:
             json.loads(response.content)
         except ValueError:
@@ -166,14 +173,18 @@ class SetupWizardFunctionalTestCase(TestCase):
         self.failUnlessEqual(response.status_code, 200)
         self.assertTemplateUsed(response, "first-login/profile.html")
         profile = Profile.objects.get(user=self.user)
-        self.assertEqual(profile.referring_user, user2, 'User 1 should be referred by user 2.')
+        self.assertEqual(profile.referring_user,
+                         user2,
+                         'User 1 should be referred by user 2.')
 
         # Test getting the referral page now has user2's email.
         response = self.client.get(reverse('setup_referral'), {},
             HTTP_X_REQUESTED_WITH='XMLHttpRequest')
         self.failUnlessEqual(response.status_code, 200)
-        self.assertContains(response, user2.email,
-            msg_prefix="Going back to referral page should have second user's email.")
+        self.assertContains(response,
+                            user2.email,
+                            msg_prefix="Going back to referral page should " \
+                                       "have second user's email.")
 
     def testSetupProfile(self):
         """Check that we can access the profile page of the setup wizard."""
@@ -193,7 +204,8 @@ class SetupWizardFunctionalTestCase(TestCase):
             # TODO: Test setup with a FB profile.
 
     def testSetupProfileUpdate(self):
-        """Check that we can update the profile of the user in the setup wizard."""
+        """Check that we can update the profile of the user in the setup
+        wizard."""
         profile = self.user.get_profile()
         points = profile.points
         response = self.client.post(reverse("setup_profile"), {
@@ -219,7 +231,8 @@ class SetupWizardFunctionalTestCase(TestCase):
         self.assertTemplateUsed(response, "first-login/activity.html")
 
     def testSetupProfileWithoutName(self):
-        """Test that there is an error when the user does not supply a username."""
+        """Test that there is an error when the user does not supply a
+        username."""
         _ = self.user.get_profile()
         response = self.client.post(reverse("setup_profile"), {
             "display_name": "",
@@ -228,7 +241,8 @@ class SetupWizardFunctionalTestCase(TestCase):
         self.assertTemplateUsed(response, "first-login/profile.html")
 
     def testSetupProfileWithDupName(self):
-        """Test that there is an error when the user uses a duplicate display name."""
+        """Test that there is an error when the user uses a duplicate display
+         name."""
         _ = self.user.get_profile()
 
         user2 = User.objects.create_user("user2", "user2@test.com")
@@ -313,4 +327,3 @@ class SetupWizardFunctionalTestCase(TestCase):
         user = User.objects.get(username="user")
         self.assertTrue(user.get_profile().setup_complete,
             "Check that the user has completed the profile setup.")
-

@@ -1,15 +1,17 @@
 """
-Server log middleware to log any request from logged in users. write a log entry in server log.
+Server log middleware to log any request from logged in users. write a log
+entry in server log.
 """
 import logging
 import re
-from time import strftime # Timestamp
+from time import strftime  # Timestamp
 
 
 # Filter out requests to media and site_media.
 MEDIA_REGEXP = r'^\/(site_)?media'
 SENTRY_REGEXP = r'^\/sentry\/'
 URL_FILTER = ("/favicon.ico", "/admin/jsi18n/",)
+
 
 class LoggingMiddleware(object):
     """
@@ -19,15 +21,17 @@ class LoggingMiddleware(object):
         """
         Log the actions of logged in users.
         """
-        # Filter out the following paths.  Logs will not be created for these paths.
+        # Filter out the following paths.  Logs will not be created for these
+        # paths.
         if re.match(MEDIA_REGEXP, request.path) or re.match(SENTRY_REGEXP,
             request.path) or request.path in URL_FILTER:
             return response
 
-        # Retrieve the username either from a cookie (when logging out) or the authenticated user.
+        # Retrieve the username either from a cookie (when logging out) or
+        # the authenticated user.
         username = None
-        if hasattr(request, "session") and request.session.has_key(
-            "logged-out-user"):
+        if hasattr(request, "session") and "logged-out-user" in request\
+        .session:
             username = request.session["logged-out-user"]
             del request.session["logged-out-user"]
         elif hasattr(request, "user") and request.user.is_authenticated():
@@ -47,8 +51,8 @@ class LoggingMiddleware(object):
         path = request.get_full_path()
         code = response.status_code if response else 500
         method = request.method
-        ip_addr = request.META["REMOTE_ADDR"] if request.META.has_key(
-            "REMOTE_ADDR") else "no-ip"
+        ip_addr = request.META["REMOTE_ADDR"] if "REOMTE_ADDR" in request\
+        .META else "no-ip"
         timestamp = strftime("%Y-%m-%d %H:%M:%S")
 
         # Create the log entry.
@@ -58,9 +62,9 @@ class LoggingMiddleware(object):
             # Dump the POST parameters, but we don't need the CSRF token.
             query_dict = request.POST.copy()
             # print query_dict
-            if query_dict.has_key(u"csrfmiddlewaretoken"):
+            if u"csrfmiddlewaretoken" in query_dict:
                 del query_dict[u'csrfmiddlewaretoken']
-            if query_dict.has_key(u"password"):
+            if u"password" in query_dict:
                 del query_dict[u'password']
 
             entry += " %s" % (query_dict,)

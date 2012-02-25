@@ -9,6 +9,7 @@ from django.contrib.auth.models import User
 
 from managers.player_mgr.models import Profile
 
+
 class FacebookForm(forms.Form):
     """Form about can post to facebook."""
     can_post = forms.BooleanField(
@@ -39,7 +40,8 @@ class ReferralForm(forms.Form):
         """
         cleaned_data = self.cleaned_data
         if self.user.email == cleaned_data.get('referrer_email'):
-            raise forms.ValidationError("Please use another user's email address, not your own.")
+            raise forms.ValidationError(
+                "Please use another user's email address, not your own.")
 
         return cleaned_data
 
@@ -62,8 +64,8 @@ class ProfileForm(forms.Form):
     """Form for modified profile info"""
     display_name = forms.CharField(
         max_length=20,
-        help_text="This name will be shown in scoreboards and on your profile " \
-                  "instead of your UH username."
+        help_text="This name will be shown in scoreboards and on your " \
+                  "profile instead of your UH username."
     )
     facebook_photo = forms.URLField(widget=forms.HiddenInput, required=False)
     use_fb_photo = forms.BooleanField(required=False)
@@ -88,7 +90,9 @@ class ProfileForm(forms.Form):
             raise forms.ValidationError('This field is required')
 
         # Check for duplicate name
-        if Profile.objects.exclude(user=self.user).filter(name=name).count() > 0:
-            raise forms.ValidationError("%s is taken.  Please use another name.")
+        if Profile.objects.exclude(user=self.user).filter(
+            name=name).count() > 0:
+            raise forms.ValidationError(
+                "%s is taken.  Please use another name.")
 
         return name

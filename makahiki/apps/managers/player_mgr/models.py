@@ -17,20 +17,22 @@ from managers.team_mgr.models import Team
 from managers.settings_mgr import get_current_round
 from managers.cache_mgr.utils import invalidate_info_bar_cache
 
+
 class Profile(models.Model):
     """
-    Profile represents a player's profile info, and his points, and other book keeping.
+    Profile represents a player's profile info, and his points,
+    and other book keeping.
     """
     user = models.ForeignKey(User, unique=True, verbose_name='user',
-        related_name='profile')
+                             related_name='profile')
     name = models.CharField('name', unique=True, max_length=50)
     first_name = models.CharField('first_name', max_length=50, null=True,
-        blank=True)
+                                  blank=True)
     last_name = models.CharField('last_name', max_length=50, null=True,
-        blank=True)
+                                 blank=True)
     points = models.IntegerField(default=0, editable=False)
     last_awarded_submission = models.DateTimeField(null=True, blank=True,
-        editable=False)
+                                                   editable=False)
     team = models.ForeignKey(Team, null=True, blank=True)
     contact_email = models.EmailField(null=True, blank=True)
     contact_text = PhoneNumberField(null=True, blank=True)
@@ -43,7 +45,7 @@ class Profile(models.Model):
     setup_profile = models.BooleanField(default=False, editable=False)
     setup_complete = models.BooleanField(default=False, )
     completion_date = models.DateTimeField(null=True, blank=True,
-        )
+                                           )
 
     # Check visits for daily visitor badge.
     daily_visit_count = models.IntegerField(default=0, editable=False)
@@ -51,7 +53,7 @@ class Profile(models.Model):
 
     # Check for referrer
     referring_user = models.ForeignKey(User, null=True, blank=True,
-        related_name='referred_profiles')
+                                       related_name='referred_profiles')
     referrer_awarded = models.BooleanField(default=False, editable=False)
 
     def __unicode__(self):
@@ -65,17 +67,19 @@ class Profile(models.Model):
         if round_name:
             return Profile.objects.filter(
                 scoreboardentry__round_name=round_name,
-            ).order_by("-scoreboardentry__points",
-                "-scoreboardentry__last_awarded_submission")[:num_results]
+            ).\
+            order_by("-scoreboardentry__points",
+                     "-scoreboardentry__last_awarded_submission")[:num_results]
 
-        return Profile.objects.all().order_by("-points", "-last_awarded_submission")[:num_results]
+        return Profile.objects.all().\
+            order_by("-points", "-last_awarded_submission")[:num_results]
 
     def current_round_points(self):
         """Returns the amount of points the user has in the current round."""
         current_round = get_current_round()
         if current_round:
             return ScoreboardEntry.objects.get(profile=self,
-                round_name=current_round).points
+                                               round_name=current_round).points
 
         return self.points
 
@@ -88,7 +92,8 @@ class Profile(models.Model):
         return None
 
     def current_round_team_rank(self):
-        """Returns the rank of the user for the current round in their own team."""
+        """Returns the rank of the user for the current round in their own
+        team."""
         current_round = get_current_round()
         if current_round:
             return self.team_rank(round_name=current_round)
@@ -101,70 +106,73 @@ class Profile(models.Model):
             return ScoreboardEntry.user_round_team_rank(self.user, round_name)
 
         # Calculate the rank.
-        # This counts the number of people who are on the team that have more points
+        # This counts the number of people who are on the team that have more
+        # points
         # OR have the same amount of points but a later submission date
         if self.last_awarded_submission:
             return Profile.objects.filter(
                 Q(points__gt=self.points) |
                 Q(points=self.points,
-                    last_awarded_submission__gt=self.last_awarded_submission),
+                  last_awarded_submission__gt=self.last_awarded_submission),
                 team=self.team,
                 user__is_staff=False,
                 user__is_superuser=False,
-            ).count() + 1
+                ).count() + 1
 
         return Profile.objects.filter(
             points__gt=self.points,
             team=self.team,
             user__is_staff=False,
             user__is_superuser=False,
-        ).count() + 1
-
+            ).count() + 1
 
     def overall_rank(self, round_name=None):
         """Returns the overall rank of the user."""
         if round_name:
             return ScoreboardEntry.user_round_overall_rank(self.user,
-                round_name)
+                                                           round_name)
 
-        # Compute the overall rank.  This counts the number of people that have more points
+        # Compute the overall rank.  This counts the number of people that
+        # have more points
         # OR have the same amount of points but a later submission date
         if self.last_awarded_submission:
             return Profile.objects.filter(
                 Q(points__gt=self.points) |
                 Q(points=self.points,
-                    last_awarded_submission__gt=self.last_awarded_submission),
+                  last_awarded_submission__gt=self.last_awarded_submission),
                 user__is_staff=False,
                 user__is_superuser=False,
-            ).count() + 1
+                ).count() + 1
 
         return Profile.objects.filter(
             points__gt=self.points,
             user__is_staff=False,
             user__is_superuser=False,
-        ).count() + 1
+            ).count() + 1
 
     def canopy_karma_info(self):
         """
-        Returns a dictionary containing the user's rank and the total number of canopy members.
+        Returns a dictionary containing the user's rank and the total number
+        of canopy members.
         """
         query = Profile.objects.filter(canopy_member=True)
         return {
-            "rank": query.filter(canopy_karma__gt=self.canopy_karma).count() + 1
-            ,
-            "total": query.count(),
+            "rank": query.filter(canopy_karma__gt=self.canopy_karma).count()
+            + 1, "total": query.count(),
             }
 
     def _is_canopy_activity(self, related_object):
         """check if the related_object is a canopy activity"""
         return related_object != None and\
                ((hasattr(related_object,
-                   "activity") and related_object.activity.is_canopy)
+                         "activity") and related_object.activity.is_canopy)
                 or
                 (hasattr(related_object,
-                    "commitment") and related_object.commitment.is_canopy))
+                         "commitment") and related_object.commitment
+                .is_canopy))
 
-    def add_points(self, points, submission_date, message, related_object=None):
+    def add_points(self, points, submission_date, message,
+                   related_object=None):
         """
         Adds points based on the point value of the submitted object.
         Note that this method does not save the profile.
@@ -175,7 +183,7 @@ class Profile(models.Model):
             points=points,
             submission_date=submission_date,
             message=message,
-        )
+            )
         if related_object:
             transaction.related_object = related_object
 
@@ -190,7 +198,8 @@ class Profile(models.Model):
         else:
             self.points += points
 
-            if not self.last_awarded_submission or submission_date > self.last_awarded_submission:
+            if not self.last_awarded_submission or submission_date > self\
+            .last_awarded_submission:
                 self.last_awarded_submission = submission_date
 
             current_round = self._get_round(submission_date)
@@ -201,7 +210,7 @@ class Profile(models.Model):
                 entry, _ = ScoreboardEntry.objects.get_or_create(
                     profile=self, round_name=current_round)
                 entry.points += points
-                if not entry.last_awarded_submission or \
+                if not entry.last_awarded_submission or\
                    submission_date > entry.last_awarded_submission:
                     entry.last_awarded_submission = submission_date
                 entry.save()
@@ -209,8 +218,10 @@ class Profile(models.Model):
     def remove_points(self, points, submission_date, message,
                       related_object=None):
         """
-        Removes points from the user. Note that this method does not save the profile.
-        If the submission date is the same as the last_awarded_submission field, we rollback
+        Removes points from the user. Note that this method does not save the
+         profile.
+        If the submission date is the same as the last_awarded_submission
+        field, we rollback
         to a previously completed task.
         """
 
@@ -224,11 +235,14 @@ class Profile(models.Model):
         # Otherwise, this just counts towards overall.
         if current_round:
             try:
-                entry = ScoreboardEntry.objects.get(profile=self, round_name=current_round)
+                entry = ScoreboardEntry.objects.get(profile=self,
+                                                    round_name=current_round)
                 entry.points -= points
                 if entry.last_awarded_submission == submission_date:
                     # Need to find the previous update.
-                    entry.last_awarded_submission = self._last_submitted_before(submission_date)
+                    entry.last_awarded_submission = self\
+                    ._last_submitted_before(
+                        submission_date)
 
                 entry.save()
             except ObjectDoesNotExist:
@@ -236,7 +250,8 @@ class Profile(models.Model):
                 raise
 
         if self.last_awarded_submission == submission_date:
-            self.last_awarded_submission = self._last_submitted_before(submission_date)
+            self.last_awarded_submission = self._last_submitted_before(
+                submission_date)
 
         # Log the transaction.
         transaction = PointsTransaction(
@@ -244,7 +259,7 @@ class Profile(models.Model):
             points=points * -1,
             submission_date=submission_date,
             message=message,
-        )
+            )
         if related_object:
             transaction.related_object = related_object
 
@@ -258,8 +273,10 @@ class Profile(models.Model):
 
         # Find which round this belongs to.
         for key in rounds:
-            start = datetime.datetime.strptime(rounds[key]["start"], "%Y-%m-%d %H:%M:%S")
-            end = datetime.datetime.strptime(rounds[key]["end"], "%Y-%m-%d %H:%M:%S")
+            start = datetime.datetime.strptime(rounds[key]["start"],
+                                               "%Y-%m-%d %H:%M:%S")
+            end = datetime.datetime.strptime(rounds[key]["end"],
+                                             "%Y-%m-%d %H:%M:%S")
             if submission_date >= start and submission_date < end:
                 return key
 
@@ -273,7 +290,8 @@ class Profile(models.Model):
         try:
             return PointsTransaction.objects.filter(
                 user=self.user,
-                submission_date__lt=submission_date).latest("submission_date").submission_date
+                submission_date__lt=submission_date).latest(
+                "submission_date").submission_date
         except ObjectDoesNotExist:
             return None
 
@@ -281,19 +299,20 @@ class Profile(models.Model):
         """
         Custom save method to check for referral bonus.
         """
-        has_referral = self.referring_user is not None and not self.referrer_awarded
+        has_referral = self.referring_user is not None and not self\
+        .referrer_awarded
         referrer = None
         if has_referral and self.points >= 30:
             self.referrer_awarded = True
             referrer = Profile.objects.get(user=self.referring_user)
             self.add_points(10, datetime.datetime.today(),
-                'Referred by %s' % referrer.name, self)
+                            'Referred by %s' % referrer.name, self)
 
         super(Profile, self).save(*args, **kwargs)
 
         if referrer:
             referrer.add_points(10, datetime.datetime.today(),
-                'Referred %s' % self.name, referrer)
+                                'Referred %s' % self.name, referrer)
             referrer.save()
 
     class Meta:
@@ -309,7 +328,7 @@ def create_profile(sender, instance=None, **kwargs):
     _ = sender
     if (kwargs.get('created', True) and not kwargs.get('raw', False)):
         profile, _ = Profile.objects.get_or_create(user=instance,
-            name=instance.username)
+                                                   name=instance.username)
         for key in settings.COMPETITION_ROUNDS.keys():
             ScoreboardEntry.objects.get_or_create(
                 profile=profile, round_name=key)

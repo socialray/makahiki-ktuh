@@ -2,8 +2,6 @@
 ask admin tests.
 """
 
-
-
 from django.test import TestCase
 from django.contrib.auth.models import User
 from django.core.urlresolvers import reverse
@@ -18,7 +16,8 @@ class AskAdminFunctionalTests(TestCase):
 
     def setUp(self):
         """setup"""
-        self.user = User.objects.create_user("user", "user@test.com", password="bogus")
+        self.user = User.objects.create_user("user", "user@test.com",
+                                             password="bogus")
         team = Team.objects.all()[0]
         profile = self.user.get_profile()
         profile.name = 'test'
@@ -40,5 +39,5 @@ class AskAdminFunctionalTests(TestCase):
 
         self.failUnlessEqual(response.status_code, 200)
         self.assertEqual(len(mail.outbox), 1)
-        self.assertTrue(mail.outbox[0].subject.find(self.user.get_profile().name) > 0)
-
+        self.assertTrue(
+            mail.outbox[0].subject.find(self.user.get_profile().name) > 0)

@@ -12,6 +12,7 @@ from managers.settings_mgr import  get_current_round
 from templatetags.class_tags import insert_classes, get_id_and_classes
 from css_rules import default
 
+
 class ContextProcessorFunctionalTestCase(TestCase):
     """Tests that the proper variables are loaded into a page."""
 
@@ -122,7 +123,8 @@ class ClassTagsUnitTests(TestCase):
     """ test class tags
     """
     def setUp(self):
-        """Stores the current values of the CSS keys so that we can modify them."""
+        """Stores the current values of the CSS keys so that we can modify
+        them."""
         self.saved_classes = default.CSS_CLASSES
         self.saved_ids = default.CSS_IDS
         default.CSS_CLASSES = {"foo": "bar"}
@@ -133,10 +135,12 @@ class ClassTagsUnitTests(TestCase):
         class_name = default.CSS_CLASSES.keys()[0]
         self.assertEqual(insert_classes(class_name),
             default.CSS_CLASSES[class_name],
-            "Check that insert classes returns the correct value from the dictionary.")
+            "Check that insert classes returns the correct value from the "
+            "dictionary.")
 
     def testEmptyClassRetrieval(self):
-        """Checks that disabling RETURN_CLASSES returns empty strings for classes."""
+        """Checks that disabling RETURN_CLASSES returns empty strings for
+        classes."""
         saved_setting = default.RETURN_CLASSES
         default.RETURN_CLASSES = False
         class_name = default.CSS_CLASSES.keys()[0]
@@ -172,4 +176,3 @@ class ClassTagsUnitTests(TestCase):
     def tearDown(self):
         default.CSS_CLASSES = self.saved_classes
         default.CSS_IDS = self.saved_ids
-    

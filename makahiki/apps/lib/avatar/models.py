@@ -52,7 +52,8 @@ class Avatar(models.Model):
             orig = self.avatar.storage.open(self.avatar.name, 'rb').read()
             image = Image.open(StringIO(orig))
         except IOError:
-            return # What should we do here?  Render a "sorry, didn't work" img?
+            return  # What should we do here?  Render a "sorry,
+            # didn't work" img?
         (w, h) = image.size
         if w != size or h != size:
             if w > h:

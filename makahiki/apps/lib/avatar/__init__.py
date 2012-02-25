@@ -22,6 +22,7 @@ AVATAR_DEFAULT_URL = getattr(settings, 'AVATAR_DEFAULT_URL',
 from django.db.models import signals
 from lib.avatar.models import Avatar
 
+
 def create_default_thumbnails(instance=None, created=False, **kwargs):
     _ = kwargs
     if created:

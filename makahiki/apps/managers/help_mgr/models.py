@@ -4,12 +4,14 @@ Help models
 from django.db import models
 
 MARKDOWN_LINK = "http://daringfireball.net/projects/markdown/syntax"
-MARKDOWN_TEXT = "Uses <a href=\"" + MARKDOWN_LINK + "\" target=\"_blank\">Markdown</a> formatting."
+MARKDOWN_TEXT = "Uses <a href=\"" + \
+                MARKDOWN_LINK + "\" target=\"_blank\">Markdown</a> formatting."
 HELP_CATEGORIES = (
     ("faq", "Frequently Asked Questions"),
     ("rules", "Rules of the competition"),
     ("widget", "Widget Help"),
     )
+
 
 class HelpTopic(models.Model):
     """
@@ -35,5 +37,3 @@ class HelpTopic(models.Model):
 
     def __unicode__(self):
         return "%s: %s" % (self.category.capitalize(), self.title)
-    
-  

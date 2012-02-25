@@ -18,10 +18,11 @@ WIDTHS = {
 ###############################################
 # PAGE LAYOUT SETTINGS
 ###############################################
-# each page's layout is defined in a dictionary with the page name as the key, and another
-# dictionary as the layout settings for the page. The settings dictionary includes keys such as
-# "PAGE_TITLE", "BASE_TEMPLATE", and "LAYOUTS". LAYOUTS is another dictionary to include layouts
-# for different device widths defined above.
+# each page's layout is defined in a dictionary with the page name as the
+# key, and another dictionary as the layout settings for the page. The
+# settings dictionary includes keys such as "PAGE_TITLE", "BASE_TEMPLATE",
+# and "LAYOUTS". LAYOUTS is another dictionary to include layouts for
+# different device widths defined above.
 # An LAYOUTS example is:
 #    { "<WIDTHS>" : ( (("row1_widget1", "40%"), ("row1_widget2", "60%")),
 #                     ("row2_widget", "100%") ) }

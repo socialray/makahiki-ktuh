@@ -2,7 +2,8 @@
 Logging Manager
 """
 import logging
-from time import strftime # Timestamp
+from time import strftime  # Timestamp
+
 
 def create_server_log(request, path=None):
     """
@@ -14,10 +15,10 @@ def create_server_log(request, path=None):
 
     if username:
         path = path or request.get_full_path()
-        code = 200 # Hardcoded since this is obviously successful.
+        code = 200  # Hardcoded since this is obviously successful.
         method = "GET"
-        ip_addr = request.META["REMOTE_ADDR"] if request.META.has_key(
-            "REMOTE_ADDR") else "no-ip"
+        ip_addr = request.META["REMOTE_ADDR"] if "REMOTE_ADDR" in request\
+        .META else "no-ip"
         # Timestamp yyyy-mm-dd Time
         timestamp = strftime("%Y-%m-%d %H:%M:%S")
 
