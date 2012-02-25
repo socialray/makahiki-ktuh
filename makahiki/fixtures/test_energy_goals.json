@@ -1,0 +1,197 @@
+[
+  {
+    "pk": 1,
+    "model": "energy_goal.teamenergygoal",
+    "fields": {
+      "created_at": "2012-02-23 10:45:30",
+      "percent_reduction": 0,
+      "updated_at": "2012-02-23 10:45:30",
+      "actual_usage": 110,
+      "goal_usage": 100,
+      "team": 1,
+      "warning_usage": 105
+    }
+  },
+  {
+    "pk": 2,
+    "model": "energy_goal.teamenergygoal",
+    "fields": {
+      "created_at": "2012-02-23 10:45:30",
+      "percent_reduction": 0,
+      "updated_at": "2012-02-23 10:45:30",
+      "actual_usage": 110,
+      "goal_usage": 100,
+      "team": 2,
+      "warning_usage": 105
+    }
+  },
+ {
+    "pk": 3,
+    "model": "energy_goal.teamenergygoal",
+    "fields": {
+      "created_at": "2012-02-23 10:45:30",
+      "percent_reduction": 0,
+      "updated_at": "2012-02-23 10:45:30",
+      "actual_usage": 110,
+      "goal_usage": 100,
+      "team": 3,
+      "warning_usage": 105
+    }
+  },
+ {
+    "pk": 4,
+    "model": "energy_goal.teamenergygoal",
+    "fields": {
+      "created_at": "2012-02-23 10:45:30",
+      "percent_reduction": 0,
+      "updated_at": "2012-02-23 10:45:30",
+      "actual_usage": 110,
+      "goal_usage": 100,
+      "team": 4,
+      "warning_usage": 105
+    }
+  },
+ {
+    "pk": 5,
+    "model": "energy_goal.teamenergygoal",
+    "fields": {
+      "created_at": "2012-02-23 10:45:30",
+      "percent_reduction": 0,
+      "updated_at": "2012-02-23 10:45:30",
+      "actual_usage": 110,
+      "goal_usage": 100,
+      "team": 5,
+      "warning_usage": 105
+    }
+  },
+ {
+    "pk": 6,
+    "model": "energy_goal.teamenergygoal",
+    "fields": {
+      "created_at": "2012-02-23 10:45:30",
+      "percent_reduction": 0,
+      "updated_at": "2012-02-23 10:45:30",
+      "actual_usage": 110,
+      "goal_usage": 100,
+      "team": 6,
+      "warning_usage": 105
+    }
+  },
+ {
+    "pk": 7,
+    "model": "energy_goal.teamenergygoal",
+    "fields": {
+      "created_at": "2012-02-23 10:45:30",
+      "percent_reduction": 0,
+      "updated_at": "2012-02-23 10:45:30",
+      "actual_usage": 110,
+      "goal_usage": 100,
+      "team": 7,
+      "warning_usage": 105
+    }
+  },
+ {
+    "pk": 8,
+    "model": "energy_goal.teamenergygoal",
+    "fields": {
+      "created_at": "2012-02-23 10:45:30",
+      "percent_reduction": 0,
+      "updated_at": "2012-02-23 10:45:30",
+      "actual_usage": 110,
+      "goal_usage": 100,
+      "team": 8,
+      "warning_usage": 105
+    }
+  },
+ {
+    "pk": 9,
+    "model": "energy_goal.teamenergygoal",
+    "fields": {
+      "created_at": "2012-02-23 10:45:30",
+      "percent_reduction": 0,
+      "updated_at": "2012-02-23 10:45:30",
+      "actual_usage": 110,
+      "goal_usage": 100,
+      "team": 9,
+      "warning_usage": 105
+    }
+  },
+ {
+    "pk": 10,
+    "model": "energy_goal.teamenergygoal",
+    "fields": {
+      "created_at": "2012-02-23 10:45:30",
+      "percent_reduction": 0,
+      "updated_at": "2012-02-23 10:45:30",
+      "actual_usage": 110,
+      "goal_usage": 100,
+      "team": 10,
+      "warning_usage": 105
+    }
+  },
+ {
+    "pk": 11,
+    "model": "energy_goal.teamenergygoal",
+    "fields": {
+      "created_at": "2012-02-23 10:45:30",
+      "percent_reduction": 0,
+      "updated_at": "2012-02-23 10:45:30",
+      "actual_usage": 110,
+      "goal_usage": 100,
+      "team": 11,
+      "warning_usage": 105
+    }
+  },
+ {
+    "pk": 12,
+    "model": "energy_goal.teamenergygoal",
+    "fields": {
+      "created_at": "2012-02-23 10:45:30",
+      "percent_reduction": 0,
+      "updated_at": "2012-02-23 10:45:30",
+      "actual_usage": 110,
+      "goal_usage": 100,
+      "team": 12,
+      "warning_usage": 105
+    }
+  },
+ {
+    "pk": 13,
+    "model": "energy_goal.teamenergygoal",
+    "fields": {
+      "created_at": "2012-02-23 10:45:30",
+      "percent_reduction": 0,
+      "updated_at": "2012-02-23 10:45:30",
+      "actual_usage": 110,
+      "goal_usage": 100,
+      "team": 13,
+      "warning_usage": 105
+    }
+  },
+ {
+    "pk": 14,
+    "model": "energy_goal.teamenergygoal",
+    "fields": {
+      "created_at": "2012-02-23 10:45:30",
+      "percent_reduction": 0,
+      "updated_at": "2012-02-23 10:45:30",
+      "actual_usage": 110,
+      "goal_usage": 100,
+      "team": 14,
+      "warning_usage": 105
+    }
+  },
+ {
+    "pk": 15,
+    "model": "energy_goal.teamenergygoal",
+    "fields": {
+      "created_at": "2012-02-23 10:45:30",
+      "percent_reduction": 0,
+      "updated_at": "2012-02-23 10:45:30",
+      "actual_usage": 110,
+      "goal_usage": 100,
+      "team": 15,
+      "warning_usage": 105
+    }
+  }
+]

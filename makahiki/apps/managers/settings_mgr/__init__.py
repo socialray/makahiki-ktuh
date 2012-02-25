@@ -8,17 +8,6 @@ from django.conf import settings
 from django.shortcuts import render_to_response
 from django.template import RequestContext
 
-# Default string to use as the team label.
-DEFAULT_TEAM_LABEL = "Team"
-
-def get_team_label():
-    """Returns the team label from the settings or the default if it doesn't exist."""
-
-    if settings.COMPETITION_GROUP_NAME:
-        return settings.COMPETITION_GROUP_NAME
-    else:
-        return DEFAULT_TEAM_LABEL
-
 
 def get_round_info():
     """Returns a dictionary containing round information."""
@@ -39,8 +28,8 @@ def get_rounds_for_header():
     return_dict = {}
     today = datetime.datetime.combine(datetime.date.today(), datetime.time())
     for key, value in rounds.items():
-        start_date = datetime.datetime.strptime(value["start"], "%Y-%m-%d")
-        end_date = datetime.datetime.strptime(value["end"], "%Y-%m-%d")
+        start_date = datetime.datetime.strptime(value["start"], "%Y-%m-%d %H:%M:%S")
+        end_date = datetime.datetime.strptime(value["end"], "%Y-%m-%d %H:%M:%S")
         start = (today - start_date).days
         end = (
                   today - end_date).days + 1 # Round technically ends the day before.
@@ -60,8 +49,8 @@ def get_current_round():
     rounds = settings.COMPETITION_ROUNDS
     today = datetime.datetime.today()
     for key in rounds.keys():
-        start = datetime.datetime.strptime(rounds[key]["start"], "%Y-%m-%d")
-        end = datetime.datetime.strptime(rounds[key]["end"], "%Y-%m-%d")
+        start = datetime.datetime.strptime(rounds[key]["start"], "%Y-%m-%d %H:%M:%S")
+        end = datetime.datetime.strptime(rounds[key]["end"], "%Y-%m-%d %H:%M:%S")
         if today >= start and today < end:
             return key
 
@@ -74,8 +63,8 @@ def get_current_round_info():
     rounds = settings.COMPETITION_ROUNDS
     today = datetime.datetime.today()
     for key in rounds.keys():
-        start = datetime.datetime.strptime(rounds[key]["start"], "%Y-%m-%d")
-        end = datetime.datetime.strptime(rounds[key]["end"], "%Y-%m-%d")
+        start = datetime.datetime.strptime(rounds[key]["start"], "%Y-%m-%d %H:%M:%S")
+        end = datetime.datetime.strptime(rounds[key]["end"], "%Y-%m-%d %H:%M:%S")
         if today >= start and today < end:
             return {
                 "name": key,
@@ -84,8 +73,8 @@ def get_current_round_info():
                 }
 
     # Check for overall round info.
-    start = datetime.datetime.strptime(settings.COMPETITION_START, "%Y-%m-%d")
-    end = datetime.datetime.strptime(settings.COMPETITION_END, "%Y-%m-%d")
+    start = datetime.datetime.strptime(settings.COMPETITION_START, "%Y-%m-%d %H:%M:%S")
+    end = datetime.datetime.strptime(settings.COMPETITION_END, "%Y-%m-%d %H:%M:%S")
     if today >= start and today < end:
         return {
             "name": "Overall",
@@ -99,8 +88,8 @@ def get_current_round_info():
 
 def in_competition():
     """Returns true if we are still in the competition."""
-    start = datetime.datetime.strptime(settings.COMPETITION_START, "%Y-%m-%d")
-    end = datetime.datetime.strptime(settings.COMPETITION_END, "%Y-%m-%d")
+    start = datetime.datetime.strptime(settings.COMPETITION_START, "%Y-%m-%d %H:%M:%S")
+    end = datetime.datetime.strptime(settings.COMPETITION_END, "%Y-%m-%d %H:%M:%S")
     today = datetime.datetime.today()
     if today >= start and today < end:
         return True
@@ -110,8 +99,8 @@ def in_competition():
 
 def get_competition_dates():
     """Returns information about the competition."""
-    start = datetime.datetime.strptime(settings.COMPETITION_START, "%Y-%m-%d")
-    end = datetime.datetime.strptime(settings.COMPETITION_END, "%Y-%m-%d")
+    start = datetime.datetime.strptime(settings.COMPETITION_START, "%Y-%m-%d %H:%M:%S")
+    end = datetime.datetime.strptime(settings.COMPETITION_END, "%Y-%m-%d %H:%M:%S")
 
     return {
         "title": "Competition",

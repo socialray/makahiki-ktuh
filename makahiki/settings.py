@@ -7,16 +7,20 @@
 
 import os.path
 import posixpath
+import types
 
 ##############
 # DB settings
 ##############
 DATABASES = {
     'default': {
+        # use 'postgresql_psycopg2', 'postgresql', 'mysql', 'sqlite3' or 'oracle'.
         'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': 'dev.db',
-        'USER': '',
-        'PASSWORD': '',
+        'NAME': 'dev.db',                # Or path to database file if using sqlite3.
+        'USER': '',                      # Not used with sqlite3.
+        'PASSWORD': '',                  # Not used with sqlite3.
+        'HOST': '',                      # Set to empty string for localhost. Not used with sqlite3.
+        'PORT': '',                      # Set to empty string for default. Not used with sqlite3.
         }
 }
 
@@ -72,10 +76,6 @@ STATICFILES_DIRS = (
 # Examples: "http://foo.com/media/", "/media/".
 ADMIN_MEDIA_PREFIX = posixpath.join(STATIC_URL, "admin/")
 
-ABSOLUTE_URL_OVERRIDES = {
-    "auth.user": lambda o: "/profiles/profile/%s/" % o.username,
-    }
-
 ROOT_URLCONF = 'urls'
 
 FIXTURE_DIRS = [
@@ -110,7 +110,8 @@ TEMPLATE_CONTEXT_PROCESSORS = (
 # MIDDLEWARE settings
 ######################
 MIDDLEWARE_CLASSES = (
-    'django.middleware.cache.UpdateCacheMiddleware',
+    'django.middleware.cache.UpdateCacheMiddleware', #always start with this for caching
+
     'django.middleware.common.CommonMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.transaction.TransactionMiddleware',
@@ -119,11 +120,11 @@ MIDDLEWARE_CLASSES = (
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'lib.django_cas.middleware.CASMiddleware',
-    'managers.player_mgr.middleware.LoginTrackingMiddleware',
+
+    'managers.player_mgr.middleware.LoginMiddleware',
     'managers.log_mgr.middleware.LoggingMiddleware',
-    'pages.home.middleware.CompetitionMiddleware',
-    'pages.home.middleware.CheckSetupMiddleware',
-    'django.middleware.cache.FetchFromCacheMiddleware',
+
+    'django.middleware.cache.FetchFromCacheMiddleware', #always end with this for caching
     )
 
 ######################
@@ -134,6 +135,14 @@ AUTHENTICATION_BACKENDS = (
     'managers.auth_mgr.models.MakahikiCASBackend',
     )
 
+CAS_REDIRECT_URL = '/home'
+CAS_IGNORE_REFERER = True
+
+LOGIN_URL = "/account/cas/login/"
+LOGIN_REDIRECT_URLNAME = "home_index"
+LOGIN_REDIRECT_URL = "/"
+RESTRICTED_URL = '/restricted/'
+
 #########################
 # INSTALLED_APPS settings
 #########################
@@ -141,7 +150,6 @@ INSTALLED_APPS = (
     # Makahiki pages
     'apps',
     'pages',
-    'pages.home',
 
     # Makahiki components
     'managers.auth_mgr',
@@ -151,22 +159,6 @@ INSTALLED_APPS = (
     'managers.score_mgr',
     'managers.cache_mgr',
     'managers.help_mgr',
-
-    'widgets.help_intro',
-    'widgets.help_faq',
-    'widgets.help_rule',
-    'widgets.ask_admin',
-    #'widgets.prizes',
-    #'widgets.smartgrid',
-    #'widgets.energy',
-    #'widgets.quests',
-    #'widgets.upcoming_events',
-    #'widgets.badges',
-    #'widgets.notifications',
-    #'widgets.profile',
-    #'widgets.news',
-    #'widgets.canopy',
-    #'widgets.analytics',
 
     # 3rd party libraries
     'lib.django_cas',
@@ -185,6 +177,7 @@ INSTALLED_APPS = (
     # external
     'staticfiles',
     'django_nose',
+    'django_extensions',
 
     # internal
     'django.contrib.admin',
@@ -267,6 +260,30 @@ try:
     INSTALLED_APPS += LOCAL_INSTALLED_APPS  # pylint: disable=E0602
 except NameError:
     pass
+
+
+#########################################
+# code to include the INSTALL_WIDGET_APPS
+#########################################
+def get_widget_apps(all_page_settings):
+    apps = ()
+    """ Returns a list of widget names defined in page_settings.py. """
+    for page in all_page_settings.keys():
+        default_layout = all_page_settings[page]["LAYOUTS"]["DEFAULT"]
+        for row in default_layout:
+            for columns in row:
+                if isinstance(columns, types.TupleType):
+                    if not columns[0] in apps:
+                        apps += ("widgets.%s" % columns[0], )
+                else:
+                    if not columns in apps:
+                        apps += ("widgets.%s" % columns, )
+                    break
+
+    return apps
+
+INSTALLED_WIDGET_APPS = get_widget_apps(PAGE_SETTINGS)
+INSTALLED_APPS += INSTALLED_WIDGET_APPS
 
 ##############################
 # LOGGING settings

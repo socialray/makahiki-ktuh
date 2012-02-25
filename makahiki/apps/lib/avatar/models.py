@@ -34,7 +34,7 @@ class Avatar(models.Model):
     def __unicode__(self):
         return _(u'Avatar for %s') % self.user
 
-    def save(self, force_insert=False, force_update=False, using=None):
+    def save(self, *args, **kwargs):
         if self.primary:
             avatars = Avatar.objects.filter(user=self.user, primary=True)\
             .exclude(id=self.id)
@@ -42,7 +42,7 @@ class Avatar(models.Model):
 
         # Invalidate avatar cache
         cache.delete('avatar-%s' % self.user.username)
-        super(Avatar, self).save(force_insert, force_update)
+        super(Avatar, self).save(*args, **kwargs)
 
     def thumbnail_exists(self, size):
         return self.avatar.storage.exists(self.avatar_name(size))

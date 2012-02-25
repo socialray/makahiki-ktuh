@@ -19,7 +19,7 @@ class Command(management.base.BaseCommand):
 
         self.stdout.write(
             "WARNING: This command will reset the following user(s):\n%s" % (
-                args.join("\n")
+                "\n".join(args)
                 ))
         self.stdout.write("\n\nThis process is irreversible.\n")
         value = raw_input("Do you wish to continue (Y/n)? ")

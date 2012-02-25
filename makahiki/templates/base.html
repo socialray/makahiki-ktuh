@@ -8,7 +8,7 @@
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
     <!-- Use the chrome frame -->
     <meta http-equiv="X-UA-Compatible" content="chrome=IE8">
-    <title>{% if SITE_NAME %}{{ SITE_NAME }} : {% endif %}{% block head_title %}{% endblock %}</title>
+    <title>{{ setting_objects.PAGE_TITLE }}: {{ SITE_NAME }} {{ COMPETITION_NAME }} </title>
     
     {# render_css_import user #}
     {% import_css STATIC_URL CSS_THEME %}

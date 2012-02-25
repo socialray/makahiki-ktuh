@@ -31,18 +31,18 @@ def setUp(self):
 
     settings.COMPETITION_ROUNDS = {
         "Round 1": {
-            "start": start.strftime("%Y-%m-%d"),
-            "end": end1.strftime("%Y-%m-%d"),
+            "start": start.strftime("%Y-%m-%d %H:%M:%S"),
+            "end": end1.strftime("%Y-%m-%d %H:%M:%S"),
             },
         "Round 2": {
-            "start": start2.strftime("%Y-%m-%d"),
-            "end": end2.strftime("%Y-%m-%d"),
+            "start": start2.strftime("%Y-%m-%d %H:%M:%S"),
+            "end": end2.strftime("%Y-%m-%d %H:%M:%S"),
             },
         }
 
-    settings.COMPETITION_START = start.strftime("%Y-%m-%d")
+    settings.COMPETITION_START = start.strftime("%Y-%m-%d %H:%M:%S")
     settings.COMPETITION_END = (end2 + datetime.timedelta(days=7)).strftime(
-        "%Y-%m-%d")
+        "%Y-%m-%d %H:%M:%S")
 
 
 def testRoundInfo(self):
@@ -91,8 +91,8 @@ class BaseUnitTestCase(TestCase):
 
         settings.COMPETITION_ROUNDS = {
             "Round 1": {
-                "start": start.strftime("%Y-%m-%d"),
-                "end": end.strftime("%Y-%m-%d"),
+                "start": start.strftime("%Y-%m-%d %H:%M:%S"),
+                "end": end.strftime("%Y-%m-%d %H:%M:%S"),
                 },
             }
 
@@ -105,8 +105,8 @@ class BaseUnitTestCase(TestCase):
 
         settings.COMPETITION_ROUNDS = {
             "Round 1": {
-                "start": start.strftime("%Y-%m-%d"),
-                "end": end.strftime("%Y-%m-%d"),
+                "start": start.strftime("%Y-%m-%d %H:%M:%S"),
+                "end": end.strftime("%Y-%m-%d %H:%M:%S"),
                 },
             }
 

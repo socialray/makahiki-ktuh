@@ -38,8 +38,8 @@ def notify_round_started():
   
   for key, value in settings.COMPETITION_ROUNDS.items():
     # We're looking for a round that ends today and another that starts today (or overall)
-    start = datetime.datetime.strptime(value["start"], "%Y-%m-%d")
-    end = datetime.datetime.strptime(value["end"], "%Y-%m-%d")
+    start = datetime.datetime.strptime(value["start"], "%Y-%m-%d %H:%M:%S")
+    end = datetime.datetime.strptime(value["end"], "%Y-%m-%d %H:%M:%S")
     # Check yesterday's round and check for the current round.
     if start < (today - datetime.timedelta(days=1)) < end:
       previous_round = key

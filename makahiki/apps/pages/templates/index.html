@@ -9,8 +9,8 @@
 {% block selected_icon %}selected-{{ settings_objects.PAGE_NAME }}{% endblock %}
 
 {% block extra_head %}
-    {% import_page_css setting_objects.CSS STATIC_URL CSS_THEME %}
-    <style> {{ setting_objects.RESPONSIVE_CSS }}</style>
+    {% import_page_css setting_objects.PAGE_CSS STATIC_URL CSS_THEME %}
+    <style> {{ setting_objects.EXTRA_CSS }}</style>
 {% endblock %}
 
 {% block body %}

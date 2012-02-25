@@ -1,16 +1,5 @@
-{% extends "logged_in_base.html" %}
-
 {% load class_tags %}
 
-{% block page_title %}
-    Home Page
-{% endblock %}
-
-{% block extra_head %}
-    {% import_page_css "home" STATIC_URL CSS_THEME %}
-{% endblock %}
-
-{% block body %}
     <div {% get_id_and_classes "home-center" %}>
         <!-- Top Row-->
         <div {% get_id_and_classes "home-activities" %}>
@@ -93,8 +82,8 @@
             </a>
 
             <div class="tile">
-                <h6 % get_id_and_classes "home-profile-title" %}>Profile</h6>
-                <p % get_id_and_classes "home-profile-content" %}>
+                <h6 {% get_id_and_classes "home-profile-title" %}>Profile</h6>
+                <p {% get_id_and_classes "home-profile-content" %}>
                 Manage your Settings<br/>
                 Connect to facebook<br/>
                 Change your picture
@@ -121,12 +110,10 @@
         </div>
         <div style="clear:both"></div>
     </div>
-{% endblock %}
 
-{% block extra_body %}
     {% if not user.get_profile.setup_complete %}
         <div {% get_id_and_classes "setup-dialog" %} title="Introduction: Step 1 of 6">
-            {% include "pages/home/templates/first-login/welcome.html" %}
+            {% include "first-login/welcome.html" %}
         </div>
         <script type="text/javascript">
             jQuery(document).ready(function ($) {
@@ -142,4 +129,3 @@
             });
         </script>
     {% endif %}
-{% endblock %}

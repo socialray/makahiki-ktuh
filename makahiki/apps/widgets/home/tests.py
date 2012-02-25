@@ -35,20 +35,18 @@ class CompetitionMiddlewareTestCase(TestCase):
         self.saved_start = settings.COMPETITION_START
         self.saved_end = settings.COMPETITION_END
 
-        self.saved_access = settings.CAN_ACCESS_OUTSIDE_COMPETITION
-        settings.CAN_ACCESS_OUTSIDE_COMPETITION = False
-
     def testBeforeCompetition(self):
         """
         Check that the user is redirected before the competition starts.
         """
         start = datetime.date.today() + datetime.timedelta(days=1)
-        settings.COMPETITION_START = start.strftime("%Y-%m-%d")
-        settings.COMPETITION_END = (start + datetime.timedelta(days=7)).strftime("%Y-%m-%d")
+        settings.COMPETITION_START = start.strftime("%Y-%m-%d %H:%M:%S")
+        settings.COMPETITION_END = (start +
+                                    datetime.timedelta(days=7)).strftime("%Y-%m-%d %H:%M:%S")
 
         response = self.client.get(reverse("home_index"), follow=True)
         self.failUnlessEqual(response.status_code, 200)
-        self.assertTemplateUsed(response, "pages/home/templates/restricted.html")
+        self.assertTemplateUsed(response, "widgets/home/templates/restricted.html")
         self.assertContains(response, "The competition starts in")
 
     def testAfterCompetition(self):
@@ -56,18 +54,18 @@ class CompetitionMiddlewareTestCase(TestCase):
         Check that the user is redirected after the competition ends.
         """
         start = datetime.date.today() - datetime.timedelta(days=8)
-        settings.COMPETITION_START = start.strftime("%Y-%m-%d")
-        settings.COMPETITION_END = (start + datetime.timedelta(days=7)).strftime("%Y-%m-%d")
+        settings.COMPETITION_START = start.strftime("%Y-%m-%d %H:%M:%S")
+        settings.COMPETITION_END = (start +
+                                    datetime.timedelta(days=7)).strftime("%Y-%m-%d %H:%M:%S")
 
         response = self.client.get(reverse("home_index"), follow=True)
         self.failUnlessEqual(response.status_code, 200)
-        self.assertTemplateUsed(response, "pages/home/templates/restricted.html")
+        self.assertTemplateUsed(response, "widgets/home/templates/restricted.html")
         self.assertContains(response, "The 2011 Kukui Cup is now over")
 
     def tearDown(self):
         settings.COMPETITION_START = self.saved_start
         settings.COMPETITION_END = self.saved_end
-        settings.CAN_ACCESS_OUTSIDE_COMPETITION = self.saved_access
 
 
 class SetupWizardFunctionalTestCase(TestCase):
@@ -90,7 +88,7 @@ class SetupWizardFunctionalTestCase(TestCase):
         """Check that we can access the terms page of the setup wizard."""
         response = self.client.get(reverse("setup_terms"), {},
             HTTP_X_REQUESTED_WITH='XMLHttpRequest')
-        self.assertTemplateUsed(response, "pages/home/templates/first-login/terms.html")
+        self.assertTemplateUsed(response, "first-login/terms.html")
         self.assertContains(response, "/account/cas/logout?next=" + reverse("about"))
         try:
             json.loads(response.content)
@@ -117,7 +115,7 @@ class SetupWizardFunctionalTestCase(TestCase):
             'referrer_email': self.user.email,
             }, HTTP_X_REQUESTED_WITH='XMLHttpRequest')
         self.failUnlessEqual(response.status_code, 200)
-        self.assertTemplateUsed(response, "pages/home/templates/first-login/referral.html")
+        self.assertTemplateUsed(response, "first-login/referral.html")
         self.assertEqual(len(response.context['form'].errors), 1,
             "Using their own email as referrer should raise an error.")
 
@@ -126,7 +124,7 @@ class SetupWizardFunctionalTestCase(TestCase):
             'referrer_email': 'user@foo.com',
             }, HTTP_X_REQUESTED_WITH='XMLHttpRequest')
         self.failUnlessEqual(response.status_code, 200)
-        self.assertTemplateUsed(response, "pages/home/templates/first-login/referral.html")
+        self.assertTemplateUsed(response, "first-login/referral.html")
         self.assertEqual(len(response.context['form'].errors), 1,
             'Using external email as referrer should raise an error.')
 
@@ -137,7 +135,7 @@ class SetupWizardFunctionalTestCase(TestCase):
         self.failUnlessEqual(response.status_code, 200)
         self.assertEqual(len(response.context['form'].errors), 1,
             'Using a bad email should insert an error.')
-        self.assertTemplateUsed(response, "pages/home/templates/first-login/referral.html")
+        self.assertTemplateUsed(response, "first-login/referral.html")
 
         # Staff user should not be able to be referred.
         user2.is_staff = True
@@ -149,7 +147,7 @@ class SetupWizardFunctionalTestCase(TestCase):
         self.failUnlessEqual(response.status_code, 200)
         self.assertEqual(len(response.context['form'].errors), 1,
             'Using an admin as a referrer should raise an error.')
-        self.assertTemplateUsed(response, "pages/home/templates/first-login/referral.html")
+        self.assertTemplateUsed(response, "first-login/referral.html")
 
         user2.is_staff = False
         user2.save()
@@ -159,14 +157,14 @@ class SetupWizardFunctionalTestCase(TestCase):
             'referrer_email': '',
             }, HTTP_X_REQUESTED_WITH='XMLHttpRequest')
         self.failUnlessEqual(response.status_code, 200)
-        self.assertTemplateUsed(response, "pages/home/templates/first-login/profile.html")
+        self.assertTemplateUsed(response, "first-login/profile.html")
 
         # Test successful referrer
         response = self.client.post(reverse('setup_referral'), {
             'referrer_email': user2.email,
             }, HTTP_X_REQUESTED_WITH='XMLHttpRequest')
         self.failUnlessEqual(response.status_code, 200)
-        self.assertTemplateUsed(response, "pages/home/templates/first-login/profile.html")
+        self.assertTemplateUsed(response, "first-login/profile.html")
         profile = Profile.objects.get(user=self.user)
         self.assertEqual(profile.referring_user, user2, 'User 1 should be referred by user 2.')
 
@@ -184,7 +182,7 @@ class SetupWizardFunctionalTestCase(TestCase):
         profile.save()
         response = self.client.get(reverse("setup_profile"), {},
             HTTP_X_REQUESTED_WITH='XMLHttpRequest')
-        self.assertTemplateUsed(response, "pages/home/templates/first-login/profile.html")
+        self.assertTemplateUsed(response, "first-login/profile.html")
         self.assertContains(response, profile.name)
         self.assertNotContains(response, "facebook_photo")
         try:
@@ -202,7 +200,7 @@ class SetupWizardFunctionalTestCase(TestCase):
             "display_name": "Test User",
             }, follow=True)
         self.failUnlessEqual(response.status_code, 200)
-        self.assertTemplateUsed(response, "pages/home/templates/first-login/activity.html")
+        self.assertTemplateUsed(response, "first-login/activity.html")
 
         user = User.objects.get(username="user")
         self.assertEqual(points + 5, user.get_profile().points,
@@ -218,7 +216,7 @@ class SetupWizardFunctionalTestCase(TestCase):
         self.assertEqual(points + 5, user.get_profile().points,
             "Check that the user was not awarded any more points.")
         self.failUnlessEqual(response.status_code, 200)
-        self.assertTemplateUsed(response, "pages/home/templates/first-login/activity.html")
+        self.assertTemplateUsed(response, "first-login/activity.html")
 
     def testSetupProfileWithoutName(self):
         """Test that there is an error when the user does not supply a username."""
@@ -227,7 +225,7 @@ class SetupWizardFunctionalTestCase(TestCase):
             "display_name": "",
             })
         self.failUnlessEqual(response.status_code, 200)
-        self.assertTemplateUsed(response, "pages/home/templates/first-login/profile.html")
+        self.assertTemplateUsed(response, "first-login/profile.html")
 
     def testSetupProfileWithDupName(self):
         """Test that there is an error when the user uses a duplicate display name."""
@@ -242,7 +240,7 @@ class SetupWizardFunctionalTestCase(TestCase):
             "display_name": "Test U.",
             }, follow=True)
         self.failUnlessEqual(response.status_code, 200)
-        self.assertTemplateUsed(response, "pages/home/templates/first-login/profile.html")
+        self.assertTemplateUsed(response, "first-login/profile.html")
         self.assertContains(response, "Please use another name.",
             msg_prefix="Duplicate name should raise an error.")
 
@@ -250,7 +248,7 @@ class SetupWizardFunctionalTestCase(TestCase):
             "display_name": "   Test U.    ",
             }, follow=True)
         self.failUnlessEqual(response.status_code, 200)
-        self.assertTemplateUsed(response, "pages/home/templates/first-login/profile.html")
+        self.assertTemplateUsed(response, "first-login/profile.html")
         self.assertContains(response, "Please use another name.",
             msg_prefix="Duplicate name with whitespace should raise an error.")
 
@@ -258,7 +256,7 @@ class SetupWizardFunctionalTestCase(TestCase):
             "display_name": "Test   U.",
             }, follow=True)
         self.failUnlessEqual(response.status_code, 200)
-        self.assertTemplateUsed(response, "pages/home/templates/first-login/profile.html")
+        self.assertTemplateUsed(response, "first-login/profile.html")
         self.assertContains(response, "Please use another name.",
             msg_prefix="Duplicate name with whitespace should raise an error.")
 
@@ -266,7 +264,7 @@ class SetupWizardFunctionalTestCase(TestCase):
         """Check that we can access the activity page of the setup wizard."""
         response = self.client.get(reverse("setup_activity"), {},
             HTTP_X_REQUESTED_WITH='XMLHttpRequest')
-        self.assertTemplateUsed(response, "pages/home/templates/first-login/activity.html")
+        self.assertTemplateUsed(response, "first-login/activity.html")
         try:
             json.loads(response.content)
         except ValueError:
@@ -276,7 +274,7 @@ class SetupWizardFunctionalTestCase(TestCase):
         """Check that we can access the question page of the setup wizard."""
         response = self.client.get(reverse("setup_question"), {},
             HTTP_X_REQUESTED_WITH='XMLHttpRequest')
-        self.assertTemplateUsed(response, "pages/home/templates/first-login/question.html")
+        self.assertTemplateUsed(response, "first-login/question.html")
         try:
             json.loads(response.content)
         except ValueError:
@@ -289,7 +287,7 @@ class SetupWizardFunctionalTestCase(TestCase):
         # Test a normal GET request (answer was incorrect).
         response = self.client.get(reverse("setup_complete"), {},
             HTTP_X_REQUESTED_WITH='XMLHttpRequest')
-        self.assertTemplateUsed(response, "pages/home/templates/first-login/complete.html")
+        self.assertTemplateUsed(response, "first-login/complete.html")
         try:
             json.loads(response.content)
         except ValueError:
@@ -306,7 +304,7 @@ class SetupWizardFunctionalTestCase(TestCase):
 
         response = self.client.post(reverse("setup_complete"), {},
             HTTP_X_REQUESTED_WITH='XMLHttpRequest')
-        self.assertTemplateUsed(response, "pages/home/templates/first-login/complete.html")
+        self.assertTemplateUsed(response, "first-login/complete.html")
         try:
             json.loads(response.content)
         except ValueError:

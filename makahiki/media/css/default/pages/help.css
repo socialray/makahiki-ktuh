@@ -2,41 +2,26 @@
 /* CSS Document */
 
 /********************** help styles ******************************/
-
-.content {
-	width: 920px;
-	margin: 0 auto 0 auto;
-}
-
-.left-column {
-	width: 376px;
-	float: left;
-}
-
-.right-column {
-	width: 478px;
-	float: right;
-}
-
 .content-box {
 	text-align: left;
 }
 
-#help-video, #help-rules{
-	width: 376px;
-}
-
-#help-video-content object {
-	margin-bottom: -11px;
-}
-
 .content-box-contents a {
 	color: #db9703;
+    text-align: center;
 }
 
 .content-box-contents ul {
 	margin: 0 auto 0 auto;
 	padding: 0 auto 0 auto;
+}
+
+#help-video .content-box{
+    text-align: center;
+}
+
+#help-video-content .content-box-contents {
+    text-align: center;
 }
 
 #help-rules-content, #help-faq-content {
@@ -46,8 +31,7 @@
 }
 
 #help-faq, #help-ask {
-	float: right;
-	width: 476px;
+
 }
 
 #help-ask-content {

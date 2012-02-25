@@ -1,15 +1,6 @@
 [
   {
     "pk": 1, 
-    "model": "prizes.raffledeadline", 
-    "fields": {
-      "round_name": "Round 1", 
-      "pub_date": "2011-04-17 10:49:25", 
-      "end_date": "2011-07-31 10:00:00"
-    }
-  },
-  {
-    "pk": 1, 
     "model": "prizes.prize", 
     "fields": {
       "title": "iPod Touch", 
@@ -136,38 +127,74 @@
   }, 
   {
     "pk": 1, 
-    "model": "prizes.raffleprize", 
+    "model": "raffle.raffleprize", 
     "fields": {
       "description": "A bike helmet.", 
       "title": "Bike Helmet", 
       "image": "prizes/bikehelmet_1.jpg", 
       "winner": null, 
       "value": 10, 
-      "deadline": 1
+      "round_name": "Round 1"
     }
   }, 
   {
     "pk": 2, 
-    "model": "prizes.raffleprize", 
+    "model": "raffle.raffleprize", 
     "fields": {
       "description": "A surfboard.", 
       "title": "Surfboard", 
       "image": "prizes/surf_lessons_1.jpg", 
       "winner": null, 
-      "value": 10, 
-      "deadline": 1
+      "value": 10,
+        "round_name": "Round 1"
     }
   }, 
   {
     "pk": 3, 
-    "model": "prizes.raffleprize", 
+    "model": "raffle.raffleprize", 
     "fields": {
       "description": "A gift certificate for a double dip cone from Bubbies Ice Cream Parlor, voted Best Ice Cream of 2010!", 
       "title": "Bubbies Gift Certificate", 
       "image": "prizes/bubbies.png", 
       "winner": null, 
-      "value": 10, 
-      "deadline": 1
+      "value": 10,
+        "round_name": "Round 1"
+    }
+  },
+  {
+    "pk": 4,
+    "model": "raffle.raffleprize",
+    "fields": {
+      "description": "A bike helmet.",
+      "title": "Bike Helmet for Overall",
+      "image": "prizes/bikehelmet_1.jpg",
+      "winner": null,
+      "value": 10,
+      "round_name": "Overall"
+    }
+  },
+  {
+    "pk": 5,
+    "model": "raffle.raffleprize",
+    "fields": {
+      "description": "A surfboard.",
+      "title": "Surfboard for Overall",
+      "image": "prizes/surf_lessons_1.jpg",
+      "winner": null,
+      "value": 10,
+        "round_name": "Overall"
+    }
+  },
+  {
+    "pk": 6,
+    "model": "raffle.raffleprize",
+    "fields": {
+      "description": "A gift certificate for a double dip cone from Bubbies Ice Cream Parlor, voted Best Ice Cream of 2010!",
+      "title": "Bubbies Gift Certificate for Overall",
+      "image": "prizes/bubbies.png",
+      "winner": null,
+      "value": 10,
+        "round_name": "Overall"
     }
   }
 ]

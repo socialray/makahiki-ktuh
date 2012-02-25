@@ -41,9 +41,9 @@ class Profile(models.Model):
 
     # Check first login completion.
     setup_profile = models.BooleanField(default=False, editable=False)
-    setup_complete = models.BooleanField(default=False, editable=False)
+    setup_complete = models.BooleanField(default=False, )
     completion_date = models.DateTimeField(null=True, blank=True,
-        editable=False)
+        )
 
     # Check visits for daily visitor badge.
     daily_visit_count = models.IntegerField(default=0, editable=False)
@@ -69,15 +69,6 @@ class Profile(models.Model):
                 "-scoreboardentry__last_awarded_submission")[:num_results]
 
         return Profile.objects.all().order_by("-points", "-last_awarded_submission")[:num_results]
-
-    def available_tickets(self):
-        """
-        Returns the number of raffle tickets the user has available.
-        """
-        total_tickets = self.points / settings.POINTS_PER_TICKET
-        allocated_tickets = self.user.raffleticket_set.count()
-
-        return total_tickets - allocated_tickets
 
     def current_round_points(self):
         """Returns the amount of points the user has in the current round."""
@@ -267,8 +258,8 @@ class Profile(models.Model):
 
         # Find which round this belongs to.
         for key in rounds:
-            start = datetime.datetime.strptime(rounds[key]["start"], "%Y-%m-%d")
-            end = datetime.datetime.strptime(rounds[key]["end"], "%Y-%m-%d")
+            start = datetime.datetime.strptime(rounds[key]["start"], "%Y-%m-%d %H:%M:%S")
+            end = datetime.datetime.strptime(rounds[key]["end"], "%Y-%m-%d %H:%M:%S")
             if submission_date >= start and submission_date < end:
                 return key
 

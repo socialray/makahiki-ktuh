@@ -207,8 +207,8 @@ class PostComment(models.Model):
     text = models.TextField()
     created_at = models.DateTimeField(editable=False)
 
-    def save(self, force_insert=False, force_update=False, using=None):
+    def save(self, *args, **kwargs):
         if not self.created_at:
             self.created_at = datetime.date.today()
 
-        super(PostComment, self).save()
+        super(PostComment, self).save(*args, **kwargs)

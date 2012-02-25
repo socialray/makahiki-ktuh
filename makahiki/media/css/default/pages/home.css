@@ -54,11 +54,11 @@ div.home-item {
 	z-index: 100;
 }
 
-.content {
+#home {
 	width: 920px;
 	height: 440px;
 	margin: 0 auto 0 auto;
-	
+
 	background: none;
 	background-color: rgba(255,255,255,0.8);
 	border: 2px solid #167000;

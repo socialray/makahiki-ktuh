@@ -26,6 +26,22 @@ WIDTHS = {
 #    { "<WIDTHS>" : ( (("row1_widget1", "40%"), ("row1_widget2", "60%")),
 #                     ("row2_widget", "100%") ) }
 PAGE_SETTINGS = {
+    # home page
+    "home":
+            {"PAGE_TITLE": "Home",
+             "BASE_TEMPLATE": "logged_in_base.html",
+             "LAYOUTS":
+                     {"DEFAULT":
+                          (
+                              ("home", "100%"),
+                              ),
+                      "PHONE_PORTRAIT":
+                          (
+                              ("home", "100%"),
+                              ),
+                      },
+             },
+
     # help page
     "help":
             {"PAGE_TITLE": "Help",
@@ -33,98 +49,18 @@ PAGE_SETTINGS = {
              "LAYOUTS":
                      {"DEFAULT":
                           (
-                              (("help_intro", "50%"), ("help_faq", "50%"),),
-                              (("help_rule", "50%"), ("ask_admin", "50%"),),
-                          ),
+                              (("help_intro", "50%"), ("help_rule", "50%"), ),
+                              (("help_faq", "50%"), ("ask_admin", "50%"),),
+
+                              ),
                       "PHONE_PORTRAIT":
                           (
-                              ("help", "100%"),
-                              ("help_faq", "50%"),
-                              ("help_rule", "50%"),
-                              ("ask_admin", "50%"),
-                          ),
-                     },
+                              ("help_intro", "100%"),
+                              ("help_faq", "100%"),
+                              ("help_rule", "100%"),
+                              ("ask_admin", "100%"),
+                              ),
+                      },
              },
 
-    # actions page
-    "actions":
-        {"PAGE_TITLE": "Actions",
-         "BASE_TEMPLATE": "logged_in_base.html",
-          "LAYOUTS":
-              {"DEFAULT":
-                 (
-                  (("upcoming_events", "40%"), ("smartgrid", "60%"), ("scoreboard", "40%"),),
-                 ),
-               "PHONE_PORTRAIT":
-                 (("upcoming_events", "100%"),
-                  ("smartgrid", "100%"),
-                  ("scoreboard", "100%"),
-                 ),
-              },
-        },
-
-    # profile page
-    "profile":
-        {"PAGE_TITLE": "Profile",
-          "BASE_TEMPLATE": "logged_in_base.html",
-          "LAYOUTS":
-              {"DEFAULT":
-                (
-                  ("profile", "100%"),
-                ),
-                "PHONE_PORTRAIT":
-                (
-                  ("profile", "100%"),
-                ),
-              },
-        },
-
-    # news page
-    "news":
-        {"PAGE_TITLE": "News",
-          "BASE_TEMPLATE": "logged_in_base.html",
-          "LAYOUTS":
-              {"DEFAULT":
-                (
-                  ("news", "100%"),
-                ),
-                "PHONE_PORTRAIT":
-                (
-                  ("news", "100%"),
-                ),
-              },
-        },
-
-    # energy page
-    "energy":
-        {"PAGE_TITLE": "Energy",
-          "BASE_TEMPLATE": "logged_in_base.html",
-          "LAYOUTS":
-              {"DEFAULT":
-                (
-                  ("energy", "100%"),
-                ),
-                "PHONE_PORTRAIT":
-                (
-                  ("energy", "100%"),
-                ),
-              },
-        },
-
-    # prizes page
-    "prizes":
-        {"PAGE_TITLE": "Prizes",
-          "BASE_TEMPLATE": "logged_in_base.html",
-          "LAYOUTS":
-              {"DEFAULT":
-                (
-                  ("prizes", "100%"),
-                ),
-                "PHONE_PORTRAIT":
-                (
-                  ("prizes", "100%"),
-                ),
-              },
-        },
-
-}
+    }

@@ -3,7 +3,7 @@
  a template. It mainly retrieve the settings from settings files.
 """
 from django.conf import settings
-from managers.settings_mgr import get_team_label, get_rounds_for_header, \
+from managers.settings_mgr import get_rounds_for_header, \
         get_current_round, get_current_round_info, in_competition
 from managers.player_mgr.models import Profile
 from managers.team_mgr.models import Team
@@ -30,23 +30,19 @@ def competition(request):
 
     return {
         "STATIC_URL": settings.STATIC_URL,
+        "SITE_NAME": settings.SITE_NAME,
         "COMPETITION_NAME": settings.COMPETITION_NAME,
-        "COMPETITION_POINT_NAME": settings.COMPETITION_POINT_NAME or "point",
-        "CSS_THEME": settings.CSS_THEME,
+        "COMPETITION_POINT_LABEL": settings.COMPETITION_POINT_LABEL or "point",
+        "CSS_THEME": settings.MAKAHIKI_THEME,
         "THEME_NAME": settings.MAKAHIKI_THEME,
         "TEAM_COUNT": team_count,
         "TEAM_MEMBER_COUNT": team_member_count,
         "OVERALL_MEMBER_COUNT": overall_member_count,
         "ROUNDS": get_rounds_for_header(),
-        "TEAM_LABEL": get_team_label(),
+        "TEAM_LABEL": settings.COMPETITION_TEAM_LABEL or "Team",
         "CURRENT_ROUND": current_round,
         "CURRENT_ROUND_INFO": get_current_round_info(),
         "FACEBOOK_APP_ID": facebook_app_id,
         "IN_COMPETITION": in_competition(),
-        "SPREADSHEETS": {
-            "THIRTY_DAYS": settings.ENERGY_THIRTY_DAYS_URL,
-            "ENERGY_GOAL": settings.ENERGY_GOAL_URL,
-            "POWER": settings.POWER_GAUGE_URL,
-            }
     }
 

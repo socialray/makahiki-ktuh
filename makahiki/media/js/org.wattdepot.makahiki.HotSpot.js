@@ -87,13 +87,6 @@ function initialize() {
     // setTimeout("initialize()", 3600000);
 }
 
-/*
- * Sets the on board gadget option of changing the time or day, depending on the date range.
- */
-function setOnboardOptions() {
-    document.getElementById("onboardoptions").innerHTML = "<a href=\"javascript:showControl()\">Change Lounge</a>";
-}
-
 /** Once dorm data is retrieved, create and display the chart with tooltips. */
 function responseHandler(response, query, source, number) {
     // Disable the loading gif 
