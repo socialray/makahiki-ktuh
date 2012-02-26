@@ -4,15 +4,17 @@ Coding Standards
 This document contains information to support uniform, high quality, and
 efficient development of Makahiki.
 
-Pylint
-------
+Pylint and PEP 8
+----------------
 
-All code should pass `Pylint`_.   To run pylint::
+All code should pass `Pylint`_ and `PEP 8`_.   To run them::
 
   % cd makahiki/
   % scripts/run_pylint.sh
+  % scripts/run_pep8.sh
 
 .. _Pylint: http://pypi.python.org/pypi/pylint
+.. _PEP 8: https://github.com/jcrocholl/pep8
 
 General documentation string standards
 --------------------------------------

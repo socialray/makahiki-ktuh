@@ -39,7 +39,8 @@ addition to adding the virtualenv startup script (it uses
 database.   Be sure to read the README file; on OS/X you must edit
 sysctl.conf in order to ensure that the server runs correctly.  Once
 installed, be sure that your PostgreSQL installation's bin/ directory 
-is on $PATH so that ``pg_config`` is defined.
+is on $PATH so that ``pg_config`` is defined.  Note for Unix users: you
+must download postgres-dev in order to get the pg_config command. 
 
 .. _Python: http://www.python.org/download/
 .. _Python Imaging Library: http://www.pythonware.com/products/pil/
@@ -54,12 +55,9 @@ is on $PATH so that ``pg_config`` is defined.
 Downloading the Makahiki source
 -------------------------------
 
-If you only wish to download the source and not edit it, you can check out using the
-read-only URL. Type the following to get a read-only version of the
-source:: 
+To download the source for your own fork::
 
   git clone git://github.com/csdl/makahiki.git
-
 
 If you wish to commit to the Makahiki project, you will need to
 create an account at `GitHub`_. Then, you will need to set up your
@@ -68,9 +66,8 @@ create an account at `GitHub`_. Then, you will need to set up your
 Once those are set up, send a Makahiki developer your Git username so that you can be
 added as a collaborator.
 
-Once you are added as a collaborator, you should be able to check out
-the code by using the private url. Type the following to check out the
-code::
+Once you are added as a collaborator, you should be able to check out the
+code as follows::
 
   git clone git@github.com:csdl/makahiki.git
 
