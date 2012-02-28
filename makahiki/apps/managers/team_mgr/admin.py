@@ -7,6 +7,7 @@ from managers.team_mgr.models import Group, Team, Post
 admin.site.register(Group)
 admin.site.register(Team)
 
+
 class PostAdmin(admin.ModelAdmin):
     """ admin for Post
     """

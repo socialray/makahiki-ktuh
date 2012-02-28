@@ -1,6 +1,7 @@
 import datetime
 from django.conf import settings
 
+
 class TestUtils:
     @staticmethod
     def set_competition_round():

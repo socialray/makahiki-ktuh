@@ -4,6 +4,7 @@ views for Help FAQ widget
 
 from apps.managers.help_mgr.models import HelpTopic
 
+
 def supply(request, page_name):
     """ supply view_objects for widget rendering."""
     _ = request
@@ -12,4 +13,3 @@ def supply(request, page_name):
     return {
         "faqs": faqs,
         }
-

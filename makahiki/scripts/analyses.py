@@ -1,7 +1,8 @@
 # User social bonuses
 data = {}
 for user in User.objects.filter(profile__points__gt=0):
-    bonuses = user.pointstransaction_set.filter(message__endswith='Social Bonus)').count()
+    bonuses = user.pointstransaction_set.filter(
+        message__endswith='Social Bonus)').count()
     if bonuses == 0:
         data['0'] = data.get('0', 0) + 1
     elif bonuses <= 10:
@@ -15,12 +16,12 @@ for user in User.objects.filter(profile__points__gt=0):
 
 for key, value in data.iteritems():
     print '%s,%d' % (key, value)
-    
-# lounge goals and points   
+
+# lounge goals and points
 for team in Team.objects.order_by('group__name', 'name'):
     goals = team.teamenergygoal_set.count()
     print '%s,%d,%d' % (team, goals, team.points())
-    
+
 # raffle information
 # 25-100: 13.24% (27/204)
 # 100-500: 51.32% (78/152)
@@ -32,5 +33,5 @@ total = 0
 for user in query:
     if user.raffleticket_set.count() > 0:
         total += 1
-        
+
 print total

@@ -13,6 +13,7 @@ from test_utils import TestUtils
 from managers.team_mgr.models import Group, Team
 from managers.player_mgr.models import Profile
 
+
 class ProfileLeadersTests(TestCase):
     """profile leader tests"""
     def setUp(self):
@@ -50,7 +51,8 @@ class ProfileLeadersTests(TestCase):
             Profile.points_leaders(round_name=self.current_round)[0], profile2,
             "User 2 should be the leading profile.")
 
-        # Have this user get the same amount of points, but an earlier award date.
+        # Have this user get the same amount of points,
+        # but an earlier award date.
         profile3 = self.users[2].get_profile()
         profile3.add_points(profile2.points,
             datetime.datetime.today() - datetime.timedelta(minutes=1), "Test")
@@ -91,7 +93,8 @@ class ProfileLeadersTests(TestCase):
         self.assertEqual(Profile.points_leaders()[0], profile2,
             "User 2 should be the leading profile.")
 
-        # Have this user get the same amount of points, but an earlier award date.
+        # Have this user get the same amount of points,
+        # but an earlier award date.
         profile3 = self.users[2].get_profile()
         profile3.add_points(profile2.points,
             datetime.datetime.today() - datetime.timedelta(minutes=1), "Test")
@@ -126,7 +129,8 @@ class ProfileUnitTests(TestCase):
 
     def testReferralBonus(self):
         """
-        Test that the referral bonus is awarded once the referred user reaches 30 points.
+        Test that the referral bonus is awarded once the referred user
+        reaches 30 points.
         """
         user1 = User.objects.create_user("test_user", 'user@test.com',
             password="changeme")
@@ -202,7 +206,8 @@ class ProfileUnitTests(TestCase):
         self.assertEqual(Profile.objects.get(user=user2).points, 45)
 
     def testTeamRankWithPoints(self):
-        """Tests that the team_rank method accurately computes the rank based on points."""
+        """Tests that the team_rank method accurately computes the rank based
+         on points."""
         user = User(username="test_user", password="changeme")
         user.save()
         group = Group(name="Test group")
@@ -237,7 +242,8 @@ class ProfileUnitTests(TestCase):
         profile2.save()
 
         self.assertEqual(profile.team_rank(), 1,
-            "Check that the user is still number 1 if the new profile is not on the same team.")
+                         "Check that the user is still number 1 if the new "
+                         "profile is not on the same team.")
 
         profile2.team = team
         profile2.save()
@@ -246,8 +252,8 @@ class ProfileUnitTests(TestCase):
             "Check that the user is now rank 2.")
 
     def testTeamRankWithSubmissionDate(self):
-        """Tests that the team_rank method accurately computes the rank when users have the same
-        number of points."""
+        """Tests that the team_rank method accurately computes the rank when
+        users have the same number of points,"""
         user = User(username="test_user", password="changeme")
         user.save()
         group = Group(name="Test group")
@@ -280,7 +286,8 @@ class ProfileUnitTests(TestCase):
             "Check that the user is now rank 2.")
 
     def testOverallRankWithPoints(self):
-        """Tests that the rank method accurately computes the rank with points."""
+        """Tests that the rank method accurately computes the rank with
+        points."""
         user = User(username="test_user", password="changeme")
         user.save()
         profile = user.get_profile()
@@ -311,8 +318,8 @@ class ProfileUnitTests(TestCase):
             "Check that the user is now rank 2.")
 
     def testOverallRankWithSubmissionDate(self):
-        """Tests that the overall_rank method accurately computes the rank when two users have
-        the same number of points."""
+        """Tests that the overall_rank method accurately computes the rank
+        when two users have the same number of points."""
         user = User(username="test_user", password="changeme")
         user.save()
 
@@ -336,7 +343,8 @@ class ProfileUnitTests(TestCase):
             "Check that the user is now rank 2.")
 
     def testOverallRankForCurrentRound(self):
-        """Test that we can retrieve the rank for the user in the current round."""
+        """Test that we can retrieve the rank for the user in the current
+        round."""
         saved_rounds = settings.COMPETITION_ROUNDS
         TestUtils.set_competition_round()
 
@@ -367,7 +375,8 @@ class ProfileUnitTests(TestCase):
         settings.COMPETITION_ROUNDS = saved_rounds
 
     def testTeamRankForCurrentRound(self):
-        """Test that we can retrieve the rank for the user in the current round."""
+        """Test that we can retrieve the rank for the user in the current
+        round."""
         saved_rounds = settings.COMPETITION_ROUNDS
         TestUtils.set_competition_round()
 
@@ -405,7 +414,8 @@ class ProfileUnitTests(TestCase):
         settings.COMPETITION_ROUNDS = saved_rounds
 
     def testCurrentRoundPoints(self):
-        """Tests that we can retrieve the points for the user in the current round."""
+        """Tests that we can retrieve the points for the user in the current
+        round."""
         # Save the round information and set up a test round.
         saved_rounds = settings.COMPETITION_ROUNDS
         TestUtils.set_competition_round()
@@ -424,10 +434,11 @@ class ProfileUnitTests(TestCase):
         profile.add_points(10,
             datetime.datetime.today() - datetime.timedelta(days=1), "Test")
 
-        self.assertEqual(profile.current_round_points(), points + 10,
-            "Check that the number of points did not change when points are awarded " +
-            "outside of a round.")
+        self.assertEqual(profile.current_round_points(),
+                         points + 10,
+                         "Check that the number of points did "
+                         "not change when points are "
+                         "awarded outside of a round.")
 
         # Restore saved rounds.
         settings.COMPETITION_ROUNDS = saved_rounds
-

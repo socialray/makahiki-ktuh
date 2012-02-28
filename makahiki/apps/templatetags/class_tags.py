@@ -7,13 +7,15 @@ from django.template import Library
 
 register = Library()
 
+
 @register.simple_tag
 def insert_classes(key, theme="default"):
     """
     Provides a string of classes that are assigned to the key.
     """
     # Import the theme dynamically from the passed in theme value.
-    # Solution found at http://docs.python.org/library/functions.html#__import__
+    # Solution found at http://docs.python.org/library/functions
+    # .html#__import__
     theme_rules = importlib.import_module("css_rules.%s" % theme)
     try:
         if theme_rules.RETURN_CLASSES:
@@ -45,7 +47,9 @@ def get_id_and_classes(key, theme="default"):
 @register.simple_tag
 def import_css(static_url, theme="default"):
     """
-    Returns HTML that imports CSS.  Typically should be used in the header section of a page.
+    Returns HTML that imports CSS.
+
+    Typically should be used in the header section of a page.
     """
     theme_rules = importlib.import_module("css_rules.%s" % theme)
     if theme_rules.RETURN_CLASSES:
@@ -57,7 +61,9 @@ def import_css(static_url, theme="default"):
 @register.simple_tag
 def import_page_css(page, static_url, theme="default"):
     """
-    Returns HTML that imports CSS.  Typically should be used in the header section of a page.
+    Returns HTML that imports CSS.
+
+    Typically should be used in the header section of a page.
     """
     theme_rules = importlib.import_module("css_rules.%s" % theme)
     if theme_rules.RETURN_CLASSES:
@@ -69,7 +75,10 @@ def import_page_css(page, static_url, theme="default"):
 @register.simple_tag
 def import_logged_in_css(static_url, theme="default"):
     """
-    Returns HTML that imports CSS.  Typically should be used in the header section of a page with a logged in user.
+    Returns HTML that imports CSS.
+
+    Typically should be used in the header section of a page with a logged in
+    user.
     """
     theme_rules = importlib.import_module("css_rules.%s" % theme)
     if theme_rules.RETURN_CLASSES:

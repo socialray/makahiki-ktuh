@@ -10,6 +10,7 @@ from django.http import HttpResponseRedirect
 
 from managers.auth_mgr.forms import LoginForm
 
+
 @user_passes_test(lambda u: u.is_staff, login_url="/account/cas/login")
 def login_as(request, user_id):
     """Admin method for logging in as another user."""
@@ -21,7 +22,8 @@ def login_as(request, user_id):
         # Expire this session when the browser closes.
         request.session.set_expiry(0)
     return HttpResponseRedirect("/")
-    
+
+
 def login(request):
     """
     Shows the login page and processes the login form.
@@ -32,7 +34,7 @@ def login(request):
             return HttpResponseRedirect('/home')
     else:
         form = LoginForm()
-        
+
     return render_to_response("account/login.html", {
             "form": form,
-    }, context_instance = RequestContext(request))
+    }, context_instance=RequestContext(request))

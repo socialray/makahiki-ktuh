@@ -25,6 +25,7 @@ from lib.avatar.models import avatar_file_path, Avatar
 import lib.facebook_api.facebook as facebook
 from widgets.home.forms import  ProfileForm, ReferralForm
 
+
 def supply(request, page_name):
     """
     Directs the user to the home page.
@@ -33,12 +34,15 @@ def supply(request, page_name):
     _ = page_name
     return {}
 
+
 @login_required
 def restricted(request):
     """handle restricted url"""
     today = datetime.datetime.today()
-    start = datetime.datetime.strptime(settings.COMPETITION_START, "%Y-%m-%d %H:%M:%S")
-    end = datetime.datetime.strptime(settings.COMPETITION_END, "%Y-%m-%d %H:%M:%S")
+    start = datetime.datetime.strptime(settings.COMPETITION_START,
+                                       "%Y-%m-%d %H:%M:%S")
+    end = datetime.datetime.strptime(settings.COMPETITION_END,
+                                     "%Y-%m-%d %H:%M:%S")
 
     before = False
     # If we are in the competition, bring them back to the home page.
@@ -103,11 +107,13 @@ def referral(request):
             form = ReferralForm(request.POST, user=request.user)
             if form.is_valid():
                 cleaned_data = form.cleaned_data
-                if cleaned_data.has_key('referrer_email') and len(
+                if 'referrer_email' in cleaned_data and len(
                     cleaned_data['referrer_email']) > 0:
-                    profile.referring_user = User.objects.get(email=cleaned_data['referrer_email'])
+                    profile.referring_user = User.objects.\
+                    get(email=cleaned_data['referrer_email'])
                 else:
-                    # Double check just in case user comes back and deletes the email.
+                    # Double check just in case user comes back and deletes
+                    # the email.
                     profile.referring_user = None
                 profile.save()
 
@@ -140,8 +146,9 @@ def profile_facebook(request):
     Connect to Facebook to get the user's facebook photo..
     """
     if request.is_ajax():
-        fb_user = facebook.get_user_from_cookie(request.COOKIES, settings.FACEBOOK_APP_ID,
-            settings.FACEBOOK_SECRET_KEY)
+        fb_user = facebook.get_user_from_cookie(request.COOKIES,
+                                                settings.FACEBOOK_APP_ID,
+                                                settings.FACEBOOK_SECRET_KEY)
         fb_id = None
         if not fb_user:
             return HttpResponse(json.dumps({
@@ -154,12 +161,14 @@ def profile_facebook(request):
             fb_id = graph_profile["id"]
         except facebook.GraphAPIError:
             return HttpResponse(json.dumps({
-                "contents": "Facebook is not available at the moment, please try later",
+                "contents": "Facebook is not available at the moment, "
+                            "please try later",
                 }), mimetype='application/json')
 
         # Insert the form into the response.
         user_info = {
-            "facebook_photo": "http://graph.facebook.com/%s/picture?type=large" % fb_id
+            "facebook_photo":
+                "http://graph.facebook.com/%s/picture?type=large" % fb_id
         }
         form = ProfileForm(initial=user_info)
 
@@ -194,7 +203,9 @@ def setup_profile(request):
             profile.name = form.cleaned_data["display_name"].strip()
             if not profile.setup_profile:
                 profile.setup_profile = True
-                profile.add_points(5, datetime.datetime.today(), "Set up profile")
+                profile.add_points(5,
+                                   datetime.datetime.today(),
+                                   "Set up profile")
 
             profile.save()
 
@@ -210,7 +221,8 @@ def setup_profile(request):
                 avatar.avatar.storage.save(path, request.FILES['avatar'])
                 avatar.save()
 
-            elif form.cleaned_data["use_fb_photo"] and form.cleaned_data["facebook_photo"]:
+            elif form.cleaned_data["use_fb_photo"] and form\
+            .cleaned_data["facebook_photo"]:
                 # Need to download the image from the url and save it.
                 photo_temp = NamedTemporaryFile(delete=True)
                 fb_url = form.cleaned_data["facebook_photo"]
@@ -242,8 +254,9 @@ def _get_profile_form(request, form=None, non_xhr=False):
     Helper method to render the profile form.
     """
     try:
-        fb_user = facebook.get_user_from_cookie(request.COOKIES, settings.FACEBOOK_APP_ID,
-            settings.FACEBOOK_SECRET_KEY)
+        fb_user = facebook.get_user_from_cookie(request.COOKIES,
+                                                settings.FACEBOOK_APP_ID,
+                                                settings.FACEBOOK_SECRET_KEY)
     except AttributeError:
         fb_user = None
 
@@ -254,10 +267,12 @@ def _get_profile_form(request, form=None, non_xhr=False):
             graph = facebook.GraphAPI(fb_user["access_token"])
             graph_profile = graph.get_object("me")
             fb_id = graph_profile["id"]
-            facebook_photo = "http://graph.facebook.com/%s/picture?type=large" % fb_id
+            facebook_photo = "http://graph.facebook.com/%s/picture" \
+                             "?type=large" % fb_id
         except facebook.GraphAPIError:
             return HttpResponse(json.dumps({
-                "contents": "Facebook is not available at the moment, please try later",
+                "contents": "Facebook is not available at the moment, "
+                            "please try later",
                 }), mimetype='application/json')
 
     if not form:
@@ -341,7 +356,8 @@ def setup_complete(request):
             if "widgets.smartgrid" in settings.INSTALLED_WIDGET_APPS:
                 activity_name = settings.SETUP_WIZARD_ACTIVITY_NAME
                 try:
-                    module = importlib.import_module("apps.widgets.smartgrid.models")
+                    module = importlib.import_module("apps.widgets.smartgrid"
+                                                     ".models")
                     activity = module.Activity.objects.get(name=activity_name)
                     module.ActivityMember.objects.get_or_create(
                         activity=activity,
@@ -349,7 +365,8 @@ def setup_complete(request):
                         approval_status="approved")
                     # If this was created, it's automatically saved.
                 except ObjectDoesNotExist:
-                    pass # Don't add anything if we can't link to the activity.
+                    pass  # Don't add anything if we can't link to the
+                    # activity.
 
         profile.setup_complete = True
         profile.completion_date = datetime.datetime.today()

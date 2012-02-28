@@ -8,6 +8,7 @@ from managers.settings_mgr import get_rounds_for_header, \
 from managers.player_mgr.models import Profile
 from managers.team_mgr.models import Team
 
+
 def competition(request):
     """Provides access to standard competition constants within a template."""
     # Get user-specific information.
@@ -45,4 +46,3 @@ def competition(request):
         "FACEBOOK_APP_ID": facebook_app_id,
         "IN_COMPETITION": in_competition(),
     }
-

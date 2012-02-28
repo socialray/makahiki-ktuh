@@ -5,6 +5,7 @@ Resets the user(s) as if they never took part in the competition.
 from django.core import management
 from django.contrib.auth.models import User
 
+
 class Command(management.base.BaseCommand):
     """reset user command"""
     help = 'Resets the user(s) as if they never took part in the competition.'
@@ -45,7 +46,8 @@ class Command(management.base.BaseCommand):
 
     def reset_user(self, user):
         """
-        Resets user by deleting them and then restoring them. Preserves the following attributes:
+        Resets user by deleting them and then restoring them. Preserves the
+        following attributes:
         * username
         * email
         * staff/superuser status

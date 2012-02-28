@@ -1,8 +1,8 @@
 """
  game_settings.py
  This file contains organizational-level settings for the game.
- These settings include the name of the game, competition start/end date, authentication,
- and theme settings.
+ These settings include the name of the game, competition start/end date,
+ authentication, and theme settings.
 """
 
 import datetime
@@ -22,25 +22,34 @@ MANAGERS = ADMINS
 # The actual name of the competition.
 COMPETITION_NAME = "Kukui Cup"
 
-# Optional setting to specify a special name for the points. Default is "point".
+# Optional setting to specify a special name for the points. Default is
+# "point".
 COMPETITION_POINT_LABEL = "point"
 
-# The label of a standard competition team.  Defaults to "Team" if this is not provided.
+# The label of a standard competition team.  Defaults to "Team" if this is
+# not provided.
 COMPETITION_TEAM_LABEL = "Lounge"
 
 # This include start and end dates along with round information.
 # The start and end date of the competition.
-COMPETITION_START = (datetime.date.today() - datetime.timedelta(days=3)).strftime("%Y-%m-%d %H:%M:%S")
-COMPETITION_END = (datetime.date.today() + datetime.timedelta(days=6)).strftime("%Y-%m-%d %H:%M:%S")
+COMPETITION_START = (
+datetime.date.today() - datetime.timedelta(days=3)).strftime(
+    "%Y-%m-%d %H:%M:%S")
+COMPETITION_END = (datetime.date.today() + datetime.timedelta(days=6))\
+.strftime(
+    "%Y-%m-%d %H:%M:%S")
 
 # The rounds of the competition. Specify dates using "yyyy-mm-dd hh:mm:ss".
 # Start means the competition will start at midnight on that date.
 # End means the competition will end at midnight of that date.
-# This means that a round that ends on "2010-08-02" will end at 11:59pm of August 1st.
+# This means that a round that ends on "2010-08-02" will end at 11:59pm of
+# August 1st.
 COMPETITION_ROUNDS = {
     "Round 1": {
-        "start": (datetime.date.today() - datetime.timedelta(days=3)).strftime("%Y-%m-%d %H:%M:%S"),
-        "end": (datetime.date.today() - datetime.timedelta(days=1)).strftime("%Y-%m-%d %H:%M:%S"),
+        "start": (datetime.date.today() - datetime.timedelta(days=3)).strftime(
+            "%Y-%m-%d %H:%M:%S"),
+        "end": (datetime.date.today() - datetime.timedelta(days=1)).strftime(
+            "%Y-%m-%d %H:%M:%S"),
         },
     }
 
@@ -54,14 +63,16 @@ CAS_SERVER_URL = 'https://login.its.hawaii.edu/cas/'
 # DATA Settings
 ##################
 # This is the name of the activity in the setup wizard.
-# If the user answers that question correctly, this activity will be marked as completed.
+# If the user answers that question correctly, this activity will be marked
+# as completed.
 SETUP_WIZARD_ACTIVITY_NAME = "Intro video"
 
 ###################
 # TIME_ZONE
 ###################
 # Local time zone for this installation. Choices can be found here:
-# http://www.postgresql.org/docs/8.1/static/datetime-keywords.html#DATETIME-TIMEZONE-SET-TABLE
+# http://www.postgresql.org/docs/8.1/static/datetime-keywords
+# .html#DATETIME-TIMEZONE-SET-TABLE
 # although not all variations may be possible on all operating systems.
 # If running in a Windows environment this must be set to the same as your
 # system time zone.
@@ -78,5 +89,6 @@ LOCALE_SETTING = 'en_US.UTF-8'
 ###################
 # THEME
 ###################
-# The theme to use as default. This corresponds to a folder in media that contains the CSS.
+# The theme to use as default. This corresponds to a folder in media that
+# contains the CSS.
 MAKAHIKI_THEME = "default"

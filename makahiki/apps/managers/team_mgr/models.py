@@ -12,6 +12,7 @@ from managers.settings_mgr import get_current_round
 
 # Create your models here.
 
+
 class Group(models.Model):
     """
     defines the group that a team belongs to.
@@ -44,7 +45,8 @@ class Group(models.Model):
         ).order_by("-points", "-last")[:num_results]
 
     def save(self, *args, **kwargs):
-        """Custom save method to generate slug and set created_at/updated_at."""
+        """Custom save method to generate slug and set
+        created_at/updated_at."""
         if not self.slug:
             self.slug = slugify(self.name)
 
@@ -62,7 +64,8 @@ class Team(models.Model):
         max_length=50)
     slug = models.SlugField(max_length=50,
         help_text="Automatically generated if left blank.")
-    group = models.ForeignKey(Group, help_text="The group this team belongs to.")
+    group = models.ForeignKey(Group,
+                              help_text="The group this team belongs to.")
 
     def __unicode__(self):
         return self.name
@@ -95,7 +98,8 @@ class Team(models.Model):
             ).order_by("-scoreboardentry__points",
                 "-scoreboardentry__last_awarded_submission", )[:num_results]
 
-        return self.profile_set.all().order_by("-points", "-last_awarded_submission")[:num_results]
+        return self.profile_set.all().\
+               order_by("-points", "-last_awarded_submission")[:num_results]
 
     def current_round_rank(self):
         """ current round rank
@@ -157,8 +161,8 @@ class Team(models.Model):
         return None
 
     def points(self, round_name=None):
-        """Returns the total number of points for the team.  Takes an optional parameter for a
-        round."""
+        """Returns the total number of points for the team.  Takes an
+        optional parameter for a round."""
         if round_name:
             from managers.player_mgr.models import ScoreboardEntry
 
@@ -170,7 +174,8 @@ class Team(models.Model):
         return dictionary["points__sum"] or 0
 
     def save(self, *args, **kwargs):
-        """Custom save method to generate slug and set created_at/updated_at."""
+        """Custom save method to generate slug and set
+        created_at/updated_at."""
         if not self.slug:
             self.slug = slugify(self.name)
 
@@ -183,7 +188,7 @@ class Post(models.Model):
     team = models.ForeignKey(Team)
     text = models.TextField()
     style_class = models.CharField(max_length=50,
-        default="user_post") #CSS class to apply to this post.
+        default="user_post")  # CSS class to apply to this post.
     created_at = models.DateTimeField(editable=False)
 
     def __unicode__(self):

@@ -20,7 +20,8 @@ def get_round_info():
 
 
 def get_rounds_for_header():
-    """Handles the round information that will be used to generate the header."""
+    """Handles the round information that will be used to generate the header
+    ."""
     # Copy the round info and insert the overall round.
     rounds = get_round_info()
 
@@ -28,11 +29,13 @@ def get_rounds_for_header():
     return_dict = {}
     today = datetime.datetime.combine(datetime.date.today(), datetime.time())
     for key, value in rounds.items():
-        start_date = datetime.datetime.strptime(value["start"], "%Y-%m-%d %H:%M:%S")
-        end_date = datetime.datetime.strptime(value["end"], "%Y-%m-%d %H:%M:%S")
+        start_date = datetime.datetime.strptime(value["start"],
+                                                "%Y-%m-%d %H:%M:%S")
+        end_date = datetime.datetime.strptime(value["end"],
+                                              "%Y-%m-%d %H:%M:%S")
         start = (today - start_date).days
-        end = (
-                  today - end_date).days + 1 # Round technically ends the day before.
+        end = (today - end_date).days + 1  # Round technically ends the day
+        # before.
 
         return_dict.update({
             key: {
@@ -49,8 +52,10 @@ def get_current_round():
     rounds = settings.COMPETITION_ROUNDS
     today = datetime.datetime.today()
     for key in rounds.keys():
-        start = datetime.datetime.strptime(rounds[key]["start"], "%Y-%m-%d %H:%M:%S")
-        end = datetime.datetime.strptime(rounds[key]["end"], "%Y-%m-%d %H:%M:%S")
+        start = datetime.datetime.strptime(rounds[key]["start"],
+                                           "%Y-%m-%d %H:%M:%S")
+        end = datetime.datetime.strptime(rounds[key]["end"],
+                                         "%Y-%m-%d %H:%M:%S")
         if today >= start and today < end:
             return key
 
@@ -63,8 +68,10 @@ def get_current_round_info():
     rounds = settings.COMPETITION_ROUNDS
     today = datetime.datetime.today()
     for key in rounds.keys():
-        start = datetime.datetime.strptime(rounds[key]["start"], "%Y-%m-%d %H:%M:%S")
-        end = datetime.datetime.strptime(rounds[key]["end"], "%Y-%m-%d %H:%M:%S")
+        start = datetime.datetime.strptime(rounds[key]["start"],
+                                           "%Y-%m-%d %H:%M:%S")
+        end = datetime.datetime.strptime(rounds[key]["end"],
+                                         "%Y-%m-%d %H:%M:%S")
         if today >= start and today < end:
             return {
                 "name": key,
@@ -73,8 +80,10 @@ def get_current_round_info():
                 }
 
     # Check for overall round info.
-    start = datetime.datetime.strptime(settings.COMPETITION_START, "%Y-%m-%d %H:%M:%S")
-    end = datetime.datetime.strptime(settings.COMPETITION_END, "%Y-%m-%d %H:%M:%S")
+    start = datetime.datetime.strptime(settings.COMPETITION_START,
+                                       "%Y-%m-%d %H:%M:%S")
+    end = datetime.datetime.strptime(settings.COMPETITION_END,
+                                     "%Y-%m-%d %H:%M:%S")
     if today >= start and today < end:
         return {
             "name": "Overall",
@@ -88,8 +97,10 @@ def get_current_round_info():
 
 def in_competition():
     """Returns true if we are still in the competition."""
-    start = datetime.datetime.strptime(settings.COMPETITION_START, "%Y-%m-%d %H:%M:%S")
-    end = datetime.datetime.strptime(settings.COMPETITION_END, "%Y-%m-%d %H:%M:%S")
+    start = datetime.datetime.strptime(settings.COMPETITION_START,
+                                       "%Y-%m-%d %H:%M:%S")
+    end = datetime.datetime.strptime(settings.COMPETITION_END,
+                                     "%Y-%m-%d %H:%M:%S")
     today = datetime.datetime.today()
     if today >= start and today < end:
         return True
@@ -99,8 +110,10 @@ def in_competition():
 
 def get_competition_dates():
     """Returns information about the competition."""
-    start = datetime.datetime.strptime(settings.COMPETITION_START, "%Y-%m-%d %H:%M:%S")
-    end = datetime.datetime.strptime(settings.COMPETITION_END, "%Y-%m-%d %H:%M:%S")
+    start = datetime.datetime.strptime(settings.COMPETITION_START,
+                                       "%Y-%m-%d %H:%M:%S")
+    end = datetime.datetime.strptime(settings.COMPETITION_END,
+                                     "%Y-%m-%d %H:%M:%S")
 
     return {
         "title": "Competition",
@@ -110,8 +123,8 @@ def get_competition_dates():
 
 
 def restricted(request, message=None):
-    """Helper method to return a error message when a user accesses a page they are not
-    allowed to view."""
+    """Helper method to return a error message when a user accesses a page
+    they are not allowed to view."""
 
     if not message:
         message = "You are not allowed to view this page."

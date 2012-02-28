@@ -1,7 +1,8 @@
 """
  settings.py
  This file contains system level settings.
- Settings include database, cache, path, middleware, and installed apps and logging.
+ Settings include database, cache, path, middleware, and installed apps and
+ logging.
  New settings should not be added here.
 """
 
@@ -14,14 +15,16 @@ import types
 ##############
 DATABASES = {
     'default': {
-        # use 'postgresql_psycopg2', 'postgresql', 'mysql', 'sqlite3' or 'oracle'.
+        # use 'postgresql_psycopg2', 'postgresql', 'mysql',
+        # 'sqlite3' or 'oracle'.
         'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': 'dev.db',                # Or path to database file if using sqlite3.
-        'USER': '',                      # Not used with sqlite3.
-        'PASSWORD': '',                  # Not used with sqlite3.
-        'HOST': '',                      # Set to empty string for localhost. Not used with sqlite3.
-        'PORT': '',                      # Set to empty string for default. Not used with sqlite3.
-        }
+        'NAME': 'dev.db',  # Or path to database file if using sqlite3.
+        'USER': '',  # Not used with sqlite3.
+        'PASSWORD': '',  # Not used with sqlite3.
+        'HOST': '',  # Set to empty string for localhost. Not used with
+        # sqlite3.
+        'PORT': '',  # Set to empty string for default. Not used with sqlite3.
+    }
 }
 
 #######################
@@ -34,7 +37,8 @@ CACHES = {
 }
 
 CACHE_MIDDLEWARE_ALIAS = 'default'
-# Note that this set up means the per site cache applies only to the landing and about pages.
+# Note that this set up means the per site cache applies only to the landing
+# and about pages.
 CACHE_MIDDLEWARE_ANONYMOUS_ONLY = True
 CACHE_MIDDLEWARE_SECONDS = 600
 
@@ -110,7 +114,8 @@ TEMPLATE_CONTEXT_PROCESSORS = (
 # MIDDLEWARE settings
 ######################
 MIDDLEWARE_CLASSES = (
-    'django.middleware.cache.UpdateCacheMiddleware', #always start with this for caching
+    'django.middleware.cache.UpdateCacheMiddleware',
+    #always start with this for caching
 
     'django.middleware.common.CommonMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
@@ -124,7 +129,8 @@ MIDDLEWARE_CLASSES = (
     'managers.player_mgr.middleware.LoginMiddleware',
     'managers.log_mgr.middleware.LoggingMiddleware',
 
-    'django.middleware.cache.FetchFromCacheMiddleware', #always end with this for caching
+    'django.middleware.cache.FetchFromCacheMiddleware',
+    #always end with this for caching
     )
 
 ######################
@@ -295,7 +301,8 @@ LOGGING = {
     'disable_existing_loggers': True,
     'formatters': {
         'verbose': {
-            'format': '%(levelname)s %(asctime)s %(module)s %(process)d %(thread)d %(message)s'
+            'format': '%(levelname)s %(asctime)s %(module)s %(process)d %'
+                      '(thread)d %(message)s'
         },
         'simple': {
             'format': '%(levelname)s %(message)s'

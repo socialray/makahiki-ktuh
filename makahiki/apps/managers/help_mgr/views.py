@@ -11,11 +11,12 @@ from django.http import  HttpResponse
 
 from managers.help_mgr.models import HelpTopic
 
+
 @login_required
 def topic(request, category, slug):
     """
-    Shows a help topic.  This method handles both a regular request and an AJAX request
-    for dialog boxes.
+    Shows a help topic.  This method handles both a regular request and an
+    AJAX request for dialog boxes.
     """
     help_topic = get_object_or_404(HelpTopic, slug=slug, category=category)
     if request.is_ajax():
@@ -28,5 +29,3 @@ def topic(request, category, slug):
     return render_to_response("help/topic.html", {
         "topic": help_topic,
         }, context_instance=RequestContext(request))
-  
-

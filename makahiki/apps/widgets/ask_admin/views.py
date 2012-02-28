@@ -13,6 +13,7 @@ from widgets.ask_admin.forms import FeedbackForm
 
 FROM_EMAIL = settings.MANAGERS[0][1]
 
+
 def supply(request, page_name):
     """ supply view_objects for widget rendering."""
     _ = request
@@ -21,6 +22,7 @@ def supply(request, page_name):
     return {
         "form": form,
         }
+
 
 def send_feedback(request):
     """send feedbacl"""
@@ -41,15 +43,17 @@ def send_feedback(request):
             # Using adapted version from Django source code
             current_site = Site.objects.get(id=settings.SITE_ID)
             subject = u'[%s] %s asked a question' % (
-            current_site.domain, request.user.get_profile().name)
+                current_site.domain, request.user.get_profile().name)
             mail = EmailMultiAlternatives(subject, message, FROM_EMAIL,
-                [settings.CONTACT_EMAIL, ], headers={"Reply-To": request.user.email})
+                [settings.CONTACT_EMAIL, ], headers={
+                    "Reply-To": request.user.email})
 
             mail.attach_alternative(html_message, 'text/html')
             mail.send()
 
             if request.is_ajax():
-                return HttpResponse(json.dumps({"success": True}), mimetype="application/json")
+                return HttpResponse(json.dumps({"success": True}),
+                                    mimetype="application/json")
 
             return HttpResponseRedirect(form.cleaned_data["url"])
 

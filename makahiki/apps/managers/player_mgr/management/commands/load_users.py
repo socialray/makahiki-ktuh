@@ -1,6 +1,7 @@
 """
 load and create the users from a csv file containing lounge, name, and email,
-if the second argument is RA, the csv file is the RA list, consists of name, email, lounge.
+if the second argument is RA, the csv file is the RA list, consists of name,
+email, lounge.
 """
 from django.core import management
 from django.contrib.auth.models import User
@@ -8,10 +9,12 @@ from django.core.exceptions import ObjectDoesNotExist
 from managers.team_mgr.models import Team
 from django.db.utils import IntegrityError
 
+
 class Command(management.base.BaseCommand):
     """load user command"""
-    help = """load and create the users from a csv file containing lounge, name, and email,
-    if the second argument is RA, the csv file is the RA list, consists of name, email, lounge."""
+    help = """load and create the users from a csv file containing lounge,
+     name, and email, if the second argument is RA, the csv file is the RA
+     list, consists of name, email, lounge."""
 
     lastname = None
     firstname = None
@@ -22,7 +25,8 @@ class Command(management.base.BaseCommand):
 
     def handle(self, *args, **options):
         """
-        Load and create the users from a csv file containing lounge, name, and email
+        Load and create the users from a csv file containing lounge, name,
+        and email.
         """
         if len(args) == 0:
             self.stdout.write("the csv file name missing.\n")
@@ -144,4 +148,4 @@ class Command(management.base.BaseCommand):
             profile.save()
         except IntegrityError:
             profile.name = self.firstname + " " + self.lastname
-            profile.save() 
+            profile.save()
