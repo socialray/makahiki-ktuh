@@ -1,10 +1,12 @@
-# default.py
-#
-# This file maps ids to a string of classes.  Templates that use class_tags
-# and insert_classes refer to this file. Note that some of the "ids" are more
-# like class names.  These rules act like "macro expansions" in the templates.
-# If True, the classes will be inserted.  Otherwise, the tags will be empty
-# strings.
+"""Provides variables (strings and dicts) that implement mappings of ids to CSS classes.
+
+Templates that use class_tags and insert_classes refer to this module. Note that some of the "ids" are
+more like class names.  These rules act like "macro expansions" in the templates. If True, the
+classes will be inserted.  Otherwise, the tags will be empty strings.
+
+Makahiki 2 note: CSS information specific to particular widgets should be encapsulated with that widget.
+"""
+
 RETURN_CLASSES = True
 
 CSS_IMPORTS = """

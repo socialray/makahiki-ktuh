@@ -23,7 +23,7 @@ from django.core.urlresolvers import reverse
 
 from lib.avatar.models import avatar_file_path, Avatar
 import lib.facebook_api.facebook as facebook
-from widgets.home.forms import  ProfileForm, ReferralForm
+from widgets.home.forms import ProfileForm, ReferralForm
 
 
 def supply(request, page_name):

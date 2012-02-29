@@ -1,1 +1,1 @@
-from lib.brabeion.internals import badges
+from apps.lib.brabeion.internals import badges

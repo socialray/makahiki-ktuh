@@ -78,7 +78,7 @@ Developer Guide
    Running a sustainability challenge <execution>
    Data logging and analysis <logging-and-analysis>
    Developing a new game plugin <plugin-development>
-   Appendix A: Module reference <module-guide>
+   Appendix A: Package reference <package-guide>
    Appendix B: Management command reference <management-commands>
    Appendix C: Settings files <settings-files>
    Appendix D: The administrator interface <admin-interface>

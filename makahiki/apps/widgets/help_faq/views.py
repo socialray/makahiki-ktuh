@@ -2,7 +2,7 @@
 views for Help FAQ widget
 """
 
-from apps.managers.help_mgr.models import HelpTopic
+from managers.help_mgr.models import HelpTopic
 
 
 def supply(request, page_name):

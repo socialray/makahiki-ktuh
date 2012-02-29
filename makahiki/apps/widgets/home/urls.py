@@ -5,9 +5,7 @@ url def for home page and setup wizard.
 from django.conf.urls.defaults import url, patterns
 
 urlpatterns = patterns('',
-    url(r'^restricted/$',
-        'widgets.home.views.restricted',
-        name="home_restricted"),
+    url(r'^restricted/$', 'widgets.home.views.restricted', name="home_restricted"),
     url(r'^setup/welcome/$',
         'widgets.home.views.setup_welcome',
         name="setup_welcome"),
