@@ -192,8 +192,6 @@ class SetupWizardFunctionalTestCase(TestCase):
         except ValueError:
             self.fail("Response JSON could not be decoded.")
 
-            # TODO: Test setup with a FB profile.
-
     def testSetupProfileUpdate(self):
         """Check that we can update the profile of the user in the setup
         wizard."""
