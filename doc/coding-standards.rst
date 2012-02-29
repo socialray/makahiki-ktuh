@@ -4,17 +4,32 @@ Coding Standards
 This document contains information to support uniform, high quality, and
 efficient development of Makahiki.
 
-Pylint and PEP 8
-----------------
+Automated quality assurance
+---------------------------
 
-All code should pass `Pylint`_ and `PEP 8`_.   To run them::
+All code should pass `Pylint`_, `PEP 8`_, and the current set of Makahiki unit
+tests.   To run them individually::
 
   % cd makahiki/
   % scripts/run_pylint.sh
   % scripts/run_pep8.sh
+  % python manage.py test
 
 .. _Pylint: http://pypi.python.org/pypi/pylint
 .. _PEP 8: https://github.com/jcrocholl/pep8
+
+To simplify quality assurance, there is a script called verify.py that runs all of these
+scripts::
+
+  % cd makahiki/
+  % scripts/verify.py
+
+If all return successfully, then verify.py returns normally and no output is printed.  If there
+are any errors, the output associated with the unsucessful tools is printed
+and verify.py returns with an error code. 
+
+It is good practice to run verify.py prior to pushing your code to the
+master branch at github. 
 
 General documentation string standards
 --------------------------------------
