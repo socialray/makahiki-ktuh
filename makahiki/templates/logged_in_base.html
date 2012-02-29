@@ -46,7 +46,7 @@
     </div>
     {% if IN_COMPETITION %}
     <div {% get_id_and_classes "header-round-info" %}>
-      <h3>{{CURRENT_ROUND}}</h3>
+      <h3>{{CURRENT_ROUND_INFO.name}}</h3>
       <span {% get_id_and_classes "header-round-countdown" %}></span>
     </div>
     <script type="text/javascript">

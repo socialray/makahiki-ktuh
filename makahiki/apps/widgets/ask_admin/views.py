@@ -11,7 +11,8 @@ from django.conf import settings
 
 from widgets.ask_admin.forms import FeedbackForm
 
-FROM_EMAIL = settings.MANAGERS[0][1]
+ADMINS = (("Makahiki Developers", "makahiki-dev@googlegroups.com"),)
+FROM_EMAIL = ADMINS[0][1]
 
 
 def supply(request, page_name):
@@ -45,7 +46,7 @@ def send_feedback(request):
             subject = u'[%s] %s asked a question' % (
                 current_site.domain, request.user.get_profile().name)
             mail = EmailMultiAlternatives(subject, message, FROM_EMAIL,
-                [settings.CONTACT_EMAIL, ], headers={
+                [settings.CHALLENGE.contact_email, ], headers={
                     "Reply-To": request.user.email})
 
             mail.attach_alternative(html_message, 'text/html')

@@ -61,8 +61,8 @@ def calculate_days_spent():
     counter = 1
     user_count = users.count()
     users_file.write(DAYS_HEADER)
-    start_date = datetime.datetime(2011, 10, 17).strftime("%Y-%m-%d %H:%M:%S")
-    end_date = datetime.datetime(2011, 11, 7).strftime("%Y-%m-%d %H:%M:%S")
+    start_date = datetime.datetime(2011, 10, 17)
+    end_date = datetime.datetime(2011, 11, 7)
 
     for user in users:
         logs = MakahikiLog.objects.filter(remote_user=user.username,
@@ -100,8 +100,8 @@ def calculate_sessions():
     counter = 1
     user_count = users.count()
     users_file.write(SESSION_HEADER)
-    start_date = datetime.datetime(2011, 10, 17).strftime("%Y-%m-%d %H:%M:%S")
-    end_date = datetime.datetime(2011, 11, 7).strftime("%Y-%m-%d %H:%M:%S")
+    start_date = datetime.datetime(2011, 10, 17)
+    end_date = datetime.datetime(2011, 11, 7)
 
     for user in users:
         logs = MakahikiLog.objects.filter(

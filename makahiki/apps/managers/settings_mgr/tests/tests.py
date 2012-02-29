@@ -25,23 +25,23 @@ def setUp(self):
 
     self.current_round = "Round 2"
 
-    start = datetime.date.today() - datetime.timedelta(days=7)
+    start = datetime.datetime.today() - datetime.timedelta(days=7)
     end1 = start + datetime.timedelta(days=6)
-    start2 = datetime.date.today()
+    start2 = datetime.datetime.today()
     end2 = start2 + datetime.timedelta(days=6)
 
     settings.COMPETITION_ROUNDS = {
         "Round 1": {
-            "start": start.strftime("%Y-%m-%d %H:%M:%S"),
-            "end": end1.strftime("%Y-%m-%d %H:%M:%S"),
+            "start": start,
+            "end": end1,
             },
         "Round 2": {
-            "start": start2.strftime("%Y-%m-%d %H:%M:%S"),
-            "end": end2.strftime("%Y-%m-%d %H:%M:%S"),
+            "start": start2,
+            "end": end2,
             },
         }
 
-    settings.COMPETITION_START = start.strftime("%Y-%m-%d %H:%M:%S")
+    settings.COMPETITION_START = start
     settings.COMPETITION_END = (end2 + datetime.timedelta(days=7)).strftime(
         "%Y-%m-%d %H:%M:%S")
 
@@ -69,9 +69,9 @@ def testRoundInfo(self):
 
     self.assertEqual(response.context["ROUNDS"], expected_info,
         "Expected %s but got %s" % (expected_info, response.context["ROUNDS"]))
-    self.assertEqual(response.context["CURRENT_ROUND"], self.current_round,
+    self.assertEqual(response.context["CURRENT_ROUND_INFO"]["name"], self.current_round,
         "Expected %s but got %s" % (
-            self.current_round, response.context["CURRENT_ROUND"]))
+            self.current_round, response.context["CURRENT_ROUND_INFO"]["name"]))
 
 
 def tearDown(self):
@@ -87,13 +87,13 @@ class BaseUnitTestCase(TestCase):
         """Tests that the current round retrieval is correct."""
         saved_rounds = settings.COMPETITION_ROUNDS
         current_round = "Round 1"
-        start = datetime.date.today() - datetime.timedelta(days=3)
+        start = datetime.datetime.today() - datetime.timedelta(days=3)
         end = start + datetime.timedelta(days=7)
 
         settings.COMPETITION_ROUNDS = {
             "Round 1": {
-                "start": start.strftime("%Y-%m-%d %H:%M:%S"),
-                "end": end.strftime("%Y-%m-%d %H:%M:%S"),
+                "start": start,
+                "end": end,
                 },
             }
 
@@ -106,8 +106,8 @@ class BaseUnitTestCase(TestCase):
 
         settings.COMPETITION_ROUNDS = {
             "Round 1": {
-                "start": start.strftime("%Y-%m-%d %H:%M:%S"),
-                "end": end.strftime("%Y-%m-%d %H:%M:%S"),
+                "start": start,
+                "end": end,
                 },
             }
 

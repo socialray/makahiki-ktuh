@@ -3,12 +3,12 @@
 
 {% if team and team.group %}
 {% cache 600 infobar team.name %}
-{% if CURRENT_ROUND and CURRENT_ROUND != 'Overall' %}
+{% if CURRENT_ROUND_INFO and CURRENT_ROUND_INFO.name != 'Overall' %}
 <!-- First slideshow element -->
 <div id="header-team-overall-rank1">
   <div {% get_id_and_classes "header-team-points" %}>
     <h3>{{team.current_round_points}}</h3>
-    <div {% get_id_and_classes "header-text" %}>{{COMPETITION_POINT_LABEL}}s in {{CURRENT_ROUND.title}}</div>
+    <div {% get_id_and_classes "header-text" %}>{{COMPETITION_POINT_LABEL}}s in {{CURRENT_ROUND_INFO.name}}</div>
   </div>
   <div {% get_id_and_classes "header-team-rank" %}>
     <h3>#{{team.current_round_rank}}</h3>
@@ -20,7 +20,7 @@
 <div id="header-team-overall-rank2" style="display:none">
   <div {% get_id_and_classes "header-team-energy" %}>
     <h3 id="round-energy-value"></h3>
-     <div {% get_id_and_classes "header-text" %}>kWh used in {{CURRENT_ROUND.title}}</div>
+     <div {% get_id_and_classes "header-text" %}>kWh used in {{CURRENT_ROUND_INFO.name}}</div>
   </div>
   <div {% get_id_and_classes "header-team-rank" %}>
     <h3 id="round-energy-rank"></h3> 
@@ -30,7 +30,7 @@
 {% endif %}
 {% endif %}
 
-<div id="header-team-overall-rank3" {% if CURRENT_ROUND %}style="display:none"{% endif %}>
+<div id="header-team-overall-rank3" {% if CURRENT_ROUND_INFO %}style="display:none"{% endif %}>
   <div {% get_id_and_classes "header-team-points" %}>
     <h3>{{team.points}}</h3>
     <div {% get_id_and_classes "header-text" %}>{{COMPETITION_POINT_LABEL}}s overall</div>

@@ -300,9 +300,9 @@
       "daily_visit_count": 3, 
       "last_awarded_submission": "2011-06-27 14:05:39", 
       "completion_date": "2011-06-02 14:52:23", 
-      "setup_complete": true, 
+      "setup_complete": false, 
       "contact_text": "", 
-      "points": 27, 
+      "points": 0, 
       "contact_email": "gelee@hawaii.edu", 
       "user": 1, 
       "contact_carrier": null, 
@@ -323,9 +323,9 @@
       "daily_visit_count": 1, 
       "last_awarded_submission": "2011-04-28 09:54:47", 
       "completion_date": "2011-06-02 14:52:23", 
-      "setup_complete": true, 
+      "setup_complete": false, 
       "contact_text": "808-387-6663", 
-      "points": 33, 
+      "points": 0, 
       "contact_email": "johnson@hawaii.edu", 
       "user": 2, 
       "contact_carrier": "verizon", 
@@ -347,9 +347,9 @@
       "daily_visit_count": 1, 
       "last_awarded_submission": "2011-07-22 18:15:11", 
       "completion_date": "2011-07-05 14:53:43", 
-      "setup_complete": true, 
+      "setup_complete": false, 
       "contact_text": "", 
-      "points": 153, 
+      "points": 0, 
       "contact_email": "", 
       "user": 3,
       "contact_carrier": null,
@@ -376,7 +376,7 @@
             "contact_email": "",
             "user": 4,
             "contact_carrier": null,
-            "setup_profile": false,
+            "setup_profile": true,
             "enable_help": true
         }
     },
@@ -393,9 +393,9 @@
             "daily_visit_count": 4,
             "last_awarded_submission": "2011-06-30 11:06:04",
             "completion_date": "2011-06-30 10:33:23",
-            "setup_complete": true,
+            "setup_complete": false,
             "contact_text": "",
-            "points": 7,
+            "points": 0,
             "contact_email": "",
             "user": 5,
             "contact_carrier": null,
@@ -417,9 +417,9 @@
             "daily_visit_count": 1,
             "last_awarded_submission": "2011-04-23 15:32:19",
             "completion_date": "2011-06-02 14:52:23",
-            "setup_complete": true,
+            "setup_complete": false,
             "contact_text": "",
-            "points": 25,
+            "points": 0,
             "contact_email": "",
             "user": 6,
             "contact_carrier": null,
@@ -440,9 +440,9 @@
             "daily_visit_count": 1,
             "last_awarded_submission": "2011-04-23 15:32:19",
             "completion_date": "2011-06-02 14:52:23",
-            "setup_complete": true,
+            "setup_complete": false,
             "contact_text": "",
-            "points": 25,
+            "points": 0,
             "contact_email": "",
             "user": 7,
             "contact_carrier": null,
@@ -463,9 +463,9 @@
             "daily_visit_count": 1,
             "last_awarded_submission": "2011-04-23 15:32:19",
             "completion_date": "2011-06-02 14:52:23",
-            "setup_complete": true,
+            "setup_complete": false,
             "contact_text": "",
-            "points": 25,
+            "points": 0,
             "contact_email": "",
             "user": 8,
             "contact_carrier": null,
@@ -486,9 +486,9 @@
             "daily_visit_count": 1,
             "last_awarded_submission": "2011-04-23 15:32:19",
             "completion_date": "2011-06-02 14:52:23",
-            "setup_complete": true,
+            "setup_complete": false,
             "contact_text": "",
-            "points": 25,
+            "points":0,
             "contact_email": "",
             "user": 9,
             "contact_carrier": null,
@@ -509,9 +509,9 @@
             "daily_visit_count": 1,
             "last_awarded_submission": "2011-04-23 15:32:19",
             "completion_date": "2011-06-02 14:52:23",
-            "setup_complete": true,
+            "setup_complete": false,
             "contact_text": "",
-            "points": 25,
+            "points":0,
             "contact_email": "",
             "user": 10,
             "contact_carrier": null,
@@ -532,9 +532,9 @@
             "daily_visit_count": 1,
             "last_awarded_submission": "2011-04-23 15:32:19",
             "completion_date": "2011-06-02 14:52:23",
-            "setup_complete": true,
+            "setup_complete": false,
             "contact_text": "",
-            "points": 25,
+            "points":0,
             "contact_email": "",
             "user": 11,
             "contact_carrier": null,
@@ -555,9 +555,9 @@
             "daily_visit_count": 1,
             "last_awarded_submission": "2011-04-23 15:32:19",
             "completion_date": "2011-06-02 14:52:23",
-            "setup_complete": true,
+            "setup_complete": false,
             "contact_text": "",
-            "points": 25,
+            "points":0,
             "contact_email": "",
             "user": 12,
             "contact_carrier": null,
@@ -578,9 +578,9 @@
             "daily_visit_count": 1,
             "last_awarded_submission": "2011-04-23 15:32:19",
             "completion_date": "2011-06-02 14:52:23",
-            "setup_complete": true,
+            "setup_complete": false,
             "contact_text": "",
-            "points": 25,
+            "points":0,
             "contact_email": "",
             "user": 13,
             "contact_carrier": null,
@@ -601,9 +601,9 @@
             "daily_visit_count": 1,
             "last_awarded_submission": "2011-04-23 15:32:19",
             "completion_date": "2011-06-02 14:52:23",
-            "setup_complete": true,
+            "setup_complete": false,
             "contact_text": "",
-            "points": 25,
+            "points":0,
             "contact_email": "",
             "user": 14,
             "contact_carrier": null,
@@ -624,9 +624,9 @@
             "daily_visit_count": 1,
             "last_awarded_submission": "2011-04-23 15:32:19",
             "completion_date": "2011-06-02 14:52:23",
-            "setup_complete": true,
+            "setup_complete": false,
             "contact_text": "",
-            "points": 25,
+            "points":0,
             "contact_email": "",
             "user": 15,
             "contact_carrier": null,
@@ -647,314 +647,14 @@
       "daily_visit_count": 3, 
       "last_awarded_submission": "2012-02-20 14:05:39", 
       "completion_date": "2012-02-18 13:12:48", 
-      "setup_complete": true, 
+      "setup_complete": false, 
       "contact_text": "", 
-      "points": 5, 
+      "points": 0,
       "contact_email": "cammymoore07@gmail.com", 
       "user": 20, 
       "contact_carrier": null, 
       "setup_profile": true, 
       "enable_help": true
     }
-  }, 
-  {
-    "pk": 1,
-    "model": "score_mgr.scoreboardentry",
-    "fields": {
-      "profile": 1,
-      "round_name": "Round 1",
-      "points": 27,
-      "last_awarded_submission": "2011-06-27 14:05:39"
-    }
-  },
-  {
-    "pk": 2,
-    "model": "score_mgr.scoreboardentry",
-    "fields": {
-      "profile": 1,
-      "round_name": "Round 2",
-      "points": 29,
-      "last_awarded_submission": "2011-04-19 15:35:00"
-    }
-  },
-  {
-    "pk": 3,
-    "model": "score_mgr.scoreboardentry",
-    "fields": {
-      "profile": 2,
-      "round_name": "Round 1",
-      "points": 21,
-      "last_awarded_submission": "2011-01-22 23:59:00"
-    }
-  },
-  {
-    "pk": 4,
-    "model": "score_mgr.scoreboardentry",
-    "fields": {
-      "profile": 2,
-      "round_name": "Round 2",
-      "points": 25,
-      "last_awarded_submission": "2011-01-22 23:59:00"
-    }
-  },
-  {
-    "pk": 5,
-    "model": "score_mgr.scoreboardentry",
-    "fields": {
-      "profile": 3,
-      "round_name": "Round 1",
-      "points": 19,
-      "last_awarded_submission": "2011-01-22 23:59:00"
-    }
-  },
-  {
-    "pk": 6,
-    "model": "score_mgr.scoreboardentry",
-    "fields": {
-      "profile": 3,
-      "round_name": "Round 2",
-      "points": 2,
-      "last_awarded_submission": "2011-01-23 00:00:00"
-    }
-  },
-  {
-    "pk": 7,
-    "model": "score_mgr.scoreboardentry",
-    "fields": {
-      "profile": 4,
-      "round_name": "Round 1",
-      "points": 4,
-      "last_awarded_submission": "2011-01-24 00:00:00"
-    }
-  },
-  {
-    "pk": 8,
-    "model": "score_mgr.scoreboardentry",
-    "fields": {
-      "profile": 4,
-      "round_name": "Round 2",
-      "points": 6,
-      "last_awarded_submission": "2011-01-21 00:00:00"
-    }
-  },
-  {
-    "pk": 9,
-    "model": "score_mgr.scoreboardentry",
-    "fields": {
-      "profile": 5,
-      "round_name": "Round 1",
-      "points": 2,
-      "last_awarded_submission": "2011-01-24 00:00:00"
-    }
-  },
-  {
-    "pk": 10,
-    "model": "score_mgr.scoreboardentry",
-    "fields": {
-      "profile": 5,
-      "round_name": "Round 2",
-      "points": 6,
-      "last_awarded_submission": "2011-01-22 23:59:00"
-    }
-  },
-  {
-    "pk": 11,
-    "model": "score_mgr.scoreboardentry",
-    "fields": {
-      "profile": 6,
-      "round_name": "Round 1",
-      "points": 17,
-      "last_awarded_submission": "2011-01-22 23:59:00"
-    }
-  },
-  {
-    "pk": 12,
-    "model": "score_mgr.scoreboardentry",
-    "fields": {
-      "profile": 6,
-      "round_name": "Round 2",
-      "points": 2,
-      "last_awarded_submission": "2011-01-23 00:00:00"
-    }
-  },
-  {
-    "pk": 13,
-    "model": "score_mgr.scoreboardentry",
-    "fields": {
-      "profile": 7,
-      "round_name": "Round 1",
-      "points": 7,
-      "last_awarded_submission": "2011-01-22 23:59:00"
-    }
-  },
-  {
-    "pk": 14,
-    "model": "score_mgr.scoreboardentry",
-    "fields": {
-      "profile": 7,
-      "round_name": "Round 2",
-      "points": 27,
-      "last_awarded_submission": "2011-01-22 23:59:00"
-    }
-  },
-  {
-    "pk": 15,
-    "model": "score_mgr.scoreboardentry",
-    "fields": {
-      "profile": 8,
-      "round_name": "Round 1",
-      "points": 2,
-      "last_awarded_submission": "2011-01-23 00:00:00"
-    }
-  },
-  {
-    "pk": 16,
-    "model": "score_mgr.scoreboardentry",
-    "fields": {
-      "profile": 8,
-      "round_name": "Round 2",
-      "points": 7,
-      "last_awarded_submission": "2011-01-22 23:59:00"
-    }
-  },
-  {
-    "pk": 17,
-    "model": "score_mgr.scoreboardentry",
-    "fields": {
-      "profile": 9,
-      "round_name": "Round 1",
-      "points": 27,
-      "last_awarded_submission": "2011-01-22 23:59:00"
-    }
-  },
-  {
-    "pk": 18,
-    "model": "score_mgr.scoreboardentry",
-    "fields": {
-      "profile": 9,
-      "round_name": "Round 2",
-      "points": 2,
-      "last_awarded_submission": "2011-01-23 00:00:00"
-    }
-  },
-    {
-        "pk": 19,
-        "model": "score_mgr.scoreboardentry",
-        "fields": {
-            "profile": 10,
-            "round_name": "Round 1",
-            "points": 2,
-            "last_awarded_submission": "2011-01-23 00:00:00"
-        }
-    },
-    {
-        "pk": 20,
-        "model": "score_mgr.scoreboardentry",
-        "fields": {
-            "profile": 10,
-            "round_name": "Round 2",
-            "points": 2,
-            "last_awarded_submission": "2011-01-23 00:00:00"
-        }
-    },
-    {
-        "pk": 21,
-        "model": "score_mgr.scoreboardentry",
-        "fields": {
-            "profile": 11,
-            "round_name": "Round 1",
-            "points": 2,
-            "last_awarded_submission": "2011-01-23 00:00:00"
-        }
-    },
-    {
-        "pk": 22,
-        "model": "score_mgr.scoreboardentry",
-        "fields": {
-            "profile": 11,
-            "round_name": "Round 2",
-            "points": 2,
-            "last_awarded_submission": "2011-01-23 00:00:00"
-        }
-    },
-    {
-        "pk": 23,
-        "model": "score_mgr.scoreboardentry",
-        "fields": {
-            "profile": 12,
-            "round_name": "Round 1",
-            "points": 2,
-            "last_awarded_submission": "2011-01-23 00:00:00"
-        }
-    },
-    {
-        "pk": 24,
-        "model": "score_mgr.scoreboardentry",
-        "fields": {
-            "profile": 12,
-            "round_name": "Round 2",
-            "points": 2,
-            "last_awarded_submission": "2011-01-23 00:00:00"
-        }
-    },
-    {
-        "pk": 25,
-        "model": "score_mgr.scoreboardentry",
-        "fields": {
-            "profile": 13,
-            "round_name": "Round 1",
-            "points": 2,
-            "last_awarded_submission": "2011-01-23 00:00:00"
-        }
-    },
-    {
-        "pk": 26,
-        "model": "score_mgr.scoreboardentry",
-        "fields": {
-            "profile": 13,
-            "round_name": "Round 2",
-            "points": 2,
-            "last_awarded_submission": "2011-01-23 00:00:00"
-        }
-    },
-    {
-        "pk": 27,
-        "model": "score_mgr.scoreboardentry",
-        "fields": {
-            "profile": 14,
-            "round_name": "Round 1",
-            "points": 2,
-            "last_awarded_submission": "2011-01-23 00:00:00"
-        }
-    },
-    {
-        "pk": 28,
-        "model": "score_mgr.scoreboardentry",
-        "fields": {
-            "profile": 14,
-            "round_name": "Round 2",
-            "points": 2,
-            "last_awarded_submission": "2011-01-23 00:00:00"
-        }
-    },
-    {
-        "pk": 29,
-        "model": "score_mgr.scoreboardentry",
-        "fields": {
-            "profile": 15,
-            "round_name": "Round 1",
-            "points": 2,
-            "last_awarded_submission": "2011-01-23 00:00:00"
-        }
-    },
-    {
-        "pk": 30,
-        "model": "score_mgr.scoreboardentry",
-        "fields": {
-            "profile": 15,
-            "round_name": "Round 2",
-            "points": 2,
-            "last_awarded_submission": "2011-01-23 00:00:00"
-        }
-    }
+  }
 ]

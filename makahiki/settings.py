@@ -10,20 +10,20 @@ import os.path
 import posixpath
 import types
 
+SITE_ID = 1
+
 ##############
 # DB settings
 ##############
 DATABASES = {
     'default': {
-        # use 'postgresql_psycopg2', 'postgresql', 'mysql',
-        # 'sqlite3' or 'oracle'.
+        # use 'postgresql_psycopg2', 'postgresql', 'mysql', or 'oracle'.
         'ENGINE': 'django.db.backends.sqlite3',
         'NAME': 'dev.db',  # Or path to database file if using sqlite3.
         'USER': '',  # Not used with sqlite3.
         'PASSWORD': '',  # Not used with sqlite3.
-        'HOST': '',  # Set to empty string for localhost. Not used with
-        # sqlite3.
-        'PORT': '',  # Set to empty string for default. Not used with sqlite3.
+        'HOST': '',  # Set to empty string for localhost. Not used in sqlite3.
+        'PORT': '',  # Set to empty string for default. Not used in sqlite3.
     }
 }
 
@@ -57,10 +57,6 @@ MEDIA_ROOT = os.path.join(PROJECT_ROOT, 'site_media', 'media')
 # URL that handles the media served from MEDIA_ROOT.
 # Example: "http://media.lawrence.com"
 MEDIA_URL = '/site_media/media/'
-
-# Location to save the files used for confirming activities (if enabled).
-# Location is relative to MEDIA_ROOT.
-ACTIVITY_FILE_DIR = "activities"
 
 # Absolute path to the directory that holds static files like app media.
 # Example: "/home/media/media.lawrence.com/apps/"
@@ -141,6 +137,11 @@ AUTHENTICATION_BACKENDS = (
     'managers.auth_mgr.models.MakahikiCASBackend',
     )
 
+AUTH_PROFILE_MODULE = 'player_mgr.Profile'
+
+###################
+# Authentication
+###################
 CAS_REDIRECT_URL = '/home'
 CAS_IGNORE_REFERER = True
 
@@ -203,99 +204,9 @@ SOUTH_TESTS_MIGRATE = False
 # Use Nose as the test runner.
 TEST_RUNNER = 'django_nose.NoseTestSuiteRunner'
 
-################
-# DEBUG settings
-################
-DEBUG = True
-TEMPLATE_DEBUG = DEBUG
-EMAIL_DEBUG = DEBUG
-
-# serve media through django.views.static.serve.
-SERVE_MEDIA = DEBUG
-
-##########################
-# MISC
-#########################
-EMAIL_CONFIRMATION_DAYS = 2
-
-# Permissions for large uploaded files.
-FILE_UPLOAD_PERMISSIONS = 0644
-
-# If you set this to False, Django will make some optimizations so as not
-# to load the internationalization machinery.
-USE_I18N = True
-
-MARKUP_FILTER_FALLBACK = 'none'
-MARKUP_CHOICES = (
-    ('restructuredtext', u'reStructuredText'),
-    ('textile', u'Textile'),
-    ('markdown', u'Markdown'),
-    ('creole', u'Creole'),
-    )
-WIKI_MARKUP_CHOICES = MARKUP_CHOICES
-
-AUTH_PROFILE_MODULE = 'player_mgr.Profile'
-# NOTIFICATION_LANGUAGE_MODULE = 'account.Account'
-
-# ACCOUNT_OPEN_SIGNUP is not used by this project, but it acts as if it was
-# set to False
-ACCOUNT_OPEN_SIGNUP = False
-ACCOUNT_REQUIRED_EMAIL = False
-ACCOUNT_EMAIL_VERIFICATION = False
-
-################################
-# Load additional settings files
-################################
-try:
-    from game_settings import *  # pylint: disable=W0401,W0614
-except ImportError:
-    pass
-
-try:
-    from page_settings import *  # pylint: disable=W0401,W0614
-except ImportError:
-    pass
-
-LOCAL_INSTALLED_APPS = ()
-try:
-    from local_settings import *  # pylint: disable=W0401,W0614, F0401
-except ImportError:
-    pass
-
-try:
-    INSTALLED_APPS += LOCAL_INSTALLED_APPS  # pylint: disable=E0602
-except NameError:
-    pass
-
-
-#########################################
-# code to include the INSTALL_WIDGET_APPS
-#########################################
-def get_widget_apps(all_page_settings):
-    apps = ()
-    """ Returns a list of widget names defined in page_settings.py. """
-    for page in all_page_settings.keys():
-        default_layout = all_page_settings[page]["LAYOUTS"]["DEFAULT"]
-        for row in default_layout:
-            for columns in row:
-                if isinstance(columns, types.TupleType):
-                    if not columns[0] in apps:
-                        apps += ("widgets.%s" % columns[0], )
-                else:
-                    if not columns in apps:
-                        apps += ("widgets.%s" % columns, )
-                    break
-
-    return apps
-
-INSTALLED_WIDGET_APPS = get_widget_apps(PAGE_SETTINGS)
-INSTALLED_APPS += INSTALLED_WIDGET_APPS
-
 ##############################
 # LOGGING settings
 ##############################
-# Logging is defined down here to give local_settings a chance to override
-# the default log file location.
 LOGGING = {
     'version': 1,
     'disable_existing_loggers': True,
@@ -346,3 +257,50 @@ LOGGING = {
             }
     }
 }
+
+##########################
+# MISC
+#########################
+# serve media through django.views.static.serve.
+SERVE_MEDIA = True
+
+EMAIL_CONFIRMATION_DAYS = 2
+
+# Permissions for large uploaded files.
+FILE_UPLOAD_PERMISSIONS = 0644
+
+# If you set this to False, Django will make some optimizations so as not
+# to load the internationalization machinery.
+USE_I18N = True
+
+################################
+# Load additional settings files
+################################
+try:
+    from page_settings import *  # pylint: disable=W0401,W0614
+except ImportError:
+    pass
+
+
+#########################################
+# code to include the INSTALL_WIDGET_APPS
+#########################################
+def get_widget_apps(all_page_settings):
+    """ Returns a list of widget names defined in page_settings.py. """
+    apps = ()
+    for page in all_page_settings.keys():
+        default_layout = all_page_settings[page]["LAYOUTS"]["DEFAULT"]
+        for row in default_layout:
+            for columns in row:
+                if isinstance(columns, types.TupleType):
+                    if not columns[0] in apps:
+                        apps += ("widgets.%s" % columns[0], )
+                else:
+                    if not columns in apps:
+                        apps += ("widgets.%s" % columns, )
+                    break
+
+    return apps
+
+INSTALLED_WIDGET_APPS = get_widget_apps(PAGE_SETTINGS)
+INSTALLED_APPS += INSTALLED_WIDGET_APPS

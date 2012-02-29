@@ -38,7 +38,6 @@ from managers.player_mgr.models import *
 from managers.player_mgr import *
 from widgets.smartgrid.models import *
 from widgets.notifications.models import UserNotification, NoticeTemplate
-from managers.settings_mgr import in_competition, get_round_info
 from widgets.energy_goal.models import TeamEnergyGoal
 from managers.team_mgr.models import Team
 

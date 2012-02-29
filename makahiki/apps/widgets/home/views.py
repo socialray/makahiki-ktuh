@@ -23,6 +23,7 @@ from django.core.urlresolvers import reverse
 
 from lib.avatar.models import avatar_file_path, Avatar
 import lib.facebook_api.facebook as facebook
+from managers.settings_mgr import in_competition
 from widgets.home.forms import  ProfileForm, ReferralForm
 
 
@@ -38,23 +39,15 @@ def supply(request, page_name):
 @login_required
 def restricted(request):
     """handle restricted url"""
-    today = datetime.datetime.today()
-    start = datetime.datetime.strptime(settings.COMPETITION_START,
-                                       "%Y-%m-%d %H:%M:%S")
-    end = datetime.datetime.strptime(settings.COMPETITION_END,
-                                     "%Y-%m-%d %H:%M:%S")
 
-    before = False
     # If we are in the competition, bring them back to the home page.
-    if start < today < end:
+    if in_competition():
         return HttpResponseRedirect(reverse('home_index'))
-    if today < start:
-        before = True
-
+    start = settings.COMPETITION_START
     return render_to_response("widgets/home/templates/restricted.html", {
-        "before": before,
+        "before": datetime.datetime.today() < start,
         "start": start,
-        "end": end,
+        "end": settings.COMPETITION_END,
         }, context_instance=RequestContext(request))
 
 

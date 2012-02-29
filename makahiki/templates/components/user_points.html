@@ -2,12 +2,12 @@
 {% load cache %}
 
 {% cache 600 infobar request.user.username %}
-{% if CURRENT_ROUND and CURRENT_ROUND != 'Overall' %}
+{% if CURRENT_ROUND_INFO and CURRENT_ROUND_INFO.name != 'Overall' %}
 <!-- First slideshow element -->
 <div id="header-user-overall-rank1">
   <div {% get_id_and_classes "header-user-points" %}>
     <h3>{{profile.current_round_points}}</h3>
-    <div {% get_id_and_classes "header-text" %}>{{COMPETITION_POINT_LABEL}}s in {{CURRENT_ROUND.title}}</div>
+    <div {% get_id_and_classes "header-text" %}>{{COMPETITION_POINT_LABEL}}s in {{CURRENT_ROUND_INFO.name}}</div>
   </div>
   <div {% get_id_and_classes "header-user-rank" %}>
     <h3>#{{profile.current_round_team_rank}}</h3>
@@ -18,7 +18,7 @@
 <div id="header-user-overall-rank2" style="display:none">
   <div {% get_id_and_classes "header-user-points" %}>
     <h3>{{profile.current_round_points}}</h3>
-    <div {% get_id_and_classes "header-text" %}>{{COMPETITION_POINT_LABEL}}s in {{CURRENT_ROUND.title}}</div>
+    <div {% get_id_and_classes "header-text" %}>{{COMPETITION_POINT_LABEL}}s in {{CURRENT_ROUND_INFO.name}}</div>
   </div>
   <div {% get_id_and_classes "header-user-rank" %}>
     <h3>#{{profile.current_round_overall_rank}}</h3>
@@ -28,7 +28,7 @@
 {% endif %}
 
 <!-- Third slideshow element -->
-<div id="header-user-team-rank3" {% if CURRENT_ROUND %}style="display:none"{% endif %}>
+<div id="header-user-team-rank3" {% if CURRENT_ROUND_INFO %}style="display:none"{% endif %}>
   <div {% get_id_and_classes "header-user-points" %}>
     <h3>{{profile.points}}</h3>
     <div {% get_id_and_classes "header-text" %}>{{COMPETITION_POINT_LABEL}}s</div>

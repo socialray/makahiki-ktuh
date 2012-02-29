@@ -4,9 +4,9 @@ This middleware class handles login check and tracking for every user login.
 
 import datetime
 import re
-from django.conf import settings
 from django.core.urlresolvers import reverse
 from django.http import HttpResponseRedirect
+from managers.settings_mgr import in_competition
 
 
 class LoginMiddleware(object):
@@ -73,23 +73,13 @@ class LoginMiddleware(object):
         if request.user.is_authenticated():
             path = request.path
 
-            today = datetime.datetime.today()
-            start = datetime.datetime.strptime(settings.COMPETITION_START,
-                                               "%Y-%m-%d %H:%M:%S")
-            end = datetime.datetime.strptime(settings.COMPETITION_END,
-                                             "%Y-%m-%d %H:%M:%S")
-
             staff_user = request.user.is_staff or request.session.get('staff',
                                                                       False)
-
-            pattern = re.compile("^/"
-                                 "(m\/|home\/restricted|site_media|media|"
-                                 "favicon.ico)/")
-
-            if today < start and not staff_user and not pattern.match(path):
-                return HttpResponseRedirect(reverse("home_restricted"))
-
-            if today > end and not staff_user and not pattern.match(path):
-                return HttpResponseRedirect(reverse("home_restricted"))
-
+            if not staff_user:
+                pattern = re.compile("^/"
+                                     "(m\/|home\/restricted|site_media|media|"
+                                     "favicon.ico)/")
+                if not pattern.match(path):
+                    if not in_competition():
+                        return HttpResponseRedirect(reverse("home_restricted"))
         return None

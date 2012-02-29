@@ -38,11 +38,9 @@ class CompetitionMiddlewareTestCase(TestCase):
         """
         Check that the user is redirected before the competition starts.
         """
-        start = datetime.date.today() + datetime.timedelta(days=1)
-        settings.COMPETITION_START = start.strftime("%Y-%m-%d %H:%M:%S")
-        settings.COMPETITION_END = (start +
-                                    datetime.timedelta(days=7)).\
-                                    strftime("%Y-%m-%d %H:%M:%S")
+        start = datetime.datetime.today() + datetime.timedelta(days=1)
+        settings.COMPETITION_START = start
+        settings.COMPETITION_END = start + datetime.timedelta(days=7)
 
         response = self.client.get(reverse("home_index"), follow=True)
         self.failUnlessEqual(response.status_code, 200)
@@ -54,11 +52,9 @@ class CompetitionMiddlewareTestCase(TestCase):
         """
         Check that the user is redirected after the competition ends.
         """
-        start = datetime.date.today() - datetime.timedelta(days=8)
-        settings.COMPETITION_START = start.strftime("%Y-%m-%d %H:%M:%S")
-        settings.COMPETITION_END = (start +
-                                    datetime.timedelta(days=7)).\
-                                    strftime("%Y-%m-%d %H:%M:%S")
+        start = datetime.datetime.today() - datetime.timedelta(days=8)
+        settings.COMPETITION_START = start
+        settings.COMPETITION_END = start - datetime.timedelta(days=7)
 
         response = self.client.get(reverse("home_index"), follow=True)
         self.failUnlessEqual(response.status_code, 200)
@@ -84,11 +80,6 @@ class SetupWizardFunctionalTestCase(TestCase):
         response = self.client.get(reverse("home_index"))
         self.failUnlessEqual(response.status_code, 200)
         self.assertContains(response, "Introduction: Step 1 of 6")
-
-        # Check that the user is redirected to the setup wizard even if they
-        # visit another page
-        response = self.client.get(reverse("profile_index"))
-        #self.assertRedirects(response, reverse("home_index"))
 
     def testSetupTerms(self):
         """Check that we can access the terms page of the setup wizard."""

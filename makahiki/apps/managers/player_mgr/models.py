@@ -273,10 +273,8 @@ class Profile(models.Model):
 
         # Find which round this belongs to.
         for key in rounds:
-            start = datetime.datetime.strptime(rounds[key]["start"],
-                                               "%Y-%m-%d %H:%M:%S")
-            end = datetime.datetime.strptime(rounds[key]["end"],
-                                             "%Y-%m-%d %H:%M:%S")
+            start = rounds[key]["start"]
+            end = rounds[key]["end"]
             if submission_date >= start and submission_date < end:
                 return key
 
@@ -327,10 +325,6 @@ def create_profile(sender, instance=None, **kwargs):
     """
     _ = sender
     if (kwargs.get('created', True) and not kwargs.get('raw', False)):
-        profile, _ = Profile.objects.get_or_create(user=instance,
-                                                   name=instance.username)
-        for key in settings.COMPETITION_ROUNDS.keys():
-            ScoreboardEntry.objects.get_or_create(
-                profile=profile, round_name=key)
+        Profile.objects.get_or_create(user=instance, name=instance.username)
 
 post_save.connect(create_profile, sender=User)

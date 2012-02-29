@@ -432,7 +432,7 @@ class ProfileUnitTests(TestCase):
             "Check that the user has 10 more points in the current round.")
 
         profile.add_points(10,
-            datetime.datetime.today() - datetime.timedelta(days=1), "Test")
+            datetime.datetime.today() - datetime.timedelta(days=2), "Test")
 
         self.assertEqual(profile.current_round_points(),
                          points + 10,

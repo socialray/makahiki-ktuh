@@ -1,1 +1,1 @@
-pep8 --exclude=lib apps
+pep8 --ignore=E501 --exclude=lib apps
