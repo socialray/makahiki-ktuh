@@ -17,7 +17,7 @@ try:
 except ImportError:
     import Image
 
-from lib.avatar import AVATAR_STORAGE_DIR, AVATAR_RESIZE_METHOD
+from apps.lib.avatar import AVATAR_STORAGE_DIR, AVATAR_RESIZE_METHOD
 
 def avatar_file_path(instance=None, filename=None, user=None):
     user = user or instance.user

@@ -8,10 +8,10 @@ from django.conf import settings
 from django.test import TestCase
 from django.contrib.auth.models import User
 from django.db import IntegrityError
-from test_utils import TestUtils
+from apps.test_utils import TestUtils
 
-from managers.team_mgr.models import Group, Team
-from managers.player_mgr.models import Profile
+from apps.managers.team_mgr.models import Group, Team
+from apps.managers.player_mgr.models import Profile
 
 
 class ProfileLeadersTests(TestCase):

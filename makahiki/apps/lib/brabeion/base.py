@@ -1,5 +1,5 @@
-from lib.brabeion.models import BadgeAward
-from lib.brabeion.signals import badge_awarded
+from apps.lib.brabeion.models import BadgeAward
+from apps.lib.brabeion.signals import badge_awarded
 
 
 
@@ -31,7 +31,7 @@ class Badge(object):
         """
         assert "user" in state
         if self.async:
-            from lib.brabeion.tasks import AsyncBadgeAward
+            from apps.lib.brabeion.tasks import AsyncBadgeAward
             state = self.freeze(**state)
             AsyncBadgeAward.delay(self, state)
             return

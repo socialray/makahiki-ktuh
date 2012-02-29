@@ -34,12 +34,12 @@ setup_environ(settings_mod)
 
 sys.path.insert(0, join(settings.PROJECT_ROOT, "apps"))
 
-from managers.player_mgr.models import *
-from managers.player_mgr import *
-from widgets.smartgrid.models import *
-from widgets.notifications.models import UserNotification, NoticeTemplate
-from widgets.energy_goal.models import TeamEnergyGoal
-from managers.team_mgr.models import Team
+from apps.managers.player_mgr.models import *
+from apps.managers.player_mgr import *
+from apps.widgets.smartgrid.models import *
+from apps.widgets.notifications.models import UserNotification, NoticeTemplate
+from apps.widgets.energy_goal.models import TeamEnergyGoal
+from apps.managers.team_mgr.models import Team
 
 
 __EMAIL__ = settings.GDATA_EMAIL

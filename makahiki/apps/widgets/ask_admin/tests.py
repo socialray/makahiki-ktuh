@@ -7,7 +7,7 @@ from django.contrib.auth.models import User
 from django.core.urlresolvers import reverse
 from django.core import mail
 
-from managers.team_mgr.models import Team
+from apps.managers.team_mgr.models import Team
 
 
 class AskAdminFunctionalTests(TestCase):

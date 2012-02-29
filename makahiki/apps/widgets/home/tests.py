@@ -10,7 +10,7 @@ from django.core.urlresolvers import reverse
 from django.contrib.auth.models import User
 from django.conf import settings
 
-from managers.player_mgr.models import Profile
+from apps.managers.player_mgr.models import Profile
 
 
 class HomeFunctionalTestCase(TestCase):

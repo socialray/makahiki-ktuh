@@ -11,11 +11,11 @@ from django.db.models.signals import post_save
 from django.core.exceptions import ObjectDoesNotExist
 
 from django.contrib.localflavor.us.models import PhoneNumberField
-from managers.score_mgr.models import ScoreboardEntry, PointsTransaction
+from apps.managers.score_mgr.models import ScoreboardEntry, PointsTransaction
 
-from managers.team_mgr.models import Team
-from managers.settings_mgr import get_current_round
-from managers.cache_mgr.utils import invalidate_info_bar_cache
+from apps.managers.team_mgr.models import Team
+from apps.managers.settings_mgr import get_current_round
+from apps.managers.cache_mgr.utils import invalidate_info_bar_cache
 
 
 class Profile(models.Model):

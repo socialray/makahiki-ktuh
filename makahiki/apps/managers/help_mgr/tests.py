@@ -6,8 +6,8 @@ from django.test import TestCase
 from django.core.urlresolvers import reverse
 from django.contrib.auth.models import User
 
-from managers.team_mgr.models import Team
-from managers.help_mgr.models import HelpTopic
+from apps.managers.team_mgr.models import Team
+from apps.managers.help_mgr.models import HelpTopic
 
 
 class HelpFunctionalTestCase(TestCase):

@@ -28,8 +28,8 @@ sys.path.insert(0, join(settings.PROJECT_ROOT, "apps"))
 from django.contrib.auth.models import User
 
 from components.analytics.models import MakahikiLog
-from managers.score_mgr.models import ScoreboardEntry
-from managers.player_mgr.models import Profile
+from apps.managers.score_mgr.models import ScoreboardEntry
+from apps.managers.player_mgr.models import Profile
 
 
 def raffle_allocation():

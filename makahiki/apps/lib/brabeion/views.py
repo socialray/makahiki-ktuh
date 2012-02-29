@@ -4,8 +4,8 @@ from django.db.models import Count
 from django.shortcuts import render_to_response
 from django.template import RequestContext
 
-from lib.brabeion import badges
-from lib.brabeion.models import BadgeAward
+from apps.lib.brabeion import badges
+from apps.lib.brabeion.models import BadgeAward
 
 
 

@@ -1,7 +1,7 @@
 from django.core.management.base import NoArgsCommand
 
-from lib.avatar.models import Avatar
-from lib.avatar import AUTO_GENERATE_AVATAR_SIZES
+from apps.lib.avatar.models import Avatar
+from apps.lib.avatar import AUTO_GENERATE_AVATAR_SIZES
 
 class Command(NoArgsCommand):
     help = "Regenerates avatar thumbnails for the sizes specified in " +\

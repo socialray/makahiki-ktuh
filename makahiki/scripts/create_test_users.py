@@ -1,7 +1,7 @@
 from django.contrib.auth.models import User
 import datetime
 
-from managers.team_mgr.models import Team
+from apps.managers.team_mgr.models import Team
 
 
 def create_users():

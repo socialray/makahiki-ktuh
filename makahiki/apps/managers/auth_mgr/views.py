@@ -8,7 +8,7 @@ from django.shortcuts import get_object_or_404, render_to_response
 from django.template import RequestContext
 from django.http import HttpResponseRedirect
 
-from managers.auth_mgr.forms import LoginForm
+from apps.managers.auth_mgr.forms import LoginForm
 
 
 @user_passes_test(lambda u: u.is_staff, login_url="/account/cas/login")

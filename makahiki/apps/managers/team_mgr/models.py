@@ -8,7 +8,7 @@ from django.contrib.auth.models import User
 from django.template.defaultfilters import slugify
 from django.db.models import Sum, Max
 
-from managers.settings_mgr import get_current_round
+from apps.managers.settings_mgr import get_current_round
 
 # Create your models here.
 
@@ -113,7 +113,7 @@ class Team(models.Model):
     def rank(self, round_name=None):
         """Returns the rank of the team across all groups."""
         if round_name:
-            from managers.score_mgr.models import ScoreboardEntry
+            from apps.managers.score_mgr.models import ScoreboardEntry
 
             aggregate = ScoreboardEntry.objects.filter(
                 profile__team=self,
@@ -164,7 +164,7 @@ class Team(models.Model):
         """Returns the total number of points for the team.  Takes an
         optional parameter for a round."""
         if round_name:
-            from managers.player_mgr.models import ScoreboardEntry
+            from apps.managers.player_mgr.models import ScoreboardEntry
 
             dictionary = ScoreboardEntry.objects.filter(profile__team=self,
                 round_name=round_name).aggregate(Sum("points"))

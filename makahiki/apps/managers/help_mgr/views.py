@@ -9,7 +9,7 @@ from django.contrib.auth.decorators import login_required
 from django.shortcuts import get_object_or_404
 from django.http import  HttpResponse
 
-from managers.help_mgr.models import HelpTopic
+from apps.managers.help_mgr.models import HelpTopic
 
 
 @login_required

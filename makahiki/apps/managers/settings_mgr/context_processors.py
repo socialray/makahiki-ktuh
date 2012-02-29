@@ -3,9 +3,9 @@
  a template. It mainly retrieve the settings from settings files.
 """
 from django.conf import settings
-from managers.settings_mgr import get_current_round_info, in_competition
-from managers.player_mgr.models import Profile
-from managers.team_mgr.models import Team
+from apps.managers.settings_mgr import get_current_round_info, in_competition
+from apps.managers.player_mgr.models import Profile
+from apps.managers.team_mgr.models import Team
 
 
 def competition(request):

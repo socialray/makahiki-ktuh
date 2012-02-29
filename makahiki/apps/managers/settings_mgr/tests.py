@@ -7,10 +7,11 @@ import datetime
 from django.test import TestCase
 from django.core.urlresolvers import reverse
 from django.conf import settings
+from apps import test_utils
 
-from managers.settings_mgr import  get_current_round
-from templatetags.class_tags import insert_classes, get_id_and_classes
-from css_rules import default
+from apps.managers.settings_mgr import  get_current_round
+from apps.templatetags.class_tags import insert_classes, get_id_and_classes
+from apps.css_rules import default
 
 
 class ContextProcessorFunctionalTestCase(TestCase):
@@ -87,29 +88,14 @@ class BaseUnitTestCase(TestCase):
         """Tests that the current round retrieval is correct."""
         saved_rounds = settings.COMPETITION_ROUNDS
         current_round = "Round 1"
-        start = datetime.datetime.today() - datetime.timedelta(days=3)
-        end = start + datetime.timedelta(days=7)
 
-        settings.COMPETITION_ROUNDS = {
-            "Round 1": {
-                "start": start,
-                "end": end,
-                },
-            }
+        test_utils.set_competition_round()
 
         current = get_current_round()
         self.assertEqual(current, current_round,
             "Test that the current round is returned.")
 
-        start = datetime.date.today() - datetime.timedelta(days=14)
-        end = start + datetime.timedelta(days=7)
-
-        settings.COMPETITION_ROUNDS = {
-            "Round 1": {
-                "start": start,
-                "end": end,
-                },
-            }
+        test_utils.set_competition_round()
 
         current_round = get_current_round()
         self.assertTrue(current_round is None,

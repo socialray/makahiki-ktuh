@@ -21,10 +21,10 @@ from django.views.decorators.cache import never_cache
 from django.views.decorators.csrf import csrf_exempt
 from django.core.urlresolvers import reverse
 
-from lib.avatar.models import avatar_file_path, Avatar
-import lib.facebook_api.facebook as facebook
-from managers.settings_mgr import in_competition
-from widgets.home.forms import  ProfileForm, ReferralForm
+from apps.lib.avatar.models import avatar_file_path, Avatar
+import apps.lib.facebook_api.facebook as facebook
+from apps.managers.settings_mgr import in_competition
+from apps.widgets.home.forms import  ProfileForm, ReferralForm
 
 
 def supply(request, page_name):

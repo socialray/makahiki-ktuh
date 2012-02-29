@@ -4,7 +4,7 @@ admin for help widget models
 from django.contrib import admin
 from django import forms
 
-from managers.help_mgr.models import HelpTopic
+from apps.managers.help_mgr.models import HelpTopic
 
 
 class HelpAdminForm(forms.ModelForm):

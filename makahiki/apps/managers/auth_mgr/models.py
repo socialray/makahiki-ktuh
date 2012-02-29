@@ -2,7 +2,7 @@
 Makahiki specific CAS backend, as an additional AUTHENTICATION_BACKENDS.
 """
 from django.core.exceptions import ObjectDoesNotExist
-from lib.django_cas.backends import CASBackend, _verify
+from apps.lib.django_cas.backends import CASBackend, _verify
 from django.contrib.auth.models import User
 
 

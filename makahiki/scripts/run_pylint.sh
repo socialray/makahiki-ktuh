@@ -1,1 +1,1 @@
-cd apps; pylint --rcfile=../../pylint.rc managers widgets pages
+pylint --rcfile=../pylint.rc apps

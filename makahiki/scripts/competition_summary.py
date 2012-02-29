@@ -22,7 +22,7 @@ setup_environ(settings_mod)
 
 sys.path.insert(0, join(settings.PROJECT_ROOT, "apps"))
 
-from managers.team_mgr.models import Team
+from apps.managers.team_mgr.models import Team
 
 
 def competition_summary():

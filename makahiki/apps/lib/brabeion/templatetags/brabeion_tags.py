@@ -1,6 +1,6 @@
 from django import template
 
-from lib.brabeion.models import BadgeAward
+from apps.lib.brabeion.models import BadgeAward
 
 
 register = template.Library()

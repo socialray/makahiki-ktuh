@@ -7,7 +7,7 @@ import datetime
 from django.test import TestCase
 from django.contrib.auth.models import User
 
-from managers.player_mgr.models import PointsTransaction
+from apps.managers.player_mgr.models import PointsTransaction
 
 
 class PointsLogTest(TestCase):

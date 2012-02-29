@@ -2,7 +2,7 @@
 Player Manager Admin
 """
 from django.contrib import admin
-from managers.player_mgr.models import Profile
+from apps.managers.player_mgr.models import Profile
 
 
 class ProfileAdmin(admin.ModelAdmin):

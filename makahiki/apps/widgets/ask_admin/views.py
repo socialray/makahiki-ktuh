@@ -9,7 +9,7 @@ from django.core.mail.message import EmailMultiAlternatives
 from django.contrib.sites.models import Site
 from django.conf import settings
 
-from widgets.ask_admin.forms import FeedbackForm
+from apps.widgets.ask_admin.forms import FeedbackForm
 
 ADMINS = (("Makahiki Developers", "makahiki-dev@googlegroups.com"),)
 FROM_EMAIL = ADMINS[0][1]

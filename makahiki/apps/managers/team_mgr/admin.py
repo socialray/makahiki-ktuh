@@ -2,7 +2,7 @@
 team manager Admin
 """
 from django.contrib import admin
-from managers.team_mgr.models import Group, Team, Post
+from apps.managers.team_mgr.models import Group, Team, Post
 
 admin.site.register(Group)
 admin.site.register(Team)

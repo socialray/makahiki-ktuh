@@ -2,7 +2,7 @@
 views for Help Rule widget
 """
 
-from managers.help_mgr.models import HelpTopic
+from apps.managers.help_mgr.models import HelpTopic
 
 
 def supply(request, page_name):

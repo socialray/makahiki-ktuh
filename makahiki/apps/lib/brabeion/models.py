@@ -21,7 +21,7 @@ class BadgeAward(models.Model):
 
     @property
     def _badge(self):
-        from lib.brabeion import badges
+        from apps.lib.brabeion import badges
         return badges._registry[self.slug]
 
     @property

@@ -6,7 +6,7 @@ email, lounge.
 from django.core import management
 from django.contrib.auth.models import User
 from django.core.exceptions import ObjectDoesNotExist
-from managers.team_mgr.models import Team
+from apps.managers.team_mgr.models import Team
 from django.db.utils import IntegrityError
 
 

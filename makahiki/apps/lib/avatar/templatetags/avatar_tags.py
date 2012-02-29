@@ -5,7 +5,7 @@ from django.contrib.auth.models import User
 from django.utils.translation import ugettext as _
 from django.utils.hashcompat import md5_constructor
 
-from lib.avatar import AVATAR_DEFAULT_URL, AVATAR_GRAVATAR_BACKUP
+from apps.lib.avatar import AVATAR_DEFAULT_URL, AVATAR_GRAVATAR_BACKUP
 
 register = template.Library()
 

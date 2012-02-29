@@ -10,8 +10,8 @@ from django.contrib.auth.models import User
 from django.conf import settings
 from django.db.models import Sum, Max
 
-from test_utils import TestUtils
-from managers.team_mgr.models import Group, Team
+from apps.test_utils import TestUtils
+from apps.managers.team_mgr.models import Group, Team
 
 
 class DormUnitTestCase(TestCase):

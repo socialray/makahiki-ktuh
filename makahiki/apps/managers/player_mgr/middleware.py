@@ -6,7 +6,7 @@ import datetime
 import re
 from django.core.urlresolvers import reverse
 from django.http import HttpResponseRedirect
-from managers.settings_mgr import in_competition
+from apps.managers.settings_mgr import in_competition
 
 
 class LoginMiddleware(object):

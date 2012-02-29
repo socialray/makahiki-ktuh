@@ -7,7 +7,7 @@ from django import forms
 from django.conf import settings
 from django.contrib.auth.models import User
 
-from managers.player_mgr.models import Profile
+from apps.managers.player_mgr.models import Profile
 
 
 class FacebookForm(forms.Form):
