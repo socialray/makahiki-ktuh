@@ -1,6 +1,7 @@
 """Test Unitilities"""
 import datetime
 from django.conf import settings
+from apps.managers.settings_mgr.models import PageSettings
 
 
 class TestUtils:
@@ -16,3 +17,8 @@ class TestUtils:
                 "end": end,
                 },
             }
+
+    @staticmethod
+    def register_page_widget(page_name, widget_name):
+        """Register a widget with a page."""
+        PageSettings(name=page_name, widget=widget_name).save()

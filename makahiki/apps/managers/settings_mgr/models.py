@@ -96,3 +96,20 @@ class RoundSettings(models.Model):
 
     def __unicode__(self):
         return self.name
+
+
+class PageSettings(models.Model):
+    """Defines the page settings."""
+
+    name = models.CharField(
+        default="home",
+        help_text="The name of the page.",
+        max_length=50,)
+
+    widget = models.CharField(
+        default="home",
+        help_text="The name of the widget in the page.",
+        max_length=50,)
+
+    def __unicode__(self):
+        return self.name + " : " + self.widget

@@ -32,6 +32,7 @@ class AskAdminFunctionalTests(TestCase):
         """
         Test that an AJAX post to ask an admin sends an email.
         """
+
         response = self.client.post(reverse('ask_admin_feedback'), {
             'url': 'http://localhost:8000/test/',
             'question': 'question',

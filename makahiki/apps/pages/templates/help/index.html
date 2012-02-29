@@ -1,0 +1,30 @@
+{% extends "logged_in_base.html" %}
+
+{% load class_tags %}
+
+{% block page_title %}
+    Help
+{% endblock %}
+
+{% block selected_icon %}selected-help{% endblock %}
+
+{% block extra_head %}
+    {% import_page_css "help" STATIC_URL CSS_THEME %}
+{% endblock %}
+
+{% block body %}
+    <div id='help_intro'>
+        {% include "widgets/help_intro/templates/index.html" %}
+    </div>
+    <div id='help_faq'>
+        {% include "widgets/help_faq/templates/index.html" %}
+    </div>
+
+    <div id='help_rule'>
+        {% include "widgets/help_rule/templates/index.html" %}
+    </div>
+
+    <div id='ask_admin'>
+        {% include "widgets/ask_admin/templates/index.html" %}
+    </div>
+{% endblock %}

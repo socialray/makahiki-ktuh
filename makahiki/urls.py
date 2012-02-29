@@ -5,7 +5,7 @@ from django.conf import settings
 from django.conf.urls.defaults import url, patterns, include
 from django.contrib import admin
 from django.views.generic.simple import direct_to_template
-from apps.managers.settings_mgr.models import ChallengeSettings, RoundSettings
+from apps.managers.settings_mgr.models import ChallengeSettings, RoundSettings, PageSettings
 
 admin.autodiscover()
 
@@ -79,12 +79,16 @@ def _load_db_settings():
     for competition_round in rounds:
         if settings.COMPETITION_START is None:
             settings.COMPETITION_START = competition_round.start
-        rounds_dict[competition_round.name] = {"start": competition_round.start,
-                                   "end": competition_round.end, }
+        rounds_dict[competition_round.name] = {
+            "start": competition_round.start,
+            "end": competition_round.end, }
         last_round = competition_round
     if last_round:
         settings.COMPETITION_END = last_round.end
     settings.COMPETITION_ROUNDS = rounds_dict
+
+    # register the home page and widget
+    PageSettings.objects.get_or_create(name="home", widget="home")
 
 if not hasattr(settings, "CHALLENGE"):
     _load_db_settings()

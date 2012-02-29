@@ -195,6 +195,19 @@ INSTALLED_APPS = (
     'south',
     )
 
+################################
+# INSTALLED Widgets
+################################
+INSTALLED_WIDGET_APPS = (
+    'widgets.home',
+    'widgets.help_intro',
+    'widgets.help_faq',
+    'widgets.help_rule',
+    'widgets.ask_admin',
+)
+
+INSTALLED_APPS += INSTALLED_WIDGET_APPS
+
 ################
 # TEST settings
 ################
@@ -273,34 +286,5 @@ FILE_UPLOAD_PERMISSIONS = 0644
 # to load the internationalization machinery.
 USE_I18N = True
 
-################################
-# Load additional settings files
-################################
-try:
-    from page_settings import *  # pylint: disable=W0401,W0614
-except ImportError:
-    pass
+DEBUG = True
 
-
-#########################################
-# code to include the INSTALL_WIDGET_APPS
-#########################################
-def get_widget_apps(all_page_settings):
-    """ Returns a list of widget names defined in page_settings.py. """
-    apps = ()
-    for page in all_page_settings.keys():
-        default_layout = all_page_settings[page]["LAYOUTS"]["DEFAULT"]
-        for row in default_layout:
-            for columns in row:
-                if isinstance(columns, types.TupleType):
-                    if not columns[0] in apps:
-                        apps += ("widgets.%s" % columns[0], )
-                else:
-                    if not columns in apps:
-                        apps += ("widgets.%s" % columns, )
-                    break
-
-    return apps
-
-INSTALLED_WIDGET_APPS = get_widget_apps(PAGE_SETTINGS)
-INSTALLED_APPS += INSTALLED_WIDGET_APPS

@@ -11,10 +11,16 @@ from django.contrib.auth.models import User
 from django.conf import settings
 
 from apps.managers.player_mgr.models import Profile
+from apps.test_utils import TestUtils
 
 
 class HomeFunctionalTestCase(TestCase):
-    """Home page test cases"""
+    """Home Test Case."""
+
+    def setUp(self):
+        """setup."""
+        TestUtils.register_page_widget("home", "home")
+
     def testIndex(self):
         """Check that we can load the index."""
         User.objects.create_user("user", "user@test.com", password="changeme")
@@ -26,6 +32,7 @@ class HomeFunctionalTestCase(TestCase):
 
 class CompetitionMiddlewareTestCase(TestCase):
     """competition middleware test."""
+
     def setUp(self):
         User.objects.create_user("user", "user@test.com", password="changeme")
         self.client.login(username="user", password="changeme")
@@ -69,10 +76,14 @@ class CompetitionMiddlewareTestCase(TestCase):
 
 class SetupWizardFunctionalTestCase(TestCase):
     """setup widzard test cases."""
+
     def setUp(self):
+        """setup."""
         self.user = User.objects.create_user("user",
                                              "user@test.com",
                                              password="changeme")
+        TestUtils.register_page_widget("home", "home")
+
         self.client.login(username="user", password="changeme")
 
     def testDisplaySetupWizard(self):
