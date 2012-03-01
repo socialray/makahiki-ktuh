@@ -2,6 +2,7 @@ language: python
 install: pip install -r requirements.txt --use-mirrors
 script: python makahiki/manage.py test
 after_script:
-  - cd makahiki; scripts/run_pylint.sh
-  - cd makahiki; scripts/run_pep8.sh
+  - cd makahiki;
+  - scripts/run_pylint.sh
+  - scripts/run_pep8.sh
 
