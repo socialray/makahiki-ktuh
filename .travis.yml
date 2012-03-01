@@ -4,7 +4,7 @@ postgres:
     database: makahiki
     username: postgres
 env:
-    - DATABASE_URL=postgres://postgres@127.0.0.1:5432/makahiki
+    - DATABASE_URL=postgres://postgres@127.0.0.1:5432/makahiki MAKAHIKI_ADMIN_INFO=admin:admin
 install: pip install -r requirements.txt --use-mirrors --quiet
 before_script:
     - "psql -c 'create database makahiki;' -U postgres"

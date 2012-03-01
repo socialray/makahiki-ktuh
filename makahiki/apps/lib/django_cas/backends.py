@@ -5,7 +5,7 @@ from urlparse import urljoin
 
 from django.conf import settings
 
-from apps.lib.django_cas.models import User
+from django.contrib.auth.models import User
 from django.contrib.auth.models import AnonymousUser
 
 __all__ = ['CASBackend']
