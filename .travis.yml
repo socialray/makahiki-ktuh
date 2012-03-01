@@ -6,6 +6,8 @@ postgres:
 env:
     - DATABASE_URL=postgres://postgres@127.0.0.1:5432/makahiki
 install: pip install -r requirements.txt --use-mirrors
+before_script:
+    - "psql -c 'create database makahiki;' -U postgres"
 script: python makahiki/manage.py test
 after_script:
     - cd makahiki;
