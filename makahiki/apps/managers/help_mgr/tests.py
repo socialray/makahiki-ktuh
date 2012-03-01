@@ -1,6 +1,4 @@
-"""
-tests for Help
-"""
+"""Tests to see that we can retrieve and display a help topic."""
 
 from django.test import TestCase
 from django.core.urlresolvers import reverse

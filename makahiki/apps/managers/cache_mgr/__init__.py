@@ -1,3 +1,1 @@
-"""
-Cache Manager
-"""
+"""Manages caching data structures."""

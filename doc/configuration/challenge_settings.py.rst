@@ -8,5 +8,3 @@ The configuration for a specific challenge is currently found in ``game_settings
           admin interface, raising the possibility that we can eliminate this file altogether and/or merge page_settings.py into it. 
 
 
-.. include:: ../../makahiki/game_settings.py
-   :literal:

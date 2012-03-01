@@ -1,6 +1,5 @@
-"""
-views for Help
-"""
+"""Provides the view of a help topic."""
+
 import simplejson as json
 from django.shortcuts import render_to_response
 from django.template import RequestContext
@@ -14,10 +13,8 @@ from apps.managers.help_mgr.models import HelpTopic
 
 @login_required
 def topic(request, category, slug):
-    """
-    Shows a help topic.  This method handles both a regular request and an
-    AJAX request for dialog boxes.
-    """
+    """Shows a help topic.  This method handles both a regular request and an
+    AJAX request for dialog boxes."""
     help_topic = get_object_or_404(HelpTopic, slug=slug, category=category)
     if request.is_ajax():
         contents = render_to_string("help/dialog.html", {"topic": help_topic})
