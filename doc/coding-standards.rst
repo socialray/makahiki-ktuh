@@ -31,6 +31,8 @@ and verify.py returns with an error code.
 It is good practice to run verify.py prior to pushing your code to the
 master branch at github. 
 
+Be patient: verify takes 10 seconds or more to complete.
+
 General documentation string standards
 --------------------------------------
 

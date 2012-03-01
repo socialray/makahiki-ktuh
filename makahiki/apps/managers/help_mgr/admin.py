@@ -1,6 +1,5 @@
-"""
-admin for help widget models
-"""
+"""Provides the admin interface for help models."""
+
 from django.contrib import admin
 from django import forms
 
@@ -8,16 +7,14 @@ from apps.managers.help_mgr.models import HelpTopic
 
 
 class HelpAdminForm(forms.ModelForm):
-    """admin form"""
+    """The admin form for help topics."""
     class Meta:
         """meta"""
         model = HelpTopic
 
     def clean_parent_topic(self):
-        """
-        Prevents sub-topics of sub-topics.  It cannot be done with the
-        current template layout.
-        """
+        """Prevents sub-topics of sub-topics.  Not possible with the current template layout."""
+
         parent_topic = self.cleaned_data["parent_topic"]
         if parent_topic and parent_topic.parent_topic:
             raise forms.ValidationError("This topic is also a sub-topic. "
@@ -31,7 +28,7 @@ class HelpAdminForm(forms.ModelForm):
 
 
 class HelpTopicAdmin(admin.ModelAdmin):
-    """help topic admin"""
+    """Help topic administrative interface."""
     # Automatically populates the slug field.
     prepopulated_fields = {"slug": ("title",)}
     list_filter = ["category", ]

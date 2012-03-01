@@ -1,13 +1,12 @@
-"""
-Makahiki specific CAS backend, as an additional AUTHENTICATION_BACKENDS.
-"""
+"""Makahiki specific CAS backend, as an additional AUTHENTICATION_BACKENDS."""
+
 from django.core.exceptions import ObjectDoesNotExist
 from apps.lib.django_cas.backends import CASBackend, _verify
 from django.contrib.auth.models import User
 
 
 class MakahikiCASBackend(CASBackend):
-    """Checks if the login name is a admin or a participant in the cup."""
+    """Checks if the login name is an admin or a participant."""
 
     def authenticate(self, ticket, service):
         """Verifies CAS ticket and gets or creates User object"""

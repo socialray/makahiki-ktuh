@@ -1,6 +1,5 @@
-"""
-Admin method for logging in as another user.
-"""
+"""Admin method for logging in as another user."""
+
 from django.contrib.auth import SESSION_KEY
 from django.contrib.auth.decorators import user_passes_test
 from django.contrib.auth.models import User
@@ -25,9 +24,7 @@ def login_as(request, user_id):
 
 
 def login(request):
-    """
-    Shows the login page and processes the login form.
-    """
+    """Show the login page and process the login form."""
     if request.method == "POST":
         form = LoginForm(request.POST)
         if form.login(request):
@@ -35,6 +32,5 @@ def login(request):
     else:
         form = LoginForm()
 
-    return render_to_response("account/login.html", {
-            "form": form,
-    }, context_instance=RequestContext(request))
+    return render_to_response("account/login.html", {"form": form},
+                              context_instance=RequestContext(request))

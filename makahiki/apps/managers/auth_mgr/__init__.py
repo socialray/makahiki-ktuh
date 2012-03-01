@@ -1,3 +1,2 @@
-"""
-Authentication Manager package
-"""
+"""Provides authentication services for Makahiki including administrative logins
+   and CAS authentication."""
