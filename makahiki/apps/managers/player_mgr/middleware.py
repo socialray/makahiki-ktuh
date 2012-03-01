@@ -53,16 +53,18 @@ class LoginMiddleware(object):
         """ check to see if setup completed."""
         user = request.user
         path = request.path
-        # We need to check if the user is going to the home page so we don't
-        # get caught in a redirect loop. We do need to filter out requests
-        # for CSS and other resources.
-        pattern = re.compile("^/"
-                             "(m\/admin|m\/setup|admin|log|account|home|"
-                             "site_media|tc|media|favicon.ico)/")
-        needs_setup = user.is_authenticated() and not user.get_profile()\
-        .setup_complete
-        if needs_setup and not pattern.match(path):
-            return HttpResponseRedirect("/")
+        if user.is_authenticated():
+            profile = user.get_profile()
+
+            # We need to check if the user is going to the home page so we don't
+            # get caught in a redirect loop. We do need to filter out requests
+            # for CSS and other resources.
+            pattern = re.compile("^/"
+                                 "(m\/admin|m\/setup|admin|log|account|home|"
+                                 "site_media|tc|media|favicon.ico)/")
+            if not profile.setup_complete and not pattern.match(path):
+                return HttpResponseRedirect("/")
+
         return None
 
     def check_competition_period(self, request):

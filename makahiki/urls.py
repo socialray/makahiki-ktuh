@@ -1,9 +1,12 @@
 """Defines the Main URLS."""
 
 import os
+import datetime
 from django.conf import settings
 from django.conf.urls.defaults import url, patterns, include
 from django.contrib import admin
+from django.contrib.auth.models import User
+from django.core.exceptions import ObjectDoesNotExist
 from django.views.generic.simple import direct_to_template
 from apps.managers.settings_mgr.models import ChallengeSettings, RoundSettings, PageSettings
 
@@ -11,29 +14,32 @@ admin.autodiscover()
 
 urlpatterns = patterns('',
     # Main page.
-    url(r'^$', "pages.views.root_index", name="root_index"),
+    url(r'^$', "apps.pages.views.root_index", name="root_index"),
 
     # page urls
-    url(r'^home/$', "pages.views.index", name="home_index"),
-    url(r'^help/$', "pages.views.index", name="help_index"),
-    url(r'^actions/$', "pages.views.index", name="actions_index"),
-    url(r'^profile/$', "pages.views.index", name="profile_index"),
-    url(r'^energy/$', "pages.views.index", name="energy_index"),
-    url(r'^news/$', "pages.views.index", name="news_index"),
-    url(r'^prizes/$', "pages.views.index", name="prizes_index"),
-    url(r'^canopy/$', 'pages.views.index', name="canopy_index"),
+    url(r'^home/$', "apps.pages.views.index", name="home_index"),
+    url(r'^help/$', "apps.pages.views.index", name="help_index"),
+    url(r'^actions/$', "apps.pages.views.index", name="actions_index"),
+    url(r'^profile/$', "apps.pages.views.index", name="profile_index"),
+    url(r'^energy/$', "apps.pages.views.index", name="energy_index"),
+    url(r'^news/$', "apps.pages.views.index", name="news_index"),
+    url(r'^prizes/$', "apps.pages.views.index", name="prizes_index"),
+    url(r'^canopy/$', 'apps.pages.views.index', name="canopy_index"),
 
     # system level
-    url(r'^log/', include('managers.log_mgr.urls')),
-    url(r'^help/', include('managers.help_mgr.urls')),
-    url(r'^account/login/$', 'managers.auth_mgr.views.login', name='auth_login'),
-    url(r'^account/cas/login/$', 'lib.django_cas.views.login'),
-    url(r'^account/cas/logout/$', 'lib.django_cas.views.logout'),
-    url(r'^avatar/', include('lib.avatar.urls')),
+    url(r'^log/', include('apps.managers.log_mgr.urls')),
+    url(r'^help/', include('apps.managers.help_mgr.urls')),
+    url(r'^avatar/', include('apps.lib.avatar.urls')),
 
-    (r'^admin/login-as/(?P<user_id>\d+)/$', 'managers.auth_mgr.views.login_as'),
-    (r'^admin/doc/', include('django.contrib.admindocs.urls')),
-    (r'^admin/', include(admin.site.urls)),
+
+    url(r'^account/cas/login/$', 'apps.lib.django_cas.views.login', name='cas_login'),
+    url(r'^account/cas/logout/$', 'apps.lib.django_cas.views.logout', name='cas_logout'),
+    url(r'^account/login/$', 'apps.managers.auth_mgr.views.login', name='auth_login'),
+
+    url(r'^admin/', include(admin.site.urls)),
+    url(r'^admin/doc/', include('django.contrib.admindocs.urls')),
+    url(r'^admin/login-as/(?P<user_id>\d+)/$', 'apps.managers.auth_mgr.views.login_as', name='auth_login_as'),
+    url(r'^admin/logout/$', 'apps.managers.auth_mgr.views.logout', name='auth_logout'),
 
     url(r'^landing/$', direct_to_template, {'template': 'landing.html'}, name='landing'),
     url(r'^restricted/$', direct_to_template, {"template": 'restricted.html'}, name="restricted"),
@@ -89,6 +95,18 @@ def _load_db_settings():
 
     # register the home page and widget
     PageSettings.objects.get_or_create(name="home", widget="home")
+
+    # create admin user if not exists
+    try:
+        User.objects.get(username=settings.ADMIN_USER)
+    except ObjectDoesNotExist:
+        user = User.objects.create_superuser(settings.ADMIN_USER, "", settings.ADMIN_PASSWORD)
+        profile = user.get_profile()
+        profile.setup_complete = True
+        profile.setup_profile = True
+        profile.completion_date = datetime.datetime.today()
+        profile.save()
+
 
 if not hasattr(settings, "CHALLENGE"):
     _load_db_settings()

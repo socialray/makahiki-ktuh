@@ -6,26 +6,11 @@
  New settings should not be added here.
 """
 
-import os.path
 import posixpath
-import types
+import os
+import urlparse
 
 SITE_ID = 1
-
-##############
-# DB settings
-##############
-DATABASES = {
-    'default': {
-        # use 'postgresql_psycopg2', 'postgresql', 'mysql', or 'oracle'.
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': 'dev.db',  # Or path to database file if using sqlite3.
-        'USER': '',  # Not used with sqlite3.
-        'PASSWORD': '',  # Not used with sqlite3.
-        'HOST': '',  # Set to empty string for localhost. Not used in sqlite3.
-        'PORT': '',  # Set to empty string for default. Not used in sqlite3.
-    }
-}
 
 #######################
 # Cache settings
@@ -115,7 +100,7 @@ MIDDLEWARE_CLASSES = (
 
     'django.middleware.common.CommonMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
-    'django.middleware.transaction.TransactionMiddleware',
+    #'django.middleware.transaction.TransactionMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.middleware.doc.XViewMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
@@ -288,3 +273,24 @@ USE_I18N = True
 
 DEBUG = True
 
+#############################################
+# Load sensitive settings from OS environment
+#############################################
+if 'DATABASE_URL' in os.environ:
+    urlparse.uses_netloc.append('postgres')
+    url = urlparse.urlparse(os.environ['DATABASE_URL'])
+    if url.scheme == 'postgres':
+        DATABASES = {}
+        DATABASES['default'] = {
+            'ENGINE': 'django.db.backends.postgresql_psycopg2',
+            'NAME': url.path[1:],
+            'USER': url.username,
+            'PASSWORD': url.password,
+            'HOST': url.hostname,
+            'PORT': url.port,
+            }
+
+if 'MAKAHIKI_ADMIN_INFO' in os.environ:
+    admin_info = os.environ['MAKAHIKI_ADMIN_INFO'].split(":")
+    ADMIN_USER = admin_info[0]
+    ADMIN_PASSWORD = admin_info[1]

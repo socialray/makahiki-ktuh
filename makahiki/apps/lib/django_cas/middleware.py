@@ -49,4 +49,4 @@ class CASMiddleware(object):
                          'privileges.</p>')
                 return HttpResponseForbidden(error)
         params = urlencode({REDIRECT_FIELD_NAME: request.get_full_path()})
-        return HttpResponseRedirect(reverse(cas_login) + '?' + params)
+        return HttpResponseRedirect(reverse("cas_login") + '?' + params)

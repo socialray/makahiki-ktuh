@@ -1,6 +1,7 @@
 """Defines DB models for makahiki settings.
 """
 import datetime
+from django.conf import settings
 from django.db import models
 
 
@@ -98,18 +99,32 @@ class RoundSettings(models.Model):
         return self.name
 
 
+def _get_widget_choice():
+    """Retrieves the available page names."""
+    return ((key.split(".")[1], key.split(".")[1]) for key in settings.INSTALLED_WIDGET_APPS)
+
+
 class PageSettings(models.Model):
     """Defines the page settings."""
+
+    PAGE_CHOICES = (("home", "home"),
+                    ("help", "help"),)
 
     name = models.CharField(
         default="home",
         help_text="The name of the page.",
+        choices=PAGE_CHOICES,
         max_length=50,)
 
     widget = models.CharField(
         default="home",
         help_text="The name of the widget in the page.",
+        choices=_get_widget_choice(),
         max_length=50,)
+
+    class Meta:
+        """meta"""
+        unique_together = (("name", "widget",),)
 
     def __unicode__(self):
         return self.name + " : " + self.widget
