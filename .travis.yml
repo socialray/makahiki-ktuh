@@ -2,6 +2,6 @@ language: python
 install: pip install -r requirements.txt --use-mirrors
 script: python makahiki/manage.py test
 after_script:
-  - pylint --rcfile=pylint.rc makahiki/apps
-  - pep8 --ignore=E501 --exclude=lib makahiki/apps
+  - cd makahiki; pylint --rcfile=pylint.rc apps
+  - cd makahiki; pep8 --ignore=E501 --exclude=lib apps
 
