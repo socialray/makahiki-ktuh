@@ -8,7 +8,7 @@ env:
 install: pip install -r requirements.txt --use-mirrors --quiet
 before_script:
     - "psql -c 'create database makahiki;' -U postgres"
-script: coverage run python makahiki/manage.py test
+script: coverage run makahiki/manage.py test
 after_script:
     - coverage report -m
     - cd makahiki;
