@@ -80,10 +80,8 @@ Developer Guide
    Developing a new game plugin <plugin-development>
    Appendix A: Package reference <package-guide>
    Appendix B: Management command reference <management-commands>
-   Appendix C: Settings files <settings-files>
-   Appendix D: The administrator interface <admin-interface>
-   Appendix E: Developing and running tests <testing>
-   Appendix F: Coding standards <coding-standards>
+   Appendix C: Developing and running tests <testing>
+   Appendix D: Coding standards <coding-standards>
 
 
  
