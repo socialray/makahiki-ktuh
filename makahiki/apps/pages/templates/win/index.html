@@ -1,0 +1,27 @@
+{% extends "logged_in_base.html" %}
+
+{% load class_tags %}
+
+{% block page_title %}
+    Prizes
+{% endblock %}
+
+{% block selected_icon %}selected-prizes{% endblock %}
+
+{% block extra_head %}
+    {% import_page_css "prizes" STATIC_URL CSS_THEME %}
+{% endblock %}
+
+{% block body %}
+    <div id='prizes'>
+        {% include "widgets/prizes/templates/index.html" %}
+    </div>
+    <div id='raffle'>
+        {% include "widgets/raffle/templates/index.html" %}
+    </div>
+
+    <div id='scoreboard'>
+        {% include "widgets/scoreboard/templates/index.html" %}
+    </div>
+
+{% endblock %}

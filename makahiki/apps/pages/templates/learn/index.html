@@ -1,0 +1,30 @@
+{% extends "logged_in_base.html" %}
+
+{% load class_tags %}
+
+{% block page_title %}
+    Learn
+{% endblock %}
+
+{% block selected_icon %}selected-learn{% endblock %}
+
+{% block extra_head %}
+    {% import_page_css "learn" STATIC_URL CSS_THEME %}
+{% endblock %}
+
+{% block body %}
+    <div id='home'>
+        {% include "widgets/notifications/templates/index.html" %}
+    </div>
+    <div id='smartgrid'>
+        {% include "widgets/smartgrid/templates/index.html" %}
+    </div>
+    <div id='upcoming_events'>
+        {% include "widgets/upcoming_events/templates/index.html" %}
+    </div>
+
+    <div id='scoreboard'>
+        {% include "widgets/scoreboard/templates/index.html" %}
+    </div>
+
+{% endblock %}

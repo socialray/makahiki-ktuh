@@ -25,7 +25,7 @@ PAGE_CSS_IMPORT = {
     "news": '<link rel="stylesheet" href="{0}css/{1}/pages/news'
             '.css">\n<script src="{0}js/news.js" '
             'type="text/javascript"></script>',
-    "actions": '<link rel="stylesheet" href="{0}css/{1}/pages/actions.css">',
+    "learn": '<link rel="stylesheet" href="{0}css/{1}/pages/learn.css">',
     "energy": '<link rel="stylesheet" href="{0}css/{1}/pages/energy'
               '.css">\n<script src="{0}js/news.js" '
               'type="text/javascript"></script>',

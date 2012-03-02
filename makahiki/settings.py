@@ -185,10 +185,14 @@ INSTALLED_APPS = (
 ################################
 INSTALLED_WIDGET_APPS = (
     'widgets.home',
+    'widgets.notifications',
     'widgets.help_intro',
     'widgets.help_faq',
     'widgets.help_rule',
     'widgets.ask_admin',
+    'widgets.smartgrid',
+    'widgets.upcoming_events',
+    'widgets.scoreboard',
 )
 
 INSTALLED_APPS += INSTALLED_WIDGET_APPS

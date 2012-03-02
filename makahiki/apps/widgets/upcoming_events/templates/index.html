@@ -1,0 +1,107 @@
+{% load class_tags %}
+
+<div {% get_id_and_classes "activity-events-box" %}>
+    <div {% get_id_and_classes "activity-events-title" %}>
+        Upcoming Events (Next 7 days)
+        <a href="#" style="float: right">
+            <img src="{{ STATIC_URL}}/css/default/images/icon-help-sm.png" width="20" align="center"
+                 title="Click to get help about this window"
+                 onclick="toggleHelp('widget', 'upcoming-events'); return false;"
+                    /></a>
+    </div>
+    <div {% get_id_and_classes "activity-events-content" %}>
+
+        <table>
+            <thead>
+            <tr>
+                <th>Event</th>
+                <th>Date</th>
+                <th>Location</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% if view_objects.upcoming_events.events %}
+                {% for event in view_objects.upcoming_events.events %}
+                    <tr>
+                        <td>
+                            <a href="{% url activity_task event.type event.slug %}">{{ event.title }}</a>
+                        </td>
+                        <td>{{ event.event_date|date:"D m/d, f A" }}</td>
+                        <td>{{ event.event_location }}</td>
+                    </tr>
+                {% endfor %}
+            {% else %}
+                <tr>
+                    <td>No upcoming events</td>
+                </tr>
+            {% endif %}
+
+
+            </tbody>
+        </table>
+        <p/>
+
+        <form {% get_id_and_classes "event-code-form" %} action="{% url activity_attend_code %}"
+                                                         method="POST">
+            {% csrf_token %}
+            <div {% get_id_and_classes "event-code" %}>
+                <b>Enter Attendance Code:</b>
+                {{ view_objects.upcoming_events.event_form.response }}
+
+                <button id="event-code-submit">
+                    Submit
+                </button>
+
+            </div>
+            <br/>
+
+            <div {% get_id_and_classes "social_email" %} style="display: None;">
+                Optional Social Bonus
+                Email: {{ view_objects.upcoming_events.event_form.social_email }}
+            </div>
+
+            <div {% get_id_and_classes "event-code-errors" %} style="color:red; display:None"></div>
+        </form>
+
+    </div>
+</div>
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        var height = 0;
+        $("#activity-scoreboard-content").children().each(function (index, value) {
+            if ($(value).height() > height) {
+                height = $(value).height();
+            }
+        });
+
+        $("#activity-scoreboard-content").after("<div id='scoreboard-cycle-nav'>").cycle({
+            height:"" + height + "px",
+            pause:1,
+            timeout:7000,
+            pager:'#scoreboard-cycle-nav'
+        });
+
+        $("#event-code-submit").click(function () {
+            $.post("{% url activity_attend_code %}", $("#event-code-form").serialize(), function (data) {
+                if (data.message) {
+                    $("#event-code-errors").html(data.message);
+                    $("#event-code-errors").show();
+                    if (data.social_email) {
+                        $("#social_email").show();
+                    }
+                }
+                else {
+                    window.location.replace("/activities/" + data.type + "/" + data.slug + "/");
+                }
+            });
+
+            return false;
+        });
+
+        $("#social_email input").click(function () {
+            this.value = "";
+        });
+
+    });
+</script>

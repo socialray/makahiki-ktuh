@@ -8,7 +8,11 @@ from django.conf import settings
 
 def get_current_round():
     """Get the current round name."""
-    return get_current_round_info()["name"]
+    round_info = get_current_round_info()
+    if round_info is not None:
+        return round_info["name"]
+    else:
+        return None
 
 
 def get_current_round_info():

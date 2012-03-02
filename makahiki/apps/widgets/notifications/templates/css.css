@@ -1,0 +1,91 @@
+/*------- Notification styles -----*/
+#notification-list, .messages {
+    padding: 0;
+    list-style: none;
+}
+
+.messages li {
+    margin: 5px auto;
+    padding: 5px;
+    clear:both;
+    border-radius: 8px;
+    -moz-border-radius: 8px;
+    -webkit-border-radius: 8px;
+    text-align: center;
+    background-color: #fce988;
+    border: 1px solid #fed22f;
+}
+
+.messages li.error {
+    border: 1px solid #CD0A0A;
+    background: #FEF1EC url(images/ui-bg_glass_95_fef1ec_1x400.png) 50% 50% repeat-x;
+    color: #CD0A0A;
+    text-align: center;
+    font-weight: bold;
+}
+
+.notification-item {
+    padding: 5px;
+    clear:both;
+    text-align: left;
+    border-radius: 8px;
+    -moz-border-radius: 8px;
+    -webkit-border-radius: 8px;
+}
+
+#notification-list li.ui-state-highlight, #notification-dialog li.ui-state-highlight {
+    background: none;
+    background-color: #fce988;
+    border: 1px solid #fed22f;
+}
+
+.notification-item .ui-icon {
+    float: left;
+    margin-right: .3em;
+}
+
+#notification-list .notification-contents {
+    float: left;
+    width: 800px;
+}
+
+.notice-icon {
+    float: left;
+    width: 25px;
+}
+
+.notice-content {
+    float: left;
+    width: 750px;
+}
+
+.notice-content p {
+    margin: 0;
+    padding: 0;
+}
+
+.notification-options {
+    float: right;
+}
+
+.notification-share {
+    float: left;
+    margin-right: 5px;
+}
+
+.notification-read {
+    float: right;
+    cursor: pointer;
+}
+
+#notification-dialog ul {
+    list-style: none;
+    padding: 0;
+    text-align: left;
+    /*font-weight: bold;*/
+}
+
+#notifications ul {
+    display: block;
+    margin: 0;
+}

@@ -347,10 +347,9 @@ def setup_complete(request):
             # User got the question right.
             # link it to an activity.
             if "widgets.smartgrid" in settings.INSTALLED_WIDGET_APPS:
-                activity_name = settings.SETUP_WIZARD_ACTIVITY_NAME
                 try:
-                    module = importlib.import_module("apps.widgets.smartgrid"
-                                                     ".models")
+                    module = importlib.import_module("apps.widgets.smartgrid.models")
+                    activity_name = module.SETUP_WIZARD_ACTIVITY_NAME
                     activity = module.Activity.objects.get(name=activity_name)
                     module.ActivityMember.objects.get_or_create(
                         activity=activity,

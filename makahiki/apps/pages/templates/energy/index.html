@@ -1,0 +1,30 @@
+{% extends "logged_in_base.html" %}
+
+{% load class_tags %}
+
+{% block page_title %}
+    Energy
+{% endblock %}
+
+{% block selected_icon %}selected-energy{% endblock %}
+
+{% block extra_head %}
+    {% import_page_css "energy" STATIC_URL CSS_THEME %}
+{% endblock %}
+
+{% block body %}
+    <div id='energy_power_meter'>
+        {% include "widgets/energy_power_meter/templates/index.html" %}
+    </div>
+    <div id='energy_goal'>
+        {% include "widgets/energy_goal/templates/index.html" %}
+    </div>
+
+    <div id='energy_scoreboard'>
+        {% include "widgets/energy_scoreboard/templates/index.html" %}
+    </div>
+
+    <div id='wallpost'>
+        {% include "widgets/wallpost/templates/index.html" %}
+    </div>
+{% endblock %}

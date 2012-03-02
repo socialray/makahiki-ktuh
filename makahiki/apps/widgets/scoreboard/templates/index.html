@@ -1,0 +1,114 @@
+{% load class_tags %}
+
+<div {% get_id_and_classes "activity-scoreboard-box" %}>
+    <div {% get_id_and_classes "activity-scoreboard-title" %}>
+        {{ view_objects.scoreboard.current_round }} Scoreboard
+        <a href="#" style="float: right">
+            <img src="{{ STATIC_URL}}/css/default/images/icon-help-sm.png" width="20" align="center"
+                 title="Click to get help about this window"
+                 onclick="toggleHelp('widget', 'points-scoreboard'); return false;"
+                    /></a>
+    </div>
+    <div {% get_id_and_classes "activity-scoreboard-content" %}>
+
+        <table {% get_id_and_classes "activities-scoreboard-table-team" %} style="width: 100%">
+            <thead>
+            <tr>
+                <th style="width: 20px">Rank</th>
+                <th style="width: 150px">{{ TEAM_LABEL.capitalize }}</th>
+                <th style="text-align: right;">Overall</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for f in view_objects.scoreboard.team_standings %}
+                <tr>
+                <td>{{ forloop.counter }}</td>
+                <td style="width: 150px;
+                        {% if f == view_objects.scoreboard.team %}font-weight: bold{% endif %}">
+                    {{ f }}
+                </td>
+                <td style="width: 110px; text-align:right;
+                        {% if f == view_objects.scoreboard.team %}font-weight: bold{% endif %}">
+                    {{ f.points }}
+                </td>
+            {% endfor %}
+            </tbody>
+        </table>
+
+        <table {% get_id_and_classes "activities-scoreboard-table-profile" %}
+                style="width: 100%; display: none">
+            <thead>
+            <tr>
+                <th>Rank</th>
+                <th>Individual</th>
+                <th style="text-align: right">Overall</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for p in view_objects.scoreboard.profile_standings %}
+                <tr>
+                <td>{{ forloop.counter }}</td>
+                <td style="width: 150px;
+                        {% if p == view_objects.scoreboard.profile %}font-weight: bold{% endif %}">
+                    {{ p.name }}
+                </td>
+                <td style="width: 110px; text-align:right;
+                        {% if p == view_objects.scoreboard.profile %}font-weight: bold{% endif %}">
+                    {{ p.current_round_points }}
+                </td>
+            {% endfor %}
+            </tbody>
+        </table>
+
+        <table {% get_id_and_classes "activities-scoreboard-table-team-profile" %}
+                style="width: 100%; display: none">
+            <thead>
+            <tr>
+                <th>Rank</th>
+                <th>Individual</th>
+                <th style="text-align: right">{{ view_objects.scoreboard.team }}</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for p in view_objects.scoreboard.user_team_standings %}
+                <tr>
+                <td>{{ forloop.counter }}</td>
+                <td style="width: 150px;
+                        {% if p == view_objects.scoreboard.profile %}font-weight: bold{% endif %}">
+                    {{ p.name }}
+                </td>
+                <td style="width: 110px; text-align:right;
+                        {% if p == view_objects.scoreboard.profile %}font-weight: bold{% endif %}">
+                    {{ p.current_round_points }}
+                </td>
+            {% endfor %}
+            </tbody>
+        </table>
+
+        <table {% get_id_and_classes "activities-scoreboard-table-profile" %}
+                style="width: 100%; display: none">
+            <thead>
+            <tr>
+                <th>Rank</th>
+                <th>{{ TEAM_IDENTIFIER }}</th>
+                <th style="text-align: right">Participation</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for f in view_objects.scoreboard.team_participation %}
+                <tr>
+                <td>{{ forloop.counter }}</td>
+                <td style="width: 150px;
+                        {% if f == view_objects.scoreboard.team %}font-weight: bold{% endif %}">
+                    {{ f }}
+                </td>
+                <td style="width: 110px; text-align:right;
+                        {% if f == view_objects.scoreboard.team %}font-weight: bold{% endif %}">
+                    {{ f.active_participation }}%
+                </td>
+            {% endfor %}
+            </tbody>
+        </table>
+
+    </div>
+</div>

@@ -108,7 +108,12 @@ class PageSettings(models.Model):
     """Defines the page settings."""
 
     PAGE_CHOICES = (("home", "home"),
-                    ("help", "help"),)
+                    ("help", "help"),
+                    ("learn", "learn"),
+                    ("win", "win"),
+                    ("energy", "energy"),
+                    ("advanced", "advanced"),
+                    ("profile", "profile"))
 
     name = models.CharField(
         default="home",
@@ -125,6 +130,7 @@ class PageSettings(models.Model):
     class Meta:
         """meta"""
         unique_together = (("name", "widget",),)
+        ordering = ['name']
 
     def __unicode__(self):
         return self.name + " : " + self.widget
