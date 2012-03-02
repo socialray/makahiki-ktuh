@@ -8,13 +8,7 @@ from django.conf import settings
 
 def get_round_info():
     """Returns a dictionary containing round information."""
-    # Copy the round info and insert the overall round.
-    rounds = settings.COMPETITION_ROUNDS.copy()
-
-    #if "Overall" not in rounds:
-    #    rounds["Overall"] = {"start": settings.COMPETITION_START,
-    #                         "end": settings.COMPETITION_END}
-
+    rounds = settings.COMPETITION_ROUNDS
     return rounds
 
 

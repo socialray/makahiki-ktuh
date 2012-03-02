@@ -23,7 +23,7 @@ urlpatterns = patterns('',
     url(r'^profile/$', "apps.pages.views.index", name="profile_index"),
     url(r'^energy/$', "apps.pages.views.index", name="energy_index"),
     url(r'^news/$', "apps.pages.views.index", name="news_index"),
-    url(r'^prizes/$', "apps.pages.views.index", name="prizes_index"),
+    url(r'^win/$', "apps.pages.views.index", name="win_index"),
     url(r'^canopy/$', 'apps.pages.views.index', name="canopy_index"),
 
     # system level
@@ -71,6 +71,9 @@ def _load_db_settings():
 
     # required setting for the CAS authentication service.
     settings.CAS_SERVER_URL = settings.CHALLENGE.cas_server_url
+    settings.LOCALE_SETTING = settings.CHALLENGE.locale_setting
+    settings.TIME_ZONE = settings.CHALLENGE.time_zone
+    settings.LANGUAGE_CODE = settings.CHALLENGE.language_code
 
     # get the Round settings from DB
     rounds = RoundSettings.objects.all()

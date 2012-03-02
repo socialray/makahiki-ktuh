@@ -30,7 +30,7 @@ PAGE_CSS_IMPORT = {
               '.css">\n<script src="{0}js/news.js" '
               'type="text/javascript"></script>',
     "help": '<link rel="stylesheet" href="{0}css/{1}/pages/help.css">',
-    "prizes": '<link rel="stylesheet" href="{0}css/{1}/pages/prizes.css">',
+    "win": '<link rel="stylesheet" href="{0}css/{1}/pages/win.css">',
     "profile": '<link rel="stylesheet" href="{0}css/{1}/pages/profile.css">',
     "canopy": '<link rel="stylesheet" href="{0}css/{1}/pages/canopy.css">',
     "status": '<link rel="stylesheet" href="{0}css/{1}/pages/status.css">',

@@ -3,25 +3,23 @@
 {% load class_tags %}
 
 {% block page_title %}
-    Prizes
+    Win
 {% endblock %}
 
-{% block selected_icon %}selected-prizes{% endblock %}
+{% block selected_icon %}selected-win{% endblock %}
 
 {% block extra_head %}
-    {% import_page_css "prizes" STATIC_URL CSS_THEME %}
+    {% import_page_css "win" STATIC_URL CSS_THEME %}
 {% endblock %}
 
 {% block body %}
-    <div id='prizes'>
-        {% include "widgets/prizes/templates/index.html" %}
-    </div>
-    <div id='raffle'>
-        {% include "widgets/raffle/templates/index.html" %}
-    </div>
-
-    <div id='scoreboard'>
-        {% include "widgets/scoreboard/templates/index.html" %}
-    </div>
-
+    <table><tr><td width="50%">
+        <div id='prizes'>
+            {% include "widgets/prizes/templates/index.html" %}
+        </div>
+    </td><td width="50%">
+        <div id='raffle'>
+            {% include "widgets/raffle/templates/index.html" %}
+        </div>
+    </td></tr></table>
 {% endblock %}

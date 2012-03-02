@@ -4,6 +4,8 @@
 
 from settings import *  # pylint: disable=W0401,W0614
 
+TEMPLATE_DEBUG=True
+
 ########################
 # SECRET_KEYs
 ########################

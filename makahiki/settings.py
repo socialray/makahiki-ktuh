@@ -100,7 +100,7 @@ MIDDLEWARE_CLASSES = (
 
     'django.middleware.common.CommonMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
-    #'django.middleware.transaction.TransactionMiddleware',
+    'django.middleware.transaction.TransactionMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.middleware.doc.XViewMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
@@ -196,6 +196,8 @@ INSTALLED_WIDGET_APPS = (
     'widgets.energy_power_meter',
     'widgets.energy_goal',
     'widgets.energy_scoreboard',
+    'widgets.prizes',
+    'widgets.raffle',
 )
 
 INSTALLED_APPS += INSTALLED_WIDGET_APPS
@@ -277,6 +279,9 @@ FILE_UPLOAD_PERMISSIONS = 0644
 # If you set this to False, Django will make some optimizations so as not
 # to load the internationalization machinery.
 USE_I18N = True
+
+# default setting, can be override by DB Challenge settings.
+LOCALE_SETTING = 'en_US.UTF-8'
 
 DEBUG = True
 

@@ -1,11 +1,9 @@
 """Scoreboard Test."""
 
 import datetime
-from django.contrib.auth.models import User
 from django.core.urlresolvers import reverse
 from django.test import TestCase
 from django.conf import settings
-from apps.managers.team_mgr.models import Team
 from apps.test_utils import TestUtils
 
 
@@ -17,13 +15,7 @@ class ScoreboardTest(TestCase):
         """
         setup
         """
-        self.user = User.objects.create_user("user", "user@test.com", password="changeme")
-        team = Team.objects.all()[0]
-        profile = self.user.get_profile()
-        profile.team = team
-        profile.setup_complete = True
-        profile.setup_profile = True
-        profile.save()
+        self.user = TestUtils.setup_user(username="user", password="changeme")
 
         TestUtils.register_page_widget("learn", "smartgrid")
         TestUtils.register_page_widget("learn", "notifications")
