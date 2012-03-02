@@ -8,9 +8,12 @@ env:
 install: pip install -r requirements.txt --use-mirrors --quiet
 before_script:
     - "psql -c 'create database makahiki;' -U postgres"
-script: python makahiki/manage.py test
+script: coverage run --source=makahiki/apps/ makahiki/manage.py test
 after_script:
+    - coverage report -m
     - cd makahiki;
     - scripts/run_pylint.sh
     - scripts/run_pep8.sh
-
+notifications:
+    email:
+        - makahiki-dev@googlegroups.com
