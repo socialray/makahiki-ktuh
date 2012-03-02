@@ -1,3 +1,6 @@
+# Ignore OS X files
+.DS_Store
+
 # Ignore database files
 *.db
 
