@@ -25,13 +25,24 @@ scripts::
   % scripts/verify.py
 
 If all return successfully, then verify.py returns normally and no output is printed.  If there
-are any errors, the output associated with the unsucessful tools is printed
+are any errors, the output associated with the unsuccessful tools is printed
 and verify.py returns with an error code. 
 
 It is good practice to run verify.py prior to pushing your code to the
 master branch at github. 
 
 Be patient: verify takes 10 seconds or more to complete.
+
+Coverage
+--------
+
+To obtain a coverage report on the test cases::
+
+  % scripts/coverage.py
+
+The report will be generated into the directory htmlcov/.  Open index.html
+to browse.  Click the coverage column to sort, and click on a module to see
+which lines were tested and which lines were not.
 
 General documentation string standards
 --------------------------------------

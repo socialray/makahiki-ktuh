@@ -1,7 +1,7 @@
 #!/usr/bin/python
 
 """Runs the tests using the coverage command. The HTML coverage report is automatically
-generated and placed in htmlcov/. If you want the plaintext report, run 
+generated and placed in htmlcov/. If you want the plaintext report, run
 "coverage report -m".
 """
 
