@@ -1,0 +1,42 @@
+{% load class_tags %}
+{% load markup %}
+
+        <div {% get_id_and_classes "energy-status-box" %}>
+            <div {% get_id_and_classes "energy-status-title" %}>
+                Daily Energy Goal Game
+                <a href="#" style="float: right">
+                    <img src="{{ STATIC_URL}}/css/default/images/icon-help-sm.png" width="20"
+                         align="center"
+                         title="Click to get help about this window"
+                         onclick="toggleHelp('widget', 'energy-goal-game'); return false;"
+                            /></a>
+            </div>
+            <div {% get_id_and_classes "energy-status-content" %}>
+                <fieldset {% get_id_and_classes "energy-status-progress" %}>
+                    <legend>Current Status</legend>
+                    <div {% get_id_and_classes "energy-power-box" %}>
+                        {% if user.get_profile.team %}
+                          {% include "usage.html" %}
+                        {% endif %}
+                    </div>
+                    <p/>
+                    <center><b>
+                        Each member receives 20 points
+                        each day that we make our goal. </b></center>
+                </fieldset>
+
+                <fieldset {% get_id_and_classes "energy-status-how" %}>
+                    <legend>How can we make our daily goal?</legend>
+                    <table {% get_id_and_classes "energy-status-how-table" %}>
+                        <tr {% get_id_and_classes "energy-status-how-calculator" %}>
+                            <td {% get_id_and_classes "energy-status-how-activities-content" %}>
+                                The following activities can help your {{ TEAM_LABEL.lower }}
+                                conserve energy, and you earn points!
+                                {% include "golow_activities.html" %}
+                            </td>
+                        </tr>
+                    </table>
+                </fieldset>
+            </div>
+        </div>
+

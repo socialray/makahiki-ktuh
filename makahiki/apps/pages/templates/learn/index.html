@@ -13,18 +13,23 @@
 {% endblock %}
 
 {% block body %}
-    <div id='home'>
+    <div id='notifications'>
         {% include "widgets/notifications/templates/index.html" %}
     </div>
-    <div id='smartgrid'>
-        {% include "widgets/smartgrid/templates/index.html" %}
-    </div>
-    <div id='upcoming_events'>
-        {% include "widgets/upcoming_events/templates/index.html" %}
-    </div>
+    <table>
+        <tr><td width="40%" valign="top">
+            <div id='upcoming_events'>
+                {% include "widgets/upcoming_events/templates/index.html" %}
+            </div>
 
-    <div id='scoreboard'>
-        {% include "widgets/scoreboard/templates/index.html" %}
-    </div>
+            <div id='scoreboard'>
+                {% include "widgets/scoreboard/templates/index.html" %}
+            </div>
+        </td><td width="60%" valign="top">
+            <div id='smartgrid'>
+                {% include "widgets/smartgrid/templates/index.html" %}
+            </div>
+        </td></tr>
+    </table>
 
 {% endblock %}

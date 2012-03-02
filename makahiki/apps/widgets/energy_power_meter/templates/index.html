@@ -1,0 +1,25 @@
+{% load class_tags %}
+{% load markup %}
+
+{% if user.get_profile.team %}
+        <div {% get_id_and_classes "energy-power" %}>
+            <div {% get_id_and_classes "activity-power-box" %}>
+                <div {% get_id_and_classes "energy-power-title" %}>
+                    Current {{ TEAM_LABEL }} Power
+                    <a href="#" style="float: right">
+                        <img src="{{ STATIC_URL}}/css/default/images/icon-help-sm.png" width="20"
+                             align="center"
+                             title="Click to get help about this window"
+                             onclick="toggleHelp('widget', 'lounge-power'); return false;"
+                                /></a>
+                </div>
+                <div {% get_id_and_classes "energy-power-content" %}>
+                    <center>
+                        <div {% get_id_and_classes "energy-power-gauge" %}>
+                          {% include "power.html" %}
+                        </div>
+                    </center>
+                </div>
+            </div>
+        </div>
+{% endif %}

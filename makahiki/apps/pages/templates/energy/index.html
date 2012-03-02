@@ -10,21 +10,26 @@
 
 {% block extra_head %}
     {% import_page_css "energy" STATIC_URL CSS_THEME %}
+    <link rel="stylesheet" href="{{ STATIC_URL }}css/{{ CSS_THEME }}/pages/energy_scoreboard.css">
 {% endblock %}
 
 {% block body %}
-    <div id='energy_power_meter'>
-        {% include "widgets/energy_power_meter/templates/index.html" %}
-    </div>
-    <div id='energy_goal'>
-        {% include "widgets/energy_goal/templates/index.html" %}
-    </div>
-
-    <div id='energy_scoreboard'>
-        {% include "widgets/energy_scoreboard/templates/index.html" %}
-    </div>
-
-    <div id='wallpost'>
-        {% include "widgets/wallpost/templates/index.html" %}
-    </div>
+    <table>
+    <tr><td width="40%" valign="top">
+        <div id='energy_power_meter'>
+            {% include "widgets/energy_power_meter/templates/index.html" %}
+        </div>
+        <div id='energy_scoreboard'>
+            {% include "widgets/energy_scoreboard/templates/index.html" %}
+        </div>
+    </td><td width="60%" valign="top">
+        <div id='energy_goal'>
+            {% include "widgets/energy_goal/templates/index.html" %}
+        </div>
+        <div id='wallpost'>
+            {% include "widgets/wallpost/templates/index.html" %}
+        </div>
+    </td>
+    </tr>
+    </table>
 {% endblock %}

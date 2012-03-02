@@ -1,0 +1,41 @@
+#energy-scoreboard table {
+    border: 0;
+    margin: 0;
+    padding: 0;
+    border-spacing: 0;
+    width: 310px;
+}
+
+#energy-scoreboard table th {
+    background: #d0cb9b;
+    font-weight: bold;
+    padding: 4px 4px 4px 20px;
+}
+
+#energy-scoreboard table td {
+    padding: 4px 4px 4px 20px;
+}
+
+#energy-scoreboard-table .alt-row {
+    background: #d9d3a6;
+}
+
+#energy-scoreboard-message {
+    margin-top: .5em;
+    margin-left: 30px;
+    font-size: 12pt;
+}
+
+/******* Scoreboard cycle styles ******/
+#scoreboard-cycle-nav {
+    text-align: center;
+}
+
+#scoreboard-cycle-nav a {
+    padding: 1px 5px;
+}
+
+#scoreboard-cycle-nav a.activeSlide {
+    font-weight: bold;
+    /*  background-color: #DBD7AF;*/
+}

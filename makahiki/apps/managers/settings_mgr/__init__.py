@@ -6,6 +6,18 @@ import datetime
 from django.conf import settings
 
 
+def get_round_info():
+    """Returns a dictionary containing round information."""
+    # Copy the round info and insert the overall round.
+    rounds = settings.COMPETITION_ROUNDS.copy()
+
+    #if "Overall" not in rounds:
+    #    rounds["Overall"] = {"start": settings.COMPETITION_START,
+    #                         "end": settings.COMPETITION_END}
+
+    return rounds
+
+
 def get_current_round():
     """Get the current round name."""
     round_info = get_current_round_info()
@@ -17,7 +29,7 @@ def get_current_round():
 
 def get_current_round_info():
     """Gets the current round and associated dates."""
-    rounds = settings.COMPETITION_ROUNDS
+    rounds = get_round_info()
     today = datetime.datetime.today()
     for key in rounds.keys():
         start = rounds[key]["start"]

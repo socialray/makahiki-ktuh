@@ -193,6 +193,9 @@ INSTALLED_WIDGET_APPS = (
     'widgets.smartgrid',
     'widgets.upcoming_events',
     'widgets.scoreboard',
+    'widgets.energy_power_meter',
+    'widgets.energy_goal',
+    'widgets.energy_scoreboard',
 )
 
 INSTALLED_APPS += INSTALLED_WIDGET_APPS

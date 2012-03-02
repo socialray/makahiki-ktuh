@@ -1,0 +1,1 @@
+"""Energy Goal module"""

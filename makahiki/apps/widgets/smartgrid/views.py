@@ -66,7 +66,7 @@ def _get_categories(user):
             commitment_members.append(member_dict)
 
         tasks = []
-        for task in ActivityBase.objects.all():
+        for task in ActivityBase.objects.all().order_by("category__id", "priority"):
             task_dict = {}
             task_dict["category_id"] = task.category_id
             task_dict["id"] = task.id
