@@ -1,14 +1,10 @@
-"""
- settings.py
- This file contains system level settings.
- Settings include database, cache, path, middleware, and installed apps and
- logging.
- New settings should not be added here.
-"""
+"""Djanjo settings file containing system-level settings.
+   Settings include database, cache, path, middleware, and installed apps and logging."""
 
 import posixpath
 import os
 import urlparse
+import sys
 
 SITE_ID = 1
 
@@ -289,8 +285,14 @@ if 'DATABASE_URL' in os.environ:
             'HOST': url.hostname,
             'PORT': url.port,
             }
+else:
+    print "Environment variable DATABASE_URL not defined. Exiting."
+    sys.exit(1)
 
 if 'MAKAHIKI_ADMIN_INFO' in os.environ:
     admin_info = os.environ['MAKAHIKI_ADMIN_INFO'].split(":")
     ADMIN_USER = admin_info[0]
     ADMIN_PASSWORD = admin_info[1]
+else:
+    print "Environment variable MAKAHIKI_ADMIN_INFO not defined. Exiting."
+    sys.exit(1)
