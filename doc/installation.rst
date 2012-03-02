@@ -1,16 +1,21 @@
 Installation
 ============
 
-Prerequisite Software
----------------------
+1. Install prerequisite software
+--------------------------------
 
 `Python`_ 2.6 or higher (but not Python 3). On Windows machines, it
-is recommended that you use the 32 bit version, as using the 64 bit
-version appears to have issues. 
+is recommended that you use the 32 bit version.
 
 `Apple Developer Tools`_ (OS/X only). If on Mac OS X, install
 Apple Developer Tools (i.e. XCode 4). This is required in order to 
-build certain libraries (PIL, etc.) that require GCC (which is bundled with XCode).
+build certain libraries (PIL, etc.) that require GCC (which is bundled with
+XCode).
+
+`Visual C++`_ (Windows only).  If on Windows, you will need to install
+Visual Studio.  Please read and follow this `blog post on Django
+installation on Windows`_.  Note that Makahiki developers all work on Unix
+platforms, so we do not regularly test for Windows compatibility.
 
 `Python Imaging Library`_ (PIL). If you are on OSX, it is easier to
 install via `Homebrew`_. Once Homebrew is installed, install PIL by
@@ -39,8 +44,11 @@ addition to adding the virtualenv startup script (it uses
 database.   Be sure to read the README file; on OS/X you must edit
 sysctl.conf in order to ensure that the server runs correctly.  Once
 installed, be sure that your PostgreSQL installation's bin/ directory 
-is on $PATH so that ``pg_config`` is defined.  Note for Unix users: you
-must download postgres-dev in order to get the pg_config command. 
+is on $PATH so that ``pg_config`` and ``psql`` are defined.  Note for non-Mac users: you
+must download postgres-dev in order to get the pg_config command.  It is
+important that the user "postgres" is "trusted" so that you can connect to
+the server as the user "postgres" locally without authentication.  This should be the
+default behavior. 
 
 .. _Python: http://www.python.org/download/
 .. _Python Imaging Library: http://www.pythonware.com/products/pil/
@@ -51,13 +59,15 @@ must download postgres-dev in order to get the pg_config command.
 .. _Virtualenvwrapper: http://www.doughellmann.com/docs/virtualenvwrapper/
 .. _PostgreSQL: http://www.postgresql.org/
 .. _Apple Developer Tools: https://developer.apple.com/technologies/mac/
+.. _Visual C++: http://microsoft.com/visualstudio/en-us/products/2008-editions/express
+.. _blog post on Django installation on Windows: http://slacy.com/blog/2011/06/django-postgresql-virtualenv-development-setup-for-windows-7/
 
-Downloading the Makahiki source
+2. Download the Makahiki source
 -------------------------------
 
 To download the source for your own fork::
 
-  git clone git://github.com/csdl/makahiki.git
+  % git clone git://github.com/csdl/makahiki.git
 
 If you wish to commit to the Makahiki project, you will need to
 create an account at `GitHub`_. Then, you will need to set up your
@@ -69,94 +79,134 @@ added as a collaborator.
 Once you are added as a collaborator, you should be able to check out the
 code as follows::
 
-  git clone git@github.com:csdl/makahiki.git
+  % git clone git@github.com:csdl/makahiki.git
 
 This will create the new folder and download the code from the repository.
-
-Downloading required libraries
-------------------------------
-
-The following steps will download additional libraries and upgrade some of the default ones.
-
--  cd into the makahiki folder.
--  Start your virtual environment by typing ``workon <environment-name>``.
--  Type ``pip install -r requirements.txt``.
-   This will load the dependencies in requirements.txt. 
 
 .. _GitHub: http://github.com
 .. _SSH keys: http://help.github.com/key-setup-redirect
 .. _email settings: http://help.github.com/git-email-settings/
 
-Basic Makahiki configuration
------------------------------
+3. cd to makahiki, and workon makahiki
+--------------------------------------
 
-Start your virtual environment by typing ``workon <environment-name>``.
+The remaining steps require you to be in the makahiki directory and to have
+activated that virtual environment::
 
-Update game_settings.py with the settings related to the
-game. Important settings include the CAS authentication server
-for your organization and your time zone.
+  % cd makahiki/
+  % workon makahiki
 
-update local_settings.py with any additional settings can be used to
-override previously defined settings. For example, you can specify a
-different database in this file.
+If you start a new shell in the midst of this process, you must be sure to invoke ``workon makahiki``
+and of course cd to the appropriate directory before continuing. 
 
-Type ``python manage.py syncdb --noinput`` to create the database.
 
-Run ``python manage.py migrate`` to sync the migrations.
+4. Download and install libraries
+---------------------------------
 
-To load some sample data into the application, type
-``./scripts/load_data.sh``. If you are on Windows, you can use
-``scripts\load_data.bat``.
+Once you have the source, you must next install a set of third party
+libraries into your Makahiki virtual environment::
 
-Running the server
-------------------
+  % pip install -r requirements.txt
+  
+This command will produce a lot of output, but it should terminate without
+indicating that an error occurred.
 
-Type ``python manage.py runserver`` to start the web server.
 
-Open a browser and go to http://localhost:8000 to see the website.
+5. Configure Postgres database
+------------------------------
 
-Adding Facebook Integration
----------------------------
+Next, create a makahiki user and database in your postgres server::
 
-The Javascript required to log in to Facebook is included in this
-application. However, you will need to apply for your own application on
-Facebook at their `Developer Site`_. Once this is done, it is
-recommended that you add this to the local\_settings.py file. These
-settings can be added to settings.py, but be aware that a) this file is
-in public version control, and you don’t want others knowing your secret
-keys and b) subsequent updates may reset the settings.py file.
+  % scripts/initialize_postgres.py
+    CREATE ROLE
+    ALTER ROLE
+    CREATE DATABASE
+    REVOKE
+    GRANT
+    GRANT
 
-::
-   
-   FACEBOOK_APP_ID = '<APP_ID>'
-   FACEBOOK_API_KEY = '<API_KEY>'
-   FACEBOOK_SECRET_KEY = '<SECRET_KEY>'
 
-These can be found in your application’s page within the Facebook
-Developer page.
+As you can see, executing the script should echo the commands to create the
+user and database. 
 
-Running tests
--------------
+6. Setup environment variables
+------------------------------
 
-You can run the tests using ``python manage.py test``.
+Makahiki requires two environment variables: DATABASE_URL and
+MAKAHIKI_ADMIN_INFO.  
 
-Other resources
----------------
+In Unix, these environment variables can be defined this way::
 
-Here are some online Python books that may be helpful when learning the
-language.
+  % DATABASE_URL=postgres://makahiki:makahiki@localhost:5432/makahiki
+  % export DATABASE_URL
 
--  Dive Into Python: Used to be online, but it has been taken down.
--  `Learn Python the Hard Way`_ (more geared toward people new to
-   coding)
+  % MAKAHIKI_ADMIN_INFO=admin:admin
+  % export MAKAHIKI_ADMIN_INFO
 
-The following tutorials may be helpful when learning about Django and
-the various packages used by the system.
+You will want to either add these variables to a login script so they are
+always available, or you can edit the postactivate file (in unix, found in
+~/.virtualenvs/makahiki/bin) so that they are defined whenever you 
+``workon makahiki``.
 
--  `Django Tutorial`_
--  `South Tutorial`_
+Note that you will want to provide a stronger password for the makahiki
+admin account if this server is publically accessable. 
 
-.. _Developer Site: http://developers.facebook.com/
-.. _Learn Python the Hard Way: http://learnpythonthehardway.org/index
-.. _Django Tutorial: http://docs.djangoproject.com/en/dev/intro/tutorial01/
-.. _South Tutorial: http://south.aeracode.org/docs/tutorial/part1.html
+7.  Configure Postgres database some more
+-----------------------------------------
+
+Now you can further configure the postgres database with the models in the
+Makahiki system::
+
+
+  % python manage.py syncdb --noinput
+    Syncing...
+    Creating tables ...
+    Creating table settings_mgr_challengesettings
+     :
+    Not synced (use migrations):
+    - 
+   (use ./manage.py migrate to migrate these)
+
+To make sure that the schemas are fully up to date, you invoke the migrate
+script::
+
+  % python manage.py migrate
+
+8. Test your installation
+-------------------------
+
+To see if the system has been installed correctly, run the tests::
+
+  % python manage.py test
+
+9. Load sample data (optional)
+------------------------------
+
+You might want to load some sample data into the system to provide a more
+realistic display on login.  If so, do the following::
+
+  % scripts/load_data.sh
+
+
+10. Bring up the server
+-----------------------
+
+Finally, you can start the Makahiki server::
+
+  % python manage.py runserver
+
+Open a browser and go to http://localhost:8000 to see the home page. 
+
+
+11. Login to administrative interface
+-------------------------------------
+
+Once the server is running, you must login as admin in order to continue
+configuration. To do this, go to http://localhost:8000/account/login
+and login using the credentials you specified in Step (6) above. 
+
+Once you are logged in, go to the administrator page at
+http://localhost:8000/admin
+
+(Documentation of page and widget configuration coming soon.)
+
