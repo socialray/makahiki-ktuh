@@ -1,0 +1,28 @@
+<script src="{{STATIC_URL}}/js/quest.js" type="text/javascript"></script>
+
+{% load class_tags %}
+
+<div {% get_id_and_classes "quest-box" %} style="clear: both">
+    <div {% get_id_and_classes "quest-header" %}>
+        <h3 {% get_id_and_classes "quest-title" %}>Your Quests</h3>
+        <a href="#" style="float: right">
+            <img src="{{ STATIC_URL}}/css/default/images/icon-help-sm.png" width="20" align="center"
+                 title="Click to get help about this window"
+                 onclick="toggleHelp('widget', 'quests'); return false;"
+                    /></a>
+    </div>
+    <div style="clear: both"></div>
+
+    {% if view_objects.quests.user_quests or view_objects.quests.available_quests %}
+        {% include "quest_list.html" %}
+    {% else %}
+        <p style="text-align: center; width: 100%">There are no quests available at this time.  Please check back later!</p>
+    {% endif %}
+
+    <div {% get_id_and_classes "quest-details" %} style="margin: 0px 10px; display: none">
+        <div {% get_id_and_classes "quest-contents" %} style="clear:both"></div>
+        <a href="javascript:void(0)" {% get_id_and_classes "quest-hide" %}>Close</a>
+
+        <div style="clear:both"></div>
+    </div>
+</div>

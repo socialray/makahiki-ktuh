@@ -1,0 +1,43 @@
+{% load class_tags %}
+
+<div {% get_id_and_classes "news-wall" %}>
+    <div {% get_id_and_classes "news-wall-box" %}>
+        <div {% get_id_and_classes "news-wall-title" %}>
+            {{ view_objects.wallpost.title }}
+            <a href="#" style="float: right">
+                <img src="{{ STATIC_URL}}/css/default/images/icon-help-sm.png" width="20"
+                     align="center"
+                     title="Click to get help about this window"
+                     onclick="toggleHelp('widget', 'news-feed'); return false;"
+                        /></a>
+        </div>
+        <div {% get_id_and_classes "news-wall-content" %}>
+            {{ view_objects.wallpost.description }}
+            <div {% get_id_and_classes "wall-form" %}>
+                <form {% get_id_and_classes "news-post-form" %} action="{% url news_post %}"
+                                                                method="POST">
+                    {% csrf_token %}
+                    <div {% get_id_and_classes "wall-post-errors" %}></div>
+                    <div {% get_id_and_classes "wall-post" %}>
+                        {{ view_objects.wallpost.wall_form.post }}
+                    </div>
+                    <div style="text-align: center">
+                        <button id="wall-post-submit"
+                                style="font-size: 12px; margin-top:1.2em; margin-left:0.5em; margin-right:0.5em; margin-bottom:1.2em;">
+                            Post
+                        </button>
+                    </div>
+                    <!-- <a {% get_id_and_classes "wall-post-submit" %} href="#">Post</a> -->
+                </form>
+            </div>
+
+            <ul {% get_id_and_classes "wall-posts" %}>
+                {% include "news_posts.html" %}
+            </ul>
+            {% if not view_objects.wallpost.posts %}
+                <p {% get_id_and_classes "wall-no-posts" %} style="padding: 7px;">There are no posts
+                    yet!</p>
+            {% endif %}
+        </div>
+    </div>
+</div>

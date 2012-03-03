@@ -1,0 +1,15 @@
+{% load class_tags %}
+
+<ul id="quest-list">
+    {# set variable to indicate that these are user quests. #}
+    {% with "true" as user_quest %}
+        {% for quest in view_objects.quests.user_quests %}
+            {% include "quest_item.html" %}
+        {% endfor %}
+    {% endwith %}
+
+    {# render available quests #}
+    {% for quest in view_objects.quests.available_quests %}
+        {% include "quest_item.html" %}
+    {% endfor %}
+</ul>

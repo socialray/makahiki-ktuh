@@ -1,0 +1,32 @@
+{% load class_tags %}
+{% load avatar_tags %}
+
+
+    <div {% get_id_and_classes "news-most-popular" %}>
+        <div {% get_id_and_classes "news-most-popular-title" %}>
+            Most Popular
+            <a href="#" style="float: right">
+                <img src="{{ STATIC_URL}}/css/default/images/icon-help-sm.png" width="20"
+                     align="center"
+                     title="Click to get help about this window"
+                     onclick="toggleHelp('widget', 'most-popular'); return false;"
+                        /></a>
+        </div>
+        <div {% get_id_and_classes "news-most-popular-content" %}>
+            <div {% get_id_and_classes "news-most-popular-tasks" %} >
+                {% include "popular_tasks.html" %}
+            </div>
+            <script type="text/javascript">
+                $(document).ready(function () {
+                    var height = 45; //Minimum height of the box.
+                    $("#news-most-popular-tasks").children().each(function (index, value) {
+                        if ($(value).height() > height) {
+                            height = $(value).height() + 30;
+                        }
+                    });
+
+                    $("#news-most-popular-tasks").cycle({height:"" + height + "px"});
+                })
+            </script>
+        </div>
+    </div>

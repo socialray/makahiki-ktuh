@@ -180,20 +180,28 @@ INSTALLED_APPS = (
 # INSTALLED Widgets
 ################################
 INSTALLED_WIDGET_APPS = (
-    'widgets.home',
-    'widgets.notifications',
-    'widgets.help_intro',
-    'widgets.help_faq',
-    'widgets.help_rule',
     'widgets.ask_admin',
-    'widgets.smartgrid',
-    'widgets.upcoming_events',
-    'widgets.scoreboard',
-    'widgets.energy_power_meter',
+    'widgets.badges',
     'widgets.energy_goal',
+    'widgets.energy_power_meter',
     'widgets.energy_scoreboard',
+    'widgets.help_faq',
+    'widgets.help_intro',
+    'widgets.help_rule',
+    'widgets.home',
+    'widgets.my_achievements',
+    'widgets.my_commitments',
+    'widgets.my_info',
+    'widgets.notifications',
+    'widgets.popular_tasks',
     'widgets.prizes',
+    'widgets.quests',
     'widgets.raffle',
+    'widgets.scoreboard',
+    'widgets.smartgrid',
+    'widgets.team_members',
+    'widgets.upcoming_events',
+    'widgets.wallpost'
 )
 
 INSTALLED_APPS += INSTALLED_WIDGET_APPS
@@ -279,7 +287,12 @@ USE_I18N = True
 # default setting, can be override by DB Challenge settings.
 LOCALE_SETTING = 'en_US.UTF-8'
 
+########################
+# DEBUG Settings: SHOULD REMOVE FOR PRODUCTION
+#######################
 DEBUG = True
+TEMPLATE_DEBUG=True
+
 
 #############################################
 # Load sensitive settings from OS environment

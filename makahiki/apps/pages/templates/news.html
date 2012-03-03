@@ -1,0 +1,34 @@
+{% extends "logged_in_base.html" %}
+
+{% load class_tags %}
+
+{% block page_title %}
+    News
+{% endblock %}
+
+{% block selected_icon %}selected-news{% endblock %}
+
+{% block extra_head %}
+    {% import_page_css "news" STATIC_URL CSS_THEME %}
+{% endblock %}
+
+{% block body %}
+    <table><tr><td width="50%" valign="top">
+    <div id='team_members'>
+        {% include "widgets/team_members/templates/index.html" %}
+    </div>
+    <div id='wallpost'>
+        {% include "widgets/wallpost/templates/index.html" %}
+    </div>
+    </td><td width="50%" valign="top">
+    <div id='upcomping_events'>
+        {% include "widgets/upcoming_events/templates/index.html" %}
+    </div>
+    <div id='popular_tasks'>
+        {% include "widgets/popular_tasks/templates/index.html" %}
+    </div>
+    <div id='my_commitments'>
+        {% include "widgets/my_commitments/templates/index.html" %}
+    </div>
+    </td></tr></table>
+{% endblock %}

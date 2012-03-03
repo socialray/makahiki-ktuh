@@ -1,0 +1,87 @@
+#news-wall {
+    margin-left: 2px;
+    text-align: left;
+}
+
+#news-wall-content a {
+    color: #db9703;
+}
+
+a#wall-post-submit {
+    background: transparent url(/site_media/static/css/default/images/bkg-buttonx80.png) top left no-repeat;
+    height: 27px;
+    display: block;
+    cursor: pointer;
+    float: right;
+    margin: .7em .5em;
+    text-align: center;
+    text-decoration: none;
+    padding: 0 auto 0 auto;
+    line-height: 25px;
+    text-transform: uppercase;
+    color: #000;
+}
+
+#id_post {
+    height: 30px;
+    margin: .5em 0 .5em .5em;
+    float: left;
+}
+
+
+#news-wall-content hr {
+    display: none;
+}
+
+#news-wall-content ul {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+#news-wall-content li {
+    clear: both;
+}
+
+#news-wall-content li div{
+    padding: 5px;
+}
+
+#news-wall-content li div div {
+    padding: 0;
+}
+
+#news-wall-content .news-image {
+    float: left;
+    width: 40px;
+}
+
+#news-wall-content .news-text p {
+    text-align: left;
+    margin: 0 0 10px 50px;
+}
+
+#news-wall-content .news-posted {
+    text-align: left;
+    font-size: 8pt;
+    margin: 0 0 0 50px;
+    font-style: italic;
+    color: #777;
+}
+
+#news-wall-content .news-system-text p {
+    margin: 0 0 10px 20px;
+    font-style: italic;
+}
+
+#news-wall-content .news-system-posted {
+    font-size: 8pt;
+    margin: 0 0 0 20px;
+    font-style: italic;
+    color: #777;
+}
+
+#view-more-posts {
+    padding: .5em 0 0 .5em;
+    text-align: center;
+}

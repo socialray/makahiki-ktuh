@@ -113,7 +113,8 @@ class PageSettings(models.Model):
                     ("win", "win"),
                     ("energy", "energy"),
                     ("advanced", "advanced"),
-                    ("profile", "profile"))
+                    ("profile", "profile"),
+                    ("news", "news"),)
 
     name = models.CharField(
         default="home",

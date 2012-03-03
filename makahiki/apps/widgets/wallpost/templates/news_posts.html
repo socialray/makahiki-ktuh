@@ -1,0 +1,22 @@
+{% load class_tags %}
+{% for post in view_objects.wallpost.posts %}
+    <!-- {% cycle 'alt-row' '' as cycle_class %} -->
+    {% if post.style_class == "user_post" %}
+        {% include "user_post.html" %}
+    {% else %}
+        {% include "system_post.html" %}
+    {% endif %}
+
+    {% if forloop.last and view_objects.wallpost.more_posts %}
+        <li {% get_id_and_classes "view-more-posts" %}>
+            <a href="#" onclick='
+                    $.get("{% url news_more_posts %}?last_post={{post.id}}&page_name={{ view_objects.wallpost.page_name }}", function(data) {
+                    $("#view-more-posts").remove();
+                    $("#wall-posts").append(data.contents);
+                    });
+
+                    return false;'>See more</a>
+        </li>
+    {% endif %}
+{% endfor %}
+

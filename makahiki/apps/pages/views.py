@@ -40,7 +40,7 @@ def index(request):
     # get user energy rank and usage
     _get_energy_rank(request, view_objects)
 
-    return render_to_response("%s/index.html" % page_name, {
+    return render_to_response("%s.html" % page_name, {
         "view_objects": view_objects,
         }, context_instance=RequestContext(request))
 

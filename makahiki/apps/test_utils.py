@@ -7,6 +7,7 @@ from django.core.files.images import ImageFile
 from apps.managers.settings_mgr.models import PageSettings
 from apps.managers.team_mgr.models import Team, Group
 from apps.widgets.prizes.models import Prize
+from apps.widgets.quests.models import Quest
 
 
 class TestUtils:
@@ -132,3 +133,17 @@ class TestUtils:
             )
         prize.save()
         return prize
+
+    @staticmethod
+    def create_quest(completion_conditions):
+        """create the test quest"""
+        quest = Quest(
+                name="Test quest",
+                quest_slug="test_quest",
+                description="test quest",
+                level=1,
+                unlock_conditions="True",
+                completion_conditions=completion_conditions,
+                )
+        quest.save()
+        return quest

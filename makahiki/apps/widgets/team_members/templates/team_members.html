@@ -1,0 +1,33 @@
+{% extends "logged_in_base.html" %}
+
+{% load class_tags %}
+{% load avatar_tags %}
+
+{% block page_title %}
+    Team Members
+{% endblock %}
+
+{% block selected_icon %}selected-news{% endblock %}
+
+{% block extra_head %}
+    {% import_page_css "news" STATIC_URL CSS_THEME %}
+{% endblock %}
+
+{% block body %}
+    <div {% get_id_and_classes "team-members" %}>
+        <div {% get_id_and_classes "team-members-title" %}>
+            {{ TEAM_LABEL }} Members
+        </div>
+        <div {% get_id_and_classes "team-members-content" %}>
+            <a href="{% url news_index %}">Back to the news page</a>
+            <ul {% get_id_and_classes "team-member-detail-list" %}>
+                {% for member in team_members %}
+                    <!-- {% cycle 'alt-row' '' as cycle_class %} -->
+                    <li class="{{cycle_class}}">
+                        {% include "news/directory/member.html" %}
+                    </li>
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
+{% endblock %}

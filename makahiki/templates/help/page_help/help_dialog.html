@@ -1,9 +1,0 @@
-{% load markup %}
-
-{% if object.title %}
-<div id="help-dialog-{{number}}" title="{{object.title}}">
-{% else %}
-<div id="help-dialog-{{number}}" title="No title">
-{% endif %}
-  {{object.text|markdown}}
-</div>
