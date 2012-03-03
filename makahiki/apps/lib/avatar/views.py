@@ -69,7 +69,7 @@ def get_facebook_photo(request):
                 "http://graph.facebook.com/%s/picture?type=large" % fb_id
         })
 
-        response = render_to_string("avatar_mgr/avatar_facebook.html", {
+        response = render_to_string("avatar/avatar_facebook.html", {
             "fb_error": fb_error,
             "fb_id": fb_id,
             "fb_form": form,
@@ -187,7 +187,7 @@ def change(request, extra_context=None, next_override=None):
             "http://graph.facebook.com/%s/picture?type=large" % fb_id
     })
     return render_to_response(
-        'avatar_mgr/change.html',
+        'avatar/change.html',
         extra_context,
         context_instance=RequestContext(
             request,

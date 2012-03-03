@@ -1,1 +1,1 @@
-pylint --rcfile=../pylint.rc apps
+pylint --rcfile=scripts/pylint.rc apps
