@@ -1,16 +1,7 @@
-# ignore top level not related to makahiki production app
-deploy/
-doc/
-log/
-.coveragerc
-.travis.yml
+deploy
+doc
 README.md
-
-# ignore all test files
 tests.py
-tests/
-test_*.*
-test_*/
-
-# ignore scripts/ dir
-scripts/
+tests
+test_*
+scripts
