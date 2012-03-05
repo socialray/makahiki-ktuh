@@ -209,6 +209,5 @@ class RafflePrizesTestCase(TestCase):
 
         response = self.client.post(reverse("raffle_add_ticket", args=(raffle_prize.id,)),
             follow=True)
-        print response
         self.failUnlessEqual(response.status_code, 200)
         self.assertContains(response, "The raffle for this round is over.")

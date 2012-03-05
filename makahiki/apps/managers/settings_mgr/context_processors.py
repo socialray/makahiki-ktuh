@@ -22,7 +22,7 @@ def competition(request):
 
     # Get Facebook info.
     try:
-        facebook_app_id = settings.FACEBOOK_APP_ID
+        facebook_app_id = settings.CHALLENGE.facebook_app_id
     except AttributeError:
         facebook_app_id = None
 

@@ -37,13 +37,6 @@ class ChallengeSettings(models.Model):
         help_text="The contact email of the admin.",
         max_length=100,)
 
-    setup_wizard_activity_name = models.CharField(
-        default="Intro video",
-        help_text="The name of the activity in the setup wizard. If the user " \
-                  "answers that question correctly, this activity will be " \
-                  "marked as completed.",
-        max_length=100,)
-
     # Choices can be found here:
     # http://www.postgresql.org/docs/8.1/static/datetime-keywords.html#DATETIME-TIMEZONE-SET-TABLE
     time_zone = models.CharField(
@@ -67,6 +60,44 @@ class ChallengeSettings(models.Model):
         default="default",
         help_text="The UI theme for this installation.",
         max_length=50,)
+
+    facebook_app_id = models.CharField(
+        default="",
+        help_text="The FACEBOOK_APP_ID for facebook integration.",
+        max_length=100,)
+
+    facebook_secret_key = models.CharField(
+        default="",
+        help_text="The FACEBOOK_SECRET_KEY for facebook integration.",
+        max_length=100,)
+
+    email_enabled = models.BooleanField(
+        default=False,
+        help_text="Enable email?",
+        )
+
+    email_host = models.CharField(
+        default="",
+        help_text="The host name of the email server.",
+        max_length=100,)
+
+    email_port = models.IntegerField(
+        default=587,
+        help_text="The port of the email server",)
+
+    email_host_user = models.CharField(
+        default="",
+        help_text="The username for the email server.",
+        max_length=100,)
+
+    email_host_password = models.CharField(
+        default="",
+        help_text="The user password for the email server.",
+        max_length=100,)
+
+    email_use_tls = models.BooleanField(
+        default=True,
+        help_text="Use TLS in the email server?",)
 
     def __unicode__(self):
         return self.site_name

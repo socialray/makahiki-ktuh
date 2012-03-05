@@ -71,9 +71,19 @@ def _load_db_settings():
 
     # required setting for the CAS authentication service.
     settings.CAS_SERVER_URL = settings.CHALLENGE.cas_server_url
+
+    # global settings
     settings.LOCALE_SETTING = settings.CHALLENGE.locale_setting
     settings.TIME_ZONE = settings.CHALLENGE.time_zone
     settings.LANGUAGE_CODE = settings.CHALLENGE.language_code
+
+    # email settings
+    if settings.CHALLENGE.email_enabled:
+        settings.EMAIL_HOST = settings.CHALLENGE.email_host
+        settings.EMAIL_PORT = settings.CHALLENGE.email_port
+        settings.EMAIL_HOST_USER = settings.CHALLENGE.email_host_user
+        settings.EMAIL_HOST_PASSWORD = settings.CHALLENGE.email_host_password
+        settings.EMAIL_USE_TLS = settings.CHALLENGE.email_use_tls
 
     # get the Round settings from DB
     rounds = RoundSettings.objects.all()

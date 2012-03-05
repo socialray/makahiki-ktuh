@@ -171,10 +171,7 @@ INSTALLED_APPS = (
     'django.contrib.admin',
     'django.contrib.admindocs',
     'django.contrib.markup',
-
-    # migration support. comment out if module is not installed.
-    'south',
-    )
+)
 
 ################################
 # INSTALLED Widgets
@@ -201,10 +198,13 @@ INSTALLED_WIDGET_APPS = (
     'widgets.smartgrid',
     'widgets.team_members',
     'widgets.upcoming_events',
-    'widgets.wallpost'
+    'widgets.wallpost',
 )
 
 INSTALLED_APPS += INSTALLED_WIDGET_APPS
+
+# migration support, need to be the last app.
+INSTALLED_APPS += ('south',)
 
 ################
 # TEST settings

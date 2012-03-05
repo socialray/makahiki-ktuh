@@ -140,8 +140,8 @@ def profile_facebook(request):
     """
     if request.is_ajax():
         fb_user = facebook.get_user_from_cookie(request.COOKIES,
-                                                settings.FACEBOOK_APP_ID,
-                                                settings.FACEBOOK_SECRET_KEY)
+                                                settings.CHALLENGE.facebook_app_id,
+                                                settings.CHALLENGE.facebook_secret_key)
         fb_id = None
         if not fb_user:
             return HttpResponse(json.dumps({
@@ -248,8 +248,8 @@ def _get_profile_form(request, form=None, non_xhr=False):
     """
     try:
         fb_user = facebook.get_user_from_cookie(request.COOKIES,
-                                                settings.FACEBOOK_APP_ID,
-                                                settings.FACEBOOK_SECRET_KEY)
+                                                settings.CHALLENGE.facebook_app_id,
+                                                settings.CHALLENGE.facebook_secret_key)
     except AttributeError:
         fb_user = None
 
