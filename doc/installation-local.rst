@@ -193,7 +193,7 @@ realistic display on login.  If so, do the following::
 
 Finally, you can start the Makahiki server::
 
-  % ./manage.py runserver
+  % ./manage.py run_gunicorn
 
 Open a browser and go to http://localhost:8000 to see the home page. 
 

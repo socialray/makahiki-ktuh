@@ -1,6 +1,4 @@
-"""
-urls for ask admin
-"""
+"""Ask Admin URL."""
 
 from django.conf.urls.defaults import url, patterns
 

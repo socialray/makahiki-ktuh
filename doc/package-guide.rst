@@ -17,6 +17,16 @@ Package: apps.managers
    Subpackage: Settings Manager <packages/settings_mgr>
    Subpackage: Team Manager <packages/team_mgr>
 
+Package: apps.widgets
+----------------------
+.. automodule:: apps.widgets
+
+.. toctree::
+   :maxdepth: 1
+
+   Subpackage: Ask_Admin widget <packages/ask_admin>
+
+
 Package: css_rules
 ------------------
 .. automodule:: apps.css_rules

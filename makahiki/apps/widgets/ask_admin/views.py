@@ -1,5 +1,6 @@
-"""
-views handler for ask admin page rendering.
+"""Views handler for ask admin page rendering.
+
+.. note:: Current source code hardwires the email address for admins.
 """
 import simplejson as json
 
@@ -26,7 +27,7 @@ def supply(request, page_name):
 
 
 def send_feedback(request):
-    """send feedbacl"""
+    """send feedback."""
     if request.method == "POST":
         form = FeedbackForm(request.POST)
         if form.is_valid():

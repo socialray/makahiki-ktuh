@@ -65,24 +65,34 @@ environments. In addition, neither of these systems are open source.
 
 
 
-Developer Guide
+User Guide
 ---------------
+
+How to install, configure, and manage a Makahiki-based sustainability challenge.
 
 .. toctree::
    :maxdepth: 1
 
-   Makahiki's architecture <architecture>
-   Downloading and installation <installation>
-   Configuration and customization <configuration>
-   Deployment: locally or to the cloud <deployment>
-   Running a sustainability challenge <execution>
+   Installation (local and cloud-based) <installation>
+   Configuring a challenge  <configuration>
+   Running a challenge <execution>
+   Management commands  <management-commands>
+
+Developer Guide
+---------------
+
+Information for development of the Makahiki system.
+
+.. toctree::
+   :maxdepth: 1
+
+   Architecture <architecture>
+   Package documentation <package-guide>
+   Reference Guide: Scripts <scripts>
+   Coding standards <coding-standards>
    Data logging and analysis <logging-and-analysis>
    Developing a new game plugin <plugin-development>
-   Appendix A: Package reference <package-guide>
-   Appendix B: Management commands reference <management-commands>
-   Appendix C: Scripts reference <scripts>
-   Appendix D: Coding standards <coding-standards>
-   Appendix E: Developing and running tests <testing>
+   Developing and running tests <testing>
 
 
 Contact Us
