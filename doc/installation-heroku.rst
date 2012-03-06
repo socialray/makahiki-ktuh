@@ -1,10 +1,10 @@
 Installation (Heroku)
 =====================
 
-1. Install prerequisite software
---------------------------------
+1. Install Heroku
+-----------------
 
-Heroku.  Sign up for an account and install the Heroku toolbelt following
+Sign up for an account and install the Heroku toolbelt following
 the instructions in the `Heroku Cheat Sheet`_ 
 
 .. _Heroku Cheat Sheet: http://devcenter.heroku.com/articles/quickstart
@@ -25,8 +25,8 @@ To download the Makahiki system, type the following::
 This will create a directory called "makahiki" containing the source code
 for the system.
 
-3. Create your Heroku application
----------------------------------
+3. Create your Heroku Makahiki application
+------------------------------------------
 
 Change directory to makahiki, and create the heroku application.  Heroku
 requires unique names, so if your organization is "hpu", then you might
@@ -50,8 +50,8 @@ below. You can also choose a different admin account name if you wish::
 
   % heroku config:add MAKAHIKI_ADMIN_INFO=admin:Dog4Days56
 
-5. Send Makahiki system to Heroku
----------------------------------
+5. Send the Makahiki system to Heroku
+-------------------------------------
 
 To upload the Makahiki source code to Heroku, do the following::
 
@@ -86,7 +86,7 @@ This last command should bring up a browser and retrieve the home page of
 your Makahiki application running on Heroku.
 
 
-11. Login to administrative interface
+7. Login to administrative interface
 -------------------------------------
 
 Once the server is running, you must login as admin in order to continue
