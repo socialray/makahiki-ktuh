@@ -71,8 +71,8 @@ Developer Guide
 .. toctree::
    :maxdepth: 1
 
-   Downloading and installation <installation>
    Makahiki's architecture <architecture>
+   Downloading and installation <installation>
    Configuration and customization <configuration>
    Deployment: locally or to the cloud <deployment>
    Running a sustainability challenge <execution>
