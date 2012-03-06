@@ -90,7 +90,7 @@ This will create the new folder and download the code from the repository.
 3. cd to makahiki, and workon makahiki
 --------------------------------------
 
-The remaining steps require you to be in the makahiki directory and to have
+The remaining steps require you to be in the makahiki/ directory and to have
 activated that virtual environment::
 
   % cd makahiki/
@@ -158,7 +158,7 @@ Now you can further configure the postgres database with the models in the
 Makahiki system::
 
 
-  % python manage.py syncdb --noinput
+  % ./manage.py syncdb --noinput
     Syncing...
     Creating tables ...
     Creating table settings_mgr_challengesettings
@@ -170,14 +170,14 @@ Makahiki system::
 To make sure that the schemas are fully up to date, you invoke the migrate
 script::
 
-  % python manage.py migrate
+  % ./manage.py migrate
 
 8. Test your installation
 -------------------------
 
 To see if the system has been installed correctly, run the tests::
 
-  % python manage.py test
+  % ./manage.py test
 
 9. Load sample data (optional)
 ------------------------------
@@ -193,7 +193,7 @@ realistic display on login.  If so, do the following::
 
 Finally, you can start the Makahiki server::
 
-  % python manage.py runserver
+  % ./manage.py runserver
 
 Open a browser and go to http://localhost:8000 to see the home page. 
 

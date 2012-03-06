@@ -1,6 +1,4 @@
-"""
-team manager tests
-"""
+"""Tests for team_manager."""
 
 
 import datetime
@@ -38,9 +36,7 @@ class DormUnitTestCase(TestCase):
         TestUtils.set_competition_round()
 
     def testTeamPointsInRound(self):
-        """
-        Tests calculating the team points leaders in a round.
-        """
+        """Tests calculating the team points leaders in a round."""
         profile = self.users[0].get_profile()
         profile.add_points(10,
             datetime.datetime.today() - datetime.timedelta(minutes=1), "test")
@@ -105,9 +101,7 @@ class DormUnitTestCase(TestCase):
                          "The leader of the team should have changed back.")
 
     def testTeamPointsOverall(self):
-        """
-        Tests calculating the team points leaders in a round.
-        """
+        """Tests calculating the team points leaders in a round."""
         profile = self.users[0].get_profile()
         profile.add_points(10,
                            datetime.datetime.today() -\
@@ -186,9 +180,7 @@ class TeamLeadersTestCase(TestCase):
         TestUtils.set_competition_round()
 
     def testTeamPointsInRound(self):
-        """
-        Tests calculating the team points leaders in a round.
-        """
+        """Tests calculating the team points leaders in a round."""
         profile = self.users[0].get_profile()
         profile.add_points(10,
             datetime.datetime.today() - datetime.timedelta(minutes=1), "test")
@@ -236,9 +228,7 @@ class TeamLeadersTestCase(TestCase):
                          "The leader of the team should have changed back.")
 
     def testIndividualPointsInRound(self):
-        """
-        Tests calculating the individual points leaders in a round.
-        """
+        """Tests calculating the individual points leaders in a round."""
         profile = self.users[0].get_profile()
         profile.add_points(10,
                            datetime.datetime.today() -
@@ -306,9 +296,7 @@ class TeamLeadersTestCase(TestCase):
                          "The leader of the team should have changed back.")
 
     def testTeamPointsOverall(self):
-        """
-        Tests calculating the team points leaders in a round.
-        """
+        """Tests calculating the team points leaders in a round."""
         profile = self.users[0].get_profile()
         profile.add_points(10,
                            datetime.datetime.today() -

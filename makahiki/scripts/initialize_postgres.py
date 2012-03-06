@@ -1,6 +1,8 @@
 #!/usr/bin/python
 
-"""Creates makahiki database and user within postgres database.
+"""Invocation: scripts/initialize_postgres.py
+
+Creates makahiki database and user within postgres database.
 Assumes that the user postgres is trusted and can login without authentication.
 This is usually the case by default.
 """

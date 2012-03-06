@@ -1,3 +1,1 @@
-"""
-Management commands
-"""
+"""Implements player management commands."""
