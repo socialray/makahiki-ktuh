@@ -311,13 +311,15 @@ if 'DATABASE_URL' in os.environ:
             'PORT': url.port,
             }
 else:
-    print "Environment variable DATABASE_URL not defined. Exiting."
-    sys.exit(1)
+    if 'READTHEDOCS' not in os.environ:
+        print "Environment variable DATABASE_URL not defined. Exiting."
+        sys.exit(1)
 
 if 'MAKAHIKI_ADMIN_INFO' in os.environ:
     admin_info = os.environ['MAKAHIKI_ADMIN_INFO'].split(":")
     ADMIN_USER = admin_info[0]
     ADMIN_PASSWORD = admin_info[1]
 else:
-    print "Environment variable MAKAHIKI_ADMIN_INFO not defined. Exiting."
-    sys.exit(1)
+    if 'READTHEDOCS' not in os.environ:
+        print "Environment variable MAKAHIKI_ADMIN_INFO not defined. Exiting."
+        sys.exit(1)
