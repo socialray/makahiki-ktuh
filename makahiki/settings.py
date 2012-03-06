@@ -166,6 +166,7 @@ INSTALLED_APPS = (
     'staticfiles',
     'django_nose',
     'django_extensions',
+    'gunicorn',
 
     # internal
     'django.contrib.admin',
