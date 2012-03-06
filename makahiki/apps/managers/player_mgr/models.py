@@ -1,6 +1,5 @@
-"""
-Player Manager Models
-"""
+"""Define the model for Player state."""
+
 import datetime
 
 from django.db import models
@@ -19,9 +18,8 @@ from apps.managers.cache_mgr.utils import invalidate_info_bar_cache
 
 
 class Profile(models.Model):
-    """
-    Profile represents a player's profile info, and his points,
-    and other book keeping.
+    """Profile represents a player's profile info, and his points,
+       and other book keeping.
     """
     user = models.ForeignKey(User, unique=True, verbose_name='user',
                              related_name='profile')
@@ -61,9 +59,7 @@ class Profile(models.Model):
 
     @staticmethod
     def points_leaders(num_results=10, round_name=None):
-        """
-        Returns the top points leaders out of all users.
-        """
+        """Returns the top points leaders out of all users."""
         if round_name:
             return Profile.objects.filter(
                 scoreboardentry__round_name=round_name,
@@ -92,8 +88,7 @@ class Profile(models.Model):
         return None
 
     def current_round_team_rank(self):
-        """Returns the rank of the user for the current round in their own
-        team."""
+        """Returns the rank of the user for the current round in their own team."""
         current_round = get_current_round()
         if current_round:
             return self.team_rank(round_name=current_round)
@@ -151,8 +146,7 @@ class Profile(models.Model):
             ).count() + 1
 
     def canopy_karma_info(self):
-        """
-        Returns a dictionary containing the user's rank and the total number
+        """Returns a dictionary containing the user's rank and the total number
         of canopy members.
         """
         query = Profile.objects.filter(canopy_member=True)
@@ -162,7 +156,7 @@ class Profile(models.Model):
             }
 
     def _is_canopy_activity(self, related_object):
-        """check if the related_object is a canopy activity"""
+        """Check if the related_object is a canopy activity."""
         return related_object != None and\
                ((hasattr(related_object,
                          "activity") and related_object.activity.is_canopy)
@@ -173,9 +167,8 @@ class Profile(models.Model):
 
     def add_points(self, points, submission_date, message,
                    related_object=None):
-        """
-        Adds points based on the point value of the submitted object.
-        Note that this method does not save the profile.
+        """Adds points based on the point value of the submitted object.
+           Note that this method does not save the profile.
         """
         # Create a transaction first.
         transaction = PointsTransaction(
@@ -217,12 +210,10 @@ class Profile(models.Model):
 
     def remove_points(self, points, submission_date, message,
                       related_object=None):
-        """
-        Removes points from the user. Note that this method does not save the
-         profile.
+        """Removes points from the user.
+        Note that this method does not save the profile.
         If the submission date is the same as the last_awarded_submission
-        field, we rollback
-        to a previously completed task.
+        field, we rollback to a previously completed task.
         """
 
         # Invalidate info bar cache.
@@ -267,7 +258,8 @@ class Profile(models.Model):
 
     def _get_round(self, submission_date):
         """Get the round that the submission date corresponds to.
-        Returns None if it doesn't correspond to anything."""
+           :returns None if it doesn't correspond to anything.
+        """
 
         rounds = settings.COMPETITION_ROUNDS
 
@@ -281,9 +273,8 @@ class Profile(models.Model):
         return None
 
     def _last_submitted_before(self, submission_date):
-        """
-        Time of the last task that was completed before the submission date.
-        Returns None if there are no other tasks.
+        """Time of the last task that was completed before the submission date.
+           :returns None if there are no other tasks.
         """
         try:
             return PointsTransaction.objects.filter(
@@ -294,9 +285,7 @@ class Profile(models.Model):
             return None
 
     def save(self, *args, **kwargs):
-        """
-        Custom save method to check for referral bonus.
-        """
+        """Custom save method to check for referral bonus."""
         has_referral = self.referring_user is not None and not self\
         .referrer_awarded
         referrer = None
@@ -314,15 +303,13 @@ class Profile(models.Model):
             referrer.save()
 
     class Meta:
-        """ Meta
-        """
+        """Meta sets verbosse name and plural."""
         verbose_name = 'profile'
         verbose_name_plural = 'profiles'
 
 
 def create_profile(sender, instance=None, **kwargs):
-    """ create a profile automatically when creating a user.
-    """
+    """ Create a profile automatically when creating a user."""
     _ = sender
     if (kwargs.get('created', True) and not kwargs.get('raw', False)):
         Profile.objects.get_or_create(user=instance, name=instance.username)

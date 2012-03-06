@@ -1,7 +1,4 @@
-"""
- provides competition settings in the request context to be used within
- a template. It mainly retrieve the settings from settings files.
-"""
+"""Provides competition settings in the request context to be used within a template."""
 from django.conf import settings
 from apps.managers.settings_mgr import get_current_round_info, in_competition
 from apps.managers.player_mgr.models import Profile
@@ -9,7 +6,10 @@ from apps.managers.team_mgr.models import Team
 
 
 def competition(request):
-    """Provides access to standard competition constants within a template."""
+    """Provides access to standard competition constants within a template.
+
+:param request: The request object.
+:return: a dictionary of game settings."""
     # Get user-specific information.
 
     user = request.user

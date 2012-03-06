@@ -1,6 +1,4 @@
-"""
-team mgr models
-"""
+"""Defines the model for teams."""
 import datetime
 
 from django.db import models
@@ -10,13 +8,9 @@ from django.db.models import Sum, Max
 
 from apps.managers.settings_mgr import get_current_round
 
-# Create your models here.
-
 
 class Group(models.Model):
-    """
-    defines the group that a team belongs to.
-    """
+    """Defines the group that a team belongs to."""
     # Automatically populate slug field when the name is added.
     prepopulated_fields = {"slug": ("name",)}
 
@@ -28,9 +22,7 @@ class Group(models.Model):
         return self.name
 
     def team_points_leaders(self, num_results=10, round_name=None):
-        """
-        Returns the top points leaders for the given group.
-        """
+        """Returns the top points leaders for the given group."""
         if round_name:
             return self.team_set.filter(
                 profile__scoreboardentry__round_name=round_name
@@ -45,8 +37,7 @@ class Group(models.Model):
         ).order_by("-points", "-last")[:num_results]
 
     def save(self, *args, **kwargs):
-        """Custom save method to generate slug and set
-        created_at/updated_at."""
+        """Custom save method to generate slug and set created_at/updated_at."""
         if not self.slug:
             self.slug = slugify(self.name)
 
@@ -54,9 +45,7 @@ class Group(models.Model):
 
 
 class Team(models.Model):
-    """
-    represents a team that a player belongs to.
-    """
+    """Represents the team that a player belongs to."""
     prepopulated_fields = {"slug": ("name",)}
 
     name = models.CharField(
@@ -72,9 +61,7 @@ class Team(models.Model):
 
     @staticmethod
     def team_points_leaders(num_results=10, round_name=None):
-        """
-        Returns the team points leaders across all groups.
-        """
+        """Returns the team points leaders across all groups."""
         if round_name:
             return Team.objects.select_related('group').filter(
                 profile__scoreboardentry__round_name=round_name
@@ -89,9 +76,7 @@ class Team(models.Model):
         ).order_by("-points", "-last")[:num_results]
 
     def points_leaders(self, num_results=10, round_name=None):
-        """
-        Gets the individual points leaders for the team.
-        """
+        """Gets the individual points leaders for the team."""
         if round_name:
             return self.profile_set.select_related('scoreboardentry').filter(
                 scoreboardentry__round_name=round_name
@@ -102,8 +87,7 @@ class Team(models.Model):
                order_by("-points", "-last_awarded_submission")[:num_results]
 
     def current_round_rank(self):
-        """ current round rank
-        """
+        """Gets the ranking of this team during the current round."""
         current_round = get_current_round()
         if current_round:
             return self.rank(round_name=current_round)
@@ -161,8 +145,7 @@ class Team(models.Model):
         return None
 
     def points(self, round_name=None):
-        """Returns the total number of points for the team.  Takes an
-        optional parameter for a round."""
+        """Returns the total number of points for the team.  Optional parameter for a round."""
         if round_name:
             from apps.managers.player_mgr.models import ScoreboardEntry
 
@@ -174,8 +157,7 @@ class Team(models.Model):
         return dictionary["points__sum"] or 0
 
     def save(self, *args, **kwargs):
-        """Custom save method to generate slug and set
-        created_at/updated_at."""
+        """Custom save method to generate slug and set created_at/updated_at."""
         if not self.slug:
             self.slug = slugify(self.name)
 
@@ -206,7 +188,7 @@ class Post(models.Model):
 
 
 class PostComment(models.Model):
-    """represent the structure for comments in a post"""
+    """Represent the structure for comments in a post."""
     user = models.ForeignKey(User)
     post = models.ForeignKey(Post)
     text = models.TextField()

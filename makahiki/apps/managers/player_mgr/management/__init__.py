@@ -1,3 +1,1 @@
-"""
-Management commands
-"""
+"""Management commands for players."""

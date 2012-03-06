@@ -1,6 +1,4 @@
-"""
-team manager Admin
-"""
+"""Administrator interface to teams."""
 from django.contrib import admin
 from apps.managers.team_mgr.models import Group, Team, Post
 
@@ -9,8 +7,7 @@ admin.site.register(Team)
 
 
 class PostAdmin(admin.ModelAdmin):
-    """ admin for Post
-    """
+    """Post administrator for teams, overrides delete_selected"""
     list_filter = ["style_class", "team"]
     actions = ["delete_selected"]
 

@@ -1,6 +1,5 @@
-"""
-score manager models
-"""
+"""The model definition for scores."""
+
 from django.db import models
 from django.db.models import Q
 from django.contrib.auth.models import User
@@ -9,8 +8,7 @@ from django.contrib.contenttypes.models import ContentType
 
 
 class ScoreboardEntry(models.Model):
-    """Defines a class that tracks the user's scores in the rounds of the
-    competition."""
+    """Defines the model that tracks user scores."""
 
     profile = models.ForeignKey("player_mgr.Profile", editable=False)
     round_name = models.CharField(max_length="30",
@@ -73,9 +71,8 @@ class ScoreboardEntry(models.Model):
 
 
 class PointsTransaction(models.Model):
-    """
-    Entries that track points awarded to users.
-    """
+    """Entries that track points awarded to users."""
+
     user = models.ForeignKey(User)
     points = models.IntegerField()
     submission_date = models.DateTimeField()

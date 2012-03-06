@@ -1,7 +1,10 @@
-"""
-load and create the users from a csv file containing lounge, name, and email,
-if the second argument is RA, the csv file is the RA list, consists of name,
+"""Invocation:  python manage.py load_users <file.csv> [RA]
+
+Load and create the users from a csv file containing lounge, name, and email.
+If the second argument is RA, then the csv file is the RA list, consists of name,
 email, lounge.
+
+.. note:: This command has UH-specific code in it and must be revised.
 """
 from django.core import management
 from django.contrib.auth.models import User
@@ -11,7 +14,8 @@ from django.db.utils import IntegrityError
 
 
 class Command(management.base.BaseCommand):
-    """load user command"""
+    """Load user command."""
+
     help = """load and create the users from a csv file containing lounge,
      name, and email, if the second argument is RA, the csv file is the RA
      list, consists of name, email, lounge."""
@@ -24,10 +28,7 @@ class Command(management.base.BaseCommand):
     is_ra = False
 
     def handle(self, *args, **options):
-        """
-        Load and create the users from a csv file containing lounge, name,
-        and email.
-        """
+        """Load and create the users from a csv file containing lounge, name, and email."""
         if len(args) == 0:
             self.stdout.write("the csv file name missing.\n")
             return
@@ -60,8 +61,9 @@ class Command(management.base.BaseCommand):
         print "---- total loaded: %d , errors: %d" % (load_count, error_count)
 
     def parse_ok(self, line):
-        """ parse the line, return false if there is an error
-        """
+        """Parse the line.
+           :return false if there is an error."""
+
         items = line.split(":")
 
         if self.is_ra:
@@ -103,7 +105,7 @@ class Command(management.base.BaseCommand):
             return get_dorm(dorm) + '-' + get_team(team)
 
         def get_dorm(dorm):
-            """returns the dorm name"""
+            """Returns the dorm name."""
             return {
                 'LE': 'Lehua',
                 'MO': 'Mokihana',
@@ -111,8 +113,7 @@ class Command(management.base.BaseCommand):
                 'LO': 'Lokelani'}[dorm]
 
         def get_team(team):
-            """ returns the team name
-            """
+            """ Returns the team name."""
             return {
                 '03': 'A',
                 '04': 'A',
@@ -126,8 +127,7 @@ class Command(management.base.BaseCommand):
                 '12': 'E'}[team]
 
     def create_user(self):
-        """ create a user
-        """
+        """Create a user."""
         try:
             user = User.objects.get(username=self.username)
             user.delete()

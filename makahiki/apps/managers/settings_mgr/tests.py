@@ -1,6 +1,4 @@
-"""
-test settings
-"""
+"""Tests the settings_mgr module."""
 
 import datetime
 
@@ -89,13 +87,13 @@ class BaseUnitTestCase(TestCase):
         saved_rounds = settings.COMPETITION_ROUNDS
         current_round = "Round 1"
 
-        test_utils.set_competition_round()
+        test_utils.TestUtils.set_competition_round()
 
         current = get_current_round()
         self.assertEqual(current, current_round,
             "Test that the current round is returned.")
 
-        test_utils.set_competition_round()
+        test_utils.TestUtils.set_competition_round()
 
         current_round = get_current_round()
         self.assertTrue(current_round is None,

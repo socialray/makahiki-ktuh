@@ -1,6 +1,4 @@
-"""
-url for logging
-"""
+"""Specify the URL pattern to be associated with logging."""
 
 from django.conf.urls.defaults import patterns, url
 

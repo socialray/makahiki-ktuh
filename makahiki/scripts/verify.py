@@ -1,6 +1,8 @@
 #!/usr/bin/python
 
-"""Runs pep8, pylint, and tests.
+"""Invocation: scripts/verify.py
+
+Runs pep8, pylint, and tests.
 If all are successful, there is no output and program terminates normally.
 If any errors, prints output from unsuccessful programs and exits with non-zero error code.
 """

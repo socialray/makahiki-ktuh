@@ -1,9 +1,8 @@
 #!/usr/bin/python
 
-"""Runs the tests using the coverage command. The HTML coverage report is automatically
-generated and placed in htmlcov/. If you want the plaintext report, run
-"coverage report -m".
-"""
+"""Invocation:  scripts/coverage.py
+
+Runs the tests and computes their coverage. An HTML coverage report is generated in htmlcov/."""
 
 import os
 
