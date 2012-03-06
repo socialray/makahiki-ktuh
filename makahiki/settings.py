@@ -138,6 +138,7 @@ INSTALLED_APPS = (
     'lib.brabeion',
     'lib.facebook_api',
     'lib.avatar',
+    'gunicorn',
 
     # Django apps
     'django.contrib.auth',

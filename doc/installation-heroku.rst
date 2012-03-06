@@ -1,5 +1,5 @@
-Installation (Heroku)
-=====================
+Makahiki Installation (Heroku)
+==============================
 
 1. Install Heroku
 -----------------

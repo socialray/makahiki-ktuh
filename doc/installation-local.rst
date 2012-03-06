@@ -1,5 +1,5 @@
-Installation (Local)
-====================
+Makahiki Installation (Local)
+=============================
 
 1. Install prerequisite software
 --------------------------------
