@@ -8,21 +8,6 @@ import sys
 
 SITE_ID = 1
 
-#######################
-# Cache settings
-#######################
-CACHES = {
-    'default': {
-        'BACKEND': 'django.core.cache.backends.dummy.DummyCache',
-        }
-}
-
-CACHE_MIDDLEWARE_ALIAS = 'default'
-# Note that this set up means the per site cache applies only to the landing
-# and about pages.
-CACHE_MIDDLEWARE_ANONYMOUS_ONLY = True
-CACHE_MIDDLEWARE_SECONDS = 600
-
 ###############
 # PATH settings
 ###############
@@ -288,6 +273,7 @@ USE_I18N = True
 #############################################
 # Load sensitive settings from OS environment
 #############################################
+# DB settings
 if 'DATABASE_URL' in os.environ:
     urlparse.uses_netloc.append('postgres')
     url = urlparse.urlparse(os.environ['DATABASE_URL'])
@@ -305,6 +291,7 @@ else:
     print "Environment variable DATABASE_URL not defined. Exiting."
     sys.exit(1)
 
+# Admin info Settings
 if 'MAKAHIKI_ADMIN_INFO' in os.environ:
     admin_info = os.environ['MAKAHIKI_ADMIN_INFO'].split(":")
     ADMIN_USER = admin_info[0]
@@ -313,6 +300,26 @@ else:
     print "Environment variable MAKAHIKI_ADMIN_INFO not defined. Exiting."
     sys.exit(1)
 
+# DEBUG settings
 if 'MAKAHIKI_DEBUG' in os.environ and os.environ['MAKAHIKI_DEBUG'] == "True":
     DEBUG = True
     TEMPLATE_DEBUG=True
+
+# CACHE settings
+if 'MEMCACHE_SERVERS' in os.environ:
+    CACHES = {
+        'default': {
+            'BACKEND': 'django_pylibmc.memcached.PyLibMCCache'
+        }
+    }
+else:
+    CACHES = {
+        'default': {
+            'BACKEND': 'django.core.cache.backends.dummy.DummyCache',
+            }
+    }
+
+CACHE_MIDDLEWARE_ALIAS = 'default'
+# Note that this set up means the per site cache applies only to the landing and about pages.
+CACHE_MIDDLEWARE_ANONYMOUS_ONLY = True
+CACHE_MIDDLEWARE_SECONDS = 600
