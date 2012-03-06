@@ -9,10 +9,25 @@ body {
 }
 
 .nav li img {
-    width: 24px;
-    height: 24px;
+    width: 40px;
+    height: 40px;
     vertical-align: middle;
     margin-right: 2px;
+}
+
+.home-icon-content {
+    background: #E3E3E3;
+    
+    background-image: -moz-linear-gradient(100% 50% 90deg, #E3E3E3, #A1A1A1);
+    background-image: -webkit-gradient(linear, 0% 0%, 0% 90%, from(#E3E3E3), to(#BBB));
+    
+    border-radius: 3px;
+	
+	box-shadow: 3px 3px 5px #000;
+	-moz-box-shadow: 3px 3px 5px #000;
+	-webkit-box-shadow: 3px 3px 5px #000;
+	
+	margin-right: 30px;
 }
 
 .navbar .brand {
