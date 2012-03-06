@@ -1,5 +1,5 @@
 Installation (Heroku)
-====================
+=====================
 
 1. Install prerequisite software
 --------------------------------
