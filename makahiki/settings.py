@@ -149,9 +149,7 @@ INSTALLED_APPS = (
 
     # external
     'staticfiles',
-    'django_nose',
     'django_extensions',
-    'gunicorn',
 
     # internal
     'django.contrib.admin',
@@ -190,7 +188,8 @@ INSTALLED_WIDGET_APPS = (
 INSTALLED_APPS += INSTALLED_WIDGET_APPS
 
 # migration support, need to be the last app.
-INSTALLED_APPS += ('south',)
+# nose has to be after south!
+INSTALLED_APPS += ('south', 'django_nose',)
 
 ################
 # TEST settings
@@ -288,8 +287,9 @@ if 'DATABASE_URL' in os.environ:
             'PORT': url.port,
             }
 else:
-    print "Environment variable DATABASE_URL not defined. Exiting."
-    sys.exit(1)
+    if 'READTHEDOCS' not in os.environ:
+        print "Environment variable DATABASE_URL not defined. Exiting."
+        sys.exit(1)
 
 # Admin info Settings
 if 'MAKAHIKI_ADMIN_INFO' in os.environ:
@@ -297,16 +297,22 @@ if 'MAKAHIKI_ADMIN_INFO' in os.environ:
     ADMIN_USER = admin_info[0]
     ADMIN_PASSWORD = admin_info[1]
 else:
-    print "Environment variable MAKAHIKI_ADMIN_INFO not defined. Exiting."
-    sys.exit(1)
+    if 'READTHEDOCS' not in os.environ:
+        print "Environment variable MAKAHIKI_ADMIN_INFO not defined. Exiting."
+        sys.exit(1)
 
 # DEBUG settings
-if 'MAKAHIKI_DEBUG' in os.environ and os.environ['MAKAHIKI_DEBUG'] == "True":
-    DEBUG = True
-    TEMPLATE_DEBUG=True
+DEBUG = True
+TEMPLATE_DEBUG = True
+if 'MAKAHIKI_HEROKU' in os.environ and os.environ['MAKAHIKI_HEROKU'] == "True":
+    DEBUG = False
+    TEMPLATE_DEBUG = False
 
 # CACHE settings
-if 'MEMCACHE_SERVERS' in os.environ:
+CACHE_MIDDLEWARE_ALIAS = 'default'
+CACHE_MIDDLEWARE_ANONYMOUS_ONLY = True
+CACHE_MIDDLEWARE_SECONDS = 600
+if 'MAKAHIKI_HEROKU' in os.environ and os.environ['MAKAHIKI_HEROKU'] == "True":
     CACHES = {
         'default': {
             'BACKEND': 'django_pylibmc.memcached.PyLibMCCache'
@@ -318,8 +324,3 @@ else:
             'BACKEND': 'django.core.cache.backends.dummy.DummyCache',
             }
     }
-
-CACHE_MIDDLEWARE_ALIAS = 'default'
-# Note that this set up means the per site cache applies only to the landing and about pages.
-CACHE_MIDDLEWARE_ANONYMOUS_ONLY = True
-CACHE_MIDDLEWARE_SECONDS = 600

@@ -1,13 +1,11 @@
-"""Defines DB models for makahiki settings.
-"""
+"""Defines the model containing game settings."""
 import datetime
 from django.conf import settings
 from django.db import models
 
 
 class ChallengeSettings(models.Model):
-    """Defines the global settings for the challenge.
-    """
+    """Defines the global settings for the challenge."""
     site_name = models.CharField(
         default="University of Hawaii at Manoa",
         help_text="The name of the site.",
@@ -107,9 +105,8 @@ class RoundSettings(models.Model):
     """Defines the round settings for this challenge.
 
     Start means the competition will start at midnight on that date.
-    End means the competition will end at midnight of that date.
-    This means that a round that ends on "2010-08-02" will end at 11:59pm of
-    August 1st.
+    End means the competition will end at one minute to midnight on the previous day.
+    For example, a round that ends on "2010-08-02" will end at 11:59pm of August 1st.
     """
     name = models.CharField(
         default="Round 1",

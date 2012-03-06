@@ -1,41 +1,42 @@
 #!/usr/bin/python
 
-"""load initial data into makahiki system.
-
-When the system is stable, could run python manage.py loaddata fixturs/* to load everything
-there.
+"""Invocation:  scripts/dump_data.py
+Creates a set of json files in the dumped_data directory containing the current state.
+This state can be loaded into a new instance using load_data.
 """
 
+import commands
 import os
 
-def main():
-    fixture_path = "fixtures"
+state_pairs = [("teams.group teams.team", "base_teams"),
+               ("activities", "base_activities"),
+               ("quests", "base_quests"),
+               ("help_topics", "base_help"),
+               ("auth.user makahiki_profiles makahiki_avatar", "test_users"),
+               ("teams.post", "test_posts"),
+               ("energy_goals", "test_energy_goals"),
+               ("prizes.prize prizes.raffledeadline prizes.raffleprize", "test_prizes")]
+"""Tuples of (<state info to extract>, <json file name in which to write the data>)."""
 
-    os.system("python manage.py dumpdata --indent=4 team_mgr.group team_mgr.team " \
-              "> %s" % os.path.join(fixture_path, "base_teams.json"))
-    os.system("python manage.py dumpdata --indent=4 smartgrid.category smartgrid.activity " \
-              "smartgrid.commitment smartgrid.activitybase smartgrid.questionchoice " \
-              "smartgrid.textpromptquestion " \
-              "> %s" % os.path.join(fixture_path, "base_activities.json"))
-    os.system("python manage.py dumpdata --indent=4 quests " \
-              "> %s" % os.path.join(fixture_path, "base_quests.json"))
-    os.system("python manage.py dumpdata --indent=4 help_mgr " \
-              "> %s" % os.path.join(fixture_path, "base_help.json"))
-    os.system("python manage.py dumpdata --indent=4 auth.user player_mgr " \
-              "> %s" % os.path.join(fixture_path, "test_users.json"))
-    os.system("python manage.py dumpdata --indent=4 energy_goal " \
-              "> %s" % os.path.join(fixture_path, "test_energy_goals.json"))
-    os.system("python manage.py dumpdata --indent=4 energy_power_meter " \
-              "> %s" % os.path.join(fixture_path, "test_energy_power_meter.json"))
-    os.system("python manage.py dumpdata --indent=4 energy_scoreboard " \
-              "> %s" % os.path.join(fixture_path, "test_energy_data.json"))
-    os.system("python manage.py dumpdata --indent=4 prizes raffle " \
-              "> %s" % os.path.join(fixture_path, "test_prizes.json"))
-    os.system("python manage.py dumpdata --indent=4 settings_mgr.challengesettings settings_mgr.pagesettings " \
-              "> %s" % os.path.join(fixture_path, "base_settings.json"))
+
+def main():
+    # Ensure dump_dir/ exists, creating it if not found.
+    dump_dir = os.path.dirname("dumped_data/")
+    if not os.path.exists(dump_dir):
+        os.makedirs(dump_dir)
+
+    #Loop through all state_types, dump the data, then write it out.
+    for state_pair in state_pairs:
+        command = "python manage.py dumpdata --indent=2 " + state_pair[0]
+        (status, output) = commands.getstatusoutput(command)
+        if status:
+            print "Error obtaining " + state_pair[0] + " skipping. (" + output + ")"
+        else:
+            output_file = os.path.join(dump_dir, state_pair[1] + ".json")
+            print "Writing " + output_file
+            with open(output_file, "w") as out:
+                out.write(output)
 
 
 if __name__ == '__main__':
     main()
-
-

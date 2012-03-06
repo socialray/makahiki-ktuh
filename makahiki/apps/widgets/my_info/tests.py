@@ -17,6 +17,11 @@ class ProfileFunctionalTestCase(TestCase):
     def setUp(self):
         """setup"""
         self.user = TestUtils.setup_user(username="user", password="changeme")
+        TestUtils.set_competition_round()
+        TestUtils.register_page_widget("profile", "my_info")
+        TestUtils.register_page_widget("profile", "my_achievements")
+        TestUtils.register_page_widget("profile", "my_commitments")
+        TestUtils.register_page_widget("profile", "quests")
 
         self.client.login(username="user", password="changeme")
 
@@ -124,6 +129,7 @@ class ProfileFunctionalTestCase(TestCase):
         """Check that the user's activity achievements are loaded."""
         activity = Activity(
             title="Test activity",
+            slug="test-activity",
             description="Testing!",
             duration=10,
             point_value=10,
@@ -131,7 +137,7 @@ class ProfileFunctionalTestCase(TestCase):
             expire_date=datetime.datetime.today() + datetime.timedelta(days=7),
             confirm_type="text",
             type="activity",
-            is_canopy=True
+            is_canopy=False
         )
         activity.save()
 
@@ -142,8 +148,7 @@ class ProfileFunctionalTestCase(TestCase):
         response = self.client.get(reverse("profile_index"))
         self.assertContains(response,
             reverse("activity_task", args=(activity.type, activity.slug,)))
-        self.assertContains(response, "Canopy Activity:")
-        self.assertContains(response, "%d&nbsp;(Karma)" % activity.point_value)
+        self.assertContains(response, "Test activity")
 
         # Test adding an event to catch a bug.
         event = Activity(
@@ -196,7 +201,7 @@ class ProfileFunctionalTestCase(TestCase):
         self.assertContains(response,
             reverse("activity_task", args=(commitment.type, commitment.slug,)))
         self.assertNotContains(response, "You have not been awarded anything yet!")
-        self.assertContains(response, "You have nothing in progress or pending.")
+        self.assertNotContains(response, "In Progress")
 
     def testVariablePointAchievement(self):
         """Test that a variable point activity appears correctly in the my achievements list."""

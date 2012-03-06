@@ -14,9 +14,12 @@ coverage==3.5.1
 pylint==0.25.1
 django-extensions==0.7.1
 pep8==0.6.1
-gunicorn==0.13.4
-pylibmc==1.2.2
-django-pylibmc-sasl==0.2.4
+
+# uncomment for heroku deployment
+#gunicorn==0.13.4
+#pylibmc==1.2.2
+#django-pylibmc-sasl==0.2.4
+# end heroku
 
 #django-debug-toolbar==0.9.4
 #django-frontendadmin==0.4

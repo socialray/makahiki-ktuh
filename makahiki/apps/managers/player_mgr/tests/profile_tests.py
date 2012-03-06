@@ -4,7 +4,6 @@ profile tests
 
 import datetime
 
-from django.conf import settings
 from django.test import TestCase
 from django.contrib.auth.models import User
 from django.db import IntegrityError
@@ -23,7 +22,6 @@ class ProfileLeadersTests(TestCase):
         self.users = [User.objects.create_user("test%d" % i, "test@test.com")
                       for i in range(0, 3)]
 
-        self.saved_rounds = settings.COMPETITION_ROUNDS
         self.current_round = "Round 1"
         TestUtils.set_competition_round()
 
@@ -102,10 +100,6 @@ class ProfileLeadersTests(TestCase):
 
         self.assertEqual(Profile.points_leaders()[0], profile2,
             "User 2 should still be the leading profile.")
-
-    def tearDown(self):
-        """Restore the saved settings."""
-        settings.COMPETITION_ROUNDS = self.saved_rounds
 
 
 class ProfileUnitTests(TestCase):
@@ -345,7 +339,6 @@ class ProfileUnitTests(TestCase):
     def testOverallRankForCurrentRound(self):
         """Test that we can retrieve the rank for the user in the current
         round."""
-        saved_rounds = settings.COMPETITION_ROUNDS
         TestUtils.set_competition_round()
 
         user = User(username="test_user", password="changeme")
@@ -371,13 +364,9 @@ class ProfileUnitTests(TestCase):
         self.assertEqual(profile.current_round_overall_rank(), 2,
             "Check that the user is now number 2.")
 
-        # Restore saved rounds.
-        settings.COMPETITION_ROUNDS = saved_rounds
-
     def testTeamRankForCurrentRound(self):
         """Test that we can retrieve the rank for the user in the current
         round."""
-        saved_rounds = settings.COMPETITION_ROUNDS
         TestUtils.set_competition_round()
 
         group = Group(name="Test group")
@@ -410,14 +399,9 @@ class ProfileUnitTests(TestCase):
         self.assertEqual(profile.current_round_team_rank(), 2,
             "Check that the user is now number 2.")
 
-        # Restore saved rounds.
-        settings.COMPETITION_ROUNDS = saved_rounds
-
     def testCurrentRoundPoints(self):
         """Tests that we can retrieve the points for the user in the current
         round."""
-        # Save the round information and set up a test round.
-        saved_rounds = settings.COMPETITION_ROUNDS
         TestUtils.set_competition_round()
 
         user = User(username="test_user", password="changeme")
@@ -439,6 +423,3 @@ class ProfileUnitTests(TestCase):
                          "Check that the number of points did "
                          "not change when points are "
                          "awarded outside of a round.")
-
-        # Restore saved rounds.
-        settings.COMPETITION_ROUNDS = saved_rounds

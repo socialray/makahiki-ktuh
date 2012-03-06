@@ -79,12 +79,11 @@ Developer Guide
    Data logging and analysis <logging-and-analysis>
    Developing a new game plugin <plugin-development>
    Appendix A: Package reference <package-guide>
-   Appendix B: Management command reference <management-commands>
-   Appendix C: Developing and running tests <testing>
+   Appendix B: Management commands reference <management-commands>
+   Appendix C: Scripts reference <scripts>
    Appendix D: Coding standards <coding-standards>
+   Appendix E: Developing and running tests <testing>
 
-
- 
 
 Contact Us
 ----------

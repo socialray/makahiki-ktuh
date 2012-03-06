@@ -1,7 +1,4 @@
-"""
-Server log middleware to log any request from logged in users. write a log
-entry in server log.
-"""
+"""A middleware class to support logging of interactions with logged in users."""
 import logging
 import re
 from time import strftime  # Timestamp
@@ -14,13 +11,10 @@ URL_FILTER = ("/favicon.ico", "/admin/jsi18n/",)
 
 
 class LoggingMiddleware(object):
-    """
-    middleware class for logging
-    """
+    """Provides logging of logged in user interactions."""
     def process_response(self, request, response):
-        """
-        Log the actions of logged in users.
-        """
+        """Log the actions of logged in users."""
+
         # Filter out the following paths.  Logs will not be created for these
         # paths.
         if re.match(MEDIA_REGEXP, request.path) or re.match(SENTRY_REGEXP,
@@ -45,9 +39,7 @@ class LoggingMiddleware(object):
         return response
 
     def __write_log_entry(self, username, request, response=None):
-        """
-        write a log entry.
-        """
+        """Write a log entry corresponding to the passed request."""
         path = request.get_full_path()
         code = response.status_code if response else 500
         method = request.method

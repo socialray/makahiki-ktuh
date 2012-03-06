@@ -101,9 +101,16 @@ appearing in the `apps/pages/views.py`_ module::
 
   """Process the request, dynamically generating the page as specified in page_settings.
 
-  :param request The django request object. 
-  :return The response object for the page.
+  :param request: The django request object. 
+  :return: The response object for the page.
   """
+
+Note the following:
+  * There must be a blank line between the text description and the start
+    of the parameter/return value descriptions.
+  * The directives must start and end with a ":".  Note that this means the
+    param directive includes a trailing ":" after the param name, and the
+    return directive has a ":" on both sides. 
 
 .. _apps/pages/views.py: https://github.com/csdl/makahiki/blob/master/makahiki/apps/pages/views.py
 

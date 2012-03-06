@@ -1,6 +1,4 @@
-"""
-This middleware class handles login check and tracking for every user login.
-"""
+"""A middleware class for player login checking and tracking."""
 
 import datetime
 import re
@@ -10,15 +8,14 @@ from apps.managers.settings_mgr import in_competition
 
 
 class LoginMiddleware(object):
-    """
-    This middleware does the following checks and tracking:
-    1. check if today is in the competition period
-    2. check if user has completed the setup
-    3. tracks how many days in a row the user has come to the site.
+    """This middleware does the following checks and tracking:
+         * checks if today is in the competition period
+         * checks if user has completed the setup
+         * tracks how many days in a row the user has come to the site.
     """
 
     def process_request(self, request):
-        """process the request"""
+        """Check the competition period and that setup is completed."""
         response = self.check_competition_period(request)
         if response is None:
             response = self.check_setup_completed(request)
@@ -50,7 +47,7 @@ class LoginMiddleware(object):
         return None
 
     def check_setup_completed(self, request):
-        """ check to see if setup completed."""
+        """ Check to see if setup has been completed."""
         user = request.user
         path = request.path
         if user.is_authenticated():
@@ -68,8 +65,7 @@ class LoginMiddleware(object):
         return None
 
     def check_competition_period(self, request):
-        """
-        Checks if we are still in the competition. If the user is logged in,
+        """Checks if we are still in the competition. If the user is logged in,
         they are redirected to a competition status page.
         """
         if request.user.is_authenticated():

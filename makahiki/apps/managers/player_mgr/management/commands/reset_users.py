@@ -1,5 +1,13 @@
-"""
-Resets the user(s) as if they never took part in the competition.
+"""Invocation: python manage.py reset_users <user email> [<user email>]*
+
+Resets the user(s) as if they never took part in the competition. Preserves these attributes:
+  * username
+  * email
+  * RA status
+  * admin status
+  * display_name
+  * first and last name
+  * team
 """
 
 from django.core import management
@@ -7,13 +15,12 @@ from django.contrib.auth.models import User
 
 
 class Command(management.base.BaseCommand):
-    """reset user command"""
+    """reset_users command"""
+
     help = 'Resets the user(s) as if they never took part in the competition.'
 
     def handle(self, *args, **options):
-        """
-        Resets the user as if they never took part in the competition.
-        """
+        """Resets the user as if they never took part in the competition."""
         if len(args) == 0:
             self.stdout.write("Need at least one username to reset.\n")
             return
@@ -45,16 +52,7 @@ class Command(management.base.BaseCommand):
             self.reset_user(user)
 
     def reset_user(self, user):
-        """
-        Resets user by deleting them and then restoring them. Preserves the
-        following attributes:
-        * username
-        * email
-        * staff/superuser status
-        * display_name
-        * First and last name
-        * Team/lounge
-        """
+        """Resets the given user by deleting them and then restoring them. """
         username = user.username
         email = user.email
         is_staff = user.is_staff

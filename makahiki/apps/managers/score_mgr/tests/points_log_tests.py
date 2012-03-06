@@ -8,12 +8,15 @@ from django.test import TestCase
 from django.contrib.auth.models import User
 
 from apps.managers.player_mgr.models import PointsTransaction
+from apps.test_utils import TestUtils
 
 
 class PointsLogTest(TestCase):
     """test points log"""
     def setUp(self):
         self.user = User.objects.create_user("test", "test@test.com")
+
+        TestUtils.set_competition_round()
 
     def testAddPoints(self):
         """

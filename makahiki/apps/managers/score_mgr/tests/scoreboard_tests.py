@@ -26,12 +26,14 @@ class ScoreboardEntryUnitTests(TestCase):
         self.current_round = "Round 1"
         TestUtils.set_competition_round()
 
+        self.user.get_profile().add_points(10, datetime.datetime.today(), "test")
+
     def testUserOverallRoundRankWithPoints(self):
         """Tests that the overall rank calculation for a user in a round is
         correct based on points."""
-        top_entry = ScoreboardEntry.objects.filter(round_name=self
-        .current_round).order_by("-points")[0]
-        entry = ScoreboardEntry.objects.get_or_create(
+        top_entry = ScoreboardEntry.objects.filter(
+            round_name=self.current_round).order_by("-points")[0]
+        entry, _ = ScoreboardEntry.objects.get_or_create(
             profile=self.user.get_profile(),
             round_name=self.current_round,
             )
@@ -49,7 +51,7 @@ class ScoreboardEntryUnitTests(TestCase):
         user2.save()
 
         profile2 = user2.get_profile()
-        entry2 = ScoreboardEntry.objects.get_or_create(
+        entry2, _ = ScoreboardEntry.objects.get_or_create(
             profile=profile2,
             round_name=self.current_round,
             )
@@ -66,9 +68,9 @@ class ScoreboardEntryUnitTests(TestCase):
     def testUserOverallRoundRankWithSubmissionDate(self):
         """Tests that the overall rank calculation for a user in a round is
         correct based on submission date."""
-        top_entry = ScoreboardEntry.objects.filter(round_name=self
-        .current_round).order_by("-points")[0]
-        entry = ScoreboardEntry.objects.get_or_create(
+        top_entry = ScoreboardEntry.objects.filter(
+            round_name=self.current_round).order_by("-points")[0]
+        entry, _ = ScoreboardEntry.objects.get_or_create(
             profile=self.user.get_profile(),
             round_name=self.current_round,
             )
@@ -87,7 +89,7 @@ class ScoreboardEntryUnitTests(TestCase):
         user2.save()
 
         profile2 = user2.get_profile()
-        entry2 = ScoreboardEntry.objects.get_or_create(
+        entry2, _ = ScoreboardEntry.objects.get_or_create(
             profile=profile2,
             round_name=self.current_round,
             )
@@ -107,7 +109,7 @@ class ScoreboardEntryUnitTests(TestCase):
         # Setup dorm
         group = Group(name="Test group")
         group.save()
-        team = Team(number="A", group=group)
+        team = Team(name="A", group=group)
         team.save()
 
         profile = self.user.get_profile()
@@ -115,9 +117,9 @@ class ScoreboardEntryUnitTests(TestCase):
         profile.save()
 
         # Set up entry
-        top_entry = ScoreboardEntry.objects.filter(round_name=self
-        .current_round).order_by("-points")[0]
-        entry = ScoreboardEntry.objects.get_or_create(
+        top_entry = ScoreboardEntry.objects.filter(
+            round_name=self.current_round).order_by("-points")[0]
+        entry, _ = ScoreboardEntry.objects.get_or_create(
             profile=self.user.get_profile(),
             round_name=self.current_round,
             )
@@ -137,7 +139,7 @@ class ScoreboardEntryUnitTests(TestCase):
         profile2.team = team
         profile2.save()
 
-        entry2 = ScoreboardEntry.objects.get_or_create(
+        entry2, _ = ScoreboardEntry.objects.get_or_create(
             profile=profile2,
             round_name=self.current_round,
             )
@@ -157,16 +159,16 @@ class ScoreboardEntryUnitTests(TestCase):
         # Set up dorm
         group = Group(name="Test group")
         group.save()
-        team = Team(number="A", group=group)
+        team = Team(name="A", group=group)
         team.save()
 
         # Create the entry for the test user
         profile = self.user.get_profile()
         profile.team = team
         profile.save()
-        top_entry = ScoreboardEntry.objects.filter(round_name=self
-        .current_round).order_by("-points")[0]
-        entry = ScoreboardEntry.objects.get_or_create(
+        top_entry = ScoreboardEntry.objects.filter(
+            round_name=self.current_round).order_by("-points")[0]
+        entry, _ = ScoreboardEntry.objects.get_or_create(
             profile=self.user.get_profile(),
             round_name=self.current_round,
             )
@@ -182,7 +184,7 @@ class ScoreboardEntryUnitTests(TestCase):
         profile2.team = team
         profile2.save()
 
-        entry2 = ScoreboardEntry.objects.get_or_create(
+        entry2, _ = ScoreboardEntry.objects.get_or_create(
             profile=profile2,
             round_name=self.current_round,
             )
@@ -201,7 +203,7 @@ class ScoreboardEntryUnitTests(TestCase):
         has not done anything yet."""
         group = Group(name="Test group")
         group.save()
-        team = Team(number="A", group=group)
+        team = Team(name="A", group=group)
         team.save()
 
         # Rank will be the number of users who have points plus one.
@@ -225,7 +227,7 @@ class ScoreboardEntryUnitTests(TestCase):
         user2.save()
 
         profile2 = user2.get_profile()
-        entry2 = ScoreboardEntry.objects.get_or_create(
+        entry2, _ = ScoreboardEntry.objects.get_or_create(
             profile=profile2,
             round_name=self.current_round,
             )
