@@ -15,6 +15,10 @@ body {
     margin-right: 2px;
 }
 
+.span4 img {
+    margin: 0 auto;
+}
+
 .home-icon-content {
     background: #E3E3E3;
     
@@ -28,6 +32,8 @@ body {
 	-webkit-box-shadow: 3px 3px 5px #000;
 	
 	margin-right: 30px;
+	padding: 5px;
+	margin-bottom: 10px;
 }
 
 .navbar .brand {
