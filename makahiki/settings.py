@@ -164,7 +164,6 @@ INSTALLED_APPS = (
 
     # external
     'staticfiles',
-    'django_nose',
     'django_extensions',
 
     # internal
@@ -204,7 +203,8 @@ INSTALLED_WIDGET_APPS = (
 INSTALLED_APPS += INSTALLED_WIDGET_APPS
 
 # migration support, need to be the last app.
-INSTALLED_APPS += ('south',)
+# nose has to be after south!
+INSTALLED_APPS += ('south', 'django_nose',)
 
 ################
 # TEST settings
