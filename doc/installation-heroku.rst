@@ -90,11 +90,15 @@ your Makahiki application running on Heroku.
 -------------------------------------
 
 Once the server is running, you must login as admin in order to continue
-configuration. To do this, go to http://localhost:8000/account/login
-and login using the credentials you specified in Step (6) above. 
+configuration. To do this, go to::
 
-Once you are logged in, go to the administrator page at
-http://localhost:8000/admin
+  http://<heroku-appname>.herokuapp.com/account/login
 
+and login using the credentials you specified in MAKAHIKI_ADMIN_INFO above. 
+
+Once you are logged in, go to the administrator page at::
+
+  http://<heroku-appname>.herokuapp.com/admin
+ 
 (Documentation of page and widget configuration coming soon.)
 
