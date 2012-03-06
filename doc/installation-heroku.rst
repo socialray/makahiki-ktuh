@@ -80,11 +80,6 @@ A few final commands are needed to get your Makahiki application running on Hero
 
   % heroku run python makahiki/manage.py syncdb --noinput
   % heroku run python makahiki/manage.py migrate
-  % heroku open
-
-This last command should bring up a browser and retrieve the home page of
-your Makahiki application running on Heroku.
-
 
 7. Login to administrative interface
 -------------------------------------
@@ -94,7 +89,10 @@ configuration. To do this, go to::
 
   http://<heroku-appname>.herokuapp.com/account/login
 
-and login using the credentials you specified in MAKAHIKI_ADMIN_INFO above. 
+Of course, replace <heroku-appname> with the name of your heroku
+application (such as makahiki-hpu).
+
+Login using the credentials you specified in MAKAHIKI_ADMIN_INFO above. 
 
 Once you are logged in, go to the administrator page at::
 
