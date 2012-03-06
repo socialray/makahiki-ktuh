@@ -284,16 +284,6 @@ FILE_UPLOAD_PERMISSIONS = 0644
 # to load the internationalization machinery.
 USE_I18N = True
 
-# default setting, can be override by DB Challenge settings.
-LOCALE_SETTING = 'en_US.UTF-8'
-
-########################
-# DEBUG Settings: SHOULD REMOVE FOR PRODUCTION
-#######################
-DEBUG = True
-TEMPLATE_DEBUG=True
-
-
 #############################################
 # Load sensitive settings from OS environment
 #############################################
@@ -321,3 +311,7 @@ if 'MAKAHIKI_ADMIN_INFO' in os.environ:
 else:
     print "Environment variable MAKAHIKI_ADMIN_INFO not defined. Exiting."
     sys.exit(1)
+
+if 'MAKAHIKI_DEBUG' in os.environ and os.environ['MAKAHIKI_DEBUG'] == "True":
+    DEBUG = True
+    TEMPLATE_DEBUG=True
