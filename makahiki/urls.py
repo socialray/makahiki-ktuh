@@ -108,9 +108,16 @@ def _load_db_settings():
     # register the home page and widget
     PageSettings.objects.get_or_create(name="home", widget="home")
 
-    # create admin user if not exists
+
+def _create_admin_user():
+    """Create admin user.
+
+    Create the admin user if not exists. otherwise, reset the password to the ENV.
+    """
     try:
-        User.objects.get(username=settings.ADMIN_USER)
+        user = User.objects.get(username=settings.ADMIN_USER)
+        user.set_password(settings.ADMIN_PASSWORD)
+        user.save()
     except ObjectDoesNotExist:
         user = User.objects.create_superuser(settings.ADMIN_USER, "", settings.ADMIN_PASSWORD)
         profile = user.get_profile()
@@ -119,6 +126,9 @@ def _load_db_settings():
         profile.completion_date = datetime.datetime.today()
         profile.save()
 
-
+# load the db settings if not done yet.
 if not hasattr(settings, "CHALLENGE"):
     _load_db_settings()
+
+# create the admin user or reset the password from ENV
+_create_admin_user()
