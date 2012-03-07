@@ -131,7 +131,6 @@ INSTALLED_APPS = (
     'managers.player_mgr',
     'managers.score_mgr',
     'managers.cache_mgr',
-    'managers.help_mgr',
 
     # 3rd party libraries
     'lib.django_cas',
@@ -162,31 +161,33 @@ INSTALLED_APPS = (
 # INSTALLED Widgets
 ################################
 INSTALLED_WIDGET_APPS = (
-    'widgets.ask_admin',
-    'widgets.badges',
-    'widgets.energy_goal',
-    'widgets.energy_power_meter',
-    'widgets.energy_scoreboard',
-    'widgets.help_faq',
-    'widgets.help_intro',
-    'widgets.help_rule',
-    'widgets.home',
-    'widgets.my_achievements',
-    'widgets.my_commitments',
-    'widgets.my_info',
-    'widgets.notifications',
-    'widgets.popular_tasks',
-    'widgets.prizes',
-    'widgets.quests',
-    'widgets.raffle',
-    'widgets.scoreboard',
-    'widgets.smartgrid',
-    'widgets.team_members',
-    'widgets.upcoming_events',
-    'widgets.wallpost',
+    'ask_admin',
+    'badges',
+    'energy_goal',
+    'energy_power_meter',
+    'energy_scoreboard',
+    'home',
+    'my_achievements',
+    'my_commitments',
+    'my_info',
+    'notifications',
+    'popular_tasks',
+    'prizes',
+    'quests',
+    'raffle',
+    'scoreboard',
+    'smartgrid',
+    'team_members',
+    'upcoming_events',
+    'wallpost',
+    'help',
+    'help.intro',
+    'help.faq',
+    'help.rule',
 )
 
-INSTALLED_APPS += INSTALLED_WIDGET_APPS
+for widget in INSTALLED_WIDGET_APPS:
+    INSTALLED_APPS += ("apps.widgets." + widget, )
 
 # migration support, need to be the last app.
 # nose has to be after south!

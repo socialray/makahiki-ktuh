@@ -3,7 +3,7 @@
 from django.contrib import admin
 from django import forms
 
-from apps.managers.help_mgr.models import HelpTopic
+from apps.widgets.help.models import HelpTopic
 
 
 class HelpAdminForm(forms.ModelForm):

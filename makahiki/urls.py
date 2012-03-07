@@ -28,7 +28,7 @@ urlpatterns = patterns('',
 
     # system level
     url(r'^log/', include('apps.managers.log_mgr.urls')),
-    url(r'^help/', include('apps.managers.help_mgr.urls')),
+    url(r'^help/', include('apps.widgets.help.urls')),
     url(r'^avatar/', include('apps.lib.avatar.urls')),
 
 
@@ -50,8 +50,7 @@ urlpatterns = patterns('',
         name='coming_soon'),
     )
 
-for widget_app in settings.INSTALLED_WIDGET_APPS:
-    widget = widget_app.split('.')[1]
+for widget in settings.INSTALLED_WIDGET_APPS:
     if os.path.isfile(
         "%s/apps/widgets/%s/urls.py" % (settings.PROJECT_ROOT, widget)):
         urlpatterns += patterns('',
