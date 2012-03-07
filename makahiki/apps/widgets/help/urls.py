@@ -3,5 +3,5 @@
 from django.conf.urls.defaults import url, patterns
 
 urlpatterns = patterns('', url(r'^(?P<category>\w+)/(?P<slug>[\w\d\-]+)/$',
-                               'managers.help_mgr.views.topic',
+                               'apps.widgets.help.views.topic',
                                name='help_topic'))

@@ -129,7 +129,7 @@ class RoundSettings(models.Model):
 
 def _get_widget_choice():
     """Retrieves the available page names."""
-    return ((key.split(".")[1], key.split(".")[1]) for key in settings.INSTALLED_WIDGET_APPS)
+    return ((key, key) for key in settings.INSTALLED_WIDGET_APPS)
 
 
 class PageSettings(models.Model):

@@ -346,7 +346,7 @@ def setup_complete(request):
         if request.method == "POST":
             # User got the question right.
             # link it to an activity.
-            if "widgets.smartgrid" in settings.INSTALLED_WIDGET_APPS:
+            if "smartgrid" in settings.INSTALLED_WIDGET_APPS:
                 try:
                     module = importlib.import_module("apps.widgets.smartgrid.models")
                     activity_name = module.SETUP_WIZARD_ACTIVITY_NAME

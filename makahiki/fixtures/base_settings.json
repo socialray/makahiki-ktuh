@@ -27,7 +27,7 @@
     "pk": 3,
     "model": "settings_mgr.pagesettings",
     "fields": {
-      "widget": "help_intro",
+      "widget": "help.intro",
       "name": "help"
     }
   },

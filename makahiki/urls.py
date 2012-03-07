@@ -28,7 +28,7 @@ urlpatterns = patterns('',
 
     # system level
     url(r'^log/', include('apps.managers.log_mgr.urls')),
-    url(r'^help/', include('apps.managers.help_mgr.urls')),
+    url(r'^help/', include('apps.widgets.help.urls')),
     url(r'^avatar/', include('apps.lib.avatar.urls')),
 
 
@@ -50,8 +50,7 @@ urlpatterns = patterns('',
         name='coming_soon'),
     )
 
-for widget_app in settings.INSTALLED_WIDGET_APPS:
-    widget = widget_app.split('.')[1]
+for widget in settings.INSTALLED_WIDGET_APPS:
     if os.path.isfile(
         "%s/apps/widgets/%s/urls.py" % (settings.PROJECT_ROOT, widget)):
         urlpatterns += patterns('',
@@ -109,9 +108,16 @@ def _load_db_settings():
     # register the home page and widget
     PageSettings.objects.get_or_create(name="home", widget="home")
 
-    # create admin user if not exists
+
+def _create_admin_user():
+    """Create admin user.
+
+    Create the admin user if not exists. otherwise, reset the password to the ENV.
+    """
     try:
-        User.objects.get(username=settings.ADMIN_USER)
+        user = User.objects.get(username=settings.ADMIN_USER)
+        user.set_password(settings.ADMIN_PASSWORD)
+        user.save()
     except ObjectDoesNotExist:
         user = User.objects.create_superuser(settings.ADMIN_USER, "", settings.ADMIN_PASSWORD)
         profile = user.get_profile()
@@ -120,6 +126,9 @@ def _load_db_settings():
         profile.completion_date = datetime.datetime.today()
         profile.save()
 
-
+# load the db settings if not done yet.
 if not hasattr(settings, "CHALLENGE"):
     _load_db_settings()
+
+# create the admin user or reset the password from ENV
+_create_admin_user()

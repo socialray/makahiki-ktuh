@@ -10,7 +10,6 @@ Package: apps.managers
 
    Subpackage: Authentication Manager <packages/auth_mgr>
    Subpackage: Cache Manager <packages/cache_mgr>
-   Subpackage: Help Manager <packages/help_mgr>
    Subpackage: Log Manager <packages/log_mgr>
    Subpackage: Player Manager <packages/player_mgr>
    Subpackage: Score Manager <packages/score_mgr>

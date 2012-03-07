@@ -5,7 +5,7 @@ from django.core.urlresolvers import reverse
 from django.contrib.auth.models import User
 
 from apps.managers.team_mgr.models import Team
-from apps.managers.help_mgr.models import HelpTopic
+from apps.widgets.help.models import HelpTopic
 from apps.test_utils import TestUtils
 
 
@@ -23,7 +23,7 @@ class HelpFunctionalTestCase(TestCase):
         profile.setup_profile = True
         profile.save()
 
-        TestUtils.register_page_widget("help", "help_rule")
+        TestUtils.register_page_widget("help", "help.rule")
 
         self.client.login(username="user", password="changeme")
 
