@@ -16,6 +16,7 @@ import sys, os
 # If extensions (or modules to document with autodoc) are in another directory,
 # add these directories to sys.path here. If the directory is relative to the
 # documentation root, use os.path.abspath to make it absolute, like shown here.
+import types
 
 sys.path.append(os.path.abspath('../makahiki'))
 sys.path.append(os.path.abspath('../makahiki/apps'))
@@ -305,7 +306,6 @@ def setup(app):
 #=================================================================================
 # Mocking out modules that readthedocs can't import.
 # Credit: http://read-the-docs.readthedocs.org/en/latest/faq.html
-# Unfortunately, this doesn't work
 #=================================================================================
 
 class Mock(object):
@@ -324,10 +324,12 @@ class Mock(object):
         else:
             return Mock()
 
-# The following doesn't fix the problem, unfortunately.
-# MOCK_MODULES = ['staticfiles', 'markdown'] 
 
-# Define to the empty list so we can keep this code around for experimentation.
-MOCK_MODULES = [ ]
+MOCK_MODULES = ['markdown']
 for mod_name in MOCK_MODULES:
     sys.modules[mod_name] = Mock()
+
+TYPE_MODULES = ['staticfiles']
+for mod_name in TYPE_MODULES:
+    sys.modules[mod_name] = types.ModuleType(mod_name)
+    sys.modules[mod_name].__path__ = '/dev/null'
