@@ -332,7 +332,7 @@ class Mock(object):
             return Mock()
 
 
-MOCK_MODULES = ['markdown',]
+MOCK_MODULES = [ ]
 for mod_name in MOCK_MODULES:
     sys.modules[mod_name] = Mock()
 
