@@ -328,6 +328,6 @@ class Mock(object):
 # MOCK_MODULES = ['staticfiles', 'markdown'] 
 
 # Define to the empty list so we can keep this code around for experimentation.
-MOCK_MODULES = [ ]
+MOCK_MODULES = ['staticfiles', 'markdown' ]
 for mod_name in MOCK_MODULES:
     sys.modules[mod_name] = Mock()
