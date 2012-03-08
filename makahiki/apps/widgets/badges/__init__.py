@@ -1,1 +1,1 @@
-"""badges module"""
+"""Provides badges for players."""

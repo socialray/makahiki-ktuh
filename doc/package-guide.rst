@@ -24,6 +24,7 @@ Package: apps.widgets
    :maxdepth: 1
 
    Subpackage: Ask_Admin widget <packages/ask_admin>
+   Subpackage: Badges widget <packages/badges>
 
 
 Package: css_rules

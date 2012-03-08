@@ -93,6 +93,7 @@ Information for development of the Makahiki system.
    Data logging and analysis <logging-and-analysis>
    Developing a new game plugin <plugin-development>
    Developing and running tests <testing>
+   Design Questions <design-questions>
 
 
 Contact Us

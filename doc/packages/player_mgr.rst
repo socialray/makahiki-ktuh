@@ -4,9 +4,6 @@ Package :mod:`apps.managers.player_mgr`
 .. automodule:: apps.managers.player_mgr
    :members:
 
-.. note:: Model fields not documented; player model hardwires point systems;
-          needs tests for management commands. 
-
 Module :mod:`apps.managers.player_mgr.models`
 ---------------------------------------------
 

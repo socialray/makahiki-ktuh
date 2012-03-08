@@ -1,6 +1,5 @@
-"""
-views handler for Badge widget rendering.
-"""
+"""Views handler for Badge widget rendering."""
+
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
 from django.shortcuts import render_to_response
@@ -11,7 +10,9 @@ from apps.widgets.badges import user_badges
 
 
 def supply(request, page_name):
-    """ supply view_objects for widget rendering."""
+    """Supply view_objects for widget rendering.
+       Awards all badges to this user.
+       :return: empty dictionary."""
     user = request.user
     _ = page_name
 
@@ -22,10 +23,10 @@ def supply(request, page_name):
 
 
 def award_badges(user):
-    """award possible badges.
+    """Award possible badges.
 
     It could be useful to create a notification if any badge is awarded.
-    which means the awarding part need to be in middleware for every page.
+    which means the awarding part needs to be in the middleware for every page.
     """
 
     badges_slug = user_badges.DailyVisitorBadge.slug
@@ -39,7 +40,7 @@ def award_badges(user):
 
 @login_required
 def badge_catalog(request):
-    """handle the badge catelog request."""
+    """Handle the badge catalog request."""
     awarded_badges = [earned.badge for earned in request.user.badges_earned.all()]
     registry = badges.get_registry().copy()
     # Remove badges that are already earned
