@@ -305,6 +305,7 @@ def setup(app):
 #=================================================================================
 # Mocking out modules that readthedocs can't import.
 # Credit: http://read-the-docs.readthedocs.org/en/latest/faq.html
+# Unfortunately, this doesn't work
 #=================================================================================
 
 class Mock(object):
@@ -323,6 +324,10 @@ class Mock(object):
         else:
             return Mock()
 
+# The following doesn't fix the problem, unfortunately.
+# MOCK_MODULES = ['staticfiles', 'markdown'] 
+
+# Define to the empty list so we can keep this code around for experimentation.
 MOCK_MODULES = [ ]
 for mod_name in MOCK_MODULES:
     sys.modules[mod_name] = Mock()
