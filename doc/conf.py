@@ -330,7 +330,7 @@ MOCK_MODULES = ['markdown',]
 for mod_name in MOCK_MODULES:
     sys.modules[mod_name] = Mock()
 
-TYPE_MODULES = ['staticfiles', 'south']
+TYPE_MODULES = ['staticfiles', 'south', 'django_nose']
 for mod_name in TYPE_MODULES:
     sys.modules[mod_name] = types.ModuleType(mod_name)
     sys.modules[mod_name].__path__ = '/dev/null'
