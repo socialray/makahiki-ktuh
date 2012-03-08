@@ -1,4 +1,4 @@
-"""Handle the rendering of the energy scoreboard widget"""
+"""Handle the rendering of the energy scoreboard widget."""
 
 import datetime
 from django.db.models import F
@@ -10,7 +10,9 @@ from apps.widgets.energy_scoreboard.models import EnergyData
 
 
 def supply(request, page_name):
-    """supply the view_objects content"""
+    """Supply the view_objects content.
+
+       :return: team, scoreboard_round, goals_scoreboard, energy_ranks"""
     _ = page_name
 
     user = request.user

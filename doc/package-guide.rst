@@ -25,6 +25,9 @@ Package: apps.widgets
 
    Subpackage: Ask_Admin widget <packages/ask_admin>
    Subpackage: Badges widget <packages/badges>
+   Subpackage: Energy Goal widget <packages/energy_goal>
+   Subpackage: Energy Power Meter widget <packages/energy_power_meter>
+   Subpackage: Energy Scoreboard widget <packages/energy_scoreboard>
 
 
 Package: css_rules

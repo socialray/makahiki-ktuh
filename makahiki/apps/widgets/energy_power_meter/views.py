@@ -1,4 +1,4 @@
-"""Handle rendering of the powermeter widget."""
+"""Handle rendering of the Energy Power Meter widget."""
 
 from django.contrib.auth.decorators import login_required
 from django.core.exceptions import ObjectDoesNotExist
@@ -8,7 +8,7 @@ from apps.widgets.energy_power_meter.models import PowerData
 
 
 def supply(request, page_name):
-    """return the view_objects content."""
+    """Return the view_objects content, which in this case is empty."""
 
     _ = request
     _ = page_name
@@ -17,7 +17,7 @@ def supply(request, page_name):
 
 @login_required
 def power_data(request):
-    """return the gviz json data for power."""
+    """Return the gviz json data for power."""
     user = request.user
 
     description = {"A": ("string", "Source"),
@@ -31,9 +31,9 @@ def power_data(request):
     try:
         power = PowerData.objects.get(team=user.get_profile().team)
         data = [{"A": power.team.name,
-             "B": power.updated_at,
-             "C": power.current_power,
-             "D": power.baseline_power,
+                 "B": power.updated_at,
+                 "C": power.current_power,
+                 "D": power.baseline_power,
             }]
 
         data_table.AppendData(data)

@@ -1,1 +1,1 @@
-"""energy scoreboard module"""
+"""Implements the energy scoreboard widget."""

@@ -1,0 +1,22 @@
+Package :mod:`apps.widgets.energy_power_meter`
+==============================================
+
+.. automodule:: apps.widgets.energy_power_meter
+   :members:
+
+Module :mod:`apps.widgets.energy_power_meter.models`
+----------------------------------------------------
+
+.. automodule:: apps.widgets.energy_power_meter.models
+   :members:
+ 
+Module :mod:`apps.widgets.energy_power_meter.admin`
+---------------------------------------------------
+
+.. automodule:: apps.widgets.energy_power_meter.admin
+   :members:
+
+
+
+
+

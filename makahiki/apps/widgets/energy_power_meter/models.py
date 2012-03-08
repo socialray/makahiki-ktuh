@@ -1,4 +1,4 @@
-"""Power Data Model"""
+"""Provides the model for the Energy Power Meter."""
 from django.db import models
 
 from apps.managers.team_mgr.models import Team

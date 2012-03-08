@@ -1,1 +1,1 @@
-"""Energy Power Meter Module"""
+"""Implements the Energy Power Meter widget."""

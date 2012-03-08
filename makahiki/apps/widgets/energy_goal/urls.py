@@ -1,4 +1,4 @@
-"""urls for serving energy data"""
+"""Urls for serving energy data."""
 from django.conf.urls.defaults import url, patterns
 
 urlpatterns = patterns('',

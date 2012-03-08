@@ -1,4 +1,4 @@
-"""Model definition"""
+"""Energy goal model definition."""
 
 import datetime
 
@@ -8,7 +8,7 @@ from apps.managers.team_mgr.models import Team
 
 
 class TeamEnergyGoal(models.Model):
-    """Team EnergyGoal Model"""
+    """Team Energy Goal Model"""
 
     # The amount of points to award for completing a goal.
     GOAL_POINTS = 20

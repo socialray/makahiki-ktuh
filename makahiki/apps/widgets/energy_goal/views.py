@@ -1,4 +1,5 @@
 """Handle rendering of energy goal widget."""
+
 from django.contrib.auth.decorators import login_required
 from django.core.exceptions import ObjectDoesNotExist
 from django.http import HttpResponse
@@ -9,7 +10,7 @@ from apps.widgets.smartgrid import get_available_golow_activities
 
 
 def supply(request, page_name):
-    """supply the view_objects content for this widget."""
+    """Supply the view_objects content for this widget."""
     _ = page_name
     user = request.user
     golow_activities = get_available_golow_activities(user)
@@ -21,7 +22,7 @@ def supply(request, page_name):
 
 @login_required
 def energy_goal_data(request):
-    """return the gviz json format of the energy goal data."""
+    """:return: the gviz json format of the energy goal data."""
     user = request.user
 
     description = {"A": ("string", "Source"),

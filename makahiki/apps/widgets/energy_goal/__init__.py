@@ -1,1 +1,1 @@
-"""Energy Goal module"""
+"""Implements the Energy goal widget."""
