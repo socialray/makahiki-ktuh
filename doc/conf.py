@@ -99,13 +99,7 @@ pygments_style = 'sphinx'
 
 # The theme to use for HTML and HTML Help pages.  See the documentation for
 # a list of builtin themes.
-
-# Using a conditional to get the RTD theme when building on readthedocs. 
-on_rtd = os.environ.get('READTHEDOCS', None) == 'True'
-if on_rtd:
-    html_theme = 'nature'     # I like nature better than the RTD theme.
-else:
-    html_theme = 'nature'
+html_theme = 'nature'
 
 # Theme options are theme-specific and customize the look and feel of a theme
 # further.  For a list of options available for each theme, see the
@@ -336,8 +330,9 @@ MOCK_MODULES = [ ]
 for mod_name in MOCK_MODULES:
     sys.modules[mod_name] = Mock()
 
-# Fixes the RTD error, but means that model autodocumentation won't work if we do the following.
-#TYPE_MODULES = ['staticfiles', 'south', 'django_nose']
-#for mod_name in TYPE_MODULES:
-#    sys.modules[mod_name] = types.ModuleType(mod_name)
-#    sys.modules[mod_name].__path__ = '/dev/null'
+on_rtd = os.environ.get('READTHEDOCS', None) == 'True'
+if on_rtd:
+    TYPE_MODULES = ['south']
+    for mod_name in TYPE_MODULES:
+        sys.modules[mod_name] = types.ModuleType(mod_name)
+        sys.modules[mod_name].__path__ = '/dev/null'
