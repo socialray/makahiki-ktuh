@@ -4,8 +4,6 @@ Package :mod:`apps.managers.settings_mgr`
 .. automodule:: apps.managers.settings_mgr
    :members:
 
-.. note:: Lots of code defined in init.py.  Is that appropriate?
-
 Module :mod:`apps.managers.settings_mgr.models`
 -----------------------------------------------
 

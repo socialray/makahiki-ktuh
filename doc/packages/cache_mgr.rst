@@ -1,5 +1,5 @@
 Package :mod:`apps.managers.cache_mgr`
-=====================================
+======================================
 
 .. automodule:: apps.managers.cache_mgr
 

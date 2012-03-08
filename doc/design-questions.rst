@@ -39,6 +39,9 @@ Click on section title to go to corresponding documentation.
   * Should competition_point_label be provided by scoring_mgr? 
   * Should competition_team_label be provided by team_mgr?
   * Should cas_server_url be provided by auth_mgr?
+  * Lots of settings defined in init.py.  Is this appropriate?
+  * The tests.py file does not appear to be invoked during testing.  Is the
+    indentation wrong?
 
 :mod:`apps.managers.team_mgr`
 -----------------------------
