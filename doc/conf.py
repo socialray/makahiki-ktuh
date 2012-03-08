@@ -306,6 +306,7 @@ def setup(app):
 #=================================================================================
 # Mocking out modules that readthedocs can't import.
 # Credit: http://read-the-docs.readthedocs.org/en/latest/faq.html
+# Unfortunately, this doesn't work
 #=================================================================================
 
 class Mock(object):
