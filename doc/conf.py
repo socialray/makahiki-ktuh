@@ -103,7 +103,7 @@ pygments_style = 'sphinx'
 # Using a conditional to get the RTD theme when building on readthedocs. 
 on_rtd = os.environ.get('READTHEDOCS', None) == 'True'
 if on_rtd:
-    html_theme = 'default'
+    html_theme = 'nature'     # I like nature better than the RTD theme.
 else:
     html_theme = 'nature'
 
@@ -336,7 +336,8 @@ MOCK_MODULES = ['markdown',]
 for mod_name in MOCK_MODULES:
     sys.modules[mod_name] = Mock()
 
-TYPE_MODULES = ['staticfiles', 'south', 'django_nose']
-for mod_name in TYPE_MODULES:
-    sys.modules[mod_name] = types.ModuleType(mod_name)
-    sys.modules[mod_name].__path__ = '/dev/null'
+# Fixes the RTD error, but means that model autodocumentation won't work if we do the following.
+#TYPE_MODULES = ['staticfiles', 'south', 'django_nose']
+#for mod_name in TYPE_MODULES:
+#    sys.modules[mod_name] = types.ModuleType(mod_name)
+#    sys.modules[mod_name].__path__ = '/dev/null'
