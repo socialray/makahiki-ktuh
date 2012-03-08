@@ -1,62 +1,69 @@
 Makahiki Installation (Local)
 =============================
 
+Note that these instructions have only been tested on Mac OS X and Linux. The
+Makahiki developers all work on Unix platforms, so we do not regularly test for
+Windows compatibility. When we are aware of special steps required for Windows,
+they have been noted below.
+
+These instructions also assume that you are using a Bourne-type shell (such as
+bash), which is the default on Mac OS X and Linux. Using a C-shell variant
+(like tcsh), is possible but not recommended.
+
 1. Install prerequisite software
 --------------------------------
 
 `Python`_ 2.6 or higher (but not Python 3). On Windows machines, it
 is recommended that you use the 32 bit version.
 
-`Apple Developer Tools`_ (OS/X only). If on Mac OS X, install
-Apple Developer Tools (i.e. XCode 4). This is required in order to 
+`Apple Developer Tools`_ (Mac OS X only). If you are using Mac OS X, install
+the Apple Developer Tools (i.e. Xcode 4). This is required in order to 
 build certain libraries (PIL, etc.) that require GCC (which is bundled with
-XCode).
+Xcode). Xcode can either be found in your OS X installation DVD, or in the Mac
+App Store.
 
 `Visual C++`_ (Windows only).  If on Windows, you will need to install
 Visual Studio.  Please read and follow this `blog post on Django
-installation on Windows`_.  Note that Makahiki developers all work on Unix
-platforms, so we do not regularly test for Windows compatibility.
+installation on Windows`_.
 
-`Python Imaging Library`_ (PIL). If you are on OSX, it is easier to
-install via `Homebrew`_. Once Homebrew is installed, install PIL by
-typing ``brew install pil``. If you are brave enough to install from
-source, make sure you have both libjpeg and zlib for jpeg and png
-support respectively.
+`Python Imaging Library`_ (PIL). If you are on Mac OS X, an easy way to install
+PIL is via `Homebrew`_. Once Homebrew is installed, install PIL by typing
+``brew install pil``. If you are brave enough to install from source, make sure
+you have both libjpeg and zlib for JPEG and PNG support respectively.
 
 Git. Find a package for your operating system at the `GitHub install
 wiki`_. It is recommended that you also configure Git so that it
 handles line endings from Windows users correctly. See `Dealing With
 Line Endings`_.
 
-Pip. Check if it is installed by typing ``pip help``. If not, install
-it by typing ``easy_install pip``. If you do not have easy_install,
-download and follow the instructions `here`_.
+Pip. Check if it is installed by typing ``pip help``. If not, install it by
+typing ``easy_install pip``. Depending on your system configuration, you may
+have to type ``sudo easy_install pip``. If you do not have easy_install,
+download and install it from the `setuptools website`_.
 
-`Virtualenvwrapper`_. Virtualenv and
-Virtualenvwrapper allow you to install libraries separately from your
-global Python path. Follow the steps in the introduction and make a
-virtualenv for Makahiki (i.e. ``mkvirtualenv makahiki``). You may
-also want to define $WORKON\_HOME to your shell startup file in
-addition to adding the virtualenv startup script (it uses
-``~/.virtualenv`` by default).
+`Virtualenvwrapper`_. Virtualenv and Virtualenvwrapper allow you to install
+libraries separately from your global Python path. Follow the
+`virtualenvwrapper installation instructions`_ through the Quick Start section,
+making a virtualenv for Makahiki (i.e. ``mkvirtualenv makahiki``).
 
-`PostgreSQL`_.  Makahiki uses PostgresSQL as its standard backend
-database.   Be sure to read the README file; on OS/X you must edit
-sysctl.conf in order to ensure that the server runs correctly.  Once
-installed, be sure that your PostgreSQL installation's bin/ directory 
-is on $PATH so that ``pg_config`` and ``psql`` are defined.  Note for non-Mac users: you
-must download postgres-dev in order to get the pg_config command.  It is
-important that the user "postgres" is "trusted" so that you can connect to
-the server as the user "postgres" locally without authentication.  This should be the
-default behavior. 
+`PostgreSQL`_.  Makahiki uses PostgreSQL as its standard backend database.
+Note that on Mac OS X, the installer will need to make changes in the
+``sysctl`` settings and a reboot before installation can proceed. Once
+installed, be sure that your PostgreSQL installation's bin/ directory is on
+$PATH so that ``pg_config`` and ``psql`` are defined.  Note for Linux users:
+you must download postgres-dev in order to get the pg_config command. It is
+important that the user "postgres" is "trusted" so that you can connect to the
+server as the user "postgres" locally without authentication. This should be
+the default behavior.
 
 .. _Python: http://www.python.org/download/
 .. _Python Imaging Library: http://www.pythonware.com/products/pil/
 .. _Homebrew: http://mxcl.github.com/homebrew/
 .. _GitHub install wiki: http://help.github.com/git-installation-redirect
 .. _Dealing With Line Endings: http://help.github.com/dealing-with-lineendings/
-.. _here: http://pypi.python.org/pypi/setuptools
+.. _setuptools website: http://pypi.python.org/pypi/setuptools
 .. _Virtualenvwrapper: http://www.doughellmann.com/docs/virtualenvwrapper/
+.. _virtualenvwrapper installation instructions: http://www.doughellmann.com/docs/virtualenvwrapper/install.html#basic-installation
 .. _PostgreSQL: http://www.postgresql.org/
 .. _Apple Developer Tools: https://developer.apple.com/technologies/mac/
 .. _Visual C++: http://microsoft.com/visualstudio/en-us/products/2008-editions/express
@@ -117,6 +124,7 @@ indicating that an error occurred.
 
 Next, create a makahiki user and database in your postgres server::
 
+  % cd makahiki
   % scripts/initialize_postgres.py
     CREATE ROLE
     ALTER ROLE
@@ -125,6 +133,8 @@ Next, create a makahiki user and database in your postgres server::
     GRANT
     GRANT
 
+(you may be prompted for the password you set for the postgres user, which was
+likely created when you ran the PostgreSQL installer in step 1).
 
 As you can see, executing the script should echo the commands to create the
 user and database. 
@@ -144,12 +154,12 @@ In Unix, these environment variables can be defined this way::
   % export MAKAHIKI_ADMIN_INFO
 
 You will want to either add these variables to a login script so they are
-always available, or you can edit the postactivate file (in unix, found in
-~/.virtualenvs/makahiki/bin) so that they are defined whenever you 
+always available, or you can edit the ``postactivate`` file (in Unix, found in
+``$WORKON_HOME/makahiki/bin``) so that they are defined whenever you 
 ``workon makahiki``.
 
 Note that you will want to provide a stronger password for the makahiki
-admin account if this server is publically accessable. 
+admin account if this server is publically accessible. 
 
 7.  Configure Postgres database some more
 -----------------------------------------
@@ -185,7 +195,7 @@ To see if the system has been installed correctly, run the tests::
 You might want to load some sample data into the system to provide a more
 realistic display on login.  If so, do the following::
 
-  % scripts/load_data.sh
+  % scripts/load_data.py
 
 
 10. Bring up the server

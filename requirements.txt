@@ -15,6 +15,7 @@ pylint==0.25.1
 django-extensions==0.7.1
 pep8==0.6.1
 gunicorn==0.13.4
+sphinx==1.1.2
 
 # uncomment for memcached deployment
 #pylibmc==1.2.2
