@@ -1,7 +1,5 @@
-"""Views handler for ask admin page rendering.
+"""Views handler for ask admin page rendering."""
 
-.. note:: Current source code hardwires the email address for admins.
-"""
 import simplejson as json
 
 from django.http import Http404, HttpResponse, HttpResponseRedirect
@@ -17,7 +15,7 @@ FROM_EMAIL = ADMINS[0][1]
 
 
 def supply(request, page_name):
-    """ supply view_objects for widget rendering."""
+    """Supply view_objects for widget rendering, returns form."""
     _ = request
     _ = page_name
     form = FeedbackForm(auto_id="help_%s")

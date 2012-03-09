@@ -1,7 +1,4 @@
-"""The manager for game settings, such as round info.
-
-.. note:: The tests.py file does not appear to be run during testing. Indentation is wrong?
-"""
+"""The manager for game settings, such as round info."""
 
 import datetime
 from django.conf import settings

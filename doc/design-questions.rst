@@ -47,6 +47,12 @@ Click on section title to go to corresponding documentation.
 
   1. Do we want to hardwire methods to get a particular scoring system (points)?  In the case of EWC, the "team" will also have a score related to gallons and kWh.
 
+
+:mod:`apps.widgets.ask_admin`
+-----------------------------
+
+  1. The views module hardwires the address for admins. 
+
 :mod:`apps.widgets.badges`
 --------------------------
 
