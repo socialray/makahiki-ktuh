@@ -8,9 +8,40 @@ body {
 	background-size: cover;
 }
 
-.nav li img {
-    vertical-align: middle;
-    margin-right: 2px;
+.navbar .navbar-inner {
+    background: none;
+    background-color: rgba(255, 255, 255, 0.7);
+}
+
+.navbar .nav li.active a {
+    background: none;
+    background-color: none;
+}
+
+.brand img {
+    width: 60px;
+}
+
+@media (min-width:980px) {
+    .nav li {
+        vertical-align: middle;
+        text-align: center;
+    }
+
+    .nav li img {
+        display: block;
+    }
+}
+
+@media (max-width:979px) {
+    .nav li a {
+        vertical-align: top;
+        font-size:1.1em;
+    }
+
+    .nav li img {
+        margin-right: 5px;
+    }
 }
 
 .span4 img {
