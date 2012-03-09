@@ -93,13 +93,13 @@ class ActivityAdminForm(forms.ModelForm):
         # Check if it is created and if it has a code confirmation type.
         if self.instance and self.instance.created_at and self.instance.confirm_type == "code":
             self.fields["num_codes"].help_text = "Number of additional codes to generate <a href=\""
-            self.fields["num_codes"].help_text += reverse("widgets.smartgrid.views.view_codes",
+            self.fields["num_codes"].help_text += reverse("apps.widgets.smartgrid.views.view_codes",
                 args=(self.instance.type, self.instance.slug,))
             self.fields["num_codes"].help_text += "\" target=\"_blank\">View codes</a>"
 
         if self.instance and self.instance.created_at and (
         self.instance.type == "event" or self.instance.type == "excursion"):
-            url = reverse("widgets.smartgrid.views.view_rsvps",
+            url = reverse("apps.widgets.smartgrid.views.view_rsvps",
                 args=(self.instance.type, self.instance.slug,))
             self.fields[
             "event_max_seat"].help_text += " <a href='%s' target='_blank'>View RSVPs</a>" % url

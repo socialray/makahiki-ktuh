@@ -19,7 +19,5 @@ except ImportError:
 
 import settings
 
-sys.path.insert(0, join(settings.PROJECT_ROOT, "apps"))
-
 if __name__ == "__main__":
     execute_manager(settings)

@@ -16,7 +16,7 @@ def insert_classes(key, theme="default"):
     # Import the theme dynamically from the passed in theme value.
     # Solution found at http://docs.python.org/library/functions
     # .html#__import__
-    theme_rules = importlib.import_module("css_rules.%s" % theme)
+    theme_rules = importlib.import_module("apps.css_rules.%s" % theme)
     try:
         if theme_rules.RETURN_CLASSES:
             return theme_rules.CSS_CLASSES[key]
@@ -31,7 +31,7 @@ def get_id_and_classes(key, theme="default"):
     """
     Outputs the id and class attributes for a tag.
     """
-    theme_rules = importlib.import_module("css_rules.%s" % theme)
+    theme_rules = importlib.import_module("apps.css_rules.%s" % theme)
 
     return_string = 'id="%s"' % key
     try:
@@ -51,7 +51,7 @@ def import_css(static_url, theme="default"):
 
     Typically should be used in the header section of a page.
     """
-    theme_rules = importlib.import_module("css_rules.%s" % theme)
+    theme_rules = importlib.import_module("apps.css_rules.%s" % theme)
     if theme_rules.RETURN_CLASSES:
         return theme_rules.CSS_IMPORTS.format(static_url, theme)
 
@@ -65,7 +65,7 @@ def import_page_css(page, static_url, theme="default"):
 
     Typically should be used in the header section of a page.
     """
-    theme_rules = importlib.import_module("css_rules.%s" % theme)
+    theme_rules = importlib.import_module("apps.css_rules.%s" % theme)
     if theme_rules.RETURN_CLASSES:
         return theme_rules.PAGE_CSS_IMPORT[page].format(static_url, theme)
 
@@ -80,7 +80,7 @@ def import_logged_in_css(static_url, theme="default"):
     Typically should be used in the header section of a page with a logged in
     user.
     """
-    theme_rules = importlib.import_module("css_rules.%s" % theme)
+    theme_rules = importlib.import_module("apps.css_rules.%s" % theme)
     if theme_rules.RETURN_CLASSES:
         return theme_rules.LOGGED_IN_CSS_IMPORT.format(static_url, theme)
 

@@ -23,9 +23,10 @@ class Profile(models.Model):
     """
     user = models.ForeignKey(User, unique=True, verbose_name='user',
                              related_name='profile')
-    name = models.CharField('name', unique=True, max_length=50)
-    first_name = models.CharField('first_name', max_length=50, null=True,
-                                  blank=True)
+    name = models.CharField('name', unique=True, max_length=50,
+                            help_text="The name of the player")
+    first_name = models.CharField('first_name', max_length=50, null=True, blank=True,
+                                  help_text="The first name of the player")
     last_name = models.CharField('last_name', max_length=50, null=True,
                                  blank=True)
     points = models.IntegerField(default=0, editable=False)

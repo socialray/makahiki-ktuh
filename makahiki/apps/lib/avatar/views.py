@@ -3,7 +3,7 @@ import simplejson as json
 
 from apps.lib.avatar.models import Avatar, avatar_file_path
 from apps.lib.avatar.forms import PrimaryAvatarForm, DeleteAvatarForm, FacebookPictureForm
-import lib.facebook_api.facebook as facebook
+import apps.lib.facebook_api.facebook as facebook
 
 from django.http import HttpResponse, HttpResponseRedirect, Http404
 from django.shortcuts import render_to_response

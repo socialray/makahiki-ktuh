@@ -69,7 +69,7 @@ TEMPLATE_CONTEXT_PROCESSORS = (
     "django.core.context_processors.media",
     "django.core.context_processors.request",
     'django.contrib.messages.context_processors.messages',
-    "managers.settings_mgr.context_processors.competition",
+    "apps.managers.settings_mgr.context_processors.competition",
     )
 
 ######################
@@ -86,10 +86,10 @@ MIDDLEWARE_CLASSES = (
     'django.middleware.doc.XViewMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
-    'lib.django_cas.middleware.CASMiddleware',
+    'apps.lib.django_cas.middleware.CASMiddleware',
 
-    'managers.player_mgr.middleware.LoginMiddleware',
-    'managers.log_mgr.middleware.LoggingMiddleware',
+    'apps.managers.player_mgr.middleware.LoginMiddleware',
+    'apps.managers.log_mgr.middleware.LoggingMiddleware',
 
     'django.middleware.cache.FetchFromCacheMiddleware',
     #always end with this for caching
@@ -100,7 +100,7 @@ MIDDLEWARE_CLASSES = (
 ######################
 AUTHENTICATION_BACKENDS = (
     'django.contrib.auth.backends.ModelBackend',
-    'managers.auth_mgr.models.MakahikiCASBackend',
+    'apps.managers.auth_mgr.models.MakahikiCASBackend',
     )
 
 AUTH_PROFILE_MODULE = 'player_mgr.Profile'
@@ -122,21 +122,21 @@ RESTRICTED_URL = '/restricted/'
 INSTALLED_APPS = (
     # Makahiki pages
     'apps',
-    'pages',
+    'apps.pages',
 
     # Makahiki components
-    'managers.auth_mgr',
-    'managers.settings_mgr',
-    'managers.team_mgr',
-    'managers.player_mgr',
-    'managers.score_mgr',
-    'managers.cache_mgr',
+    'apps.managers.auth_mgr',
+    'apps.managers.settings_mgr',
+    'apps.managers.team_mgr',
+    'apps.managers.player_mgr',
+    'apps.managers.score_mgr',
+    'apps.managers.cache_mgr',
 
     # 3rd party libraries
-    'lib.django_cas',
-    'lib.brabeion',
-    'lib.facebook_api',
-    'lib.avatar',
+    'apps.lib.django_cas',
+    'apps.lib.brabeion',
+    'apps.lib.facebook_api',
+    'apps.lib.avatar',
     'gunicorn',
 
     # Django apps

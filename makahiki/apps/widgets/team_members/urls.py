@@ -3,5 +3,6 @@
 from django.conf.urls.defaults import url, patterns
 
 urlpatterns = patterns('',
-    url(r'^team-members/$', 'widgets.team_members.views.team_members', name="news_team_members"),
+    url(r'^team-members/$', 'apps.widgets.team_members.views.team_members',
+        name="news_team_members"),
 )

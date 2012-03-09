@@ -11,11 +11,12 @@ class ScoreboardEntry(models.Model):
     """Defines the model that tracks user scores."""
 
     profile = models.ForeignKey("player_mgr.Profile", editable=False)
-    round_name = models.CharField(max_length="30",
-        editable=False)
-    points = models.IntegerField(default=0, editable=False)
-    last_awarded_submission = models.DateTimeField(null=True, blank=True,
-        editable=False)
+    round_name = models.CharField(max_length="30", editable=False,
+                                  help_text="The name of the round")
+    points = models.IntegerField(default=0, editable=False,
+                                 help_text="Points for this round")
+    last_awarded_submission = models.DateTimeField(null=True, blank=True, editable=False,
+                                                   help_text="Last award time")
 
     class Meta:
         """meta"""

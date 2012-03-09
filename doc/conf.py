@@ -19,7 +19,7 @@ import sys, os
 import types
 
 sys.path.append(os.path.abspath('../makahiki'))
-sys.path.append(os.path.abspath('../makahiki/apps'))
+#sys.path.append(os.path.abspath('../makahiki/apps'))
 
 #setup django
 import settings
@@ -325,14 +325,13 @@ class Mock(object):
         else:
             return Mock()
 
-
-MOCK_MODULES = [ ]
-for mod_name in MOCK_MODULES:
-    sys.modules[mod_name] = Mock()
-
 on_rtd = os.environ.get('READTHEDOCS', None) == 'True'
 if on_rtd:
-    TYPE_MODULES = ['south']
+    TYPE_MODULES = ['south', 'staticfiles', 'django_nose',]
     for mod_name in TYPE_MODULES:
         sys.modules[mod_name] = types.ModuleType(mod_name)
         sys.modules[mod_name].__path__ = '/dev/null'
+
+    MOCK_MODULES = ['markdown',]
+    for mod_name in MOCK_MODULES:
+        sys.modules[mod_name] = Mock()
