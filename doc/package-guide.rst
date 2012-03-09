@@ -29,6 +29,7 @@ Package: apps.widgets
    Subpackage: Energy Power Meter widget <packages/energy_power_meter>
    Subpackage: Energy Scoreboard widget <packages/energy_scoreboard>
    Subpackage: Help widgets <packages/help>
+   Subpackage: Home and first login wizard widget <packages/home>
 
 
 Package: css_rules

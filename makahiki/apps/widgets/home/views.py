@@ -1,6 +1,5 @@
-"""
-Handles home page rendering.
-"""
+"""Provides the views for the home page and the first login wizard."""
+
 import cgi
 import json
 import datetime
@@ -28,9 +27,9 @@ from apps.widgets.home.forms import  ProfileForm, ReferralForm
 
 
 def supply(request, page_name):
-    """
-    Directs the user to the home page.
-    """
+    """Simply directs the user to the home page.
+
+       :return: an empty dict."""
     _ = request
     _ = page_name
     return {}
@@ -38,7 +37,7 @@ def supply(request, page_name):
 
 @login_required
 def restricted(request):
-    """handle restricted url"""
+    """The view when they have logged in before the competition begins."""
 
     # If we are in the competition, bring them back to the home page.
     if in_competition():
@@ -54,9 +53,7 @@ def restricted(request):
 @never_cache
 @login_required
 def setup_welcome(request):
-    """
-    Uses AJAX to display the initial setup page.
-    """
+    """Display page 1 (welcome) of the first login wizard."""
     if request.is_ajax():
         response = render_to_string("first-login/welcome.html", {},
             context_instance=RequestContext(request))
@@ -72,9 +69,7 @@ def setup_welcome(request):
 @never_cache
 @login_required
 def terms(request):
-    """
-    Uses AJAX to display a terms and conditions page.
-    """
+    """Display page 2 (terms and conditions) of first login wizard."""
     if request.is_ajax():
         response = render_to_string("first-login/terms.html", {
         }, context_instance=RequestContext(request))
@@ -89,9 +84,8 @@ def terms(request):
 
 @login_required
 def referral(request):
-    """
-    Uses AJAX to display a referral page.
-    """
+    """Display page 3 (referral bonus) of the first login wizard."""
+
     if request.is_ajax():
         profile = request.user.get_profile()
         form = None
@@ -135,9 +129,7 @@ def referral(request):
 @never_cache
 @login_required
 def profile_facebook(request):
-    """
-    Connect to Facebook to get the user's facebook photo..
-    """
+    """Connect to Facebook to get the user's facebook photo."""
     if request.is_ajax():
         fb_user = facebook.get_user_from_cookie(request.COOKIES,
                                                 settings.CHALLENGE.facebook_app_id,
@@ -180,9 +172,8 @@ def profile_facebook(request):
 @never_cache
 @login_required
 def setup_profile(request):
-    """
-    Displays the profile form.
-    """
+    """Display page 4 (profile) of the first login wizard."""
+
     if request.is_ajax():
         return _get_profile_form(request)
 
@@ -243,9 +234,7 @@ def setup_profile(request):
 
 @never_cache
 def _get_profile_form(request, form=None, non_xhr=False):
-    """
-    Helper method to render the profile form.
-    """
+    """Helper method to render the profile form."""
     try:
         fb_user = facebook.get_user_from_cookie(request.COOKIES,
                                                 settings.CHALLENGE.facebook_app_id,
@@ -294,7 +283,8 @@ def _get_profile_form(request, form=None, non_xhr=False):
 @never_cache
 @login_required
 def setup_activity(request):
-    """handles setup activity url"""
+    """Display page 5 (activity) of the first login wizard."""
+
     if request.is_ajax():
         template = render_to_string("first-login/activity.html", {},
             context_instance=RequestContext(request))
@@ -321,7 +311,8 @@ def setup_activity(request):
 @never_cache
 @login_required
 def setup_question(request):
-    """handles setup questions"""
+    """Display page 6 (activity question) of the first login wizard."""
+
     if request.is_ajax():
         template = render_to_string("first-login/question.html", {},
             context_instance=RequestContext(request))
@@ -339,7 +330,8 @@ def setup_question(request):
 @login_required
 @csrf_exempt
 def setup_complete(request):
-    """handles setup complete"""
+    """Display page 7 (complete) of the first login wizard."""
+
     if request.is_ajax():
         profile = request.user.get_profile()
 

@@ -1,6 +1,5 @@
-"""
-Forms for home setup page
-"""
+"""Provides the forms for the first login wizard."""
+
 import re
 
 from django import forms
@@ -21,7 +20,7 @@ class FacebookForm(forms.Form):
 
 
 class ReferralForm(forms.Form):
-    """Form for referrer. """
+    """Form for referral bonus."""
     referrer_email = forms.EmailField(
         required=False,
         label='Referrer Email (Optional)'
@@ -35,9 +34,7 @@ class ReferralForm(forms.Form):
         super(ReferralForm, self).__init__(*args, **kwargs)
 
     def clean(self):
-        """
-        Check if the user is not submitting their own email.
-        """
+        """Check to make sure the user is not submitting their own email."""
         cleaned_data = self.cleaned_data
         if self.user.email == cleaned_data.get('referrer_email'):
             raise forms.ValidationError(
@@ -46,9 +43,7 @@ class ReferralForm(forms.Form):
         return cleaned_data
 
     def clean_referrer_email(self):
-        """
-        Check if the user is a part of the competition.
-        """
+        """Check to make sure the referring user is part of the competition."""
         email = self.cleaned_data['referrer_email']
         if email:
             # Check if user is in the system.
@@ -72,14 +67,12 @@ class ProfileForm(forms.Form):
     avatar = forms.ImageField(required=False)
 
     def __init__(self, *args, **kwargs):
-        """
-        Override for init to take a user argument.
-        """
+        """Allow init to take a user argument."""
         self.user = kwargs.pop('user', None)
         super(ProfileForm, self).__init__(*args, **kwargs)
 
     def clean_display_name(self):
-        """clean the display name"""
+        """Verify display name: trim whitespace, require non-empty, no duplicates."""
         name = self.cleaned_data['display_name'].strip()
         # Remove extra whitespace from the name.
         spaces = re.compile(r'\s+')
