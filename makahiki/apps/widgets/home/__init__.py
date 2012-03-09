@@ -1,3 +1,1 @@
-"""
-Home page package
-"""
+"""Implements the home page and first login wizard."""

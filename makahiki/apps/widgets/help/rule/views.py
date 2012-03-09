@@ -1,6 +1,4 @@
-"""
-views for Help Rule widget
-"""
+"""The view for the widget to display the rules of the challenge."""
 
 from apps.widgets.help.models import HelpTopic
 

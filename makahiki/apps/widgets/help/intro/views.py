@@ -1,6 +1,4 @@
-"""
-views for Help Intro Widget
-"""
+"""Implements the view for the widget providing an introduction to the challenge."""
 
 
 def supply(request, page_name):

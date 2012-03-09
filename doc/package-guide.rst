@@ -28,6 +28,7 @@ Package: apps.widgets
    Subpackage: Energy Goal widget <packages/energy_goal>
    Subpackage: Energy Power Meter widget <packages/energy_power_meter>
    Subpackage: Energy Scoreboard widget <packages/energy_scoreboard>
+   Subpackage: Help widgets <packages/help>
 
 
 Package: css_rules

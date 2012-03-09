@@ -1,6 +1,4 @@
-"""
-url def for home page and setup wizard.
-"""
+"""Url definitions for the home page and first login wizard."""
 
 from django.conf.urls.defaults import url, patterns
 

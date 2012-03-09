@@ -1,3 +1,1 @@
-"""
-help intro package
-"""
+"""Implements the widget providing an introduction to the challenge."""

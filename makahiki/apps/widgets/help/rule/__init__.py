@@ -1,3 +1,1 @@
-"""
-help rule package
-"""
+"""Implements the help widget for challenge rules."""
