@@ -18,6 +18,11 @@ body {
     background-color: none;
 }
 
+.navbar .nav .active > a:hover {
+    background: none;
+    background-color: none;
+}
+
 .brand img {
     width: 60px;
 }
@@ -44,8 +49,30 @@ body {
     }
 }
 
+@media (max-width: 480px) {
+    #info-bar {
+        height: 170px;
+    }
+}
+
 .span4 img {
     margin: 0 auto;
+}
+
+#info-bar {
+    background: #E3E3E3;
+    
+    background-image: -moz-linear-gradient(100% 50% 90deg, #E3E3E3, #A1A1A1);
+    background-image: -webkit-gradient(linear, 0% 0%, 0% 90%, from(#E3E3E3), to(#BBB));
+    
+    border-radius: 3px;
+	
+	box-shadow: 3px 3px 5px #000;
+	-moz-box-shadow: 3px 3px 5px #000;
+	-webkit-box-shadow: 3px 3px 5px #000;
+	
+	padding: 5px 0;
+	margin-bottom: 20px;
 }
 
 .home-icon-content {
