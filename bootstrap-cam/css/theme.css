@@ -1,12 +1,15 @@
 @charset "UTF-8";
 /* CSS Document */ 
 
-/* Import style structure for future themes from oceanStyle.css  */
-@import url('oceanStyle.css');
+/* set the UH logo */
+a.brand img {
+	background: transparent url(../images/icon-uh-logo.png) top left no-repeat;
+	display: block;	
+}
 
 /* Set background picture, center it, make sure it doesn't repeat and that it covers the background for any size on any browser */
 body {
-  background: url("oceanWave.jpg")center fixed;
+  background: url("../images/oceanWave.jpg")center fixed;
   background-repeat: no-repeat;    
     -webkit-background-size: cover;
     -moz-background-size: cover;
@@ -14,8 +17,11 @@ body {
   background-size: cover;
 }
 
+.navbar .nav .active>a,.navbar .nav .active>a:hover {
+	color: #24333B;;
+}
 /* Set common transparency background for various elements, note that this effect stacks on header elements. */
-#header, #header-info, #header-round-info, .container-landing-about, #header-nav-links, #header #quest-box {
+#header, #header-info, #header-round-info, .container-landing-about, #header-nav-links, #header {
   background: none repeat scroll 0 0 rgba(255, 255, 255, 0.5);
 }
 
@@ -25,7 +31,7 @@ body {
 }
 
 /* Set override to custom text color for colors that are specific to certain sections. */
-body, #quest-box h4,  #header #quest-box, #quest-list li a, #header-nav-links ul li h4, #header-nav-links {
+body, #header-nav-links ul li h4, #header-nav-links {
   color: #24333B;
 }
 

@@ -183,9 +183,111 @@ img {
 /* #header */
 /* #header-info */
 /* #header-logout */
+#header-logout {
+	position: absolute;
+	top: 0;
+	right: 8px;
+}
+
 /* #header-nav-links */
 /* #header-round-info */
+#info-bar-single {
+	display: inline;
+	visibility: hidden;
+}
+
+#info-bar-wide,#info-bar-single {
+	background: #E3E3E3;
+	background-image: -moz-linear-gradient(100% 50% 90deg, #E3E3E3, #A1A1A1);
+	background-image: -webkit-gradient(linear, 0% 0%, 0% 90%, from(#E3E3E3),
+		to(#BBB) );
+	border-radius: 3px;
+	box-shadow: 3px 3px 5px #000;
+	-moz-box-shadow: 3px 3px 5px #000;
+	-webkit-box-shadow: 3px 3px 5px #000;
+	padding: 5px 0;
+	margin-bottom: 20px;
+}
+
 /* #quest-box */
+/*------- Quest styles -----*/
+#quest-box {
+	background: none;
+	background-color: rgba(70, 130, 80, 0.5);
+	color: white;
+	-moz-border-radius: 8px;
+	-webkit-border-radius: 8px;
+	padding: 5px;
+}
+
+#quest-box h4 {
+	margin: 5px 0;
+	color: white;
+}
+
+#quest-complete-dialog {
+	text-align: left;
+}
+
+#quest-contents {
+	text-align: left;
+}
+
+#quest-hide {
+	color: white;
+	float: right;
+	display: block;
+	font-weight: bold;
+	padding-right: 10px;
+	padding-top: 3px;
+}
+
+#quest-help-icon {
+	height: 17px;
+	cursor: pointer;
+	float: right;
+}
+
+#quest-list {
+	list-style: none;
+	padding: 0 10px 5px 5px;
+	margin: 10px auto 5px;
+	text-align: center;
+}
+
+#quest-list li {
+	margin: 10px;
+	padding: 5px 10px;
+	border-radius: 8px;
+	-moz-border-radius: 8px;
+	-webkit-border-radius: 8px;
+	display: inline;
+}
+
+#quest-list li a {
+	color: white;
+	font-size: 1.1em;
+}
+
+#quest-list li.selected {
+	background-color: rgba(40, 42, 42, 1.0);
+	/*  font-weight: bold;*/
+}
+
+#quest-list li a.quest-user-quest {
+	color: #FCE988;
+}
+
+#quest-title {
+	margin: 0;
+	display: inline;
+	vertical-align: bottom;
+	float: left;
+	text-align: center;
+	width: 95%;
+	margin-left: 25px;
+}
+
 /* #quest-complete-dialog */
 /* #quest-contents */
 /* #quest-help-icon */
@@ -193,3 +295,13 @@ img {
 /* #quest-list */
 /* #quest-title */
 /* #utilities   -- from bootstrap */
+@media ( max-width : 480px) {
+	#info-bar-wide {
+		display: inline;
+		visibility: hidden;
+	}
+	#info-bar-single {
+		display: block;
+		visibility: visible;
+	}
+}
