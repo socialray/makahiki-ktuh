@@ -1,0 +1,195 @@
+/* ========================= */
+/*       Elements            */
+/* ========================= */
+
+/* a */
+a.home img {
+	background: transparent url(../images/icon-home.png) top left no-repeat;
+	display: block;
+}
+
+a.home:hover img {
+	background: transparent url(../images/icon-home-over.png) top left
+		no-repeat;
+	display: block;
+}
+
+a.activities img {
+	background: transparent url(../images/icon-scoreboard.png) top left
+		no-repeat;
+	display: block;
+}
+
+a.activities:hover img {
+	background: transparent url(../images/icon-scoreboard-over.png) top left
+		no-repeat;
+	display: block;
+}
+
+a.energy img {
+	background: transparent url(../images/icon-go-low.png) top left
+		no-repeat;
+	display: block;
+}
+
+a.energy:hover img {
+	background: transparent url(../images/icon-go-low-over.png) top left
+		no-repeat;
+	display: block;
+}
+
+a.news img {
+	background: transparent url(../images/icon-news.png) top left no-repeat;
+	display: block;
+}
+
+a.news:hover img {
+	background: transparent url(../images/icon-news-over.png) top left
+		no-repeat;
+	display: block;
+}
+
+a.prizes img {
+	background: transparent url(../images/icon-prizes.png) top left
+		no-repeat;
+	display: block;
+}
+
+a.prizes:hover img {
+	background: transparent url(../images/icon-prizes-over.png) top left
+		no-repeat;
+	display: block;
+}
+
+a.profile img {
+	background: transparent url(../images/icon-profile.png) top left
+		no-repeat;
+	display: block;
+}
+
+a.profile:hover img {
+	background: transparent url(../images/icon-profile-over.png) top left
+		no-repeat;
+	display: block;
+}
+
+a.help img {
+	background: transparent url(../images/icon-help.png) top left no-repeat;
+	display: block;
+}
+
+a.help:hover img {
+	background: transparent url(../images/icon-help-over.png) top left
+		no-repeat;
+	display: block;
+}
+
+/* body */
+body {
+	margin: 0;
+	padding: 0;
+	text-align: center;
+}
+
+/* fieldset */
+fieldset {
+	border: 0;
+	border-radius: 8px;
+	-moz-border-radius: 8px;
+	-webkit-border-radius: 8px;
+	margin-top: -10px;
+}
+
+fieldset legend {
+	font-weight: bold;
+	text-align: left;
+	text-decoration: underline;
+	padding: 25px 0 0 0;
+}
+
+/* img */
+img {
+	border: none;
+}
+
+/* ========================= */
+/*       Classes             */
+/* ========================= */
+
+/* .container */
+/* Set background to null for containers and default content area */
+.container,.container-top,.container-bottom,.content {
+	background: none;
+}
+
+/* Set Common Shadows and border radius across all objects which plan to use it. */
+.content {
+	border-radius: 8px 8px 8px 8px;
+	box-shadow: 3px 3px 8px #000;
+	-moz-box-shadow: 3px 3px 8px #000;
+	-webkit-box-shadow: 3px 3px 8px #000;
+}
+
+/* .content-box */
+.content-box {
+	border-radius: 8px;
+	-moz-border-radius: 8px;
+	-webkit-border-radius: 8px;
+	padding-bottom: 8px;
+	margin-bottom: 15px;
+	opacity: 0.88;
+}
+
+/* smaller and lighter shadow used inside the content boxes */
+.content-box-shadow {
+	box-shadow: 0 0 3px 3px #222;
+	-moz-box-shadow: 0 0 3px 3px #222;
+	-webkit-box-shadow: 0 0 3px 3px #222;
+}
+
+/* .content-box-title */
+/* formating for title area on widgets, create rounded corners at the top, set font weight and opacity */
+.content-box-title {
+	height: 29px;
+	margin: 0;
+	padding: 0;
+	line-height: 29px;
+	font-weight: bold;
+	border-top-left-radius: 8px;
+	-moz-border-radius-topleft: 8px;
+	-webkit-border-top-left-radius: 8px;
+	border-top-right-radius: 8px;
+	-moz-border-radius-topright: 8px;
+	-webkit-border-top-right-radius: 8px;
+	opacity: .99;
+}
+
+/* .nav-bar-inner */
+.navbar-inner {
+	border-radius: 8px 8px 8px 8px;
+	box-shadow: 3px 3px 8px #000;
+	-moz-box-shadow: 3px 3px 8px #000;
+	-webkit-box-shadow: 3px 3px 8px #000;
+}
+/* .quest-options */
+.quest-options {
+	float: right;
+}
+
+/* ========================= */
+/*       IDs                 */
+/* ========================= */
+
+/* #header */
+/* #header-info */
+/* #header-logout */
+/* #header-nav-links */
+/* #header-round-info */
+/* #quest-box */
+/* #quest-complete-dialog */
+/* #quest-contents */
+/* #quest-help-icon */
+/* #quest-hide */
+/* #quest-list */
+/* #quest-title */
+/* #utilities   -- from bootstrap */
