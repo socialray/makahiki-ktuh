@@ -8,19 +8,17 @@
 <link href="css/bootstrap.css" rel="stylesheet">
 <link href="css/bootstrap-responsive.css" rel="stylesheet">
 <link href="css/bootstrap-override.css" rel="stylesheet">
-<link href="css/style.css" rel="stylesheet">
-<link href="css/base-theme.css" rel="stylesheet">
+<link href="css/makahiki-structure.css" rel="stylesheet">
 <link href="css/activities.css" rel="stylesheet">
+<link href="css/theme.css" rel="stylesheet">
 </head>
 <body data-spy="scroll" data-target=".subnav" data-offset="50">
 	<p></p>
 	<p></p>
-	<div id="utilities">
-		<div id="header-logout">
-			<button id="header-feedback" href="javascript:void(0);">Send
-				Feedback</button>
-			<a href="landing.html">Logout</a>
-		</div>
+	<div id="header-logout">
+		<button id="header-feedback" href="javascript:void(0);">Send
+			Feedback</button>
+		<a href="landing.html">Logout</a>
 	</div>
 
 	<!-- Navbar
@@ -32,7 +30,7 @@
 					data-target=".nav-collapse"> <span class="icon-bar"></span> <span
 					class="icon-bar"></span> <span class="icon-bar"></span>
 				</a> <a class="brand" href="./home.html"><img
-					src="./images/uh-logo1.png" alt="University of Hawaii" /> Kukui
+					src="./images/spacer-54.png" alt="University of Hawaii" /> Kukui
 					Cup</a>
 
 				<div class="nav-collapse">
@@ -63,49 +61,116 @@
 
 					</ul>
 				</div>
-				<div id="header-round-info">
-					<h3>Overall</h3>
-					<span id="header-round-countdown" class="hasCountdown">(ends
-						in 5 Days, 9 Hours, and 39 Minutes)</span>
-				</div>
-
 			</div>
 		</div>
 	</div>
 
-	<div class="container content-box">
-		<div class="row">
-			<ul class="nav nav-pills">
-				<li><div class="span1">
-						<img src="./images/cam.jpeg" />Cam
-					</div></li>
-				<li><div id="player-score">
-						<div id="user-cycle">
-							<div id="header-user-overall-rank1" class="span4">
-								20 points in Round 1</br>#2 out of 2 in Ilima-E
-							</div>
-							<div id="header-user-overall-rank2" class="span4">
-								20 points in Round 1</br>#4 out of 17 overall
-							</div>
-							<div id="header-user-team-rank3" class="span4">20 points #1
-								out of 2 in Ilima-E</div>
-							<div id="header-user-overall-rank4" class="span4">20 points
-								#1 out of 17 overall</div>
+	<div id="info-bar-wide" class="container-fluid">
+		<div class="row-fluid">
+			<div class="span12">
+				<div class="span4" style="border-right:">
+					<img src="./images/default_avatar.png" />
+					<ul style="float: right; list-style: none">
+						<li><h4>Cam M.</h4></li>
+						<li><div id="user-cycle">
+								<div id="header-user-overall-rank1" class="span3">
+									20 points in Round 1</br>#2 out of 2 in Ilima-E
+								</div>
+								<div id="header-user-overall-rank2" class="span3">
+									20 points in Round 1</br>#4 out of 17 overall
+								</div>
+								<div id="header-user-team-rank3" class="span3">20 points
+									#1 out of 2 in Ilima-E</div>
+								<div id="header-user-overall-rank4" class="span3">20
+									points #1 out of 17 overall</div>
+							</div></li>
+					</ul>
+				</div>
+				<div class="span3" style="border-left: 1px solid black">
+					<h4 style="text-align: center">Mokihana: Lounge A</h4>
+					<div id="team-cycle">
+						<div class="span3">
+							<ul style="list-style: none">
+								<li>570 points</br>#2 out of 20
+								</li>
+							</ul>
 						</div>
-					</div></li>
-				<li><div class="span1">Ilima-E</div></li>
-				<li><div id="team-score">
-						<div id="team-cycle">
-							<div id="header-team-overall-rank1" class="span4">41 points
-								in Round 1 #1 out of 15 in all teams</div>
-							<div id="header-team-overall-rank3" class="span4">20 points
-								overall #1 out of 15 in all teams</div>
+						<div class="span3">
+							<ul style="list-style: none">
+								<li>88 kWh</br>#1 out of 20
+								</li>
+							</ul>
 						</div>
-					</div></li>
-			</ul>
+						<div class="span3">
+							<ul style="list-style: none">
+								<li>50 gallons</br>#7 out of 20
+								</li>
+							</ul>
+						</div>
+					</div>
+				</div>
+				<div class="span4"
+					style="border-left: 1px solid black; text-align: center">
+					<div id="round-cycle">
+						<div class="span4">
+							<ul style="list-style: none">
+								<li><h4>Overall Round</h4></li>
+								<li>Ends in 5 Days, 9 Hours, and 39 Minutes</li>
+							</ul>
+						</div>
+						<div class="span4">
+							<ul style="list-style: none">
+								<li><h4>Next Workshop</h4></li>
+								<li>Friday evening @ 5pm.</li>
+							</ul>
+						</div>
+					</div>
+				</div>
+			</div>
 		</div>
 	</div>
-	<p></p>
+	<div id="info-bar-single" class="container">
+		<div class="row">
+			<div id="single-cycle">
+				<div>
+					<h4>Cam M.</h4>
+					20 points in Round 1</br>#2 out of 2 in Ilima-E
+				</div>
+				<div>
+					<h4>Cam M.</h4>
+					20 points in Round 1</br>#4 out of 17 overall
+				</div>
+				<div>
+					<h4>Cam M.</h4>
+					20 points #1 out of 2 in Ilima-E
+				</div>
+				<div>
+					<h4>Cam M.</h4>
+					20 points #1 out of 17 overall
+				</div>
+				<div>
+					<h4>Mokihana: Lounge A</h4>
+					570 points #2 out of 20
+				</div>
+				<div>
+					<h4>Mokihana: Lounge A</h4>
+					88 kWh #1 out of 20
+				</div>
+				<div>
+					<h4>Mokihana: Lounge A</h4>
+					50 gallons #7 out of 20
+				</div>
+				<div>
+					<h4>Overall Round</h4>
+					Ends in 5 Days, 9 Hours, and 39 Minutes
+				</div>
+				<div>
+					<h4>Next Workshop</h4>
+					Friday evening @ 5pm.
+				</div>
+			</div>
+		</div>
+	</div>
 	<div id="quest-box" style="clear: both">
 		<div id="quest-header">
 			<h3 id="quest-title">Your Quests</h3>
@@ -139,9 +204,9 @@
 							<div id="activity-events-title" class="content-box-title">
 								Upcoming Events (Next 7 days) <a
 									href="http://dasha.ics.hawaii.edu:8200/activities/?ref=nav-button#"
-									style="float: right"> <img
-									src="./images/icon-help-sm.png" width="20"
-									align="center" title="Click to get help about this window"
+									style="float: right"> <img src="./images/icon-help-sm.png"
+									width="20" align="center"
+									title="Click to get help about this window"
 									onclick="toggleHelp(&#39;widget&#39;, &#39;upcoming-events&#39;); return false;"></a>
 							</div>
 							<div id="activity-events-content">
@@ -186,9 +251,9 @@
 							<div id="activity-scoreboard-title" class="content-box-title">
 								Overall Scoreboard <a
 									href="http://dasha.ics.hawaii.edu:8200/activities/?ref=nav-button#"
-									style="float: right"> <img
-									src="./images/icon-help-sm.png" width="20"
-									align="center" title="Click to get help about this window"
+									style="float: right"> <img src="./images/icon-help-sm.png"
+									width="20" align="center"
+									title="Click to get help about this window"
 									onclick="toggleHelp(&#39;widget&#39;, &#39;points-scoreboard&#39;); return false;"></a>
 							</div>
 							<div id="activity-scoreboard-content"
@@ -432,9 +497,9 @@
 							<div id="activity-categories-title" class="content-box-title">
 								The Smart Grid Game <a
 									href="http://dasha.ics.hawaii.edu:8200/activities/?ref=nav-button#"
-									style="float: right"> <img
-									src="./images/icon-help-sm.png" width="20"
-									align="center" title="Click to get help about this window"
+									style="float: right"> <img src="./images/icon-help-sm.png"
+									width="20" align="center"
+									title="Click to get help about this window"
 									onclick="toggleHelp(&#39;widget&#39;, &#39;smart-grid-game&#39;); return false;"></a>
 							</div>
 							<div id="activity-categories-content">
@@ -562,8 +627,8 @@
 																			<a
 																				href="http://dasha.ics.hawaii.edu:8200/activities/activity/intro-video/"
 																				title="Intro video"> <img
-																				src="./images/icon-done.png" width="12"
-																				align="left"> <br> Intro video
+																				src="./images/icon-done.png" width="12" align="left">
+																				<br> Intro video
 
 
 																			</a>
@@ -583,8 +648,8 @@
 																			<a
 																				href="http://dasha.ics.hawaii.edu:8200/activities/activity/cup-secrets/"
 																				title="Cup Secrets"> <img
-																				src="./images/icon-done.png" width="12"
-																				align="left"> <br> Cup Secrets
+																				src="./images/icon-done.png" width="12" align="left">
+																				<br> Cup Secrets
 
 
 																			</a>
@@ -736,9 +801,8 @@
 																			<a
 																				href="http://dasha.ics.hawaii.edu:8200/activities/event/round-1-party/"
 																				title="Round 1 Party"> <img
-																				src="./images/icon-exclamation2.png"
-																				width="12" align="left"> <br> Round 1
-																				Party
+																				src="./images/icon-exclamation2.png" width="12"
+																				align="left"> <br> Round 1 Party
 
 
 																			</a>
@@ -811,8 +875,8 @@
 																			<a
 																				href="http://dasha.ics.hawaii.edu:8200/activities/activity/power-energy/"
 																				title="Power &amp; Energy"> <img
-																				src="./images/icon-done.png" width="12"
-																				align="left"> <br> Power &amp; Energy
+																				src="./images/icon-done.png" width="12" align="left">
+																				<br> Power &amp; Energy
 
 
 																			</a>
@@ -832,8 +896,8 @@
 																			<a
 																				href="http://dasha.ics.hawaii.edu:8200/activities/activity/energy-intuition/"
 																				title="Energy Intuition"> <img
-																				src="./images/icon-done.png" width="12"
-																				align="left"> <br> Energy Intuition
+																				src="./images/icon-done.png" width="12" align="left">
+																				<br> Energy Intuition
 
 
 																			</a>
@@ -979,8 +1043,8 @@
 																			<a
 																				href="http://dasha.ics.hawaii.edu:8200/activities/activity/audit-video/"
 																				title="Audit Video"> <img
-																				src="./images/icon-done.png" width="12"
-																				align="left"> <br> Audit Video
+																				src="./images/icon-done.png" width="12" align="left">
+																				<br> Audit Video
 
 
 																			</a>
@@ -1055,8 +1119,8 @@
 																			<a
 																				href="http://dasha.ics.hawaii.edu:8200/activities/activity/lighting-video/"
 																				title="Lighting video"> <img
-																				src="./images/icon-done.png" width="12"
-																				align="left"> <br> Lighting video
+																				src="./images/icon-done.png" width="12" align="left">
+																				<br> Lighting video
 
 
 																			</a>
@@ -1120,9 +1184,8 @@
 																			<a
 																				href="http://dasha.ics.hawaii.edu:8200/activities/commitment/turn-off-lights/"
 																				title="Turn off lights"> <img
-																				src="./images/icon-exclamation2.png"
-																				width="12" align="left"> <br> Turn off
-																				lights
+																				src="./images/icon-exclamation2.png" width="12"
+																				align="left"> <br> Turn off lights
 
 
 																			</a>
@@ -1297,8 +1360,8 @@
 																			<a
 																				href="http://dasha.ics.hawaii.edu:8200/activities/activity/energy-gen-1/"
 																				title="Energy Issues"> <img
-																				src="./images/icon-done.png" width="12"
-																				align="left"> <br> Energy Issues
+																				src="./images/icon-done.png" width="12" align="left">
+																				<br> Energy Issues
 
 
 																			</a>
@@ -1318,8 +1381,8 @@
 																			<a
 																				href="http://dasha.ics.hawaii.edu:8200/activities/activity/energy-gen-2/"
 																				title="Energy Now"> <img
-																				src="./images/icon-done.png" width="12"
-																				align="left"> <br> Energy Now
+																				src="./images/icon-done.png" width="12" align="left">
+																				<br> Energy Now
 
 
 																			</a>
@@ -1338,9 +1401,8 @@
 
 																			<a
 																				href="http://dasha.ics.hawaii.edu:8200/activities/activity/energy-gen-3/"
-																				title="HCEI"> <img
-																				src="./images/icon-done.png" width="12"
-																				align="left"> <br> HCEI
+																				title="HCEI"> <img src="./images/icon-done.png"
+																				width="12" align="left"> <br> HCEI
 
 
 																			</a>
@@ -1384,8 +1446,8 @@
 																			<a
 																				href="http://dasha.ics.hawaii.edu:8200/activities/activity/energy-gen-1-2/"
 																				title="Energy Issues 2"> <img
-																				src="./images/icon-done.png" width="12"
-																				align="left"> <br> Energy Issues 2
+																				src="./images/icon-done.png" width="12" align="left">
+																				<br> Energy Issues 2
 
 
 																			</a>
@@ -1594,8 +1656,8 @@
 																			<a
 																				href="http://dasha.ics.hawaii.edu:8200/activities/commitment/use-stairs/"
 																				title="Use stairs"> <img
-																				src="./images/icon-exclamation2.png"
-																				width="12" align="left"> <br> Use stairs
+																				src="./images/icon-exclamation2.png" width="12"
+																				align="left"> <br> Use stairs
 
 
 																			</a>
@@ -1697,8 +1759,8 @@
 																			<a
 																				href="http://dasha.ics.hawaii.edu:8200/activities/event/pedalpalooza/"
 																				title="Pedal palooza"> <img
-																				src="./images/icon-done.png" width="12"
-																				align="left"> <br> Pedal palooza
+																				src="./images/icon-done.png" width="12" align="left">
+																				<br> Pedal palooza
 
 
 																			</a>
@@ -1740,8 +1802,8 @@
 																			<a
 																				href="http://dasha.ics.hawaii.edu:8200/activities/event/swag-game-3/"
 																				title="Cafe Play 3"> <img
-																				src="./images/icon-exclamation2.png"
-																				width="12" align="left"> <br> Cafe Play 3
+																				src="./images/icon-exclamation2.png" width="12"
+																				align="left"> <br> Cafe Play 3
 
 
 																			</a>
@@ -1838,9 +1900,8 @@
 																			<a
 																				href="http://dasha.ics.hawaii.edu:8200/activities/commitment/recycle-cans/"
 																				title="Recycle cans"> <img
-																				src="./images/icon-exclamation2.png"
-																				width="12" align="left"> <br> Recycle
-																				cans
+																				src="./images/icon-exclamation2.png" width="12"
+																				align="left"> <br> Recycle cans
 
 
 																			</a>
@@ -2012,8 +2073,8 @@
 																			<a
 																				href="http://dasha.ics.hawaii.edu:8200/activities/event/food-day/"
 																				title="Food Day"> <img
-																				src="./images/icon-exclamation2.png"
-																				width="12" align="left"> <br> Food Day
+																				src="./images/icon-exclamation2.png" width="12"
+																				align="left"> <br> Food Day
 
 
 																			</a>
@@ -2377,8 +2438,8 @@
 																			<a
 																				href="http://dasha.ics.hawaii.edu:8200/activities/event/low-energy-eating/"
 																				title="Eating Well"> <img
-																				src="./images/icon-exclamation2.png"
-																				width="12" align="left"> <br> Eating Well
+																				src="./images/icon-exclamation2.png" width="12"
+																				align="left"> <br> Eating Well
 
 
 																			</a>
@@ -3164,6 +3225,18 @@ function unlock_dialog(type, slug, depends_on)
 		$(function() {
 			$('#team-cycle').cycle({
 				fx : 'fade' // choose your transition type, ex: fade, scrollUp, shuffle, etc...
+			});
+		});
+		
+		$(function() {
+			$('#round-cycle').cycle({
+				fx : 'scrollUp' // choose your transition type, ex: fade, scrollUp, shuffle, etc...
+			});
+		});
+		
+		$(function() {
+			$('#single-cycle').cycle({
+				fx : 'scrollUp' // choose your transition type, ex: fade, scrollUp, shuffle, etc...
 			});
 		});
 	</script>
