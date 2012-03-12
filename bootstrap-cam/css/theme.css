@@ -132,6 +132,33 @@
 	background-color: #A2C0D2;
 }
 
+#quest-box {
+	background: none;
+	background-color: rgba(70, 130, 80, 0.5);
+	color: white;
+}
+
+#quest-box h4 {
+	color: white;
+}
+	
+#quest-hide {
+	color: white;
+}
+
+#quest-list li a {
+	color: white;
+}
+
+#quest-list li.selected {
+	background-color: rgba(40, 42, 42, 1.0);
+	/*  font-weight: bold;*/
+}
+
+#quest-list li a.quest-user-quest {
+	color: #FCE988;
+}
+
 /* set the UH logo */
 a.brand img {
 	background: transparent url(../images/icon-uh-logo.png) top left

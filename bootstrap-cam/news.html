@@ -69,62 +69,119 @@
 	<div id="info-bar-wide" class="container-fluid">
 		<div class="row-fluid">
 			<div class="span12">
-				<div class="span4" style="border-right:">
+				<div class="span1">
 					<img src="./images/default_avatar.png" />
-					<ul style="float: right; list-style: none">
-						<li><h4>Cam M.</h4></li>
-						<li><div id="user-cycle">
-								<div id="header-user-overall-rank1" class="span3">
-									20 points in Round 1</br>#2 out of 2 in Ilima-E
-								</div>
-								<div id="header-user-overall-rank2" class="span3">
-									20 points in Round 1</br>#4 out of 17 overall
-								</div>
-								<div id="header-user-team-rank3" class="span3">20 points
-									#1 out of 2 in Ilima-E</div>
-								<div id="header-user-overall-rank4" class="span3">20
-									points #1 out of 17 overall</div>
-							</div></li>
-					</ul>
+					<h4>Cam M.</h4>
 				</div>
-				<div class="span3" style="border-left: 1px solid black">
-					<h4 style="text-align: center">Mokihana: Lounge A</h4>
-					<div id="team-cycle">
-						<div class="span3">
-							<ul style="list-style: none">
-								<li>570 points</br>#2 out of 20
-								</li>
-							</ul>
-						</div>
-						<div class="span3">
-							<ul style="list-style: none">
-								<li>88 kWh</br>#1 out of 20
-								</li>
-							</ul>
-						</div>
-						<div class="span3">
-							<ul style="list-style: none">
-								<li>50 gallons</br>#7 out of 20
-								</li>
-							</ul>
+				<div id="user-cycle" class="span3">
+					<div>
+						<ul>
+							<li>20 points in Round 1</br>#2 out of 2 in Ilima-E
+							</li>
+						</ul>
+					</div>
+					<div>
+						<ul>
+							<li>20 points in Round 1</br>#4 out of 17 overall
+							</li>
+						</ul>
+					</div>
+					<div>
+						<ul>
+							<li>20 points </br>#1 out of 2 in Ilima-E
+							</li>
+						</ul>
+					</div>
+					<div>
+						<ul>
+							<li>20 points </br>#1 out of 17 overall
+							</li>
+						</ul>
+					</div>
+				</div>
+				<div class="span4">
+					<h4>Mokihana: Lounge A</h4>
+					<div class="span2 offset1">
+						<div id="team-cycle">
+							<div>
+								<ul>
+									<li>570 points</br>#2 out of 20
+									</li>
+								</ul>
+							</div>
+							<div>
+								<ul>
+									<li>88 kWh</br>#1 out of 20
+									</li>
+								</ul>
+							</div>
+							<div>
+								<ul>
+									<li>50 gallons</br>#7 out of 20
+									</li>
+								</ul>
+							</div>
 						</div>
 					</div>
 				</div>
-				<div class="span4"
-					style="border-left: 1px solid black; text-align: center">
+				<div class="span4" style="text-align: center">
 					<div id="round-cycle">
 						<div class="span4">
-							<ul style="list-style: none">
+							<ul>
 								<li><h4>Overall Round</h4></li>
 								<li>Ends in 5 Days, 9 Hours, and 39 Minutes</li>
 							</ul>
 						</div>
 						<div class="span4">
-							<ul style="list-style: none">
+							<ul>
 								<li><h4>Next Workshop</h4></li>
 								<li>Friday evening @ 5pm.</li>
 							</ul>
 						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div id="info-bar-single" class="container-fluid">
+		<div class="row-fluid">
+			<div class="span12" style="text-align: center">
+				<div id="single-cycle">
+					<div class="span4">
+						<h4>Cam M.</h4>
+						20 points in Round 1</br>#2 out of 2 in Ilima-E
+					</div>
+					<div class="span4">
+						<h4>Cam M.</h4>
+						20 points in Round 1</br>#4 out of 17 overall
+					</div>
+					<div class="span4">
+						<h4>Cam M.</h4>
+						20 points #1 out of 2 in Ilima-E
+					</div>
+					<div class="span4">
+						<h4>Cam M.</h4>
+						20 points #1 out of 17 overall
+					</div>
+					<div class="span4">
+						<h4>Mokihana: Lounge A</h4>
+						570 points #2 out of 20
+					</div>
+					<div class="span4">
+						<h4>Mokihana: Lounge A</h4>
+						88 kWh #1 out of 20
+					</div>
+					<div class="span4">
+						<h4>Mokihana: Lounge A</h4>
+						50 gallons #7 out of 20
+					</div>
+					<div class="span4">
+						<h4>Overall Round</h4>
+						Ends in 5 Days, 9 Hours, and 39 Minutes
+					</div>
+					<div class="span4">
+						<h4>Next Workshop</h4>
+						Friday evening @ 5pm.
 					</div>
 				</div>
 			</div>
@@ -1045,30 +1102,35 @@ $( document ).ready( function ()
 	<script src="js/jquery.cycle.all.js"></script>
 
 	<script type="text/javascript">
-		$.fn.cycle.defaults.timeout = 6000;
-		$(function() {
-			$('#user-cycle').cycle({
-				fx : 'fade' // choose your transition type, ex: fade, scrollUp, shuffle, etc...
-			});
+	$.fn.cycle.defaults.timeout = 6000;
+	$(function() {
+		$('#user-cycle').cycle({
+			fx : 'fade', // choose your transition type, ex: fade, scrollUp, shuffle, etc...
+			fit : 1
 		});
+	});
 
-		$(function() {
-			$('#team-cycle').cycle({
-				fx : 'fade' // choose your transition type, ex: fade, scrollUp, shuffle, etc...
-			});
+	$(function() {
+		$('#team-cycle').cycle({
+			fx : 'fade', // choose your transition type, ex: fade, scrollUp, shuffle, etc...
+			fit : 1
 		});
-		
-		$(function() {
-			$('#round-cycle').cycle({
-				fx : 'scrollUp' // choose your transition type, ex: fade, scrollUp, shuffle, etc...
-			});
+	});
+	
+	$(function() {
+		$('#round-cycle').cycle({
+			fx : 'scrollUp', // choose your transition type, ex: fade, scrollUp, shuffle, etc...
+			fit : 1
 		});
-		
-		$(function() {
-			$('#single-cycle').cycle({
-				fx : 'scrollUp' // choose your transition type, ex: fade, scrollUp, shuffle, etc...
-			});
+	});
+	
+	$(function() {
+		$('#single-cycle').cycle({
+			fx : 'scrollUp', // choose your transition type, ex: fade, scrollUp, shuffle, etc...
+			fit : 1,
+			height : 55
 		});
+	});
 	</script>
 
 </body>
