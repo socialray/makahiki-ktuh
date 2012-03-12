@@ -197,9 +197,10 @@ img {
 	border-radius: none;
 	box-shadow: none;
 	display: none;
-	height: 55px;
+	height: 65px;
 	margin-bottom: none;
 	padding: none;
+	text-align: center;
 }
 
 #info-bar-wide {
@@ -228,9 +229,6 @@ img {
 /* #quest-box */
 /*------- Quest styles -----*/
 #quest-box {
-	background: none;
-	background-color: rgba(70, 130, 80, 0.5);
-	color: white;
 	-moz-border-radius: 8px;
 	-webkit-border-radius: 8px;
 	padding: 5px;
@@ -238,7 +236,6 @@ img {
 
 #quest-box h4 {
 	margin: 5px 0;
-	color: white;
 }
 
 #quest-complete-dialog {
@@ -250,7 +247,6 @@ img {
 }
 
 #quest-hide {
-	color: white;
 	float: right;
 	display: block;
 	font-weight: bold;
@@ -281,17 +277,7 @@ img {
 }
 
 #quest-list li a {
-	color: white;
 	font-size: 1.1em;
-}
-
-#quest-list li.selected {
-	background-color: rgba(40, 42, 42, 1.0);
-	/*  font-weight: bold;*/
-}
-
-#quest-list li a.quest-user-quest {
-	color: #FCE988;
 }
 
 #quest-title {
@@ -303,13 +289,6 @@ img {
 	width: 95%;
 	margin-left: 25px;
 }
-
-/* #quest-complete-dialog */
-/* #quest-contents */
-/* #quest-help-icon */
-/* #quest-hide */
-/* #quest-list */
-/* #quest-title */
 
 /* for small screen widths hide the wide info-bar */
 @media ( max-width : 480px) {
