@@ -192,14 +192,14 @@ img {
 /* #header-nav-links */
 /* #header-round-info */
 #info-bar-single {
-		background: none;
-		background-image: none;
-		border-radius: none;
-		box-shadow: none;
-		display: inline;
-		padding: none;
-		margin-bottom: none;
-		visibility: hidden;
+	background: none;
+	background-image: none;
+	border-radius: none;
+	box-shadow: none;
+	display: none;
+	height: 55px;
+	margin-bottom: none;
+	padding: none;
 }
 
 #info-bar-wide {
@@ -215,6 +215,16 @@ img {
 	margin-bottom: 20px;
 }
 
+#info-bar-wide h4, #info-bar-single h4 {
+	text-align: center;
+}
+
+#info-bar-wide ul, #info-bar-single ul {
+	list-style: none outside none;
+}
+#info-bar-wide li {
+	display: block;
+}
 /* #quest-box */
 /*------- Quest styles -----*/
 #quest-box {
@@ -300,17 +310,17 @@ img {
 /* #quest-hide */
 /* #quest-list */
 /* #quest-title */
-/* #utilities   -- from bootstrap */
+
+/* for small screen widths hide the wide info-bar */
 @media ( max-width : 480px) {
 	#info-bar-wide {
 		background: none;
 		background-image: none;
 		border-radius: none;
 		box-shadow: none;
-		display: inline;
+		display: none;
 		padding: none;
 		margin-bottom: none;
-		visibility: hidden;
 	}
 	#info-bar-single {
 		background: #E3E3E3;
@@ -324,6 +334,8 @@ img {
 		padding: 5px 0;
 		margin-bottom: 20px;
 		display: block;
-		visibility: visible;
+	}
+	#quest-list li {
+		display: block; /* make them vertical */
 	}
 }
