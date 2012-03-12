@@ -8,19 +8,18 @@
 <link href="css/bootstrap.css" rel="stylesheet">
 <link href="css/bootstrap-responsive.css" rel="stylesheet">
 <link href="css/bootstrap-override.css" rel="stylesheet">
-<link href="css/style.css" rel="stylesheet">
-<link href="css/base-theme.css" rel="stylesheet">
+<link href="css/makahiki-structure.css" rel="stylesheet">
+<link href="css/help.css" rel="stylesheet">
+<link href="css/theme.css" rel="stylesheet">
 </head>
 <body data-spy="scroll" data-target=".subnav" data-offset="50">
 
 	<p></p>
 	<p></p>
-	<div id="utilities">
-		<div id="header-logout">
-			<button id="header-feedback" href="javascript:void(0);">Send
-				Feedback</button>
-			<a href="landing.html">Logout</a>
-		</div>
+	<div id="header-logout">
+		<button id="header-feedback" href="javascript:void(0);">Send
+			Feedback</button>
+		<a href="landing.html">Logout</a>
 	</div>
 
 	<!-- Navbar
@@ -32,7 +31,7 @@
 					data-target=".nav-collapse"> <span class="icon-bar"></span> <span
 					class="icon-bar"></span> <span class="icon-bar"></span>
 				</a> <a class="brand" href="./home.html"><img
-					src="./images/uh-logo1.png" alt="University of Hawaii" /> Kukui
+					src="./images/spacer-54.png" alt="University of Hawaii" /> Kukui
 					Cup</a>
 
 				<div class="nav-collapse">
@@ -62,49 +61,116 @@
 
 					</ul>
 				</div>
-				<div id="header-round-info">
-					<h3>Overall</h3>
-					<span id="header-round-countdown" class="hasCountdown">(ends
-						in 5 Days, 9 Hours, and 39 Minutes)</span>
-				</div>
-
 			</div>
 		</div>
 	</div>
 
-	<div class="container content-box">
-		<div class="row">
-			<ul class="nav nav-pills">
-				<li><div class="span1">
-						<img src="./images/cam.jpeg" />Cam
-					</div></li>
-				<li><div id="player-score">
-						<div id="user-cycle">
-							<div id="header-user-overall-rank1" class="span4">
-								20 points in Round 1</br>#2 out of 2 in Ilima-E
-							</div>
-							<div id="header-user-overall-rank2" class="span4">
-								20 points in Round 1</br>#4 out of 17 overall
-							</div>
-							<div id="header-user-team-rank3" class="span4">20 points #1
-								out of 2 in Ilima-E</div>
-							<div id="header-user-overall-rank4" class="span4">20 points
-								#1 out of 17 overall</div>
+	<div id="info-bar-wide" class="container-fluid">
+		<div class="row-fluid">
+			<div class="span12">
+				<div class="span4" style="border-right:">
+					<img src="./images/default_avatar.png" />
+					<ul style="float: right; list-style: none">
+						<li><h4>Cam M.</h4></li>
+						<li><div id="user-cycle">
+								<div id="header-user-overall-rank1" class="span3">
+									20 points in Round 1</br>#2 out of 2 in Ilima-E
+								</div>
+								<div id="header-user-overall-rank2" class="span3">
+									20 points in Round 1</br>#4 out of 17 overall
+								</div>
+								<div id="header-user-team-rank3" class="span3">20 points
+									#1 out of 2 in Ilima-E</div>
+								<div id="header-user-overall-rank4" class="span3">20
+									points #1 out of 17 overall</div>
+							</div></li>
+					</ul>
+				</div>
+				<div class="span3" style="border-left: 1px solid black">
+					<h4 style="text-align: center">Mokihana: Lounge A</h4>
+					<div id="team-cycle">
+						<div class="span3">
+							<ul style="list-style: none">
+								<li>570 points</br>#2 out of 20
+								</li>
+							</ul>
 						</div>
-					</div></li>
-				<li><div class="span1">Ilima-E</div></li>
-				<li><div id="team-score">
-						<div id="team-cycle">
-							<div id="header-team-overall-rank1" class="span4">41 points
-								in Round 1 #1 out of 15 in all teams</div>
-							<div id="header-team-overall-rank3" class="span4">20 points
-								overall #1 out of 15 in all teams</div>
+						<div class="span3">
+							<ul style="list-style: none">
+								<li>88 kWh</br>#1 out of 20
+								</li>
+							</ul>
 						</div>
-					</div></li>
-			</ul>
+						<div class="span3">
+							<ul style="list-style: none">
+								<li>50 gallons</br>#7 out of 20
+								</li>
+							</ul>
+						</div>
+					</div>
+				</div>
+				<div class="span4"
+					style="border-left: 1px solid black; text-align: center">
+					<div id="round-cycle">
+						<div class="span4">
+							<ul style="list-style: none">
+								<li><h4>Overall Round</h4></li>
+								<li>Ends in 5 Days, 9 Hours, and 39 Minutes</li>
+							</ul>
+						</div>
+						<div class="span4">
+							<ul style="list-style: none">
+								<li><h4>Next Workshop</h4></li>
+								<li>Friday evening @ 5pm.</li>
+							</ul>
+						</div>
+					</div>
+				</div>
+			</div>
 		</div>
 	</div>
-	<p></p>
+	<div id="info-bar-single" class="container">
+		<div class="row">
+			<div id="single-cycle">
+				<div>
+					<h4>Cam M.</h4>
+					20 points in Round 1</br>#2 out of 2 in Ilima-E
+				</div>
+				<div>
+					<h4>Cam M.</h4>
+					20 points in Round 1</br>#4 out of 17 overall
+				</div>
+				<div>
+					<h4>Cam M.</h4>
+					20 points #1 out of 2 in Ilima-E
+				</div>
+				<div>
+					<h4>Cam M.</h4>
+					20 points #1 out of 17 overall
+				</div>
+				<div>
+					<h4>Mokihana: Lounge A</h4>
+					570 points #2 out of 20
+				</div>
+				<div>
+					<h4>Mokihana: Lounge A</h4>
+					88 kWh #1 out of 20
+				</div>
+				<div>
+					<h4>Mokihana: Lounge A</h4>
+					50 gallons #7 out of 20
+				</div>
+				<div>
+					<h4>Overall Round</h4>
+					Ends in 5 Days, 9 Hours, and 39 Minutes
+				</div>
+				<div>
+					<h4>Next Workshop</h4>
+					Friday evening @ 5pm.
+				</div>
+			</div>
+		</div>
+	</div>
 	<div class="content">
 		<div class="left-column">
 			<div id="help-video" class="content-box">
@@ -536,6 +602,18 @@
 		$(function() {
 			$('#team-cycle').cycle({
 				fx : 'fade' // choose your transition type, ex: fade, scrollUp, shuffle, etc...
+			});
+		});
+
+		$(function() {
+			$('#round-cycle').cycle({
+				fx : 'scrollUp' // choose your transition type, ex: fade, scrollUp, shuffle, etc...
+			});
+		});
+
+		$(function() {
+			$('#single-cycle').cycle({
+				fx : 'scrollUp' // choose your transition type, ex: fade, scrollUp, shuffle, etc...
 			});
 		});
 	</script>
