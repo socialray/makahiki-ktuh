@@ -1,0 +1,96 @@
+.home-icon-content {
+    background: #E3E3E3;
+    
+    background-image: -moz-linear-gradient(100% 50% 90deg, #E3E3E3, #A1A1A1);
+    background-image: -webkit-gradient(linear, 0% 0%, 0% 90%, from(#E3E3E3), to(#BBB));
+    
+    border-radius: 3px;
+	
+	box-shadow: 3px 3px 5px #000;
+	-moz-box-shadow: 3px 3px 5px #000;
+	-webkit-box-shadow: 3px 3px 5px #000;
+	
+	margin-right: 30px;
+        padding: 5px;
+        margin-bottom: 10px;
+}
+
+#home-activities-icon {
+	background: transparent url(../../makahiki/media/images/icons/icon-scoreboard-lg.png) top left no-repeat;
+	width: 120px;
+	height: 124px;
+}
+
+#home-activities-icon:hover {
+	background: transparent url(../../makahiki/media/images/icons/icon-scoreboard-lg-over.png) top left no-repeat;
+}
+
+#home-energy-icon {
+	background: transparent url(../../makahiki/media/images/icons/icon-go-low-lg.png) top left no-repeat;
+	width: 120px;
+	height: 124px;
+}
+
+#home-energy-icon:hover {
+	background: transparent url(../../makahiki/media/images/icons/icon-go-low-lg-over.png) top left no-repeat;
+}
+
+#home-water-icon {
+	background: transparent url(../../makahiki/media/images/icons/icon-water-lg.png) top left no-repeat;
+	width: 120px;
+	height: 124px;
+}
+
+#home-water-icon:hover {
+	background: transparent url(../../makahiki/media/images/icons/icon-water-lg-over.png) top left no-repeat;
+}
+
+#home-advanced-icon {
+	background: transparent url(../../makahiki/media/images/icons/icon-scoreboard-lg.png) top left no-repeat;
+	width: 120px;
+	height: 124px;
+}
+
+#home-advanced-icon:hover {
+	background: transparent url(../../makahiki/media/images/icons/icon-scoreboard-lg-over.png) top left no-repeat;
+}
+
+#home-news-icon {
+	background: transparent url(../../makahiki/media/images/icons/icon-news-lg.png) top left no-repeat;
+	width: 120px;
+	height: 124px;
+}
+
+#home-news-icon:hover {
+	background: transparent url(../../makahiki/media/images/icons/icon-news-lg-over.png) top left no-repeat;
+}
+
+#home-profile-icon {
+	background: transparent url(../../makahiki/media/images/icons/icon-profile-lg.png) top left no-repeat;
+	width: 120px;
+	height: 124px;
+}
+
+#home-profile-icon:hover {
+	background: transparent url(../../makahiki/media/images/icons/icon-profile-lg-over.png) top left no-repeat;
+}
+
+#home-prizes-icon {
+	background: transparent url(../../makahiki/media/images/icons/icon-prizes-lg.png) top left no-repeat;
+	width: 120px;
+	height: 124px;
+}
+
+#home-prizes-icon:hover {
+	background: transparent url(../../makahiki/media/images/icons/icon-prizes-lg-over.png) top left no-repeat;
+}
+
+#home-help-icon {
+	background: transparent url(../../makahiki/media/images/icons/icon-help-lg.png) top left no-repeat;
+	width: 120px;
+	height: 124px;
+}
+
+#home-help-icon:hover {
+	background: transparent url(../../makahiki/media/images/icons/icon-help-lg-over.png) top left no-repeat;
+}
