@@ -2,7 +2,7 @@
 <html lang="en">
   <head>
     <meta charset="utf-8">
-    <title>Bootstrap, from Twitter</title>
+    <title>Kukui Cup: Home</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="">
     <meta name="author" content="">
@@ -27,7 +27,7 @@
   <body>
     <div class="row">
       <div id="send-feedback" class="span3 offset9">
-        <button style="margin-right: 10px">Send feedback</button>
+        <button class="btn">Send feedback</button>
         <a href="#">Logout</a>
       </div>
     </div>
@@ -39,18 +39,18 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </a>
-          <a class="brand" href="#"><img src="icons/old-logo.png"/></a>
+          <a class="brand" href="#"><img src="../../makahiki/media/images/icons/icon-uh-logo.png"/></a>
           <div class="nav-collapse">
             <ul class="nav">
-              <li class="active"><a href="#"><img src="icons/homepageicon.png" style="width: 64px; margin-top:-10px"/>Home</a></li>
-              <li><a href="#about"><img src="icons/icon-scoreboard.png"/>Learn</a></li>
-              <li><a href="#contact"><img src="icons/icon-go-low.png"/>Energy</a></li>
-              <li><a href="#contact"><img src="icons/watericon.png" style="width: 64px; margin-top:-10px"/>Water</a></li>
-              <li><a href="#contact"><img src="icons/icon-scoreboard.png"/>Advanced</a></li>
-              <li><a href="#contact"><img src="icons/icon-news.png"/>News</a></li>
-              <li><a href="#contact"><img src="icons/icon-prizes.png"/>Prizes</a></li>
-              <li><a href="#contact"><img src="icons/icon-profile.png"/>Profile</a></li>
-              <li><a href="#contact"><img src="icons/icon-help.png"/>Help</a></li>
+              <li class="active"><a href="#"><img src="../../makahiki/media/images/icons/icon-home.png"/>Home</a></li>
+              <li><a href="#about"><img src="../../makahiki/media/images/icons/icon-scoreboard.png"/>Learn</a></li>
+              <li><a href="#contact"><img src="../../makahiki/media/images/icons/icon-go-low.png"/>Energy</a></li>
+              <li><a href="#contact"><img src="../../makahiki/media/images/icons/icon-water.png" style="width: 64px"/>Water</a></li>
+              <li><a href="#contact"><img src="../../makahiki/media/images/icons/icon-scoreboard.png"/>Advanced</a></li>
+              <li><a href="#contact"><img src="../../makahiki/media/images/icons/icon-news.png"/>News</a></li>
+              <li><a href="#contact"><img src="../../makahiki/media/images/icons/icon-prizes.png"/>Prizes</a></li>
+              <li><a href="#contact"><img src="../../makahiki/media/images/icons/icon-profile.png"/>Profile</a></li>
+              <li><a href="#contact"><img src="../../makahiki/media/images/icons/icon-help.png"/>Help</a></li>
             </ul>
           </div><!--/.nav-collapse -->
         </div>
@@ -63,11 +63,14 @@
             <div class="row-fluid">
               <div id="user-info" class="span3">
                 <h4>George L.</h4>
-                <img src="http://dasha.ics.hawaii.edu:8200/site_media/static/images/default_avatar.png"/>
-                <ul>
-                    <li>88 points</li>
-                    <li>#3 out of 55 overall</li>
-                </ul>
+                <div id="user-info-content">
+                  <img src="http://dasha.ics.hawaii.edu:8200/site_media/static/images/default_avatar.png"/>
+                  <ul>
+                      <li>88 points</li>
+                      <li>#3 out of 55 overall</li>
+                  </ul>
+                </div>
+                <br style="clear:both"/>
               </div>
               <div id="team-info" class="span6">
                  <h4>Mokihana: Lounge A</h5>
@@ -92,7 +95,7 @@
                             <li>#7 out of 20</li>
                         </ul>
                     </div>
-
+                    <br style="clear:both"/>
                   </div>
               </div>
               <div id="rotating-info" class="span3">
@@ -104,10 +107,29 @@
       </div><!-- row-fluid -->
 
       <div class="row-fluid">
+        <div id="quest-bar" class="span12">
+          <img src="../../makahiki/media/images/icons/icon-help-sm.png" width="20" style="float:right"/>
+          <h3>Your Quests</h3>
+          <!-- <br style="clear:both"/> -->
+
+          <div class="row-fluid">
+            <div class="span4">
+              <a href="#">Get Social</a>
+            </div>
+            <div class="span4">
+              <a href="#">Get the Fully Committted badge</a>
+            </div>
+            <div class="span4">
+              <a href="#">Check lounge energy use</a>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="row-fluid">
         <div class="span12">
           <div class="row-fluid">
             <div class="span4">
-              <img src="icons/icon-scoreboard-lg.jpg"/>
+              <img src="../../makahiki/media/images/icons/icon-scoreboard-lg.png"/>
               <div class="home-icon-content">
                   <h2>Learn</h2>
                   <p>
@@ -120,7 +142,7 @@
               </div>
             </div><!--/span-->
             <div class="span4">
-              <img src="icons/icon-go-low-lg.jpg"/>
+              <img src="../../makahiki/media/images/icons/icon-go-low-lg.png"/>
               <div class="home-icon-content">
                   <h2>Energy</h2>
                     <p>
@@ -133,7 +155,7 @@
                 </div>
             </div><!--/span-->
             <div class="span4">
-              <img src="icons/watericon.png" style="width: 120px"/>
+              <img src="../../makahiki/media/images/icons/icon-water-lg.png" style="width: 120px"/>
               <div class="home-icon-content">
                   <h2>Water</h2>
                     <p>
@@ -148,7 +170,7 @@
           </div><!--/row-->
           <div class="row-fluid">
             <div class="span4">
-              <img src="icons/icon-scoreboard-lg.jpg"/>
+              <img src="../../makahiki/media/images/icons/icon-scoreboard-lg.png"/>
               <div class="home-icon-content">
                   <h2>Advanced</h2>
                     <p>
@@ -161,7 +183,7 @@
                 </div>
             </div><!--/span-->
             <div class="span4">
-              <img src="icons/icon-news-lg.jpg"/>
+              <img src="../../makahiki/media/images/icons/icon-news-lg.png"/>
               <div class="home-icon-content">
                   <h2>News</h2>
                     <p>
@@ -174,7 +196,7 @@
                 </div>
             </div><!--/span-->
             <div class="span4">
-              <img src="icons/icon-prizes-lg.jpg"/>
+              <img src="../../makahiki/media/images/icons/icon-prizes-lg.png"/>
               <div class="home-icon-content">
                   <h2>Prizes</h2>
                     <p>
@@ -189,7 +211,7 @@
           </div><!--/row-->
           <div class="row-fluid">
             <div class="span4">
-              <img src="icons/icon-profile-lg.jpg"/>
+              <img src="../../makahiki/media/images/icons/icon-profile-lg.png"/>
               <div class="home-icon-content">
                   <h2>Profile</h2>
                     <p>
@@ -202,7 +224,7 @@
                 </div>
             </div><!--/span-->
             <div class="span4">
-              <img src="icons/icon-help-lg.jpg"/>
+              <img src="../../makahiki/media/images/icons/icon-help-lg.png"/>
               <div class="home-icon-content">
                   <h2>Help</h2>
                     <p>
