@@ -25,9 +25,11 @@
   </head>
 
   <body>
-    <div style="float: right; margin: 10px;">
+    <div class="row">
+      <div id="send-feedback" class="span3 offset9">
         <button style="margin-right: 10px">Send feedback</button>
-        <a href="#" style="color: white; text-decoration: underline">Logout</a>
+        <a href="#">Logout</a>
+      </div>
     </div>
     <div class="navbar" style="clear:both">
       <div class="navbar-inner">
@@ -58,42 +60,49 @@
     <div class="container-fluid">
       <div class="row-fluid">
           <div id="info-bar" class="span12">
-              <div class="span3">
-                  <img src="http://dasha.ics.hawaii.edu:8200/site_media/static/images/default_avatar.png" />
-                  <ul style="float: right; list-style: none">
-                      <li><h4>George L.</h5></li>
-                      <li>88 points</li>
-                      <li>#3 out of 55 overall</li>
-                  </ul>
+            <div class="row-fluid">
+              <div id="user-info" class="span3">
+                <h4>George L.</h4>
+                <img src="http://dasha.ics.hawaii.edu:8200/site_media/static/images/default_avatar.png"/>
+                <ul>
+                    <li>88 points</li>
+                    <li>#3 out of 55 overall</li>
+                </ul>
               </div>
-              <div class="span5" style="border-left: 1px solid black">
-                  <h4 style="text-align: center">Mokihana: Lounge A</h5>
-                  <div style="float: left; width: 35%">
-                      <ul style="list-style: none">
-                          <li>570 points</li>
-                          <li>#2 out of 20</li>
-                      </ul>
+              <div id="team-info" class="span6">
+                 <h4>Mokihana: Lounge A</h5>
+                  <div class="row">
+                    <div class="span2">
+                        <ul>
+                            <li>570 points</li>
+                            <li>#2 out of 20</li>
+                        </ul>
+                    </div>
+
+                    <div class="span2">
+                        <ul>
+                            <li>88 kWh</li>
+                            <li>#1 out of 20</li>
+                        </ul>
+                    </div>
+
+                    <div class="span2">
+                        <ul>
+                            <li>50 gallons</li>
+                            <li>#7 out of 20</li>
+                        </ul>
+                    </div>
+
                   </div>
-                  <div style="float: left;">
-                      <ul style="list-style: none">
-                          <li>88 kWh</li>
-                          <li>#1 out of 20</li>
-                      </ul>
-                  </div>
-                  <div style="float: right; margin-right: 15px">
-                      <ul style="list-style: none">
-                          <li>50 gallons</li>
-                          <li>#7 out of 20</li>
-                      </ul>
-                  </div>
-                  <div style="clear: both"></div>
               </div>
-              <div class="span4" style="text-align: center">
+              <div id="rotating-info" class="span3">
                   <h4>Overall Round</h4>
                   Ends in 5 Days, 9 Hours, and 39 Minutes
               </div>
-          </div>
-      </div>
+            </div>
+          </div><!-- info-bar -->
+      </div><!-- row-fluid -->
+
       <div class="row-fluid">
         <div class="span12">
           <div class="row-fluid">
