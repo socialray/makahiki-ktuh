@@ -8,6 +8,7 @@ body {
 	background-size: cover;
 }
 
+/* Send feedback styles */
 #send-feedback {
     float: right;
     margin: 5px;
@@ -38,37 +39,35 @@ body {
     background-color: none;
 }
 
-/*.brand img {
-    width: 60px;
-}*/
+/* nav bar image defaults */
+.nav li a img {
+    display: block;
+	width: 54px;
+	height: 54px;
+}
 
-@media (min-width:980px) {
-    .nav li {
+/* Handle slightly different layout for nav bar items in collapsed view.*/
+@media (max-width:479px) {
+    .nav li a img {
         vertical-align: middle;
-        text-align: center;
+        margin-right: 20px;
+        display: inline;
     }
-
-    .nav li img {
-        display: block;
+    
+    .nav li a {
+        font-size:1.1em;
     }
 }
 
-@media (max-width:979px) {
-    .nav li a {
-        vertical-align: top;
-        font-size:1.1em;
-    }
-
-    .nav li img {
-        margin-right: 5px;
+/* Center text in full nav bar.*/
+@media (min-width:480px) {
+    .nav li {
+        text-align: center;
     }
 }
 
 #nav-home a img {
 	background: transparent url(../../makahiki/media/images/icons/icon-home.png) top left no-repeat;
-	display: block;
-	width: 54px;
-	height: 54px;
 }
 
 #nav-home a:hover img {
@@ -77,9 +76,6 @@ body {
 
 #nav-activities a img {
 	background: transparent url(../../makahiki/media/images/icons/icon-scoreboard.png) top left no-repeat;
-	display: block;
-	width: 54px;
-	height: 54px;
 }
 
 #nav-activities a:hover img {
@@ -88,9 +84,6 @@ body {
 
 #nav-energy a img {
 	background: transparent url(../../makahiki/media/images/icons/icon-go-low.png) top left no-repeat;
-	display: block;
-	width: 54px;
-	height: 54px;
 }
 
 #nav-energy a:hover img {
@@ -99,9 +92,6 @@ body {
 
 #nav-water a img {
 	background: transparent url(../../makahiki/media/images/icons/icon-water.png) top left no-repeat;
-	display: block;
-	width: 54px;
-	height: 54px;
 }
 
 #nav-water a:hover img {
@@ -110,9 +100,6 @@ body {
 
 #nav-advanced a img {
 	background: transparent url(../../makahiki/media/images/icons/icon-scoreboard.png) top left no-repeat;
-	display: block;
-	width: 54px;
-	height: 54px;
 }
 
 #nav-advanced a:hover img {
@@ -121,9 +108,6 @@ body {
 
 #nav-news a img {
 	background: transparent url(../../makahiki/media/images/icons/icon-news.png) top left no-repeat;
-	display: block;
-	width: 54px;
-	height: 54px;
 }
 
 #nav-news a:hover img {
@@ -132,9 +116,6 @@ body {
 
 #nav-prizes a img {
 	background: transparent url(../../makahiki/media/images/icons/icon-prizes.png) top left no-repeat;
-	display: block;
-	width: 54px;
-	height: 54px;
 }
 
 #nav-prizes a:hover img {
@@ -143,9 +124,6 @@ body {
 
 #nav-profile a img {
 	background: transparent url(../../makahiki/media/images/icons/icon-profile.png) top left no-repeat;
-	display: block;
-	width: 54px;
-	height: 54px;
 }
 
 #nav-profile a:hover img {
@@ -154,14 +132,24 @@ body {
 
 #nav-help a img {
 	background: transparent url(../../makahiki/media/images/icons/icon-help.png) top left no-repeat;
-	display: block;
-	width: 54px;
-	height: 54px;
 }
 
 #nav-help a:hover img {
     background: transparent url(../../makahiki/media/images/icons/icon-help-over.png) top left no-repeat;
 }
+
+/* Query to remove images up to tablet width.*/
+@media (min-width: 480px) and (max-width: 767px) {
+    .nav li a img {
+    	display: none;
+    }
+
+    .nav li a:hover img {
+        display: none;
+    }
+}
+
+/* end nav bar images */
 
 #info-bar {
     background: #E3E3E3;
@@ -216,37 +204,19 @@ body {
     text-align: center;
 }
 
-@media (min-width: 768px) {
-    #quest-bar {
-        background-image: -moz-linear-gradient(100% 40% 90deg, #EFB820, #FFFFFF);
-            background-image: -webkit-gradient(linear, 0% 0%, 0% 50%, from(#FFFFFF), to(#EFB820));
-        color: black;
-            border-radius: 5px;
-            text-align: center;
-            margin-bottom: 20px;
-            box-shadow: 3px 3px 5px #000;
-        -moz-box-shadow: 3px 3px 5px #000;
-        -webkit-box-shadow: 3px 3px 5px #000;
-        padding: 5px;
-        display: block;
-    }
-    
-    #quest-mini {
-        display: none;
-    }
+#quest-bar {
+    background-image: -moz-linear-gradient(100% 40% 90deg, #EFB820, #FFFFFF);
+        background-image: -webkit-gradient(linear, 0% 0%, 0% 50%, from(#FFFFFF), to(#EFB820));
+    color: black;
+        border-radius: 5px;
+        text-align: center;
+        margin-bottom: 20px;
+        box-shadow: 3px 3px 5px #000;
+    -moz-box-shadow: 3px 3px 5px #000;
+    -webkit-box-shadow: 3px 3px 5px #000;
+    padding: 5px;
+    display: block;
 }
-
-@media (max-width: 767px) {
-    #quest-bar {
-        display: none;
-    }
-    
-    #quest-mini {
-        display: inline;
-    }
-}
-
-
 
 #quest-bar a {
     color: black;
