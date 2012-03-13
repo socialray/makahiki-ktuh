@@ -1,10 +1,10 @@
-"""Prepare rendering"""
+"""Provides the view of the My_Info widget, which both displays profile info and allows updates."""
 
 from apps.widgets.my_info.forms import ProfileForm
 
 
 def supply(request, page_name):
-    """supply view_objects"""
+    """Supply view_objects for My_Info and process the POST command."""
     _ = page_name
     user = request.user
     form = None

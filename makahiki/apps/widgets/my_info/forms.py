@@ -1,4 +1,4 @@
-"""my info Forms"""
+"""Provide the forms for the My_Info widget."""
 import re
 
 from django import forms
@@ -9,11 +9,9 @@ from apps.widgets.smartgrid.models import TextReminder
 
 
 class ProfileForm(forms.Form):
-    """defines the Forms in my info widget"""
+    """Define the form for the My_Info widget."""
     def __init__(self, *args, **kwargs):
-        """
-        Override for init to take a user argument.
-        """
+        """Override init to take a user argument."""
         self.user = kwargs.pop('user', None)
         super(ProfileForm, self).__init__(*args, **kwargs)
 
@@ -27,9 +25,7 @@ class ProfileForm(forms.Form):
     contact_carrier = forms.ChoiceField(choices=TextReminder.TEXT_CARRIERS)
 
     def clean_display_name(self):
-        """
-        Check if this profile name is valid
-        """
+        """Check if this profile name is valid."""
         name = self.cleaned_data['display_name'].strip()
         # Remove extra whitespace from the name.
         spaces = re.compile(r'\s+')
