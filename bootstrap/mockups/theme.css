@@ -224,7 +224,7 @@ body {
 	-moz-box-shadow: 3px 3px 5px #000;
 	-webkit-box-shadow: 3px 3px 5px #000;
 	
-	margin-right: 30px;
+/*  margin-right: 30px;*/
 	padding: 5px;
 	margin-bottom: 10px;
 }
@@ -254,7 +254,12 @@ body {
 @media (max-width: 767px) {
     #team-info .span2 {
         float:left;
-        margin-left: 10px;
+        margin-left: 20px;
+    }
+    
+    #team-info ul {
+        float:left;
+        margin-left: 0;
     }
 }
 
