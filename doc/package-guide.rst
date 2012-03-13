@@ -30,6 +30,9 @@ Package: apps.widgets
    Subpackage: Energy Scoreboard widget <packages/energy_scoreboard>
    Subpackage: Help widgets <packages/help>
    Subpackage: Home and first login wizard widget <packages/home>
+   Subpackage: My_Achievements widget <packages/my_achievements>
+   Subpackage: My_Commitments widget <packages/my_commitments>
+   Subpackage: My_Info widget <packages/my_info>
 
 
 Package: css_rules
