@@ -6,6 +6,14 @@
 	background-color: green;
 }
 
+/* set the UH logo */
+.brand img {
+	background: transparent url(../images/icon-uh-logo.png) top left
+		no-repeat;
+	display: block;
+	margin: 0 auto;
+}
+
 .btn-navbar {
 	background-color: #2B93AD;
 	background-image: -moz-linear-gradient(top, #2B93AD, #2B93AD);
@@ -24,7 +32,6 @@
 	{
 	background-color: #2B93AD;
 }
-
 
 .commitment,.commitment-legend {
 	background-color: blue;
@@ -56,16 +63,26 @@
 .excursion,.excursion-legend {
 	background-color: red;
 }
+
 .navbar .nav>li>a {
 	color: #ffffff;
 }
 
 .navbar .nav>li>a:hover {
-	color: #2B93AD;
+	color: #24333B;
 }
 
 .navbar .nav .active>a,.navbar .nav .active>a:hover {
 	color: #24333B;;
+}
+
+.navbar-inner {
+	background: rgba(112,147,219, .45);
+/* 	background: rgba(0,0,156, .45); */
+/* 	background-image: -moz-linear-gradient(100% 50% 90deg, rgba(224, 255, 255, .45), */
+/* 		rgba(79, 148, 205, .5) ); */
+/* 	background-image: -webkit-gradient(linear, 0% 0%, 0% 90%, from(rgba(224, 255, 255, .45) */
+/* 		), to(rgba(79, 148, 205, .5) ) ); */
 }
 
 .prize a {
@@ -85,6 +102,17 @@
 	}
 }
 
+/* for small screen widths hide the wide info-bar */
+@media ( max-width : 640px) {
+	#info-bar-single {
+		background: rgba(224, 255, 255, .45);
+		background-image: -moz-linear-gradient(100% 50% 90deg, rgba(224, 255, 255, .45),
+			rgba(79, 148, 205, .5) );
+		background-image: -webkit-gradient(linear, 0% 0%, 0% 90%, from(rgba(224, 255, 255, .45)
+			), to(rgba(79, 148, 205, .5) ) );
+	}
+}
+
 /* Elements sharing background color mid-light blue */
 #activity-category .get-started,#activity-category .basic-energy,#activity-category .lights-out,#activity-category .make-watts,#activity-category .moving-on,#activity-category .opala,#activity-category .wet-wild,#activity-category .potpourri
 	{
@@ -94,6 +122,14 @@
 /* ===== Page specific coloring for Energy ===== */
 #energy-status-how-activities-table th {
 	background: #C1EBEC;
+}
+
+#info-bar-wide {
+	background: rgba(224, 255, 255, .45);
+	background-image: -moz-linear-gradient(100% 50% 90deg, rgba(224, 255, 255, .45),
+		rgba(79, 148, 205, .5) );
+	background-image: -webkit-gradient(linear, 0% 0%, 0% 90%, from(rgba(224, 255, 255, .45)
+		), to(rgba(79, 148, 205, .5) ) );
 }
 
 /* Set common border thickness and color for header elements that use it. */
@@ -142,7 +178,7 @@
 #quest-box h4 {
 	color: white;
 }
-	
+
 #quest-hide {
 	color: white;
 }
@@ -158,13 +194,6 @@
 
 #quest-list li a.quest-user-quest {
 	color: #FCE988;
-}
-
-/* set the UH logo */
-a.brand img {
-	background: transparent url(../images/icon-uh-logo.png) top left
-		no-repeat;
-	display: block;
 }
 
 /* Set background picture, center it, make sure it doesn't repeat and that it covers the background for any size on any browser */
@@ -186,4 +215,3 @@ body,#header-nav-links ul li h4,#header-nav-links {
 th {
 	background: #A2C0D2;
 }
-

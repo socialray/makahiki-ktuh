@@ -46,6 +46,20 @@
 	}
 }
 
+@media ( max-width : 767px) {
+	.row-fluid {
+		width: 100%;
+	}
+	.row {
+		margin-left: 0;
+	}
+	.row>[class*="span"],.row-fluid>[class*="span"] {
+		display: inline;
+		width: auto;
+		margin: 0;
+	}
+}
+
 @media ( min-width : 640px) and (max-width: 979px) {
 	.container {
 		width: 100%;

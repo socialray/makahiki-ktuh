@@ -141,7 +141,7 @@ img {
 
 /* .container */
 /* Set background to null for containers and default content area */
-.container,.container-top,.container-bottom,.content {
+.container,.content {
 	background: none;
 }
 
@@ -227,10 +227,6 @@ img {
 }
 
 #info-bar-wide {
-	background: #E3E3E3;
-	background-image: -moz-linear-gradient(100% 50% 90deg, #E3E3E3, #A1A1A1);
-	background-image: -webkit-gradient(linear, 0% 0%, 0% 90%, from(#E3E3E3),
-		to(#BBB) );
 	border-radius: 3px;
 	box-shadow: 3px 3px 5px #000;
 	-moz-box-shadow: 3px 3px 5px #000;
@@ -322,33 +318,42 @@ img {
 }
 
 /* for small screen widths hide the wide info-bar */
-@media ( max-width : 640px) {
-	.nav img {
-		display: block;
-	}
-	#info-bar-wide {
-		background: none;
-		background-image: none;
-		border-radius: none;
-		box-shadow: none;
-		display: none;
-		padding: none;
-		margin-bottom: none;
-	}
-	#info-bar-single {
-		background: #E3E3E3;
-		background-image: -moz-linear-gradient(100% 50% 90deg, #E3E3E3, #A1A1A1);
-		background-image: -webkit-gradient(linear, 0% 0%, 0% 90%, from(#E3E3E3),
-			to(#BBB) );
-		border-radius: 3px;
-		box-shadow: 3px 3px 5px #000;
-		-moz-box-shadow: 3px 3px 5px #000;
-		-webkit-box-shadow: 3px 3px 5px #000;
-		padding: 5px 0;
-		margin-bottom: 20px;
-		display: block;
-	}
-	#quest-list li {
-		display: block; /* make them vertical */
-	}
+@media
+(
+max-width
+:
+640px)
+{
+a.activities img,a.activities:hover img,a.advanced img,a.advanced:hover img,a.energy img,a.energy:hover img,a.help img,a.help:hover img,a.home img,a.home:hover img,a.news img,a.news:hover img,a.prizes img,a.prizes:hover img,a.profile img,a.profile:hover img,a.water img,a.water:hover img
+	{
+	display: none;
+}
+
+#info-bar-wide {
+	background: none;
+	background-image: none;
+	border-radius: none;
+	box-shadow: none;
+	display: none;
+	padding: none;
+	margin-bottom: none;
+}
+
+#info-bar-single {
+	background: #E3E3E3;
+	background-image: -moz-linear-gradient(100% 50% 90deg, #E3E3E3, #A1A1A1);
+	background-image: -webkit-gradient(linear, 0% 0%, 0% 90%, from(#E3E3E3),
+		to(#BBB) );
+	border-radius: 3px;
+	box-shadow: 3px 3px 5px #000;
+	-moz-box-shadow: 3px 3px 5px #000;
+	-webkit-box-shadow: 3px 3px 5px #000;
+	padding: 5px 0;
+	margin-bottom: 20px;
+	display: block;
+}
+
+#quest-list li {
+	display: block; /* make them vertical */
+}
 }
