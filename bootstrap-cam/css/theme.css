@@ -25,6 +25,7 @@
 	background-color: #2B93AD;
 }
 
+
 .commitment,.commitment-legend {
 	background-color: blue;
 }
@@ -80,7 +81,7 @@
 		color: #f8f8ff;
 	}
 	.navbar .nav>li>a:hover,.navbar .dropdown-menu a:hover {
-		background-color: #2e8b57;
+		background-color: transparent;
 	}
 }
 

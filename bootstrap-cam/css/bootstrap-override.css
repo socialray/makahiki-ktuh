@@ -16,12 +16,14 @@
 		display: none;
 	}
 	.nav-collapse {
+		clear: none;
 		overflow: visible;
 		height: auto;
+		overflow: visible;
 	}
-	.navbar .container {
-		width: 940px;
+	.navbar .container { /* 		display: inline; */
 		padding: 0;
+		width: 100%;
 	}
 	.navbar .nav {
 		float: left;
@@ -44,9 +46,13 @@
 	}
 }
 
-@media ( min-width : 768px) and (max-width: 979px) {
+@media ( min-width : 640px) and (max-width: 979px) {
 	.container {
-		width: 100%;		
+		width: 100%;
+	}
+	.navbar .container {
+		padding: 0;
+		width: 100%;
 	}
 }
 

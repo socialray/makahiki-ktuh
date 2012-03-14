@@ -3,17 +3,6 @@
 /* ========================= */
 
 /* a */
-a.home img {
-	background: transparent url(../images/icon-home.png) top left no-repeat;
-	display: block;
-}
-
-a.home:hover img {
-	background: transparent url(../images/icon-home-over.png) top left
-		no-repeat;
-	display: block;
-}
-
 a.activities img {
 	background: transparent url(../images/icon-scoreboard.png) top left
 		no-repeat;
@@ -26,6 +15,18 @@ a.activities:hover img {
 	display: block;
 }
 
+a.advanced img {
+	background: transparent url(../images/icon-advanced.png) top left
+		no-repeat;
+	display: block;
+}
+
+a.advanced:hover img {
+	background: transparent url(../images/icon-advanced-over.png) top left
+		no-repeat;
+	display: block;
+}
+
 a.energy img {
 	background: transparent url(../images/icon-go-low.png) top left
 		no-repeat;
@@ -34,6 +35,28 @@ a.energy img {
 
 a.energy:hover img {
 	background: transparent url(../images/icon-go-low-over.png) top left
+		no-repeat;
+	display: block;
+}
+
+a.help img {
+	background: transparent url(../images/icon-help.png) top left no-repeat;
+	display: block;
+}
+
+a.help:hover img {
+	background: transparent url(../images/icon-help-over.png) top left
+		no-repeat;
+	display: block;
+}
+
+a.home img {
+	background: transparent url(../images/icon-home.png) top left no-repeat;
+	display: block;
+}
+
+a.home:hover img {
+	background: transparent url(../images/icon-home-over.png) top left
 		no-repeat;
 	display: block;
 }
@@ -73,13 +96,13 @@ a.profile:hover img {
 	display: block;
 }
 
-a.help img {
-	background: transparent url(../images/icon-help.png) top left no-repeat;
+a.water img {
+	background: transparent url(../images/icon-water.png) top left no-repeat;
 	display: block;
 }
 
-a.help:hover img {
-	background: transparent url(../images/icon-help-over.png) top left
+a.water:hover img {
+	background: transparent url(../images/icon-water-over.png) top left
 		no-repeat;
 	display: block;
 }
@@ -216,13 +239,14 @@ img {
 	margin-bottom: 20px;
 }
 
-#info-bar-wide h4, #info-bar-single h4 {
+#info-bar-wide h4,#info-bar-single h4 {
 	text-align: center;
 }
 
-#info-bar-wide ul, #info-bar-single ul {
+#info-bar-wide ul,#info-bar-single ul {
 	list-style: none outside none;
 }
+
 #info-bar-wide li {
 	display: block;
 }
@@ -290,8 +314,18 @@ img {
 	margin-left: 25px;
 }
 
+@media ( min-width : 641px) and (max-width: 979px) {
+	/* hide icons from nav bar */
+	.nav img {
+		display: none;
+	}
+}
+
 /* for small screen widths hide the wide info-bar */
-@media ( max-width : 480px) {
+@media ( max-width : 640px) {
+	.nav img {
+		display: block;
+	}
 	#info-bar-wide {
 		background: none;
 		background-image: none;
