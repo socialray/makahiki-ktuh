@@ -283,14 +283,14 @@ img {
 
 #quest-list {
 	list-style: none;
-	padding: 0 10px 5px 5px;
-	margin: 10px auto 5px;
+	padding: 0;
+	margin: 5px auto 1px;
 	text-align: center;
 }
 
 #quest-list li {
-	margin: 10px;
-	padding: 5px 10px;
+	margin: 0px;
+	padding: 0 2px;
 	border-radius: 8px;
 	-moz-border-radius: 8px;
 	-webkit-border-radius: 8px;

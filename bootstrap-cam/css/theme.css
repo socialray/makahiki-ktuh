@@ -190,6 +190,18 @@
 	color: white;
 }
 
+/* #quest-list .btn { */
+/* 	background-color: rgba(40, 42, 42, 1.0); */
+/* 	background-image: -moz-linear-gradient(top, blue, blue); */
+/* 	background-image: -ms-linear-gradient(top, #ffffff, #e6e6e6); */
+/* 	background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#ffffff), */
+/* 		to(#e6e6e6) ); */
+/* 	background-image: -webkit-linear-gradient(top, #ffffff, #e6e6e6); */
+/* 	background-image: -o-linear-gradient(top, #ffffff, #e6e6e6); */
+/* 	background-image: linear-gradient(top, #ffffff, #e6e6e6); */
+/* 	background-repeat: repeat-x; */
+/* } */
+
 #quest-list li.selected {
 	background-color: rgba(40, 42, 42, 1.0);
 	/*  font-weight: bold;*/
