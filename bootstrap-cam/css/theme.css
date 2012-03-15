@@ -77,12 +77,12 @@
 }
 
 .navbar-inner {
-	background: rgba(112,147,219, .45);
-/* 	background: rgba(0,0,156, .45); */
-/* 	background-image: -moz-linear-gradient(100% 50% 90deg, rgba(224, 255, 255, .45), */
-/* 		rgba(79, 148, 205, .5) ); */
-/* 	background-image: -webkit-gradient(linear, 0% 0%, 0% 90%, from(rgba(224, 255, 255, .45) */
-/* 		), to(rgba(79, 148, 205, .5) ) ); */
+	background: rgba(112, 147, 219, .45);
+	/* 	background: rgba(0,0,156, .45); */
+	/* 	background-image: -moz-linear-gradient(100% 50% 90deg, rgba(224, 255, 255, .45), */
+	/* 		rgba(79, 148, 205, .5) ); */
+	/* 	background-image: -webkit-gradient(linear, 0% 0%, 0% 90%, from(rgba(224, 255, 255, .45) */
+	/* 		), to(rgba(79, 148, 205, .5) ) ); */
 }
 
 .prize a {
@@ -104,6 +104,9 @@
 
 /* for small screen widths hide the wide info-bar */
 @media ( max-width : 640px) {
+	.brand img {
+		display: none;
+	}
 	#info-bar-single {
 		background: rgba(224, 255, 255, .45);
 		background-image: -moz-linear-gradient(100% 50% 90deg, rgba(224, 255, 255, .45),
