@@ -5,7 +5,6 @@ Django management script
 from django.core.management import execute_manager
 import imp
 import sys
-from os.path import join
 
 try:
     imp.find_module('settings')  # Assumed to be in the same directory.

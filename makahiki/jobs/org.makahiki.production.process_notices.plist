@@ -8,8 +8,9 @@
     <string>/Users/kukuicup/production/makahiki</string>
     <key>ProgramArguments</key>
     <array>
-    <string>/Users/kukuicup/Envs/kukuicup/bin/python</string>
-    <string>process_notices.py</string>
+      <string>/Users/kukuicup/Envs/kukuicup/bin/python</string>
+      <string>manage.py</string>
+      <string>process_notices</string>
     </array>
     
     <!-- Only applies if the task is run as root. -->

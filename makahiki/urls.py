@@ -1,14 +1,10 @@
 """Defines the Main URLS."""
 
 import os
-import datetime
 from django.conf import settings
 from django.conf.urls.defaults import url, patterns, include
 from django.contrib import admin
-from django.contrib.auth.models import User
-from django.core.exceptions import ObjectDoesNotExist
 from django.views.generic.simple import direct_to_template
-from apps.managers.settings_mgr.models import ChallengeSettings, RoundSettings, PageSettings
 
 admin.autodiscover()
 
@@ -38,7 +34,8 @@ urlpatterns = patterns('',
 
     url(r'^admin/', include(admin.site.urls)),
     url(r'^admin/doc/', include('django.contrib.admindocs.urls')),
-    url(r'^admin/login-as/(?P<user_id>\d+)/$', 'apps.managers.auth_mgr.views.login_as', name='auth_login_as'),
+    url(r'^admin/login-as/(?P<user_id>\d+)/$', 'apps.managers.auth_mgr.views.login_as',
+        name='auth_login_as'),
     url(r'^admin/logout/$', 'apps.managers.auth_mgr.views.logout', name='auth_logout'),
 
     url(r'^landing/$', direct_to_template, {'template': 'landing.html'}, name='landing'),
@@ -57,78 +54,4 @@ for widget in settings.INSTALLED_WIDGET_APPS:
             (r'^%s/' % widget, include('apps.widgets.%s.urls' % widget)), )
 
 if settings.SERVE_MEDIA:
-    urlpatterns += patterns('',
-        (r'^site_media/', include('staticfiles.urls')),
-                            )
-
-
-def _load_db_settings():
-    """Load additional settings from DB."""
-
-    # get the CALLENGE setting from DB
-    settings.CHALLENGE, _ = ChallengeSettings.objects.get_or_create(pk=1)
-
-    # required setting for the CAS authentication service.
-    settings.CAS_SERVER_URL = settings.CHALLENGE.cas_server_url
-
-    # global settings
-    settings.LOCALE_SETTING = settings.CHALLENGE.locale_setting
-    settings.TIME_ZONE = settings.CHALLENGE.time_zone
-    settings.LANGUAGE_CODE = settings.CHALLENGE.language_code
-
-    # email settings
-    if settings.CHALLENGE.email_enabled:
-        settings.EMAIL_HOST = settings.CHALLENGE.email_host
-        settings.EMAIL_PORT = settings.CHALLENGE.email_port
-        settings.EMAIL_HOST_USER = settings.CHALLENGE.email_host_user
-        settings.EMAIL_HOST_PASSWORD = settings.CHALLENGE.email_host_password
-        settings.EMAIL_USE_TLS = settings.CHALLENGE.email_use_tls
-
-    # get the Round settings from DB
-    rounds = RoundSettings.objects.all()
-    if rounds.count() == 0:
-        RoundSettings.objects.create()
-        rounds = RoundSettings.objects.all()
-
-    #store in a round dictionary and calculate start and end
-    rounds_dict = {}
-    settings.COMPETITION_START = None
-    last_round = None
-    for competition_round in rounds:
-        if settings.COMPETITION_START is None:
-            settings.COMPETITION_START = competition_round.start
-        rounds_dict[competition_round.name] = {
-            "start": competition_round.start,
-            "end": competition_round.end, }
-        last_round = competition_round
-    if last_round:
-        settings.COMPETITION_END = last_round.end
-    settings.COMPETITION_ROUNDS = rounds_dict
-
-    # register the home page and widget
-    PageSettings.objects.get_or_create(name="home", widget="home")
-
-
-def _create_admin_user():
-    """Create admin user.
-
-    Create the admin user if not exists. otherwise, reset the password to the ENV.
-    """
-    try:
-        user = User.objects.get(username=settings.ADMIN_USER)
-        user.set_password(settings.ADMIN_PASSWORD)
-        user.save()
-    except ObjectDoesNotExist:
-        user = User.objects.create_superuser(settings.ADMIN_USER, "", settings.ADMIN_PASSWORD)
-        profile = user.get_profile()
-        profile.setup_complete = True
-        profile.setup_profile = True
-        profile.completion_date = datetime.datetime.today()
-        profile.save()
-
-# load the db settings if not done yet.
-if not hasattr(settings, "CHALLENGE"):
-    _load_db_settings()
-
-# create the admin user or reset the password from ENV
-_create_admin_user()
+    urlpatterns += patterns('', (r'^site_media/', include('staticfiles.urls')), )

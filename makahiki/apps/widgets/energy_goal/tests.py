@@ -97,6 +97,7 @@ class TeamEnergyGoalTest(TestCase):
             actual_usage=5,
         )
         goal.save()
+        goal.award_goal_points()
         profile = Profile.objects.get(user__username="user")
         self.assertEqual(profile.points, points,
             "User that did not complete the setup process should not be awarded points.")
@@ -106,12 +107,14 @@ class TeamEnergyGoalTest(TestCase):
 
         goal.actual_usage = 15
         goal.save()
+        goal.award_goal_points()
         profile = Profile.objects.get(user__username="user")
         self.assertEqual(profile.points, points,
             "Team that failed the goal should not be awarded any points.")
 
         goal.actual_usage = 5
         goal.save()
+        goal.award_goal_points()
         profile = Profile.objects.get(user__username="user")
         self.assertEqual(profile.points, points + TeamEnergyGoal.GOAL_POINTS,
             "User that setup their profile should be awarded points.")

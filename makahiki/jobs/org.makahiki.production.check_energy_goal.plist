@@ -8,10 +8,11 @@
     <string>/Users/kukuicup/production/makahiki</string>
     <key>ProgramArguments</key>
     <array>
-    <string>/Users/kukuicup/Envs/kukuicup/bin/python</string>
-    <string>check_energy_goal.py</string>
+      <string>/Users/kukuicup/Envs/kukuicup/bin/python</string>
+      <string>manage.py</string>
+      <string>check_energy_goal</string>
     </array>
-    
+
     <!-- Only applies if the task is run as root. -->
     <key>UserName</key>
     <string>kukuicup</string>
