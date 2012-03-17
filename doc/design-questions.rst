@@ -80,6 +80,16 @@ Click on section title to go to corresponding documentation.
 
   1. What does the admin interface to this actually accomplish? (Similar question for other energy widgets?)
 
+:mod:`apps.widgets.notifications`
+---------------------------------
+
+  1. Three functions in init.py.  Can these be moved elsewhere?
+
+:mod:`apps.widgets.popular_tasks`
+---------------------------------
+
+  1. For consistency with new SGG terminology, this should be "popular_actions".
+
 
 
 

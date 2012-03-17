@@ -33,6 +33,8 @@ Package: apps.widgets
    Subpackage: My_Achievements widget <packages/my_achievements>
    Subpackage: My_Commitments widget <packages/my_commitments>
    Subpackage: My_Info widget <packages/my_info>
+   Subpackage: Notifications widget <packages/notifications>
+   Subpackage: Popular_Tasks widget <packages/popular_tasks>
 
 
 Package: css_rules
