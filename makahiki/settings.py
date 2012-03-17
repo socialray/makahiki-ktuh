@@ -320,7 +320,8 @@ if 'MAKAHIKI_DEBUG' in os.environ and os.environ['MAKAHIKI_DEBUG'] == "True":
 CACHE_MIDDLEWARE_ALIAS = 'default'
 CACHE_MIDDLEWARE_ANONYMOUS_ONLY = True
 CACHE_MIDDLEWARE_SECONDS = 600
-if 'MAKAHIKI_CACHE' in os.environ and os.environ['MAKAHIKI_CACHE'] == "True":
+if 'MAKAHIKI_MEMCACHED_ENABLED' in os.environ and \
+   os.environ['MAKAHIKI_MEMCACHED_ENABLED'] == "True":
     CACHES = {
         'default': {
             'BACKEND': 'django_pylibmc.memcached.PyLibMCCache'
