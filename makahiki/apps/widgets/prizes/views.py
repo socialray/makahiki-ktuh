@@ -1,4 +1,4 @@
-"""handle the view rendering"""
+"""Provide the view of the prizes widget."""
 import datetime
 
 from django.template.defaultfilters import slugify
@@ -8,7 +8,7 @@ from apps.widgets.prizes.models import Prize
 
 
 def supply(request, page_name):
-    """supply view_object content"""
+    """Supply view_object content, which is the prizes for this team."""
     _ = page_name
     team = request.user.get_profile().team
     prizes = _get_prizes(team)
@@ -19,10 +19,8 @@ def supply(request, page_name):
 
 
 def _get_prizes(team):
-    """
-    Private method to process the prizes half of the page.
-    Takes the user's team and returns a dictionary to be used in the template.
-    """
+    """Private method to process the prizes half of the page.
+       Takes the user's team and returns a dictionary to be used in the template."""
     rounds = get_round_info()
     prize_dict = {}
     today = datetime.datetime.today()

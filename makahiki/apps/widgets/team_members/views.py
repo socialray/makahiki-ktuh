@@ -1,4 +1,4 @@
-"""hanlde the team member widget request."""
+"""Provides the view of the team member widget."""
 
 from django.shortcuts import render_to_response
 from django.template import RequestContext
@@ -10,7 +10,7 @@ from apps.managers.player_mgr.models import Profile
 
 
 def supply(request, page_name):
-    """supply view_objects content"""
+    """Supply view_objects content, which is the set of team members."""
     _ = page_name
     team_id = request.user.get_profile().team_id
 
@@ -28,7 +28,7 @@ def supply(request, page_name):
 @never_cache
 @login_required
 def team_members(request):
-    """handle team member request"""
+    """Provide the team members."""
     members = User.objects.filter(profile__team=request.user.get_profile().team).order_by(
         "-profile__points",
         "-profile__last_awarded_submission",

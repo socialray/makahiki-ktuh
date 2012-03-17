@@ -1,1 +1,1 @@
-"""management module"""
+"""Management commands for quests."""

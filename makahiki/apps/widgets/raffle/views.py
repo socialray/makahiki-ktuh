@@ -14,7 +14,7 @@ from apps.widgets.raffle.models import  RafflePrize, RaffleTicket, POINTS_PER_TI
 
 
 def supply(request, page_name):
-    """supply the view_objects contents."""
+    """Supply the view_objects contents, which provides all raffle data."""
     _ = page_name
     user = request.user
     current_round_info = get_current_round_info()
@@ -48,9 +48,7 @@ def supply(request, page_name):
 
 @login_required
 def add_ticket(request, prize_id):
-    """
-    Adds a user's raffle ticket to the prize.
-    """
+    """Adds a user's raffle ticket to the prize."""
     if request.method == "POST":
         prize = get_object_or_404(RafflePrize, id=prize_id)
         user = request.user
@@ -73,9 +71,7 @@ def add_ticket(request, prize_id):
 
 @login_required
 def remove_ticket(request, prize_id):
-    """
-    Removes a user's raffle ticket from the prize.
-    """
+    """Removes a user's raffle ticket from the prize."""
     if request.method == "POST":
         prize = get_object_or_404(RafflePrize, id=prize_id)
         if prize.allocated_tickets(request.user) > 0:
@@ -92,7 +88,7 @@ def remove_ticket(request, prize_id):
 @never_cache
 @user_passes_test(lambda u: u.is_staff, login_url="/account/cas/login")
 def raffle_form(request, prize_id):
-    """supply the raffle form"""
+    """Supply the raffle form."""
     _ = request
     prize = get_object_or_404(RafflePrize, pk=prize_id)
     return render_to_response('view_prizes/form.txt', {

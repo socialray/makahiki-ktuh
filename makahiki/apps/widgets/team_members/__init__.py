@@ -1,1 +1,1 @@
-"""team member module"""
+"""Implements the team member widget."""
