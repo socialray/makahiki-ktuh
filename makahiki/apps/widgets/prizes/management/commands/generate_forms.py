@@ -1,4 +1,4 @@
-"""generate the winner forms after the competition"""
+"""Generate the hardcopy forms for winners after a round is completed."""
 import os
 from django.db.models import Q
 from django.template.loader import render_to_string
@@ -12,17 +12,15 @@ from apps.widgets.prizes.models import Prize
 
 
 class Command(management.base.BaseCommand):
-    """command"""
+    """Pick the raffle game winners."""
     help = 'Picks winners for raffle deadlines that have passed.'
 
     def handle(self, *args, **options):
-        """
-        Generates forms for winners.
-        """
+        """Generates forms for winners."""
         self.__generate_forms(get_current_round_info()["name"])
 
     def __generate_forms(self, round_name):
-        """generate forms"""
+        """Generate both raffle and prize forms."""
         round_dir = 'prizes/%s' % round_name
         if not os.path.exists('prizes'):
             os.mkdir('prizes')
@@ -33,7 +31,7 @@ class Command(management.base.BaseCommand):
         self.__generate_prize_forms(round_dir, round_name)
 
     def __generate_raffle_forms(self, round_dir, round_name):
-        """generate raffle forms"""
+        """Generate the raffle forms."""
 
         # Get raffle prizes.
         prizes = RafflePrize.objects.filter(round_name=round_name,
@@ -52,7 +50,7 @@ class Command(management.base.BaseCommand):
             f.write(contents)
 
     def __generate_prize_forms(self, round_dir, round_name):
-        """generate prize forms"""
+        """Generate the prize forms."""
         prizes = Prize.objects.filter(
             Q(award_to='individual_team') | Q(award_to='individual_overall'),
             round_name=round_name,

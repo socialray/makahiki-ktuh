@@ -16,3 +16,5 @@ Module :mod:`apps.widgets.notifications.views`
 .. automodule:: apps.widgets.notifications.views
    :members:
 
+
+

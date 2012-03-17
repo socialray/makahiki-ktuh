@@ -1,1 +1,1 @@
-"""Prize module"""
+"""Implements the prize widget."""

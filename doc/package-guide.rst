@@ -35,6 +35,7 @@ Package: apps.widgets
    Subpackage: My_Info widget <packages/my_info>
    Subpackage: Notifications widget <packages/notifications>
    Subpackage: Popular_Tasks widget <packages/popular_tasks>
+   Subpackage: Prizes widget <packages/prizes>
 
 
 Package: css_rules

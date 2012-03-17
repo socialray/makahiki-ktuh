@@ -88,7 +88,38 @@ Click on section title to go to corresponding documentation.
 :mod:`apps.widgets.popular_tasks`
 ---------------------------------
 
-  1. For consistency with new SGG terminology, this should be "popular_actions".
+  1. For consistency with new SGG terminology, should this be "popular_actions"?
+
+:mod:`apps.widgets.prizes`
+--------------------------
+
+  1. Should the management command for raffle picking and form printing
+     move to the raffle widget?
+
+:mod:`apps.widgets.quests`
+--------------------------
+
+  1. Should the "utility" functions be in init.py?  More generally, should
+     this module be more object-oriented?
+
+
+High-level issues for discussion
+--------------------------------
+
+  1. What is the appropriate level of object orientation?  Should every
+     module be implemented via classes? If not, how do we decide when to
+     use object orientation and when to not use it?
+
+  2. Unit tests need to be reviewed. It appears that some test classes are
+     not even invoked. 
+     
+  3. When is it appropriate to include methods in init.py?  
+
+  4. When is it appropriate to included methods in urls.py?
+
+  5. When should a feature be part of management.commands, and when should
+     it be an external, stand-alone script?
+
 
 
 
