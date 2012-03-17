@@ -56,6 +56,11 @@ important that the user "postgres" is "trusted" so that you can connect to the
 server as the user "postgres" locally without authentication. This should be
 the default behavior.
 
+`Memcache`_.  Makahiki can optionally use Memcache to improve performance.
+To avoid the need for alternative configuration files, we require local installations to install
+Memcache even if they aren't intending to use it.  Fortunately,
+installation is simple.  Just follow `Heroku's memcache installation instructions`_. 
+
 .. _Python: http://www.python.org/download/
 .. _Python Imaging Library: http://www.pythonware.com/products/pil/
 .. _Homebrew: http://mxcl.github.com/homebrew/
@@ -68,6 +73,8 @@ the default behavior.
 .. _Apple Developer Tools: https://developer.apple.com/technologies/mac/
 .. _Visual C++: http://microsoft.com/visualstudio/en-us/products/2008-editions/express
 .. _blog post on Django installation on Windows: http://slacy.com/blog/2011/06/django-postgresql-virtualenv-development-setup-for-windows-7/
+.. _Memcache: http://memcached.org
+.. _Heroku's memcache installation instructions: http://devcenter.heroku.com/articles/memcache#local_memcache_setup
 
 2. Download the Makahiki source
 -------------------------------
