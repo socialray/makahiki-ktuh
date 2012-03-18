@@ -1,7 +1,61 @@
 Design Questions
 ================
 
-Click on section title to go to corresponding documentation.
+High-level issues for discussion
+********************************
+
+  A. What is the appropriate level of object orientation?  Should every
+     module be implemented via classes? If not, how do we decide when to
+     use object orientation and when to not use it?
+
+  B. Unit tests need to be reviewed. It appears that some test classes are
+     not even invoked. 
+     
+  C. When is it appropriate to include methods in init.py?  
+
+  D. When is it appropriate to included methods in urls.py?
+
+  E. When should a feature be part of management.commands, and when should
+     it be an external, stand-alone script?
+
+Is this a framework (yet)?
+**************************
+
+After completing this review of the Makahiki 2 codebase, I am struck by the
+realization that it does not yet feel like a "framework" or "game engine"
+to me.
+
+For me, the defining feature of a domain-specific framework is that domain entities
+have a "first class" status within the framework.  In our case, I view at
+least the following domain entities as requiring "first class" status for
+us to have a framework:
+
+  * Authentication methods
+  * Players
+  * Teams
+  * Scoring systems
+  * Widgets
+
+Currently, I do not view any of these entities as having first class status.
+For that to be the case, we must have an easy way to perform the following:
+
+  * Create an instance of the entity.
+  * Ensure that all instances of the entity have an appropriate, common structure.
+  * Be able to determine how many instances of the entity exist.
+  * Be able to enable or disable an instance of the entity.
+  * Be able to easily extend the system to support new instances of the entity.
+
+Typically, a framework supports the first class status of domain-specific
+entities through an object orientation with classes that define
+the common structural features and the internal state, and instances
+reflecting all the definitions of the entities.   Some first class
+entities require persistent state (players, teams), others might not
+(authentication systems). 
+
+Module specific questions
+*************************
+
+Click on the section title to go to corresponding documentation.
 
 :mod:`apps.managers.cache_mgr`
 ------------------------------
@@ -118,56 +172,6 @@ Click on section title to go to corresponding documentation.
   29. The team_members widget imports player_mgr but nothing from
       team_mgr.  This seems confusing. Is it correct?
       
-
-High-level issues for discussion
---------------------------------
-
-  A. What is the appropriate level of object orientation?  Should every
-     module be implemented via classes? If not, how do we decide when to
-     use object orientation and when to not use it?
-
-  B. Unit tests need to be reviewed. It appears that some test classes are
-     not even invoked. 
-     
-  C. When is it appropriate to include methods in init.py?  
-
-  D. When is it appropriate to included methods in urls.py?
-
-  E. When should a feature be part of management.commands, and when should
-     it be an external, stand-alone script?
-
-Is this a framework (yet)?
---------------------------
-
-After completing this review of the Makahiki 2 codebase, I am struck by the
-realization that it does not yet feel like a "framework" or "game engine"
-to me.
-
-For me, the defining feature of a domain-specific framework is that domain entities
-have a "first class" status within the framework.  In our case, I view at
-least the following domain entities as requiring "first class" status:
-
-  * Authentication methods
-  * Players
-  * Teams
-  * Scoring systems
-  * Widgets
-
-For any of these entities to have "first class" status, we must have an
-easy way to perform the following:
-
-  * Create an instance of the entity.
-  * Ensure that all instances of the entity have an appropriate, common structure.
-  * Be able to know how many instances of the entity exist.
-  * Be able to enable or disable the entity.
-  * Be able to easily extend the system to support new instances of the entity.
-
-Typically, a framework supports the first class status of domain-specific
-entities through an object orientation with classes that define
-the common structural features and the internal state, and instances
-reflecting all the definitions of the entities.   Some first class
-entities require persistent state (players, teams), others might not
-(authentication systems). 
 
 
 
