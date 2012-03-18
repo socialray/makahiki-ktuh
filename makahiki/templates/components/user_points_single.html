@@ -4,29 +4,25 @@
 {% cache 600 infobar request.user.username %}
 {% if CURRENT_ROUND_INFO and CURRENT_ROUND_INFO.name != 'Overall' %}
 <!-- First slideshow element -->
-<div id="header-user-overall-rank1">
-    <ul>
-        <li>{{CURRENT_ROUND_INFO.name}}: {{profile.current_round_points}} {{COMPETITION_POINT_LABEL}}s #{{profile.current_round_team_rank}}/{{TEAM_MEMBER_COUNT}} in {{profile.team.name}}.</li>
-    </ul>
+<div id="header-user-overall-rank1" class="span3">
+    <h4>{{profile.name}}</h4>
+    {{CURRENT_ROUND_INFO.name}}: {{profile.current_round_points}} {{COMPETITION_POINT_LABEL}}s #{{profile.current_round_team_rank}}/{{TEAM_MEMBER_COUNT}} in {{profile.team.name}}.
 </div>
 <!-- Second slideshow element -->
 <div id="header-user-overall-rank2">
-    <ul>
-        <li>{{CURRENT_ROUND_INFO.name}}: {{profile.current_round_points}} {{COMPETITION_POINT_LABEL}}s #{{profile.current_round_overall_rank}}/{{OVERALL_MEMBER_COUNT}} overall.</li>
-    </ul>        
+    <h4>{{profile.name}}</h4>
+    {{CURRENT_ROUND_INFO.name}}: {{profile.current_round_points}} {{COMPETITION_POINT_LABEL}}s #{{profile.current_round_overall_rank}}/{{OVERALL_MEMBER_COUNT}} overall.
 </div>
 {% endif %}
 <!-- Third slideshow element -->
 <div id="header-user-team-rank3">
-  <ul>
-    <li>Overall: {{profile.points}} {{COMPETITION_POINT_LABEL}}s #{{profile.team_rank}}/{{TEAM_MEMBER_COUNT}} in {{profile.team.name}}</li>
-  </ul>
-</div>
+    <h4>{{profile.name}}</h4>
+    Overall: {{profile.points}} {{COMPETITION_POINT_LABEL}}s #{{profile.team_rank}}/{{TEAM_MEMBER_COUNT}} in {{profile.team.name}}
+  </div>
 <!-- Fourth slideshow element -->
 <div id="header-user-overall-rank4">
-    <ul>
-        <li>Overall: {{profile.points}} {{COMPETITION_POINT_LABEL}}s #{{profile.overall_rank}}/{{OVERALL_MEMBER_COUNT}}</li>
-    </ul>
+    <h4>{{profile.name}}</h4>
+    Overall: {{profile.points}} {{COMPETITION_POINT_LABEL}}s #{{profile.overall_rank}}/{{OVERALL_MEMBER_COUNT}}
 </div>
 
 {% if profile.canopy_member %}

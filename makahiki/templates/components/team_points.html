@@ -5,9 +5,9 @@
 {% cache 600 infobar team.name %}
 {% if CURRENT_ROUND_INFO and CURRENT_ROUND_INFO.name != 'Overall' %}
 <!-- First slideshow element -->
-<div id="header-team-overall-rank1">
+<div class="span3">
   <div {% get_id_and_classes "header-team-points" %}>
-    <h3>{{team.current_round_points}}</h3>
+    <h4>{{team.current_round_points}}</h4>
     <div {% get_id_and_classes "header-text" %}>{{COMPETITION_POINT_LABEL}}s in {{CURRENT_ROUND_INFO.name}}</div>
   </div>
   <div {% get_id_and_classes "header-team-rank" %}>
