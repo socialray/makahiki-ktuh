@@ -5,15 +5,12 @@
 <head>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>{{ setting_objects.PAGE_TITLE }}: {{ SITE_NAME }} {{ COMPETITION_NAME }}</title>
-    {% import_css STATIC_URL CSS_THEME %}
     {% block extra_head_base %}
         {% block extra_head %}{% endblock %}
     {% endblock %}
 </head>
 <body>
-  <div {% get_id_and_classes "header" %}>
-    {% block header %}{% endblock %}
-  </div>
+  {% block header %}{% endblock %}
   
   {# This is where the contents of the page will be inserted #}
   <div class="content">
@@ -25,10 +22,5 @@
   {% block extra_body_base %}
       {% block extra_body %}{% endblock %}
   {% endblock %}
-  
-  <!-- javascript
-   ================================================== -->
-  <!-- Placed at the end of the document so the pages load faster -->
-  
 </body>
 </html>
