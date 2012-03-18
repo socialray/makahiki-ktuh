@@ -4,105 +4,105 @@
 
 /* a */
 a.activities img {
-	background: transparent url(../images/icon-scoreboard.png) top left
+	background: transparent url(../images/icons/icon-scoreboard.png) top left
 		no-repeat;
 	display: block;
 }
 
 a.activities:hover img {
-	background: transparent url(../images/icon-scoreboard-over.png) top left
+	background: transparent url(../images/icons/icon-scoreboard-over.png) top left
 		no-repeat;
 	display: block;
 }
 
 a.advanced img {
-	background: transparent url(../images/icon-advanced.png) top left
+	background: transparent url(../images/icons/icon-advanced.png) top left
 		no-repeat;
 	display: block;
 }
 
 a.advanced:hover img {
-	background: transparent url(../images/icon-advanced-over.png) top left
+	background: transparent url(../images/icons/icon-advanced-over.png) top left
 		no-repeat;
 	display: block;
 }
 
 a.energy img {
-	background: transparent url(../images/icon-go-low.png) top left
+	background: transparent url(../images/icons/icon-go-low.png) top left
 		no-repeat;
 	display: block;
 }
 
 a.energy:hover img {
-	background: transparent url(../images/icon-go-low-over.png) top left
+	background: transparent url(../images/icons/icon-go-low-over.png) top left
 		no-repeat;
 	display: block;
 }
 
 a.help img {
-	background: transparent url(../images/icon-help.png) top left no-repeat;
+	background: transparent url(../images/icons/icon-help.png) top left no-repeat;
 	display: block;
 }
 
 a.help:hover img {
-	background: transparent url(../images/icon-help-over.png) top left
+	background: transparent url(../images/icons/icon-help-over.png) top left
 		no-repeat;
 	display: block;
 }
 
 a.home img {
-	background: transparent url(../images/icon-home.png) top left no-repeat;
+	background: transparent url(../images/icons/icon-home.png) top left no-repeat;
 	display: block;
 }
 
 a.home:hover img {
-	background: transparent url(../images/icon-home-over.png) top left
+	background: transparent url(../images/icons/icon-home-over.png) top left
 		no-repeat;
 	display: block;
 }
 
 a.news img {
-	background: transparent url(../images/icon-news.png) top left no-repeat;
+	background: transparent url(../images/icons/icon-news.png) top left no-repeat;
 	display: block;
 }
 
 a.news:hover img {
-	background: transparent url(../images/icon-news-over.png) top left
+	background: transparent url(../images/icons/icon-news-over.png) top left
 		no-repeat;
 	display: block;
 }
 
 a.prizes img {
-	background: transparent url(../images/icon-prizes.png) top left
+	background: transparent url(../images/icons/icon-prizes.png) top left
 		no-repeat;
 	display: block;
 }
 
 a.prizes:hover img {
-	background: transparent url(../images/icon-prizes-over.png) top left
+	background: transparent url(../images/icons/icon-prizes-over.png) top left
 		no-repeat;
 	display: block;
 }
 
 a.profile img {
-	background: transparent url(../images/icon-profile.png) top left
+	background: transparent url(../images/icons/icon-profile.png) top left
 		no-repeat;
 	display: block;
 }
 
 a.profile:hover img {
-	background: transparent url(../images/icon-profile-over.png) top left
+	background: transparent url(../images/icons/icon-profile-over.png) top left
 		no-repeat;
 	display: block;
 }
 
 a.water img {
-	background: transparent url(../images/icon-water.png) top left no-repeat;
+	background: transparent url(../images/icons/icon-water.png) top left no-repeat;
 	display: block;
 }
 
 a.water:hover img {
-	background: transparent url(../images/icon-water-over.png) top left
+	background: transparent url(../images/icons/icon-water-over.png) top left
 		no-repeat;
 	display: block;
 }
