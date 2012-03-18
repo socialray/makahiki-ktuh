@@ -52,6 +52,14 @@ reflecting all the definitions of the entities.   Some first class
 entities require persistent state (players, teams), others might not
 (authentication systems). 
 
+What I am instead seeing in Makahiki at present is a basically a design in
+which a set of methods are triggered by http requests, make calls to an
+underlying database, and then return dictionaries of property-value pairs
+to pages for display.  (See all of the views.py files for examples.)  This
+is simple, but not abstract.  It's very "flat" as an architecture.   For
+Makahiki to become a framework, I think we must create and manipulate
+domain-specific entities. 
+
 Module specific questions
 *************************
 
