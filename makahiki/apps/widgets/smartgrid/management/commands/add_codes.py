@@ -1,4 +1,4 @@
-"""add a confirmation code."""
+"""Add a confirmation code."""
 
 from django.core import management
 

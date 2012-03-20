@@ -1,4 +1,4 @@
-"""Smartgrid widget."""
+"""Implements the Smart Grid Game widget."""
 
 import datetime
 
@@ -14,18 +14,16 @@ from operator import attrgetter
 from apps.widgets.smartgrid.models import Activity, ActivityBase, Category, Commitment, \
                                           ActivityMember, CommitmentMember
 
-# Directory in which to save image files for ActivityMember verification.
 ACTIVITY_FILE_DIR = getattr(settings, 'ACTIVITY_FILE_DIR', 'activities')
+"""Directory in which to save image files for ActivityMember verification."""
 
-# Maximum number of commitments user can have at one time.
 MAX_COMMITMENTS = 5
+"""Maximum number of commitments user can have at one time."""
 
 
 def get_popular_tasks():
-    """
-    Returns a dictionary containing the most popular tasks.
-    The keys are the type of the task and the values are a list of tasks.
-    """
+    """Returns a dictionary containing the most popular tasks.
+       The keys are the type of the task and the values are a list of tasks."""
     return {
         "Activity": get_popular_activities("activity")[:5],
         "Commitment": get_popular_commitments()[:5],
@@ -86,7 +84,7 @@ def get_incomplete_task_members(user):
 
 
 def is_pending_commitment(user, commitment):
-    """check if the commitment is pending."""
+    """Check to see if the commitment is pending."""
     return CommitmentMember.objects.filter(user=user, commitment=commitment, award_date=None)
 
 
@@ -201,7 +199,7 @@ def get_available_golow_activities(user):
 
 
 def _pick_one_activity_per_type(user, activities, golow_tasks):
-    """return one activity per type. """
+    """Return one activity per type. """
     activity_type = None
     for task in activities:
         if task in golow_tasks:
@@ -270,12 +268,12 @@ def get_awarded_points(user, category):
 
 
 def is_pau(user, task):
-    """return true if the task is done for the user."""
+    """Return true if the task is done for the user."""
     return is_pau_by_id(user, task.id, task.type)
 
 
 def is_pau_by_id(user, task_id, task_type):
-    """return true if the task specified by the task_id is done for the user."""
+    """Return true if the task specified by the task_id is done for the user."""
     if task_type != "commitment":
         pau = ActivityMember.objects.filter(user=user, activity__id=task_id).count() > 0
     else:
@@ -284,7 +282,7 @@ def is_pau_by_id(user, task_id, task_type):
 
 
 def completedAllOf(user, cat_slug):
-    """completed all of the category"""
+    """Return true if completed all of the category."""
     try:
         cat = Category.objects.get(slug=cat_slug)
     except ObjectDoesNotExist:
@@ -298,7 +296,7 @@ def completedAllOf(user, cat_slug):
 
 
 def completedSomeOf(user, some, cat_slug):
-    """completed some of the category"""
+    """Return true if completed some of the category."""
     try:
         cat = Category.objects.get(slug=cat_slug)
     except ObjectDoesNotExist:
@@ -315,7 +313,7 @@ def completedSomeOf(user, some, cat_slug):
 
 
 def completed(user, activity_members, commitment_members, task_slug):
-    """completed the task"""
+    """Return true if completed the task."""
 
     if activity_members != None:
         for member in activity_members:
@@ -335,7 +333,7 @@ def completed(user, activity_members, commitment_members, task_slug):
 
 
 def afterPublished(task_id):
-    """return true if the event/excursion have been published"""
+    """Return true if the event/excursion has been published"""
     try:
         return Activity.objects.get(id=task_id).pub_date <= datetime.date.today()
     except ObjectDoesNotExist:
@@ -343,7 +341,7 @@ def afterPublished(task_id):
 
 
 def is_unlock_from_cache(user, task):
-    """check the unlocking of a task from cache."""
+    """Check the unlocking of a task from cache."""
     if task.is_canopy:
         return is_unlock(user, task)
 
@@ -359,7 +357,7 @@ def is_unlock_from_cache(user, task):
 
 
 def is_unlock(user, task):
-    """determine the unlock status of a task by dependency expression"""
+    """Determine the unlock status of a task by dependency expression"""
 
     # only canopy member able to see canopy activity
     profile = user.get_profile()
@@ -371,7 +369,7 @@ def is_unlock(user, task):
 
 
 def is_unlock_by_id(user, task_id, task_depends_on, activity_members, commitment_members):
-    """check the unlocking by the task_id."""
+    """Check the unlocking by the task_id."""
     expr = task_depends_on
     if expr == None or expr == "":
         return False
@@ -415,7 +413,7 @@ def annotate_task_status(user, task):
 
 
 def _get_task_members(task, activity_members, commitment_members):
-    """check the task is in members list"""
+    """Check that the task is in members list"""
 
     if task["type"] != "commitment":
         for member in activity_members:
@@ -464,7 +462,7 @@ def annotate_simple_task_status(user, task, activity_members, commitment_members
 
 
 def get_user_by_email(email):
-    """return the user from given email"""
+    """Return the user from given email"""
     try:
         return User.objects.get(email=email)
     except ObjectDoesNotExist:
@@ -473,8 +471,7 @@ def get_user_by_email(email):
 
 def get_completed_members(user):
     """ Retrieve previously awarded tasks, quests, and badges.
-    Note that we need to check the various activity types because of signup bonuses.
-    """
+        Note that we need to check the various activity types because of signup bonuses."""
     activity_members = user.activitymember_set.exclude(
         activity__type="activity",
         award_date__isnull=True,

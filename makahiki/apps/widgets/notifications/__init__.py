@@ -1,14 +1,13 @@
-"""Provides notification service."""
+"""Provides the notification service."""
 
 from apps.widgets.notifications.models import UserNotification
 
 
 def get_unread_notifications(user, limit=None):
-    """
-    Retrieves the user's unread notifications that are to be displayed on the web.
-    Returns a dictionary containing their alerts, their unread notifications, and if there are
-    more unread notifications.
-    """
+    """Retrieves the user's unread notifications that are to be displayed on the web.
+       Returns a dictionary containing their alerts, their unread notifications, and if there are
+       more unread notifications."""
+
     if not user:
         return None
 
@@ -32,16 +31,12 @@ def get_unread_notifications(user, limit=None):
 
 
 def get_unread_count(user):
-    """
-    Get the number of notifications that are unread.
-    """
+    """Get the number of notifications that are unread."""
     return UserNotification.objects.filter(recipient=user, unread=True).count()
 
 
 def get_user_alert_notifications(user):
-    """
-    Retrieves notifications that should be displayed in an alert.
-    """
+    """Retrieves notifications that should be displayed in an alert."""
     notifications = user.usernotification_set.filter(
         unread=True,
         display_alert=True,

@@ -1,4 +1,5 @@
-"""notification test."""
+"""Notification testing."""
+
 from django.test import TestCase
 from django.core.urlresolvers import reverse
 from django.contrib.auth.models import User
@@ -10,11 +11,9 @@ from apps.test_utils import TestUtils
 
 
 class NotificationUnitTests(TestCase):
-    """Notifcation Test."""
+    """Notification Test."""
     def testGetUnread(self):
-        """
-        Test that we can get the user's unread notifications.
-        """
+        """Test that we can get the user's unread notifications."""
         user = User.objects.create_user("test", "test@test.com")
         for i in range(0, 3):
             notification = UserNotification(recipient=user, contents="Test notification %i" % i)

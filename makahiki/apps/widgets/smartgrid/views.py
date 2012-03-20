@@ -1,4 +1,4 @@
-"""Prepares the rendering of smartgrid widget."""
+"""Prepares the rendering of Smart Grid Game widget."""
 
 import datetime
 from django.db.models.query_utils import Q
@@ -44,7 +44,7 @@ def supply(request, page_name):
 
 
 def _get_categories(user):
-    """return the category list with the tasks info"""
+    """Return the category list with the tasks info"""
     categories = cache.get('smartgrid-categories-%s' % user.username)
     if not categories:
         activity_members = []
@@ -175,7 +175,7 @@ def _check_attend_code(user, form):
 
 
 def attend_code(request):
-    """claim the attendance code"""
+    """Claim the attendance code"""
 
     user = request.user
     activity_member = None
@@ -405,7 +405,7 @@ def __add_activity(request, activity):
 
 
 def __drop_activity(request, activity):
-    """drop the current user from the activity."""
+    """Drop the current user from the activity."""
     user = request.user
 
     # Search for an existing activity for this user

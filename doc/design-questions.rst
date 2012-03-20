@@ -1,7 +1,69 @@
 Design Questions
 ================
 
-Click on section title to go to corresponding documentation.
+High-level issues for discussion
+********************************
+
+  A. What is the appropriate level of object orientation?  Should every
+     module be implemented via classes? If not, how do we decide when to
+     use object orientation and when to not use it?
+
+  B. Unit tests need to be reviewed. It appears that some test classes are
+     not even invoked. 
+     
+  C. When is it appropriate to include methods in init.py?  
+
+  D. When is it appropriate to included methods in urls.py?
+
+  E. When should a feature be part of management.commands, and when should
+     it be an external, stand-alone script?
+
+Is this a framework (yet)?
+**************************
+
+After completing this review of the Makahiki 2 codebase, I am struck by the
+realization that it does not yet feel like a "framework" or "game engine"
+to me.
+
+For me, the defining feature of a domain-specific framework is that domain entities
+have a "first class" status within the framework.  In our case, I view at
+least the following domain entities as requiring "first class" status for
+us to have a framework:
+
+  * Authentication methods
+  * Players
+  * Teams
+  * Scoring systems
+  * Widgets
+
+Currently, I do not view any of these entities as having first class status.
+For that to be the case, we must have an easy way to perform the following:
+
+  * Create an instance of the entity.
+  * Ensure that all instances of the entity have an appropriate, common structure.
+  * Be able to determine how many instances of the entity exist.
+  * Be able to enable or disable an instance of the entity.
+  * Be able to easily extend the system to support new instances of the entity.
+
+Typically, a framework supports the first class status of domain-specific
+entities through an object orientation with classes that define
+the common structural features and the internal state, and instances
+reflecting all the definitions of the entities.   Some first class
+entities require persistent state (players, teams), others might not
+(authentication systems). 
+
+What I am instead seeing in Makahiki at present is a basically a design in
+which a set of methods are triggered by http requests, make calls to an
+underlying database, and then return dictionaries of property-value pairs
+to pages for display.  (See all of the views.py files for examples.)  This
+is simple, but not abstract.  It's very "flat" as an architecture.   For
+Makahiki to become a framework, I think we must create and manipulate
+domain-specific entities. 
+
+Module specific questions
+*************************
+
+Click on the section title to go to corresponding documentation.
 
 :mod:`apps.managers.cache_mgr`
 ------------------------------
@@ -11,74 +73,115 @@ Click on section title to go to corresponding documentation.
 :mod:`apps.managers.auth_mgr`
 -----------------------------
 
-  1. For Makahiki2, we need a more flexible mechanism for authentication, including CAS, OpenDirectory, and "manual".  Should the authentication manager implement support for multiple authentication schemes?   How will this interact with the user interface for authentication?
+  2. For Makahiki2, we need a more flexible mechanism for authentication, including CAS, OpenDirectory, and "manual".  Should the authentication manager implement support for multiple authentication schemes?   How will this interact with the user interface for authentication?
 
 :mod:`apps.managers.log_mgr`
 ----------------------------
 
-  1. Should we have a set of prepackaged log file analyses?  If so, where do they go?  scripts/?  admin interface? management command? (More generally, when should something be a script vs. a management commmand vs. an admin form?)
+  3. Should we have a set of prepackaged log file analyses?  If so, where do they go?  scripts/?  admin interface? management command? (More generally, when should something be a script vs. a management commmand vs. an admin form?)
 
 :mod:`apps.managers.player_mgr`
 -------------------------------
 
-  1. Model fields should be documented.
-  2. Model hardwires the point systems in use. 
-  3. Management commands to load and reset users need unit tests.
-  4. Score data (referral bonus, points) directly in model.
+  4. Model fields should be documented.
+  5. Model hardwires the point systems in use. 
+  6. Management commands to load and reset users need unit tests.
+  7. Score data (referral bonus, points) directly in model.
 
 :mod:`apps.managers.score_mgr`
 ------------------------------
 
-  1. Does not appear to support definition of new scoring systems (such as 'gallons' for water).
-  2. Should the score manager have an internal data structure containing the current state of all scores for all users and teams that is queried by modules?  Or should each player have an instance of a scoring system that provides their own personal data?
+  8. Does not appear to support definition of new scoring systems (such as 'gallons' for water).
+  9. Should the score manager have an internal data structure containing the current state of all scores for all users and teams that is queried by modules?  Or should each player have an instance of a scoring system that provides their own personal data?
 
 :mod:`apps.managers.settings_mgr`
 ---------------------------------
 
-  1. Where should one specify the organizational logo that goes in the header bar?
-  2. Should competition_point_label be provided by scoring_mgr? 
-  3. Should competition_team_label be provided by team_mgr?
-  4. Should cas_server_url be provided by auth_mgr?
-  5. Lots of settings defined in init.py.  Is this appropriate?
-  6. The tests.py file does not appear to be invoked during testing.  Is  the indentation wrong?
+  10. Where should one specify the organizational logo that goes in the header bar?
+  11. Should competition_point_label be provided by scoring_mgr? 
+  12. Should competition_team_label be provided by team_mgr?
+  13. Should cas_server_url be provided by auth_mgr?
+  14. Lots of settings defined in init.py.  Is this appropriate?
+  15. The tests.py file does not appear to be invoked during testing.  Is  the indentation wrong?
 
 :mod:`apps.managers.team_mgr`
 -----------------------------
 
-  1. Do we want to hardwire methods to get a particular scoring system (points)?  In the case of EWC, the "team" will also have a score related to gallons and kWh.
+  16. Do we want to hardwire methods to get a particular scoring system (points)?  In the case of EWC, the "team" will also have a score related to gallons and kWh.
 
 
 :mod:`apps.widgets.ask_admin`
 -----------------------------
 
-  1. The views module hardwires the address for admins. 
+  17. The views module hardwires the address for admins. 
 
 :mod:`apps.widgets.badges`
 --------------------------
 
-  1. Currently we only have three possible badges.  That seems lame; can we think of more?
+  18. Currently we only have three possible badges.  That seems lame; can we think of more?
 
 :mod:`apps.widgets.energy_goal`
 -------------------------------
 
-  1. Should the "manual" energy goal widget be a variant of this module, or
-     a separate widget (apps.widgets.manual_energy_goal).   Perhaps even
-     more interestingly, since EWC will have a water challenge, maybe the manual
-     widget should be able to be instantiated for either water or energy?
-  2. It's not really clear how/when energy goal points get awarded.  Is there a
-     periodic script that gets run each night?  Where is that code? Can we
-     put it in this module?
+  19. Should the "manual" energy goal widget be a variant of this module, or
+      a separate widget (apps.widgets.manual_energy_goal).   Perhaps even
+      more interestingly, since EWC will have a water challenge, maybe the manual
+      widget should be able to be instantiated for either water or energy?
+  20. It's not really clear how/when energy goal points get awarded.  Is there a
+      periodic script that gets run each night?  Where is that code? Can we
+      put it in this module?
 
 :mod:`apps.widgets.energy_power_meter`
 --------------------------------------
 
-  1. This widget appears to save energy data locally (as part of the
-     model).  Is this a change from Makahiki 1? Do we need to be persisting this data, or can we just keep it in-memory?
+  21. This widget appears to save energy data locally (as part of the
+      model).  Is this a change from Makahiki 1? Do we need to be persisting this data, or can we just keep it in-memory?
 
 :mod:`apps.widgets.energy_scoreboard`
 -------------------------------------
 
-  1. What does the admin interface to this actually accomplish? (Similar question for other energy widgets?)
+  22. What does the admin interface to this actually accomplish? (Similar question for other energy widgets?)
+
+:mod:`apps.widgets.notifications`
+---------------------------------
+
+  23. Three functions in init.py.  Can these be moved elsewhere?
+
+:mod:`apps.widgets.popular_tasks`
+---------------------------------
+
+  24. For consistency with new SGG terminology, should this be "popular_actions"?
+
+:mod:`apps.widgets.prizes`
+--------------------------
+
+  25. Should the management command for raffle picking and form printing
+      move to the raffle widget?
+
+:mod:`apps.widgets.quests`
+--------------------------
+
+  26. Should the "utility" functions be in init.py?  More generally, should
+      this module be more object-oriented?
+
+:mod:`apps.widgets.scoreboard`
+------------------------------
+
+  27. Shouldn't the scoreboard widget refer to the score manager for data?
+
+:mod:`apps.widgets.smartgrid`
+------------------------------
+
+  28. Can this code can be restructured and simplified?  Lots going on in init.py.
+
+:mod:`apps.widgets.team_members`
+---------------------------------
+
+  29. The team_members widget imports player_mgr but nothing from
+      team_mgr.  This seems confusing. Is it correct?
+      
+
+
 
 
 

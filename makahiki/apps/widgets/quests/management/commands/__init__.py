@@ -1,1 +1,1 @@
-"""command module"""
+"""Provides the quest management command(s)."""

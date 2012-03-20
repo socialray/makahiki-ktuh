@@ -1,1 +1,1 @@
-"""wall post module"""
+"""Provide the wall post widget."""

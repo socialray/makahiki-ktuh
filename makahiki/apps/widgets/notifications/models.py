@@ -19,12 +19,11 @@ TYPE_CHOICES = (
     ('canopy-elevation', 'Canopy Elevation'),
     ('commitment-ready', 'Commitment Ready'),
     )
+"""Possible notification types."""
 
 
 class NoticeTemplate(models.Model):
-    """
-    Templates for built in notifications.
-    """
+    """Templates for built in notifications."""
     TEMPLATE_TEXT = """
   Uses <a href='http://daringfireball.net/projects/markdown/syntax'>Markdown</a> formatting.
   The available template variables are listed
@@ -34,10 +33,8 @@ class NoticeTemplate(models.Model):
     template = models.TextField(help_text=TEMPLATE_TEXT)
 
     def render(self, context_dict=None):
-        """
-        Renders the message first using Django's templating system, then using Markdown.
-        The template renderer uses the passed in context to insert variables.
-        """
+        """Renders the message first using Django's templating system, then using Markdown.
+           The template renderer uses the passed in context to insert variables."""
         if context_dict:
             context_dict = {}
         template = Template(self.template)
@@ -65,7 +62,7 @@ class UserNotification(models.Model):
 
     @property
     def is_success(self):
-        """return true if success"""
+        """Return true if success."""
         if self.level == constants.SUCCESS:
             return True
 
@@ -73,7 +70,7 @@ class UserNotification(models.Model):
 
     @property
     def icon_class(self):
-        """return the css class for the icon."""
+        """Return the css class for the icon."""
         if self.level == constants.ERROR:
             return "ui-icon-alert"
         elif self.level == constants.SUCCESS:
@@ -83,7 +80,7 @@ class UserNotification(models.Model):
 
     @property
     def style_class(self):
-        """return the style class"""
+        """Return the style class"""
         if self.level == constants.ERROR or self.level == constants.WARNING:
             return "ui-state-error"
 
@@ -91,7 +88,7 @@ class UserNotification(models.Model):
 
     @staticmethod
     def create_info_notification(recipient, contents, display_alert=False, content_object=None):
-        """create a info level notification."""
+        """Create an info level notification."""
         notification = UserNotification(
             recipient=recipient,
             contents=contents,
@@ -105,7 +102,7 @@ class UserNotification(models.Model):
 
     @staticmethod
     def create_success_notification(recipient, contents, display_alert=False, content_object=None):
-        """create a success notification."""
+        """Create a success notification."""
         notification = UserNotification(
             recipient=recipient,
             contents=contents,
@@ -119,7 +116,7 @@ class UserNotification(models.Model):
 
     @staticmethod
     def create_warning_notification(recipient, contents, display_alert=True, content_object=None):
-        """create a warning level notification."""
+        """Create a warning level notification."""
         notification = UserNotification(
             recipient=recipient,
             contents=contents,
@@ -133,7 +130,7 @@ class UserNotification(models.Model):
 
     @staticmethod
     def create_error_notification(recipient, contents, display_alert=True, content_object=None):
-        """create an error level notification."""
+        """Create an error level notification."""
         notification = UserNotification(
             recipient=recipient,
             contents=contents,
@@ -148,7 +145,7 @@ class UserNotification(models.Model):
 
     @staticmethod
     def create_email_notification(recipient_email, subject, message, html_message=None):
-        """create an email notification."""
+        """Create an email notification."""
         msg = EmailMultiAlternatives(subject, message, settings.SERVER_EMAIL, [recipient_email, ])
         if html_message:
             msg.attach_alternative(html_message, "text/html")
