@@ -10,6 +10,14 @@ These instructions also assume that you are using a Bourne-type shell (such as
 bash), which is the default on Mac OS X and Linux. Using a C-shell variant
 (like tcsh), is possible but not recommended.
 
+Hardware requirements 
+---------------------
+
+Our estimated hardware requirements (for production use) are:
+  * CPU:  modern dual or quad core
+  * RAM: 8 GB
+  * Disk space: 10 GB
+
 1. Install prerequisite software
 --------------------------------
 
