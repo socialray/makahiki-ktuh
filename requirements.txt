@@ -16,9 +16,8 @@ django-extensions==0.7.1
 pep8==0.6.1
 gunicorn==0.13.4
 sphinx==1.1.2
-pylibmc==1.2.2
-#-e git://github.com/lericson/pylibmc.git#egg=pylibmc
-django-pylibmc-sasl==0.2.4
+#pylibmc==1.2.2
+#django-pylibmc-sasl==0.2.4
 
 #django-debug-toolbar==0.9.4
 #django-frontendadmin==0.4
