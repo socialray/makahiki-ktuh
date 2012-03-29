@@ -1,5 +1,7 @@
-Design Questions
-================
+Design Review, March 2012
+=========================
+
+This page contains a summary of a design review of Makahiki done in March, 2012.
 
 High-level issues for discussion
 ********************************
@@ -170,7 +172,7 @@ Management commands is a simple wrapper to first level class methods.
 
 **8. Does not appear to support definition of new scoring systems (such as 'gallons' for water).**
 
-(Yongwen) Score_mgr currently only handles point management and ranking for
+(Yongwen) Score_mgr currently only The handles point management and ranking for
 points. Energy ranking is handled in energy_scoreboard widget. Energy
 and Water was considered as widget components and un-pluggable.
 
@@ -371,13 +373,99 @@ same team_id.  It may not seem object-oriented by using the db model
 directly.
 
 The object-oriented way could be:
-1. get the TeamMgr object from player
-2. call TeamMgr.members()
 
-There seem to be a good idea to encapsulate the model query, so that
-if model changes, only the first-level class implement ion need to be
+  1. get the TeamMgr object from player
+  2. call TeamMgr.members()
+
+It seems to be a good idea to encapsulate the model query, so that
+if model changes, only the first-level class implementation needs to be
 changed accordingly. The external interface (views, interaction with
 other objects) could remain the same.
+
+(Draft) Summary 
+****************
+
+**When to use object orientation?** We will use OO when it is useful to encapsulate state and behavior,
+and when the class will have multiple instances.  Otherwise, we will continue to use module-based
+design.  Note that if we are creating multiple instances with internal state, we must support
+concurrent access, a problem we do not have when maintaining all state in the underlying database.
+OO seems most applicable for representing relatively static entities that are initialized at the
+start of execution and then do not change, such as teams.
+
+**Testing.**  We still need to review testing in more detail. We need both unit tests and
+integration (i.e. selenium) tests. 
+
+**What should go in init.py?**  As a general rule, only a doc string should go in init.py.
+
+**Mission control, then admin interface, then management command, then script**  As a general rule,
+this sequence indicates the preferred location for administrative functions. Prefer online access
+over command line access, and avoid scripts.  Note that it can be useful to implement a management
+command and then provide access to it via mission control.
+
+**The cache manager.**  Implement as a module, not a class.  All other code will go through this
+module to access caching.
+
+**The authentication manager.**  We do not currently understand the design issues with various
+authentication structures well enough to decide upon the most appropriate "pluggable" architecture,
+if any.  For now, simply implement additional authentication in the most convenient way possible,
+then we will review again.
+
+**The log manager.** This manager should support storage and analysis of data that is later
+retrieved by the mission control page and/or management commands to
+provide "real time analytics" regarding the progress of the competition.
+
+**Document all model fields.** Enables Sphinx to better document the system.
+
+**The score manager.** The Score Manager must support definition of new scoring systems, and must
+encapsulate access to all score data (unlike Makahiki 1 where score data was hardwired in each
+user). Yongwen and George differ on whether there is a single Score Manager supporting all scores,
+or whether there should be multiple Score Manager instances, one per player and/or team. We must
+discuss this question further.
+
+**The Challenge Manager.** We need a new module called the Challenge Manager that provides access to
+all details regarding the configuration of the current competition.  As this is a singleton, it is
+best implemented as a module, not a class.  Clients should use this instead of the settings module.
+
+**Badges.** We should discuss whether or not the badge game mechanic is appropriate for Makahiki.
+
+**Energy goal game.**  There are at least four design questions with the energy goal game:
+
+  1. How to eliminate the need for gdata spreadsheets?  While some of the spreadsheets
+     (baselines) will be persisted, others (latest power data) do not need to be persisted. 
+
+  2. The second question is:  How to implement the manual DEGG?  Options include:  implement as a variant on the
+     current "automated" DEGG; implement as a separate widget; or implement as a generic widget that can
+     be specialized to water, etc.
+
+  3. How to support A-B testing?   We might want to be able to test whether the "goal" vs. "budget"
+     representation yields different behaviors. 
+
+  4. How should the daily computation of award points be implemented?  It was a script. Can we move
+     it up the food chain (management command, admin interface, etc.)?
+
+**The team manager.** Currently, code directly accesses the database for team data. It seems that
+code should instead be accessing the team manager module.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
