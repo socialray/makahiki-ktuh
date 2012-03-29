@@ -9,18 +9,31 @@
 	background: #E3F9F8;
 }
 
+/* set the UH logo */
+.brand img {
+	background: transparent url(../images/icon-byuh-logo.png) top left
+		no-repeat;
+	display: block;
+	margin: 0 auto;
+}
+
 .btn-navbar {
-	background-color: #2B93AD;
-	background-image: -moz-linear-gradient(top, #2B93AD, #2B93AD);
-	background-image: -ms-linear-gradient(top, #2B93AD, #2B93AD);
-	background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#2B93AD),
-		to(#2B93AD) );
-	background-image: -webkit-linear-gradient(top, #2B93AD, #2B93AD);
-	background-image: -o-linear-gradient(top, #2B93AD, #2B93AD);
-	background-image: linear-gradient(top, #2B93AD, #2B93AD);
-	filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#2B93AD',
-		endColorstr='#2B93AD', GradientType=0 );
-	border-color: #2B93AD #2B93AD #000000;
+	background-color: rgba(255, 255, 255, 0.7);
+	background-image: -moz-linear-gradient(top, rgba(255, 255, 255, 0.7),
+		rgba(255, 255, 255, 0.7) );
+	background-image: -ms-linear-gradient(top, rgba(255, 255, 255, 0.7),
+		rgba(255, 255, 255, 0.7) );
+	background-image: -webkit-gradient(linear, 0 0, 0 100%, from(rgba(255, 255, 255, 0.7)
+		), to(rgba(255, 255, 255, 0.7) ) );
+	background-image: -webkit-linear-gradient(top, rgba(255, 255, 255, 0.7),
+		rgba(255, 255, 255, 0.7) );
+	background-image: -o-linear-gradient(top, rgba(255, 255, 255, 0.7),
+		rgba(255, 255, 255, 0.7) );
+	background-image: linear-gradient(top, rgba(255, 255, 255, 0.7),
+		rgba(255, 255, 255, 0.7) );
+	filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='rgba(255, 255, 255, 0.7)',
+		endColorstr='rgba(255, 255, 255, 0.7)', GradientType=0 );
+	border-color: rgba(255, 255, 255, 0.7) rgba(255, 255, 255, 0.7) #000000;
 }
 
 .btn-navbar:hover,.btn-navbar:active,.btn-navbar.active,.btn-navbar.disabled,.btn-navbar[disabled]
@@ -67,6 +80,31 @@
 	background-color: #EC5B74;
 }
 
+.navbar .brand {
+	color: #222222;
+}
+
+.navbar .nav>li>a {
+	color: #222222;
+}
+
+.navbar .nav>li>a:hover {
+	color: #EFB820;
+}
+
+.navbar .nav .active>a,.navbar .nav .active>a:hover {
+	color: #8E6B23;
+}
+
+.navbar-inner {
+	background-color: rgba(255, 255, 255, 0.7);
+	/* 	background: rgba(0,0,156, .45); */
+	/* 	background-image: -moz-linear-gradient(100% 50% 90deg, rgba(224, 255, 255, .45), */
+	/* 		rgba(79, 148, 205, .5) ); */
+	/* 	background-image: -webkit-gradient(linear, 0% 0%, 0% 90%, from(rgba(224, 255, 255, .45) */
+	/* 		), to(rgba(79, 148, 205, .5) ) ); */
+}
+
 /* orange */
 .survey,.survery-legend {
 	background-color: #F2C061;
@@ -95,6 +133,10 @@
 	background: #C1EBEC;
 }
 
+#feedback-logout a {
+	color: white;
+}
+
 #header-logout a {
 	font-family: "Lucida Sans Unicode", "Lucida Grande", Verdana, Arial,
 		Helvetica, sans-serif;
@@ -119,9 +161,9 @@
 
 /** Quest bar **/
 #quest-box {
-	background-image: -moz-linear-gradient(100% 50% 90deg, #0DE6DE, #3B6BFA);
-	background-image: -webkit-gradient(linear, 0% 0%, 0% 50%, from(#A1A1A1),
-		to(#E3E3E3) );
+	background-image: -moz-linear-gradient(100% 50% 90deg, #ADFF2F, #ADFF2F);
+	background-image: -webkit-gradient(linear, 0% 0%, 0% 50%, from(#ADFF2F),
+		to(#ADFF2F) );
 	box-shadow: 3px 3px 8px #000;
 	-moz-box-shadow: 3px 3px 8px #000;
 	-webkit-box-shadow: 3px 3px 8px #000;

@@ -15,17 +15,22 @@
 }
 
 .btn-navbar {
-	background-color: #2B93AD;
-	background-image: -moz-linear-gradient(top, #2B93AD, #2B93AD);
-	background-image: -ms-linear-gradient(top, #2B93AD, #2B93AD);
-	background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#2B93AD),
-		to(#2B93AD) );
-	background-image: -webkit-linear-gradient(top, #2B93AD, #2B93AD);
-	background-image: -o-linear-gradient(top, #2B93AD, #2B93AD);
-	background-image: linear-gradient(top, #2B93AD, #2B93AD);
-	filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#2B93AD',
-		endColorstr='#2B93AD', GradientType=0 );
-	border-color: #2B93AD #2B93AD #000000;
+	background-color: rgba(255, 255, 255, 0.7);
+	background-image: -moz-linear-gradient(top, rgba(255, 255, 255, 0.7),
+		rgba(255, 255, 255, 0.7) );
+	background-image: -ms-linear-gradient(top, rgba(255, 255, 255, 0.7),
+		rgba(255, 255, 255, 0.7) );
+	background-image: -webkit-gradient(linear, 0 0, 0 100%, from(rgba(255, 255, 255, 0.7)
+		), to(rgba(255, 255, 255, 0.7) ) );
+	background-image: -webkit-linear-gradient(top, rgba(255, 255, 255, 0.7),
+		rgba(255, 255, 255, 0.7) );
+	background-image: -o-linear-gradient(top, rgba(255, 255, 255, 0.7),
+		rgba(255, 255, 255, 0.7) );
+	background-image: linear-gradient(top, rgba(255, 255, 255, 0.7),
+		rgba(255, 255, 255, 0.7) );
+	filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='rgba(255, 255, 255, 0.7)',
+		endColorstr='rgba(255, 255, 255, 0.7)', GradientType=0 );
+	border-color: rgba(255, 255, 255, 0.7) rgba(255, 255, 255, 0.7) #000000;
 }
 
 .btn-navbar:hover,.btn-navbar:active,.btn-navbar.active,.btn-navbar.disabled,.btn-navbar[disabled]
@@ -64,20 +69,24 @@
 	background-color: red;
 }
 
+.navbar .brand {
+	color: #222222;
+}
+
 .navbar .nav>li>a {
-	color: #ffffff;
+	color: #222222;
 }
 
 .navbar .nav>li>a:hover {
-	color: #24333B;
+	color: #EFB820;
 }
 
 .navbar .nav .active>a,.navbar .nav .active>a:hover {
-	color: #24333B;;
+	color: #EFB820;
 }
 
 .navbar-inner {
-	background: rgba(112, 147, 219, .45);
+	background-color: rgba(255, 255, 255, 0.7);
 	/* 	background: rgba(0,0,156, .45); */
 	/* 	background-image: -moz-linear-gradient(100% 50% 90deg, rgba(224, 255, 255, .45), */
 	/* 		rgba(79, 148, 205, .5) ); */
@@ -104,15 +113,11 @@
 
 /* for small screen widths hide the wide info-bar */
 @media ( max-width : 640px) {
-	.brand img {
-		display: none;
-	}
 	#info-bar-single {
-		background: rgba(224, 255, 255, .45);
-		background-image: -moz-linear-gradient(100% 50% 90deg, rgba(224, 255, 255, .45),
-			rgba(79, 148, 205, .5) );
-		background-image: -webkit-gradient(linear, 0% 0%, 0% 90%, from(rgba(224, 255, 255, .45)
-			), to(rgba(79, 148, 205, .5) ) );
+		background: #E3E3E3;
+		background-image: -moz-linear-gradient(100% 50% 90deg, #E3E3E3, #A1A1A1);
+		background-image: -webkit-gradient(linear, 0% 0%, 0% 90%, from(#E3E3E3),
+			to(#BBB) );
 	}
 }
 
@@ -127,12 +132,15 @@
 	background: #C1EBEC;
 }
 
+#feedback-logout a {
+	color: rgb(47, 79, 34);
+}
+
 #info-bar-wide {
-	background: rgba(224, 255, 255, .45);
-	background-image: -moz-linear-gradient(100% 50% 90deg, rgba(224, 255, 255, .45),
-		rgba(79, 148, 205, .5) );
-	background-image: -webkit-gradient(linear, 0% 0%, 0% 90%, from(rgba(224, 255, 255, .45)
-		), to(rgba(79, 148, 205, .5) ) );
+	background: #E3E3E3;
+	background-image: -moz-linear-gradient(100% 50% 90deg, #E3E3E3, #A1A1A1);
+	background-image: -webkit-gradient(linear, 0% 0%, 0% 90%, from(#E3E3E3),
+		to(#BBB) );
 }
 
 /* Set common border thickness and color for header elements that use it. */
@@ -173,9 +181,10 @@
 }
 
 #quest-box {
-	background: none;
-	background-color: rgba(70, 130, 80, 0.5);
-	color: white;
+	background-image: -moz-linear-gradient(100% 40% 90deg, #EFB820, #FFFFFF);
+	background-image: -webkit-gradient(linear, 0% 0%, 0% 50%, from(#FFFFFF),
+		to(#EFB820) );
+	color: black;
 }
 
 #quest-box h4 {
@@ -187,20 +196,8 @@
 }
 
 #quest-list li a {
-	color: white;
+	color: black;
 }
-
-/* #quest-list .btn { */
-/* 	background-color: rgba(40, 42, 42, 1.0); */
-/* 	background-image: -moz-linear-gradient(top, blue, blue); */
-/* 	background-image: -ms-linear-gradient(top, #ffffff, #e6e6e6); */
-/* 	background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#ffffff), */
-/* 		to(#e6e6e6) ); */
-/* 	background-image: -webkit-linear-gradient(top, #ffffff, #e6e6e6); */
-/* 	background-image: -o-linear-gradient(top, #ffffff, #e6e6e6); */
-/* 	background-image: linear-gradient(top, #ffffff, #e6e6e6); */
-/* 	background-repeat: repeat-x; */
-/* } */
 
 #quest-list li.selected {
 	background-color: rgba(40, 42, 42, 1.0);
@@ -213,7 +210,7 @@
 
 /* Set background picture, center it, make sure it doesn't repeat and that it covers the background for any size on any browser */
 body {
-	background: url("../images/oceanWave.jpg") center fixed;
+	background: url("../images/ti.jpg") center fixed;
 	background-repeat: no-repeat;
 	-webkit-background-size: cover;
 	-moz-background-size: cover;
