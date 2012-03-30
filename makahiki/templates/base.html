@@ -4,7 +4,7 @@
 <html lang="{{ LANGUAGE_CODE }}">
 <head>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>{{ setting_objects.PAGE_TITLE }}: {{ SITE_NAME }} {{ COMPETITION_NAME }}</title>
+<title>{% block page_title %}{% endblock %}: {{ SITE_NAME }} {{ COMPETITION_NAME }}</title>
     {% block extra_head_base %}
         {% block extra_head %}{% endblock %}
     {% endblock %}

@@ -161,6 +161,7 @@ img {
 	padding-bottom: 8px;
 	margin-bottom: 15px;
 	opacity: 0.88;
+	text-align: left;
 }
 
 /* smaller and lighter shadow used inside the content boxes */
@@ -168,6 +169,10 @@ img {
 	box-shadow: 0 0 3px 3px #222;
 	-moz-box-shadow: 0 0 3px 3px #222;
 	-webkit-box-shadow: 0 0 3px 3px #222;
+}
+
+.content-box-contents a {
+    text-align: center;
 }
 
 /* .content-box-title */
@@ -185,6 +190,7 @@ img {
 	-moz-border-radius-topright: 8px;
 	-webkit-border-top-right-radius: 8px;
 	opacity: .99;
+	text-align: center;
 }
 
 /* ++++++++++++++++++++++++++++++++++++++*/

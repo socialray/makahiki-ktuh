@@ -13,12 +13,11 @@ RETURN_CLASSES = True
 CSS_IMPORTS = """
 """
 
-LOGGED_IN_CSS_IMPORTS = """
+LOGGED_IN_CSS_IMPORT = """
 <link href="{0}css/bootstrap.css" rel="stylesheet">
 <link href="{0}css/bootstrap-responsive.css" rel="stylesheet">
 <link href="{0}css/bootstrap-override.css" rel="stylesheet">
 <link href="{0}css/makahiki-structure.css" rel="stylesheet">
-<!-- link href="css/<page>.css" rel="stylesheet" -->
 <link rel="stylesheet/less" type="text/css" href="{0}css/theme.less">
 <script src="{0}js/less-1.3.0.min.js" type="text/javascript"></script>
 """
@@ -46,13 +45,15 @@ CSS_IDS = {
 
     "quest-list": "quest-list",
 
-    "home-energy": "home-item",
-    "home-activities": "home-item",
-    "home-news": "home-item",
-    "home-prizes": "home-item",
-    "home-help": "home-item",
-    "home-profile": "home-item",
+    "home": "container-fluid",
+    "home-energy": "home-item span4",
+    "home-activities": "home-item span4",
+    "home-news": "home-item span4",
+    "home-prizes": "home-item span4",
+    "home-help": "home-item span4",
+    "home-profile": "home-item span4",
 
+    "energy-body": "container-fluid",
     "energy-power": "content-box",
     "energy-scoreboard-box": "content-box",
     "energy-status-box": "content-box",
@@ -60,6 +61,7 @@ CSS_IDS = {
     "energy-scoreboard-title": "content-box-title",
     "energy-status-title": "content-box-title",
 
+    "activity-body": "container-fluid",
     "activity-events-box": "content-box",
     "activity-scoreboard-box": "content-box",
     "activity-categories-box": "content-box",
@@ -71,6 +73,7 @@ CSS_IDS = {
     "activity-task-stats-title": "content-box-title",
     "activity-task-details-title": "content-box-title",
 
+    "news-body": "container-fluid",
     "news-wall": "content-box",
     "news-events": "content-box",
     "news-commitments": "content-box",
@@ -99,6 +102,11 @@ CSS_IDS = {
     "help-faq-content": "content-box-contents",
     "help-topic-content": "content-box-contents",
 
+    "info-bar-wide": "container-fluid",
+    "info-bar-single": "container-fluid",
+    "feedback-logout": "span2",
+
+    "profile-body": "container-fluid",
     "profile-form-box": "content-box",
     "profile-badges-box": "content-box",
     "profile-history-box": "content-box",
@@ -126,6 +134,7 @@ CSS_IDS = {
     "avatar-change": "content-box",
     "avatar-change-title": "content-box-title",
 
+    "prizes-body": "container-fluid",
     "prizes-list": "content-box",
     "prizes-raffle": "content-box",
     "prizes-raffle-title": "content-box-title",
@@ -141,6 +150,12 @@ CSS_IDS = {
     "canopy-members-title": "content-box-title",
     "canopy-karma": "content-box",
     "canopy-karma-title": "content-box-title",
+
+    "base-row": "row-fluid",
+    "single-col": "span12",
+    "narrow-col": "span5",
+    "wide-col": "span7",
+    "even-col": "span6",
     }
 
 CSS_CLASSES = {

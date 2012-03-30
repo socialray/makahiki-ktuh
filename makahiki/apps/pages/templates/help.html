@@ -13,18 +13,28 @@
 {% endblock %}
 
 {% block body %}
-    <div id='help_intro'>
-        {% include "widgets/help/intro/templates/index.html" %}
-    </div>
-    <div id='help_faq'>
-        {% include "widgets/help/faq/templates/index.html" %}
+    <div {% get_id_and_classes "news-body" "responsive" %}>
+        <div {% get_id_and_classes "base-row" "responsive" %}>
+            <!-- left column -->
+            <div {% get_id_and_classes "even-col" "responsive" %}>
+                <div id='help_intro'>
+                    {% include "widgets/help/intro/templates/index.html" %}
+                </div>
+                <div id='help_faq'>
+                    {% include "widgets/help/faq/templates/index.html" %}
+                </div>
+            </div>
+            <!-- right column -->
+            <div {% get_id_and_classes "even-col" "responsive" %}>
+                <div id='help_rule'>
+                    {% include "widgets/help/rule/templates/index.html" %}
+                </div>
+                <div id='ask_admin'>
+                    {% include "widgets/ask_admin/templates/index.html" %}
+                </div>
+            </div>
+        </div>
     </div>
 
-    <div id='help_rule'>
-        {% include "widgets/help/rule/templates/index.html" %}
-    </div>
 
-    <div id='ask_admin'>
-        {% include "widgets/ask_admin/templates/index.html" %}
-    </div>
 {% endblock %}
