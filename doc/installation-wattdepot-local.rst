@@ -10,7 +10,14 @@ Our estimated hardware requirements (for production use) are:
   * Disk space: 10 GB
 
 
-1. Install prerequisite software
---------------------------------
- 
-Remaining instructions coming soon.
+WattDepot generic local install instructions
+--------------------------------------------
+
+Follow the `WattDepot local install`_ instructions
+
+.. _WattDepot local install: http://code.google.com/p/wattdepot/wiki/InstallingWattDepotServerLocally
+
+
+Makahiki-specific WattDepot instructions
+----------------------------------------
+To be added in the future...
