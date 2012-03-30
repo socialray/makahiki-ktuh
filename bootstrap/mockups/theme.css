@@ -223,3 +223,30 @@ background: transparent url(../../makahiki/media/images/icons/icon-help.png) top
     font-weight: bold;
     text-decoration: underline;
 }
+
+/****************** Widget styles ******************/
+
+.content-box-title {
+    text-align: center;
+    padding: 5px 0;
+    margin-bottom: 5px;
+    /* So only the top two corners are rounded*/
+    border-top-left-radius: 8px;
+    -moz-border-radius-topleft: 8px;
+    -webkit-border-top-left-radius: 8px; 
+    /* So only the top two corners are rounded*/
+    border-top-right-radius: 8px;
+    -moz-border-radius-topright: 8px;
+    -webkit-border-top-right-radius: 8px;
+    
+	background-color: #333333;
+	background-image: -moz-linear-gradient(100% 50% 90deg, #EFB820, #FFFFFF);
+	background-image: -webkit-gradient(linear, 0% 0%, 0% 50%, from(#FFFFFF), to(#EFB820));
+}
+
+.content-box {
+    border-radius: 8px;
+    moz-border-radius: 8px;
+    webkit-border-radius: 8px;
+	background-color: #EBE7BC; 
+}
