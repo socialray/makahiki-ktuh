@@ -3,12 +3,12 @@
 import re
 from django.core.urlresolvers import reverse
 from django.http import HttpResponseRedirect
-from apps.managers.settings_mgr import in_competition
 import datetime
 from django.conf import settings
 from django.contrib.auth.models import User
 from django.core.exceptions import ObjectDoesNotExist
-from apps.managers.settings_mgr.models import ChallengeSettings, RoundSettings, PageSettings
+from apps.managers.settings_mgr import in_competition
+from apps.managers.settings_mgr.models import ChallengeSettings, PageSettings, RoundSettings
 
 
 def _load_db_settings():
@@ -34,25 +34,7 @@ def _load_db_settings():
         settings.EMAIL_USE_TLS = settings.CHALLENGE.email_use_tls
 
     # get the Round settings from DB
-    rounds = RoundSettings.objects.all()
-    if rounds.count() == 0:
-        RoundSettings.objects.create()
-        rounds = RoundSettings.objects.all()
-
-    #store in a round dictionary and calculate start and end
-    rounds_dict = {}
-    settings.COMPETITION_START = None
-    last_round = None
-    for competition_round in rounds:
-        if settings.COMPETITION_START is None:
-            settings.COMPETITION_START = competition_round.start
-        rounds_dict[competition_round.name] = {
-            "start": competition_round.start,
-            "end": competition_round.end, }
-        last_round = competition_round
-    if last_round:
-        settings.COMPETITION_END = last_round.end
-    settings.COMPETITION_ROUNDS = rounds_dict
+    RoundSettings.set_round_settings()
 
     # register the home page and widget
     PageSettings.objects.get_or_create(name="home", widget="home")

@@ -85,7 +85,10 @@ class Prize(models.Model):
             return Profile.points_leaders(num_results=1, round_name=round_name)[0]
 
         elif self.award_to == "team_group":
-            return team.group.team_points_leaders(num_results=1, round_name=round_name)[0]
+            if team:
+                return team.group.team_points_leaders(num_results=1, round_name=round_name)[0]
+            else:
+                return None
 
         elif self.award_to == "team_overall":
             return Team.team_points_leaders(num_results=1, round_name=round_name)[0]

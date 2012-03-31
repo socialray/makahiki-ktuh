@@ -48,7 +48,7 @@ def index(request):
 def _get_view_objects(request, page_name, view_objects):
     """ Returns view_objects supplied widgets defined in page_settings.py. """
 
-    page_settings = PageSettings.objects.filter(name=page_name)
+    page_settings = PageSettings.objects.filter(name=page_name, enabled=True)
     if page_settings.count() == 0:
         return False
 
