@@ -112,7 +112,7 @@ RESTRICTED_URL = '/restricted/'
 #########################
 INSTALLED_APPS = (
     # Makahiki pages
-    'apps',
+    'apps.template_support',
     'apps.pages',
 
     # Makahiki components
