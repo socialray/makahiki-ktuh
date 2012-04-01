@@ -8,6 +8,8 @@ env:
 install: pip install -r requirements.txt --use-mirrors --quiet
 before_script:
     - "psql -c 'create database makahiki;' -U postgres"
+    - "export DISPLAY=:99.0"
+    - "sh -e /etc/init.d/xvfb start"  
 script: coverage run --source=makahiki/apps/ makahiki/manage.py test
 after_script:
     - coverage report -m
