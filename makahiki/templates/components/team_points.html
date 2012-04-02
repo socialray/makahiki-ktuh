@@ -5,52 +5,33 @@
 {% cache 600 infobar team.name %}
 {% if CURRENT_ROUND_INFO and CURRENT_ROUND_INFO.name != 'Overall' %}
 <!-- First slideshow element -->
-<div id="header-team-overall-rank1">
-  <div {% get_id_and_classes "header-team-points" %}>
-    <h3>{{team.current_round_points}}</h3>
-    <div {% get_id_and_classes "header-text" %}>{{COMPETITION_POINT_LABEL}}s in {{CURRENT_ROUND_INFO.name}}</div>
-  </div>
-  <div {% get_id_and_classes "header-team-rank" %}>
-    <h3>#{{team.current_round_rank}}</h3>
-    <div {% get_id_and_classes "header-text" %}>out of {{TEAM_COUNT}} in all teams</div>
-  </div>
+<div>
+    <ul>
+        <li>{{CURRENT_ROUND_INFO.name}}: {{team.current_round_points}} {{COMPETITION_POINT_LABEL}}s.
+        #{{team.current_round_rank}}/{{TEAM_COUNT}}.
+        </li> 
+    </ul>
 </div>
 
 {% if energy_rank_info %}
-<div id="header-team-overall-rank2" style="display:none">
-  <div {% get_id_and_classes "header-team-energy" %}>
-    <h3 id="round-energy-value"></h3>
-     <div {% get_id_and_classes "header-text" %}>kWh used in {{CURRENT_ROUND_INFO.name}}</div>
-  </div>
-  <div {% get_id_and_classes "header-team-rank" %}>
-    <h3 id="round-energy-rank"></h3> 
-    <div {% get_id_and_classes "header-text" %}>out of {{TEAM_COUNT}} in all teams</div>
-  </div>
+<div>
+    <ul>
+        <li>{{CURRENT_ROUND_INFO.name}}: <span id="round-energy-value"></span> kWh.
+        #<span id="round-energy-rank"></span>  out of {{TEAM_COUNT}}.</li>
+    </ul>
 </div>
 {% endif %}
 {% endif %}
-
-<div id="header-team-overall-rank3" {% if CURRENT_ROUND_INFO %}style="display:none"{% endif %}>
-  <div {% get_id_and_classes "header-team-points" %}>
-    <h3>{{team.points}}</h3>
-    <div {% get_id_and_classes "header-text" %}>{{COMPETITION_POINT_LABEL}}s overall</div>
-  </div>
-  <div {% get_id_and_classes "header-team-rank" %}>
-    <h3>#{{team.rank}}</h3>
-    <div {% get_id_and_classes "header-text" %}>out of {{TEAM_COUNT}} in all teams</div>
-  </div>
+<div>
+    <ul>
+        <li>Overall: {{team.points}} {{COMPETITION_POINT_LABEL}}s. #{{team.rank}} out of {{TEAM_COUNT}}</li>
+    </ul>
 </div>
-
 {% if energy_rank_info %}
-<div id="header-team-overall-rank4" style="display:none">
-  <div {% get_id_and_classes "header-team-energy" %}>
-    <h3>{{ energy_rank_info.usage }}</h3>
-     <div {% get_id_and_classes "header-text" %}>kWh used overall</div>
-  </div>
-  <div {% get_id_and_classes "header-team-rank" %}>
-      <h3>#{{ energy_rank_info.rank }}</h3>
-    <div {% get_id_and_classes "header-text" %}>out of {{TEAM_COUNT}} in all teams</div>
-  </div>
+<div>
+    <ul>
+        <li>Overall: {{ energy_rank_info.usage }} kWh. #{{ energy_rank_info.rank }} out of {{TEAM_COUNT}}.</li>
+    </ul>
 </div>
 {% endif %}
 

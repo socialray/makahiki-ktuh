@@ -4,92 +4,30 @@
 {% load markup %}
 
 {% block extra_head_base %}
-  <script src="{{STATIC_URL}}/js/feedback.js" type="text/javascript"></script>
-
-  {% import_logged_in_css STATIC_URL %}
+  {% import_logged_in_css STATIC_URL "responsive" %}
   {% block extra_head %}{% endblock %}
 {% endblock %}
 
 {% block header %}
-
-
-<div style="margin-top: 10px">
-  
-  <div {% get_id_and_classes "header-logout" %}>
-    <div id="header-site-name">
-        {{ SITE_NAME }} {{ COMPETITION_NAME }}
+ {% include "components/RIB.html" %}
+ {% include "components/navbar.html" %}
+    <div id='notifications'>
+        {% include "widgets/notifications/templates/index.html" %}
     </div>
-
-    {% if user.get_profile.canopy_member and not in_canopy %}
-    <div id="link-container" style="float: left">
-      <div id="header-canopy-link" class="hidden">
-        <a href="{% url canopy_index %}">Head up to the canopy</a>
-      </div>
+    <div id='quests'>
+        {% include "widgets/quests/templates/index.html" %}
     </div>
-    {% endif %}
-    
-    <button {% get_id_and_classes "header-feedback" %} disabled="disabled" href="javascript:void(0);">Send Feedback</button>
-    <a href="/account/cas/logout/?next=/landing/">Logout</a>
+ {% if messages %}
+  <div id="messages">
+    <ul class="messages">
+        {% for message in messages %}
+        <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+        {% endfor %}
+    </ul>
   </div>
-
-  <div {% get_id_and_classes "header-logo" %}>
-    <a href="{% url home_index %}"><img src="{{STATIC_URL}}css/default/images/logo.png" title="Home"/></a>
-  </div>
-
-  <div {% get_id_and_classes "header-info" %}>
-    {% include "components/user_info.html" %}
-  </div>  
-  
-  <div {% get_id_and_classes "header-nav" %}>
-    <div class="{% block selected_icon %}{% endblock %}">
-      {% include "components/navigation.html" %}
-    </div>
-    {% if IN_COMPETITION %}
-    <div {% get_id_and_classes "header-round-info" %}>
-      <h3>{{CURRENT_ROUND_INFO.name}}</h3>
-      <span {% get_id_and_classes "header-round-countdown" %}></span>
-    </div>
-    <script type="text/javascript">
-      var endDate = new Date("{{CURRENT_ROUND_INFO.end.ctime}}");
-      var today = new Date();
-      // Calculate the number of days in the difference.
-      var hourDiff = (endDate - today) / (1000 * 60 * 60);
-      if (hourDiff > 24) {
-        $("#header-round-countdown").countdown({
-          until: endDate,
-          tickInterval: 60,
-          layout: '(ends in {dn} {dl}, {hn} {hl}, and {mn} {ml})'
-        });
-      }
-      else {
-        if (hourDiff < 6) {
-          $("#header-round-info").addClass("ending");
-        }
-        $("#header-round-countdown").countdown({
-          until: endDate,
-          layout: '(ends in {hn} {hl}, {mn} {ml}, and {sn} {sl})'
-        });
-      }
-    </script>
-    {% endif %}
-  </div>
-</div>
-
-
-{% block quests %}
+ {% endif %}
 {% endblock %}
 
-{% if messages %}
-<div id="messages">
-  <ul class="messages">
-      {% for message in messages %}
-      <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
-      {% endfor %}
-  </ul>
-</div>
-{% endif %}
-
-{% endblock %}
 
 {% block extra_body_base %}
 
@@ -110,6 +48,56 @@
   });
 </script>
 
-{% block extra_body %}{% endblock %}
+{% block extra_body %}
+  <!-- javascript
+   ================================================== -->
+  <!-- Placed at the end of the document so the pages load faster -->
+  <script src="{{STATIC_URL}}js/jquery.js" type="text/javascript"></script>
+  <script src="{{STATIC_URL}}js/bootstrap-transition.js" type="text/javascript"></script>
+  <script src="{{STATIC_URL}}js/bootstrap-alert.js" type="text/javascript"></script>
+  <script src="{{STATIC_URL}}js/bootstrap-modal.js" type="text/javascript"></script>
+  <script src="{{STATIC_URL}}js/bootstrap-dropdown.js" type="text/javascript"></script>
+  <script src="{{STATIC_URL}}js/bootstrap-scrollspy.js" type="text/javascript"></script>
+  <script src="{{STATIC_URL}}js/bootstrap-tab.js" type="text/javascript"></script>
+  <script src="{{STATIC_URL}}js/bootstrap-tooltip.js" type="text/javascript"></script>
+  <script src="{{STATIC_URL}}js/bootstrap-popover.js" type="text/javascript"></script>
+  <script src="{{STATIC_URL}}js/bootstrap-button.js" type="text/javascript"></script>
+  <script src="{{STATIC_URL}}js/bootstrap-collapse.js" type="text/javascript"></script>
+  <script src="{{STATIC_URL}}js/bootstrap-carousel.js" type="text/javascript"></script>
+  <script src="{{STATIC_URL}}js/bootstrap-typeahead.js" type="text/javascript"></script>
+  <script src="{{STATIC_URL}}js/jquery.cycle.all.js" type="text/javascript"></script>
+  <script type="text/javascript">
+      $.fn.cycle.defaults.timeout = 6000;
+      $(function() {
+          $('#user-cycle').cycle({
+              fx : 'fade', // choose your transition type, ex: fade, scrollUp, shuffle, etc...
+              fit : 1
+          });
+      });
+
+      $(function() {
+          $('#team-cycle').cycle({
+              fx : 'fade', // choose your transition type, ex: fade, scrollUp, shuffle, etc...
+              fit : 1
+          });
+      });
+
+      $(function() {
+          $('#round-cycle').cycle({
+              fx : 'fade', // choose your transition type, ex: fade, scrollUp, shuffle, etc...
+              fit : 1
+          });
+      });
+      
+      $(function() {
+          $('#single-cycle').cycle({
+              fx : 'scrollUp', // choose your transition type, ex: fade, scrollUp, shuffle, etc...
+              fit : 1,
+              height : 55
+          });
+      });
+  </script>
+  {% block page_cycles %}{% endblock page_cycles %}
+{% endblock %}
 
 {% endblock %}

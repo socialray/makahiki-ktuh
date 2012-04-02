@@ -2,19 +2,7 @@
 /* CSS Document */
 
 /********************** help styles ******************************/
-.content-box {
-	text-align: left;
-}
 
-.content-box-contents a {
-	color: #db9703;
-    text-align: center;
-}
-
-.content-box-contents ul {
-	margin: 0 auto 0 auto;
-	padding: 0 auto 0 auto;
-}
 
 #help-video .content-box{
     text-align: center;

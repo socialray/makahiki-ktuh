@@ -1,0 +1,64 @@
+{% load class_tags %}
+    <!-- Navbar
+    ================================================== -->
+    <div class="navbar">
+        <div class="navbar-inner">
+            <div class="container">
+                <a class="btn btn-navbar" data-toggle="collapse"
+                    data-target=".nav-collapse"> <span
+                    class="icon-bar"></span> <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </a>
+                <div class="brand">
+                    <img src="{{ STATIC_URL }}images/spacer-54.png"
+                        alt="University of Hawaii" />
+                    <div class="caption">Kukui Cup/UH</div>
+                </div>
+
+                <div class="nav-collapse">
+                    <ul class="nav">
+                        <!-- Choose the correct active page by adding active to the class list -->
+                        <li class="home"><a href="{% url home_index %}?ref=nav-button"
+                            class="home"><img
+                                src="{{ STATIC_URL }}images/spacer-54.png">Home</a></li>
+                        <li class=""><a href="{% url learn_index %}?ref=nav-button"
+                            class="activities"> <img
+                                src="{{ STATIC_URL }}images/spacer-54.png"> Get
+                                Nutz
+                        </a></li>
+                        <li class=""><a href="{% url energy_index %}?ref=nav-button"
+                            class="energy"> <img
+                                src="{{ STATIC_URL }}images/spacer-54.png"> Go
+                                Low
+                        </a></li>
+                        <li class=""><a href="{% url water_index %}?ref=nav-button"
+                            class="water"><img
+                                src="{{ STATIC_URL }}images/spacer-54.png">
+                                Water</a></li>
+                        <li class=""><a href="{% url news_index %}?ref=nav-button"
+                            class="news"> <img
+                                src="{{ STATIC_URL }}images/spacer-54.png"> News
+                        </a></li>
+                        <li class=""><a href="{% url canopy_index %}?ref=nav-button"
+                            class="advanced"><img
+                                src="{{ STATIC_URL }}images/spacer-54.png">
+                                Advanced</a></li>
+                        <li class=""><a href="{% url win_index %}?ref=nav-button"
+                            class="prizes"> <img
+                                src="{{ STATIC_URL }}images/spacer-54.png">
+                                Prizes
+                        </a></li>
+                        <li class=""><a href="{% url profile_index %}?ref=nav-button"
+                            class="profile"> <img
+                                src="{{ STATIC_URL }}images/spacer-54.png">
+                                Profile
+                        </a></li>
+                        <li class=""><a href="{% url help_index %}?ref=nav-button"
+                            class="help"> <img
+                                src="{{ STATIC_URL }}images/spacer-54.png"> Help
+                        </a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>

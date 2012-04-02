@@ -1,7 +1,8 @@
 {% load class_tags %}
 
-    <div {% get_id_and_classes "home-center" %}>
-        <!-- Top Row-->
+<div {% get_id_and_classes "home-center" %}>
+    <!-- Top Row-->
+    <div class="row-fluid">
         <div {% get_id_and_classes "home-activities" %}>
             <a href="/actions">
                 <img {% get_id_and_classes "home-activities-icon" %}
@@ -36,8 +37,6 @@
                 </p>
             </div>
         </div>
-
-        <!-- Middle Row-->
         <div {% get_id_and_classes "home-news" %}>
             <a href="/news">
                 <img {% get_id_and_classes "home-news-icon" %}
@@ -55,14 +54,14 @@
                 </p>
             </div>
         </div>
-
+    </div>
+    <div class="row-fluid">
         <div {% get_id_and_classes "home-prizes" %}>
             <a href="/prizes">
                 <img  {% get_id_and_classes "home-prizes-icon" %}
                         src="{{STATIC_URL}}css/default/images/spacer.png" width="65" align="Left"
                         height="65"/>
             </a>
-
             <div class="tile">
                 <h6 {% get_id_and_classes "home-prizes-title" %}>Prizes</h6>
 
@@ -73,7 +72,6 @@
                 </p>
             </div>
         </div>
-
         <div {% get_id_and_classes "home-profile" %}>
             <a href="/profile">
                 <img {% get_id_and_classes "home-profile-icon" %}
@@ -90,7 +88,6 @@
                 </p>
             </div>
         </div>
-
         <div {% get_id_and_classes "home-help" %}>
             <a href="/help">
                 <img {% get_id_and_classes "home-help-icon" %}
@@ -108,9 +105,8 @@
                 </p>
             </div>
         </div>
-        <div style="clear:both"></div>
     </div>
-
+</div>
     {% if not user.get_profile.setup_complete %}
         <div {% get_id_and_classes "setup-dialog" %} title="Introduction: Step 1 of 6">
             {% include "first-login/welcome.html" %}

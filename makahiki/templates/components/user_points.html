@@ -5,49 +5,28 @@
 {% if CURRENT_ROUND_INFO and CURRENT_ROUND_INFO.name != 'Overall' %}
 <!-- First slideshow element -->
 <div id="header-user-overall-rank1">
-  <div {% get_id_and_classes "header-user-points" %}>
-    <h3>{{profile.current_round_points}}</h3>
-    <div {% get_id_and_classes "header-text" %}>{{COMPETITION_POINT_LABEL}}s in {{CURRENT_ROUND_INFO.name}}</div>
-  </div>
-  <div {% get_id_and_classes "header-user-rank" %}>
-    <h3>#{{profile.current_round_team_rank}}</h3>
-    <div {% get_id_and_classes "header-text" %}>out of {{TEAM_MEMBER_COUNT}} in {{profile.team.name}}</div>
-  </div>
+    <ul>
+        <li>{{CURRENT_ROUND_INFO.name}}: {{profile.current_round_points}} {{COMPETITION_POINT_LABEL}}s #{{profile.current_round_team_rank}}/{{TEAM_MEMBER_COUNT}} in {{profile.team.name}}.</li>
+    </ul>
 </div>
 <!-- Second slideshow element -->
-<div id="header-user-overall-rank2" style="display:none">
-  <div {% get_id_and_classes "header-user-points" %}>
-    <h3>{{profile.current_round_points}}</h3>
-    <div {% get_id_and_classes "header-text" %}>{{COMPETITION_POINT_LABEL}}s in {{CURRENT_ROUND_INFO.name}}</div>
-  </div>
-  <div {% get_id_and_classes "header-user-rank" %}>
-    <h3>#{{profile.current_round_overall_rank}}</h3>
-    <div {% get_id_and_classes "header-text" %}>out of {{OVERALL_MEMBER_COUNT}} overall</div>
-  </div>
+<div id="header-user-overall-rank2">
+    <ul>
+        <li>{{CURRENT_ROUND_INFO.name}}: {{profile.current_round_points}} {{COMPETITION_POINT_LABEL}}s #{{profile.current_round_overall_rank}}/{{OVERALL_MEMBER_COUNT}} overall.</li>
+    </ul>        
 </div>
 {% endif %}
-
 <!-- Third slideshow element -->
-<div id="header-user-team-rank3" {% if CURRENT_ROUND_INFO %}style="display:none"{% endif %}>
-  <div {% get_id_and_classes "header-user-points" %}>
-    <h3>{{profile.points}}</h3>
-    <div {% get_id_and_classes "header-text" %}>{{COMPETITION_POINT_LABEL}}s</div>
-  </div>
-  <div {% get_id_and_classes "header-user-rank" %}>
-    <h3>#{{profile.team_rank}}</h3>
-    <div {% get_id_and_classes "header-text" %}>out of {{TEAM_MEMBER_COUNT}} in {{profile.team.name}}</div>
-  </div>
+<div id="header-user-team-rank3">
+  <ul>
+    <li>Overall: {{profile.points}} {{COMPETITION_POINT_LABEL}}s #{{profile.team_rank}}/{{TEAM_MEMBER_COUNT}} in {{profile.team.name}}</li>
+  </ul>
 </div>
 <!-- Fourth slideshow element -->
-<div id="header-user-overall-rank4" style="display:none">
-  <div {% get_id_and_classes "header-user-points" %}>
-    <h3>{{profile.points}}</h3>
-    <div {% get_id_and_classes "header-text" %}>{{COMPETITION_POINT_LABEL}}s</div>
-  </div>
-  <div {% get_id_and_classes "header-user-rank" %}>
-    <h3>#{{profile.overall_rank}}</h3>
-    <div {% get_id_and_classes "header-text" %}>out of {{OVERALL_MEMBER_COUNT}} overall</div>
-  </div>
+<div id="header-user-overall-rank4">
+    <ul>
+        <li>Overall: {{profile.points}} {{COMPETITION_POINT_LABEL}}s #{{profile.overall_rank}}/{{OVERALL_MEMBER_COUNT}}</li>
+    </ul>
 </div>
 
 {% if profile.canopy_member %}

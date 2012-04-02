@@ -1,7 +1,8 @@
 {% load avatar_tags %} 
 {% load class_tags %} 
 {% if user.is_authenticated %}
-<div id="info-bar-wide" class="container-fluid">
+<div {% get_id_and_classes "info-bar-wide" "responsive" %}>
+<!-- <div id="info-bar-wide" class="container-fluid"> -->
     <div class="row-fluid">
         <div class="span12">
             <div class="span1">
@@ -39,7 +40,7 @@
         <div class="span12" style="text-align: center">
             <div class="span4">
                 <div id="single-cycle">
-                    {% include "components/user_points_single.html" %}
+                    {% include "components/RIB_single.html" %}
                 </div>
             </div>
             <div id="feedback-logout" class="span2">

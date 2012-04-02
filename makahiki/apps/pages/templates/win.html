@@ -13,13 +13,20 @@
 {% endblock %}
 
 {% block body %}
-    <table><tr><td width="50%">
-        <div id='prizes'>
-            {% include "widgets/prizes/templates/index.html" %}
+    <div {% get_id_and_classes "prizes-body" "responsive" %}>
+        <div {% get_id_and_classes "base-row" "responsive" %}>
+            <!-- left column -->
+            <div {% get_id_and_classes "even-col" "responsive" %}>
+                <div id='prizes'>
+                    {% include "widgets/prizes/templates/index.html" %}
+                </div>
+            </div>
+            <!-- right column -->
+            <div {% get_id_and_classes "even-col" "responsive" %}>
+                <div>
+                    {% include "widgets/raffle/templates/index.html" %}
+                </div>
+            </div>
         </div>
-    </td><td width="50%">
-        <div id='raffle'>
-            {% include "widgets/raffle/templates/index.html" %}
-        </div>
-    </td></tr></table>
+    </div>
 {% endblock %}
