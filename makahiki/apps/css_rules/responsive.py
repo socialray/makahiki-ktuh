@@ -87,6 +87,7 @@ CSS_IDS = {
     "team-members": "content-box",
     "team-members-title": "content-box-title",
 
+    "help-body": "container-fluid",
     "help-video": "content-box",
     "help-rules": "content-box",
     "help-faq": "content-box",
