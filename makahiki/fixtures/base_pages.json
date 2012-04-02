@@ -1,0 +1,218 @@
+[
+  {
+    "pk": 10,
+    "model": "settings_mgr.pagesettings",
+    "fields": {
+      "widget": "energy_scoreboard",
+      "enabled": true,
+      "name": "energy"
+    }
+  },
+  {
+    "pk": 7,
+    "model": "settings_mgr.pagesettings",
+    "fields": {
+      "widget": "energy_goal",
+      "enabled": true,
+      "name": "energy"
+    }
+  },
+  {
+    "pk": 12,
+    "model": "settings_mgr.pagesettings",
+    "fields": {
+      "widget": "quests",
+      "enabled": true,
+      "name": "energy"
+    }
+  },
+  {
+    "pk": 9,
+    "model": "settings_mgr.pagesettings",
+    "fields": {
+      "widget": "energy_power_meter",
+      "enabled": true,
+      "name": "energy"
+    }
+  },
+  {
+    "pk": 11,
+    "model": "settings_mgr.pagesettings",
+    "fields": {
+      "widget": "wallpost",
+      "enabled": true,
+      "name": "energy"
+    }
+  },
+  {
+    "pk": 13,
+    "model": "settings_mgr.pagesettings",
+    "fields": {
+      "widget": "notifications",
+      "enabled": true,
+      "name": "energy"
+    }
+  },
+  {
+    "pk": 2,
+    "model": "settings_mgr.pagesettings",
+    "fields": {
+      "widget": "help.intro",
+      "enabled": true,
+      "name": "help"
+    }
+  },
+  {
+    "pk": 3,
+    "model": "settings_mgr.pagesettings",
+    "fields": {
+      "widget": "help.faq",
+      "enabled": true,
+      "name": "help"
+    }
+  },
+  {
+    "pk": 4,
+    "model": "settings_mgr.pagesettings",
+    "fields": {
+      "widget": "help.rule",
+      "enabled": true,
+      "name": "help"
+    }
+  },
+  {
+    "pk": 5,
+    "model": "settings_mgr.pagesettings",
+    "fields": {
+      "widget": "ask_admin",
+      "enabled": true,
+      "name": "help"
+    }
+  },
+  {
+    "pk": 1,
+    "model": "settings_mgr.pagesettings",
+    "fields": {
+      "widget": "home",
+      "enabled": true,
+      "name": "home"
+    }
+  },
+  {
+    "pk": 8,
+    "model": "settings_mgr.pagesettings",
+    "fields": {
+      "widget": "upcoming_events",
+      "enabled": true,
+      "name": "learn"
+    }
+  },
+  {
+    "pk": 6,
+    "model": "settings_mgr.pagesettings",
+    "fields": {
+      "widget": "smartgrid",
+      "enabled": true,
+      "name": "learn"
+    }
+  },
+  {
+    "pk": 24,
+    "model": "settings_mgr.pagesettings",
+    "fields": {
+      "widget": "team_members",
+      "enabled": true,
+      "name": "news"
+    }
+  },
+  {
+    "pk": 20,
+    "model": "settings_mgr.pagesettings",
+    "fields": {
+      "widget": "wallpost",
+      "enabled": true,
+      "name": "news"
+    }
+  },
+  {
+    "pk": 21,
+    "model": "settings_mgr.pagesettings",
+    "fields": {
+      "widget": "upcoming_events",
+      "enabled": true,
+      "name": "news"
+    }
+  },
+  {
+    "pk": 22,
+    "model": "settings_mgr.pagesettings",
+    "fields": {
+      "widget": "popular_tasks",
+      "enabled": true,
+      "name": "news"
+    }
+  },
+  {
+    "pk": 23,
+    "model": "settings_mgr.pagesettings",
+    "fields": {
+      "widget": "my_commitments",
+      "enabled": true,
+      "name": "news"
+    }
+  },
+  {
+    "pk": 19,
+    "model": "settings_mgr.pagesettings",
+    "fields": {
+      "widget": "badges",
+      "enabled": true,
+      "name": "profile"
+    }
+  },
+  {
+    "pk": 16,
+    "model": "settings_mgr.pagesettings",
+    "fields": {
+      "widget": "my_achievements",
+      "enabled": true,
+      "name": "profile"
+    }
+  },
+  {
+    "pk": 17,
+    "model": "settings_mgr.pagesettings",
+    "fields": {
+      "widget": "my_commitments",
+      "enabled": true,
+      "name": "profile"
+    }
+  },
+  {
+    "pk": 18,
+    "model": "settings_mgr.pagesettings",
+    "fields": {
+      "widget": "my_info",
+      "enabled": true,
+      "name": "profile"
+    }
+  },
+  {
+    "pk": 14,
+    "model": "settings_mgr.pagesettings",
+    "fields": {
+      "widget": "prizes",
+      "enabled": true,
+      "name": "win"
+    }
+  },
+  {
+    "pk": 15,
+    "model": "settings_mgr.pagesettings",
+    "fields": {
+      "widget": "raffle",
+      "enabled": true,
+      "name": "win"
+    }
+  }
+]

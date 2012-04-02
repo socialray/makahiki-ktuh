@@ -1,4 +1,4 @@
-"""management command for regenerate code."""
+"""Regenerate codes for the Smart Grid Game."""
 
 from django.core import management
 

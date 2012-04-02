@@ -1,4 +1,4 @@
-"""handles wall post widget request and rendering."""
+"""Handles wall post widget request and rendering."""
 
 from django.contrib.auth.decorators import login_required
 from django.http import Http404, HttpResponse
@@ -8,8 +8,8 @@ from apps.managers.team_mgr.models import Post
 from apps.widgets.wallpost.forms import WallForm
 import simplejson as json
 
-# Number of posts to load at a time.
 DEFAULT_POST_COUNT = 10
+"""Number of posts to load at a time."""
 
 
 def supply(request, page_name):

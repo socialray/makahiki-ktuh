@@ -22,14 +22,9 @@ class TeamEnergyGoal(models.Model):
     created_at = models.DateTimeField(editable=False, auto_now_add=True)
     updated_at = models.DateTimeField(editable=False, auto_now=True)
 
-    def save(self, *args, **kwargs):
-        """Overrided save method to award the goal's points to members of the team."""
-        goal_completed = self.goal_usage and \
-                         self.actual_usage and \
-                         (self.actual_usage <= self.goal_usage)
-        super(TeamEnergyGoal, self).save(*args, **kwargs)
-
-        if self.team and goal_completed:
+    def award_goal_points(self):
+        """award points to the team members if the goal is meet."""
+        if self.goal_usage and self.actual_usage and self.actual_usage <= self.goal_usage:
             count = 0
             # Award points to the members of the team.
             for profile in self.team.profile_set.all():
@@ -41,8 +36,10 @@ class TeamEnergyGoal(models.Model):
                         today = today - datetime.timedelta(hours=1)
 
                     date = "%d/%d/%d" % (today.month, today.day, today.year)
-                    profile.add_points(self.GOAL_POINTS, today, "Team Energy Goal for %s" % date,
-                        self)
+                    profile.add_points(self.GOAL_POINTS, today,
+                                       "Team Energy Goal for %s" % date, self)
                     profile.save()
                     count = count + 1
-            print '     %s users in the lounge awarded %s points each' % (count, self.GOAL_POINTS)
+
+            print '%s users in %s are awarded %s points each.' % (count,
+                                                                  self.team, self.GOAL_POINTS)

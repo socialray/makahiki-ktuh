@@ -1,1 +1,1 @@
-"""scoreboard module"""
+"""Implements the scoreboard widget."""

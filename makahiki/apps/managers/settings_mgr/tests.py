@@ -1,13 +1,14 @@
 """Tests the settings_mgr module."""
 
 import datetime
+from django.contrib.auth.models import User
 
 from django.test import TestCase
 from django.core.urlresolvers import reverse
 from django.conf import settings
 
 from apps.managers.settings_mgr import  get_current_round
-from apps.templatetags.class_tags import insert_classes, get_id_and_classes
+from apps.template_support.templatetags.class_tags import insert_classes, get_id_and_classes
 from apps.css_rules import default
 from apps.test_utils import TestUtils
 
@@ -20,7 +21,10 @@ class ContextProcessorFunctionalTestCase(TestCase):
         TestUtils.set_competition_round()
         current_round = get_current_round()
 
-        response = self.client.get(reverse("landing"))
+        User.objects.create_user("user", "user@test.com", password="changeme")
+        self.client.login(username="user", password="changeme")
+
+        response = self.client.get(reverse("home_index"))
         # Response context should have round info corresponding to the past days.
 
         self.assertEqual(response.context["CURRENT_ROUND_INFO"]["name"], current_round,

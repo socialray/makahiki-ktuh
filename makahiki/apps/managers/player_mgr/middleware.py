@@ -1,10 +1,63 @@
 """A middleware class for player login checking and tracking."""
 
-import datetime
 import re
 from django.core.urlresolvers import reverse
 from django.http import HttpResponseRedirect
+import datetime
+from django.conf import settings
+from django.contrib.auth.models import User
+from django.core.exceptions import ObjectDoesNotExist
 from apps.managers.settings_mgr import in_competition
+from apps.managers.settings_mgr.models import ChallengeSettings, PageSettings, RoundSettings
+
+
+def _load_db_settings():
+    """Load additional settings from DB."""
+
+    # get the CALLENGE setting from DB
+    settings.CHALLENGE, _ = ChallengeSettings.objects.get_or_create(pk=1)
+
+    # required setting for the CAS authentication service.
+    settings.CAS_SERVER_URL = settings.CHALLENGE.cas_server_url
+
+    # global settings
+    settings.LOCALE_SETTING = settings.CHALLENGE.locale_setting
+    settings.TIME_ZONE = settings.CHALLENGE.time_zone
+    settings.LANGUAGE_CODE = settings.CHALLENGE.language_code
+
+    # email settings
+    if settings.CHALLENGE.email_enabled:
+        settings.EMAIL_HOST = settings.CHALLENGE.email_host
+        settings.EMAIL_PORT = settings.CHALLENGE.email_port
+        settings.EMAIL_HOST_USER = settings.CHALLENGE.email_host_user
+        settings.EMAIL_HOST_PASSWORD = settings.CHALLENGE.email_host_password
+        settings.EMAIL_USE_TLS = settings.CHALLENGE.email_use_tls
+
+    # get the Round settings from DB
+    RoundSettings.set_round_settings()
+
+    # register the home page and widget
+    PageSettings.objects.get_or_create(name="home", widget="home")
+
+
+def _create_admin_user():
+    """Create admin user.
+
+    Create the admin user if not exists. otherwise, reset the password to the ENV.
+    """
+    print settings.ADMIN_USER
+    try:
+        user = User.objects.get(username=settings.ADMIN_USER)
+        if not user.check_password(settings.ADMIN_PASSWORD):
+            user.set_password(settings.ADMIN_PASSWORD)
+            user.save()
+    except ObjectDoesNotExist:
+        user = User.objects.create_superuser(settings.ADMIN_USER, "", settings.ADMIN_PASSWORD)
+        profile = user.get_profile()
+        profile.setup_complete = True
+        profile.setup_profile = True
+        profile.completion_date = datetime.datetime.today()
+        profile.save()
 
 
 class LoginMiddleware(object):
@@ -16,6 +69,12 @@ class LoginMiddleware(object):
 
     def process_request(self, request):
         """Check the competition period and that setup is completed."""
+
+        # load the db settings if not done yet.
+        if settings.CHALLENGE.competition_name is None:
+            _load_db_settings()
+            _create_admin_user()
+
         response = self.check_competition_period(request)
         if response is None:
             response = self.check_setup_completed(request)

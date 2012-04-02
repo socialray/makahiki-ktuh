@@ -1,1 +1,1 @@
-"""command module"""
+"""Management commands for prizes."""

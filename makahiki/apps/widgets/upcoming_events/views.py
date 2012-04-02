@@ -1,7 +1,5 @@
 """Prepare the rendering for upcoming_events widget.
-
-Depends on smartgrid widget.
-"""
+   Depends on the smart grid game widget."""
 
 from apps.widgets.smartgrid.forms import EventCodeForm
 from apps.widgets.smartgrid import get_available_events
@@ -9,7 +7,7 @@ from django.core.cache import cache
 
 
 def supply(request, page_name):
-    """supply the view_objects for this widget."""
+    """Supply the view_objects for this widget, which are the upcoming events."""
 
     _ = page_name
     user = request.user

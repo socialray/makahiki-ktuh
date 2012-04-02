@@ -1,4 +1,4 @@
-"""Prize Model"""
+"""Implements the model for prize management."""
 from django.db import models
 
 from apps.managers.player_mgr.models import Profile
@@ -6,9 +6,7 @@ from apps.managers.team_mgr.models import Group, Team
 
 
 class Prize(models.Model):
-    """
-    Represents a prize in the system.
-    """
+    """Represents a prize in the system."""
     AWARD_TO_CHOICES = (
         ("individual_overall", "Individual (Overall)"),
         ("individual_team", "Individual (Team)"),
@@ -57,9 +55,7 @@ class Prize(models.Model):
         unique_together = ("round_name", "award_to", "competition_type")
 
     def num_awarded(self, team=None):
-        """
-        Returns the number of prizes that will be awarded for this prize.
-        """
+        """Returns the number of prizes that will be awarded for this prize."""
         _ = team
         if self.award_to in ("individual_overall", "team_overall", "group"):
             # For overall prizes, it is only possible to award one.
@@ -76,20 +72,23 @@ class Prize(models.Model):
         raise Exception("Unknown award_to value '%s'" % self.award_to)
 
     def leader(self, team=None):
-        """return the prize leader"""
+        """Return the prize leader."""
         if self.competition_type == "points":
             return self._points_leader(team)
         else:
             return self._energy_leader(team)
 
     def _points_leader(self, team=None):
-        """return point leader"""
+        """Return the point leader."""
         round_name = None if self.round_name == "Overall" else self.round_name
         if self.award_to == "individual_overall":
             return Profile.points_leaders(num_results=1, round_name=round_name)[0]
 
         elif self.award_to == "team_group":
-            return team.group.team_points_leaders(num_results=1, round_name=round_name)[0]
+            if team:
+                return team.group.team_points_leaders(num_results=1, round_name=round_name)[0]
+            else:
+                return None
 
         elif self.award_to == "team_overall":
             return Team.team_points_leaders(num_results=1, round_name=round_name)[0]
@@ -102,7 +101,7 @@ class Prize(models.Model):
         raise Exception("'%s' is not implemented yet." % self.award_to)
 
     def _energy_leader(self, team):
-        """energy leader"""
+        """Return the energy leader."""
         _ = team
         raise Exception(
             "Energy leader information is not implemented here.  Needs to be implemented at "

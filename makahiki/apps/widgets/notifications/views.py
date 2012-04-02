@@ -1,4 +1,4 @@
-"""Handle the requests for notification widget."""
+"""Handle the requests for the notification widget."""
 
 from django.shortcuts import get_object_or_404
 from django.core.urlresolvers import reverse
@@ -9,13 +9,13 @@ from apps.widgets.notifications import get_unread_notifications
 
 
 def supply(request, page_name):
-    """supply the view_objects content for this widget."""
+    """Supply the view_objects content, which are the last 3 unread notifications."""
     _ = page_name
     return get_unread_notifications(request.user, limit=3)
 
 
 def read(request, notification_id):
-    """handle the read notification request."""
+    """Handle the read notification request."""
     if not request.method == "POST":
         raise Http404
 

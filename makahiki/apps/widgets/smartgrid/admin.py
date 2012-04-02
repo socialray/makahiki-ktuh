@@ -1,4 +1,4 @@
-"""Admin definition."""
+"""Admin definition for Smart Grid Game widget."""
 from django.db import models
 from apps.widgets.smartgrid.models import CommitmentMember, ActivityMember, Activity, Category, \
                                      Commitment, ConfirmationCode, TextPromptQuestion, \
@@ -112,13 +112,13 @@ class ActivityAdminForm(forms.ModelForm):
         """
           Validates the admin form data based on a set of constraints.
 
-          #1 Events must have an event date.
-          #2 If the verification type is "image" or "code", then a confirm prompt is required.
-          #3 If the verification type is "text", then additional questions are required
-             (Handled in the formset class below).
-          #4 Publication date must be before expiration date.
-          #5 If the verification type is "code", then the number of codes is required.
-          #6 Either points or a point range needs to be specified.
+            1.  Events must have an event date.
+            2.  If the verification type is "image" or "code", then a confirm prompt is required.
+            3.  If the verification type is "text", then additional questions are required
+                (Handled in the formset class below).
+            4.  Publication date must be before expiration date.
+            5.  If the verification type is "code", then the number of codes is required.
+            6.  Either points or a point range needs to be specified.
         """
 
         # Data that has passed validation.

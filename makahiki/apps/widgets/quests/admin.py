@@ -1,4 +1,4 @@
-"""Quest admin"""
+"""Quest administrative interface, enabling checking of quest conditions."""
 
 import sys
 
@@ -16,9 +16,7 @@ class QuestAdminForm(forms.ModelForm):
         model = Quest
 
     def clean_unlock_conditions(self):
-        """
-        Validates the unlock conditions of the quest.
-        """
+        """Validates the unlock conditions of the quest."""
         from apps.widgets.quests import process_conditions_string
 
         data = self.cleaned_data["unlock_conditions"]
@@ -35,9 +33,7 @@ class QuestAdminForm(forms.ModelForm):
         return data
 
     def clean_completion_conditions(self):
-        """
-        Validates the unlock conditions of the quest.
-        """
+        """Validates the unlock conditions of the quest."""
         from apps.widgets.quests import process_conditions_string
 
         data = self.cleaned_data["completion_conditions"]

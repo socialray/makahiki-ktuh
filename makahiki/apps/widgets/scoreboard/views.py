@@ -1,4 +1,4 @@
-"""Prepares the rendering for point scoreboard widget."""
+"""Prepares the views for point scoreboard widget."""
 
 from django.db.models.aggregates import Count
 from apps.managers.settings_mgr import get_current_round
@@ -7,7 +7,7 @@ from apps.managers.team_mgr.models import Team
 
 
 def supply(request, page_name):
-    """supply the view_objects content for this widget."""
+    """Supply the view_objects content for this widget, which is all the scoreboard data."""
 
     _ = page_name
     user = request.user

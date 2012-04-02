@@ -1,1 +1,1 @@
-"""upcoming event module"""
+"""Implements the upcoming event widget."""

@@ -13,33 +13,24 @@ SITE_ID = 1
 ###############
 PROJECT_ROOT = os.path.abspath(os.path.dirname(__file__))
 
-# Default log file location.
-LOG_FILE = 'makahiki.log'
-
 # Absolute path to the directory that holds media.
-# Example: "/home/media/media.lawrence.com/"
 MEDIA_ROOT = os.path.join(PROJECT_ROOT, 'site_media', 'media')
 
 # URL that handles the media served from MEDIA_ROOT.
-# Example: "http://media.lawrence.com"
 MEDIA_URL = '/site_media/media/'
 
 # Absolute path to the directory that holds static files like app media.
-# Example: "/home/media/media.lawrence.com/apps/"
 STATIC_ROOT = os.path.join(PROJECT_ROOT, 'site_media', 'static')
 
 # URL that handles the static files like app media.
-# Example: "http://media.lawrence.com"
 STATIC_URL = '/site_media/static/'
 
-# Additional directories which hold static files
+# directories which hold static files
 STATICFILES_DIRS = (
     ('makahiki', os.path.join(PROJECT_ROOT, 'media')),
     )
 
-# URL prefix for admin media -- CSS, JavaScript and images. Make sure to use a
-# trailing slash.
-# Examples: "http://foo.com/media/", "/media/".
+# URL prefix for admin media -- CSS, JavaScript and images. Make sure to use a trailing slash.
 ADMIN_MEDIA_PREFIX = posixpath.join(STATIC_URL, "admin/")
 
 ROOT_URLCONF = 'urls'
@@ -121,7 +112,7 @@ RESTRICTED_URL = '/restricted/'
 #########################
 INSTALLED_APPS = (
     # Makahiki pages
-    'apps',
+    'apps.template_support',
     'apps.pages',
 
     # Makahiki components
@@ -205,6 +196,9 @@ TEST_RUNNER = 'django_nose.NoseTestSuiteRunner'
 ##############################
 # LOGGING settings
 ##############################
+# Default log file location.
+LOG_FILE = 'makahiki.log'
+
 LOGGING = {
     'version': 1,
     'disable_existing_loggers': True,
@@ -256,7 +250,7 @@ LOGGING = {
     }
 }
 
-##########################
+#########################
 # MISC
 #########################
 # serve media through django.views.static.serve.
@@ -270,6 +264,18 @@ FILE_UPLOAD_PERMISSIONS = 0644
 # If you set this to False, Django will make some optimizations so as not
 # to load the internationalization machinery.
 USE_I18N = True
+
+
+##############################
+# Dummy setting for CHALLENGE
+##############################
+# set the dummpy challenge object to by pass reference check.
+# It should be overridden from the DB ChallengeSettings object.
+class Challenge():
+    """Defines the dummy global settings for the challenge. """
+    competition_name = None
+
+CHALLENGE = Challenge()
 
 #############################################
 # Load sensitive settings from OS environment
@@ -304,17 +310,18 @@ else:
         sys.exit(1)
 
 # DEBUG settings
-DEBUG = True
-TEMPLATE_DEBUG = True
-if 'MAKAHIKI_HEROKU' in os.environ and os.environ['MAKAHIKI_HEROKU'] == "True":
-    DEBUG = False
-    TEMPLATE_DEBUG = False
+DEBUG = False
+TEMPLATE_DEBUG = False
+if 'MAKAHIKI_DEBUG' in os.environ and os.environ['MAKAHIKI_DEBUG'] == "True":
+    DEBUG = True
+    TEMPLATE_DEBUG = True
 
 # CACHE settings
 CACHE_MIDDLEWARE_ALIAS = 'default'
 CACHE_MIDDLEWARE_ANONYMOUS_ONLY = True
 CACHE_MIDDLEWARE_SECONDS = 600
-if 'MAKAHIKI_HEROKU' in os.environ and os.environ['MAKAHIKI_HEROKU'] == "True":
+if 'MAKAHIKI_MEMCACHED_ENABLED' in os.environ and \
+   os.environ['MAKAHIKI_MEMCACHED_ENABLED'] == "True":
     CACHES = {
         'default': {
             'BACKEND': 'django_pylibmc.memcached.PyLibMCCache'

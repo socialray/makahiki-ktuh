@@ -1,9 +1,13 @@
-"""raffle model definition"""
+"""Provides the model for the raffle widget."""
+
 from django.db import models
 from django.contrib.auth.models import User
 
-POINTS_PER_TICKET = 25      # Number of points for each raffle ticket.
-RAFFLE_END_PERIOD = 2       # raffle end 2 hours before round ends
+POINTS_PER_TICKET = 25
+"""Number of points required to earn a raffle ticket"""
+
+RAFFLE_END_PERIOD = 2
+"""Number of hours prior to the end of a round that the raffle closes."""
 
 
 class RafflePrize(models.Model):
@@ -31,9 +35,8 @@ class RafflePrize(models.Model):
         return "%s: %s" % (self.round_name, self.title)
 
     def add_ticket(self, user):
-        """Adds a ticket from the user if they have one.  Throws an exception if they cannot
-        add a ticket.
-        """
+        """Adds a ticket from the user if they have one.
+          Throws an exception if they cannot add a ticket."""
         if RaffleTicket.available_tickets(user) <= 0:
             raise Exception("This user does not have any tickets to allocate.")
 
@@ -41,18 +44,14 @@ class RafflePrize(models.Model):
         ticket.save()
 
     def remove_ticket(self, user):
-        """
-        Removes an allocated ticket.
-        """
+        """Removes an allocated ticket."""
         # Get the first ticket that matches the query.
         ticket = RaffleTicket.objects.filter(raffle_prize=self, user=user)[0]
         ticket.delete()
 
     def allocated_tickets(self, user=None):
-        """
-        Returns the number of tickets allocated to this prize.
-        Takes an optional argument to return the number of tickets allocated by the user.
-        """
+        """Returns the number of tickets allocated to this prize.
+           Takes an optional argument to return the number of tickets allocated by the user."""
         query = self.raffleticket_set.filter(raffle_prize=self)
         if user:
             query = query.filter(user=user)
@@ -69,9 +68,7 @@ class RaffleTicket(models.Model):
 
     @staticmethod
     def available_tickets(user):
-        """
-        Returns the number of raffle tickets the user has available.
-        """
+        """Returns the number of raffle tickets the user has available."""
         profile = user.get_profile()
         total_tickets = profile.points / POINTS_PER_TICKET
         allocated_tickets = user.raffleticket_set.count()
@@ -80,5 +77,5 @@ class RaffleTicket(models.Model):
 
     @staticmethod
     def total_tickets(user):
-        """return the total ticket for this user"""
+        """Return the total tickets available for this user."""
         return user.get_profile().points / POINTS_PER_TICKET

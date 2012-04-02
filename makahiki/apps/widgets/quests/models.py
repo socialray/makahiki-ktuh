@@ -1,4 +1,4 @@
-"""Defines Quest Model"""
+"""Defines the Quest Model."""
 
 import datetime
 
@@ -10,9 +10,7 @@ MARKDOWN_TEXT = "Uses <a href=\"" + MARKDOWN_LINK + "\" target=\"_blank\">Markdo
 
 
 class Quest(models.Model):
-    """
-    Represents a quest in the database.
-    """
+    """Represents a quest in the database."""
     name = models.CharField(max_length=255, help_text="The name of the quest.")
     quest_slug = models.SlugField()
     description = models.TextField(
@@ -46,9 +44,7 @@ class Quest(models.Model):
         return process_conditions_string(self.completion_conditions, user)
 
     def accept(self, user):
-        """
-        Lets the user accept the quest.  Returns True if successful.
-        """
+        """Lets the user accept the quest.  Returns True if successful."""
         # Check if user can add the quest.
         if not self.can_add_quest(user):
             return False
@@ -62,9 +58,7 @@ class Quest(models.Model):
         return True
 
     def opt_out(self, user):
-        """
-        Lets the user opt out of seeing the quest.  Returns True if successful.
-        """
+        """Lets the user opt out of seeing the quest.  Returns True if successful."""
         # Check if user can add the quest.
         if not self.can_add_quest(user):
             return False
@@ -77,10 +71,8 @@ class Quest(models.Model):
 
 
 class QuestMember(models.Model):
-    """
-    Represents a user's participation in a quest.
-    This should not be in the admin interface, since there shouldn't be a reason to edit instances.
-    """
+    """Represents a user's participation in a quest.
+       Shouldn't be in the admin interface, since there shouldn't be a reason to edit instances."""
     user = models.ForeignKey(User)
     quest = models.ForeignKey(Quest)
     completed = models.BooleanField(default=False,
@@ -95,9 +87,7 @@ class QuestMember(models.Model):
         unique_together = ["user", "quest"]
 
     def save(self, *args, **kwargs):
-        """
-        Custom save method to create a points transaction after the object is saved.
-        """
+        """Custom save method to create a points transaction after the object is saved."""
         super(QuestMember, self).save(*args, **kwargs)
         if self.completed:
             message = "Quest: %s" % self.quest.name

@@ -1,8 +1,8 @@
 """Provides competition settings in the request context to be used within a template."""
-from django.conf import settings
 from apps.managers.settings_mgr import get_current_round_info, in_competition
 from apps.managers.player_mgr.models import Profile
 from apps.managers.team_mgr.models import Team
+from django.conf import settings
 
 
 def competition(request):
@@ -14,11 +14,13 @@ def competition(request):
 
     user = request.user
     team_member_count = None
+    team_count = None
+    overall_member_count = None
+
     if user.is_authenticated() and user.get_profile().team:
         team_member_count = user.get_profile().team.profile_set.count()
-
-    team_count = Team.objects.count()
-    overall_member_count = Profile.objects.count()
+        team_count = Team.objects.count()
+        overall_member_count = Profile.objects.count()
 
     # Get Facebook info.
     try:

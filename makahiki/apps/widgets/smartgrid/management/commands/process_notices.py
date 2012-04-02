@@ -1,39 +1,20 @@
-#!/usr/bin/env python
-import sys
+"""Process Notice command."""
+
 import datetime
-
-from os.path import abspath, dirname, join
-
 from django.conf import settings
-from django.core.management import setup_environ
+from django.contrib.auth.models import User
+from django.contrib.sites.models import Site
 
-try:
-    import settings as settings_mod  # Assumed to be in the same directory.
-except ImportError:
-    sys.stderr.write(
-        "Error: Can't find the file 'settings.py' in the directory containing"\
-        " %r. It appears you've customized things.\nYou'll have to run "\
-        "django-admin.py, passing it your settings module.\n(If the file "\
-        "settings.py does indeed exist, it's causing an ImportError somehow.)"\
-        "\n" % __file__)
-    sys.exit(1)
-
-import sys
-
-# setup the environment before we start accessing things in the settings.
-setup_environ(settings_mod)
-
-sys.path.insert(0, join(settings.PROJECT_ROOT, "apps"))
-
-from apps.managers.player_mgr.models import *
-from apps.managers.player_mgr import *
-from apps.widgets.smartgrid.models import *
+from django.core import management
+from django.core.urlresolvers import reverse
+from apps.widgets.smartgrid.models import CommitmentMember, ActivityMember
 from apps.widgets.notifications.models import UserNotification, NoticeTemplate
-from apps.managers.settings_mgr import in_competition, get_round_info
+from apps.managers.settings_mgr import in_competition
 from django.db.models import Q
 
 
 def notify_round_started():
+    """notify the start of a round"""
     if not in_competition():
         return
 
@@ -67,6 +48,7 @@ def notify_round_started():
 
 
 def notify_commitment_end():
+    """notify the end of a commitment period and award points"""
     members = CommitmentMember.objects.filter(
         completion_date=datetime.date.today(), award_date__isnull=True)
 
@@ -98,6 +80,7 @@ def notify_commitment_end():
 
 
 def process_rsvp():
+    """process RSVP notification and penalty"""
     members = ActivityMember.objects.filter(
         Q(activity__type="event") | Q(activity__type="excursion"),
         approval_status="pending")
@@ -166,31 +149,38 @@ def process_rsvp():
                     reverse("activity_task",
                             args=(activity.type, activity.slug,)),
                     activity.title)
-                message += "<p/>Because you signed up for the " \
-                           "event/excursion, if you do not enter the " \
-                           "confirmation code within 2 days after the " \
-                           "event/excusion, a total of 4 points (2 point " \
-                           "signup bonus plus 2 point no-show penalty) will " \
-                           "be deducted from your total points. So please " \
-                           "enter your confirmation code early to avoid the " \
+                message += "<p/>Because you signed up for the "\
+                           "event/excursion, if you do not enter the "\
+                           "confirmation code within 2 days after the "\
+                           "event/excusion, a total of 4 points (2 point "\
+                           "signup bonus plus 2 point no-show penalty) will "\
+                           "be deducted from your total points. So please "\
+                           "enter your confirmation code early to avoid the "\
                            "penalty."
                 message += "<p/><p/>Kukui Cup Administrators"
-            subject = "[Kukui Cup] Reminder to enter your event/excursion " \
+            subject = "[Kukui Cup] Reminder to enter your event/excursion "\
                       "confirmation code"
             UserNotification.create_email_notification(user.email, subject,
                                                        message, message)
             print "sent post event email reminder to %s for %s" % (
                 profile.name, activity.title)
 
-if __name__ == "__main__":
-    print '****** Processing RSVPs for %s *******\n' % datetime.datetime\
-    .today()
-    process_rsvp()
 
-    print '****** Processing commitment notifications for %s *******\n' % \
-        datetime.datetime.today()
-    notify_commitment_end()
+class Command(management.base.BaseCommand):
+    """command."""
+    help = 'Process notification for RSVP, commitment and round starting.'
 
-    print '****** Processing round notifications for %s *******\n' % \
-        datetime.datetime.today()
-    notify_round_started()
+    def handle(self, *args, **options):
+        """Process notification for RSVP, commitment and round starting."""
+
+        self.stdout.write('****** Processing RSVPs for %s *******\n' % datetime.datetime.today())
+
+        process_rsvp()
+
+        self.stdout.write('****** Processing commitment notifications for %s *******\n' %
+                          datetime.datetime.today())
+        notify_commitment_end()
+
+        self.stdout.write('****** Processing round notifications for %s *******\n' %
+              datetime.datetime.today())
+        notify_round_started()

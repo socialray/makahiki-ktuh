@@ -1,4 +1,4 @@
-"""verify quests command"""
+"""Verify quests admin command."""
 
 import sys
 

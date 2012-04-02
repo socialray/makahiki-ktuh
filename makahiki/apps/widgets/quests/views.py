@@ -1,4 +1,4 @@
-"""handle quest related request"""
+"""Implemenat view processing for Quests."""
 import re
 
 # Create your views here.
@@ -19,7 +19,7 @@ def supply(request, page_name):
 
 @login_required
 def accept(request, slug):
-    """accept the quest"""
+    """Accept the quest."""
     if request.method == "POST":
         referer = request.META["HTTP_REFERER"]
         referer = re.sub(r'\?.*$', '', referer)  # Chomp off the query parameters.
@@ -34,7 +34,7 @@ def accept(request, slug):
 
 @login_required
 def opt_out(request, slug):
-    """opt_out the quest"""
+    """opt_out of the quest"""
     if request.method == "POST":
         referer = request.META["HTTP_REFERER"]
         referer = re.sub(r'\?.*$', '', referer)  # Chomp off the query parameters.

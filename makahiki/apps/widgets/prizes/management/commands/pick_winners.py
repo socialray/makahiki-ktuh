@@ -1,4 +1,4 @@
-"""Pick a prize winner"""
+"""Pick the raffle prize winners."""
 import random
 from django.core import management
 from apps.managers.settings_mgr import get_current_round_info
@@ -20,7 +20,7 @@ class Command(management.base.BaseCommand):
                                                        winner__isnull=False))
 
     def __pick_winners(self, prizes):
-        """pick a winner"""
+        """Pick the winner."""
         for prize in prizes:
             if not prize.winner:
                 # Randomly order the tickets and then pick a random ticket.

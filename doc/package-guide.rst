@@ -8,13 +8,13 @@ Package: apps.managers
 .. toctree::
    :maxdepth: 1
 
-   Subpackage: Authentication Manager <packages/auth_mgr>
-   Subpackage: Cache Manager <packages/cache_mgr>
-   Subpackage: Log Manager <packages/log_mgr>
-   Subpackage: Player Manager <packages/player_mgr>
-   Subpackage: Score Manager <packages/score_mgr>
-   Subpackage: Settings Manager <packages/settings_mgr>
-   Subpackage: Team Manager <packages/team_mgr>
+   Authentication Manager <packages/auth_mgr>
+   Cache Manager <packages/cache_mgr>
+   Log Manager <packages/log_mgr>
+   Player Manager <packages/player_mgr>
+   Score Manager <packages/score_mgr>
+   Settings Manager <packages/settings_mgr>
+   Team Manager <packages/team_mgr>
 
 Package: apps.widgets
 ----------------------
@@ -23,16 +23,26 @@ Package: apps.widgets
 .. toctree::
    :maxdepth: 1
 
-   Subpackage: Ask_Admin widget <packages/ask_admin>
-   Subpackage: Badges widget <packages/badges>
-   Subpackage: Energy Goal widget <packages/energy_goal>
-   Subpackage: Energy Power Meter widget <packages/energy_power_meter>
-   Subpackage: Energy Scoreboard widget <packages/energy_scoreboard>
-   Subpackage: Help widgets <packages/help>
-   Subpackage: Home and first login wizard widget <packages/home>
-   Subpackage: My_Achievements widget <packages/my_achievements>
-   Subpackage: My_Commitments widget <packages/my_commitments>
-   Subpackage: My_Info widget <packages/my_info>
+   Ask Admin widget <packages/ask_admin>
+   Badges widget <packages/badges>
+   Energy Goal widget <packages/energy_goal>
+   Energy Power Meter widget <packages/energy_power_meter>
+   Energy Scoreboard widget <packages/energy_scoreboard>
+   Help widgets <packages/help>
+   Home and first login wizard widget <packages/home>
+   My Achievements widget <packages/my_achievements>
+   My Commitments widget <packages/my_commitments>
+   My Info widget <packages/my_info>
+   Notifications widget <packages/notifications>
+   Popular Tasks widget <packages/popular_tasks>
+   Prizes widget <packages/prizes>
+   Quests widget <packages/quests>
+   Raffle widget <packages/raffle>
+   Scoreboard widget <packages/scoreboard>
+   Smart Grid Game widget <packages/smartgrid>
+   Team Members widget <packages/team_members>
+   Upcoming events widget <packages/upcoming_events>
+   Wall Post widget <packages/wallpost>
 
 
 Package: css_rules
@@ -50,4 +60,5 @@ Package: apps.lib
 
 .. toctree::
    :maxdepth: 1
+
 

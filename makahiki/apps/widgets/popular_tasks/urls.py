@@ -1,4 +1,5 @@
-"""urls"""
+"""Urls for the popular tasks widget"""
+
 from django.conf.urls.defaults import url, patterns
 
 urlpatterns = patterns('',

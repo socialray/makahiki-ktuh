@@ -1,1 +1,1 @@
-"""raffle module"""
+"""Implements the raffle widget."""

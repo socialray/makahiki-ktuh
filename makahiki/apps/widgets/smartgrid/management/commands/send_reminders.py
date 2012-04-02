@@ -1,4 +1,4 @@
-"""Send reminder command."""
+"""Send reminder commands."""
 
 import datetime
 

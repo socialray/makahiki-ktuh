@@ -59,7 +59,7 @@ class TestUtils:
     @staticmethod
     def register_page_widget(page_name, widget_name):
         """Register a widget with a page."""
-        PageSettings(name=page_name, widget=widget_name).save()
+        PageSettings.objects.get_or_create(name=page_name, widget=widget_name)
 
     @staticmethod
     def create_event(slug=None):

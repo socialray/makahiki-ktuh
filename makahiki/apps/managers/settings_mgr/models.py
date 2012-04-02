@@ -126,6 +126,34 @@ class RoundSettings(models.Model):
     def __unicode__(self):
         return self.name
 
+    @staticmethod
+    def set_round_settings():
+        """set the round info in the system settings."""
+        rounds = RoundSettings.objects.all()
+        if rounds.count() == 0:
+            RoundSettings.objects.create()
+            rounds = RoundSettings.objects.all()
+
+        #store in a round dictionary and calculate start and end
+        rounds_dict = {}
+        settings.COMPETITION_START = None
+        last_round = None
+        for competition_round in rounds:
+            if settings.COMPETITION_START is None:
+                settings.COMPETITION_START = competition_round.start
+            rounds_dict[competition_round.name] = {
+                "start": competition_round.start,
+                "end": competition_round.end, }
+            last_round = competition_round
+        if last_round:
+            settings.COMPETITION_END = last_round.end
+        settings.COMPETITION_ROUNDS = rounds_dict
+
+    def save(self, *args, **kwargs):
+        """Custom save method."""
+        super(RoundSettings, self).save(*args, **kwargs)
+        RoundSettings.set_round_settings()
+
 
 def _get_widget_choice():
     """Retrieves the available page names."""
@@ -155,6 +183,10 @@ class PageSettings(models.Model):
         help_text="The name of the widget in the page.",
         choices=_get_widget_choice(),
         max_length=50,)
+
+    enabled = models.BooleanField(
+        default=True,
+        help_text="Enable ?",)
 
     class Meta:
         """meta"""

@@ -15,6 +15,7 @@ def main():
     os.system("python manage.py loaddata %s" % os.path.join(fixture_path, "base_activities.json"))
     os.system("python manage.py loaddata %s" % os.path.join(fixture_path, "base_quests.json"))
     os.system("python manage.py loaddata %s" % os.path.join(fixture_path, "base_help.json"))
+    os.system("python manage.py loaddata %s" % os.path.join(fixture_path, "base_pages.json"))
     os.system("python manage.py loaddata %s" % os.path.join(fixture_path, "test_users.json"))
     os.system("python manage.py loaddata %s" % os.path.join(fixture_path, "test_energy_data.json"))
     os.system("python manage.py loaddata %s" % os.path.join(fixture_path, "test_energy_power_meter.json"))

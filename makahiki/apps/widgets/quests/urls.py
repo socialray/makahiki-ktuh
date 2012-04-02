@@ -1,4 +1,4 @@
-"""quest related urls"""
+"""Quest related urls."""
 
 from django.conf.urls.defaults import url, patterns
 

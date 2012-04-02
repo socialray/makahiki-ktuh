@@ -1,4 +1,4 @@
-"""Smartgrid model definition."""
+"""Smart Grid Game model definition."""
 
 import datetime
 import random

@@ -1,4 +1,4 @@
-"""Provides common quests utility functions."""
+"""Implements the quest widget."""
 
 from apps.managers.score_mgr.models import ScoreboardEntry
 from apps.widgets.quests.models import Quest, QuestMember
@@ -6,21 +6,20 @@ from apps.widgets.smartgrid import is_pau
 from apps.widgets.smartgrid.models import ActivityBase, ActivityMember, CommitmentMember, Category
 from apps.widgets.notifications.models import UserNotification
 
-# The number of quests a user can have at any one time.
 MAX_AVAILABLE_QUESTS = 3
+"""The number of quests a user can have at any one time."""
 
 
 def has_task(user, slug=None, task_type=None, name=None):
-    """
-    Determines if the user is participating in a task.
-    In the case of a activity, this returns True if the user submitted or completed the activity.
-    In the case of a commitment, this returns True if the user made or completed the commitment.
-    In the case of a event or excursion, this returns True if the user entered their attendance code.
-    In the case of a survey, this returns True if the user completed the survey.
+    """Determines if the user is participating in a task.
 
-    If a task_type is specified, then it checks to see if a user has completed a task of that type.
-    Only one of name and task_type should be specified.
-    """
+        * For a activity, this returns True if the user submitted or completed the activity.
+        * For a commitment, this returns True if the user made or completed the commitment.
+        * For a event or excursion, this returns True if the user entered their attendance code.
+        * For a survey, this returns True if the user completed the survey.
+
+       If a task_type is specified, then checks to see if a user has completed a task of that type.
+       Only one of name and task_type should be specified."""
     if not (name or slug) and not task_type:
         raise Exception("Either slug or task_type must be specified.")
 
@@ -44,12 +43,10 @@ def has_task(user, slug=None, task_type=None, name=None):
 
 
 def completed_task(user, name=None, slug=None, task_type=None):
-    """
-    Determines if the user has either completed the named task or completed a task of the given type.
-    In general, if a user-task member is approved or has an award date, it is completed.
-    Only one of name and task_type should be specified.  Specifying neither will raise an Exception.
-    Specifying both will result in an error.
-    """
+    """Determines if the user has completed the named task or completed a task of the given type.
+       In general, if a user-task member is approved or has an award date, it is completed.
+       Only one of name and task_type should be specified.  Specifying neither raises an Exception.
+       Specifying both results in an error."""
     if not (name or slug) and not task_type:
         raise Exception("Either name or task_type must be specified.")
 
@@ -84,9 +81,7 @@ def completed_task(user, name=None, slug=None, task_type=None):
 
 
 def has_points(user, points, round_name=None):
-    """
-    Returns True if the user has at least the requested number of points.
-    """
+    """Returns True if the user has at least the requested number of points."""
     profile = user.get_profile()
     if round_name:
         entry = ScoreboardEntry.objects.get(profile=profile, round_name=round_name)
@@ -96,16 +91,12 @@ def has_points(user, points, round_name=None):
 
 
 def allocated_ticket(user):
-    """
-    Returns True if the user has any allocated tickets.
-    """
+    """Returns True if the user has any allocated tickets."""
     return user.raffleticket_set.count() > 0
 
 
 def num_tasks_completed(user, num_tasks, category_name=None, task_type=None):
-    """
-    Returns True if the user has completed the requested number of tasks.
-    """
+    """Returns True if the user has completed the requested number of tasks."""
     # Check if we have a type and/or category.
     if task_type:
         task_type = task_type.lower()
@@ -146,7 +137,7 @@ def num_tasks_completed(user, num_tasks, category_name=None, task_type=None):
 
 
 def badge_awarded(user, badge_slug):
-    """returns True if the badge is awarded to the user."""
+    """Returns True if the badge is awarded to the user."""
     for badge in user.badges_earned.all():
         if badge.slug == badge_slug:
             return True
@@ -155,18 +146,14 @@ def badge_awarded(user, badge_slug):
 
 
 def posted_to_wall(user):
-    """
-    Returns True if the user posted to their wall and False otherwise.
-    """
+    """Returns True if the user posted to their wall and False otherwise."""
     if user.post_set.filter(style_class="user_post").count() > 0:
         return True
     return False
 
 
 def set_profile_pic(user):
-    """
-    Returns True if the user posted to their wall and False otherwise.
-    """
+    """Returns True if the user posted to their wall and False otherwise."""
     if user.avatar_set.filter(primary=True).count() > 0:
         return True
     return False
@@ -184,9 +171,7 @@ CONDITIONS = {
 
 
 def process_conditions_string(conditions_string, user):
-    """
-    Utility method to evaluate conditions.
-    """
+    """Utility method to evaluate conditions."""
     conditions = conditions_string
     for name in CONDITIONS.keys():
         conditions = conditions.replace(name + "(", name + "(user,")
@@ -198,10 +183,8 @@ def process_conditions_string(conditions_string, user):
 
 
 def possibly_completed_quests(user):
-    """
-    Check if the user may have completed one of their quests.
-    Returns an array of the completed quests.
-    """
+    """Check if the user may have completed one of their quests.
+       Returns an array of the completed quests."""
     user_quests = user.quest_set.filter(questmember__completed=False, questmember__opt_out=False)
     completed = []
     for quest in user_quests:
@@ -219,12 +202,11 @@ def possibly_completed_quests(user):
 
 
 def get_quests(user):
-    """
-    Loads the quests for the user.
-    Returns a dictionary of two things:
-    * The user's current quests (user_quests)
-    * Quests the user can participate in (available_quests)
-    """
+    """Loads the quests for the user.
+       Returns a dictionary of two things:
+
+         * The user's current quests (user_quests).
+         * Quests the user can participate in (available_quests)."""
     return_dict = {}
 
     # Check for completed quests.
@@ -244,9 +226,7 @@ def get_quests(user):
 
 
 def get_user_quests(user):
-    """
-    Get the quests the user is participating in.
-    """
+    """Get the quests the user is participating in."""
     return user.quest_set.filter(
         questmember__user=user,
         questmember__opt_out=False,
@@ -255,9 +235,7 @@ def get_user_quests(user):
 
 
 def get_available_quests(user, num_quests):
-    """
-    Get the quests the user could participate in.
-    """
+    """Get the quests the user could participate in."""
     quests = []
     for quest in Quest.objects.exclude(questmember__user=user).order_by('level'):
         if quest.can_add_quest(user):

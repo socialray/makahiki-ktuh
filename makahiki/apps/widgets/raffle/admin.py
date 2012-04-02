@@ -1,4 +1,5 @@
-"""raffle admin"""
+"""Raffle widget administration"""
+
 from django.contrib import admin
 from django import forms
 from django.core.urlresolvers import reverse
@@ -13,9 +14,7 @@ class RafflePrizeAdminForm(forms.ModelForm):
         model = RafflePrize
 
     def __init__(self, *args, **kwargs):
-        """
-        Override to have a link to winner of the prize.
-        """
+        """Override to have a link to winner of the prize."""
         super(RafflePrizeAdminForm, self).__init__(*args, **kwargs)
         if self.instance and self.instance.winner:
             self.fields['winner'].help_text = 'View pickup <a href="%s">form</a>' % reverse(
