@@ -34,10 +34,13 @@ App Store.
 Visual Studio.  Please read and follow this `blog post on Django
 installation on Windows`_.
 
-`Python Imaging Library`_ (PIL). If you are on Mac OS X, an easy way to install
-PIL is via `Homebrew`_. Once Homebrew is installed, install PIL by typing
+`Python Imaging Library`_ (PIL). If you are on Mac OS X, we have found 
+`Homebrew`_ to be the most reliable way to install PIL. 
+Once Homebrew is installed, install PIL by typing
 ``brew install pil``. If you are brave enough to install from source, make sure
-you have both libjpeg and zlib for JPEG and PNG support respectively.
+you have both libjpeg (for JPEG) and zlib (for PNG). On Linux, a developer has reported
+that the PIL system installed by apt-get does not support JPEG (April, 2012).  To fix, the developer
+downloaded and installed from source.
 
 Git. Find a package for your operating system at the `GitHub install
 wiki`_. It is recommended that you also configure Git so that it
@@ -61,8 +64,9 @@ installed, be sure that your PostgreSQL installation's bin/ directory is on
 $PATH so that ``pg_config`` and ``psql`` are defined.  Note for Linux users:
 you must download postgres-dev in order to get the pg_config command. It is
 important that the user "postgres" is "trusted" so that you can connect to the
-server as the user "postgres" locally without authentication. This should be
-the default behavior.
+server as the user "postgres" locally without authentication. If that is not the case, you
+must edit the pg_hba.conf file and change "local all postgres ident" to "local all postgres trust".
+
 
 `Memcache`_.  Makahiki can optionally use Memcache to improve performance.
 To avoid the need for alternative configuration files, we require local installations to install
