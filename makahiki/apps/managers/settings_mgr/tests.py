@@ -3,7 +3,7 @@
 import datetime
 from django.contrib.auth.models import User
 
-from django.test import TestCase
+from django.test import TransactionTestCase
 from django.core.urlresolvers import reverse
 from django.conf import settings
 
@@ -13,7 +13,7 @@ from apps.css_rules import default
 from apps.test_helpers.test_utils import TestUtils
 
 
-class ContextProcessorFunctionalTestCase(TestCase):
+class ContextProcessorFunctionalTestCase(TransactionTestCase):
     """Tests that the proper variables are loaded into a page."""
 
     def testRoundInfo(self):
@@ -32,7 +32,7 @@ class ContextProcessorFunctionalTestCase(TestCase):
                 current_round, response.context["CURRENT_ROUND_INFO"]["name"]))
 
 
-class BaseUnitTestCase(TestCase):
+class BaseUnitTestCase(TransactionTestCase):
     """basic setting test"""
     def testCurrentRound(self):
         """Tests that the current round retrieval is correct."""
@@ -54,7 +54,7 @@ class BaseUnitTestCase(TestCase):
             "Test that there is no current round.")
 
 
-class ClassTagsUnitTests(TestCase):
+class ClassTagsUnitTests(TransactionTestCase):
     """ test class tags
     """
     def setUp(self):

@@ -1,14 +1,14 @@
 """Individual test"""
 import datetime
 
-from django.test import TestCase
+from django.test import TransactionTestCase
 from django.contrib.auth.models import User
 
 from apps.managers.player_mgr.models import Profile
 from apps.test_helpers.test_utils import TestUtils
 
 
-class OverallPrizeTest(TestCase):
+class OverallPrizeTest(TransactionTestCase):
     """
     Tests awarding a prize to the individual overall points winner.
     """
@@ -119,7 +119,7 @@ class OverallPrizeTest(TestCase):
         self.prize.delete()
 
 
-class TeamPrizeTest(TestCase):
+class TeamPrizeTest(TransactionTestCase):
     """
     Tests awarding a prize to the individual on each team with the most points.
     """

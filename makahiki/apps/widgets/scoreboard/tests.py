@@ -2,12 +2,12 @@
 
 import datetime
 from django.core.urlresolvers import reverse
-from django.test import TestCase
+from django.test import TransactionTestCase
 from django.conf import settings
 from apps.test_helpers.test_utils import TestUtils
 
 
-class ScoreboardTest(TestCase):
+class ScoreboardTest(TransactionTestCase):
     """Scoreboard Test."""
     fixtures = ["base_teams.json"]
 

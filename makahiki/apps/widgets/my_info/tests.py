@@ -1,7 +1,7 @@
 """Profile page test"""
 import datetime
 
-from django.test import TestCase
+from django.test import TransactionTestCase
 from django.core.urlresolvers import reverse
 from django.contrib.auth.models import User
 
@@ -10,7 +10,7 @@ from apps.widgets.smartgrid.models import Activity, ActivityMember, Commitment, 
 from apps.widgets.quests.models import Quest
 
 
-class ProfileFunctionalTestCase(TestCase):
+class ProfileFunctionalTestCase(TransactionTestCase):
     """Profile page test"""
     fixtures = ["base_teams.json"]
 

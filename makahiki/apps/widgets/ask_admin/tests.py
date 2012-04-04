@@ -2,7 +2,7 @@
 ask admin tests.
 """
 
-from django.test import TestCase
+from django.test import TransactionTestCase
 from django.contrib.auth.models import User
 from django.core.urlresolvers import reverse
 from django.core import mail
@@ -10,7 +10,7 @@ from django.core import mail
 from apps.managers.team_mgr.models import Team
 
 
-class AskAdminFunctionalTests(TestCase):
+class AskAdminFunctionalTests(TransactionTestCase):
     """AskAdmin test cases."""
     fixtures = ["base_teams.json"]
 

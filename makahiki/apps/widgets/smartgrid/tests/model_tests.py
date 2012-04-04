@@ -1,7 +1,7 @@
 """Test"""
 import datetime
 from django.contrib.auth.models import User
-from django.test import TestCase
+from django.test import TransactionTestCase
 from django.core import mail
 from django.conf import settings
 from apps.test_helpers.test_utils import TestUtils
@@ -13,7 +13,7 @@ from apps.widgets.smartgrid.models import  EmailReminder, ActivityMember, \
 from apps.widgets.notifications.models import UserNotification
 
 
-class ActivitiesTest(TestCase):
+class ActivitiesTest(TransactionTestCase):
     """Test Activity"""
     def setUp(self):
         """Generate test user and activity. Set the competition settings to the
@@ -238,7 +238,7 @@ class ActivitiesTest(TestCase):
         settings.COMPETITION_ROUNDS = self.saved_rounds
 
 
-class CommitmentsUnitTestCase(TestCase):
+class CommitmentsUnitTestCase(TransactionTestCase):
     """Commitment Test."""
     def setUp(self):
         """Create test user and commitment. Set the competition settings to the current
@@ -339,7 +339,7 @@ class CommitmentsUnitTestCase(TestCase):
         settings.COMPETITION_ROUNDS = self.saved_rounds
 
 
-class RemindersUnitTest(TestCase):
+class RemindersUnitTest(TransactionTestCase):
     """Reminder test."""
     def setUp(self):
         """

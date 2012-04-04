@@ -3,7 +3,7 @@
 import datetime
 import os
 
-from django.test import TestCase
+from django.test import TransactionTestCase
 from django.contrib.auth.models import User
 from django.conf import settings
 from django.core.files.images import ImageFile
@@ -21,7 +21,7 @@ from apps.widgets.raffle.models import RafflePrize, RaffleTicket
 from apps.test_helpers.test_utils import TestUtils
 
 
-class QuestConditionsTest(TestCase):
+class QuestConditionsTest(TransactionTestCase):
     """
     Tests for the possible quest conditions.
     """

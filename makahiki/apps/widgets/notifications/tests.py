@@ -1,6 +1,6 @@
 """Notification testing."""
 
-from django.test import TestCase
+from django.test import TransactionTestCase
 from django.core.urlresolvers import reverse
 from django.contrib.auth.models import User
 
@@ -10,7 +10,7 @@ from apps.widgets.notifications.models import UserNotification
 from apps.test_helpers.test_utils import TestUtils
 
 
-class NotificationUnitTests(TestCase):
+class NotificationUnitTests(TransactionTestCase):
     """Notification Test."""
     def testGetUnread(self):
         """Test that we can get the user's unread notifications."""
@@ -33,7 +33,7 @@ class NotificationUnitTests(TestCase):
         self.assertEqual(unread.count(), 4, "There should be four unread notifications.")
 
 
-class NotificationFunctionalTests(TestCase):
+class NotificationFunctionalTests(TransactionTestCase):
     """View Test."""
     fixtures = ["base_teams.json"]
 

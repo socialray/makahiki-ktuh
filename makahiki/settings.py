@@ -122,7 +122,7 @@ INSTALLED_APPS = (
     'apps.managers.player_mgr',
     'apps.managers.score_mgr',
     'apps.managers.cache_mgr',
-    
+
     # Test utilities
     'apps.test_helpers',
 

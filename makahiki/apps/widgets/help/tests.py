@@ -1,6 +1,6 @@
 """Tests to see that we can retrieve and display a help topic."""
 
-from django.test import TestCase
+from django.test import TransactionTestCase
 from django.core.urlresolvers import reverse
 from django.contrib.auth.models import User
 
@@ -9,7 +9,7 @@ from apps.widgets.help.models import HelpTopic
 from apps.test_helpers.test_utils import TestUtils
 
 
-class HelpFunctionalTestCase(TestCase):
+class HelpFunctionalTestCase(TransactionTestCase):
     """test cases"""
     fixtures = ["base_teams.json"]
 

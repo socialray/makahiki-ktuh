@@ -3,7 +3,7 @@
 from apps.managers.team_mgr.models import Group
 from apps.managers.player_mgr.models import Profile
 
-from django.test import TestCase
+from django.test import TransactionTestCase
 from django.core.urlresolvers import reverse
 from django.contrib.auth.models import User
 
@@ -12,7 +12,7 @@ from apps.widgets.energy_goal.models import TeamEnergyGoal
 from apps.test_helpers.test_utils import TestUtils
 
 
-class EnergyFunctionalTestCase(TestCase):
+class EnergyFunctionalTestCase(TransactionTestCase):
     """Energy Test"""
     fixtures = ["base_teams.json"]
 
@@ -70,7 +70,7 @@ class EnergyFunctionalTestCase(TestCase):
                 self.assertEqual(team["completions"], 0, "No team should have completed a goal.")
 
 
-class TeamEnergyGoalTest(TestCase):
+class TeamEnergyGoalTest(TransactionTestCase):
     """Team Energy Goal Test"""
     def setUp(self):
         """setup"""

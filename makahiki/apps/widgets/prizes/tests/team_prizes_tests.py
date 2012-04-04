@@ -2,12 +2,12 @@
 import datetime
 from django.contrib.auth.models import User
 
-from django.test import TestCase
+from django.test import TransactionTestCase
 from apps.managers.team_mgr.models import Group, Team
 from apps.test_helpers.test_utils import TestUtils
 
 
-class DormTeamPrizeTests(TestCase):
+class DormTeamPrizeTests(TransactionTestCase):
     """
     Tests awarding a prize to a dorm team points winner.
     """
@@ -131,7 +131,7 @@ class DormTeamPrizeTests(TestCase):
         self.prize.delete()
 
 
-class OverallTeamPrizeTest(TestCase):
+class OverallTeamPrizeTest(TransactionTestCase):
     """
     Tests awarding a prize to a dorm team points winner.
     """

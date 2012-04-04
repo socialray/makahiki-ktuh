@@ -1,7 +1,7 @@
 """badges test"""
 import datetime
 
-from django.test import TestCase
+from django.test import TransactionTestCase
 from django.contrib.auth.models import User
 
 from apps.lib.brabeion import badges
@@ -11,7 +11,7 @@ from apps.widgets.smartgrid.models import Commitment, CommitmentMember
 from apps.widgets.badges.management.commands.award_badge import award_badge
 
 
-class DailyVisitorBadgeTest(TestCase):
+class DailyVisitorBadgeTest(TransactionTestCase):
     """DailyVisitorBadgeTest"""
     def test_awarding(self):
         """
@@ -37,7 +37,7 @@ class DailyVisitorBadgeTest(TestCase):
             "Check that the daily visitor badge was awarded.")
 
 
-class FullyCommittedBadgeTest(TestCase):
+class FullyCommittedBadgeTest(TransactionTestCase):
     """FullyCommittedBadgeTest"""
 
     def test_awarding(self):
@@ -80,7 +80,7 @@ class FullyCommittedBadgeTest(TestCase):
             "Check that the Fully Committed badge was awarded.")
 
 
-class ManagementCommandTest(TestCase):
+class ManagementCommandTest(TransactionTestCase):
     """ManagementCommandTest"""
 
     def test_bug_hunter_award(self):

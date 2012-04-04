@@ -1,12 +1,12 @@
 """Quests Test"""
 from django.contrib.auth.models import User
 from django.core.urlresolvers import reverse
-from django.test import TestCase
+from django.test import TransactionTestCase
 from apps.test_helpers.test_utils import TestUtils
 from apps.widgets.quests import get_quests
 
 
-class QuestFunctionalTestCase(TestCase):
+class QuestFunctionalTestCase(TransactionTestCase):
     """Quests Tests"""
     def setUp(self):
         """setup"""

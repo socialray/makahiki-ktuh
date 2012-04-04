@@ -1,7 +1,7 @@
 """News page Test"""
 import datetime
 
-from django.test import TestCase
+from django.test import TransactionTestCase
 from django.core.urlresolvers import reverse
 from apps.test_helpers.test_utils import TestUtils
 
@@ -10,7 +10,7 @@ from apps.managers.team_mgr.models import  Post
 from apps.widgets.wallpost.views import DEFAULT_POST_COUNT
 
 
-class NewsFunctionalTestCase(TestCase):
+class NewsFunctionalTestCase(TransactionTestCase):
     """News page test"""
     fixtures = ["base_teams.json"]
 

@@ -5,7 +5,7 @@ home page tests
 import json
 import datetime
 
-from django.test import TestCase
+from django.test import TransactionTestCase
 from django.core.urlresolvers import reverse
 from django.contrib.auth.models import User
 from django.conf import settings
@@ -14,7 +14,7 @@ from apps.managers.player_mgr.models import Profile
 from apps.test_helpers.test_utils import TestUtils
 
 
-class HomeFunctionalTestCase(TestCase):
+class HomeFunctionalTestCase(TransactionTestCase):
     """Home Test Case."""
 
     def setUp(self):
@@ -30,7 +30,7 @@ class HomeFunctionalTestCase(TestCase):
         self.failUnlessEqual(response.status_code, 200)
 
 
-class CompetitionMiddlewareTestCase(TestCase):
+class CompetitionMiddlewareTestCase(TransactionTestCase):
     """competition middleware test."""
 
     def setUp(self):
@@ -74,7 +74,7 @@ class CompetitionMiddlewareTestCase(TestCase):
         settings.COMPETITION_END = self.saved_end
 
 
-class SetupWizardFunctionalTestCase(TestCase):
+class SetupWizardFunctionalTestCase(TransactionTestCase):
     """setup widzard test cases."""
 
     def setUp(self):

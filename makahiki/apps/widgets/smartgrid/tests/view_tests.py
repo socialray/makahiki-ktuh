@@ -1,14 +1,14 @@
 """View Test."""
 import datetime
 from django.core.urlresolvers import reverse
-from django.test import TestCase
+from django.test import TransactionTestCase
 from apps.widgets.smartgrid.models import  EmailReminder, ActivityMember, \
                                            TextReminder, Commitment, ConfirmationCode
 from apps.managers.player_mgr.models import Profile
 from apps.test_helpers.test_utils import TestUtils
 
 
-class ActivitiesFunctionalTest(TestCase):
+class ActivitiesFunctionalTest(TransactionTestCase):
     """Activities View Test."""
     fixtures = ["base_teams.json"]
 

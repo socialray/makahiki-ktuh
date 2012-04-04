@@ -3,7 +3,7 @@
 
 import datetime
 
-from django.test import TestCase
+from django.test import TransactionTestCase
 from django.contrib.auth.models import User
 from django.conf import settings
 from django.db.models import Sum, Max
@@ -12,7 +12,7 @@ from apps.test_helpers.test_utils import TestUtils
 from apps.managers.team_mgr.models import Group, Team
 
 
-class DormUnitTestCase(TestCase):
+class DormUnitTestCase(TransactionTestCase):
     """dorm test"""
 
     def setUp(self):
@@ -157,7 +157,7 @@ class DormUnitTestCase(TestCase):
         settings.COMPETITION_ROUNDS = self.saved_rounds
 
 
-class TeamLeadersTestCase(TestCase):
+class TeamLeadersTestCase(TransactionTestCase):
     """test team leader"""
     def setUp(self):
         self.group = Group(name="Test Group")
@@ -350,7 +350,7 @@ class TeamLeadersTestCase(TestCase):
         settings.COMPETITION_ROUNDS = self.saved_rounds
 
 
-class TeamsUnitTestCase(TestCase):
+class TeamsUnitTestCase(TransactionTestCase):
     """team tests"""
     def setUp(self):
         self.group = Group(name="Test group")

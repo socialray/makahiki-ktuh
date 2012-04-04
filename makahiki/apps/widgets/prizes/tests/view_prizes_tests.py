@@ -1,7 +1,7 @@
 """Prize page view test"""
 import datetime
 
-from django.test import TestCase
+from django.test import TransactionTestCase
 from django.core.urlresolvers import reverse
 from django.conf import settings
 
@@ -9,7 +9,7 @@ from apps.widgets.prizes.models import Prize
 from apps.test_helpers.test_utils import TestUtils
 
 
-class PrizesFunctionalTestCase(TestCase):
+class PrizesFunctionalTestCase(TransactionTestCase):
     """test prize page view"""
     fixtures = ["base_teams.json", "test_prizes.json"]
 
