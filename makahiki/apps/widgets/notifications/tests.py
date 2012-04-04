@@ -7,7 +7,7 @@ from django.contrib.auth.models import User
 from apps.managers.team_mgr.models import Team
 from apps.widgets.notifications import get_unread_notifications
 from apps.widgets.notifications.models import UserNotification
-from apps.test_utils import TestUtils
+from apps.test_helpers.test_utils import TestUtils
 
 
 class NotificationUnitTests(TestCase):

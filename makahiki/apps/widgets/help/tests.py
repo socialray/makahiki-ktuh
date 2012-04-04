@@ -6,7 +6,7 @@ from django.contrib.auth.models import User
 
 from apps.managers.team_mgr.models import Team
 from apps.widgets.help.models import HelpTopic
-from apps.test_utils import TestUtils
+from apps.test_helpers.test_utils import TestUtils
 
 
 class HelpFunctionalTestCase(TestCase):

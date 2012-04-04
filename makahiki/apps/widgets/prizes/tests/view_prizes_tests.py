@@ -6,7 +6,7 @@ from django.core.urlresolvers import reverse
 from django.conf import settings
 
 from apps.widgets.prizes.models import Prize
-from apps.test_utils import TestUtils
+from apps.test_helpers.test_utils import TestUtils
 
 
 class PrizesFunctionalTestCase(TestCase):

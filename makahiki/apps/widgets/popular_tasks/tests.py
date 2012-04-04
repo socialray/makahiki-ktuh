@@ -3,7 +3,7 @@ import datetime
 
 from django.test import TestCase
 from django.core.urlresolvers import reverse
-from apps.test_utils import TestUtils
+from apps.test_helpers.test_utils import TestUtils
 
 from apps.widgets.smartgrid.models import Commitment, CommitmentMember
 from apps.managers.team_mgr.models import  Post

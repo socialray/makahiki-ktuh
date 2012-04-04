@@ -1,7 +1,7 @@
 """Quest Test"""
 from django.test import TestCase
 from django.contrib.auth.models import User
-from apps.test_utils import TestUtils
+from apps.test_helpers.test_utils import TestUtils
 
 from apps.widgets.quests import get_quests, possibly_completed_quests
 from apps.widgets.quests.models import Quest, QuestMember

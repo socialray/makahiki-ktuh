@@ -27,8 +27,8 @@ STATIC_URL = '/site_media/static/'
 
 # directories which hold static files
 STATICFILES_DIRS = (
-    ('makahiki', os.path.join(PROJECT_ROOT, 'media')),
-    )
+    os.path.join(PROJECT_ROOT, 'media'),
+)
 
 # URL prefix for admin media -- CSS, JavaScript and images. Make sure to use a trailing slash.
 ADMIN_MEDIA_PREFIX = posixpath.join(STATIC_URL, "admin/")
@@ -122,6 +122,9 @@ INSTALLED_APPS = (
     'apps.managers.player_mgr',
     'apps.managers.score_mgr',
     'apps.managers.cache_mgr',
+    
+    # Test utilities
+    'apps.test_helpers',
 
     # 3rd party libraries
     'apps.lib.django_cas',
@@ -139,13 +142,13 @@ INSTALLED_APPS = (
     'django.contrib.messages',
 
     # external
-    'staticfiles',
     'django_extensions',
 
     # internal
     'django.contrib.admin',
     'django.contrib.admindocs',
     'django.contrib.markup',
+    'django.contrib.staticfiles',
 )
 
 ################################

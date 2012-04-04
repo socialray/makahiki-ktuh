@@ -8,7 +8,7 @@ from django.conf import settings
 from apps.managers.settings_mgr import get_current_round_info
 
 from apps.widgets.raffle.models import RafflePrize
-from apps.test_utils import TestUtils
+from apps.test_helpers.test_utils import TestUtils
 
 
 class RafflePrizesTestCase(TestCase):

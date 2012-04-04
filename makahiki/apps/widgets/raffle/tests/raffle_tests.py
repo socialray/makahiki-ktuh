@@ -6,7 +6,7 @@ from django.test import TestCase
 from django.conf import settings
 from django.core.files.images import ImageFile
 from django.contrib.auth.models import User
-from apps.test_utils import TestUtils
+from apps.test_helpers.test_utils import TestUtils
 
 from apps.widgets.raffle.models import RafflePrize, RaffleTicket
 

@@ -7,7 +7,7 @@ import datetime
 from django.test import TestCase
 from django.contrib.auth.models import User
 from django.db import IntegrityError
-from apps.test_utils import TestUtils
+from apps.test_helpers.test_utils import TestUtils
 
 from apps.managers.team_mgr.models import Group, Team
 from apps.managers.player_mgr.models import Profile

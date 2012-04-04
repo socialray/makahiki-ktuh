@@ -4,7 +4,7 @@ import datetime
 from django.core.urlresolvers import reverse
 from django.test import TestCase
 from django.conf import settings
-from apps.test_utils import TestUtils
+from apps.test_helpers.test_utils import TestUtils
 
 
 class ScoreboardTest(TestCase):

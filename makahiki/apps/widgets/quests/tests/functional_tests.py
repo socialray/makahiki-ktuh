@@ -2,7 +2,7 @@
 from django.contrib.auth.models import User
 from django.core.urlresolvers import reverse
 from django.test import TestCase
-from apps.test_utils import TestUtils
+from apps.test_helpers.test_utils import TestUtils
 from apps.widgets.quests import get_quests
 
 

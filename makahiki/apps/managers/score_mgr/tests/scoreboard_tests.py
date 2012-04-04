@@ -7,7 +7,7 @@ import datetime
 from django.conf import settings
 from django.test import TestCase
 from django.contrib.auth.models import User
-from apps.test_utils import TestUtils
+from apps.test_helpers.test_utils import TestUtils
 from apps.managers.team_mgr.models import Group, Team
 from apps.managers.player_mgr.models import Profile
 from apps.managers.score_mgr.models import ScoreboardEntry

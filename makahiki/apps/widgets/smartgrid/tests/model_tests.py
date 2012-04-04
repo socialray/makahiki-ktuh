@@ -4,7 +4,7 @@ from django.contrib.auth.models import User
 from django.test import TestCase
 from django.core import mail
 from django.conf import settings
-from apps.test_utils import TestUtils
+from apps.test_helpers.test_utils import TestUtils
 
 from apps.widgets.smartgrid import get_popular_activities, get_available_activities, \
                                    get_available_events, get_popular_commitments

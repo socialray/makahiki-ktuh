@@ -18,7 +18,7 @@ from apps.widgets.smartgrid.models import Activity, ActivityMember, Commitment, 
 from apps.lib.avatar import create_default_thumbnails
 from apps.lib.avatar.models import Avatar, avatar_file_path
 from apps.widgets.raffle.models import RafflePrize, RaffleTicket
-from apps.test_utils import TestUtils
+from apps.test_helpers.test_utils import TestUtils
 
 
 class QuestConditionsTest(TestCase):

@@ -10,7 +10,7 @@ from django.conf import settings
 from apps.managers.settings_mgr import  get_current_round
 from apps.template_support.templatetags.class_tags import insert_classes, get_id_and_classes
 from apps.css_rules import default
-from apps.test_utils import TestUtils
+from apps.test_helpers.test_utils import TestUtils
 
 
 class ContextProcessorFunctionalTestCase(TestCase):

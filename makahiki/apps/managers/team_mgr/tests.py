@@ -8,7 +8,7 @@ from django.contrib.auth.models import User
 from django.conf import settings
 from django.db.models import Sum, Max
 
-from apps.test_utils import TestUtils
+from apps.test_helpers.test_utils import TestUtils
 from apps.managers.team_mgr.models import Group, Team
 
 

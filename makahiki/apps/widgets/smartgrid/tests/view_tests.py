@@ -5,7 +5,7 @@ from django.test import TestCase
 from apps.widgets.smartgrid.models import  EmailReminder, ActivityMember, \
                                            TextReminder, Commitment, ConfirmationCode
 from apps.managers.player_mgr.models import Profile
-from apps.test_utils import TestUtils
+from apps.test_helpers.test_utils import TestUtils
 
 
 class ActivitiesFunctionalTest(TestCase):
