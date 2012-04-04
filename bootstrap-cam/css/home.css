@@ -1,0 +1,102 @@
+.content p {
+	background: transparent url(../images/bullet.png) top left repeat-y;
+	font-size: 8pt;
+	line-height: 14px;
+	text-align: left;
+	white-space: nowrap;
+	padding-left: 13px;
+	margin: 0 2px 5px 2px
+}
+
+.content .tile { 
+	background-color: rgba(46, 139, 87, 0.2);
+	padding: 1px;
+	border: 3px outset #DDD;
+	margin-top: -.7em;
+	/* 	background-image: -moz-linear-gradient(100% 50% 90deg, #E3E3E3, #A1A1A1); */
+	/* 	background-image: -webkit-gradient(linear, 0% 0%, 0% 90%, from(#E3E3E3), */
+	/* 		to(#BBB) ); */
+	border-radius: 8px 8px 8px 8px;
+	box-shadow: 3px 3px 5px #000;
+	-moz-box-shadow: 3px 3px 5px #000;
+	-webkit-box-shadow: 3px 3px 5px #000;
+	/* Force tiles on top of icons.*/
+	position: relative;
+	z-index: 100;
+}
+
+.tile h6 {
+	color: #24333B;
+}
+
+#home-energy-icon {
+	background: transparent url(../images/icon-go-low-lg.png) top left
+		no-repeat;
+	width: 120px;
+	height: 124px;
+}
+
+#home-energy-icon:hover {
+	background: transparent url(../images/icon-go-low-lg-over.png) top left
+		no-repeat;
+}
+
+#home-activities-icon {
+	background: transparent url(../images/icon-scoreboard-lg.png) top left
+		no-repeat;
+	width: 120px;
+	height: 124px;
+}
+
+#home-activities-icon:hover {
+	background: transparent url(../images/icon-scoreboard-lg-over.png) top
+		left no-repeat;
+}
+
+#home-news-icon {
+	background: transparent url(../images/icon-news-lg.png) top left
+		no-repeat;
+	width: 120px;
+	height: 124px;
+}
+
+#home-news-icon:hover {
+	background: transparent url(../images/icon-news-lg-over.png) top left
+		no-repeat;
+}
+
+#home-prizes-icon {
+	background: transparent url(../images/icon-prizes-lg.png) top left
+		no-repeat;
+	width: 120px;
+	height: 124px;
+}
+
+#home-prizes-icon:hover {
+	background: transparent url(../images/icon-prizes-lg-over.png) top left
+		no-repeat;
+}
+
+#home-help-icon {
+	background: transparent url(../images/icon-help-lg.png) top left
+		no-repeat;
+	width: 120px;
+	height: 124px;
+}
+
+#home-help-icon:hover {
+	background: transparent url(../images/icon-help-lg-over.png) top left
+		no-repeat;
+}
+
+#home-profile-icon {
+	background: transparent url(../images/icon-profile-lg.png) top left
+		no-repeat;
+	width: 120px;
+	height: 124px;
+}
+
+#home-profile-icon:hover {
+	background: transparent url(../images/icon-profile-lg-over.png) top left
+		no-repeat;
+}

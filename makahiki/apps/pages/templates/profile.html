@@ -13,19 +13,26 @@
 {% endblock %}
 
 {% block body %}
-    <table><tr><td width="50%" valign="top">
-            <div id='my_info'>
-                {% include "widgets/my_info/templates/index.html" %}
+    <div {% get_id_and_classes "profile-body" "responsive" %}>
+        <div {% get_id_and_classes "base-row" "responsive" %}>
+            <!-- left column -->
+            <div {% get_id_and_classes "even-col" "responsive" %}>
+                <div id='my_info'>
+                    {% include "widgets/my_info/templates/index.html" %}
+                </div>
+                <div id='badges'>
+                    {% include "widgets/badges/templates/index.html" %}
+                </div>
             </div>
-            <div id='badges'>
-                {% include "widgets/badges/templates/index.html" %}
+            <!-- right column -->
+            <div {% get_id_and_classes "even-col" "responsive" %}>
+                <div id='my_commitments'>
+                    {% include "widgets/my_commitments/templates/index.html" %}
+                </div>
+                <div id='my_achievements'>
+                    {% include "widgets/my_achievements/templates/index.html" %}
+                </div>
             </div>
-        </td><td width="50%" valign="top">
-            <div id='my_commitments'>
-                {% include "widgets/my_commitments/templates/index.html" %}
-            </div>
-            <div id='my_achievements'>
-                {% include "widgets/my_achievements/templates/index.html" %}
-            </div>
-    </td></tr></table>
+        </div>
+    </div>
 {% endblock %}

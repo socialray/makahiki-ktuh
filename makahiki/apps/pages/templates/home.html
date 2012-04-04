@@ -13,13 +13,7 @@
 {% endblock %}
 
 {% block body %}
-    <div id='notifications'>
-        {% include "widgets/notifications/templates/index.html" %}
-    </div>
-    <div id='quests'>
-        {% include "widgets/quests/templates/index.html" %}
-    </div>
-    <div id='home'>
+    <div {% get_id_and_classes "home" "responsive" %}>
         {% include "widgets/home/templates/index.html" %}
     </div>
 {% endblock %}

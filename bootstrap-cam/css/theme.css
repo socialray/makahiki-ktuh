@@ -1,0 +1,232 @@
+@charset "UTF-8";
+/* CSS Document */
+
+/* ===== Page specific coloring for Activities ===== */
+.activity,.activity-legend {
+	background-color: green;
+}
+
+/* set the UH logo */
+.brand img {
+	background: transparent url(../images/icon-uh-logo.png) top left
+		no-repeat;
+	display: block;
+	margin: 0 auto;
+}
+
+.btn-navbar {
+	background-color: #2B93AD;
+	background-image: -moz-linear-gradient(top, #2B93AD, #2B93AD);
+	background-image: -ms-linear-gradient(top, #2B93AD, #2B93AD);
+	background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#2B93AD),
+		to(#2B93AD) );
+	background-image: -webkit-linear-gradient(top, #2B93AD, #2B93AD);
+	background-image: -o-linear-gradient(top, #2B93AD, #2B93AD);
+	background-image: linear-gradient(top, #2B93AD, #2B93AD);
+	filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#2B93AD',
+		endColorstr='#2B93AD', GradientType=0 );
+	border-color: #2B93AD #2B93AD #000000;
+}
+
+.btn-navbar:hover,.btn-navbar:active,.btn-navbar.active,.btn-navbar.disabled,.btn-navbar[disabled]
+	{
+	background-color: #2B93AD;
+}
+
+.commitment,.commitment-legend {
+	background-color: blue;
+}
+/* Container Styles, make sure they're transparent */
+.container,.container-top,.container-bottom {
+	background: transparent;
+}
+
+/* Elements which will use the ocean blue gradients, lightest-blue on the bottom, mid-blue on top */
+.content-box-title {
+	background-color: blue;
+	background-image: -moz-linear-gradient(100% 70% 90deg, rgba(195, 216, 235, 1.0),
+		rgba(43, 147, 173, .9) );
+	background-image: -webkit-gradient(linear, left top, left bottom, from(rgba(43, 147, 173,
+		1.0) ), to(rgba(195, 216, 235, 1.0) ) );
+	border-bottom: 1px solid #000;
+}
+
+/* Set background color for elements which will use the darker ocean blue */
+.content-box,.alt-row,fieldset {
+	background-color: #E3F9F8;
+}
+
+.event,.event-legend {
+	background-color: yellow;
+}
+
+.excursion,.excursion-legend {
+	background-color: red;
+}
+
+.navbar .nav>li>a {
+	color: #ffffff;
+}
+
+.navbar .nav>li>a:hover {
+	color: #24333B;
+}
+
+.navbar .nav .active>a,.navbar .nav .active>a:hover {
+	color: #24333B;;
+}
+
+.navbar-inner {
+	background: rgba(112, 147, 219, .45);
+	/* 	background: rgba(0,0,156, .45); */
+	/* 	background-image: -moz-linear-gradient(100% 50% 90deg, rgba(224, 255, 255, .45), */
+	/* 		rgba(79, 148, 205, .5) ); */
+	/* 	background-image: -webkit-gradient(linear, 0% 0%, 0% 90%, from(rgba(224, 255, 255, .45) */
+	/* 		), to(rgba(79, 148, 205, .5) ) ); */
+}
+
+.prize a {
+	color: #000000;
+}
+
+.survey,.survery-legend {
+	background-color: orange;
+}
+
+@media ( max-width : 979px) {
+	.navbar .nav>li>a,.navbar .dropdown-menu a {
+		color: #f8f8ff;
+	}
+	.navbar .nav>li>a:hover,.navbar .dropdown-menu a:hover {
+		background-color: transparent;
+	}
+}
+
+/* for small screen widths hide the wide info-bar */
+@media ( max-width : 640px) {
+	.brand img {
+		display: none;
+	}
+	#info-bar-single {
+		background: rgba(224, 255, 255, .45);
+		background-image: -moz-linear-gradient(100% 50% 90deg, rgba(224, 255, 255, .45),
+			rgba(79, 148, 205, .5) );
+		background-image: -webkit-gradient(linear, 0% 0%, 0% 90%, from(rgba(224, 255, 255, .45)
+			), to(rgba(79, 148, 205, .5) ) );
+	}
+}
+
+/* Elements sharing background color mid-light blue */
+#activity-category .get-started,#activity-category .basic-energy,#activity-category .lights-out,#activity-category .make-watts,#activity-category .moving-on,#activity-category .opala,#activity-category .wet-wild,#activity-category .potpourri
+	{
+	background-color: #84C4FF;
+}
+
+/* ===== Page specific coloring for Energy ===== */
+#energy-status-how-activities-table th {
+	background: #C1EBEC;
+}
+
+#info-bar-wide {
+	background: rgba(224, 255, 255, .45);
+	background-image: -moz-linear-gradient(100% 50% 90deg, rgba(224, 255, 255, .45),
+		rgba(79, 148, 205, .5) );
+	background-image: -webkit-gradient(linear, 0% 0%, 0% 90%, from(rgba(224, 255, 255, .45)
+		), to(rgba(79, 148, 205, .5) ) );
+}
+
+/* Set common border thickness and color for header elements that use it. */
+#header-info,#header-nav-links,#header-round-info {
+	border: 2px solid #24333B;
+}
+
+/* hover color should be slightly lighter blue such that people can see when they hover */
+#header-nav-links a:hover h4 {
+	color: #2B93AD;
+}
+
+/* Set common transparency background for various elements, note that this effect stacks on header elements. */
+#header,#header-info,#header-round-info,.container-landing-about,#header-nav-links,#header
+	{
+	background: none repeat scroll 0 0 rgba(255, 255, 255, 0.5);
+}
+
+/* ===== Page specific coloring for Landing ===== */
+#landing-intro {
+	background: #AAAAAA;
+}
+
+/* ===== Page specific coloring for Prizes ===== */
+#prizes-list-table-header,#prizes-list-table-awarded-header,#prizes-list-table-criteria-header
+	{
+	background: white;
+}
+
+/* ===== Page specific coloring for Profile ===== */
+#profile-badges-content h5,#profile-history-content h5,table#profile-form-table
+	{
+	background-color: white;
+}
+
+#profile-form-table td.profile-section-header {
+	background-color: #A2C0D2;
+}
+
+#quest-box {
+	background: none;
+	background-color: rgba(70, 130, 80, 0.5);
+	color: white;
+}
+
+#quest-box h4 {
+	color: white;
+}
+
+#quest-hide {
+	color: white;
+}
+
+#quest-list li a {
+	color: white;
+}
+
+/* #quest-list .btn { */
+/* 	background-color: rgba(40, 42, 42, 1.0); */
+/* 	background-image: -moz-linear-gradient(top, blue, blue); */
+/* 	background-image: -ms-linear-gradient(top, #ffffff, #e6e6e6); */
+/* 	background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#ffffff), */
+/* 		to(#e6e6e6) ); */
+/* 	background-image: -webkit-linear-gradient(top, #ffffff, #e6e6e6); */
+/* 	background-image: -o-linear-gradient(top, #ffffff, #e6e6e6); */
+/* 	background-image: linear-gradient(top, #ffffff, #e6e6e6); */
+/* 	background-repeat: repeat-x; */
+/* } */
+
+#quest-list li.selected {
+	background-color: rgba(40, 42, 42, 1.0);
+	/*  font-weight: bold;*/
+}
+
+#quest-list li a.quest-user-quest {
+	color: #FCE988;
+}
+
+/* Set background picture, center it, make sure it doesn't repeat and that it covers the background for any size on any browser */
+body {
+	background: url("../images/oceanWave.jpg") center fixed;
+	background-repeat: no-repeat;
+	-webkit-background-size: cover;
+	-moz-background-size: cover;
+	-o-background-size: cover;
+	background-size: cover;
+}
+
+/* Set override to custom text color for colors that are specific to certain sections. */
+body,#header-nav-links ul li h4,#header-nav-links {
+	color: #24333B;
+}
+
+/* ===== Page specific coloring for News ===== */
+th {
+	background: #A2C0D2;
+}

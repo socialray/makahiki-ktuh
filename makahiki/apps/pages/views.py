@@ -37,6 +37,9 @@ def index(request):
     if not is_page_defined:
         return HttpResponseRedirect(reverse("home_index"))
 
+    # sets the active page
+    view_objects['active'] = page_name
+
     # get user energy rank and usage
     _get_energy_rank(request, view_objects)
 
