@@ -4,7 +4,7 @@ from django.db.models import Q
 from django.template.loader import render_to_string
 from django.template.defaultfilters import slugify
 from django.core import management
-from apps.managers.settings_mgr import get_current_round_info
+from apps.managers.challenge_mgr import challenge_mgr
 from apps.managers.team_mgr.models import Team
 from apps.managers.player_mgr.models import Profile
 from apps.widgets.raffle.models import RafflePrize
@@ -17,7 +17,7 @@ class Command(management.base.BaseCommand):
 
     def handle(self, *args, **options):
         """Generates forms for winners."""
-        self.__generate_forms(get_current_round_info()["name"])
+        self.__generate_forms(challenge_mgr.get_current_round_info()["name"])
 
     def __generate_forms(self, round_name):
         """Generate both raffle and prize forms."""

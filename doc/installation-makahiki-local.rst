@@ -190,7 +190,7 @@ Makahiki system::
   % ./manage.py syncdb --noinput
     Syncing...
     Creating tables ...
-    Creating table settings_mgr_challengesettings
+    Creating table challenge_mgr_challengesettings
      :
     Not synced (use migrations):
     - 

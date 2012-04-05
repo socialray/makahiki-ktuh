@@ -6,7 +6,7 @@ from django.contrib.auth.models import User
 from django.template.defaultfilters import slugify
 from django.db.models import Sum, Max
 
-from apps.managers.settings_mgr import get_current_round
+from apps.managers.challenge_mgr import challenge_mgr
 
 
 class Group(models.Model):
@@ -88,7 +88,7 @@ class Team(models.Model):
 
     def current_round_rank(self):
         """Gets the ranking of this team during the current round."""
-        current_round = get_current_round()
+        current_round = challenge_mgr.get_current_round()
         if current_round:
             return self.rank(round_name=current_round)
 
@@ -138,7 +138,7 @@ class Team(models.Model):
 
     def current_round_points(self):
         """Returns the number of points for the current round."""
-        current_round = get_current_round()
+        current_round = challenge_mgr.get_current_round()
         if current_round:
             return self.points(round_name=current_round)
 

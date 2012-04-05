@@ -11,13 +11,11 @@ from django.core.urlresolvers import reverse
 from django.conf import settings
 from django.template.loader import render_to_string
 from django.contrib.sites.models import Site
-from django.core.cache import cache
 from django.utils import importlib
 
 from apps.managers.team_mgr.models import Post
 from apps.widgets.notifications.models import UserNotification
-from apps.managers.cache_mgr.utils import invalidate_team_avatar_cache, \
-                                          invalidate_commitments_cache
+from apps.managers.cache_mgr import cache_mgr
 
 SETUP_WIZARD_ACTIVITY_NAME = "Intro video"
 MARKDOWN_LINK = "http://daringfireball.net/projects/markdown/syntax"
@@ -439,10 +437,10 @@ class CommitmentMember(CommonBase):
                 post.save()
 
         # Invalidate the categories cache.
-        cache.delete('smartgrid-categories-%s' % self.user.username)
-        cache.delete('user_events-%s' % self.user.username)
-        invalidate_team_avatar_cache(self.commitment, self.user)
-        invalidate_commitments_cache(self.user)
+        cache_mgr.delete('smartgrid-categories-%s' % self.user.username)
+        cache_mgr.delete('user_events-%s' % self.user.username)
+        cache_mgr.invalidate_team_avatar_cache(self.commitment, self.user)
+        cache_mgr.invalidate_commitments_cache(self.user)
         super(CommitmentMember, self).save(args, kwargs)
 
     def delete(self, using=None):
@@ -462,10 +460,10 @@ class CommitmentMember(CommonBase):
             post.save()
 
         # Invalidate the categories cache.
-        cache.delete('smartgrid-categories-%s' % self.user.username)
-        cache.delete('user_events-%s' % self.user.username)
-        invalidate_team_avatar_cache(self.commitment, self.user)
-        invalidate_commitments_cache(self.user)
+        cache_mgr.delete('smartgrid-categories-%s' % self.user.username)
+        cache_mgr.delete('user_events-%s' % self.user.username)
+        cache_mgr.invalidate_team_avatar_cache(self.commitment, self.user)
+        cache_mgr.invalidate_commitments_cache(self.user)
         super(CommitmentMember, self).delete()
 
 
@@ -555,9 +553,9 @@ class ActivityMember(CommonActivityUser):
             # self.submission_date = None # User will have to resubmit.
 
         # Invalidate the categories cache.
-        cache.delete('smartgrid-categories-%s' % self.user.username)
-        cache.delete('user_events-%s' % self.user.username)
-        invalidate_team_avatar_cache(self.activity, self.user)
+        cache_mgr.delete('smartgrid-categories-%s' % self.user.username)
+        cache_mgr.delete('user_events-%s' % self.user.username)
+        cache_mgr.invalidate_team_avatar_cache(self.activity, self.user)
         super(ActivityMember, self).save()
 
         # We check here for approved and rejected items because the object needs to be saved first.
@@ -742,9 +740,9 @@ class ActivityMember(CommonActivityUser):
             profile.save()
 
         # Invalidate the categories cache.
-        cache.delete('smartgrid-categories-%s' % self.user.username)
-        cache.delete('user_events-%s' % self.user.username)
-        invalidate_team_avatar_cache(self.activity, self.user)
+        cache_mgr.delete('smartgrid-categories-%s' % self.user.username)
+        cache_mgr.delete('user_events-%s' % self.user.username)
+        cache_mgr.invalidate_team_avatar_cache(self.activity, self.user)
         super(ActivityMember, self).delete()
 
 #------ Reminders --------#

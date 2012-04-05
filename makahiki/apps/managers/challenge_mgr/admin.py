@@ -1,6 +1,6 @@
 """Implements the admin interface for game settings."""
 from django.contrib import admin
-from apps.managers.settings_mgr.models import ChallengeSettings, RoundSettings, PageSettings
+from apps.managers.challenge_mgr.models import ChallengeSettings, RoundSettings, PageSettings
 
 admin.site.register(ChallengeSettings)
 

@@ -1,5 +1,5 @@
 """Provides competition settings in the request context to be used within a template."""
-from apps.managers.settings_mgr import get_current_round_info, in_competition
+from apps.managers.challenge_mgr import challenge_mgr
 from apps.managers.player_mgr.models import Profile
 from apps.managers.team_mgr.models import Team
 from django.conf import settings
@@ -39,7 +39,7 @@ def competition(request):
         "TEAM_MEMBER_COUNT": team_member_count,
         "OVERALL_MEMBER_COUNT": overall_member_count,
         "TEAM_LABEL": settings.CHALLENGE.competition_team_label,
-        "CURRENT_ROUND_INFO": get_current_round_info(),
+        "CURRENT_ROUND_INFO": challenge_mgr.get_current_round_info(),
         "FACEBOOK_APP_ID": facebook_app_id,
-        "IN_COMPETITION": in_competition(),
+        "IN_COMPETITION": challenge_mgr.in_competition(),
     }

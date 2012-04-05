@@ -9,13 +9,13 @@ from django.core import management
 from django.core.urlresolvers import reverse
 from apps.widgets.smartgrid.models import CommitmentMember, ActivityMember
 from apps.widgets.notifications.models import UserNotification, NoticeTemplate
-from apps.managers.settings_mgr import in_competition
+from apps.managers.challenge_mgr import challenge_mgr
 from django.db.models import Q
 
 
 def notify_round_started():
     """notify the start of a round"""
-    if not in_competition():
+    if not challenge_mgr.in_competition():
         return
 
     today = datetime.datetime.today()

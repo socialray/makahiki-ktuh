@@ -14,7 +14,7 @@ from django.template.loader import render_to_string
 from django.contrib.auth.decorators import login_required
 from django.views.decorators.cache import never_cache
 from django.contrib import messages
-from django.core.cache import cache
+from apps.managers.cache_mgr import cache_mgr
 
 from apps.widgets.smartgrid.models import TextPromptQuestion, EmailReminder, ActivityMember, \
                                      CommitmentMember, Category, ActivityBase, Activity, \
@@ -45,7 +45,7 @@ def supply(request, page_name):
 
 def _get_categories(user):
     """Return the category list with the tasks info"""
-    categories = cache.get('smartgrid-categories-%s' % user.username)
+    categories = cache_mgr.get('smartgrid-categories-%s' % user.username)
     if not categories:
         activity_members = []
         for member in ActivityMember.objects.filter(user=user):
@@ -98,7 +98,7 @@ def _get_categories(user):
             cat.task_list = task_list
 
         # Cache the categories for an hour (or until they are invalidated)
-        cache.set('smartgrid-categories-%s' % user,
+        cache_mgr.set('smartgrid-categories-%s' % user,
             categories, 60 * 60)
 
     return categories

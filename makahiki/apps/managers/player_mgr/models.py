@@ -13,8 +13,8 @@ from django.contrib.localflavor.us.models import PhoneNumberField
 from apps.managers.score_mgr.models import ScoreboardEntry, PointsTransaction
 
 from apps.managers.team_mgr.models import Team
-from apps.managers.settings_mgr import get_current_round
-from apps.managers.cache_mgr.utils import invalidate_info_bar_cache
+from apps.managers.challenge_mgr import challenge_mgr
+from apps.managers.cache_mgr import cache_mgr
 
 
 class Profile(models.Model):
@@ -73,7 +73,7 @@ class Profile(models.Model):
 
     def current_round_points(self):
         """Returns the amount of points the user has in the current round."""
-        current_round = get_current_round()
+        current_round = challenge_mgr.get_current_round()
         if current_round:
             return ScoreboardEntry.objects.get(profile=self,
                                                round_name=current_round).points
@@ -82,7 +82,7 @@ class Profile(models.Model):
 
     def current_round_overall_rank(self):
         """Returns the overall rank of the user for the current round."""
-        current_round = get_current_round()
+        current_round = challenge_mgr.get_current_round()
         if current_round:
             return self.overall_rank(round_name=current_round)
 
@@ -90,7 +90,7 @@ class Profile(models.Model):
 
     def current_round_team_rank(self):
         """Returns the rank of the user for the current round in their own team."""
-        current_round = get_current_round()
+        current_round = challenge_mgr.get_current_round()
         if current_round:
             return self.team_rank(round_name=current_round)
 
@@ -184,7 +184,7 @@ class Profile(models.Model):
         transaction.save()
 
         # Invalidate info bar cache.
-        invalidate_info_bar_cache(self.user)
+        cache_mgr.invalidate_info_bar_cache(self.user)
 
         # canopy activity deal with karma
         if self._is_canopy_activity(related_object):
@@ -218,7 +218,7 @@ class Profile(models.Model):
         """
 
         # Invalidate info bar cache.
-        invalidate_info_bar_cache(self.user)
+        cache_mgr.invalidate_info_bar_cache(self.user)
 
         self.points -= points
 

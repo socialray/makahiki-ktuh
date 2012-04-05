@@ -3,7 +3,7 @@ import datetime
 
 from django.template.defaultfilters import slugify
 
-from apps.managers.settings_mgr import get_round_info
+from apps.managers.challenge_mgr import challenge_mgr
 from apps.widgets.prizes.models import Prize
 
 
@@ -21,7 +21,7 @@ def supply(request, page_name):
 def _get_prizes(team):
     """Private method to process the prizes half of the page.
        Takes the user's team and returns a dictionary to be used in the template."""
-    rounds = get_round_info()
+    rounds = challenge_mgr.get_round_info()
     prize_dict = {}
     today = datetime.datetime.today()
     for key in rounds.keys():

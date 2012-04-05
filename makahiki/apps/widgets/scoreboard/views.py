@@ -1,7 +1,7 @@
 """Prepares the views for point scoreboard widget."""
 
 from django.db.models.aggregates import Count
-from apps.managers.settings_mgr import get_current_round
+from apps.managers.challenge_mgr import challenge_mgr
 from apps.managers.player_mgr.models import Profile
 from apps.managers.team_mgr.models import Team
 
@@ -15,7 +15,7 @@ def supply(request, page_name):
     team = user.get_profile().team
     user_team_standings = None
 
-    current_round = get_current_round()
+    current_round = challenge_mgr.get_current_round()
     round_name = current_round if current_round else None
     team_standings = Team.team_points_leaders(num_results=10, round_name=round_name)
     profile_standings = Profile.points_leaders(num_results=10, round_name=round_name)
