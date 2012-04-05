@@ -256,3 +256,69 @@ div.home-item {
         float: none;
     }
 }
+
+@media ( max-width : 639px) {
+    .tile p {
+        display: none;
+    }
+    #home-energy-icon {
+        background: transparent
+            url(/site_media/static/images/icons/icon-go-low.png) top
+            left no-repeat;
+    }
+    #home-energy-icon:hover {
+        background: transparent
+            url(/site_media/static/images/icons/icon-go-low-over.png)
+            top left no-repeat;
+    }
+    #home-activities-icon {
+        background: transparent
+            url(/site_media/static/images/icons/icon-scoreboard.png)
+            top left no-repeat;
+    }
+    #home-activities-icon:hover {
+        background: transparent
+            url(/site_media/static/images/icons/icon-scoreboard-over.png)
+            top left no-repeat;
+    }
+    #home-news-icon {
+        background: transparent
+            url(/site_media/static/images/icons/icon-news.png) top
+            left no-repeat;
+    }
+    #home-news-icon:hover {
+        background: transparent
+            url(/site_media/static/images/icons/icon-news-over.png)
+            top left no-repeat;
+    }
+    #home-prizes-icon {
+        background: transparent
+            url(/site_media/static/images/icons/icon-prizes.png) top
+            left no-repeat;
+    }
+    #home-prizes-icon:hover {
+        background: transparent
+            url(/site_media/static/images/icons/icon-prizes-over.png)
+            top left no-repeat;
+    }
+    #home-help-icon {
+        background: transparent
+            url(/site_media/static/images/icons/icon-help.png) top
+            left no-repeat;
+    }
+    #home-help-icon:hover {
+        background: transparent
+            url(/site_media/static/images/icons/icon-help-over.png)
+            top left no-repeat;
+    }
+    #home-profile-icon {
+        background: transparent
+            url(/site_media/static/images/icons/icon-profile.png) top
+            left no-repeat;
+    }
+    #home-profile-icon:hover {
+        background: transparent
+            url(/site_media/static/images/icons/icon-profile-over.png)
+            top left no-repeat;
+    }
+}
