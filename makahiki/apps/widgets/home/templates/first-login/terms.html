@@ -1,11 +1,11 @@
 {% load class_tags %}
 
 <h2>Terms and Conditions</h2>
-<div {% get_id_and_classes "setup-content" %}>
+<div id="setup-content">
     <p>The Kukui Cup competition is part of a University of Hawaii research project on energy.
         Please read the following information and make a selection below.</p>
 
-    <div {% get_id_and_classes "setup-terms-content" %}>
+    <div id="setup-terms-content">
         {% include "first-login/terms_text.html" %}
     </div>
 </div>
@@ -39,10 +39,10 @@
 
 <div style="clear:both"></div>
 
-<div {% get_id_and_classes "progressbar-header" %}>
+<div id="progressbar-header">
     <p>Introduction progress, points: {{ user.get_profile.points }}</p>
 </div>
-<div {% get_id_and_classes "progressbar" %}></div>
+<div id="progressbar"></div>
 <script type="text/javascript">
     $(document).ready(function () {
         $("#progressbar").progressbar({

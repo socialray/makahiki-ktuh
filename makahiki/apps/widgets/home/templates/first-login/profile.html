@@ -2,11 +2,11 @@
 {% load class_tags %}
 <h2>Customize your Kukui Cup profile</h2>
 
-<div {% get_id_and_classes "setup-content" %}>
+<div id="setup-content">
     <p>Each participant has a profile on the Kukui Cup website. You can personalize yours right now
         and get 5 points immediately!</p>
 
-    <form {% get_id_and_classes "profile-form" %} action="{% url setup_profile %}" method="post">
+    <form id="profile-form" action="{% url setup_profile %}" method="post">
         {% csrf_token %}
         <ul>
             <li>
@@ -46,10 +46,10 @@
 </div>
 <div style="clear:both"></div>
 
-<div {% get_id_and_classes "progressbar-header" %}>
+<div id="progressbar-header">
     <p>Introduction progress, points: {{ user.get_profile.points }}</p>
 </div>
-<div {% get_id_and_classes "progressbar" %}></div>
+<div id="progressbar"></div>
 
 <script type="text/javascript">
     {% include "first-login/profile.js" %}

@@ -2,6 +2,7 @@
 
 <li id="notification-item-{{notification.id}}"
     class="{{notification.style_class}} notification-item">
+    <!-- FIXME: don't like the width 700px CAM -->
     <div class="notification-contents"
          {% if notification.is_success %}style='width: 700px'{% endif %}>
         <div class='notice-icon'>
