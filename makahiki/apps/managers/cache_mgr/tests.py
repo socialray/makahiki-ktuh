@@ -1,6 +1,7 @@
 """Tests the cache_mgr module."""
 
 from django.test import TransactionTestCase
+import os
 from apps.managers.cache_mgr import cache_mgr
 
 
@@ -17,12 +18,14 @@ class BaseUnitTestCase(TransactionTestCase):
         self.assertEqual(len(cache_mgr.keys()), 1,
                          "Test that the current cache is not empty after set.")
 
-        self.assertEqual(cache_mgr.get_cache('test_key'), 'test_value',
-                         "Test get the correct value from cache.")
+        if 'MAKAHIKI_MEMCACHED_ENABLED' in os.environ and \
+            os.environ['MAKAHIKI_MEMCACHED_ENABLED'] == "True":
+            self.assertEqual(cache_mgr.get_cache('test_key'), 'test_value',
+                             "Test get the correct value from cache.")
 
         cache_mgr.get_cache('test_key_2', 'default_value')
         self.assertEqual(len(cache_mgr.keys()), 2,
-                         "Test that the current cache after get default.")
+                             "Test that the current cache after get default.")
 
         cache_mgr.delete('test_key')
         self.assertEqual(len(cache_mgr.keys()), 1,
