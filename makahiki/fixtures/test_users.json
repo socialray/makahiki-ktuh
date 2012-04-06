@@ -306,8 +306,7 @@
       "contact_email": "gelee@hawaii.edu", 
       "user": 1, 
       "contact_carrier": null, 
-      "setup_profile": true, 
-      "enable_help": true
+      "setup_profile": true
     }
   }, 
   {
@@ -329,8 +328,7 @@
       "contact_email": "johnson@hawaii.edu", 
       "user": 2, 
       "contact_carrier": "verizon", 
-      "setup_profile": true, 
-      "enable_help": false
+      "setup_profile": true
     }
   },
 
@@ -353,8 +351,7 @@
       "contact_email": "", 
       "user": 3,
       "contact_carrier": null,
-      "setup_profile": true, 
-      "enable_help": true
+      "setup_profile": true
     }
   },
     {
@@ -376,8 +373,7 @@
             "contact_email": "",
             "user": 4,
             "contact_carrier": null,
-            "setup_profile": true,
-            "enable_help": true
+            "setup_profile": true
         }
     },
     {
@@ -399,8 +395,7 @@
             "contact_email": "",
             "user": 5,
             "contact_carrier": null,
-            "setup_profile": true,
-            "enable_help": true
+            "setup_profile": true
         }
     },
 
@@ -423,8 +418,7 @@
             "contact_email": "",
             "user": 6,
             "contact_carrier": null,
-            "setup_profile": true,
-            "enable_help": true
+            "setup_profile": true
         }
     },
     {
@@ -446,8 +440,7 @@
             "contact_email": "",
             "user": 7,
             "contact_carrier": null,
-            "setup_profile": true,
-            "enable_help": true
+            "setup_profile": true
         }
     },
     {
@@ -469,8 +462,7 @@
             "contact_email": "",
             "user": 8,
             "contact_carrier": null,
-            "setup_profile": true,
-            "enable_help": true
+            "setup_profile": true
         }
     },
     {
@@ -492,8 +484,7 @@
             "contact_email": "",
             "user": 9,
             "contact_carrier": null,
-            "setup_profile": true,
-            "enable_help": true
+            "setup_profile": true
         }
     },
     {
@@ -515,8 +506,7 @@
             "contact_email": "",
             "user": 10,
             "contact_carrier": null,
-            "setup_profile": true,
-            "enable_help": true
+            "setup_profile": true
         }
     },
     {
@@ -538,8 +528,7 @@
             "contact_email": "",
             "user": 11,
             "contact_carrier": null,
-            "setup_profile": true,
-            "enable_help": true
+            "setup_profile": true
         }
     },
     {
@@ -561,8 +550,7 @@
             "contact_email": "",
             "user": 12,
             "contact_carrier": null,
-            "setup_profile": true,
-            "enable_help": true
+            "setup_profile": true
         }
     },
     {
@@ -584,8 +572,7 @@
             "contact_email": "",
             "user": 13,
             "contact_carrier": null,
-            "setup_profile": true,
-            "enable_help": true
+            "setup_profile": true
         }
     },
     {
@@ -607,8 +594,7 @@
             "contact_email": "",
             "user": 14,
             "contact_carrier": null,
-            "setup_profile": true,
-            "enable_help": true
+            "setup_profile": true
         }
     },
     {
@@ -630,8 +616,7 @@
             "contact_email": "",
             "user": 15,
             "contact_carrier": null,
-            "setup_profile": true,
-            "enable_help": true
+            "setup_profile": true
         }
     },
   {
@@ -653,8 +638,7 @@
       "contact_email": "cammymoore07@gmail.com", 
       "user": 20, 
       "contact_carrier": null, 
-      "setup_profile": true, 
-      "enable_help": true
+      "setup_profile": true
     }
   }
 ]

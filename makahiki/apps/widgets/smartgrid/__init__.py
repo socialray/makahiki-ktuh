@@ -344,7 +344,7 @@ def is_unlock_from_cache(user, task):
     if task.is_canopy:
         return is_unlock(user, task)
 
-    categories = cache_mgr.get('smartgrid-categories-%s' % user.username)
+    categories = cache_mgr.get_cache('smartgrid-categories-%s' % user.username)
     if not categories:
         return is_unlock(user, task)
 

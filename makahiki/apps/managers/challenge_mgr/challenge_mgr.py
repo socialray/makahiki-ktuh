@@ -7,8 +7,8 @@ from django.core.exceptions import ObjectDoesNotExist
 from apps.managers.challenge_mgr.models import ChallengeSettings, RoundSettings, PageSettings
 
 
-def load_db_settings():
-    """Load additional settings from DB."""
+def load_settings():
+    """Load settings for this challenge."""
 
     # get the CALLENGE setting from DB
     set_challenge_settings()
@@ -46,7 +46,6 @@ def create_admin_user():
 
     Create the admin user if not exists. otherwise, reset the password to the ENV.
     """
-    print settings.ADMIN_USER
     try:
         user = User.objects.get(username=settings.ADMIN_USER)
         if not user.check_password(settings.ADMIN_PASSWORD):
@@ -64,7 +63,7 @@ def create_admin_user():
 def info():
     """returns the information about the challenge."""
     if settings.CHALLENGE.competition_name is None:
-        load_db_settings()
+        load_settings()
 
     return "Challenge name : %s \n" \
            "Rounds: %s" % (settings.CHALLENGE.competition_name,

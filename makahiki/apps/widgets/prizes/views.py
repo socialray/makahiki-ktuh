@@ -27,7 +27,7 @@ def _get_prizes(team):
     for key in rounds.keys():
         prizes = Prize.objects.filter(round_name=key)
         for prize in prizes:
-            if today < rounds[key]["start"]:
+            if key != "Overall" and today < rounds[key]["start"]:
                 # If the round happens in the future, we don't care who the leader is.
                 prize.current_leader = "TBD"
 

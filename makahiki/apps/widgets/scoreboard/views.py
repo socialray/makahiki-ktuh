@@ -2,7 +2,8 @@
 
 from django.db.models.aggregates import Count
 from apps.managers.challenge_mgr import challenge_mgr
-from apps.managers.player_mgr.models import Profile
+from apps.managers.player_mgr import player_mgr
+from apps.managers.team_mgr import team_mgr
 from apps.managers.team_mgr.models import Team
 
 
@@ -17,15 +18,16 @@ def supply(request, page_name):
 
     current_round = challenge_mgr.get_current_round()
     round_name = current_round if current_round else None
-    team_standings = Team.team_points_leaders(num_results=10, round_name=round_name)
-    profile_standings = Profile.points_leaders(num_results=10, round_name=round_name)
+    team_standings = team_mgr.team_points_leaders(num_results=10, round_name=round_name)
+    profile_standings = player_mgr.points_leaders(num_results=10, round_name=round_name)
     if team:
         user_team_standings = team.points_leaders(num_results=10, round_name=round_name)
 
     # Calculate active participation.
-    team_participation = Team.objects.filter(profile__points__gte=50).annotate(
-        user_count=Count('profile'),
-    ).order_by('-user_count').select_related('group')[:10]
+    team_participation = Team.objects.filter(
+        profile__scoreboardentry__points__gte=50,
+        profile__scoreboardentry__round_name="Overall").annotate(
+            user_count=Count('profile')).order_by('-user_count').select_related('group')[:10]
 
     for f in team_participation:
         f.active_participation = (f.user_count * 100) / f.profile_set.count()

@@ -2,7 +2,7 @@
 from django.contrib.auth.models import User
 from django.core.urlresolvers import reverse
 from django.test import TransactionTestCase
-from apps.test_helpers.test_utils import TestUtils
+from apps.test_helpers import test_utils
 from apps.widgets.quests import get_quests
 
 
@@ -16,8 +16,8 @@ class QuestFunctionalTestCase(TransactionTestCase):
         profile.setup_complete = True
         profile.save()
 
-        TestUtils.register_page_widget("home", "quests")
-        TestUtils.register_page_widget("home", "notifications")
+        test_utils.register_page_widget("home", "quests")
+        test_utils.register_page_widget("home", "notifications")
         self.client.login(username="user", password="changeme")
 
     def testNoQuests(self):
@@ -28,7 +28,7 @@ class QuestFunctionalTestCase(TransactionTestCase):
 
     def testGetQuests(self):
         """Test that quests show up in the interface."""
-        quest = TestUtils.create_quest(completion_conditions=False)
+        quest = test_utils.create_quest(completion_conditions=False)
         quest.unlock_conditions = "False"
         quest.save()
 
@@ -45,7 +45,7 @@ class QuestFunctionalTestCase(TransactionTestCase):
 
     def testAcceptQuest(self):
         """Test that a user can accept a quest using a url."""
-        quest = TestUtils.create_quest(completion_conditions=False)
+        quest = test_utils.create_quest(completion_conditions=False)
 
         response = self.client.get(reverse("home_index"))
         self.assertContains(response, "Test quest",
@@ -61,7 +61,7 @@ class QuestFunctionalTestCase(TransactionTestCase):
 
     def testOptOutOfQuest(self):
         """Test that a user can opt out of the quest."""
-        quest = TestUtils.create_quest(completion_conditions=True)
+        quest = test_utils.create_quest(completion_conditions=True)
 
         response = self.client.get(reverse("home_index"))
         self.assertContains(response, "Test quest",
@@ -78,7 +78,7 @@ class QuestFunctionalTestCase(TransactionTestCase):
 
     def testCancelQuest(self):
         """Test that a user can cancel their participation in a quest."""
-        quest = TestUtils.create_quest(completion_conditions=False)
+        quest = test_utils.create_quest(completion_conditions=False)
 
         response = self.client.post(
             reverse("quests_accept", args=(quest.quest_slug,)),
@@ -100,7 +100,7 @@ class QuestFunctionalTestCase(TransactionTestCase):
 
     def testQuestCompletion(self):
         """Test that a user gets a dialog box when they complete a quest."""
-        quest = TestUtils.create_quest(completion_conditions=True)
+        quest = test_utils.create_quest(completion_conditions=True)
 
         response = self.client.get(reverse("home_index"))
         self.assertEqual(len(response.context["view_objects"]["notifications"]["alerts"]),

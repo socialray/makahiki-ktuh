@@ -70,7 +70,7 @@ class RaffleTicket(models.Model):
     def available_tickets(user):
         """Returns the number of raffle tickets the user has available."""
         profile = user.get_profile()
-        total_tickets = profile.points / POINTS_PER_TICKET
+        total_tickets = profile.points() / POINTS_PER_TICKET
         allocated_tickets = user.raffleticket_set.count()
 
         return total_tickets - allocated_tickets
@@ -78,4 +78,4 @@ class RaffleTicket(models.Model):
     @staticmethod
     def total_tickets(user):
         """Return the total tickets available for this user."""
-        return user.get_profile().points / POINTS_PER_TICKET
+        return user.get_profile().points() / POINTS_PER_TICKET

@@ -10,11 +10,11 @@ def supply(request, page_name):
 
     _ = page_name
     user = request.user
-    events = cache_mgr.get('user_events-%s' % user.username)
+    events = cache_mgr.get_cache('user_events-%s' % user.username)
     if not events:
         events = get_available_events(user)
         # Cache the user_event for a day
-        cache_mgr.set('user_events-%s' % user.username,
+        cache_mgr.set_cache('user_events-%s' % user.username,
             events, 60 * 60)
 
     event_form = EventCodeForm()

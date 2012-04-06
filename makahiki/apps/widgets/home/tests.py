@@ -11,7 +11,7 @@ from django.contrib.auth.models import User
 from django.conf import settings
 
 from apps.managers.player_mgr.models import Profile
-from apps.test_helpers.test_utils import TestUtils
+from apps.test_helpers import test_utils
 
 
 class HomeFunctionalTestCase(TransactionTestCase):
@@ -19,7 +19,7 @@ class HomeFunctionalTestCase(TransactionTestCase):
 
     def setUp(self):
         """setup."""
-        TestUtils.register_page_widget("home", "home")
+        test_utils.register_page_widget("home", "home")
 
     def testIndex(self):
         """Check that we can load the index."""
@@ -82,7 +82,7 @@ class SetupWizardFunctionalTestCase(TransactionTestCase):
         self.user = User.objects.create_user("user",
                                              "user@test.com",
                                              password="changeme")
-        TestUtils.register_page_widget("home", "home")
+        test_utils.register_page_widget("home", "home")
 
         self.client.login(username="user", password="changeme")
 
@@ -207,7 +207,7 @@ class SetupWizardFunctionalTestCase(TransactionTestCase):
         """Check that we can update the profile of the user in the setup
         wizard."""
         profile = self.user.get_profile()
-        points = profile.points
+        points = profile.points()
         response = self.client.post(reverse("setup_profile"), {
             "display_name": "Test User",
             }, follow=True)
@@ -215,7 +215,7 @@ class SetupWizardFunctionalTestCase(TransactionTestCase):
         self.assertTemplateUsed(response, "first-login/activity.html")
 
         user = User.objects.get(username="user")
-        self.assertEqual(points + 5, user.get_profile().points,
+        self.assertEqual(points + 5, user.get_profile().points(),
             "Check that the user has been awarded points.")
         self.assertTrue(user.get_profile().setup_profile,
             "Check that the user has now set up their profile.")
@@ -225,7 +225,7 @@ class SetupWizardFunctionalTestCase(TransactionTestCase):
             "display_name": "Test User",
             }, follow=True)
         user = User.objects.get(username="user")
-        self.assertEqual(points + 5, user.get_profile().points,
+        self.assertEqual(points + 5, user.get_profile().points(),
             "Check that the user was not awarded any more points.")
         self.failUnlessEqual(response.status_code, 200)
         self.assertTemplateUsed(response, "first-login/activity.html")

@@ -6,7 +6,7 @@ from django.test import TransactionTestCase
 from django.conf import settings
 from django.core.files.images import ImageFile
 from django.contrib.auth.models import User
-from apps.test_helpers.test_utils import TestUtils
+from apps.test_helpers import test_utils
 
 from apps.widgets.raffle.models import RafflePrize, RaffleTicket
 
@@ -22,7 +22,7 @@ class RafflePrizeTests(TransactionTestCase):
         This prize is not saved, as the round field is not yet set.
         """
 
-        TestUtils.set_competition_round()
+        test_utils.set_competition_round()
 
         # Create a test user
         self.user = User.objects.create_user("user", "user@test.com", password="changeme")

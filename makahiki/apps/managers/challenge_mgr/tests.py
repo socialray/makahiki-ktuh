@@ -8,7 +8,7 @@ from django.core.urlresolvers import reverse
 from django.conf import settings
 
 from apps.managers.challenge_mgr import challenge_mgr
-from apps.test_helpers.test_utils import TestUtils
+from apps.test_helpers import test_utils
 
 
 class ContextProcessorFunctionalTestCase(TransactionTestCase):
@@ -16,7 +16,7 @@ class ContextProcessorFunctionalTestCase(TransactionTestCase):
 
     def testRoundInfo(self):
         """Tests that round info is available for the page to process."""
-        TestUtils.set_competition_round()
+        test_utils.set_competition_round()
         current_round = challenge_mgr.get_current_round()
 
         User.objects.create_user("user", "user@test.com", password="changeme")
@@ -36,7 +36,7 @@ class BaseUnitTestCase(TransactionTestCase):
         """Tests that the current round retrieval is correct."""
         current_round = "Round 1"
 
-        TestUtils.set_competition_round()
+        test_utils.set_competition_round()
 
         current = challenge_mgr.get_current_round()
         self.assertEqual(current, current_round,

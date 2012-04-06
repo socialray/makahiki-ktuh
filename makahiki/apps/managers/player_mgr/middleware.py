@@ -20,7 +20,7 @@ class LoginMiddleware(object):
 
         # load the db settings if not done yet.
         if settings.CHALLENGE.competition_name is None:
-            challenge_mgr.load_db_settings()
+            challenge_mgr.load_settings()
             challenge_mgr.create_admin_user()
 
         response = self.check_competition_period(request)

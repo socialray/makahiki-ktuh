@@ -13,14 +13,14 @@ class BaseUnitTestCase(TransactionTestCase):
         self.assertEqual(len(cache_mgr.keys()), 0,
                          "Test that the current cache is empty.")
 
-        cache_mgr.set('test_key', 'test_value')
+        cache_mgr.set_cache('test_key', 'test_value')
         self.assertEqual(len(cache_mgr.keys()), 1,
                          "Test that the current cache is not empty after set.")
 
-        self.assertEqual(cache_mgr.get('test_key'), 'test_value',
+        self.assertEqual(cache_mgr.get_cache('test_key'), 'test_value',
                          "Test get the correct value from cache.")
 
-        cache_mgr.get('test_key_2', 'default_value')
+        cache_mgr.get_cache('test_key_2', 'default_value')
         self.assertEqual(len(cache_mgr.keys()), 2,
                          "Test that the current cache after get default.")
 

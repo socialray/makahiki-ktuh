@@ -279,6 +279,7 @@ class Challenge():
     competition_name = None
 
 CHALLENGE = Challenge()
+COMPETITION_ROUNDS = None
 
 #############################################
 # Load sensitive settings from OS environment

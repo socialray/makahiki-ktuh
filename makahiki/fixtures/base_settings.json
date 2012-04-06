@@ -14,29 +14,5 @@
       "language_code": "en",
       "competition_team_label": "Lounge"
     }
-  },
-  {
-    "pk": 1,
-    "model": "challenge_mgr.pagesettings",
-    "fields": {
-      "widget": "home",
-      "name": "home"
-    }
-  },
-  {
-    "pk": 3,
-    "model": "challenge_mgr.pagesettings",
-    "fields": {
-      "widget": "help.intro",
-      "name": "help"
-    }
-  },
-  {
-    "pk": 4,
-    "model": "challenge_mgr.pagesettings",
-    "fields": {
-      "widget": "ask_admin",
-      "name": "help"
-    }
   }
 ]

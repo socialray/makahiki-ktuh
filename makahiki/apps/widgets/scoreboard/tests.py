@@ -3,8 +3,7 @@
 import datetime
 from django.core.urlresolvers import reverse
 from django.test import TransactionTestCase
-from django.conf import settings
-from apps.test_helpers.test_utils import TestUtils
+from apps.test_helpers import test_utils
 
 
 class ScoreboardTest(TransactionTestCase):
@@ -15,19 +14,18 @@ class ScoreboardTest(TransactionTestCase):
         """
         setup
         """
-        self.user = TestUtils.setup_user(username="user", password="changeme")
+        self.user = test_utils.setup_user(username="user", password="changeme")
 
-        TestUtils.register_page_widget("learn", "smartgrid")
-        TestUtils.register_page_widget("learn", "notifications")
-        TestUtils.register_page_widget("learn", "scoreboard")
+        test_utils.register_page_widget("learn", "smartgrid")
+        test_utils.register_page_widget("learn", "notifications")
+        test_utils.register_page_widget("learn", "scoreboard")
 
         self.client.login(username="user", password="changeme")
 
     def testScoreboard(self):
         """Test that the scoreboard loads current round information."""
-        saved_rounds = settings.COMPETITION_ROUNDS
 
-        TestUtils.set_competition_round()
+        test_utils.set_competition_round()
 
         # Give the user points in the round and then check the queryset used in the page.
         profile = self.user.get_profile()
@@ -70,6 +68,3 @@ class ScoreboardTest(TransactionTestCase):
         self.assertEqual(response.context["view_objects"]["scoreboard"]["user_team_standings"][
                          0].current_round_points(), 10,
             "The user still should have 10 points this round.")
-
-        # Don't forget to clean up.
-        settings.COMPETITION_ROUNDS = saved_rounds

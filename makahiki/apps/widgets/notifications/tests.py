@@ -7,7 +7,7 @@ from django.contrib.auth.models import User
 from apps.managers.team_mgr.models import Team
 from apps.widgets.notifications import get_unread_notifications
 from apps.widgets.notifications.models import UserNotification
-from apps.test_helpers.test_utils import TestUtils
+from apps.test_helpers import test_utils
 
 
 class NotificationUnitTests(TransactionTestCase):
@@ -46,8 +46,8 @@ class NotificationFunctionalTests(TransactionTestCase):
         profile.setup_profile = True
         profile.save()
 
-        TestUtils.register_page_widget("home", "notifications")
-        TestUtils.register_page_widget("help", "notifications")
+        test_utils.register_page_widget("home", "notifications")
+        test_utils.register_page_widget("help", "notifications")
 
         self.client.login(username="user", password="test")
 

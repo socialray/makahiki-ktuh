@@ -2,7 +2,7 @@
 Tests for the pages module.
 """
 from apps.test_helpers.selenium_helpers import MakahikiSeleniumTestCase
-from apps.test_helpers.test_utils import TestUtils
+from apps.test_helpers import test_utils
 
 
 class LandingSeleniumTestCase(MakahikiSeleniumTestCase):
@@ -18,7 +18,7 @@ class LandingSeleniumTestCase(MakahikiSeleniumTestCase):
         """Test logging in the user to the system."""
         username = "atestuser"
         password = "atestpass"
-        TestUtils.setup_user(username, password)
+        test_utils.setup_user(username, password)
 
         self.login(username, password)
         self.logout()

@@ -7,6 +7,7 @@ from django.utils.http import urlquote
 
 _makahiki_cache_keys = set()
 
+
 def info():
     """return the information about this cache."""
     return "%s" % type(cache)
@@ -24,7 +25,7 @@ def delete(key, version=None):
     cache.delete(key, version)
 
 
-def get(key, default=None, version=None):
+def get_cache(key, default=None, version=None):
     """proxy the call to django cache.get."""
     value = cache.get(key, default, version)
     if value is not None:
@@ -32,7 +33,7 @@ def get(key, default=None, version=None):
     return value
 
 
-def set(key, value, timeout=None, version=None):
+def set_cache(key, value, timeout=None, version=None):
     """proxy the call to django cache.set."""
     _makahiki_cache_keys.add(key)
     cache.set(key, value, timeout, version)
