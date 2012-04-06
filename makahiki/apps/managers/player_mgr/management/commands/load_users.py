@@ -7,11 +7,7 @@ email, lounge.
 .. note:: This command has UH-specific code in it and must be revised.
 """
 from django.core import management
-from django.contrib.auth.models import User
-from django.core.exceptions import ObjectDoesNotExist
 from apps.managers.player_mgr import player_mgr
-from apps.managers.team_mgr.models import Team
-from django.db.utils import IntegrityError
 
 
 class Command(management.base.BaseCommand):
@@ -127,5 +123,3 @@ class Command(management.base.BaseCommand):
                 '10': 'D',
                 '11': 'E',
                 '12': 'E'}[team]
-
-

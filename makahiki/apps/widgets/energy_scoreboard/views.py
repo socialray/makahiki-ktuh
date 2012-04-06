@@ -1,12 +1,8 @@
 """Handle the rendering of the energy scoreboard widget."""
 
 import datetime
-from django.db.models import F
-from django.db.models.aggregates import Count
-
 from apps.managers.challenge_mgr import challenge_mgr
-from apps.widgets.energy_goal.models import TeamEnergyGoal
-from apps.widgets.energy_scoreboard.models import EnergyData
+from apps.managers.score_mgr import resource_score_mgr
 
 
 def supply(request, page_name):
@@ -27,16 +23,9 @@ def supply(request, page_name):
         if today >= rounds[key]["start"]:
             scoreboard_rounds.append(key)
 
-    # Generate the scoreboard for energy goals.
-    # We could aggregate the energy goals in teams, but there's a bug in Django.
-    # See https://code.djangoproject.com/ticket/13461
-    goals_scoreboard = TeamEnergyGoal.objects.filter(
-        actual_usage__lte=F("goal_usage")
-    ).values(
-        "team__name"
-    ).annotate(completions=Count("team")).order_by("-completions")
+    goals_scoreboard = resource_score_mgr.energy_goal_ranks()
 
-    energy_ranks = EnergyData.get_overall_ranks()
+    energy_ranks = resource_score_mgr.energy_ranks()
 
     return {
         "team": team,

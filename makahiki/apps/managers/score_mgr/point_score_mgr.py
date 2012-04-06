@@ -201,9 +201,10 @@ def team_points_leaders(num_results=10, round_name="Overall"):
     """Returns the team points leaders across all groups, as a dictionary profile__team__name
     and points.
     """
-    entry = ScoreboardEntry.objects.values("profile__team__name").filter(round_name=round_name).annotate(
-        points=Sum("points"),
-        last=Max("last_awarded_submission")).order_by("-points", "-last")
+    entry = ScoreboardEntry.objects.values("profile__team__name").filter(
+        round_name=round_name).annotate(
+            points=Sum("points"),
+            last=Max("last_awarded_submission")).order_by("-points", "-last")
     if entry:
         return entry[:num_results]
     else:
@@ -267,5 +268,3 @@ def _last_submitted_before(user, submission_date):
             "submission_date").submission_date
     except ObjectDoesNotExist:
         return None
-
-

@@ -21,6 +21,7 @@ def points_leader(round_name="Overall"):
     else:
         return Profile.objects.all()[0]
 
+
 def points_leaders(num_results=10, round_name="Overall"):
     """Returns the points leaders out of all users, as a dictionary object
     with profile__name and points.
