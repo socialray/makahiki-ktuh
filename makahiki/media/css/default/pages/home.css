@@ -69,16 +69,16 @@ div.home-item {
 
 #home-advanced-icon {
     background: transparent
-        url(/site_media/static/images/icons/icon-advanced-lg.png) top left
-        no-repeat;
+        url(/site_media/static/images/icons/icon-advanced-lg.png) top
+        left no-repeat;
     width: 120px;
     height: 124px;
 }
 
 #home-advanced-icon:hover {
     background: transparent
-        url(/site_media/static/images/icons/icon-advanced-lg-over.png) top
-        left no-repeat;
+        url(/site_media/static/images/icons/icon-advanced-lg-over.png)
+        top left no-repeat;
 }
 
 #home-energy-icon {
@@ -290,20 +290,24 @@ div.home-item {
         display: none;
     }
     #home-advanced-icon {
-    background: transparent
-        url(/site_media/static/images/icons/icon-advanced.png) top left
-        no-repeat;
+        background: transparent
+            url(/site_media/static/images/icons/icon-advanced.png) top
+            left no-repeat;
+        width: 54px;
+        height: 56px;
     }
     #home-advanced-icon:hover {
-    background: transparent
-        url(/site_media/static/images/icons/icon-advanced-over.png) top
-        left no-repeat;
+        background: transparent
+            url(/site_media/static/images/icons/icon-advanced-over.png)
+            top left no-repeat;
     }
     #home-energy-icon {
         background: transparent
             url(/site_media/static/images/icons/icon-go-low.png) top
             left no-repeat;
-    }
+        width: 54px;
+        height: 56px;
+}
     #home-energy-icon:hover {
         background: transparent
             url(/site_media/static/images/icons/icon-go-low-over.png)
@@ -311,9 +315,11 @@ div.home-item {
     }
     #home-activities-icon {
         background: transparent
-            url(/site_media/static/images/icons/icon-scoreboard.png)
-            top left no-repeat;
-    }
+            url(/site_media/static/images/icons/icon-scoreboard.png) top
+            left no-repeat;
+        width: 54px;
+        height: 56px;
+}
     #home-activities-icon:hover {
         background: transparent
             url(/site_media/static/images/icons/icon-scoreboard-over.png)
@@ -321,19 +327,23 @@ div.home-item {
     }
     #home-news-icon {
         background: transparent
-            url(/site_media/static/images/icons/icon-news.png) top
-            left no-repeat;
-    }
+            url(/site_media/static/images/icons/icon-news.png) top left
+            no-repeat;
+        width: 54px;
+        height: 56px;
+}
     #home-news-icon:hover {
         background: transparent
-            url(/site_media/static/images/icons/icon-news-over.png)
-            top left no-repeat;
+            url(/site_media/static/images/icons/icon-news-over.png) top
+            left no-repeat;
     }
     #home-prizes-icon {
         background: transparent
             url(/site_media/static/images/icons/icon-prizes.png) top
             left no-repeat;
-    }
+        width: 54px;
+        height: 56px;
+}
     #home-prizes-icon:hover {
         background: transparent
             url(/site_media/static/images/icons/icon-prizes-over.png)
@@ -341,32 +351,38 @@ div.home-item {
     }
     #home-help-icon {
         background: transparent
-            url(/site_media/static/images/icons/icon-help.png) top
-            left no-repeat;
-    }
+            url(/site_media/static/images/icons/icon-help.png) top left
+            no-repeat;
+        width: 54px;
+        height: 56px;
+}
     #home-help-icon:hover {
         background: transparent
-            url(/site_media/static/images/icons/icon-help-over.png)
-            top left no-repeat;
+            url(/site_media/static/images/icons/icon-help-over.png) top
+            left no-repeat;
     }
     #home-profile-icon {
         background: transparent
             url(/site_media/static/images/icons/icon-profile.png) top
             left no-repeat;
-    }
+        width: 54px;
+        height: 56px;
+}
     #home-profile-icon:hover {
         background: transparent
             url(/site_media/static/images/icons/icon-profile-over.png)
             top left no-repeat;
     }
     #home-water-icon {
-    background: transparent
-        url(/site_media/static/images/icons/icon-water.png) top left
-        no-repeat;
-    }
+        background: transparent
+            url(/site_media/static/images/icons/icon-water.png) top left
+            no-repeat;
+        width: 54px;
+        height: 56px;
+}
     #home-water-icon:hover {
-    background: transparent
-        url(/site_media/static/images/icons/icon-water-over.png) top
-        left no-repeat;
+        background: transparent
+            url(/site_media/static/images/icons/icon-water-over.png) top
+            left no-repeat;
     }
 }
