@@ -314,10 +314,21 @@ img {
 /* ========================= */
 /*       IDs                 */
 /* ========================= */
-#feedback-logout {
-	
+#feedback-logout a {
+    float: right;
+	text-align: right;
 }
 
+#feedback-single {
+    position: absolute;
+    left: 4px;
+    top: 0;
+    margin: 0;
+}
+
+#feedback-single button {
+    float: left;
+}
 /* #header-logout */
 #header-logout {
 	position: absolute;
@@ -419,7 +430,7 @@ img {
 	vertical-align: bottom;
 	float: left;
 	text-align: center;
-	width: 95%;
+	width: 92%;
 	margin-left: 25px;
 }
 
