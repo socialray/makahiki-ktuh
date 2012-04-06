@@ -1,5 +1,3 @@
-from django.contrib.auth.models import User
-
 from apps.lib.brabeion.base import Badge
 
 

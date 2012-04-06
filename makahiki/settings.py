@@ -60,7 +60,7 @@ TEMPLATE_CONTEXT_PROCESSORS = (
     "django.core.context_processors.media",
     "django.core.context_processors.request",
     'django.contrib.messages.context_processors.messages',
-    "apps.managers.settings_mgr.context_processors.competition",
+    "apps.managers.challenge_mgr.context_processors.competition",
     )
 
 ######################
@@ -117,7 +117,7 @@ INSTALLED_APPS = (
 
     # Makahiki components
     'apps.managers.auth_mgr',
-    'apps.managers.settings_mgr',
+    'apps.managers.challenge_mgr',
     'apps.managers.team_mgr',
     'apps.managers.player_mgr',
     'apps.managers.score_mgr',
@@ -279,6 +279,7 @@ class Challenge():
     competition_name = None
 
 CHALLENGE = Challenge()
+COMPETITION_ROUNDS = None
 
 #############################################
 # Load sensitive settings from OS environment

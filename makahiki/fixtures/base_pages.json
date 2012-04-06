@@ -1,7 +1,7 @@
 [
   {
     "pk": 10,
-    "model": "settings_mgr.pagesettings",
+    "model": "challenge_mgr.pagesettings",
     "fields": {
       "widget": "energy_scoreboard",
       "enabled": true,
@@ -10,7 +10,7 @@
   },
   {
     "pk": 7,
-    "model": "settings_mgr.pagesettings",
+    "model": "challenge_mgr.pagesettings",
     "fields": {
       "widget": "energy_goal",
       "enabled": true,
@@ -19,7 +19,7 @@
   },
   {
     "pk": 12,
-    "model": "settings_mgr.pagesettings",
+    "model": "challenge_mgr.pagesettings",
     "fields": {
       "widget": "quests",
       "enabled": true,
@@ -28,7 +28,7 @@
   },
   {
     "pk": 9,
-    "model": "settings_mgr.pagesettings",
+    "model": "challenge_mgr.pagesettings",
     "fields": {
       "widget": "energy_power_meter",
       "enabled": true,
@@ -37,7 +37,7 @@
   },
   {
     "pk": 11,
-    "model": "settings_mgr.pagesettings",
+    "model": "challenge_mgr.pagesettings",
     "fields": {
       "widget": "wallpost",
       "enabled": true,
@@ -46,7 +46,7 @@
   },
   {
     "pk": 13,
-    "model": "settings_mgr.pagesettings",
+    "model": "challenge_mgr.pagesettings",
     "fields": {
       "widget": "notifications",
       "enabled": true,
@@ -55,7 +55,7 @@
   },
   {
     "pk": 2,
-    "model": "settings_mgr.pagesettings",
+    "model": "challenge_mgr.pagesettings",
     "fields": {
       "widget": "help.intro",
       "enabled": true,
@@ -64,7 +64,7 @@
   },
   {
     "pk": 3,
-    "model": "settings_mgr.pagesettings",
+    "model": "challenge_mgr.pagesettings",
     "fields": {
       "widget": "help.faq",
       "enabled": true,
@@ -73,7 +73,7 @@
   },
   {
     "pk": 4,
-    "model": "settings_mgr.pagesettings",
+    "model": "challenge_mgr.pagesettings",
     "fields": {
       "widget": "help.rule",
       "enabled": true,
@@ -82,7 +82,7 @@
   },
   {
     "pk": 5,
-    "model": "settings_mgr.pagesettings",
+    "model": "challenge_mgr.pagesettings",
     "fields": {
       "widget": "ask_admin",
       "enabled": true,
@@ -91,7 +91,7 @@
   },
   {
     "pk": 1,
-    "model": "settings_mgr.pagesettings",
+    "model": "challenge_mgr.pagesettings",
     "fields": {
       "widget": "home",
       "enabled": true,
@@ -100,7 +100,7 @@
   },
   {
     "pk": 8,
-    "model": "settings_mgr.pagesettings",
+    "model": "challenge_mgr.pagesettings",
     "fields": {
       "widget": "upcoming_events",
       "enabled": true,
@@ -109,7 +109,7 @@
   },
   {
     "pk": 6,
-    "model": "settings_mgr.pagesettings",
+    "model": "challenge_mgr.pagesettings",
     "fields": {
       "widget": "smartgrid",
       "enabled": true,
@@ -118,7 +118,7 @@
   },
   {
     "pk": 24,
-    "model": "settings_mgr.pagesettings",
+    "model": "challenge_mgr.pagesettings",
     "fields": {
       "widget": "team_members",
       "enabled": true,
@@ -127,7 +127,7 @@
   },
   {
     "pk": 20,
-    "model": "settings_mgr.pagesettings",
+    "model": "challenge_mgr.pagesettings",
     "fields": {
       "widget": "wallpost",
       "enabled": true,
@@ -136,7 +136,7 @@
   },
   {
     "pk": 21,
-    "model": "settings_mgr.pagesettings",
+    "model": "challenge_mgr.pagesettings",
     "fields": {
       "widget": "upcoming_events",
       "enabled": true,
@@ -145,7 +145,7 @@
   },
   {
     "pk": 22,
-    "model": "settings_mgr.pagesettings",
+    "model": "challenge_mgr.pagesettings",
     "fields": {
       "widget": "popular_tasks",
       "enabled": true,
@@ -154,7 +154,7 @@
   },
   {
     "pk": 23,
-    "model": "settings_mgr.pagesettings",
+    "model": "challenge_mgr.pagesettings",
     "fields": {
       "widget": "my_commitments",
       "enabled": true,
@@ -163,7 +163,7 @@
   },
   {
     "pk": 19,
-    "model": "settings_mgr.pagesettings",
+    "model": "challenge_mgr.pagesettings",
     "fields": {
       "widget": "badges",
       "enabled": true,
@@ -172,7 +172,7 @@
   },
   {
     "pk": 16,
-    "model": "settings_mgr.pagesettings",
+    "model": "challenge_mgr.pagesettings",
     "fields": {
       "widget": "my_achievements",
       "enabled": true,
@@ -181,7 +181,7 @@
   },
   {
     "pk": 17,
-    "model": "settings_mgr.pagesettings",
+    "model": "challenge_mgr.pagesettings",
     "fields": {
       "widget": "my_commitments",
       "enabled": true,
@@ -190,7 +190,7 @@
   },
   {
     "pk": 18,
-    "model": "settings_mgr.pagesettings",
+    "model": "challenge_mgr.pagesettings",
     "fields": {
       "widget": "my_info",
       "enabled": true,
@@ -199,7 +199,7 @@
   },
   {
     "pk": 14,
-    "model": "settings_mgr.pagesettings",
+    "model": "challenge_mgr.pagesettings",
     "fields": {
       "widget": "prizes",
       "enabled": true,
@@ -208,7 +208,7 @@
   },
   {
     "pk": 15,
-    "model": "settings_mgr.pagesettings",
+    "model": "challenge_mgr.pagesettings",
     "fields": {
       "widget": "raffle",
       "enabled": true,

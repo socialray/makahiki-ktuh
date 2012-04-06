@@ -5,7 +5,7 @@ from django.test import TransactionTestCase
 from django.core.urlresolvers import reverse
 from django.contrib.auth.models import User
 
-from apps.test_helpers.test_utils import TestUtils
+from apps.test_helpers import test_utils
 from apps.widgets.smartgrid.models import Activity, ActivityMember, Commitment, CommitmentMember
 from apps.widgets.quests.models import Quest
 
@@ -16,12 +16,12 @@ class ProfileFunctionalTestCase(TransactionTestCase):
 
     def setUp(self):
         """setup"""
-        self.user = TestUtils.setup_user(username="user", password="changeme")
-        TestUtils.set_competition_round()
-        TestUtils.register_page_widget("profile", "my_info")
-        TestUtils.register_page_widget("profile", "my_achievements")
-        TestUtils.register_page_widget("profile", "my_commitments")
-        TestUtils.register_page_widget("profile", "quests")
+        self.user = test_utils.setup_user(username="user", password="changeme")
+        test_utils.set_competition_round()
+        test_utils.register_page_widget("profile", "my_info")
+        test_utils.register_page_widget("profile", "my_achievements")
+        test_utils.register_page_widget("profile", "my_commitments")
+        test_utils.register_page_widget("profile", "quests")
 
         self.client.login(username="user", password="changeme")
 
@@ -219,7 +219,7 @@ class ProfileFunctionalTestCase(TransactionTestCase):
         )
         activity.save()
 
-        points = self.user.get_profile().points
+        points = self.user.get_profile().points()
         member = ActivityMember.objects.create(
             user=self.user,
             activity=activity,
@@ -228,7 +228,7 @@ class ProfileFunctionalTestCase(TransactionTestCase):
         )
         member.save()
 
-        self.assertEqual(self.user.get_profile().points, points + 314159,
+        self.assertEqual(self.user.get_profile().points(), points + 314159,
             "Variable number of points should have been awarded.")
 
         # Kludge to change point value for the info bar.

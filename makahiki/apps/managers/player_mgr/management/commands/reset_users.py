@@ -12,6 +12,7 @@ Resets the user(s) as if they never took part in the competition. Preserves thes
 
 from django.core import management
 from django.contrib.auth.models import User
+from apps.managers.player_mgr import player_mgr
 
 
 class Command(management.base.BaseCommand):
@@ -49,33 +50,4 @@ class Command(management.base.BaseCommand):
 
         for user in users:
             self.stdout.write("Resetting user %s\n" % user.username)
-            self.reset_user(user)
-
-    def reset_user(self, user):
-        """Resets the given user by deleting them and then restoring them. """
-        username = user.username
-        email = user.email
-        is_staff = user.is_staff
-        is_superuser = user.is_superuser
-
-        profile = user.get_profile()
-        d_name = profile.name
-        f_name = profile.first_name
-        l_name = profile.last_name
-        team = profile.team
-
-        # Delete the user and create a new one.
-        user.delete()
-        new_user = User.objects.create_user(username=username, email=email,
-            password="")
-        new_user.is_staff = is_staff
-        new_user.is_superuser = is_superuser
-        new_user.save()
-
-        profile = new_user.get_profile()
-        profile.name = d_name
-        profile.first_name = f_name
-        profile.last_name = l_name
-        profile.team = team
-
-        profile.save()
+            player_mgr.reset_user(user)

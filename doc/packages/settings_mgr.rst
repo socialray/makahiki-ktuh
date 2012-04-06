@@ -1,25 +1,25 @@
-Package :mod:`apps.managers.settings_mgr`
+Package :mod:`apps.managers.challenge_mgr`
 =========================================
 
-.. automodule:: apps.managers.settings_mgr
+.. automodule:: apps.managers.challenge_mgr
    :members:
 
-Module :mod:`apps.managers.settings_mgr.models`
+Module :mod:`apps.managers.challenge_mgr.models`
 -----------------------------------------------
 
-.. automodule:: apps.managers.settings_mgr.models
+.. automodule:: apps.managers.challenge_mgr.models
    :members:
 
-Module :mod:`apps.managers.settings_mgr.admin`
+Module :mod:`apps.managers.challenge_mgr.admin`
 ----------------------------------------------
 
-.. automodule:: apps.managers.settings_mgr.admin
+.. automodule:: apps.managers.challenge_mgr.admin
    :members:
 
-Module :mod:`apps.managers.settings_mgr.context_processors`
+Module :mod:`apps.managers.challenge_mgr.context_processors`
 -----------------------------------------------------------
 
-.. automodule:: apps.managers.settings_mgr.context_processors
+.. automodule:: apps.managers.challenge_mgr.context_processors
    :members:
 
 

@@ -9,7 +9,7 @@ from django.http import HttpResponseRedirect
 from django.core.urlresolvers import reverse
 from django.contrib.auth.decorators import login_required
 from django.conf import settings
-from apps.managers.settings_mgr.models import PageSettings
+from apps.managers.challenge_mgr.models import PageSettings
 
 
 @never_cache

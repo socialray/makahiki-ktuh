@@ -3,9 +3,7 @@ import datetime
 
 from django.test import TransactionTestCase
 from django.contrib.auth.models import User
-
 from apps.lib.brabeion import badges
-
 from apps.widgets.badges import user_badges
 from apps.widgets.smartgrid.models import Commitment, CommitmentMember
 from apps.widgets.badges.management.commands.award_badge import award_badge

@@ -5,10 +5,10 @@ import re
 from django.test import TransactionTestCase
 from django.core.urlresolvers import reverse
 from django.conf import settings
-from apps.managers.settings_mgr import get_current_round_info
+from apps.managers.challenge_mgr import challenge_mgr
 
 from apps.widgets.raffle.models import RafflePrize
-from apps.test_helpers.test_utils import TestUtils
+from apps.test_helpers import test_utils
 
 
 class RafflePrizesTestCase(TransactionTestCase):
@@ -19,12 +19,12 @@ class RafflePrizesTestCase(TransactionTestCase):
         """Set up rounds, team, and a user."""
         # Set up rounds.
 
-        TestUtils.set_two_rounds()
+        test_utils.set_two_rounds()
 
         # Set up user
-        self.user = TestUtils.setup_user(username="user", password="changeme")
+        self.user = test_utils.setup_user(username="user", password="changeme")
 
-        TestUtils.register_page_widget("win", "raffle")
+        test_utils.register_page_widget("win", "raffle")
         self.client.login(username="user", password="changeme")
 
     def testIndex(self):
@@ -44,7 +44,7 @@ class RafflePrizesTestCase(TransactionTestCase):
         self.assertContains(response,
             "Your total raffle tickets: 0 Allocated right now: 0 Available: 0",
             msg_prefix="User should not have any raffle tickets.")
-        deadline = get_current_round_info()["end"] - datetime.timedelta(hours=2)
+        deadline = challenge_mgr.get_current_round_info()["end"] - datetime.timedelta(hours=2)
         date_string = deadline.strftime("%A, %B %d, %Y, ")
         # Workaround since strftime doesn't remove the leading 0 in hours.
         hour = deadline.hour

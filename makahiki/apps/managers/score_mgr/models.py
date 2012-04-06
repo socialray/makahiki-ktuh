@@ -1,7 +1,6 @@
 """The model definition for scores."""
 
 from django.db import models
-from django.db.models import Q
 from django.contrib.auth.models import User
 from django.contrib.contenttypes import generic
 from django.contrib.contenttypes.models import ContentType
@@ -23,53 +22,6 @@ class ScoreboardEntry(models.Model):
         unique_together = (("profile", "round_name",),)
         ordering = ("round_name",)
 
-    @staticmethod
-    def user_round_overall_rank(user, round_name):
-        """user round overall rank"""
-        entry, _ = ScoreboardEntry.objects.get_or_create(
-            profile=user.get_profile(),
-            round_name=round_name
-        )
-
-        # Check if the user has done anything.
-        if entry.last_awarded_submission:
-            return ScoreboardEntry.objects.filter(
-                Q(points__gt=entry.points) |
-                Q(points=entry.points,
-                    last_awarded_submission__gt=entry.last_awarded_submission),
-                round_name=round_name,
-            ).count() + 1
-
-        # Users who have not done anything yet are assumed to be last.
-        return ScoreboardEntry.objects.filter(
-            points__gt=entry.points,
-            round_name=round_name,
-        ).count() + 1
-
-    @staticmethod
-    def user_round_team_rank(user, round_name):
-        """user round team rank"""
-        team = user.get_profile().team
-        entry, _ = ScoreboardEntry.objects.get_or_create(
-            profile=user.get_profile(),
-            round_name=round_name
-        )
-
-        if entry.last_awarded_submission:
-            return ScoreboardEntry.objects.filter(
-                Q(points__gt=entry.points) |
-                Q(points=entry.points,
-                    last_awarded_submission__gt=entry.last_awarded_submission),
-                profile__team=team,
-                round_name=round_name,
-            ).count() + 1
-        else:
-            return ScoreboardEntry.objects.filter(
-                points__gt=entry.points,
-                profile__team=team,
-                round_name=round_name,
-            ).count() + 1
-
 
 class PointsTransaction(models.Model):
     """Entries that track points awarded to users."""
@@ -81,17 +33,3 @@ class PointsTransaction(models.Model):
     object_id = models.PositiveIntegerField(null=True)
     content_type = models.ForeignKey(ContentType, null=True)
     related_object = generic.GenericForeignKey("content_type", "object_id")
-
-    @staticmethod
-    def get_transaction_for_object(related_object, points):
-        """get transaction log"""
-        try:
-            content_type = ContentType.objects.get_for_model(related_object)
-            return PointsTransaction.objects.filter(
-                points=points,
-                object_id=related_object.id,
-                content_type=content_type,
-            )[0]
-
-        except IndexError:
-            return None

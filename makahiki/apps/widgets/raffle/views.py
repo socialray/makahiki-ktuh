@@ -8,7 +8,7 @@ from django.contrib.auth.decorators import login_required, user_passes_test
 from django.core.urlresolvers import reverse
 from django.views.decorators.cache import never_cache
 
-from apps.managers.settings_mgr import  get_current_round_info
+from apps.managers.challenge_mgr import  challenge_mgr
 from apps.widgets.raffle.models import  RafflePrize, RaffleTicket, POINTS_PER_TICKET, \
                                         RAFFLE_END_PERIOD
 
@@ -17,7 +17,7 @@ def supply(request, page_name):
     """Supply the view_objects contents, which provides all raffle data."""
     _ = page_name
     user = request.user
-    current_round_info = get_current_round_info()
+    current_round_info = challenge_mgr.get_current_round_info()
     deadline = current_round_info["end"] - datetime.timedelta(hours=RAFFLE_END_PERIOD)
     today = datetime.datetime.today()
 
@@ -52,7 +52,7 @@ def add_ticket(request, prize_id):
     if request.method == "POST":
         prize = get_object_or_404(RafflePrize, id=prize_id)
         user = request.user
-        current_round_info = get_current_round_info()
+        current_round_info = challenge_mgr.get_current_round_info()
         deadline = current_round_info["end"] - datetime.timedelta(hours=RAFFLE_END_PERIOD)
         in_deadline = datetime.datetime.today() <= deadline
 

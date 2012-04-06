@@ -4,7 +4,7 @@ import datetime
 from django.db.models import F
 from django.db.models.aggregates import Count
 
-from apps.managers.settings_mgr import get_round_info
+from apps.managers.challenge_mgr import challenge_mgr
 from apps.widgets.energy_goal.models import TeamEnergyGoal
 from apps.widgets.energy_scoreboard.models import EnergyData
 
@@ -18,7 +18,7 @@ def supply(request, page_name):
     user = request.user
     team = user.get_profile().team
 
-    rounds = get_round_info()
+    rounds = challenge_mgr.get_round_info()
     scoreboard_rounds = []
     today = datetime.datetime.today()
     for key in rounds.keys():

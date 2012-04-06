@@ -6,7 +6,7 @@ from django.contrib.auth.models import User
 
 from apps.managers.team_mgr.models import Team
 from apps.widgets.help.models import HelpTopic
-from apps.test_helpers.test_utils import TestUtils
+from apps.test_helpers import test_utils
 
 
 class HelpFunctionalTestCase(TransactionTestCase):
@@ -23,7 +23,7 @@ class HelpFunctionalTestCase(TransactionTestCase):
         profile.setup_profile = True
         profile.save()
 
-        TestUtils.register_page_widget("help", "help.rule")
+        test_utils.register_page_widget("help", "help.rule")
 
         self.client.login(username="user", password="changeme")
 

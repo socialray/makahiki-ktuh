@@ -3,9 +3,10 @@ import datetime
 
 from django.test import TransactionTestCase
 from django.contrib.auth.models import User
+from apps.managers.player_mgr import player_mgr
 
 from apps.managers.player_mgr.models import Profile
-from apps.test_helpers.test_utils import TestUtils
+from apps.test_helpers import test_utils
 
 
 class OverallPrizeTest(TransactionTestCase):
@@ -18,11 +19,12 @@ class OverallPrizeTest(TransactionTestCase):
         Sets up a test individual prize for the rest of the tests.
         This prize is not saved, as the round field is not yet set.
         """
-        self.prize = TestUtils.setup_prize(award_to="individual_overall", competition_type="points")
+        self.prize = test_utils.setup_prize(award_to="individual_overall",
+                                            competition_type="points")
 
         self.current_round = "Round 1"
 
-        TestUtils.set_competition_round()
+        test_utils.set_competition_round()
 
         # Create test users.
         self.users = [User.objects.create_user("test%d" % i, "test@test.com") for i in range(0, 3)]
@@ -46,7 +48,7 @@ class OverallPrizeTest(TransactionTestCase):
 
         # Test one user
         profile = self.users[0].get_profile()
-        top_points = Profile.objects.all().order_by("-points")[0].points
+        top_points = Profile.objects.all()[0].points()
         profile.add_points(top_points + 1,
                            datetime.datetime.today() - datetime.timedelta(minutes=1),
                            "test")
@@ -57,14 +59,14 @@ class OverallPrizeTest(TransactionTestCase):
 
         # Have another user move ahead in points
         profile2 = self.users[1].get_profile()
-        profile2.add_points(profile.points + 1, datetime.datetime.today(), "test")
+        profile2.add_points(profile.points() + 1, datetime.datetime.today(), "test")
         profile2.save()
 
         self.assertEqual(self.prize.leader(), profile2, "User 2 should be the leading profile.")
 
         # Have this user get the same amount of points, but an earlier award date.
         profile3 = self.users[2].get_profile()
-        profile3.add_points(profile2.points,
+        profile3.add_points(profile2.points(),
             datetime.datetime.today() - datetime.timedelta(minutes=1), "test")
         profile3.save()
 
@@ -82,12 +84,12 @@ class OverallPrizeTest(TransactionTestCase):
         """
         Tests that we can retrieve the overall individual points leader for a round prize.
         """
-        self.prize.round = "Overall"
+        self.prize.round_name = "Overall"
         self.prize.save()
 
         # Test one user
         profile = self.users[0].get_profile()
-        top_points = Profile.objects.all().order_by("-points")[0].points
+        top_points = player_mgr.points_leaders(num_results=1)[0].points()
         profile.add_points(top_points + 1, datetime.datetime.today(), "test")
         profile.save()
 
@@ -96,14 +98,14 @@ class OverallPrizeTest(TransactionTestCase):
 
         # Have another user move ahead in points
         profile2 = self.users[1].get_profile()
-        profile2.add_points(profile.points + 1, datetime.datetime.today(), "test")
+        profile2.add_points(profile.points() + 1, datetime.datetime.today(), "test")
         profile2.save()
 
         self.assertEqual(self.prize.leader(), profile2, "User 2 should be the leading profile.")
 
         # Have this user get the same amount of points, but an earlier award date.
         profile3 = self.users[2].get_profile()
-        profile3.add_points(profile2.points,
+        profile3.add_points(profile2.points(),
             datetime.datetime.today() - datetime.timedelta(minutes=1), "test")
         profile3.save()
 
@@ -129,13 +131,13 @@ class TeamPrizeTest(TransactionTestCase):
         Sets up a test individual prize for the rest of the tests.
         This prize is not saved, as the round field is not yet set.
         """
-        self.prize = TestUtils.setup_prize(award_to="individual_team", competition_type="points")
+        self.prize = test_utils.setup_prize(award_to="individual_team", competition_type="points")
 
         self.current_round = "Round 1"
 
-        TestUtils.set_competition_round()
+        test_utils.set_competition_round()
 
-        TestUtils.create_teams(self)
+        test_utils.create_teams(self)
 
     def testNumAwarded(self):
         """

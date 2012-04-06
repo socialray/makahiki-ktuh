@@ -9,7 +9,7 @@ from django.contrib.auth.models import User
 
 from apps.managers.team_mgr.models import Team
 from apps.widgets.energy_goal.models import TeamEnergyGoal
-from apps.test_helpers.test_utils import TestUtils
+from apps.test_helpers import test_utils
 
 
 class EnergyFunctionalTestCase(TransactionTestCase):
@@ -26,7 +26,7 @@ class EnergyFunctionalTestCase(TransactionTestCase):
         profile.setup_profile = True
         profile.save()
 
-        TestUtils.register_page_widget("energy", "energy_scoreboard")
+        test_utils.register_page_widget("energy", "energy_scoreboard")
         self.client.login(username="user", password="changeme")
 
     def testIndex(self):
@@ -89,7 +89,7 @@ class TeamEnergyGoalTest(TransactionTestCase):
     def testTeamEnergyGoal(self):
         """Test energy goal"""
         profile = self.user.get_profile()
-        points = profile.points
+        points = profile.points()
 
         goal = TeamEnergyGoal(
             team=self.team,
@@ -99,7 +99,7 @@ class TeamEnergyGoalTest(TransactionTestCase):
         goal.save()
         goal.award_goal_points()
         profile = Profile.objects.get(user__username="user")
-        self.assertEqual(profile.points, points,
+        self.assertEqual(profile.points(), points,
             "User that did not complete the setup process should not be awarded points.")
 
         profile.setup_complete = True
@@ -109,12 +109,12 @@ class TeamEnergyGoalTest(TransactionTestCase):
         goal.save()
         goal.award_goal_points()
         profile = Profile.objects.get(user__username="user")
-        self.assertEqual(profile.points, points,
+        self.assertEqual(profile.points(), points,
             "Team that failed the goal should not be awarded any points.")
 
         goal.actual_usage = 5
         goal.save()
         goal.award_goal_points()
         profile = Profile.objects.get(user__username="user")
-        self.assertEqual(profile.points, points + TeamEnergyGoal.GOAL_POINTS,
+        self.assertEqual(profile.points(), points + TeamEnergyGoal.GOAL_POINTS,
             "User that setup their profile should be awarded points.")

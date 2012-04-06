@@ -1,30 +1,28 @@
 """
-test scoreboard
+test score_mgr
 """
 
 import datetime
-
 from django.conf import settings
 from django.test import TransactionTestCase
 from django.contrib.auth.models import User
-from apps.test_helpers.test_utils import TestUtils
+from apps.managers.score_mgr import score_mgr
+from apps.test_helpers import test_utils
 from apps.managers.team_mgr.models import Group, Team
-from apps.managers.player_mgr.models import Profile
-from apps.managers.score_mgr.models import ScoreboardEntry
+from apps.managers.score_mgr.models import ScoreboardEntry, PointsTransaction
 
 
 class ScoreboardEntryUnitTests(TransactionTestCase):
     """scoreboard test"""
 
     def setUp(self):
-        """Generate test. Set the competition settings to the current date for
-        testing."""
+        """Generate test. Set the competition settings to the current date for testing."""
         self.user = User(username="test_user", password="changeme")
         self.user.save()
 
         self.saved_rounds = settings.COMPETITION_ROUNDS
         self.current_round = "Round 1"
-        TestUtils.set_competition_round()
+        test_utils.set_competition_round()
 
         self.user.get_profile().add_points(10, datetime.datetime.today(), "test")
 
@@ -41,9 +39,8 @@ class ScoreboardEntryUnitTests(TransactionTestCase):
         entry.last_awarded_submission = datetime.datetime.today()
         entry.save()
 
-        self.assertEqual(ScoreboardEntry.\
-                         user_round_overall_rank(self.user,
-                                                 self.current_round),
+        self.assertEqual(score_mgr.user_round_overall_rank(self.user.get_profile(),
+                                                           self.current_round),
                          1,
                          "Check user is ranked #1 for the current round.")
 
@@ -59,9 +56,8 @@ class ScoreboardEntryUnitTests(TransactionTestCase):
         entry2.last_awarded_submission = entry.last_awarded_submission
         entry2.save()
 
-        self.assertEqual(ScoreboardEntry.\
-                         user_round_overall_rank(self.user,
-                                                 self.current_round),
+        self.assertEqual(score_mgr.user_round_overall_rank(self.user.get_profile(),
+                                                           self.current_round),
                          2,
                          "Check user is now second.")
 
@@ -75,13 +71,11 @@ class ScoreboardEntryUnitTests(TransactionTestCase):
             round_name=self.current_round,
             )
         entry.points = top_entry.points + 1
-        entry.last_awarded_submission = datetime.datetime.today() -\
-                                        datetime.timedelta(days=3)
+        entry.last_awarded_submission = datetime.datetime.today() - datetime.timedelta(days=3)
         entry.save()
 
-        self.assertEqual(ScoreboardEntry.\
-                         user_round_overall_rank(self.user,
-                                                 self.current_round),
+        self.assertEqual(score_mgr.user_round_overall_rank(self.user.get_profile(),
+                                                           self.current_round),
                          1,
                          "Check user is ranked #1 for the current round.")
 
@@ -97,9 +91,8 @@ class ScoreboardEntryUnitTests(TransactionTestCase):
         entry2.last_awarded_submission = datetime.datetime.today()
         entry2.save()
 
-        self.assertEqual(ScoreboardEntry.\
-                         user_round_overall_rank(self.user,
-                                                 self.current_round),
+        self.assertEqual(score_mgr.user_round_overall_rank(self.user.get_profile(),
+                                                           self.current_round),
                          2,
                          "Check user is now second.")
 
@@ -127,9 +120,8 @@ class ScoreboardEntryUnitTests(TransactionTestCase):
         entry.last_awarded_submission = datetime.datetime.today()
         entry.save()
 
-        self.assertEqual(ScoreboardEntry.\
-                         user_round_team_rank(self.user,
-                                              self.current_round),
+        self.assertEqual(score_mgr.user_round_team_rank(self.user.get_profile(),
+                                                        self.current_round),
                          1,
                          "Check user is ranked #1 for the current round.")
 
@@ -147,9 +139,8 @@ class ScoreboardEntryUnitTests(TransactionTestCase):
         entry2.last_awarded_submission = entry.last_awarded_submission
         entry2.save()
 
-        self.assertEqual(ScoreboardEntry.\
-                         user_round_team_rank(self.user,
-                                              self.current_round),
+        self.assertEqual(score_mgr.user_round_team_rank(self.user.get_profile(),
+                                                        self.current_round),
                          2,
                          "Check user is now second.")
 
@@ -192,9 +183,8 @@ class ScoreboardEntryUnitTests(TransactionTestCase):
         entry2.last_awarded_submission = datetime.datetime.today()
         entry2.save()
 
-        self.assertEqual(ScoreboardEntry.\
-                         user_round_team_rank(self.user,
-                                              self.current_round),
+        self.assertEqual(score_mgr.user_round_team_rank(self.user.get_profile(),
+                                                        self.current_round),
                          2,
                          "Check user is now second.")
 
@@ -207,18 +197,15 @@ class ScoreboardEntryUnitTests(TransactionTestCase):
         team.save()
 
         # Rank will be the number of users who have points plus one.
-        overall_rank = Profile.objects.filter(points__gt=0).count() + 1
-        team_rank = Profile.objects.filter(points__gt=0,
-                                           team=team).count() + 1
+        overall_rank = 1
+        team_rank = 1
 
-        self.assertEqual(ScoreboardEntry.\
-                         user_round_overall_rank(self.user,
-                                                 self.current_round),
+        self.assertEqual(score_mgr.user_round_overall_rank(self.user.get_profile(),
+                                                           self.current_round),
                          overall_rank,
-                         "Check user is last overallfor the current round.")
-        self.assertEqual(ScoreboardEntry.\
-                         user_round_team_rank(self.user,
-                                              self.current_round),
+                         "Check user is last overall for the current round.")
+        self.assertEqual(score_mgr.user_round_team_rank(self.user.get_profile(),
+                                                        self.current_round),
                          team_rank,
                          "Check user is last in their team for the current "
                          "round.")
@@ -227,26 +214,41 @@ class ScoreboardEntryUnitTests(TransactionTestCase):
         user2.save()
 
         profile2 = user2.get_profile()
-        entry2, _ = ScoreboardEntry.objects.get_or_create(
-            profile=profile2,
-            round_name=self.current_round,
-            )
-        entry2.points = 10
-        entry2.last_awarded_submission = datetime.datetime.today()
-        entry2.team = team
-        entry2.save()
+        profile2.add_points(10, datetime.datetime.today(), "test")
 
-        self.assertEqual(ScoreboardEntry.\
-                         user_round_overall_rank(self.user,
-                                                 self.current_round),
+        self.assertEqual(score_mgr.user_round_overall_rank(self.user.get_profile(),
+                                                           self.current_round),
                          overall_rank + 1,
                          "Check that the user's overall rank has moved down.")
-        self.assertEqual(ScoreboardEntry.\
-                         user_round_team_rank(self.user,
-                                              self.current_round),
+        self.assertEqual(score_mgr.user_round_team_rank(self.user.get_profile(),
+                                                        self.current_round),
                          team_rank + 1,
                          "Check that the user's team rank has moved down.")
 
     def tearDown(self):
         """Restore the saved settings."""
         settings.COMPETITION_ROUNDS = self.saved_rounds
+
+
+class PointsLogTest(TransactionTestCase):
+    """test points log"""
+    def setUp(self):
+        self.user = User.objects.create_user("test", "test@test.com")
+
+        test_utils.set_competition_round()
+
+    def testAddPoints(self):
+        """
+        Test that adding points creates a new entry in the points log.
+        """
+        log_count = PointsTransaction.objects.count()
+        profile = self.user.get_profile()
+        profile.add_points(10, datetime.datetime.today(), "Hello world", None)
+        profile.save()
+
+        self.assertEqual(PointsTransaction.objects.count(), log_count + 1,
+                         "A new log should have been created.")
+        log = profile.user.pointstransaction_set.all()[0]
+        self.assertEqual(log.points, 10, "Points should have been awarded.")
+        self.assertEqual(log.message, "Hello world",
+                         "Message should have been added.")

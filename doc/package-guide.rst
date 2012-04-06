@@ -13,7 +13,7 @@ Package: apps.managers
    Log Manager <packages/log_mgr>
    Player Manager <packages/player_mgr>
    Score Manager <packages/score_mgr>
-   Settings Manager <packages/settings_mgr>
+   Challenge Manager <packages/challenge__mgr>
    Team Manager <packages/team_mgr>
 
 Package: apps.widgets

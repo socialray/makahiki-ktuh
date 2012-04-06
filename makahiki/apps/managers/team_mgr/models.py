@@ -1,177 +1,67 @@
 """Defines the model for teams."""
-import datetime
 
 from django.db import models
 from django.contrib.auth.models import User
-from django.template.defaultfilters import slugify
-from django.db.models import Sum, Max
-
-from apps.managers.settings_mgr import get_current_round
+from apps.managers.challenge_mgr import challenge_mgr
+from apps.managers.score_mgr import score_mgr
 
 
 class Group(models.Model):
     """Defines the group that a team belongs to."""
-    # Automatically populate slug field when the name is added.
-    prepopulated_fields = {"slug": ("name",)}
 
     name = models.CharField(max_length=200, help_text="The name of the group.")
-    slug = models.SlugField(max_length=20,
-        help_text="Automatically generated if left blank.")
+    slug = models.SlugField(help_text="Automatically generated if left blank.", null=True)
 
     def __unicode__(self):
         return self.name
 
-    def team_points_leaders(self, num_results=10, round_name=None):
+    def team_points_leaders(self, num_results=10, round_name="Overall"):
         """Returns the top points leaders for the given group."""
-        if round_name:
-            return self.team_set.filter(
-                profile__scoreboardentry__round_name=round_name
-            ).annotate(
-                points=Sum("profile__scoreboardentry__points"),
-                last=Max("profile__scoreboardentry__last_awarded_submission")
-            ).order_by("-points", "-last")[:num_results]
-
-        return self.team_set.annotate(
-            points=Sum("profile__points"),
-            last=Max("profile__last_awarded_submission")
-        ).order_by("-points", "-last")[:num_results]
-
-    def save(self, *args, **kwargs):
-        """Custom save method to generate slug and set created_at/updated_at."""
-        if not self.slug:
-            self.slug = slugify(self.name)
-
-        super(Group, self).save(*args, **kwargs)
+        return score_mgr.team_points_leaders(self, num_results, round_name)
 
 
 class Team(models.Model):
     """Represents the team that a player belongs to."""
-    prepopulated_fields = {"slug": ("name",)}
 
-    name = models.CharField(
-        help_text="The team name",
-        max_length=50)
-    slug = models.SlugField(max_length=50,
-        help_text="Automatically generated if left blank.")
-    group = models.ForeignKey(Group,
-                              help_text="The group this team belongs to.")
+    name = models.CharField(help_text="The team name", max_length=50)
+    slug = models.SlugField(help_text="Automatically generated if left blank.", null=True)
+    group = models.ForeignKey(Group, help_text="The group this team belongs to.")
 
     def __unicode__(self):
         return self.name
 
-    @staticmethod
-    def team_points_leaders(num_results=10, round_name=None):
-        """Returns the team points leaders across all groups."""
-        if round_name:
-            return Team.objects.select_related('group').filter(
-                profile__scoreboardentry__round_name=round_name
-            ).annotate(
-                points=Sum("profile__scoreboardentry__points"),
-                last=Max("profile__scoreboardentry__last_awarded_submission")
-            ).order_by("-points", "-last")[:num_results]
-
-        return Team.objects.select_related('group').annotate(
-            points=Sum("profile__points"),
-            last=Max("profile__last_awarded_submission")
-        ).order_by("-points", "-last")[:num_results]
-
-    def points_leaders(self, num_results=10, round_name=None):
-        """Gets the individual points leaders for the team."""
-        if round_name:
-            return self.profile_set.select_related('scoreboardentry').filter(
-                scoreboardentry__round_name=round_name
-            ).order_by("-scoreboardentry__points",
-                "-scoreboardentry__last_awarded_submission", )[:num_results]
-
-        return self.profile_set.all().\
-               order_by("-points", "-last_awarded_submission")[:num_results]
-
     def current_round_rank(self):
         """Gets the ranking of this team during the current round."""
-        current_round = get_current_round()
-        if current_round:
-            return self.rank(round_name=current_round)
+        current_round = challenge_mgr.get_current_round()
+        return score_mgr.team_rank(self, round_name=current_round)
 
-        return None
-
-    def rank(self, round_name=None):
+    def rank(self, round_name="Overall"):
         """Returns the rank of the team across all groups."""
-        if round_name:
-            from apps.managers.score_mgr.models import ScoreboardEntry
-
-            aggregate = ScoreboardEntry.objects.filter(
-                profile__team=self,
-                round_name=round_name
-            ).aggregate(points=Sum("points"),
-                last=Max("last_awarded_submission"))
-
-            points = aggregate["points"] or 0
-            last_awarded_submission = aggregate["last"]
-            # Group by teams, filter out other rounds, and annotate.
-            annotated_teams = ScoreboardEntry.objects.values(
-                "profile__team").filter(
-                round_name=round_name
-            ).annotate(
-                team_points=Sum("points"),
-                last_awarded=Max("last_awarded_submission")
-            )
-        else:
-            aggregate = self.profile_set.aggregate(points=Sum("points"),
-                last=Max("last_awarded_submission"))
-            points = aggregate["points"] or 0
-            last_awarded_submission = aggregate["last"]
-
-            annotated_teams = Team.objects.annotate(
-                team_points=Sum("profile__points"),
-                last_awarded_submission=Max("profile__last_awarded_submission")
-            )
-
-        count = annotated_teams.filter(team_points__gt=points).count()
-        # If there was a submission, tack that on to the count.
-        if last_awarded_submission:
-            count = count + annotated_teams.filter(
-                team_points=points,
-                last_awarded_submission__gt=last_awarded_submission
-            ).count()
-
-        return count + 1
+        return score_mgr.team_rank(self, round_name=round_name)
 
     def current_round_points(self):
         """Returns the number of points for the current round."""
-        current_round = get_current_round()
-        if current_round:
-            return self.points(round_name=current_round)
+        current_round = challenge_mgr.get_current_round()
+        return score_mgr.team_points(self, round_name=current_round)
 
-        return None
-
-    def points(self, round_name=None):
+    def points(self, round_name="Overall"):
         """Returns the total number of points for the team.  Optional parameter for a round."""
-        if round_name:
-            from apps.managers.player_mgr.models import ScoreboardEntry
+        return score_mgr.team_points(self, round_name)
 
-            dictionary = ScoreboardEntry.objects.filter(profile__team=self,
-                round_name=round_name).aggregate(Sum("points"))
-        else:
-            dictionary = self.profile_set.aggregate(Sum("points"))
-
-        return dictionary["points__sum"] or 0
-
-    def save(self, *args, **kwargs):
-        """Custom save method to generate slug and set created_at/updated_at."""
-        if not self.slug:
-            self.slug = slugify(self.name)
-
-        super(Team, self).save(*args, **kwargs)
+    def points_leaders(self, num_results=10, round_name="Overall"):
+        """Gets the individual points leaders for the team."""
+        return score_mgr.points_leaders_in_team(self, num_results, round_name)
 
 
 class Post(models.Model):
     """Represents a wall post on a user's wall."""
-    user = models.ForeignKey(User)
-    team = models.ForeignKey(Team)
-    text = models.TextField()
-    style_class = models.CharField(max_length=50,
-        default="user_post")  # CSS class to apply to this post.
-    created_at = models.DateTimeField(editable=False)
+    user = models.ForeignKey(User, help_text="The user who submit the post.")
+    team = models.ForeignKey(Team, help_text="The team of the submitter.")
+    text = models.TextField(help_text="The content of the post.")
+    style_class = models.CharField(max_length=50, default="user_post",
+                                   help_text="The CSS class to apply to this post.")
+    created_at = models.DateTimeField(editable=False, auto_now_add=True,
+                                      help_text="The create timestamp")
 
     def __unicode__(self):
         return "%s (%s): %s" % (self.team, self.user.username, self.text)
@@ -180,16 +70,11 @@ class Post(models.Model):
         """Formats the created date into a pretty string."""
         return self.created_at.strftime("%m/%d %I:%M %p")
 
-    def save(self, *args, **kwargs):
-        if not self.created_at:
-            self.created_at = datetime.datetime.today()
-
-        super(Post, self).save(*args, **kwargs)
-
 
 class PostComment(models.Model):
     """Represent the structure for comments in a post."""
-    user = models.ForeignKey(User)
-    post = models.ForeignKey(Post)
-    text = models.TextField()
-    created_at = models.DateTimeField(editable=False, auto_now_add=True)
+    user = models.ForeignKey(User, help_text="The user who submit the comment.")
+    post = models.ForeignKey(Post, help_text="The post.")
+    text = models.TextField(help_text="The content of the comment.")
+    created_at = models.DateTimeField(editable=False, auto_now_add=True,
+                                      help_text="The create timestamp")
