@@ -83,7 +83,7 @@ class Prize(models.Model):
         """Return the point leader."""
         round_name = self.round_name
         if self.award_to == "individual_overall":
-            return player_mgr.points_leaders(num_results=1, round_name=round_name)[0]
+            return player_mgr.points_leader(round_name=round_name)
 
         elif self.award_to == "team_group":
             if team:
@@ -92,7 +92,7 @@ class Prize(models.Model):
                 return None
 
         elif self.award_to == "team_overall":
-            return team_mgr.team_points_leaders(num_results=1, round_name=round_name)[0]
+            return team_mgr.team_points_leader(round_name=round_name)
 
         elif self.award_to == "individual_team":
             if team:

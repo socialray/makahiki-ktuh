@@ -174,7 +174,7 @@ class TeamLeadersTestCase(TransactionTestCase):
             datetime.datetime.today() - datetime.timedelta(minutes=1), "test")
         profile.save()
 
-        self.assertEqual(team_mgr.team_points_leaders(round_name=self.current_round)[0],
+        self.assertEqual(team_mgr.team_points_leader(round_name=self.current_round),
                          profile.team,
                          "The user's team is not leading in the prize.")
 
@@ -187,7 +187,7 @@ class TeamLeadersTestCase(TransactionTestCase):
                             "test")
         profile2.save()
 
-        self.assertEqual(team_mgr.team_points_leaders(round_name=self.current_round)[0],
+        self.assertEqual(team_mgr.team_points_leader(round_name=self.current_round),
                          profile2.team,
                          "The user's team should have changed.")
 
@@ -199,7 +199,7 @@ class TeamLeadersTestCase(TransactionTestCase):
                            "test")
         profile.save()
 
-        self.assertEqual(team_mgr.team_points_leaders(round_name=self.current_round)[0],
+        self.assertEqual(team_mgr.team_points_leader(round_name=self.current_round),
                          profile2.team,
                          "The leader of the team should not change.")
 
@@ -207,7 +207,7 @@ class TeamLeadersTestCase(TransactionTestCase):
         profile.add_points(1, datetime.datetime.today(), "test")
         profile.save()
 
-        self.assertEqual(team_mgr.team_points_leaders(round_name=self.current_round)[0],
+        self.assertEqual(team_mgr.team_points_leader(round_name=self.current_round),
                          profile.team,
                          "The leader of the team should have changed back.")
 

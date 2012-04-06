@@ -25,7 +25,7 @@
                         {% for f in view_objects.scoreboard.team_standings %}
                         <tr>
                             <td>{{ forloop.counter }}</td>
-                            <td style="width: 150px;">{{ f }}</td>
+                            <td style="width: 150px;">{{ f.profile__team__name }}</td>
                             <td style="width: 110px; text-align: right;">
                                 {{ f.points }}</td>
                         </tr>
@@ -49,9 +49,9 @@
                         {% for p in view_objects.scoreboard.profile_standings %}
                         <tr>
                             <td>{{ forloop.counter }}</td>
-                            <td style="width: 150px;">{{ p.name }}</td>
+                            <td style="width: 150px;">{{ p.profile__name }}</td>
                             <td style="width: 110px; text-align: right;">
-                                {{ p.current_round_points }}</td>
+                                {{ p.points }}</td>
                         </tr> 
                         {% endfor %}
                     </tbody>

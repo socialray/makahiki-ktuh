@@ -75,7 +75,7 @@ class Command(management.base.BaseCommand):
                     f.write(contents)
 
             else:
-                leader = player_mgr.points_leaders(1, round_name)[0].user
+                leader = player_mgr.points_leader(round_name).user
                 prize.winner = leader
                 contents = render_to_string('view_prizes/form.txt', {
                     'raffle': False,

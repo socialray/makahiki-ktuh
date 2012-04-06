@@ -3,7 +3,7 @@
 from django.db import models
 from django.contrib.auth.models import User
 from apps.managers.challenge_mgr import challenge_mgr
-from apps.managers.score_mgr import score_mgr
+from apps.managers.score_mgr import point_score_mgr
 
 
 class Group(models.Model):
@@ -17,7 +17,7 @@ class Group(models.Model):
 
     def team_points_leaders(self, num_results=10, round_name="Overall"):
         """Returns the top points leaders for the given group."""
-        return score_mgr.team_points_leaders(self, num_results, round_name)
+        return point_score_mgr.team_points_leaders_in_group(self, num_results, round_name)
 
 
 class Team(models.Model):
@@ -33,24 +33,24 @@ class Team(models.Model):
     def current_round_rank(self):
         """Gets the ranking of this team during the current round."""
         current_round = challenge_mgr.get_current_round()
-        return score_mgr.team_rank(self, round_name=current_round)
+        return point_score_mgr.team_rank(self, round_name=current_round)
 
     def rank(self, round_name="Overall"):
         """Returns the rank of the team across all groups."""
-        return score_mgr.team_rank(self, round_name=round_name)
+        return point_score_mgr.team_rank(self, round_name=round_name)
 
     def current_round_points(self):
         """Returns the number of points for the current round."""
         current_round = challenge_mgr.get_current_round()
-        return score_mgr.team_points(self, round_name=current_round)
+        return point_score_mgr.team_points(self, round_name=current_round)
 
     def points(self, round_name="Overall"):
         """Returns the total number of points for the team.  Optional parameter for a round."""
-        return score_mgr.team_points(self, round_name)
+        return point_score_mgr.team_points(self, round_name)
 
     def points_leaders(self, num_results=10, round_name="Overall"):
         """Gets the individual points leaders for the team."""
-        return score_mgr.points_leaders_in_team(self, num_results, round_name)
+        return point_score_mgr.player_points_leaders_in_team(self, num_results, round_name)
 
 
 class Post(models.Model):
