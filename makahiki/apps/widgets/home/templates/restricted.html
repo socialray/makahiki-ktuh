@@ -12,17 +12,17 @@
 
 {% block body %}
 
-    <div {% get_id_and_classes "landing-page" %}>
-        <div {% get_id_and_classes "landing-logo" %}>
+    <div id="landing-page">
+        <div id="landing-logo">
             <a href="{% url landing %}"><img
                     src="{{STATIC_URL}}css/default/images/old-logo.png"/></a>
         </div>
-        <div {% get_id_and_classes "landing-title" %}>
+        <div id="landing-title">
             <h2>The Kukui Cup: Lights out, game on!</h2>
         </div>
     </div>
 
-    <div {% get_id_and_classes "landing-about" %}>
+    <div id="landing-about">
         {% if before %}
             <h3>You have logged in successfully, but the competition has not yet started.
                 The competition starts in <span id='restricted-countdown'></span>. Come back then!</h3>

@@ -1,12 +1,12 @@
 {% load class_tags %}
 
 <h2>Verification Question</h2>
-<div {% get_id_and_classes "setup-content" %}>
+<div id="setup-content">
     <p style="margin: 0">If you&apos;ve watched the intro video, answer the following question for a
         generous 20 points. Many Kukui Cup activities will have verification steps before you earn
         your points.</p>
 
-    <form {% get_id_and_classes "setup-activity-form" %}>
+    <form id="setup-activity-form">
         {% csrf_token %}
         <label for="activity-select">Question: Which level of student can participate in the Kukui
             Cup?</label>
@@ -38,10 +38,10 @@
 
 <div style="clear:both"></div>
 
-<div {% get_id_and_classes "progressbar-header" %}>
+<div id="progressbar-header">
     <p>Introduction progress, points: {{ user.get_profile.points }}</p>
 </div>
-<div {% get_id_and_classes "progressbar" %}></div>
+<div id="progressbar"></div>
 <script type="text/javascript">
     $(document).ready(function () {
         $("#progressbar").progressbar({

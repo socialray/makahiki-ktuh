@@ -67,6 +67,20 @@ div.home-item {
     float: none;
 }
 
+#home-advanced-icon {
+    background: transparent
+        url(/site_media/static/images/icons/icon-advanced-lg.png) top left
+        no-repeat;
+    width: 120px;
+    height: 124px;
+}
+
+#home-advanced-icon:hover {
+    background: transparent
+        url(/site_media/static/images/icons/icon-advanced-lg-over.png) top
+        left no-repeat;
+}
+
 #home-energy-icon {
     background: transparent
         url(/site_media/static/images/icons/icon-go-low-lg.png) top left
@@ -149,6 +163,20 @@ div.home-item {
     background: transparent
         url(/site_media/static/images/icons/icon-profile-lg-over.png)
         top left no-repeat;
+}
+
+#home-water-icon {
+    background: transparent
+        url(/site_media/static/images/icons/icon-water-lg.png) top left
+        no-repeat;
+    width: 120px;
+    height: 124px;
+}
+
+#home-water-icon:hover {
+    background: transparent
+        url(/site_media/static/images/icons/icon-water-lg-over.png) top
+        left no-repeat;
 }
 
 /* Setup wizard styles */
@@ -261,6 +289,16 @@ div.home-item {
     .tile p {
         display: none;
     }
+    #home-advanced-icon {
+    background: transparent
+        url(/site_media/static/images/icons/icon-advanced.png) top left
+        no-repeat;
+    }
+    #home-advanced-icon:hover {
+    background: transparent
+        url(/site_media/static/images/icons/icon-advanced-over.png) top
+        left no-repeat;
+    }
     #home-energy-icon {
         background: transparent
             url(/site_media/static/images/icons/icon-go-low.png) top
@@ -320,5 +358,15 @@ div.home-item {
         background: transparent
             url(/site_media/static/images/icons/icon-profile-over.png)
             top left no-repeat;
+    }
+    #home-water-icon {
+    background: transparent
+        url(/site_media/static/images/icons/icon-water.png) top left
+        no-repeat;
+    }
+    #home-water-icon:hover {
+    background: transparent
+        url(/site_media/static/images/icons/icon-water-over.png) top
+        left no-repeat;
     }
 }

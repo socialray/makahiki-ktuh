@@ -3,7 +3,7 @@
 <script type="text/javascript" src="http://www.youtube.com/player_api"></script>
 
 <h2>Introduction Video</h2>
-<div {% get_id_and_classes "setup-content" %}>
+<div id="setup-content">
     <p>Please watch this short video that explains the Kukui Cup competition and how to use this
         website. Pay close attention, because on the next screen you will be asked a question about
         the video to earn some more points!</p>
@@ -65,10 +65,10 @@
 
 <div style="clear:both"></div>
 
-<div {% get_id_and_classes "progressbar-header" %}>
+<div id="progressbar-header">
     <p>Introduction progress, points: {{ user.get_profile.points }}</p>
 </div>
-<div {% get_id_and_classes "progressbar" %}></div>
+<div id="progressbar"></div>
 <script type="text/javascript">
     $(document).ready(function () {
         $("#progressbar").progressbar({
