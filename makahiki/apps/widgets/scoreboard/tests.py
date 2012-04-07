@@ -35,20 +35,23 @@ class ScoreboardTest(TransactionTestCase):
         response = self.client.get(reverse("learn_index"))
         self.assertContains(response, "Round 1 Scoreboard", count=1,
             msg_prefix="This should display the current round scoreboard.")
-        self.assertEqual(response.context["view_objects"]["scoreboard"]["team_standings"][0],
-            profile.team,
+        self.assertEqual(response.context["view_objects"]["scoreboard"]["team_standings"][
+            0]["profile__team__name"],
+            profile.team.name,
             "The user's team should be leading.")
-        self.assertEqual(response.context["view_objects"]["scoreboard"]["profile_standings"][0],
-            profile,
+        self.assertEqual(response.context["view_objects"]["scoreboard"]["profile_standings"][
+            0]["profile__name"],
+            profile.name,
             "The user's should be leading the overall standings.")
         self.assertEqual(response.context["view_objects"]["scoreboard"]["user_team_standings"][0],
             profile,
             "The user should be leading in their own team.")
-        self.assertEqual(response.context["view_objects"]["scoreboard"]["team_standings"][0].points,
+        self.assertEqual(response.context["view_objects"]["scoreboard"]["team_standings"][
+            0]["points"],
             10,
             "The user's team should have 10 points this round.")
         self.assertEqual(response.context["view_objects"]["scoreboard"]["profile_standings"][
-                         0].current_round_points(), 10,
+            0]["points"], 10,
             "The user should have 10 points this round.")
         self.assertEqual(response.context["view_objects"]["scoreboard"]["user_team_standings"][
                          0].current_round_points(), 10,
@@ -59,11 +62,12 @@ class ScoreboardTest(TransactionTestCase):
         profile.save()
 
         response = self.client.get(reverse("learn_index"))
-        self.assertEqual(response.context["view_objects"]["scoreboard"]["team_standings"][0].points,
+        self.assertEqual(response.context["view_objects"]["scoreboard"]["team_standings"][
+            0]["points"],
             10,
             "Test that the user's team still has 10 points.")
         self.assertEqual(response.context["view_objects"]["scoreboard"]["profile_standings"][
-                         0].current_round_points(), 10,
+            0]["points"], 10,
             "The user still should have 10 points this round.")
         self.assertEqual(response.context["view_objects"]["scoreboard"]["user_team_standings"][
                          0].current_round_points(), 10,

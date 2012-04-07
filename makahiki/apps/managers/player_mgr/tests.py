@@ -37,7 +37,7 @@ class ProfileLeadersTests(TransactionTestCase):
         profile.save()
 
         self.assertEqual(
-            player_mgr.points_leaders(round_name=self.current_round)[0], profile,
+            player_mgr.points_leader(round_name=self.current_round), profile,
             "Current leader is not the leading user.")
 
         # Have another user move ahead in points
@@ -47,7 +47,7 @@ class ProfileLeadersTests(TransactionTestCase):
         profile2.save()
 
         self.assertEqual(
-            player_mgr.points_leaders(round_name=self.current_round)[0], profile2,
+            player_mgr.points_leader(round_name=self.current_round), profile2,
             "User 2 should be the leading profile.")
 
         # Have this user get the same amount of points,
@@ -58,7 +58,7 @@ class ProfileLeadersTests(TransactionTestCase):
         profile3.save()
 
         self.assertEqual(
-            player_mgr.points_leaders(round_name=self.current_round)[0], profile2,
+            player_mgr.points_leader(round_name=self.current_round), profile2,
             "User 2 should still be the leading profile.")
 
         # Have the first user earn more points outside of the round.
@@ -67,7 +67,7 @@ class ProfileLeadersTests(TransactionTestCase):
         profile.save()
 
         self.assertEqual(
-            player_mgr.points_leaders(round_name=self.current_round)[0], profile2,
+            player_mgr.points_leader(round_name=self.current_round), profile2,
             "User 2 should still be the leading profile.")
 
     def testLeadersOverall(self):
@@ -80,7 +80,7 @@ class ProfileLeadersTests(TransactionTestCase):
             datetime.datetime.today() - datetime.timedelta(minutes=1), "Test")
         profile.save()
 
-        self.assertEqual(player_mgr.points_leaders()[0], profile,
+        self.assertEqual(player_mgr.points_leader(), profile,
             "Current leader is not the leading user.")
 
         # Have another user move ahead in points
@@ -89,7 +89,7 @@ class ProfileLeadersTests(TransactionTestCase):
             "Test")
         profile2.save()
 
-        self.assertEqual(player_mgr.points_leaders()[0], profile2,
+        self.assertEqual(player_mgr.points_leader(), profile2,
             "User 2 should be the leading profile.")
 
         # Have this user get the same amount of points,
@@ -99,7 +99,7 @@ class ProfileLeadersTests(TransactionTestCase):
             datetime.datetime.today() - datetime.timedelta(minutes=1), "Test")
         profile3.save()
 
-        self.assertEqual(player_mgr.points_leaders()[0], profile2,
+        self.assertEqual(player_mgr.points_leader(), profile2,
             "User 2 should still be the leading profile.")
 
 
@@ -257,7 +257,7 @@ class ProfileUnitTests(TransactionTestCase):
 
         profile = user.get_profile()
         profile.team = team
-        top_user = player_mgr.points_leaders()[0]
+        top_user = player_mgr.points_leader()
         profile.add_points(top_user.points() + 1,
             datetime.datetime.today() - datetime.timedelta(minutes=1), "Test")
         profile.save()
@@ -344,7 +344,7 @@ class ProfileUnitTests(TransactionTestCase):
         user.save()
 
         profile = user.get_profile()
-        top_user = player_mgr.points_leaders()[0]
+        top_user = player_mgr.points_leader()
         profile.add_points(top_user.points() + 1, datetime.datetime.today(),
             "Test")
         profile.save()

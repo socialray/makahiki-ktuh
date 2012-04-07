@@ -7,7 +7,7 @@ from django.contrib.auth.models import User
 from django.db.models.signals import post_save, pre_save
 from django.contrib.localflavor.us.models import PhoneNumberField
 from apps.managers.challenge_mgr import challenge_mgr
-from apps.managers.score_mgr import score_mgr
+from apps.managers.score_mgr import point_score_mgr
 from apps.managers.team_mgr.models import Team
 
 
@@ -64,41 +64,41 @@ class Profile(models.Model):
     def current_round_points(self):
         """Returns the total number of points for the user.  Optional parameter for a round."""
         current_round = challenge_mgr.get_current_round()
-        return score_mgr.profile_points(self, round_name=current_round)
+        return point_score_mgr.player_points(self, round_name=current_round)
 
     def points(self):
         """Returns the total number of points for the user.  Optional parameter for a round."""
-        return score_mgr.profile_points(self)
+        return point_score_mgr.player_points(self)
 
     def last_awarded_submission(self):
         """Returns the last awarded submission date."""
-        return score_mgr.profile_last_awarded_submission(self)
+        return point_score_mgr.player_last_awarded_submission(self)
 
     def current_round_overall_rank(self):
         """Returns the overall rank of the user for the current round."""
         current_round = challenge_mgr.get_current_round()
-        return score_mgr.user_round_overall_rank(self, round_name=current_round)
+        return point_score_mgr.player_rank(self, round_name=current_round)
 
     def overall_rank(self):
         """Returns the rank of the user for the round."""
-        return score_mgr.user_round_overall_rank(self)
+        return point_score_mgr.player_rank(self)
 
     def current_round_team_rank(self):
         """Returns the rank of the user for the current round in their own team."""
         current_round = challenge_mgr.get_current_round()
-        return score_mgr.user_round_team_rank(self, round_name=current_round)
+        return point_score_mgr.player_rank_in_team(self, round_name=current_round)
 
     def team_rank(self):
         """Returns the rank of the user in their own team."""
-        return score_mgr.user_round_team_rank(self)
+        return point_score_mgr.player_rank_in_team(self)
 
     def add_points(self, points, submission_date, message, related_object=None):
         """Adds points based on the point value of the submitted object."""
-        score_mgr.add_points(self, points, submission_date, message, related_object)
+        point_score_mgr.player_add_points(self, points, submission_date, message, related_object)
 
     def remove_points(self, points, submission_date, message, related_object=None):
         """Removes points from the user."""
-        score_mgr.remove_points(self, points, submission_date, message, related_object)
+        point_score_mgr.player_remove_points(self, points, submission_date, message, related_object)
 
 
 def create_profile(sender, instance=None, **kwargs):
@@ -106,6 +106,7 @@ def create_profile(sender, instance=None, **kwargs):
     _ = sender
     if (kwargs.get('created', True) and not kwargs.get('raw', False)):
         Profile.objects.get_or_create(user=instance, name=instance.username)
+
 
 post_save.connect(create_profile, sender=User)
 
@@ -118,9 +119,9 @@ def award_possible_referral_bonus(sender, instance=None, **kwargs):
     if has_referral and instance.points() >= 30:
         instance.referrer_awarded = True
         referrer = Profile.objects.get(user=instance.referring_user)
-        score_mgr.add_points(referrer, 10, datetime.datetime.today(),
+        point_score_mgr.player_add_points(referrer, 10, datetime.datetime.today(),
                              'Referred %s' % instance.name, referrer)
-        score_mgr.add_points(instance, 10, datetime.datetime.today(),
+        point_score_mgr.player_add_points(instance, 10, datetime.datetime.today(),
                              'Referred by %s' % referrer.name, instance)
 
 

@@ -89,7 +89,7 @@ class OverallPrizeTest(TransactionTestCase):
 
         # Test one user
         profile = self.users[0].get_profile()
-        top_points = player_mgr.points_leaders(num_results=1)[0].points()
+        top_points = player_mgr.points_leader().points()
         profile.add_points(top_points + 1, datetime.datetime.today(), "test")
         profile.save()
 

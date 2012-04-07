@@ -7,10 +7,7 @@ email, lounge.
 .. note:: This command has UH-specific code in it and must be revised.
 """
 from django.core import management
-from django.contrib.auth.models import User
-from django.core.exceptions import ObjectDoesNotExist
-from apps.managers.team_mgr.models import Team
-from django.db.utils import IntegrityError
+from apps.managers.player_mgr import player_mgr
 
 
 class Command(management.base.BaseCommand):
@@ -54,7 +51,8 @@ class Command(management.base.BaseCommand):
             if not self.parse_ok(line):
                 error_count += 1
             else:
-                self.create_user()
+                player_mgr.create_player(self.username, self.email, self.firstname,
+                                         self.lastname, self.lounge)
                 load_count += 1
 
         infile.close()
@@ -125,27 +123,3 @@ class Command(management.base.BaseCommand):
                 '10': 'D',
                 '11': 'E',
                 '12': 'E'}[team]
-
-    def create_user(self):
-        """Create a user."""
-        try:
-            user = User.objects.get(username=self.username)
-            user.delete()
-        except ObjectDoesNotExist:
-            pass
-
-        user = User.objects.create_user(self.username, self.email)
-        user.first_name = self.firstname
-        user.last_name = self.lastname
-        user.save()
-
-        profile = user.get_profile()
-        profile.first_name = self.firstname
-        profile.last_name = self.lastname
-        profile.name = self.firstname + " " + self.lastname[:1] + "."
-        profile.team = Team.objects.get(name=self.lounge)
-        try:
-            profile.save()
-        except IntegrityError:
-            profile.name = self.firstname + " " + self.lastname
-            profile.save()
