@@ -34,19 +34,19 @@
         </div>
     </div>
 </div>
-<div id="info-bar-single" class="container-fluid">
-    <div class="row-fluid">
-        <div class="span12" style="text-align: center">
-            <div id="feedback-single" class="span2">
-                <button id="header-feedback" href="javascript:void(0);">Send Feedback</button>
-            </div>
-            <div class="span4">
-                <div id="single-cycle">
-                    {% include "components/RIB_single.html" %}
-                </div>
-            </div>
-            <div id="feedback-logout" class="span2">
-                <a href="{% url cas_logout %}">Logout</a>
+<div id="info-bar-single" class="container">
+    <div class="row">
+        <div id="feedback-single" class="span2">
+            <button id="header-feedback" href="javascript:void(0);">Send Feedback</button>
+        </div>
+        <div id="feedback-logout" class="span2 offset9">
+            <a href="{% url cas_logout %}">Logout</a>
+        </div>
+    </div>
+    <div class="row">
+        <div id="sngle-cycle" class="carousel">
+            <div class="carousel-inner">
+                {% include "components/RIB_single.html" %}
             </div>
         </div>
     </div>

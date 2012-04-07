@@ -110,7 +110,8 @@ a.water:hover img {
 /* body */
 body {
 	margin: 0;
-	padding: 0;
+	padding-left: 20px;
+    padding-right: 20px;
 	text-align: center;
 }
 
@@ -319,23 +320,23 @@ img {
 	text-align: right;
 }
 
-#feedback-single {
-    position: absolute;
-    left: 4px;
-    top: 0;
-    margin: 0;
-}
+/* #feedback-single { */
+/*     position: absolute; */
+/*     left: 4px; */
+/*     top: 0; */
+/*     margin: 0; */
+/* } */
 
 #feedback-single button {
     float: left;
 }
 
 /* #header-logout */
-#header-logout {
-	position: absolute;
-	top: 0;
-	right: 8px;
-}
+/* #header-logout { */
+/* 	position: absolute; */
+/* 	top: 0; */
+/* 	right: 8px; */
+/* } */
 
 /* #header-nav-links */
 /* #header-round-info */
@@ -345,7 +346,7 @@ img {
 	border-radius: none;
 	box-shadow: none;
 	display: none;
-	height: 55px;
+	height: 70px;
 	margin-bottom: none;
 	padding: none;
 	text-align: center;
@@ -461,11 +462,11 @@ img {
 	.navbar {
 		margin-bottom: 5px;
 	}
-	#feedback-logout {
-		position: absolute;
-		right: 8px;
-		top: 0;
-	}
+/* 	#feedback-logout { */
+/* 		position: absolute; */
+/* 		right: 8px; */
+/* 		top: 0; */
+/* 	} */
 	#info-bar-wide {
 		background: none;
 		background-image: none;
