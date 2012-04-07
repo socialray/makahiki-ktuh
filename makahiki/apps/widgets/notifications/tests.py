@@ -46,8 +46,8 @@ class NotificationFunctionalTests(TransactionTestCase):
         profile.setup_profile = True
         profile.save()
 
-        test_utils.register_page_widget("home", "notifications")
-        test_utils.register_page_widget("help", "notifications")
+        test_utils.register_page_widget("home", "home")
+        test_utils.register_page_widget("help", "help.faq")
 
         self.client.login(username="user", password="test")
 

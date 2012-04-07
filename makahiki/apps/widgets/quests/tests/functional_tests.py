@@ -16,8 +16,7 @@ class QuestFunctionalTestCase(TransactionTestCase):
         profile.setup_complete = True
         profile.save()
 
-        test_utils.register_page_widget("home", "quests")
-        test_utils.register_page_widget("home", "notifications")
+        test_utils.register_page_widget("home", "home")
         self.client.login(username="user", password="changeme")
 
     def testNoQuests(self):

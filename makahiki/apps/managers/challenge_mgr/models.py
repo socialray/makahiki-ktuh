@@ -156,7 +156,7 @@ class RoundSettings(models.Model):
 
 
 def _get_widget_choice():
-    """Retrieves the available page names."""
+    """Retrieves the available widget names."""
     return ((key, key) for key in settings.INSTALLED_WIDGET_APPS)
 
 

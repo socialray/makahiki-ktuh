@@ -1,14 +1,5 @@
 [
   {
-    "pk": 10,
-    "model": "challenge_mgr.pagesettings",
-    "fields": {
-      "widget": "energy_scoreboard",
-      "enabled": true,
-      "name": "energy"
-    }
-  },
-  {
     "pk": 7,
     "model": "challenge_mgr.pagesettings",
     "fields": {
@@ -18,10 +9,10 @@
     }
   },
   {
-    "pk": 12,
+    "pk": 10,
     "model": "challenge_mgr.pagesettings",
     "fields": {
-      "widget": "quests",
+      "widget": "energy_scoreboard",
       "enabled": true,
       "name": "energy"
     }
@@ -40,15 +31,6 @@
     "model": "challenge_mgr.pagesettings",
     "fields": {
       "widget": "wallpost",
-      "enabled": true,
-      "name": "energy"
-    }
-  },
-  {
-    "pk": 13,
-    "model": "challenge_mgr.pagesettings",
-    "fields": {
-      "widget": "notifications",
       "enabled": true,
       "name": "energy"
     }
@@ -90,21 +72,21 @@
     }
   },
   {
+    "pk": 58,
+    "model": "challenge_mgr.pagesettings",
+    "fields": {
+      "widget": "ask_admin",
+      "enabled": true,
+      "name": "home"
+    }
+  },
+  {
     "pk": 1,
     "model": "challenge_mgr.pagesettings",
     "fields": {
       "widget": "home",
       "enabled": true,
       "name": "home"
-    }
-  },
-  {
-    "pk": 8,
-    "model": "challenge_mgr.pagesettings",
-    "fields": {
-      "widget": "upcoming_events",
-      "enabled": true,
-      "name": "learn"
     }
   },
   {
@@ -117,12 +99,12 @@
     }
   },
   {
-    "pk": 24,
+    "pk": 8,
     "model": "challenge_mgr.pagesettings",
     "fields": {
-      "widget": "team_members",
+      "widget": "upcoming_events",
       "enabled": true,
-      "name": "news"
+      "name": "learn"
     }
   },
   {
@@ -162,12 +144,12 @@
     }
   },
   {
-    "pk": 19,
+    "pk": 24,
     "model": "challenge_mgr.pagesettings",
     "fields": {
-      "widget": "badges",
+      "widget": "team_members",
       "enabled": true,
-      "name": "profile"
+      "name": "news"
     }
   },
   {
@@ -193,6 +175,15 @@
     "model": "challenge_mgr.pagesettings",
     "fields": {
       "widget": "my_info",
+      "enabled": true,
+      "name": "profile"
+    }
+  },
+  {
+    "pk": 19,
+    "model": "challenge_mgr.pagesettings",
+    "fields": {
+      "widget": "badges",
       "enabled": true,
       "name": "profile"
     }

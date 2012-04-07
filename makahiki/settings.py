@@ -154,6 +154,17 @@ INSTALLED_APPS = (
 ################################
 # INSTALLED Widgets
 ################################
+INSTALLED_DEFAULT_WIDGET_APPS = (
+    'quests',
+    'notifications',
+    'help',
+)
+for widget in INSTALLED_DEFAULT_WIDGET_APPS:
+    INSTALLED_APPS += ("apps.widgets." + widget, )
+
+################################
+# INSTALLED Widgets
+################################
 INSTALLED_WIDGET_APPS = (
     'ask_admin',
     'badges',
@@ -164,7 +175,6 @@ INSTALLED_WIDGET_APPS = (
     'my_achievements',
     'my_commitments',
     'my_info',
-    'notifications',
     'popular_tasks',
     'prizes',
     'quests',
@@ -174,7 +184,6 @@ INSTALLED_WIDGET_APPS = (
     'team_members',
     'upcoming_events',
     'wallpost',
-    'help',
     'help.intro',
     'help.faq',
     'help.rule',

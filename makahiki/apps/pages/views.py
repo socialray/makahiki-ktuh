@@ -50,7 +50,7 @@ def index(request):
 
 
 def _get_view_objects(request, page_name, view_objects):
-    """ Returns view_objects supplied widgets defined in page_settings.py. """
+    """ Returns view_objects supplied widgets defined in PageSettings. """
 
     page_settings = PageSettings.objects.filter(name=page_name, enabled=True)
     if page_settings.count() == 0:
@@ -62,6 +62,13 @@ def _get_view_objects(request, page_name, view_objects):
         page_views = importlib.import_module(view_module_name)
         widget = widget.replace(".", "_")
         view_objects[widget] = page_views.supply(request, page_name)
+
+    # load default widgets for all pages
+    for widget in settings.INSTALLED_DEFAULT_WIDGET_APPS:
+        view_module_name = 'apps.widgets.' + widget + '.views'
+        page_views = importlib.import_module(view_module_name)
+        widget = widget.replace(".", "_")
+        view_objects[widget] = page_views.supply(request, None)
 
     return True
 

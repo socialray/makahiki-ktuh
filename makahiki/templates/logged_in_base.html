@@ -21,12 +21,12 @@
 {% block header %}
  {% include "components/RIB.html" %}
  {% include "components/navbar.html" %}
-    <div id="notifications">
-        {% include "widgets/notifications/templates/index.html" %}
-    </div>
-    <div id="quests">
-        {% include "widgets/quests/templates/index.html" %}
-    </div>
+ <div id="notifications">
+    {% include "widgets/notifications/templates/index.html" %}
+ </div>
+ <div id="quests">
+    {% include "widgets/quests/templates/index.html" %}
+ </div>
  {% if messages %}
   <div id="messages">
     <ul class="messages">

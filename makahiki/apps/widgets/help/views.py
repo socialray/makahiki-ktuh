@@ -11,6 +11,13 @@ from django.http import  HttpResponse
 from apps.widgets.help.models import HelpTopic
 
 
+def supply(request, page_name):
+    """ supply view_objects for widget rendering, namely the faq objects."""
+    _ = request
+    _ = page_name
+    return {}
+
+
 @login_required
 def topic(request, category, slug):
     """Shows a help topic.  This method handles both a regular request and an

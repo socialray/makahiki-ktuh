@@ -48,6 +48,12 @@ urlpatterns = patterns('',
         name='coming_soon'),
     )
 
+for widget in settings.INSTALLED_DEFAULT_WIDGET_APPS:
+    if os.path.isfile(
+        "%s/apps/widgets/%s/urls.py" % (settings.PROJECT_ROOT, widget)):
+        urlpatterns += patterns('',
+            (r'^%s/' % widget, include('apps.widgets.%s.urls' % widget)), )
+
 for widget in settings.INSTALLED_WIDGET_APPS:
     if os.path.isfile(
         "%s/apps/widgets/%s/urls.py" % (settings.PROJECT_ROOT, widget)):
