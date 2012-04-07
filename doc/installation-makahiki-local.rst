@@ -21,7 +21,7 @@ Our estimated hardware requirements (for production use) are:
 1. Install prerequisite software
 --------------------------------
 
-`Python`_ 2.6 or higher (but not Python 3). On Windows machines, it
+`Python`_ 2.7 or higher (but not Python 3). On Windows machines, it
 is recommended that you use the 32 bit version.
 
 `Apple Developer Tools`_ (Mac OS X only). If you are using Mac OS X, install
