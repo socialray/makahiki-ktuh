@@ -2,12 +2,12 @@
 import datetime
 from django.contrib.auth.models import User
 
-from django.test import TestCase
+from django.test import TransactionTestCase
 from apps.managers.team_mgr.models import Group, Team
-from apps.test_utils import TestUtils
+from apps.test_helpers import test_utils
 
 
-class DormTeamPrizeTests(TestCase):
+class DormTeamPrizeTests(TransactionTestCase):
     """
     Tests awarding a prize to a dorm team points winner.
     """
@@ -17,10 +17,10 @@ class DormTeamPrizeTests(TestCase):
         Sets up a test team prize for the rest of the tests.
         This prize is not saved, as the round field is not yet set.
         """
-        self.prize = TestUtils.setup_prize(award_to="team_group", competition_type="points")
+        self.prize = test_utils.setup_prize(award_to="team_group", competition_type="points")
 
         self.current_round = "Round 1"
-        TestUtils.set_competition_round()
+        test_utils.set_competition_round()
 
         # Create test groups, teams, and users.
         self.groups = [Group(name="Test Group %d" % i) for i in range(0, 2)]
@@ -63,7 +63,7 @@ class DormTeamPrizeTests(TestCase):
 
         # Test a user in a different group.
         profile1 = self.users[1].get_profile()
-        profile1.add_points(profile.points + 1,
+        profile1.add_points(profile.points() + 1,
             datetime.datetime.today() + datetime.timedelta(minutes=1), "test")
         profile1.save()
 
@@ -75,7 +75,7 @@ class DormTeamPrizeTests(TestCase):
         # Test that a user in a different team but same dorm changes the leader for the
         # original user.
         profile2 = self.users[2].get_profile()
-        profile2.add_points(profile.points + 1,
+        profile2.add_points(profile.points() + 1,
             datetime.datetime.today() + datetime.timedelta(minutes=1), "test")
         profile2.save()
 
@@ -88,7 +88,7 @@ class DormTeamPrizeTests(TestCase):
         """
         Tests that we can retrieve the overall individual points leader for a round prize.
         """
-        self.prize.round = "Overall"
+        self.prize.round_name = "Overall"
         self.prize.save()
 
         # Test one user will go ahead in points.
@@ -101,7 +101,7 @@ class DormTeamPrizeTests(TestCase):
 
         # Test a user in a different group.
         profile1 = self.users[1].get_profile()
-        profile1.add_points(profile.points + 1,
+        profile1.add_points(profile.points() + 1,
             datetime.datetime.today() + datetime.timedelta(minutes=1), "test")
         profile1.save()
 
@@ -113,7 +113,7 @@ class DormTeamPrizeTests(TestCase):
         # Test that a user in a different team but same dorm changes the leader for
         # the original user.
         profile2 = self.users[2].get_profile()
-        profile2.add_points(profile.points + 1,
+        profile2.add_points(profile.points() + 1,
             datetime.datetime.today() + datetime.timedelta(minutes=1), "test")
         profile2.save()
 
@@ -131,7 +131,7 @@ class DormTeamPrizeTests(TestCase):
         self.prize.delete()
 
 
-class OverallTeamPrizeTest(TestCase):
+class OverallTeamPrizeTest(TransactionTestCase):
     """
     Tests awarding a prize to a dorm team points winner.
     """
@@ -141,11 +141,11 @@ class OverallTeamPrizeTest(TestCase):
         Sets up a test team overall prize for the rest of the tests.
         This prize is not saved, as the round field is not yet set.
         """
-        self.prize = TestUtils.setup_prize(award_to="team_overall", competition_type="points")
+        self.prize = test_utils.setup_prize(award_to="team_overall", competition_type="points")
 
         self.current_round = "Round 1"
-        TestUtils.set_competition_round()
-        TestUtils.create_teams(self)
+        test_utils.set_competition_round()
+        test_utils.create_teams(self)
 
     def testNumAwarded(self):
         """
@@ -175,7 +175,7 @@ class OverallTeamPrizeTest(TestCase):
 
         # Test that a user in a different team changes the leader for the original user.
         profile2 = self.users[2].get_profile()
-        profile2.add_points(profile.points + 1,
+        profile2.add_points(profile.points() + 1,
             datetime.datetime.today() + datetime.timedelta(minutes=1), "test")
         profile2.save()
 
@@ -186,7 +186,7 @@ class OverallTeamPrizeTest(TestCase):
         """
         Tests that we can retrieve the overall individual points leader for a round prize.
         """
-        self.prize.round = "Overall"
+        self.prize.round_name = "Overall"
         self.prize.save()
 
         # Test one user will go ahead in points.
@@ -200,7 +200,7 @@ class OverallTeamPrizeTest(TestCase):
         # Test that a user in a different team but same dorm changes the leader for the
         # original user.
         profile2 = self.users[2].get_profile()
-        profile2.add_points(profile.points + 1,
+        profile2.add_points(profile.points() + 1,
             datetime.datetime.today() + datetime.timedelta(minutes=1), "test")
         profile2.save()
 

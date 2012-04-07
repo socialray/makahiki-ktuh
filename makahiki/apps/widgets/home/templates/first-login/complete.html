@@ -1,7 +1,7 @@
 {% load class_tags %}
 
 <h2>Introduction Complete</h2>
-<div {% get_id_and_classes "setup-content" %}>
+<div id="setup-content">
     <p>Congratulations, you have finished the Kukui Cup introduction and
         earned {{ user.get_profile.points }} points! When you click the "Go home" button, you will
         be taken to your personalized Kukui Cup home page. Your home page connects you to your
@@ -33,10 +33,10 @@
 
 <div style="clear:both"></div>
 
-<div {% get_id_and_classes "progressbar-header" %}>
+<div id="progressbar-header">
     <p>Introduction progress, points: {{ user.get_profile.points }}</p>
 </div>
-<div {% get_id_and_classes "progressbar" %}></div>
+<div id="progressbar"></div>
 <script type="text/javascript">
     $(document).ready(function () {
         $("#progressbar").progressbar({

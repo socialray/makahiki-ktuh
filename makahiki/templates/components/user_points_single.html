@@ -1,0 +1,48 @@
+{% load avatar_tags %} 
+{% load class_tags %}
+{% load cache %}
+{% cache 600 infobar request.user.username %}
+  {% with user.get_profile as profile %}
+    {% if CURRENT_ROUND_INFO and CURRENT_ROUND_INFO.name != 'Overall' %}
+                    <div class="span3">
+                        <h4>{{profile.name}}</h4>
+                        {{CURRENT_ROUND_INFO.name}}: {{profile.current_round_points}} {{COMPETITION_POINT_LABEL}}s #{{profile.current_round_team_rank}}/{{TEAM_MEMBER_COUNT}} in {{profile.team.name}}.
+                    </div>
+                    <div class="span3">
+                        <h4>{{profile.name}}</h4>
+                        {{CURRENT_ROUND_INFO.name}}: {{profile.current_round_points}} {{COMPETITION_POINT_LABEL}}s #{{profile.current_round_overall_rank}}/{{OVERALL_MEMBER_COUNT}} overall.
+                    </div>
+    {% endif %}
+                    <div class="span3">
+                        <h4>{{profile.name}}</h4>
+                        Overall: {{profile.points}} {{COMPETITION_POINT_LABEL}}s #{{profile.team_rank}}/{{TEAM_MEMBER_COUNT}} in {{profile.team.name}}
+                    </div>
+                    <div class="span3">
+                        <h4>{{profile.name}}</h4>
+                        Overall: {{profile.points}} {{COMPETITION_POINT_LABEL}}s #{{profile.overall_rank}}/{{OVERALL_MEMBER_COUNT}}
+                    </div>
+  {% endwith %}
+  {% with user.get_profile.team as team %}
+                    <div class="span3">
+                        <h4>{{team}}</h4>
+                        {{CURRENT_ROUND_INFO.name}}: {{team.current_round_points}} {{COMPETITION_POINT_LABEL}}s. #{{team.current_round_rank}}/{{TEAM_COUNT}}.
+                    </div>               
+    {% if energy_rank_info %}
+                    <div class="span3">
+                        <h4>{{team}}</h4>
+                        {{CURRENT_ROUND_INFO.name}}: <span id="round-energy-value"></span> kWh.
+        #<span id="round-energy-rank"></span>  out of {{TEAM_COUNT}}.
+                    </div>
+    {% endif %}
+                    <div class="span3">
+                        <h4>{{team}}</h4>
+                        Overall: {{team.points}} {{COMPETITION_POINT_LABEL}}s. #{{team.rank}} out of {{TEAM_COUNT}}
+                    </div>    
+    {% if energy_rank_info %}
+                    <div class="span3">
+                        <h4>{{team}}</h4>
+                        Overall: {{ energy_rank_info.usage }} kWh. #{{ energy_rank_info.rank }} out of {{TEAM_COUNT}}.
+                    </div>
+    {% endif %}
+  {% endwith %}     
+{% endcache %}

@@ -1,24 +1,23 @@
 """Prize page view test"""
 import datetime
 
-from django.test import TestCase
+from django.test import TransactionTestCase
 from django.core.urlresolvers import reverse
-from django.conf import settings
 
 from apps.widgets.prizes.models import Prize
-from apps.test_utils import TestUtils
+from apps.test_helpers import test_utils
 
 
-class PrizesFunctionalTestCase(TestCase):
+class PrizesFunctionalTestCase(TransactionTestCase):
     """test prize page view"""
     fixtures = ["base_teams.json", "test_prizes.json"]
 
     def setUp(self):
         """Set up a team and log in."""
-        self.user = TestUtils.setup_user(username="user", password="changeme")
+        self.user = test_utils.setup_user(username="user", password="changeme")
 
-        TestUtils.set_competition_round()
-        TestUtils.register_page_widget("win", "prizes")
+        test_utils.set_competition_round()
+        test_utils.register_page_widget("win", "prizes")
 
         profile = self.user.get_profile()
         profile.add_points(10, datetime.datetime.today(), "test")
@@ -36,20 +35,7 @@ class PrizesFunctionalTestCase(TestCase):
 
     def testLeadersInRound1(self):
         """Test that the leaders are displayed correctly in round 1."""
-        start = datetime.datetime.today()
-        end1 = start + datetime.timedelta(days=7)
-        end2 = start + datetime.timedelta(days=14)
-
-        settings.COMPETITION_ROUNDS = {
-            "Round 1": {"start": start,
-                        "end": end1, },
-            "Round 2": {"start": end1,
-                        "end": end2, },
-            "Overall": {"start": start,
-                        "end": end2, },
-            }
-        settings.COMPETITION_START = start
-        settings.COMPETITION_END = end2
+        test_utils.set_competition_round()
 
         profile = self.user.get_profile()
         profile.name = "Test User"
@@ -60,7 +46,7 @@ class PrizesFunctionalTestCase(TestCase):
         response = self.client.get(reverse("win_index"))
         self.assertContains(response, "Current leader: " + str(profile), count=2,
             msg_prefix="Individual prizes should have user as the leader.")
-        self.assertContains(response, "Current leader: " + str(team), count=1,
+        self.assertContains(response, "Current leader: " + str(team), count=2,
             msg_prefix="Team points prizes should have team as the leader")
         self.assertContains(response, "Current leader: <span id='round-1-leader'></span>", count=1,
             msg_prefix="Span for round 1 energy prize should be inserted.")
@@ -68,7 +54,7 @@ class PrizesFunctionalTestCase(TestCase):
             msg_prefix="Span for round 2 energy prize should not be inserted.")
         self.assertContains(response, "Current leader: <span id='overall-leader'></span>", count=1,
             msg_prefix="Span for overall energy prize should be inserted.")
-        self.assertContains(response, "Current leader: TBD", count=3,
+        self.assertContains(response, "Current leader: TBD", count=0,
             msg_prefix="Round 2 prizes should not have a leader yet.")
 
         # Test XSS vulnerability.
@@ -82,7 +68,7 @@ class PrizesFunctionalTestCase(TestCase):
     def testLeadersInRound2(self):
         """Test that the leaders are displayed correctly in round 2."""
 
-        TestUtils.set_two_rounds()
+        test_utils.set_two_rounds()
 
         profile = self.user.get_profile()
         profile.add_points(10, datetime.datetime.today(), "test")
@@ -93,11 +79,11 @@ class PrizesFunctionalTestCase(TestCase):
         response = self.client.get(reverse("win_index"))
         self.assertContains(response, "Winner: ", count=3,
             msg_prefix="There should be winners for three prizes.")
-        self.assertContains(response, "Current leader: " + str(profile), count=1,
+        self.assertContains(response, "Current leader: " + str(profile), count=2,
             msg_prefix="Individual prizes should have user as the leader.")
         self.assertContains(response, "Current leader: <span id='round-2-leader'></span>", count=1,
             msg_prefix="Span for round 2 energy prize should be inserted.")
-        self.assertContains(response, "Current leader: " + str(team), count=1,
+        self.assertContains(response, "Current leader: " + str(team), count=2,
             msg_prefix="Team points prizes should have team as the leader")
 
         # Test XSS vulnerability.

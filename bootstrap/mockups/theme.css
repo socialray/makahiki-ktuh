@@ -2,34 +2,251 @@ body {
     overflow-y: scroll;
     
     background: url(ti.jpg) no-repeat center center fixed;
-	-webkit-background-size: cover;
-	-moz-background-size: cover;
-	-o-background-size: cover;
-	background-size: cover;
+-webkit-background-size: cover;
+-moz-background-size: cover;
+-o-background-size: cover;
+background-size: cover;
 }
 
-.nav li img {
-    width: 40px;
-    height: 40px;
-    vertical-align: middle;
-    margin-right: 2px;
+/* Send feedback styles */
+#send-feedback {
+    float: right;
+    margin: 5px;
 }
 
-.home-icon-content {
-    background: #E3E3E3;
+#send-feedback button {
+    margin-right: 10px;
+}
+
+#send-feedback a {
+    color: white;
+    text-decoration: underline;
+}
+
+/*Overrides for nav bar.*/
+.navbar .navbar-inner {
+    background: none;
+    background-color: rgba(255, 255, 255, 0.7);
+}
+
+.navbar .nav li.active a {
+    background: none;
+    background-color: none;
+}
+
+.navbar .nav .active > a:hover {
+    background: none;
+    background-color: none;
+}
+
+/* nav bar image defaults */
+.nav li a img {
+    display: block;
+width: 54px;
+height: 54px;
+}
+
+/* Handle slightly different layout for nav bar items in collapsed view.*/
+@media (max-width:479px) {
+    .nav li a img {
+        vertical-align: middle;
+        margin-right: 20px;
+        display: inline;
+    }
     
+    .nav li a {
+        font-size:1.1em;
+    }
+}
+
+/* Center text in full nav bar.*/
+@media (min-width:480px) {
+    .nav li {
+        text-align: center;
+    }
+}
+
+#nav-home a img {
+background: transparent url(../../makahiki/media/images/icons/icon-home.png) top left no-repeat;
+}
+
+#nav-home a:hover img {
+    background: transparent url(../../makahiki/media/images/icons/icon-home-over.png) top left no-repeat;
+}
+
+#nav-activities a img {
+background: transparent url(../../makahiki/media/images/icons/icon-scoreboard.png) top left no-repeat;
+}
+
+#nav-activities a:hover img {
+    background: transparent url(../../makahiki/media/images/icons/icon-scoreboard-over.png) top left no-repeat;
+}
+
+#nav-energy a img {
+background: transparent url(../../makahiki/media/images/icons/icon-go-low.png) top left no-repeat;
+}
+
+#nav-energy a:hover img {
+    background: transparent url(../../makahiki/media/images/icons/icon-go-low-over.png) top left no-repeat;
+}
+
+#nav-water a img {
+background: transparent url(../../makahiki/media/images/icons/icon-water.png) top left no-repeat;
+}
+
+#nav-water a:hover img {
+    background: transparent url(../../makahiki/media/images/icons/icon-water-over.png) top left no-repeat;
+}
+
+#nav-advanced a img {
+background: transparent url(../../makahiki/media/images/icons/icon-scoreboard.png) top left no-repeat;
+}
+
+#nav-advanced a:hover img {
+    background: transparent url(../../makahiki/media/images/icons/icon-scoreboard-over.png) top left no-repeat;
+}
+
+#nav-news a img {
+background: transparent url(../../makahiki/media/images/icons/icon-news.png) top left no-repeat;
+}
+
+#nav-news a:hover img {
+    background: transparent url(../../makahiki/media/images/icons/icon-news-over.png) top left no-repeat;
+}
+
+#nav-prizes a img {
+background: transparent url(../../makahiki/media/images/icons/icon-prizes.png) top left no-repeat;
+}
+
+#nav-prizes a:hover img {
+    background: transparent url(../../makahiki/media/images/icons/icon-prizes-over.png) top left no-repeat;
+}
+
+#nav-profile a img {
+background: transparent url(../../makahiki/media/images/icons/icon-profile.png) top left no-repeat;
+}
+
+#nav-profile a:hover img {
+    background: transparent url(../../makahiki/media/images/icons/icon-profile-over.png) top left no-repeat;
+}
+
+#nav-help a img {
+background: transparent url(../../makahiki/media/images/icons/icon-help.png) top left no-repeat;
+}
+
+#nav-help a:hover img {
+    background: transparent url(../../makahiki/media/images/icons/icon-help-over.png) top left no-repeat;
+}
+
+/* Query to remove images up to tablet width.*/
+@media (min-width: 480px) and (max-width: 767px) {
+    .nav li a img {
+     display: none;
+    }
+
+    .nav li a:hover img {
+        display: none;
+    }
+}
+
+/* end nav bar images */
+
+#info-bar {
+    background: #E3E3E3;
+
     background-image: -moz-linear-gradient(100% 50% 90deg, #E3E3E3, #A1A1A1);
     background-image: -webkit-gradient(linear, 0% 0%, 0% 90%, from(#E3E3E3), to(#BBB));
-    
+
     border-radius: 3px;
-	
-	box-shadow: 3px 3px 5px #000;
-	-moz-box-shadow: 3px 3px 5px #000;
-	-webkit-box-shadow: 3px 3px 5px #000;
-	
-	margin-right: 30px;
+
+        box-shadow: 3px 3px 5px #000;
+        -moz-box-shadow: 3px 3px 5px #000;
+        -webkit-box-shadow: 3px 3px 5px #000;
+
+        padding: 5px 0;
+        margin-bottom: 20px;
 }
 
-.navbar .brand {
+#user-info h4 {
+    text-align: center;
+}
+
+#user-info img {
+    float:left
+}
+
+#user-info ul {
+    list-style: none;
+    float: left;
+    margin-left: 10px;
+}
+
+#user-info-content {
+    margin-left:20px;
+}
+
+#team-info h4 {
+    text-align: center;
+}
+
+@media (max-width: 767px) {
+    #team-info .span2 {
+        float:left;
+        margin-left: 10px;
+    }
+}
+
+#team-info .span2 ul {
+    list-style: none;
+}
+
+#rotating-info {
+    text-align: center;
+}
+
+#quest-bar {
+    background-image: -moz-linear-gradient(100% 40% 90deg, #EFB820, #FFFFFF);
+        background-image: -webkit-gradient(linear, 0% 0%, 0% 50%, from(#FFFFFF), to(#EFB820));
     color: black;
+        border-radius: 5px;
+        text-align: center;
+        margin-bottom: 20px;
+        box-shadow: 3px 3px 5px #000;
+    -moz-box-shadow: 3px 3px 5px #000;
+    -webkit-box-shadow: 3px 3px 5px #000;
+    padding: 5px;
+    display: block;
+}
+
+#quest-bar a {
+    color: black;
+    font-weight: bold;
+    text-decoration: underline;
+}
+
+/****************** Widget styles ******************/
+
+.content-box-title {
+    text-align: center;
+    padding: 5px 0;
+    margin-bottom: 5px;
+    /* So only the top two corners are rounded*/
+    border-top-left-radius: 8px;
+    -moz-border-radius-topleft: 8px;
+    -webkit-border-top-left-radius: 8px; 
+    /* So only the top two corners are rounded*/
+    border-top-right-radius: 8px;
+    -moz-border-radius-topright: 8px;
+    -webkit-border-top-right-radius: 8px;
+    
+	background-color: #333333;
+	background-image: -moz-linear-gradient(100% 50% 90deg, #EFB820, #FFFFFF);
+	background-image: -webkit-gradient(linear, 0% 0%, 0% 50%, from(#FFFFFF), to(#EFB820));
+}
+
+.content-box {
+    border-radius: 8px;
+    moz-border-radius: 8px;
+    webkit-border-radius: 8px;
+	background-color: #EBE7BC; 
 }

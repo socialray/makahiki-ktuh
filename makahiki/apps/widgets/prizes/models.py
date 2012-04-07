@@ -1,7 +1,8 @@
 """Implements the model for prize management."""
 from django.db import models
+from apps.managers.player_mgr import player_mgr
 
-from apps.managers.player_mgr.models import Profile
+from apps.managers.team_mgr import team_mgr
 from apps.managers.team_mgr.models import Group, Team
 
 
@@ -80,9 +81,9 @@ class Prize(models.Model):
 
     def _points_leader(self, team=None):
         """Return the point leader."""
-        round_name = None if self.round_name == "Overall" else self.round_name
+        round_name = self.round_name
         if self.award_to == "individual_overall":
-            return Profile.points_leaders(num_results=1, round_name=round_name)[0]
+            return player_mgr.points_leader(round_name=round_name)
 
         elif self.award_to == "team_group":
             if team:
@@ -91,7 +92,7 @@ class Prize(models.Model):
                 return None
 
         elif self.award_to == "team_overall":
-            return Team.team_points_leaders(num_results=1, round_name=round_name)[0]
+            return team_mgr.team_points_leader(round_name=round_name)
 
         elif self.award_to == "individual_team":
             if team:

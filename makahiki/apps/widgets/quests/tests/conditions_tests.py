@@ -3,7 +3,7 @@
 import datetime
 import os
 
-from django.test import TestCase
+from django.test import TransactionTestCase
 from django.contrib.auth.models import User
 from django.conf import settings
 from django.core.files.images import ImageFile
@@ -18,10 +18,10 @@ from apps.widgets.smartgrid.models import Activity, ActivityMember, Commitment, 
 from apps.lib.avatar import create_default_thumbnails
 from apps.lib.avatar.models import Avatar, avatar_file_path
 from apps.widgets.raffle.models import RafflePrize, RaffleTicket
-from apps.test_utils import TestUtils
+from apps.test_helpers import test_utils
 
 
-class QuestConditionsTest(TestCase):
+class QuestConditionsTest(TransactionTestCase):
     """
     Tests for the possible quest conditions.
     """
@@ -30,7 +30,7 @@ class QuestConditionsTest(TestCase):
         self.user = User(username="testuser", password="password")
         self.user.save()
 
-        self.quest = TestUtils.create_quest(completion_conditions=False)
+        self.quest = test_utils.create_quest(completion_conditions=False)
 
     def testAllocatedTicket(self):
         """
@@ -447,13 +447,11 @@ class QuestConditionsTest(TestCase):
         profile = self.user.get_profile()
         test_points = 10
         self.assertFalse(has_points(self.user, test_points), "User should not have any points")
-        profile.points = test_points
-        profile.save()
+        profile.add_points(test_points, datetime.datetime.today(), "test quest")
         self.assertTrue(has_points(self.user, test_points), "User should have enough points.")
 
         # Test within context of a quest.
-        profile.points = 0
-        profile.save()
+        profile.remove_points(test_points, datetime.datetime.today(), "test quest")
         self.quest.unlock_conditions = "has_points(10)"
         self.quest.save()
         self.assertTrue(self.quest not in get_quests(self.user),
@@ -461,7 +459,6 @@ class QuestConditionsTest(TestCase):
 
         self.quest.unlock_conditions = "not has_points(10)"
         self.quest.save()
-        print self.user.get_profile().points
         self.assertTrue(self.quest in get_quests(self.user)["available_quests"],
             "User should be able to participate in this quest.")
 
@@ -471,8 +468,7 @@ class QuestConditionsTest(TestCase):
         self.assertTrue(self.quest not in possibly_completed_quests(self.user),
             "User should not be able to complete this quest.")
 
-        profile.points = 10
-        profile.save()
+        profile.add_points(test_points, datetime.datetime.today(), "test quest")
         self.assertTrue(self.quest in possibly_completed_quests(self.user),
             "User should have completed this quest.")
 

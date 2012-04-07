@@ -1,13 +1,13 @@
 """Quest Test"""
-from django.test import TestCase
+from django.test import TransactionTestCase
 from django.contrib.auth.models import User
-from apps.test_utils import TestUtils
+from apps.test_helpers import test_utils
 
 from apps.widgets.quests import get_quests, possibly_completed_quests
 from apps.widgets.quests.models import Quest, QuestMember
 
 
-class QuestTest(TestCase):
+class QuestTest(TransactionTestCase):
     """Quest Test"""
     def setUp(self):
         self.user = User(username="testuser", password="password")
@@ -105,7 +105,7 @@ class QuestTest(TestCase):
 
     def testBasicPrerequisites(self):
         """Tests that the user can only get quests for which they meet the prerequisites."""
-        quest = TestUtils.create_quest(completion_conditions=False)
+        quest = test_utils.create_quest(completion_conditions=False)
         quest.unlock_conditions = "False"
         quest.save()
 
@@ -120,7 +120,7 @@ class QuestTest(TestCase):
 
     def testBasicCompletion(self):
         """Tests that the user can complete quests."""
-        quest = TestUtils.create_quest(completion_conditions=False)
+        quest = test_utils.create_quest(completion_conditions=False)
 
         quests = get_quests(self.user)
         self.assertEqual(len(quests["available_quests"]), 1, "User should have one quest.")

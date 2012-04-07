@@ -5,21 +5,21 @@ home page tests
 import json
 import datetime
 
-from django.test import TestCase
+from django.test import TransactionTestCase
 from django.core.urlresolvers import reverse
 from django.contrib.auth.models import User
 from django.conf import settings
 
 from apps.managers.player_mgr.models import Profile
-from apps.test_utils import TestUtils
+from apps.test_helpers import test_utils
 
 
-class HomeFunctionalTestCase(TestCase):
+class HomeFunctionalTestCase(TransactionTestCase):
     """Home Test Case."""
 
     def setUp(self):
         """setup."""
-        TestUtils.register_page_widget("home", "home")
+        test_utils.register_page_widget("home", "home")
 
     def testIndex(self):
         """Check that we can load the index."""
@@ -30,7 +30,7 @@ class HomeFunctionalTestCase(TestCase):
         self.failUnlessEqual(response.status_code, 200)
 
 
-class CompetitionMiddlewareTestCase(TestCase):
+class CompetitionMiddlewareTestCase(TransactionTestCase):
     """competition middleware test."""
 
     def setUp(self):
@@ -74,7 +74,7 @@ class CompetitionMiddlewareTestCase(TestCase):
         settings.COMPETITION_END = self.saved_end
 
 
-class SetupWizardFunctionalTestCase(TestCase):
+class SetupWizardFunctionalTestCase(TransactionTestCase):
     """setup widzard test cases."""
 
     def setUp(self):
@@ -82,7 +82,7 @@ class SetupWizardFunctionalTestCase(TestCase):
         self.user = User.objects.create_user("user",
                                              "user@test.com",
                                              password="changeme")
-        TestUtils.register_page_widget("home", "home")
+        test_utils.register_page_widget("home", "home")
 
         self.client.login(username="user", password="changeme")
 
@@ -207,7 +207,7 @@ class SetupWizardFunctionalTestCase(TestCase):
         """Check that we can update the profile of the user in the setup
         wizard."""
         profile = self.user.get_profile()
-        points = profile.points
+        points = profile.points()
         response = self.client.post(reverse("setup_profile"), {
             "display_name": "Test User",
             }, follow=True)
@@ -215,7 +215,7 @@ class SetupWizardFunctionalTestCase(TestCase):
         self.assertTemplateUsed(response, "first-login/activity.html")
 
         user = User.objects.get(username="user")
-        self.assertEqual(points + 5, user.get_profile().points,
+        self.assertEqual(points + 5, user.get_profile().points(),
             "Check that the user has been awarded points.")
         self.assertTrue(user.get_profile().setup_profile,
             "Check that the user has now set up their profile.")
@@ -225,7 +225,7 @@ class SetupWizardFunctionalTestCase(TestCase):
             "display_name": "Test User",
             }, follow=True)
         user = User.objects.get(username="user")
-        self.assertEqual(points + 5, user.get_profile().points,
+        self.assertEqual(points + 5, user.get_profile().points(),
             "Check that the user was not awarded any more points.")
         self.failUnlessEqual(response.status_code, 200)
         self.assertTemplateUsed(response, "first-login/activity.html")

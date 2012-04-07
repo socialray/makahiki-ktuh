@@ -3,16 +3,15 @@
 
 import datetime
 
-from django.test import TestCase
+from django.test import TransactionTestCase
 from django.contrib.auth.models import User
-from django.conf import settings
-from django.db.models import Sum, Max
+from apps.managers.team_mgr import team_mgr
 
-from apps.test_utils import TestUtils
+from apps.test_helpers import test_utils
 from apps.managers.team_mgr.models import Group, Team
 
 
-class DormUnitTestCase(TestCase):
+class DormUnitTestCase(TransactionTestCase):
     """dorm test"""
 
     def setUp(self):
@@ -31,9 +30,8 @@ class DormUnitTestCase(TestCase):
             user.get_profile().team = self.teams[index % 4]
             user.get_profile().save()
 
-        self.saved_rounds = settings.COMPETITION_ROUNDS
         self.current_round = "Round 1"
-        TestUtils.set_competition_round()
+        test_utils.set_competition_round()
 
     def testTeamPointsInRound(self):
         """Tests calculating the team points leaders in a round."""
@@ -42,20 +40,18 @@ class DormUnitTestCase(TestCase):
             datetime.datetime.today() - datetime.timedelta(minutes=1), "test")
         profile.save()
 
-        self.assertEqual(self.groups[0].\
-                         team_points_leaders(round_name=self.current_round)[0],
+        self.assertEqual(self.groups[0].team_points_leaders(round_name=self.current_round)[0],
                          profile.team,
                          "The user's team is not leading in the prize.")
 
         # Test that a user in a different team but same dorm changes the
         # leader for the original user.
         profile2 = self.users[2].get_profile()
-        profile2.add_points(profile.points + 1,
+        profile2.add_points(profile.points() + 1,
             datetime.datetime.today() - datetime.timedelta(minutes=1), "test")
         profile2.save()
 
-        self.assertEqual(self.groups[0].\
-                         team_points_leaders(round_name=self.current_round)[0],
+        self.assertEqual(self.groups[0].team_points_leaders(round_name=self.current_round)[0],
                          profile2.team,
                          "The user's team should have changed.")
 
@@ -67,26 +63,23 @@ class DormUnitTestCase(TestCase):
                            "test")
         profile.save()
 
-        self.assertEqual(self.groups[0].\
-                         team_points_leaders(round_name=self.current_round)[0],
+        self.assertEqual(self.groups[0].team_points_leaders(round_name=self.current_round)[0],
                          profile2.team,
                          "The leader of the team should not change.")
 
         # Test that adding points to a user in a different dorm does not
         # change affect these standings.
         profile1 = self.users[1].get_profile()
-        profile1.add_points(profile.points + 1,
+        profile1.add_points(profile.points() + 1,
                             datetime.datetime.today() -\
                             datetime.timedelta(minutes=1),
                             "test")
         profile1.save()
 
-        self.assertEqual(self.groups[0].\
-                         team_points_leaders(round_name=self.current_round)[0],
+        self.assertEqual(self.groups[0].team_points_leaders(round_name=self.current_round)[0],
                          profile2.team,
                          "The leader of the team should not change.")
-        self.assertEqual(self.groups[1].\
-                         team_points_leaders(round_name=self.current_round)[0],
+        self.assertEqual(self.groups[1].team_points_leaders(round_name=self.current_round)[0],
                          profile1.team,
                          "The leader in the second dorm should be profile1's "
                          "team.")
@@ -95,8 +88,7 @@ class DormUnitTestCase(TestCase):
         profile.add_points(1, datetime.datetime.today(), "test")
         profile.save()
 
-        self.assertEqual(self.groups[0].\
-                         team_points_leaders(round_name=self.current_round)[0],
+        self.assertEqual(self.groups[0].team_points_leaders(round_name=self.current_round)[0],
                          profile.team,
                          "The leader of the team should have changed back.")
 
@@ -116,7 +108,7 @@ class DormUnitTestCase(TestCase):
         # Test that a user in a different team but same dorm changes the
         # leader for the original user.
         profile2 = self.users[2].get_profile()
-        profile2.add_points(profile.points + 1,
+        profile2.add_points(profile.points() + 1,
                             datetime.datetime.today() -\
                             datetime.timedelta(minutes=1),
                             "test")
@@ -130,7 +122,7 @@ class DormUnitTestCase(TestCase):
         profile.add_points(1, datetime.datetime.today(), "test")
         profile.save()
 
-        self.assertEqual(profile.points, profile2.points,
+        self.assertEqual(profile.points(), profile2.points(),
             "The two profiles should have identical points.")
         self.assertEqual(self.groups[0].team_points_leaders()[0],
                          profile.team,
@@ -139,7 +131,7 @@ class DormUnitTestCase(TestCase):
         # Test that adding points to a user in a different dorm does not
         # change affect these standings.
         profile1 = self.users[1].get_profile()
-        profile1.add_points(profile.points + 1,
+        profile1.add_points(profile.points() + 1,
                             datetime.datetime.today() -
                             datetime.timedelta(minutes=1),
                             "test")
@@ -153,11 +145,8 @@ class DormUnitTestCase(TestCase):
                          "The leader in the second dorm should be profile1's "
                          "team.")
 
-    def tearDown(self):
-        settings.COMPETITION_ROUNDS = self.saved_rounds
 
-
-class TeamLeadersTestCase(TestCase):
+class TeamLeadersTestCase(TransactionTestCase):
     """test team leader"""
     def setUp(self):
         self.group = Group(name="Test Group")
@@ -175,9 +164,8 @@ class TeamLeadersTestCase(TestCase):
             user.get_profile().team = self.teams[index % 2]
             user.get_profile().save()
 
-        self.saved_rounds = settings.COMPETITION_ROUNDS
         self.current_round = "Round 1"
-        TestUtils.set_competition_round()
+        test_utils.set_competition_round()
 
     def testTeamPointsInRound(self):
         """Tests calculating the team points leaders in a round."""
@@ -186,22 +174,20 @@ class TeamLeadersTestCase(TestCase):
             datetime.datetime.today() - datetime.timedelta(minutes=1), "test")
         profile.save()
 
-        self.assertEqual(Team.\
-                         team_points_leaders(round_name=self.current_round)[0],
+        self.assertEqual(team_mgr.team_points_leader(round_name=self.current_round),
                          profile.team,
                          "The user's team is not leading in the prize.")
 
         # Test that a user in a different team but same dorm changes the
         # leader for the original user.
         profile2 = self.users[2].get_profile()
-        profile2.add_points(profile.points + 1,
+        profile2.add_points(profile.points() + 1,
                             datetime.datetime.today() -
                             datetime.timedelta(minutes=1),
                             "test")
         profile2.save()
 
-        self.assertEqual(Team.\
-                         team_points_leaders(round_name=self.current_round)[0],
+        self.assertEqual(team_mgr.team_points_leader(round_name=self.current_round),
                          profile2.team,
                          "The user's team should have changed.")
 
@@ -213,8 +199,7 @@ class TeamLeadersTestCase(TestCase):
                            "test")
         profile.save()
 
-        self.assertEqual(Team.\
-                         team_points_leaders(round_name=self.current_round)[0],
+        self.assertEqual(team_mgr.team_points_leader(round_name=self.current_round),
                          profile2.team,
                          "The leader of the team should not change.")
 
@@ -222,8 +207,7 @@ class TeamLeadersTestCase(TestCase):
         profile.add_points(1, datetime.datetime.today(), "test")
         profile.save()
 
-        self.assertEqual(Team.\
-                         team_points_leaders(round_name=self.current_round)[0],
+        self.assertEqual(team_mgr.team_points_leader(round_name=self.current_round),
                          profile.team,
                          "The leader of the team should have changed back.")
 
@@ -236,8 +220,7 @@ class TeamLeadersTestCase(TestCase):
                            "test")
         profile.save()
 
-        self.assertEqual(profile.\
-                         team.points_leaders(round_name=self.current_round)[0],
+        self.assertEqual(profile.team.points_leaders(round_name=self.current_round)[0],
                          profile,
                          "The user should be in the lead in his own team.")
 
@@ -250,13 +233,11 @@ class TeamLeadersTestCase(TestCase):
                             "test")
         profile1.save()
 
-        self.assertEqual(profile.\
-                         team.points_leaders(round_name=self.current_round)[0],
+        self.assertEqual(profile.team.points_leaders(round_name=self.current_round)[0],
                          profile,
                          "The leader for the user's team should not have"
                          " changed.")
-        self.assertEqual(profile1.\
-                         team.points_leaders(round_name=self.current_round)[0],
+        self.assertEqual(profile1.team.points_leaders(round_name=self.current_round)[0],
                          profile1,
                          "User 1 should be leading in their own team.")
 
@@ -268,8 +249,7 @@ class TeamLeadersTestCase(TestCase):
                             "test")
         profile2.save()
 
-        self.assertEqual(profile.\
-                         team.points_leaders(round_name=self.current_round)[0],
+        self.assertEqual(profile.team.points_leaders(round_name=self.current_round)[0],
                          profile2,
                          "User 2 should be in the lead in the user's team.")
 
@@ -281,8 +261,7 @@ class TeamLeadersTestCase(TestCase):
                            "test")
         profile.save()
 
-        self.assertEqual(profile.\
-                         team.points_leaders(round_name=self.current_round)[0],
+        self.assertEqual(profile.team.points_leaders(round_name=self.current_round)[0],
                          profile2,
                          "The leader of the team should not change.")
 
@@ -290,8 +269,7 @@ class TeamLeadersTestCase(TestCase):
         profile.add_points(5, datetime.datetime.today(), "test")
         profile.save()
 
-        self.assertEqual(profile.\
-                         team.points_leaders(round_name=self.current_round)[0],
+        self.assertEqual(profile.team.points_leaders(round_name=self.current_round)[0],
                          profile,
                          "The leader of the team should have changed back.")
 
@@ -304,8 +282,7 @@ class TeamLeadersTestCase(TestCase):
                            "test")
         profile.save()
 
-        self.assertEqual(profile.\
-                         team.points_leaders()[0],
+        self.assertEqual(profile.team.points_leaders()[0],
                          profile,
                          "The user should be in the lead in his own team.")
 
@@ -346,11 +323,8 @@ class TeamLeadersTestCase(TestCase):
                          profile,
                          "The leader of the team should have changed back.")
 
-    def tearDown(self):
-        settings.COMPETITION_ROUNDS = self.saved_rounds
 
-
-class TeamsUnitTestCase(TestCase):
+class TeamsUnitTestCase(TransactionTestCase):
     """team tests"""
     def setUp(self):
         self.group = Group(name="Test group")
@@ -394,9 +368,7 @@ class TeamsUnitTestCase(TestCase):
     def testPointsInRound(self):
         """Tests that we can accurately compute the amount of points in a
         round."""
-        # Save the round information and set up a test round.
-        saved_rounds = settings.COMPETITION_ROUNDS
-        TestUtils.set_competition_round()
+        test_utils.set_competition_round()
 
         user = User(username="test_user", password="test_password")
         user.save()
@@ -426,9 +398,6 @@ class TeamsUnitTestCase(TestCase):
                          10,
                          "Check that the number of points did not change.")
 
-        # Restore saved rounds.
-        settings.COMPETITION_ROUNDS = saved_rounds
-
     def testOverallRankWithPoints(self):
         """Check that calculating the rank is correct based on point value."""
         # Create a test user.
@@ -438,10 +407,7 @@ class TeamsUnitTestCase(TestCase):
         user.get_profile().team = self.test_team
 
         # Test the team is ranked last if they haven't done anything yet.
-        team_rank = Team.objects.annotate(
-            team_points=Sum("profile__points"),
-            last_awarded_submission=Max("profile__last_awarded_submission")
-        ).filter(team_points__gt=self.test_team.points).count() + 1
+        team_rank = 1
         self.assertEqual(self.test_team.rank(), team_rank,
             "Check the team is ranked last.")
 
@@ -473,8 +439,7 @@ class TeamsUnitTestCase(TestCase):
     def testRoundRank(self):
         """Check that the rank calculation is correct for the current round."""
         # Save the round information and set up a test round.
-        saved_rounds = settings.COMPETITION_ROUNDS
-        TestUtils.set_competition_round()
+        test_utils.set_competition_round()
 
         # Create a test user.
         user = User(username="test_user", password="test_password")
@@ -520,8 +485,6 @@ class TeamsUnitTestCase(TestCase):
         self.assertEqual(self.test_team.current_round_rank(),
                          2,
                          "Check the team is still ranked number 2.")
-
-        settings.COMPETITION_ROUNDS = saved_rounds
 
     def testOverallRankWithSubmissionDate(self):
         """Check that rank calculation is correct in the case of ties."""

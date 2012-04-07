@@ -21,7 +21,6 @@ def supply(request, page_name):
             profile.contact_email = form.cleaned_data["contact_email"]
             profile.contact_text = form.cleaned_data["contact_text"]
             profile.contact_carrier = form.cleaned_data["contact_carrier"]
-            # profile.enable_help = form.cleaned_data["enable_help"]
 
             profile.save()
             form.message = "Your changes have been saved"
@@ -33,7 +32,6 @@ def supply(request, page_name):
     if not form:
         profile = user.get_profile()
         form = ProfileForm(initial={
-            # "enable_help": user.get_profile().enable_help,
             "display_name": profile.name,
             "contact_email": profile.contact_email or user.email,
             "contact_text": profile.contact_text,

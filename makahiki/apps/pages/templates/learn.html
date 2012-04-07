@@ -13,23 +13,35 @@
 {% endblock %}
 
 {% block body %}
-    <div id='notifications'>
-        {% include "widgets/notifications/templates/index.html" %}
+    <div {% get_id_and_classes "activity-body" "responsive" %}>
+        <div {% get_id_and_classes "base-row" "responsive" %}>
+            <!-- left column -->
+            <div {% get_id_and_classes "narrow-col" "responsive" %}>
+                <div id='upcoming_events'>
+                    {% include "widgets/upcoming_events/templates/index.html" %}
+                </div>
+                <div id='scoreboard'>
+                    {% include "widgets/scoreboard/templates/index.html" %}
+                </div>
+            </div>
+            <!-- right column -->
+            <div {% get_id_and_classes "wide-col" "responsive" %}>
+                <div id='smartgrid'>
+                    {% include "widgets/smartgrid/templates/index.html" %}
+                </div>
+            </div>
+        </div>
     </div>
-    <table>
-        <tr><td width="40%" valign="top">
-            <div id='upcoming_events'>
-                {% include "widgets/upcoming_events/templates/index.html" %}
-            </div>
-
-            <div id='scoreboard'>
-                {% include "widgets/scoreboard/templates/index.html" %}
-            </div>
-        </td><td width="60%" valign="top">
-            <div id='smartgrid'>
-                {% include "widgets/smartgrid/templates/index.html" %}
-            </div>
-        </td></tr>
-    </table>
-
 {% endblock %}
+
+{% block page_cycles %}
+<script type="text/javascript">
+  jQuery(document).ready(function($) {
+    $("#energy-scoreboard").cycle({
+        pause: 1,
+        timeout: 7000,
+        pager: '#scoreboard-cycle-nav'
+    });
+  })
+</script>
+{% endblock page_cycles %}

@@ -1,23 +1,23 @@
 """View Test."""
 import datetime
 from django.core.urlresolvers import reverse
-from django.test import TestCase
+from django.test import TransactionTestCase
 from apps.widgets.smartgrid.models import  EmailReminder, ActivityMember, \
                                            TextReminder, Commitment, ConfirmationCode
 from apps.managers.player_mgr.models import Profile
-from apps.test_utils import TestUtils
+from apps.test_helpers import test_utils
 
 
-class ActivitiesFunctionalTest(TestCase):
+class ActivitiesFunctionalTest(TransactionTestCase):
     """Activities View Test."""
     fixtures = ["base_teams.json"]
 
     def setUp(self):
         """setup"""
-        self.user = self.user = TestUtils.setup_user(username="user", password="changeme")
+        self.user = self.user = test_utils.setup_user(username="user", password="changeme")
 
-        TestUtils.register_page_widget("learn", "smartgrid")
-        TestUtils.register_page_widget("learn", "notifications")
+        test_utils.register_page_widget("learn", "smartgrid")
+        test_utils.register_page_widget("learn", "notifications")
 
         self.client.login(username="user", password="changeme")
 
@@ -28,7 +28,7 @@ class ActivitiesFunctionalTest(TestCase):
 
     def testViewCodesAndRsvps(self):
         """test view code and rsvp."""
-        activity = TestUtils.create_event()
+        activity = test_utils.create_event()
 
         ConfirmationCode.generate_codes_for_activity(activity, 5)
 
@@ -56,7 +56,7 @@ class ActivitiesFunctionalTest(TestCase):
         """
         Tests the submission of a confirmation code.
         """
-        activity = TestUtils.create_event(slug="test-activity")
+        activity = test_utils.create_event(slug="test-activity")
         activity.event_date = datetime.datetime.today() - datetime.timedelta(days=1, seconds=30)
         activity.save()
 
@@ -86,7 +86,7 @@ class ActivitiesFunctionalTest(TestCase):
         # Try creating a new activity with codes and see if we can submit a code for one activity
         # for another.
         code = ConfirmationCode.objects.filter(activity=activity)[2]
-        activity = TestUtils.create_event(slug="test-activity2")
+        activity = test_utils.create_event(slug="test-activity2")
         activity.event_date = datetime.datetime.today() - datetime.timedelta(days=1, seconds=30)
         activity.save()
         ConfirmationCode.generate_codes_for_activity(activity, 1)
@@ -102,7 +102,7 @@ class ActivitiesFunctionalTest(TestCase):
         """
         Test that a rejected activity submission posts a message.
         """
-        activity = TestUtils.create_activity()
+        activity = test_utils.create_activity()
         member = ActivityMember(
             activity=activity,
             user=self.user,
@@ -146,7 +146,7 @@ class ActivitiesFunctionalTest(TestCase):
         """
         Test that the user can create a email reminder.
         """
-        event = TestUtils.create_event()
+        event = test_utils.create_event()
 
         reminders = self.user.emailreminder_set.count()
 
@@ -196,7 +196,7 @@ class ActivitiesFunctionalTest(TestCase):
         """
         Test that we can adjust a reminder.
         """
-        event = TestUtils.create_event()
+        event = test_utils.create_event()
 
         original_date = event.event_date - datetime.timedelta(hours=2)
         reminder = EmailReminder(
@@ -231,7 +231,7 @@ class ActivitiesFunctionalTest(TestCase):
         """
         Test that unchecking send_email will remove the reminder.
         """
-        event = TestUtils.create_event()
+        event = test_utils.create_event()
 
         reminder = EmailReminder(
             user=self.user,
@@ -258,7 +258,7 @@ class ActivitiesFunctionalTest(TestCase):
         """
         Test that a user can create a text reminder.
         """
-        event = TestUtils.create_event()
+        event = test_utils.create_event()
 
         reminders = self.user.textreminder_set.count()
 
@@ -317,7 +317,7 @@ class ActivitiesFunctionalTest(TestCase):
         """
         Test that we can adjust a text reminder.
         """
-        event = TestUtils.create_event()
+        event = test_utils.create_event()
 
         original_date = event.event_date - datetime.timedelta(hours=2)
         reminder = TextReminder(
@@ -355,7 +355,7 @@ class ActivitiesFunctionalTest(TestCase):
         """
         Test that we can adjust a text reminder.
         """
-        event = TestUtils.create_event()
+        event = test_utils.create_event()
 
         reminder = TextReminder(
             user=self.user,

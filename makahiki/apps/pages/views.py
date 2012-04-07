@@ -9,7 +9,8 @@ from django.http import HttpResponseRedirect
 from django.core.urlresolvers import reverse
 from django.contrib.auth.decorators import login_required
 from django.conf import settings
-from apps.managers.settings_mgr.models import PageSettings
+from apps.managers.challenge_mgr.models import PageSettings
+from apps.managers.score_mgr import resource_score_mgr
 
 
 @never_cache
@@ -36,6 +37,9 @@ def index(request):
 
     if not is_page_defined:
         return HttpResponseRedirect(reverse("home_index"))
+
+    # sets the active page
+    view_objects['active'] = page_name
 
     # get user energy rank and usage
     _get_energy_rank(request, view_objects)
@@ -65,8 +69,7 @@ def _get_view_objects(request, page_name, view_objects):
 def _get_energy_rank(request, view_objects):
     """ Gets the user energy rank and usage."""
     if "energy_scoreboard" in settings.INSTALLED_WIDGET_APPS:
-        module = importlib.import_module("apps.widgets.energy_scoreboard.models")
-        energy_rank_info = module.EnergyData.get_team_overall_rank_info(
+        energy_rank_info = resource_score_mgr.energy_team_rank_info(
             request.user.get_profile().team)
         view_objects["energy_rank_info"] = energy_rank_info
 

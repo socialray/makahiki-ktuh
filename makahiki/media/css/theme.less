@@ -1,0 +1,250 @@
+// color variables for the theme.
+
+@base: #2B93AD;
+@nav: white;
+@nav-inner: fadeout(#7093DB, 55%);
+@hover-color: #24333B;
+@rib-bkg: fadeout(#E0FFFF, 55%);
+@rib-bkg2: fadeout(#4F95CD, 55%);
+@activity-bkg: #84C4FF;
+@activity-legend: green;
+@commit: blue;
+@content: #C1D8EB;
+@content-alt: #E3F9F8;
+@con-border: #000;
+@quest-box: fadeout(#468250, 55%);
+@quest-list-sel: #282A2A;
+@news: #A2C0D2;
+
+// logo
+/* set the logo */
+.brand img {
+	background: transparent url(../images/icons/icon-uh-logo.png) top left
+		no-repeat;
+	display: block;
+	margin: 0 auto;
+}
+
+/* Set background picture, center it, make sure it doesn't repeat and that it covers the background for any size on any browser */
+body {
+	background: url(../images/oceanWave.jpg) center fixed;
+	background-repeat: no-repeat;
+	-webkit-background-size: cover;
+	-moz-background-size: cover;
+	-o-background-size: cover;
+	background-size: cover;
+}
+
+// *************************************************
+// CSS code you shouldn't need to edit beyond this.
+// *************************************************
+.activity,.activity-legend {
+	background-color: @activity-legend;
+}
+
+.btn-navbar {
+	background-color: fadeout(@base, 60%);
+	background-image: -moz-linear-gradient(top, fadeout(@base, 60%), fadeout(@base, 60%));
+	background-image: -ms-linear-gradient(top, fadeout(@base, 60%), fadeout(@base, 60%));
+	background-image: -webkit-gradient(linear, 0 0, 0 100%, from(fadeout(@base, 60%)),
+		to(fadeout(@base, 60%)) );
+	background-image: -webkit-linear-gradient(top, fadeout(@base, 60%), fadeout(@base, 60%));
+	background-image: -o-linear-gradient(top, fadeout(@base, 60%), fadeout(@base, 60%));
+	background-image: linear-gradient(top, fadeout(@base, 60%), fadeout(@base, 60%));
+	filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='fadeout(@base, 60%)',
+		endColorstr='fadeout(@base, 60%)', GradientType=0 );
+	border-color: @base @base #000000;
+}
+
+
+.btn-navbar:hover,.btn-navbar:active,.btn-navbar.active,.btn-navbar.disabled,.btn-navbar[disabled]
+	{
+	background-color: @base;
+}
+
+.commitment,.commitment-legend {
+	background-color: @commit;
+}
+
+/* Container Styles, make sure they're transparent */
+.container,.container-top,.container-bottom {
+	background: transparent;
+}
+
+/* Elements which will use the ocean blue gradients, lightest-blue on the bottom, mid-blue on top */
+.content-box-title {
+	background-color: @commit;
+	background-image: -moz-linear-gradient(100% 70% 90deg, @content,
+		fadeout(@base, 10%));
+	background-image: -webkit-gradient(linear, left top, left bottom, from(@content ), to(fadeout(@base, 10%) ) );
+	border-bottom: 1px solid @con-border;
+}
+
+/* Set background color for elements which will use the darker ocean blue */
+.content-box,.alt-row,fieldset {
+	background-color: @content-alt;
+}
+
+.event,.event-legend {
+	background-color: yellow;
+}
+
+.excursion,.excursion-legend {
+	background-color: red;
+}
+
+.horizontalaccordion>ul>li {
+    /* Decorative CSS */
+    background:@quest-box;
+}
+
+.horizontalaccordion>ul>li>h3 {
+    /* Decorative CSS */
+    border-left:#f0f0f0 1px solid;
+    text-decoration:none;
+    color: @nav;
+    background:darken(@quest-box, 30%);
+}
+
+.horizontalaccordion:hover>ul>li:hover>h3 {
+    /* Decorative CSS */
+    color:@nav;
+    background:darken(@quest-box, 30%);
+}
+
+.navbar .nav>li>a {
+	color: @nav;
+}
+
+.navbar .nav>li>a:hover {
+	color: @hover-color;
+}
+
+.navbar .nav .active>a,.navbar .nav .active>a:hover {
+	color: @hover-color;
+}
+
+.navbar-inner {
+	background: @nav-inner;
+}
+
+.prize a {
+	color: #000000;
+}
+
+.survey,.survery-legend {
+	background-color: orange;
+}
+
+@media ( max-width : 979px) {
+	.navbar .nav>li>a,.navbar .dropdown-menu a {
+		color: #f8f8ff;
+	}
+	.navbar .nav>li>a:hover,.navbar .dropdown-menu a:hover {
+		background-color: transparent;
+	}
+}
+
+/* for small screen widths hide the wide info-bar */
+@media ( max-width : 640px) {
+	.brand img {
+		display: none;
+	}
+	#info-bar-single {
+		background: @rib-bkg;
+		background-image: -moz-linear-gradient(100% 50% 90deg, @rib-bkg,
+			@rib-bkg2 );
+		background-image: -webkit-gradient(linear, 0% 0%, 0% 90%, from(@rib-bkg), to(@rib-bkg2) );
+	}
+}
+
+/* Elements sharing background color mid-light blue */
+#activity-category .get-started,#activity-category .basic-energy,#activity-category .lights-out,#activity-category .make-watts,#activity-category .moving-on,#activity-category .opala,#activity-category .wet-wild,#activity-category .potpourri
+	{
+	background-color: @activity-bkg;
+}
+
+/* ===== Page specific coloring for Energy ===== */
+#energy-status-how-activities-table th {
+	background: #C1EBEC;
+}
+
+#info-bar-wide {
+	background: @rib-bkg;
+	background-image: -moz-linear-gradient(100% 50% 90deg, @rib-bkg,
+		@rib-bkg2 );
+	background-image: -webkit-gradient(linear, 0% 0%, 0% 90%, from(@rib-bkg), to(@rib-bkg2) );
+}
+
+/* Set common border thickness and color for header elements that use it. */
+#header-info,#header-nav-links,#header-round-info {
+	border: 2px solid @hover-color;
+}
+
+/* hover color should be slightly lighter blue such that people can see when they hover */
+#header-nav-links a:hover h4 {
+	color: @base;
+}
+
+/* Set common transparency background for various elements, note that this effect stacks on header elements. */
+#header,#header-info,#header-round-info,.container-landing-about,#header-nav-links,#header
+	{
+	background: none repeat scroll 0 0 rgba(255, 255, 255, 0.5);
+}
+
+/* ===== Page specific coloring for Landing ===== */
+#landing-intro {
+	background: #AAAAAA;
+}
+
+/* ===== Page specific coloring for Prizes ===== */
+#prizes-list-table-header,#prizes-list-table-awarded-header,#prizes-list-table-criteria-header
+	{
+	background: @nav;
+}
+
+/* ===== Page specific coloring for Profile ===== */
+#profile-badges-content h5,#profile-history-content h5,table#profile-form-table
+	{
+	background-color: @nav;
+}
+
+#profile-form-table td.profile-section-header {
+	background-color: #A2C0D2;
+}
+
+#quest-box {
+	background: none;
+	background-color: @quest-box;
+	color: white;
+}
+
+#quest-box h4 {
+	color: @nav;
+}
+
+#quest-hide {
+	color: @nav;
+}
+
+#quest-list li a {
+	color: @nav;
+}
+
+#quest-list li.selected {
+	background-color: @quest-box;
+}
+
+#quest-list li a.quest-user-quest {
+	color: #FCE988;
+}
+
+/* Set override to custom text color for colors that are specific to certain sections. */
+body,#header-nav-links ul li h4,#header-nav-links {
+	color: @hover-color;
+}
+
+/* ===== Page specific coloring for News ===== */
+th {
+	background: @news;
+}

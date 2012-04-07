@@ -22,7 +22,7 @@ from django.core.urlresolvers import reverse
 
 from apps.lib.avatar.models import avatar_file_path, Avatar
 import apps.lib.facebook_api.facebook as facebook
-from apps.managers.settings_mgr import in_competition
+from apps.managers.challenge_mgr import challenge_mgr
 from apps.widgets.home.forms import  ProfileForm, ReferralForm
 
 
@@ -40,7 +40,7 @@ def restricted(request):
     """The view when they have logged in before the competition begins."""
 
     # If we are in the competition, bring them back to the home page.
-    if in_competition():
+    if challenge_mgr.in_competition():
         return HttpResponseRedirect(reverse('home_index'))
     start = settings.COMPETITION_START
     return render_to_response("widgets/home/templates/restricted.html", {

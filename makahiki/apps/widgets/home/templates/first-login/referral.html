@@ -2,7 +2,7 @@
 {% load class_tags %}
 <h2>Referral Bonus</h2>
 
-<div {% get_id_and_classes "setup-content" %}>
+<div id="setup-content">
     <p>
         If a participant in the competition has referred you to the {{ COMPETITION_NAME }}, please
         enter their UH email here.
@@ -10,7 +10,7 @@
         points!
     </p>
 
-    <form {% get_id_and_classes "setup-referrer-form" %} action="{% url setup_referral %}"
+    <form id="setup-referrer-form" action="{% url setup_referral %}"
                                                          method="post">
         {{ form.as_p }}
     </form>
@@ -30,10 +30,10 @@
 </div>
 <div style="clear:both"></div>
 
-<div {% get_id_and_classes "progressbar-header" %}>
+<div id="progressbar-header">
     <p>Introduction progress, points: {{ user.get_profile.points }}</p>
 </div>
-<div {% get_id_and_classes "progressbar" %}></div>
+<div id="progressbar"></div>
 
 <script type="text/javascript">
     jQuery(document).ready(function ($) {

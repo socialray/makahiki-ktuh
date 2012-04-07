@@ -27,8 +27,8 @@ STATIC_URL = '/site_media/static/'
 
 # directories which hold static files
 STATICFILES_DIRS = (
-    ('makahiki', os.path.join(PROJECT_ROOT, 'media')),
-    )
+    os.path.join(PROJECT_ROOT, 'media'),
+)
 
 # URL prefix for admin media -- CSS, JavaScript and images. Make sure to use a trailing slash.
 ADMIN_MEDIA_PREFIX = posixpath.join(STATIC_URL, "admin/")
@@ -60,7 +60,7 @@ TEMPLATE_CONTEXT_PROCESSORS = (
     "django.core.context_processors.media",
     "django.core.context_processors.request",
     'django.contrib.messages.context_processors.messages',
-    "apps.managers.settings_mgr.context_processors.competition",
+    "apps.managers.challenge_mgr.context_processors.competition",
     )
 
 ######################
@@ -117,11 +117,14 @@ INSTALLED_APPS = (
 
     # Makahiki components
     'apps.managers.auth_mgr',
-    'apps.managers.settings_mgr',
+    'apps.managers.challenge_mgr',
     'apps.managers.team_mgr',
     'apps.managers.player_mgr',
     'apps.managers.score_mgr',
     'apps.managers.cache_mgr',
+
+    # Test utilities
+    'apps.test_helpers',
 
     # 3rd party libraries
     'apps.lib.django_cas',
@@ -139,13 +142,13 @@ INSTALLED_APPS = (
     'django.contrib.messages',
 
     # external
-    'staticfiles',
     'django_extensions',
 
     # internal
     'django.contrib.admin',
     'django.contrib.admindocs',
     'django.contrib.markup',
+    'django.contrib.staticfiles',
 )
 
 ################################
@@ -276,6 +279,7 @@ class Challenge():
     competition_name = None
 
 CHALLENGE = Challenge()
+COMPETITION_ROUNDS = None
 
 #############################################
 # Load sensitive settings from OS environment

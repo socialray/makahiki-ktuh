@@ -1,7 +1,7 @@
 [
   {
     "pk": 1,
-    "model": "settings_mgr.challengesettings",
+    "model": "challenge_mgr.challengesettings",
     "fields": {
       "competition_name": "Kukui Cup",
       "cas_server_url": "https://login.its.hawaii.edu/cas/",
@@ -13,30 +13,6 @@
       "competition_point_label": "point",
       "language_code": "en",
       "competition_team_label": "Lounge"
-    }
-  },
-  {
-    "pk": 1,
-    "model": "settings_mgr.pagesettings",
-    "fields": {
-      "widget": "home",
-      "name": "home"
-    }
-  },
-  {
-    "pk": 3,
-    "model": "settings_mgr.pagesettings",
-    "fields": {
-      "widget": "help.intro",
-      "name": "help"
-    }
-  },
-  {
-    "pk": 4,
-    "model": "settings_mgr.pagesettings",
-    "fields": {
-      "widget": "ask_admin",
-      "name": "help"
     }
   }
 ]

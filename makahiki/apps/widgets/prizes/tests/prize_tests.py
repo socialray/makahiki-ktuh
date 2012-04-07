@@ -1,7 +1,7 @@
 """Prizes test"""
 import os
 
-from django.test import TestCase
+from django.test import TransactionTestCase
 from django.conf import settings
 from django.core.files.images import ImageFile
 from django.db import IntegrityError
@@ -10,7 +10,7 @@ from apps.widgets.prizes.models import Prize
 from django.db import transaction
 
 
-class PrizeTest(TestCase):
+class PrizeTest(TransactionTestCase):
     """
     Tests basic methods of a prize.
     """

@@ -296,18 +296,14 @@
       "last_name": "Lee", 
       "name": "George L.", 
       "team": 10,
-      "canopy_member": true, 
-      "daily_visit_count": 3, 
-      "last_awarded_submission": "2011-06-27 14:05:39", 
-      "completion_date": "2011-06-02 14:52:23", 
+      "daily_visit_count": 3,
+      "completion_date": "2011-06-02 14:52:23",
       "setup_complete": false, 
       "contact_text": "", 
-      "points": 0, 
-      "contact_email": "gelee@hawaii.edu", 
+      "contact_email": "gelee@hawaii.edu",
       "user": 1, 
       "contact_carrier": null, 
-      "setup_profile": true, 
-      "enable_help": true
+      "setup_profile": true
     }
   }, 
   {
@@ -319,18 +315,14 @@
       "last_name": "Johnson", 
       "name": "pmj", 
       "team": 11,
-      "canopy_member": false, 
-      "daily_visit_count": 1, 
-      "last_awarded_submission": "2011-04-28 09:54:47", 
-      "completion_date": "2011-06-02 14:52:23", 
+      "daily_visit_count": 1,
+      "completion_date": "2011-06-02 14:52:23",
       "setup_complete": false, 
       "contact_text": "808-387-6663", 
-      "points": 0, 
-      "contact_email": "johnson@hawaii.edu", 
+      "contact_email": "johnson@hawaii.edu",
       "user": 2, 
       "contact_carrier": "verizon", 
-      "setup_profile": true, 
-      "enable_help": false
+      "setup_profile": true
     }
   },
 
@@ -343,18 +335,14 @@
       "last_name": "Brewer", 
       "name": "Robert McFly", 
       "team": 12,
-      "canopy_member": true, 
-      "daily_visit_count": 1, 
-      "last_awarded_submission": "2011-07-22 18:15:11", 
-      "completion_date": "2011-07-05 14:53:43", 
+      "daily_visit_count": 1,
+      "completion_date": "2011-07-05 14:53:43",
       "setup_complete": false, 
       "contact_text": "", 
-      "points": 0, 
-      "contact_email": "", 
+      "contact_email": "",
       "user": 3,
       "contact_carrier": null,
-      "setup_profile": true, 
-      "enable_help": true
+      "setup_profile": true
     }
   },
     {
@@ -366,18 +354,14 @@
             "last_name": "Xu",
             "name": "Yongwen X.",
             "team": 13,
-            "canopy_member": false,
             "daily_visit_count": 0,
-            "last_awarded_submission": null,
             "completion_date": null,
             "setup_complete": false,
             "contact_text": "",
-            "points": 0,
             "contact_email": "",
             "user": 4,
             "contact_carrier": null,
-            "setup_profile": true,
-            "enable_help": true
+            "setup_profile": true
         }
     },
     {
@@ -389,18 +373,14 @@
             "last_name": "Burgess",
             "name": "Greg B.",
             "team": 14,
-            "canopy_member": false,
             "daily_visit_count": 4,
-            "last_awarded_submission": "2011-06-30 11:06:04",
             "completion_date": "2011-06-30 10:33:23",
             "setup_complete": false,
             "contact_text": "",
-            "points": 0,
             "contact_email": "",
             "user": 5,
             "contact_carrier": null,
-            "setup_profile": true,
-            "enable_help": true
+            "setup_profile": true
         }
     },
 
@@ -413,18 +393,14 @@
             "last_name": "User",
             "name": "test",
             "team": 15,
-            "canopy_member": false,
             "daily_visit_count": 1,
-            "last_awarded_submission": "2011-04-23 15:32:19",
             "completion_date": "2011-06-02 14:52:23",
             "setup_complete": false,
             "contact_text": "",
-            "points": 0,
             "contact_email": "",
             "user": 6,
             "contact_carrier": null,
-            "setup_profile": true,
-            "enable_help": true
+            "setup_profile": true
         }
     },
     {
@@ -436,18 +412,14 @@
             "last_name": "User1",
             "name": "test1",
             "team": 1,
-            "canopy_member": false,
             "daily_visit_count": 1,
-            "last_awarded_submission": "2011-04-23 15:32:19",
             "completion_date": "2011-06-02 14:52:23",
             "setup_complete": false,
             "contact_text": "",
-            "points": 0,
             "contact_email": "",
             "user": 7,
             "contact_carrier": null,
-            "setup_profile": true,
-            "enable_help": true
+            "setup_profile": true
         }
     },
     {
@@ -459,18 +431,14 @@
             "last_name": "User2",
             "name": "test2",
             "team": 2,
-            "canopy_member": false,
             "daily_visit_count": 1,
-            "last_awarded_submission": "2011-04-23 15:32:19",
             "completion_date": "2011-06-02 14:52:23",
             "setup_complete": false,
             "contact_text": "",
-            "points": 0,
             "contact_email": "",
             "user": 8,
             "contact_carrier": null,
-            "setup_profile": true,
-            "enable_help": true
+            "setup_profile": true
         }
     },
     {
@@ -482,18 +450,14 @@
             "last_name": "User",
             "name": "test3",
             "team": 3,
-            "canopy_member": false,
             "daily_visit_count": 1,
-            "last_awarded_submission": "2011-04-23 15:32:19",
             "completion_date": "2011-06-02 14:52:23",
             "setup_complete": false,
             "contact_text": "",
-            "points":0,
             "contact_email": "",
             "user": 9,
             "contact_carrier": null,
-            "setup_profile": true,
-            "enable_help": true
+            "setup_profile": true
         }
     },
     {
@@ -505,18 +469,14 @@
             "last_name": "User",
             "name": "test4",
             "team": 4,
-            "canopy_member": false,
             "daily_visit_count": 1,
-            "last_awarded_submission": "2011-04-23 15:32:19",
             "completion_date": "2011-06-02 14:52:23",
             "setup_complete": false,
             "contact_text": "",
-            "points":0,
             "contact_email": "",
             "user": 10,
             "contact_carrier": null,
-            "setup_profile": true,
-            "enable_help": true
+            "setup_profile": true
         }
     },
     {
@@ -528,18 +488,14 @@
             "last_name": "User",
             "name": "test5",
             "team": 5,
-            "canopy_member": false,
             "daily_visit_count": 1,
-            "last_awarded_submission": "2011-04-23 15:32:19",
             "completion_date": "2011-06-02 14:52:23",
             "setup_complete": false,
             "contact_text": "",
-            "points":0,
             "contact_email": "",
             "user": 11,
             "contact_carrier": null,
-            "setup_profile": true,
-            "enable_help": true
+            "setup_profile": true
         }
     },
     {
@@ -551,18 +507,14 @@
             "last_name": "User",
             "name": "test6",
             "team": 6,
-            "canopy_member": false,
             "daily_visit_count": 1,
-            "last_awarded_submission": "2011-04-23 15:32:19",
             "completion_date": "2011-06-02 14:52:23",
             "setup_complete": false,
             "contact_text": "",
-            "points":0,
             "contact_email": "",
             "user": 12,
             "contact_carrier": null,
-            "setup_profile": true,
-            "enable_help": true
+            "setup_profile": true
         }
     },
     {
@@ -574,18 +526,14 @@
             "last_name": "User7",
             "name": "test7",
             "team": 7,
-            "canopy_member": false,
             "daily_visit_count": 1,
-            "last_awarded_submission": "2011-04-23 15:32:19",
             "completion_date": "2011-06-02 14:52:23",
             "setup_complete": false,
             "contact_text": "",
-            "points":0,
             "contact_email": "",
             "user": 13,
             "contact_carrier": null,
-            "setup_profile": true,
-            "enable_help": true
+            "setup_profile": true
         }
     },
     {
@@ -597,18 +545,14 @@
             "last_name": "User8",
             "name": "test8",
             "team": 8,
-            "canopy_member": false,
             "daily_visit_count": 1,
-            "last_awarded_submission": "2011-04-23 15:32:19",
             "completion_date": "2011-06-02 14:52:23",
             "setup_complete": false,
             "contact_text": "",
-            "points":0,
             "contact_email": "",
             "user": 14,
             "contact_carrier": null,
-            "setup_profile": true,
-            "enable_help": true
+            "setup_profile": true
         }
     },
     {
@@ -620,18 +564,14 @@
             "last_name": "User9",
             "name": "test9",
             "team": 9,
-            "canopy_member": false,
             "daily_visit_count": 1,
-            "last_awarded_submission": "2011-04-23 15:32:19",
             "completion_date": "2011-06-02 14:52:23",
             "setup_complete": false,
             "contact_text": "",
-            "points":0,
             "contact_email": "",
             "user": 15,
             "contact_carrier": null,
-            "setup_profile": true,
-            "enable_help": true
+            "setup_profile": true
         }
     },
   {
@@ -643,18 +583,14 @@
       "last_name": "Moore", 
       "name": "Cam", 
       "team": 11,
-      "canopy_member": false, 
-      "daily_visit_count": 3, 
-      "last_awarded_submission": "2012-02-20 14:05:39", 
-      "completion_date": "2012-02-18 13:12:48", 
+      "daily_visit_count": 3,
+      "completion_date": "2012-02-18 13:12:48",
       "setup_complete": false, 
       "contact_text": "", 
-      "points": 0,
-      "contact_email": "cammymoore07@gmail.com", 
+      "contact_email": "cammymoore07@gmail.com",
       "user": 20, 
       "contact_carrier": null, 
-      "setup_profile": true, 
-      "enable_help": true
+      "setup_profile": true
     }
   }
 ]

@@ -1,15 +1,15 @@
 """Tests to see that we can retrieve and display a help topic."""
 
-from django.test import TestCase
+from django.test import TransactionTestCase
 from django.core.urlresolvers import reverse
 from django.contrib.auth.models import User
 
 from apps.managers.team_mgr.models import Team
 from apps.widgets.help.models import HelpTopic
-from apps.test_utils import TestUtils
+from apps.test_helpers import test_utils
 
 
-class HelpFunctionalTestCase(TestCase):
+class HelpFunctionalTestCase(TransactionTestCase):
     """test cases"""
     fixtures = ["base_teams.json"]
 
@@ -23,7 +23,7 @@ class HelpFunctionalTestCase(TestCase):
         profile.setup_profile = True
         profile.save()
 
-        TestUtils.register_page_widget("help", "help.rule")
+        test_utils.register_page_widget("help", "help.rule")
 
         self.client.login(username="user", password="changeme")
 

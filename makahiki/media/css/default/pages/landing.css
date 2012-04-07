@@ -32,10 +32,10 @@
 	background-color: rgba(255,255,255,0.8);
 	border: 2px solid #167000;
 	
-	width: 460px;
-	height: 130px;
-	float: none;
-	margin: 0 auto 0 auto;
+/* 	width: 460px; */
+/* 	height: 130px; */
+/* 	float: none; */
+/* 	margin: 0 auto 0 auto; */
 	padding: 8px;
 	padding-bottom: 0;
 }
@@ -50,8 +50,8 @@
 }
 
 #landing-title {
-	width: 258px;
-	height: 58px;
+/* 	width: 258px; */
+/* 	height: 58px; */
 	float: right;
 	margin: 10px 30px 0 0;
 }
@@ -71,11 +71,11 @@
 	background-color: rgba(255,255,255,0.6);
 	border: 2px solid #167000;
 	
-	width: 690px;
-	height: 530px;
-	margin: 2em auto 0 auto;
+/* 	width: 690px; */
+/* 	height: 530px; */
+/* 	margin: 2em auto 0 auto; */
 	padding: 30px;
-	float: none;
+/* 	float: none; */
 	display: block;
 	text-align: center;
 	font-size: 14pt;
@@ -141,10 +141,10 @@
 }
 
 #footer {
-	position: relative;
-	margin: -260px auto -230px auto;
-	width: 480px;
-	height: 160px;
+/* 	position: relative; */
+/* 	margin: -260px auto -230px auto; */
+/* 	width: 480px; */
+/* 	height: 160px; */
 }
 
 #landing-sponsors {
@@ -188,11 +188,11 @@
 	background-color: rgba(255,255,255,0.6);
 	border: 2px solid #167000;
 	
-	width: 690px;
+/* 	width: 690px; */
 /*  height: 480px;*/
-	margin: 2em auto 0 auto;
+/* 	margin: 2em auto 0 auto; */
 	padding: 30px;
-	float: none;
+/* 	float: none; */
 	display: block;
 	text-align: left;
 	font-size: 12pt;

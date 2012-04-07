@@ -1,7 +1,7 @@
 """Pick the raffle prize winners."""
 import random
 from django.core import management
-from apps.managers.settings_mgr import get_current_round_info
+from apps.managers.challenge_mgr import challenge_mgr
 from apps.widgets.notifications.models import NoticeTemplate, UserNotification
 from apps.widgets.raffle.models import RafflePrize
 
@@ -14,7 +14,7 @@ class Command(management.base.BaseCommand):
         """
         Picks winners for raffle deadlines that have passed.
         """
-        round_name = get_current_round_info()["name"]
+        round_name = challenge_mgr.get_current_round_info()["name"]
         self.stdout.write("Picking winners for %s prizes\n" % round_name)
         self.__pick_winners(RafflePrize.objects.filter(round_name=round_name,
                                                        winner__isnull=False))

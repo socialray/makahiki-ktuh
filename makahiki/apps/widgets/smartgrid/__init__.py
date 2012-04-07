@@ -7,10 +7,9 @@ from django.conf import settings
 from django.db.models import Sum, Count
 from django.core.exceptions import ObjectDoesNotExist
 from django.contrib.auth.models import User
-from django.core.cache import cache
 from itertools import chain
 from operator import attrgetter
-
+from apps.managers.cache_mgr import cache_mgr
 from apps.widgets.smartgrid.models import Activity, ActivityBase, Category, Commitment, \
                                           ActivityMember, CommitmentMember
 
@@ -345,7 +344,7 @@ def is_unlock_from_cache(user, task):
     if task.is_canopy:
         return is_unlock(user, task)
 
-    categories = cache.get('smartgrid-categories-%s' % user.username)
+    categories = cache_mgr.get_cache('smartgrid-categories-%s' % user.username)
     if not categories:
         return is_unlock(user, task)
 

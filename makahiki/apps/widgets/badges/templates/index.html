@@ -1,8 +1,8 @@
 {% load class_tags %}
 
-<div {% get_id_and_classes "profile-badges" %}>
-    <div {% get_id_and_classes "profile-badges-box" %}>
-        <div {% get_id_and_classes "profile-badges-title" %}>
+<div {% get_id_and_classes "profile-badges" "responsive" %}>
+    <div {% get_id_and_classes "profile-badges-box" "responsive" %}>
+        <div {% get_id_and_classes "profile-badges-title" "responsive" %}>
             My Badges
             <a href="#" style="float: right">
                 <img src="{{ STATIC_URL}}/css/default/images/icon-help-sm.png" width="20"
@@ -11,13 +11,13 @@
                      onclick="toggleHelp('widget', 'my-badges'); return false;"
                         /></a>
         </div>
-        <div {% get_id_and_classes "profile-badges-content" %}>
+        <div {% get_id_and_classes "profile-badges-content" "responsive" %}>
             {# <h5>Individual Badges</h5> #}
-            <table {% get_id_and_classes "profile-user-badge-table" %}>
+            <table {% get_id_and_classes "profile-user-badge-table" "responsive" %}>
                 <tr>
-                    <th {% get_id_and_classes "profile-user-badge-image-header" %}></th>
-                    <th {% get_id_and_classes "profile-user-badge-text-header" %}>Badge</th>
-                    <th {% get_id_and_classes "profile-user-badge-achievement-header" %}>
+                    <th {% get_id_and_classes "profile-user-badge-image-header" "responsive" %}></th>
+                    <th {% get_id_and_classes "profile-user-badge-text-header" "responsive" %}>Badge</th>
+                    <th {% get_id_and_classes "profile-user-badge-achievement-header" "responsive" %}>
                         Achievement
                     </th>
                 </tr>
@@ -30,12 +30,12 @@
                         </tr>
                     {% endfor %}
                 {% else %}
-                    <tr {% get_id_and_classes "profile-user-badge-empty" %}>
+                    <tr {% get_id_and_classes "profile-user-badge-empty" "responsive" %}>
                         <td colspan="3">You don't have any badges yet!</td>
                     </tr>
                 {% endif %}
             </table>
-            <div {% get_id_and_classes "profile-badge-catalog" %}>
+            <div {% get_id_and_classes "profile-badge-catalog" "responsive" %}>
                 <a href="{% url profile_badges %}">See Badge Catalog</a>
             </div>
         </div>

@@ -80,14 +80,14 @@ def completed_task(user, name=None, slug=None, task_type=None):
         ).count() > 0
 
 
-def has_points(user, points, round_name=None):
+def has_points(user, points, round_name="Overall"):
     """Returns True if the user has at least the requested number of points."""
     profile = user.get_profile()
-    if round_name:
-        entry = ScoreboardEntry.objects.get(profile=profile, round_name=round_name)
-        return entry.points >= points
+    entry = ScoreboardEntry.objects.filter(profile=profile, round_name=round_name)
+    if entry:
+        return entry[0].points >= points
     else:
-        return profile.points >= points
+        return False
 
 
 def allocated_ticket(user):

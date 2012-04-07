@@ -1,32 +1,24 @@
 """
 Tests for the pages module.
 """
-from django.test import LiveServerTestCase
-from selenium.webdriver.firefox.webdriver import WebDriver
+from apps.test_helpers.selenium_helpers import MakahikiSeleniumTestCase
+from apps.test_helpers import test_utils
 
 
-class LandingSeleniumTests(LiveServerTestCase):
-    """
-    Selenium tests for the home page.
-    """
-    @classmethod
-    def setUpClass(cls):
-        """
-        Set up for all tests in this class.
-        """
-        cls.selenium = WebDriver()
-        super(LandingSeleniumTests, cls).setUpClass()
-
-    @classmethod
-    def tearDownClass(cls):
-        """
-        Tear down for all tests in this class.
-        """
-        super(LandingSeleniumTests, cls).tearDownClass()
-        cls.selenium.quit()
+class LandingSeleniumTestCase(MakahikiSeleniumTestCase):
+    """Selenium tests for the home page."""
+    fixtures = ["base_teams.json", "base_pages.json"]
 
     def testLanding(self):
-        """
-        Test getting the home page and logging in.
-        """
-        self.selenium.get('%s%s' % (self.live_server_url, '/'))
+        """Test getting the landing page."""
+        self.selenium.get('%s%s' % (self.live_server_url, "/"))
+        self.selenium.find_element_by_id("landing-button-participant")
+
+    def testLogin(self):
+        """Test logging in the user to the system."""
+        username = "atestuser"
+        password = "atestpass"
+        test_utils.setup_user(username, password)
+
+        self.login(username, password)
+        self.logout()

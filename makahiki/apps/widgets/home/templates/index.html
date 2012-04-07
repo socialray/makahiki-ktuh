@@ -1,121 +1,129 @@
 {% load class_tags %}
 
-    <div {% get_id_and_classes "home-center" %}>
-        <!-- Top Row-->
-        <div {% get_id_and_classes "home-activities" %}>
-            <a href="/actions">
-                <img {% get_id_and_classes "home-activities-icon" %}
-                        src="{{STATIC_URL}}css/default/images/spacer.png" width="65" align="Left"
-                        height="65"/>
-            </a>
-
-            <div class='tile'>
-                <h6 {% get_id_and_classes "home-activities-title" %}>Get Nutz</h6>
-
-                <p {% get_id_and_classes "home-activities-content" %}>
-                    Do activities and make committments<br/>
-                    Earn Kukuicup points<br/>
-                    See where you stand
-                </p>
-            </div>
+<!-- Top Row-->
+<div class="row-fluid">
+    <div class="home-item">
+        <a href="/actions">
+            <img id="home-activities-icon"
+                 src="{{STATIC_URL}}css/default/images/spacer.png"/>
+        </a>
+        <div class='tile'>
+            <h6>Get Nutz</h6>
+            <p>
+                Do activities and make committments<br/>
+                Earn Kukuicup points<br/>
+                See where you stand
+            </p>
         </div>
-        <div {% get_id_and_classes "home-energy" %}>
-            <a href="/energy">
-                <img {% get_id_and_classes "home-energy-icon" %}
-                        src="{{STATIC_URL}}css/default/images/spacer.png" width="65" align="Left"
-                        height="65"/>
-            </a>
-
-            <div class="tile">
-                <h6 {% get_id_and_classes "home-energy-title" %}>Go Low</h6>
-
-                <p {% get_id_and_classes "home-energy-content" %}>
-                    Observe and Conserve Energy<br/>
-                    Track conservation goals<br/>
-                    Compare usage to others
-                </p>
-            </div>
+    </div>
+    <div class="home-item">
+        <a href="/energy">
+            <img id="home-energy-icon"
+                 src="{{STATIC_URL}}css/default/images/spacer.png"/>
+        </a>
+        <div class="tile">
+            <h6>Go Low</h6>
+            <p>
+                Observe and Conserve Energy<br/>
+                Track conservation goals<br/>
+                Compare usage to others
+            </p>
         </div>
-
-        <!-- Middle Row-->
-        <div {% get_id_and_classes "home-news" %}>
-            <a href="/news">
-                <img {% get_id_and_classes "home-news-icon" %}
-                        src="{{STATIC_URL}}css/default/images/spacer.png" width="65" align="Left"
-                        height="65"/>
-            </a>
-
-            <div class="tile">
-                <h6 {% get_id_and_classes "home-news-title" %}>News</h6>
-
-                <p {% get_id_and_classes "home-news-content" %}>
-                    What are people doing?<br/>
-                    Your public comments<br/>
-                    Top activities and events
-                </p>
-            </div>
+    </div>
+    <!-- FIXME: Need actual info for water -->
+    <div class="home-item">
+        <a href="/water">
+            <img id="home-water-icon"
+                 src="{{STATIC_URL}}css/default/images/spacer.png"/>
+        </a>
+        <div class="tile">
+            <h6>Use Less</h6>
+            <p>
+                Observe and Conserve Water<br/>
+                Track conservation goals<br/>
+                Compare usage to others
+            </p>
         </div>
-
-        <div {% get_id_and_classes "home-prizes" %}>
-            <a href="/prizes">
-                <img  {% get_id_and_classes "home-prizes-icon" %}
-                        src="{{STATIC_URL}}css/default/images/spacer.png" width="65" align="Left"
-                        height="65"/>
-            </a>
-
-            <div class="tile">
-                <h6 {% get_id_and_classes "home-prizes-title" %}>Prizes</h6>
-
-                <p  {% get_id_and_classes "home-prizes-content" %}>
-                    See the prizes<br/>
-                    Allocate your points<br/>
-                    Monitor your chances
-                </p>
-            </div>
+    </div>
+    <div class="home-item">
+        <a href="/news">
+            <img id="home-news-icon"
+                 src="{{STATIC_URL}}css/default/images/spacer.png"/>
+        </a>
+        <div class="tile">
+            <h6>News</h6>
+            <p>
+                What are people doing?<br/>
+                Your public comments<br/>
+                Top activities and events
+            </p>
         </div>
-
-        <div {% get_id_and_classes "home-profile" %}>
-            <a href="/profile">
-                <img {% get_id_and_classes "home-profile-icon" %}
-                        src="{{STATIC_URL}}css/default/images/spacer.png" width="65" align="Left"
-                        height="65"/>
-            </a>
-
-            <div class="tile">
-                <h6 {% get_id_and_classes "home-profile-title" %}>Profile</h6>
-                <p {% get_id_and_classes "home-profile-content" %}>
+    </div>
+</div>
+<div class="row-fluid">
+    <!-- FIXME: Need actual info for advanced and way to turn on/off -->
+    <div class="home-item">
+        <a href="/advanced">
+            <img  id="home-advanced-icon"
+                  src="{{STATIC_URL}}css/default/images/spacer.png"/>
+        </a>
+        <div class="tile">
+            <h6>Advanced</h6>
+            <p>
+                Donec id elit non mi porta gravida<br/>
+                Fusce dapibus, tellus<br/>
+                Tortor mauris condimentum nibh
+            </p>
+        </div>
+    </div>
+    <div class="home-item">
+        <a href="/prizes">
+            <img  id="home-prizes-icon"
+                  src="{{STATIC_URL}}css/default/images/spacer.png"/>
+        </a>
+        <div class="tile">
+            <h6>Prizes</h6>
+            <p>
+                See the prizes<br/>
+                Allocate your points<br/>
+                Monitor your chances
+            </p>
+        </div>
+    </div>
+    <div class="home-item">
+        <a href="/profile">
+            <img id="home-profile-icon"
+                 src="{{STATIC_URL}}css/default/images/spacer.png"/>
+        </a>
+        <div class="tile">
+            <h6>Profile</h6>
+            <p>
                 Manage your Settings<br/>
                 Connect to facebook<br/>
                 Change your picture
-                </p>
-            </div>
+            </p>
         </div>
-
-        <div {% get_id_and_classes "home-help" %}>
-            <a href="/help">
-                <img {% get_id_and_classes "home-help-icon" %}
-                        src="{{STATIC_URL}}css/default/images/spacer.png" width="65" align="Left"
-                        height="65"/>
-            </a>
-
-            <div class="tile">
-                <h6 {% get_id_and_classes "home-help-title" %}>Help</h6>
-
-                <p {% get_id_and_classes "home-help-content" %}>
-                    Get acquainted with the Kukuicup<br/>
-                    Watch an introductory video<br/>
-                    Learn the rules
-                </p>
-            </div>
-        </div>
-        <div style="clear:both"></div>
     </div>
-
-    {% if not user.get_profile.setup_complete %}
-        <div {% get_id_and_classes "setup-dialog" %} title="Introduction: Step 1 of 6">
-            {% include "first-login/welcome.html" %}
+    <div class="home-item">
+        <a href="/help">
+            <img id="home-help-icon"
+                 src="{{STATIC_URL}}css/default/images/spacer.png"/>
+        </a>
+        <div class="tile">
+            <h6>Help</h6>
+            <p>
+                Get acquainted with the Kukuicup<br/>
+                Watch an introductory video<br/>
+                Learn the rules
+            </p>
         </div>
-        <script type="text/javascript">
+    </div>
+</div>
+{% if not user.get_profile.setup_complete %}
+    <div id="setup-dialog" title="Introduction: Step 1 of 6">
+        {% include "first-login/welcome.html" %}
+    </div>
+    <script type="text/javascript">
             jQuery(document).ready(function ($) {
                 $("#setup-dialog").dialog({
                     modal:true,
@@ -127,5 +135,5 @@
                     }
                 });
             });
-        </script>
-    {% endif %}
+    </script>
+{% endif %}

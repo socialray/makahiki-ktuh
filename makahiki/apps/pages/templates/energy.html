@@ -14,21 +14,32 @@
 {% endblock %}
 
 {% block body %}
+    <div {% get_id_and_classes "energy-body" "responsive" %}>
+        <div {% get_id_and_classes "base-row" "responsive" %}>
+            <!-- left column -->
+            <div {% get_id_and_classes "narrow-col" "responsive" %}>
+                <div id='energy_power_meter'>
+                    {% include "widgets/energy_power_meter/templates/index.html" %}
+                </div>
+                <div id='energy_scoreboard'>
+                    {% include "widgets/energy_scoreboard/templates/index.html" %}
+                </div>
+            </div>
+            <!-- right column -->
+            <div {% get_id_and_classes "wide-col" "responsive" %}>
+                <div id='energy_goal'>
+                    {% include "widgets/energy_goal/templates/index.html" %}
+                </div>
+                <div id='wallpost'>
+                    {% include "widgets/wallpost/templates/index.html" %}
+                </div>
+            </div>
+        </div>
+    </div>
+
     <table>
     <tr><td width="40%" valign="top">
-        <div id='energy_power_meter'>
-            {% include "widgets/energy_power_meter/templates/index.html" %}
-        </div>
-        <div id='energy_scoreboard'>
-            {% include "widgets/energy_scoreboard/templates/index.html" %}
-        </div>
     </td><td width="60%" valign="top">
-        <div id='energy_goal'>
-            {% include "widgets/energy_goal/templates/index.html" %}
-        </div>
-        <div id='wallpost'>
-            {% include "widgets/wallpost/templates/index.html" %}
-        </div>
     </td>
     </tr>
     </table>
