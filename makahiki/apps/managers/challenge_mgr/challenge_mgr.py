@@ -69,18 +69,18 @@ def info():
                                             settings.CHALLENGE.site_name)
 
 
-def round_info():
+def rounds_info():
     """returns the round info about the challenge."""
     if settings.COMPETITION_ROUNDS is None:
         load_settings()
 
-    str = ""
+    info_str = ""
     for r in settings.COMPETITION_ROUNDS.keys():
-        str += r + " ["
-        str += "start: %s" % settings.COMPETITION_ROUNDS[r]["start"].date().isoformat()
-        str += ", end: %s" % settings.COMPETITION_ROUNDS[r]["end"].date().isoformat()
-        str += "]"
-    return str
+        info_str += r + " ["
+        info_str += "start: %s" % settings.COMPETITION_ROUNDS[r]["start"].date().isoformat()
+        info_str += ", end: %s" % settings.COMPETITION_ROUNDS[r]["end"].date().isoformat()
+        info_str += "]"
+    return info_str
 
 
 def available_widgets():
@@ -90,10 +90,10 @@ def available_widgets():
 
 def enabled_widgets():
     """returns all the enabled widgets in the challenge."""
-    str = ""
+    info_str = ""
     for p in PageSettings.objects.filter(enabled=True):
-        str += p.name + " : " + p.widget + "\n"
-    return str
+        info_str += p.name + " : " + p.widget + "\n"
+    return info_str
 
 
 def get_round_info():
