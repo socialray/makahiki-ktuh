@@ -38,7 +38,7 @@ div.home-item {
     background: #E3E3E3;
     padding: 1px;
     border: 3px outset #DDD;
-    margin-top: -.7em;
+/*     margin-top: -.7em; */
     background-image: -moz-linear-gradient(100% 50% 90deg, #E3E3E3, #A1A1A1);
     background-image: -webkit-gradient(linear, 0% 0%, 0% 90%, from(#E3E3E3),
         to(#BBB) );
