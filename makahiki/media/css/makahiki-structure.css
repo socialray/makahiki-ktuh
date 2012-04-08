@@ -172,6 +172,13 @@ img {
 	-webkit-box-shadow: 0 0 3px 3px #222;
 }
 
+.content-box-contents {
+    padding-left: 10px;
+    padding-right: 10px;
+    padding-bottom: 5px;
+    padding-top: 5px;
+}
+
 .content-box-contents a {
     text-align: center;
 }
@@ -181,7 +188,8 @@ img {
 .content-box-title {
 	height: 29px;
 	margin: 0;
-	padding: 0;
+    padding-left: 0px;
+    padding-right: 0px;
 	line-height: 29px;
 	font-weight: bold;
 	border-top-left-radius: 8px;
@@ -311,6 +319,36 @@ img {
 .quest-options {
 	float: right;
 }
+/************************************************************************************
+VIDEO
+*************************************************************************************/
+.video-container {
+    position: relative;
+    padding-bottom: 56.25%;
+    padding-top: 30px;
+    height: 0;
+    overflow: hidden;
+}
+.video-container iframe,  
+.video-container object,  
+.video-container embed {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+
+/* video fixed width wrappers */
+.video-wrapper {
+    width: 600px;
+    max-width: 100%;
+}
+.video-wrapper2 {
+    width: 560px;
+    max-width: 100%;
+}
+
 
 /* ========================= */
 /*       IDs                 */
@@ -372,6 +410,70 @@ img {
 #info-bar-wide li {
 	display: block;
 }
+
+#landing-intro button {
+    display: block;
+    text-decoration: none;
+    cursor: pointer;
+    color: #000;
+    width: 300px;
+    height: 92px;
+    margin: 0 auto 0 auto;
+    border: 0;
+    background: #E3E3E3 url(/site_media/static/css/default/images/bkg-landing-button.gif);
+    padding: 1px;
+    border: 3px outset #DDD;
+    margin-top: -.7em;
+    
+    border-radius: 8px;
+    -moz-border-radius: 8px;
+    -webkit-border-radius: 8px;
+    
+    box-shadow: 3px 3px 5px #000;
+    -moz-box-shadow: 3px 3px 5px #000;
+    -webkit-box-shadow: 3px 3px 5px #000;
+}
+
+#landing-intro button a {
+    text-decoration: none;
+}
+
+#landing-intro button h3 {
+    font-size: 1.25em;
+    line-height: normal;
+    color: #000;
+    margin: 0;
+    padding: 0;
+    vertical-align: top;
+}
+
+#landing-intro button h5 {
+    font-size: 1em;
+    font-weight: normal;
+    line-height: normal;
+    color: #000;
+    margin: 10px 0;
+    padding: 0;
+}
+
+#landing-sponsors-list ul {
+    list-style: none outside none;
+}
+
+#landing-title {
+    margin: 10px 30px 0 0;
+}
+
+#landing-title h2 {
+    background: transparent url(/site_media/static/css/default/images/bkg-landing-title-text.png) top center no-repeat;
+    text-transform: uppercase;
+    text-indent: -999px;
+    overflow: hidden;
+    width: 258px;
+    height: 58px;
+    float: right;
+}
+
 /* #quest-box */
 /*------- Quest styles -----*/
 #quest-box {
