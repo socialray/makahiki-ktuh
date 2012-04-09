@@ -1,20 +1,15 @@
-<div id="prizes-list" class="content-box">
-    <div id="prizes-list-box">
-        <div id="prizes-list-title" class="content-box-title">
-            Prizes and Prize Winners
-            <a href="#" style="float: right">
-                <img src="{{ STATIC_URL}}/css/default/images/icon-help-sm.png" width="20"
-                     align="center"
-                     title="Click to get help about this window"
-                     onclick="toggleHelp('widget', 'prizes'); return false;"
-                        /></a>
-        </div>
-        <div id="prizes-list-content">
-          <div id="prizes-carousel" class="carousel">
-            <div class="carousel-inner">
-              {% include "view_prizes/prize_list.html" %}
-            </div>
-          </div>
+<div id="prizes-list" class="content-box span12">
+    <div id="prizes-list-title" class="content-box-title">
+        Prizes and Prize Winners
+        <a href="#" style="float: right">
+            <img src="{{ STATIC_URL}}/css/default/images/icon-help-sm.png" width="20"
+                 align="center"
+                 title="Click to get help about this window"
+                 onclick="toggleHelp('widget', 'prizes'); return false;"/></a>
+    </div>
+    <div id="prizes-carousel" class="row-fluid">
+        <div class="carousel-inner span12">
+            {% include "view_prizes/prize_list.html" %}
         </div>
     </div>
 </div>
