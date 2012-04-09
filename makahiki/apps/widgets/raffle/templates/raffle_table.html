@@ -1,13 +1,11 @@
-{% load class_tags %}
-
-<table {% get_id_and_classes "prizes-raffle-table" %}>
+<table id="prizes-raffle-table">
     <tr>
-        <th {% get_id_and_classes "prizes-raffle-prize-header" %}>Prize</th>
-        <th {% get_id_and_classes "prizes-raffle-value-header" %}>Value</th>
-        <th {% get_id_and_classes "prizes-raffle-user-tickets-header" %}>Your tickets</th>
-        <th {% get_id_and_classes "prizes-raffle-total-tickets-header" %}>Total tickets</th>
-        <th {% get_id_and_classes "prizes-raffle-odds-header" %}>Current odds</th>
-        <th {% get_id_and_classes "prizes-raffle-options-header" %}>Change ticket allocation</th>
+        <th id="prizes-raffle-prize-header">Prize</th>
+        <th id="prizes-raffle-value-header">Value</th>
+        <th id="prizes-raffle-user-tickets-header">Your tickets</th>
+        <th id="prizes-raffle-total-tickets-header">Total tickets</th>
+        <th id="prizes-raffle-odds-header">Current odds</th>
+        <th id="prizes-raffle-options-header">Change ticket allocation</th>
     </tr>
     {% include "raffle_list.html" %}
 </table>
