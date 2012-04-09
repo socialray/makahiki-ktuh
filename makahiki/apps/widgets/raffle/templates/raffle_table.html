@@ -1,13 +1,17 @@
-<table id="prizes-raffle-table">
-    <tr>
-        <th id="prizes-raffle-prize-header">Prize</th>
-        <th id="prizes-raffle-value-header">Value</th>
-        <th id="prizes-raffle-user-tickets-header">Your tickets</th>
-        <th id="prizes-raffle-total-tickets-header">Total tickets</th>
-        <th id="prizes-raffle-odds-header">Current odds</th>
-        <th id="prizes-raffle-options-header">Change ticket allocation</th>
-    </tr>
+<table id="prizes-raffle-table" class="table table-striped">
+    <thead>
+        <tr>
+            <th id="prizes-raffle-prize-header">Prize</th>
+            <th id="prizes-raffle-value-header">Value</th>
+            <th id="prizes-raffle-user-tickets-header">Your tickets</th>
+            <th id="prizes-raffle-total-tickets-header">Total tickets</th>
+            <th id="prizes-raffle-odds-header">Current odds</th>
+            <th id="prizes-raffle-options-header">Change ticket allocation</th>
+        </tr>
+    </thead>
+    <tbody>
     {% include "raffle_list.html" %}
+    </tbody>
 </table>
 <div id="prizes-raffle-footer">
     You receive 1 raffle ticket for every {{ raffle.points_per_ticket }} awarded Kukui Cup

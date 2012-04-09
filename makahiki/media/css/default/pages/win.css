@@ -7,15 +7,9 @@ th {
 }
 
 #prizes-raffle-info {
-	background: transparent url(/site_media/static/css/default/images/bkg-message-tray.png) top left no-repeat;
-	width: 450px;
-	height: 54px;
-	line-height: 47px;
-	display: block;
-	margin: .5em auto 5px auto;
-	color: #FFF;
 	font-weight: bold;
 	text-align: center;
+	margin: 10px 5px;
 }
 
 #prizes-raffle {
