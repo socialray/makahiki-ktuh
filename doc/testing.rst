@@ -9,14 +9,20 @@ You can also run tests for individual apps by passing in those apps as
 parameters. For example, ``python manage.py test widgets.profile`` will
 run the tests in ``apps/widgets/profile``.
 
-Creating Selenium Tests Using Selenium IDE
-------------------------------------------
+Creating Selenium Tests
+-----------------------
 
-To create a Selenium test, we highly recommend using the Selenium IDE
-plugin for Firefox. Using the Selenium IDE, your actions on the website
-can be recorded and then exported to Python. Use Firefox and go to
-[[http://seleniumhq.org/download/]] to download and install the plugin.
-After it is downloaded, restart Firefox to complete the installation.
+There are two ways to create Selenium tests; by hand or using the 
+Selenium IDE. If you choose to write them yourself, the Python WebDriver
+API (http://readthedocs.org/docs/selenium-python/en/latest/api.html)
+has a list of functions that might be useful when creating tests. While
+tedious, it will prevent you from running into compatibility errors.
+
+The other way is to use the Selenium IDE plugin for Firefox. Using the 
+Selenium IDE, your actions on the website can be recorded and then 
+exported to Python. Use Firefox and go to [[http://seleniumhq.org/download/]] 
+to download and install the plugin. After it is downloaded, restart Firefox 
+to complete the installation.
 
 Next, start up a test server using
 ``python manage.py testserver fixtures/*``. This creates a test database
@@ -26,110 +32,81 @@ In Firefox, go to ``http://localhost:8000``. Start the Selenium IDE by
 going to Tools->Selenium IDE. By default, it starts recording once you
 open the IDE. Create your test by navigating through the site as a user
 would. You have access to additional test assertion commands by right
-clicking on the page.
+clicking on the page. However, the downside of the IDE is that not all
+of the Selenium assertions work when exported to the WebDriver format 
+that Django will use.
 
 Once you are done, click on the red “record” icon on the Selenium IDE to
 stop it from recording. You can then export your test by going to
-“File->Export Test Case As->Python 2 (Remote Control)”. We recommend
-saving these tests in a Selenium subdirectory of the page you are
-testing. We also recommend saving a copy of the test case (File->Save
-Test Case As) with a .sel extension in the same directory so that we can
-open it in the IDE.
+“File->Export Test Case As->Python 2 (WebDriver)”. 
 
 Once the test is exported, it still needs to be edited to fit within our
 framework.
 
-Editing Selenium tests to run within our test framework
--------------------------------------------------------
+Editing exported Selenium tests to run within our test framework
+----------------------------------------------------------------
 
 When the test is exported, it needs to be edited a little to support our
-test framework. By default, a test comes out something like this (with
-some comments about the things we’ll edit):
-
+test framework. By default, a test comes out something like this.
 ::
 
-    from selenium import selenium # We'll import a Mixin for selenium.
-    import unittest, time, re # We don't need to import unittest.  Instead, we will import Django's TestCase.
+    from selenium import webdriver
+    from selenium.webdriver.common.by import By
+    from selenium.webdriver.support.ui import Select
+    from selenium.common.exceptions import NoSuchElementException
+    import unittest, time, re
 
-    class sample_test(unittest.TestCase): # This will inherit from Django's TestCase and the Selenium mixin
-        # Optional fixtures can be specified here
+    class Test(unittest.TestCase):
         def setUp(self):
+            self.driver = webdriver.Firefox()
+            self.driver.implicitly_wait(30)
+            self.base_url = "http://localhost:8000/"
             self.verificationErrors = []
-            self.selenium = selenium("localhost", 4444, "*chrome", "http://localhost:8000/") # not needed
-            self.selenium.start() # not needed
-
-        def test_sample_test(self):
-            sel = self.selenium
-            sel.open("/")
-            try: self.failUnless(sel.is_text_present("Welcome"))
-            except AssertionError, e: self.verificationErrors.append(str(e))
-
+    
+        def test_(self):
+            driver = self.driver
+            driver.get(self.base_url + "/account/login/")
+    
         def tearDown(self):
-            self.selenium.stop() # Not needed
-            self.assertEqual([], self.verificationErrors)
-
-    if __name__ == "__main__":
-        unittest.main() 
-
-Things that need to be changed:
-
--  Replace ``from selenium import selenium`` with
-   ``from noseselenium.cases import SeleniumTestCaseMixin``. This
-   contains the selenium class as well as some additional useful
-   features like loading fixtures.
--  unittest does not need to be imported. Instead, add the import
-   statement ``from django.test import TestCase``.
--  Change the class definition to inherit from TestCase (Django’s test
-   case) and SeleniumTestCaseMixin. It should read something like
-   ``class sample_test(TestCase, SeleniumTestCaseMixin):``.
--  You can import fixtures from the database. For example, to load the
-   teams and users fixtures, add the line
-   ``selenium_fixtures = ["fixtures/base_teams.json", "fixtures/test_users.json"]``.
--  In setUp, remove the selenium initialization and
-   ``self.selenium.start()``. This will be handled by the mixin.
--  In tearDown, remove ``self.selenium.stop()``.
-
-After this, your tests should look something like this:
-
-::
-
-    from noseselenium.cases import SeleniumTestCaseMixin
-    import time, re
-    from django.test import TestCase
-
-    class sample_test(TestCase, SeleniumTestCaseMixin):
-        selenium_fixtures = []
-
-        def setUp(self):
-            self.verificationErrors = []
-
-        def test_sample_test(self):
-            sel = self.selenium
-            sel.open("/")
-            try: self.failUnless(sel.is_text_present("Welcome"))
-            except AssertionError, e: self.verificationErrors.append(str(e))
-
-        def tearDown(self):
+            self.driver.quit()
             self.assertEqual([], self.verificationErrors)
 
     if __name__ == "__main__":
         unittest.main()
 
-Running Selenium tests with the rest of the test suite
-------------------------------------------------------
+Things that need to be changed:
 
-There are a few things you’ll need to do before you run the exported
-Python Selenium tests from the command line.
+- Delete the existing imports. Instead, import MakahikiSeleniumTestCase from
+  apps.test_helpers.selenium_helpers and test_utils from apps.test_helpers.
+- Change the Test class to inherit from MakahikiSeleniumTestCase.
+- Remove the setUp and tearDown methods. These are handled for you in
+  MakahikiSeleniumTestCase. Note that MakahikiSeleniumTestCase has a few useful
+  functions, like ``login(username, password)`` and ``logout()``.
+- After the class definition, add in a few base test fixtures
+  (i.e. `fixtures = ["base_teams.json", "base_pages.json"]`). You may want to
+  enter additional fixtures from the fixtures directory. The two fixtures in
+  the example are highly recommended unless you have a specific reason not to
+  include them.
+- Remove the if statement at the end.
+- Put in comments and change the name of the test class.
+  
+After this, your test should look something like this:
 
--  Make sure your requirements are up to date. Type
-   ``pip install -r requirements.pip`` to install the latest
-   requirements.
--  It is HIGHLY recommended that you use a database backend other than
-   SQLite3 because of issues with concurrency. To set up a different
-   backend, consult Django’s documentation
-   [[http://docs.djangoproject.com/en/1.2/topics/install/#get-your-database-running]].
--  Next, you’ll need to have the Selenium server running on your system.
-   Download it from the Selenium downloads page
-   [[http://seleniumhq.org/download/]]. Once downloaded, it can be
-   started using ``java -jar selenium-server.jar``.
+::
+
+    """
+    Tests for the pages module.
+    """
+    from apps.test_helpers.selenium_helpers import MakahikiSeleniumTestCase
+    from apps.test_helpers import test_utils
+
+
+    class LandingSeleniumTestCase(MakahikiSeleniumTestCase):
+        """Selenium tests for the home page."""
+        fixtures = ["base_teams.json", "base_pages.json"]
+
+        def testLogin(self):
+            self.login("username", "password")
+            self.logout()
+
 
