@@ -13,6 +13,7 @@ class ProfileForm(forms.Form):
     def __init__(self, *args, **kwargs):
         """Override init to take a user argument."""
         self.user = kwargs.pop('user', None)
+        self.message = None
         super(ProfileForm, self).__init__(*args, **kwargs)
 
     display_name = forms.CharField(required=True, max_length=20, min_length=1)
