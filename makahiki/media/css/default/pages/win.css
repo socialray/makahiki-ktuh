@@ -3,7 +3,6 @@
 /********************** prize styles ******************************/
 
 th {
-	background: #c2bb79;
 	text-transform: capitalize;
 }
 
@@ -17,14 +16,6 @@ th {
 	color: #FFF;
 	font-weight: bold;
 	text-align: center;
-}
-
-#prizes-list-table-header, #prizes-list-table-awarded-header, #prizes-list-table-criteria-header {
-	background: #dbd7af;
-}
-
-#prizes-list {
-	margin-left: 30px;
 }
 
 #prizes-raffle {
@@ -57,13 +48,7 @@ th {
 
 .prize {
 	text-align: center;
-	width: 55px;
 }
-
-/*.prize {
-  text-align: center;
-  width: 55px;
-}*/
 
 .prize img {
 	display: block;
