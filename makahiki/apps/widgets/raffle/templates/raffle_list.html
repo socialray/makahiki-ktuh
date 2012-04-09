@@ -5,7 +5,7 @@
 {% for prize in raffle.prizes %}
 {% with prize|user_tickets:user as user_tickets %}
 <tr>
-    <td class="prize">
+    <td class="raffle-prize">
         <a id="raffle-{{prize.title|slugify}}" href="#raffle-{{prize.title|slugify}}-description" data-toggle="modal" data-backdrop="false">
             {{ prize.title }}
         </a>
@@ -22,12 +22,13 @@
             </div>
         </div>
     </td>
-    <td class="{% insert_classes "prize-number" %}">{{ prize.value|currency }}</td>
-    <td class="{% insert_classes "prize-number" %} user-tickets">{{ user_tickets }}</td>
-    <td class="{% insert_classes "prize-number" %} total-tickets">{{ prize.allocated_tickets }}</td>
-    <td class="{% insert_classes "prize-number" %} user-odds">
+    <td class="number">{{ prize.value|currency }}</td>
+    <td class="number condensed-tickets">{{ user_tickets }} / {{prize.allocated_tickets}}</td>
+    <td class="number user-tickets">{{ user_tickets }}</td>
+    <td class="number total-tickets">{{ prize.allocated_tickets }}</td>
+    <td class="number user-odds">
         {# {{prize|user_odds:user}} #}</td>
-    <td>
+    <td class="ticket-add-remove">
         {% if raffle.tickets.available > 0 %}
             <form action="{% url raffle_add_ticket prize.id %}" method="POST">
                 {% csrf_token %}

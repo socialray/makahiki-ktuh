@@ -20,10 +20,6 @@ th {
 	border: 0;
 }
 
-.content-box th, .content-box td {
-	padding: 4px 8px 4px 8px;
-}
-
 #prizes-raffle th {
 	background: transparent;
 	text-align: center;
@@ -103,3 +99,22 @@ th {
 /*  background-color: #DBD7AF;*/
 }
 
+@media (min-width: 481px) {
+  .condensed-tickets {
+    display: none;
+  }
+}
+/* Styles for raffle table when we get real small.*/
+@media (max-width: 480px) {
+  .total-tickets, .user-tickets {
+    display: none;
+  }
+  
+  .raffle-prize {
+    width: 80px;
+  }
+  
+  .condensed-tickets {
+    display: block;
+  }
+}
