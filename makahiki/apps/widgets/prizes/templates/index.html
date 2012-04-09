@@ -1,8 +1,6 @@
-{% load class_tags %}
-
-<div {% get_id_and_classes "prizes-list" %}>
-    <div {% get_id_and_classes "prizes-list-box" %}>
-        <div {% get_id_and_classes "prizes-list-title" %}>
+<div id="prizes-list" class="content-box">
+    <div id="prizes-list-box">
+        <div id="prizes-list-title" class="content-box-title">
             Prizes and Prize Winners
             <a href="#" style="float: right">
                 <img src="{{ STATIC_URL}}/css/default/images/icon-help-sm.png" width="20"
