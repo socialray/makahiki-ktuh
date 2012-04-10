@@ -16,12 +16,12 @@
     <tr>
         <td class="prize">
             {# {% if prize.image %}<img src="{{MEDIA_URL}}{{prize.image}}"/>{% endif %} #}
-            <a id="{{name|slugify}}-{{prize.title|slugify}}-link" data-toggle="modal" data-backdrop="false"
+            <a id="{{name|slugify}}-{{prize.title|slugify}}-link" data-toggle="modal"
                     href="#{{name|slugify}}-{{prize.title|slugify}}">
                 {{ prize.title }}
             </a>
             <!-- Modal Dialog stuff -->
-            <div id="{{name|slugify}}-{{prize.title|slugify}}" class="modal hide" style="position: fixed">
+            <div id="{{name|slugify}}-{{prize.title|slugify}}" class="modal hide fade" style="position: fixed">
                 <div class="modal-header">
                     <h3>{{name}}: {{prize.title}}</h3>
                 </div>
@@ -29,7 +29,7 @@
                     {{ prize.long_description|markdown }}
                 </div>
                 <div class="modal-footer">
-                    <a href="#" class="btn">Close</a>
+                    <a href="#" class="btn" data-dismiss="modal">Close</a>
                 </div>
             </div>
         </td>

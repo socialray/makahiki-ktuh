@@ -6,12 +6,13 @@
 {% with prize|user_tickets:user as user_tickets %}
 <tr>
     <td class="raffle-prize">
-        <a id="raffle-{{prize.title|slugify}}" href="#raffle-{{prize.title|slugify}}-description" data-toggle="modal" data-backdrop="false">
+        <a id="raffle-{{prize.title|slugify}}" href="#raffle-{{prize.title|slugify}}-description" data-toggle="modal">
             {{ prize.title }}
         </a>
 
         <div id="raffle-{{prize.title|slugify}}-description" class="prize-dialog modal hide fade">
             <div class="modal-header">
+                <a class="close" data-dismiss="modal">x</a>
                 <h3>{{prize.title}}</h3>
             </div>
             <div class="modal-body">
@@ -19,6 +20,7 @@
                 {{ prize.description|markdown }}
             </div>
             <div class="modal-footer">
+                <a href="#" class="btn" data-dismiss="modal">Close</a>
             </div>
         </div>
     </td>
