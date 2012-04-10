@@ -8,9 +8,9 @@
         <table>
         <tr>
         <td>day</td>
-        {% for day in daily_goal.keys %}
+        {% for goal in daily_goal %}
           <td align="center">
-              {{ day }}
+              {{ forloop.counter }}
           </td>
         {% endfor %}
         </tr>

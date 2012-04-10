@@ -1,7 +1,6 @@
 """Handle rendering of energy goal widget."""
 
 from django.contrib.auth.decorators import login_required
-from django.core.exceptions import ObjectDoesNotExist
 from django.http import HttpResponse
 from apps.lib.gviz_api import gviz_api
 from apps.widgets.energy_goal.models import TeamEnergyGoal
@@ -38,7 +37,7 @@ def energy_goal_data(request):
     # Loading it into gviz_api.DataTable
     data_table = gviz_api.DataTable(description)
 
-    goal = TeamEnergyGoal.objects.filter(team=user.get_profile().team).order_by("-updated_at");
+    goal = TeamEnergyGoal.objects.filter(team=user.get_profile().team).order_by("-updated_at")
 
     if goal:
         data = [{"A": goal[0].team.name,
@@ -66,6 +65,7 @@ def get_daily_energy_goal_data(request):
         data_table.append(goal)
     days = days + 1
     for day in range(days, 8):
+        _ = day
         data_table.append(None)
 
     return data_table
