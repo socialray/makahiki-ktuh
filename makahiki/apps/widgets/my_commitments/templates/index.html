@@ -1,17 +1,15 @@
 {% load class_tags %}
 {% load avatar_tags %}
-
-    <div {% get_id_and_classes "news-commitments" %}>
-        <div {% get_id_and_classes "news-commitments-title" %}>
+ 
+        <div class="content-box-title">
             My Public Commitments
             <a href="#" style="float: right">
                 <img src="{{ STATIC_URL}}/css/default/images/icon-help-sm.png" width="20"
                      align="center"
                      title="Click to get help about this window"
-                     onclick="toggleHelp('widget', 'my-public-commitments'); return false;"
-                        /></a>
+                     onclick="toggleHelp('widget', 'my-public-commitments'); return false;" />
+            </a>
         </div>
-        <div {% get_id_and_classes "news-commitments-content" %}>
+        <div >
             {% include "user_commitments.html" %}
-        </div>
-    </div>
+        </div> 

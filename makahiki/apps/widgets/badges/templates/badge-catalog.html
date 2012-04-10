@@ -13,19 +13,19 @@
 {% endblock %}
 
 {% block body %}
-    <div {% get_id_and_classes "badge-catalog-box" %}>
-        <div {% get_id_and_classes "badge-catalog-title" %}>
+    <div class="content-box">
+        <div class="content-box-title">
             Badge Catalog
         </div>
-        <div {% get_id_and_classes "badge-catalog-content" %}>
+        <div class="content-box">
             <a href="{% url profile_index %}">Back to profile</a>
 
-            <table {% get_id_and_classes "badge-catalog-table" %}>
+            <table>
                 <tr>
-                    <th {% get_id_and_classes "badge-catalog-image-header" %}></th>
-                    <th {% get_id_and_classes "badge-catalog-title-header" %}>Badge</th>
-                    <th {% get_id_and_classes "badge-catalog-achievement-header" %}>Achievement</th>
-                    <th {% get_id_and_classes "badge-catalog-users-header" %}></th>
+                    <th></th>
+                    <th id="badge-catalog-title-header">Badge</th>
+                    <th id="badge-catalog-achievement-header"}>Achievement</th>
+                    <th></th>
                 </tr>
 
                 {% for badge in awarded_badges %}
