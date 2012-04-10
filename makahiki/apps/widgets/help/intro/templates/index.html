@@ -1,31 +1,12 @@
-<script type="text/javascript" src="http://www.google.com/jsapi"></script>
-
-{% load class_tags %}
-
-    <div {% get_id_and_classes "help-video" %}>
-        <div {% get_id_and_classes "help-video-box" %}>
-            <div {% get_id_and_classes "help-video-title" %}>
+    <div id="help-video" class="content-box">
+        <div id="help-video-box">
+            <div id="help-video-title" class="content-box-title">
                 Introduction to the Kukui Cup
             </div>
-            <div {% get_id_and_classes "help-video-content" %}>
-                <center>
-                <div id="videoDiv">Loading Video ...</div>
-                </center>
-                <script type="text/javascript">
-                    google.load("swfobject", "2.1");
-                </script>
-                <script type="text/javascript">
-                    google.setOnLoadCallback(function () {
-                        var videoID = "T37kNTkZCrA";
-                        var width = "376";
-                        var length = "225";
-                        var params = { allowScriptAccess:"always", wmode:"opaque" };
-                        var atts = { id:"ytPlayer" };
-                        swfobject.embedSWF("http://www.youtube.com/v/" + videoID +
-                                "?fs=1&hl=en_US&rel=0&enablejsapi=1",
-                                "videoDiv", width, length, "8", null, null, params, atts);
-                    });
-                </script>
+            <div id="help-video-content" class="content-box-contents video-container">
+                <iframe id="player" type="text/html" width="320" height="195"
+                        src="http://www.youtube.com/embed/T37kNTkZCrA?fs=1&hl=en_US&rel=0&enablejsapi=1"
+                        frameborder="0"></iframe>
             </div>
         </div>
     </div>
