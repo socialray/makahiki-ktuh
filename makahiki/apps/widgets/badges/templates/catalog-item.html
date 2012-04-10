@@ -1,6 +1,6 @@
 {% load class_tags %}
 {% load avatar_tags %}
-
+<!--Badge Image-->
 <td class="badge-image">
     {% if badge in awarded_badges %}
         <img src="{{STATIC_URL}}{{badge.image}}"/>
@@ -8,14 +8,16 @@
 
     {% endif %}
 </td>
-<td class="badge-name">
+<!--Badge Name-->
+<td >
     {% if badge in awarded_badges %}
         {{ badge.name }}
     {% else %}
         Locked
     {% endif %}
 </td>
-<td class="badge-description">
+<!--Badge Description-->
+<td>
     {% if badge in awarded_badges %}
         {{ badge.description.0 }}
     {% else %}

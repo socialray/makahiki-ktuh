@@ -13,23 +13,31 @@
 {% endblock %}
 
 {% block body %}
-    <div {% get_id_and_classes "profile-body" "responsive" %}>
-        <div {% get_id_and_classes "base-row" "responsive" %}>
+    <div class="container-fluid">
+        <div class="row-fluid">
             <!-- left column -->
-            <div {% get_id_and_classes "even-col" "responsive" %}>
-                <div id='my_info'>
+            <div class="span6">
+
+                <!-- My Info -->
+                <div class="content-box">
                     {% include "widgets/my_info/templates/index.html" %}
                 </div>
-                <div id='badges'>
+
+                <!-- My Badges -->
+                <div class="content-box">
                     {% include "widgets/badges/templates/index.html" %}
                 </div>
             </div>
             <!-- right column -->
-            <div {% get_id_and_classes "even-col" "responsive" %}>
-                <div id='my_commitments'>
+            <div class="span6">
+
+                <!-- My Public Commitment-->
+                <div class="content-box">
                     {% include "widgets/my_commitments/templates/index.html" %}
                 </div>
-                <div id='my_achievements'>
+
+                <!-- My Achievements-->
+                <div id="profile-achievements" class="content-box">
                     {% include "widgets/my_achievements/templates/index.html" %}
                 </div>
             </div>

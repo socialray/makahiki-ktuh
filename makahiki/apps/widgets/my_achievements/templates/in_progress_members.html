@@ -1,11 +1,11 @@
 {% load class_tags %}
 {% load markup %}
 
-<table {% get_id_and_classes "profile-history-current-table" %}>
-    <tr {% get_id_and_classes "profile-history-current-table-header" %}>
-        <th {% get_id_and_classes "profile-history-current-date-header" %}>Date</th>
-        <th {% get_id_and_classes "profile-history-current-task-header" %}>Task</th>
-        <th {% get_id_and_classes "profile-history-current-status-header" %}>Status</th>
+<table>
+    <tr id="profile-history-current-table-header" >
+        <th id="profile-history-current-date-header" >Date</th>
+        <th id="profile-history-current-task-header" >Task</th>
+        <th id="profile-history-current-status-header" >Status</th>
     </tr>
     {% for member in view_objects.my_achievements.in_progress_members %}
         {% if member.activity %}
