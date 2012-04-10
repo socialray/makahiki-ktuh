@@ -1,6 +1,10 @@
 @charset "UTF-8";
 /* CSS Document */
 /********************** prize styles ******************************/
+#prizes-body {
+  padding: 0;
+}
+
 .prize .modal {position: absolute}
 
 th {
@@ -115,6 +119,6 @@ th {
   }
   
   .condensed-tickets {
-    display: block;
+    display: table-cell;
   }
 }
