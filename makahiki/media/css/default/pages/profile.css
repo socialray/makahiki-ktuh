@@ -168,6 +168,17 @@ td#profile-form-fb-profile-label, td#profile-form-fb-can-post-fields {
 #avatar-change-content form button {
   display: block;
   margin-top: 5px;
+} 
+
+.tab {
+  padding: 0 1% 0 5%;
+}
+@media screen and (max-width : 767px){
+  .tab {
+    padding: 0 1% 0 0;
+  }
 }
 
-
+.avatar-box{
+  padding-bottom: 40px;
+}
