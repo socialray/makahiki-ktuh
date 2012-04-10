@@ -16,15 +16,18 @@
                     <legend>Current Status</legend>
                     <div {% get_id_and_classes "energy-power-box" %}>
                         {% if user.get_profile.team %}
-                          {% include "usage.html" %}
+                          <center>{% include "usage.html" %}</center>
                         {% endif %}
                     </div>
-                    <p/>
-                    <center><b>
-                        Each member receives 20 points
-                        each day that we make our goal. </b></center>
                 </fieldset>
-
+                <fieldset {% get_id_and_classes "energy-status-progress" %}>
+                    <legend>Daily Goal Status</legend>
+                    <div {% get_id_and_classes "energy-power-box" %}>
+                        {% if user.get_profile.team %}
+                            <center>{% include "goal.html" %}</center>
+                        {% endif %}
+                    </div>
+                </fieldset>
                 <fieldset {% get_id_and_classes "energy-status-how" %}>
                     <legend>How can we make our daily goal?</legend>
                     <table {% get_id_and_classes "energy-status-how-table" %}>
