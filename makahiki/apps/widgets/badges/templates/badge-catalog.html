@@ -1,19 +1,4 @@
-{% extends "logged_in_base.html" %}
-
-{% load class_tags %}
-
-{% block page_title %}
-    Badge Catalog
-{% endblock %}
-
-{% block selected_icon %}selected-profile{% endblock %}
-
-{% block extra_head %}
-    {% import_page_css "profile" STATIC_URL CSS_THEME %}
-{% endblock %}
-
-{% block body %}
-    <div class="content-box">
+ 
         <div class="content-box-title">
             Badge Catalog
         </div>
@@ -43,5 +28,4 @@
 
             <a href="{% url profile_index %}">Back to profile</a>
         </div>
-    </div>
-{% endblock %}
+ 
