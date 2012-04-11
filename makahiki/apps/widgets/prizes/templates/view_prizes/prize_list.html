@@ -1,56 +1,60 @@
 {% load markup %}
 
 {% for name, prizes in view_objects.prizes.prizes.items reversed %}
-<table id="prizes-list-table" class="table table-striped item {% if forloop.first %}active{% endif %}">
-    <thead>
+{# note: This is NOT an extraneous div! These classes cannot go into the table! #}
+<div class="item {% if forloop.first %}active{% endif %}">
+    <table id="prizes-list-table" class="table table-striped">
+        <thead>
+            <tr>
+                <th colspan=2 style="text-align: center">{{ name }} prizes</th>
+            </tr>
+            <tr>
+               <th id="prizes-list-table-header">Prize</th>
+               <th id="prizes-list-table-criteria-header">Criteria</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for prize in prizes %}
         <tr>
-            <th colspan=3 style="text-align: center">{{ name }} prizes</th>
-        </tr>
-        <tr>
-           <th id="prizes-list-table-header">Prize</th>
-           <th id="prizes-list-table-criteria-header">Criteria</th>
-        </tr>
-    </thead>
-    <tbody>
-    {% for prize in prizes %}
-    <tr>
-        <td class="prize">
-            {# {% if prize.image %}<img src="{{MEDIA_URL}}{{prize.image}}"/>{% endif %} #}
-            <a id="{{name|slugify}}-{{prize.title|slugify}}-link" data-toggle="modal"
-                    href="#{{name|slugify}}-{{prize.title|slugify}}">
-                {{ prize.title }}
-            </a>
-            <!-- Modal Dialog stuff -->
-            <div id="{{name|slugify}}-{{prize.title|slugify}}" class="modal hide fade" style="position: fixed">
-                <div class="modal-header">
-                    <h3>{{name}}: {{prize.title}}</h3>
+            <td class="prize">
+                {# {% if prize.image %}<img src="{{MEDIA_URL}}{{prize.image}}"/>{% endif %} #}
+                <a id="{{name|slugify}}-{{prize.title|slugify}}-link" data-toggle="modal"
+                        href="#{{name|slugify}}-{{prize.title|slugify}}">
+                    {{ prize.title }}
+                </a>
+                <!-- Modal Dialog stuff -->
+                <div id="{{name|slugify}}-{{prize.title|slugify}}" class="modal hide fade">
+                    <div class="modal-header">
+                        <h3>{{name}}: {{prize.title}}</h3>
+                    </div>
+                    <div class="modal-body">
+                        {{ prize.long_description|markdown }}
+                    </div>
+                    <div class="modal-footer">
+                        <a href="#" class="btn" data-dismiss="modal">Close</a>
+                    </div>
                 </div>
-                <div class="modal-body">
-                    {{ prize.long_description|markdown }}
-                </div>
-                <div class="modal-footer">
-                    <a href="#" class="btn" data-dismiss="modal">Close</a>
-                </div>
-            </div>
-        </td>
-        <td>
-           {{ prize.short_description|markdown }} <br/>
-           {% if prize.winner %}
-               {% if prize.winner.points %}
-                   Winner: {{ prize.winner }}
+            </td>
+            <td>
+               {{ prize.short_description|markdown }} <br/>
+               {% if prize.winner %}
+                   {% if prize.winner.points %}
+                       Winner: {{ prize.winner }}
+                   {% else %}
+                       Winner: {{ prize.winner|safe }}
+                   {% endif %}
                {% else %}
-                   Winner: {{ prize.winner|safe }}
+                   {% if prize.current_leader.points %}
+                       Current leader: {{ prize.current_leader }}
+                   {% else %}
+                       Current leader: {{ prize.current_leader|safe }}
+                   {% endif %}
                {% endif %}
-           {% else %}
-               {% if prize.current_leader.points %}
-                   Current leader: {{ prize.current_leader }}
-               {% else %}
-                   Current leader: {{ prize.current_leader|safe }}
-               {% endif %}
-           {% endif %}
-        </td>
-    </tr>
-    {% endfor %}
-    </tbody>
-</table>
+            </td>
+        </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+</div>
 {% endfor %}
+

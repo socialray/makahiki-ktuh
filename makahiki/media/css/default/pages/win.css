@@ -1,7 +1,9 @@
 @charset "UTF-8";
 /* CSS Document */
 /********************** prize styles ******************************/
-.prize .modal {position: absolute}
+#prizes-body {
+  padding: 0;
+}
 
 th {
 	text-transform: capitalize;
@@ -115,6 +117,9 @@ th {
   }
   
   .condensed-tickets {
-    display: block;
+    display: table-cell;
   }
 }
+
+
+
