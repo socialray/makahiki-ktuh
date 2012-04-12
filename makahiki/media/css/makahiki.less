@@ -19,15 +19,17 @@
 .makahiki-box {
     .border-radius(@makahikiBorderRadius);
     .box-shadow(3px 3px @makahikiBorderRadius @black);
-    margin-bottom: 20px;
+    margin-bottom: @gridGutterWidth;
 }
 
 .content-box {
+    text-align: left;
     .makahiki-box;
     margin-bottom: 15px;
 }
 
 .content-box-title {
+    text-align: center;
     height: 29px;
     line-height: 29px;
     font-weight: bold;

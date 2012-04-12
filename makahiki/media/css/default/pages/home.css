@@ -34,14 +34,18 @@ div.home-item {
     float: left;
 }
 
-.content .tile {
-/*     background: #E3E3E3; */
+.content .container-fluid {
+    padding-left: 20;
+    padding-right: 20;
+}
+
+.content .tile { /*     background: #E3E3E3; */
     padding: 1px;
     border: 3px outset #DDD;
-/*     margin-top: -.7em; */
-/*     background-image: -moz-linear-gradient(100% 50% 90deg, #E3E3E3, #A1A1A1); */
-/*     background-image: -webkit-gradient(linear, 0% 0%, 0% 90%, from(#E3E3E3), */
-/*         to(#BBB) ); */
+    /*     margin-top: -.7em; */
+    /*     background-image: -moz-linear-gradient(100% 50% 90deg, #E3E3E3, #A1A1A1); */
+    /*     background-image: -webkit-gradient(linear, 0% 0%, 0% 90%, from(#E3E3E3), */
+    /*         to(#BBB) ); */
     border-radius: 3px;
     box-shadow: 3px 3px 5px #000;
     -moz-box-shadow: 3px 3px 5px #000;
@@ -57,6 +61,8 @@ div.home-item {
     background: none;
     background-color: rgba(255, 255, 255, 0.65);
     border: 2px solid #167000;
+    padding-left: 20px;
+    padding-right: 20px;
 }
 
 #home-prizes {
@@ -307,7 +313,7 @@ div.home-item {
             left no-repeat;
         width: 54px;
         height: 56px;
-}
+    }
     #home-energy-icon:hover {
         background: transparent
             url(/site_media/static/images/icons/icon-go-low-over.png)
@@ -319,7 +325,7 @@ div.home-item {
             left no-repeat;
         width: 54px;
         height: 56px;
-}
+    }
     #home-activities-icon:hover {
         background: transparent
             url(/site_media/static/images/icons/icon-scoreboard-over.png)
@@ -331,7 +337,7 @@ div.home-item {
             no-repeat;
         width: 54px;
         height: 56px;
-}
+    }
     #home-news-icon:hover {
         background: transparent
             url(/site_media/static/images/icons/icon-news-over.png) top
@@ -343,7 +349,7 @@ div.home-item {
             left no-repeat;
         width: 54px;
         height: 56px;
-}
+    }
     #home-prizes-icon:hover {
         background: transparent
             url(/site_media/static/images/icons/icon-prizes-over.png)
@@ -355,7 +361,7 @@ div.home-item {
             no-repeat;
         width: 54px;
         height: 56px;
-}
+    }
     #home-help-icon:hover {
         background: transparent
             url(/site_media/static/images/icons/icon-help-over.png) top
@@ -367,7 +373,7 @@ div.home-item {
             left no-repeat;
         width: 54px;
         height: 56px;
-}
+    }
     #home-profile-icon:hover {
         background: transparent
             url(/site_media/static/images/icons/icon-profile-over.png)
@@ -379,7 +385,7 @@ div.home-item {
             no-repeat;
         width: 54px;
         height: 56px;
-}
+    }
     #home-water-icon:hover {
         background: transparent
             url(/site_media/static/images/icons/icon-water-over.png) top

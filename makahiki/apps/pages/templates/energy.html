@@ -14,10 +14,10 @@
 {% endblock %}
 
 {% block body %}
-    <div {% get_id_and_classes "energy-body" "responsive" %}>
-        <div {% get_id_and_classes "base-row" "responsive" %}>
+    <div class="container-fluid">
+        <div class="row-fluid">
             <!-- left column -->
-            <div {% get_id_and_classes "narrow-col" "responsive" %}>
+            <div class="span5">
                 <div id='energy_power_meter'>
                     {% include "widgets/energy_power_meter/templates/index.html" %}
                 </div>
@@ -26,7 +26,7 @@
                 </div>
             </div>
             <!-- right column -->
-            <div {% get_id_and_classes "wide-col" "responsive" %}>
+            <div class="span7">
                 <div id='energy_goal'>
                     {% include "widgets/energy_goal/templates/index.html" %}
                 </div>
