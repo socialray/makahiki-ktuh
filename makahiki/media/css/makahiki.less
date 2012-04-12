@@ -1,0 +1,261 @@
+/*
+ * Makahiki2 style.
+ * 
+ * Copyright 2012 CSDL.
+ * 
+ * Uses Twitter Bootstrap v2.
+ */
+ 
+ 
+ // Bootstrap
+ @import "bootstrap.less";
+ 
+ // Responsiveness
+ @import "responsive.less";
+
+ // Overrides for bootstrap variables
+ @import "makahiki-override.less";
+
+.makahiki-box {
+    .border-radius(@makahikiBorderRadius);
+    .box-shadow(3px 3px @makahikiBorderRadius @black);
+    margin-bottom: @gridGutterWidth;
+}
+
+.content-box {
+    text-align: left;
+    .makahiki-box;
+    margin-bottom: 15px;
+}
+
+.content-box-title {
+    text-align: center;
+    height: 29px;
+    line-height: 29px;
+    font-weight: bold;
+    .top-border-radius(@makahikiBorderRadius);    
+}
+.info-bar h4 {
+    .pagination-centered;
+}
+
+.info-bar ul {
+    list-style: none outside none;
+}
+
+.info-bar li {
+    .show;
+}
+
+.makahiki-box-title {
+    display: inline;
+    margin-left: auto;
+    margin-right: auto;
+    .pagination-centered;     
+}
+
+.makahiki-box-title a {
+    float: right;    
+}
+
+.quest-description {
+    text-align: left;
+}
+
+.quest-list {
+    list-style: none;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.quest-list li {
+    margin: 0px;
+    padding: 0 2px;
+    display: inline;    
+}
+
+.quest-list a {
+    color: @white;
+}
+/* ====================
+ * Navbar icons.
+ * ==================== */ 
+a.activities img {
+    background: transparent url(../images/icons/icon-scoreboard.png) top left
+        no-repeat;    
+    .show
+}
+a.activities:hover img {
+    background: transparent url(../images/icons/icon-scoreboard-over.png) top left
+        no-repeat;
+    .show
+}
+
+a.advanced img {
+    background: transparent url(../images/icons/icon-advanced.png) top left
+        no-repeat;
+    .show
+}
+
+a.advanced:hover img {
+    background: transparent url(../images/icons/icon-advanced-over.png) top left
+        no-repeat;
+    .show
+}
+
+a.energy img {
+    background: transparent url(../images/icons/icon-go-low.png) top left
+        no-repeat;
+    .show
+}
+
+a.energy:hover img {
+    background: transparent url(../images/icons/icon-go-low-over.png) top left
+        no-repeat;
+    .show
+}
+
+a.help img {
+    background: transparent url(../images/icons/icon-help.png) top left no-repeat;
+    .show
+}
+
+a.help:hover img {
+    background: transparent url(../images/icons/icon-help-over.png) top left
+        no-repeat;
+    .show
+}
+
+a.home img {
+    background: transparent url(../images/icons/icon-home.png) top left no-repeat;
+    .show
+}
+
+a.home:hover img {
+    background: transparent url(../images/icons/icon-home-over.png) top left
+        no-repeat;
+    .show
+}
+
+a.news img {
+    background: transparent url(../images/icons/icon-news.png) top left no-repeat;
+    .show
+}
+
+a.news:hover img {
+    background: transparent url(../images/icons/icon-news-over.png) top left
+        no-repeat;
+    .show
+}
+
+a.prizes img {
+    background: transparent url(../images/icons/icon-prizes.png) top left
+        no-repeat;
+    .show
+}
+
+a.prizes:hover img {
+    background: transparent url(../images/icons/icon-prizes-over.png) top left
+        no-repeat;
+    .show
+}
+
+a.profile img {
+    background: transparent url(../images/icons/icon-profile.png) top left
+        no-repeat;
+    .show
+}
+
+a.profile:hover img {
+    background: transparent url(../images/icons/icon-profile-over.png) top left
+        no-repeat;
+    .show
+}
+
+a.water img {
+    background: transparent url(../images/icons/icon-water.png) top left no-repeat;
+    .show
+}
+
+a.water:hover img {
+    background: transparent url(../images/icons/icon-water-over.png) top left
+        no-repeat;
+    .show
+}
+
+body {
+    margin: 0;
+    padding-left: 20px;
+    padding-right: 20px;
+    .pagination-centered;
+}
+
+#info-bar-single {
+    .hidden;
+}
+
+#info-bar-single a {
+    float: right;
+    text-align: right;
+}
+
+#info-bar-single button {
+    float: left;
+}
+
+@media ( min-width : 641px) and (max-width: 979px) {
+    /* hide icons from nav bar */
+    .nav img {
+        display: none;
+    }
+}
+
+/* Query to remove images up to tablet width.*/
+@media ( min-width : 480px) and (max-width: 821px) {
+    .nav li a img {
+        display: none;
+    }
+    .nav li a:hover img {
+        display: none;
+    }
+}
+
+/* for small screen widths hide the wide info-bar */
+@media ( max-width : 640px) {
+    a.activities img,a.activities:hover img,a.advanced img,a.advanced:hover img,a.energy img,a.energy:hover img,a.help img,a.help:hover img,a.home img,a.home:hover img,a.news img,a.news:hover img,a.prizes img,a.prizes:hover img,a.profile img,a.profile:hover img,a.water img,a.water:hover img
+        {
+        .hidden;
+    }
+    body {
+        padding-left: 0;
+        padding-right: 0;
+    }
+    .container-fluid {
+        padding-left: 0px;
+        padding-right: 0px;
+    }    
+    .makahiki-box {
+        margin-bottom: 5px;
+    }
+    .navbar {
+        margin-bottom: 5px;
+    }
+    #info-bar-wide {
+        .hidden;
+    }
+    #info-bar-single {
+        .show;
+        visibility: visible;
+    }
+    #quest-list {
+        padding: 0px;
+    }
+    #quest-list li {
+        display: block; /* make them vertical */
+        margin: 5px;
+        padding: 0px;
+    }
+    #quest-title {
+        margin: 0px;
+    }
+}

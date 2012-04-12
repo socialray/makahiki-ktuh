@@ -13,10 +13,10 @@
 {% endblock %}
 
 {% block body %}
-    <div {% get_id_and_classes "help-body" "responsive" %}>
-        <div {% get_id_and_classes "base-row" "responsive" %}>
+    <div class="container-fluid">
+        <div class="row-fluid">
             <!-- left column -->
-            <div {% get_id_and_classes "even-col" "responsive" %}>
+            <div class="span6">
                 <div id='help_intro'>
                     {% include "widgets/help/intro/templates/index.html" %}
                 </div>
@@ -25,7 +25,7 @@
                 </div>
             </div>
             <!-- right column -->
-            <div {% get_id_and_classes "even-col" "responsive" %}>
+            <div class="span6">
                 <div id='help_rule'>
                     {% include "widgets/help/rule/templates/index.html" %}
                 </div>

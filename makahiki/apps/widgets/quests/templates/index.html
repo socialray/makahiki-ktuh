@@ -2,10 +2,10 @@
 
 {% load class_tags %}
 
-<div id="quest-box" style="clear: both">
-    <div id="quest-header">
-        <h3 id="quest-title">Your Quests</h3>
-        <a href="#" style="float: right">
+<div id="quest-box">
+    <div id="quest-header" class="makahiki-box-title">
+        <h3 id="quest-title" class="makahiki-box-title">Your Quests</h3>
+        <a href="#">
             <img src="{{ STATIC_URL}}/css/default/images/icon-help-sm.png" width="20" align="center"
                  title="Click to get help about this window"
                  onclick="toggleHelp('widget', 'quests'); return false;"
@@ -20,7 +20,7 @@
     {% endif %}
 
     <div id="quest-details" style="margin: 0px 10px; display: none">
-        <div id="quest-contents" style="clear:both"></div>
+        <div id="quest-contents" class="quest-description" style="clear:both"></div>
         <a href="javascript:void(0)" id="quest-hide">Close</a>
 
         <div style="clear:both"></div>
