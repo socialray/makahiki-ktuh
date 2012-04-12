@@ -18,12 +18,14 @@
 {% endblock %}
 
 {% block body %}
-    <div {% get_id_and_classes "activity-task-stats" %}>
-        <div {% get_id_and_classes "activity-task-stats-box" %}>
-            <div {% get_id_and_classes "activity-task-stats-title" %}>
+<div class="container-fluid">
+    <div class="row-fluid">
+    <div class="span6">
+        <div class="content-box">
+            <div class="content-box-title">
                 {{ task.type|capfirst }} : {{ task.name }}
             </div>
-            <div {% get_id_and_classes "activity-task-stats-content" %}>
+            <div class="content-box-contents">
                 {% if task.is_canopy %}
                     <p/> This is a Canopy {{ task.type|capfirst }}.
                 {% endif %}
@@ -112,7 +114,7 @@
                             </button>
                         </a>
                     {% else %}
-                        <a href="/actions">
+                        <a href="/learn/">
                             <button style="cursor:pointer;">
                                 <img src="{{ STATIC_URL}}/css/default/images/left.png" width="50"
                                      align="top">
@@ -125,9 +127,9 @@
         </div>
     </div>
 
-    <div {% get_id_and_classes "activity-task-details" %}>
-        <div {% get_id_and_classes "activity-task-details-box" %}>
-            <div {% get_id_and_classes "activity-task-details-title" %}>
+    <div class="span6">
+        <div class="content-box">
+            <div class="content-box-title">
                 <table>
                     <tr>
                         <td>About the {{ task.type }}</td>
@@ -142,7 +144,7 @@
                     </tr>
                 </table>
             </div>
-            <div {% get_id_and_classes "activity-task-details-content" %}>
+            <div class="content-box-contents">
                 {% if pau %}
                     {% if approval.approval_status == "approved" or approval.award_date %}
                         <div {% get_id_and_classes "activity-task-details-info" %}>
@@ -356,6 +358,8 @@
             </div>
         </div>
     </div>
+    </div>
+</div>    
 {% endblock %}
 
 {% block extra_body %}
