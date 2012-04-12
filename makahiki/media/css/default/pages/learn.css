@@ -233,8 +233,8 @@ table#activities-grid td table td{
 #activity-category .get-started div, #activity-category .basic-energy div, #activity-category .lights-out div, #activity-category .make-watts div, #activity-category .moving-on div, #activity-category .opala div, #activity-category .wet-wild div, #activity-category .potpourri div {
 	position: relative; 
 	font-size: 9pt;
-	top: 35%;
-	margin: -50% auto 0 auto;
+/* 	top: 35%; */
+	margin: 0 auto 0 auto;
 	padding: 2px;
 	}
     
