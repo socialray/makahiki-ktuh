@@ -1,7 +1,8 @@
 {% with view_objects.energy_goal.goal as goal %}
+{% if goal %}
 <div id="EnergyGoalGame-visualization">
     <table cellpadding="5"
-           style="background-color:#F5F3E5; font-family: sans-serif; text-align: center; vertical-align: top">
+           style="text-align: center; vertical-align: top">
       <tr>
          <td style="vertical-align: top" align="center">
              <table cellpadding="5">
@@ -41,12 +42,12 @@
           {% else %}
             Your lounge is currently beating the goal by {{ goal.actual_diff }} kWh. Great job!
           {% endif %}
+          <br/>
+          Last check: {{ goal.updated_at }}
 
       </td> </tr>
-      <tr> <td colspan="3" style="font-size: 0.7em">Last check: {{ goal.updated_at }} </td> </tr>
     </table>
 </div>
-<p/>
-<b>Each member receives 20 points each day that we make our goal. </b>
 
+{% endif %}
 {% endwith %}

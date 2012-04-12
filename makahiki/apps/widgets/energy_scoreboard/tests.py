@@ -1,11 +1,12 @@
 """Energy scoreboard Test"""
+import datetime
 
 from django.test import TransactionTestCase
 from django.core.urlresolvers import reverse
 from django.contrib.auth.models import User
 
 from apps.managers.team_mgr.models import Team
-from apps.widgets.energy_goal.models import TeamEnergyGoal
+from apps.widgets.energy_goal.models import EnergyGoal
 from apps.test_helpers import test_utils
 
 
@@ -38,10 +39,10 @@ class EnergyFunctionalTestCase(TransactionTestCase):
         for goal in goals:
             self.assertEqual(goal["completions"], 0, "No team should have completed a goal.")
 
-        goal = TeamEnergyGoal.objects.create(
+        goal = EnergyGoal.objects.create(
             team=self.team,
-            goal_usage="1",
-            actual_usage="2",
+            date=datetime.date.today(),
+            goal_status="Over the goal",
         )
 
         response = self.client.get(reverse("energy_index"))
@@ -49,11 +50,11 @@ class EnergyFunctionalTestCase(TransactionTestCase):
         for goal in goals:
             self.assertEqual(goal["completions"], 0, "No team should have completed a goal.")
 
-        goal = TeamEnergyGoal.objects.create(
+        goal = EnergyGoal.objects.create(
             team=self.team,
-            goal_usage="2",
-            actual_usage="1",
-        )
+            date=datetime.date.today(),
+            goal_status="Below the goal",
+            )
 
         response = self.client.get(reverse("energy_index"))
         goals = response.context["view_objects"]["energy_scoreboard"]["goals_scoreboard"]

@@ -1,4 +1,5 @@
 """Energy Goal Test"""
+import datetime
 
 from apps.managers.team_mgr.models import Group
 from apps.managers.player_mgr.models import Profile
@@ -7,7 +8,9 @@ from django.test import TransactionTestCase
 from django.contrib.auth.models import User
 
 from apps.managers.team_mgr.models import Team
-from apps.widgets.energy_goal.models import TeamEnergyGoal
+from apps.widgets.energy_goal import energy_goal
+from apps.widgets.energy_goal.models import EnergyGoalSettings, EnergyGoalBaseline
+from apps.managers.resource_mgr.models import EnergyData
 
 
 class TeamEnergyGoalTest(TransactionTestCase):
@@ -31,13 +34,30 @@ class TeamEnergyGoalTest(TransactionTestCase):
         profile = self.user.get_profile()
         points = profile.points()
 
-        goal = TeamEnergyGoal(
+        goal_settings = EnergyGoalSettings(
             team=self.team,
-            goal_usage=10,
-            actual_usage=5,
+            goal_percent_reduction=5,
+            goal_points=20,
+            manual_entry=True,
+            manual_entry_time=datetime.time(hour=15),
         )
-        goal.save()
-        goal.award_goal_points()
+        goal_settings.save()
+        goal_baseline = EnergyGoalBaseline(
+            team=self.team,
+            date=datetime.date.today(),
+            baseline_usage=150,
+        )
+        goal_baseline.save()
+        energy_data = EnergyData(
+            team=self.team,
+            date=datetime.date.today(),
+            time=datetime.time(hour=15),
+            usage=100,
+        )
+        energy_data.save()
+
+        energy_goal.check_daily_energy_goal(self.team)
+
         profile = Profile.objects.get(user__username="user")
         self.assertEqual(profile.points(), points,
             "User that did not complete the setup process should not be awarded points.")
@@ -45,16 +65,18 @@ class TeamEnergyGoalTest(TransactionTestCase):
         profile.setup_complete = True
         profile.save()
 
-        goal.actual_usage = 15
-        goal.save()
-        goal.award_goal_points()
+        energy_data.usage = 150
+        energy_data.save()
+        energy_goal.check_daily_energy_goal(self.team)
+
         profile = Profile.objects.get(user__username="user")
         self.assertEqual(profile.points(), points,
             "Team that failed the goal should not be awarded any points.")
 
-        goal.actual_usage = 5
-        goal.save()
-        goal.award_goal_points()
+        energy_data.usage = 100
+        energy_data.save()
+        energy_goal.check_daily_energy_goal(self.team)
+
         profile = Profile.objects.get(user__username="user")
-        self.assertEqual(profile.points(), points + TeamEnergyGoal.GOAL_POINTS,
+        self.assertEqual(profile.points(), points + goal_settings.goal_points,
             "User that setup their profile should be awarded points.")

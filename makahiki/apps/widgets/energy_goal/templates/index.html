@@ -12,6 +12,8 @@
                             /></a>
             </div>
             <div {% get_id_and_classes "energy-status-content" %}>
+                <b>Each member receives 20 points each day that we make our goal. </b>
+              {% if not view_objects.energy_goal.is_manual_entry %}
                 <fieldset {% get_id_and_classes "energy-status-progress" %}>
                     <legend>Current Status</legend>
                     <div {% get_id_and_classes "energy-power-box" %}>
@@ -20,6 +22,7 @@
                         {% endif %}
                     </div>
                 </fieldset>
+              {% endif %}
                 <fieldset {% get_id_and_classes "energy-status-progress" %}>
                     <legend>Daily Goal Status</legend>
                     <div {% get_id_and_classes "energy-power-box" %}>

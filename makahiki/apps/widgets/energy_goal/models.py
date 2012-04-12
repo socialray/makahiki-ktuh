@@ -1,45 +1,69 @@
 """Energy goal model definition."""
 
-import datetime
-
 from django.db import models
 
 from apps.managers.team_mgr.models import Team
 
 
-class TeamEnergyGoal(models.Model):
+class EnergyGoalBaseline(models.Model):
+    """Monthly Team Energy baseline Model"""
+
+    team = models.ForeignKey(
+        Team,
+        help_text="The team which this baseline is related to.")
+
+    date = models.DateField(
+        help_text="The date of the month.",)
+
+    baseline_usage = models.IntegerField(
+        default=0,
+        help_text="The baseline energy usage of the day.",)
+
+
+class EnergyGoal(models.Model):
+    """Team Energy Goal Model"""
+    STATUS_CHOICES = (("Over the goal", "Over the goal"),
+                    ("Below the goal", "Below the goal"),
+                    ("Unknown", "Unknown"),
+                    ("Not available", "Not available"),)
+
+    team = models.ForeignKey(
+        Team,
+        help_text="The team which this goal is related to.")
+
+    date = models.DateField(
+        help_text="The date of the month.")
+
+    goal_status = models.CharField(
+        default="Not available",
+        choices=STATUS_CHOICES,
+        max_length=20,
+        help_text="The status of the goal.")
+
+
+class EnergyGoalSettings(models.Model):
     """Team Energy Goal Model"""
 
-    # The amount of points to award for completing a goal.
-    GOAL_POINTS = 20
+    team = models.ForeignKey(
+        Team,
+        help_text="The team which this goal is related to.")
 
-    team = models.ForeignKey(Team)
-    percent_reduction = models.IntegerField(default=0, editable=False)
-    goal_usage = models.IntegerField(default=0,)
-    actual_usage = models.IntegerField(default=0,)
-    warning_usage = models.IntegerField(default=0,)
+    goal_percent_reduction = models.IntegerField(
+        default=5,
+        help_text="The goal percentage of reduction.")
 
-    created_at = models.DateTimeField(editable=False, auto_now_add=True)
-    updated_at = models.DateTimeField(editable=False, auto_now=True)
+    warning_percent_reduction = models.IntegerField(
+        default=3,
+        help_text="The warning percentage of reduction.")
 
-    def award_goal_points(self):
-        """award points to the team members if the goal is meet."""
-        if self.goal_usage and self.actual_usage and self.actual_usage <= self.goal_usage:
-            count = 0
-            # Award points to the members of the team.
-            for profile in self.team.profile_set.all():
-                if profile.setup_complete:
-                    today = datetime.datetime.today()
-                    # Hack to get around executing this script at midnight.  We want to award
-                    # points earlier to ensure they are within the round they were completed.
-                    if today.hour == 0:
-                        today = today - datetime.timedelta(hours=1)
+    goal_points = models.IntegerField(
+        default=20,
+        help_text="The amount of points to award for completing a goal.")
 
-                    date = "%d/%d/%d" % (today.month, today.day, today.year)
-                    profile.add_points(self.GOAL_POINTS, today,
-                                       "Team Energy Goal for %s" % date, self)
-                    profile.save()
-                    count = count + 1
+    manual_entry = models.BooleanField(
+        default=False,
+        help_text="Manually enter energy data?",)
 
-            print '%s users in %s are awarded %s points each.' % (count,
-                                                                  self.team, self.GOAL_POINTS)
+    manual_entry_time = models.TimeField(
+        blank=True, null=True,
+        help_text="The time for manual energy data entry.",)

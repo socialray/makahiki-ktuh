@@ -1,10 +1,11 @@
 [
   {
     "pk": 1,
-    "model": "energy_scoreboard.energydata",
+    "model": "resource_mgr.energydata",
     "fields": {
       "date": "2012-02-23",
-      "energy": 1000,
+      "time": "15:00",
+      "usage": 1000,
       "created_at": "2012-02-23 13:16:07",
       "updated_at": "2012-02-23 13:16:07",
       "team": 1
@@ -12,10 +13,11 @@
   },
   {
     "pk": 2,
-    "model": "energy_scoreboard.energydata",
+    "model": "resource_mgr.energydata",
     "fields": {
       "date": "2012-02-23",
-      "energy": 900,
+        "time": "15:00",
+      "usage": 900,
       "created_at": "2012-02-23 13:16:20",
       "updated_at": "2012-02-23 13:16:20",
       "team": 2
@@ -23,10 +25,11 @@
   },
   {
     "pk": 3,
-    "model": "energy_scoreboard.energydata",
+    "model": "resource_mgr.energydata",
     "fields": {
       "date": "2012-02-23",
-      "energy": 999,
+        "time": "15:00",
+      "usage": 999,
       "created_at": "2012-02-23 13:16:37",
       "updated_at": "2012-02-23 13:16:37",
       "team": 3
@@ -34,10 +37,11 @@
   },
   {
     "pk": 4,
-    "model": "energy_scoreboard.energydata",
+    "model": "resource_mgr.energydata",
     "fields": {
       "date": "2012-02-23",
-      "energy": 999,
+        "time": "15:00",
+      "usage": 999,
       "created_at": "2012-02-23 13:16:56",
       "updated_at": "2012-02-23 13:16:56",
       "team": 4
@@ -45,10 +49,11 @@
   },
   {
     "pk": 5,
-    "model": "energy_scoreboard.energydata",
+    "model": "resource_mgr.energydata",
     "fields": {
       "date": "2012-02-23",
-      "energy": 888,
+        "time": "15:00",
+      "usage": 888,
       "created_at": "2012-02-23 13:17:04",
       "updated_at": "2012-02-23 13:17:04",
       "team": 5
@@ -56,10 +61,11 @@
   },
   {
     "pk": 6,
-    "model": "energy_scoreboard.energydata",
+    "model": "resource_mgr.energydata",
     "fields": {
       "date": "2012-02-23",
-      "energy": 777,
+        "time": "15:00",
+      "usage": 777,
       "created_at": "2012-02-23 13:17:16",
       "updated_at": "2012-02-23 13:17:16",
       "team": 6
@@ -67,10 +73,11 @@
   },
   {
     "pk": 7,
-    "model": "energy_scoreboard.energydata",
+    "model": "resource_mgr.energydata",
     "fields": {
       "date": "2012-02-23",
-      "energy": 666,
+        "time": "15:00",
+      "usage": 666,
       "created_at": "2012-02-23 13:17:39",
       "updated_at": "2012-02-23 13:17:39",
       "team": 7
@@ -78,10 +85,11 @@
   },
   {
     "pk": 9,
-    "model": "energy_scoreboard.energydata",
+    "model": "resource_mgr.energydata",
     "fields": {
       "date": "2012-02-23",
-      "energy": 898,
+        "time": "15:00",
+      "usage": 898,
       "created_at": "2012-02-23 13:18:10",
       "updated_at": "2012-02-23 13:18:10",
       "team": 8
@@ -89,10 +97,11 @@
   },
   {
     "pk": 10,
-    "model": "energy_scoreboard.energydata",
+    "model": "resource_mgr.energydata",
     "fields": {
       "date": "2012-02-23",
-      "energy": 776,
+        "time": "15:00",
+      "usage": 776,
       "created_at": "2012-02-23 13:18:19",
       "updated_at": "2012-02-23 13:18:19",
       "team": 9
@@ -100,10 +109,11 @@
   },
   {
     "pk": 11,
-    "model": "energy_scoreboard.energydata",
+    "model": "resource_mgr.energydata",
     "fields": {
       "date": "2012-02-23",
-      "energy": 876,
+        "time": "15:00",
+      "usage": 876,
       "created_at": "2012-02-23 13:18:27",
       "updated_at": "2012-02-23 13:18:27",
       "team": 10
@@ -111,10 +121,11 @@
   },
   {
     "pk": 12,
-    "model": "energy_scoreboard.energydata",
+    "model": "resource_mgr.energydata",
     "fields": {
       "date": "2012-02-23",
-      "energy": 567,
+        "time": "15:00",
+      "usage": 567,
       "created_at": "2012-02-23 13:18:34",
       "updated_at": "2012-02-23 13:18:34",
       "team": 11
@@ -122,10 +133,11 @@
   },
   {
     "pk": 13,
-    "model": "energy_scoreboard.energydata",
+    "model": "resource_mgr.energydata",
     "fields": {
       "date": "2012-02-23",
-      "energy": 767,
+        "time": "15:00",
+      "usage": 767,
       "created_at": "2012-02-23 13:18:48",
       "updated_at": "2012-02-23 13:18:48",
       "team": 12
@@ -133,10 +145,11 @@
   },
   {
     "pk": 14,
-    "model": "energy_scoreboard.energydata",
+    "model": "resource_mgr.energydata",
     "fields": {
       "date": "2012-02-23",
-      "energy": 567,
+        "time": "15:00",
+      "usage": 567,
       "created_at": "2012-02-23 13:19:01",
       "updated_at": "2012-02-23 13:19:01",
       "team": 14
@@ -144,10 +157,11 @@
   },
   {
     "pk": 15,
-    "model": "energy_scoreboard.energydata",
+    "model": "resource_mgr.energydata",
     "fields": {
       "date": "2012-02-23",
-      "energy": 675,
+        "time": "15:00",
+      "usage": 675,
       "created_at": "2012-02-23 13:19:12",
       "updated_at": "2012-02-23 13:19:12",
       "team": 15
@@ -155,10 +169,11 @@
   },
   {
     "pk": 16,
-    "model": "energy_scoreboard.energydata",
+    "model": "resource_mgr.energydata",
     "fields": {
       "date": "2012-02-23",
-      "energy": 783,
+        "time": "15:00",
+      "usage": 783,
       "created_at": "2012-02-23 13:20:04",
       "updated_at": "2012-02-23 13:20:04",
       "team": 13

@@ -1,9 +1,11 @@
 """Handle rendering of energy goal widget."""
+import datetime
 
-from django.contrib.auth.decorators import login_required
-from django.http import HttpResponse
-from apps.lib.gviz_api import gviz_api
-from apps.widgets.energy_goal.models import TeamEnergyGoal
+from django.core.exceptions import ObjectDoesNotExist
+from apps.managers.challenge_mgr import challenge_mgr
+from apps.managers.resource_mgr import resource_mgr
+from apps.widgets.energy_goal import energy_goal
+from apps.widgets.energy_goal.models import EnergyGoal
 
 from apps.widgets.smartgrid import get_available_golow_activities
 
@@ -12,60 +14,50 @@ def supply(request, page_name):
     """Supply the view_objects content for this widget."""
     _ = page_name
     user = request.user
+    team = user.get_profile().team
     golow_activities = get_available_golow_activities(user)
-    goal = TeamEnergyGoal.objects.filter(team=user.get_profile().team).order_by("-updated_at")[0]
-    goal.actual_diff = abs(goal.actual_usage - goal.goal_usage)
+    is_manual_entry = energy_goal.is_manual_entry(team)
+
+    goal = None
+    if not is_manual_entry:
+        goal = get_realtime_goal_data(team)
 
     return {
         "golow_activities": golow_activities,
         "goal": goal,
-        "daily_goal": get_daily_energy_goal_data(request),
+        "is_manual_entry": is_manual_entry,
+        "daily_goal": get_daily_energy_goal_data(team),
         }
 
 
-@login_required
-def energy_goal_data(request):
-    """:return: the gviz json format of the energy goal data."""
-    user = request.user
-
-    description = {"A": ("string", "Source"),
-                   "B": ("date", "Last Update"),
-                   "C": ("number", "Actual"),
-                   "D": ("number", "Goal"),
-                   "E": ("number", "Warning")}
-
-    # Loading it into gviz_api.DataTable
-    data_table = gviz_api.DataTable(description)
-
-    goal = TeamEnergyGoal.objects.filter(team=user.get_profile().team).order_by("-updated_at")
-
-    if goal:
-        data = [{"A": goal[0].team.name,
-                 "B": goal[0].updated_at,
-                 "C": goal[0].actual_usage,
-                 "D": goal[0].goal_usage,
-                 "E": goal[0].warning_usage
-                }]
-    data_table.AppendData(data)
-
-    return HttpResponse(data_table.ToResponse(tqx="reqId:1"))
+def get_realtime_goal_data(team):
+    """:return: the energy goal data for the user's team."""
+    goal = {}
+    goal["goal_usage"] = energy_goal.current_goal_usage(team=team)
+    goal["warning_usage"] = energy_goal.current_warning_usage(team=team)
+    data = resource_mgr.team_current_energy_data(team=team)
+    if data:
+        goal["actual_usage"] = data.usage
+        goal["updated_at"] = data.updated_at
+        goal["actual_diff"] = abs(goal["actual_usage"] - goal["goal_usage"])
+    return goal
 
 
-@login_required
-def get_daily_energy_goal_data(request):
+def get_daily_energy_goal_data(team):
     """:return: the gviz json format of the daily energy goal data."""
-    user = request.user
 
-    goal_data = TeamEnergyGoal.objects.filter(team=user.get_profile().team).order_by(
-        "updated_at")[:7]
-    days = 0
+    round_info = challenge_mgr.get_current_round_info()
+    start = round_info["start"].date()
+    end = round_info["end"].date()
+    delta = (end - start).days
     data_table = []
-    for goal in goal_data:
-        days = days + 1
+    for day in range(0, delta):
+        date = start + datetime.timedelta(days=day)
+        try:
+            goal = EnergyGoal.objects.get(date=date)
+        except ObjectDoesNotExist:
+            goal = EnergyGoal(team=team, date=date)
+
         data_table.append(goal)
-    days = days + 1
-    for day in range(days, 8):
-        _ = day
-        data_table.append(None)
 
     return data_table

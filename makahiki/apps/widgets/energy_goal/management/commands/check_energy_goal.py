@@ -2,7 +2,8 @@
 import datetime
 
 from django.core import management
-from apps.widgets.energy_goal.models import TeamEnergyGoal
+from apps.managers.team_mgr.models import Team
+from apps.widgets.energy_goal import energy_goal
 
 
 class Command(management.base.BaseCommand):
@@ -13,5 +14,9 @@ class Command(management.base.BaseCommand):
         """check the energy goal for all teams"""
         print '****** Processing check_energy_goal for %s *******\n' % datetime.datetime.today()
 
-        for goal in TeamEnergyGoal.objects.all():
-            goal.award_goal_points()
+        for team in Team.objects.all():
+            count = energy_goal.check_daily_energy_goal(team)
+            goal_points = team.energygoalsettings_set.all()[0].goal_points
+            print '%s users in %s are awarded %s points each.' % (count,
+                                                                  team,
+                                                                  goal_points)
