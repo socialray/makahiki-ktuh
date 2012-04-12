@@ -1,6 +1,6 @@
 {% if view_objects.notifications %}
     {% if view_objects.notifications.unread %}
-        <ul id="notification-list">
+        <ul class="notification-list">
             {% for notification in view_objects.notifications.unread %}
                 {% include "widgets/notifications/templates/notifications/list-item.html" %}
             {% endfor %}

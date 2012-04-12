@@ -595,6 +595,7 @@ def _calculate_task_duration(task):
 def _create_activity_request_form(request, task, user, approval, pau):
     """ Create activity request form """
     form_title = "Get your points"
+    question = "?"
 
     social_email = None
     social_email2 = None
