@@ -1,6 +1,6 @@
 {% load class_tags %}
 
-<ul id="quest-list">
+<ul class="quest-list">
     {# set variable to indicate that these are user quests. #}
     {% with "true" as user_quest %}
         {% for quest in view_objects.quests.user_quests %}
