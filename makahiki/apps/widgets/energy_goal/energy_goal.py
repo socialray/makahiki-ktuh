@@ -53,35 +53,36 @@ def check_daily_energy_goal(team):
         # check if the manual entry time is within the target time,
         # otherwise can not determine the actual usage
         goal_settings = team.energygoalsettings_set.all()[0]
-        if goal_settings.manual_entry and \
-            goal_settings.manual_entry_time.hour <= energy_data.time.hour and\
-           energy_data.time.hour <= (goal_settings.manual_entry_time.hour + 1):
+        if not goal_settings.manual_entry or  \
+            (goal_settings.manual_entry_time.hour <= energy_data.time.hour and\
+             energy_data.time.hour <= (goal_settings.manual_entry_time.hour + 1)):
             actual_usage = energy_data.usage
 
     count = 0
 
-    goal = EnergyGoal(team=team, date=date)
+    goal, _ = EnergyGoal.objects.get_or_create(team=team, date=date)
 
     if actual_usage:
         if actual_usage <= goal_usage:
+            # if already awarded, do nothing
+            if goal.goal_status != "Below the goal":
+                goal.goal_status = "Below the goal"
+                goal_points = team.energygoalsettings_set.all()[0].goal_points
 
-            goal.goal_status = "Below the goal"
-            goal_points = team.energygoalsettings_set.all()[0].goal_points
+                # Award points to the members of the team.
+                for profile in team.profile_set.all():
+                    if profile.setup_complete:
+                        today = datetime.datetime.today()
+                        # Hack to get around executing this script at midnight.  We want to award
+                        # points earlier to ensure they are within the round they were completed.
+                        if today.hour == 0:
+                            today = today - datetime.timedelta(hours=1)
 
-            # Award points to the members of the team.
-            for profile in team.profile_set.all():
-                if profile.setup_complete:
-                    today = datetime.datetime.today()
-                    # Hack to get around executing this script at midnight.  We want to award
-                    # points earlier to ensure they are within the round they were completed.
-                    if today.hour == 0:
-                        today = today - datetime.timedelta(hours=1)
-
-                    date = "%d/%d/%d" % (today.month, today.day, today.year)
-                    profile.add_points(goal_points, today,
-                                       "Team Energy Goal for %s" % date, goal)
-                    profile.save()
-                    count = count + 1
+                        date = "%d/%d/%d" % (today.month, today.day, today.year)
+                        profile.add_points(goal_points, today,
+                                           "Team Energy Goal for %s" % date, goal)
+                        profile.save()
+                        count = count + 1
         else:
             goal.goal_status = "Over the goal"
     else:

@@ -16,7 +16,8 @@ class Command(management.base.BaseCommand):
 
         for team in Team.objects.all():
             count = energy_goal.check_daily_energy_goal(team)
-            goal_points = team.energygoalsettings_set.all()[0].goal_points
-            print '%s users in %s are awarded %s points each.' % (count,
+            if count:
+                goal_points = team.energygoalsettings_set.all()[0].goal_points
+                print '%s users in %s are awarded %s points each.' % (count,
                                                                   team,
                                                                   goal_points)

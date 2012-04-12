@@ -32,15 +32,18 @@ def supply(request, page_name):
 
 def get_realtime_goal_data(team):
     """:return: the energy goal data for the user's team."""
-    goal = {}
-    goal["goal_usage"] = energy_goal.current_goal_usage(team=team)
-    goal["warning_usage"] = energy_goal.current_warning_usage(team=team)
     data = resource_mgr.team_current_energy_data(team=team)
+
     if data:
+        goal = {}
+        goal["goal_usage"] = energy_goal.current_goal_usage(team=team)
+        goal["warning_usage"] = energy_goal.current_warning_usage(team=team)
         goal["actual_usage"] = data.usage
         goal["updated_at"] = data.updated_at
         goal["actual_diff"] = abs(goal["actual_usage"] - goal["goal_usage"])
-    return goal
+        return goal
+    else:
+        return None
 
 
 def get_daily_energy_goal_data(team):
@@ -54,7 +57,7 @@ def get_daily_energy_goal_data(team):
     for day in range(0, delta):
         date = start + datetime.timedelta(days=day)
         try:
-            goal = EnergyGoal.objects.get(date=date)
+            goal = EnergyGoal.objects.get(date=date, team=team)
         except ObjectDoesNotExist:
             goal = EnergyGoal(team=team, date=date)
 
