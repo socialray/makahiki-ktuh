@@ -1,11 +1,60 @@
 """The manager for defining and managing scores."""
+import datetime
 
 from django.db.models import Q
-from django.conf import settings
 from django.core.exceptions import ObjectDoesNotExist
 from django.db.models.aggregates import Sum, Max
-from apps.managers.score_mgr.models import ScoreboardEntry, PointsTransaction
+from apps.managers.challenge_mgr import challenge_mgr
+from apps.managers.score_mgr.models import ScoreboardEntry, PointsTransaction, ScoreSettings
 from apps.managers.cache_mgr import cache_mgr
+
+
+def init():
+    """initialize score manager."""
+    if ScoreSettings.objects.count() == 0:
+        ScoreSettings.objects.create()
+
+
+def info():
+    """returns the score_mgr info."""
+    s = score_settings()
+    return  "referral_points: %d \n" \
+            "signup_points: %d \n" \
+            "setup_points: %d \n" \
+            "noshow_penalty_points: %d \n" \
+            "quest_points: %d" % (s.referral_bonus_points, s.signup_bonus_points,
+                                s.setup_points, s.noshow_penalty_points, s.quest_bonus_points)
+
+
+def score_settings():
+    """returns the score settings."""
+    init()
+    return ScoreSettings.objects.all()[0]
+
+
+def referral_points():
+    """returns the referral point amount from settings."""
+    return score_settings().referral_bonus_points
+
+
+def setup_points():
+    """returns the setup point amount from settings."""
+    return score_settings().setup_points
+
+
+def signup_points():
+    """returns the signup point amount from settings."""
+    return score_settings().signup_bonus_points
+
+
+def noshow_penalty_points():
+    """returns the noshow penalty point amount from settings."""
+    return score_settings().noshow_penalty_points
+
+
+def quest_points():
+    """returns the signup point amount from settings."""
+    return score_settings().quest_bonus_points
 
 
 def player_rank(profile, round_name="Overall"):
@@ -32,7 +81,7 @@ def player_rank(profile, round_name="Overall"):
 
 
 def player_rank_in_team(profile, round_name="Overall"):
-    """user round team rank"""
+    """Returns user's rank in his team."""
     team = profile.team
     entry, _ = ScoreboardEntry.objects.get_or_create(
         profile=profile,
@@ -112,7 +161,7 @@ def player_add_points(profile, points, submission_date, message, related_object=
     transaction.save()
 
     # update the scoreboard entry for the current round and overall round
-    current_round = _get_round(submission_date)
+    current_round = challenge_mgr.get_round(submission_date)
     _update_scoreboard_entry_add(profile, current_round, points, submission_date)
     if current_round != "Overall":
         _update_scoreboard_entry_add(profile, "Overall", points, submission_date)
@@ -127,7 +176,7 @@ def player_remove_points(profile, points, submission_date, message, related_obje
     field, we rollback to a previously completed task.
     """
     # update the scoreboard entry for the current round and overall round
-    current_round = _get_round(submission_date)
+    current_round = challenge_mgr.get_round(submission_date)
     _update_scoreboard_entry_remove(profile, current_round, points, submission_date)
     if current_round != "Overall":
         _update_scoreboard_entry_remove(profile, "Overall", points, submission_date)
@@ -148,7 +197,7 @@ def player_remove_points(profile, points, submission_date, message, related_obje
 
 
 def player_points_leaders_in_team(team, num_results=10, round_name="Overall"):
-    """Gets the individual points leaders for the team."""
+    """Gets the individual points leaders for the team, as Profile objects"""
     return team.profile_set.select_related('scoreboardentry').filter(
         scoreboardentry__round_name=round_name
     ).order_by("-scoreboardentry__points",
@@ -187,7 +236,7 @@ def team_points(team, round_name="Overall"):
 
 
 def team_points_leader(round_name="Overall"):
-    """Returns the team points leader (the first place) across all groups, as a Team object ID."""
+    """Returns the team points leader (the first place) across all groups, as a Team ID."""
     entry = ScoreboardEntry.objects.values("profile__team").filter(round_name=round_name).annotate(
         points=Sum("points"),
         last=Max("last_awarded_submission")).order_by("-points", "-last")
@@ -220,6 +269,15 @@ def team_points_leaders_in_group(group, num_results=10, round_name="Overall"):
         "-points", "-last")[:num_results]
 
 
+def award_referral_bonus(instance, referrer):
+    """award the referral bonus to both party."""
+    points = referral_points()
+    player_add_points(instance, points, datetime.datetime.today(),
+                                      'Referred by %s' % referrer.name, instance)
+    player_add_points(referrer, points, datetime.datetime.today(),
+                      'Referred %s' % instance.name, referrer)
+
+
 def _update_scoreboard_entry_add(profile, round_name, points, submission_date):
     """Update the scoreboard entry for player_add_points."""
     entry, _ = ScoreboardEntry.objects.get_or_create(profile=profile, round_name=round_name)
@@ -239,24 +297,6 @@ def _update_scoreboard_entry_remove(profile, round_name, points, submission_date
     entry.save()
 
 
-def _get_round(submission_date):
-    """Get the round that the submission date corresponds to.
-       :returns None if it doesn't correspond to anything.
-    """
-
-    rounds = settings.COMPETITION_ROUNDS
-
-    # Find which round this belongs to.
-    if rounds is not None:
-        for key in rounds:
-            start = rounds[key]["start"]
-            end = rounds[key]["end"]
-            if submission_date >= start and submission_date < end:
-                return key
-
-    return "Overall"
-
-
 def _last_submitted_before(user, submission_date):
     """Time of the last task that was completed before the submission date.
        :returns None if there are no other tasks.
@@ -268,3 +308,4 @@ def _last_submitted_before(user, submission_date):
             "submission_date").submission_date
     except ObjectDoesNotExist:
         return None
+

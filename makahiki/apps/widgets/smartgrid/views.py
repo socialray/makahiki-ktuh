@@ -15,6 +15,7 @@ from django.contrib.auth.decorators import login_required
 from django.views.decorators.cache import never_cache
 from django.contrib import messages
 from apps.managers.cache_mgr import cache_mgr
+from apps.managers.score_mgr import score_mgr
 
 from apps.widgets.smartgrid.models import TextPromptQuestion, EmailReminder, ActivityMember, \
                                      CommitmentMember, Category, ActivityBase, Activity, \
@@ -291,8 +292,10 @@ def __add_commitment(request, commitment):
 
         #increase the point from signup
         message = "Commitment: %s (Sign up)" % (commitment.title)
-        user.get_profile().add_points(2, datetime.datetime.today() - datetime.timedelta(minutes=1),
-            message, member)
+        user.get_profile().add_points(score_mgr.signup_points(),
+                                      datetime.datetime.today() - datetime.timedelta(minutes=1),
+                                      message,
+                                      member)
         user.get_profile().save()
         value = 2
     else:
@@ -318,7 +321,7 @@ def __drop_commitment(request, commitment):
 
             #decrease sign up point
             message = "Commitment: %s (Drop)" % (commitment.title)
-            value = 2
+            value = score_mgr.signup_points()
             user.get_profile().remove_points(value,
                 datetime.datetime.today() - datetime.timedelta(minutes=1), message, member)
             user.get_profile().save()
@@ -387,7 +390,7 @@ def __add_activity(request, activity):
             #increase point
             message = "%s: %s (Sign up)" % (activity.type.capitalize(), activity.title)
             user.get_profile().add_points(
-                2,
+                score_mgr.signup_points(),
                 datetime.datetime.today() - datetime.timedelta(minutes=1),
                 message,
                 activity_member)
@@ -415,13 +418,13 @@ def __drop_activity(request, activity):
 
             #decrease point
             message = "%s: %s (Drop)" % (activity.type.capitalize(), activity.title)
+            value = score_mgr.signup_points()
             user.get_profile().remove_points(
-                2,
+                value,
                 datetime.datetime.today() - datetime.timedelta(minutes=1),
                 message,
                 activity_member)
             user.get_profile().save()
-            value = 2
 
             activity_member.delete()
 

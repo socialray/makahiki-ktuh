@@ -23,6 +23,7 @@
                     </div>
                 </fieldset>
               {% endif %}
+              {% if view_objects.energy_goal.daily_goal%}
                 <fieldset {% get_id_and_classes "energy-status-progress" %}>
                     <legend>Daily Goal Status</legend>
                     <div {% get_id_and_classes "energy-power-box" %}>
@@ -31,6 +32,7 @@
                         {% endif %}
                     </div>
                 </fieldset>
+                {% endif %}
                 <fieldset {% get_id_and_classes "energy-status-how" %}>
                     <legend>How can we make our daily goal?</legend>
                     <table {% get_id_and_classes "energy-status-how-table" %}>

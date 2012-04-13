@@ -12,6 +12,7 @@ from django.conf import settings
 from django.template.loader import render_to_string
 from django.contrib.sites.models import Site
 from django.utils import importlib
+from apps.managers.score_mgr import score_mgr
 
 from apps.managers.team_mgr.models import Post
 from apps.widgets.notifications.models import UserNotification
@@ -646,7 +647,7 @@ class ActivityMember(CommonActivityUser):
             self._has_noshow_penalty():
             message = "%s: %s (Reverse No Show Penalty)" % (self.activity.type.capitalize(),
                                                             self.activity.title)
-            profile.add_points(4, self.award_date, message, self)
+            profile.add_points(score_mgr.noshow_penalty_points(), self.award_date, message, self)
 
         if not self.submission_date:
             # This may happen if it is an item with a confirmation code.

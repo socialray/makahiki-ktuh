@@ -9,6 +9,7 @@ from django.test import TransactionTestCase
 from django.core.urlresolvers import reverse
 from django.contrib.auth.models import User
 from django.conf import settings
+from apps.managers.challenge_mgr import challenge_mgr
 
 from apps.managers.player_mgr.models import Profile
 from apps.test_helpers import test_utils
@@ -36,6 +37,8 @@ class CompetitionMiddlewareTestCase(TransactionTestCase):
     def setUp(self):
         User.objects.create_user("user", "user@test.com", password="changeme")
         self.client.login(username="user", password="changeme")
+
+        challenge_mgr.init()
 
         # Save settings that will be restored later.
         self.saved_start = settings.COMPETITION_START

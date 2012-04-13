@@ -1,11 +1,20 @@
-"""Administrator interface to energy scoreboard, display the team, date, and energy."""
+"""Administrator interface to resource manager."""
 from django.contrib import admin
 
-from apps.managers.resource_mgr.models import EnergyData
+from apps.managers.resource_mgr.models import EnergyUsage, WaterUsage, WasteUsage, ResourceSettings
 
 
-class EnergyDataAdmin(admin.ModelAdmin):
+class UsageAdmin(admin.ModelAdmin):
     """Administrator display list: team, date, and energy."""
     list_display = ["team", "date", "time", "usage"]
 
-admin.site.register(EnergyData, EnergyDataAdmin)
+admin.site.register(EnergyUsage, UsageAdmin)
+admin.site.register(WaterUsage, UsageAdmin)
+admin.site.register(WasteUsage, UsageAdmin)
+
+
+class ResourceSettingsAdmin(admin.ModelAdmin):
+    """Administrator display list: team, date, and energy."""
+    list_display = ["name", "unit", "winning_order",]
+
+admin.site.register(ResourceSettings, ResourceSettingsAdmin)

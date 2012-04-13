@@ -16,17 +16,20 @@ def supply(request, page_name):
     user = request.user
     team = user.get_profile().team
     golow_activities = get_available_golow_activities(user)
-    is_manual_entry = energy_goal.is_manual_entry(team)
-
     goal = None
-    if not is_manual_entry:
-        goal = get_realtime_goal_data(team)
+    daily_goal = None
+    is_manual_entry = None
+    if team:
+        is_manual_entry = energy_goal.is_manual_entry(team)
+        if not is_manual_entry:
+            goal = get_realtime_goal_data(team)
+        daily_goal = get_daily_energy_goal_data(team)
 
     return {
         "golow_activities": golow_activities,
         "goal": goal,
         "is_manual_entry": is_manual_entry,
-        "daily_goal": get_daily_energy_goal_data(team),
+        "daily_goal": daily_goal,
         }
 
 

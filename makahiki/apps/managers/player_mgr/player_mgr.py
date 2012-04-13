@@ -4,7 +4,7 @@ from django.contrib.auth.models import User
 from django.core.exceptions import ObjectDoesNotExist
 from django.db.utils import IntegrityError
 from apps.managers.player_mgr.models import Profile
-from apps.managers.score_mgr import point_score_mgr
+from apps.managers.score_mgr import score_mgr
 from apps.managers.team_mgr.models import Team
 
 
@@ -15,7 +15,7 @@ def players(num_results=10):
 
 def points_leader(round_name="Overall"):
     """Returns the points leader (the first place) out of all users, as a Profile object."""
-    entry = point_score_mgr.player_points_leader(round_name=round_name)
+    entry = score_mgr.player_points_leader(round_name=round_name)
     if entry:
         return entry
     else:
@@ -26,7 +26,7 @@ def points_leaders(num_results=10, round_name="Overall"):
     """Returns the points leaders out of all users, as a dictionary object
     with profile__name and points.
     """
-    entry = point_score_mgr.player_points_leaders(num_results=num_results, round_name=round_name)
+    entry = score_mgr.player_points_leaders(num_results=num_results, round_name=round_name)
     if entry:
         return entry
     else:

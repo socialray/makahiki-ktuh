@@ -7,8 +7,11 @@ from django.core.exceptions import ObjectDoesNotExist
 from apps.managers.challenge_mgr.models import ChallengeSettings, RoundSettings, PageSettings
 
 
-def load_settings():
-    """Load settings for this challenge."""
+def init():
+    """initialize the challenge."""
+
+    if settings.CHALLENGE.competition_name is not None:
+        return
 
     # get the CALLENGE setting from DB
     set_challenge_settings()
@@ -18,6 +21,9 @@ def load_settings():
 
     # register the home page and widget
     PageSettings.objects.get_or_create(name="home", widget="home")
+
+    # create the admin
+    create_admin_user()
 
 
 def set_challenge_settings():
@@ -62,17 +68,14 @@ def create_admin_user():
 
 def info():
     """returns the information about the challenge."""
-    if settings.CHALLENGE.competition_name is None:
-        load_settings()
-
+    init()
     return "Challenge name : %s @ %s" % (settings.CHALLENGE.competition_name,
                                             settings.CHALLENGE.site_name)
 
 
 def rounds_info():
     """returns the round info about the challenge."""
-    if settings.COMPETITION_ROUNDS is None:
-        load_settings()
+    init()
 
     info_str = ""
     for r in settings.COMPETITION_ROUNDS.keys():
@@ -102,15 +105,6 @@ def get_round_info():
     return rounds
 
 
-def get_current_round():
-    """Get the current round name."""
-    round_info = get_current_round_info()
-    if round_info is not None:
-        return round_info["name"]
-    else:
-        return None
-
-
 def get_current_round_info():
     """Gets the current round and associated dates."""
     rounds = get_round_info()
@@ -127,6 +121,32 @@ def get_current_round_info():
 
     # No current round.
     return None
+
+
+def get_current_round():
+    """Get the current round name."""
+    round_info = get_current_round_info()
+    if round_info is not None:
+        return round_info["name"]
+    else:
+        return None
+
+
+def get_round(submission_date):
+    """Get the round that the specified date corresponds to.
+       :returns Overall if it doesn't correspond to anything.
+    """
+    rounds = settings.COMPETITION_ROUNDS
+
+    # Find which round this belongs to.
+    if rounds is not None:
+        for key in rounds:
+            start = rounds[key]["start"]
+            end = rounds[key]["end"]
+            if submission_date >= start and submission_date < end:
+                return key
+
+    return "Overall"
 
 
 def in_competition():

@@ -39,7 +39,7 @@ class EnergyFunctionalTestCase(TransactionTestCase):
         for goal in goals:
             self.assertEqual(goal["completions"], 0, "No team should have completed a goal.")
 
-        goal = EnergyGoal.objects.create(
+        energy_goal = EnergyGoal.objects.create(
             team=self.team,
             date=datetime.date.today(),
             goal_status="Over the goal",
@@ -50,11 +50,8 @@ class EnergyFunctionalTestCase(TransactionTestCase):
         for goal in goals:
             self.assertEqual(goal["completions"], 0, "No team should have completed a goal.")
 
-        goal = EnergyGoal.objects.create(
-            team=self.team,
-            date=datetime.date.today(),
-            goal_status="Below the goal",
-            )
+        energy_goal.goal_status = "Below the goal",
+        energy_goal.save()
 
         response = self.client.get(reverse("energy_index"))
         goals = response.context["view_objects"]["energy_scoreboard"]["goals_scoreboard"]

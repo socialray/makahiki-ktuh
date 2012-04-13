@@ -6,6 +6,31 @@ from django.contrib.contenttypes import generic
 from django.contrib.contenttypes.models import ContentType
 
 
+class ScoreSettings(models.Model):
+    """score settings models."""
+
+    setup_points = models.IntegerField(
+        default=5,
+        help_text="The point amount for setting up the profile."
+    )
+    referral_bonus_points = models.IntegerField(
+        default=10,
+        help_text="The point amount for referral bonus.",
+    )
+    signup_bonus_points = models.IntegerField(
+        default=2,
+        help_text="The point amount for signing up a commitment or activity."
+    )
+    quest_bonus_points = models.IntegerField(
+        default=0,
+        help_text="The point amount for completing a quest."
+    )
+    noshow_penalty_points = models.IntegerField(
+        default=4,
+        help_text="The point amount for no show penalty."
+    )
+
+
 class ScoreboardEntry(models.Model):
     """Defines the model that tracks user scores."""
 

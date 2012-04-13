@@ -7,6 +7,7 @@ from django.contrib.sites.models import Site
 
 from django.core import management
 from django.core.urlresolvers import reverse
+from apps.managers.score_mgr import score_mgr
 from apps.widgets.smartgrid.models import CommitmentMember, ActivityMember
 from apps.widgets.notifications.models import UserNotification, NoticeTemplate
 from apps.managers.challenge_mgr import challenge_mgr
@@ -109,7 +110,7 @@ def process_rsvp():
         if diff.days == 3:
             message = "%s: %s (No Show)" % (
                 activity.type.capitalize(), activity.title)
-            profile.remove_points(4,
+            profile.remove_points(score_mgr.noshow_penalty_points(),
                                   datetime.datetime.today() - datetime
                                   .timedelta(
                                       minutes=1), message, member)

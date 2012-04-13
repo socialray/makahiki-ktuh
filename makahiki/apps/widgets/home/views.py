@@ -23,6 +23,7 @@ from django.core.urlresolvers import reverse
 from apps.lib.avatar.models import avatar_file_path, Avatar
 import apps.lib.facebook_api.facebook as facebook
 from apps.managers.challenge_mgr import challenge_mgr
+from apps.managers.score_mgr import score_mgr
 from apps.widgets.home.forms import  ProfileForm, ReferralForm
 
 
@@ -116,6 +117,7 @@ def referral(request):
 
         response = render_to_string('first-login/referral.html', {
             'form': form,
+            'referral_points': score_mgr.referral_points(),
             }, context_instance=RequestContext(request))
 
         return HttpResponse(json.dumps({
@@ -187,7 +189,7 @@ def setup_profile(request):
             profile.name = form.cleaned_data["display_name"].strip()
             if not profile.setup_profile:
                 profile.setup_profile = True
-                profile.add_points(5,
+                profile.add_points(score_mgr.setup_points(),
                                    datetime.datetime.today(),
                                    "Set up profile")
 

@@ -4,7 +4,6 @@ import re
 import datetime
 from django.core.urlresolvers import reverse
 from django.http import HttpResponseRedirect
-from django.conf import settings
 from apps.managers.challenge_mgr import challenge_mgr
 
 
@@ -19,9 +18,7 @@ class LoginMiddleware(object):
         """Check the competition period and that setup is completed."""
 
         # load the db settings if not done yet.
-        if settings.CHALLENGE.competition_name is None:
-            challenge_mgr.load_settings()
-            challenge_mgr.create_admin_user()
+        challenge_mgr.init()
 
         response = self.check_competition_period(request)
         if response is None:

@@ -10,7 +10,7 @@ from django.core.urlresolvers import reverse
 from django.contrib.auth.decorators import login_required
 from django.conf import settings
 from apps.managers.challenge_mgr.models import PageSettings
-from apps.managers.score_mgr import resource_score_mgr
+from apps.managers.resource_mgr import resource_mgr
 
 
 @never_cache
@@ -76,7 +76,7 @@ def _get_view_objects(request, page_name, view_objects):
 def _get_energy_rank(request, view_objects):
     """ Gets the user energy rank and usage."""
     if "energy_scoreboard" in settings.INSTALLED_WIDGET_APPS:
-        energy_rank_info = resource_score_mgr.energy_team_rank_info(
+        energy_rank_info = resource_mgr.energy_team_rank_info(
             request.user.get_profile().team)
         view_objects["energy_rank_info"] = energy_rank_info
 

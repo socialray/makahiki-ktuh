@@ -4,6 +4,7 @@ import datetime
 
 from django.db import models
 from django.contrib.auth.models import User
+from apps.managers.score_mgr import score_mgr
 
 MARKDOWN_LINK = "http://daringfireball.net/projects/markdown/syntax"
 MARKDOWN_TEXT = "Uses <a href=\"" + MARKDOWN_LINK + "\" target=\"_blank\">Markdown</a> formatting."
@@ -91,4 +92,5 @@ class QuestMember(models.Model):
         super(QuestMember, self).save(*args, **kwargs)
         if self.completed:
             message = "Quest: %s" % self.quest.name
-            self.user.get_profile().add_points(0, datetime.datetime.today(), message, self)
+            self.user.get_profile().add_points(score_mgr.quest_points(),
+                                               datetime.datetime.today(), message, self)

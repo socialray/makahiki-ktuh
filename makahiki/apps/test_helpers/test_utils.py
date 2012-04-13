@@ -14,7 +14,8 @@ def setup_user(username, password):
     """setup test user"""
     user = User.objects.create_user(username=username, email=username + "@test.com",
                                     password=password)
-    team = Team.objects.all()[0]
+    group, _ = Group.objects.get_or_create(name="testgroup")
+    team, _ = Team.objects.get_or_create(name="test_team", group=group)
     profile = user.get_profile()
     profile.team = team
     profile.setup_complete = True

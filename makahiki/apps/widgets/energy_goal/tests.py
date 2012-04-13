@@ -10,7 +10,7 @@ from django.contrib.auth.models import User
 from apps.managers.team_mgr.models import Team
 from apps.widgets.energy_goal import energy_goal
 from apps.widgets.energy_goal.models import EnergyGoalSettings, EnergyGoalBaseline
-from apps.managers.resource_mgr.models import EnergyData
+from apps.managers.resource_mgr.models import EnergyUsage
 
 
 class TeamEnergyGoalTest(TransactionTestCase):
@@ -48,7 +48,7 @@ class TeamEnergyGoalTest(TransactionTestCase):
             baseline_usage=150,
         )
         goal_baseline.save()
-        energy_data = EnergyData(
+        energy_data = EnergyUsage(
             team=self.team,
             date=datetime.date.today(),
             time=datetime.time(hour=15),
