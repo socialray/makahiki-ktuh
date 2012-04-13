@@ -174,7 +174,7 @@ table#activities-grid {
 
 table#activities-grid td {
 	padding: 1px;
-	width: 53px;
+	width: 12.5%;
 	vertical-align: top;
 }
 
@@ -215,7 +215,7 @@ table#activities-grid td table td{
 }
 
 #activity-category .get-started, #activity-category .basic-energy, #activity-category .lights-out, #activity-category .make-watts, #activity-category .moving-on, #activity-category .opala, #activity-category .wet-wild, #activity-category .potpourri {
-	width: 55px;
+	width: 12.5%;
 	height: 40px;
 	display: table-cell; 
 	vertical-align: middle;
@@ -233,13 +233,13 @@ table#activities-grid td table td{
 #activity-category .get-started div, #activity-category .basic-energy div, #activity-category .lights-out div, #activity-category .make-watts div, #activity-category .moving-on div, #activity-category .opala div, #activity-category .wet-wild div, #activity-category .potpourri div {
 	position: relative; 
 	font-size: 9pt;
-	top: 35%;
-	margin: -50% auto 0 auto;
+/* 	top: 35%; */
+	margin: 0 auto 0 auto;
 	padding: 2px;
 	}
     
 .activity, .commitment, .event, .survey, .excursion, .yellow-green {
-	width: 55px;
+/* 	width: 12.5%; */
 	height: 48px;
 	border: 1px solid #000;
 	border-radius: 8px;

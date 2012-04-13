@@ -3,15 +3,11 @@
 
 /********************** home styles ******************************/
 .content p {
-    background: transparent
-        url(/site_media/static/css/default/images/bullet.png) top left
-        repeat-y;
     font-size: 8pt;
     line-height: 14px;
     text-align: left;
     white-space: nowrap;
     padding-left: 13px;
-    margin: 0 2px 5px 2px
 }
 
 .content img {

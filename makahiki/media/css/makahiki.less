@@ -9,12 +9,27 @@
  
  // Bootstrap
  @import "bootstrap.less";
+
+// @import "cerulean-var.less";
+ 
+// @import "bootswatch.less";
  
  // Responsiveness
  @import "responsive.less";
 
  // Overrides for bootstrap variables
  @import "makahiki-override.less";
+
+@makahikiBorderRadius:            8px;
+
+.top-border-radius (@radius: 5px) {
+    -webkit-border-top-left-radius: @radius;
+    -moz-border-radius-topleft: @radius;
+    border-top-left-radius: @radius;
+    -webkit-border-top-right-radius: @radius;
+    -moz-border-radius-topright: @radius;
+    border-top-right-radius: @radius;    
+}
 
 .makahiki-box {
     .border-radius(@makahikiBorderRadius);
@@ -207,6 +222,10 @@ body {
     padding-left: 20px;
     padding-right: 20px;
     .pagination-centered;
+}
+
+#activities-grid {
+    line-height: 12px;
 }
 
 #info-bar-single {
