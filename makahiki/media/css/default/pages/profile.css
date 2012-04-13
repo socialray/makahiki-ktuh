@@ -7,15 +7,30 @@ table, tr {
   width:100%;
 }
 
+input, select {
+  width: 80%;
+}
 td, h5 {
   padding: 4px;
   vertical-align: middle;
+}
+
+.content-box,.content-box-title {
+  opacity: 1;
 }
 
 form {
   margin: 0px;
 }
 
+.width-ten-percent {
+    width: 10%;
+}
+
+.margin-one-third {
+    margin-left: 35%;
+    margin-right: 35%
+}
 .Empty-List {
   width: 100%; 
   text-align: left;
@@ -33,10 +48,40 @@ form {
 .container-fluid {
   padding: 0px;
 } 
+ 
+.modal { 
+  float:left;
+  position: fixed;  
+  margin-top: -200px;
+  top: 230px;
+  margin-left: -49%;
+  left: 50%;
+  margin-right: -10%;
+  width: 97.5%;
+  min-width: 20px;
+  border-radius: 8px;
+}
 
-.content-box {
-	text-align: left;
-  opacity: .99;
+.modal-body {
+  max-height: 280px;
+  overflow-y: auto;
+  margin-bottom: -20px;
+}
+
+.modal-body, .modal-footer {
+  padding: 0px;
+}
+
+.modal-footer {
+  background-color: gray;
+}
+
+.badge-catalog {
+  position: fixed;
+  left:10%;
+  top: 200px;
+  margin-top: 50px;
+  width: 80%;
 }
 
 #profile-form-message { 
@@ -47,7 +92,7 @@ form {
 #profile-form-table td {
 	text-align: left;
 	vertical-align: top;
-	padding: 5px 10px 5px 15px;
+	padding: 1%;
 	margin: 0;
 }
 
@@ -67,11 +112,7 @@ td#profile-form-fb-profile-label, td#profile-form-fb-can-post-fields {
 
 #profile-form-table textarea {
   height: 60px
-}
-
-#profile-form-table td.profile-form-label {
-	padding-left: 30px;
-}
+} 
 
 #profile-form-table #profile-form-fb-login-button {
   padding-left: 30px;
@@ -81,6 +122,9 @@ td#profile-form-fb-profile-label, td#profile-form-fb-can-post-fields {
 	text-align: center;
 }
 
+.profile-form-label {
+    margin: 0px;
+}
 #profile-notifications {
 	width: 100%;
 	float: left;
