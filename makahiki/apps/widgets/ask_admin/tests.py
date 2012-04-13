@@ -1,12 +1,9 @@
 """
 ask admin tests.
 """
-from django.conf import settings
-
 from django.test import TransactionTestCase
 from django.contrib.auth.models import User
 from django.core.urlresolvers import reverse
-from django.core import mail
 
 from apps.managers.team_mgr.models import Team
 
