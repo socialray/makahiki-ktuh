@@ -15,6 +15,6 @@ admin.site.register(WasteUsage, UsageAdmin)
 
 class ResourceSettingsAdmin(admin.ModelAdmin):
     """Administrator display list: team, date, and energy."""
-    list_display = ["name", "unit", "winning_order",]
+    list_display = ["name", "unit", "winning_order", ]
 
 admin.site.register(ResourceSettings, ResourceSettingsAdmin)

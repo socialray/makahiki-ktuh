@@ -35,25 +35,6 @@ class ChallengeSettings(models.Model):
         help_text="The contact email of the admin.",
         max_length=100,)
 
-    # Choices can be found here:
-    # http://www.postgresql.org/docs/8.1/static/datetime-keywords.html#DATETIME-TIMEZONE-SET-TABLE
-    time_zone = models.CharField(
-        default="Pacific/Honolulu",
-        help_text="The local time zone for this installation.",
-        max_length=50,)
-
-    # All choices can be found here:
-    # http://www.w3.org/TR/REC-html40/struct/dirlang.html#langcodes
-    language_code = models.CharField(
-        default="en",
-        help_text="The language code for this installation.",
-        max_length=50,)
-
-    locale_setting = models.CharField(
-        default="en_US.UTF-8",
-        help_text="The locale setting for currency conversion.",
-        max_length=50,)
-
     theme = models.CharField(
         default="default",
         help_text="The UI theme for this installation.",
@@ -83,22 +64,31 @@ class ChallengeSettings(models.Model):
         default=587,
         help_text="The port of the email server",)
 
-    email_host_user = models.CharField(
-        default="",
-        help_text="The username for the email server.",
-        max_length=100,)
-
-    email_host_password = models.CharField(
-        default="",
-        help_text="The user password for the email server.",
-        max_length=100,)
-
     email_use_tls = models.BooleanField(
         default=True,
         help_text="Use TLS in the email server?",)
 
     def __unicode__(self):
         return self.site_name
+
+    def save(self, *args, **kwargs):
+        """Custom save method."""
+        super(ChallengeSettings, self).save(*args, **kwargs)
+        ChallengeSettings.set_settings()
+
+    @staticmethod
+    def set_settings():
+        """get the CALLENGE setting from DB."""
+        settings.CHALLENGE, _ = ChallengeSettings.objects.get_or_create(pk=1)
+
+        # required setting for the CAS authentication service.
+        settings.CAS_SERVER_URL = settings.CHALLENGE.cas_server_url
+
+        # email settings
+        if settings.CHALLENGE.email_enabled:
+            settings.EMAIL_HOST = settings.CHALLENGE.email_host
+            settings.EMAIL_PORT = settings.CHALLENGE.email_port
+            settings.EMAIL_USE_TLS = settings.CHALLENGE.email_use_tls
 
 
 class RoundSettings(models.Model):
@@ -126,8 +116,13 @@ class RoundSettings(models.Model):
     def __unicode__(self):
         return self.name
 
+    def save(self, *args, **kwargs):
+        """Custom save method."""
+        super(RoundSettings, self).save(*args, **kwargs)
+        RoundSettings.set_settings()
+
     @staticmethod
-    def set_round_settings():
+    def set_settings():
         """set the round info in the system settings."""
         rounds = RoundSettings.objects.all()
         if rounds.count() == 0:
@@ -148,11 +143,6 @@ class RoundSettings(models.Model):
         if last_round:
             settings.COMPETITION_END = last_round.end
         settings.COMPETITION_ROUNDS = rounds_dict
-
-    def save(self, *args, **kwargs):
-        """Custom save method."""
-        super(RoundSettings, self).save(*args, **kwargs)
-        RoundSettings.set_round_settings()
 
 
 def _get_widget_choice():

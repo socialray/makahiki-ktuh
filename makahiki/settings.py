@@ -144,12 +144,12 @@ INSTALLED_APPS = (
 
     # external
     'django_extensions',
+    'staticfiles',
 
     # internal
     'django.contrib.admin',
     'django.contrib.admindocs',
     'django.contrib.markup',
-    'django.contrib.staticfiles',
 )
 
 ################################
@@ -269,14 +269,16 @@ LOGGING = {
 # serve media through django.views.static.serve.
 SERVE_MEDIA = True
 
-EMAIL_CONFIRMATION_DAYS = 2
-
 # Permissions for large uploaded files.
 FILE_UPLOAD_PERMISSIONS = 0644
 
 # If you set this to False, Django will make some optimizations so as not
 # to load the internationalization machinery.
 USE_I18N = True
+
+TIME_ZONE = 'Pacific/Honolulu'
+LOCALE_SETTING = 'en'
+LANGUAGE_CODE = 'en_US.UTF-8'
 
 
 ##############################
@@ -323,10 +325,16 @@ else:
         print "Environment variable MAKAHIKI_ADMIN_INFO not defined. Exiting."
         sys.exit(1)
 
+# email Settings
+if 'MAKAHIKI_EMAIL_INFO' in os.environ:
+    email_info = os.environ['MAKAHIKI_EMAIL_INFO'].split(":")
+    EMAIL_HOST_USER = email_info[0]
+    EMAIL_HOST_PASSWORD = email_info[1]
+
 # DEBUG settings
 DEBUG = False
 TEMPLATE_DEBUG = False
-if 'MAKAHIKI_DEBUG' in os.environ and os.environ['MAKAHIKI_DEBUG'] == "True":
+if 'MAKAHIKI_DEBUG' in os.environ and os.environ['MAKAHIKI_DEBUG'].lower() == "true":
     DEBUG = True
     TEMPLATE_DEBUG = True
 

@@ -27,9 +27,9 @@ def resources_info():
 def team_current_energy_data(team):
     """Return the latest energy data of the current date."""
     date = datetime.date.today()
-    data = team.energyusage_set.filter(date=date)
-    if data:
-        return data[0]
+    energy_data = EnergyUsage.objects.filter(team=team, date=date)
+    if energy_data:
+        return energy_data[0]
     else:
         return None
 
@@ -96,4 +96,3 @@ def energy_goal_ranks():
     ).values(
         "team__name"
     ).annotate(completions=Count("team")).order_by("-completions")
-

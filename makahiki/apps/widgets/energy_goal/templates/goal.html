@@ -5,18 +5,25 @@
     <table cellpadding="5"
            style="text-align: center; vertical-align: top">
     <tr><td>
-      <table cellpadding="5" border="1"
+      <table cellpadding="2" border="1"
                style="text-align: center; vertical-align: top">
         <tr>
         {% for goal in daily_goal %}
-          <td align="center">
-              {{ goal.date|date:"D n/j"  }}
-          </td>
+          {% if forloop.counter <= 7 %}
+            <td align="center" bgcolor="gray">
+              <b>{{ goal.date|date:"D"  }}</b>
+            </td>
+          {% endif %}
         {% endfor %}
         </tr>
         <tr>
         {% for goal in daily_goal %}
-            <td>
+            {% if forloop.counter == 8 %}
+                </tr><tr>
+            {% endif %}
+            <td width="50">
+              <span style="font-size: 0.7em;">{{ goal.date|date:"n/j" }} </span> <br/>
+              <center>
               {% if goal.goal_status == "Over the goal"%}
                 <img src="/site_media/static/images/energy/bad32.png"/>
               {% elif goal.goal_status == "Below the goal"%}
@@ -24,8 +31,9 @@
               {% elif goal.goal_status == "Unknown" %}
                 <img src="/site_media/static/images/energy/unknown32.png"/>
               {% else %}
-                  <table><tr><td height="16"></td></tr></table>
+                  <table><tr><td height="32"></td></tr></table>
               {%  endif %}
+              </center>
             </td>
         {% endfor %}
         </tr>

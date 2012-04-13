@@ -2,8 +2,6 @@
 from django.contrib import admin
 from apps.managers.challenge_mgr.models import ChallengeSettings, RoundSettings, PageSettings
 
-admin.site.register(ChallengeSettings)
-
 
 class PageSettingsAdmin(admin.ModelAdmin):
     """PageSettings administrator interface definition."""
@@ -17,3 +15,5 @@ class RoundSettingsAdmin(admin.ModelAdmin):
     list_display = ["name", "start", "end"]
 
 admin.site.register(RoundSettings, RoundSettingsAdmin)
+
+admin.site.register(ChallengeSettings)

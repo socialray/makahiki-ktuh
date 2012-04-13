@@ -1,11 +1,11 @@
 """Views handler for ask admin page rendering."""
+from django.core.urlresolvers import reverse
 
 import simplejson as json
 
-from django.http import Http404, HttpResponse, HttpResponseRedirect
+from django.http import Http404, HttpResponseRedirect, HttpResponse
 from django.template.loader import render_to_string
 from django.core.mail.message import EmailMultiAlternatives
-from django.contrib.sites.models import Site
 from django.conf import settings
 
 from apps.widgets.ask_admin.forms import FeedbackForm
@@ -19,6 +19,7 @@ def supply(request, page_name):
     _ = request
     _ = page_name
     form = FeedbackForm(auto_id="help_%s")
+    form.url = reverse("help_index")
     return {
         "form": form,
         }
@@ -41,20 +42,22 @@ def send_feedback(request):
                 })
 
             # Using adapted version from Django source code
-            current_site = Site.objects.get(id=settings.SITE_ID)
             subject = u'[%s] %s asked a question' % (
-                current_site.domain, request.user.get_profile().name)
-            mail = EmailMultiAlternatives(subject, message, FROM_EMAIL,
-                [settings.CHALLENGE.contact_email, ], headers={
+                settings.CHALLENGE.competition_name,
+                request.user.get_profile().name)
+
+            if settings.CHALLENGE.email_enabled:
+                mail = EmailMultiAlternatives(subject, message, FROM_EMAIL,
+                    [settings.CHALLENGE.contact_email, ], headers={
                     "Reply-To": request.user.email})
 
-            mail.attach_alternative(html_message, 'text/html')
-            mail.send()
+                mail.attach_alternative(html_message, 'text/html')
+                mail.send()
 
             if request.is_ajax():
                 return HttpResponse(json.dumps({"success": True}),
                                     mimetype="application/json")
 
-            return HttpResponseRedirect(form.cleaned_data["url"])
+            return HttpResponseRedirect(reverse("help_index"))
 
     raise Http404

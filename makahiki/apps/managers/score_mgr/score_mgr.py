@@ -308,4 +308,3 @@ def _last_submitted_before(user, submission_date):
             "submission_date").submission_date
     except ObjectDoesNotExist:
         return None
-
