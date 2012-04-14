@@ -41,6 +41,16 @@
 /*
  * Devices
  */
+.android-515x295-landscape {
+    background-image: url(../images/android-515x295-landscape.png);
+    padding: 19px 0 20px 0;
+}
+
+.android-515x295-portrait {
+    background-image: url(../images/android-295x515-portrait.png);
+    padding: 60px 0 78px 0;
+}
+
 .iphone-portrait {
     background-image: url(../images/iphone-portrait.png);
     padding: 115px 0 117px 0px;
@@ -59,4 +69,14 @@
 .ipad-landscape {
     background-image: url(../images/ipad-landscape.png);
     padding: 101px 0 103px 0;
+}
+
+.kindle-portrait {
+    background-image: url(../images/kindle-portrait.png);
+    padding: 82px 0 149px 0;
+}
+
+.kindle-landscape {
+    background-image: url(../images/kindle-landscape.png);
+    padding: 98px 0 96px 0;
 }

@@ -1,0 +1,50 @@
+<!doctype html>
+<html lang="en-us">
+<head>
+<!-- 
+    Borrowed from http://www.responsinator.com/ written by @andyhovey
+    and @tamapugsley.  Modified to test Makahiki2.
+-->
+<meta charset="utf-8">
+<title>Kindle Sizes</title>
+<link rel="stylesheet" media="screen" href="css/main.css">
+</head>
+<body>
+    <section id='devices'>
+        <div class='deviceWrap kindle-portrait'>
+            <div class='device'
+                style='width: 600px; height: 820px; padding-top: 144px; padding-bottom: 60px;'>
+                <div class='flashingTop' style='height: 144px'>
+                    <span class='time'></span>
+                </div>
+                <div class='flashingBottom' style='height: 60px'></div>
+                <iframe src='http://127.0.0.1:8000/home/' id='kindle-portrait'></iframe>
+            </div>
+            <!-- /device -->
+
+        </div>
+        <!-- /deviceWrap -->
+        <div class='deviceTitle'>
+            <em>Kindle portrait</em> 600 x 1024
+        </div>
+        <div class='deviceWrap kindle-landscape'>
+            <div class='device'
+                style='width: 1024px; height: 396px; padding-top: 144px; padding-bottom: 60px;'>
+                <div class='flashingTop' style='height: 144px'>
+                    <span class='time'></span>
+                </div>
+                <div class='flashingBottom' style='height: 60px'></div>
+                <iframe src='http://127.0.0.1:8000/home/' id='kindle-landscape'></iframe>
+            </div>
+            <!-- /device -->
+        </div>
+        <!-- /deviceWrap -->
+        <div class='deviceTitle'>
+            <em>Kindle landscape</em> 1024 x 600
+        </div>
+    </section>
+
+    <script type='text/javascript' src='js/main.js?v=18'></script>
+
+</body>
+</html>
