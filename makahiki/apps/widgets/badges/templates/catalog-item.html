@@ -1,5 +1,7 @@
 {% load class_tags %}
 {% load avatar_tags %}
+
+{%  with view_objects.badges.awarded_badges as awarded_badges %}
 <!--Badge Image-->
 <td class="badge-image">
     {% if badge in awarded_badges %}
@@ -38,3 +40,4 @@
         Be the first to get this badge!
     {% endif %}
 </td>
+{% endwith %}

@@ -1,9 +1,6 @@
 """Views handler for Badge widget rendering."""
 
-from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
-from django.shortcuts import render_to_response
-from django.template.context import RequestContext
 from apps.lib.brabeion.models import BadgeAward
 from apps.lib.brabeion import badges
 from apps.widgets.badges import user_badges
@@ -19,7 +16,7 @@ def supply(request, page_name):
     # award possible badges,
     award_badges(user)
 
-    return {}
+    return badge_catalog(request)
 
 
 def award_badges(user):
@@ -38,7 +35,6 @@ def award_badges(user):
         badges.possibly_award_badge(badges_slug, user=user)
 
 
-@login_required
 def badge_catalog(request):
     """Handle the badge catalog request."""
     awarded_badges = [earned.badge for earned in request.user.badges_earned.all()]
@@ -60,7 +56,7 @@ def badge_catalog(request):
         badge.team_users = User.objects.filter(badges_earned__slug=badge.slug,
             profile__team=team)
 
-    return render_to_response("badge-catalog.html", {
+    return {
         "awarded_badges": awarded_badges,
         "locked_badges": locked_badges,
-        }, context_instance=RequestContext(request))
+        }
