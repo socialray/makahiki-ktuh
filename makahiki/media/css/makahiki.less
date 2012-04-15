@@ -33,6 +33,54 @@
     margin-bottom: @gridGutterWidth;
 }
 
+#mainwrap{
+    background:#ffffcc;
+    width:100%;
+    overflow:hidden;
+    text-align:center;
+}
+
+#mainwrap ul {
+    float:left;
+    margin:auto;
+    padding:0;
+    list-style:none;
+    position:relative;
+    left:50%;
+}
+
+#mainwrap ul li {
+    padding:15px;
+    margin:15px;
+    display:-moz-inline-box;/* older gecko*/
+    display:inline-block;
+    position:relative;
+    left:-50%;
+}
+
+.centered-row {
+    border: solid 1px #aaa;
+    text-align: centered;
+    white-space: nowrap;
+    font-size: 20px;
+    letter-spacing: 80px;
+    line-height: 12px;
+    overflow: hidden;
+    width: 100%;    
+}
+
+.centered-row-child {
+    width: 18%;
+//    height: 100px;
+    border: solid 1px #ccc;
+    display: inline-block;
+    letter-spacing: normal;
+    font-size: normal;
+    white-space: normal;
+    text-align: normal;
+    vertical-align: middle;    
+}
+
 .content-box {
     text-align: left;
     .makahiki-box;
@@ -51,6 +99,7 @@
     font-weight: bold;
     .top-border-radius(@makahikiBorderRadius);    
 }
+
 .info-bar h4 {
     .pagination-centered;
 }
@@ -88,6 +137,10 @@
     list-style: none;
 }
 
+.quest-box img {
+    float: right;    
+}
+
 .quest-description {
     text-align: left;
 }
@@ -104,9 +157,6 @@
     display: inline;    
 }
 
-.quest-list a {
-    color: @white;
-}
 /* ====================
  * Navbar icons.
  * ==================== */ 
