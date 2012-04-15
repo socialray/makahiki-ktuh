@@ -123,14 +123,34 @@
     float: right;    
 }
 
+.notice-icon {
+    float: left;
+}
+.notice-content {
+    margin: 0 0 0 10px;
+    float: left;
+}
+.notification-contents {
+    display: inline;
+}
+
+.notification-read {
+    float: left;
+    margin: 0 10px 0 10px;
+}
+.notification-share {
+    float: left;
+    margin: 0 10px 0 10px;
+}
 .notifications {
     .makahiki-box;
 }
 .notification-item {
-    margin: 5px auto;
-    padding: 5px;
-    clear:both; 
-    text-align: left;
+    display: inline;
+//    margin: 5px auto;
+//    padding: 5px;
+//    clear:both; 
+//    text-align: left;
 }
 
 .notification-list, .messages {
@@ -155,6 +175,17 @@
     margin: 0px;
     padding: 0 2px;
     display: inline;    
+}
+
+/*------- General Dialog style to center the OK button. ---*/
+.ui-dialog .ui-dialog-buttonpane {
+  text-align: center;
+}
+
+/*------- Modal Overlay override -------*/
+.ui-widget-overlay {
+    opacity: .75;
+    filter: Alpha(Opacity=75);
 }
 
 /* ====================
@@ -285,6 +316,15 @@ body {
 
 #info-bar-single button {
     float: left;
+}
+
+/***** Help styles *****/
+#widget-help-dialog {
+  text-align: left;
+}
+
+#widget-help-dialog-close {
+  .pagination-centered;
 }
 
 @media ( min-width : 641px) and (max-width: 979px) {
