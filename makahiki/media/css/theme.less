@@ -147,6 +147,24 @@ body {
 	}
 }
 
+/* Styles for header */
+#info-bar-wide {
+	background: @rib-bkg;
+	background-image: -moz-linear-gradient(100% 50% 90deg, @rib-bkg,
+		@rib-bkg2 );
+	background-image: -webkit-gradient(linear, 0% 0%, 0% 90%, from(@rib-bkg), to(@rib-bkg2) );
+}
+
+/* Set common border thickness and color for header elements that use it. */
+#header-info,#header-nav-links,#header-round-info {
+	border: 2px solid @hover-color;
+}
+
+/* hover color should be slightly lighter blue such that people can see when they hover */
+#header-nav-links a:hover h4 {
+	color: @base;
+}
+
 /* for small screen widths hide the wide info-bar */
 @media ( max-width : 640px) {
 	.brand img {
@@ -171,23 +189,6 @@ body {
 	background: #C1EBEC;
 }
 
-#info-bar-wide {
-	background: @rib-bkg;
-	background-image: -moz-linear-gradient(100% 50% 90deg, @rib-bkg,
-		@rib-bkg2 );
-	background-image: -webkit-gradient(linear, 0% 0%, 0% 90%, from(@rib-bkg), to(@rib-bkg2) );
-}
-
-/* Set common border thickness and color for header elements that use it. */
-#header-info,#header-nav-links,#header-round-info {
-	border: 2px solid @hover-color;
-}
-
-/* hover color should be slightly lighter blue such that people can see when they hover */
-#header-nav-links a:hover h4 {
-	color: @base;
-}
-
 /* Set common transparency background for various elements, note that this effect stacks on header elements. */
 #header,#header-info,#header-round-info,.container-landing-about,#header-nav-links,#header
 	{
@@ -195,14 +196,9 @@ body {
 }
 
 /* ===== Page specific coloring for Prizes ===== */
-/*#prizes-list-table-header,#prizes-list-table-awarded-header,#prizes-list-table-criteria-header
-  {
-  background: none;
+#prizes-raffle-table .number {
+  color: #03b710;
 }
-
-#prizes-raffle-table th {
-  background: none;
-}*/
 
 /* ===== Page specific coloring for Profile ===== */
 #profile-badges-content h5,#profile-achievements h5,table#profile-form-table
@@ -213,6 +209,8 @@ body {
 #profile-form-table td.profile-section-header {
 	background-color: #A2C0D2;
 }
+
+/* ===== Page specific coloring for Quests ===== */
 
 .quest-box {
 	background: none;

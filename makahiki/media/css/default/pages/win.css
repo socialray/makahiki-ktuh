@@ -49,24 +49,35 @@ th {
   text-align: left;
 }
 
+#prizes-raffle-table td {
+  text-align: center;
+}
+
+#prizes-raffle-table .raffle-prize {
+  text-align: left;
+}
+
 .number {
   font-size: 1.1em;
   font-weight: bold;
-  color: #03b710;
   text-align: center;
+}
+
+.ticket-add-remove {
+  margin: 0 auto;
+  width: 27%;
 }
 
 .enabled, .disabled {
 	width: 28px;
 	height: 28px;
-	display: inline;
-	margin: .5em;
+	display: block;
+	margin: .2em .5em;
 	color: #FFF;
 	font-weight: bold;
 	line-height: 28px;
 	text-decoration: none;
 	text-align: center;
-	display: block;
 	float: left;
 }
 
@@ -88,20 +99,6 @@ th {
 	display: block;
 }
 
-/**** Prize cycle styles ****/
-#prize-cycle-nav {
-  text-align: center;
-}
-
-#prize-cycle-nav a {
-  padding: 1px 5px;
-}
-
-#prize-cycle-nav a.activeSlide {
-  font-weight: bold;
-/*  background-color: #DBD7AF;*/
-}
-
 @media (min-width: 481px) {
   .condensed-tickets {
     display: none;
@@ -111,10 +108,6 @@ th {
 @media (max-width: 480px) {
   .total-tickets, .user-tickets {
     display: none;
-  }
-  
-  .raffle-prize {
-    width: 80px;
   }
   
   .condensed-tickets {
