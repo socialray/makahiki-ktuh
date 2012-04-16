@@ -14,6 +14,7 @@ class Command(management.base.BaseCommand):
         """check the energy goal for all teams"""
         print '****** Processing check_energy_goal for %s *******\n' % datetime.datetime.today()
 
+        count = 0
         for team in Team.objects.all():
             count = energy_goal.check_daily_energy_goal(team)
             if count:
@@ -21,3 +22,5 @@ class Command(management.base.BaseCommand):
                 print '%s users in %s are awarded %s points each.' % (count,
                                                                   team,
                                                                   goal_points)
+        if count == 0:
+            print 'No user are awarded daily energy goal points.'

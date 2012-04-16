@@ -6,53 +6,54 @@ from apps.managers.resource_mgr import resource_mgr
 from apps.widgets.energy_goal.models import EnergyGoal
 
 
+def team_goal_settings(team):
+    """returns the energy goal settings for the team."""
+    return team.energygoalsettings_set.all()[0]
+
+
 def is_manual_entry(team):
-    """return true if the team's data is manual entry."""
-    goal_settings = team.energygoalsettings_set.all()[0]
-    return goal_settings.manual_entry
+    """returns true if the team's data is manual entry."""
+    return team_goal_settings(team).manual_entry
 
 
-def current_goal_usage(team):
-    """Retun the goal usage of the current date."""
-    date = datetime.date.today()
-    goal_settings = team.energygoalsettings_set.all()[0]
-    goal_percentage = goal_settings.goal_percent_reduction
+def team_goal_usage(date, team):
+    """Returns the goal usage of the current date."""
+    goal_percentage = team_goal_settings(team).goal_percent_reduction
 
     try:
         baseline_usage = team.energygoalbaseline_set.get(date=date).baseline_usage
     except ObjectDoesNotExist:
         baseline_usage = 0
 
-    goal_usage = (baseline_usage * 100 - baseline_usage * goal_percentage) / 100
-    return goal_usage
+    usage = (baseline_usage * 100 - baseline_usage * goal_percentage) / 100
+    return usage
 
 
-def current_warning_usage(team):
-    """return the current warning usage."""
-    date = datetime.date.today()
-    goal_settings = team.energygoalsettings_set.all()[0]
-    warning_percentage = goal_settings.warning_percent_reduction
+def team_warning_usage(date, team):
+    """returns the current warning usage."""
+    warning_percentage = team_goal_settings(team).warning_percent_reduction
 
     try:
         baseline_usage = team.energygoalbaseline_set.get(date=date).baseline_usage
     except ObjectDoesNotExist:
         baseline_usage = 0
 
-    warning_usage = (baseline_usage * 100 - baseline_usage * warning_percentage) / 100
-    return warning_usage
+    usage = (baseline_usage * 100 - baseline_usage * warning_percentage) / 100
+    return usage
 
 
 def check_daily_energy_goal(team):
-    """check the dail energy goal, award points to the team members if the goal is meet."""
+    """check the dail energy goal, award points to the team members if the goal is meet.
+    Returns the number of players in the team got the award."""
 
     date = datetime.date.today()
-    goal_usage = current_goal_usage(team)
-    energy_data = resource_mgr.team_current_energy_data(team)
+    goal_usage = team_goal_usage(date, team)
+    energy_data = resource_mgr.team_energy_data(date, team)
     actual_usage = None
     if energy_data:
         # check if the manual entry time is within the target time,
         # otherwise can not determine the actual usage
-        goal_settings = team.energygoalsettings_set.all()[0]
+        goal_settings = team_goal_settings(team)
         if not goal_settings.manual_entry or  \
             (goal_settings.manual_entry_time.hour <= energy_data.time.hour and\
              energy_data.time.hour <= (goal_settings.manual_entry_time.hour + 1)):

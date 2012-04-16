@@ -26,9 +26,9 @@
         Hint: {{ badge.hint }}
     {% endif %}
 </td>
-<td>
+<td class="badge-members">
     {% if badge.total_users > 0 %}
-        {{ badge.total_users }} pe{{ badge.total_users|pluralize:"rson has,ople have" }} this badge
+        {{ badge.total_users }} pe{{ badge.total_users|pluralize:"rson has,ople have" }} this badge </br>
         ({{ badge.team_users.count }} in your {{ TEAM_LABEL.lower }})
         <ul style="list-style: none; padding: 0">
             {% for user in badge.team_users %}

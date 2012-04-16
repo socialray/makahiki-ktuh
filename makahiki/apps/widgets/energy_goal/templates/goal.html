@@ -2,8 +2,8 @@
 {% with view_objects.energy_goal.daily_goal as daily_goal %}
 
 <div id="DailyEnergyGoalGame-visualization"></div>
-    <table cellpadding="5"
-           style="text-align: center; vertical-align: top">
+    <table cellpadding="1"
+           align="center">
     <tr><td>
       <table cellpadding="2" border="1"
                style="text-align: center; vertical-align: top">
@@ -25,11 +25,11 @@
               <span style="font-size: 0.7em;">{{ goal.date|date:"n/j" }} </span> <br/>
               <center>
               {% if goal.goal_status == "Over the goal"%}
-                <img src="/site_media/static/images/energy/bad32.png"/>
+                <img src="/site_media/static/images/energy/bad32.png" title={{ goal.verbose_info }}/>
               {% elif goal.goal_status == "Below the goal"%}
-                <img src="/site_media/static/images/energy/good32.png"/>
+                <img src="/site_media/static/images/energy/good32.png" title={{ goal.verbose_info }}/>
               {% elif goal.goal_status == "Unknown" %}
-                <img src="/site_media/static/images/energy/unknown32.png"/>
+                <img src="/site_media/static/images/energy/unknown32.png" title={{ goal.verbose_info }}/>
               {% else %}
                   <table><tr><td height="32"></td></tr></table>
               {%  endif %}
@@ -38,10 +38,13 @@
         {% endfor %}
         </tr>
       </table>
-    <tr> <td style="font-size: 0.8em">Each circle indicates the goal status in the current round:<br>
-        <img src="/site_media/static/images/energy/good32.png" width="16"/>: Made the goal
-        <img src="/site_media/static/images/energy/bad32.png"  width="16"/>: Did not make it
-        <img src="/site_media/static/images/energy/unknown32.png"  width="16"/>: No data</td> </tr>
+    <tr><td style="font-size: 0.8em" align="left">
+        <img src="/site_media/static/images/energy/good32.png" width="16"/>: Awarded (Made the goal)</td></tr>
+    <tr><td style="font-size: 0.8em" align="left">
+        <img src="/site_media/static/images/energy/bad32.png"  width="16"/>: Not awarded (Did not make the goal)</td></tr>
+    <tr><td style="font-size: 0.8em" align="left">
+        <img src="/site_media/static/images/energy/unknown32.png"  width="16"/>: Not awarded (Can not determine)</td></tr>
+    </td> </tr>
     </table>
 
 {% endwith %}
