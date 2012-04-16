@@ -12,10 +12,8 @@
     {% import_page_css "home" STATIC_URL CSS_THEME %}
 {% endblock %}
 
-{% block body %}
-<div class="content">
-    <div id="home" class="container">
+{% block body %} 
+    <div class="homecontent">
         {% include "widgets/home/templates/index.html" %}
-    </div>
-</div>    
+    </div> 
 {% endblock %}

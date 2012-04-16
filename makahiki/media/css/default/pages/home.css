@@ -1,7 +1,35 @@
 @charset "UTF-8";
 /* CSS Document */
+ 
+.homecontent {
+    margin-left: 7%;
+}
+
+.homecontent > ul { 
+    margin-top: 20px;
+    list-style: none;
+    margin: 0px; 
+} 
+
+.homecontent > ul > li:nth-of-type(7) > .home-item {
+    margin-left: 16%;
+}
+
+.homecontent > ul > li {
+    list-style: none;
+}
+
+.tile > ul {
+    list-style: none;
+    margin-left: 0px;
+}
+
+.tile > ul > li {
+    margin-bottom: 3px;
+}
 
 /********************** home styles ******************************/
+
 .content p {
     font-size: 8pt;
     line-height: 14px;
@@ -14,35 +42,32 @@
     border: 0;
 }
 
-h6 {
-    margin: 0;
-    padding: 0;
+.tile > h6 { 
     text-transform: uppercase;
     font-weight: bold;
-    font-size: 12pt;
+    font-size: 14pt;
 }
 
-div.home-item {
-    width: 210px;
+.home-item { 
+    width: 28%;
+    height: 210px;
     display: block;
     padding-bottom: 2px;
     margin: 10px 10px 0px 10px;
     float: left;
 }
-
+ 
 .content .container-fluid {
     padding-left: 20;
     padding-right: 20;
 }
 
-.content .tile { /*     background: #E3E3E3; */
+.tile { /*     background: #E3E3E3; */
+    height: 80px; 
     padding: 1px;
-    border: 3px outset #DDD;
-    /*     margin-top: -.7em; */
-    /*     background-image: -moz-linear-gradient(100% 50% 90deg, #E3E3E3, #A1A1A1); */
-    /*     background-image: -webkit-gradient(linear, 0% 0%, 0% 90%, from(#E3E3E3), */
-    /*         to(#BBB) ); */
-    border-radius: 3px;
+    background-color: rgba(255,255,255,.8);
+    border: 3px outset #DDD; 
+    border-radius: 8px;
     box-shadow: 3px 3px 5px #000;
     -moz-box-shadow: 3px 3px 5px #000;
     -webkit-box-shadow: 3px 3px 5px #000;
@@ -50,16 +75,7 @@ div.home-item {
     position: relative;
     z-index: 100;
 }
-
-#home { /* 	width: 920px; */
-    /* 	height: 440px; */
-    margin: 0 auto 0 auto;
-    background: none;
-    background-color: rgba(255, 255, 255, 0.65);
-    border: 2px solid #167000;
-    padding-left: 20px;
-    padding-right: 20px;
-}
+ 
 
 #home-prizes {
     clear: left;
@@ -69,7 +85,7 @@ div.home-item {
     float: none;
 }
 
-#home-advanced-icon {
+.home-advanced-icon {
     background: transparent
         url(/site_media/static/images/icons/icon-advanced-lg.png) top
         left no-repeat;
@@ -77,13 +93,13 @@ div.home-item {
     height: 124px;
 }
 
-#home-advanced-icon:hover {
+.home-advanced-icon:hover {
     background: transparent
         url(/site_media/static/images/icons/icon-advanced-lg-over.png)
         top left no-repeat;
 }
 
-#home-energy-icon {
+.home-energy-icon {
     background: transparent
         url(/site_media/static/images/icons/icon-go-low-lg.png) top left
         no-repeat;
@@ -91,13 +107,13 @@ div.home-item {
     height: 124px;
 }
 
-#home-energy-icon:hover {
+.home-energy-icon:hover {
     background: transparent
         url(/site_media/static/images/icons/icon-go-low-lg-over.png) top
         left no-repeat;
 }
 
-#home-activities-icon {
+.home-activities-icon {
     background: transparent
         url(/site_media/static/images/icons/icon-scoreboard-lg.png) top
         left no-repeat;
@@ -105,13 +121,13 @@ div.home-item {
     height: 124px;
 }
 
-#home-activities-icon:hover {
+.home-activities-icon:hover {
     background: transparent
         url(/site_media/static/images/icons/icon-scoreboard-lg-over.png)
         top left no-repeat;
 }
 
-#home-news-icon {
+.home-news-icon {
     background: transparent
         url(/site_media/static/images/icons/icon-news-lg.png) top left
         no-repeat;
@@ -119,13 +135,13 @@ div.home-item {
     height: 124px;
 }
 
-#home-news-icon:hover {
+.home-news-icon:hover {
     background: transparent
         url(/site_media/static/images/icons/icon-news-lg-over.png) top
         left no-repeat;
 }
 
-#home-prizes-icon {
+.home-prizes-icon {
     background: transparent
         url(/site_media/static/images/icons/icon-prizes-lg.png) top left
         no-repeat;
@@ -133,13 +149,13 @@ div.home-item {
     height: 124px;
 }
 
-#home-prizes-icon:hover {
+.home-prizes-icon:hover {
     background: transparent
         url(/site_media/static/images/icons/icon-prizes-lg-over.png) top
         left no-repeat;
 }
 
-#home-help-icon {
+.home-help-icon {
     background: transparent
         url(/site_media/static/images/icons/icon-help-lg.png) top left
         no-repeat;
@@ -147,13 +163,13 @@ div.home-item {
     height: 124px;
 }
 
-#home-help-icon:hover {
+.home-help-icon:hover {
     background: transparent
         url(/site_media/static/images/icons/icon-help-lg-over.png) top
         left no-repeat;
 }
 
-#home-profile-icon {
+.home-profile-icon {
     background: transparent
         url(/site_media/static/images/icons/icon-profile-lg.png) top
         left no-repeat;
@@ -161,13 +177,13 @@ div.home-item {
     height: 124px;
 }
 
-#home-profile-icon:hover {
+.home-profile-icon:hover {
     background: transparent
         url(/site_media/static/images/icons/icon-profile-lg-over.png)
         top left no-repeat;
 }
 
-#home-water-icon {
+.home-water-icon {
     background: transparent
         url(/site_media/static/images/icons/icon-water-lg.png) top left
         no-repeat;
@@ -175,7 +191,7 @@ div.home-item {
     height: 124px;
 }
 
-#home-water-icon:hover {
+.home-water-icon:hover {
     background: transparent
         url(/site_media/static/images/icons/icon-water-lg-over.png) top
         left no-repeat;
@@ -278,111 +294,137 @@ div.home-item {
         padding-left: 5px;
         padding-right: 5px;
     }
-    div.home-item {
+    .home-item {
         width: none;
+        height: 60px;
         display: block;
         padding-bottom: 2px;
         margin: 2px 2px 0px 2px;
-        float: none;
+        float: left;
     }
 }
 
 @media ( max-width : 639px) {
-    .tile p {
-        display: none;
+    .homecontent > ul > li:nth-of-type(7) > .home-item {
+        margin-left: 0px;
+    } 
+
+    .homecontent {
+        margin-left: 0px;
     }
-    #home-advanced-icon {
+    .tile {
+        height: 20px;
+        z-index: -100;
+    }
+
+    .tile ul {
+        display: none; 
+    }
+
+    .home-item {
+        margin-left: 0px;
+        width: 49%;
+        margin-bottom: 10px;
+        height: 75px;
+    } 
+/*
+    .home-item a > img {
+        margin-left: -50%;
+        margin-bottom: -45px; 
+    }
+*/  
+    .home-advanced-icon {
         background: transparent
             url(/site_media/static/images/icons/icon-advanced.png) top
             left no-repeat;
         width: 54px;
         height: 56px;
     }
-    #home-advanced-icon:hover {
+    .home-advanced-icon:hover {
         background: transparent
             url(/site_media/static/images/icons/icon-advanced-over.png)
             top left no-repeat;
     }
-    #home-energy-icon {
+    .home-energy-icon {
         background: transparent
             url(/site_media/static/images/icons/icon-go-low.png) top
             left no-repeat;
         width: 54px;
         height: 56px;
     }
-    #home-energy-icon:hover {
+    .home-energy-icon:hover {
         background: transparent
             url(/site_media/static/images/icons/icon-go-low-over.png)
             top left no-repeat;
     }
-    #home-activities-icon {
+    .home-activities-icon {
         background: transparent
             url(/site_media/static/images/icons/icon-scoreboard.png) top
             left no-repeat;
         width: 54px;
         height: 56px;
     }
-    #home-activities-icon:hover {
+    .home-activities-icon:hover {
         background: transparent
             url(/site_media/static/images/icons/icon-scoreboard-over.png)
             top left no-repeat;
     }
-    #home-news-icon {
+    .home-news-icon {
         background: transparent
             url(/site_media/static/images/icons/icon-news.png) top left
             no-repeat;
         width: 54px;
         height: 56px;
     }
-    #home-news-icon:hover {
+    .home-news-icon:hover {
         background: transparent
             url(/site_media/static/images/icons/icon-news-over.png) top
             left no-repeat;
     }
-    #home-prizes-icon {
+    .home-prizes-icon {
         background: transparent
             url(/site_media/static/images/icons/icon-prizes.png) top
             left no-repeat;
         width: 54px;
         height: 56px;
     }
-    #home-prizes-icon:hover {
+    .home-prizes-icon:hover {
         background: transparent
             url(/site_media/static/images/icons/icon-prizes-over.png)
             top left no-repeat;
     }
-    #home-help-icon {
+    .home-help-icon {
         background: transparent
             url(/site_media/static/images/icons/icon-help.png) top left
             no-repeat;
         width: 54px;
         height: 56px;
     }
-    #home-help-icon:hover {
+    .home-help-icon:hover {
         background: transparent
             url(/site_media/static/images/icons/icon-help-over.png) top
             left no-repeat;
     }
-    #home-profile-icon {
+    .home-profile-icon {
         background: transparent
             url(/site_media/static/images/icons/icon-profile.png) top
             left no-repeat;
         width: 54px;
         height: 56px;
     }
-    #home-profile-icon:hover {
+    .home-profile-icon:hover {
         background: transparent
             url(/site_media/static/images/icons/icon-profile-over.png)
             top left no-repeat;
     }
-    #home-water-icon {
+    .home-water-icon {
         background: transparent
             url(/site_media/static/images/icons/icon-water.png) top left
             no-repeat;
         width: 54px;
         height: 56px;
     }
-    #home-water-icon:hover {
+    .home-water-icon:hover {
         background: transparent
             url(/site_media/static/images/icons/icon-water-over.png) top
             left no-repeat;
