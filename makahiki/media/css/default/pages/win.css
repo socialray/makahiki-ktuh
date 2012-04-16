@@ -12,7 +12,9 @@ th {
 #prizes-raffle-info {
 	font-weight: bold;
 	text-align: center;
-	margin: 10px 5px;
+	border-radius: 0;
+	-moz-border-radius: 0;
+	-webkit-border-radius: 0;
 }
 
 #prizes-list table {
@@ -22,8 +24,11 @@ th {
 	border: 0;
 }
 
+#prizes-list-table-header, #prizes-list-table-criteria-header {
+  background: none;
+}
+
 #prizes-raffle th {
-	background: transparent;
 	text-align: center;
 	}
 
@@ -38,10 +43,6 @@ th {
 .prize img {
 	display: block;
 	margin: 0 auto;
-}
-
-.prize a {
-	color: #c86c09;
 }
 
 .prize-dialog {
