@@ -10,7 +10,7 @@
         </div>
     {% endif %}
 
-    <table id="profile-form-table">
+    <table>
         <tr>
             <td colspan="2" class="profile-section-header">General</td>
         </tr>
@@ -61,11 +61,11 @@
         </tr>
         </tr>
     </table>
-    <div id="profile-form-submit">
-        <a href="#" id="profile-form-submit-button">Save Changes</a>
+    <div>
+        <a href="#" class="textlink">Save Changes</a>
         <script type="text/javascript">
             $(document).ready(function () {
-                $("#profile-form-submit-button").click(function () {
+                $(".profile-form-submit-button").click(function () {
                     $(this).parents("form").submit();
                 });
             });
