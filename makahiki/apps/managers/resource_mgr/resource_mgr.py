@@ -1,5 +1,4 @@
 """resource manager module"""
-import datetime
 from django.db.models.aggregates import Count
 from apps.managers.team_mgr.models import Team
 from apps.widgets.energy_goal.models import EnergyGoal
@@ -24,23 +23,13 @@ def resources_info():
     return info
 
 
-def team_current_energy_data(team):
+def team_energy_data(date, team):
     """Return the latest energy data of the current date."""
-    date = datetime.date.today()
     energy_data = EnergyUsage.objects.filter(team=team, date=date)
     if energy_data:
         return energy_data[0]
     else:
         return None
-
-
-def team_current_energy_usage(team):
-    """Return the latest energy data of the current date."""
-    data = team_current_energy_data(team)
-    if data:
-        return data.usage
-    else:
-        return 0
 
 
 def resource_ranks(name):
