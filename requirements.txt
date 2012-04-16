@@ -5,7 +5,7 @@ simplejson==2.3.2
 Markdown==2.1.1
 PIL==1.1.7
 elementtree==1.2.7-20070827-preview
-django-staticfiles==0.1.2
+# django-staticfiles==0.1.2
 django-markup==0.4
 psycopg2==2.4.1
 django-nose==0.1.3
