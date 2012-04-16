@@ -9,12 +9,13 @@ th {
 	text-transform: capitalize;
 }
 
+#prizes {
+  margin-bottom: 10px;
+}
+
 #prizes-raffle-info {
-	font-weight: bold;
 	text-align: center;
-	border-radius: 0;
-	-moz-border-radius: 0;
-	-webkit-border-radius: 0;
+  padding: 8px 0;
 }
 
 #prizes-list table {
