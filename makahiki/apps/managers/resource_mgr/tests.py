@@ -19,14 +19,15 @@ class ResourceManagerTestCase(TransactionTestCase):
 
     def testEnergy(self):
         """test Energy."""
+        date = datetime.date.today()
         _ = EnergyUsage.objects.create(
             team=self.team,
-            date=datetime.date.today(),
+            date=date,
             time=datetime.time(hour=15),
             usage=100,
         )
 
         rank = resource_mgr.energy_team_rank_info(self.team)["rank"]
-        usage = resource_mgr.team_current_energy_usage(self.team)
+        usage = resource_mgr.team_energy_data(date=date, team=self.team).usage
         self.assertEqual(rank, 1, "The team should be first rank.")
         self.assertEqual(usage, 100, "The team usage.is not correct.")
