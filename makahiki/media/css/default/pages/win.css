@@ -113,6 +113,10 @@ th {
   .condensed-tickets {
     display: table-cell;
   }
+  
+  #prizes {
+    margin-bottom: 10px;
+  }
 }
 
 
