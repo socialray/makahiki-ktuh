@@ -25,7 +25,7 @@
               {% endif %}
               {% if view_objects.energy_goal.daily_goal%}
                 <fieldset {% get_id_and_classes "energy-status-progress" %}>
-                    <legend>Daily Goal Status</legend>
+                    <legend>Current Round Daily Goal Status</legend>
                     <div {% get_id_and_classes "energy-power-box" %}>
                         {% if user.get_profile.team %}
                             <center>{% include "goal.html" %}</center>
