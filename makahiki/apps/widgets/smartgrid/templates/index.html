@@ -12,14 +12,6 @@
     <div {% get_id_and_classes "activity-categories-content" %}>
         <p>
         <table {% get_id_and_classes "activities-grid" %}>
-            <col width="12.5%"/>
-            <col width="12.5%"/>
-            <col width="12.5%"/>
-            <col width="12.5%"/>
-            <col width="12.5%"/>
-            <col width="12.5%"/>
-            <col width="12.5%"/>
-            <col width="12.5%"/>
             <tr><!-- Start header -->
                 {% for cat in view_objects.smartgrid.categories %}
                     <td>
@@ -136,19 +128,19 @@
                 <td>
                     <div class="activity-legend"></div>
                 </td>
-                <td>activity</td>
+                <td width=100>activity</td>
                 <td>
                     <div class="commitment-legend"></div>
                 </td>
-                <td>commitment</td>
+                <td width=100>commitment</td>
                 <td>
                     <div class="event-legend"></div>
                 </td>
-                <td>event</td>
+                <td width=100>event</td>
                 <td>
                     <div class="excursion-legend"></div>
                 </td>
-                <td>excursion</td>
+                <td width=100>excursion</td>
                 <td>
                     <div class="survey-legend"></div>
                 </td>

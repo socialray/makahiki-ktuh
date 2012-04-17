@@ -170,6 +170,7 @@ table#activities-grid {
 	padding-left: 2px;
 	border: 0;
 	margin: 0 auto;
+	width: 100%;
 }
 
 table#activities-grid td {
