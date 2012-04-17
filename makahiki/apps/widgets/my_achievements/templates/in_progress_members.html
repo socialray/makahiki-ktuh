@@ -2,10 +2,10 @@
 {% load markup %}
 
 <table>
-    <tr id="profile-history-current-table-header" >
-        <th id="profile-history-current-date-header" >Date</th>
-        <th id="profile-history-current-task-header" >Task</th>
-        <th id="profile-history-current-status-header" >Status</th>
+    <tr>
+        <th class="profile-history-current-date-header" >Date</th>
+        <th class="profile-history-current-task-header" >Task</th>
+        <th class="profile-history-current-status-header" >Status</th>
     </tr>
     {% for member in view_objects.my_achievements.in_progress_members %}
         {% if member.activity %}

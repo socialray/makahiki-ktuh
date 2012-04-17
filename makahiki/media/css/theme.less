@@ -8,8 +8,12 @@
 @rib-bkg: fadeout(#E0FFFF, 55%);
 @rib-bkg2: fadeout(#4F95CD, 55%);
 @activity-bkg: #84C4FF;
-@activity-legend: green;
+@activity-legend: #70A21F;
 @commit: blue;
+@commitment-legend: #845D18;
+@event-legend: #A09E43;
+@excursion-legend: #AB441B;
+@survey-legend: #C18E22;
 @content: #C1D8EB;
 @content-alt: #E3F9F8;
 @con-border: #000;
@@ -65,7 +69,7 @@ body {
 }
 
 .commitment,.commitment-legend {
-	background-color: @commit;
+	background-color: @commitment-legend;
 }
 
 /* Container Styles, make sure they're transparent */
@@ -88,11 +92,11 @@ body {
 }
 
 .event,.event-legend {
-	background-color: yellow;
+	background-color: @event-legend;
 }
 
 .excursion,.excursion-legend {
-	background-color: red;
+	background-color: @excursion-legend;
 }
 
 .horizontalaccordion>ul>li {
@@ -135,7 +139,7 @@ body {
 }
 
 .survey,.survery-legend {
-	background-color: orange;
+	background-color: @survey-legend;
 }
 
 @media ( max-width : 979px) {

@@ -31,20 +31,19 @@
               <td colspan="3">You don't have any badges yet!</td>
           </tr>
       {% endif %}
-  </table>
-  <div >
-
-<!--Bootstrap modal dialog-->
-<a  data-toggle="modal" href="#badge-catalog"> See Badge Catalog </a> 
+  </table> 
+<div>
+<!--Bootstrap modal dialog>
+<a  class="textlink" data-toggle="modal" href="#badge-catalog"> See Badge Catalog </a> 
   <div id="badge-catalog" class="modal hide">
       <div class="modal-body">
-          {% include "badge-catalog.html" %}
+           include "badge-catalog.html" 
       </div>
       <div class="modal-footer">
           <a href="#" class="btn" data-dismiss="modal">Close</a>
       </div>
   </div>
 
-<!--end modal--> 
-     <!-- <a href="{% url profile_badges %}" class="margin-one-third">See Badge Catalog</a>-->
+<end modal--> 
+     <a href="{% url profile_badges %}" class="margin-one-third">See Badge Catalog</a>
   </div> 

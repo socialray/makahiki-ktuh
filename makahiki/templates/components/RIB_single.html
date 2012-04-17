@@ -44,5 +44,9 @@
         Overall: {{ energy_rank_info.usage }} kWh. #{{ energy_rank_info.rank }} out of {{TEAM_COUNT}}.
     </div>
     {% endif %}
-  {% endwith %}     
+  {% endwith %}  
+    <div class="item">
+        <h4>{{ CURRENT_ROUND_INFO.name }}</h4>
+        Ends on {{CURRENT_ROUND_INFO.end}}.
+    </div>   
 {# {% endcache %} #}

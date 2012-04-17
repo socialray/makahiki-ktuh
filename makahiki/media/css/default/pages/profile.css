@@ -52,13 +52,15 @@ form {
 .modal { 
   float:left;
   position: fixed;  
-  margin-top: -200px;
+  margin-top: -180px;
   top: 230px;
   margin-left: -49%;
   left: 50%;
   margin-right: -10%;
   width: 97.5%;
   min-width: 20px;
+  overflow-y:auto;
+  max-height:80%;
   border-radius: 8px;
 }
 
@@ -83,8 +85,9 @@ form {
   margin-top: 50px;
   width: 80%;
 }
+ 
 
-#profile-form-message { 
+.profile-form-message { 
   font-weight: bold;
   padding: 5px;
 }
@@ -143,7 +146,7 @@ td#profile-form-fb-profile-label, td#profile-form-fb-can-post-fields {
   margin-left: 20px;
 }
 
-#profile-history-current-date-header, #profile-history-previous-date-header {
+.profile-history-current-date-header, .profile-history-previous-date-header {
 	width: 15%;
 }
 
@@ -225,4 +228,13 @@ td#profile-form-fb-profile-label, td#profile-form-fb-can-post-fields {
 
 .avatar-box{
   padding-bottom: 40px;
+}
+
+.textlink {
+  margin-left: 40%;
+}
+
+@media screen and (max-width : 450px){
+.badge-members {
+  display: none;
 }
