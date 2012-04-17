@@ -1,10 +1,12 @@
 <!-- FIXME: round cycle is the upcoming events. Need to get these from the database somehow. -->
+{% if IN_COMPETITION %}
 <div class="span3">
     <ul>
-        <li><h4>Overall Round</h4></li>
-        <li>Ends in 5 Days, 9 Hours, and 39 Minutes</li>
+        <li><h4>{{ CURRENT_ROUND_INFO.name }}</h4></li>
+        <li>Ends on {{CURRENT_ROUND_INFO.end}}</li>
     </ul>
 </div>
+{% endif %}
 <div class="span3">
     <ul>
         <li><h4>Next Workshop</h4></li>
