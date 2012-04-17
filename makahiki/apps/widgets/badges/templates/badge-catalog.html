@@ -28,13 +28,13 @@
                     <th></th>
                 </tr>
 
-                {% for badge in awarded_badges %}
+                {% for badge in view_objects.badges.awarded_badges %}
                     <tr class="{% cycle '' 'alt-row' as cycle_class %}">
                         {% include "catalog-item.html" %}
                     </tr>
                 {% endfor %}
 
-                {% for badge in locked_badges %}
+                {% for badge in view_objects.badges.locked_badges %}
                     <tr class="{% cycle cycle_class %}">
                         {% include "catalog-item.html" %}
                     </tr>
