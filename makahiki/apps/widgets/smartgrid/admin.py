@@ -193,7 +193,7 @@ class ActivityAdminForm(forms.ModelForm):
     def save(self, *args, **kwargs):
         _ = args
         _ = kwargs
-        activity = super(models.ModelForm, self).save(*args, **kwargs)
+        activity = super(forms.ModelForm, self).save(*args, **kwargs)
 
         activity.save()
 
