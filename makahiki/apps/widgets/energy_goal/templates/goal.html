@@ -1,7 +1,6 @@
 
 {% with view_objects.energy_goal.daily_goal as daily_goal %}
 
-<div id="DailyEnergyGoalGame-visualization"></div>
     <table cellpadding="1"
            align="center">
     <tr><td>
@@ -23,17 +22,26 @@
             {% endif %}
             <td width="50">
               <span style="font-size: 0.7em;">{{ goal.date|date:"n/j" }} </span> <br/>
-              <center>
-              {% if goal.goal_status == "Over the goal"%}
-                <img src="/site_media/static/images/energy/bad32.png" title={{ goal.verbose_info }}/>
-              {% elif goal.goal_status == "Below the goal"%}
-                <img src="/site_media/static/images/energy/good32.png" title={{ goal.verbose_info }}/>
-              {% elif goal.goal_status == "Unknown" %}
-                <img src="/site_media/static/images/energy/unknown32.png" title={{ goal.verbose_info }}/>
-              {% else %}
-                  <table><tr><td height="32"></td></tr></table>
-              {%  endif %}
-              </center>
+              <div class="goal_tooltip">
+                  {% if goal.goal_status == "Over the goal"%}
+                      <div class="goal_tooltip">
+                          <img rel="tooltip" title="{{ goal.verbose_info }}"
+                               src="/site_media/static/images/energy/bad32.png"/>
+                      </div>
+                  {% elif goal.goal_status == "Below the goal"%}
+                      <div class="goal_tooltip">
+                        <img rel="tooltip" title="{{ goal.verbose_info }}"
+                             src="/site_media/static/images/energy/good32.png"/>
+                      </div>
+                  {% elif goal.goal_status == "Unknown" %}
+                      <div class="goal_tooltip">
+                          <img rel="tooltip" title="{{ goal.verbose_info }}"
+                               src="/site_media/static/images/energy/unknown32.png"/>
+                      </div>
+                  {% else %}
+                      <table><tr><td height="32"></td></tr></table>
+                  {%  endif %}
+              </div>
             </td>
         {% endfor %}
         </tr>
@@ -48,3 +56,12 @@
     </table>
 
 {% endwith %}
+
+<script type="text/javascript">
+
+    // tooltip demo
+    $('.goal_tooltip').tooltip({
+        selector: "img[rel=tooltip]"
+    })
+
+</script>

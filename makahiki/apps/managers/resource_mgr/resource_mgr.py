@@ -32,6 +32,15 @@ def team_energy_data(date, team):
         return None
 
 
+def team_energy_usage(date, team):
+    """Return the latest energy usage of the current date."""
+    energy_data = team_energy_data(date, team)
+    if energy_data:
+        return energy_data.usage
+    else:
+        return 0
+
+
 def resource_ranks(name):
     """return the resource ranking for all teams."""
     team_count = Team.objects.count()

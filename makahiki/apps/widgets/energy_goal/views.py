@@ -64,8 +64,9 @@ def get_daily_energy_goal_data(team):
         goals = team.energygoal_set.filter(date=date)
         if goals:
             goal_info["goal_status"] = goals[0].goal_status
-            goal_info["verbose_info"] = "%dkWh used within 24 hours ends at %s, the goal is %d" % (
-                resource_mgr.team_energy_data(date, team).usage,
+            goal_info["verbose_info"] = "%d kWh used within the last 24 hours (ends at %s). " \
+                                        "The goal is %d kWh." % (
+                resource_mgr.team_energy_usage(date, team),
                 energy_goal.team_goal_settings(team).manual_entry_time,
                 energy_goal.team_goal_usage(date, team)
             )
