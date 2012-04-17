@@ -65,3 +65,8 @@ if settings.SERVE_MEDIA:
             (r'^site_media/media/(?P<path>.*)$', 'django.views.static.serve',
                     {'document_root': settings.MEDIA_ROOT}),
        )
+
+    urlpatterns += patterns('',
+            (r'^site_media/static/(?P<path>.*)$', 'django.views.static.serve',
+                    {'document_root': settings.STATIC_ROOT}),
+       )
