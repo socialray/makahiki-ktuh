@@ -33,20 +33,20 @@
         {% if raffle.tickets.available > 0 %}
             <form action="{% url raffle_add_ticket prize.id %}" method="POST">
                 {% csrf_token %}
-                <a class="enabled" href="#"
+                <a class="enabled ticket-add" href="#"
                    onclick="$(this).parent().submit(); return false;">+1</a>
             </form>
         {% else %}
-            <div class="disabled">+1</div>
+            <div class="disabled ticket-add">+1</div>
         {% endif %}
         {% if user_tickets > 0 %}
         <form action="{% url raffle_remove_ticket prize.id %}" method="POST">
             {% csrf_token %}
-            <a class="enabled" href="#"
+            <a class="enabled ticket-remove" href="#"
                onclick="$(this).parent().submit(); return false;">-1</a>
         </form>
         {% else %}
-        <div class="disabled">-1</div>
+        <div class="disabled ticket-remove">-1</div>
         {% endif %}
     </td>
 </tr>

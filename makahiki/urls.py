@@ -62,6 +62,6 @@ for widget in settings.INSTALLED_WIDGET_APPS:
 
 if settings.SERVE_MEDIA:
     urlpatterns += patterns('',
-            (r'^site_media/(?P<path>.*)$', 'django.views.static.serve',
+            (r'^site_media/media/(?P<path>.*)$', 'django.views.static.serve',
                     {'document_root': settings.MEDIA_ROOT}),
        )

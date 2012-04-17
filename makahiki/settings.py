@@ -14,7 +14,7 @@ SITE_ID = 1
 PROJECT_ROOT = os.path.abspath(os.path.dirname(__file__))
 
 # Absolute path to the directory that holds media.
-MEDIA_ROOT = os.path.join(PROJECT_ROOT, 'site_media')
+MEDIA_ROOT = os.path.join(PROJECT_ROOT, 'site_media', 'media')
 
 # URL that handles the media served from MEDIA_ROOT.
 MEDIA_URL = '/site_media/media/'
