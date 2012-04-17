@@ -69,6 +69,10 @@ th {
   width: 29%;
 }
 
+.ticket-add-remove form {
+  display: inline;
+}
+
 .enabled, .disabled {
 	width: 28px;
 	height: 28px;
