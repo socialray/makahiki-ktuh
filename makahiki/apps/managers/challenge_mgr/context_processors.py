@@ -2,6 +2,7 @@
 from apps.managers.challenge_mgr import challenge_mgr
 from apps.managers.player_mgr.models import Profile
 from apps.managers.team_mgr.models import Team
+from apps.widgets.smartgrid import get_available_events
 from django.conf import settings
 
 
@@ -42,4 +43,5 @@ def competition(request):
         "CURRENT_ROUND_INFO": challenge_mgr.get_current_round_info(),
         "FACEBOOK_APP_ID": facebook_app_id,
         "IN_COMPETITION": challenge_mgr.in_competition(),
+        "AVAILABLE_EVENTS": get_available_events(user),
     }
