@@ -42,6 +42,12 @@
   width: 75px;
   text-align: center;
   min-height: 80px;
+  float: left;
+}
+
+#news-members-link {
+  text-align: center;
+  clear: both;
 }
 
 /**** Team members list styles *******/
