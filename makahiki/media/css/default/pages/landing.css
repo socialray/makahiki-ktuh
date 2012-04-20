@@ -2,100 +2,117 @@
 /* CSS Document */
 
 .container {
-	width: 960px;
-	/*background: transparent url(/site_media/static/css/default/images/bkg-page.jpg) top center no-repeat;*/
-	text-align: center;
-	margin: 0 auto;
-/*  padding: 10px 0 0 0;*/
-	
-	box-shadow: 0px 3px 20px #000;
-	-moz-box-shadow: 0px 3px 20px #000;
-	-webkit-box-shadow: 0px 3px 20px #000;
-  /*min-height: 787px;*/
+  width: 100%;
 }
 
-.container-top, .container-bottom {
-  min-height: 787px;
+.content {
+  box-shadow: none;
 }
 
-.container-bottom {
-/*  height: 2500px;*/
+button {
+  width: 80%;
 }
 
-#header {
-	display: none;
+.row {
+  margin-left: 0px;
 }
 
-#landing-page {
-	background: none;
-	background-color: white;
-	background-color: rgba(255,255,255,0.8);
-	border: 2px solid #167000;
-	
-/* 	width: 460px; */
-/* 	height: 130px; */
-/* 	float: none; */
-/* 	margin: 0 auto 0 auto; */
-	padding: 8px;
-	padding-bottom: 0;
-}
-
-#landing-logo {
+.logo, .title-text {
 	float: left;
+}    
+
+.logo-header-box {
+  min-height: 115px;
+  width: 60%;
+  margin: 10px 20% 20px 20%; 
+  display: block;
+}  
+
+@media ( max-width : 460px) {
+  .logo-header-box {
+    min-height: 115px;
+    width: 100%;
+    margin: 10px 0% 20px 0%; 
+    display: block;
+  } 
 }
 
-#landing-logo img {
-	margin: 0;
-	padding: 0 30px 0 20px;
+
+
+.logo-header-text { 
+  display: block;
+  padding-top: 20px; 
+  padding-left: 5%;
+  font-weight: bold; 
+  font-size: 20pt;
+  line-height: 28px;
+  margin-left: 106px; 
+  margin-right: 2.5%;
+  text-align: center;
+  width: 58%;
+}
+ 
+/* causes strange alignments at sub-800px widths
+@media ( min-width : 800px) {
+  .logo-header-text { 
+    display: block;
+    padding-top: 20px; 
+    padding-left: 5%;
+    font-weight: bold; 
+    font-size: 20pt;
+    line-height: 28px;
+    margin-left: 106px; 
+    margin-right: 2.5%;
+    text-align: center;
+    width: 70%;
+  } */
+
+@media ( min-width : 1150px) {
+  .logo-header-text { 
+    display: block;
+    padding-top: 40px; 
+    padding-left: 5%;
+    font-weight: bold; 
+    font-size: 20pt;
+    line-height: 28px;
+    margin-left: 106px; 
+    margin-right: 2.5%;
+    text-align: center;
+    width: 70%;
+  }
 }
 
-#landing-title {
-/* 	width: 258px; */
-/* 	height: 58px; */
-	float: right;
-	margin: 10px 30px 0 0;
+
+@media ( max-width : 650px) {
+  .logo-header-text {
+    font-size: 15pt;
+  }
+} 
+
+.logo {
+  float: left;
+  margin-left: 2.5%;
+  margin-right: 2.5%;
+  height: 113px;
+  width: 106px;
+  display: block;
+}  
+
+.landing-body {
+  text-align: center;
+  font-size: 12pt;
+  padding: 15px;
+  border-radius: 8px;
 }
 
-#landing-title h2 {
-	background: transparent url(/site_media/static/css/default/images/bkg-landing-title-text.png) top center no-repeat;
-	text-transform: uppercase;
-	text-indent: -999px;
-	overflow: hidden;
-	width: 258px;
-	height: 58px;
-}
 
-#landing-intro {
-	background: none;
-	background-color: white;
-	background-color: rgba(255,255,255,0.6);
-	border: 2px solid #167000;
-	
-/* 	width: 690px; */
-/* 	height: 530px; */
-/* 	margin: 2em auto 0 auto; */
-	padding: 30px;
-/* 	float: none; */
-	display: block;
-	text-align: center;
-	font-size: 14pt;
-}
 
-.welcome-text {
-	background: transparent url(/site_media/static/css/default/images/bkg-landing-welcome-text.png) top center no-repeat;
-	width: 686px;
-	height: 75px;
-	display: block;
-	text-indent: -9999px;
-	text-transform: uppercase;
-}
-
-#landing-intro button {
+.landing-intro button {
 	display: block;
 	text-decoration: none;
 	cursor: pointer;
 	color: #000;
-	width: 300px;
+	width: 500px;
 	height: 92px;
 	margin: 0 auto 0 auto;
 	border: 0;
@@ -111,55 +128,33 @@
 	box-shadow: 3px 3px 5px #000;
 	-moz-box-shadow: 3px 3px 5px #000;
 	-webkit-box-shadow: 3px 3px 5px #000;
+} 
+
+.contact-link {
+  text-align: center;
+  font-size: 12pt;
+  color: black;
+  margin-bottom: 20px;
 }
 
-#landing-intro button a {
-	text-decoration: none;
+.landing-sponsors {
+  padding: 5px;
+  padding-top: 15px;
 }
 
-#landing-intro button h3 {
-	font-size: 1.25em;
-	line-height: normal;
-	color: #000;
-	margin: 0;
-	padding: 0;
-	vertical-align: top;
-}
-
-#landing-intro button h5 {
-	font-size: 1em;
-	font-weight: normal;
-	line-height: normal;
-	color: #000;
-	margin: 10px 0;
-	padding: 0;
-}
-
-
-#landing-poster {
-	display: none;
-}
-
-#footer {
-/* 	position: relative; */
-/* 	margin: -260px auto -230px auto; */
-/* 	width: 480px; */
-/* 	height: 160px; */
-}
-
-#landing-sponsors {
-  background-color: #E3E3E3;
-}
-
-#landing-sponsors-list {
+.landing-sponsors-list {
   padding: 5px;
 }
 
-#landing-sponsors-list img {
+li {
+  margin-bottom: 10px;
+}
+
+.landing-sponsors-list img {
 	border: 0;
 }
 
-#landing-sponsors-list p {
+.landing-sponsors-list p {
 	clear: both;
 	float: none;
 	margin: 0;
@@ -168,93 +163,11 @@
 	display: block;
 }
 
-#landing-sponsors #landing-sponsors-list p a {
+.landing-sponsors .landing-sponsors-list p a {
 	clear: both;
 	margin: 0;
 	padding: 0;
 	display: inline;
 	float: none;
 }
-
-/******* About page styles *********/
-#landing-about {
-	/* 
-	  Transparent background info found at:
-	  http://www.w3schools.com/css/css_image_transparency.asp
-	  http://stackoverflow.com/questions/806000/css-semi-transparent-background-but-not-text
-	*/
-	background: none;
-	background-color: white;
-	background-color: rgba(255,255,255,0.6);
-	border: 2px solid #167000;
-	
-/* 	width: 690px; */
-/*  height: 480px;*/
-/* 	margin: 2em auto 0 auto; */
-	padding: 30px;
-/* 	float: none; */
-	display: block;
-	text-align: left;
-	font-size: 12pt;
-	clear:both;
-}
-
-#standings-header {
-  margin: 5px;
-  padding: 5px;
-  background: none;
-  background-color: white;
-  background-color: rgba(20,22,22,0.7);
-  color: white;
-  -moz-border-radius: 8px;
-  -webkit-border-radius: 8px;
-}
-
-#standings-header h3 {
-  margin: 5px 0;
-  text-align: center;
-}
-
-#standings-table td {
-  width: 100px;
-}
-
-/******* Browser check styles *********/
-#landing-browser-check {
-	/* 
-	  Transparent background info found at:
-	  http://www.w3schools.com/css/css_image_transparency.asp
-	  http://stackoverflow.com/questions/806000/css-semi-transparent-background-but-not-text
-	*/
-	background: none;
-	background-color: white;
-	border: 2px solid #167000;
-	
-	width: 690px;
-	margin: 2em auto 0 auto;
-	padding: 30px;
-	float: none;
-	display: block;
-	text-align: left;
-	font-size: 12pt;
-	clear:both;
-}
-
-#landing-browser-buttons {
-  margin: 0;
-  padding: 0;
-}
-
-#landing-browser-buttons button {
-  background-color: #FEF1EC;
-  border: 1px solid #CD0A0A;
-  cursor: pointer;
-  padding: 0;
-  color: #CD0A0A;
-  width: 700px;
-}
-
-#landing-button-continue h3 {
-  margin: 0;
-  padding: 0 5px;
-}
+  
