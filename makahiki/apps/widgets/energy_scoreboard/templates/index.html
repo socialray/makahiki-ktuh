@@ -1,50 +1,48 @@
 {% load class_tags %}
 
-<div {% get_id_and_classes "energy-scoreboard-box" %}>
-  <div {% get_id_and_classes "energy-scoreboard" %}>
+<div class="content-box">
+    <div class="carousel">
+    <div class="carousel-inner">
     {% for round_name in view_objects.energy_scoreboard.scoreboard_rounds %}
-        <div class="energy-scoreboard-cycle"
-             {% if not forloop.first %}style="display: none"{% endif %}>
-            <div {% get_id_and_classes "energy-scoreboard-title" %} style="width: 100%">
+        <div class="item {% if forloop.first %}active{% endif %}">
+            <div class="content-box-title">
                 {{ round_name }} kWh Score Board
                 <a href="#" style="float: right">
                     <img src="{{ STATIC_URL}}/css/default/images/icon-help-sm.png" width="20"
                          align="center"
                          title="Click to get help about this window"
                          onclick="toggleHelp('widget', 'energy-scoreboard'); return false;"
-                            /></a>
+                    /></a>
             </div>
-            <div {% get_id_and_classes "energy-scoreboard-content" %}>
-                <table id="{{round_name|slugify}}-energy-scoreboard">
+            <div>
+                <table id="{{round_name|slugify}}-energy-scoreboard" class="table">
                     <tr>
                         <th>Rank</th>
                         <th>{{ TEAM_LABEL }}</th>
                         <th>kWh used</th>
                     </tr>
                     {% for entry in view_objects.energy_scoreboard.energy_ranks %}
-
-                        <tr>
-                            <td>{%  if entry.team == user.get_profile.team %}<b>{% endif %}
-                                {{ forloop.counter }}</td>
-                            <td>{%  if entry.team == user.get_profile.team %}<b>{% endif %}
-                                {{ entry.team.name }}
-                            </td>
-                            <td style="text-align: right; padding-right: 20px">
-                                {%  if entry.team == user.get_profile.team %}<b>{% endif %}
-                                {{ entry.energy }}
-                            </td>
-                        </tr>
-
+                    <tr>
+                        <td>{%  if entry.team == user.get_profile.team %}<b>{% endif %}
+                               {{ forloop.counter }}
+                        </td>
+                        <td>{%  if entry.team == user.get_profile.team %}<b>{% endif %}
+                               {{ entry.team.name }}
+                        </td>
+                        <td style="text-align: right; padding-right: 20px">
+                               {%  if entry.team == user.get_profile.team %}<b>{% endif %}
+                               {{ entry.energy }}
+                        </td>
+                    </tr>
                     {% endfor %}
-
                 </table>
             </div>
         </div>
     {% endfor %}
     {# Additional scoreboard entry for the energy goals #}
     {% if view_objects.energy_scoreboard.goals_scoreboard and view_objects.energy_scoreboard.goals_scoreboard|length > 0 %}
-        <div class="energy-scoreboard-cycle" style="display: none">
-            <div {% get_id_and_classes "energy-scoreboard-title" %} style="width: 100%">
+        <div class="item">
+            <div class="content-box-title">
                 Completed Energy Goals
                 <a href="#" style="float: right">
                     <img src="{{ STATIC_URL}}/css/default/images/icon-help-sm.png" width="20"
@@ -53,8 +51,8 @@
                          onclick="toggleHelp('widget', 'energy-scoreboard'); return false;"
                             /></a>
             </div>
-            <div {% get_id_and_classes "energy-scoreboard-content" %}>
-                <table id="energy-goals-scoreboard">
+            <div>
+                <table id="energy-goals-scoreboard" class="table">
                     <tr>
                         <th>Rank</th>
                         <th>{{ TEAM_LABEL }}</th>
@@ -73,8 +71,8 @@
             </div>
         </div>
     {% endif %}
+    </div>
   </div>
-  <div id="scoreboard-cycle-nav"></div>
   <div id="energy-scoreboard-message">#1 at end of round wins a
     <a href="/prizes"> prize!</a>
   </div>
