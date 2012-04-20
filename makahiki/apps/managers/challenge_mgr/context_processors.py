@@ -17,11 +17,13 @@ def competition(request):
     team_member_count = None
     team_count = None
     overall_member_count = None
+    available_events = None
 
     if user.is_authenticated() and user.get_profile().team:
         team_member_count = user.get_profile().team.profile_set.count()
         team_count = Team.objects.count()
         overall_member_count = Profile.objects.count()
+        available_events = get_available_events(user)
 
     # Get Facebook info.
     try:
@@ -43,5 +45,5 @@ def competition(request):
         "CURRENT_ROUND_INFO": challenge_mgr.get_current_round_info(),
         "FACEBOOK_APP_ID": facebook_app_id,
         "IN_COMPETITION": challenge_mgr.in_competition(),
-        "AVAILABLE_EVENTS": get_available_events(user),
+        "AVAILABLE_EVENTS": available_events,
     }
