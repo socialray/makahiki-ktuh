@@ -3,6 +3,7 @@ from django.utils import importlib
 from apps.managers.challenge_mgr import challenge_mgr
 from apps.managers.player_mgr.models import Profile
 from apps.managers.team_mgr.models import Team
+from apps.widgets.smartgrid import smartgrid
 from django.conf import settings
 
 
@@ -17,15 +18,16 @@ def competition(request):
     team_member_count = None
     team_count = None
     overall_member_count = None
-    default_view_objects = None
+    available_events = None
 
     if user.is_authenticated() and user.get_profile().team:
         team_member_count = user.get_profile().team.profile_set.count()
         team_count = Team.objects.count()
         overall_member_count = Profile.objects.count()
+        available_events = smartgrid.get_available_events(user)
         default_view_objects = _get_default_view_objects(request)
 
-    # Get Facebook info.
+# Get Facebook info.
     try:
         facebook_app_id = settings.CHALLENGE.facebook_app_id
     except AttributeError:
@@ -46,6 +48,7 @@ def competition(request):
         "FACEBOOK_APP_ID": facebook_app_id,
         "IN_COMPETITION": challenge_mgr.in_competition(),
         "DEFAULT_VIEW_OBJECTS": default_view_objects,
+        "AVAILABLE_EVENTS": available_events,
     }
 
 

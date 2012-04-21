@@ -2,15 +2,18 @@
 {% load cache %}
 
 {% cache 600 infobar request.user.username %}
+{% with user.get_profile as profile %}
 {% if CURRENT_ROUND_INFO and CURRENT_ROUND_INFO.name != 'Overall' %}
 <!-- First slideshow element -->
 <div id="header-user-overall-rank1" class="item active">
+    <h4>{{profile.name}}</h4>
     <ul>
         <li>{{CURRENT_ROUND_INFO.name}}: {{profile.current_round_points}} {{COMPETITION_POINT_LABEL}}s #{{profile.current_round_team_rank}}/{{TEAM_MEMBER_COUNT}} in {{profile.team.name}}.</li>
     </ul>
 </div>
 <!-- Second slideshow element -->
 <div id="header-user-overall-rank2" class="item">
+    <h4>{{profile.name}}</h4>
     <ul>
         <li>{{CURRENT_ROUND_INFO.name}}: {{profile.current_round_points}} {{COMPETITION_POINT_LABEL}}s #{{profile.current_round_overall_rank}}/{{OVERALL_MEMBER_COUNT}} overall.</li>
     </ul>        
@@ -18,12 +21,14 @@
 {% endif %}
 <!-- Third slideshow element -->
 <div id="header-user-team-rank3" class="item">
+    <h4>{{profile.name}}</h4>
   <ul>
     <li>Overall: {{profile.points}} {{COMPETITION_POINT_LABEL}}s #{{profile.team_rank}}/{{TEAM_MEMBER_COUNT}} in {{profile.team.name}}</li>
   </ul>
 </div>
 <!-- Fourth slideshow element -->
 <div id="header-user-overall-rank4" class="item">
+    <h4>{{profile.name}}</h4>
     <ul>
         <li>Overall: {{profile.points}} {{COMPETITION_POINT_LABEL}}s #{{profile.overall_rank}}/{{OVERALL_MEMBER_COUNT}}</li>
     </ul>
@@ -34,15 +39,15 @@
 {% with canopy_info=profile.canopy_karma_info %}
 <div id="header-user-overall-rank5" >
   <div id="header-user-points" class="item">
-    <h3>{{profile.canopy_karma}}</h3>
-    <div id="header-text">Canopy Karma points</div>
+    <h4>{{profile.name}}</h4>
+    <div>{{profile.canopy_karma}} Canopy Karma points</div>
   </div>
   <div id="header-user-rank" class="item">
-    <h3>#{{canopy_info.rank}}</h3>
-    <div id="header-text">out of {{canopy_info.total}} overall</div>
+    <h4>{{profile.name}}</h4>
+    <div>#{{canopy_info.rank}} out of {{canopy_info.total}} overall</div>
   </div>
 </div>
 {% endwith %}
 {% endif %}
-
+{% endwith %}
 {% endcache %}

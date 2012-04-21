@@ -7,25 +7,20 @@
             <div class="span1">
                 <img src="{% avatar_url user 60 %}" />
             </div>
-            <div class="span3 carousel">
-                {% with user.get_profile as profile %}
-                <h4>{{profile.name}}</h4>
-                <div id="user-cycle">
+            <div id="wide-personal-cycle" class="span3 carousel">
+                <div class="carousel-inner">
                     {% include "components/user_points.html" %}
                 </div>
-                {% endwith %}
             </div>
-            <div class="span3">
-                {% with user.get_profile.team as team %}
-                <h4>{{team}}</h4>
-                <div id="team-cycle">
+            <div id="wide-team-cycle" class="span3 carousel">
+                <div class="carousel-inner">
                     {% include "components/team_points.html" %}
                 </div>
-                {% endwith %}
             </div>
-            <div class="span3">
-                <div id="round-cycle">
-                    {% include "components/round_cycle.html" %}</div>
+            <div id="wide-round-cycle" class="span3 carousel">
+                <div class="carousel-inner">
+                    {% include "components/round_cycle.html" %}
+                </div>
             </div>
             <div class="span2">
                 <button id="header-feedback" href="javascript:void(0);">Send Feedback</button>

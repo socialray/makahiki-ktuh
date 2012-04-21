@@ -18,8 +18,9 @@
             Badge Catalog
         </div>
         <div class="content-box">
-            <a class="textlink" href="{% url profile_index %}">Back to profile</a>
-
+            <p class="centered">
+              <a class="textlink" href="{% url profile_index %}">Back to profile</a>
+            </p>
             <table>
                 <tr>
                     <th></th>
@@ -40,8 +41,9 @@
                     </tr>
                 {% endfor %}
             </table>
-
-            <a class="textlink" href="{% url profile_index %}">Back to profile</a>
+            <p class="centered">
+              <a class="textlink" href="{% url profile_index %}">Back to profile</a>
+            </p>
         </div>
     </div>
 {% endblock %}

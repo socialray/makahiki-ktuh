@@ -100,23 +100,30 @@ var log_js_action = function(type, object, action) {
 }
 
 var toggleHelp = function(category, slug) {
-  // log_js_action("ask-admin", "dialog", "open");
-  jQuery("#widget-help-dialog").dialog("open");
-  jQuery("#ui-dialog-title-widget-help-dialog").html("");
-  jQuery("#widget-help-dialog").html("");
-  jQuery.ajax({
-    url: "/help/" + category + "/" + slug + "/", 
-    success: function(data) {
-      jQuery("#ui-dialog-title-widget-help-dialog").html(data.title);
-      jQuery("#widget-help-dialog").html(data.contents);
-    },
-    error: function(XMLHttpRequest, textStatus, errorThrown) {
-      jQuery("#ui-dialog-title-widget-help-dialog").html("(empty)");
-      jQuery("#widget-help-dialog").html("There is no help content for this widget. " +
-          "If you are an admin, please create a new topic in category '" + category + 
-          "' and slug '" + slug + "'.");
-    }
-  });
+    var modalElement = $('<div />', { class: 'modal hide fade', id: 'my-modal' })
+    .append($('<div />', { class: 'modal-header' })
+    .append($('<a/>', { class: 'close', text: 'x', href: '#', 'data-dismiss': 'modal' } ))
+    .append($('<h3/>', { text: 'Item Modal Window' })))
+    .append($('<div />', { class: 'modal-body'} ))
+    .append($('<a/>', { class: 'btn', href: '#', 'data-dismiss': 'modal', text: 'Close'}));
+
+    modalElement.modal({
+        backdrop: true
+    });	
+    
+    jQuery.ajax({
+        url: "/help/" + category + "/" + slug + "/", 
+        success: function(data) {
+        	modalElement.find('.modal-header h3').html(data.title);
+        	modalElement.find('.modal-body').html(data.contents);
+        },
+        error: function(XMLHttpRequest, textStatus, errorThrown) {
+        	modalElement.find('.modal-header h3').html("(empty)");
+        	modalElement.find('.modal-body').html("There is no help content for this widget. " +
+        	          "If you are an admin, please create a new topic in category '" + category + 
+        	          "' and slug '" + slug + "'.");
+        }
+    });
 }
 
 // Utility functions for get/set/delete cookies

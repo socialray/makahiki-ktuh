@@ -21,6 +21,8 @@
 @quest-list-sel: #282A2A;
 @news: #A2C0D2;
 @notifications: fadeout(#adff2f, 45%);
+@content-box-table-header: #A2C0D2;
+@landingSponsorDiv: #E3E3E3;
 
 // logo
 /* set the logo */
@@ -91,6 +93,9 @@ body {
 	background-color: @content-alt;
 }
 
+.content-box th {
+    background-color: @content-box-table-header;
+}
 .event,.event-legend {
 	background-color: @event-legend;
 }
@@ -99,23 +104,16 @@ body {
 	background-color: @excursion-legend;
 }
 
-.horizontalaccordion>ul>li {
-    /* Decorative CSS */
-    background:@quest-box;
+.modal-header {
+    background-color: darken(@content, 10%);
 }
 
-.horizontalaccordion>ul>li>h3 {
-    /* Decorative CSS */
-    border-left:#f0f0f0 1px solid;
-    text-decoration:none;
-    color: @nav;
-    background:darken(@quest-box, 30%);
+.modal-body {
+    background-color: @content;
 }
 
-.horizontalaccordion:hover>ul>li:hover>h3 {
-    /* Decorative CSS */
-    color:@nav;
-    background:darken(@quest-box, 30%);
+.modal {
+    background-color: @content;
 }
 
 .navbar .nav>li>a {
@@ -264,3 +262,8 @@ body,#header-nav-links ul li h4,#header-nav-links {
 /*th {
   background: @news;
 }*/
+
+/* ===== Page specific coloring for Landing ===== */
+.landing-sponsors { 
+  background-color: @landingSponsorDiv;
+}
