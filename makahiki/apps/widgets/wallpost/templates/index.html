@@ -1,8 +1,6 @@
-{% load class_tags %}
-
-<div {% get_id_and_classes "news-wall" "responsive" %}>
-    <div {% get_id_and_classes "news-wall-box" "responsive" %}>
-        <div {% get_id_and_classes "news-wall-title" "responsive" %}>
+<div id="news-wall" class="content-box">
+    <div id="news-wall-box">
+        <div id="news-wall-title" class="content-box-title">
             {{ view_objects.wallpost.title }}
             <a href="#" style="float: right">
                 <img src="{{ STATIC_URL}}/css/default/images/icon-help-sm.png" width="20"
@@ -11,14 +9,14 @@
                      onclick="toggleHelp('widget', 'news-feed'); return false;"
                         /></a>
         </div>
-        <div {% get_id_and_classes "news-wall-content" "responsive" %}>
+        <div id="news-wall-content">
             {{ view_objects.wallpost.description }}
-            <div {% get_id_and_classes "wall-form" "responsive" %}>
-                <form {% get_id_and_classes "news-post-form" "responsive" %} action="{% url news_post %}"
+            <div id="wall-form">
+                <form id="news-post-form" action="{% url news_post %}"
                                                                 method="POST">
                     {% csrf_token %}
-                    <div {% get_id_and_classes "wall-post-errors" "responsive" %}></div>
-                    <div {% get_id_and_classes "wall-post" "responsive" %}>
+                    <div id="wall-post-errors"></div>
+                    <div id="wall-post">
                         {{ view_objects.wallpost.wall_form.post }}
                     </div>
                     <div style="text-align: center">
@@ -27,15 +25,14 @@
                             Post
                         </button>
                     </div>
-                    <!-- <a {% get_id_and_classes "wall-post-submit" %} href="#">Post</a> -->
                 </form>
             </div>
 
-            <ul {% get_id_and_classes "wall-posts" "responsive" %}>
+            <ul id="wall-posts">
                 {% include "news_posts.html" %}
             </ul>
             {% if not view_objects.wallpost.posts %}
-                <p {% get_id_and_classes "wall-no-posts" "responsive" %} style="padding: 7px;">There are no posts
+                <p id="wall-no-posts" style="padding: 7px;">There are no posts
                     yet!</p>
             {% endif %}
         </div>
