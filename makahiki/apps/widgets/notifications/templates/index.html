@@ -1,13 +1,15 @@
-{% if view_objects.notifications %}
-    {% if view_objects.notifications.unread %}
+{% with DEFAULT_VIEW_OBJECTS.notifications as notifications %}
+{% if notifications %}
+    {% if notifications.unread %}
         <ul class="notification-list">
-            {% for notification in view_objects.notifications.unread %}
+            {% for notification in notifications.unread %}
                 {% include "widgets/notifications/templates/notifications/list-item.html" %}
             {% endfor %}
         </ul>
     {% endif %}
 
-    {% if view_objects.notifications.alerts %}
+    {% if notifications.alerts %}
         {% include "widgets/notifications/templates/notifications/dialog.html" %}
     {% endif %}
 {% endif %}
+{% endwith %}

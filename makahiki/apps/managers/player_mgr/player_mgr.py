@@ -87,3 +87,11 @@ def reset_user(user):
     profile.team = team
 
     profile.save()
+
+
+def get_user_by_email(email):
+    """Return the user from given email"""
+    try:
+        return User.objects.get(email=email)
+    except ObjectDoesNotExist:
+        return None

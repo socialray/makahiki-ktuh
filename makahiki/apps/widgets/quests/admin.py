@@ -17,7 +17,7 @@ class QuestAdminForm(forms.ModelForm):
 
     def clean_unlock_conditions(self):
         """Validates the unlock conditions of the quest."""
-        from apps.widgets.quests import process_conditions_string
+        from apps.widgets.quests.quests import process_conditions_string
 
         data = self.cleaned_data["unlock_conditions"]
         # Pick a user and see if the conditions result is true or false.
@@ -34,7 +34,7 @@ class QuestAdminForm(forms.ModelForm):
 
     def clean_completion_conditions(self):
         """Validates the unlock conditions of the quest."""
-        from apps.widgets.quests import process_conditions_string
+        from apps.widgets.quests.quests import process_conditions_string
 
         data = self.cleaned_data["completion_conditions"]
         # Pick a user and see if the conditions result is true or false.

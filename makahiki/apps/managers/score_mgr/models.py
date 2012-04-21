@@ -35,12 +35,15 @@ class ScoreboardEntry(models.Model):
     """Defines the model that tracks user scores."""
 
     profile = models.ForeignKey("player_mgr.Profile", editable=False)
-    round_name = models.CharField(max_length="30", editable=False,
-                                  help_text="The name of the round")
-    points = models.IntegerField(default=0, editable=False,
-                                 help_text="Points for this round")
-    last_awarded_submission = models.DateTimeField(null=True, blank=True, editable=False,
-                                                   help_text="Last award time")
+    round_name = models.CharField(
+        max_length="30", editable=False,
+        help_text="The name of the round")
+    points = models.IntegerField(
+        default=0, editable=False,
+        help_text="Points for this round")
+    last_awarded_submission = models.DateTimeField(
+        null=True, blank=True, editable=False,
+        help_text="Last award time")
 
     class Meta:
         """meta"""
@@ -52,9 +55,16 @@ class PointsTransaction(models.Model):
     """Entries that track points awarded to users."""
 
     user = models.ForeignKey(User)
-    points = models.IntegerField()
-    submission_date = models.DateTimeField()
-    message = models.CharField(max_length=255)
+    points = models.IntegerField(
+        help_text="The points for the transaction. negative number indicates a subtraction"
+    )
+    transaction_date = models.DateTimeField(
+        help_text="The date of the transaction"
+    )
+    message = models.CharField(
+        max_length=255,
+        help_text="The message of the transcation.")
+
     object_id = models.PositiveIntegerField(null=True)
     content_type = models.ForeignKey(ContentType, null=True)
     related_object = generic.GenericForeignKey("content_type", "object_id")

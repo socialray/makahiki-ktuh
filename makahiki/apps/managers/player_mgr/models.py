@@ -89,13 +89,17 @@ class Profile(models.Model):
         """Returns the rank of the user in their own team."""
         return score_mgr.player_rank_in_team(self)
 
-    def add_points(self, points, submission_date, message, related_object=None):
+    def add_points(self, points, transaction_date, message, related_object=None):
         """Adds points based on the point value of the submitted object."""
-        score_mgr.player_add_points(self, points, submission_date, message, related_object)
+        score_mgr.player_add_points(self, points, transaction_date, message, related_object)
 
-    def remove_points(self, points, submission_date, message, related_object=None):
+    def remove_points(self, points, transaction_date, message, related_object=None):
         """Removes points from the user."""
-        score_mgr.player_remove_points(self, points, submission_date, message, related_object)
+        score_mgr.player_remove_points(self, points, transaction_date, message, related_object)
+
+    def remove_related_points(self, related_object):
+        """Removes points related to the related_object (action) from the user."""
+        score_mgr.player_remove_related_points(self, related_object)
 
 
 def create_profile(sender, instance=None, **kwargs):

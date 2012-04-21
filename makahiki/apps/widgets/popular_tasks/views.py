@@ -1,6 +1,6 @@
 """Prepare rendering of popular smart grid actions widget"""
 
-from apps.widgets.smartgrid import   get_popular_tasks
+from apps.widgets.smartgrid import   smartgrid
 
 
 def supply(request, page_name):
@@ -9,5 +9,5 @@ def supply(request, page_name):
     _ = request
     _ = page_name
     return {
-        "popular_tasks": get_popular_tasks(),
+        "popular_tasks": smartgrid.get_popular_tasks(),
         }

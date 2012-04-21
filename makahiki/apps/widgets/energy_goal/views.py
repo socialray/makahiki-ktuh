@@ -5,7 +5,7 @@ from apps.managers.challenge_mgr import challenge_mgr
 from apps.managers.resource_mgr import resource_mgr
 from apps.widgets.energy_goal import energy_goal
 
-from apps.widgets.smartgrid import get_available_golow_activities
+from apps.widgets.smartgrid import smartgrid
 
 
 def supply(request, page_name):
@@ -13,7 +13,7 @@ def supply(request, page_name):
     _ = page_name
     user = request.user
     team = user.get_profile().team
-    golow_activities = get_available_golow_activities(user)
+    golow_activities = smartgrid.get_available_golow_actions(user)
     goal = None
     daily_goal = None
     is_manual_entry = None

@@ -1,9 +1,9 @@
 Hi {{ object.user.get_profile.name }},
 
-{% with object.activity as activity %}
+{% with object.action as action %}
     <p>
         Your response to "<a
-            href='http://{{domain}}{% url activity_task activity.type activity.slug %}'>{{ activity.title }}</a>"
+            href='http://{{domain}}{% url activity_task action.type action.slug %}'>{{ action.title }}</a>"
         was not approved. Here is our feedback:
     </p>
 
@@ -12,8 +12,8 @@ Hi {{ object.user.get_profile.name }},
     </p>
 
     <p>
-        You can still receive points for this {{ activity.type.lower }}. Please click <a
-            href='http://{{domain}}{% url activity_task activity.type activity.slug %}'>here</a> to
+        You can still receive points for this {{ action.type.lower }}. Please click <a
+            href='http://{{domain}}{% url activity_task action.type action.slug %}'>here</a> to
         try again.
     </p>
 {% endwith %}

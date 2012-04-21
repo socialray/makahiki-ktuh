@@ -8,6 +8,7 @@ from apps.managers.challenge_mgr.models import PageSettings
 from apps.managers.team_mgr.models import Team, Group
 from apps.widgets.prizes.models import Prize
 from apps.widgets.quests.models import Quest
+from apps.widgets.smartgrid.models import Event, Activity
 
 
 def setup_user(username, password):
@@ -57,31 +58,8 @@ def register_page_widget(page_name, widget_name):
     PageSettings.objects.get_or_create(name=page_name, widget=widget_name)
 
 
-def create_event(slug=None):
-    """create test event"""
-    from apps.widgets.smartgrid.models import Activity
-
-    if slug is None:
-        slug = "test-event"
-    event = Activity.objects.create(
-        title="Test event",
-        slug=slug,
-        description="Testing!",
-        duration=10,
-        point_value=10,
-        pub_date=datetime.datetime.today(),
-        expire_date=datetime.datetime.today() + datetime.timedelta(days=7),
-        confirm_type="code",
-        type="event",
-        event_date=datetime.datetime.today() + datetime.timedelta(days=1),
-        )
-    return event
-
-
 def create_activity():
     """create test activity"""
-    from apps.widgets.smartgrid.models import Activity
-
     return Activity.objects.create(
         title="Test activity",
         description="Testing!",
@@ -92,6 +70,25 @@ def create_activity():
         expire_date=datetime.datetime.today() + datetime.timedelta(days=7),
         confirm_type="text",
         type="activity",
+    )
+
+
+def create_event(slug=None):
+    """create test activity"""
+    if not slug:
+        slug = "test-event"
+
+    return Event.objects.create(
+        title="Test event",
+        description="Testing!",
+        slug=slug,
+        duration=10,
+        point_value=10,
+        pub_date=datetime.datetime.today(),
+        expire_date=datetime.datetime.today() + datetime.timedelta(days=7),
+        event_date=datetime.datetime.today() + datetime.timedelta(days=1),
+        depends_on=True,
+        type="event",
     )
 
 

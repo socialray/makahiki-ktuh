@@ -1,7 +1,7 @@
 {% load notice_tags %}
 <div id="notification-dialog" title="Notifications" style="display: none">
     <ul id="notification-dialog-list">
-        {% for notification in view_objects.notifications.alerts %}
+        {% for notification in notifications.alerts %}
             <li id="notification-dialog-{{notification.id}}"
                 class="{{notification.style_class}} notification-item">
                 <!-- FIXME: Don't like the width 530px -->
@@ -63,4 +63,4 @@
     });
 </script>
 
-{% mark_alerts_displayed request view_objects.notifications.alerts %}
+{% mark_alerts_displayed request notifications.alerts %}

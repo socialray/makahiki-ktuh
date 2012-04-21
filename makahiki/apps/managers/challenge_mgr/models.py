@@ -86,6 +86,7 @@ class ChallengeSettings(models.Model):
 
         # email settings
         if settings.CHALLENGE.email_enabled:
+            settings.SERVER_EMAIL = settings.CHALLENGE.contact_email
             settings.EMAIL_HOST = settings.CHALLENGE.email_host
             settings.EMAIL_PORT = settings.CHALLENGE.email_port
             settings.EMAIL_USE_TLS = settings.CHALLENGE.email_use_tls

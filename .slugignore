@@ -1,7 +1,10 @@
 deploy
+bootstrap
+bootstrap-cam
+caminator
+log
 doc
 README.md
 tests.py
 tests
-test_*
 scripts

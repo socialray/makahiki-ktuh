@@ -7,7 +7,7 @@ from django.http import HttpResponseRedirect, Http404
 from django.shortcuts import get_object_or_404
 
 from apps.widgets.quests.models import Quest, QuestMember
-from apps.widgets.quests import get_quests
+from apps.widgets.quests.quests import get_quests
 
 
 def supply(request, page_name):

@@ -1,6 +1,6 @@
 {% load class_tags %}
 
-<form id="task-reminder-form" action="{% url activity_reminder task.type task.slug %}"
+<form id="task-reminder-form" action="{% url activity_reminder action.type action.slug %}"
       method="post">
     {% csrf_token %}
     <div style='padding-left: 10px'>

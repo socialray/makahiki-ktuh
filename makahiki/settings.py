@@ -276,9 +276,14 @@ FILE_UPLOAD_PERMISSIONS = 0644
 # to load the internationalization machinery.
 USE_I18N = True
 
+# Locale Info
 TIME_ZONE = 'Pacific/Honolulu'
 LOCALE_SETTING = 'en'
 LANGUAGE_CODE = 'en_US.UTF-8'
+
+# Markdown info
+MARKDOWN_LINK = "http://daringfireball.net/projects/markdown/syntax"
+MARKDOWN_TEXT = "Uses <a href=\"" + MARKDOWN_LINK + "\" target=\"_blank\">Markdown</a> formatting."
 
 
 ##############################

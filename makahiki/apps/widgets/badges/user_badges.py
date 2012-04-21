@@ -39,7 +39,8 @@ class FullyCommittedBadge(Badge):
     def award(self, **state):
         """award the badge"""
         user = state["user"]
-        current_members = user.commitmentmember_set.filter(
+        current_members = user.actionmember_set.filter(
+            action__type="commitment",
             award_date__isnull=True
         )
         if current_members.count() == 5:

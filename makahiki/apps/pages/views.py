@@ -63,13 +63,6 @@ def _get_view_objects(request, page_name, view_objects):
         widget = widget.replace(".", "_")
         view_objects[widget] = page_views.supply(request, page_name)
 
-    # load default widgets for all pages
-    for widget in settings.INSTALLED_DEFAULT_WIDGET_APPS:
-        view_module_name = 'apps.widgets.' + widget + '.views'
-        page_views = importlib.import_module(view_module_name)
-        widget = widget.replace(".", "_")
-        view_objects[widget] = page_views.supply(request, None)
-
     return True
 
 

@@ -1,13 +1,11 @@
 """Defines the Quest Model."""
 
 import datetime
+from django.conf import settings
 
 from django.db import models
 from django.contrib.auth.models import User
 from apps.managers.score_mgr import score_mgr
-
-MARKDOWN_LINK = "http://daringfireball.net/projects/markdown/syntax"
-MARKDOWN_TEXT = "Uses <a href=\"" + MARKDOWN_LINK + "\" target=\"_blank\">Markdown</a> formatting."
 
 
 class Quest(models.Model):
@@ -15,7 +13,7 @@ class Quest(models.Model):
     name = models.CharField(max_length=255, help_text="The name of the quest.")
     quest_slug = models.SlugField()
     description = models.TextField(
-        help_text="Outline the steps to completing this quest. %s" % MARKDOWN_TEXT)
+        help_text="Outline the steps to completing this quest. %s" % settings.MARKDOWN_TEXT)
     level = models.IntegerField()
     unlock_conditions = models.TextField(
         help_text="Conditions a user needs to meet in order to have this quest be available." \
@@ -34,13 +32,13 @@ class Quest(models.Model):
 
     def can_add_quest(self, user):
         """Returns True if the user can add the quest."""
-        from apps.widgets.quests import process_conditions_string
+        from apps.widgets.quests.quests import process_conditions_string
 
         return process_conditions_string(self.unlock_conditions, user)
 
     def completed_quest(self, user):
         """Returns True if the user completed the quest."""
-        from apps.widgets.quests import process_conditions_string
+        from apps.widgets.quests.quests import process_conditions_string
 
         return process_conditions_string(self.completion_conditions, user)
 

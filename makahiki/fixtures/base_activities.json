@@ -69,7 +69,7 @@
     "fields": {
       "answer": "kilowatt-hour", 
       "question": "What is the unit of measurement for household energy?", 
-      "activity": 2
+      "action": 2
     }
   }, 
   {
@@ -78,7 +78,7 @@
     "fields": {
       "answer": "watt", 
       "question": "What is the unit of measurement for power?", 
-      "activity": 2
+      "action": 2
     }
   }, 
   {
@@ -87,7 +87,7 @@
     "fields": {
       "answer": "burning for light", 
       "question": "What was the kukui nut used for?", 
-      "activity": 22
+      "action": 22
     }
   }, 
   {
@@ -96,7 +96,7 @@
     "fields": {
       "answer": "93%", 
       "question": "How much energy does Hawaii get from fossil fuels like oil?", 
-      "activity": 22
+      "action": 22
     }
   }, 
   {
@@ -105,7 +105,7 @@
     "fields": {
       "answer": "wind farm", 
       "question": "What do you call a large group of windmills?", 
-      "activity": 23
+      "action": 23
     }
   }, 
   {
@@ -114,7 +114,7 @@
     "fields": {
       "answer": "power", 
       "question": "What concept in electricity is like a car's speedometer?", 
-      "activity": 2
+      "action": 2
     }
   }, 
   {
@@ -123,7 +123,7 @@
     "fields": {
       "answer": "energy", 
       "question": "What concept in electricity is like a car's odometer?", 
-      "activity": 2
+      "action": 2
     }
   }, 
   {
@@ -132,7 +132,7 @@
     "fields": {
       "answer": "Import from adjacent states or countries", 
       "question": "What do other states do when they need more energy than they can generate?", 
-      "activity": 28
+      "action": 28
     }
   }, 
   {
@@ -141,7 +141,7 @@
     "fields": {
       "answer": "Oil", 
       "question": "What does Hawaii use for most of its energy needs?", 
-      "activity": 29
+      "action": 29
     }
   }, 
   {
@@ -150,7 +150,7 @@
     "fields": {
       "answer": "incandescent", 
       "question": "What lighting method uses the most energy?", 
-      "activity": 28
+      "action": 28
     }
   }, 
   {
@@ -159,7 +159,7 @@
     "fields": {
       "answer": "doesn't work at night, or when very cloudy", 
       "question": "What is one limitation of solar power?", 
-      "activity": 22
+      "action": 22
     }
   }, 
   {
@@ -168,7 +168,7 @@
     "fields": {
       "answer": "strong and steady wind", 
       "question": "What two things are needed for a good wind turbine location?", 
-      "activity": 23
+      "action": 23
     }
   }, 
   {
@@ -177,7 +177,7 @@
     "fields": {
       "answer": "less fresh water, less beach, more drought, more floods, more coral bleaching", 
       "question": "What is one expected impact of climate change in Hawaii?", 
-      "activity": 26
+      "action": 26
     }
   }, 
   {
@@ -186,7 +186,7 @@
     "fields": {
       "answer": "reduce it, get it under 350 ppm", 
       "question": "What should we do about carbon dioxide?", 
-      "activity": 26
+      "action": 26
     }
   }, 
   {
@@ -195,7 +195,7 @@
     "fields": {
       "answer": "Reduce our energy use, reduce energy footprint", 
       "question": "How can we in Hawaii reduce our carbon footprint?", 
-      "activity": 26
+      "action": 26
     }
   }, 
   {
@@ -204,7 +204,7 @@
     "fields": {
       "answer": "90%", 
       "question": "How much of Hawaii's energy comes from oil?", 
-      "activity": 14
+      "action": 14
     }
   }, 
   {
@@ -213,7 +213,7 @@
     "fields": {
       "answer": "bar", 
       "question": "foo", 
-      "activity": 18
+      "action": 18
     }
   }, 
   {
@@ -222,7 +222,7 @@
     "fields": {
       "answer": "cup", 
       "question": "what is kukuicup", 
-      "activity": 13
+      "action": 13
     }
   }, 
   {
@@ -231,7 +231,7 @@
     "fields": {
       "answer": "Hale Aloha groups, or Lehua, Ilima, Mokihana",
       "question": "Where is the Kukui Cup taking place?", 
-      "activity": 14
+      "action": 14
     }
   }, 
   {
@@ -240,25 +240,17 @@
     "fields": {
       "answer": "freshmen, first-year students, residents of Hale Aloha", 
       "question": "What students can participate?", 
-      "activity": 14
+      "action": 14
     }
   }, 
-  {
-    "pk": 44, 
-    "model": "smartgrid.textpromptquestion", 
-    "fields": {
-      "answer": "power", 
-      "question": "The watt is a unit of", 
-      "activity": 53
-    }
-  }, 
+
   {
     "pk": 30, 
     "model": "smartgrid.textpromptquestion", 
     "fields": {
       "answer": "200 W", 
       "question": "How much power does a game console use?", 
-      "activity": 15
+      "action": 15
     }
   }, 
   {
@@ -267,7 +259,7 @@
     "fields": {
       "answer": "1000+ W", 
       "question": "How much does power a microwave use?", 
-      "activity": 15
+      "action": 15
     }
   }, 
   {
@@ -276,7 +268,7 @@
     "fields": {
       "answer": "175-200 W", 
       "question": "How much power does a solar panel generate?", 
-      "activity": 15
+      "action": 15
     }
   }, 
   {
@@ -285,7 +277,7 @@
     "fields": {
       "answer": "3 MW", 
       "question": "How much power does a big wind turbine generate?", 
-      "activity": 15
+      "action": 15
     }
   }, 
   {
@@ -294,7 +286,7 @@
     "fields": {
       "answer": "3 Wh", 
       "question": "How much energy is in a AA battery?", 
-      "activity": 15
+      "action": 15
     }
   }, 
   {
@@ -303,7 +295,7 @@
     "fields": {
       "answer": "1 kWh", 
       "question": "How much energy does a solar panel generate per day?", 
-      "activity": 15
+      "action": 15
     }
   }, 
   {
@@ -312,7 +304,7 @@
     "fields": {
       "answer": "1500 kWh", 
       "question": "How much energy does a Hale Aloha tower use per day?", 
-      "activity": 15
+      "action": 15
     }
   }, 
   {
@@ -321,7 +313,7 @@
     "fields": {
       "answer": "$0.20-$0.30", 
       "question": "How much does a kilowatt-hour cost in Hawaii?", 
-      "activity": 15
+      "action": 15
     }
   }, 
   {
@@ -330,7 +322,7 @@
     "fields": {
       "answer": "a power plant that turns some of Hawaii's waste into energy", 
       "question": "What is H-POWER?", 
-      "activity": 57
+      "action": 57
     }
   }, 
   {
@@ -339,7 +331,7 @@
     "fields": {
       "answer": "60%", 
       "question": "What percentage of our trash does H-POWER convert into energy?", 
-      "activity": 57
+      "action": 57
     }
   }, 
   {
@@ -348,7 +340,7 @@
     "fields": {
       "answer": "prevent, reuse, recycle", 
       "question": "What are the three components of the trash pyramid?", 
-      "activity": 57
+      "action": 57
     }
   }, 
   {
@@ -357,1952 +349,1094 @@
     "fields": {
       "answer": "incandescent", 
       "question": "What lighting method uses the most energy?", 
-      "activity": 20
-    }
-  }, 
-  {
-    "pk": 45, 
-    "model": "smartgrid.textpromptquestion", 
-    "fields": {
-      "answer": "W", 
-      "question": "The watt is abbreviated as", 
-      "activity": 53
-    }
-  }, 
-  {
-    "pk": 46, 
-    "model": "smartgrid.textpromptquestion", 
-    "fields": {
-      "answer": "watt-hour", 
-      "question": "Electrical energy is commonly measured in units of", 
-      "activity": 53
-    }
-  }, 
-  {
-    "pk": 47, 
-    "model": "smartgrid.textpromptquestion", 
-    "fields": {
-      "answer": "watt-hour", 
-      "question": "The abbreviation \"Wh\" refers to what unit", 
-      "activity": 53
-    }
-  }, 
-  {
-    "pk": 48, 
-    "model": "smartgrid.textpromptquestion", 
-    "fields": {
-      "answer": "26 Wh", 
-      "question": "A compact fluorescent lightbulb uses 13 W. If it is run for 2 hours, how much energy does it use?", 
-      "activity": 53
-    }
-  }, 
-  {
-    "pk": 49, 
-    "model": "smartgrid.textpromptquestion", 
-    "fields": {
-      "answer": "100 W", 
-      "question": "While reading your electric bill you notice that you used 72 kWh more than the previous month. You search your apartment for anything out of the ordinary and find you left a fan running in a closet all month long! About how much power does the fan use?", 
-      "activity": 53
-    }
-  }, 
-  {
-    "pk": 50, 
-    "model": "smartgrid.textpromptquestion", 
-    "fields": {
-      "answer": "2.5 kW", 
-      "question": "Roughly how much power does an electric oven use when turned to its highest setting?", 
-      "activity": 53
-    }
-  }, 
-  {
-    "pk": 51, 
-    "model": "smartgrid.textpromptquestion", 
-    "fields": {
-      "answer": "13 kWh", 
-      "question": "On average, how much electrical energy does a home in Hawaii use per day?", 
-      "activity": 53
-    }
-  }, 
-  {
-    "pk": 52, 
-    "model": "smartgrid.textpromptquestion", 
-    "fields": {
-      "answer": "200 W", 
-      "question": "What is the approximate maximum power generated from a single standard rooftop solar panel?", 
-      "activity": 53
-    }
-  }, 
-  {
-    "pk": 53, 
-    "model": "smartgrid.textpromptquestion", 
-    "fields": {
-      "answer": "oil", 
-      "question": "What is the source of approximately 80% of Hawaii's electricity?", 
-      "activity": 53
-    }
-  }, 
-  {
-    "pk": 54, 
-    "model": "smartgrid.textpromptquestion", 
-    "fields": {
-      "answer": "1.2 GW", 
-      "question": "What is the approximate maximum electrical power demand for the entire island of Oahu?", 
-      "activity": 53
-    }
-  }, 
-  {
-    "pk": 55, 
-    "model": "smartgrid.textpromptquestion", 
-    "fields": {
-      "answer": "A graph of the amount of power used on the grid over time", 
-      "question": "What is the electrical grid demand curve?", 
-      "activity": 53
-    }
-  }, 
-  {
-    "pk": 56, 
-    "model": "smartgrid.textpromptquestion", 
-    "fields": {
-      "answer": "Get 70% of Hawaii's energy from clean sources by 2030", 
-      "question": "What is the goal of the Hawaii Clean Energy Initiative?", 
-      "activity": 53
-    }
-  }, 
-  {
-    "pk": 57, 
-    "model": "smartgrid.textpromptquestion", 
-    "fields": {
-      "answer": "All of the above", 
-      "question": "What are the effects of climate change?", 
-      "activity": 53
-    }
-  }, 
-  {
-    "pk": 58, 
-    "model": "smartgrid.textpromptquestion", 
-    "fields": {
-      "answer": "387 ppm, 350 ppm", 
-      "question": "Approximately how much carbon dioxide is in the atmosphere now, and what level is considered safe/acceptable?", 
-      "activity": 53
+      "action": 20
     }
   }, 
   {
     "pk": 1, 
-    "model": "smartgrid.questionchoice", 
-    "fields": {
-      "choice": "energy", 
-      "question": 44, 
-      "activity": 53
-    }
-  }, 
-  {
-    "pk": 2, 
-    "model": "smartgrid.questionchoice", 
-    "fields": {
-      "choice": "power", 
-      "question": 44, 
-      "activity": 53
-    }
-  }, 
-  {
-    "pk": 3, 
-    "model": "smartgrid.questionchoice", 
-    "fields": {
-      "choice": "distance", 
-      "question": 44, 
-      "activity": 53
-    }
-  }, 
-  {
-    "pk": 4, 
-    "model": "smartgrid.questionchoice", 
-    "fields": {
-      "choice": "force", 
-      "question": 44, 
-      "activity": 53
-    }
-  }, 
-  {
-    "pk": 5, 
-    "model": "smartgrid.questionchoice", 
-    "fields": {
-      "choice": "wt", 
-      "question": 45, 
-      "activity": 53
-    }
-  }, 
-  {
-    "pk": 6, 
-    "model": "smartgrid.questionchoice", 
-    "fields": {
-      "choice": "Wh", 
-      "question": 45, 
-      "activity": 53
-    }
-  }, 
-  {
-    "pk": 7, 
-    "model": "smartgrid.questionchoice", 
-    "fields": {
-      "choice": "W", 
-      "question": 45, 
-      "activity": 53
-    }
-  }, 
-  {
-    "pk": 8, 
-    "model": "smartgrid.questionchoice", 
-    "fields": {
-      "choice": "tt", 
-      "question": 45, 
-      "activity": 53
-    }
-  }, 
-  {
-    "pk": 9, 
-    "model": "smartgrid.questionchoice", 
-    "fields": {
-      "choice": "BTU", 
-      "question": 46, 
-      "activity": 53
-    }
-  }, 
-  {
-    "pk": 10, 
-    "model": "smartgrid.questionchoice", 
-    "fields": {
-      "choice": "erg", 
-      "question": 46, 
-      "activity": 53
-    }
-  }, 
-  {
-    "pk": 11, 
-    "model": "smartgrid.questionchoice", 
-    "fields": {
-      "choice": "watt-hour", 
-      "question": 46, 
-      "activity": 53
-    }
-  }, 
-  {
-    "pk": 12, 
-    "model": "smartgrid.questionchoice", 
-    "fields": {
-      "choice": "watt", 
-      "question": 46, 
-      "activity": 53
-    }
-  }, 
-  {
-    "pk": 13, 
-    "model": "smartgrid.questionchoice", 
-    "fields": {
-      "choice": "watt", 
-      "question": 47, 
-      "activity": 53
-    }
-  }, 
-  {
-    "pk": 14, 
-    "model": "smartgrid.questionchoice", 
-    "fields": {
-      "choice": "wind-hour", 
-      "question": 47, 
-      "activity": 53
-    }
-  }, 
-  {
-    "pk": 15, 
-    "model": "smartgrid.questionchoice", 
-    "fields": {
-      "choice": "watt-hour", 
-      "question": 47, 
-      "activity": 53
-    }
-  }, 
-  {
-    "pk": 16, 
-    "model": "smartgrid.questionchoice", 
-    "fields": {
-      "choice": "power", 
-      "question": 47, 
-      "activity": 53
-    }
-  }, 
-  {
-    "pk": 17, 
-    "model": "smartgrid.questionchoice", 
-    "fields": {
-      "choice": "7.5 Wh", 
-      "question": 48, 
-      "activity": 53
-    }
-  }, 
-  {
-    "pk": 18, 
-    "model": "smartgrid.questionchoice", 
-    "fields": {
-      "choice": "13 Wh", 
-      "question": 48, 
-      "activity": 53
-    }
-  }, 
-  {
-    "pk": 19, 
-    "model": "smartgrid.questionchoice", 
-    "fields": {
-      "choice": "26 Wh", 
-      "question": 48, 
-      "activity": 53
-    }
-  }, 
-  {
-    "pk": 20, 
-    "model": "smartgrid.questionchoice", 
-    "fields": {
-      "choice": "52 Wh", 
-      "question": 48, 
-      "activity": 53
-    }
-  }, 
-  {
-    "pk": 21, 
-    "model": "smartgrid.questionchoice", 
-    "fields": {
-      "choice": "100 W", 
-      "question": 49, 
-      "activity": 53
-    }
-  }, 
-  {
-    "pk": 22, 
-    "model": "smartgrid.questionchoice", 
-    "fields": {
-      "choice": "10 W", 
-      "question": 49, 
-      "activity": 53
-    }
-  }, 
-  {
-    "pk": 23, 
-    "model": "smartgrid.questionchoice", 
-    "fields": {
-      "choice": "300 kWh", 
-      "question": 49, 
-      "activity": 53
-    }
-  }, 
-  {
-    "pk": 24, 
-    "model": "smartgrid.questionchoice", 
-    "fields": {
-      "choice": "1 kWh", 
-      "question": 49, 
-      "activity": 53
-    }
-  }, 
-  {
-    "pk": 25, 
-    "model": "smartgrid.questionchoice", 
-    "fields": {
-      "choice": "100 W", 
-      "question": 50, 
-      "activity": 53
-    }
-  }, 
-  {
-    "pk": 26, 
-    "model": "smartgrid.questionchoice", 
-    "fields": {
-      "choice": "500 W", 
-      "question": 50, 
-      "activity": 53
-    }
-  }, 
-  {
-    "pk": 27, 
-    "model": "smartgrid.questionchoice", 
-    "fields": {
-      "choice": "1 kW", 
-      "question": 50, 
-      "activity": 53
-    }
-  }, 
-  {
-    "pk": 28, 
-    "model": "smartgrid.questionchoice", 
-    "fields": {
-      "choice": "2.5 kW", 
-      "question": 50, 
-      "activity": 53
-    }
-  }, 
-  {
-    "pk": 29, 
-    "model": "smartgrid.questionchoice", 
-    "fields": {
-      "choice": "13 kWh", 
-      "question": 51, 
-      "activity": 53
-    }
-  }, 
-  {
-    "pk": 30, 
-    "model": "smartgrid.questionchoice", 
-    "fields": {
-      "choice": "4 kWh", 
-      "question": 51, 
-      "activity": 53
-    }
-  }, 
-  {
-    "pk": 31, 
-    "model": "smartgrid.questionchoice", 
-    "fields": {
-      "choice": "57 kWh", 
-      "question": 51, 
-      "activity": 53
-    }
-  }, 
-  {
-    "pk": 32, 
-    "model": "smartgrid.questionchoice", 
-    "fields": {
-      "choice": "328 kWh", 
-      "question": 51, 
-      "activity": 53
-    }
-  }, 
-  {
-    "pk": 33, 
-    "model": "smartgrid.questionchoice", 
-    "fields": {
-      "choice": "25 W", 
-      "question": 52, 
-      "activity": 53
-    }
-  }, 
-  {
-    "pk": 34, 
-    "model": "smartgrid.questionchoice", 
-    "fields": {
-      "choice": "50 W", 
-      "question": 52, 
-      "activity": 53
-    }
-  }, 
-  {
-    "pk": 35, 
-    "model": "smartgrid.questionchoice", 
-    "fields": {
-      "choice": "200 W", 
-      "question": 52, 
-      "activity": 53
-    }
-  }, 
-  {
-    "pk": 36, 
-    "model": "smartgrid.questionchoice", 
-    "fields": {
-      "choice": "800 W", 
-      "question": 52, 
-      "activity": 53
-    }
-  }, 
-  {
-    "pk": 37, 
-    "model": "smartgrid.questionchoice", 
-    "fields": {
-      "choice": "coal", 
-      "question": 53, 
-      "activity": 53
-    }
-  }, 
-  {
-    "pk": 38, 
-    "model": "smartgrid.questionchoice", 
-    "fields": {
-      "choice": "wind", 
-      "question": 53, 
-      "activity": 53
-    }
-  }, 
-  {
-    "pk": 39, 
-    "model": "smartgrid.questionchoice", 
-    "fields": {
-      "choice": "solar", 
-      "question": 53, 
-      "activity": 53
-    }
-  }, 
-  {
-    "pk": 40, 
-    "model": "smartgrid.questionchoice", 
-    "fields": {
-      "choice": "oil", 
-      "question": 53, 
-      "activity": 53
-    }
-  }, 
-  {
-    "pk": 41, 
-    "model": "smartgrid.questionchoice", 
-    "fields": {
-      "choice": "560 kW", 
-      "question": 54, 
-      "activity": 53
-    }
-  }, 
-  {
-    "pk": 42, 
-    "model": "smartgrid.questionchoice", 
-    "fields": {
-      "choice": "3800 kW", 
-      "question": 54, 
-      "activity": 53
-    }
-  }, 
-  {
-    "pk": 43, 
-    "model": "smartgrid.questionchoice", 
-    "fields": {
-      "choice": "11.8 GW", 
-      "question": 54, 
-      "activity": 53
-    }
-  }, 
-  {
-    "pk": 44, 
-    "model": "smartgrid.questionchoice", 
-    "fields": {
-      "choice": "1.2 GW", 
-      "question": 54, 
-      "activity": 53
-    }
-  }, 
-  {
-    "pk": 45, 
-    "model": "smartgrid.questionchoice", 
-    "fields": {
-      "choice": "A graph of the amount of power used on the grid over time", 
-      "question": 55, 
-      "activity": 53
-    }
-  }, 
-  {
-    "pk": 46, 
-    "model": "smartgrid.questionchoice", 
-    "fields": {
-      "choice": "The number of efficient appliances demanded by consumers", 
-      "question": 55, 
-      "activity": 53
-    }
-  }, 
-  {
-    "pk": 47, 
-    "model": "smartgrid.questionchoice", 
-    "fields": {
-      "choice": "A graph of the amount of energy used on the grid over time", 
-      "question": 55, 
-      "activity": 53
-    }
-  }, 
-  {
-    "pk": 48, 
-    "model": "smartgrid.questionchoice", 
-    "fields": {
-      "choice": "The amount overhead power lines can bend before breaking", 
-      "question": 55, 
-      "activity": 53
-    }
-  }, 
-  {
-    "pk": 49, 
-    "model": "smartgrid.questionchoice", 
-    "fields": {
-      "choice": "Maintain Hawaii's energy use at current levels forever", 
-      "question": 56, 
-      "activity": 53
-    }
-  }, 
-  {
-    "pk": 50, 
-    "model": "smartgrid.questionchoice", 
-    "fields": {
-      "choice": "Decrease Hawaii's oil use by 20% by 2020", 
-      "question": 56, 
-      "activity": 53
-    }
-  }, 
-  {
-    "pk": 51, 
-    "model": "smartgrid.questionchoice", 
-    "fields": {
-      "choice": "Get 70% of Hawaii's energy from clean sources by 2030", 
-      "question": 56, 
-      "activity": 53
-    }
-  }, 
-  {
-    "pk": 52, 
-    "model": "smartgrid.questionchoice", 
-    "fields": {
-      "choice": "Get 50% of Hawaii's energy from wind by 2050", 
-      "question": 56, 
-      "activity": 53
-    }
-  }, 
-  {
-    "pk": 53, 
-    "model": "smartgrid.questionchoice", 
-    "fields": {
-      "choice": "Global temperatures increasing by a few degrees on average", 
-      "question": 57, 
-      "activity": 53
-    }
-  }, 
-  {
-    "pk": 54, 
-    "model": "smartgrid.questionchoice", 
-    "fields": {
-      "choice": "Changes in seasonal rainfall patterns (droughts, floods)", 
-      "question": 57, 
-      "activity": 53
-    }
-  }, 
-  {
-    "pk": 55, 
-    "model": "smartgrid.questionchoice", 
-    "fields": {
-      "choice": "A significant rise in the sea level", 
-      "question": 57, 
-      "activity": 53
-    }
-  }, 
-  {
-    "pk": 56, 
-    "model": "smartgrid.questionchoice", 
-    "fields": {
-      "choice": "All of the above", 
-      "question": 57, 
-      "activity": 53
-    }
-  }, 
-  {
-    "pk": 57, 
-    "model": "smartgrid.questionchoice", 
-    "fields": {
-      "choice": "450 ppm, 500 ppm", 
-      "question": 58, 
-      "activity": 53
-    }
-  }, 
-  {
-    "pk": 58, 
-    "model": "smartgrid.questionchoice", 
-    "fields": {
-      "choice": "387 ppm, 350 ppm", 
-      "question": 58, 
-      "activity": 53
-    }
-  }, 
-  {
-    "pk": 59, 
-    "model": "smartgrid.questionchoice", 
-    "fields": {
-      "choice": "331 ppm, 350 ppm", 
-      "question": 58, 
-      "activity": 53
-    }
-  }, 
-  {
-    "pk": 60, 
-    "model": "smartgrid.questionchoice", 
-    "fields": {
-      "choice": "600 ppm, 450 ppm", 
-      "question": 58, 
-      "activity": 53
-    }
-  },
-  {
-    "pk": 1, 
-    "model": "smartgrid.activitybase", 
+    "model": "smartgrid.action", 
     "fields": {
       "category": 1, 
-      "energy_related": false, 
-      "depends_on_text": "", 
-      "description": "What: Learn about the competition and the cool prizes you can win\r\n\r\nWhen: January 27, 2011 7:00pm\r\n\r\nWhere: Roof lounge of your tower", 
+      "depends_on_text": "",
+      "description": "What: Learn about the competition and the cool prizes you can win\r\n\r\nWhen: January 27, 2011 7:00pm\r\n\r\nWhere: Roof lounge of your tower",
       "title": "Attend Kukui Cup Orientation meeting", 
       "depends_on": "False", 
-      "created_at": "2011-02-17 10:35:30", 
-      "social_bonus": 10, 
-      "updated_at": "2011-07-19 12:41:49", 
-      "priority": 1000, 
-      "mobile_restricted": false, 
-      "type": "event", 
-      "slug": "orientation", 
+      "social_bonus": 10,
+      "priority": 1000,
+      "type": "event",
+      "point_value": 10,
+      "slug": "orientation",
       "name": "Orientation"
     }
   }, 
   {
     "pk": 2, 
-    "model": "smartgrid.activitybase", 
+    "model": "smartgrid.action", 
     "fields": {
       "category": 2, 
-      "energy_related": true, 
-      "depends_on_text": null, 
+      "depends_on_text": null,
       "description": "Watch this video explaining the difference between power and energy\r\n\r\n<object width=\"471\" height=\"383\"><param name=\"movie\" value=\"http://www.youtube.com/v/hBUg7bsR0d0?fs=1&amp;hl=en_US&amp;rel=0\"></param><param name=\"allowFullScreen\" value=\"true\"></param><param name=\"allowscriptaccess\" value=\"always\"></param><embed src=\"http://www.youtube.com/v/hBUg7bsR0d0?fs=1&amp;hl=en_US&amp;rel=0\" type=\"application/x-shockwave-flash\" allowscriptaccess=\"always\" allowfullscreen=\"true\" width=\"471\" height=\"383\" wmode=\"opaque\"></embed></object>\r\n", 
       "title": "Watch video about Power & Energy", 
       "depends_on": "completed(\"intro-video\")",
-      "created_at": "2011-02-17 10:35:30", 
-      "social_bonus": 0, 
-      "updated_at": "2011-06-09 21:07:32", 
-      "priority": 1, 
-      "mobile_restricted": false, 
-      "type": "activity", 
-      "slug": "power-energy", 
+      "social_bonus": 0,
+      "priority": 1,
+      "type": "activity",
+      "point_value": 10,
+      "slug": "power-energy",
       "name": "Power & Energy"
     }
   }, 
   {
     "pk": 3, 
-    "model": "smartgrid.activitybase", 
+    "model": "smartgrid.action", 
     "fields": {
       "category": 4, 
-      "energy_related": false, 
-      "depends_on_text": "", 
+      "depends_on_text": "",
       "description": "<center>![Blue Planet Foundation logo](http://blueplanetfoundation.org/images/stories/blue-planet-foundation-logo.gif)\r\n\r\nAttend a special presentation by the Blue Planet Foundation on what they are doing to get Hawaii off of fossil fuels, and how students can get involved.", 
       "title": "Attend Blue Planet Foundation Meeting", 
       "depends_on": "completed(\"intro-video\")",
-      "created_at": "2011-02-17 10:35:30", 
-      "social_bonus": 10, 
-      "updated_at": "2011-07-19 12:41:36", 
-      "priority": 12, 
-      "mobile_restricted": false, 
-      "type": "event", 
-      "slug": "blue-planet", 
+      "social_bonus": 10,
+      "priority": 12,
+      "type": "event",
+      "point_value": 10,
+      "slug": "blue-planet",
       "name": "Blue Planet"
     }
   }, 
   {
     "pk": 4, 
-    "model": "smartgrid.activitybase", 
+    "model": "smartgrid.action", 
     "fields": {
       "category": 3, 
-      "energy_related": false, 
-      "depends_on_text": null, 
+      "depends_on_text": null,
       "description": "Find an incandescent bulb (perhaps from a desk lamp) and replace it with a CFL. You should throw away the incandescent bulb, because even though it isn't burned out it is a massive energy hog and you don't want someone using it later.\n\nFor verification, please take a single photo showing both the incandescent bulb you replaced and the CFL you installed.", 
       "title": "Replace incandescent bulb with compact fluorescent (CFL)", 
       "depends_on": "False", 
-      "created_at": "2011-02-17 10:35:30", 
-      "social_bonus": 0, 
-      "updated_at": "2011-06-09 21:07:32", 
-      "priority": 18, 
-      "mobile_restricted": false, 
-      "type": "activity", 
-      "slug": "cfl-bulb", 
+      "social_bonus": 0,
+      "priority": 18,
+      "type": "activity",
+      "point_value": 10,
+      "slug": "cfl-bulb",
       "name": "CFL bulb"
     }
   }, 
   {
     "pk": 5, 
-    "model": "smartgrid.activitybase", 
+    "model": "smartgrid.action", 
     "fields": {
       "category": 8, 
-      "energy_related": false, 
-      "depends_on_text": null, 
+      "depends_on_text": null,
       "description": "SustainableUH is a student-lead organization focused on establishing the University of Hawaii as a world leader in sustainable practices, education, and research. Attend a special meeting and find out what Sustainable UH has accomplished and how you can get involved!", 
       "title": "Attend SustainableUH meeting", 
       "depends_on": "False", 
-      "created_at": "2011-02-17 10:35:30", 
-      "social_bonus": 0, 
-      "updated_at": "2011-06-09 21:07:32", 
-      "priority": 1000, 
-      "mobile_restricted": false, 
-      "type": "event", 
-      "slug": "sustainbableuh", 
+      "social_bonus": 0,
+      "priority": 1000,
+      "type": "event",
+      "point_value": 10,
+      "slug": "sustainbableuh",
       "name": "SustainbableUH"
     }
   }, 
   {
     "pk": 6, 
-    "model": "smartgrid.activitybase", 
+    "model": "smartgrid.action", 
     "fields": {
       "category": 5, 
-      "energy_related": false, 
-      "depends_on_text": null, 
+      "depends_on_text": null,
       "description": "<center>![Electric car crushed by gasoline pump](/site_media/media/gblocks/Who-Killed-The-Electric-Car-cover.jpg)</center>\r\n\r\nWho Killed the Electric Car? is a 2006 documentary film that explores the creation, limited commercialization, and subsequent destruction of the battery electric vehicle in the United States, specifically the General Motors EV1 of the mid 1990s. The film explores the roles of automobile manufacturers, the oil industry, the US government, the Californian government, batteries, hydrogen vehicles, and consumers in limiting the development and adoption of this technology.\r\n\r\nShowing in.", 
       "title": "Watch the movie \"Who Killed the Electric Car?\"", 
       "depends_on": "completed(\"climate-change\") or completed(\"trash-video\")",
-      "created_at": "2011-02-17 10:35:30", 
-      "social_bonus": 0, 
-      "updated_at": "2011-06-09 21:07:32", 
-      "priority": 25, 
-      "mobile_restricted": false, 
-      "type": "event", 
-      "slug": "e-car-movie", 
+      "social_bonus": 0,
+      "priority": 25,
+      "type": "event",
+      "point_value": 10,
+      "slug": "e-car-movie",
       "name": "E-car movie"
     }
   }, 
   {
     "pk": 7, 
-    "model": "smartgrid.activitybase", 
+    "model": "smartgrid.action", 
     "fields": {
       "category": 2, 
-      "energy_related": true, 
-      "depends_on_text": null, 
+      "depends_on_text": null,
       "description": "<center>![Laptop falling asleep](/site_media/media/gblocks/SleepyMacBookPro-small.png)</center>\r\n\r\nConfigure your computer and any external monitor to sleep after 20 minutes of inactivity. You can find instructions on enabling sleep functionality at the [EnergySTAR website](http://www.energystar.gov/index.cfm?c=power_mgt.pr_power_mgt_users).\r\n\r\nOnce you have changed your settings, please take a screenshot showing the new settings for use in verification:\r\n\r\n  * [How to take a screenshot on Windows](http://www.wikihow.com/Take-a-Screenshot-in-Microsoft-Windows)\r\n  * [How to take a screenshot on Mac OS X](http://www.wikihow.com/Take-a-Screenshot-in-Mac-OS-X)", 
       "title": "Configure computer to sleep after inactivity", 
       "depends_on": "completed(\"power-energy\")",
-      "created_at": "2011-02-17 10:35:30", 
-      "social_bonus": 0, 
-      "updated_at": "2011-06-09 21:07:32", 
-      "priority": 6, 
-      "mobile_restricted": false, 
-      "type": "activity", 
-      "slug": "computer-sleep", 
+      "social_bonus": 0,
+      "priority": 6,
+      "type": "activity",
+      "point_value": 10,
+      "slug": "computer-sleep",
       "name": "Computer Sleep"
     }
   }, 
   {
     "pk": 8, 
-    "model": "smartgrid.activitybase", 
+    "model": "smartgrid.action", 
     "fields": {
       "category": 1, 
-      "energy_related": false, 
-      "depends_on_text": null, 
+      "depends_on_text": null,
       "description": "<center>![Facebook logo](/site_media/media/gblocks/facebook-logo-small.png)</center>\r\n\r\nShow support for the Kukui Cup by Liking the <a href=\"https://www.facebook.com/pages/Kukui-Cup/198203673552272\" target=\"_blank\">Kukui Cup page on Facebook</a> (it will open in a new window). Follow the link, click on the \"Like\" button, and then take a screenshot of the Kukui Cup Facebook page for verification:\r\n\r\n  * [How to take a screenshot on Windows](http://www.wikihow.com/Take-a-Screenshot-in-Microsoft-Windows)\r\n  * [How to take a screenshot on Mac OS X](http://www.wikihow.com/Take-a-Screenshot-in-Mac-OS-X)", 
       "title": "Like Kukui Cup on Facebook", 
       "depends_on": "completed(\"intro-video\")",
-      "created_at": "2011-02-17 10:35:30", 
-      "social_bonus": 0, 
-      "updated_at": "2011-06-09 21:07:32", 
-      "priority": 4, 
-      "mobile_restricted": false, 
-      "type": "activity", 
-      "slug": "like-cup", 
+      "social_bonus": 0,
+      "priority": 4,
+      "type": "activity",
+      "point_value": 10,
+      "slug": "like-cup",
       "name": "Like Cup"
     }
   }, 
   {
     "pk": 9, 
-    "model": "smartgrid.activitybase", 
+    "model": "smartgrid.action", 
     "fields": {
       "category": 1, 
-      "energy_related": false, 
-      "depends_on_text": null, 
+      "depends_on_text": null,
       "description": "<center>![Twitter logo](/site_media/media/gblocks/twitter-logo-small.png)</center>\r\n\r\nIf you use <a href=\"https://twitter.com/\" target=\"_blank\">Twitter</a> (will open in a new window), tweet a link to the Kukui Cup website <http://kukuicup.org/> so other folks will learn about the competition.\r\n\r\nOnce you have tweeted, take a screenshot of your tweet for verification:\r\n\r\n  * [How to take a screenshot on Windows](http://www.wikihow.com/Take-a-Screenshot-in-Microsoft-Windows)\r\n  * [How to take a screenshot on Mac OS X](http://www.wikihow.com/Take-a-Screenshot-in-Mac-OS-X)", 
       "title": "Tweet about Kukui Cup", 
       "depends_on": "completed(\"energy-intuition\")",
-      "created_at": "2011-02-17 10:35:30", 
-      "social_bonus": 0, 
-      "updated_at": "2011-06-09 21:07:32", 
-      "priority": 6, 
-      "mobile_restricted": false, 
-      "type": "activity", 
-      "slug": "tweet-link", 
+      "social_bonus": 0,
+      "priority": 6,
+      "type": "activity",
+      "point_value": 10,
+      "slug": "tweet-link",
       "name": "Tweet link"
     }
   }, 
   {
     "pk": 10, 
-    "model": "smartgrid.activitybase", 
+    "model": "smartgrid.action", 
     "fields": {
       "category": 1, 
-      "energy_related": false, 
-      "depends_on_text": null, 
+      "depends_on_text": null,
       "description": "<center>![Facebook logo](/site_media/media/gblocks/facebook-logo-small.png)</center>\r\n\r\nShare a link to the Kukui Cup website <http://kukuicup.org/> on Facebook to get the word out about the competition. Go to <a href=\"https://www.facebook.com/\" target=\"_blank\">Facebook</a>  (will open in a new window) and click on the Share Link button at the top: \r\n\r\n<center>![Share link area](/site_media/media/gblocks/Facebook-share-link-small.png)</center>\r\n\r\nEnter the text \"http://kukuicup.org/\" in that field and press the Attach button.\r\n\r\nOnce you have updated your status, take a screenshot for verification:\r\n\r\n  * [How to take a screenshot on Windows](http://www.wikihow.com/Take-a-Screenshot-in-Microsoft-Windows)\r\n  * [How to take a screenshot on Mac OS X](http://www.wikihow.com/Take-a-Screenshot-in-Mac-OS-X)\r\n", 
       "title": "Share Kukui Cup link on Facebook", 
       "depends_on": "completed(\"energy-intuition\")",
-      "created_at": "2011-02-17 10:35:30", 
-      "social_bonus": 0, 
-      "updated_at": "2011-06-09 21:07:32", 
-      "priority": 5, 
-      "mobile_restricted": false, 
-      "type": "activity", 
-      "slug": "share-link", 
+      "social_bonus": 0,
+      "priority": 5,
+      "type": "activity",
+      "point_value": 10,
+      "slug": "share-link",
       "name": "Share link"
     }
   }, 
   {
     "pk": 11, 
-    "model": "smartgrid.activitybase", 
+    "model": "smartgrid.action", 
     "fields": {
       "category": 7, 
-      "energy_related": false, 
-      "depends_on_text": null, 
+      "depends_on_text": null,
       "description": "This is a followup activity to the energy audit activity. If you haven't performed that activity, do it first and keep your notes around for this activity.\r\n\r\nBased on the audit results, make a label for each device in your room that shows the number of watts consumed when on and off, and put it close to the power switch for those devices that have them.\r\n\r\nOnce you have made the labels take a photo of the devices with their labels on to be used for verification.", 
       "title": "Label power hogs in your room", 
       "depends_on": "False", 
-      "created_at": "2011-02-17 10:35:30", 
-      "social_bonus": 0, 
-      "updated_at": "2011-06-09 21:07:32", 
-      "priority": 11, 
-      "mobile_restricted": false, 
-      "type": "activity", 
-      "slug": "power-hogs", 
+      "social_bonus": 0,
+      "priority": 11,
+      "type": "activity",
+      "point_value": 10,
+      "slug": "power-hogs",
       "name": "Power Hogs"
     }
   }, 
   {
     "pk": 12, 
-    "model": "smartgrid.activitybase", 
+    "model": "smartgrid.action", 
     "fields": {
       "category": 5, 
-      "energy_related": false, 
-      "depends_on_text": null, 
+      "depends_on_text": null,
       "description": "Use this [carbon footprint calculator](http://coolclimate.berkeley.edu/) to estimate the size of your carbon footprint. Record the size of your footprint for verification.", 
       "title": "Determine carbon footprint using calculator", 
       "depends_on": null, 
-      "created_at": "2011-02-17 10:35:30", 
-      "social_bonus": 0, 
-      "updated_at": "2011-06-09 21:07:32", 
-      "priority": 1000, 
-      "mobile_restricted": false, 
-      "type": "activity", 
-      "slug": "carbon-footprint", 
+      "social_bonus": 0,
+      "priority": 1000,
+      "type": "activity",
+      "point_value": 10,
+      "slug": "carbon-footprint",
       "name": "Carbon footprint"
     }
   }, 
   {
     "pk": 13, 
-    "model": "smartgrid.activitybase", 
+    "model": "smartgrid.action", 
     "fields": {
       "category": 1, 
-      "energy_related": false, 
-      "depends_on_text": null, 
+      "depends_on_text": null,
       "description": "Watch this promotional video about the Kukui Cup to learn more about the competition.\r\n\r\n<object width=\"560\" height=\"340\"><param name=\"movie\" value=\"http://www.youtube.com/v/fRzAKp-7DGI?fs=1&amp;hl=en_US&amp;rel=0\"></param><param name=\"allowFullScreen\" value=\"true\"></param><param name=\"allowscriptaccess\" value=\"always\"></param><embed src=\"http://www.youtube.com/v/fRzAKp-7DGI?fs=1&amp;hl=en_US&amp;rel=0\" type=\"application/x-shockwave-flash\" allowscriptaccess=\"always\" allowfullscreen=\"true\" width=\"560\" height=\"340\"></embed></object>\r\n", 
       "title": "Watch Kukui Cup Promo video", 
       "depends_on": "False", 
-      "created_at": "2011-02-17 10:35:30", 
-      "social_bonus": 0, 
-      "updated_at": "2011-06-09 21:07:32", 
-      "priority": 900, 
-      "mobile_restricted": false, 
-      "type": "activity", 
-      "slug": "promo-video", 
+      "social_bonus": 0,
+      "priority": 900,
+      "type": "activity",
+      "point_value": 10,
+      "slug": "promo-video",
       "name": "Promo Video"
     }
   }, 
   {
     "pk": 14, 
-    "model": "smartgrid.activitybase", 
+    "model": "smartgrid.action", 
     "fields": {
       "category": 1, 
-      "energy_related": false, 
-      "depends_on_text": null, 
+      "depends_on_text": null,
       "description": "If you missed it during your the first login process, watch this video explaining the competition and this website\r\n\r\n<object width=\"471\" height=\"295\"><param name=\"movie\" value=\"http://www.youtube.com/v/CzAmUxXXeJY?fs=1&amp;hl=en_US&amp;rel=0\"></param><param name=\"allowFullScreen\" value=\"true\"></param><param name=\"allowscriptaccess\" value=\"always\"></param><embed src=\"http://www.youtube.com/v/CzAmUxXXeJY?fs=1&amp;hl=en_US&amp;rel=0\" type=\"application/x-shockwave-flash\" allowscriptaccess=\"always\" allowfullscreen=\"true\" width=\"471\" height=\"295\" wmode=\"opaque\"></embed></object>\r\n", 
       "title": "Watch introduction video", 
       "depends_on": "True", 
-      "created_at": "2011-02-17 10:35:30", 
-      "social_bonus": 0, 
-      "updated_at": "2011-06-09 21:07:32", 
-      "priority": 1, 
-      "mobile_restricted": false, 
-      "type": "activity", 
-      "slug": "intro-video", 
+      "social_bonus": 0,
+      "priority": 1,
+      "type": "activity",
+      "point_value": 10,
+      "slug": "intro-video",
       "name": "Intro video"
     }
   }, 
   {
     "pk": 15, 
-    "model": "smartgrid.activitybase", 
+    "model": "smartgrid.action", 
     "fields": {
       "category": 2, 
-      "energy_related": true, 
-      "depends_on_text": null, 
+      "depends_on_text": null,
       "description": "Watch this video about improving your energy intuition.\r\n\r\n<object width=\"471\" height=\"383\"><param name=\"movie\" value=\"http://www.youtube.com/v/E4MLXlUiRv0?fs=1&amp;hl=en_US&amp;rel=0\"></param><param name=\"allowFullScreen\" value=\"true\"></param><param name=\"allowscriptaccess\" value=\"always\"></param><embed src=\"http://www.youtube.com/v/E4MLXlUiRv0?fs=1&amp;hl=en_US&amp;rel=0\" type=\"application/x-shockwave-flash\" allowscriptaccess=\"always\" allowfullscreen=\"true\" width=\"471\" height=\"383\" wmode=\"opaque\"></embed></object>\r\n", 
       "title": "Watch video on Energy Intuition", 
       "depends_on": "completed(\"power-energy\")",
-      "created_at": "2011-02-17 10:35:30", 
-      "social_bonus": 0, 
-      "updated_at": "2011-06-09 21:07:32", 
-      "priority": 2, 
-      "mobile_restricted": false, 
-      "type": "activity", 
-      "slug": "energy-intuition", 
+      "social_bonus": 0,
+      "priority": 2,
+      "type": "activity",
+      "point_value": 10,
+      "slug": "energy-intuition",
       "name": "Energy Intuition"
     }
   }, 
   {
     "pk": 16, 
-    "model": "smartgrid.activitybase", 
+    "model": "smartgrid.action", 
     "fields": {
       "category": 2, 
-      "energy_related": false, 
-      "depends_on_text": null, 
+      "depends_on_text": null,
       "description": "Watch this video that explains how to figure out how much energy your stuff uses.\r\n\r\nPlaceholder video:\r\n\r\n<object width=\"560\" height=\"340\"><param name=\"movie\" value=\"http://www.youtube.com/v/fRzAKp-7DGI?fs=1&amp;hl=en_US&amp;rel=0\"></param><param name=\"allowFullScreen\" value=\"true\"></param><param name=\"allowscriptaccess\" value=\"always\"></param><embed src=\"http://www.youtube.com/v/fRzAKp-7DGI?fs=1&amp;hl=en_US&amp;rel=0\" type=\"application/x-shockwave-flash\" allowscriptaccess=\"always\" allowfullscreen=\"true\" width=\"560\" height=\"340\"></embed></object>\r\n\r\n\r\nOnce you are done, **click the \"I Did This!\" button** to answer a question about the information in the video, and get your points!", 
       "title": "Watch video on how to audit your energy use", 
       "depends_on": "False", 
-      "created_at": "2011-02-17 10:35:30", 
-      "social_bonus": 0, 
-      "updated_at": "2011-06-09 21:07:32", 
-      "priority": 9, 
-      "mobile_restricted": false, 
-      "type": "activity", 
-      "slug": "audit-energy", 
+      "social_bonus": 0,
+      "priority": 9,
+      "type": "activity",
+      "point_value": 10,
+      "slug": "audit-energy",
       "name": "Audit Energy"
     }
   }, 
   {
     "pk": 17, 
-    "model": "smartgrid.activitybase", 
+    "model": "smartgrid.action", 
     "fields": {
       "category": 5, 
-      "energy_related": false, 
-      "depends_on_text": null, 
+      "depends_on_text": null,
       "description": "Watch this video that talks about the challenges facing Hawaii as we try to keep meeting our energy needs.\r\n\r\nPlaceholder video:\r\n\r\n<object width=\"560\" height=\"340\"><param name=\"movie\" value=\"http://www.youtube.com/v/fRzAKp-7DGI?fs=1&amp;hl=en_US&amp;rel=0\"></param><param name=\"allowFullScreen\" value=\"true\"></param><param name=\"allowscriptaccess\" value=\"always\"></param><embed src=\"http://www.youtube.com/v/fRzAKp-7DGI?fs=1&amp;hl=en_US&amp;rel=0\" type=\"application/x-shockwave-flash\" allowscriptaccess=\"always\" allowfullscreen=\"true\" width=\"560\" height=\"340\"></embed></object>\r\n\r\n\r\nOnce you are done, **click the \"I Did This!\" button** to answer a question about the information in the video, and get your points!", 
       "title": "Watch Hawaii Energy Challenges video", 
       "depends_on": "", 
-      "created_at": "2011-02-17 10:35:30", 
-      "social_bonus": 0, 
-      "updated_at": "2011-06-09 21:07:32", 
-      "priority": 1, 
-      "mobile_restricted": false, 
-      "type": "activity", 
-      "slug": "energy-challenge", 
+      "social_bonus": 0,
+      "priority": 1,
+      "type": "activity",
+      "point_value": 10,
+      "slug": "energy-challenge",
       "name": "Energy Challenge"
     }
   }, 
   {
     "pk": 18, 
-    "model": "smartgrid.activitybase", 
+    "model": "smartgrid.action", 
     "fields": {
       "category": 4, 
-      "energy_related": false, 
-      "depends_on_text": null, 
+      "depends_on_text": null,
       "description": "Watch this video that explains how we generate our energy in Hawaii.\r\n\r\nPlaceholder video:\r\n\r\n<object width=\"560\" height=\"340\"><param name=\"movie\" value=\"http://www.youtube.com/v/fRzAKp-7DGI?fs=1&amp;hl=en_US&amp;rel=0\"></param><param name=\"allowFullScreen\" value=\"true\"></param><param name=\"allowscriptaccess\" value=\"always\"></param><embed src=\"http://www.youtube.com/v/fRzAKp-7DGI?fs=1&amp;hl=en_US&amp;rel=0\" type=\"application/x-shockwave-flash\" allowscriptaccess=\"always\" allowfullscreen=\"true\" width=\"560\" height=\"340\"></embed></object>\r\n\r\n\r\nOnce you are done, **click the \"I Did This!\" button** to answer a question about the information in the video, and get your points!", 
       "title": "Watch Energy Generation in Hawaii video", 
       "depends_on": "", 
-      "created_at": "2011-02-17 10:35:30", 
-      "social_bonus": 0, 
-      "updated_at": "2011-06-09 21:07:32", 
-      "priority": 900, 
-      "mobile_restricted": false, 
-      "type": "activity", 
-      "slug": "energy-hawaii", 
+      "social_bonus": 0,
+      "priority": 900,
+      "type": "activity",
+      "point_value": 10,
+      "slug": "energy-hawaii",
       "name": "Energy Hawaii"
     }
   }, 
   {
     "pk": 19, 
-    "model": "smartgrid.activitybase", 
+    "model": "smartgrid.action", 
     "fields": {
       "category": 3, 
-      "energy_related": false, 
-      "depends_on_text": "", 
+      "depends_on_text": "",
       "description": "<center>![Light switch turned off](/site_media/media/gblocks/lightswitch.jpg)</center>\r\n\r\nFor this event, try turning off everything in your dorm room for 15 minutes: lights, computers, TVs, everything.\r\n\r\nIf you can get most of your Lounge mates to participate, try to see how low you can get your Lounge's power consumption to go. Use a laptop or mobile device to record your Lounge's instantaneous power value from the [Go Low](/energy/) page, and submit that value here.", 
       "title": "Go Dark event", 
       "depends_on": "completed(\"power-energy\")",
-      "created_at": "2011-02-17 10:35:30", 
-      "social_bonus": 10, 
-      "updated_at": "2011-07-19 12:41:17", 
-      "priority": 16, 
-      "mobile_restricted": false, 
-      "type": "event", 
-      "slug": "go-dark", 
+      "social_bonus": 10,
+      "priority": 16,
+      "type": "event",
+      "point_value": 10,
+      "slug": "go-dark",
       "name": "Go Dark"
     }
   }, 
   {
     "pk": 20, 
-    "model": "smartgrid.activitybase", 
+    "model": "smartgrid.action", 
     "fields": {
       "category": 3, 
-      "energy_related": false, 
-      "depends_on_text": null, 
+      "depends_on_text": null,
       "description": "Watch this video about the ways we use energy to generate light.\r\n\r\n<object width=\"471\" height=\"295\"><param name=\"movie\" value=\"http://www.youtube.com/v/vP9bDqOnUQk?fs=1&amp;hl=en_US&amp;rel=0\"></param><param name=\"allowFullScreen\" value=\"true\"></param><param name=\"allowscriptaccess\" value=\"always\"></param><embed src=\"http://www.youtube.com/v/vP9bDqOnUQk?fs=1&amp;hl=en_US&amp;rel=0\" type=\"application/x-shockwave-flash\" allowscriptaccess=\"always\" allowfullscreen=\"true\" width=\"471\" height=\"295\" wmode=\"opaque\"></embed></object>\r\n", 
       "title": "Watch video about Lighting", 
       "depends_on": "completed(\"climate-change\") or completed(\"trash-video\")",
-      "created_at": "2011-02-17 10:35:30", 
-      "social_bonus": 0, 
-      "updated_at": "2011-06-09 21:07:33", 
-      "priority": 1, 
-      "mobile_restricted": false, 
-      "type": "activity", 
-      "slug": "lighting-video", 
+      "social_bonus": 0,
+      "priority": 1,
+      "type": "activity",
+      "point_value": 10,
+      "slug": "lighting-video",
       "name": "Lighting video"
     }
   }, 
   {
     "pk": 21, 
-    "model": "smartgrid.activitybase", 
+    "model": "smartgrid.action", 
     "fields": {
       "category": 2, 
-      "energy_related": true, 
-      "depends_on_text": null, 
+      "depends_on_text": null,
       "description": "![Kill-A-Watt meter](http://blog.hgtv.com/greenhome/files/2009/05/killawatt.jpg)\r\n\r\nBorrow a Kill-A-Watt meter from your RA, and then check all the plug-in appliances in your room to see how much power they use when turned on & when turned off. Write down both the on and off values for each device as you check them because you will need that to get your points.", 
       "title": "Audit energy use in your dorm room", 
       "depends_on": "False", 
-      "created_at": "2011-02-17 10:35:30", 
-      "social_bonus": 0, 
-      "updated_at": "2011-06-09 21:07:33", 
-      "priority": 10, 
-      "mobile_restricted": false, 
-      "type": "activity", 
-      "slug": "dorm-energy-audit", 
+      "social_bonus": 0,
+      "priority": 10,
+      "type": "activity",
+      "point_value": 10,
+      "slug": "dorm-energy-audit",
       "name": "Group Energy Audit"
     }
   }, 
   {
     "pk": 22, 
-    "model": "smartgrid.activitybase", 
+    "model": "smartgrid.action", 
     "fields": {
       "category": 4, 
-      "energy_related": false, 
-      "depends_on_text": null, 
+      "depends_on_text": null,
       "description": "Watch this video that explains how we can get energy directly from the sun.\r\n\r\nPlaceholder video:\r\n\r\n<object width=\"560\" height=\"340\"><param name=\"movie\" value=\"http://www.youtube.com/v/fRzAKp-7DGI?fs=1&amp;hl=en_US&amp;rel=0\"></param><param name=\"allowFullScreen\" value=\"true\"></param><param name=\"allowscriptaccess\" value=\"always\"></param><embed src=\"http://www.youtube.com/v/fRzAKp-7DGI?fs=1&amp;hl=en_US&amp;rel=0\" type=\"application/x-shockwave-flash\" allowscriptaccess=\"always\" allowfullscreen=\"true\" width=\"560\" height=\"340\"></embed></object>\r\n\r\n\r\nOnce you are done, **click the \"I Did This!\" button** to answer a question about the information in the video, and get your points!", 
       "title": "Watch video about solar energy", 
       "depends_on": "", 
-      "created_at": "2011-02-17 10:35:30", 
-      "social_bonus": 0, 
-      "updated_at": "2011-06-09 21:07:33", 
-      "priority": 950, 
-      "mobile_restricted": false, 
-      "type": "activity", 
-      "slug": "solar-energy", 
+      "social_bonus": 0,
+      "priority": 950,
+      "type": "activity",
+      "point_value": 10,
+      "slug": "solar-energy",
       "name": "Solar Energy"
     }
   }, 
   {
     "pk": 23, 
-    "model": "smartgrid.activitybase", 
+    "model": "smartgrid.action", 
     "fields": {
       "category": 4, 
-      "energy_related": false, 
-      "depends_on_text": null, 
+      "depends_on_text": null,
       "description": "Watch this video explaining how energy can be generated from the wind.\r\n\r\n<object width=\"471\" height=\"295\"><param name=\"movie\" value=\"http://www.youtube.com/v/Im_im4j9eRY?fs=1&amp;hl=en_US&amp;rel=0\"></param><param name=\"allowFullScreen\" value=\"true\"></param><param name=\"allowscriptaccess\" value=\"always\"></param><embed src=\"http://www.youtube.com/v/Im_im4j9eRY?fs=1&amp;hl=en_US&amp;rel=0\" type=\"application/x-shockwave-flash\" allowscriptaccess=\"always\" allowfullscreen=\"true\" width=\"471\" height=\"295\" wmode=\"opaque\"></embed></object>\r\n", 
       "title": "Watch video about wind energy in Hawaii", 
       "depends_on": "completed(\"climate-change\") or completed(\"trash-video\")",
-      "created_at": "2011-02-17 10:35:30", 
-      "social_bonus": 0, 
-      "updated_at": "2011-06-09 21:07:33", 
-      "priority": 1, 
-      "mobile_restricted": false, 
-      "type": "activity", 
-      "slug": "wind-energy", 
+      "social_bonus": 0,
+      "priority": 1,
+      "type": "activity",
+      "point_value": 10,
+      "slug": "wind-energy",
       "name": "Wind energy"
     }
   }, 
   {
     "pk": 24, 
-    "model": "smartgrid.activitybase", 
+    "model": "smartgrid.action", 
     "fields": {
       "category": 8, 
-      "energy_related": false, 
-      "depends_on_text": null, 
+      "depends_on_text": null,
       "description": "Attend a special presentation by the Kokua Hawaii Foundation on their work with Hawaii's schools. Meeting will take place in in Lehua's rooftop lounge.", 
       "title": "Attend Kokua Hawaii Foundation event", 
       "depends_on": "", 
-      "created_at": "2011-02-17 10:35:30", 
-      "social_bonus": 0, 
-      "updated_at": "2011-06-09 21:07:33", 
-      "priority": 900, 
-      "mobile_restricted": false, 
-      "type": "event", 
-      "slug": "kokua-hawaii", 
+      "social_bonus": 0,
+      "priority": 900,
+      "type": "event",
+      "point_value": 10,
+      "slug": "kokua-hawaii",
       "name": "Kokua Hawaii"
     }
   }, 
   {
     "pk": 25, 
-    "model": "smartgrid.activitybase", 
+    "model": "smartgrid.action", 
     "fields": {
       "category": 8, 
-      "energy_related": false, 
-      "depends_on_text": "", 
+      "depends_on_text": "",
       "description": "Attend a presentation from KYA Sustainability Studio to hear from UH graduates about how they got jobs making Hawaii more sustainable. Meeting will take place in in Lehua's rooftop lounge.", 
       "title": "Attend KYA Sustainability Studio event", 
       "depends_on": "", 
-      "created_at": "2011-02-17 10:35:30", 
-      "social_bonus": 10, 
-      "updated_at": "2011-07-19 12:42:14", 
-      "priority": 800, 
-      "mobile_restricted": false, 
-      "type": "event", 
-      "slug": "kya-studio", 
+      "social_bonus": 10,
+      "priority": 800,
+      "type": "event",
+      "point_value": 10,
+      "slug": "kya-studio",
       "name": "KYA studio"
     }
   }, 
   {
     "pk": 26, 
-    "model": "smartgrid.activitybase", 
+    "model": "smartgrid.action", 
     "fields": {
       "category": 8, 
-      "energy_related": false, 
-      "depends_on_text": null, 
+      "depends_on_text": null,
       "description": "Watch this video talking about climate change and how it will affect Hawaii.\r\n\r\n<object width=\"471\" height=\"295\"><param name=\"movie\" value=\"http://www.youtube.com/v/wSquej2rFXM?fs=1&amp;hl=en_US&amp;rel=0\"></param><param name=\"allowFullScreen\" value=\"true\"></param><param name=\"allowscriptaccess\" value=\"always\"></param><embed src=\"http://www.youtube.com/v/wSquej2rFXM?fs=1&amp;hl=en_US&amp;rel=0\" type=\"application/x-shockwave-flash\" allowscriptaccess=\"always\" allowfullscreen=\"true\" width=\"471\" height=\"295\" wmode=\"opaque\"></embed></object>\r\n", 
       "title": "Watch a video about climate change", 
       "depends_on": "completed(\"energy-intuition\")",
-      "created_at": "2011-02-17 10:35:30", 
-      "social_bonus": 0, 
-      "updated_at": "2011-06-09 21:07:33", 
-      "priority": 1, 
-      "mobile_restricted": false, 
-      "type": "activity", 
-      "slug": "climate-change", 
+      "social_bonus": 0,
+      "priority": 1,
+      "type": "activity",
+      "point_value": 10,
+      "slug": "climate-change",
       "name": "Climate change"
     }
   }, 
   {
     "pk": 27, 
-    "model": "smartgrid.activitybase", 
+    "model": "smartgrid.action", 
     "fields": {
       "category": 8, 
-      "energy_related": false, 
-      "depends_on_text": null, 
+      "depends_on_text": null,
       "description": "<center>![Image of hurricane coming out of a smokestack](/site_media/media/gblocks/inconvenient-truth-small.jpg)</center>\r\n\r\nCome see Al Gore's very influential movie about climate change: [An Inconvenient Truth](http://www.imdb.com/title/tt0497116/). Showing in Ilima's roof lounge.", 
       "title": "Watch the movie \"An Inconvenient Truth\"", 
       "depends_on": "completed(\"energy-intuition\")",
-      "created_at": "2011-02-17 10:35:30", 
-      "social_bonus": 0, 
-      "updated_at": "2011-06-09 21:07:33", 
-      "priority": 300, 
-      "mobile_restricted": false, 
-      "type": "event", 
-      "slug": "inconvenient-truth", 
+      "social_bonus": 0,
+      "priority": 300,
+      "type": "event",
+      "point_value": 10,
+      "slug": "inconvenient-truth",
       "name": "Inconvenient Truth"
     }
   }, 
   {
     "pk": 28, 
-    "model": "smartgrid.activitybase", 
+    "model": "smartgrid.action", 
     "fields": {
       "category": 5, 
-      "energy_related": false, 
-      "depends_on_text": null, 
+      "depends_on_text": null,
       "description": "Attend a presentation by Prof. Chip Fletcher on the affects of climate change on Hawaii's shoreline. The presentation will take place in in Mokihana's rooftop lounge.", 
       "title": "Attend talk by Prof Chip Fletcher", 
       "depends_on": null, 
-      "created_at": "2011-02-17 10:35:30", 
-      "social_bonus": 0, 
-      "updated_at": "2011-06-09 21:07:33", 
-      "priority": 27, 
-      "mobile_restricted": false, 
-      "type": "event", 
-      "slug": "talk", 
+      "social_bonus": 0,
+      "priority": 27,
+      "type": "event",
+      "point_value": 10,
+      "slug": "talk",
       "name": "Talk"
     }
   }, 
   {
     "pk": 29, 
-    "model": "smartgrid.activitybase", 
+    "model": "smartgrid.action", 
     "fields": {
       "category": 3, 
-      "energy_related": false, 
-      "depends_on_text": null, 
+      "depends_on_text": null,
       "description": "This is an opportunity to really explore the issue of lighting in more depth. Pick one of the activities below and go do it! Note that these activities will require significantly more effort than normal activities, but they are also worth more points. This task is worth a variable number of points, so the more effort and the higher quality of your result, the more points you will receive.\n\n  * Make a YouTube video about lighting\n  * Write a letter to the editor about lighting\n  * Join a local environmental/energy organization", 
       "title": "Advanced lighting activity", 
       "depends_on": null, 
-      "created_at": "2011-02-17 10:35:30", 
-      "social_bonus": 0, 
-      "updated_at": "2011-06-09 21:07:33", 
-      "priority": 1000, 
-      "mobile_restricted": false, 
-      "type": "activity", 
-      "slug": "advanced-lighting", 
+      "social_bonus": 0,
+      "priority": 1000,
+      "type": "activity",
+      "point_value": 10,
+      "slug": "advanced-lighting",
       "name": "Advanced lighting"
     }
   }, 
   {
     "pk": 30, 
-    "model": "smartgrid.activitybase", 
+    "model": "smartgrid.action", 
     "fields": {
       "category": 2, 
-      "energy_related": true, 
-      "depends_on_text": null, 
+      "depends_on_text": null,
       "description": "<center>![Group bed](/site_media/media/gblocks/dorm-bed.jpg)</center>\r\n\r\nCommit to turning off all appliances in your room (computer, TVs, DVD players, game consoles) every night before you go to sleep. Appliances use a significant amount of electricity, so turning them off when you definitely won't be using them (like when you are asleep) will save energy.",
       "title": "I will turn off all appliances every night before going to sleep", 
       "depends_on": "completed(\"power-energy\")",
-      "created_at": "2011-02-17 10:35:30", 
-      "social_bonus": 0, 
-      "updated_at": "2011-06-09 21:07:33", 
-      "priority": 4, 
-      "mobile_restricted": false, 
-      "type": "commitment", 
-      "slug": "off-b4-bed", 
+      "social_bonus": 0,
+      "priority": 4,
+      "type": "commitment",
+      "point_value": 10,
+      "slug": "off-b4-bed",
       "name": "Off b4 bed"
     }
   }, 
   {
     "pk": 31, 
-    "model": "smartgrid.activitybase", 
+    "model": "smartgrid.action", 
     "fields": {
       "category": 3, 
-      "energy_related": false, 
-      "depends_on_text": null, 
+      "depends_on_text": null,
       "description": "Commit to turning off the lights when leaving any room.", 
       "title": "I will turn off the lights when leaving any room", 
       "depends_on": null, 
-      "created_at": "2011-02-17 10:35:30", 
-      "social_bonus": 0, 
-      "updated_at": "2011-06-09 21:07:33", 
-      "priority": 6, 
-      "mobile_restricted": false, 
-      "type": "commitment", 
-      "slug": "turn-off-lights", 
+      "social_bonus": 0,
+      "priority": 6,
+      "type": "commitment",
+      "point_value": 10,
+      "slug": "turn-off-lights",
       "name": "turn off lights"
     }
   }, 
   {
     "pk": 32, 
-    "model": "smartgrid.activitybase", 
+    "model": "smartgrid.action", 
     "fields": {
       "category": 3, 
-      "energy_related": false, 
-      "depends_on_text": null, 
+      "depends_on_text": null,
       "description": "Commit to using task lighting (like a desk lamp) instead of overhead room lights when possible. Often overhead lights provide more light than you need, or might not provide the light where you need it. Using a desk lamp will reduce your electricity use while giving you the light you need, where you need it.", 
       "title": "I will use task lighting instead of overhead lights", 
       "depends_on": "", 
-      "created_at": "2011-02-17 10:35:30", 
-      "social_bonus": 0, 
-      "updated_at": "2011-06-09 21:07:33", 
-      "priority": 7, 
-      "mobile_restricted": false, 
-      "type": "commitment", 
-      "slug": "task-lighting", 
+      "social_bonus": 0,
+      "priority": 7,
+      "type": "commitment",
+      "point_value": 10,
+      "slug": "task-lighting",
       "name": "task lighting"
     }
   }, 
   {
     "pk": 33, 
-    "model": "smartgrid.activitybase", 
+    "model": "smartgrid.action", 
     "fields": {
       "category": 2, 
-      "energy_related": true, 
-      "depends_on_text": null, 
+      "depends_on_text": null,
       "description": "<center>![Power strip with multiple things plugged in](/site_media/media/gblocks/powerstrip.jpg)</center>\r\n\r\nA vampire load is a device that uses power when plugged in, even when it is turned off and not doing anything. Commit to turning off any vampire loads (cell phone charger, iPod charger, game consoles, TVs) using a power strip when you are not using them, thereby saving energy. If you need a power strip, you can buy them at the UH Bookstore, or many other stores (grocery stores, drug stores, etc).", 
       "title": "I will turn off vampire loads using a power strip", 
       "depends_on": "completed(\"intro-video\")",
-      "created_at": "2011-02-17 10:35:30", 
-      "social_bonus": 0, 
-      "updated_at": "2011-06-09 21:07:33", 
-      "priority": 3, 
-      "mobile_restricted": false, 
-      "type": "commitment", 
-      "slug": "turn-off-vampires", 
+      "social_bonus": 0,
+      "priority": 3,
+      "type": "commitment",
+      "point_value": 10,
+      "slug": "turn-off-vampires",
       "name": "Turn off vampires"
     }
   }, 
   {
     "pk": 34, 
-    "model": "smartgrid.activitybase", 
+    "model": "smartgrid.action", 
     "fields": {
       "category": 8, 
-      "energy_related": false, 
-      "depends_on_text": null, 
+      "depends_on_text": null,
       "description": "Commit to turning off water at sinks when you aren't actually using the water, such as when brushing your teeth, shaving, applying makeup, etc. Clean water is a valuable resource that shouldn't be wasted. Also pumping water from the ground into a building, heating it, and then treating the used water takes energy, so reducing the amount of water used saves energy.", 
       "title": "I will turn off water when brushing my teeth or shaving", 
       "depends_on": "", 
-      "created_at": "2011-02-17 10:35:30", 
-      "social_bonus": 0, 
-      "updated_at": "2011-06-09 21:07:33", 
-      "priority": 100, 
-      "mobile_restricted": false, 
-      "type": "commitment", 
-      "slug": "turn-off-water", 
+      "social_bonus": 0,
+      "priority": 100,
+      "type": "commitment",
+      "point_value": 10,
+      "slug": "turn-off-water",
       "name": "turn off water"
     }
   }, 
   {
     "pk": 35, 
-    "model": "smartgrid.activitybase", 
+    "model": "smartgrid.action", 
     "fields": {
       "category": 7, 
-      "energy_related": false, 
-      "depends_on_text": null, 
+      "depends_on_text": null,
       "description": "Commit to turning off water when showering except when actively rinsing off soap or shampoo. Clean water is a valuable resource that shouldn't be wasted. Also pumping water from the ground into a building, heating it, and then treating the used water takes energy, so reducing the amount of water used saves energy.", 
       "title": "I will turn off water when sudsing and scrubbing in shower", 
       "depends_on": "", 
-      "created_at": "2011-02-17 10:35:30", 
-      "social_bonus": 0, 
-      "updated_at": "2011-06-09 21:07:33", 
-      "priority": 20, 
-      "mobile_restricted": false, 
-      "type": "commitment", 
-      "slug": "water-in-shower", 
+      "social_bonus": 0,
+      "priority": 20,
+      "type": "commitment",
+      "point_value": 10,
+      "slug": "water-in-shower",
       "name": "water in shower"
     }
   }, 
   {
     "pk": 36, 
-    "model": "smartgrid.activitybase", 
+    "model": "smartgrid.action", 
     "fields": {
       "category": 3, 
-      "energy_related": false, 
-      "depends_on_text": null, 
+      "depends_on_text": null,
       "description": "<center>![Sun coming through window](/site_media/media/gblocks/sun-window.jpg)</center>\r\n\r\nCommit to using natural light from windows or outdoors instead of turning on electric lighting. This can mean opening shades instead of turning on the lights, and/or planning your day so that tasks that require light (like reading books, doing written homework) are done during the day.", 
       "title": "I will use natural light instead of electric lighting", 
       "depends_on": "completed(\"energy-intuition\")",
-      "created_at": "2011-02-17 10:35:30", 
-      "social_bonus": 0, 
-      "updated_at": "2011-06-09 21:07:33", 
-      "priority": 3, 
-      "mobile_restricted": false, 
-      "type": "commitment", 
-      "slug": "use-sunlight", 
+      "social_bonus": 0,
+      "priority": 3,
+      "type": "commitment",
+      "point_value": 10,
+      "slug": "use-sunlight",
       "name": "Use sunlight"
     }
   }, 
   {
     "pk": 37, 
-    "model": "smartgrid.activitybase", 
+    "model": "smartgrid.action", 
     "fields": {
       "category": 6, 
-      "energy_related": false, 
-      "depends_on_text": null, 
+      "depends_on_text": null,
       "description": "Commit to turning off your printer when you aren't actively printing something out. This will reduce electricity use, since printers draw some power if they are turned on even when they aren't printing.", 
       "title": "I will turn off printer when not printing", 
       "depends_on": "False", 
-      "created_at": "2011-02-17 10:35:30", 
-      "social_bonus": 0, 
-      "updated_at": "2011-06-09 21:07:33", 
-      "priority": 901, 
-      "mobile_restricted": false, 
-      "type": "commitment", 
-      "slug": "printer", 
+      "social_bonus": 0,
+      "priority": 901,
+      "type": "commitment",
+      "point_value": 10,
+      "slug": "printer",
       "name": "printer"
     }
   }, 
   {
     "pk": 38, 
-    "model": "smartgrid.activitybase", 
+    "model": "smartgrid.action", 
     "fields": {
       "category": 4, 
-      "energy_related": false, 
-      "depends_on_text": null, 
+      "depends_on_text": null,
       "description": "<center>![Stairwell looking down](/site_media/media/gblocks/stairwell.jpg)</center>\r\n\r\nCommit to using the stairs instead of elevators during your day, whenever that is feasible. Elevators use electricity, so by using the stairs you will save some energy. Also, using the stairs is good exercise!", 
       "title": "I will use stairs instead of elevator", 
       "depends_on": "completed(\"climate-change\") or completed(\"trash-video\")",
-      "created_at": "2011-02-17 10:35:30", 
-      "social_bonus": 0, 
-      "updated_at": "2011-06-09 21:07:33", 
-      "priority": 5, 
-      "mobile_restricted": false, 
-      "type": "commitment", 
-      "slug": "use-stairs", 
+      "social_bonus": 0,
+      "priority": 5,
+      "type": "commitment",
+      "point_value": 10,
+      "slug": "use-stairs",
       "name": "Use stairs"
     }
   }, 
   {
     "pk": 39, 
-    "model": "smartgrid.activitybase", 
+    "model": "smartgrid.action", 
     "fields": {
       "category": 6, 
-      "energy_related": false, 
-      "depends_on_text": null, 
+      "depends_on_text": null,
       "description": "<center>![Lid of a recycling bin](/site_media/media/gblocks/recycling-can-lid.jpg)</center>\r\n\r\nCommit to recycling all (recyclable) beverage containers at one of the recycling bins on campus or around town. Making things from recycled materials generally costs less and uses less energy than making them from raw materials.", 
       "title": "I will recycle all beverage containers", 
       "depends_on": "completed(\"climate-change\") or completed(\"trash-video\")",
-      "created_at": "2011-02-17 10:35:30", 
-      "social_bonus": 0, 
-      "updated_at": "2011-06-09 21:07:33", 
-      "priority": 3, 
-      "mobile_restricted": false, 
-      "type": "commitment", 
-      "slug": "recycle-cans", 
+      "social_bonus": 0,
+      "priority": 3,
+      "type": "commitment",
+      "point_value": 10,
+      "slug": "recycle-cans",
       "name": "Recycle cans"
     }
   }, 
   {
     "pk": 40, 
-    "model": "smartgrid.activitybase", 
+    "model": "smartgrid.action", 
     "fields": {
       "category": 5, 
-      "energy_related": false, 
-      "depends_on_text": null, 
+      "depends_on_text": null,
       "description": "<center>![Picture of 3 people in a car](/site_media/media/gblocks/carpool.jpg)</center>\r\n\r\nCommit to not driving off-campus in a car by yourself. Try riding the bus (free using your U-PASS!), riding a bike, walking, driving a moped, or using a vehicle with 3+ occupants instead. Transportation fuel is a major use of energy and it generates a lot of greenhouse gases, so traveling more efficiently saves energy and the planet.", 
       "title": "I won't drive off-campus alone", 
       "depends_on": "completed(\"climate-change\") or completed(\"trash-video\")",
-      "created_at": "2011-02-17 10:35:30", 
-      "social_bonus": 0, 
-      "updated_at": "2011-06-09 21:07:33", 
-      "priority": 3, 
-      "mobile_restricted": false, 
-      "type": "commitment", 
-      "slug": "car-pool", 
+      "social_bonus": 0,
+      "priority": 3,
+      "type": "commitment",
+      "point_value": 10,
+      "slug": "car-pool",
       "name": "Car pool"
     }
   }, 
   {
     "pk": 41, 
-    "model": "smartgrid.activitybase", 
+    "model": "smartgrid.action", 
     "fields": {
       "category": 4, 
-      "energy_related": false, 
-      "depends_on_text": null, 
+      "depends_on_text": null,
       "description": "Commit to using your TV (watching shows, movies, playing games) for not more than 1 hour per day. Widescreen TVs use a lot of electricity, so putting a limit on how much you use them will reduce your electricity use.", 
       "title": "I will limit my TV use to 1 hour a day", 
       "depends_on": null, 
-      "created_at": "2011-02-17 10:35:30", 
-      "social_bonus": 0, 
-      "updated_at": "2011-06-09 21:07:33", 
-      "priority": 10, 
-      "mobile_restricted": false, 
-      "type": "commitment", 
-      "slug": "limit-tv", 
+      "social_bonus": 0,
+      "priority": 10,
+      "type": "commitment",
+      "point_value": 10,
+      "slug": "limit-tv",
       "name": "limit TV"
     }
   }, 
   {
     "pk": 42, 
-    "model": "smartgrid.activitybase", 
+    "model": "smartgrid.action", 
     "fields": {
       "category": 7, 
-      "energy_related": false, 
-      "depends_on_text": null, 
+      "depends_on_text": null,
       "description": "Commit to always washing full loads of laundry. Washing less than a full load is less efficient, leading to more electricity and hot water being used per piece of laundry washed.", 
       "title": "I will wash only full loads of laundry", 
       "depends_on": "", 
-      "created_at": "2011-02-17 10:35:30", 
-      "social_bonus": 0, 
-      "updated_at": "2011-06-09 21:07:33", 
-      "priority": 21, 
-      "mobile_restricted": false, 
-      "type": "commitment", 
-      "slug": "full-load-laundry", 
+      "social_bonus": 0,
+      "priority": 21,
+      "type": "commitment",
+      "point_value": 10,
+      "slug": "full-load-laundry",
       "name": "full load laundry"
     }
   }, 
   {
     "pk": 43, 
-    "model": "smartgrid.activitybase", 
+    "model": "smartgrid.action", 
     "fields": {
       "category": 1, 
-      "energy_related": false, 
-      "depends_on_text": null, 
+      "depends_on_text": null,
       "description": "Commit to wearing your Kukui Cup button every day during the commitment period. Wearing your button will help spread awareness about the competition, and remind others to get involved.", 
       "title": "I will wear my Kukui Cup button every day", 
       "depends_on": "False", 
-      "created_at": "2011-02-17 10:35:30", 
-      "social_bonus": 0, 
-      "updated_at": "2011-06-09 21:07:33", 
-      "priority": 990, 
-      "mobile_restricted": false, 
-      "type": "commitment", 
-      "slug": "kukui-cup-button", 
+      "social_bonus": 0,
+      "priority": 990,
+      "type": "commitment",
+      "point_value": 10,
+      "slug": "kukui-cup-button",
       "name": "kukui cup button"
     }
   }, 
   {
     "pk": 44, 
-    "model": "smartgrid.activitybase", 
+    "model": "smartgrid.action", 
     "fields": {
       "category": 5, 
-      "energy_related": false, 
-      "depends_on_text": null, 
+      "depends_on_text": null,
       "description": "Commit to walking to any destination less than one mile away from your residence hall. Walking saves energy, costs nothing, and is good exercise.", 
       "title": "I will walk to destinations less than one mile away", 
       "depends_on": "", 
-      "created_at": "2011-02-17 10:35:30", 
-      "social_bonus": 0, 
-      "updated_at": "2011-06-09 21:07:33", 
-      "priority": 4, 
-      "mobile_restricted": false, 
-      "type": "commitment", 
-      "slug": "walk", 
+      "social_bonus": 0,
+      "priority": 4,
+      "type": "commitment",
+      "point_value": 10,
+      "slug": "walk",
       "name": "walk"
     }
   }, 
   {
     "pk": 45, 
-    "model": "smartgrid.activitybase", 
+    "model": "smartgrid.action", 
     "fields": {
       "category": 7, 
-      "energy_related": false, 
-      "depends_on_text": null, 
+      "depends_on_text": null,
       "description": "Commit to washing your laundry in cold water instead of warm or hot water. There are now detergents designed to be used in cold water, and it takes lots of energy to heat water up. By using cold water, you will be saving energy.", 
       "title": "I will wash my laundry in cold water", 
       "depends_on": "", 
-      "created_at": "2011-02-17 10:35:30", 
-      "social_bonus": 0, 
-      "updated_at": "2011-06-09 21:07:33", 
-      "priority": 25, 
-      "mobile_restricted": false, 
-      "type": "commitment", 
-      "slug": "cold-laundry", 
+      "social_bonus": 0,
+      "priority": 25,
+      "type": "commitment",
+      "point_value": 10,
+      "slug": "cold-laundry",
       "name": "cold laundry"
     }
   }, 
   {
     "pk": 46, 
-    "model": "smartgrid.activitybase", 
+    "model": "smartgrid.action", 
     "fields": {
       "category": 7, 
-      "energy_related": false, 
-      "depends_on_text": null, 
+      "depends_on_text": null,
       "description": "Commit to measuring the length of your shower with a watch or phone, and reducing the time by 1 minute. Clean water is a valuable resource that shouldn't be wasted. Also pumping water from the ground into a building, heating it, and then treating the used water takes energy, so reducing the amount of water used saves energy.", 
       "title": "I will reduce my shower time by 1 minute", 
       "depends_on": "", 
-      "created_at": "2011-02-17 10:35:30", 
-      "social_bonus": 0, 
-      "updated_at": "2011-06-09 21:07:33", 
-      "priority": 30, 
-      "mobile_restricted": false, 
-      "type": "commitment", 
-      "slug": "reduce-shower-time", 
+      "social_bonus": 0,
+      "priority": 30,
+      "type": "commitment",
+      "point_value": 10,
+      "slug": "reduce-shower-time",
       "name": "reduce shower time"
     }
   }, 
   {
     "pk": 47, 
-    "model": "smartgrid.activitybase", 
+    "model": "smartgrid.action", 
     "fields": {
       "category": 6, 
-      "energy_related": false, 
-      "depends_on_text": null, 
+      "depends_on_text": null,
       "description": "Commit to turning off your music (from computer, stereo, etc) when you leave your room. You save electricity when you turn off your music when you aren't there to enjoy it.", 
       "title": "I will turn off my music when leaving my room", 
       "depends_on": "False", 
-      "created_at": "2011-02-17 10:35:30", 
-      "social_bonus": 0, 
-      "updated_at": "2011-06-09 21:07:33", 
-      "priority": 910, 
-      "mobile_restricted": false, 
-      "type": "commitment", 
-      "slug": "turn-off-music", 
+      "social_bonus": 0,
+      "priority": 910,
+      "type": "commitment",
+      "point_value": 10,
+      "slug": "turn-off-music",
       "name": "turn off music"
     }
   }, 
   {
     "pk": 48, 
-    "model": "smartgrid.activitybase", 
+    "model": "smartgrid.action", 
     "fields": {
       "category": 4, 
-      "energy_related": false, 
-      "depends_on_text": null, 
+      "depends_on_text": null,
       "description": "Commit to turning off your computer/TV/game console and doing something that doesn't require electricity instead. There are many things you can do both on and off campus that don't require electricity, go find them!", 
       "title": "I will do something 'unplugged' every day", 
       "depends_on": null, 
-      "created_at": "2011-02-17 10:35:30", 
-      "social_bonus": 0, 
-      "updated_at": "2011-06-09 21:07:33", 
-      "priority": 11, 
-      "mobile_restricted": false, 
-      "type": "commitment", 
-      "slug": "unplugged", 
+      "social_bonus": 0,
+      "priority": 11,
+      "type": "commitment",
+      "point_value": 10,
+      "slug": "unplugged",
       "name": "unplugged"
     }
   }, 
   {
     "pk": 49, 
-    "model": "smartgrid.activitybase", 
+    "model": "smartgrid.action", 
     "fields": {
       "category": 8, 
-      "energy_related": false, 
-      "depends_on_text": null, 
+      "depends_on_text": null,
       "description": "Commit to bringing and using reuseable bags when shopping instead of the paper or plastic ones offered by stores. Making disposable bags requires energy, and often the bags end up in our landfills or worse yet they blow away into the ocean. Using a reusable bag saves energy and keeps trash out of our landfills.", 
       "title": "I will bring reusable bags when shopping", 
       "depends_on": "", 
-      "created_at": "2011-02-17 10:35:30", 
-      "social_bonus": 0, 
-      "updated_at": "2011-06-09 21:07:33", 
-      "priority": 200, 
-      "mobile_restricted": false, 
-      "type": "commitment", 
-      "slug": "resuable-bag", 
+      "social_bonus": 0,
+      "priority": 200,
+      "type": "commitment",
+      "point_value": 10,
+      "slug": "resuable-bag",
       "name": "resuable bag"
     }
   }, 
   {
     "pk": 50, 
-    "model": "smartgrid.activitybase", 
+    "model": "smartgrid.action", 
     "fields": {
       "category": 5, 
-      "energy_related": false, 
-      "depends_on_text": null, 
+      "depends_on_text": null,
       "description": "Commit to not eating any meat (beef, pork, chicken, fish, shellfish, etc) during the commitment period. Producing meat (beef in particular) uses a great deal of energy, and produces a great deal of greenhouse gasses. A vegetarian diet uses less energy and emits less greenhouse gas. There are many of vegetarian food options on campus, try them out!", 
       "title": "I will not eat meat", 
       "depends_on": null, 
-      "created_at": "2011-02-17 10:35:30", 
-      "social_bonus": 0, 
-      "updated_at": "2011-06-09 21:07:33", 
-      "priority": 12, 
-      "mobile_restricted": false, 
-      "type": "commitment", 
-      "slug": "meat", 
+      "social_bonus": 0,
+      "priority": 12,
+      "type": "commitment",
+      "point_value": 10,
+      "slug": "meat",
       "name": "meat"
     }
   }, 
   {
     "pk": 52, 
-    "model": "smartgrid.activitybase", 
+    "model": "smartgrid.action", 
     "fields": {
       "category": 6, 
-      "energy_related": false, 
-      "depends_on_text": null, 
+      "depends_on_text": null,
       "description": "<center>![Crane picking up cars from a large pile](http://www.opala.org/images/solid_waste/hmr_crane.jpg)</center>\r\n\r\nFind out more about how Oahu deals with our opala (garbage) in this **all day** tour of several waste and recycling facilities. This tour starts early so make sure you get to the bus on time! Lunch is not provided, so either bring your own, or there will be an opportunity to buy one in a lunch-friendly area.", 
       "title": "Take a tour of Oahu's trashier side", 
       "depends_on": "completed(\"climate-change\") or completed(\"trash-video\")",
-      "created_at": "2011-02-28 00:50:45", 
-      "social_bonus": 0, 
-      "updated_at": "2011-06-09 21:07:33", 
-      "priority": 960, 
-      "mobile_restricted": false, 
-      "type": "excursion", 
-      "slug": "tour-de-trash", 
+      "social_bonus": 0,
+      "priority": 960,
+      "type": "excursion",
+      "point_value": 10,
+      "slug": "tour-de-trash",
       "name": "Tour de Trash"
     }
-  }, 
+  },
   {
-    "pk": 53, 
-    "model": "smartgrid.activitybase", 
+    "pk": 53,
+    "model": "smartgrid.action",
     "fields": {
-      "category": 7, 
-      "energy_related": false, 
-      "depends_on_text": "", 
-      "description": "Part of the Kukui Cup is learning more about energy. This questionnaire will ask you some multiple choice questions about energy. Just give it your best shot (without consulting any other resources), as you will receive the points for this activity independent of how many you answer correctly.", 
-      "title": "Test your energy literacy", 
-      "depends_on": "True", 
-      "created_at": "2011-02-28 00:51:39", 
-      "social_bonus": 0, 
-      "updated_at": "2011-06-30 10:58:51", 
-      "priority": 1000, 
-      "mobile_restricted": false, 
-      "type": "survey", 
-      "slug": "energy-literacy", 
-      "name": "Energy literacy"
+      "category": 7,
+      "depends_on_text": null,
+      "description": "Filler",
+      "title": "Filler",
+      "depends_on": "completed(\"climate-change\") or completed(\"trash-video\")",
+      "social_bonus": 0,
+      "priority": 960,
+      "type": "excursion",
+      "point_value": 10,
+      "slug": "filler",
+      "name": "Filler"
     }
-  }, 
+  },
   {
     "pk": 54, 
-    "model": "smartgrid.activitybase", 
+    "model": "smartgrid.action", 
     "fields": {
       "category": 6, 
-      "energy_related": false, 
-      "depends_on_text": "", 
+      "depends_on_text": "",
       "description": "<center>![Rise Above Plastics spelled out in beach sand with pieces of recovered plastic](/site_media/media/gblocks/rise-above-plastics.jpg)</center>\r\n\r\nHelp make Oahu's beaches more beautiful by participating in this beach cleanup sponsored by the Surfrider Foundation. You need to register for this free event to reserve your seat on the bus by clicking the Register button below. Make sure to wear comfortable clothes, a hat, sunscreen, and some water to keep cool with while you work!", 
       "title": "Take a trip to clean up one of Oahu's beaches", 
       "depends_on": "completed(\"energy-intuition\")",
-      "created_at": "2011-02-28 00:52:31", 
-      "social_bonus": 0, 
-      "updated_at": "2011-07-05 15:38:41", 
-      "priority": 995, 
-      "mobile_restricted": false, 
-      "type": "excursion", 
-      "slug": "beach-cleanup", 
+      "social_bonus": 0,
+      "priority": 995,
+      "type": "excursion",
+      "point_value": 10,
+      "slug": "beach-cleanup",
       "name": "Beach cleanup"
     }
   }, 
   {
     "pk": 55, 
-    "model": "smartgrid.activitybase", 
+    "model": "smartgrid.action", 
     "fields": {
       "category": 6, 
-      "energy_related": false, 
-      "depends_on_text": null, 
+      "depends_on_text": null,
       "description": "test activity 2", 
       "title": "test activity 2", 
       "depends_on": null, 
-      "created_at": "2011-02-28 00:53:34", 
-      "social_bonus": 0, 
-      "updated_at": "2011-06-09 21:07:33", 
-      "priority": 1000, 
-      "mobile_restricted": false, 
-      "type": "activity", 
-      "slug": "test-activity-2", 
+      "social_bonus": 0,
+      "priority": 1000,
+      "type": "activity",
+      "point_value": 10,
+      "slug": "test-activity-2",
       "name": "test activity 2"
     }
   }, 
   {
     "pk": 56, 
-    "model": "smartgrid.activitybase", 
+    "model": "smartgrid.action", 
     "fields": {
       "category": 7, 
-      "energy_related": false, 
-      "depends_on_text": "", 
+      "depends_on_text": "",
       "description": "<center>![image of tunnel door](http://www.boardofwatersupply.com/images/library/waihee1.gif)</center>\r\n\r\n\"Walk in a 1,500 foot dike tunnel to see, feel and hear water at its very source. This dike water source supplies water to Windward O'ahu, from Kahalu'u to Kailua.\" Wear warm clothing and rain gear (no umbrellas) as it will be wet. Wear comfortable shoes that you don't mind getting wet, and bring a flashlight if you have one. Also make sure you bring your UH student ID card, because you can't go on the tour without it!", 
       "title": "Check out the Waihee tunnel in Windward Oahu", 
       "depends_on": "completed(\"climate-change\") or completed(\"trash-video\")",
-      "created_at": "2011-02-28 00:54:10", 
-      "social_bonus": 10, 
-      "updated_at": "2011-07-22 18:13:58", 
-      "priority": 100, 
-      "mobile_restricted": false, 
-      "type": "excursion", 
-      "slug": "waihee-tunnel", 
+      "social_bonus": 10,
+      "priority": 100,
+      "type": "excursion",
+      "point_value": 10,
+      "slug": "waihee-tunnel",
       "name": "Waihee tunnel"
     }
   }, 
   {
     "pk": 57, 
-    "model": "smartgrid.activitybase", 
+    "model": "smartgrid.action", 
     "fields": {
       "category": 6, 
-      "energy_related": false, 
-      "depends_on_text": null, 
+      "depends_on_text": null,
       "description": "Check out this video called Trash is Treasure and maybe change your thinking about trash\r\n\r\n<object width=\"471\" height=\"295\"><param name=\"movie\" value=\"http://www.youtube.com/v/uMxeWJgFLhQ?fs=1&amp;hl=en_US&amp;rel=0\"></param><param name=\"allowFullScreen\" value=\"true\"></param><param name=\"allowscriptaccess\" value=\"always\"></param><embed src=\"http://www.youtube.com/v/uMxeWJgFLhQ?fs=1&amp;hl=en_US&amp;rel=0\" type=\"application/x-shockwave-flash\" allowscriptaccess=\"always\" allowfullscreen=\"true\" width=\"471\" height=\"295\" wmode=\"opaque\"></embed></object>\r\n", 
       "title": "Watch Trash is Treasure video", 
       "depends_on": "completed(\"energy-intuition\")",
-      "created_at": "2011-04-17 18:12:26", 
-      "social_bonus": 0, 
-      "updated_at": "2011-06-09 21:07:33", 
-      "priority": 1, 
-      "mobile_restricted": false, 
-      "type": "activity", 
-      "slug": "trash-video", 
+      "social_bonus": 0,
+      "priority": 1,
+      "type": "activity",
+      "point_value": 10,
+      "slug": "trash-video",
       "name": "Trash video"
     }
   }, 
   {
     "pk": 58, 
-    "model": "smartgrid.activitybase", 
+    "model": "smartgrid.action", 
     "fields": {
       "category": 4, 
-      "energy_related": false, 
-      "depends_on_text": null, 
+      "depends_on_text": null,
       "description": "<center>![Wind turbine being assembled with crane](http://media.staradvertiser.com/images/312*467/20101009_biz_windfarm.jpg)</center>\r\n\r\nTake a trip to First Wind's Oahu wind farm on the windward side of Oahu, which uses several wind turbines to generate a total of up to 30 MW of renewable energy. You need to register for this free event to reserve your seat on the bus by clicking the \"I want to sign up\" button below.", 
       "title": "Take a trip to a wind farm on the windward side", 
       "depends_on": "completed(\"power-energy\")",
-      "created_at": "2011-04-18 17:51:47", 
-      "social_bonus": 0, 
-      "updated_at": "2011-06-09 21:07:33", 
-      "priority": 800, 
-      "mobile_restricted": false, 
-      "type": "excursion", 
-      "slug": "wind-farm-tour", 
+      "social_bonus": 0,
+      "priority": 800,
+      "type": "excursion",
+      "point_value": 10,
+      "slug": "wind-farm-tour",
       "name": "Wind farm tour"
     }
   }, 
   {
     "pk": 59, 
-    "model": "smartgrid.activitybase", 
+    "model": "smartgrid.action", 
     "fields": {
       "category": 8, 
-      "energy_related": false, 
-      "depends_on_text": "", 
+      "depends_on_text": "",
       "description": "<center>![Charlie Reppun with the Reppun farm in the background](/site_media/media/gblocks/charliereppun-small.jpg)</center>\r\n\r\nTake a trip to the Waiahole Valley on the windward side of Oahu to see the Reppun farm, which uses renewable energy for all its electrical needs. You need to register for this free event to reserve your seat on the bus by clicking the \"I want to sign up\" button below. Make sure to wear clothes and shoes that you don't mind getting wet or muddy on the farm!", 
       "title": "Take a trip to the Reppun farm", 
       "depends_on": "completed(\"intro-video\")",
-      "created_at": "2011-04-18 18:02:01", 
-      "social_bonus": 10, 
-      "updated_at": "2011-07-19 12:38:16", 
-      "priority": 400, 
-      "mobile_restricted": false, 
-      "type": "excursion", 
-      "slug": "reppun-farm", 
+      "social_bonus": 10,
+      "priority": 400,
+      "type": "excursion",
+      "point_value": 10,
+      "slug": "reppun-farm",
       "name": "Reppun Farm"
     }
   }, 
   {
     "pk": 60, 
-    "model": "smartgrid.activitybase", 
+    "model": "smartgrid.action", 
     "fields": {
       "category": 1, 
-      "energy_related": false, 
-      "depends_on_text": null, 
+      "depends_on_text": null,
       "description": "Filler 1", 
       "title": "Filler 1", 
       "depends_on": "", 
-      "created_at": "2011-04-18 18:05:47", 
-      "social_bonus": 0, 
-      "updated_at": "2011-06-09 21:07:33", 
-      "priority": 1000, 
-      "mobile_restricted": false, 
-      "type": "activity", 
-      "slug": "filler-1", 
+      "social_bonus": 0,
+      "priority": 1000,
+      "type": "activity",
+      "point_value": 10,
+      "slug": "filler-1",
       "name": "Filler 1"
     }
   }, 
   {
     "pk": 61, 
-    "model": "smartgrid.activitybase", 
+    "model": "smartgrid.action", 
     "fields": {
       "category": 2, 
-      "energy_related": false, 
-      "depends_on_text": null, 
+      "depends_on_text": null,
       "description": "<center>![Go Low icon](/site_media/static/css/default/images/icon-go-low-lg.jpg)</center>\r\n\r\nOne important aspect of the Kukui Cup is the Daily Energy Goal Game, which can be found on the [Go Low](/energy) page. Every lounge is assigned a daily energy goal that represents a 5% reduction in electricity use from what the lounge was using before the competition. The Energy Goal Game shows how much energy your lounge has used so far today, and how that compares to the energy goal. The game also shows some activities that might be helpful in getting your lounge to reduce its energy use.\r\n\r\nFor this activity, you will check out the [Go Low](/energy) page. Read the page over, and come back to here and report three things: is your lounge above or below the energy goal, by how much, and name one activity that might help your lounge conserve energy.", 
       "title": "Examine your lounge's energy use", 
       "depends_on": "completed(\"power-energy\")",
-      "created_at": "2011-04-18 18:06:31", 
-      "social_bonus": 0, 
-      "updated_at": "2011-06-09 21:07:33", 
-      "priority": 5, 
-      "mobile_restricted": false, 
-      "type": "activity", 
-      "slug": "check-energy", 
+      "social_bonus": 0,
+      "priority": 5,
+      "type": "activity",
+      "point_value": 10,
+      "slug": "check-energy",
       "name": "Check energy"
     }
   }, 
   {
     "pk": 62, 
-    "model": "smartgrid.activitybase", 
+    "model": "smartgrid.action", 
     "fields": {
       "category": 3, 
-      "energy_related": false, 
-      "depends_on_text": null, 
+      "depends_on_text": null,
       "description": "Filler 3", 
       "title": "Filler 3", 
       "depends_on": "", 
-      "created_at": "2011-04-18 18:07:27", 
-      "social_bonus": 0, 
-      "updated_at": "2011-06-09 21:07:33", 
-      "priority": 1000, 
-      "mobile_restricted": false, 
-      "type": "activity", 
-      "slug": "filler-3", 
+      "social_bonus": 0,
+      "priority": 1000,
+      "type": "activity",
+      "point_value": 10,
+      "slug": "filler-3",
       "name": "Filler 3"
     }
   }, 
   {
     "pk": 63, 
-    "model": "smartgrid.activitybase", 
+    "model": "smartgrid.action", 
     "fields": {
       "category": 5, 
-      "energy_related": false, 
-      "depends_on_text": null, 
+      "depends_on_text": null,
       "description": "Filler 4", 
       "title": "Filler 4", 
       "depends_on": "", 
-      "created_at": "2011-04-18 18:08:05", 
-      "social_bonus": 0, 
-      "updated_at": "2011-06-09 21:07:33", 
-      "priority": 1000, 
-      "mobile_restricted": false, 
-      "type": "activity", 
-      "slug": "filler-4", 
+      "social_bonus": 0,
+      "priority": 1000,
+      "type": "activity",
+      "point_value": 10,
+      "slug": "filler-4",
       "name": "Filler 4"
     }
   }, 
   {
     "pk": 64, 
-    "model": "smartgrid.activitybase", 
+    "model": "smartgrid.action", 
     "fields": {
       "category": 6, 
-      "energy_related": false, 
-      "depends_on_text": null, 
+      "depends_on_text": null,
       "description": "Filler 5", 
       "title": "Filler 5", 
       "depends_on": "", 
-      "created_at": "2011-04-18 18:08:48", 
-      "social_bonus": 0, 
-      "updated_at": "2011-06-09 21:07:33", 
-      "priority": 1000, 
-      "mobile_restricted": false, 
-      "type": "activity", 
-      "slug": "filler-5", 
+      "social_bonus": 0,
+      "priority": 1000,
+      "type": "activity",
+      "point_value": 10,
+      "slug": "filler-5",
       "name": "Filler 5"
     }
   }, 
   {
     "pk": 65, 
-    "model": "smartgrid.activitybase", 
+    "model": "smartgrid.action", 
     "fields": {
       "category": 7, 
-      "energy_related": false, 
-      "depends_on_text": null, 
+      "depends_on_text": null,
       "description": "Filler 6", 
       "title": "Filler 6", 
       "depends_on": "", 
-      "created_at": "2011-04-18 18:09:25", 
-      "social_bonus": 0, 
-      "updated_at": "2011-06-09 21:07:33", 
-      "priority": 1000, 
-      "mobile_restricted": false, 
-      "type": "activity", 
-      "slug": "filler-6", 
+      "social_bonus": 0,
+      "priority": 1000,
+      "type": "activity",
+      "point_value": 10,
+      "slug": "filler-6",
       "name": "Filler 6"
     }
   }, 
@@ -2310,183 +1444,157 @@
     "pk": 30, 
     "model": "smartgrid.commitment", 
     "fields": {
-      "duration": 5, 
-      "point_value": 5
+      "duration": 5
     }
   }, 
   {
     "pk": 31, 
     "model": "smartgrid.commitment", 
     "fields": {
-      "duration": 5, 
-      "point_value": 2
+      "duration": 5
     }
   }, 
   {
     "pk": 32, 
     "model": "smartgrid.commitment", 
     "fields": {
-      "duration": 5, 
-      "point_value": 5
+      "duration": 5
     }
   }, 
   {
     "pk": 33, 
     "model": "smartgrid.commitment", 
     "fields": {
-      "duration": 5, 
-      "point_value": 5
+      "duration": 5
     }
   }, 
   {
     "pk": 34, 
     "model": "smartgrid.commitment", 
     "fields": {
-      "duration": 5, 
-      "point_value": 5
+      "duration": 5
     }
   }, 
   {
     "pk": 35, 
     "model": "smartgrid.commitment", 
     "fields": {
-      "duration": 5, 
-      "point_value": 5
+      "duration": 5
     }
   }, 
   {
     "pk": 36, 
     "model": "smartgrid.commitment", 
     "fields": {
-      "duration": 5, 
-      "point_value": 5
+      "duration": 5
     }
   }, 
   {
     "pk": 37, 
     "model": "smartgrid.commitment", 
     "fields": {
-      "duration": 5, 
-      "point_value": 2
+      "duration": 5
     }
   }, 
   {
     "pk": 38, 
     "model": "smartgrid.commitment", 
     "fields": {
-      "duration": 5, 
-      "point_value": 5
+      "duration": 5
     }
   }, 
   {
     "pk": 39, 
     "model": "smartgrid.commitment", 
     "fields": {
-      "duration": 5, 
-      "point_value": 5
+      "duration": 5
     }
   }, 
   {
     "pk": 40, 
     "model": "smartgrid.commitment", 
     "fields": {
-      "duration": 5, 
-      "point_value": 5
+      "duration": 5
     }
   }, 
   {
     "pk": 41, 
     "model": "smartgrid.commitment", 
     "fields": {
-      "duration": 5, 
-      "point_value": 2
+      "duration": 5
     }
   }, 
   {
     "pk": 42, 
     "model": "smartgrid.commitment", 
     "fields": {
-      "duration": 5, 
-      "point_value": 5
+      "duration": 5
     }
   }, 
   {
     "pk": 43, 
     "model": "smartgrid.commitment", 
     "fields": {
-      "duration": 5, 
-      "point_value": 5
+      "duration": 5
     }
   }, 
   {
     "pk": 44, 
     "model": "smartgrid.commitment", 
     "fields": {
-      "duration": 5, 
-      "point_value": 5
+      "duration": 5
     }
   }, 
   {
     "pk": 45, 
     "model": "smartgrid.commitment", 
     "fields": {
-      "duration": 5, 
-      "point_value": 5
+      "duration": 5
     }
   }, 
   {
     "pk": 46, 
     "model": "smartgrid.commitment", 
     "fields": {
-      "duration": 5, 
-      "point_value": 5
+      "duration": 5
     }
   }, 
   {
     "pk": 47, 
     "model": "smartgrid.commitment", 
     "fields": {
-      "duration": 5, 
-      "point_value": 2
+      "duration": 5
     }
   }, 
   {
     "pk": 48, 
     "model": "smartgrid.commitment", 
     "fields": {
-      "duration": 5, 
-      "point_value": 2
+      "duration": 5
     }
   }, 
   {
     "pk": 49, 
     "model": "smartgrid.commitment", 
     "fields": {
-      "duration": 5, 
-      "point_value": 5
+      "duration": 5
     }
   }, 
   {
     "pk": 50, 
     "model": "smartgrid.commitment", 
     "fields": {
-      "duration": 5, 
-      "point_value": 2
+      "duration": 5
     }
   }, 
   {
     "pk": 1, 
-    "model": "smartgrid.activity", 
+    "model": "smartgrid.event",
     "fields": {
       "event_location": "", 
-      "confirm_type": "code", 
-      "point_range_start": null, 
-      "confirm_prompt": "Enter the attendance code from the meeting.", 
       "event_date": "2012-03-27 19:00:00",
-      "point_value": 30, 
       "expire_date": "2013-02-04",
       "duration": 60, 
-      "point_range_end": null, 
       "pub_date": "2010-05-12"
     }
   }, 
@@ -2494,12 +1602,9 @@
     "pk": 2, 
     "model": "smartgrid.activity", 
     "fields": {
-      "event_location": "", 
-      "confirm_type": "text", 
+      "confirm_type": "text",
       "point_range_start": null, 
       "confirm_prompt": "", 
-      "event_date": null, 
-      "point_value": 10, 
       "expire_date": "2011-12-31", 
       "duration": 5, 
       "point_range_end": null, 
@@ -2508,17 +1613,12 @@
   }, 
   {
     "pk": 3, 
-    "model": "smartgrid.activity", 
+    "model": "smartgrid.event",
     "fields": {
       "event_location": "Lehua rooftop", 
-      "confirm_type": "code", 
-      "point_range_start": null, 
-      "confirm_prompt": "Enter the ticket code provided at the meeting.", 
-      "event_date": "2011-08-27 19:00:00", 
-      "point_value": 20, 
+      "event_date": "2011-08-27 19:00:00",
       "expire_date": "2011-12-31", 
       "duration": 60, 
-      "point_range_end": null, 
       "pub_date": "2010-05-12"
     }
   }, 
@@ -2526,13 +1626,10 @@
     "pk": 4, 
     "model": "smartgrid.activity", 
     "fields": {
-      "event_location": null, 
-      "confirm_type": "image", 
+      "confirm_type": "image",
       "point_range_start": null, 
       "confirm_prompt": "Please upload the photo you took, showing both the incandescent bulb you replaced and the CFL you installed.", 
-      "event_date": null, 
-      "point_value": 4, 
-      "expire_date": "2011-02-21", 
+      "expire_date": "2011-02-21",
       "duration": 5, 
       "point_range_end": null, 
       "pub_date": "2010-05-12"
@@ -2540,33 +1637,23 @@
   }, 
   {
     "pk": 5, 
-    "model": "smartgrid.activity", 
+    "model": "smartgrid.event",
     "fields": {
       "event_location": "", 
-      "confirm_type": "code", 
-      "point_range_start": null, 
-      "confirm_prompt": "Enter the attendance code you received at the meeting.", 
       "event_date": "2012-03-31 18:00:00",
-      "point_value": 20, 
       "expire_date": "2013-02-07",
       "duration": 60, 
-      "point_range_end": null, 
       "pub_date": "2010-07-16"
     }
   }, 
   {
     "pk": 6, 
-    "model": "smartgrid.activity", 
+    "model": "smartgrid.event",
     "fields": {
       "event_location": "Mokihana rooftop", 
-      "confirm_type": "code", 
-      "point_range_start": null, 
-      "confirm_prompt": "Enter the attendance code you received at the movie.", 
       "event_date": "2012-03-30 20:00:00",
-      "point_value": 20, 
       "expire_date": "2013-12-31",
       "duration": 100, 
-      "point_range_end": null, 
       "pub_date": "2010-07-12"
     }
   }, 
@@ -2574,12 +1661,9 @@
     "pk": 7, 
     "model": "smartgrid.activity", 
     "fields": {
-      "event_location": "", 
-      "confirm_type": "image", 
+      "confirm_type": "image",
       "point_range_start": null, 
       "confirm_prompt": "Please upload the screenshot you took of your new, more energy efficient system settings.", 
-      "event_date": null, 
-      "point_value": 10, 
       "expire_date": "2011-02-21", 
       "duration": 10, 
       "point_range_end": null, 
@@ -2590,12 +1674,9 @@
     "pk": 8, 
     "model": "smartgrid.activity", 
     "fields": {
-      "event_location": "", 
-      "confirm_type": "image", 
+      "confirm_type": "image",
       "point_range_start": null, 
-      "confirm_prompt": "Please upload the screenshot showing you joined the Kukui Cup Facebook group.", 
-      "event_date": null, 
-      "point_value": 5, 
+      "confirm_prompt": "Please upload the screenshot showing you joined the Kukui Cup Facebook group.",
       "expire_date": "2011-12-31", 
       "duration": 5, 
       "point_range_end": null, 
@@ -2606,12 +1687,9 @@
     "pk": 9, 
     "model": "smartgrid.activity", 
     "fields": {
-      "event_location": "", 
-      "confirm_type": "image", 
+      "confirm_type": "image",
       "point_range_start": null, 
-      "confirm_prompt": "Please upload the screenshot showing your tweet about the Kukui Cup website.", 
-      "event_date": null, 
-      "point_value": 5, 
+      "confirm_prompt": "Please upload the screenshot showing your tweet about the Kukui Cup website.",
       "expire_date": "2011-12-31", 
       "duration": 5, 
       "point_range_end": null, 
@@ -2622,12 +1700,9 @@
     "pk": 10, 
     "model": "smartgrid.activity", 
     "fields": {
-      "event_location": "", 
-      "confirm_type": "image", 
+      "confirm_type": "image",
       "point_range_start": null, 
-      "confirm_prompt": "Please upload the screenshot showing a link to the Kukui Cup in your Facebook newsfeed.", 
-      "event_date": null, 
-      "point_value": 5, 
+      "confirm_prompt": "Please upload the screenshot showing a link to the Kukui Cup in your Facebook newsfeed.",
       "expire_date": "2011-12-31", 
       "duration": 5, 
       "point_range_end": null, 
@@ -2638,12 +1713,9 @@
     "pk": 11, 
     "model": "smartgrid.activity", 
     "fields": {
-      "event_location": "", 
-      "confirm_type": "image", 
+      "confirm_type": "image",
       "point_range_start": null, 
-      "confirm_prompt": "Please upload the photo showing your labels on devices in your room.", 
-      "event_date": null, 
-      "point_value": 5, 
+      "confirm_prompt": "Please upload the photo showing your labels on devices in your room.",
       "expire_date": "2011-02-21", 
       "duration": 15, 
       "point_range_end": null, 
@@ -2654,13 +1726,10 @@
     "pk": 12, 
     "model": "smartgrid.activity", 
     "fields": {
-      "event_location": null, 
-      "confirm_type": "text", 
+      "confirm_type": "text",
       "point_range_start": null, 
       "confirm_prompt": "Enter in the carbon footprint you received from the calculator, and any comments you have about your carbon footprint.", 
-      "event_date": null, 
-      "point_value": 3, 
-      "expire_date": "2010-12-31", 
+      "expire_date": "2010-12-31",
       "duration": 20, 
       "point_range_end": null, 
       "pub_date": "2010-07-16"
@@ -2670,13 +1739,10 @@
     "pk": 13, 
     "model": "smartgrid.activity", 
     "fields": {
-      "event_location": "", 
-      "confirm_type": "text", 
+      "confirm_type": "text",
       "point_range_start": null, 
       "confirm_prompt": "", 
-      "event_date": null, 
-      "point_value": 10, 
-      "expire_date": "2011-02-21", 
+      "expire_date": "2011-02-21",
       "duration": 5, 
       "point_range_end": null, 
       "pub_date": "2010-10-12"
@@ -2686,12 +1752,9 @@
     "pk": 14, 
     "model": "smartgrid.activity", 
     "fields": {
-      "event_location": "", 
-      "confirm_type": "text", 
+      "confirm_type": "text",
       "point_range_start": null, 
-      "confirm_prompt": "", 
-      "event_date": null, 
-      "point_value": 20, 
+      "confirm_prompt": "",
       "expire_date": "2011-12-31", 
       "duration": 5, 
       "point_range_end": null, 
@@ -2702,12 +1765,9 @@
     "pk": 15, 
     "model": "smartgrid.activity", 
     "fields": {
-      "event_location": "", 
-      "confirm_type": "text", 
+      "confirm_type": "text",
       "point_range_start": null, 
       "confirm_prompt": "", 
-      "event_date": null, 
-      "point_value": 10, 
       "expire_date": "2011-12-31", 
       "duration": 3, 
       "point_range_end": null, 
@@ -2718,13 +1778,10 @@
     "pk": 16, 
     "model": "smartgrid.activity", 
     "fields": {
-      "event_location": "", 
-      "confirm_type": "free", 
+      "confirm_type": "free",
       "point_range_start": null, 
       "confirm_prompt": "this is a test", 
-      "event_date": null, 
-      "point_value": 4, 
-      "expire_date": "2011-02-21", 
+      "expire_date": "2011-02-21",
       "duration": 3, 
       "point_range_end": null, 
       "pub_date": "2010-10-15"
@@ -2734,12 +1791,9 @@
     "pk": 17, 
     "model": "smartgrid.activity", 
     "fields": {
-      "event_location": "", 
-      "confirm_type": "free", 
+      "confirm_type": "free",
       "point_range_start": null, 
       "confirm_prompt": "input a test", 
-      "event_date": null, 
-      "point_value": 10, 
       "expire_date": "2011-02-21", 
       "duration": 5, 
       "point_range_end": null, 
@@ -2750,13 +1804,10 @@
     "pk": 18, 
     "model": "smartgrid.activity", 
     "fields": {
-      "event_location": "", 
-      "confirm_type": "text", 
+      "confirm_type": "text",
       "point_range_start": null, 
       "confirm_prompt": "", 
-      "event_date": null, 
-      "point_value": 3, 
-      "expire_date": "2011-02-21", 
+      "expire_date": "2011-02-21",
       "duration": 3, 
       "point_range_end": null, 
       "pub_date": "2010-10-15"
@@ -2764,17 +1815,12 @@
   }, 
   {
     "pk": 19, 
-    "model": "smartgrid.activity", 
+    "model": "smartgrid.event",
     "fields": {
       "event_location": "All groups",
-      "confirm_type": "code", 
-      "point_range_start": null, 
-      "confirm_prompt": "Enter in the minimum value you saw for your Lounge's power usage, with everything turned off.", 
       "event_date": "2012-03-27 20:00:00",
-      "point_value": 20, 
       "expire_date": "2013-12-31",
       "duration": 20, 
-      "point_range_end": null, 
       "pub_date": "2010-10-15"
     }
   }, 
@@ -2782,12 +1828,9 @@
     "pk": 20, 
     "model": "smartgrid.activity", 
     "fields": {
-      "event_location": "", 
-      "confirm_type": "text", 
+      "confirm_type": "text",
       "point_range_start": null, 
       "confirm_prompt": "", 
-      "event_date": null, 
-      "point_value": 10, 
       "expire_date": "2011-12-31", 
       "duration": 5, 
       "point_range_end": null, 
@@ -2798,12 +1841,9 @@
     "pk": 21, 
     "model": "smartgrid.activity", 
     "fields": {
-      "event_location": "", 
-      "confirm_type": "free", 
+      "confirm_type": "free",
       "point_range_start": null, 
       "confirm_prompt": "Enter the name of each device in your room and both the on and off power use values below.", 
-      "event_date": null, 
-      "point_value": 10, 
       "expire_date": "2011-02-21", 
       "duration": 15, 
       "point_range_end": null, 
@@ -2814,13 +1854,10 @@
     "pk": 22, 
     "model": "smartgrid.activity", 
     "fields": {
-      "event_location": "", 
-      "confirm_type": "text", 
+      "confirm_type": "text",
       "point_range_start": null, 
       "confirm_prompt": "", 
-      "event_date": null, 
-      "point_value": 3, 
-      "expire_date": "2011-02-21", 
+      "expire_date": "2011-02-21",
       "duration": 3, 
       "point_range_end": null, 
       "pub_date": "2010-10-18"
@@ -2830,12 +1867,9 @@
     "pk": 23, 
     "model": "smartgrid.activity", 
     "fields": {
-      "event_location": "", 
-      "confirm_type": "text", 
+      "confirm_type": "text",
       "point_range_start": null, 
       "confirm_prompt": "", 
-      "event_date": null, 
-      "point_value": 10, 
       "expire_date": "2011-12-31", 
       "duration": 5, 
       "point_range_end": null, 
@@ -2844,33 +1878,23 @@
   }, 
   {
     "pk": 24, 
-    "model": "smartgrid.activity", 
+    "model": "smartgrid.event",
     "fields": {
-      "event_location": "", 
-      "confirm_type": "code", 
-      "point_range_start": null, 
-      "confirm_prompt": "Enter the attendance code you received at the meeting below.", 
+      "event_location": "",
       "event_date": "2012-03-17 18:00:00",
-      "point_value": 20, 
       "expire_date": "2013-02-21",
       "duration": 60, 
-      "point_range_end": null, 
       "pub_date": "2010-10-18"
     }
   }, 
   {
     "pk": 25, 
-    "model": "smartgrid.activity", 
+    "model": "smartgrid.event",
     "fields": {
       "event_location": "", 
-      "confirm_type": "code", 
-      "point_range_start": null, 
-      "confirm_prompt": "Enter the attendance code you received at the meeting below.", 
       "event_date": "2012-03-14 18:00:00",
-      "point_value": 20, 
       "expire_date": "2013-02-21",
       "duration": 60, 
-      "point_range_end": null, 
       "pub_date": "2010-10-18"
     }
   }, 
@@ -2878,12 +1902,9 @@
     "pk": 26, 
     "model": "smartgrid.activity", 
     "fields": {
-      "event_location": "", 
-      "confirm_type": "text", 
+      "confirm_type": "text",
       "point_range_start": null, 
       "confirm_prompt": "", 
-      "event_date": null, 
-      "point_value": 10, 
       "expire_date": "2011-12-31", 
       "duration": 5, 
       "point_range_end": null, 
@@ -2892,33 +1913,23 @@
   }, 
   {
     "pk": 27, 
-    "model": "smartgrid.activity", 
+    "model": "smartgrid.event",
     "fields": {
       "event_location": "Ilima rooftop", 
-      "confirm_type": "image", 
-      "point_range_start": null, 
-      "confirm_prompt": "Enter the attendance code you received at the meeting below.", 
-      "event_date": "2011-04-29 19:00:00", 
-      "point_value": 20, 
+      "event_date": "2011-04-29 19:00:00",
       "expire_date": "2011-12-31", 
       "duration": 110, 
-      "point_range_end": null, 
       "pub_date": "2010-10-18"
     }
   }, 
   {
     "pk": 28, 
-    "model": "smartgrid.activity", 
+    "model": "smartgrid.event",
     "fields": {
       "event_location": null, 
-      "confirm_type": "code", 
-      "point_range_start": null, 
-      "confirm_prompt": "Enter the attendance code you received at the meeting below.", 
-      "event_date": "2011-02-16 19:00:00", 
-      "point_value": 5, 
+      "event_date": "2011-02-16 19:00:00",
       "expire_date": "2011-02-16", 
       "duration": 60, 
-      "point_range_end": null, 
       "pub_date": "2010-10-18"
     }
   }, 
@@ -2926,13 +1937,10 @@
     "pk": 29, 
     "model": "smartgrid.activity", 
     "fields": {
-      "event_location": null, 
-      "confirm_type": "text", 
+      "confirm_type": "text",
       "point_range_start": 5, 
       "confirm_prompt": "Enter in the the verification information requested for this type of activity (i.e. URL of your blog, YouTube video, etc).", 
-      "event_date": null, 
-      "point_value": null, 
-      "expire_date": "2011-02-21", 
+      "expire_date": "2011-02-21",
       "duration": 120, 
       "point_range_end": 20, 
       "pub_date": "2010-10-18"
@@ -2940,49 +1948,34 @@
   }, 
   {
     "pk": 52, 
-    "model": "smartgrid.activity", 
+    "model": "smartgrid.event",
     "fields": {
       "event_location": "Ilima parking lot", 
-      "confirm_type": "code", 
-      "point_range_start": null, 
-      "confirm_prompt": "Enter the attendance code you received at the excursion", 
-      "event_date": "2011-05-08 07:30:00", 
-      "point_value": 35, 
-      "expire_date": "2011-12-31", 
+      "event_date": "2011-05-08 07:30:00",
+      "expire_date": "2011-12-31",
       "duration": 540, 
-      "point_range_end": null, 
       "pub_date": "2011-02-27"
     }
-  }, 
+  },
   {
-    "pk": 53, 
-    "model": "smartgrid.activity", 
+    "pk": 53,
+    "model": "smartgrid.event",
     "fields": {
-      "event_location": "", 
-      "confirm_type": "text", 
-      "point_range_start": null, 
-      "confirm_prompt": "Answer the questions below to the best of your ability:", 
-      "event_date": null, 
-      "point_value": 20, 
-      "expire_date": "2011-12-31", 
-      "duration": 10, 
-      "point_range_end": null, 
+      "event_location": "Ilima parking lot",
+      "event_date": "2011-05-08 07:30:00",
+      "expire_date": "2011-12-31",
+      "duration": 540,
       "pub_date": "2011-02-27"
     }
-  }, 
+  },
   {
     "pk": 54, 
-    "model": "smartgrid.activity", 
+    "model": "smartgrid.event",
     "fields": {
       "event_location": "Ilima parking lot", 
-      "confirm_type": "code", 
-      "point_range_start": null, 
-      "confirm_prompt": "Enter the attendance code you received at the end of the excursion.", 
-      "event_date": "2011-05-14 09:00:00", 
-      "point_value": 30, 
+      "event_date": "2011-05-14 09:00:00",
       "expire_date": "2011-12-31", 
       "duration": 240, 
-      "point_range_end": null, 
       "pub_date": "2011-02-27"
     }
   }, 
@@ -2990,12 +1983,9 @@
     "pk": 55, 
     "model": "smartgrid.activity", 
     "fields": {
-      "event_location": null, 
-      "confirm_type": "free", 
+      "confirm_type": "free",
       "point_range_start": null, 
-      "confirm_prompt": "test", 
-      "event_date": null, 
-      "point_value": 5, 
+      "confirm_prompt": "test",
       "expire_date": "2011-03-31", 
       "duration": 15, 
       "point_range_end": null, 
@@ -3004,17 +1994,12 @@
   }, 
   {
     "pk": 56, 
-    "model": "smartgrid.activity", 
+    "model": "smartgrid.event",
     "fields": {
       "event_location": "Ilima parking lot", 
-      "confirm_type": "code", 
-      "point_range_start": null, 
-      "confirm_prompt": "Enter the attendance code you received at the excursion", 
-      "event_date": "2011-05-07 09:00:00", 
-      "point_value": 30, 
+      "event_date": "2011-05-07 09:00:00",
       "expire_date": "2011-12-31", 
       "duration": 50, 
-      "point_range_end": null, 
       "pub_date": "2011-02-27"
     }
   }, 
@@ -3022,12 +2007,9 @@
     "pk": 57, 
     "model": "smartgrid.activity", 
     "fields": {
-      "event_location": "", 
-      "confirm_type": "text", 
+      "confirm_type": "text",
       "point_range_start": null, 
       "confirm_prompt": "", 
-      "event_date": null, 
-      "point_value": 10, 
       "expire_date": "2011-12-31", 
       "duration": 5, 
       "point_range_end": null, 
@@ -3036,33 +2018,23 @@
   }, 
   {
     "pk": 58, 
-    "model": "smartgrid.activity", 
+    "model": "smartgrid.event",
     "fields": {
       "event_location": "Ilima parking lot", 
-      "confirm_type": "code", 
-      "point_range_start": null, 
-      "confirm_prompt": "Enter the attendance code you received at the end of the excursion.", 
-      "event_date": "2011-05-15 09:00:00", 
-      "point_value": 30, 
+      "event_date": "2011-05-15 09:00:00",
       "expire_date": "2011-12-31", 
       "duration": 240, 
-      "point_range_end": null, 
       "pub_date": "2011-04-18"
     }
   }, 
   {
     "pk": 59, 
-    "model": "smartgrid.activity", 
+    "model": "smartgrid.event",
     "fields": {
       "event_location": "Ilima parking lot", 
-      "confirm_type": "code", 
-      "point_range_start": null, 
-      "confirm_prompt": "Enter the attendance code you received at the end of the excursion.", 
-      "event_date": "2011-05-21 09:00:00", 
-      "point_value": 30, 
+      "event_date": "2011-05-21 09:00:00",
       "expire_date": "2011-12-31", 
       "duration": 240, 
-      "point_range_end": null, 
       "pub_date": "2011-04-18"
     }
   }, 
@@ -3070,12 +2042,9 @@
     "pk": 60, 
     "model": "smartgrid.activity", 
     "fields": {
-      "event_location": "", 
-      "confirm_type": "free", 
+      "confirm_type": "free",
       "point_range_start": null, 
-      "confirm_prompt": "Foo", 
-      "event_date": null, 
-      "point_value": 5, 
+      "confirm_prompt": "Foo",
       "expire_date": "2011-12-31", 
       "duration": 5, 
       "point_range_end": null, 
@@ -3086,12 +2055,9 @@
     "pk": 61, 
     "model": "smartgrid.activity", 
     "fields": {
-      "event_location": "", 
-      "confirm_type": "free", 
+      "confirm_type": "free",
       "point_range_start": null, 
       "confirm_prompt": "Please report on the following 3 things: is your lounge above or below the energy goal? by how much? name one activity that might help your lounge conserve energy.", 
-      "event_date": null, 
-      "point_value": 10, 
       "expire_date": "2011-12-31", 
       "duration": 10, 
       "point_range_end": null, 
@@ -3102,12 +2068,9 @@
     "pk": 62, 
     "model": "smartgrid.activity", 
     "fields": {
-      "event_location": "", 
-      "confirm_type": "free", 
+      "confirm_type": "free",
       "point_range_start": null, 
-      "confirm_prompt": "foo", 
-      "event_date": null, 
-      "point_value": 5, 
+      "confirm_prompt": "foo",
       "expire_date": "2011-12-31", 
       "duration": 5, 
       "point_range_end": null, 
@@ -3118,12 +2081,9 @@
     "pk": 63, 
     "model": "smartgrid.activity", 
     "fields": {
-      "event_location": "", 
-      "confirm_type": "free", 
+      "confirm_type": "free",
       "point_range_start": null, 
-      "confirm_prompt": "foo", 
-      "event_date": null, 
-      "point_value": 5, 
+      "confirm_prompt": "foo",
       "expire_date": "2011-12-31", 
       "duration": 5, 
       "point_range_end": null, 
@@ -3134,12 +2094,9 @@
     "pk": 64, 
     "model": "smartgrid.activity", 
     "fields": {
-      "event_location": "", 
-      "confirm_type": "free", 
+      "confirm_type": "free",
       "point_range_start": null, 
-      "confirm_prompt": "foo", 
-      "event_date": null, 
-      "point_value": 5, 
+      "confirm_prompt": "foo",
       "expire_date": "2011-12-31", 
       "duration": 5, 
       "point_range_end": null, 
@@ -3150,12 +2107,9 @@
     "pk": 65, 
     "model": "smartgrid.activity", 
     "fields": {
-      "event_location": "", 
-      "confirm_type": "free", 
+      "confirm_type": "free",
       "point_range_start": null, 
-      "confirm_prompt": "foo", 
-      "event_date": null, 
-      "point_value": 5, 
+      "confirm_prompt": "foo",
       "expire_date": "2011-12-31", 
       "duration": 5, 
       "point_range_end": null, 
