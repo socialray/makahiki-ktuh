@@ -24,8 +24,7 @@ class LoggingMiddleware(object):
         # Retrieve the username either from a cookie (when logging out) or
         # the authenticated user.
         username = None
-        if hasattr(request, "session") and "logged-out-user" in request\
-        .session:
+        if hasattr(request, "session") and "logged-out-user" in request.session:
             username = request.session["logged-out-user"]
             del request.session["logged-out-user"]
         elif hasattr(request, "user") and request.user.is_authenticated():
@@ -43,8 +42,7 @@ class LoggingMiddleware(object):
         path = request.get_full_path()
         code = response.status_code if response else 500
         method = request.method
-        ip_addr = request.META["REMOTE_ADDR"] if "REOMTE_ADDR" in request\
-        .META else "no-ip"
+        ip_addr = request.META["REMOTE_ADDR"] if "REOMTE_ADDR" in request.META else "no-ip"
         timestamp = strftime("%Y-%m-%d %H:%M:%S")
 
         # Create the log entry.

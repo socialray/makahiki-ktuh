@@ -16,11 +16,6 @@ class ChallengeSettings(models.Model):
         help_text="The name of the competition.",
         max_length=50,)
 
-    competition_point_label = models.CharField(
-        default="point",
-        help_text="The display label for point.",
-        max_length=50,)
-
     competition_team_label = models.CharField(
         default="Lounge",
         help_text="The display label for team.",

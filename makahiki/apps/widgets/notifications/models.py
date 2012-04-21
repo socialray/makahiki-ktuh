@@ -146,7 +146,8 @@ class UserNotification(models.Model):
     @staticmethod
     def create_email_notification(recipient_email, subject, message, html_message=None):
         """Create an email notification."""
-        if settings.CHALLENGE.email_enabled:
+
+        try:
             msg = EmailMultiAlternatives(subject,
                                          message,
                                          settings.SERVER_EMAIL,
@@ -155,3 +156,5 @@ class UserNotification(models.Model):
                 msg.attach_alternative(html_message, "text/html")
 
             msg.send()
+        except:
+            pass

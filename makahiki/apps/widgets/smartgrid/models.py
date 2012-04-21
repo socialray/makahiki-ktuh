@@ -580,7 +580,7 @@ class ActionMember(models.Model):
 
         if self.action.type != "activity":
             #increase the point from signup
-            message = "%s: %s (Sign up)" % (self.action.type, self.action.title)
+            message = "%s (Sign up)" % self.action
             self.user.get_profile().add_points(score_mgr.signup_points(),
                                                self.submission_date,
                                                message,
@@ -591,7 +591,7 @@ class ActionMember(models.Model):
 
         if self.action.type != "activity":
             #increase the point from signup
-            message = "%s: %s (Drop Sign up)" % (self.action.type, self.action.title)
+            message = "%s (Drop Sign up)" % self.action
             self.user.get_profile().remove_points(score_mgr.signup_points(),
                                                self.submission_date,
                                                message,

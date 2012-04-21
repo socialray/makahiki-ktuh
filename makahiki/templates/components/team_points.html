@@ -9,7 +9,7 @@
 <div class="item active">
     <h4>{{team}}</h4>
     <ul>
-        <li>{{CURRENT_ROUND_INFO.name}}: {{team.current_round_points}} {{COMPETITION_POINT_LABEL}}s.
+        <li>{{CURRENT_ROUND_INFO.name}}: {{team.current_round_points}} points.
         #{{team.current_round_rank}}/{{TEAM_COUNT}}.
         </li> 
     </ul>
@@ -29,7 +29,7 @@
 <div class="item">
     <h4>{{team}}</h4>
     <ul>
-        <li>Overall: {{team.points}} {{COMPETITION_POINT_LABEL}}s. #{{team.rank}} out of {{TEAM_COUNT}}</li>
+        <li>Overall: {{team.points}} points. #{{team.rank}} out of {{TEAM_COUNT}}</li>
     </ul>
 </div>
 {% if energy_rank_info %}

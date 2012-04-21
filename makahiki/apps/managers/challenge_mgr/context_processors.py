@@ -19,12 +19,15 @@ def competition(request):
     team_count = None
     overall_member_count = None
     available_events = None
+    default_view_objects = None
 
     if user.is_authenticated() and user.get_profile().team:
         team_member_count = user.get_profile().team.profile_set.count()
         team_count = Team.objects.count()
         overall_member_count = Profile.objects.count()
         available_events = smartgrid.get_available_events(user)
+
+    if user.is_authenticated():
         default_view_objects = _get_default_view_objects(request)
 
 # Get Facebook info.
@@ -37,7 +40,6 @@ def competition(request):
         "STATIC_URL": settings.STATIC_URL,
         "SITE_NAME": settings.CHALLENGE.site_name,
         "COMPETITION_NAME": settings.CHALLENGE.competition_name,
-        "COMPETITION_POINT_LABEL": settings.CHALLENGE.competition_point_label,
         "CSS_THEME": settings.CHALLENGE.theme,
         "THEME_NAME": settings.CHALLENGE.theme,
         "TEAM_COUNT": team_count,
