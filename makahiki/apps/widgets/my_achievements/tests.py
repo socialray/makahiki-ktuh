@@ -4,6 +4,7 @@ import datetime
 from django.test import TransactionTestCase
 from django.core.urlresolvers import reverse
 from django.contrib.auth.models import User
+from apps.managers.challenge_mgr import challenge_mgr
 
 from apps.test_helpers import test_utils
 from apps.widgets.smartgrid.models import Activity, ActionMember, Commitment, Event
@@ -18,9 +19,8 @@ class MyAchievementsTestCase(TransactionTestCase):
         """setup"""
         self.user = test_utils.setup_user(username="user", password="changeme")
         test_utils.set_competition_round()
-        test_utils.register_page_widget("profile", "my_achievements")
-        test_utils.register_page_widget("profile", "my_commitments")
-        test_utils.register_page_widget("profile", "quests")
+        challenge_mgr.register_page_widget("profile", "my_achievements")
+        challenge_mgr.register_page_widget("profile", "my_commitments")
 
         self.client.login(username="user", password="changeme")
 

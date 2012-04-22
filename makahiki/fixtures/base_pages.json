@@ -1,11 +1,115 @@
 [
   {
+    "pk": 2,
+    "model": "challenge_mgr.pageinfo",
+    "fields": {
+      "name": "learn",
+      "title": "Get Nutz",
+      "introduction": "* Play the Game\r\n* Earn Kukuicup points\r\n* See where you stand",
+      "unlock_condition": "True",
+      "label": "Get Nutz",
+      "priority": 2,
+      "url": "/learn"
+    }
+  },
+  {
+    "pk": 3,
+    "model": "challenge_mgr.pageinfo",
+    "fields": {
+      "name": "energy",
+      "title": "Go Low",
+      "introduction": "* Observe Energy use\r\n* Track Energy goals\r\n* Compare usage to others",
+      "unlock_condition": "True",
+      "label": "Go Low",
+      "priority": 3,
+      "url": "/energy"
+    }
+  },
+  {
+    "pk": 4,
+    "model": "challenge_mgr.pageinfo",
+    "fields": {
+      "name": "water",
+      "title": "Drop Down",
+      "introduction": "* Observe Water use\r\n* Track Water goals\r\n* Compare usage to others",
+      "unlock_condition": "True",
+      "label": "Drop Down",
+      "priority": 4,
+      "url": "/water"
+    }
+  },
+  {
+    "pk": 5,
+    "model": "challenge_mgr.pageinfo",
+    "fields": {
+      "name": "advanced",
+      "title": "Advanced",
+      "introduction": "* Compare team usage\r\n* See historical trends\r\n* Help others conserve",
+      "unlock_condition": "True",
+      "label": "Advanced",
+      "priority": 5,
+      "url": "/advanced"
+    }
+  },
+  {
+    "pk": 6,
+    "model": "challenge_mgr.pageinfo",
+    "fields": {
+      "name": "news",
+      "title": "News",
+      "introduction": "* What are people doing?\r\n* Your public comments\r\n* Top activities & events",
+      "unlock_condition": "True",
+      "label": "News",
+      "priority": 6,
+      "url": "/news"
+    }
+  },
+  {
+    "pk": 7,
+    "model": "challenge_mgr.pageinfo",
+    "fields": {
+      "name": "win",
+      "title": "Prizes",
+      "introduction": "* See the prizes\r\n* Allocate your points\r\n* Monitor your chances",
+      "unlock_condition": "True",
+      "label": "Prizes",
+      "priority": 7,
+      "url": "/win"
+    }
+  },
+  {
+    "pk": 8,
+    "model": "challenge_mgr.pageinfo",
+    "fields": {
+      "name": "profile",
+      "title": "Profile",
+      "introduction": "* Manage your Settings\r\n* Connect to facebook\r\n* Change your picture",
+      "unlock_condition": "True",
+      "label": "Profile",
+      "priority": 8,
+      "url": "/profile"
+    }
+  },
+  {
+    "pk": 9,
+    "model": "challenge_mgr.pageinfo",
+    "fields": {
+      "name": "help",
+      "title": "Help",
+      "introduction": "* Watch intro video\r\n* Learn the rules\r\n* Ask an admin",
+      "unlock_condition": "True",
+      "label": "Help",
+      "priority": 9,
+      "url": "/help"
+    }
+  },
+  {
     "pk": 7,
     "model": "challenge_mgr.pagesettings",
     "fields": {
       "widget": "energy_goal",
       "enabled": true,
-      "name": "energy"
+      "page": 3
     }
   },
   {
@@ -14,7 +118,7 @@
     "fields": {
       "widget": "energy_scoreboard",
       "enabled": true,
-      "name": "energy"
+      "page": 3
     }
   },
   {
@@ -23,7 +127,7 @@
     "fields": {
       "widget": "energy_power_meter",
       "enabled": true,
-      "name": "energy"
+      "page": 3
     }
   },
   {
@@ -32,7 +136,7 @@
     "fields": {
       "widget": "wallpost",
       "enabled": true,
-      "name": "energy"
+      "page": 3
     }
   },
   {
@@ -41,7 +145,7 @@
     "fields": {
       "widget": "help.intro",
       "enabled": true,
-      "name": "help"
+      "page": 9
     }
   },
   {
@@ -50,7 +154,7 @@
     "fields": {
       "widget": "help.faq",
       "enabled": true,
-      "name": "help"
+      "page": 9
     }
   },
   {
@@ -59,7 +163,7 @@
     "fields": {
       "widget": "help.rule",
       "enabled": true,
-      "name": "help"
+      "page": 9
     }
   },
   {
@@ -68,25 +172,7 @@
     "fields": {
       "widget": "ask_admin",
       "enabled": true,
-      "name": "help"
-    }
-  },
-  {
-    "pk": 58,
-    "model": "challenge_mgr.pagesettings",
-    "fields": {
-      "widget": "ask_admin",
-      "enabled": true,
-      "name": "home"
-    }
-  },
-  {
-    "pk": 1,
-    "model": "challenge_mgr.pagesettings",
-    "fields": {
-      "widget": "home",
-      "enabled": true,
-      "name": "home"
+      "page": 9
     }
   },
   {
@@ -95,7 +181,7 @@
     "fields": {
       "widget": "smartgrid",
       "enabled": true,
-      "name": "learn"
+      "page": 2
     }
   },
   {
@@ -104,7 +190,7 @@
     "fields": {
       "widget": "upcoming_events",
       "enabled": true,
-      "name": "learn"
+      "page": 2
     }
   },
   {
@@ -113,7 +199,7 @@
     "fields": {
       "widget": "wallpost",
       "enabled": true,
-      "name": "news"
+      "page": 6
     }
   },
   {
@@ -122,7 +208,7 @@
     "fields": {
       "widget": "upcoming_events",
       "enabled": true,
-      "name": "news"
+      "page": 6
     }
   },
   {
@@ -131,7 +217,7 @@
     "fields": {
       "widget": "popular_tasks",
       "enabled": true,
-      "name": "news"
+      "page": 6
     }
   },
   {
@@ -140,7 +226,7 @@
     "fields": {
       "widget": "my_commitments",
       "enabled": true,
-      "name": "news"
+      "page": 6
     }
   },
   {
@@ -149,7 +235,7 @@
     "fields": {
       "widget": "team_members",
       "enabled": true,
-      "name": "news"
+      "page": 6
     }
   },
   {
@@ -158,7 +244,7 @@
     "fields": {
       "widget": "my_achievements",
       "enabled": true,
-      "name": "profile"
+      "page": 8
     }
   },
   {
@@ -167,7 +253,7 @@
     "fields": {
       "widget": "my_commitments",
       "enabled": true,
-      "name": "profile"
+      "page": 8
     }
   },
   {
@@ -176,7 +262,7 @@
     "fields": {
       "widget": "my_info",
       "enabled": true,
-      "name": "profile"
+      "page": 8
     }
   },
   {
@@ -185,7 +271,7 @@
     "fields": {
       "widget": "badges",
       "enabled": true,
-      "name": "profile"
+      "page": 8
     }
   },
   {
@@ -194,7 +280,7 @@
     "fields": {
       "widget": "prizes",
       "enabled": true,
-      "name": "win"
+      "page": 7
     }
   },
   {
@@ -203,7 +289,7 @@
     "fields": {
       "widget": "raffle",
       "enabled": true,
-      "name": "win"
+      "page": 7
     }
   }
 ]

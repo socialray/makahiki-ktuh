@@ -4,7 +4,9 @@ import datetime
 from django.conf import settings
 from django.contrib.auth.models import User
 from django.core.exceptions import ObjectDoesNotExist
-from apps.managers.challenge_mgr.models import ChallengeSettings, RoundSettings, PageSettings
+from apps.managers.challenge_mgr.models import ChallengeSettings, RoundSettings, PageSettings, \
+    PageInfo
+from apps.utils import utils
 
 
 def init():
@@ -18,9 +20,6 @@ def init():
 
     # get the Round settings from DB
     RoundSettings.set_settings()
-
-    # register the home page and widget
-    PageSettings.objects.get_or_create(name="home", widget="home")
 
     # create the admin
     create_admin_user()
@@ -63,6 +62,51 @@ def rounds_info():
         info_str += ", end: %s" % settings.COMPETITION_ROUNDS[r]["end"].date().isoformat()
         info_str += "]"
     return info_str
+
+
+def pages():
+    """returns all the page name in the challenge."""
+    return PageInfo.objects.all().values_list("name", flat=True)
+
+
+def has_points(user, points):
+    """returns True if the user has more than the specific points."""
+    return user.get_profile().points() >= points
+
+
+PAGE_PREDICATES = {
+    "has_points": has_points,
+}
+
+
+def eval_page_unlock(user, page):
+    """Determine the unlock status of a task by dependency expression"""
+    predicates = page.unlock_condition
+    if not predicates:
+        return False
+
+    return utils.eval_predicates(predicates, user, PAGE_PREDICATES)
+
+
+def page_info(user):
+    """returns the page settings."""
+    all_pages = PageInfo.objects.all().order_by("priority")
+    for page in all_pages:
+        page.is_unlock = eval_page_unlock(user, page)
+    return all_pages
+
+
+def page_settings(page_name):
+    """return the page widget settings of the page."""
+    return PageSettings.objects.filter(page__name=page_name, enabled=True)
+
+
+def register_page_widget(page_name, widget, label=None):
+    """ register the page and widget."""
+    if not label:
+        label = page_name
+    page, _ = PageInfo.objects.get_or_create(name=page_name, label=label)
+    PageSettings.objects.get_or_create(page=page, widget=widget)
 
 
 def available_widgets():

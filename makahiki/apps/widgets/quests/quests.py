@@ -1,5 +1,6 @@
 """Implements the quest widget."""
 from apps.managers.score_mgr import score_mgr
+from apps.utils import utils
 from apps.widgets.quests import MAX_AVAILABLE_QUESTS
 
 from apps.widgets.quests.models import Quest, QuestMember
@@ -68,14 +69,7 @@ CONDITIONS = {
 
 def process_conditions_string(conditions_string, user):
     """Utility method to evaluate conditions."""
-    conditions = conditions_string
-    for name in CONDITIONS.keys():
-        conditions = conditions.replace(name + "(", name + "(user,")
-
-    allow_dict = CONDITIONS.copy()
-    allow_dict.update({"True": True, "False": False, "user": user})
-
-    return eval(conditions, {"__builtins__": None}, allow_dict)
+    return utils.eval_predicates(conditions_string, user, CONDITIONS)
 
 
 def possibly_completed_quests(user):

@@ -20,6 +20,7 @@ def competition(request):
     overall_member_count = None
     available_events = None
     default_view_objects = None
+    page_info = None
 
     if user.is_authenticated() and user.get_profile().team:
         team_member_count = user.get_profile().team.profile_set.count()
@@ -29,6 +30,7 @@ def competition(request):
 
     if user.is_authenticated():
         default_view_objects = _get_default_view_objects(request)
+        page_info = challenge_mgr.page_info(user)
 
 # Get Facebook info.
     try:
@@ -51,6 +53,7 @@ def competition(request):
         "IN_COMPETITION": challenge_mgr.in_competition(),
         "DEFAULT_VIEW_OBJECTS": default_view_objects,
         "AVAILABLE_EVENTS": available_events,
+        "PAGE_INFO": page_info,
     }
 
 

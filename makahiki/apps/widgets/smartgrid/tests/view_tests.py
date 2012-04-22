@@ -2,6 +2,7 @@
 import datetime
 from django.core.urlresolvers import reverse
 from django.test import TransactionTestCase
+from apps.managers.challenge_mgr import challenge_mgr
 from apps.widgets.smartgrid.models import  EmailReminder, ActionMember, \
                                            TextReminder, Commitment, ConfirmationCode
 from apps.managers.player_mgr.models import Profile
@@ -16,7 +17,7 @@ class ActivitiesFunctionalTest(TransactionTestCase):
         """setup"""
         self.user = self.user = test_utils.setup_user(username="user", password="changeme")
 
-        test_utils.register_page_widget("learn", "smartgrid")
+        challenge_mgr.register_page_widget("learn", "smartgrid")
 
         self.client.login(username="user", password="changeme")
 

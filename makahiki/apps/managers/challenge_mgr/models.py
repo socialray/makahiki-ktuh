@@ -141,33 +141,48 @@ class RoundSettings(models.Model):
         settings.COMPETITION_ROUNDS = rounds_dict
 
 
-def _get_widget_choice():
-    """Retrieves the available widget names."""
-    return ((key, key) for key in settings.INSTALLED_WIDGET_APPS)
+class PageInfo(models.Model):
+    """Defines the page info."""
+    name = models.CharField(
+        help_text="The name of the page.",
+        max_length=50,)
+    label = models.CharField(
+        help_text="The label of the page.",
+        max_length=100,)
+    title = models.CharField(
+        blank=True, null=True,
+        help_text="The title of the page.",
+        max_length=255,)
+    introduction = models.TextField(
+        blank=True, null=True,
+        help_text="The introduction of the page. " + settings.MARKDOWN_TEXT,
+        max_length=1000,)
+    priority = models.IntegerField(
+        default=1,
+        help_text="The priority (ordering) of the page.")
+    url = models.CharField(
+        default="/",
+        help_text="The URL of the page.",
+        max_length=255,)
+    unlock_condition = models.CharField(
+        default="True",
+        max_length=255,
+        help_text="The conditions string to unlock the page.",)
+
+    def __unicode__(self):
+        return self.name
 
 
 class PageSettings(models.Model):
-    """Defines the page settings."""
+    """Defines the page and widget settings."""
+    WIDGET_CHOICES = ((key, key) for key in settings.INSTALLED_WIDGET_APPS)
 
-    PAGE_CHOICES = (("home", "home"),
-                    ("help", "help"),
-                    ("learn", "learn"),
-                    ("win", "win"),
-                    ("energy", "energy"),
-                    ("advanced", "advanced"),
-                    ("profile", "profile"),
-                    ("news", "news"),)
-
-    name = models.CharField(
-        default="home",
-        help_text="The name of the page.",
-        choices=PAGE_CHOICES,
-        max_length=50,)
+    page = models.ForeignKey(PageInfo)
 
     widget = models.CharField(
         default="home",
         help_text="The name of the widget in the page.",
-        choices=_get_widget_choice(),
+        choices=WIDGET_CHOICES,
         max_length=50,)
 
     enabled = models.BooleanField(
@@ -176,8 +191,5 @@ class PageSettings(models.Model):
 
     class Meta:
         """meta"""
-        unique_together = (("name", "widget",),)
-        ordering = ['name']
-
-    def __unicode__(self):
-        return self.name + " : " + self.widget
+        unique_together = (("page", "widget", ), )
+        ordering = ['page', 'widget', ]

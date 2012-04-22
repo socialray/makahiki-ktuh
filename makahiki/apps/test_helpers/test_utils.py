@@ -4,7 +4,6 @@ import os
 from django.conf import settings
 from django.contrib.auth.models import User
 from django.core.files.images import ImageFile
-from apps.managers.challenge_mgr.models import PageSettings
 from apps.managers.team_mgr.models import Team, Group
 from apps.widgets.prizes.models import Prize
 from apps.widgets.quests.models import Quest
@@ -51,11 +50,6 @@ def set_two_rounds():
         }
     settings.COMPETITION_START = start
     settings.COMPETITION_END = overall_end
-
-
-def register_page_widget(page_name, widget_name):
-    """Register a widget with a page."""
-    PageSettings.objects.get_or_create(name=page_name, widget=widget_name)
 
 
 def create_activity():

@@ -30,34 +30,50 @@ class Migration(SchemaMigration):
         db.create_table('challenge_mgr_roundsettings', (
             ('id', self.gf('django.db.models.fields.AutoField')(primary_key=True)),
             ('name', self.gf('django.db.models.fields.CharField')(default='Round 1', max_length=50)),
-            ('start', self.gf('django.db.models.fields.DateTimeField')(default=datetime.datetime(2012, 4, 21, 1, 16, 20, 373050))),
-            ('end', self.gf('django.db.models.fields.DateTimeField')(default=datetime.datetime(2012, 4, 28, 1, 16, 20, 373104))),
+            ('start', self.gf('django.db.models.fields.DateTimeField')(default=datetime.datetime(2012, 4, 21, 23, 29, 5, 83908))),
+            ('end', self.gf('django.db.models.fields.DateTimeField')(default=datetime.datetime(2012, 4, 28, 23, 29, 5, 83961))),
         ))
         db.send_create_signal('challenge_mgr', ['RoundSettings'])
+
+        # Adding model 'PageInfo'
+        db.create_table('challenge_mgr_pageinfo', (
+            ('id', self.gf('django.db.models.fields.AutoField')(primary_key=True)),
+            ('name', self.gf('django.db.models.fields.CharField')(max_length=50)),
+            ('label', self.gf('django.db.models.fields.CharField')(max_length=100)),
+            ('title', self.gf('django.db.models.fields.CharField')(max_length=255, null=True, blank=True)),
+            ('introduction', self.gf('django.db.models.fields.TextField')(max_length=1000, null=True, blank=True)),
+            ('priority', self.gf('django.db.models.fields.IntegerField')(default=1)),
+            ('url', self.gf('django.db.models.fields.CharField')(default='/', max_length=255)),
+            ('unlock_condition', self.gf('django.db.models.fields.CharField')(default='True', max_length=255)),
+        ))
+        db.send_create_signal('challenge_mgr', ['PageInfo'])
 
         # Adding model 'PageSettings'
         db.create_table('challenge_mgr_pagesettings', (
             ('id', self.gf('django.db.models.fields.AutoField')(primary_key=True)),
-            ('name', self.gf('django.db.models.fields.CharField')(default='home', max_length=50)),
+            ('page', self.gf('django.db.models.fields.related.ForeignKey')(to=orm['challenge_mgr.PageInfo'])),
             ('widget', self.gf('django.db.models.fields.CharField')(default='home', max_length=50)),
             ('enabled', self.gf('django.db.models.fields.BooleanField')(default=True)),
         ))
         db.send_create_signal('challenge_mgr', ['PageSettings'])
 
-        # Adding unique constraint on 'PageSettings', fields ['name', 'widget']
-        db.create_unique('challenge_mgr_pagesettings', ['name', 'widget'])
+        # Adding unique constraint on 'PageSettings', fields ['page', 'widget']
+        db.create_unique('challenge_mgr_pagesettings', ['page_id', 'widget'])
 
 
     def backwards(self, orm):
         
-        # Removing unique constraint on 'PageSettings', fields ['name', 'widget']
-        db.delete_unique('challenge_mgr_pagesettings', ['name', 'widget'])
+        # Removing unique constraint on 'PageSettings', fields ['page', 'widget']
+        db.delete_unique('challenge_mgr_pagesettings', ['page_id', 'widget'])
 
         # Deleting model 'ChallengeSettings'
         db.delete_table('challenge_mgr_challengesettings')
 
         # Deleting model 'RoundSettings'
         db.delete_table('challenge_mgr_roundsettings')
+
+        # Deleting model 'PageInfo'
+        db.delete_table('challenge_mgr_pageinfo')
 
         # Deleting model 'PageSettings'
         db.delete_table('challenge_mgr_pagesettings')
@@ -80,19 +96,30 @@ class Migration(SchemaMigration):
             'site_name': ('django.db.models.fields.CharField', [], {'default': "'University of Hawaii at Manoa'", 'max_length': '50'}),
             'theme': ('django.db.models.fields.CharField', [], {'default': "'default'", 'max_length': '50'})
         },
+        'challenge_mgr.pageinfo': {
+            'Meta': {'object_name': 'PageInfo'},
+            'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
+            'introduction': ('django.db.models.fields.TextField', [], {'max_length': '1000', 'null': 'True', 'blank': 'True'}),
+            'label': ('django.db.models.fields.CharField', [], {'max_length': '100'}),
+            'name': ('django.db.models.fields.CharField', [], {'max_length': '50'}),
+            'priority': ('django.db.models.fields.IntegerField', [], {'default': '1'}),
+            'title': ('django.db.models.fields.CharField', [], {'max_length': '255', 'null': 'True', 'blank': 'True'}),
+            'unlock_condition': ('django.db.models.fields.CharField', [], {'default': "'True'", 'max_length': '255'}),
+            'url': ('django.db.models.fields.CharField', [], {'default': "'/'", 'max_length': '255'})
+        },
         'challenge_mgr.pagesettings': {
-            'Meta': {'ordering': "['name']", 'unique_together': "(('name', 'widget'),)", 'object_name': 'PageSettings'},
+            'Meta': {'ordering': "['page', 'widget']", 'unique_together': "(('page', 'widget'),)", 'object_name': 'PageSettings'},
             'enabled': ('django.db.models.fields.BooleanField', [], {'default': 'True'}),
             'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
-            'name': ('django.db.models.fields.CharField', [], {'default': "'home'", 'max_length': '50'}),
+            'page': ('django.db.models.fields.related.ForeignKey', [], {'to': "orm['challenge_mgr.PageInfo']"}),
             'widget': ('django.db.models.fields.CharField', [], {'default': "'home'", 'max_length': '50'})
         },
         'challenge_mgr.roundsettings': {
             'Meta': {'ordering': "['start']", 'object_name': 'RoundSettings'},
-            'end': ('django.db.models.fields.DateTimeField', [], {'default': 'datetime.datetime(2012, 4, 28, 1, 16, 20, 373104)'}),
+            'end': ('django.db.models.fields.DateTimeField', [], {'default': 'datetime.datetime(2012, 4, 28, 23, 29, 5, 83961)'}),
             'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
             'name': ('django.db.models.fields.CharField', [], {'default': "'Round 1'", 'max_length': '50'}),
-            'start': ('django.db.models.fields.DateTimeField', [], {'default': 'datetime.datetime(2012, 4, 21, 1, 16, 20, 373050)'})
+            'start': ('django.db.models.fields.DateTimeField', [], {'default': 'datetime.datetime(2012, 4, 21, 23, 29, 5, 83908)'})
         }
     }
 

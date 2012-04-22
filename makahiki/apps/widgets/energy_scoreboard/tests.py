@@ -4,10 +4,10 @@ import datetime
 from django.test import TransactionTestCase
 from django.core.urlresolvers import reverse
 from django.contrib.auth.models import User
+from apps.managers.challenge_mgr import challenge_mgr
 
 from apps.managers.team_mgr.models import Team
 from apps.widgets.energy_goal.models import EnergyGoal
-from apps.test_helpers import test_utils
 
 
 class EnergyFunctionalTestCase(TransactionTestCase):
@@ -24,7 +24,7 @@ class EnergyFunctionalTestCase(TransactionTestCase):
         profile.setup_profile = True
         profile.save()
 
-        test_utils.register_page_widget("energy", "energy_scoreboard")
+        challenge_mgr.register_page_widget("energy", "energy_scoreboard")
         self.client.login(username="user", password="changeme")
 
     def testIndex(self):

@@ -185,18 +185,18 @@ img {
   color: #FCE988;
 }
 
-#header-nav-links a.activities img {
+#header-nav-links a.learn img {
 	background: transparent url(/site_media/static/css/default/images/icon-scoreboard.png) top left no-repeat;
 	display: block;
 	width: 54px;
 	height: 54px;
 }
 
-#header-nav-links a.activities:hover img {
+#header-nav-links a.learn:hover img {
 	background: transparent url(/site_media/static/css/default/images/icon-scoreboard-over.png) top left no-repeat;
 }
 
-.selected-learn #header-nav-links a.activities h4 {
+.selected-learn #header-nav-links a.learn h4 {
   color: #FCE988;
 }
 
@@ -245,18 +245,18 @@ img {
   color: #FCE988;
 }
 
-#header-nav-links a.prizes img {
+#header-nav-links a.win img {
 	background: transparent url(/site_media/static/css/default/images/icon-prizes.png) top left no-repeat;
 	display: block;
 	width: 54px;
 	height: 54px;
 }
 
-#header-nav-links a.prizes:hover img {
+#header-nav-links a.win:hover img {
 	background: transparent url(/site_media/static/css/default/images/icon-prizes-over.png) top left no-repeat;
 }
 
-.selected-win #header-nav-links a.prizes h4 {
+.selected-win #header-nav-links a.win h4 {
   color: #FCE988;
 }
 

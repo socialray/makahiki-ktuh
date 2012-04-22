@@ -3,11 +3,11 @@
 from django.test import TransactionTestCase
 from django.core.urlresolvers import reverse
 from django.contrib.auth.models import User
+from apps.managers.challenge_mgr import challenge_mgr
 
 from apps.managers.team_mgr.models import Team
 from apps.widgets.notifications import get_unread_notifications
 from apps.widgets.notifications.models import UserNotification
-from apps.test_helpers import test_utils
 
 
 class NotificationUnitTests(TransactionTestCase):
@@ -46,8 +46,7 @@ class NotificationFunctionalTests(TransactionTestCase):
         profile.setup_profile = True
         profile.save()
 
-        test_utils.register_page_widget("home", "home")
-        test_utils.register_page_widget("help", "help.faq")
+        challenge_mgr.register_page_widget("help", "help.faq")
 
         self.client.login(username="user", password="test")
 

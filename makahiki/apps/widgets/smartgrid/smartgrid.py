@@ -5,6 +5,7 @@ from django.db.models import  Count
 from django.core.exceptions import ObjectDoesNotExist
 from django.shortcuts import get_object_or_404
 from apps.managers.cache_mgr import cache_mgr
+from apps.utils import utils
 from apps.widgets.smartgrid import NUM_GOLOW_ACTIONS, SETUP_WIZARD_ACTIVITY_NAME
 from apps.widgets.smartgrid.models import Action, Category, Activity, ActionMember
 from apps.widgets.smartgrid.models import Event
@@ -195,8 +196,9 @@ def completedSomeOf(user, some, cat_slug):
     return False
 
 
-def afterPublished(action_slug):
+def afterPublished(user, action_slug):
     """Return true if the event/excursion has been published"""
+    _ = user
     actions = Action.objects.filter(slug=action_slug)
     if actions:
         return actions[0].pub_date <= datetime.date.today()
@@ -220,26 +222,21 @@ def is_unlock(user, action):
     return False
 
 
+SMARTGRID_PREDICATES = {
+    "completedAllOf": completedAllOf,
+    "completedSomeOf": completedSomeOf,
+    "completed": completed,
+    "afterPublished": afterPublished,
+    }
+
+
 def eval_unlock(user, action):
     """Determine the unlock status of a task by dependency expression"""
-    expr = action.depends_on
-    if not expr:
+    predicates = action.depends_on
+    if not predicates:
         return False
 
-    expr = expr.replace("completedAllOf(", "completedAllOf(user,")
-    expr = expr.replace("completedSomeOf(", "completedSomeOf(user,")
-    expr = expr.replace("completed(", "completed(user,")
-
-    allow_dict = {'completedAllOf': completedAllOf,
-                  'completedSomeOf': completedSomeOf,
-                  'completed': completed,
-                  'afterPublished': afterPublished,
-                  'True': True,
-                  'False': False,
-                  'user': user,
-                  }
-
-    return eval(expr, {"__builtins__": None}, allow_dict)
+    return utils.eval_predicates(predicates, user, SMARTGRID_PREDICATES)
 
 
 def has_action(user, slug=None, action_type=None):

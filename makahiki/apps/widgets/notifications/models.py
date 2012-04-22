@@ -1,4 +1,6 @@
 """Model definition for notification service."""
+from smtplib import SMTPSenderRefused
+from _socket import *
 
 from django.db import models
 from django.contrib.auth.models import User
@@ -147,7 +149,8 @@ class UserNotification(models.Model):
     def create_email_notification(recipient_email, subject, message, html_message=None):
         """Create an email notification."""
 
-        try:
+        if settings.EMAIL_BACKEND == 'django.core.mail.backends.locmem.EmailBackend' or \
+           settings.CHALLENGE.email_enabled:
             msg = EmailMultiAlternatives(subject,
                                          message,
                                          settings.SERVER_EMAIL,
@@ -156,5 +159,3 @@ class UserNotification(models.Model):
                 msg.attach_alternative(html_message, "text/html")
 
             msg.send()
-        except:
-            pass
