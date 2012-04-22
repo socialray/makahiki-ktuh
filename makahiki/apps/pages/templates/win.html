@@ -15,14 +15,18 @@
         <div class="row-fluid">
             <!-- left column -->
             <div class="span6">
+                {% if view_objects.prizes %}
                 <div id='prizes' class="row-fluid">
                     {% include "widgets/prizes/templates/index.html" %}
                 </div>
+                {% endif %}
             </div>
             <!-- right column -->
             <div class="span6">
                 <div class="row-fluid">
+                    {% if view_objects.raffle %}
                     {% include "widgets/raffle/templates/index.html" %}
+                    {% endif %}
                 </div>
             </div>
         </div>
