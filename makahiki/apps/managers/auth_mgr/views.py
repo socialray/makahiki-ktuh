@@ -3,6 +3,7 @@
 from django.contrib.auth import SESSION_KEY
 from django.contrib.auth.decorators import user_passes_test
 from django.contrib.auth.models import User
+from django.core.urlresolvers import reverse
 from django.shortcuts import get_object_or_404, render_to_response
 from django.template import RequestContext
 from django.http import HttpResponseRedirect
@@ -20,7 +21,7 @@ def login_as(request, user_id):
         request.session['staff'] = True
         # Expire this session when the browser closes.
         request.session.set_expiry(0)
-    return HttpResponseRedirect("/")
+    return HttpResponseRedirect(reverse("home_index"))
 
 
 def login(request):
@@ -28,7 +29,7 @@ def login(request):
     if request.method == "POST":
         form = LoginForm(request.POST)
         if form.login(request):
-            return HttpResponseRedirect('/home')
+            return HttpResponseRedirect(reverse("home_index"))
     else:
         form = LoginForm()
 

@@ -7,6 +7,9 @@ from django.http import HttpResponseRedirect
 from apps.managers.challenge_mgr import challenge_mgr
 
 
+NO_REDIRECT_PATTERN = "^/(home|admin|log|account|tc|site_media|media|favicon.ico)/"
+"""The url patterns that will not be redirect to home to avoid redirect loop."""
+
 class LoginMiddleware(object):
     """This middleware does the following checks and tracking:
          * checks if today is in the competition period
@@ -60,11 +63,9 @@ class LoginMiddleware(object):
             # We need to check if the user is going to the home page so we don't
             # get caught in a redirect loop. We do need to filter out requests
             # for CSS and other resources.
-            pattern = re.compile("^/"
-                                 "(m\/admin|m\/setup|admin|log|account|home|"
-                                 "site_media|tc|media|favicon.ico)/")
-            if not profile.setup_complete and not pattern.match(path):
-                return HttpResponseRedirect("/")
+            if not profile.setup_complete and \
+               not re.compile(NO_REDIRECT_PATTERN).match(path):
+                return HttpResponseRedirect(reverse("home_index"))
 
         return None
 
@@ -75,13 +76,9 @@ class LoginMiddleware(object):
         if request.user.is_authenticated():
             path = request.path
 
-            staff_user = request.user.is_staff or request.session.get('staff',
-                                                                      False)
-            if not staff_user:
-                pattern = re.compile("^/"
-                                     "(m\/|home\/restricted|site_media|media|"
-                                     "favicon.ico)/")
-                if not pattern.match(path):
-                    if not challenge_mgr.in_competition():
-                        return HttpResponseRedirect(reverse("home_restricted"))
+            staff_user = request.user.is_staff or request.session.get('staff', False)
+            if not staff_user and \
+               not re.compile(NO_REDIRECT_PATTERN).match(path) and \
+               not challenge_mgr.in_competition():
+                    return HttpResponseRedirect(reverse("home_restricted"))
         return None
