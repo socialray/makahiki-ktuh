@@ -1,7 +1,5 @@
 """handles rendering events."""
 
-
-import datetime
 import simplejson as json
 
 from django.db import  IntegrityError
@@ -86,9 +84,7 @@ def complete(request, event):
             try:
                 action_member = ActionMember.objects.get(user=user, action=event)
             except ObjectDoesNotExist:
-                action_member = ActionMember(user=user,
-                                             action=event,
-                                             submission_date=datetime.datetime.today())
+                action_member = ActionMember(user=user, action=event)
 
             action_member.approval_status = "approved"
             value = event.point_value

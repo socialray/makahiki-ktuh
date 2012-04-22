@@ -177,7 +177,7 @@ class MyAchievementsTestCase(TransactionTestCase):
             action=event,
             approval_status="approved",
         )
-        m2.social_email = "user2@test.com"
+        m2.social_email = "user@test.com"
         m2.save()
 
         response = self.client.get(reverse("profile_index"))

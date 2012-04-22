@@ -389,6 +389,12 @@ class ActionMember(models.Model):
 
     def save(self, *args, **kwargs):
         """custom save method."""
+
+        if self.social_bonus_awarded:
+            # only awarding social bonus
+            super(ActionMember, self).save(args, kwargs)
+            return
+
         if not self.points_awarded:
             self.points_awarded = self.action.point_value
 
@@ -417,17 +423,29 @@ class ActionMember(models.Model):
             else:    # is approved
                 # Record dates.
                 self.award_date = datetime.datetime.today()
-                if not self.submission_date:
-                    self.submission_date = self.award_date
-                super(ActionMember, self).save(args, kwargs)
 
-                self.award_points()
-                self.award_possible_social_bonus()
+                if self.submission_date:
+                    if self.action.type == "event":
+                        # this is an event with signup
+                        # must save before awarding point due to the generic foreign key relation
+                        super(ActionMember, self).save(args, kwargs)
+                        self._award_possible_reverse_penalty_points()
+                else:
+                    # always make sure the submission_date is set
+                    self.submission_date = self.award_date
+
+                # must save before awarding point due to the generic foreign key relation
+                super(ActionMember, self).save(args, kwargs)
+                self._award_points()
+
+                self.social_bonus_awarded = self._award_possible_social_bonus()
+                if self.social_bonus_awarded:
+                    super(ActionMember, self).save(args, kwargs)
 
         self.post_to_wall()
         self.invalidate_cache()
 
-    def award_points(self):
+    def _award_points(self):
         """Custom save method to award points."""
         profile = self.user.get_profile()
 
@@ -442,43 +460,116 @@ class ActionMember(models.Model):
         else:  # is Event
             transaction_date = self.award_date
 
-            ## reverse event/excursion noshow penalty
-            if self._has_noshow_penalty():
-                message = "%s (Reverse No Show Penalty)" % self.action
-                profile.add_points(score_mgr.noshow_penalty_points(),
-                                   transaction_date,
-                                   message,
-                                   self)
-
         profile.add_points(points, transaction_date, self.action, self)
 
-    def award_possible_social_bonus(self):
+    def _award_possible_social_bonus(self):
         """award possible social bonus."""
 
         profile = self.user.get_profile()
-
-        ## award social bonus to myself if the ref user had successfully completed the activity
         social_message = "%s (Social Bonus)" % self.action
-        if self.social_email:
-            ref_user = User.objects.get(email=self.social_email)
-            ref_members = ActionMember.objects.filter(user=ref_user,
-                                                      action=self.action)
-            for m in ref_members:
-                if m.award_date:
-                    profile.add_points(self.action.social_bonus,
-                                       self.award_date,
-                                       social_message, self)
 
         # award social bonus to others who referenced my email and successfully completed
         # the activity
         ref_members = ActionMember.objects.filter(action=self.action,
+                                                  approval_status="approved",
                                                   social_email=self.user.email)
         for m in ref_members:
-            if m.award_date:
+            if not m.social_bonus_awarded:
                 ref_profile = m.user.get_profile()
-                ref_profile.add_points(self.action.social_bonus,
-                                       self.award_date,
+                ref_profile.add_points(m.action.social_bonus,
+                                       m.award_date,
                                        social_message, self)
+                m.social_bonus_awarded = True
+                m.save()
+
+        ## award social bonus to myself if the ref user had successfully completed the activity
+        if self.social_email and not self.social_bonus_awarded:
+            ref_members = ActionMember.objects.filter(social_email=self.social_email,
+                                                      approval_status="approved",
+                                                      action=self.action)
+            for m in ref_members:
+                profile.add_points(self.action.social_bonus,
+                                   self.award_date,
+                                   social_message, self)
+                return True
+
+        return False
+
+    def _award_signup_points(self):
+        """award the sign up point for commitment and event."""
+
+        if self.action.type != "activity":
+            #increase the point from signup
+            message = "%s (Sign up)" % self.action
+            self.user.get_profile().add_points(score_mgr.signup_points(),
+                                               self.submission_date,
+                                               message,
+                                               self)
+
+    def _drop_signup_points(self):
+        """award the sign up point for commitment and event."""
+
+        if self.action.type != "activity":
+            #increase the point from signup
+            message = "%s (Drop Sign up)" % self.action
+            self.user.get_profile().remove_points(score_mgr.signup_points(),
+                                               self.submission_date,
+                                               message,
+                                               self)
+
+    def _award_possible_reverse_penalty_points(self):
+        """ reverse event/excursion noshow penalty."""
+        if self._has_noshow_penalty():
+            message = "%s (Reverse No Show Penalty)" % self.action
+            self.user.get_profile().add_points(score_mgr.noshow_penalty_points(),
+                               self.award_date,
+                               message,
+                               self)
+
+    def _has_noshow_penalty(self):
+        """if NOSHOW_PENALTY_DAYS past and has submission_date (signed up),
+        return true as noshow penalty."""
+        event = self.action.event
+        diff = datetime.date.today() - event.event_date.date()
+        if diff.days > NOSHOW_PENALTY_DAYS and self.submission_date:
+            return True
+        else:
+            return False
+
+    def _handle_activity_rejected(self):
+        """Creates a notification for rejected tasks.  This also creates an email message if
+        it is configured.
+        """
+        # Construct the message to be sent.
+        message = "Your response to <a href='%s'>%s</a> %s was not approved." % (
+            reverse("activity_task", args=(self.action.type, self.action.slug,)),
+            self.action.title,
+            # The below is to tell the javascript to convert into a pretty date.
+            # See the prettyDate function in media/js/makahiki.js
+            "<span class='rejection-date' title='%s'></span>" % self.submission_date.isoformat(),
+            )
+
+        message += " You can still get points by clicking on the link and trying again."
+
+        UserNotification.create_error_notification(self.user, message, content_object=self)
+
+        subject = "[%s] Your response to '%s' was not approved" % (
+            settings.CHALLENGE.competition_name, self.action.title)
+
+        current_site = Site.objects.get(id=settings.SITE_ID)
+
+        message = render_to_string("email/rejected_activity.txt", {
+            "object": self,
+            "COMPETITION_NAME": settings.CHALLENGE.competition_name,
+            "domain": current_site.domain,
+            })
+        html_message = render_to_string("email/rejected_activity.html", {
+            "object": self,
+            "COMPETITION_NAME": settings.CHALLENGE.competition_name,
+            "domain": current_site.domain,
+            })
+
+        UserNotification.create_email_notification(self.user.email, subject, message, html_message)
 
     def post_to_wall(self):
         """post to team wall as system post."""
@@ -529,73 +620,6 @@ class ActionMember(models.Model):
         self.invalidate_cache()
 
         super(ActionMember, self).delete()
-
-    def _has_noshow_penalty(self):
-        """if NOSHOW_PENALTY_DAYS past and has submission_date (signed up),
-        return true as noshow penalty."""
-        event = self.action.event
-        diff = datetime.date.today() - event.event_date.date()
-        if diff.days > NOSHOW_PENALTY_DAYS and self.submission_date:
-            return True
-        else:
-            return False
-
-    def _handle_activity_rejected(self):
-        """Creates a notification for rejected tasks.  This also creates an email message if
-        it is configured.
-        """
-        # Construct the message to be sent.
-        message = "Your response to <a href='%s'>%s</a> %s was not approved." % (
-            reverse("activity_task", args=(self.action.type, self.action.slug,)),
-            self.action.title,
-            # The below is to tell the javascript to convert into a pretty date.
-            # See the prettyDate function in media/js/makahiki.js
-            "<span class='rejection-date' title='%s'></span>" % self.submission_date.isoformat(),
-            )
-
-        message += " You can still get points by clicking on the link and trying again."
-
-        UserNotification.create_error_notification(self.user, message, content_object=self)
-
-        subject = "[%s] Your response to '%s' was not approved" % (
-            settings.CHALLENGE.competition_name, self.action.title)
-
-        current_site = Site.objects.get(id=settings.SITE_ID)
-
-        message = render_to_string("email/rejected_activity.txt", {
-            "object": self,
-            "COMPETITION_NAME": settings.CHALLENGE.competition_name,
-            "domain": current_site.domain,
-            })
-        html_message = render_to_string("email/rejected_activity.html", {
-            "object": self,
-            "COMPETITION_NAME": settings.CHALLENGE.competition_name,
-            "domain": current_site.domain,
-            })
-
-        UserNotification.create_email_notification(self.user.email, subject, message, html_message)
-
-    def _award_signup_points(self):
-        """award the sign up point for commitment and event."""
-
-        if self.action.type != "activity":
-            #increase the point from signup
-            message = "%s (Sign up)" % self.action
-            self.user.get_profile().add_points(score_mgr.signup_points(),
-                                               self.submission_date,
-                                               message,
-                                               self)
-
-    def _drop_signup_points(self):
-        """award the sign up point for commitment and event."""
-
-        if self.action.type != "activity":
-            #increase the point from signup
-            message = "%s (Drop Sign up)" % self.action
-            self.user.get_profile().remove_points(score_mgr.signup_points(),
-                                               self.submission_date,
-                                               message,
-                                               self)
 
 
 class Reminder(models.Model):

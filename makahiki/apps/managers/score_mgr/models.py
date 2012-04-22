@@ -68,3 +68,8 @@ class PointsTransaction(models.Model):
     object_id = models.PositiveIntegerField(null=True)
     content_type = models.ForeignKey(ContentType, null=True)
     related_object = generic.GenericForeignKey("content_type", "object_id")
+
+    class Meta:
+        """meta"""
+        unique_together = (("user", "transaction_date", "message",),)
+        ordering = ("-transaction_date",)

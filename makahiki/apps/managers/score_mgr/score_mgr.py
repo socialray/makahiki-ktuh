@@ -59,13 +59,14 @@ def quest_points():
 
 def player_rank(profile, round_name="Overall"):
     """user round overall rank"""
-    entry, _ = ScoreboardEntry.objects.get_or_create(
-        profile=profile,
-        round_name=round_name
-    )
+    entry = None
+    try:
+        entry = ScoreboardEntry.objects.get(profile=profile, round_name=round_name)
+    except ObjectDoesNotExist:
+        pass
 
     # Check if the user has done anything.
-    if entry.last_awarded_submission:
+    if entry and entry.last_awarded_submission:
         return ScoreboardEntry.objects.filter(
             Q(points__gt=entry.points) |
             Q(points=entry.points,
@@ -73,9 +74,14 @@ def player_rank(profile, round_name="Overall"):
             round_name=round_name,
             ).count() + 1
 
+    if entry:
+        points = entry.points
+    else:
+        points = 0
+
     # Users who have not done anything yet are assumed to be last.
     return ScoreboardEntry.objects.filter(
-        points__gt=entry.points,
+        points__gt=points,
         round_name=round_name,
         ).count() + 1
 
@@ -83,12 +89,13 @@ def player_rank(profile, round_name="Overall"):
 def player_rank_in_team(profile, round_name="Overall"):
     """Returns user's rank in his team."""
     team = profile.team
-    entry, _ = ScoreboardEntry.objects.get_or_create(
-        profile=profile,
-        round_name=round_name
-    )
+    entry = None
+    try:
+        entry = ScoreboardEntry.objects.get(profile=profile, round_name=round_name)
+    except ObjectDoesNotExist:
+        pass
 
-    if entry.last_awarded_submission:
+    if entry and entry.last_awarded_submission:
         return ScoreboardEntry.objects.filter(
             Q(points__gt=entry.points) |
             Q(points=entry.points,
@@ -96,12 +103,17 @@ def player_rank_in_team(profile, round_name="Overall"):
             profile__team=team,
             round_name=round_name,
             ).count() + 1
+
+    if entry:
+        points = entry.points
     else:
-        return ScoreboardEntry.objects.filter(
-            points__gt=entry.points,
-            profile__team=team,
-            round_name=round_name,
-            ).count() + 1
+        points = 0
+
+    return ScoreboardEntry.objects.filter(
+        points__gt=points,
+        profile__team=team,
+        round_name=round_name,
+        ).count() + 1
 
 
 def player_points(profile, round_name="Overall"):

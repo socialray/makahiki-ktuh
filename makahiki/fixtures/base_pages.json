@@ -194,6 +194,15 @@
     }
   },
   {
+    "pk": 25,
+    "model": "challenge_mgr.pagesettings",
+    "fields": {
+      "widget": "scoreboard",
+      "enabled": true,
+      "page": 2
+    }
+  },
+  {
     "pk": 20,
     "model": "challenge_mgr.pagesettings",
     "fields": {
