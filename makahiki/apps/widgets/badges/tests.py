@@ -5,7 +5,7 @@ from django.test import TransactionTestCase
 from django.contrib.auth.models import User
 from apps.lib.brabeion import badges
 from apps.widgets.badges import user_badges
-from apps.widgets.smartgrid.models import Commitment, CommitmentMember
+from apps.widgets.smartgrid.models import Commitment, ActionMember
 from apps.widgets.badges.management.commands.award_badge import award_badge
 
 
@@ -61,7 +61,7 @@ class FullyCommittedBadgeTest(TransactionTestCase):
         for index, commitment in enumerate(commitments):
             self.assertEqual(user.badges_earned.count(), 0,
                 "Badge should not be awarded after %i commitments" % index)
-            member = CommitmentMember(user=user, commitment=commitment,
+            member = ActionMember(user=user, action=commitment,
                 award_date=datetime.datetime.today())
             member.save()
             self.assertEqual(user.badges_earned.count(), 0,

@@ -1,0 +1,291 @@
+{% load markup %}
+
+{% load class_tags %}
+
+<div class="content-box">
+<div class="content-box-title">
+    <table>
+        <tr>
+            <td>About the {{ action.type }}</td>
+            <td width="1%">
+                <a href="#">
+                    <img src="{{ STATIC_URL}}/css/default/images/icon-help-sm.png"
+                         width="20" align="center"
+                         title="Click to get help about this window"
+                         onclick="toggleHelp('widget', '{{action.type}}-details'); return false;"
+                            /></a>
+            </td>
+        </tr>
+    </table>
+</div>
+<div class="content-box-contents">
+{% if action.is_pau %}
+    {% if action.member.approval_status == "approved" or action.member.award_date %}
+        <div {% get_id_and_classes "activity-task-details-info" %}>
+            <p/>
+            Congratulations! You did it and earned {{ action.member.points_awarded }}
+            {% if action.is_canopy %} Karma {% endif %} points! <br/>
+            {% if action.member.social_bonus_awarded %}
+                <span style="color:orange"> Plus {{ action.social_bonus }} social bonus points!</span>
+            {% endif %}
+            {% if not action.is_canopy %}
+                <br/>
+                You may have unlocked new activities in the smart grid game.
+            {% endif %}
+            {% if action.type == "commitment" and action.can_commit %}
+                <br/>
+                <a onclick="task_form_overlay()">
+                    <button style="cursor:pointer;">I will do this again!</button>
+                </a>
+            {% endif %}
+
+        </div>
+    {% else %}
+        {% if action.type == "event" or action.type == "excursion" %}
+            <div {% get_id_and_classes "activity-task-details-info" %}>
+                <p/>
+                {% if action.event.is_event_completed %}
+                    Thank you for attending the event. <br/>
+                    Click on the "I Did it" button to get the rest of your points.
+                    <br/>
+                    <a onclick="task_form_overlay()">
+                        <button style="cursor:pointer;">I Did it</button>
+                    </a>
+                {% else %}
+                    Thank you! You've earned 2 bonus {% if action.is_canopy %}
+                    Karma {% endif %} points by signing up.<br/>
+                    After the {{ action.type }}, please come back here within 2 daysto
+                    get your points.
+                    If you sign up but do not attend, you will lose the 2 point
+                    signing bonus and pay a 2 point "no-show" penalty.
+                    <br/>
+                    <form action='{% url activity_drop_task action.type action.slug %}'
+                          method='post'>
+                        {% csrf_token %}
+                        <button id="submit_button1" style="cursor:pointer;"
+                                onclick='$("#submit_button1").attr("disabled", "disabled");javascript:this.form.submit(); return false;'>
+                            Take me off the signup list
+                        </button>
+                    </form>
+
+                {% endif %}
+            </div>
+        {% endif %}
+        {% if action.type == "commitment" %}
+            <div {% get_id_and_classes "activity-task-details-info" %}>
+                <p/>
+                {% if action.member.days_left > 0 %}
+                    Thank you! You've earned 2 {% if action.is_canopy %}
+                    Karma {% endif %} points by committing.<br/>
+                    Please come back on {{ action.member.completion_date|date:"l m/d" }}
+                    ({{ action.member.days_left }} days left) to get the rest of your
+                    points.
+                    <br/>
+                    <form action='{% url activity_drop_task action.type action.slug %}'
+                          method='post'>
+                        {% csrf_token %}
+                        <button id="submit_button2" style="cursor:pointer;"
+                                onclick='$("#submit_button2").attr("disabled", "disabled");javascript:this.form.submit(); return false;'>
+                            Drop this commitment
+                        </button>
+                    </form>
+                {% else %}
+                    Thank you for committing to this for {{ action.duration }} days.
+                    <br/>
+                    Click on the "I Did it" button to get the rest of your points.
+                    <br/>
+                    <a onclick="task_form_overlay()">
+                        <button style="cursor:pointer;">I Did it</button>
+                    </a>
+                {% endif %}
+            </div>
+        {% endif %}
+        {% if action.type == "activity" %}
+            {% if action.member.approval_status != "rejected" %}
+                <div {% get_id_and_classes "activity-task-details-info" %}>
+                    <p/>
+                    Thank you for submitting your response. <br/>
+                    An administrator is reviewing your response. <br/>
+                    Come back soon to see your new total.
+                </div>
+            {% else %}
+                <div {% get_id_and_classes "activity-task-details-info" %}>
+                    <p/>
+
+                    <div style="text-align:left; margin-left:10px;">
+                        Administrator feels that there is a problem with your
+                        submission. <br/>
+                        Please try again. Here is the feedback: <br/>
+                        <span style="color:orange">{{ action.member.admin_comment }}</span>
+                    </div>
+                    {% if user == action.member.user %}
+                        <a onclick="task_form_overlay()">
+                            <button style="cursor:pointer;">I will try again
+                            </button>
+                        </a>
+                    {% else %}
+                        <br/>Please try again.
+                    {% endif %}
+                </div>
+            {% endif %}
+        {% endif %}
+    {% endif %}
+{% endif %}
+
+
+<p/>
+<center><b>{{ action.title }}</b></center>
+
+<p/>
+
+{{ action.description|markdown }}
+
+<p/>
+<center>
+
+    {% if not action.is_pau %}              <!-- not done yet  -->
+        {% if action.type == "commitment" %}
+            {% if action.can_commit %}
+                {% if action.social_bonus > 0 %}
+                    <a onclick="task_form_overlay()">
+                        <button style="cursor:pointer;">I will do this!
+                            <img src="{{ STATIC_URL}}/css/default/images/right.png"
+                                 width="50" align="center">
+                        </button>
+                    </a>
+                {% else %}
+                    <form action='{% url activity_add_task action.type action.slug %}'
+                          method='post'>
+                        {% csrf_token %}
+                        <button id="submit_button4" style="cursor:pointer;"
+                                onclick='$("#submit_button4").attr("disabled", "disabled");javascript:this.form.submit(); return false;'>
+                            I will do this!
+                            <img src="{{ STATIC_URL}}/css/default/images/right.png"
+                                 width="50" align="center">
+                        </button>
+                    </form>
+                {% endif %}
+            {% else %}
+                <b>You already have 5 active commitments. <br/>
+                    You can make this commitment once any of your active commitments
+                    are completed.
+                </b>
+            {% endif %}
+        {% endif %}
+        {% if action.type == "event" or action.type == "excursion" %}
+            {% if action.event.is_event_completed %}
+                <b>This event was already completed at {{ action.event_date }}. <br/>
+                    If you attended the event, Click on the "I Did it" button to get
+                    your points. <p/>
+                    <a onclick="task_form_overlay()">
+                        <button style="cursor:pointer;">
+                            I Did it
+                            <img src="{{ STATIC_URL}}/css/default/images/right.png"
+                                 width="50" align="center">
+                        </button>
+                    </a>
+                </b>
+            {% else %}
+                {% if action.available_seat > 0 %}
+                    {# <a href="{% url activity_add_task action.type action.slug %}"> #}
+                    <form action='{% url activity_add_task action.type action.slug %}'
+                          method='post'>
+                        {% csrf_token %}
+                        <button id="submit_button5" style="cursor:pointer;"
+                                onclick='$("#submit_button5").attr("disabled", "disabled");javascript:this.form.submit(); return false;'>
+                            I want to sign up
+                            <img src="{{ STATIC_URL }}/css/default/images/right.png"
+                                 width="50" align="center"/>
+                        </button>
+                    </form>
+                    {# </a> #}
+                {% else %}
+                    <b>This {{ action.type }} is full. You can still try to attend on
+                        a space available basis.</b>
+                {% endif %}
+            {% endif %}
+        {% endif %}
+        {% if action.type == "survey" %}
+            <a onclick="task_form_overlay()">
+                <button style="cursor:pointer;">I want to do it
+                    <img src="{{ STATIC_URL}}/css/default/images/right.png"
+                         width="50" align="center">
+                </button>
+            </a>
+        {% endif %}
+        {% if action.type == "activity" %}
+            <b>
+                Once you are done, click the button below to get your points!
+            </b>
+            <p/>
+            <a onclick="task_form_overlay()">
+                <button style="cursor:pointer;">
+                    I Did This!
+                    <img src="{{ STATIC_URL}}/css/default/images/right.png"
+                         width="50" align="center"></button>
+            </a>
+        {% endif %}
+    {% endif %}
+    <br/> <br/>
+</center>
+<p>
+</div>
+</div>
+
+<div id="setup-dialog" title="{{form.form_title}}" style="visibility: hidden;">
+    {% include "task_form.html" %}
+</div>
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        var notification = getCookie("task_notify");
+        if (notification != null) {
+            notification = notification.replace(/"/g, '');
+            var notice = '<div class="notice">'
+                    + '<img src="{{ STATIC_URL}}/css/default/images/icon-notify.png" width="30" align="center" />'
+                    + '<div class="body">'
+                    + notification
+                    + '</div>'
+                    + '</div>';
+
+            $(notice).purr(
+                    {
+                        usingTransparentPNG:true,
+                        fadeInSpeed:600,
+                        fadeOutSpeed:600,
+                        removeTimer:2500,
+                        isSticky:false
+                    });
+            deleteCookie("task_notify");
+        }
+
+        {% if display_form %}
+            task_form_overlay();
+        {% endif %}
+    });
+
+    function task_form_overlay() {
+        el = document.getElementById("setup-dialog");
+        el.style.visibility = "visible";
+        $("#setup-dialog").dialog({
+            modal:true,
+            width:500,
+            {% if action.type == "survey" %}
+                height:500,
+            {% endif %}
+            closeOnEscape:false,
+            position:[400, 100],
+            open:function (event, ui) {
+                log_js_action("smartgrid", "{{action.slug}}", "show-form");
+            },
+            close:function (event, ui) {
+                log_js_action("smartgrid", "{{action.slug}}", "close-form");
+            }
+        });
+
+        $('#id_response').focus();
+
+        return false;
+    }
+
+</script>

@@ -4,13 +4,13 @@ from django.contrib.auth.models import User
 from django.test import TransactionTestCase
 from django.core import mail
 from django.conf import settings
+from apps.managers.score_mgr import score_mgr
 from apps.test_helpers import test_utils
 
-from apps.widgets.smartgrid import get_popular_activities, get_available_activities, \
-                                   get_available_events, get_popular_commitments
-from apps.widgets.smartgrid.models import  EmailReminder, ActivityMember, \
-                                     CommitmentMember, Activity, TextReminder, Commitment
+from apps.widgets.smartgrid.models import  EmailReminder, TextReminder, \
+                                           ActionMember, Commitment
 from apps.widgets.notifications.models import UserNotification
+from apps.widgets.smartgrid import smartgrid
 
 
 class ActivitiesTest(TransactionTestCase):
@@ -21,6 +21,7 @@ class ActivitiesTest(TransactionTestCase):
         self.user = User.objects.create_user('user', 'user@test.com')
         self.user.save()
         self.activity = test_utils.create_activity()
+        self.event = test_utils.create_event()
 
         self.saved_rounds = settings.COMPETITION_ROUNDS
         self.current_round = "Round 1"
@@ -31,7 +32,7 @@ class ActivitiesTest(TransactionTestCase):
         """
         Test that regular activities create the appropriate log.
         """
-        member = ActivityMember(user=self.user, activity=self.activity, approval_status='approved')
+        member = ActionMember(user=self.user, action=self.activity, approval_status='approved')
         member.save()
 
         # Check the points log for this user.
@@ -40,65 +41,18 @@ class ActivitiesTest(TransactionTestCase):
 
     def testPopularActivities(self):
         """Check which activity is the most popular."""
-        activity_member = ActivityMember(user=self.user, activity=self.activity)
+        activity_member = ActionMember(user=self.user, action=self.activity)
         activity_member.approval_status = "approved"
         activity_member.save()
 
-        activities = get_popular_activities()
-        self.assertEqual(activities[0]["title"], self.activity.title)
-        self.assertEqual(activities[0]["completions"], 1,
-            "Most popular activity should have one completion.")
-
-    def testActivityOrdering(self):
-        """Check the ordering of two activities.  If they do not have priorities,
-        they should be alphabetical."""
-        activity2 = Activity(
-            title="Another test activity",
-            description="Testing!",
-            duration=10,
-            point_value=10,
-            pub_date=datetime.datetime.today(),
-            expire_date=datetime.datetime.today() + datetime.timedelta(days=7),
-            confirm_type="text",
-            type="activity"
-        )
-        activity2.save()
-
-        activities = get_available_activities(self.user)
-        self.assertTrue(self.activity in activities,
-            "Check that the first activity is in the list.")
-        self.assertTrue(activity2 in activities, "Check that the second activity is in the list.")
-        self.assertEqual(activities[0], activity2,
-            "Check that the activities are ordered alphabetically.")
-
-        # Add priority to test activity.
-        self.activity.priority = 1
-        self.activity.save()
-
-        activities = get_available_activities(self.user)
-        self.assertTrue(self.activity in activities,
-            "Check that the first activity is in the list.")
-        self.assertTrue(activity2 in activities, "Check that the second activity is in the list.")
-        self.assertEqual(activities[0], self.activity, "Check that the test activity is now first.")
+        activities = smartgrid.get_popular_tasks()
+        self.assertEqual(activities["Activity"][0].title, self.activity.title)
 
     def testGetEvents(self):
-        """Verify that get_available_activities does not retrieve events."""
-        self.activity.type = "event"
-        self.activity.depends_on = "True"
-        self.activity.name = "name"
-        self.activity.pub_date = datetime.datetime.today()
-        self.activity.expire_date = datetime.datetime.today() + datetime.timedelta(days=7)
-        self.activity.event_date = datetime.datetime.today()
+        """Verify that get_available_events does retrieve events."""
+        events = smartgrid.get_available_events(self.user)
 
-        self.activity.save()
-
-        activities = get_available_activities(self.user)
-        if self.activity in activities:
-            self.fail("Event is listed in the activity list.")
-
-        events = get_available_events(self.user)
-
-        if self.activity.id != events[0]["id"]:
+        if self.event.id != events[0].id:
             self.fail("Event is not listed in the events list.")
 
     def testApproveAddsPoints(self):
@@ -113,7 +67,7 @@ class ActivitiesTest(TransactionTestCase):
 
         activity_points = self.activity.point_value
 
-        activity_member = ActivityMember(user=self.user, activity=self.activity)
+        activity_member = ActionMember(user=self.user, action=self.activity)
         activity_member.save()
 
         # Verify that nothing has changed.
@@ -136,37 +90,27 @@ class ActivitiesTest(TransactionTestCase):
             activity_member.submission_date - entry.last_awarded_submission) < datetime.timedelta(
             minutes=1))
 
-    def testUnapproveRemovesPoints(self):
-        """Test that unapproving a user removes their points."""
+    def testRejectThenApprove(self):
+        """Test that Reject then approve a user removes their points."""
         points = self.user.get_profile().points()
 
-        # Setup to check round points.
-        (entry, _) = self.user.get_profile().scoreboardentry_set.get_or_create(
-            round_name=self.current_round)
-        round_points = entry.points
-
-        activity_member = ActivityMember(user=self.user, activity=self.activity,
+        activity_member = ActionMember(user=self.user, action=self.activity,
             submission_date=datetime.datetime.today())
-        activity_member.approval_status = "approved"
-        activity_member.save()
-        award_date = activity_member.award_date
 
         activity_member.approval_status = "rejected"
         activity_member.save()
-        new_points = self.user.get_profile().points()
         self.assertEqual(len(mail.outbox), 1, "Check that the rejection sent an email.")
-
         self.assertTrue(activity_member.award_date is None)
-        self.assertEqual(points, new_points)
         self.assertTrue(self.user.get_profile().last_awarded_submission() is None)
 
-        entry = self.user.get_profile().scoreboardentry_set.get(round_name=self.current_round)
-        self.assertEqual(round_points, entry.points)
-        self.assertTrue(
-            entry.last_awarded_submission is None or entry.last_awarded_submission < award_date)
+        activity_member.approval_status = "approved"
+        activity_member.save()
+        new_points = self.user.get_profile().points()
+
+        self.assertEqual(points + activity_member.points_awarded, new_points)
 
     def testDeleteRemovesPoints(self):
-        """Test that deleting an approved ActivityMember removes their points."""
+        """Test that deleting an approved ActionMember removes their points."""
 
         points = self.user.get_profile().points()
 
@@ -175,7 +119,7 @@ class ActivitiesTest(TransactionTestCase):
             round_name=self.current_round)
         round_points = entry.points
 
-        activity_member = ActivityMember(user=self.user, activity=self.activity)
+        activity_member = ActionMember(user=self.user, action=self.activity)
         activity_member.approval_status = "approved"
         activity_member.save()
         award_date = activity_member.award_date
@@ -191,28 +135,13 @@ class ActivitiesTest(TransactionTestCase):
         self.assertTrue(
             entry.last_awarded_submission is None or entry.last_awarded_submission < award_date)
 
-    def testCreateVariablePointActivity(self):
-        """Tests the creation of activities with variable points."""
-        activity = Activity(
-            title="Test activity",
-            description="Variable points!",
-            duration=10,
-            point_range_start=5,
-            point_range_end=10,
-            pub_date=datetime.datetime.today(),
-            expire_date=datetime.datetime.today() + datetime.timedelta(days=7),
-            confirm_type="text",
-        )
-        activity.save()
-        self.assertTrue(activity.has_variable_points)
-
     def testRejectionNotifications(self):
         """
         Test that notifications are created by rejections and
         are marked as read when the member changes back to pending.
         """
         notifications = UserNotification.objects.count()
-        activity_member = ActivityMember(user=self.user, activity=self.activity,
+        activity_member = ActionMember(user=self.user, action=self.activity,
             submission_date=datetime.datetime.today())
         activity_member.approval_status = "rejected"
         activity_member.submission_date = datetime.datetime.today()
@@ -254,48 +183,46 @@ class CommitmentsUnitTestCase(TransactionTestCase):
 
     def testPopularCommitments(self):
         """Tests that we can retrieve the most popular commitments."""
-        commitment_member = CommitmentMember(user=self.user, commitment=self.commitment)
+        commitment_member = ActionMember(user=self.user, action=self.commitment)
         commitment_member.award_date = datetime.datetime.today()
+        commitment_member.approval_status = "approved"
         commitment_member.save()
 
-        commitments = get_popular_commitments()
-        self.assertEqual(commitments[0]["title"], self.commitment.title)
-        self.assertEqual(commitments[0]["completions"], 1,
+        commitments = smartgrid.get_popular_tasks()
+        self.assertEqual(commitments["Commitment"][0].title, self.commitment.title)
+        self.assertEqual(commitments["Commitment"][0].completions, 1,
             "Most popular commitment should have one completion.")
 
     def testCompletionAddsPoints(self):
         """Tests that completing a task adds points."""
         points = self.user.get_profile().points()
-        last_awarded_submission = self.user.get_profile().last_awarded_submission()
 
         # Setup to check round points.
         (entry, _) = self.user.get_profile().scoreboardentry_set.get_or_create(
             round_name=self.current_round)
         round_points = entry.points
-        round_last_awarded = entry.last_awarded_submission
 
-        commitment_member = CommitmentMember(user=self.user, commitment=self.commitment,
+        commitment_member = ActionMember(user=self.user, action=self.commitment,
             completion_date=datetime.datetime.today())
         commitment_member.save()
 
-        # Check that this does not change the user's points.
-        self.assertEqual(points, self.user.get_profile().points())
-        self.assertEqual(last_awarded_submission, self.user.get_profile().last_awarded_submission())
+        # Check that the user's signup point.
+        self.assertEqual(points + score_mgr.signup_points(), self.user.get_profile().points())
 
         entry = self.user.get_profile().scoreboardentry_set.get(round_name=self.current_round)
-        self.assertEqual(round_points, entry.points)
-        self.assertEqual(round_last_awarded, entry.last_awarded_submission)
+        self.assertEqual(round_points + score_mgr.signup_points(), entry.points)
 
         commitment_member.award_date = datetime.datetime.today()
+        commitment_member.approval_status = "approved"
         commitment_member.save()
-        points += commitment_member.commitment.point_value
-        self.assertEqual(points, self.user.get_profile().points())
+        points += commitment_member.action.commitment.point_value
+        self.assertEqual(points + score_mgr.signup_points(), self.user.get_profile().points())
         self.assertEqual(self.user.get_profile().last_awarded_submission(),
             commitment_member.award_date)
 
         entry = self.user.get_profile().scoreboardentry_set.get(round_name=self.current_round)
-        round_points += commitment_member.commitment.point_value
-        self.assertEqual(round_points, entry.points)
+        round_points += commitment_member.action.commitment.point_value
+        self.assertEqual(round_points + score_mgr.signup_points(), entry.points)
         self.assertTrue(
             abs(entry.last_awarded_submission - commitment_member.award_date) < datetime.timedelta(
                 minutes=1))
@@ -310,11 +237,12 @@ class CommitmentsUnitTestCase(TransactionTestCase):
             round_name=self.current_round)
         round_points = entry.points
 
-        commitment_member = CommitmentMember(user=self.user, commitment=self.commitment,
+        commitment_member = ActionMember(user=self.user, action=self.commitment,
             completion_date=datetime.datetime.today())
         commitment_member.save()
 
         commitment_member.award_date = datetime.datetime.today()
+        commitment_member.approval_status = "approved"
         commitment_member.save()
         award_date = commitment_member.award_date
         commitment_member.delete()
@@ -350,7 +278,7 @@ class RemindersUnitTest(TransactionTestCase):
         """Test that we can send an email reminder."""
         reminder = EmailReminder.objects.create(
             user=self.user,
-            activity=self.event,
+            action=self.event,
             email_address="test@tester.com",
             send_at=datetime.datetime.today(),
         )
@@ -359,7 +287,7 @@ class RemindersUnitTest(TransactionTestCase):
         sent_mail = mail.outbox[0]
         self.assertTrue("test@tester.com" in sent_mail.to,
             "Email address should be in the recipient list.")
-        reminder = self.user.emailreminder_set.get(activity=self.event)
+        reminder = self.user.emailreminder_set.get(action=self.event)
         self.assertTrue(reminder.sent, "Reminder should be marked as sent.")
 
         # Try to send the reminder again.
@@ -373,7 +301,7 @@ class RemindersUnitTest(TransactionTestCase):
         """
         reminder = TextReminder.objects.create(
             user=self.user,
-            activity=self.event,
+            action=self.event,
             text_number="808-555-1234",
             text_carrier="att",
             send_at=datetime.datetime.today(),
@@ -395,7 +323,7 @@ class RemindersUnitTest(TransactionTestCase):
         """
         reminder = TextReminder.objects.create(
             user=self.user,
-            activity=self.event,
+            action=self.event,
             text_number="808-555-1234",
             text_carrier="tmobile",
             send_at=datetime.datetime.today(),
@@ -413,7 +341,7 @@ class RemindersUnitTest(TransactionTestCase):
         """
         reminder = TextReminder.objects.create(
             user=self.user,
-            activity=self.event,
+            action=self.event,
             text_number="808-555-1234",
             text_carrier="sprint",
             send_at=datetime.datetime.today(),
@@ -431,7 +359,7 @@ class RemindersUnitTest(TransactionTestCase):
         """
         reminder = TextReminder.objects.create(
             user=self.user,
-            activity=self.event,
+            action=self.event,
             text_number="808-555-1234",
             text_carrier="verizon",
             send_at=datetime.datetime.today(),

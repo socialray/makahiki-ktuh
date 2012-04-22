@@ -313,14 +313,14 @@ div.home-item img,div.home-item a {
 		no-repeat;
 }
 
-#home-activities-icon {
+#home-learn-icon {
 	background: transparent url(../images/icon-scoreboard-lg.png) top left
 		no-repeat;
 	width: 120px;
 	height: 124px;
 }
 
-#home-activities-icon:hover {
+#home-learn-icon:hover {
 	background: transparent url(../images/icon-scoreboard-lg-over.png) top
 		left no-repeat;
 }
@@ -337,14 +337,14 @@ div.home-item img,div.home-item a {
 		no-repeat;
 }
 
-#home-prizes-icon {
+#home-win-icon {
 	background: transparent url(../images/icon-prizes-lg.png) top left
 		no-repeat;
 	width: 120px;
 	height: 124px;
 }
 
-#home-prizes-icon:hover {
+#home-win-icon:hover {
 	background: transparent url(../images/icon-prizes-lg-over.png) top left
 		no-repeat;
 }

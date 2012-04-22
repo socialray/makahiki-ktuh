@@ -230,9 +230,10 @@ td#profile-form-fb-profile-label, td#profile-form-fb-can-post-fields {
   padding-bottom: 40px;
 }
 
-.textlink {
-  margin-left: 40%;
+.centered {
+  text-align: center;
 }
+
 
 @media screen and (max-width : 450px){
 .badge-members {

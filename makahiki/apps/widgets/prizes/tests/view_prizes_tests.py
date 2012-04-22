@@ -3,6 +3,7 @@ import datetime
 
 from django.test import TransactionTestCase
 from django.core.urlresolvers import reverse
+from apps.managers.challenge_mgr import challenge_mgr
 
 from apps.widgets.prizes.models import Prize
 from apps.test_helpers import test_utils
@@ -17,7 +18,7 @@ class PrizesFunctionalTestCase(TransactionTestCase):
         self.user = test_utils.setup_user(username="user", password="changeme")
 
         test_utils.set_competition_round()
-        test_utils.register_page_widget("win", "prizes")
+        challenge_mgr.register_page_widget("win", "prizes")
 
         profile = self.user.get_profile()
         profile.add_points(10, datetime.datetime.today(), "test")

@@ -1,5 +1,6 @@
 {% load class_tags %}
 
+{% with DEFAULT_VIEW_OBJECTS.ask_admin as ask_admin %}
 <div {% get_id_and_classes "help-ask" "responsive" %}>
     <div {% get_id_and_classes "help-ask-box" %}>
         <div {% get_id_and_classes "help-ask-title" %}>
@@ -11,11 +12,11 @@
             <form {% get_id_and_classes "help-ask-form" %} action="{% url ask_admin_feedback %}"
                                                            method="POST">
                 {% csrf_token %}
-                {{ view_objects.ask_admin.form.url }}
-                {% if view_objects.ask_adminform.question.errors %}
-                    {{ view_objects.ask_admin.form.question.errors }}
+                {{ ask_admin.form.url }}
+                {% if ask_admin.form.question.errors %}
+                    {{ ask_admin.form.question.errors }}
                 {% endif %}
-                {{ view_objects.ask_admin.form.question }}
+                {{ ask_admin.form.question }}
                 <div {% get_id_and_classes "help-ask-submit" %}>
                     <input type="submit" value="Send"/>
             <span id="help-ask-spinner" style="display:none">
@@ -29,3 +30,4 @@
         </div>
     </div>
 </div>
+{% endwith %}

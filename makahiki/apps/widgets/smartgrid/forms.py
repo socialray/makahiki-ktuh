@@ -4,7 +4,7 @@ from django import forms
 from django.forms.util import ErrorList
 
 from apps.widgets.smartgrid.models import ConfirmationCode, QuestionChoice, TextReminder
-from apps.widgets.smartgrid import get_user_by_email
+from apps.managers.player_mgr import player_mgr
 
 
 class ActivityTextForm(forms.Form):
@@ -18,7 +18,7 @@ class ActivityTextForm(forms.Form):
 
     def __init__(self, *args, **kwargs):
         self.request = kwargs.pop('request', None)
-        self.activity = kwargs.pop('activity', None)
+        self.action = kwargs.pop('action', None)
         qid = None
         if 'question_id' in kwargs:
             qid = kwargs.pop('question_id')
@@ -42,7 +42,7 @@ class ActivityTextForm(forms.Form):
                 if "choice_response" in cleaned_data:
                     del cleaned_data["choice_response"]
 
-        _validate_social_email(self.request, self.activity, cleaned_data, self._errors)
+        _validate_social_email(self.request, self.action, cleaned_data, self._errors)
 
         return cleaned_data
 
@@ -56,7 +56,7 @@ class ActivityCodeForm(forms.Form):
 
     def __init__(self, *args, **kwargs):
         self.request = kwargs.pop('request', None)
-        self.activity = kwargs.pop('activity', None)
+        self.action = kwargs.pop('action', None)
 
         super(ActivityCodeForm, self).__init__(*args, **kwargs)
 
@@ -71,16 +71,16 @@ class ActivityCodeForm(forms.Form):
             if not code.is_active:
                 self._errors["response"] = ErrorList(["This code has already been used."])
                 del cleaned_data["response"]
-            # Check if this activity is the same as the added activity (if provided)
-            elif self.activity and code.activity != self.activity:
+            # Check if this action is the same as the added action (if provided)
+            elif self.action and code.action.event != self.action:
                 self._errors["response"] = ErrorList(
-                    ["This confirmation code is not valid for this activity."])
+                    ["This confirmation code is not valid for this action."])
                 del cleaned_data["response"]
-            # Check if the user has already submitted a code for this activity.
-            elif code.activity in self.request.user.activity_set.filter(
-                activitymember__award_date__isnull=False):
+            # Check if the user has already submitted a code for this action.
+            elif code.action in self.request.user.action_set.filter(
+                actionmember__award_date__isnull=False):
                 self._errors["response"] = ErrorList(
-                    ["You have already redemmed a code for this activity."])
+                    ["You have already redeemed a code for this action."])
                 del cleaned_data["response"]
         except ConfirmationCode.DoesNotExist:
             self._errors["response"] = ErrorList(["This code is not valid."])
@@ -88,7 +88,7 @@ class ActivityCodeForm(forms.Form):
         except KeyError:
             self._errors["response"] = ErrorList(["Please input code."])
 
-        _validate_social_email(self.request, self.activity, cleaned_data, self._errors)
+        _validate_social_email(self.request, self.action, cleaned_data, self._errors)
 
         return cleaned_data
 
@@ -102,12 +102,12 @@ class ActivityFreeResponseForm(forms.Form):
 
     def __init__(self, *args, **kwargs):
         self.request = kwargs.pop('request', None)
-        self.activity = kwargs.pop('activity', None)
+        self.action = kwargs.pop('action', None)
         super(ActivityFreeResponseForm, self).__init__(*args, **kwargs)
 
     def clean(self):
         cleaned_data = self.cleaned_data
-        _validate_social_email(self.request, self.activity, cleaned_data, self._errors)
+        _validate_social_email(self.request, self.action, cleaned_data, self._errors)
         return cleaned_data
 
 
@@ -120,12 +120,12 @@ class ActivityImageForm(forms.Form):
 
     def __init__(self, *args, **kwargs):
         self.request = kwargs.pop('request', None)
-        self.activity = kwargs.pop('activity', None)
+        self.action = kwargs.pop('action', None)
         super(ActivityImageForm, self).__init__(*args, **kwargs)
 
     def clean(self):
         cleaned_data = self.cleaned_data
-        _validate_social_email(self.request, self.activity, cleaned_data, self._errors)
+        _validate_social_email(self.request, self.action, cleaned_data, self._errors)
         return cleaned_data
 
 
@@ -139,12 +139,12 @@ class ActivityFreeResponseImageForm(forms.Form):
 
     def __init__(self, *args, **kwargs):
         self.request = kwargs.pop('request', None)
-        self.activity = kwargs.pop('activity', None)
+        self.action = kwargs.pop('action', None)
         super(ActivityFreeResponseImageForm, self).__init__(*args, **kwargs)
 
     def clean(self):
         cleaned_data = self.cleaned_data
-        _validate_social_email(self.request, self.activity, cleaned_data, self._errors)
+        _validate_social_email(self.request, self.action, cleaned_data, self._errors)
         return cleaned_data
 
 
@@ -156,12 +156,12 @@ class CommitmentCommentForm(forms.Form):
 
     def __init__(self, *args, **kwargs):
         self.request = kwargs.pop('request', None)
-        self.activity = kwargs.pop('activity', None)
+        self.action = kwargs.pop('action', None)
         super(CommitmentCommentForm, self).__init__(*args, **kwargs)
 
     def clean(self):
         cleaned_data = self.cleaned_data
-        _validate_social_email(self.request, self.activity, cleaned_data, self._errors)
+        _validate_social_email(self.request, self.action, cleaned_data, self._errors)
         return cleaned_data
 
 
@@ -187,9 +187,9 @@ class SurveyForm(forms.Form):
         return cleaned_data
 
 
-def _validate_social_email(request, activity, cleaned_data, errors):
+def _validate_social_email(request, action, cleaned_data, errors):
     """validate the two social email."""
-    if activity.is_group and \
+    if action.is_group and \
         (not "social_email" in cleaned_data or \
          cleaned_data["social_email"] == None or \
          cleaned_data["social_email"] == ""):
@@ -202,7 +202,7 @@ def _validate_social_email(request, activity, cleaned_data, errors):
 def _validate_one_email(request, cleaned_data, email, errors):
     """validate one email."""
     if cleaned_data[email]:
-        user = get_user_by_email(cleaned_data[email])
+        user = player_mgr.get_user_by_email(cleaned_data[email])
         if user == None or user == request.user:
             errors[email] = ErrorList(["Invalid email. Please input only one valid email."])
             del cleaned_data[email]

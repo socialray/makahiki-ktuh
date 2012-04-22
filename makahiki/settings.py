@@ -124,9 +124,6 @@ INSTALLED_APPS = (
     'apps.managers.score_mgr',
     'apps.managers.cache_mgr',
 
-    # Test utilities
-    'apps.test_helpers',
-
     # 3rd party libraries
     'apps.lib.django_cas',
     'apps.lib.brabeion',
@@ -158,6 +155,8 @@ INSTALLED_APPS = (
 INSTALLED_DEFAULT_WIDGET_APPS = (
     'quests',
     'notifications',
+    'ask_admin',
+    'home',
     'help',
 )
 for widget in INSTALLED_DEFAULT_WIDGET_APPS:
@@ -172,7 +171,6 @@ INSTALLED_WIDGET_APPS = (
     'energy_goal',
     'energy_power_meter',
     'energy_scoreboard',
-    'home',
     'my_achievements',
     'my_commitments',
     'my_info',
@@ -276,9 +274,14 @@ FILE_UPLOAD_PERMISSIONS = 0644
 # to load the internationalization machinery.
 USE_I18N = True
 
+# Locale Info
 TIME_ZONE = 'Pacific/Honolulu'
 LOCALE_SETTING = 'en'
 LANGUAGE_CODE = 'en_US.UTF-8'
+
+# Markdown info
+MARKDOWN_LINK = "http://daringfireball.net/projects/markdown/syntax"
+MARKDOWN_TEXT = "Uses <a href=\"" + MARKDOWN_LINK + "\" target=\"_blank\">Markdown</a> formatting."
 
 
 ##############################

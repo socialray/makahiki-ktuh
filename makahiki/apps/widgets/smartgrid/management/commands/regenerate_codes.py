@@ -58,7 +58,7 @@ class Command(management.base.BaseCommand):
 
             # Delete confirmation codes for this activity
             self.stdout.write("Deleting old codes for '%s'\n" % activity.title)
-            ConfirmationCode.objects.filter(activity=activity).delete()
+            ConfirmationCode.objects.filter(action=activity).delete()
 
             self.stdout.write("Generating new codes for '%s'\n" % activity.title)
             ConfirmationCode.generate_codes_for_activity(activity, num_codes)

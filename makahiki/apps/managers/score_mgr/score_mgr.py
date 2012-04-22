@@ -59,13 +59,14 @@ def quest_points():
 
 def player_rank(profile, round_name="Overall"):
     """user round overall rank"""
-    entry, _ = ScoreboardEntry.objects.get_or_create(
-        profile=profile,
-        round_name=round_name
-    )
+    entry = None
+    try:
+        entry = ScoreboardEntry.objects.get(profile=profile, round_name=round_name)
+    except ObjectDoesNotExist:
+        pass
 
     # Check if the user has done anything.
-    if entry.last_awarded_submission:
+    if entry and entry.last_awarded_submission:
         return ScoreboardEntry.objects.filter(
             Q(points__gt=entry.points) |
             Q(points=entry.points,
@@ -73,9 +74,14 @@ def player_rank(profile, round_name="Overall"):
             round_name=round_name,
             ).count() + 1
 
+    if entry:
+        points = entry.points
+    else:
+        points = 0
+
     # Users who have not done anything yet are assumed to be last.
     return ScoreboardEntry.objects.filter(
-        points__gt=entry.points,
+        points__gt=points,
         round_name=round_name,
         ).count() + 1
 
@@ -83,12 +89,13 @@ def player_rank(profile, round_name="Overall"):
 def player_rank_in_team(profile, round_name="Overall"):
     """Returns user's rank in his team."""
     team = profile.team
-    entry, _ = ScoreboardEntry.objects.get_or_create(
-        profile=profile,
-        round_name=round_name
-    )
+    entry = None
+    try:
+        entry = ScoreboardEntry.objects.get(profile=profile, round_name=round_name)
+    except ObjectDoesNotExist:
+        pass
 
-    if entry.last_awarded_submission:
+    if entry and entry.last_awarded_submission:
         return ScoreboardEntry.objects.filter(
             Q(points__gt=entry.points) |
             Q(points=entry.points,
@@ -96,12 +103,17 @@ def player_rank_in_team(profile, round_name="Overall"):
             profile__team=team,
             round_name=round_name,
             ).count() + 1
+
+    if entry:
+        points = entry.points
     else:
-        return ScoreboardEntry.objects.filter(
-            points__gt=entry.points,
-            profile__team=team,
-            round_name=round_name,
-            ).count() + 1
+        points = 0
+
+    return ScoreboardEntry.objects.filter(
+        points__gt=points,
+        profile__team=team,
+        round_name=round_name,
+        ).count() + 1
 
 
 def player_points(profile, round_name="Overall"):
@@ -146,13 +158,13 @@ def player_last_awarded_submission(profile):
         return None
 
 
-def player_add_points(profile, points, submission_date, message, related_object=None):
+def player_add_points(profile, points, transaction_date, message, related_object=None):
     """Adds points based on the point value of the submitted object."""
     # Create a transaction first.
     transaction = PointsTransaction(
         user=profile.user,
         points=points,
-        submission_date=submission_date,
+        transaction_date=transaction_date,
         message=message,
         )
     if related_object:
@@ -160,32 +172,27 @@ def player_add_points(profile, points, submission_date, message, related_object=
 
     transaction.save()
 
-    # update the scoreboard entry for the current round and overall round
-    current_round = challenge_mgr.get_round(submission_date)
-    _update_scoreboard_entry_add(profile, current_round, points, submission_date)
-    if current_round != "Overall":
-        _update_scoreboard_entry_add(profile, "Overall", points, submission_date)
+    # update the scoreboard entry
+    _update_scoreboard_entry(profile, points, transaction_date)
 
     # Invalidate info bar cache.
     cache_mgr.invalidate_info_bar_cache(profile.user)
 
 
-def player_remove_points(profile, points, submission_date, message, related_object=None):
+def player_remove_points(profile, points, transaction_date, message, related_object=None):
     """Removes points from the user.
     If the submission date is the same as the last_awarded_submission
     field, we rollback to a previously completed task.
     """
-    # update the scoreboard entry for the current round and overall round
-    current_round = challenge_mgr.get_round(submission_date)
-    _update_scoreboard_entry_remove(profile, current_round, points, submission_date)
-    if current_round != "Overall":
-        _update_scoreboard_entry_remove(profile, "Overall", points, submission_date)
+
+    # update the scoreboard entry
+    _update_scoreboard_entry(profile, points * -1, transaction_date)
 
     # Log the transaction.
     transaction = PointsTransaction(
         user=profile.user,
         points=points * -1,
-        submission_date=submission_date,
+        transaction_date=transaction_date,
         message=message,
         )
     if related_object:
@@ -194,6 +201,71 @@ def player_remove_points(profile, points, submission_date, message, related_obje
 
     # Invalidate info bar cache.
     cache_mgr.invalidate_info_bar_cache(profile.user)
+
+
+def player_remove_related_points(profile, related_object):
+    """Removes all points transaction related to the related_object."""
+    txns = related_object.pointstransactions.all()
+    points = 0
+    last_awarded_submission = None
+    for txn in txns:
+        points += txn.points
+        # find the latest transaction date
+        if not last_awarded_submission or (
+            txn.points > 0 and last_awarded_submission < txn.transaction_date):
+            last_awarded_submission = txn.transaction_date
+        txn.delete()
+
+    if last_awarded_submission:
+        _update_scoreboard_entry(profile, points * -1, last_awarded_submission)
+
+
+def _update_scoreboard_entry(profile, points, transaction_date):
+    """Update the scoreboard entry for the associated round and Overall round."""
+
+    current_round = challenge_mgr.get_round(transaction_date)
+
+    _update_round_scoreboard_entry(profile, current_round, points, transaction_date)
+    if current_round != "Overall":
+        _update_round_scoreboard_entry(profile, "Overall", points, transaction_date)
+
+
+def _update_round_scoreboard_entry(profile, round_name, points, transaction_date):
+    """update the round scoreboard entry for the transaction."""
+    entry, _ = ScoreboardEntry.objects.get_or_create(profile=profile, round_name=round_name)
+    entry.points += points
+
+    # update the last_awarded_submission
+    if points > 0:
+        if not entry.last_awarded_submission or transaction_date > entry.last_awarded_submission:
+            entry.last_awarded_submission = transaction_date
+    else:
+        if entry.last_awarded_submission == transaction_date:
+            # Need to find the previous update.
+            entry.last_awarded_submission = _last_submitted_before(profile.user, transaction_date)
+
+    entry.save()
+
+
+def _last_submitted_before(user, transaction_date):
+    """Time of the last task that was completed before the submission date.
+       :returns None if there are no other tasks.
+    """
+    try:
+        return PointsTransaction.objects.filter(
+            user=user,
+            transaction_date__lt=transaction_date).latest("transaction_date").transaction_date
+    except ObjectDoesNotExist:
+        return None
+
+
+def player_has_points(profile, points, round_name="Overall"):
+    """Returns True if the user has at least the requested number of points."""
+    entry = ScoreboardEntry.objects.filter(profile=profile, round_name=round_name)
+    if entry:
+        return entry[0].points >= points
+    else:
+        return False
 
 
 def player_points_leaders_in_team(team, num_results=10, round_name="Overall"):
@@ -276,35 +348,3 @@ def award_referral_bonus(instance, referrer):
                                       'Referred by %s' % referrer.name, instance)
     player_add_points(referrer, points, datetime.datetime.today(),
                       'Referred %s' % instance.name, referrer)
-
-
-def _update_scoreboard_entry_add(profile, round_name, points, submission_date):
-    """Update the scoreboard entry for player_add_points."""
-    entry, _ = ScoreboardEntry.objects.get_or_create(profile=profile, round_name=round_name)
-    entry.points += points
-    if not entry.last_awarded_submission or submission_date > entry.last_awarded_submission:
-        entry.last_awarded_submission = submission_date
-    entry.save()
-
-
-def _update_scoreboard_entry_remove(profile, round_name, points, submission_date):
-    """Update the scoreboard entry for player_remove_points."""
-    entry = ScoreboardEntry.objects.get(profile=profile, round_name=round_name)
-    entry.points -= points
-    if entry.last_awarded_submission == submission_date:
-        # Need to find the previous update.
-        entry.last_awarded_submission = _last_submitted_before(profile.user, submission_date)
-    entry.save()
-
-
-def _last_submitted_before(user, submission_date):
-    """Time of the last task that was completed before the submission date.
-       :returns None if there are no other tasks.
-    """
-    try:
-        return PointsTransaction.objects.filter(
-            user=user,
-            submission_date__lt=submission_date).latest(
-            "submission_date").submission_date
-    except ObjectDoesNotExist:
-        return None

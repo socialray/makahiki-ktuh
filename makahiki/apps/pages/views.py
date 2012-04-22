@@ -9,7 +9,7 @@ from django.http import HttpResponseRedirect
 from django.core.urlresolvers import reverse
 from django.contrib.auth.decorators import login_required
 from django.conf import settings
-from apps.managers.challenge_mgr.models import PageSettings
+from apps.managers.challenge_mgr import challenge_mgr
 from apps.managers.resource_mgr import resource_mgr
 
 
@@ -33,27 +33,26 @@ def index(request):
 
     # get the view_objects
     view_objects = {}
-    is_page_defined = _get_view_objects(request, page_name, view_objects)
+    is_page_defined = supply_view_objects(request, page_name, view_objects)
 
     if not is_page_defined:
-        return HttpResponseRedirect(reverse("home_index"))
+        page_name = "home"
 
     # sets the active page
     view_objects['active'] = page_name
 
     # get user energy rank and usage
-    _get_energy_rank(request, view_objects)
+    supply_energy_rank(request, view_objects)
 
     return render_to_response("%s.html" % page_name, {
         "view_objects": view_objects,
         }, context_instance=RequestContext(request))
 
 
-def _get_view_objects(request, page_name, view_objects):
+def supply_view_objects(request, page_name, view_objects):
     """ Returns view_objects supplied widgets defined in PageSettings. """
-
-    page_settings = PageSettings.objects.filter(name=page_name, enabled=True)
-    if page_settings.count() == 0:
+    page_settings = challenge_mgr.page_settings(page_name)
+    if not page_settings:
         return False
 
     for page_setting in page_settings:
@@ -63,17 +62,10 @@ def _get_view_objects(request, page_name, view_objects):
         widget = widget.replace(".", "_")
         view_objects[widget] = page_views.supply(request, page_name)
 
-    # load default widgets for all pages
-    for widget in settings.INSTALLED_DEFAULT_WIDGET_APPS:
-        view_module_name = 'apps.widgets.' + widget + '.views'
-        page_views = importlib.import_module(view_module_name)
-        widget = widget.replace(".", "_")
-        view_objects[widget] = page_views.supply(request, None)
-
     return True
 
 
-def _get_energy_rank(request, view_objects):
+def supply_energy_rank(request, view_objects):
     """ Gets the user energy rank and usage."""
     if "energy_scoreboard" in settings.INSTALLED_WIDGET_APPS:
         energy_rank_info = resource_mgr.energy_team_rank_info(

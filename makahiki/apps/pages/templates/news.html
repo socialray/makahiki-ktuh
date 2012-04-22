@@ -17,24 +17,34 @@
         <div class="row-fluid">
             <!-- left column -->
             <div class="span6">
+                {% if view_objects.team_members %}
                 <div id='team_members'>
                     {% include "widgets/team_members/templates/index.html" %}
                 </div>
+                {% endif %}
+                {% if view_objects.wallpost %}
                 <div id='wallpost'>
                     {% include "widgets/wallpost/templates/index.html" %}
                 </div>
+                {% endif %}
             </div>
             <!-- right column -->
             <div class="span6">
+                {% if view_objects.upcoming_events %}
                 <div id='upcomping_events'>
                     {% include "widgets/upcoming_events/templates/index.html" %}
                 </div>
+                {% endif %}
+                {% if view_objects.popular_tasks %}
                 <div id='popular_tasks'>
                     {% include "widgets/popular_tasks/templates/index.html" %}
                 </div>
+                {% endif %}
+                {% if view_objects.my_commitments %}
                 <div id='my_commitments'>
                     {% include "widgets/my_commitments/templates/index.html" %}
                 </div>
+                {% endif %}
             </div>
         </div>
     </div>

@@ -3,9 +3,10 @@ import datetime
 
 from django.test import TransactionTestCase
 from django.core.urlresolvers import reverse
+from apps.managers.challenge_mgr import challenge_mgr
 from apps.test_helpers import test_utils
 
-from apps.widgets.smartgrid.models import Commitment, CommitmentMember
+from apps.widgets.smartgrid.models import Commitment, ActionMember
 from apps.managers.team_mgr.models import  Post
 from apps.widgets.wallpost.views import DEFAULT_POST_COUNT
 
@@ -18,9 +19,9 @@ class NewsFunctionalTestCase(TransactionTestCase):
         self.user = test_utils.setup_user(username="user", password="changeme")
         self.team = self.user.get_profile().team
 
-        test_utils.register_page_widget("news", "popular_tasks")
-        test_utils.register_page_widget("news", "my_commitments")
-        test_utils.register_page_widget("news", "wallpost")
+        challenge_mgr.register_page_widget("news", "popular_tasks")
+        challenge_mgr.register_page_widget("news", "my_commitments")
+        challenge_mgr.register_page_widget("news", "wallpost")
 
         self.client.login(username="user", password="changeme")
 
@@ -36,12 +37,13 @@ class NewsFunctionalTestCase(TransactionTestCase):
         commitment = Commitment(
             type="commitment",
             title="Test commitment",
+            slug="test-commitment",
             description="A commitment!",
             point_value=10,
         )
         commitment.save()
 
-        member = CommitmentMember(commitment=commitment, user=self.user)
+        member = ActionMember(action=commitment, user=self.user)
         member.save()
 
         response = self.client.get(reverse("news_index"))
@@ -58,14 +60,19 @@ class NewsFunctionalTestCase(TransactionTestCase):
         posts = self.team.post_set.count()
         commitment = Commitment(
             type="commitment",
-            title="Test commitment",
-            description="A commitment!",
+            title="Test commitment2",
+            slug="test-commitment2",
+            description="A commitment2!",
             point_value=10,
         )
         commitment.save()
 
-        member = CommitmentMember(commitment=commitment, user=self.user,
-            award_date=datetime.datetime.today())
+        member = ActionMember(action=commitment, user=self.user)
+        member.save()
+
+        member = ActionMember(action=commitment, user=self.user,
+                              approval_status="approved",
+                              award_date=datetime.datetime.today())
         member.save()
 
         response = self.client.get(reverse("news_index"))

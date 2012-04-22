@@ -8,7 +8,7 @@ from django.contrib.sites.models import Site
 from django.core import management
 from django.core.urlresolvers import reverse
 from apps.managers.score_mgr import score_mgr
-from apps.widgets.smartgrid.models import CommitmentMember, ActivityMember
+from apps.widgets.smartgrid.models import ActionMember
 from apps.widgets.notifications.models import UserNotification, NoticeTemplate
 from apps.managers.challenge_mgr import challenge_mgr
 from django.db.models import Q
@@ -50,7 +50,7 @@ def notify_round_started():
 
 def notify_commitment_end():
     """notify the end of a commitment period and award points"""
-    members = CommitmentMember.objects.filter(
+    members = ActionMember.objects.filter(
         completion_date=datetime.date.today(), award_date__isnull=True)
 
     # try and load the notification template.
@@ -82,8 +82,8 @@ def notify_commitment_end():
 
 def process_rsvp():
     """process RSVP notification and penalty"""
-    members = ActivityMember.objects.filter(
-        Q(activity__type="event") | Q(activity__type="excursion"),
+    members = ActionMember.objects.filter(
+        Q(action__type="event") | Q(action__type="excursion"),
         approval_status="pending")
 
     # try and load the notification template.
@@ -102,14 +102,14 @@ def process_rsvp():
         pass
 
     for member in members:
-        activity = member.activity
+        action = member.action
         user = member.user
         profile = user.get_profile()
 
-        diff = datetime.date.today() - activity.event_date.date()
+        diff = datetime.date.today() - action.event_date.date()
         if diff.days == 3:
             message = "%s: %s (No Show)" % (
-                activity.type.capitalize(), activity.title)
+                action.type.capitalize(), action.title)
             profile.remove_points(score_mgr.noshow_penalty_points(),
                                   datetime.datetime.today() - datetime
                                   .timedelta(
@@ -118,16 +118,15 @@ def process_rsvp():
             print "removed 4 points from %s for '%s'" % (profile.name, message)
 
             if template_noshow:
-                message = template_noshow.render({"ACTIVITY": activity})
+                message = template_noshow.render({"ACTIVITY": action})
             else:
                 message = "4 points had been deducted from you, "\
                           "because you signed up but did not enter the "\
                           "confirmation code 2 days after the %s <a "\
                           "href='%s'>%s</a>, " % (
-                    activity.type.capitalize(),
-                    reverse("activity_task",
-                            args=(activity.type, activity.slug,)),
-                    activity.title)
+                    action.type.capitalize(),
+                    reverse("activity_task", args=(action.type, action.slug,)),
+                    action.title)
                 message += " If you did attend, please click on the link to "\
                            "claim your points and reverse the deduction."
 
@@ -135,21 +134,20 @@ def process_rsvp():
                                                       display_alert=True,
                                                       content_object=member)
             print "created no-show penalty notification for %s for %s" % (
-                profile.name, activity.title)
+                profile.name, action.title)
 
         if diff.days == 2:
             if template_reminder:
-                message = template_reminder.render({"ACTIVITY": activity})
+                message = template_reminder.render({"ACTIVITY": action})
             else:
                 message = "Hi %s, <p/> We just wanted to remind you that the "\
                           "%s <a href='http://%s%s'>%s</a> had ended. Please "\
                           "click on the link to claim your points." % (
                     profile.name,
-                    activity.type.capitalize(),
+                    action.type.capitalize(),
                     Site.objects.get(id=settings.SITE_ID).domain,
-                    reverse("activity_task",
-                            args=(activity.type, activity.slug,)),
-                    activity.title)
+                    reverse("activity_task", args=(action.type, action.slug,)),
+                            action.title)
                 message += "<p/>Because you signed up for the "\
                            "event/excursion, if you do not enter the "\
                            "confirmation code within 2 days after the "\
@@ -164,7 +162,7 @@ def process_rsvp():
             UserNotification.create_email_notification(user.email, subject,
                                                        message, message)
             print "sent post event email reminder to %s for %s" % (
-                profile.name, activity.title)
+                profile.name, action.title)
 
 
 class Command(management.base.BaseCommand):

@@ -15,13 +15,13 @@
         margin-bottom: 10px;
 }
 
-#home-activities-icon {
+#home-learn-icon {
 	background: transparent url(../../makahiki/media/images/icons/icon-scoreboard-lg.png) top left no-repeat;
 	width: 120px;
 	height: 124px;
 }
 
-#home-activities-icon:hover {
+#home-learn-icon:hover {
 	background: transparent url(../../makahiki/media/images/icons/icon-scoreboard-lg-over.png) top left no-repeat;
 }
 
@@ -75,13 +75,13 @@
 	background: transparent url(../../makahiki/media/images/icons/icon-profile-lg-over.png) top left no-repeat;
 }
 
-#home-prizes-icon {
+#home-win-icon {
 	background: transparent url(../../makahiki/media/images/icons/icon-prizes-lg.png) top left no-repeat;
 	width: 120px;
 	height: 124px;
 }
 
-#home-prizes-icon:hover {
+#home-win-icon:hover {
 	background: transparent url(../../makahiki/media/images/icons/icon-prizes-lg-over.png) top left no-repeat;
 }
 

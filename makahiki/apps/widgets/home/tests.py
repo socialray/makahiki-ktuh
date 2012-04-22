@@ -12,15 +12,10 @@ from django.conf import settings
 from apps.managers.challenge_mgr import challenge_mgr
 
 from apps.managers.player_mgr.models import Profile
-from apps.test_helpers import test_utils
 
 
 class HomeFunctionalTestCase(TransactionTestCase):
     """Home Test Case."""
-
-    def setUp(self):
-        """setup."""
-        test_utils.register_page_widget("home", "home")
 
     def testIndex(self):
         """Check that we can load the index."""
@@ -85,7 +80,6 @@ class SetupWizardFunctionalTestCase(TransactionTestCase):
         self.user = User.objects.create_user("user",
                                              "user@test.com",
                                              password="changeme")
-        test_utils.register_page_widget("home", "home")
 
         self.client.login(username="user", password="changeme")
 

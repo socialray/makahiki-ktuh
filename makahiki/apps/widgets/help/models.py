@@ -1,11 +1,6 @@
 """The model for help topics."""
-
+from django.conf import settings
 from django.db import models
-
-MARKDOWN_LINK = "http://daringfireball.net/projects/markdown/syntax"
-
-MARKDOWN_TEXT = "Uses <a href=\"" + \
-                MARKDOWN_LINK + "\" target=\"_blank\">Markdown</a> formatting."
 
 HELP_CATEGORIES = (
     ("faq", "Frequently Asked Questions"),
@@ -24,7 +19,7 @@ class HelpTopic(models.Model):
     category = models.CharField(max_length=50, choices=HELP_CATEGORIES,
                                 help_text="One of the HELP_CATEGORIES.")
     contents = models.TextField(
-        help_text="The content of the help topic. %s" % MARKDOWN_TEXT)
+        help_text="The content of the help topic. %s" % settings.MARKDOWN_TEXT)
     parent_topic = models.ForeignKey("HelpTopic",
         null=True,
         blank=True,

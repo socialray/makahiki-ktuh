@@ -1,6 +1,6 @@
 {% load class_tags %}
 
-{% if not task.is_event_completed %}
+{% if not action.is_event_completed %}
     <div {% get_id_and_classes "task-reminder" %}>
         <p>
             {% if reminders.email or reminders.text %}
@@ -29,10 +29,10 @@
                 autoOpen:false,
                 width:650,
                 open:function (event, ui) {
-                    log_js_action("{{task.type}}", "{{task.slug}}", "reminder-open");
+                    log_js_action("{{action.type}}", "{{action.slug}}", "reminder-open");
                 },
                 close:function (event, ui) {
-                    log_js_action("{{task.type}}", "{{task.slug}}", "reminder-close");
+                    log_js_action("{{action.type}}", "{{action.slug}}", "reminder-close");
                 }
             });
 
@@ -103,7 +103,7 @@
 
                 $("#task-reminder-form-submit").click(function () {
                     $("#task-reminder-form button").attr("disabled", "disabled");
-                    $.post("{% url activity_reminder task.type task.slug %}", $("#task-reminder-form").serialize(), function (data) {
+                    $.post("{% url activity_reminder action.type action.slug %}", $("#task-reminder-form").serialize(), function (data) {
                         if (data.success) {
                             window.location.reload();
                         }

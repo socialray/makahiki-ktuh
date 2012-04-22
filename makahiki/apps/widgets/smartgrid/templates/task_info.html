@@ -1,0 +1,111 @@
+{% load cache %}
+
+{% load markup %}
+
+{% load avatar_tags %}
+{% load class_tags %}
+
+<div class="content-box">
+    <div class="content-box-title">
+        {{ action.type|capfirst }} : {{ action.name }}
+    </div>
+    <div class="content-box-contents">
+        {% if action.is_canopy %}
+            <p/> This is a Canopy {{ action.type|capfirst }}.
+        {% endif %}
+        {% if action.is_group %}
+            <p/>This is a Group {{ action.type|capfirst }}.
+        {% endif %}
+        <p/>
+        This {{ action.type }} is worth
+        {% if action.point_value %}
+            <b>{{ action.point_value }}</b>
+        {% else %}
+            from <b>{{ action.point_range_start }}</b> to <b>{{ action.point_range_end }}</b>
+        {% endif %}
+        {% if action.is_canopy %} Karma {% endif %} points.
+        {% if action.type == "commitment" %}
+            It lasts {{ action.commitment.duration }} days.
+        {% else %}
+            <p/>
+            {% if action.type == "event" or action.type == "excursion" %}
+                <b>When</b> : {{ action.event_date }} <br/>
+                <b>Where</b> : {{ action.event_location }} <br/>
+                <b>Estimated duration</b> : {{ action.duration }} <br/>
+                <b>Space(s) still available</b> : {{ action.available_seat }}
+            {% else %}
+                <b>Estimated time required</b> : {{ action.duration }} <br/>
+            {% endif %}
+        {% endif %}
+        <p/>
+        {% if action.social_bonus > 0 %}
+            <b>Social Bonus : {{ action.social_bonus }} points. </b>
+            <a href="#">
+                <img src="{{ STATIC_URL}}/css/default/images/icon-help-sm.png" width="20"
+                     align="center"
+                     title="What is the Social Bonus ?"
+                     onclick="toggleHelp('widget', 'social-bonus'); return false;"
+                        /></a>
+        {% endif %}
+        <p/>
+        {{ completed_count }}
+        {% if completed_count == 1 %}
+            person in the competition has
+        {% else %}
+            people in the competition have
+        {% endif %}
+        {% if action.type == "event" or action.type == "excursion" %}
+            signed up.
+        {% else %}
+            done this.
+        {% endif %}
+        <p/>
+        {% with team_members|length as team_member_count %}
+            {{ team_member_count }}
+            {% if team_member_count == 1 %}
+                person in your {{ TEAM_LABEL.lower }} has
+            {% else %}
+                people in your {{ TEAM_LABEL.lower }} have
+            {% endif %}
+            {% if action.type == "event" or action.type == "excursion" %}
+                signed up.
+            {% else %}
+                done this.
+            {% endif %}
+            <br/>
+            {% cache 3600000 team_avatar action.id user.get_profile.team_id %}
+                {% for member in team_members %}
+                    <img src="{% avatar_url member.user 40 %}"
+                         title="{{member.user.get_profile.name}}"/>
+                {% endfor %}
+            {% endcache %}
+        {% endwith %}
+
+        {% if action.type == "event" or action.type == "excursion" %}
+            {% include "reminder.html" %}
+        {% endif %}
+
+        <p/>
+
+        <p/>
+        <center>
+            {% if action.is_canopy %}
+                <a href="/canopy">
+                    <button style="cursor:pointer;">
+                        <img src="{{ STATIC_URL}}/css/default/images/left.png" width="50"
+                             align="top">
+                        <br/>Back to the Canopy
+                    </button>
+                </a>
+            {% else %}
+                <a href="/learn/">
+                    <button style="cursor:pointer;">
+                        <img src="{{ STATIC_URL}}/css/default/images/left.png" width="50"
+                             align="top">
+                        <br/>Back to Smart Grid Game
+                    </button>
+                </a>
+            {% endif %}
+        </center>
+    </div>
+</div>

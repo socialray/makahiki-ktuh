@@ -6,7 +6,6 @@ import datetime
 import urllib2
 
 from django.conf import settings
-from django.core.exceptions import ObjectDoesNotExist
 from django.shortcuts import render_to_response
 from django.template import RequestContext
 from django.template.loader import render_to_string
@@ -341,18 +340,8 @@ def setup_complete(request):
             # User got the question right.
             # link it to an activity.
             if "smartgrid" in settings.INSTALLED_WIDGET_APPS:
-                try:
-                    module = importlib.import_module("apps.widgets.smartgrid.models")
-                    activity_name = module.SETUP_WIZARD_ACTIVITY_NAME
-                    activity = module.Activity.objects.get(name=activity_name)
-                    module.ActivityMember.objects.get_or_create(
-                        activity=activity,
-                        user=profile.user,
-                        approval_status="approved")
-                    # If this was created, it's automatically saved.
-                except ObjectDoesNotExist:
-                    pass  # Don't add anything if we can't link to the
-                    # activity.
+                module = importlib.import_module("apps.widgets.smartgrid.smartgrid")
+                module.complete_setup_activity(request.user)
 
         profile.setup_complete = True
         profile.completion_date = datetime.datetime.today()

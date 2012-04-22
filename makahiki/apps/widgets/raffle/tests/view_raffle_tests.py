@@ -24,7 +24,7 @@ class RafflePrizesTestCase(TransactionTestCase):
         # Set up user
         self.user = test_utils.setup_user(username="user", password="changeme")
 
-        test_utils.register_page_widget("win", "raffle")
+        challenge_mgr.register_page_widget("win", "raffle")
         self.client.login(username="user", password="changeme")
 
     def testIndex(self):

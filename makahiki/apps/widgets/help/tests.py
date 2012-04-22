@@ -3,10 +3,10 @@
 from django.test import TransactionTestCase
 from django.core.urlresolvers import reverse
 from django.contrib.auth.models import User
+from apps.managers.challenge_mgr import challenge_mgr
 
 from apps.managers.team_mgr.models import Team
 from apps.widgets.help.models import HelpTopic
-from apps.test_helpers import test_utils
 
 
 class HelpFunctionalTestCase(TransactionTestCase):
@@ -23,7 +23,7 @@ class HelpFunctionalTestCase(TransactionTestCase):
         profile.setup_profile = True
         profile.save()
 
-        test_utils.register_page_widget("help", "help.rule")
+        challenge_mgr.register_page_widget("help", "help.rule")
 
         self.client.login(username="user", password="changeme")
 

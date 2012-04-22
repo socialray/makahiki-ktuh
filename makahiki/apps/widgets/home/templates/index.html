@@ -1,139 +1,27 @@
 {% load class_tags %}
+{% load markup %}
+
 
 <!-- Top Row-->
 <ul>
-    <li>
+    {% for page in PAGE_INFO %}
+      {% if page.is_unlock %}
+      <li>
         <div class="home-item">
-            <a href="/learn/?ref=home-page">
-                <img class="home-activities-icon"
+            <a href="{{ page.url }}/?ref=home-page">
+                <img class="home-{{ page.name }}-icon"
                      src="{{STATIC_URL}}css/default/images/spacer.png"/>
             </a>
             <div class='tile'>
-                <h6>Get Nutz</h6>
-                <ul>
-                    <li>Play the Game</li>
-                    <li>Earn Kukuicup points</li>
-                    <li>See where you stand</li>
-                </ul>
+                <h6>{{ page.label }}</h6>
+                  {{ page.introduction|markdown }}
             </div>
         </div>
-     </li>
-     <li>
-        <div class="home-item">
-            <a href="/energy/?ref=home-page">
-                <img class="home-energy-icon"
-                     src="{{STATIC_URL}}css/default/images/spacer.png"/>
-            </a>
-            <div class="tile">
-                <h6>Go Low</h6>
-                <ul>
-                    <li>Observe Energy use</li>
-                    <li>Track Energy goals</li>
-                    <li>Compare usage to others</li>
-                </ul>
-            </div>
-        </div>
-     </li> 
-     <li>
-        <div class="home-item">
-            <a href="/news/?ref=home-page">
-                <img class="home-news-icon"
-                     src="{{STATIC_URL}}css/default/images/spacer.png"/>
-            </a>
-            <div class="tile">
-                <h6>News</h6>
-                <ul>
-                    <li>What are people doing?</li>
-                    <li>Your public comments</li>
-                    <li>Top activities & events</li>
-                </ul>
-            </div>
-        </div> 
-     </li>
-     
-     <li>
-        <div class="home-item">
-            <a href="/win/?ref=home-page">
-                <img  class="home-prizes-icon"
-                      src="{{STATIC_URL}}css/default/images/spacer.png"/>
-            </a>
-            <div class="tile">
-                <h6>Prizes</h6>
-                <ul>
-                    <li>See the prizes</li>
-                    <li>Allocate your points</li>
-                    <li>Monitor your chances</li>
-                </ul>
-            </div>
-        </div>
-     </li>
-     <li>
-        <div class="home-item">
-            <a href="/profile/?ref=home-page">
-                <img class="home-profile-icon"
-                     src="{{STATIC_URL}}css/default/images/spacer.png"/>
-            </a>
-            <div class="tile">
-                <h6>Profile</h6>
-                <ul>
-                    <li>Manage your Settings</li>
-                    <li>Connect to facebook</li>
-                    <li>Change your picture</li>
-                </ul>
-            </div>
-        </div>
-     </li>
-     <li>
-        <div class="home-item">
-            <a href="/help/?ref=home-page">
-                <img class="home-help-icon"
-                     src="{{STATIC_URL}}css/default/images/spacer.png"/>
-            </a>
-            <div class="tile">
-                <h6>Help</h6>
-                <ul>
-                    <li>Watch intro video</li>
-                    <li>Learn the rules</li>
-                    <li>Ask an admin</li>
-                </ul>
-            </div>
-        </div>
-    </li> 
-    <li>
-        <!-- FIXME: Need actual info for advanced and way to turn on/off -->
-        <div class="home-item">
-            <a href="/canopy/?ref=home-page">
-                <img  class="home-advanced-icon"
-                      src="{{STATIC_URL}}css/default/images/spacer.png"/>
-            </a>
-            <div class="tile">
-                <h6>Advanced</h6>
-                <ul>
-                    <li>Compare team usage</li>
-                    <li>See historical trends</i>
-                    <li>Help others conserve</li>
-                </ul>
-            </div>
-        </div>
-     </li>
-     <li>
-        <!-- FIXME: Need actual info for water -->
-        <div class="home-item">
-            <a href="/water/?ref=home-page">
-                <img class="home-water-icon"
-                     src="{{STATIC_URL}}css/default/images/spacer.png"/>
-            </a>
-            <div class="tile">
-                <h6>Drop Down</h6>
-                <ul>
-                    <li>Observe Water use</li>
-                    <li>Track Water goals</li>
-                    <li>Compare usage to others</li>
-                </ul>
-            </div>
-        </div>
-     </li>
+      </li>
+      {% endif %}
+    {% endfor %}
 </ul>
+
 {% if not user.get_profile.setup_complete %}
     <div id="setup-dialog" title="Introduction: Step 1 of 6">
         {% include "first-login/welcome.html" %}

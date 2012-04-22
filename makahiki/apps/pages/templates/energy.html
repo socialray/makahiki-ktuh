@@ -18,21 +18,29 @@
         <div class="row-fluid">
             <!-- left column -->
             <div class="span5">
+                {% if view_objects.energy_power_meter %}
                 <div id='energy_power_meter'>
                     {% include "widgets/energy_power_meter/templates/index.html" %}
                 </div>
+                {% endif %}
+                {% if view_objects.energy_scoreboard %}
                 <div id='energy_scoreboard'>
                     {% include "widgets/energy_scoreboard/templates/index.html" %}
                 </div>
+                {% endif %}
             </div>
             <!-- right column -->
             <div class="span7">
+                {% if view_objects.energy_goal %}
                 <div id='energy_goal'>
                     {% include "widgets/energy_goal/templates/index.html" %}
                 </div>
+                {% endif %}
+                {% if view_objects.wallpost %}
                 <div id='wallpost'>
                     {% include "widgets/wallpost/templates/index.html" %}
                 </div>
+                {% endif %}
             </div>
         </div>
     </div>

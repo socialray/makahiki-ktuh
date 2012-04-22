@@ -1,18 +1,20 @@
 [
   {
-    "pk": 1,
-    "model": "challenge_mgr.challengesettings",
-    "fields": {
-      "competition_name": "Kukui Cup",
-      "cas_server_url": "https://login.its.hawaii.edu/cas/",
-      "site_name": "University of Hawaii at Manoa",
-      "locale_setting": "en_US.UTF-8",
-      "time_zone": "Pacific/Honolulu",
-      "theme": "default",
-      "contact_email": "",
-      "competition_point_label": "point",
-      "language_code": "en",
-      "competition_team_label": "Lounge"
+      "pk": 1,
+      "model": "challenge_mgr.challengesettings",
+      "fields": {
+          "competition_name": "Kukui Cup",
+          "cas_server_url": "https://login.its.hawaii.edu/cas/",
+          "site_name": "University of Hawaii at Manoa",
+          "email_enabled": false,
+          "theme": "default",
+          "email_use_tls": true,
+          "contact_email": "",
+          "facebook_app_id": "",
+          "email_port": 587,
+          "facebook_secret_key": "",
+          "competition_team_label": "Lounge",
+          "email_host": ""
     }
   }
 ]

@@ -17,30 +17,30 @@
         <div class="row-fluid">
             <!-- left column -->
             <div class="span6">
-
-                <!-- My Info -->
+                {% if view_objects.my_info %}
                 <div class="content-box">
                     {% include "widgets/my_info/templates/index.html" %}
-                </div> 
+                </div>
+                {% endif %}
             </div>
 
             <!-- right column -->
             <div class="span6">
-
-                <!-- My Badges -->
+                {% if view_objects.badges %}
                 <div class="content-box">
                     {% include "widgets/badges/templates/index.html" %}
                 </div>
-
-                <!-- My Public Commitment-->
+                {% endif %}
+                {% if view_objects.my_commitments %}
                 <div class="content-box">
                     {% include "widgets/my_commitments/templates/index.html" %}
                 </div>
-
-                <!-- My Achievements-->
+                {% endif %}
+                {% if view_objects.my_achievements %}
                 <div class="content-box">
                     {% include "widgets/my_achievements/templates/index.html" %}
                 </div>
+                {% endif %}
             </div>
         </div>
     </div>

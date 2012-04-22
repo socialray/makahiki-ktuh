@@ -3,9 +3,9 @@
 <div {% get_id_and_classes "activity-task-form-content" %}>
     {% if form.is_multipart %}
         <form id="myform" enctype="multipart/form-data"
-              action="{% url activity_add_task task.type task.slug %}" method="post">
+              action="{% url activity_add_task action.type action.slug %}" method="post">
     {% else %}
-        <form id="myform" action="{% url activity_add_task task.type task.slug %}" method="post">
+        <form id="myform" action="{% url activity_add_task action.type action.slug %}" method="post">
     {% endif %}
 
     {% csrf_token %}
@@ -15,13 +15,13 @@
     {% endif %}
 
     <p/>
-    {% if task.type == "event" or task.type == "excursion" %}          {# event #}
-        {% if task.is_event_completed %}
+    {% if action.type == "event" or action.type == "excursion" %}          {# event #}
+        {% if action.event.is_event_completed %}
             Please enter the confirmation code you received from the event:
             {{ form.response.errors }}
             {{ form.response }}
 
-            {% if task.social_bonus > 0 %}
+            {% if action.social_bonus > 0 %}
                 <p/>
                 (Optional) If you did this with a friend or friends, please enter
                 one of their UH email addresses here for a social bonus:<br/>
@@ -29,7 +29,7 @@
                 {{ form.social_email }}
             {% endif %}
 
-            {% if task.is_group %}
+            {% if action.is_group %}
                 <p/>
                 Please enter the UH email address of other team members that complete this task with
                 you:<br/>
@@ -49,8 +49,8 @@
                 </button>
             </div>
         {% else %}
-            You will earn 2 {% if task.is_canopy %} Karma {% endif %} points for signing up for
-            the {{ task.type }}.
+            You will earn 2 {% if action.is_canopy %} Karma {% endif %} points for signing up for
+            the {{ action.type }}.
             <div {% get_id_and_classes "activity-task-form-content-button" %}>
                 <button id="submit_form_button2" style="cursor:pointer;"
                         onclick='$("#submit_form_button2").attr("disabled", "disabled");javascript:this.form.submit(); return false;'>
@@ -64,21 +64,21 @@
 
     {% endif %}
 
-    {% if task.type == "commitment" %}     {# commitment #}
+    {% if action.type == "commitment" %}     {# commitment #}
         {% if not approval or approval.award_date %}
-            You will earn 2 {% if task.is_canopy %} Karma {% endif %} points for making this
+            You will earn 2 {% if action.is_canopy %} Karma {% endif %} points for making this
             commitment.
             <p/>
-            You will need to come back after {{ task.duration }} days to get the rest of your
+            You will need to come back after {{ action.duration }} days to get the rest of your
             points.
-            {% if task.social_bonus > 0 %}
+            {% if action.social_bonus > 0 %}
                 <p/>
                 (Optional) If you want to do this with a friend or friends, please enter
                 one of their UH email addresses here for a social bonus:<br/>
                 {{ form.social_email.errors }}
                 {{ form.social_email }}
             {% endif %}
-            {% if task.is_group %}
+            {% if action.is_group %}
                 <p/>
                 Please enter the UH email address of other team members that complete this task with
                 you:<br/>
@@ -97,15 +97,15 @@
         {% else %}
             Thank you for the commitment.
             <p/>
-            You will earned {{ task.point_value }} {% if task.is_canopy %} Karma {% endif %} points.
-            {% if task.social_bonus > 0 %}
+            You will earned {{ action.point_value }} {% if action.is_canopy %} Karma {% endif %} points.
+            {% if action.social_bonus > 0 %}
                 <p/>
                 (Optional) If you did this with a friend or friends, please enter
                 one of their UH email addresses here for a social bonus:<br/>
                 {{ form.social_email.errors }}
                 {{ form.social_email }}
             {% endif %}
-            {% if task.is_group %}
+            {% if action.is_group %}
                 <p/>
                 Please enter the UH email address of other team members that complete this task with
                 you:<br/>
@@ -124,9 +124,9 @@
         {% endif %}
     {% endif %}
 
-    {% if task.type == "activity" %}          {# activity #}
+    {% if action.type == "activity" %}          {# activity #}
         {% if form.image_response %}         {# image #}
-            {{ task.confirm_prompt }} <p/>
+            {{ action.confirm_prompt }} <p/>
             {% if form.response %}
                 {{ form.response.errors }}
                 {{ form.response }}
@@ -134,14 +134,14 @@
             {{ form.image_response.errors }}
             {{ form.image_response }}
         {% else %}
-            {% if question %}                                {# question #}
+            {% if form.action_question %}                                {# question #}
                 Please answer the following question(s) and submit your answer(s).
                 <br>You can also click on the "Cancel" button to go back to review the information.
                 <p/>
-                {{ task.confirm_prompt }} <p/>
+                {{ action.confirm_prompt }} <p/>
                 {{ form.question }}
-                <b>{{ question.question }}</b> <br/>
-                {% if question.questionchoice_set.count > 0 %}    {# choice response question #}
+                <b>{{ form.action_question.question }}</b> <br/>
+                {% if form.action_question.questionchoice_set.count > 0 %}    {# choice response question #}
                     {{ form.choice_response.errors }}
                     {{ form.choice_response }}
                 {% else %}                                        {# text response question #}
@@ -149,19 +149,19 @@
                     {{ form.response }}
                 {% endif %}
             {% else %}                                       {# free text #}
-                {{ task.confirm_prompt }} <p/>
+                {{ action.confirm_prompt }} <p/>
                 {{ form.response.errors }}
                 {{ form.response }}
             {% endif %}
         {% endif %}
-        {% if task.social_bonus > 0 %}
+        {% if action.social_bonus > 0 %}
             <p/>
             (Optional) If you did this with a friend or friends, please enter
             one of their UH email addresses here for a social bonus: <br/>
             {{ form.social_email.errors }}
             {{ form.social_email }}
         {% endif %}
-        {% if task.is_group %}
+        {% if action.is_group %}
             <p/>
             Please enter the UH email address of other team members that complete this task with
             you:<br/>
@@ -182,8 +182,8 @@
         </div>
     {% endif %}
 
-    {% if task.type == "survey" %}          {# survey #}
-        {{ task.confirm_prompt }} <p/>
+    {% if action.type == "survey" %}          {# survey #}
+        {{ action.confirm_prompt }} <p/>
         {% for field in form %}
             <b>{{ field.label }}</b> <br/>
             {{ field.errors }}

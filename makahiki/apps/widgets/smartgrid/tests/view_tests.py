@@ -2,7 +2,8 @@
 import datetime
 from django.core.urlresolvers import reverse
 from django.test import TransactionTestCase
-from apps.widgets.smartgrid.models import  EmailReminder, ActivityMember, \
+from apps.managers.challenge_mgr import challenge_mgr
+from apps.widgets.smartgrid.models import  EmailReminder, ActionMember, \
                                            TextReminder, Commitment, ConfirmationCode
 from apps.managers.player_mgr.models import Profile
 from apps.test_helpers import test_utils
@@ -16,7 +17,7 @@ class ActivitiesFunctionalTest(TransactionTestCase):
         """setup"""
         self.user = self.user = test_utils.setup_user(username="user", password="changeme")
 
-        test_utils.register_page_widget("learn", "smartgrid")
+        challenge_mgr.register_page_widget("learn", "smartgrid")
 
         self.client.login(username="user", password="changeme")
 
@@ -55,55 +56,57 @@ class ActivitiesFunctionalTest(TransactionTestCase):
         """
         Tests the submission of a confirmation code.
         """
-        activity = test_utils.create_event(slug="test-activity")
+        activity = test_utils.create_event()
         activity.event_date = datetime.datetime.today() - datetime.timedelta(days=1, seconds=30)
         activity.save()
 
         ConfirmationCode.generate_codes_for_activity(activity, 10)
-        code = ConfirmationCode.objects.filter(activity=activity)[0]
+        code = ConfirmationCode.objects.filter(action=activity)[0]
 
-        response = self.client.post(reverse("activity_add_task", args=("event", "test-activity")), {
+        response = self.client.post(reverse("activity_add_task", args=("event", "test-event")), {
             "response": code.code,
             "code": 1,
             }, follow=True)
 
         self.failUnlessEqual(response.status_code, 200)
         self.assertEqual(ConfirmationCode.objects.filter(
-            activity=activity, is_active=False).count(), 1)
-        code = ConfirmationCode.objects.filter(activity=activity)[0]
+            action=activity, is_active=False).count(), 1)
+        code = ConfirmationCode.objects.filter(action=activity)[0]
         self.assertTrue(
-            activity in self.user.activity_set.filter(activitymember__award_date__isnull=False))
+            activity.action_ptr in self.user.action_set.filter(
+                actionmember__award_date__isnull=False))
 
         # Try submitting the code again and check if we have an error message.
-        code = ConfirmationCode.objects.filter(activity=activity)[1]
-        response = self.client.post(reverse("activity_add_task", args=("event", "test-activity")), {
+        code = ConfirmationCode.objects.filter(action=activity)[1]
+        response = self.client.post(reverse("activity_add_task", args=("event", "test-event")), {
             "response": code.code,
             "code": 1,
             }, follow=True)
-        self.assertContains(response, "You have already redemmed a code for this activity.")
+        print response
+        self.assertContains(response, "You have already redeemed a code for this action.")
 
         # Try creating a new activity with codes and see if we can submit a code for one activity
         # for another.
-        code = ConfirmationCode.objects.filter(activity=activity)[2]
-        activity = test_utils.create_event(slug="test-activity2")
+        code = ConfirmationCode.objects.filter(action=activity)[2]
+        activity = test_utils.create_event(slug="test-event2")
         activity.event_date = datetime.datetime.today() - datetime.timedelta(days=1, seconds=30)
         activity.save()
         ConfirmationCode.generate_codes_for_activity(activity, 1)
 
-        response = self.client.post(reverse("activity_add_task", args=("event", "test-activity2")),
+        response = self.client.post(reverse("activity_add_task", args=("event", "test-event2")),
                 {
                 "response": code.code,
                 "code": 1,
                 }, follow=True)
-        self.assertContains(response, "This confirmation code is not valid for this activity.")
+        self.assertContains(response, "This confirmation code is not valid for this action.")
 
     def testRejectedActivity(self):
         """
         Test that a rejected activity submission posts a message.
         """
         activity = test_utils.create_activity()
-        member = ActivityMember(
-            activity=activity,
+        member = ActionMember(
+            action=activity,
             user=self.user,
             approval_status="rejected",
             submission_date=datetime.datetime.today(),
@@ -177,7 +180,8 @@ class ActivitiesFunctionalTest(TransactionTestCase):
             "Should not have added a reminder")
 
         # Test valid form
-        response = self.client.post(reverse("activity_reminder", args=(event.type, event.slug,)), {
+        response = self.client.post(reverse("activity_reminder", args=(event.type, event.slug,)),
+                {
             "send_email": True,
             "email": "foo@test.com",
             "email_advance": "1",
@@ -200,7 +204,7 @@ class ActivitiesFunctionalTest(TransactionTestCase):
         original_date = event.event_date - datetime.timedelta(hours=2)
         reminder = EmailReminder(
             user=self.user,
-            activity=event,
+            action=event,
             email_address="foo@foo.com",
             send_at=original_date,
         )
@@ -216,7 +220,7 @@ class ActivitiesFunctionalTest(TransactionTestCase):
             }, HTTP_X_REQUESTED_WITH="XMLHttpRequest")
         self.failUnlessEqual(response.status_code, 200)
 
-        reminder = self.user.emailreminder_set.get(activity=event)
+        reminder = self.user.emailreminder_set.get(action=event)
         profile = Profile.objects.get(user=self.user)
         self.assertEqual(reminder.email_address, "foo@test.com",
             "Email address should have changed.")
@@ -234,7 +238,7 @@ class ActivitiesFunctionalTest(TransactionTestCase):
 
         reminder = EmailReminder(
             user=self.user,
-            activity=event,
+            action=event,
             email_address="foo@foo.com",
             send_at=event.event_date - datetime.timedelta(hours=2),
         )
@@ -321,7 +325,7 @@ class ActivitiesFunctionalTest(TransactionTestCase):
         original_date = event.event_date - datetime.timedelta(hours=2)
         reminder = TextReminder(
             user=self.user,
-            activity=event,
+            action=event,
             text_number="8085551234",
             text_carrier="att",
             send_at=original_date,
@@ -340,7 +344,7 @@ class ActivitiesFunctionalTest(TransactionTestCase):
             }, HTTP_X_REQUESTED_WITH="XMLHttpRequest")
 
         self.failUnlessEqual(response.status_code, 200)
-        reminder = self.user.textreminder_set.get(activity=event)
+        reminder = self.user.textreminder_set.get(action=event)
         # print profile.contact_text
         profile = Profile.objects.get(user=self.user)
         self.assertEqual(reminder.text_number, "808-555-6789", "Text number should have updated.")
@@ -358,7 +362,7 @@ class ActivitiesFunctionalTest(TransactionTestCase):
 
         reminder = TextReminder(
             user=self.user,
-            activity=event,
+            action=event,
             text_number="8085551234",
             text_carrier="att",
             send_at=event.event_date - datetime.timedelta(hours=2),

@@ -3,7 +3,7 @@ from django.test import TransactionTestCase
 from django.contrib.auth.models import User
 from apps.test_helpers import test_utils
 
-from apps.widgets.quests import get_quests, possibly_completed_quests
+from apps.widgets.quests.quests import get_quests, possibly_completed_quests
 from apps.widgets.quests.models import Quest, QuestMember
 
 
