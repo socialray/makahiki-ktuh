@@ -1,6 +1,4 @@
 """Model definition for notification service."""
-from smtplib import SMTPSenderRefused
-from _socket import *
 
 from django.db import models
 from django.contrib.auth.models import User

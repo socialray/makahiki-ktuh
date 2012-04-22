@@ -12,7 +12,7 @@ def supply(request, page_name):
 
     _ = request
     _ = page_name
-    return {None:None}
+    return {None: None}
 
 
 @login_required
