@@ -232,9 +232,19 @@
 </div>
 </div>
 
-<div id="setup-dialog" title="{{form.form_title}}" style="visibility: hidden;">
-    {% include "task_form.html" %}
+<div class="modal hide fade" id="taskModal">
+    <div class="modal-header">
+        <a class="close" data-dismiss="modal">x</a>
+        <h3>{{form.form_title}}</h3>
+    </div>
+    <div class="modal-body" id="modal-body">
+        {% include "task_form.html" %}
+    </div>
+    <div class="modal-footer">
+        <a href="#" class="btn" data-dismiss="modal">Close</a>
+    </div>
 </div>
+
 
 <script type="text/javascript">
     $(document).ready(function () {
@@ -265,23 +275,21 @@
     });
 
     function task_form_overlay() {
-        el = document.getElementById("setup-dialog");
-        el.style.visibility = "visible";
-        $("#setup-dialog").dialog({
-            modal:true,
-            width:500,
-            {% if action.type == "survey" %}
-                height:500,
-            {% endif %}
-            closeOnEscape:false,
-            position:[400, 100],
-            open:function (event, ui) {
-                log_js_action("smartgrid", "{{action.slug}}", "show-form");
-            },
-            close:function (event, ui) {
-                log_js_action("smartgrid", "{{action.slug}}", "close-form");
-            }
+        var modalElement = $('#taskModal');
+
+        modalElement.modal({
+            backdrop: true,
+            keyboard: true,
+            show: false
+        }); 
+        // set up event logging
+        modalElement.on('shown', function() {
+        	log_js_action("smartgrid", "{{action.slug}}", "shown-form");
         });
+        modalElement.on('hidden', function() {
+        	log_js_action("smartgrid", "{{action.slug}}", "close-form");
+        });
+        modalElement.modal('show');
 
         $('#id_response').focus();
 

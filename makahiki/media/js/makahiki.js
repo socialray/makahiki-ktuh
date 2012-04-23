@@ -100,15 +100,19 @@ var log_js_action = function(type, object, action) {
 }
 
 var toggleHelp = function(category, slug) {
-    var modalElement = $('<div />', { class: 'modal hide fade', id: 'my-modal' })
-    .append($('<div />', { class: 'modal-header' })
-    .append($('<a/>', { class: 'close', text: 'x', href: '#', 'data-dismiss': 'modal' } ))
-    .append($('<h3/>', { text: 'Item Modal Window' })))
-    .append($('<div />', { class: 'modal-body'} ))
-    .append($('<a/>', { class: 'btn', href: '#', 'data-dismiss': 'modal', text: 'Close'}));
+//    var modalElement = $('<div />', { class: 'modal hide fade', id: 'my-modal' })
+//    .append($('<div />', { class: 'modal-header' })
+//    .append($('<a/>', { class: 'close', text: 'x', href: '#', 'data-dismiss': 'modal' } ))
+//    .append($('<h3/>', { text: 'Item Modal Window' })))
+//    .append($('<div />', { class: 'modal-body'} ))
+//    .append($('<a/>', { class: 'btn', href: '#', 'data-dismiss': 'modal', text: 'Close'}));
 
+	var modalElement = $('#helpModal');
+	
     modalElement.modal({
-        backdrop: true
+        backdrop: true,
+        keyboard: true,
+        show: false
     });	
     
     jQuery.ajax({
@@ -124,6 +128,7 @@ var toggleHelp = function(category, slug) {
         	          "' and slug '" + slug + "'.");
         }
     });
+    modalElement.modal('show');
 }
 
 // Utility functions for get/set/delete cookies

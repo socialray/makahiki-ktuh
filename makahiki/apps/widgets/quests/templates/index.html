@@ -12,7 +12,7 @@
                     /></a>
     </div>
     <div>
-    <img src="{{ STATIC_URL}}/css/default/images/spacer.png" width="20">
+    <img class="quest-pad" src="{{ STATIC_URL}}/css/default/images/spacer.png" width="20">
     {%  with DEFAULT_VIEW_OBJECTS.quests as quests %}
     {% if quests.user_quests or quests.available_quests %}
         {% include "quest_list.html" %}

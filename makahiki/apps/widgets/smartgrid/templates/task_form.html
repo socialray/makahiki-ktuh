@@ -45,8 +45,9 @@
                     Submit
                 </button>
                 <button style="cursor:pointer;"
-                        onclick='$("#setup-dialog").dialog("close"); return false;'>Cancel
+                        onclick='$("#taskModal").modal("hide"); return false;'>Cancel
                 </button>
+
             </div>
         {% else %}
             You will earn 2 {% if action.is_canopy %} Karma {% endif %} points for signing up for
@@ -57,7 +58,7 @@
                     OK
                 </button>
                 <button style="cursor:pointer;"
-                        onclick='$("#setup-dialog").dialog("close"); return false;'>Cancel
+                        onclick='$("#taskModal").modal("hide"); return false;'>Cancel
                 </button>
             </div>
         {% endif %}
@@ -177,7 +178,7 @@
                 Submit
             </button>
             <button style="cursor:pointer;"
-                    onclick='$("#setup-dialog").dialog("close"); return false;'>Cancel
+                    onclick='$("#taskModal").modal("hide"); return false;'>Cancel
             </button>
         </div>
     {% endif %}
@@ -196,12 +197,10 @@
                 Submit
             </button>
             <button style="cursor:pointer;"
-                    onclick='$("#setup-dialog").dialog("close"); return false;'>Cancel
+                    onclick='$("#taskModal").modal("hide"); return false;'>Cancel
             </button>
         </div>
     {% endif %}
-
     </form>
-
 </div>
 
