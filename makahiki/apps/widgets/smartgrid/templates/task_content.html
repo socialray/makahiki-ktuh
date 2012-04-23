@@ -232,10 +232,6 @@
 </div>
 </div>
 
-<div id="setup-dialog" title="{{form.form_title}}" style="visibility: hidden;">
-    {% include "task_form.html" %}
-</div>
-
 <div class="modal hide fade" id="taskModal">
     <div class="modal-header">
         <a class="close" data-dismiss="modal">x</a>
@@ -279,24 +275,6 @@
     });
 
     function task_form_overlay() {
-//         el = document.getElementById("setup-dialog");
-//         el.style.visibility = "visible";
-//         $("#setup-dialog").dialog({
-//             modal:true,
-//             width:500,
-//             {% if action.type == "survey" %}
-//                 height:500,
-//             {% endif %}
-//             closeOnEscape:false,
-//             position:[400, 100],
-//             open:function (event, ui) {
-//                 log_js_action("smartgrid", "{{action.slug}}", "show-form");
-//             },
-//             close:function (event, ui) {
-//                 log_js_action("smartgrid", "{{action.slug}}", "close-form");
-//             }
-//         });
-
         var modalElement = $('#taskModal');
 
         modalElement.modal({
