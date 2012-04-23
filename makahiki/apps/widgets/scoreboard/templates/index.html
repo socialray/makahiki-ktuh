@@ -1,7 +1,7 @@
 {% load class_tags %}
 
-<div {% get_id_and_classes "activity-scoreboard-box" %}>
-    <div {% get_id_and_classes "activity-scoreboard-title" %}>
+<div class="content-box">
+    <div class="content-box-title">
         {{ view_objects.scoreboard.current_round }} Scoreboard <a
             href="#" style="float: right"> <img
             src="{{ STATIC_URL}}/css/default/images/icon-help-sm.png"
@@ -9,107 +9,99 @@
             title="Click to get help about this window"
             onclick="toggleHelp('widget', 'points-scoreboard'); return false;" /></a>
     </div>
-    <div {% get_id_and_classes "energy-scoreboard" %}>
-        <div class="scoreboard-cycle">
-            <div {% get_id_and_classes "activity-scoreboard-content" %}>
-                <table {% get_id_and_classes "activities-scoreboard-table-team" %} 
-                    style="width: 100%">
-                    <thead>
-                        <tr>
-                            <th style="width: 20px">Rank</th>
-                            <th style="width: 150px">{{ TEAM_LABEL.capitalize }}</th>
-                            <th style="text-align: right;">Overall</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {% for f in view_objects.scoreboard.team_standings %}
-                        <tr>
-                            <td>{{ forloop.counter }}</td>
-                            <td style="width: 150px;">{{ f.profile__team__name }}</td>
-                            <td style="width: 110px; text-align: right;">
-                                {{ f.points }}</td>
-                        </tr>
-                        {% endfor %}
-                    </tbody>
-                </table>
+    <div class="row-fluid">
+        <div id="score-carousel" class="span12 carousel">
+            <div class="carousel-inner">
+                <div class="item active">
+                    <table class="table table-striped">
+                        <thead>
+                            <tr>
+                                <th>Rank</th>
+                                <th>{{ TEAM_LABEL.capitalize }}</th>
+                                <th>Overall</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for f in view_objects.scoreboard.team_standings %}
+                            <tr>
+                                <td>{{ forloop.counter }}</td>
+                                <td>{{ f.profile__team__name }}</td>
+                                <td>{{ f.points }}</td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+                <div class="item">
+                    <table class="table table-striped">
+                        <thead>
+                            <tr>
+                                <th>Rank</th>
+                                <th>Individual</th>
+                                <th>Overall</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for p in view_objects.scoreboard.profile_standings %}
+                            <tr>
+                                <td>{{ forloop.counter }}</td>
+                                <td>{{ p.profile__name }}</td>
+                                <td>{{ p.points }}</td>
+                            </tr> 
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+                <div class="item">
+                    <table class="table table-striped">
+                        <thead>
+                            <tr>
+                                <th>Rank</th>
+                                <th>Individual</th>
+                                <th>{{ view_objects.scoreboard.team }}</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for p in view_objects.scoreboard.user_team_standings %}
+                            <tr>
+                                <td>{{ forloop.counter }}</td>
+                                <td>{{ p.name }}</td>
+                                <td>{{ p.current_round_points }}</td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+                <div class="item">
+                    <table class="table table-striped">
+                        <thead>
+                            <tr>
+                                <th>Rank</th>
+                                <th>{{ TEAM_IDENTIFIER }}</th>
+                                <th>Participation</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for f in view_objects.scoreboard.team_participation %}
+                            <tr>
+                                <td>{{ forloop.counter }}</td>
+                                <td>{{ f }}</td>
+                                <td>{{ f.active_participation }}%</td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div id="energy-scoreboard-message">#1 at end of round wins a 
+                <a href="/win"> prize!</a>
             </div>
         </div>
-        <div class="scoreboard-cycle">
-            <div {% get_id_and_classes "activity-scoreboard-content" %}>
-                <table {% get_id_and_classes "activities-scoreboard-table-profile" %}
-                       style="width: 100%">
-                    <thead>
-                        <tr>
-                            <th>Rank</th>
-                            <th>Individual</th>
-                            <th style="text-align: right">Overall</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {% for p in view_objects.scoreboard.profile_standings %}
-                        <tr>
-                            <td>{{ forloop.counter }}</td>
-                            <td style="width: 150px;">{{ p.profile__name }}</td>
-                            <td style="width: 110px; text-align: right;">
-                                {{ p.points }}</td>
-                        </tr> 
-                        {% endfor %}
-                    </tbody>
-                </table>
-            </div>
-        </div>
-
-        <div class="scoreboard-cycle">
-            <div {% get_id_and_classes "activity-scoreboard-content" %}>
-                <table {% get_id_and_classes "activities-scoreboard-table-team-profile" %}
-                    style="width: 100%">
-                    <thead>
-                        <tr>
-                            <th>Rank</th>
-                            <th>Individual</th>
-                            <th style="text-align: right">{{ view_objects.scoreboard.team }}</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {% for p in view_objects.scoreboard.user_team_standings %}
-                        <tr>
-                            <td>{{ forloop.counter }}</td>
-                            <td style="width: 150px;">{{ p.name }}</td>
-                            <td style="width: 110px; text-align: right;">
-                                {{ p.current_round_points }}</td>
-                        </tr>
-                        {% endfor %}
-                    </tbody>
-                </table>
-            </div>
-        </div>
-        <div class="scoreboard-cycle">
-            <div {% get_id_and_classes "activity-scoreboard-content" %}>
-                <table {% get_id_and_classes "activities-scoreboard-table-profile" %}
-                    style="width: 100%">
-                    <thead>
-                        <tr>
-                            <th>Rank</th>
-                            <th>{{ TEAM_IDENTIFIER }}</th>
-                            <th style="text-align: right">Participation</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {% for f in view_objects.scoreboard.team_participation %}
-                        <tr>
-                            <td>{{ forloop.counter }}</td>
-                            <td style="width: 150px;">{{ f }}</td>
-                            <td style="width: 110px; text-align: right;">
-                                {{ f.active_participation }}%</td>
-                        </tr>
-                        {% endfor %}
-                    </tbody>
-                </table>
-            </div>
-        </div>
-    </div>
-    <div id="scoreboard-cycle-nav"></div>
-    <div id="energy-scoreboard-message">#1 at end of round wins a 
-        <a href="/win"> prize!</a>
     </div>
 </div>
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        $("#score-carousel").carousel();
+    });
+</script>

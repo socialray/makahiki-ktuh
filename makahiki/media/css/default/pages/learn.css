@@ -15,10 +15,6 @@
 	width: 342px;
 }
 
-#activity-scoreboard-content table {
-  width: 100%;
-}
-
 #activity-categories {
 	float: right;
 	width: 565px;
@@ -88,6 +84,10 @@
 
 #activity-task-form-content-button {
     padding-left: 100px;
+}
+
+#score-carousel th:last-child, #score-carousel td:last-child  {
+    text-align: right;
 }
 
 h3.activity-categories-title {

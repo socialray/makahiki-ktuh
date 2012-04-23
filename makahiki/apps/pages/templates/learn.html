@@ -23,9 +23,9 @@
                 </div>
                 {% endif %}
                 {% if view_objects.scoreboard %}
-                <div id='scoreboard'>
+<!--                 <div id='scoreboard'> -->
                     {% include "widgets/scoreboard/templates/index.html" %}
-                </div>
+<!--                 </div> -->
                 {% endif %}
             </div>
             <!-- right column -->
@@ -40,14 +40,3 @@
     </div>
 {% endblock %}
 
-{% block page_cycles %}
-<script type="text/javascript">
-  jQuery(document).ready(function($) {
-    $("#energy-scoreboard").cycle({
-        pause: 1,
-        timeout: 7000,
-        pager: '#scoreboard-cycle-nav'
-    });
-  })
-</script>
-{% endblock page_cycles %}

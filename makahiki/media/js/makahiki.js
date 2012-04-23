@@ -39,20 +39,6 @@ if ( typeof jQuery != "undefined" )
 	
 // Setup the header cycle.
 jQuery(document).ready(function($) {
-  jQuery("#user-cycle").cycle();
-  var $teamInfo = $("#team-cycle");
-  if ($teamInfo.children().length > 0) {
-    jQuery("#team-cycle").cycle();
-  }
-  
-  //Set up the help dialog.
-  jQuery("#widget-help-dialog").dialog({
-    autoOpen: false,
-    width: 550,
-    position: ["center", 100],
-    modal: true
-  });
-  
   $("#link-container").hover(function() {
     if ($("#header-canopy-link").hasClass("hidden")) {
       $("#header-canopy-link").removeClass("hidden").css({display: "none"}).fadeIn("slow");
