@@ -12,7 +12,11 @@ def supply(request, page_name):
     _ = page_name
 
     # Get the team members.
-    members = request.user.get_profile().team.points_leaders()
+    team = request.user.get_profile().team
+    if team:
+        members = request.user.get_profile().team.points_leaders()
+    else:
+        members = None
 
     return {
         "team_members": members,
@@ -23,7 +27,11 @@ def supply(request, page_name):
 @login_required
 def team_members(request):
     """Provide the team members."""
-    members = team_mgr.team_members(request.user.get_profile().team)
+    team = request.user.get_profile().team
+    if team:
+        members = team_mgr.team_members(team)
+    else:
+        members = None
 
     return render_to_response("team_members.html", {
         "team_members": members,

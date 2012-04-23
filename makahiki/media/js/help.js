@@ -1,20 +1,16 @@
 $(document).ready(function() {
   $("#help-ask-form textarea").keyup(function() {
     if (this.value.length == 0) {
-      $("#help-ask-submit input").button("option", "disabled", true);
+      $("#help-ask-submit").attr("disabled", true);
     }
     else {
-      $("#help-ask-submit input").button("option", "disabled", false);
+      $("#help-ask-submit").attr("disabled", false);
     }
   });
-  
-  $("#help-ask-submit input").button({
-    disabled: true
-  });
-  
-  $("#help-ask-submit input").click(function() {
-    if(!$(this).button("option", "disabled")) {
-      $(this).button("option", "disabled", true);
+
+  $("#help-ask-submit").click(function() {
+    if(! $(this).attr("disabled")) {
+      $(this).attr("disabled", true);
       $("#field_url").val(window.location);
       $("#help-ask-spinner").show();
       $.post(this.form.action, $("#help-ask-form").serialize(), function(data) {

@@ -17,8 +17,8 @@
                     {{ ask_admin.form.question.errors }}
                 {% endif %}
                 {{ ask_admin.form.question }}
-                <div {% get_id_and_classes "help-ask-submit" %}>
-                    <input type="submit" value="Send"/>
+                <div>
+                    <button id="help-ask-submit" disabled="true" href="javascript:void(0);">Send</button>
             <span id="help-ask-spinner" style="display:none">
               Sending
               <img src="{{STATIC_URL}}images/spinner.gif"/>
@@ -31,3 +31,5 @@
     </div>
 </div>
 {% endwith %}
+
+<script src="{{STATIC_URL}}js/help.js" type="text/javascript"></script>

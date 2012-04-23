@@ -4,7 +4,8 @@
         <p>Having issues? Just want to tell us something? Let us know!</p>
         <input id="id_url" type="hidden" name="url" value=""/>
         <textarea id="id_question" rows="3" cols="53" name="question"></textarea><br/>
-        <input id="feedback-submit" type="submit" value="Send"/>
+        <button id="feedback-submit" disabled="true" href="javascript:void(0);">Send</button>
+
     <span id="feedback-spinner" style="display:none">
       Sending
       <img src="{{STATIC_URL}}images/spinner.gif"/>

@@ -54,10 +54,9 @@ def send_feedback(request):
                 mail.attach_alternative(html_message, 'text/html')
                 mail.send()
 
+            #print "email sent %s" % html_message
             if request.is_ajax():
                 return HttpResponse(json.dumps({"success": True}),
                                     mimetype="application/json")
-
-            return HttpResponseRedirect(reverse("help_index"))
 
     raise Http404

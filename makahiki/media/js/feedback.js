@@ -27,10 +27,10 @@ jQuery(document).ready(function() {
   
   jQuery("#feedback-form textarea").keyup(function() {
     if (this.value.length == 0) {
-      jQuery("#feedback-submit").button("option", "disabled", true);
+      jQuery("#feedback-submit").attr("disabled", true);
     }
     else {
-      jQuery("#feedback-submit").button("option", "disabled", false);
+      jQuery("#feedback-submit").attr("disabled", false);
     }
   });
   
@@ -38,13 +38,9 @@ jQuery(document).ready(function() {
     jQuery("#feedback-dialog").dialog("open");
   });
   
-  jQuery("#feedback-submit").button({
-    disabled: true
-  });
-  
   jQuery("#feedback-submit").click(function() {
-    if(!jQuery(this).button("option", "disabled")) {
-      jQuery(this).button("option", "disabled", true);
+    if(!jQuery(this).attr("disabled")) {
+      jQuery(this).attr("disabled", true);
       // alert(this.form.action);
       jQuery("#feedback-spinner").show();
       $.post(this.form.action, jQuery("#feedback-form").serialize(), function(data) {

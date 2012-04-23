@@ -18,6 +18,10 @@ def supply(request, page_name):
     _ = page_name
     user = request.user
     current_round_info = challenge_mgr.get_current_round_info()
+    if not current_round_info:
+        # no in any round
+        return {}
+
     deadline = current_round_info["end"] - datetime.timedelta(hours=RAFFLE_END_PERIOD)
     today = datetime.datetime.today()
 
