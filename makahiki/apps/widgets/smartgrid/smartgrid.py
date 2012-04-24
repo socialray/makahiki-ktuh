@@ -26,7 +26,7 @@ def complete_setup_activity(user):
                 action=activity,
                 user=user)
 
-        member.approval_status="approved"
+        member.approval_status = "approved"
         member.save()
     except ObjectDoesNotExist:
         pass  # Don't add anything if we can't find to the activity.
