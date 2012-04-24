@@ -24,6 +24,9 @@
 
 {% if not user.get_profile.setup_complete %}
     <div id="setup-dialog" class="modal">
+        <div style="display: none;">
+          Introduction: Step 1 of 6
+        </div>
         {% include "first-login/welcome.html" %}
     </div>
     <script type="text/javascript">
