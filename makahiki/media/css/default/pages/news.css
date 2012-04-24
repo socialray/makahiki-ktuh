@@ -113,3 +113,61 @@
 #team-member-details .team-member-admin {
   font-style: italic;
 }
+
+/* Wall post styles */
+
+#news-wall-content {
+  padding: 5px 10px;
+}
+
+#wall-post textarea {
+  box-sizing: border-box;
+  -webkit-box-sizing:border-box;
+  -moz-box-sizing: border-box;
+  -ms-box-sizing: border-box;
+  width: 100%;
+}
+
+#wall-post-button {
+  text-align: right;
+}
+
+#wall-posts {
+  list-style: none;
+  margin: 0;
+}
+
+#wall-posts li {
+  margin: 0;
+  padding: 5px 0;
+  border-top: 1px outset gray;
+}
+
+#wall-posts li .row {
+  margin-left: 0;
+}
+
+#wall-posts .wallpost-image {
+  margin-left: 0;
+  margin-right: 10px;
+}
+
+#wall-posts .wallpost-text {
+  margin-left: 0;
+}
+
+.wallpost-username {
+  font-weight: bold;
+}
+
+.wallpost-posted {
+  font-style: italic;
+  font-size: 0.9em;
+}
+
+@media (max-width: 767px) {
+  #wall-posts .wallpost-image {
+    float: left;
+    display: inline;
+  }
+}

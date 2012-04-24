@@ -12,19 +12,20 @@
         <div id="news-wall-content">
             {{ view_objects.wallpost.description }}
             <div id="wall-form">
-                <form id="news-post-form" action="{% url news_post %}"
-                                                                method="POST">
-                    {% csrf_token %}
-                    <div id="wall-post-errors"></div>
-                    <div id="wall-post">
-                        {{ view_objects.wallpost.wall_form.post }}
+              <form id="news-post-form" action="{% url news_post %}" method="POST">
+                  {% csrf_token %}
+                  <div id="wall-post-errors"></div>
+                  <div id="wall-post" class="control-group">
+                    <div class="controls">
+                      <textarea rows="2" id="id_post" name="post" placeholder="What's on your mind?"/></textarea>
                     </div>
-                    <div style="text-align: center">
-                        <button id="wall-post-submit"
-                                style="font-size: 12px; margin-top:1.2em; margin-left:0.5em; margin-right:0.5em; margin-bottom:1.2em;">
-                            Post
-                        </button>
-                    </div>
+                  </div>
+                  
+                  <div id="wall-post-button">
+                    <button id="wall-post-submit" class="btn btn-primary">
+                        Post
+                    </button>
+                  </div>
                 </form>
             </div>
 
@@ -32,8 +33,7 @@
                 {% include "news_posts.html" %}
             </ul>
             {% if not view_objects.wallpost.posts %}
-                <p id="wall-no-posts" style="padding: 7px;">There are no posts
-                    yet!</p>
+                <p id="wall-no-posts" style="padding: 7px;">There are no posts yet!</p>
             {% endif %}
         </div>
     </div>
