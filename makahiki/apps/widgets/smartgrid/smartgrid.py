@@ -16,11 +16,18 @@ def complete_setup_activity(user):
     """complete the setup activity."""
     try:
         activity = Activity.objects.get(name=SETUP_WIZARD_ACTIVITY_NAME)
-        ActionMember.objects.get_or_create(
-            action=activity,
-            user=user,
-            approval_status="approved")
-        # If this was created, it's automatically saved.
+        
+        try:
+            member = ActionMember.objects.get(
+                action=activity,
+                user=user)
+        except ObjectDoesNotExist:
+            member = ActionMember(
+                action=activity,
+                user=user)
+
+        member.approval_status="approved"
+        member.save()
     except ObjectDoesNotExist:
         pass  # Don't add anything if we can't find to the activity.
 
