@@ -10,58 +10,79 @@ class ChallengeSettings(models.Model):
         default="University of Hawaii at Manoa",
         help_text="The name of the site.",
         max_length=50,)
-
+    site_logo = models.ImageField(
+        upload_to="challenge",
+        max_length=1024, blank=True, null=True,
+        help_text="The logo of the site.",)
     competition_name = models.CharField(
         default="Kukui Cup",
         help_text="The name of the competition.",
         max_length=50,)
-
+    theme = models.CharField(
+        default="default",
+        help_text="The UI theme for this installation.",
+        max_length=50,)
     competition_team_label = models.CharField(
         default="Lounge",
         help_text="The display label for team.",
         max_length=50,)
-
     cas_server_url = models.CharField(
         default="https://login.its.hawaii.edu/cas/",
         help_text="The URL for CAS authentication service.",
         max_length=100,)
 
-    contact_email = models.CharField(
-        help_text="The contact email of the admin.",
-        max_length=100,)
-
-    theme = models.CharField(
-        default="default",
-        help_text="The UI theme for this installation.",
-        max_length=50,)
-
-    facebook_app_id = models.CharField(
-        default="",
-        help_text="The FACEBOOK_APP_ID for facebook integration.",
-        max_length=100,)
-
-    facebook_secret_key = models.CharField(
-        default="",
-        help_text="The FACEBOOK_SECRET_KEY for facebook integration.",
-        max_length=100,)
-
+    # email settings
     email_enabled = models.BooleanField(
         default=False,
         help_text="Enable email?",
         )
-
+    contact_email = models.CharField(
+        help_text="The contact email of the admin.",
+        max_length=100,)
     email_host = models.CharField(
         default="",
         help_text="The host name of the email server.",
         max_length=100,)
-
     email_port = models.IntegerField(
         default=587,
         help_text="The port of the email server",)
-
     email_use_tls = models.BooleanField(
         default=True,
         help_text="Use TLS in the email server?",)
+
+    # landing page content settings
+    landing_slogan = models.CharField(
+        default="The Kukui Cup: Lights out, game on!",
+        max_length=255,
+        help_text="The slogan text in the landing page.")
+    landing_introduction = models.TextField(
+        default="Aloha!",
+        help_text="The introduction in the landing page. " + settings.MARKDOWN_TEXT,
+        max_length=500,)
+    landing_participant_text = models.TextField(
+        default="Let me in",
+        max_length=255,
+        help_text="The text of the participant button in the landing page. " +
+                  settings.MARKDOWN_TEXT)
+    landing_non_participant_text = models.TextField(
+        default="About",
+        max_length=255,
+        help_text="The text of the non participant button in the landing page. " +
+                  settings.MARKDOWN_TEXT)
+    landing_sponsors = models.TextField(
+        default="text",
+        help_text="The sponsors in the landing page. " + settings.MARKDOWN_TEXT,
+        max_length=255,)
+
+    # should be using environment variables
+    facebook_app_id = models.CharField(
+        default="",
+        help_text="The FACEBOOK_APP_ID for facebook integration.",
+        max_length=100,)
+    facebook_secret_key = models.CharField(
+        default="",
+        help_text="The FACEBOOK_SECRET_KEY for facebook integration.",
+        max_length=100,)
 
     def __unicode__(self):
         return self.site_name
@@ -177,7 +198,7 @@ class PageSettings(models.Model):
     """Defines the page and widget settings."""
     WIDGET_CHOICES = ((key, key) for key in settings.INSTALLED_WIDGET_APPS)
 
-    page = models.ForeignKey(PageInfo)
+    page = models.ForeignKey("PageInfo")
 
     widget = models.CharField(
         default="home",
@@ -193,3 +214,6 @@ class PageSettings(models.Model):
         """meta"""
         unique_together = (("page", "widget", ), )
         ordering = ['page', 'widget', ]
+
+    def __unicode__(self):
+        return ""

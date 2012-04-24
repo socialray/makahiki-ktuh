@@ -110,14 +110,13 @@ class TextQuestionInline(admin.TabularInline):
     fieldset = (
         (None, {
             'fields': ('question', 'answer'),
-            'classes': ['wide', ],
             })
         )
     formfield_overrides = {
-        models.TextField: {'widget': Textarea(attrs={'rows': 2, 'cols': 80})},
+        models.TextField: {'widget': Textarea(attrs={'rows': 2, 'cols': 70})},
         }
 
-    extra = 3
+    extra = 1
     formset = TextQuestionInlineFormSet
 
 

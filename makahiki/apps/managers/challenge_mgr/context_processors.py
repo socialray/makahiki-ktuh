@@ -40,14 +40,13 @@ def competition(request):
 
     return {
         "STATIC_URL": settings.STATIC_URL,
-        "SITE_NAME": settings.CHALLENGE.site_name,
-        "COMPETITION_NAME": settings.CHALLENGE.competition_name,
+        "MEDIA_URL": settings.MEDIA_URL,
+        "CHALLENGE": settings.CHALLENGE,
         "CSS_THEME": settings.CHALLENGE.theme,
-        "THEME_NAME": settings.CHALLENGE.theme,
+        "TEAM_LABEL": settings.CHALLENGE.competition_team_label,
         "TEAM_COUNT": team_count,
         "TEAM_MEMBER_COUNT": team_member_count,
         "OVERALL_MEMBER_COUNT": overall_member_count,
-        "TEAM_LABEL": settings.CHALLENGE.competition_team_label,
         "CURRENT_ROUND_INFO": challenge_mgr.get_current_round_info(),
         "FACEBOOK_APP_ID": facebook_app_id,
         "IN_COMPETITION": challenge_mgr.in_competition(),
