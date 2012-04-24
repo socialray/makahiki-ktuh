@@ -1,10 +1,10 @@
 $(document).ready(function () {
-    // bind 'myForm' and provide a simple callback function
+    //bind 'myForm' and provide a simple callback function
     $('#profile-form').ajaxForm();
 
-    $("#progressbar").progressbar({
-        value:400 / 7
-    });
+    
+        var s = 4.0/7.0*100 + "%";
+        $(".bar").width(s);
 
     $("#back").button().click(function () {
         $(this).button("option", "disabled", true);

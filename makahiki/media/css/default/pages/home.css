@@ -1,6 +1,29 @@
 @charset "UTF-8";
 /* CSS Document */
  
+
+#setup-dialog input {
+    width: 180px;
+}
+
+#setup-dialog #id_avatar {
+    width: 40%;
+}
+
+.homecontent .modal {
+    position: fixed; 
+}
+
+#setup-dialog .modal-body {
+    max-height: 200px;
+    overflow-y: scroll;
+}
+
+#setup-dialog {
+    text-align: left;
+    z-index: 10000;
+}
+
 .homecontent {
     margin-left: 7%;
 }
@@ -271,10 +294,7 @@
     margin-bottom: 10px;
 }
 
-#setup-terms-content {
-    border: 1px solid black;
-    height: 200px;
-    overflow: auto;
+#setup-terms-content { 
     padding: 5px;
 }
 

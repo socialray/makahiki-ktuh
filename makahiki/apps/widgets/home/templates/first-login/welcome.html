@@ -1,38 +1,44 @@
 {% load class_tags %}
+<div class="modal-header">
+  <h2>Welcome to the Kukui Cup, {{ user.get_profile.first_name }}!</h2>
+</div>
+<div class="modal-body">
+  <div id="setup-content">
+      <p>You have successfully logged into the Kukui Cup website. You will stay logged into the
+          website until you click the logout button, so if you are using a public computer remember to
+          log out when you are finished just like you would log out of Facebook or your email.</p>
 
-<h2>Welcome to the Kukui Cup, {{ user.get_profile.first_name }}!</h2>
-<div id="setup-content">
-    <p>You have successfully logged into the Kukui Cup website. You will stay logged into the
-        website until you click the logout button, so if you are using a public computer remember to
-        log out when you are finished just like you would log out of Facebook or your email.</p>
+      <p>Now we will step you through setting up your profile and getting your first points!</p>
 
-    <p>Now we will step you through setting up your profile and getting your first points!</p>
-
-    <div id="setup-welcome-info">
-        <p style="margin: 5px 0">
-            According to our records, your name
-            is {{ user.get_profile.first_name }} {{ user.get_profile.last_name }} and you live
-            in {{ user.get_profile.team }}.<br/>If this is not correct, please <a
-                href="mailto:{{CONTACT_EMAIL}}">email the admins</a>.
-        </p>
+      <div id="setup-welcome-info">
+          <p style="margin: 5px 0">
+              According to our records, your name
+              is {{ user.get_profile.first_name }} {{ user.get_profile.last_name }} and you live
+              in {{ user.get_profile.team }}.<br/>If this is not correct, please <a
+                  href="mailto:{{CONTACT_EMAIL}}">email the admins</a>.
+          </p>
+      </div>
+  </div>
+</div><!--end modal body-->
+<div class="modal-footer">
+  <div style="text-align: center">
+      <a id="next" class="btn btn-primary">Next: Terms and conditions &nbsp;
+          <i class="icon-chevron-right"></i><img src="{{ STATIC_URL}}/css/default/images/right.png" width="24" align="top">
+      </a> 
+      <div id="progressbar-header">
+          <p>Introduction progress, points: {{ user.get_profile.points }}</p>
+      </div>
+  </div>
+      <div id="progressbar" class="progress">
+        <div class="bar"
+          style="width: 0%;">
+        </div>
     </div>
 </div>
-
-<div style="text-align: center">
-    <button id="next">Next: Terms and conditions &nbsp;
-        <img src="{{ STATIC_URL}}/css/default/images/right.png" width="24" align="top">
-    </button>
-    <div id="progressbar-header">
-        <p>Introduction progress, points: {{ user.get_profile.points }}</p>
-    </div>
-</div>
-<div id="progressbar"></div>
-
 <script type='text/javascript'>
     jQuery(document).ready(function ($) {
-        $("#progressbar").progressbar({
-            value:100 / 7
-        });
+        var s = 1.0/7.0*100 + "%";
+        $(".bar").width(s);
 
         $("#next").button().unbind('click').click(function () {
             $(this).button("option", "disabled", true);
