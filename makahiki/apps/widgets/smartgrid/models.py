@@ -322,6 +322,7 @@ class ActionMember(models.Model):
 
     user = models.ForeignKey(User)
     action = models.ForeignKey(Action)
+    question = models.ForeignKey(TextPromptQuestion, null=True, blank=True)
     notifications = generic.GenericRelation(UserNotification, editable=False)
     pointstransactions = generic.GenericRelation(PointsTransaction, editable=False)
 

@@ -157,7 +157,7 @@ class ActivityAdminForm(forms.ModelForm):
             pub_date = cleaned_data.get("pub_date")
             expire_date = cleaned_data.get("expire_date")
 
-            if pub_date >= expire_date:
+            if expire_date and pub_date >= expire_date:
                 self._errors["expire_date"] = ErrorList(
                     [u"The expiration date must be after the pub date."])
                 del cleaned_data["expire_date"]
@@ -266,7 +266,7 @@ class EventAdminForm(forms.ModelForm):
             pub_date = cleaned_data.get("pub_date")
             expire_date = cleaned_data.get("expire_date")
 
-            if pub_date >= expire_date:
+            if expire_date and pub_date >= expire_date:
                 self._errors["expire_date"] = ErrorList(
                     [u"The expiration date must be after the pub date."])
                 del cleaned_data["expire_date"]
@@ -311,7 +311,7 @@ class ActivityAdmin(admin.ModelAdmin):
     )
     prepopulated_fields = {"slug": ("name",)}
     form = ActivityAdminForm
-    inlines = [TextQuestionInline, QuestionChoiceInline]
+    inlines = [TextQuestionInline]
 
     formfield_overrides = {
         models.CharField: {'widget': TextInput(attrs={'size': '100'})},
@@ -362,7 +362,7 @@ class EventAdmin(admin.ModelAdmin):
                      'related_resource', ('is_canopy', 'is_group'))}),
         ("Points", {"fields": ("point_value", "social_bonus",)}),
         ("Ordering", {"fields": ("priority", "category")}),
-        ("Confirmation Type", {'fields': ('num_codes',)}),
+        ("Confirmation Code", {'fields': ('num_codes',)}),
         )
     prepopulated_fields = {"slug": ("name",)}
     form = EventAdminForm
@@ -413,7 +413,7 @@ class ActionMemberAdminForm(forms.ModelForm):
         super(ActionMemberAdminForm, self).__init__(*args, **kwargs)
         # Instance points to an instance of the model.
         member = self.instance
-        if self.instance and member and member.action.has_variable_points:
+        if member and member.action and not member.action.point_value:
             action = member.action
             message = "Specify the number of points to award.  This value must be between %d and %d"
             message = message % (action.point_range_start, action.point_range_end)
@@ -431,7 +431,7 @@ class ActionMemberAdminForm(forms.ModelForm):
         status = cleaned_data.get("approval_status")
 
         action = self.instance.action
-        if status == "approved" and action.has_variable_points:
+        if status == "approved" and not action.point_value:
             # Check if the point value is filled in.
             if "points_awarded" not in cleaned_data:
                 self._errors["points_awarded"] = ErrorList(
@@ -493,14 +493,15 @@ class ActionMemberAdmin(admin.ModelAdmin):
         Based on iridescent's answer to
         http://stackoverflow.com/questions/851636/default-filter-in-django-admin
         """
-        test = request.META['HTTP_REFERER'].split(request.META['PATH_INFO'])
-        if test[-1] and not test[-1].startswith('?'):
-            if not 'approval_status__exact' in request.GET:
-                q = request.GET.copy()
-                q['approval_status__exact'] = 'pending'
-                q['action__type__exact'] = 'action'
-                request.GET = q
-                request.META['QUERY_STRING'] = request.GET.urlencode()
+        if 'HTTP_REFERER' in request.META and 'PATH_INFO' in request.META:
+            test = request.META['HTTP_REFERER'].split(request.META['PATH_INFO'])
+            if test[-1] and not test[-1].startswith('?'):
+                if not 'approval_status__exact' in request.GET:
+                    q = request.GET.copy()
+                    q['approval_status__exact'] = 'pending'
+                    request.GET = q
+                    request.META['QUERY_STRING'] = request.GET.urlencode()
+
         return super(ActionMemberAdmin, self).changelist_view(request,
             extra_context=extra_context)
 
@@ -515,7 +516,7 @@ class ActionMemberAdmin(admin.ModelAdmin):
     def get_form(self, request, obj=None, **kwargs):
         """Override to remove the points_awarded field if the action
         does not have variable points."""
-        if obj and obj.action.has_variable_points:
+        if obj and not obj.action.point_value:
             self.fields = ("user", "action", "question", "response", "image",
                            "admin_comment", "approval_status", "points_awarded", "social_email")
         else:
@@ -524,4 +525,4 @@ class ActionMemberAdmin(admin.ModelAdmin):
 
         return super(ActionMemberAdmin, self).get_form(request, obj, **kwargs)
 
-admin.site.register(ActionMember)
+admin.site.register(ActionMember, ActionMemberAdmin)
