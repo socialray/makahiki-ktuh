@@ -1,6 +1,7 @@
 {% extends "site_base.html" %}
 
 {% load class_tags %}
+{% load markup %}
 
 {% block page_title %}
     Welcome to KukuiCup!
@@ -23,31 +24,27 @@
         <div class="content-box logo-header-box">
                 <img class="logo" src="{{STATIC_URL}}css/default/images/old-logo.png"></img>
                 <div class="logo-header-text"> 
-                  The Kukui Cup: Lights out, game on! 
+                  {{ CHALLENGE.landing_slogan }}
                 </div> 
         </div>
     </div>
     <div class="row-fluid">
         <div class="content-box landing-body">
-            Aloha! The Kukui Cup is an energy challenge that can be played by all first year UH students
-            living in the Hale Aloha residence halls.
+            {{ CHALLENGE.landing_introduction }}
             <p>
 
             <p>
 
                 <button id="landing-button-participant" class="landing-intro button"
                         onclick='javascript:location.href="{% url home_index %}"'>
-                    <h3>I'm a registered player</h3>
-                    <h5>You will be prompted for your <br>
-                        UH username and password, it's safe</h5>
+                    {{ CHALLENGE.landing_participant_text|markdown }}
                 </button>
 
             <p>
 
                 <button id="landing-button-non-participant" class="landing-intro button"
-                        onclick="javascript:location.href='{% url about %}'">                    
-                    <h3>I'm not registered</h3>
-                    <h5>but I'd like to know more about the Kukui Cup</h5>
+                        onclick="javascript:location.href='{% url about %}'">
+                    {{ CHALLENGE.landing_non_participant_text|markdown }}
                 </button>
 
         </div>
@@ -57,20 +54,10 @@
                     <h4>Sponsored by:</h4> 
                 <div id="landing-sponsors-list">
                     <ul>
-                    <li><a href="http://csdl.ics.hawaii.edu"><img
-                            src="{{STATIC_URL}}images/sponsors/logo.csdl.gif"/>Collaborative Software Development Laboratory</a></li>
-                    <li><a href="http://reis.manoa.hawaii.edu"><img
-                            src="{{STATIC_URL}}images/sponsors/logo.reis.2.png"/>Renewable Energy &amp; Island Sustainability</a></li>
-                    <li><a href="http://manoa.hawaii.edu/housing/"><img
-                            src="{{STATIC_URL}}images/sponsors/logo.manoa.2.png"/>Student Housing Services, UH Manoa</a></li>
-                    <li><a href="http://www.nsf.gov/"><img src="http://www.nsf.gov/images/logos/nsf1sm.gif"
-                                                       width="75px"/>National Science Foundation</a></li>
-                    <li><a href="http://energy.hawaii.gov"><img
-                            src="{{STATIC_URL}}images/sponsors/dbedt-logo.jpg"
-                            style="padding-top: 10px"/></a></li>
+                        {{ CHALLENGE.landing_sponsors|markdown }}
                     </ul>
                 </div>
-                <a class="contact-link" href="mailto:{{ CONTACT_EMAIL }}">Contact the Kukui Cup administrators</a> 
+                <a class="contact-link" href="mailto:{{ CHALLENGE.contact_email }}">Contact the Kukui Cup administrators</a>
         </div>    
     </div>
     <script>

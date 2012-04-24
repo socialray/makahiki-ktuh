@@ -23,9 +23,13 @@ class Group(models.Model):
 class Team(models.Model):
     """Represents the team that a player belongs to."""
 
+    group = models.ForeignKey(Group, help_text="The group this team belongs to.")
     name = models.CharField(help_text="The team name", max_length=50)
     slug = models.SlugField(help_text="Automatically generated if left blank.", null=True)
-    group = models.ForeignKey(Group, help_text="The group this team belongs to.")
+    logo = models.ImageField(
+        max_length=1024, blank=True, null=True,
+        upload_to="challenge",
+        help_text="The logo of the team.",)
 
     def __unicode__(self):
         return self.name

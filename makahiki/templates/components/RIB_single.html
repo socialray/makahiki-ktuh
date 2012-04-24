@@ -49,4 +49,15 @@
         <h4>{{ CURRENT_ROUND_INFO.name }}</h4>
         Ends on {{CURRENT_ROUND_INFO.end}}.
     </div>   
+    {% for event in AVAILABLE_EVENTS %}
+    <div class="item">
+        <h4>{{event.title}}</h4>
+        {{event.event_date}}
+    </div>
+    {% empty %}
+    <div class="item">
+        Sorry, no upcoming events.<br>
+        Check back later.
+    </div>
+    {% endfor %}    
 {# {% endcache %} #}

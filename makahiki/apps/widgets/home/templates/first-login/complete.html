@@ -1,7 +1,8 @@
 {% load class_tags %}
-
-<h2>Introduction Complete</h2>
-<div id="setup-content">
+<div class="modal-header">
+  <h2>Introduction Complete</h2>
+</div>
+<div id="setup-content" class="modal-body">
     <p>Congratulations, you have finished the Kukui Cup introduction and
         earned {{ user.get_profile.points }} points! When you click the "Go home" button, you will
         be taken to your personalized Kukui Cup home page. Your home page connects you to your
@@ -11,46 +12,53 @@
     <p>Your home page will contain your first set of quests. Follow the quests (as shown below) to
         learn more about the Kukui Cup and earn points and prizes.</p>
 </div>
-<div style="margin-bottom: 10px; width: 100%; text-align: center">
-    <img src="{{ STATIC_URL}}/css/default/images/quest-screen.png"/>
-</div>
+<div class="modal-footer">
+  <div style="margin-bottom: 10px; width: 100%; text-align: center">
+      <img src="{{ STATIC_URL}}/css/default/images/quest-screen.png"/>
+  </div>
 
-<div style="float: left">
-    <button id="back">
-        <img src="{{ STATIC_URL}}/css/default/images/left.png" width="24" align="top">
-        Back
-    </button>
-</div>
+  <div style="float: left">
+      <button id="back" class="btn btn-primary" >
+          <img src="{{ STATIC_URL}}/css/default/images/left.png" width="24" align="top">
+          Back
+      </button>
+  </div>
 
-<div style="float:right">
-    <button id="gohome">
-         <a href="{% url home_index %}">
-         <img src="{{ STATIC_URL}}/css/default/images/right.png" width="24" align="top"/>
-         Go home
-         </a>
-    </button>
-</div>
+  <div style="float:right">
+      <button id="gohome" class="btn btn-success" >
+           <a class="white" href="{% url home_index %}">
+           <img src="{{ STATIC_URL}}/css/default/images/right.png" width="24" align="top"/>
+           Go home
+           </a>
+      </button>
+  </div>
 
-<div style="clear:both"></div>
+  <div style="clear:both"></div>
 
-<div id="progressbar-header">
-    <p>Introduction progress, points: {{ user.get_profile.points }}</p>
-</div>
-<div id="progressbar"></div>
-<script type="text/javascript">
-    $(document).ready(function () {
-        $("#progressbar").progressbar({
-            value:100
-        });
+  <div id="progressbar-header">
+      <p>Introduction progress, points: {{ user.get_profile.points }}</p>
+  </div>
+  <div id="progressbar" class="progress">
+      <div class="bar" style="width: 0%;">
+      </div>
+  </div>
+  <script type="text/javascript">
+      $(document).ready(function () {
+          var s = 7.0/7.0*100 + "%";
+        $(".bar").width(s);
 
-        $("#back").button().click(function () {
-            $(this).button("option", "disabled", true);
-            $.get("{% url setup_question %}?from=complete", function (data) {
-                $("#ui-dialog-title-setup-dialog").html(data.title);
-                $("#setup-dialog").html(data.contents);
+          $("#back").button().click(function () {
+              $(this).button("option", "disabled", true);
+              $.get("{% url setup_question %}?from=complete", function (data) {
+                  $("#ui-dialog-title-setup-dialog").html(data.title);
+                  $("#setup-dialog").html(data.contents);
+              });
+          });
+
+          $("#gohome").button().click(function() {
+              $('#setup-dialog').modal('hide')
+              $('#setup-dialog').style.display = 'none';
             });
-        });
-
-        $("#gohome").button();
-    });
-</script>
+      });
+  </script>
+</div>

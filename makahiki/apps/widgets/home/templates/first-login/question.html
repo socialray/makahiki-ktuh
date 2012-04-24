@@ -1,12 +1,13 @@
 {% load class_tags %}
-
-<h2>Verification Question</h2>
-<div id="setup-content">
+<div class="modal-header">
+  <h2>Verification Question</h2>
+</div>
+<div id="setup-content" class="modal-body">
     <p style="margin: 0">If you&apos;ve watched the intro video, answer the following question for a
         generous 20 points. Many Kukui Cup activities will have verification steps before you earn
         your points.</p>
 
-    <form id="setup-activity-form">
+    <form id="setup-activity-form" class="well">
         {% csrf_token %}
         <label for="activity-select">Question: Which level of student can participate in the Kukui
             Cup?</label>
@@ -22,31 +23,34 @@
     </form>
 </div>
 
-<div style="float: left">
-    <button id="back" style="text-align: left">
-        <img src="{{ STATIC_URL}}/css/default/images/left.png" width="24" align="top">
-        Back<br/>oops, let me watch that again
-    </button>
-</div>
+<div class="modal-footer">
+  <div style="float: left">
+      <button id="back" class="btn btn-primary" style="text-align: left">
+          <img src="{{ STATIC_URL}}/css/default/images/left.png" width="24" align="top">
+          Back<br/>oops, let me watch that again
+      </button>
+  </div>
 
-<div style="float:right">
-    <button id="next" style="margin-bottom: 10px; text-align: right">Submit My Answer
-        <img src="{{ STATIC_URL}}/css/default/images/right.png" width="24" align="top">
-        <br/>Almost done!!!
-    </button>
-</div>
+  <div style="float:right">
+      <button id="next" class="btn btn-primary" style="margin-bottom: 10px; text-align: right">Submit My Answer
+          <img src="{{ STATIC_URL}}/css/default/images/right.png" width="24" align="top">
+          <br/>Almost done!!!
+      </button>
+  </div>
 
-<div style="clear:both"></div>
+  <div style="clear:both"></div>
 
-<div id="progressbar-header">
-    <p>Introduction progress, points: {{ user.get_profile.points }}</p>
-</div>
-<div id="progressbar"></div>
+  <div id="progressbar-header">
+      <p>Introduction progress, points: {{ user.get_profile.points }}</p>
+  </div>
+  <div id="progressbar" class="progress">
+      <div class="bar" style="width: 0%;">
+      </div>
+  </div>
 <script type="text/javascript">
     $(document).ready(function () {
-        $("#progressbar").progressbar({
-            value:600 / 7
-        });
+        var s = 6.0/7.0*100 + "%";
+        $(".bar").width(s);
 
         $("#activity-select").change(function () {
             if ($("#activity-select option:selected").val() == "first-years") {

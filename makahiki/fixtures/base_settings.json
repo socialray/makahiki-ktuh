@@ -1,20 +1,26 @@
 [
   {
-      "pk": 1,
-      "model": "challenge_mgr.challengesettings",
-      "fields": {
-          "competition_name": "Kukui Cup",
-          "cas_server_url": "https://login.its.hawaii.edu/cas/",
-          "site_name": "University of Hawaii at Manoa",
-          "email_enabled": false,
-          "theme": "default",
-          "email_use_tls": true,
-          "contact_email": "",
-          "facebook_app_id": "",
-          "email_port": 587,
-          "facebook_secret_key": "",
-          "competition_team_label": "Lounge",
-          "email_host": ""
+    "pk": 1,
+    "model": "challenge_mgr.challengesettings",
+    "fields": {
+      "competition_name": "Kukui Cup/UH",
+      "cas_server_url": "https://login.its.hawaii.edu/cas/",
+      "site_name": "University of Hawaii at Manoa",
+      "landing_sponsors": "[<img src=\"/site_media/static/images/sponsors/logo.csdl.gif\" title=\"Collaborative Software Development Laboratory\">](http://csdl.ics.hawaii.edu)\r\n[<img src=\"/site_media/static/images/sponsors/logo.reis.2.png\" title=\"Renewable Energy & Island Sustainability\">](http://reis.manoa.hawaii.edu)\r\n[<img src=\"/site_media/static/images/sponsors/logo.manoa.2.png\" title=\"Student Housing Services, UH Manoa\">](http://manoa.hawaii.edu/housing)\r\n[<img src=\"http://www.nsf.gov/images/logos/nsf1sm.gif\" width=\"75px title=\"National Science Foundation\">](http://www.nsf.gov)\r\n[<img src=\"/site_media/static/images/sponsors/dbedt-logo.jpg\" title=\"DBEDT\">](http://energy.hawaii.gov)",
+      "landing_slogan": "The Kukui Cup: Lights out, game on!",
+      "facebook_app_id": " ",
+      "email_use_tls": true,
+      "landing_non_participant_text": "###I'm not registered\r\n#####but I'd like to know more about the Kukui Cup</h5>",
+      "email_port": 587,
+      "theme": "default",
+      "contact_email": "test",
+      "email_enabled": false,
+      "site_logo": "",
+      "facebook_secret_key": " ",
+      "landing_participant_text": "### I'm a registered player  \r\n##### You will be prompted for \r\n##### your UH username and password, it's safe",
+      "landing_introduction": "Aloha! The Kukui Cup is an energy challenge that can be played by all first year UH students living in the Hale Aloha residence halls.",
+      "competition_team_label": "Lounge",
+      "email_host": "localhost"
     }
   }
 ]
