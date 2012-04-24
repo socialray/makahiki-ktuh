@@ -1,17 +1,22 @@
 {% load class_tags %}
 
 <script type="text/javascript" src="http://www.youtube.com/player_api"></script>
-
-<h2>Introduction Video</h2>
-<div id="setup-content">
+<div class="modal-header">
+  <h2>Introduction Video</h2>
+</div>
+<div id="setup-content modal-body">
     <p>Please watch this short video that explains the Kukui Cup competition and how to use this
         website. Pay close attention, because on the next screen you will be asked a question about
         the video to earn some more points!</p>
 
-    <iframe id="player" type="text/html" width="640" height="390"
-            src="http://www.youtube.com/embed/T37kNTkZCrA?fs=1&hl=en_US&rel=0&enablejsapi=1"
-            frameborder="0"></iframe>
 
+        <div id="help-video-box"> 
+            <div id="help-video-content" class="content-box-contents video-container">
+                <iframe id="player" type="text/html" width="100%" height="300"
+                        src="http://www.youtube.com/embed/T37kNTkZCrA?fs=1&hl=en_US&rel=0&enablejsapi=1"
+                        frameborder="0"></iframe>
+            </div>
+        </div>
     <script>
         var player;
         function onYouTubePlayerAPIReady() {
@@ -48,46 +53,49 @@
     </script>
 
 </div>
+<div class="modal-footer">
+  <div style="float: left">
+      <button id="back" class="btn btn-primary" >
+          <img src="{{ STATIC_URL}}/css/default/images/left.png" width="24" align="top">
+          Back<br/>Profile
+      </button>
+  </div>
 
-<div style="float: left">
-    <button id="back">
-        <img src="{{ STATIC_URL}}/css/default/images/left.png" width="24" align="top">
-        Back
-    </button>
+  <div style="float:right">
+      <button id="next" class="btn btn-primary" style="margin-bottom: 10px; text-align: right">Next
+          <img src="{{ STATIC_URL}}/css/default/images/right.png" width="24" align="top">
+          <br/>get your points!
+      </button>
+  </div>
+
+  <div style="clear:both"></div>
+
+    <div id="progressbar-header">
+        <p>Introduction progress, points: {{ user.get_profile.points }}</p>
+    </div>
+    <div id="progressbar" class="progress">
+        <div class="bar" style="width: 0%;">
+        </div>
+    </div>
+  <script type="text/javascript">
+      $(document).ready(function () {
+        var s = 5.0/7.0*100 + "%";
+        $(".bar").width(s);
+
+          $("#back").button().click(function () {
+              $(this).button("option", "disabled", true);
+              $.get("{% url setup_profile %}?from=video", function (data) {
+                  $("#ui-dialog-title-setup-dialog").html(data.title);
+                  $("#setup-dialog").html(data.contents);
+              });
+          });
+
+          $("#next").button().click(function () {
+              $.get("{% url setup_question %}", function (data) {
+                  $("#ui-dialog-title-setup-dialog").html(data.title);
+                  $("#setup-dialog").html(data.contents);
+              });
+          });
+      });
+  </script>
 </div>
-
-<div style="float:right">
-    <button id="next" style="margin-bottom: 10px; text-align: right">Next
-        <img src="{{ STATIC_URL}}/css/default/images/right.png" width="24" align="top">
-        <br/>get your points!
-    </button>
-</div>
-
-<div style="clear:both"></div>
-
-<div id="progressbar-header">
-    <p>Introduction progress, points: {{ user.get_profile.points }}</p>
-</div>
-<div id="progressbar"></div>
-<script type="text/javascript">
-    $(document).ready(function () {
-        $("#progressbar").progressbar({
-            value:500 / 7
-        });
-
-        $("#back").button().click(function () {
-            $(this).button("option", "disabled", true);
-            $.get("{% url setup_profile %}?from=video", function (data) {
-                $("#ui-dialog-title-setup-dialog").html(data.title);
-                $("#setup-dialog").html(data.contents);
-            });
-        });
-
-        $("#next").button().click(function () {
-            $.get("{% url setup_question %}", function (data) {
-                $("#ui-dialog-title-setup-dialog").html(data.title);
-                $("#setup-dialog").html(data.contents);
-            });
-        });
-    });
-</script>

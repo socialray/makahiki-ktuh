@@ -23,20 +23,16 @@
 </ul>
 
 {% if not user.get_profile.setup_complete %}
-    <div id="setup-dialog" title="Introduction: Step 1 of 6">
+    <div id="setup-dialog" class="modal">
         {% include "first-login/welcome.html" %}
     </div>
     <script type="text/javascript">
             jQuery(document).ready(function ($) {
-                $("#setup-dialog").dialog({
-                    modal:true,
-                    width:700,
-                    closeOnEscape:false,
-                    position:["center", 25],
-                    open:function (event, ui) {
-                        $('.ui-dialog-titlebar-close').hide();
-                    }
-                });
-            });
+                $("#setup-dialog").modal({ 
+                    keyboard:false,
+                    backdrop: "static",
+                    show:true, 
+                });//.modal() end 
+            });//opening
     </script>
 {% endif %}
