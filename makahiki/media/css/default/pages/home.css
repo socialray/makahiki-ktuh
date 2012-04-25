@@ -2,43 +2,52 @@
 /* CSS Document */
  
 
+
 #setup-dialog input {
     width: 180px;
 }
 
 #setup-dialog #id_avatar {
     width: 40%;
-}
+} 
 
 .homecontent .modal {
     position: fixed; 
-    max-height: 480px;
-    width: 90%;
-    max-width: 350px;
+    max-height: 450px; 
+    min-width: 270px;
 }
 
 #setup-dialog .modal-body {
-    max-height: 200px;
-    max-width: 350px;
+    max-height: 180px; 
     overflow-y: scroll;
 }
 
 #setup-dialog .modal-header {
-    max-height: 80px; 
-    max-width: 350px;
-    padding-bottom: 5px;
-    padding-top: 5px;
+    max-height: 80px;  
+    padding-bottom: 0px;
+    padding-top: 0px;
 }
 
 #setup-dialog .modal-footer {
-    max-height: 200px;
-    max-width: 350px;
-    padding-bottom: 5px;
+    max-height: 190px; 
+    padding-bottom: 0px;
     padding-top: 5px;
 }
 
+iframe {
+    width: 100%;
+    height: 300px;
+}
+
+@media ( max-width : 350px) {
+    iframe {
+        width: 100%;
+        height: 150px;
+    }
+}
+
 #setup-dialog .progress {
-    margin-bottom: 10px;
+    margin-bottom: 5px;
 }
 
 #setup-dialog {
