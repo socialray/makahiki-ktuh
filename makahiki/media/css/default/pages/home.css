@@ -11,10 +11,12 @@
     width: 40%;
 } 
 
-.homecontent .modal {
-    position: fixed; 
-    max-height: 450px; 
-    min-width: 270px;
+@media ( max-width : 350px) {
+    .homecontent .modal {
+        position: fixed; 
+        max-height: 450px; 
+        min-width: 270px;
+    }
 }
 
 #setup-dialog .modal-body {
