@@ -5,7 +5,7 @@ from apps.managers.team_mgr.models import Team
 
 def team_members(team):
     """Get the team members."""
-    return team.profile_set()
+    return team.profile_set.all()
 
 
 def team_points_leader(round_name="Overall"):

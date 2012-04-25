@@ -1,16 +1,12 @@
-{% load class_tags %}
-
 <li>
-    <div class="{% insert_classes 'system-post' %} {{cycle_class}}">
-        <div class="{% insert_classes 'system-post-content' %}">
-            <p><span
-                    style="font-weight: bold">{{ post.user.get_profile.name }}</span> {{ post.text }}
+    <div class="{{cycle_class}} row">
+        <div class="wallpost-text span6">
+            <p>
+              <span class="wallpost-username">{{ post.user.get_profile.name }}</span> {{ post.text }}
             </p>
 
-            <div class="{% insert_classes 'system-post-date-string' %}">Posted
+            <div class="wallpost-posted">Posted
                 at {{ post.date_string }}</div>
         </div>
     </div>
-
-    <hr/>
 </li>

@@ -1,9 +1,8 @@
-{% load class_tags %}
 {% load avatar_tags %}
 
-<div {% get_id_and_classes "news-members" %}>
-    <div {% get_id_and_classes "news-members-title" %}>
-        {{ TEAM_LABEL }} members
+<div id="news-members" class="content-box">
+    <div id="news-members-title" class="content-box-title">
+        <h3>{{ TEAM_LABEL }} members</h3>
         <a href="#" style="float: right">
             <img src="{{ STATIC_URL}}/css/default/images/icon-help-sm.png" width="20" align="center"
                  title="Click to get help about this window"
@@ -11,25 +10,22 @@
                     /></a>
         <br style="clear: both"/>
     </div>
-    <div {% get_id_and_classes "news-members-content" %}>
-        <ul {% get_id_and_classes "news-members-list" %}>
-            {% for member in view_objects.team_members.team_members %}
-                <li>
-                    <a href="{% url news_team_members %}#{{member.name|slugify}}">
-                        <img src="{% avatar_url member.user 40 %}" alt="Photo of {{ member.name }}"
-                             title="Photo of {{ member.name }}" align="top"/>
+    <div id="news-members-content">
+        <ul id="news-members-list" >
+        {% for member in view_objects.team_members.team_members %}
+        <li>
+          <a href="{% url news_team_members %}#{{member.name|slugify}}">
+            <img src="{% avatar_url member.user 40 %}" alt="Photo of {{ member.name }}"
+                 title="Photo of {{ member.name }}" align="top"/>
 
-                        <div>
-                            {{ member.name }}
-                        </div>
-                    </a>
-                </li>
-                {% if forloop.counter|divisibleby:6 %}
-                    <br style="clear: left"/>
-                {% endif %}
-            {% endfor %}
+            <div>
+                {{ member.name }}
+            </div>
+          </a>
+        </li>
+        {% endfor %}
         </ul>
-        <div style="text-align: center">
+        <div id='news-members-link'>
             <a href="{% url news_team_members %}">View all members</a>
         </div>
     </div>
