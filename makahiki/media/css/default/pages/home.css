@@ -12,11 +12,33 @@
 
 .homecontent .modal {
     position: fixed; 
+    max-height: 480px;
+    width: 90%;
+    max-width: 350px;
 }
 
 #setup-dialog .modal-body {
     max-height: 200px;
+    max-width: 350px;
     overflow-y: scroll;
+}
+
+#setup-dialog .modal-header {
+    max-height: 80px; 
+    max-width: 350px;
+    padding-bottom: 5px;
+    padding-top: 5px;
+}
+
+#setup-dialog .modal-footer {
+    max-height: 200px;
+    max-width: 350px;
+    padding-bottom: 5px;
+    padding-top: 5px;
+}
+
+#setup-dialog .progress {
+    margin-bottom: 10px;
 }
 
 #setup-dialog {
