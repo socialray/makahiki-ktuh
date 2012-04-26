@@ -3,8 +3,7 @@
   <h2>Verification Question</h2>
 </div>
 <div id="setup-content" class="modal-body">
-    <p style="margin: 0">If you&apos;ve watched the intro video, answer the following question for a
-        generous 20 points. Many Kukui Cup activities will have verification steps before you earn
+    <p style="margin: 0">If you&apos;ve watched the intro video, answer the following question for <b id="points"> </b>. Many Kukui Cup activities will have verification steps before you earn
         your points.</p>
 
     <form id="setup-activity-form" class="well">
@@ -51,7 +50,6 @@
     $(document).ready(function () {
         var s = 6.0/7.0*100 + "%";
         $(".bar").width(s);
-
         $("#activity-select").change(function () {
             if ($("#activity-select option:selected").val() == "first-years") {
                 $("#response-correct").val("true");

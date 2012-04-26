@@ -93,7 +93,8 @@
           $("#next").button().click(function () {
               $.get("{% url setup_question %}", function (data) {
                   $("#ui-dialog-title-setup-dialog").html(data.title);
-                  $("#setup-dialog").html(data.contents);
+                  $("#setup-dialog").html(data.contents); 
+                  $('#points').html(data.points);
               });
           });
       });

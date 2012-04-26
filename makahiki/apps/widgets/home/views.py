@@ -7,6 +7,7 @@ import urllib2
 
 from django.conf import settings
 from django.shortcuts import render_to_response
+from django.shortcuts import get_object_or_404
 from django.template import RequestContext
 from django.template.loader import render_to_string
 from django.http import Http404, HttpResponse, HttpResponseRedirect
@@ -24,6 +25,7 @@ import apps.lib.facebook_api.facebook as facebook
 from apps.managers.challenge_mgr import challenge_mgr
 from apps.managers.score_mgr import score_mgr
 from apps.widgets.home.forms import  ProfileForm, ReferralForm
+from apps.widgets.smartgrid.models import Action
 
 
 def supply(request, page_name):
@@ -191,7 +193,6 @@ def setup_profile(request):
                 profile.add_points(score_mgr.setup_points(),
                                    datetime.datetime.today(),
                                    "Set up profile")
-
             profile.save()
 
             if 'avatar' in request.FILES:
@@ -313,7 +314,8 @@ def setup_activity(request):
 @login_required
 def setup_question(request):
     """Display page 6 (activity question) of the first login wizard."""
-
+    activity = get_object_or_404(Action, slug="intro-video")
+    points = str(activity.point_value) + " points"
     if request.is_ajax():
         template = render_to_string("first-login/question.html", {},
             context_instance=RequestContext(request))
@@ -321,6 +323,7 @@ def setup_question(request):
         response = HttpResponse(json.dumps({
             "title": "Introduction: Step 6 of 7",
             "contents": template,
+            "points": points,
             }), mimetype='application/json')
 
         return response
@@ -340,12 +343,13 @@ def setup_complete(request):
             # User got the question right.
             # link it to an activity.
             if "smartgrid" in settings.INSTALLED_WIDGET_APPS:
-                module = importlib.import_module("apps.widgets.smartgrid.smartgrid")
-                module.complete_setup_activity(request.user)
+                if not profile.setup_complete:
+                    module = importlib.import_module("apps.widgets.smartgrid.smartgrid")
+                    module.complete_setup_activity(request.user)
+                    profile.setup_complete = True
+                    profile.completion_date = datetime.datetime.today()
+                    profile.save()
 
-        profile.setup_complete = True
-        profile.completion_date = datetime.datetime.today()
-        profile.save()
         template = render_to_string("first-login/complete.html", {},
             context_instance=RequestContext(request))
 
