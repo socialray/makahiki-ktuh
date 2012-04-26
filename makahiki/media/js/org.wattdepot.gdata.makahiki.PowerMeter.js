@@ -19,11 +19,9 @@ org.wattdepot.gdata.makahiki.PowerMeter = function() {
     powerTable.addColumn('number'); // the power in Wh.
     powerTable.addColumn('number'); // the baseline power in Wh.
     powerTable.addRows(numPowerTableRows);
-    // Determine the row in the rollingDays table that contains this source's data.
-    var rollingPowerSourceRow = findRow(rollingSecondsDatatable, source);
-    var timestampVal = rollingSecondsDatatable.getValue(rollingPowerSourceRow, 1);
-    var powerVal = rollingSecondsDatatable.getValue(rollingPowerSourceRow, 2);
-    var baselineVal = rollingSecondsDatatable.getValue(rollingPowerSourceRow, 3);
+    var timestampVal = rollingSecondsDatatable.getValue(0, 0);
+    var powerVal = Number(rollingSecondsDatatable.getValue(0, 1).toFixed(0));
+    var baselineVal = 3000;
     powerTable.setCell(0, 0, timestampVal);
     powerTable.setCell(0, 1, powerVal);
     powerTable.setCell(0, 2, baselineVal);
