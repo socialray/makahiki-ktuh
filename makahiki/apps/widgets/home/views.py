@@ -7,6 +7,7 @@ import urllib2
 
 from django.conf import settings
 from django.shortcuts import render_to_response
+from django.shortcuts import get_object_or_404
 from django.template import RequestContext
 from django.template.loader import render_to_string
 from django.http import Http404, HttpResponse, HttpResponseRedirect
@@ -23,13 +24,14 @@ from apps.lib.avatar.models import avatar_file_path, Avatar
 import apps.lib.facebook_api.facebook as facebook
 from apps.managers.challenge_mgr import challenge_mgr
 from apps.managers.score_mgr import score_mgr
-from apps.widgets.home.forms import  ProfileForm, ReferralForm
+from apps.widgets.home.forms import ProfileForm, ReferralForm
+from apps.widgets.smartgrid.models import Action
 
 
 def supply(request, page_name):
     """Simply directs the user to the home page.
 
-       :return: an empty dict."""
+:return: an empty dict."""
     _ = request
     _ = page_name
     return {}
@@ -138,7 +140,7 @@ def profile_facebook(request):
         fb_id = None
         if not fb_user:
             return HttpResponse(json.dumps({
-                "error": "We could not access your info.  Please log in again."
+                "error": "We could not access your info. Please log in again."
             }), mimetype="application/json")
 
         try:
@@ -317,10 +319,13 @@ def setup_question(request):
     if request.is_ajax():
         template = render_to_string("first-login/question.html", {},
             context_instance=RequestContext(request))
+        activity = get_object_or_404(Action, slug="intro-video")
+        points = str(activity.point_value) + " points"
 
         response = HttpResponse(json.dumps({
             "title": "Introduction: Step 6 of 7",
             "contents": template,
+            "points": points,
             }), mimetype='application/json')
 
         return response

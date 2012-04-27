@@ -1,6 +1,6 @@
 {% load avatar_tags %}
 {% load class_tags %}
-<div class="modal-head">
+<div class="modal-header">
     <h2>Referral Bonus</h2>
 </div>
 
@@ -9,8 +9,8 @@
         <p>
             If a participant in the competition has referred you to the {{ CHALLENGE.competition_name }}, please
             enter their UH email here.
-            If you complete the setup and earn at least 30 points, you will both be awarded {{ referral_points }} extra
-            points!
+            If you complete the setup and earn <b>at least 30 points</b>, you will both be awarded <b>{{ referral_points }} extra
+            points</b>!
         </p>
         <form id="setup-referrer-form" class="well" action="{% url setup_referral %}" method="post">
             {{ form.as_p }}

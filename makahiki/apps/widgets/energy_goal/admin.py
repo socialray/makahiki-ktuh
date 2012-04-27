@@ -17,4 +17,3 @@ class EnergyGoalAdmin(admin.ModelAdmin):
     list_display = ["team", "date", "goal_status"]
 
 admin.site.register(EnergyGoal, EnergyGoalAdmin)
-

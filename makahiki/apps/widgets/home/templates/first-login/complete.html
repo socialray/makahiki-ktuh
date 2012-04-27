@@ -4,19 +4,36 @@
 </div>
 <div id="setup-content" class="modal-body">
     <p>Congratulations, you have finished the Kukui Cup introduction and
-        earned {{ user.get_profile.points }} points! When you click the "Go home" button, you will
+        earned <b>{{ user.get_profile.points }} points</b>! When you click the "Go home" button, you will
         be taken to your personalized Kukui Cup home page. Your home page connects you to your
         {{ TEAM_LABEL }}'s energy usage and standing in the competition, as well as additional activities you
         can perform to get more points.</p>
 
     <p>Your home page will contain your first set of quests. Follow the quests (as shown below) to
         learn more about the Kukui Cup and earn points and prizes.</p>
-</div>
-<div class="modal-footer">
-  <div style="margin-bottom: 10px; width: 100%; text-align: center">
-      <img src="{{ STATIC_URL}}/css/default/images/quest-screen.png"/>
-  </div>
+      <div style="margin-bottom: 10px; width: 100%; text-align: center">
+      <!--img src="{{ STATIC_URL}}/css/default/images/quest-screen.png"/-->
+      <!--start questbar-->
+      <div class="quest-box">
+          <div id="quest-header" class="makahiki-box-title">
+              <h3 id="quest-title" class="makahiki-box-title">Your Quests</h3> 
+          </div>
+          <div>
+          <img class="quest-pad" src="{{ STATIC_URL}}/css/default/images/spacer.png" width="20">
+          {%  with DEFAULT_VIEW_OBJECTS.quests as quests %}
+          {% if quests.user_quests or quests.available_quests %}
+              {% include "quest_list.html" %}
+          {% else %}
+              <p style="text-align: center; width: 100%">There are no quests available at this time.  Please check back later!</p>
+          {% endif %}
+          {% endwith %}
+          </div> 
+      </div>
 
+      <!--end questbar-->
+  </div>
+</div>
+<div class="modal-footer"> 
   <div style="float: left">
       <button id="back" class="btn btn-primary" >
           <img src="{{ STATIC_URL}}/css/default/images/left.png" width="24" align="top">
