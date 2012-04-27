@@ -5,21 +5,6 @@ from django.db import models
 from apps.managers.team_mgr.models import Team
 
 
-class EnergyGoalBaseline(models.Model):
-    """Monthly Team Energy baseline Model"""
-
-    team = models.ForeignKey(
-        Team,
-        help_text="The team which this baseline is related to.")
-
-    date = models.DateField(
-        help_text="The date of the month.",)
-
-    baseline_usage = models.IntegerField(
-        default=0,
-        help_text="The baseline energy usage of the day.",)
-
-
 class EnergyGoal(models.Model):
     """Team Energy Goal Model"""
     STATUS_CHOICES = (("Over the goal", "Over the goal"),

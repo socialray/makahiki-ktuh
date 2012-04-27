@@ -1,7 +1,6 @@
 """daily energy_goal game module."""
 
 import datetime
-from django.core.exceptions import ObjectDoesNotExist
 from apps.managers.resource_mgr import resource_mgr
 from apps.widgets.energy_goal.models import EnergyGoal
 
@@ -16,38 +15,42 @@ def is_manual_entry(team):
     return team_goal_settings(team).manual_entry
 
 
-def team_goal_usage(date, team):
+def team_daily_goal_usage(date, team):
     """Returns the goal usage of the current date."""
     goal_percentage = team_goal_settings(team).goal_percent_reduction
 
-    try:
-        baseline_usage = team.energygoalbaseline_set.get(date=date).baseline_usage
-    except ObjectDoesNotExist:
-        baseline_usage = 0
+    baseline_usage = resource_mgr.team_daily_energy_baseline(date, team)
 
     usage = (baseline_usage * 100 - baseline_usage * goal_percentage) / 100
     return usage
 
 
-def team_warning_usage(date, team):
+def team_hourly_goal_usage(date, team):
+    """Returns the goal usage of the current date."""
+    goal_percentage = team_goal_settings(team).goal_percent_reduction
+
+    baseline_usage = resource_mgr.team_hourly_energy_baseline(date, team)
+
+    usage = (baseline_usage * 100 - baseline_usage * goal_percentage) / 100
+    return usage
+
+
+def team_hourly_warning_usage(date, team):
     """returns the current warning usage."""
     warning_percentage = team_goal_settings(team).warning_percent_reduction
 
-    try:
-        baseline_usage = team.energygoalbaseline_set.get(date=date).baseline_usage
-    except ObjectDoesNotExist:
-        baseline_usage = 0
+    baseline_usage = resource_mgr.team_hourly_energy_baseline(date, team)
 
     usage = (baseline_usage * 100 - baseline_usage * warning_percentage) / 100
     return usage
 
 
 def check_daily_energy_goal(team):
-    """check the dail energy goal, award points to the team members if the goal is meet.
+    """check the daily energy goal, award points to the team members if the goal is meet.
     Returns the number of players in the team got the award."""
 
     date = datetime.date.today()
-    goal_usage = team_goal_usage(date, team)
+    goal_usage = team_daily_goal_usage(date, team)
     energy_data = resource_mgr.team_energy_data(date, team)
     actual_usage = None
     if energy_data:

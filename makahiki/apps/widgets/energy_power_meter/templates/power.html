@@ -8,7 +8,7 @@
 <script type="text/javascript">
     // Wrap this code in an anonymous self-invoking function to avoid polluting global namespace.
     (function power_meter() {
-        var spreadsheetUrl = "/energy_power_meter/data";
+        var spreadsheetUrl = "http://server.wattdepot.org:8194/wattdepot/sources/{{user.get_profile.team.name}}/gviz/sensordata/latest?tq=select%20timePoint%2C%20powerConsumed";
         var refreshInterval = 15; // refresh every 15 seconds.
 
         // Load the visualization API and the spreadsheet, then call displayEnergy.
@@ -16,7 +16,7 @@
 
         function displayEnergy(datatable) {
             var source = '{{user.get_profile.team.name}}';
-            var options = {width:200,
+            var options = {width:300,
                 title:source,
                 captionStyle:{fontSize:'0.70em'},
                 titleStyle:{fontWeight:'bold'},

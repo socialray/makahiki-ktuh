@@ -2,7 +2,7 @@
 
 from django.contrib import admin
 
-from apps.widgets.energy_goal.models import EnergyGoal, EnergyGoalBaseline, EnergyGoalSettings
+from apps.widgets.energy_goal.models import EnergyGoal, EnergyGoalSettings
 
 
 class EnergyGoalSettingsAdmin(admin.ModelAdmin):
@@ -17,10 +17,3 @@ class EnergyGoalAdmin(admin.ModelAdmin):
     list_display = ["team", "date", "goal_status"]
 
 admin.site.register(EnergyGoal, EnergyGoalAdmin)
-
-
-class EnergyGoalBaselineAdmin(admin.ModelAdmin):
-    """EnergyGoal administrator interface definition."""
-    list_display = ["team", "date", "baseline_usage"]
-
-admin.site.register(EnergyGoalBaseline, EnergyGoalBaselineAdmin)

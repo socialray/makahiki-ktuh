@@ -9,8 +9,8 @@ from django.contrib.auth.models import User
 
 from apps.managers.team_mgr.models import Team
 from apps.widgets.energy_goal import energy_goal
-from apps.widgets.energy_goal.models import EnergyGoalSettings, EnergyGoalBaseline
-from apps.managers.resource_mgr.models import EnergyUsage
+from apps.widgets.energy_goal.models import EnergyGoalSettings
+from apps.managers.resource_mgr.models import EnergyUsage, DailyEnergyBaseline
 
 
 class TeamEnergyGoalTest(TransactionTestCase):
@@ -42,10 +42,10 @@ class TeamEnergyGoalTest(TransactionTestCase):
             manual_entry_time=datetime.time(hour=15),
         )
         goal_settings.save()
-        goal_baseline = EnergyGoalBaseline(
+        goal_baseline = DailyEnergyBaseline(
             team=self.team,
-            date=datetime.date.today(),
-            baseline_usage=150,
+            day=datetime.date.today().weekday(),
+            usage=150,
         )
         goal_baseline.save()
         energy_data = EnergyUsage(
