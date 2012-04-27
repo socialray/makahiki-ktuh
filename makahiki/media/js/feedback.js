@@ -34,8 +34,37 @@ jQuery(document).ready(function() {
     }
   });
   
+  $('#feedbackModal').modal({
+      backdrop: false,
+      keyboard: true,
+      show: false
+  }); 
+  // set up event logging
+  $('#feedbackModal').on('shown', function() {
+      log_js_action("feedback", "form", 'feedback-open');
+      jQuery("#id_url").val(window.location);
+      jQuery("#feedbackModal textarea").focus();
+      jQuery("#feedbackModal textarea").val("");
+  });
+  $('#feedbackModal').on('hidden', function() {
+      log_js_action("feedback", "form", 'feedback-close');
+  });
+  $('#successModal').modal({
+      backdrop: false,
+      keyboard: true,
+      show: false
+  }); 
+  // set up event logging
+  $('#successModal').on('shown', function() {
+      log_js_action("feedback", "form", 'feedback-success-open');
+  });
+  $('#successModal').on('hidden', function() {
+      log_js_action("feedback", "form", 'feedback-success-close');
+  });
+  
   jQuery("#header-feedback").click(function() {
-    jQuery("#feedback-dialog").dialog("open");
+//    jQuery("#feedback-dialog").dialog("open");
+	  $('#feedbackModal').modal('show');
   });
   
   jQuery("#feedback-submit").click(function() {
@@ -43,10 +72,14 @@ jQuery(document).ready(function() {
       jQuery(this).attr("disabled", true);
       // alert(this.form.action);
       jQuery("#feedback-spinner").show();
+      
       $.post(this.form.action, jQuery("#feedback-form").serialize(), function(data) {
-        jQuery("#feedback-dialog").dialog("close");
-        jQuery("#feedback-success").dialog("open");
-        jQuery("#feedback-spinner").hide();
+//        jQuery("#feedback-dialog").dialog("close");
+          jQuery("#feedback-spinner").hide();
+    	  $('#feedbackModal').modal('hide');
+    	  $('#feedbackModal textarea').val("");
+    	  $('#successModal').modal('show');
+//        jQuery("#feedback-success").dialog("open");
       });
     }
     
@@ -54,7 +87,7 @@ jQuery(document).ready(function() {
   });
   
   jQuery("#feedback-success button").click(function() {
-    jQuery("#feedback-success").dialog("close");
+//    jQuery("#feedback-success").dialog("close");
   })
   jQuery("#header-feedback").removeAttr("disabled");
 });

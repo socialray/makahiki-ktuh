@@ -8,13 +8,27 @@ $(document).ready(function() {
     }
   });
 
+  $('#successModal').modal({
+      backdrop: false,
+      keyboard: true,
+      show: false
+  }); 
+  // set up event logging
+  $('#successModal').on('shown', function() {
+      log_js_action("ask_admin", "form", 'feedback-success-open');
+  });
+  $('#successModal').on('hidden', function() {
+      log_js_action("ask_admin", "form", 'feedback-success-close');
+  });
+
   $("#help-ask-submit").click(function() {
     if(! $(this).attr("disabled")) {
       $(this).attr("disabled", true);
       $("#field_url").val(window.location);
       $("#help-ask-spinner").show();
       $.post(this.form.action, $("#help-ask-form").serialize(), function(data) {
-        $("#feedback-success").dialog("open");
+//        $("#feedback-success").dialog("open");
+    	$('#successModal').modal('show');
         $("#help-ask-spinner").hide();
         $("#help-ask-form textarea").val("");
       });
