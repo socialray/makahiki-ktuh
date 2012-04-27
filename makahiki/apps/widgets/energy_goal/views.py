@@ -33,13 +33,13 @@ def supply(request, page_name):
 
 def get_realtime_goal_data(team):
     """:return: the energy goal data for the user's team."""
-    date = datetime.date.today()
-    data = resource_mgr.team_energy_data(date=date, team=team)
+    date = datetime.datetime.today()
+    data = resource_mgr.team_energy_data(date=date.date(), team=team)
 
     if data:
         goal = {}
-        goal["goal_usage"] = energy_goal.team_goal_usage(date=date, team=team)
-        goal["warning_usage"] = energy_goal.team_warning_usage(date, team=team)
+        goal["goal_usage"] = energy_goal.team_hourly_goal_usage(date=date, team=team)
+        goal["warning_usage"] = energy_goal.team_hourly_warning_usage(date, team=team)
         goal["actual_usage"] = data.usage
         goal["updated_at"] = data.updated_at
         goal["actual_diff"] = abs(goal["actual_usage"] - goal["goal_usage"])
@@ -68,7 +68,7 @@ def get_daily_energy_goal_data(team):
                                         "The goal is %d kWh." % (
                 resource_mgr.team_energy_usage(date, team),
                 energy_goal.team_goal_settings(team).manual_entry_time,
-                energy_goal.team_goal_usage(date, team)
+                energy_goal.team_daily_goal_usage(date, team)
             )
 
         data_table.append(goal_info)
