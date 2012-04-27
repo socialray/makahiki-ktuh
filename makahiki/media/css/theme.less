@@ -24,9 +24,11 @@
 @content-box-table-header: #A2C0D2;
 @landingSponsorDiv: #E3E3E3;
 
+@image-background: "../images/oceanWave.jpg";
+
 /* Set background picture, center it, make sure it doesn't repeat and that it covers the background for any size on any browser */
 body {
-	background: url(../images/oceanWave.jpg) center fixed;
+	background: url("@{image-background}") center fixed;
 	background-repeat: no-repeat;
 	-webkit-background-size: cover;
 	-moz-background-size: cover;
