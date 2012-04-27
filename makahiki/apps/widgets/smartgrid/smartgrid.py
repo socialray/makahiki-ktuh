@@ -16,7 +16,6 @@ def complete_setup_activity(user):
     """complete the setup activity."""
     try:
         activity = Activity.objects.get(name=SETUP_WIZARD_ACTIVITY_NAME)
-        
         try:
             member = ActionMember.objects.get(
                 action=activity,

@@ -12,7 +12,7 @@
 
         <div id="help-video-box"> 
             <div id="help-video-content" class="content-box-contents video-container">
-                <iframe id="player" type="text/html" width="100%" height="300"
+                <iframe id="player" type="text/html"
                         src="http://www.youtube.com/embed/T37kNTkZCrA?fs=1&hl=en_US&rel=0&enablejsapi=1"
                         frameborder="0"></iframe>
             </div>
@@ -57,7 +57,7 @@
   <div style="float: left">
       <button id="back" class="btn btn-primary" >
           <img src="{{ STATIC_URL}}/css/default/images/left.png" width="24" align="top">
-          Back<br/>Profile
+          Back<br/>Profile Setup
       </button>
   </div>
 
@@ -93,7 +93,8 @@
           $("#next").button().click(function () {
               $.get("{% url setup_question %}", function (data) {
                   $("#ui-dialog-title-setup-dialog").html(data.title);
-                  $("#setup-dialog").html(data.contents);
+                  $("#setup-dialog").html(data.contents); 
+                  $('#points').html(data.points);
               });
           });
       });
