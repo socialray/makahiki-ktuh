@@ -1,33 +1,29 @@
 {% load class_tags %}
 
 {% with DEFAULT_VIEW_OBJECTS.ask_admin as ask_admin %}
-<div {% get_id_and_classes "help-ask" "responsive" %}>
-    <div {% get_id_and_classes "help-ask-box" %}>
-        <div {% get_id_and_classes "help-ask-title" %}>
+<div class="content-box">
+    <div class="content-box-title">
             Ask an Admin
-        </div>
-        <div {% get_id_and_classes "help-ask-content" %}>
-            Got a question that's not answered here? Type it below and an admin will email you
-            the answer.
-            <form {% get_id_and_classes "help-ask-form" %} action="{% url ask_admin_feedback %}"
-                                                           method="POST">
-                {% csrf_token %}
-                {{ ask_admin.form.url }}
-                {% if ask_admin.form.question.errors %}
-                    {{ ask_admin.form.question.errors }}
-                {% endif %}
-                {{ ask_admin.form.question }}
-                <div>
-                    <button id="help-ask-submit" disabled="true" href="javascript:void(0);">Send</button>
-            <span id="help-ask-spinner" style="display:none">
-              Sending
-              <img src="{{STATIC_URL}}images/spinner.gif"/>
-            </span>
-
-                    <div style="clear: both"></div>
-                </div>
-            </form>
-        </div>
+    </div>
+    <div class="content-box-contents">
+        Got a question that's not answered here? Type it below and an admin will email you
+        the answer.
+        <form id="help-ask-form" action="{% url ask_admin_feedback %}"
+                                 method="POST">
+            {% csrf_token %}
+            {{ ask_admin.form.url }}
+            {% if ask_admin.form.question.errors %}
+                {{ ask_admin.form.question.errors }}
+            {% endif %}
+            {{ ask_admin.form.question }}
+            <div>
+                <button id="help-ask-submit" disabled="true" href="javascript:void(0);">Send</button>
+                <span id="help-ask-spinner" style="display:none">
+                Sending
+                <img src="{{STATIC_URL}}images/spinner.gif"/>
+                </span>
+            </div>
+        </form>
     </div>
 </div>
 {% endwith %}
