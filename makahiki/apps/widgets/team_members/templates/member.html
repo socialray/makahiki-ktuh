@@ -1,55 +1,56 @@
-{% load class_tags %}
 {% load avatar_tags %}
 
-<img class="member-image" src="{% avatar_url member 40 %}"
-     alt="Photo of {{ member.get_profile.name }}" title="Photo of {{ member.get_profile.name }}"
-     align="top"/>
-<ul {% get_id_and_classes "team-member-details" %}>
-    <li class="team-member-name">
-        <a name="{{member.get_profile.name|slugify}}">
-            {{ member.get_profile.name }}
+<div class="span1">
+  <img class="member-image" src="{% avatar_url member 40 %}"
+       alt="Photo of {{ member.name }}" title="Photo of {{ member.name }}"
+       align="top"/>
+</div>
 
-            {% for badge in member.badges_earned.all %}
-                <a href="{% url profile_badges %}"><img class="member-badges"
-                                                        src="{{STATIC_URL}}{{badge.image}}"
-                                                        alt="{{badge.badge.name}}"
-                                                        title="{{badge.badge.name}}"/></a>
-            {% endfor %}
-    </li>
+{% with member.user as user %}
+<div class="team-member-details span3">
+  <a name="{{member.get_profile.name|slugify}}">
+      <h4>{{ member.name }}</h4>
 
-    {% if member.is_superuser or member.is_staff %}
-        <!-- Downloaded from http://www.iconarchive.com/show/silk-icons-by-famfamfam/award-star-gold-3-icon.html -->
-        <li class="team-member-admin"><img src="{{STATIC_URL}}images/award-star-gold-3-icon.png">Administrator
-        </li>
+      {% for badge in user.badges_earned.all %}
+          <a href="{% url profile_badges %}"><img class="member-badges"
+                                                  src="{{STATIC_URL}}{{badge.image}}"
+                                                  alt="{{badge.badge.name}}"
+                                                  title="{{badge.badge.name}}"/></a>
+      {% endfor %}
+  </a>
+  
+  {% if user.is_superuser or user.is_staff %}
+  <!-- Downloaded from http://www.iconarchive.com/show/silk-icons-by-famfamfam/award-star-gold-3-icon.html -->
+  <img src="{{STATIC_URL}}images/award-star-gold-3-icon.png">Administrator
+  {% endif %}
+  
+  <p>
+  {% if CURRENT_ROUND %}
+      Ranked #{{ member.get_profile.current_round_overall_rank }} in {{ CURRENT_ROUND }}
+      (#{{ member.get_profile.overall_rank }} overall)
+  {% else %}
+      #{{ member.get_profile.overall_rank }} overall
+  {% endif %}
+  </p>
+
+  {# Check if the user is a participant or an admin without a team #}
+  {% if member.team and member.points > 0 %}
+  <p>
+    {% if CURRENT_ROUND %}
+        Points: {{ member.get_profile.current_round_points }} points in {{ CURRENT_ROUND }}
+        ({{ member.get_profile.points }} points overall)
+    {% else %}
+        Points: {{ member.get_profile.points }} points overall
     {% endif %}
+  {% endif %}
+  </p>
+</div>
 
-    <li>
-        {% if CURRENT_ROUND %}
-            Ranked #{{ member.get_profile.current_round_overall_rank }} in {{ CURRENT_ROUND }}
-            (#{{ member.get_profile.overall_rank }} overall)
-        {% else %}
-            #{{ member.get_profile.overall_rank }} overall
-        {% endif %}
-    </li>
-
-    {# Check if the user is a participant or an admin without a team #}
-    {% if member.get_profile.team and member.get_profile.points > 0 %}
-        <li>
-            {% if CURRENT_ROUND %}
-                Points: {{ member.get_profile.current_round_points }} points in {{ CURRENT_ROUND }}
-                ({{ member.get_profile.points }} points overall)
-            {% else %}
-                Points: {{ member.get_profile.points }} points overall
-            {% endif %}
-        </li>
-    {% endif %}
-</ul>
-
-<div style="float: right; width: 500px">
-    {% with member.actionmember_set.all as commitment_members %}
+<div class="span8">
+    {% with user.actionmember_set.all as commitment_members %}
         {% if commitment_members.count > 0 %}
-            <h4 style="margin: 0; padding: 0">{{ member.get_profile.name }}&apos;s Commitments</h4>
-            <ul {% get_id_and_classes "team-member-commitments" %}>
+            <h4>{{ member.name }}&apos;s Commitments</h4>
+            <ul class="team-member-commitments">
                 {% for commitment_member in commitment_members %}
                     <li>
                         <a href="{% url activity_task commitment_member.action.type commitment_member.action.slug %}">{{ commitment_member.action }}</a>
@@ -59,4 +60,4 @@
         {% endif %}
     {% endwith %}
 </div>
-<br style="clear: both"/>
+{% endwith %}

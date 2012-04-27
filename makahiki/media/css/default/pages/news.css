@@ -51,67 +51,21 @@
 }
 
 /**** Team members list styles *******/
-#team-members {
-  margin: 0 15px;
-}
-
-#team-members-content {
-  text-align: left;
-  margin: 0;
-  padding: 5px 20px;
-}
-
-#team-member-list {
+#team-member-detail-list {
   list-style: none;
   margin: 0;
-  padding: 0;
-}
-
-#team-member-list li {
-  width: 60px;
-  margin: 0;
-  padding: 0;
-  text-align: center;
-}
-
-#team-member-list li img {
-  padding: 2px;
-}
-
-#team-member-detail-list, #team-member-details {
-  list-style: none;
-  margin: 0;
-  padding: 0;
 }
 
 #team-member-detail-list>li {
-  padding: 5px 0;
+  margin: 5px 0;
 }
 
-#team-member-detail-list>li .member-image {
-  padding: 4px 2px;
+.team-member-details h4 {
+  color: black;
 }
 
-#team-member-details {
-  margin-left: 5px;
-}
-
-#team-member-details>li {
-  padding: 2px 0;
-}
-
-#team-member-details .team-member-name {
-  font-weight: bold;
-  font-size: 1.0em;
-}
-
-#team-member-details .member-badges {
-  vertical-align: middle;
-  padding-left: 2px;
-}
-
-#team-member-details .team-member-admin {
-  font-style: italic;
+.team-member-details p {
+  margin: 0;
 }
 
 /* Wall post styles */

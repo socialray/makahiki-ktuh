@@ -1,6 +1,5 @@
 {% extends "logged_in_base.html" %}
 
-{% load class_tags %}
 {% load avatar_tags %}
 
 {% block page_title %}
@@ -10,17 +9,17 @@
 {% block selected_icon %}selected-news{% endblock %}
 
 {% block extra_head %}
-    {% import_page_css "news" STATIC_URL CSS_THEME %}
+  <link rel="stylesheet" href="{{STATIC_URL}}css/default/pages/news.css">
 {% endblock %}
 
 {% block body %}
-    <div {% get_id_and_classes "team-members" %}>
-        <div {% get_id_and_classes "team-members-title" %}>
+    <div id="team-members" class="content-box">
+        <div id="team-members-title" class="content-box-title">
             {{ TEAM_LABEL }} Members
         </div>
-        <div {% get_id_and_classes "team-members-content" %}>
+        <div id="team-members-content">
             <a href="{% url news_index %}">Back to the news page</a>
-            <ul {% get_id_and_classes "team-member-detail-list" %}>
+            <ul id="team-member-detail-list" class="row-fluid">
                 {% for member in team_members %}
                     <!-- {% cycle 'alt-row' '' as cycle_class %} -->
                     <li class="{{cycle_class}}">
