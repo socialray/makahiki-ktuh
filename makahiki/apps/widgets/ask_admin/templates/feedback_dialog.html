@@ -1,23 +1,41 @@
-<div id="feedback-dialog" title="Send Feedback" style="display: none">
-    <form id="feedback-form" action="{% url ask_admin_feedback %}" method="POST">
-        {% csrf_token %}
-        <p>Having issues? Just want to tell us something? Let us know!</p>
-        <input id="id_url" type="hidden" name="url" value=""/>
-        <textarea id="id_question" rows="3" cols="53" name="question"></textarea><br/>
-        <button id="feedback-submit" disabled="true" href="javascript:void(0);">Send</button>
+<div class="modal hide fade" id="feedbackModal">
+    <div class="modal-header">
+        <a class="close" data-dismiss="modal">x</a>
+        <h3>Send Feedback</h3>
+    </div>
+    <div class="modal-body" id="modal-body">
+        <form id="feedback-form" action="{% url ask_admin_feedback %}" method="POST">
+            {% csrf_token %}
+            <p>Having issues? Just want to tell us something? Let us know!</p>
+            <input id="id_url" type="hidden" name="url" value=""/>
+            <textarea id="id_question" rows="3" cols="53" name="question"></textarea><br/>
+            <button id="feedback-submit" disabled="true" href="javascript:void(0);">Send</button>
 
-    <span id="feedback-spinner" style="display:none">
-      Sending
-      <img src="{{STATIC_URL}}images/spinner.gif"/>
-    </span>
-    </form>
+        <span id="feedback-spinner" style="display:none">
+        Sending
+        <img src="{{STATIC_URL}}images/spinner.gif"/>
+        </span>
+        </form>
+    </div>
+    <div class="modal-footer">
+        <a href="#" class="btn" data-dismiss="modal">Close</a>
+    </div>
 </div>
 
-<div id="feedback-success" title="Thank You!" style="display: none">
-    <p style="text-align: left">
+<div class="modal hide fade" id="successModal">
+    <div class="modal-header">
+        <a class="close" data-dismiss="modal">x</a>
+        <h3>Thank You!</h3>
+    </div>
+    <div class="modal-body" id="modal-body">
+        <p style="text-align: left">
         Your feedback has been sent to the administrators. If you asked a question, they will email
         you a response as soon as possible.
-    </p>
-
-    <button>OK</button>
+       </p>
+    </div>
+    <div class="modal-footer">
+        <a href="#" class="btn" data-dismiss="modal">Close</a>
+    </div>
 </div>
+
+

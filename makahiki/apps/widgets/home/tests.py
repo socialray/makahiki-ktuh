@@ -74,6 +74,7 @@ class CompetitionMiddlewareTestCase(TransactionTestCase):
 
 class SetupWizardFunctionalTestCase(TransactionTestCase):
     """setup widzard test cases."""
+    fixtures = ["base_activities.json"]
 
     def setUp(self):
         """setup."""

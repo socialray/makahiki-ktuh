@@ -52,6 +52,14 @@ jQuery(document).ready(function($) {
   }
   
   $(".rejection-date").prettyDate();
+  
+  // setup help modal
+  $('#helpModal').modal({
+      backdrop: true,
+      keyboard: true,
+      show: false
+  });	
+  
 });
 
 // Function to handle AJAX post requests.
@@ -86,21 +94,15 @@ var log_js_action = function(type, object, action) {
 }
 
 var toggleHelp = function(category, slug) {
-//    var modalElement = $('<div />', { class: 'modal hide fade', id: 'my-modal' })
-//    .append($('<div />', { class: 'modal-header' })
-//    .append($('<a/>', { class: 'close', text: 'x', href: '#', 'data-dismiss': 'modal' } ))
-//    .append($('<h3/>', { text: 'Item Modal Window' })))
-//    .append($('<div />', { class: 'modal-body'} ))
-//    .append($('<a/>', { class: 'btn', href: '#', 'data-dismiss': 'modal', text: 'Close'}));
-
 	var modalElement = $('#helpModal');
-	
-    modalElement.modal({
-        backdrop: true,
-        keyboard: true,
-        show: false
-    });	
-    
+    // set up event logging
+    modalElement.on('shown', function() {
+        log_js_action(category, slug, 'help-open');
+    });
+    modalElement.on('hidden', function() {
+        log_js_action(category, slug, 'help-close');
+    });
+
     jQuery.ajax({
         url: "/help/" + category + "/" + slug + "/", 
         success: function(data) {
