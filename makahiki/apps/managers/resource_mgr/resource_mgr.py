@@ -52,9 +52,10 @@ def team_energy_usage(date, team):
 def team_daily_energy_baseline(date, team):
     """Returns the energy baseline usage for the date."""
     day = date.weekday()
-    try:
-        return team.dailyenergybaseline_set.filter(day=day)[0].usage
-    except ObjectDoesNotExist:
+    baseline = team.dailyenergybaseline_set.filter(day=day)
+    if baseline:
+        return baseline[0].usage
+    else:
         return 0
 
 
@@ -62,9 +63,10 @@ def team_hourly_energy_baseline(date, team):
     """Returns the energy baseline usage for the date."""
     day = date.weekday()
     hour = date.time().hour
-    try:
-        return team.hourlyenergybaseline_set.filter(day=day, hour=hour)[0].usage
-    except ObjectDoesNotExist:
+    baseline = team.hourlyenergybaseline_set.filter(day=day, hour=hour)
+    if baseline:
+        return baseline[0].usage
+    else:
         return 0
 
 
@@ -86,7 +88,7 @@ def update_energy_usage(date, team):
     property_elements = ElementTree.XML(response.text).findall(".//Property")
     for p in property_elements:
         key_value = p.getchildren()
-        if key_value[0].text == "energyConsumed":
+        if key_value and key_value[0].text == "energyConsumed":
             usage = key_value[1].text
 
     #print usage

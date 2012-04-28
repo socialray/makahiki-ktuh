@@ -8,7 +8,7 @@
 
 {% with member.user as user %}
 <div class="team-member-details span3">
-  <a name="{{member.get_profile.name|slugify}}">
+  <a name="{{member.name|slugify}}">
       <h4>{{ member.name }}</h4>
 
       {% for badge in user.badges_earned.all %}
@@ -26,10 +26,10 @@
   
   <p>
   {% if CURRENT_ROUND %}
-      Ranked #{{ member.get_profile.current_round_overall_rank }} in {{ CURRENT_ROUND }}
-      (#{{ member.get_profile.overall_rank }} overall)
+      Ranked #{{ member.current_round_overall_rank }} in {{ CURRENT_ROUND }}
+      (#{{ member.overall_rank }} overall)
   {% else %}
-      #{{ member.get_profile.overall_rank }} overall
+      #{{ member.overall_rank }} overall
   {% endif %}
   </p>
 
@@ -37,23 +37,23 @@
   {% if member.team and member.points > 0 %}
   <p>
     {% if CURRENT_ROUND %}
-        Points: {{ member.get_profile.current_round_points }} points in {{ CURRENT_ROUND }}
-        ({{ member.get_profile.points }} points overall)
+        Points: {{ member.current_round_points }} points in {{ CURRENT_ROUND }}
+        ({{ member.points }} points overall)
     {% else %}
-        Points: {{ member.get_profile.points }} points overall
+        Points: {{ member.points }} points overall
     {% endif %}
   {% endif %}
   </p>
 </div>
 
 <div class="span8">
-    {% with user.actionmember_set.all as commitment_members %}
-        {% if commitment_members.count > 0 %}
-            <h4>{{ member.name }}&apos;s Commitments</h4>
+    {% with user.actionmember_set.all as action_members %}
+        {% if action_members.count > 0 %}
+            <h4>{{ member.name }}&apos;s Actions</h4>
             <ul class="team-member-commitments">
-                {% for commitment_member in commitment_members %}
+                {% for action_member in action_members %}
                     <li>
-                        <a href="{% url activity_task commitment_member.action.type commitment_member.action.slug %}">{{ commitment_member.action }}</a>
+                        <a href="{% url activity_task action_member.action.type action_member.action.slug %}">{{ action_member.action }}</a>
                     </li>
                 {% endfor %}
             </ul>

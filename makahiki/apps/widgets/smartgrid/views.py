@@ -49,8 +49,10 @@ def view_action(request, action_type, slug):
         form = view_activities.view(request, action)
     else:  # events
         form = view_events.view(request, action)
+        # calculate available seat
+        action.available_seat = action.event.event_max_seat - completed_count
 
-    user_reminders = view_reminders.load_reminders(action, user, completed_count)
+    user_reminders = view_reminders.load_reminders(action, user)
 
     return render_to_response("task.html", {
         "action": action,
