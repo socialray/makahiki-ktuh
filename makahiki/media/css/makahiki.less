@@ -16,8 +16,18 @@
  // Overrides for bootstrap variables
  @import "makahiki-override.less";
 
-@makahikiBorderRadius:            8px;
+@makahikiBorderRadius: 8px;
 @contentBoxBottomMargin: 15px;
+
+.background-gradient(@start, @end) {
+    background-image: -moz-linear-gradient(top, @start, @end);
+    background-image: -ms-linear-gradient(top, @start, @end);
+    background-image: -webkit-gradient(linear, 0 0, 0 100%, from(@start),
+        to(@end));
+    background-image: -webkit-linear-gradient(top, @start, @end);
+    background-image: -o-linear-gradient(top, @start, @end);
+    background-image: linear-gradient(top, @start, @end);    
+}
 
 .top-border-radius (@radius: 5px) {
     -webkit-border-top-left-radius: @radius;
