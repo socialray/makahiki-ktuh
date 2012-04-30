@@ -17,9 +17,9 @@ def init():
     """initialize the resource manager."""
 
     if ResourceSettings.objects.count() == 0:
-        ResourceSettings.objects.create(name="Energy", unit="kWh", winning_order="Ascending")
-        ResourceSettings.objects.create(name="Water", unit="Gallon", winning_order="Ascending")
-        ResourceSettings.objects.create(name="Waste", unit="Ton", winning_order="Descending")
+        ResourceSettings.objects.create(name="energy", unit="kWh", winning_order="Ascending")
+        ResourceSettings.objects.create(name="water", unit="Gallon", winning_order="Ascending")
+        ResourceSettings.objects.create(name="waste", unit="Ton", winning_order="Descending")
 
 
 def resources_info():
@@ -29,6 +29,12 @@ def resources_info():
     for resource in ResourceSettings.objects.all():
         info += resource.name + " : " + resource.unit + " : " + resource.winning_order + "\n"
     return info
+
+
+def get_resource_settings(name):
+    """returns the resource settings for the specified name."""
+    init()
+    return ResourceSettings.objects.get(name=name)
 
 
 def team_energy_data(date, team):
@@ -105,17 +111,16 @@ def update_energy_usage(date, team):
 def resource_ranks(name):
     """return the resource ranking for all teams."""
     team_count = Team.objects.count()
-    if name == "Energy":
+    if name == "energy":
         resource = EnergyUsage
-    elif name == "Water":
+    elif name == "water":
         resource = WaterUsage
-    elif name == "Waste":
+    elif name == "waste":
         resource = WasteUsage
     else:
         return None
 
-    init()
-    resource_settings = ResourceSettings.objects.get(name=name)
+    resource_settings = get_resource_settings(name)
     if resource_settings.winning_order == "Ascending":
         ordering = "total"
     else:
@@ -127,17 +132,17 @@ def resource_ranks(name):
 
 def energy_ranks():
     """Get the overall energy ranking for all teams, return an ordered query set."""
-    return resource_ranks("Energy")
+    return resource_ranks("energy")
 
 
 def waste_ranks():
     """Get the overall waste ranking for all teams, return an ordered query set."""
-    return resource_ranks("Waste")
+    return resource_ranks("waste")
 
 
 def water_ranks():
     """Get the overall water ranking for all teams, return an ordered query set."""
-    return resource_ranks("Water")
+    return resource_ranks("water")
 
 
 def energy_team_rank_info(team):

@@ -142,7 +142,7 @@ def player_points_leaders(num_results=10, round_name="Overall"):
     """
     entries = ScoreboardEntry.objects.filter(round_name=round_name,).order_by(
         "-points",
-        "-last_awarded_submission").values('profile__name', 'points')
+        "-last_awarded_submission").values('profile', 'profile__name', 'points')
     if entries:
         return entries[:num_results]
     else:

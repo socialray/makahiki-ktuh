@@ -6,10 +6,16 @@ from apps.managers.resource_mgr import resource_mgr
 
 
 def supply(request, page_name):
+    """Supply the view_objects content."""
+    _ = request
+    _ = page_name
+    return {}
+
+
+def resource_supply(request, resource):
     """Supply the view_objects content.
 
        :return: team, scoreboard_round, goals_scoreboard, energy_ranks"""
-    _ = page_name
 
     user = request.user
     team = user.get_profile().team
@@ -25,10 +31,12 @@ def supply(request, page_name):
 
     goals_scoreboard = resource_mgr.energy_goal_ranks()
 
-    energy_ranks = resource_mgr.energy_ranks()
+    energy_ranks = resource_mgr.resource_ranks(resource)
 
+    resource_settings = resource_mgr.get_resource_settings(resource)
     return {
         "team": team,
+        "resource": resource_settings,
         "scoreboard_rounds": scoreboard_rounds,
         "goals_scoreboard": goals_scoreboard,
         "energy_ranks": energy_ranks,

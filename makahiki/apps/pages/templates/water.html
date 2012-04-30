@@ -1,0 +1,49 @@
+{% extends "logged_in_base.html" %}
+
+{% load class_tags %}
+
+{% block page_title %}
+    Water
+{% endblock %}
+
+{% block selected_icon %}selected-water{% endblock %}
+
+{% block extra_head %}
+    {% import_page_css "energy" STATIC_URL CSS_THEME %}
+    <link rel="stylesheet" href="{{ STATIC_URL }}css/{{ CSS_THEME }}/pages/resource_scoreboard.css">
+{% endblock %}
+
+{% block body %}
+    <div class="container-fluid">
+        <div class="row-fluid">
+            <!-- left column -->
+            <div class="span5">
+                {% if view_objects.resource_scoreboard_water %}
+                    <div id='resource_scoreboard'>
+                        {% include "widgets/resource_scoreboard/water/templates/index.html" %}
+                    </div>
+                {% endif %}
+            </div>
+            <!-- right column -->
+            <div class="span7">
+                {% if view_objects.energy_goal %}
+                    <div id='energy_goal'>
+                        {% include "widgets/energy_goal/templates/index.html" %}
+                    </div>
+                {% endif %}
+                {% if view_objects.wallpost %}
+                    <div id='wallpost'>
+                        {% include "widgets/wallpost/templates/index.html" %}
+                    </div>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+
+    <table>
+        <tr><td width="40%" valign="top">
+        </td><td width="60%" valign="top">
+        </td>
+        </tr>
+    </table>
+{% endblock %}

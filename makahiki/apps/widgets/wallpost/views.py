@@ -4,7 +4,7 @@ from django.contrib.auth.decorators import login_required
 from django.http import Http404, HttpResponse
 from django.template.context import RequestContext
 from django.template.loader import render_to_string
-from apps.managers.team_mgr.models import Post
+from apps.managers.team_mgr.models import Post, CanopyPost
 from apps.widgets.wallpost.forms import WallForm
 import simplejson as json
 
@@ -30,6 +30,18 @@ def supply(request, page_name):
 
         title = "Organize with your team peeps"
         description = "Got ideas on how to conserve energy? Share it with your team:"
+
+    elif page_name == "advanced":
+        if "last_post" in request.GET:
+            posts = CanopyPost.objects.filter(
+                id__lt=int(request.GET["last_post"])).select_related(
+                'user__profile').order_by("-id")
+        else:
+            posts = CanopyPost.objects.filter().select_related('user__profile').order_by("-id")
+
+        title = "Canopy News Feed"
+        description = "Share with your fellow canopy members:"
+
     else:
         if "last_post" in request.GET:
             posts = Post.objects.filter(
@@ -39,12 +51,14 @@ def supply(request, page_name):
         else:
             posts = Post.objects.filter(team=team).select_related('user__profile').order_by("-id")
 
-        title = "News Feed"
+        title = page_name + " News Feed"
         description = ""
 
     post_count = posts.count()
     posts = posts[:DEFAULT_POST_COUNT]
     is_more_posts = True if post_count > DEFAULT_POST_COUNT else False
+
+    wall_form = WallForm(initial={"page_name": page_name})
 
     return {
         "page_name": page_name,
@@ -52,7 +66,7 @@ def supply(request, page_name):
         "description": description,
         "posts": posts,
         "more_posts": is_more_posts,
-        "wall_form": WallForm(),
+        "wall_form": wall_form,
         }
 
 
@@ -62,11 +76,18 @@ def post(request):
     if request.is_ajax() and request.method == "POST":
         form = WallForm(request.POST)
         if form.is_valid():
-            wall_post = Post(
-                user=request.user,
-                team=request.user.get_profile().team,
-                text=form.cleaned_data["post"]
-            )
+            print form.cleaned_data
+            if form.cleaned_data["page_name"] == "advanced":
+                wall_post = CanopyPost(
+                    user=request.user,
+                    text=form.cleaned_data["post"]
+                )
+            else:
+                wall_post = Post(
+                    user=request.user,
+                    team=request.user.get_profile().team,
+                    text=form.cleaned_data["post"]
+                )
             wall_post.save()
 
             # Render the post and send it as a response.

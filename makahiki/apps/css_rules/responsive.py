@@ -55,10 +55,10 @@ CSS_IDS = {
 
     "energy-body": "container-fluid",
     "energy-power": "content-box",
-    "energy-scoreboard-box": "content-box",
+    "resource-scoreboard-box": "content-box",
     "energy-status-box": "content-box",
     "energy-power-title": "content-box-title",
-    "energy-scoreboard-title": "content-box-title",
+    "resource-scoreboard-title": "content-box-title",
     "energy-status-title": "content-box-title",
 
     "activity-body": "container-fluid",

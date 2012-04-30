@@ -12,7 +12,7 @@ from apps.widgets.help.models import HelpTopic
 
 
 def supply(request, page_name):
-    """ supply view_objects for widget rendering, namely the faq objects."""
+    """ supply view_objects for widget rendering."""
     _ = request
     _ = page_name
     return {}

@@ -1,0 +1,33 @@
+{% load avatar_tags %}
+{% load class_tags %}
+
+    <div {% get_id_and_classes "canopy-members" %}>
+        <div {% get_id_and_classes "canopy-members-title" %}>
+            Canopy Members
+            <a href="#" style="float: right">
+                <img src="{{ STATIC_URL}}/css/default/images/icon-help-sm.png" width="20"
+                     align="center"
+                     title="Click to get help about this window"
+                     onclick="toggleHelp('widget', 'canopy-directory'); return false;"
+                        /></a>
+        </div>
+        <div {% get_id_and_classes "canopy-members-content" %}>
+            <ul {% get_id_and_classes "canopy-member-list" %}>
+                {% for member in view_objects.canopy_member.members %}
+                    <li>
+                        <div>
+                            <a href="{% url canopy_members %}#{{member.get_profile.name|slugify}}">
+                                <img src="{% avatar_url member 40 %}"
+                                     alt="Photo of {{ member.get_profile.name }}" align="top"/>
+
+                                <div>{{ member.get_profile.name }}</div>
+                            </a>
+                        </div>
+                    </li>
+                {% endfor %}
+            </ul>
+            <div style="clear: both">
+                <a href="{% url canopy_members %}">View detailed list</a>
+            </div>
+        </div>
+    </div>

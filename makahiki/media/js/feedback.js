@@ -34,31 +34,31 @@ jQuery(document).ready(function() {
     }
   });
   
-  $('#feedbackModal').modal({
+  jQuery('#feedbackModal').modal({
       backdrop: false,
       keyboard: true,
       show: false
   }); 
   // set up event logging
-  $('#feedbackModal').on('shown', function() {
+  jQuery('#feedbackModal').on('shown', function() {
       log_js_action("feedback", "form", 'feedback-open');
       jQuery("#id_url").val(window.location);
       jQuery("#feedbackModal textarea").focus();
       jQuery("#feedbackModal textarea").val("");
   });
-  $('#feedbackModal').on('hidden', function() {
+  jQuery('#feedbackModal').on('hidden', function() {
       log_js_action("feedback", "form", 'feedback-close');
   });
-  $('#successModal').modal({
+  jQuery('#successModal').modal({
       backdrop: false,
       keyboard: true,
       show: false
   }); 
   // set up event logging
-  $('#successModal').on('shown', function() {
+  jQuery('#successModal').on('shown', function() {
       log_js_action("feedback", "form", 'feedback-success-open');
   });
-  $('#successModal').on('hidden', function() {
+  jQuery('#successModal').on('hidden', function() {
       log_js_action("feedback", "form", 'feedback-success-close');
   });
   

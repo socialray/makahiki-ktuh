@@ -2,6 +2,7 @@
 
 from django.contrib.auth.models import User
 from django.core.exceptions import ObjectDoesNotExist
+from django.db.models.query_utils import Q
 from django.db.utils import IntegrityError
 from apps.managers.player_mgr.models import Profile
 from apps.managers.score_mgr import score_mgr
@@ -11,6 +12,24 @@ from apps.managers.team_mgr.models import Team
 def players(num_results=10):
     """Get some numbers of players."""
     return Profile.objects.all()[:num_results]
+
+
+def canopy_members():
+    """returns the canopy memebers, which are the top 50 points leaders, plus admin."""
+
+    members = []
+    entries = score_mgr.player_points_leaders(num_results=50)
+    if entries:
+        for entry in entries:
+            member = User.objects.get(profile__id=entry["profile"])
+            members.append(member)
+
+    entries = User.objects.filter(Q(is_superuser=True) |
+                                  Q(is_staff=True)).select_related('profile')
+    for entry in entries:
+        members.append(entry)
+
+    return members
 
 
 def points_leader(round_name="Overall"):
@@ -26,9 +45,9 @@ def points_leaders(num_results=10, round_name="Overall"):
     """Returns the points leaders out of all users, as a dictionary object
     with profile__name and points.
     """
-    entry = score_mgr.player_points_leaders(num_results=num_results, round_name=round_name)
-    if entry:
-        return entry
+    entries = score_mgr. player_points_leaders(num_results=num_results, round_name=round_name)
+    if entries:
+        return entries
     else:
         return Profile.objects.all().extra(select={'profile__name': 'name', 'points': 0}).values(
             'profile__name', 'points')[:num_results]

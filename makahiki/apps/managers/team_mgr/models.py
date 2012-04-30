@@ -75,10 +75,16 @@ class Post(models.Model):
         return self.created_at.strftime("%m/%d %I:%M %p")
 
 
-class PostComment(models.Model):
-    """Represent the structure for comments in a post."""
-    user = models.ForeignKey(User, help_text="The user who submit the comment.")
-    post = models.ForeignKey(Post, help_text="The post.")
-    text = models.TextField(help_text="The content of the comment.")
+class CanopyPost(models.Model):
+    """Canopy wall post."""
+    user = models.ForeignKey(User, help_text="The user who submit the post.")
+    text = models.TextField(help_text="The content of the post.")
     created_at = models.DateTimeField(editable=False, auto_now_add=True,
                                       help_text="The create timestamp")
+
+    def __unicode__(self):
+        return "%s (%s): %s" % (self.team, self.user.username, self.text)
+
+    def date_string(self):
+        """Formats the created date into a pretty string."""
+        return self.created_at.strftime("%m/%d %I:%M %p")

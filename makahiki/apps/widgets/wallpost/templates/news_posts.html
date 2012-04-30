@@ -7,7 +7,7 @@
     {% endif %}
 
     {% if forloop.last and view_objects.wallpost.more_posts %}
-        <li id="view-more-posts" %}>
+        <li id="view-more-posts">
             <a href="#" onclick='
                     $.get("{% url news_more_posts %}?last_post={{post.id}}&page_name={{ view_objects.wallpost.page_name }}", function(data) {
                     $("#view-more-posts").remove();

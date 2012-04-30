@@ -1,54 +1,15 @@
 [
   {
-    "pk": 2,
-    "model": "challenge_mgr.pageinfo",
-    "fields": {
-      "name": "learn",
-      "title": "Get Nutz",
-      "introduction": "* Play the Game\r\n* Earn Kukuicup points\r\n* See where you stand",
-      "unlock_condition": "True",
-      "label": "Get Nutz",
-      "priority": 2,
-      "url": "/learn"
-    }
-  },
-  {
     "pk": 3,
     "model": "challenge_mgr.pageinfo",
     "fields": {
       "name": "energy",
       "title": "Go Low",
       "introduction": "* Observe Energy use\r\n* Track Energy goals\r\n* Compare usage to others",
-      "unlock_condition": "True",
       "label": "Go Low",
       "priority": 3,
-      "url": "/energy"
-    }
-  },
-  {
-    "pk": 4,
-    "model": "challenge_mgr.pageinfo",
-    "fields": {
-      "name": "water",
-      "title": "Drop Down",
-      "introduction": "* Observe Water use\r\n* Track Water goals\r\n* Compare usage to others",
-      "unlock_condition": "True",
-      "label": "Drop Down",
-      "priority": 4,
-      "url": "/water"
-    }
-  },
-  {
-    "pk": 5,
-    "model": "challenge_mgr.pageinfo",
-    "fields": {
-      "name": "advanced",
-      "title": "Advanced",
-      "introduction": "* Compare team usage\r\n* See historical trends\r\n* Help others conserve",
-      "unlock_condition": "True",
-      "label": "Advanced",
-      "priority": 5,
-      "url": "/advanced"
+      "url": "/energy",
+      "unlock_condition": "True"
     }
   },
   {
@@ -58,23 +19,10 @@
       "name": "news",
       "title": "News",
       "introduction": "* What are people doing?\r\n* Your public comments\r\n* Top activities & events",
-      "unlock_condition": "True",
       "label": "News",
       "priority": 6,
-      "url": "/news"
-    }
-  },
-  {
-    "pk": 7,
-    "model": "challenge_mgr.pageinfo",
-    "fields": {
-      "name": "win",
-      "title": "Prizes",
-      "introduction": "* See the prizes\r\n* Allocate your points\r\n* Monitor your chances",
-      "unlock_condition": "True",
-      "label": "Prizes",
-      "priority": 7,
-      "url": "/win"
+      "url": "/news",
+      "unlock_condition": "True"
     }
   },
   {
@@ -84,10 +32,10 @@
       "name": "profile",
       "title": "Profile",
       "introduction": "* Manage your Settings\r\n* Connect to facebook\r\n* Change your picture",
-      "unlock_condition": "True",
       "label": "Profile",
       "priority": 8,
-      "url": "/profile"
+      "url": "/profile",
+      "unlock_condition": "True"
     }
   },
   {
@@ -97,82 +45,84 @@
       "name": "help",
       "title": "Help",
       "introduction": "* Watch intro video\r\n* Learn the rules\r\n* Ask an admin",
-      "unlock_condition": "True",
       "label": "Help",
       "priority": 9,
-      "url": "/help"
+      "url": "/help",
+      "unlock_condition": "True"
     }
   },
   {
     "pk": 7,
-    "model": "challenge_mgr.pagesettings",
+    "model": "challenge_mgr.pageinfo",
     "fields": {
-      "widget": "energy_goal",
-      "enabled": true,
-      "page": 3
-    }
-  },
-  {
-    "pk": 10,
-    "model": "challenge_mgr.pagesettings",
-    "fields": {
-      "widget": "energy_scoreboard",
-      "enabled": true,
-      "page": 3
-    }
-  },
-  {
-    "pk": 9,
-    "model": "challenge_mgr.pagesettings",
-    "fields": {
-      "widget": "energy_power_meter",
-      "enabled": true,
-      "page": 3
-    }
-  },
-  {
-    "pk": 11,
-    "model": "challenge_mgr.pagesettings",
-    "fields": {
-      "widget": "wallpost",
-      "enabled": true,
-      "page": 3
-    }
-  },
-  {
-    "pk": 2,
-    "model": "challenge_mgr.pagesettings",
-    "fields": {
-      "widget": "help.intro",
-      "enabled": true,
-      "page": 9
-    }
-  },
-  {
-    "pk": 3,
-    "model": "challenge_mgr.pagesettings",
-    "fields": {
-      "widget": "help.faq",
-      "enabled": true,
-      "page": 9
-    }
-  },
-  {
-    "pk": 4,
-    "model": "challenge_mgr.pagesettings",
-    "fields": {
-      "widget": "help.rule",
-      "enabled": true,
-      "page": 9
+      "name": "win",
+      "title": "Prizes",
+      "introduction": "* See the prizes\r\n* Allocate your points\r\n* Monitor your chances",
+      "label": "Prizes",
+      "priority": 7,
+      "url": "/win",
+      "unlock_condition": "True"
     }
   },
   {
     "pk": 5,
+    "model": "challenge_mgr.pageinfo",
+    "fields": {
+      "name": "advanced",
+      "title": "Advanced",
+      "introduction": "* Compare team usage\r\n* See historical trends\r\n* Help others conserve",
+      "label": "Advanced",
+      "priority": 5,
+      "url": "/advanced",
+      "unlock_condition": "has_points(60)"
+    }
+  },
+  {
+    "pk": 2,
+    "model": "challenge_mgr.pageinfo",
+    "fields": {
+      "name": "learn",
+      "title": "Get Nutz",
+      "introduction": "* Play the Game\r\n* Earn Kukuicup points\r\n* See where you stand",
+      "label": "Get Nutz",
+      "priority": 2,
+      "url": "/learn",
+      "unlock_condition": "True"
+    }
+  },
+  {
+    "pk": 4,
+    "model": "challenge_mgr.pageinfo",
+    "fields": {
+      "name": "water",
+      "title": "Drop Down",
+      "introduction": "* Observe Water use\r\n* Track Water goals\r\n* Compare usage to others",
+      "label": "Drop Down",
+      "priority": 4,
+      "url": "/water",
+      "unlock_condition": "True"
+    }
+  },
+  {
+    "pk": 10,
+    "model": "challenge_mgr.pageinfo",
+    "fields": {
+      "name": "status",
+      "title": "Status",
+      "introduction": "* Mission Control\r\n* Status\r\n* Analytics",
+      "label": "Status",
+      "priority": 10,
+      "url": "/status",
+      "unlock_condition": "True"
+    }
+  },
+  {
+    "pk": 25,
     "model": "challenge_mgr.pagesettings",
     "fields": {
-      "widget": "ask_admin",
+      "widget": "scoreboard",
       "enabled": true,
-      "page": 9
+      "page": 2
     }
   },
   {
@@ -194,28 +144,100 @@
     }
   },
   {
-    "pk": 25,
+    "pk": 7,
     "model": "challenge_mgr.pagesettings",
     "fields": {
-      "widget": "scoreboard",
+      "widget": "energy_goal",
       "enabled": true,
-      "page": 2
+      "page": 3
     }
   },
   {
-    "pk": 20,
+    "pk": 9,
+    "model": "challenge_mgr.pagesettings",
+    "fields": {
+      "widget": "energy_power_meter",
+      "enabled": true,
+      "page": 3
+    }
+  },
+  {
+    "pk": 10,
+    "model": "challenge_mgr.pagesettings",
+    "fields": {
+      "widget": "resource_scoreboard.energy",
+      "enabled": true,
+      "page": 3
+    }
+  },
+  {
+    "pk": 11,
     "model": "challenge_mgr.pagesettings",
     "fields": {
       "widget": "wallpost",
       "enabled": true,
-      "page": 6
+      "page": 3
     }
   },
   {
-    "pk": 21,
+    "pk": 30,
     "model": "challenge_mgr.pagesettings",
     "fields": {
-      "widget": "upcoming_events",
+      "widget": "energy_goal",
+      "enabled": true,
+      "page": 4
+    }
+  },
+  {
+    "pk": 29,
+    "model": "challenge_mgr.pagesettings",
+    "fields": {
+      "widget": "resource_scoreboard.water",
+      "enabled": true,
+      "page": 4
+    }
+  },
+  {
+    "pk": 31,
+    "model": "challenge_mgr.pagesettings",
+    "fields": {
+      "widget": "wallpost",
+      "enabled": true,
+      "page": 4
+    }
+  },
+  {
+    "pk": 27,
+    "model": "challenge_mgr.pagesettings",
+    "fields": {
+      "widget": "canopy_member",
+      "enabled": true,
+      "page": 5
+    }
+  },
+  {
+    "pk": 26,
+    "model": "challenge_mgr.pagesettings",
+    "fields": {
+      "widget": "canopy_viz",
+      "enabled": true,
+      "page": 5
+    }
+  },
+  {
+    "pk": 28,
+    "model": "challenge_mgr.pagesettings",
+    "fields": {
+      "widget": "wallpost",
+      "enabled": true,
+      "page": 5
+    }
+  },
+  {
+    "pk": 23,
+    "model": "challenge_mgr.pagesettings",
+    "fields": {
+      "widget": "my_commitments",
       "enabled": true,
       "page": 6
     }
@@ -230,21 +252,57 @@
     }
   },
   {
-    "pk": 23,
-    "model": "challenge_mgr.pagesettings",
-    "fields": {
-      "widget": "my_commitments",
-      "enabled": true,
-      "page": 6
-    }
-  },
-  {
     "pk": 24,
     "model": "challenge_mgr.pagesettings",
     "fields": {
       "widget": "team_members",
       "enabled": true,
       "page": 6
+    }
+  },
+  {
+    "pk": 21,
+    "model": "challenge_mgr.pagesettings",
+    "fields": {
+      "widget": "upcoming_events",
+      "enabled": true,
+      "page": 6
+    }
+  },
+  {
+    "pk": 20,
+    "model": "challenge_mgr.pagesettings",
+    "fields": {
+      "widget": "wallpost",
+      "enabled": true,
+      "page": 6
+    }
+  },
+  {
+    "pk": 14,
+    "model": "challenge_mgr.pagesettings",
+    "fields": {
+      "widget": "prizes",
+      "enabled": true,
+      "page": 7
+    }
+  },
+  {
+    "pk": 15,
+    "model": "challenge_mgr.pagesettings",
+    "fields": {
+      "widget": "raffle",
+      "enabled": true,
+      "page": 7
+    }
+  },
+  {
+    "pk": 19,
+    "model": "challenge_mgr.pagesettings",
+    "fields": {
+      "widget": "badges",
+      "enabled": true,
+      "page": 8
     }
   },
   {
@@ -275,30 +333,102 @@
     }
   },
   {
-    "pk": 19,
+    "pk": 5,
     "model": "challenge_mgr.pagesettings",
     "fields": {
-      "widget": "badges",
+      "widget": "ask_admin",
       "enabled": true,
-      "page": 8
+      "page": 9
     }
   },
   {
-    "pk": 14,
+    "pk": 3,
     "model": "challenge_mgr.pagesettings",
     "fields": {
-      "widget": "prizes",
+      "widget": "help.faq",
       "enabled": true,
-      "page": 7
+      "page": 9
     }
   },
   {
-    "pk": 15,
+    "pk": 2,
     "model": "challenge_mgr.pagesettings",
     "fields": {
-      "widget": "raffle",
+      "widget": "help.intro",
       "enabled": true,
-      "page": 7
+      "page": 9
+    }
+  },
+  {
+    "pk": 4,
+    "model": "challenge_mgr.pagesettings",
+    "fields": {
+      "widget": "help.rule",
+      "enabled": true,
+      "page": 9
+    }
+  },
+  {
+    "pk": 36,
+    "model": "challenge_mgr.pagesettings",
+    "fields": {
+      "widget": "resource_scoreboard.energy",
+      "enabled": true,
+      "page": 10
+    }
+  },
+  {
+    "pk": 38,
+    "model": "challenge_mgr.pagesettings",
+    "fields": {
+      "widget": "resource_scoreboard.water",
+      "enabled": true,
+      "page": 10
+    }
+  },
+  {
+    "pk": 37,
+    "model": "challenge_mgr.pagesettings",
+    "fields": {
+      "widget": "scoreboard",
+      "enabled": true,
+      "page": 10
+    }
+  },
+  {
+    "pk": 35,
+    "model": "challenge_mgr.pagesettings",
+    "fields": {
+      "widget": "status.actions",
+      "enabled": true,
+      "page": 10
+    }
+  },
+  {
+    "pk": 33,
+    "model": "challenge_mgr.pagesettings",
+    "fields": {
+      "widget": "status.prizes",
+      "enabled": true,
+      "page": 10
+    }
+  },
+  {
+    "pk": 32,
+    "model": "challenge_mgr.pagesettings",
+    "fields": {
+      "widget": "status.rsvps",
+      "enabled": true,
+      "page": 10
+    }
+  },
+  {
+    "pk": 34,
+    "model": "challenge_mgr.pagesettings",
+    "fields": {
+      "widget": "status.users",
+      "enabled": true,
+      "page": 10
     }
   }
 ]
