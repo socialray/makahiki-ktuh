@@ -78,13 +78,12 @@
 {% block extra_body %}
   <!-- javascript
    ================================================== -->
-  <!-- Placed at the end of the document so the pages load faster -->
   <script type="text/javascript">
-  $(document).ready(function() {
-    $('#sngle-cycle').carousel()
-    $('#wide-personal-cycle').carousel()
-    $('#wide-team-cycle').carousel()
-    $('#wide-round-cycle').carousel()
+    jQuery(document).ready(function() {
+    jQuery('#sngle-cycle').carousel()
+    jQuery('#wide-personal-cycle').carousel()
+    jQuery('#wide-team-cycle').carousel()
+    jQuery('#wide-round-cycle').carousel()
   });
   </script>
   {% block page_cycles %}{% endblock page_cycles %}

@@ -23,11 +23,14 @@ def supply(request, page_name):
             goal = get_realtime_goal_data(team)
         daily_goal = get_daily_energy_goal_data(team)
 
+    resource_settings = resource_mgr.get_resource_settings(page_name)
+
     return {
         "golow_activities": golow_activities,
         "goal": goal,
         "is_manual_entry": is_manual_entry,
         "daily_goal": daily_goal,
+        "resource": resource_settings,
         }
 
 

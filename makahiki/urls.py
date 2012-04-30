@@ -22,6 +22,7 @@ urlpatterns = patterns('',
     url(r'^news/$', "apps.pages.views.index", name="news_index"),
     url(r'^win/$', "apps.pages.views.index", name="win_index"),
     url(r'^advanced/$', 'apps.pages.views.index', name="advanced_index"),
+    url(r'^status/$', 'apps.pages.views.index', name="status_index"),
 
     # system level
     url(r'^log/', include('apps.managers.log_mgr.urls')),

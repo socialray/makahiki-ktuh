@@ -1,8 +1,10 @@
 Namespace("org.wattdepot.makahiki");
 
+google.load("visualization", "1", {packages:['corechart', 'imagechart']});
+
 // Store user preferences in corresponding variables.
 var title = "Energy Consumed";
-var host_uri = 'http://server.wattdepot.org:8192/gviz/';
+var host_uri = 'http://server.wattdepot.org:8194/wattdepot';
 var dataType = "energyConsumed";
 
 // an array for collected tables which will be combined for display.
@@ -101,7 +103,7 @@ function initialize() {
     // and store each as an element in the array.
     var query = new Array();
     for (l = 0; l < source.length; l++) {
-        var url = host_uri + 'sources/' + source[l].toString() + '/calculated?startTime=' +
+        var url = host_uri + '/sources/' + source[l].toString() + '/gviz/calculated?startTime=' +
             startTime + '&endTime=' + endTime + '&samplingInterval=' + interval;
         //debug(url);
         query[l] = new google.visualization.Query(url);

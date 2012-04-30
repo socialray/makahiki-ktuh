@@ -8,9 +8,9 @@ class ResourceSettings(models.Model):
     """resource settings model."""
 
     RESOURCE_CHOICE = (
-        ("Energy", "Energy"),
-        ("Water", "Water"),
-        ("Waste", "Waste"),)
+        ("energy", "energy"),
+        ("water", "water"),
+        ("waste", "waste"),)
     WINNING_ORDER_CHOICE = (
         ("Ascending", "Ascending"),
         ("Descending", "Descending"),)
