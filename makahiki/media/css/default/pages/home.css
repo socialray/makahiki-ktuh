@@ -157,7 +157,19 @@ iframe {
         url(/site_media/static/images/icons/icon-advanced-lg-over.png)
         top left no-repeat;
 }
+.home-status-icon {
+    background: transparent
+    url(/site_media/static/images/icons/icon-status-lg.png) top
+    left no-repeat;
+    width: 120px;
+    height: 124px;
+}
 
+.home-status-icon:hover {
+    background: transparent
+    url(/site_media/static/images/icons/icon-status-lg-over.png)
+    top left no-repeat;
+}
 .home-energy-icon {
     background: transparent
         url(/site_media/static/images/icons/icon-go-low-lg.png) top left
@@ -400,6 +412,18 @@ iframe {
         background: transparent
             url(/site_media/static/images/icons/icon-advanced-over.png)
             top left no-repeat;
+    }
+    .home-status-icon {
+        background: transparent
+        url(/site_media/static/images/icons/icon-status.png) top
+        left no-repeat;
+        width: 54px;
+        height: 56px;
+    }
+    .home-status-icon:hover {
+        background: transparent
+        url(/site_media/static/images/icons/icon-status-over.png)
+        top left no-repeat;
     }
     .home-energy-icon {
         background: transparent
