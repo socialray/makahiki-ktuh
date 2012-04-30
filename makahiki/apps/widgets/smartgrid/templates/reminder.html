@@ -21,6 +21,18 @@
     <div {% get_id_and_classes "task-reminder-dialog" %} title="Remind Me" style="display: none">
         {% include "reminder_form.html" %}
     </div>
+    <div class="modal hide fade" id="reminderModal">
+        <div class="modal-header">
+            <a class="close" data-dismiss="modal">x</a>
+            <h3>Remind Me</h3>
+        </div>
+        <div class="modal-body" id="modal-body">
+            {% include "reminder_form.html" %}
+        </div>
+        <div class="modal-footer">
+            <a href="#" class="btn" data-dismiss="modal">Close</a>
+        </div>
+    </div>
 
     <script type="text/javascript">
         jQuery(document).ready(function ($) {
@@ -35,9 +47,21 @@
                     log_js_action("{{action.type}}", "{{action.slug}}", "reminder-close");
                 }
             });
+            $('#reminderModal').modal({
+                backdrop: true,
+                keyboard: true,
+                show: false
+            });
+            $('#reminderModal').on('shown', function() {
+                log_js_action("{{action.type}}", "{{action.slug}}", 'reminder-open');
+            });
+            $('#reminderModal').on('hidden', function() {
+                log_js_action("{{action.type}}", "{{action.slug}}", 'reminder-close');
+            });
 
             $("#task-reminder-button").click(function () {
-                $("#task-reminder-dialog").dialog("open");
+//                 $("#task-reminder-dialog").dialog("open");
+                $("#reminderModal").modal('show');
             });
 
             function createDateString(offset) {
@@ -97,7 +121,8 @@
                 });
 
                 $("#task-reminder-form-cancel").click(function () {
-                    $("#task-reminder-dialog").dialog("close");
+//                     $("#task-reminder-dialog").dialog("close");
+                    $("#reminderModal").modal('hide');
                     return false;
                 });
 
@@ -108,7 +133,8 @@
                             window.location.reload();
                         }
                         else {
-                            $("#task-reminder-dialog").html(data.form);
+//                             $("#task-reminder-dialog").html(data.form);
+                            $("#reminderModal .modal-body").html(data.form);
                             bindReminderForm();
                         }
 

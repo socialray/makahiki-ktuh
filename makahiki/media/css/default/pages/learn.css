@@ -221,12 +221,11 @@ table#activities-grid td table td{
 	text-align: center;
 	margin: 0;
 	padding: 0;
-	border: 1px solid #000;
 	border-radius: 8px;
-	-moz-border-radius: 8px;
+    -moz-border-radius: 8px;
 	-webkit-border-radius: 8px;
-	text-transform: capitalize;
-	background-color: #FFF;
+    text-transform: capitalize;
+/*     border: 1px solid #000; */
 }
 
 #activity-category .get-started div, #activity-category .basic-energy div, #activity-category .lights-out div, #activity-category .make-watts div, #activity-category .moving-on div, #activity-category .opala div, #activity-category .wet-wild div, #activity-category .potpourri div {
