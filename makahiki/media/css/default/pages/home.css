@@ -10,6 +10,10 @@
     width: 40%;
 } 
 
+.homecontent.modal {
+  height: 100%;
+}
+
 @media ( max-width : 350px) {
     .homecontent .modal {
         position: fixed; 
