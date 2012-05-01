@@ -102,11 +102,10 @@ def reminder(request, action_type, slug):
     raise Http404
 
 
-def load_reminders(action, user, completed_member_count):
+def load_reminders(action, user):
     """Load the reminders."""
     reminders = {}
     if action.type == "event" or action.type == "excursion":
-        action.available_seat = action.event.event_max_seat - completed_member_count
         # Store initial reminder fields.
         reminder_init = {"email": user.get_profile().contact_email or user.email,
             "text_number": user.get_profile().contact_text,

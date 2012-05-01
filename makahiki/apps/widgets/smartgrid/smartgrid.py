@@ -3,6 +3,7 @@
 import datetime
 from django.db.models import  Count
 from django.core.exceptions import ObjectDoesNotExist
+from django.db.models.query_utils import Q
 from django.shortcuts import get_object_or_404
 from apps.managers.cache_mgr import cache_mgr
 from apps.utils import utils
@@ -47,11 +48,13 @@ def annotate_action_status(user, action):
     else:
         action.member = None
 
-    #Calculate the task duration
-    if action.type != "commitment":
+    # calculate the task duration
+    if action.type == "commitment":
+        action.duration = action.commitment.duration
+    else:
         if action.type == "activity":
             duration = action.activity.duration
-        else:
+        else:  # is event
             duration = action.event.duration
 
         hours = duration / 60
@@ -344,8 +347,8 @@ def get_available_events(user):
     """Retrieves only the events that a user can participate in."""
 
     events = Event.objects.filter(
+        Q(expire_date__isnull=True) | Q(expire_date__gte=datetime.date.today()),
         pub_date__lte=datetime.date.today(),
-        expire_date__gte=datetime.date.today(),
         event_date__gte=datetime.date.today(),
     ).order_by("event_date")
 

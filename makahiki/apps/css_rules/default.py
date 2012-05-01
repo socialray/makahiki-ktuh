@@ -32,7 +32,7 @@ PAGE_CSS_IMPORT = {
     "help": '<link rel="stylesheet" href="{0}css/{1}/pages/help.css">',
     "win": '<link rel="stylesheet" href="{0}css/{1}/pages/win.css">',
     "profile": '<link rel="stylesheet" href="{0}css/{1}/pages/profile.css">',
-    "canopy": '<link rel="stylesheet" href="{0}css/{1}/pages/canopy.css">',
+    "advanced": '<link rel="stylesheet" href="{0}css/{1}/pages/advanced.css">',
     "status": '<link rel="stylesheet" href="{0}css/{1}/pages/status.css">',
     }
 
@@ -50,10 +50,10 @@ CSS_IDS = {
     "home-profile": "home-item",
 
     "energy-power": "content-box",
-    "energy-scoreboard-box": "content-box",
+    "resource-scoreboard-box": "content-box",
     "energy-status-box": "content-box",
     "energy-power-title": "content-box-title",
-    "energy-scoreboard-title": "content-box-title",
+    "resource-scoreboard-title": "content-box-title",
     "energy-status-title": "content-box-title",
 
     "activity-events-box": "content-box",

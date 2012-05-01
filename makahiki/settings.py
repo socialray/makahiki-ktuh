@@ -168,9 +168,13 @@ for widget in INSTALLED_DEFAULT_WIDGET_APPS:
 INSTALLED_WIDGET_APPS = (
     'ask_admin',
     'badges',
+    'canopy_viz',
+    'canopy_member',
     'energy_goal',
     'energy_power_meter',
-    'energy_scoreboard',
+    'resource_scoreboard',
+    'resource_scoreboard.energy',
+    'resource_scoreboard.water',
     'my_achievements',
     'my_commitments',
     'my_info',
@@ -186,6 +190,11 @@ INSTALLED_WIDGET_APPS = (
     'help.intro',
     'help.faq',
     'help.rule',
+    'status',
+    'status.prizes',
+    'status.rsvps',
+    'status.users',
+    'status.actions',
 )
 
 for widget in INSTALLED_WIDGET_APPS:

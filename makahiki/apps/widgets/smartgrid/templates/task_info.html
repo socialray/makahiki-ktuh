@@ -25,12 +25,12 @@
         {% endif %}
         {% if action.is_canopy %} Karma {% endif %} points.
         {% if action.type == "commitment" %}
-            It lasts {{ action.commitment.duration }} days.
+            It lasts {{ action.duration }} days.
         {% else %}
             <p/>
             {% if action.type == "event" or action.type == "excursion" %}
-                <b>When</b> : {{ action.event_date }} <br/>
-                <b>Where</b> : {{ action.event_location }} <br/>
+                <b>When</b> : {{ action.event.event_date }} <br/>
+                <b>Where</b> : {{ action.event.event_location }} <br/>
                 <b>Estimated duration</b> : {{ action.duration }} <br/>
                 <b>Space(s) still available</b> : {{ action.available_seat }}
             {% else %}

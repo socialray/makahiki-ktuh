@@ -7,7 +7,7 @@ google.load("visualization", "1", {packages:['corechart', 'imagechart']});
 google.setOnLoadCallback(initialize);
 
 var title = "Energy Consumed";
-var host_uri = 'http://server.wattdepot.org:8192/gviz/';
+var host_uri = 'http://server.wattdepot.org:8194/wattdepot';
 
 var dataType = "energyConsumed";
 var dateRange = "last7days"
@@ -65,7 +65,7 @@ function initialize() {
     // In order to support multiple sources in a single visualization, need to create an array of queries
     // and store each as an element in the array.
 
-    var url = host_uri + 'sources/' + source + '/calculated?startTime=' +
+    var url = host_uri + '/sources/' + source + '/gviz/calculated?startTime=' +
         startTime + '&endTime=' + endTime + '&samplingInterval=' + interval;
     query = new google.visualization.Query(url);
     //debug(url);

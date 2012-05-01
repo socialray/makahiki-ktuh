@@ -32,8 +32,10 @@
       <div class="row-fluid">
           <div class="span12">
               <div class="setup-form-photo">
-                  <p>Upload a new picture (optional):</p>
-                  {{ form.avatar }}
+                  <div class="upload-form">
+                      <p>Upload a new picture (optional):</p>
+                      {{ form.avatar }}
+                  </div>
                   <div id="profile-picture-facebook">
                         {% include "first-login/profile-facebook.html" %}
                   </div>
@@ -59,7 +61,7 @@
   </div>
   <div style="clear:both"></div> 
   <div id="progressbar-header">
-        <p>Introduction progress, points: {{ user.get_profile.points }}</p>
+      <p>Introduction progress, points: {{ user.get_profile.points }}</p>
   </div>
   <div id="progressbar" class="progress">
       <div class="bar" style="width: 0%;">

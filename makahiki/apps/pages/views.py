@@ -42,7 +42,8 @@ def index(request):
     view_objects['active'] = page_name
 
     # get user energy rank and usage
-    supply_energy_rank(request, view_objects)
+    energy_rank_info = resource_mgr.energy_team_rank_info(request.user.get_profile().team)
+    view_objects["energy_rank_info"] = energy_rank_info
 
     return render_to_response("%s.html" % page_name, {
         "view_objects": view_objects,
@@ -55,6 +56,7 @@ def supply_view_objects(request, page_name, view_objects):
     if not page_settings:
         return False
 
+    view_objects['widget_templates'] = []
     for page_setting in page_settings:
         widget = page_setting.widget
         view_module_name = 'apps.widgets.' + widget + '.views'
@@ -62,15 +64,12 @@ def supply_view_objects(request, page_name, view_objects):
         widget = widget.replace(".", "_")
         view_objects[widget] = page_views.supply(request, page_name)
 
+        widget_template = "widgets/" + \
+                          page_setting.widget.replace(".", "/") + \
+                          "/templates/index.html"
+        view_objects['widget_templates'].append(widget_template)
+
     return True
-
-
-def supply_energy_rank(request, view_objects):
-    """ Gets the user energy rank and usage."""
-    if "energy_scoreboard" in settings.INSTALLED_WIDGET_APPS:
-        energy_rank_info = resource_mgr.energy_team_rank_info(
-            request.user.get_profile().team)
-        view_objects["energy_rank_info"] = energy_rank_info
 
 
 def _get_widget_css(view_objects):

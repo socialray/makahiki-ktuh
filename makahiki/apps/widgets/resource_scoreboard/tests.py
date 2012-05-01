@@ -24,7 +24,7 @@ class EnergyFunctionalTestCase(TransactionTestCase):
         profile.setup_profile = True
         profile.save()
 
-        challenge_mgr.register_page_widget("energy", "energy_scoreboard")
+        challenge_mgr.register_page_widget("energy", "resource_scoreboard.energy")
         self.client.login(username="user", password="changeme")
 
     def testIndex(self):
@@ -35,7 +35,7 @@ class EnergyFunctionalTestCase(TransactionTestCase):
     def testEnergyScoreboard(self):
         """test Energy scoreboard."""
         response = self.client.get(reverse("energy_index"))
-        goals = response.context["view_objects"]["energy_scoreboard"]["goals_scoreboard"]
+        goals = response.context["view_objects"]["resource_scoreboard_energy"]["goals_scoreboard"]
         for goal in goals:
             self.assertEqual(goal["completions"], 0, "No team should have completed a goal.")
 
@@ -46,7 +46,7 @@ class EnergyFunctionalTestCase(TransactionTestCase):
         )
 
         response = self.client.get(reverse("energy_index"))
-        goals = response.context["view_objects"]["energy_scoreboard"]["goals_scoreboard"]
+        goals = response.context["view_objects"]["resource_scoreboard_energy"]["goals_scoreboard"]
         for goal in goals:
             self.assertEqual(goal["completions"], 0, "No team should have completed a goal.")
 
@@ -54,7 +54,7 @@ class EnergyFunctionalTestCase(TransactionTestCase):
         energy_goal.save()
 
         response = self.client.get(reverse("energy_index"))
-        goals = response.context["view_objects"]["energy_scoreboard"]["goals_scoreboard"]
+        goals = response.context["view_objects"]["resource_scoreboard_energy"]["goals_scoreboard"]
         for team in goals:
             if team["team__name"] == self.team.name:
                 # print team.teamenergygoal_set.all()

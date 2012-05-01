@@ -6,7 +6,7 @@ Namespace("org.wattdepot.makahiki");
 
  google.setOnLoadCallback(initialize); 
   
- var host_uri = 'http://server.wattdepot.org:8192/gviz/'; 
+ var host_uri = 'http://server.wattdepot.org:8194/wattdepot';
       
  var powerSource;      
  var table;
@@ -91,7 +91,7 @@ Namespace("org.wattdepot.makahiki");
       /**sensor data and calculated data have different query a uri.  */
       var query = new Array();
       for (i=0; i<powerSource.length; i++){
-        var url = host_uri + 'sources/' + powerSource[i] +  '/calculated?startTime=' + startTime + '&endTime=' + endTime + '&samplingInterval='+interval; 
+        var url = host_uri + '/sources/' + powerSource[i] +  '/gviz/calculated?startTime=' + startTime + '&endTime=' + endTime + '&samplingInterval='+interval;
          //var url = host_uri + 'sources/' + powerSource[i] + '/sensordata?startTime=' + startTime + '&endTime=' + endTime; 
         //debug(url) ;
         
