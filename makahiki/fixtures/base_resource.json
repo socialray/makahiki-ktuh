@@ -1,0 +1,29 @@
+[
+  {
+    "pk": 1,
+    "model": "resource_mgr.resourcesettings",
+    "fields": {
+      "winning_order": "Ascending",
+      "name": "energy",
+      "unit": "kWh"
+    }
+  },
+  {
+    "pk": 2,
+    "model": "resource_mgr.resourcesettings",
+    "fields": {
+      "winning_order": "Ascending",
+      "name": "water",
+      "unit": "Gallon"
+    }
+  },
+  {
+    "pk": 3,
+    "model": "resource_mgr.resourcesettings",
+    "fields": {
+      "winning_order": "Descending",
+      "name": "waste",
+      "unit": "Ton"
+    }
+  }
+]
