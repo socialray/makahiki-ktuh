@@ -12,33 +12,54 @@
   } 
 }
 
-.homecontent.modal {
-  height: 100%;
-}
-
+/*mobile*/
 @media ( max-width : 350px) {
-    .homecontent .modal {
+    #setup-dialog {
+        margin-top: 0px;
         position: fixed; 
-        max-height: 450px; 
+        max-height: 410px; 
         min-width: 270px;
+    }
+    
+    #setup-dialog .modal-body { 
+        max-height: 165px; 
+        overflow-y: scroll;
+    }
+
+    #setup-dialog .modal-header > h2 { 
+        font-size: 13pt;
+        line-height: 13pt;
+    }
+
+    #setup-dialog .modal-footer { 
+        max-height: 155px; 
+        padding-bottom: 0px;
+        padding-top: 5px;
     }
 }
 
-#setup-dialog .modal-body {
-    max-height: 180px; 
-    overflow-y: scroll;
-}
+/*tablet+*/
+@media ( min-width : 350px) {
+    #setup-dialog {
+      margin-top: -300px; 
+    }
 
-#setup-dialog .modal-header {
-    max-height: 80px;  
-    padding-bottom: 0px;
-    padding-top: 0px;
-}
 
-#setup-dialog .modal-footer {
-    max-height: 190px; 
-    padding-bottom: 0px;
-    padding-top: 5px;
+    #setup-dialog .modal-body {
+        height: 40%; 
+        max-height: 360px;
+        overflow-y: scroll;
+    }
+
+    #setup-dialog .modal-header {
+        height: 5%;
+        max-height: 30px;
+    }
+
+    #setup-dialog .modal-footer {
+        height: 15%;
+        max-height: 130px;
+    }
 }
 
 iframe {
@@ -280,7 +301,7 @@ iframe {
 }
 
 #progressbar-header p {
-    margin: 5px 0;
+    margin: 3px 0;
 }
 
 #setup-welcome-info {
