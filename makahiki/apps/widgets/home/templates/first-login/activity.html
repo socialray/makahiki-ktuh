@@ -26,15 +26,7 @@
 
       // 3. This function creates an <iframe> (and YouTube player)
       //    after the API code downloads.
-      var player;  
-      $(document).ready(function(){ 
-          player = new YT.Player('player', {
-            events: {
-              'onReady': onPlayerReady,
-              'onStateChange': onPlayerStateChange
-            }
-          }); 
-      })
+      var player;   
 
       // 4. The API will call this function when the video player is ready.
       function onPlayerReady(event) { 
@@ -98,6 +90,22 @@
         var s = 5.0/7.0*100 + "%";
         $(".bar").width(s);
 
+        var done=false;
+        while(!done) {
+            try {
+                player = new YT.Player('player', {
+                    events: {
+                      'onReady': onPlayerReady,
+                      'onStateChange': onPlayerStateChange
+                    }
+                  });
+                alert("Done");
+                done=true;
+            }
+            catch (err) {
+                setTimeout(function() {},50);
+            }
+        }
           $("#back").button().click(function () {
               $(this).button("option", "disabled", true);
               $.get("{% url setup_profile %}?from=video", function (data) {
