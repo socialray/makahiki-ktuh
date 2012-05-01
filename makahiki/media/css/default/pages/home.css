@@ -6,9 +6,11 @@
     width: 180px;
 }
 
-#setup-dialog #id_avatar {
-    width: 40%;
-} 
+@media ( max-width : 651px) {
+  .upload-form { 
+    display: none;
+  } 
+}
 
 .homecontent.modal {
   height: 100%;

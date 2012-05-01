@@ -17,9 +17,47 @@
                         frameborder="0"></iframe>
             </div>
         </div>
-    <script>
+       <script>
+      // 2. This code loads the IFrame Player API code asynchronously.
+      var tag = document.createElement('script');
+      tag.src = "http://www.youtube.com/player_api";
+      var firstScriptTag = document.getElementsByTagName('script')[0];
+      firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+
+      // 3. This function creates an <iframe> (and YouTube player)
+      //    after the API code downloads.
+      var player;
+      function onYouTubePlayerAPIReady() {
+        player = new YT.Player('player', {
+          height: '390',
+          width: '640',
+          videoId: 'u1zgFlCw8Aw',
+          events: {
+            'onReady': onPlayerReady,
+            'onStateChange': onPlayerStateChange
+          }
+        });
+        alert("api ready");
+      }
+
+      // 4. The API will call this function when the video player is ready.
+      function onPlayerReady(event) {
+        alert("player ready");
+      }
+
+      // 5. The API calls this function when the player's state changes.
+      //    The function indicates that when playing a video (state=1),
+      //    the player should play for six seconds and then stop.
+      var done = false;
+      function onPlayerStateChange(event) {
+        alert("changed");
+      } 
+ 
+/*
+src="http://www.youtube.com/embed/T37kNTkZCrA?fs=1&hl=en_US&rel=0&enablejsapi=1"
         var player;
         function onYouTubePlayerAPIReady() {
+            alert("Ready");
             player = new YT.Player('player', {
                 events:{
                     'onStateChange':onPlayerStateChange
@@ -27,6 +65,7 @@
             });
         }
         function onPlayerStateChange(event) {
+            alert("Changed");
             var state = "";
             switch (event.data) {
                 case -1:
@@ -50,6 +89,8 @@
             }
             log_js_action("home", "setup-video", "video-" + state);
         }
+
+*/
     </script>
 
 </div>
