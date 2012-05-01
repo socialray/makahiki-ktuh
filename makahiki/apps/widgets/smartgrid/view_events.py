@@ -165,13 +165,17 @@ def view_rsvps(request, action_type, slug):
 
 def _check_attend_code(user, form):
     """Check the confirmation code in AJAX."""
+    social_email = None
+    code = None
+    message = None
+
     try:
         code = ConfirmationCode.objects.get(code=form.cleaned_data["response"].lower())
         if not code.is_active:
             message = "This code has already been used."
-        elif code.event in user.event_set.filter(actionmember__award_date__isnull=False):
+        elif code.action in user.action_set.filter(actionmember__award_date__isnull=False):
             message = "You have already redemmed a code for this event/excursion."
-        elif code.event.social_bonus:
+        elif code.action.social_bonus:
             if form.cleaned_data["social_email"]:
                 if form.cleaned_data["social_email"] != "Email":
                     ref_user = player_mgr.get_user_by_email(form.cleaned_data["social_email"])
@@ -209,12 +213,12 @@ def attend_code(request):
                 }), mimetype="application/json")
 
             try:
-                action_member = ActionMember.objects.get(user=user, action=code.event)
+                action_member = ActionMember.objects.get(user=user, action=code.action)
             except ObjectDoesNotExist:
-                action_member = ActionMember(user=user, action=code.event)
+                action_member = ActionMember(user=user, action=code.action)
 
             action_member.approval_status = "approved"
-            value = code.event.point_value
+            value = code.action.point_value
 
             if "social_email" in form.cleaned_data and \
                form.cleaned_data["social_email"] != "Email":
@@ -227,9 +231,8 @@ def attend_code(request):
             code.save()
 
             response = HttpResponse(json.dumps({
-                "type": code.event.type,
-                "slug": code.event.slug,
-                }), mimetype="application/json")
+                "redirectUrl": reverse("activity_task", args=(code.action.type, code.action.slug))
+            }), mimetype="application/json")
             notification = "You just earned " + str(value) + " points."
             response.set_cookie("task_notify", notification)
             return response
