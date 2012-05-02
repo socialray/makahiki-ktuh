@@ -348,12 +348,12 @@ def setup_complete(request):
             if "smartgrid" in settings.INSTALLED_WIDGET_APPS:
                 activity = get_object_or_404(Action, slug="intro-video")
                 points_awarded = ActionMember.objects.filter(user=request.user, action=activity)
-                if not profile.setup_complete and not points_awarded:
+                if not points_awarded:
                     module = importlib.import_module("apps.widgets.smartgrid.smartgrid")
                     module.complete_setup_activity(request.user)
-                    profile.setup_complete = True
-                    profile.completion_date = datetime.datetime.today()
-                    profile.save()
+        profile.setup_complete = True
+        profile.completion_date = datetime.datetime.today()
+        profile.save()
         template = render_to_string("first-login/complete.html", {},
             context_instance=RequestContext(request))
 
