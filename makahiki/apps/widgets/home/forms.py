@@ -46,12 +46,18 @@ class ReferralForm(forms.Form):
         """Check to make sure the referring user is part of the competition."""
         email = self.cleaned_data['referrer_email']
         if email:
-            # Check if user is in the system.
+            # Check if referer is staff.
             try:
-                User.objects.get(email=email, is_staff=False)
-            except User.DoesNotExist:
+                User.objects.get(email=email, is_staff=True)
                 raise forms.ValidationError(
-                    "Sorry, but that user is not a part of the competition.")
+                    "Sorry, but admins are invalid referers.")
+            except User.DoesNotExist:
+            # Check to see if they exist as players.
+                try:
+                    User.objects.get(email=email, is_staff=False)
+                except User.DoesNotExist:
+                    raise forms.ValidationError(
+                        "Sorry, but that user is not a part of the competition.")
         return email
 
 
