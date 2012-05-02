@@ -276,6 +276,10 @@ table#activities-grid td table td{
 	padding: 1px;
 }
 
+.activity div a, .commitment div a, .event div a, .survey div a, .excursion div a, .yellow-green div a {    
+    color: #000;
+}
+
 .activity p, .commitment p, .event p, .survey p, .excursion p, .yellow-green p {
 	font-size: 12pt;
 	font-weight: bold;	
