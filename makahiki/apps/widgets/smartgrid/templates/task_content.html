@@ -1,4 +1,5 @@
 {% load markup %}
+{% load markup %}
 
 {% load class_tags %}
 
@@ -174,7 +175,7 @@
         {% endif %}
         {% if action.type == "event" or action.type == "excursion" %}
             {% if action.event.is_event_completed %}
-                <b>This event was already completed at {{ action.event_date }}. <br/>
+                <b>This event was already completed at {{ action.event.event_date }} <br/>
                     If you attended the event, Click on the "I Did it" button to get
                     your points. <p/>
                     <a onclick="task_form_overlay()">

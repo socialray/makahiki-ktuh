@@ -3,7 +3,6 @@
 import datetime
 from django.conf import settings
 from django.contrib.auth.models import User
-from django.contrib.sites.models import Site
 
 from django.core import management
 from django.core.urlresolvers import reverse
@@ -106,7 +105,7 @@ def process_rsvp():
         user = member.user
         profile = user.get_profile()
 
-        diff = datetime.date.today() - action.event_date.date()
+        diff = datetime.date.today() - action.event.event_date.date()
         if diff.days == 3:
             message = "%s: %s (No Show)" % (
                 action.type.capitalize(), action.title)
@@ -145,7 +144,7 @@ def process_rsvp():
                           "click on the link to claim your points." % (
                     profile.name,
                     action.type.capitalize(),
-                    Site.objects.get(id=settings.SITE_ID).domain,
+                    settings.CHALLENGE.site_domain,
                     reverse("activity_task", args=(action.type, action.slug,)),
                             action.title)
                 message += "<p/>Because you signed up for the "\
