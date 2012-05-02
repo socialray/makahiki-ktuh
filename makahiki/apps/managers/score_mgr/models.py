@@ -1,4 +1,5 @@
 """The model definition for scores."""
+from django.conf import settings
 
 from django.db import models
 from django.contrib.auth.models import User
@@ -17,6 +18,11 @@ class ScoreSettings(models.Model):
         default=10,
         help_text="The point amount for referral bonus.",
     )
+    active_threshold_points = models.IntegerField(
+        default=50,
+        help_text="The threshold point amount for active participation.It is also the threshold"
+                  "for awarding referral bonus.",
+    )
     signup_bonus_points = models.IntegerField(
         default=2,
         help_text="The point amount for signing up a commitment or activity."
@@ -29,6 +35,11 @@ class ScoreSettings(models.Model):
         default=4,
         help_text="The point amount for no show penalty."
     )
+
+    def save(self, *args, **kwargs):
+        """Custom save method."""
+        super(ScoreSettings, self).save(*args, **kwargs)
+        settings.CHALLENGE.score_settings = self
 
 
 class ScoreboardEntry(models.Model):

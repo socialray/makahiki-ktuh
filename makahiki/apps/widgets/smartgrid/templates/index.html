@@ -170,6 +170,25 @@
 
 
 <script type="text/javascript">
+    $(document).ready(function () {
+        var task_depends_on = getCookie("task_depends_on");
+        if (task_depends_on != null)
+        {
+            deleteCookie("task_depends_on");
+
+            var modalElement = $('#unlockModal');
+
+            modalElement.modal({
+                backdrop: true,
+                keyboard: true,
+                show: false
+            });
+            modalElement.find('#depends_on').html(task_depends_on);
+
+            modalElement.modal('show');
+        }
+    });
+
     function unlock_dialog(type, slug, depends_on) {
         var modalElement = $('#unlockModal');
 
@@ -178,7 +197,7 @@
             keyboard: true,
             show: false
         }); 
-        modalElement.find('#depends_on').innerHTML = depends_on;
+        modalElement.find('#depends_on').html(depends_on);
         
         // set up event logging
         modalElement.on('shown', function() {

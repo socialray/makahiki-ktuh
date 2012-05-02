@@ -9,7 +9,6 @@ from django.contrib.contenttypes import generic
 from django.core.urlresolvers import reverse
 from django.conf import settings
 from django.template.loader import render_to_string
-from django.contrib.sites.models import Site
 from django.contrib.localflavor.us.models import PhoneNumberField
 import os
 
@@ -557,17 +556,15 @@ class ActionMember(models.Model):
         subject = "[%s] Your response to '%s' was not approved" % (
             settings.CHALLENGE.competition_name, self.action.title)
 
-        current_site = Site.objects.get(id=settings.SITE_ID)
-
         message = render_to_string("email/rejected_activity.txt", {
             "object": self,
             "COMPETITION_NAME": settings.CHALLENGE.competition_name,
-            "domain": current_site.domain,
+            "domain": settings.CHALLENGE.site_domain,
             })
         html_message = render_to_string("email/rejected_activity.html", {
             "object": self,
             "COMPETITION_NAME": settings.CHALLENGE.competition_name,
-            "domain": current_site.domain,
+            "domain": settings.CHALLENGE.site_domain,
             })
 
         UserNotification.create_email_notification(self.user.email, subject, message, html_message)
@@ -668,18 +665,17 @@ class EmailReminder(Reminder):
         if not self.sent:
             subject = "[%s] Reminder for %s" % (settings.CHALLENGE.competition_name,
                                                 self.action.title)
-            current_site = Site.objects.get(id=settings.SITE_ID)
             message = render_to_string("email/activity_reminder.txt", {
                 "action": self.action,
                 "user": self.user,
                 "COMPETITION_NAME": settings.CHALLENGE.competition_name,
-                "domain": current_site.domain,
+                "domain": settings.CHALLENGE.site_domain,
                 })
             html_message = render_to_string("email/activity_reminder.html", {
                 "action": self.action,
                 "user": self.user,
                 "COMPETITION_NAME": settings.CHALLENGE.competition_name,
-                "domain": current_site.domain,
+                "domain": settings.CHALLENGE.site_domain,
                 })
 
             UserNotification.create_email_notification(self.email_address, subject, message,
