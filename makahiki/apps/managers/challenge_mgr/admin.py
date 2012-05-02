@@ -64,7 +64,7 @@ class ChallengeSettingsAdmin(admin.ModelAdmin):
         (None,
             {"fields":
                   (("site_name", "site_logo"),
-                   "competition_name",
+                   ("competition_name", "site_domain"),
                    "theme",
                    "cas_server_url",
                    "competition_team_label",
@@ -81,6 +81,9 @@ class ChallengeSettingsAdmin(admin.ModelAdmin):
                    "landing_participant_text",
                    "landing_non_participant_text",
                    "landing_sponsors", )}),
+        ("Home Page Settings",
+             {"fields":
+                  ("term_conditions",)}),
     )
 
     formfield_overrides = {

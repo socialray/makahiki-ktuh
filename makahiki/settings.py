@@ -6,12 +6,22 @@ import os
 import urlparse
 import sys
 
-SITE_ID = 1
-
 ###############
 # PATH settings
 ###############
 PROJECT_ROOT = os.path.abspath(os.path.dirname(__file__))
+
+ROOT_URLCONF = 'urls'
+
+FIXTURE_DIRS = [
+    os.path.join(PROJECT_ROOT, "fixtures"),
+    ]
+
+#######################
+# static media settings
+#######################
+# serve media through django.views.static.serve.
+SERVE_MEDIA = True
 
 # Absolute path to the directory that holds media.
 MEDIA_ROOT = os.path.join(PROJECT_ROOT, 'site_media', 'media')
@@ -32,12 +42,6 @@ STATICFILES_DIRS = (
 
 # URL prefix for admin media -- CSS, JavaScript and images. Make sure to use a trailing slash.
 ADMIN_MEDIA_PREFIX = posixpath.join(STATIC_URL, "admin/")
-
-ROOT_URLCONF = 'urls'
-
-FIXTURE_DIRS = [
-    os.path.join(PROJECT_ROOT, "fixtures"),
-    ]
 
 #######################
 # Template settings
@@ -104,8 +108,19 @@ CAS_IGNORE_REFERER = True
 
 LOGIN_URL = "/account/cas/login/"
 LOGIN_REDIRECT_URLNAME = "home_index"
-LOGIN_REDIRECT_URL = "/"
+LOGIN_REDIRECT_URL = "/home"
 RESTRICTED_URL = '/restricted/'
+
+#################
+# CACHE settings
+#################
+CACHE_MIDDLEWARE_ALIAS = 'default'
+CACHE_MIDDLEWARE_ANONYMOUS_ONLY = True
+CACHE_MIDDLEWARE_SECONDS = 600
+MEMCACHED_CACHES = {'default':
+                        {'BACKEND': 'django_pylibmc.memcached.PyLibMCCache'}}
+DUMMY_CACHES = {'default':
+                        {'BACKEND': 'django.core.cache.backends.dummy.DummyCache'}}
 
 #########################
 # INSTALLED_APPS settings
@@ -135,7 +150,6 @@ INSTALLED_APPS = (
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
-    'django.contrib.sites',
     'django.contrib.humanize',
     'django.contrib.messages',
 
@@ -145,7 +159,6 @@ INSTALLED_APPS = (
 
     # internal
     'django.contrib.admin',
-    'django.contrib.admindocs',
     'django.contrib.markup',
 )
 
@@ -273,8 +286,6 @@ LOGGING = {
 #########################
 # MISC
 #########################
-# serve media through django.views.static.serve.
-SERVE_MEDIA = True
 
 # Permissions for large uploaded files.
 FILE_UPLOAD_PERMISSIONS = 0644
@@ -351,19 +362,8 @@ if 'MAKAHIKI_DEBUG' in os.environ and os.environ['MAKAHIKI_DEBUG'].lower() == "t
     TEMPLATE_DEBUG = True
 
 # CACHE settings
-CACHE_MIDDLEWARE_ALIAS = 'default'
-CACHE_MIDDLEWARE_ANONYMOUS_ONLY = True
-CACHE_MIDDLEWARE_SECONDS = 600
-if 'MAKAHIKI_MEMCACHED_ENABLED' in os.environ and \
+if 'MAKAHIKI_MEMCACHED_ENABLED' in os.environ and\
    os.environ['MAKAHIKI_MEMCACHED_ENABLED'] == "True":
-    CACHES = {
-        'default': {
-            'BACKEND': 'django_pylibmc.memcached.PyLibMCCache'
-        }
-    }
+    CACHES = MEMCACHED_CACHES
 else:
-    CACHES = {
-        'default': {
-            'BACKEND': 'django.core.cache.backends.dummy.DummyCache',
-            }
-    }
+    CACHES = DUMMY_CACHES

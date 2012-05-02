@@ -150,7 +150,7 @@ class ProfileUnitTests(TransactionTestCase):
         self.assertEqual(points1, Profile.objects.get(user=user1).points(),
             'User 1 should not have received any points.')
 
-        profile2.add_points(20, datetime.datetime.today(),
+        profile2.add_points(40, datetime.datetime.today(),
             'Trigger referral bonus.')
         points2 = profile2.points()
         profile2.save()
@@ -181,14 +181,14 @@ class ProfileUnitTests(TransactionTestCase):
         profile1.setup_profile = True
         profile1.setup_complete = True
         profile1.referring_user = user2
-        profile1.add_points(25, datetime.datetime.today(), 'test 1')
+        profile1.add_points(45, datetime.datetime.today(), 'test 1')
         profile1.save()
 
         profile2 = user2.get_profile()
         profile2.setup_profile = True
         profile2.setup_complete = True
         profile2.referring_user = user1
-        profile2.add_points(25, datetime.datetime.today(), 'test 1')
+        profile2.add_points(45, datetime.datetime.today(), 'test 1')
         profile2.save()
 
         profile1.add_points(10, datetime.datetime.today(), 'test 1')
@@ -197,8 +197,8 @@ class ProfileUnitTests(TransactionTestCase):
         #for log in user2.pointstransaction_set.all():
         #    print "%d %s" % (log.points, log.message)
 
-        self.assertEqual(Profile.objects.get(user=user1).points(), 45)
-        self.assertEqual(Profile.objects.get(user=user2).points(), 35)
+        self.assertEqual(Profile.objects.get(user=user1).points(), 65)
+        self.assertEqual(Profile.objects.get(user=user2).points(), 55)
 
     def testTeamRankWithPoints(self):
         """Tests that the team_rank method accurately computes the rank based
