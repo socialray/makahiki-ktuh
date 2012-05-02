@@ -534,6 +534,6 @@ iframe {
     }
 }
 
-#gohome {
+#gohome > a{
   color: white;
-}
+
