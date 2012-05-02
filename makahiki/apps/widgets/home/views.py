@@ -25,7 +25,7 @@ import apps.lib.facebook_api.facebook as facebook
 from apps.managers.challenge_mgr import challenge_mgr
 from apps.managers.score_mgr import score_mgr
 from apps.widgets.home.forms import ProfileForm, ReferralForm
-from apps.widgets.smartgrid.models import Action
+from apps.widgets.smartgrid.models import Action, ActionMember
 
 
 def supply(request, page_name):
@@ -345,12 +345,14 @@ def setup_complete(request):
             # User got the question right.
             # link it to an activity.
             if "smartgrid" in settings.INSTALLED_WIDGET_APPS:
-                module = importlib.import_module("apps.widgets.smartgrid.smartgrid")
-                module.complete_setup_activity(request.user)
-
-        profile.setup_complete = True
-        profile.completion_date = datetime.datetime.today()
-        profile.save()
+                activity = get_object_or_404(Action, slug="intro-video")
+                points_awarded = ActionMember.objects.filter(user=request.user, action=activity)
+                if not profile.setup_complete and not points_awarded:
+                    module = importlib.import_module("apps.widgets.smartgrid.smartgrid")
+                    module.complete_setup_activity(request.user)
+                    profile.setup_complete = True
+                    profile.completion_date = datetime.datetime.today()
+                    profile.save()
         template = render_to_string("first-login/complete.html", {},
             context_instance=RequestContext(request))
 
