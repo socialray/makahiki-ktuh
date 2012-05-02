@@ -6,7 +6,7 @@
     width: 180px;
 }
 
-@media ( max-width : 651px) {
+@media ( max-width : 660px) {
   .upload-form { 
     display: none;
   } 
@@ -532,4 +532,8 @@ iframe {
             url(/site_media/static/images/icons/icon-water-over.png) top
             left no-repeat;
     }
+}
+
+#gohome {
+  color: white;
 }

@@ -87,7 +87,13 @@
   border-radius: 8px;
 }
 
-
+#landing-button-participant {
+  margin-top: 10px;
+}
+#landing-button-non-participant {
+  margin-top: 15px;
+}
+ 
 
 #landing-button-non-participant, #landing-button-participant {
 	display: block;
@@ -97,12 +103,12 @@
   width: 40%; 
   min-width: 230px;
 	height: 92px;
-	margin: 0 auto 0 auto;
+	margin-left: auto;
+  margin-right: auto;
 	border: 0;
 	background: #E3E3E3 url(/site_media/static/css/default/images/bkg-landing-button.gif);
 	padding: 0px 4px 10px 4px;
-	border: 3px outset #DDD;
-	margin-top: -.7em;
+	border: 3px outset #DDD; 
 	
 	border-radius: 8px;
 	-moz-border-radius: 8px;
@@ -113,9 +119,6 @@
 	-webkit-box-shadow: 3px 3px 5px #000;
 } 
 
-#landing-button-participant {
-  margin-top: 10px;
-}
 
 .contact-link {
   text-align: center;
@@ -158,4 +161,5 @@ li {
 	display: inline;
 	float: none;
 }
+ 
   
