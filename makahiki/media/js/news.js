@@ -38,7 +38,7 @@ $(document).ready(function() {
   var height = 0;
   $("#news-most-popular-actions .item").each(function(index, item) {
     height = $(item).height();
-    console.log("height of item is " + height);
+    // console.log("height of item is " + height);
     if (height > maxHeight){
       maxHeight = height;
     }
