@@ -15,16 +15,20 @@ import os
 from apps.managers.score_mgr import score_mgr
 from apps.managers.score_mgr.models import PointsTransaction
 from apps.managers.team_mgr.models import Post
+from apps.utils.utils import media_file_path, OverwriteStorage
 from apps.widgets.notifications.models import UserNotification
 from apps.managers.cache_mgr import cache_mgr
 from apps.widgets.smartgrid import NOSHOW_PENALTY_DAYS
+
+MEDIA_LOCATION = "smartgrid"
+"""location for the uploaded files."""
 
 
 def activity_image_file_path(instance=None, filename=None, user=None):
     """Returns the file path used to save an activity confirmation image."""
     if instance:
         user = user or instance.user
-    return os.path.join("actions", user.username, filename)
+    return os.path.join(settings.MAKAHIKI_MEDIA_PREFIX, MEDIA_LOCATION, user.username, filename)
 
 
 class Category(models.Model):
@@ -133,6 +137,11 @@ class Action(models.Model):
     title = models.CharField(
         max_length=200,
         help_text="The title of the action.")
+    image = models.ImageField(
+        max_length=255, blank=True, null=True,
+        upload_to=media_file_path(),
+        storage=OverwriteStorage(),
+        help_text="Uploaded image for the activity.")
     description = models.TextField(
         help_text=settings.MARKDOWN_TEXT)
     type = models.CharField(
@@ -358,6 +367,7 @@ class ActionMember(models.Model):
     image = models.ImageField(
         max_length=1024, blank=True,
         upload_to=activity_image_file_path,
+        storage=OverwriteStorage(),
         help_text="Uploaded image for verification.")
     points_awarded = models.IntegerField(
         blank=True, null=True,

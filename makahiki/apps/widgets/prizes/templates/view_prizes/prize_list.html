@@ -17,7 +17,7 @@
         {% for prize in prizes %}
         <tr>
             <td class="prize">
-                {% if prize.image %}<img src="{{MEDIA_URL}}{{prize.image}}"/>{% endif %}
+                {% if prize.image %}<img src="{{prize.image.url}}"/>{% endif %}
                 <a id="{{name|slugify}}-{{prize.title|slugify}}-link" data-toggle="modal"
                         href="#{{name|slugify}}-{{prize.title|slugify}}">
                     {{ prize.title }}

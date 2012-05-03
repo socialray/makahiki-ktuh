@@ -15,7 +15,7 @@ class CommitmentAdmin(admin.ModelAdmin):
     """Commitment Admin."""
     fieldsets = (
         ("Basic Information", {
-            'fields': ('name', 'slug', 'title', 'description', 'social_bonus', 'duration',
+            'fields': ('name', 'slug', 'title', 'image', 'description', 'social_bonus', 'duration',
                        'depends_on', 'depends_on_text', 'related_resource',
                        ('is_canopy', 'is_group')),
             }),
@@ -299,7 +299,7 @@ class ActivityAdmin(admin.ModelAdmin):
     """Activity Admin"""
     fieldsets = (
         ("Basic Information",
-         {'fields': ('name', 'slug', 'type', 'title', 'description', 'duration',
+         {'fields': ('name', 'slug', 'type', 'title', 'image', 'description', 'duration',
                      ('pub_date', 'expire_date'),
                      ('depends_on', 'depends_on_text'),
                      'related_resource', ('is_canopy', 'is_group'))}),
@@ -354,7 +354,7 @@ class EventAdmin(admin.ModelAdmin):
     """Event Admin"""
     fieldsets = (
         ("Basic Information",
-         {'fields': ('name', 'slug', 'type', 'title', 'description', 'duration',
+         {'fields': ('name', 'slug', 'type', 'title', 'image', 'description', 'duration',
                      ('pub_date', 'expire_date'),
                      ('event_date', 'event_max_seat', 'event_location'),
                      ('depends_on', 'depends_on_text'),

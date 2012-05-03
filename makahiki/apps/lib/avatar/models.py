@@ -1,11 +1,13 @@
 import datetime
 import os.path
+from django.conf import settings
 
 from django.db import models
 from django.contrib.auth.models import User
 from django.core.files.base import ContentFile
 from django.utils.translation import ugettext as _
 from apps.managers.cache_mgr import cache_mgr
+from apps.utils.utils import OverwriteStorage
 
 try:
     from cStringIO import StringIO
@@ -21,14 +23,19 @@ from apps.lib.avatar import AVATAR_STORAGE_DIR, AVATAR_RESIZE_METHOD
 
 def avatar_file_path(instance=None, filename=None, user=None):
     user = user or instance.user
-    return os.path.join(AVATAR_STORAGE_DIR, user.username, filename)
+    return os.path.join(settings.MAKAHIKI_MEDIA_PREFIX,
+                        AVATAR_STORAGE_DIR,
+                        user.username,
+                        filename)
 
 
 class Avatar(models.Model):
     user = models.ForeignKey(User)
     primary = models.BooleanField(default=False)
-    avatar = models.ImageField(max_length=1024, upload_to=avatar_file_path,
-        blank=True)
+    avatar = models.ImageField(max_length=1024,
+                               upload_to=avatar_file_path,
+                               storage=OverwriteStorage(),
+                               blank=True)
     date_uploaded = models.DateTimeField(default=datetime.datetime.now)
 
     def __unicode__(self):

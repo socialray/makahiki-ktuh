@@ -81,9 +81,6 @@ class ChallengeSettingsAdmin(admin.ModelAdmin):
                    "landing_participant_text",
                    "landing_non_participant_text",
                    "landing_sponsors", )}),
-        ("Home Page Settings",
-             {"fields":
-                  ("term_conditions",)}),
     )
 
     formfield_overrides = {

@@ -10,8 +10,8 @@ from django.conf import settings
 def competition(request):
     """Provides access to standard competition constants within a template.
 
-:param request: The request object.
-:return: a dictionary of game settings."""
+    :param request: The request object.
+    :return: a dictionary of game settings."""
     # Get user-specific information.
 
     user = request.user
@@ -32,15 +32,7 @@ def competition(request):
         default_view_objects = _get_default_view_objects(request)
         page_info = challenge_mgr.page_info(user)
 
-# Get Facebook info.
-    try:
-        facebook_app_id = settings.CHALLENGE.facebook_app_id
-    except AttributeError:
-        facebook_app_id = None
-
     return {
-        "STATIC_URL": settings.STATIC_URL,
-        "MEDIA_URL": settings.MEDIA_URL,
         "CHALLENGE": settings.CHALLENGE,
         "CSS_THEME": settings.CHALLENGE.theme,
         "TEAM_LABEL": settings.CHALLENGE.competition_team_label,
@@ -48,11 +40,12 @@ def competition(request):
         "TEAM_MEMBER_COUNT": team_member_count,
         "OVERALL_MEMBER_COUNT": overall_member_count,
         "CURRENT_ROUND_INFO": challenge_mgr.get_current_round_info(),
-        "FACEBOOK_APP_ID": facebook_app_id,
+        "FACEBOOK_APP_ID": settings.FACEBOOK_APP_ID,
         "IN_COMPETITION": challenge_mgr.in_competition(),
         "DEFAULT_VIEW_OBJECTS": default_view_objects,
         "AVAILABLE_EVENTS": available_events,
         "PAGE_INFO": page_info,
+        "MAKAHIKI_USE_COMPILED_LESS": settings.MAKAHIKI_USE_COMPILED_LESS,
     }
 
 

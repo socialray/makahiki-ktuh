@@ -169,7 +169,7 @@ iframe {
 
 .home-advanced-icon {
     background: transparent
-        url(/site_media/static/images/icons/icon-advanced-lg.png) top
+        url(../../../images/icons/icon-advanced-lg.png) top
         left no-repeat;
     width: 120px;
     height: 124px;
@@ -177,12 +177,12 @@ iframe {
 
 .home-advanced-icon:hover {
     background: transparent
-        url(/site_media/static/images/icons/icon-advanced-lg-over.png)
+        url(../../../images/icons/icon-advanced-lg-over.png)
         top left no-repeat;
 }
 .home-status-icon {
     background: transparent
-    url(/site_media/static/images/icons/icon-status-lg.png) top
+    url(../../../images/icons/icon-status-lg.png) top
     left no-repeat;
     width: 120px;
     height: 124px;
@@ -190,12 +190,12 @@ iframe {
 
 .home-status-icon:hover {
     background: transparent
-    url(/site_media/static/images/icons/icon-status-lg-over.png)
+    url(../../../images/icons/icon-status-lg-over.png)
     top left no-repeat;
 }
 .home-energy-icon {
     background: transparent
-        url(/site_media/static/images/icons/icon-go-low-lg.png) top left
+        url(../../../images/icons/icon-go-low-lg.png) top left
         no-repeat;
     width: 120px;
     height: 124px;
@@ -203,13 +203,13 @@ iframe {
 
 .home-energy-icon:hover {
     background: transparent
-        url(/site_media/static/images/icons/icon-go-low-lg-over.png) top
+        url(../../../images/icons/icon-go-low-lg-over.png) top
         left no-repeat;
 }
 
 .home-learn-icon {
     background: transparent
-        url(/site_media/static/images/icons/icon-scoreboard-lg.png) top
+        url(../../../images/icons/icon-scoreboard-lg.png) top
         left no-repeat;
     width: 120px;
     height: 124px;
@@ -217,13 +217,13 @@ iframe {
 
 .home-learn-icon:hover {
     background: transparent
-        url(/site_media/static/images/icons/icon-scoreboard-lg-over.png)
+        url(../../../images/icons/icon-scoreboard-lg-over.png)
         top left no-repeat;
 }
 
 .home-news-icon {
     background: transparent
-        url(/site_media/static/images/icons/icon-news-lg.png) top left
+        url(../../../images/icons/icon-news-lg.png) top left
         no-repeat;
     width: 120px;
     height: 124px;
@@ -231,13 +231,13 @@ iframe {
 
 .home-news-icon:hover {
     background: transparent
-        url(/site_media/static/images/icons/icon-news-lg-over.png) top
+        url(../../../images/icons/icon-news-lg-over.png) top
         left no-repeat;
 }
 
 .home-win-icon {
     background: transparent
-        url(/site_media/static/images/icons/icon-prizes-lg.png) top left
+        url(../../../images/icons/icon-prizes-lg.png) top left
         no-repeat;
     width: 120px;
     height: 124px;
@@ -245,13 +245,13 @@ iframe {
 
 .home-win-icon:hover {
     background: transparent
-        url(/site_media/static/images/icons/icon-prizes-lg-over.png) top
+        url(../../../images/icons/icon-prizes-lg-over.png) top
         left no-repeat;
 }
 
 .home-help-icon {
     background: transparent
-        url(/site_media/static/images/icons/icon-help-lg.png) top left
+        url(../../../images/icons/icon-help-lg.png) top left
         no-repeat;
     width: 120px;
     height: 124px;
@@ -259,13 +259,13 @@ iframe {
 
 .home-help-icon:hover {
     background: transparent
-        url(/site_media/static/images/icons/icon-help-lg-over.png) top
+        url(../../../images/icons/icon-help-lg-over.png) top
         left no-repeat;
 }
 
 .home-profile-icon {
     background: transparent
-        url(/site_media/static/images/icons/icon-profile-lg.png) top
+        url(../../../images/icons/icon-profile-lg.png) top
         left no-repeat;
     width: 120px;
     height: 124px;
@@ -273,13 +273,13 @@ iframe {
 
 .home-profile-icon:hover {
     background: transparent
-        url(/site_media/static/images/icons/icon-profile-lg-over.png)
+        url(../../../images/icons/icon-profile-lg-over.png)
         top left no-repeat;
 }
 
 .home-water-icon {
     background: transparent
-        url(/site_media/static/images/icons/icon-water-lg.png) top left
+        url(../../../images/icons/icon-water-lg.png) top left
         no-repeat;
     width: 120px;
     height: 124px;
@@ -287,7 +287,7 @@ iframe {
 
 .home-water-icon:hover {
     background: transparent
-        url(/site_media/static/images/icons/icon-water-lg-over.png) top
+        url(../../../images/icons/icon-water-lg-over.png) top
         left no-repeat;
 }
 
@@ -426,110 +426,110 @@ iframe {
 */  
     .home-advanced-icon {
         background: transparent
-            url(/site_media/static/images/icons/icon-advanced.png) top
+            url(../../../images/icons/icon-advanced.png) top
             left no-repeat;
         width: 54px;
         height: 56px;
     }
     .home-advanced-icon:hover {
         background: transparent
-            url(/site_media/static/images/icons/icon-advanced-over.png)
+            url(../../../images/icons/icon-advanced-over.png)
             top left no-repeat;
     }
     .home-status-icon {
         background: transparent
-        url(/site_media/static/images/icons/icon-status.png) top
+        url(../../../images/icons/icon-status.png) top
         left no-repeat;
         width: 54px;
         height: 56px;
     }
     .home-status-icon:hover {
         background: transparent
-        url(/site_media/static/images/icons/icon-status-over.png)
+        url(../../../images/icons/icon-status-over.png)
         top left no-repeat;
     }
     .home-energy-icon {
         background: transparent
-            url(/site_media/static/images/icons/icon-go-low.png) top
+            url(../../../images/icons/icon-go-low.png) top
             left no-repeat;
         width: 54px;
         height: 56px;
     }
     .home-energy-icon:hover {
         background: transparent
-            url(/site_media/static/images/icons/icon-go-low-over.png)
+            url(../../../images/icons/icon-go-low-over.png)
             top left no-repeat;
     }
     .home-learn-icon {
         background: transparent
-            url(/site_media/static/images/icons/icon-scoreboard.png) top
+            url(../../../images/icons/icon-scoreboard.png) top
             left no-repeat;
         width: 54px;
         height: 56px;
     }
     .home-learn-icon:hover {
         background: transparent
-            url(/site_media/static/images/icons/icon-scoreboard-over.png)
+            url(../../../images/icons/icon-scoreboard-over.png)
             top left no-repeat;
     }
     .home-news-icon {
         background: transparent
-            url(/site_media/static/images/icons/icon-news.png) top left
+            url(../../../images/icons/icon-news.png) top left
             no-repeat;
         width: 54px;
         height: 56px;
     }
     .home-news-icon:hover {
         background: transparent
-            url(/site_media/static/images/icons/icon-news-over.png) top
+            url(../../../images/icons/icon-news-over.png) top
             left no-repeat;
     }
     .home-win-icon {
         background: transparent
-            url(/site_media/static/images/icons/icon-prizes.png) top
+            url(../../../images/icons/icon-prizes.png) top
             left no-repeat;
         width: 54px;
         height: 56px;
     }
     .home-win-icon:hover {
         background: transparent
-            url(/site_media/static/images/icons/icon-prizes-over.png)
+            url(../../../images/icons/icon-prizes-over.png)
             top left no-repeat;
     }
     .home-help-icon {
         background: transparent
-            url(/site_media/static/images/icons/icon-help.png) top left
+            url(../../../images/icons/icon-help.png) top left
             no-repeat;
         width: 54px;
         height: 56px;
     }
     .home-help-icon:hover {
         background: transparent
-            url(/site_media/static/images/icons/icon-help-over.png) top
+            url(../../../images/icons/icon-help-over.png) top
             left no-repeat;
     }
     .home-profile-icon {
         background: transparent
-            url(/site_media/static/images/icons/icon-profile.png) top
+            url(../../../images/icons/icon-profile.png) top
             left no-repeat;
         width: 54px;
         height: 56px;
     }
     .home-profile-icon:hover {
         background: transparent
-            url(/site_media/static/images/icons/icon-profile-over.png)
+            url(../../../images/icons/icon-profile-over.png)
             top left no-repeat;
     }
     .home-water-icon {
         background: transparent
-            url(/site_media/static/images/icons/icon-water.png) top left
+            url(../../../images/icons/icon-water.png) top left
             no-repeat;
         width: 54px;
         height: 56px;
     }
     .home-water-icon:hover {
         background: transparent
-            url(/site_media/static/images/icons/icon-water-over.png) top
+            url(../../../images/icons/icon-water-over.png) top
             left no-repeat;
     }
 }

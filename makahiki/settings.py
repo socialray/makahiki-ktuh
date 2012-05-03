@@ -1,7 +1,5 @@
-"""Djanjo settings file containing system-level settings.
-   Settings include database, cache, path, middleware, and installed apps and logging."""
+"""Django settings file containing system-level settings."""
 
-import posixpath
 import os
 import urlparse
 import sys
@@ -17,31 +15,16 @@ FIXTURE_DIRS = [
     os.path.join(PROJECT_ROOT, "fixtures"),
     ]
 
-#######################
-# static media settings
-#######################
-# serve media through django.views.static.serve.
-SERVE_MEDIA = True
-
-# Absolute path to the directory that holds media.
-MEDIA_ROOT = os.path.join(PROJECT_ROOT, 'site_media', 'media')
-
-# URL that handles the media served from MEDIA_ROOT.
-MEDIA_URL = '/site_media/media/'
-
-# Absolute path to the directory that holds static files like app media.
-STATIC_ROOT = os.path.join(PROJECT_ROOT, 'site_media', 'static')
-
-# URL that handles the static files like app media.
-STATIC_URL = '/site_media/static/'
-
 # directories which hold static files
 STATICFILES_DIRS = (
     os.path.join(PROJECT_ROOT, 'media'),
 )
 
-# URL prefix for admin media -- CSS, JavaScript and images. Make sure to use a trailing slash.
-ADMIN_MEDIA_PREFIX = posixpath.join(STATIC_URL, "admin/")
+# Absolute path to the directory that holds media.
+MEDIA_ROOT = os.path.join(PROJECT_ROOT, 'site_media', 'media')
+
+# Absolute path to the directory that holds static files like app media.
+STATIC_ROOT = os.path.join(PROJECT_ROOT, 'site_media')
 
 #######################
 # Template settings
@@ -63,6 +46,7 @@ TEMPLATE_CONTEXT_PROCESSORS = (
     "django.core.context_processors.i18n",
     "django.core.context_processors.media",
     "django.core.context_processors.request",
+    "django.core.context_processors.static",
     'django.contrib.messages.context_processors.messages',
     "apps.managers.challenge_mgr.context_processors.competition",
     )
@@ -117,10 +101,6 @@ RESTRICTED_URL = '/restricted/'
 CACHE_MIDDLEWARE_ALIAS = 'default'
 CACHE_MIDDLEWARE_ANONYMOUS_ONLY = True
 CACHE_MIDDLEWARE_SECONDS = 600
-MEMCACHED_CACHES = {'default':
-                        {'BACKEND': 'django_pylibmc.memcached.PyLibMCCache'}}
-DUMMY_CACHES = {'default':
-                        {'BACKEND': 'django.core.cache.backends.dummy.DummyCache'}}
 
 #########################
 # INSTALLED_APPS settings
@@ -144,7 +124,6 @@ INSTALLED_APPS = (
     'apps.lib.brabeion',
     'apps.lib.facebook_api',
     'apps.lib.avatar',
-    'gunicorn',
 
     # Django apps
     'django.contrib.auth',
@@ -152,14 +131,14 @@ INSTALLED_APPS = (
     'django.contrib.sessions',
     'django.contrib.humanize',
     'django.contrib.messages',
+    'django.contrib.staticfiles',
+    'django.contrib.admin',
+    'django.contrib.markup',
 
     # external
     'django_extensions',
-    'django.contrib.staticfiles',
-
-    # internal
-    'django.contrib.admin',
-    'django.contrib.markup',
+    'gunicorn',
+    'storages',
 )
 
 ################################
@@ -354,16 +333,50 @@ if 'MAKAHIKI_EMAIL_INFO' in os.environ:
     EMAIL_HOST_USER = email_info[0]
     EMAIL_HOST_PASSWORD = email_info[1]
 
+# Helper lambda for retrieving environment variables:
+env = lambda e, d: os.environ[e] if e in os.environ else d
+
 # DEBUG settings
-DEBUG = False
-TEMPLATE_DEBUG = False
-if 'MAKAHIKI_DEBUG' in os.environ and os.environ['MAKAHIKI_DEBUG'].lower() == "true":
-    DEBUG = True
-    TEMPLATE_DEBUG = True
+MAKAHIKI_DEBUG = env('MAKAHIKI_DEBUG', '').lower() == "true"
+DEBUG = MAKAHIKI_DEBUG
+TEMPLATE_DEBUG = MAKAHIKI_DEBUG
 
 # CACHE settings
-if 'MAKAHIKI_MEMCACHED_ENABLED' in os.environ and\
-   os.environ['MAKAHIKI_MEMCACHED_ENABLED'] == "True":
-    CACHES = MEMCACHED_CACHES
+if env('MAKAHIKI_MEMCACHED_ENABLED', '').lower() == "true":
+    CACHES = {'default':
+                {'BACKEND': 'django_pylibmc.memcached.PyLibMCCache'}}
 else:
-    CACHES = DUMMY_CACHES
+    CACHES = {'default':
+                {'BACKEND': 'django.core.cache.backends.dummy.DummyCache'}}
+
+# static media settings
+if env('MAKAHIKI_USE_S3', '').lower() == "true":
+    DEFAULT_FILE_STORAGE = 'storages.backends.s3boto.S3BotoStorage'
+    STATICFILES_STORAGE = 'storages.backends.s3boto.S3BotoStorage'
+    AWS_ACCESS_KEY_ID = env('AWS_ACCESS_KEY_ID', '')
+    AWS_SECRET_ACCESS_KEY = env('AWS_SECRET_ACCESS_KEY', '')
+    AWS_STORAGE_BUCKET_NAME = env('AWS_STORAGE_BUCKET_NAME', '')
+    AWS_DEFAULT_ACL = "private"
+
+    STATIC_URL = 'https://s3.amazonaws.com/%s/' % AWS_STORAGE_BUCKET_NAME
+    SERVE_MEDIA = False
+else:
+    # URL that handles the static files like app media.
+    STATIC_URL = '/site_media/'
+    # serve media through django.views.static.serve.
+    SERVE_MEDIA = True
+
+MAKAHIKI_MEDIA_PREFIX = "media"
+# URL that handles the media served from MEDIA_ROOT.
+MEDIA_URL = STATIC_URL + MAKAHIKI_MEDIA_PREFIX
+
+# settings to use less or compiled css
+if env('MAKAHIKI_USE_COMPILED_LESS', '').lower() == "true":
+    MAKAHIKI_USE_COMPILED_LESS = True
+
+# django secret key
+SECRET_KEY = env('SECRET_KEY', '')
+
+# facebook key
+FACEBOOK_APP_ID = env('FACEBOOK_APP_ID', '')
+FACEBOOK_SECRET_KEY = env('FACEBOOK_SECRET_KEY', '')

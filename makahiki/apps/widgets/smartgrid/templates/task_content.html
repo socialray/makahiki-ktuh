@@ -1,7 +1,7 @@
 {% load markup %}
-{% load markup %}
 
 {% load class_tags %}
+{% load staticfiles %}
 
 <div class="content-box">
 <div class="content-box-title">
@@ -10,7 +10,7 @@
             <td>About the {{ action.type }}</td>
             <td width="1%">
                 <a href="#">
-                    <img src="{{ STATIC_URL}}/css/default/images/icon-help-sm.png"
+                    <img src="{{ STATIC_URL}}css/default/images/icon-help-sm.png"
                          width="20" align="center"
                          title="Click to get help about this window"
                          onclick="toggleHelp('widget', '{{action.type}}-details'); return false;"
@@ -138,6 +138,10 @@
 <center><b>{{ action.title }}</b></center>
 
 <p/>
+{% if action.image %}
+    <center><img src="{{ action.image.url }}" /> </center>
+{% endif %}
+<p/>
 
 {{ action.description|markdown }}
 
@@ -150,7 +154,7 @@
                 {% if action.social_bonus > 0 %}
                     <a onclick="task_form_overlay()">
                         <button style="cursor:pointer;">I will do this!
-                            <img src="{{ STATIC_URL}}/css/default/images/right.png"
+                            <img src="{{ STATIC_URL}}css/default/images/right.png"
                                  width="50" align="center">
                         </button>
                     </a>
@@ -161,7 +165,7 @@
                         <button id="submit_button4" style="cursor:pointer;"
                                 onclick='$("#submit_button4").attr("disabled", "disabled");javascript:this.form.submit(); return false;'>
                             I will do this!
-                            <img src="{{ STATIC_URL}}/css/default/images/right.png"
+                            <img src="{{ STATIC_URL}}css/default/images/right.png"
                                  width="50" align="center">
                         </button>
                     </form>
@@ -181,7 +185,7 @@
                     <a onclick="task_form_overlay()">
                         <button style="cursor:pointer;">
                             I Did it
-                            <img src="{{ STATIC_URL}}/css/default/images/right.png"
+                            <img src="{{ STATIC_URL}}css/default/images/right.png"
                                  width="50" align="center">
                         </button>
                     </a>
@@ -209,7 +213,7 @@
         {% if action.type == "survey" %}
             <a onclick="task_form_overlay()">
                 <button style="cursor:pointer;">I want to do it
-                    <img src="{{ STATIC_URL}}/css/default/images/right.png"
+                    <img src="{{ STATIC_URL}}css/default/images/right.png"
                          width="50" align="center">
                 </button>
             </a>
@@ -222,7 +226,7 @@
             <a onclick="task_form_overlay()">
                 <button style="cursor:pointer;">
                     I Did This!
-                    <img src="{{ STATIC_URL}}/css/default/images/right.png"
+                    <img src="{{ STATIC_URL}}css/default/images/right.png"
                          width="50" align="center"></button>
             </a>
         {% endif %}
@@ -253,7 +257,7 @@
         if (notification != null) {
             notification = notification.replace(/"/g, '');
             var notice = '<div class="notice">'
-                    + '<img src="{{ STATIC_URL}}/css/default/images/icon-notify.png" width="30" align="center" />'
+                    + '<img src="{{ STATIC_URL}}css/default/images/icon-notify.png" width="30" align="center" />'
                     + '<div class="body">'
                     + notification
                     + '</div>'

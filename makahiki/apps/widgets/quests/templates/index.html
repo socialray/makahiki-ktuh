@@ -1,4 +1,4 @@
-<script src="{{STATIC_URL}}/js/quest.js" type="text/javascript"></script>
+<script src="{{STATIC_URL}}js/quest.js" type="text/javascript"></script>
 
 {% load class_tags %}
 
@@ -6,13 +6,13 @@
     <div id="quest-header" class="makahiki-box-title">
         <h3 id="quest-title" class="makahiki-box-title">Your Quests</h3>
         <a href="#">
-            <img src="{{ STATIC_URL}}/css/default/images/icon-help-sm.png"
+            <img src="{{ STATIC_URL}}css/default/images/icon-help-sm.png"
                  title="Click to get help about this window"
                  onclick="toggleHelp('widget', 'quests'); return false;"
                     /></a>
     </div>
     <div>
-    <img class="quest-pad" src="{{ STATIC_URL}}/css/default/images/spacer.png" width="20">
+    <img class="quest-pad" src="{{ STATIC_URL}}css/default/images/spacer.png" width="20">
     {%  with DEFAULT_VIEW_OBJECTS.quests as quests %}
     {% if quests.user_quests or quests.available_quests %}
         {% include "quest_list.html" %}

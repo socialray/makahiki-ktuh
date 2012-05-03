@@ -2,6 +2,7 @@
 
 from django.db import models
 from django.contrib.auth.models import User
+from apps.utils.utils import media_file_path, OverwriteStorage
 
 POINTS_PER_TICKET = 25
 """Number of points required to earn a raffle ticket"""
@@ -21,7 +22,8 @@ class RafflePrize(models.Model):
     )
     image = models.ImageField(
         max_length=1024,
-        upload_to="prizes",
+        upload_to=media_file_path(),
+        storage=OverwriteStorage(),
         blank=True,
         help_text="A picture of your raffle prize."
     )

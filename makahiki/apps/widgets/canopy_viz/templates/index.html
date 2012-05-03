@@ -1,9 +1,9 @@
 {% load class_tags %}
 
-<script src="{{STATIC_URL}}/js/canopy.js" type="text/javascript"></script>
-<script type="text/javascript" src="{{STATIC_URL}}/js/com.iskitz.ajile.js?mvcoff,mvcshareoff,refresh"></script>
+<script src="{{STATIC_URL}}js/canopy.js" type="text/javascript"></script>
+<script type="text/javascript" src="{{STATIC_URL}}js/com.iskitz.ajile.js?mvcoff,mvcshareoff,refresh"></script>
 <script type="text/javascript" src="http://www.google.com/jsapi"></script>
-<script type="text/javascript" src="{{STATIC_URL}}/js/org.wattdepot.gdata.GDataLoader.js"></script>
+<script type="text/javascript" src="{{STATIC_URL}}js/org.wattdepot.gdata.GDataLoader.js"></script>
 
 {% with viz=view_objects.canopy_viz.viz all_lounges=view_objects.canopy_viz.all_lounges group_lounges=view_objects.canopy_viz.group_lounges all_groups=view_objects.canopy_viz.all_groups %}
 
@@ -11,7 +11,7 @@
     <div {% get_id_and_classes "canopy-viz-title" %}>
         Advanced Visualizations
         <a href="#" style="float: right">
-            <img src="{{ STATIC_URL}}/css/default/images/icon-help-sm.png" width="20" align="center"
+            <img src="{{ STATIC_URL}}css/default/images/icon-help-sm.png" width="20" align="center"
                  title="Click to get help about this window"
                  onclick="toggleHelp('widget', 'advanced-visualizations'); return false;"
                     /></a>

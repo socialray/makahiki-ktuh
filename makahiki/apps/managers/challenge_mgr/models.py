@@ -2,6 +2,7 @@
 import datetime
 from django.conf import settings
 from django.db import models
+from apps.utils.utils import media_file_path, OverwriteStorage
 
 
 class ChallengeSettings(models.Model):
@@ -15,7 +16,8 @@ class ChallengeSettings(models.Model):
         help_text="The domain name of the site.",
         max_length=100,)
     site_logo = models.ImageField(
-        upload_to="challenge",
+        upload_to=media_file_path(),
+        storage=OverwriteStorage(),
         max_length=255, blank=True, null=True,
         help_text="The logo of the site.",)
     competition_name = models.CharField(
@@ -78,22 +80,6 @@ class ChallengeSettings(models.Model):
         help_text="The sponsors in the landing page. " + settings.MARKDOWN_TEXT,
         max_length=255,)
 
-    # home page T & C
-    term_conditions = models.TextField(
-        default="",
-        help_text="The term and conditions in the home page. " + settings.MARKDOWN_TEXT,
-        max_length=4095,)
-
-    # should be using environment variables
-    facebook_app_id = models.CharField(
-        default="",
-        help_text="The FACEBOOK_APP_ID for facebook integration.",
-        max_length=100,)
-    facebook_secret_key = models.CharField(
-        default="",
-        help_text="The FACEBOOK_SECRET_KEY for facebook integration.",
-        max_length=100,)
-
     def __unicode__(self):
         return self.site_name
 
@@ -116,6 +102,7 @@ class ChallengeSettings(models.Model):
             settings.EMAIL_HOST = settings.CHALLENGE.email_host
             settings.EMAIL_PORT = settings.CHALLENGE.email_port
             settings.EMAIL_USE_TLS = settings.CHALLENGE.email_use_tls
+            settings.ADMINS = (('Admin', settings.CHALLENGE.contact_email),)
 
 
 class RoundSettings(models.Model):
