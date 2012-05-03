@@ -35,11 +35,13 @@ def supply(request, page_name):
 :return: an empty dict."""
     _ = request
     _ = page_name
-    tcObj = HelpTopic.objects.filter(slug="terms-and-conditions")[0]
-    termsObj = tcObj.contents
-    return {
-    "terms": termsObj,
-    }
+    if page_name == 'terms':
+        tcObj = HelpTopic.objects.filter(slug="terms-and-conditions")[0]
+        termsObj = tcObj.contents
+        return {
+        "terms": termsObj,
+        }
+    return {}
 
 
 @login_required
@@ -78,7 +80,7 @@ def setup_welcome(request):
 def terms(request):
     """Display page 2 (terms and conditions) of first login wizard."""
     if request.is_ajax():
-        tc = supply(request, '')
+        tc = supply(request, 'terms')
         response = render_to_string("first-login/terms.html", {
             "terms": tc
         }, context_instance=RequestContext(request))
