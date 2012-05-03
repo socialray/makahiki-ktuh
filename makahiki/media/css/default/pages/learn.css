@@ -315,12 +315,14 @@ table#activities-grid td table td{
 .excursion-legend {
 	background-color: #AB441B;
 	}
-		
-#purr-container {
-	position: absolute;
-	top: 400px;
-	left: 450px;
-}
+	
+/* #purr-container { */
+/* 	position: absolute; */
+/* 	top: 50%; */
+/* 	left: 450px; */
+/*     margin-left: auto; */
+/*     margin-right: auto; */
+/* } */
 
 .notice {
   background-color: #646666;
