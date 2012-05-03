@@ -28,6 +28,7 @@ from apps.widgets.home.forms import ProfileForm, ReferralForm
 from apps.widgets.smartgrid.models import Action, ActionMember
 from apps.widgets.help.models import HelpTopic
 
+
 def supply(request, page_name):
     """Simply directs the user to the home page.
 
@@ -35,9 +36,9 @@ def supply(request, page_name):
     _ = request
     _ = page_name
     tcObj = HelpTopic.objects.filter(slug="terms-and-conditions")[0]
-    terms = tcObj.contents
+    termsObj = tcObj.contents
     return {
-    "terms": terms,
+    "terms": termsObj,
     }
 
 
@@ -77,9 +78,9 @@ def setup_welcome(request):
 def terms(request):
     """Display page 2 (terms and conditions) of first login wizard."""
     if request.is_ajax():
-        terms = supply(request,'')
+        tc = supply(request, '')
         response = render_to_string("first-login/terms.html", {
-            "terms": terms
+            "terms": tc
         }, context_instance=RequestContext(request))
 
         return HttpResponse(json.dumps({
