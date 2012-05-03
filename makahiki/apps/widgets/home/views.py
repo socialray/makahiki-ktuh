@@ -26,7 +26,7 @@ from apps.managers.challenge_mgr import challenge_mgr
 from apps.managers.score_mgr import score_mgr
 from apps.widgets.home.forms import ProfileForm, ReferralForm
 from apps.widgets.smartgrid.models import Action, ActionMember
-
+from apps.widgets.help.models import HelpTopic
 
 def supply(request, page_name):
     """Simply directs the user to the home page.
@@ -34,7 +34,11 @@ def supply(request, page_name):
 :return: an empty dict."""
     _ = request
     _ = page_name
-    return {}
+    tcObj = HelpTopic.objects.filter(slug="terms-and-conditions")[0]
+    terms = tcObj.contents
+    return {
+    "terms": terms,
+    }
 
 
 @login_required
@@ -73,7 +77,9 @@ def setup_welcome(request):
 def terms(request):
     """Display page 2 (terms and conditions) of first login wizard."""
     if request.is_ajax():
+        terms = supply(request,'')
         response = render_to_string("first-login/terms.html", {
+            "terms": terms
         }, context_instance=RequestContext(request))
 
         return HttpResponse(json.dumps({
