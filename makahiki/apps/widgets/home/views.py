@@ -136,8 +136,8 @@ def profile_facebook(request):
     """Connect to Facebook to get the user's facebook photo."""
     if request.is_ajax():
         fb_user = facebook.get_user_from_cookie(request.COOKIES,
-                                                settings.CHALLENGE.facebook_app_id,
-                                                settings.CHALLENGE.facebook_secret_key)
+                                                settings.FACEBOOK_APP_ID,
+                                                settings.FACEBOOK_SECRET_KEY)
         fb_id = None
         if not fb_user:
             return HttpResponse(json.dumps({
@@ -241,8 +241,8 @@ def _get_profile_form(request, form=None, non_xhr=False):
     """Helper method to render the profile form."""
     try:
         fb_user = facebook.get_user_from_cookie(request.COOKIES,
-                                                settings.CHALLENGE.facebook_app_id,
-                                                settings.CHALLENGE.facebook_secret_key)
+                                                settings.FACEBOOK_APP_ID,
+                                                settings.FACEBOOK_SECRET_KEY)
     except AttributeError:
         fb_user = None
 
