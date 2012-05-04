@@ -1,13 +1,12 @@
 {% load class_tags %}
+{% load markup %}
+
 <div class="modal-header">
     <h2>Terms and Conditions</h2>
 </div>
 <div id="setup-content" class="modal-body">
-    <p>The Kukui Cup competition is part of a University of Hawaii research project on energy.
-        Please read the following information and make a selection below.</p>
-
     <div id="setup-terms-content">
-        {% include "first-login/terms_text.html" %}
+        {{terms.terms|markdown}}
     </div>
 </div>
 <div class="modal-footer">
@@ -17,12 +16,6 @@
             Back
         </a>
     </div>
-
-    {% if is_mobile %}
-        <div style="float:center">
-            <a href="{% url mobile_tc %}"><font color="Purple">View Terms and Conditions</font></a>
-        </div>
-    {% endif %}
 
     <div style="float:right">
         <a class="btn btn-success" id="agree" style="margin-bottom: 10px">I Agree 

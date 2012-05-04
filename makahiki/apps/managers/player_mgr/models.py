@@ -117,7 +117,7 @@ def award_possible_referral_bonus(sender, instance=None, **kwargs):
     _ = sender
     _ = kwargs
     has_referral = instance.referring_user is not None and not instance.referrer_awarded
-    if has_referral and instance.points() >= 30:
+    if has_referral and instance.points() >= score_mgr.active_threshold_points():
         instance.referrer_awarded = True
         referrer = Profile.objects.get(user=instance.referring_user)
         score_mgr.award_referral_bonus(instance, referrer)

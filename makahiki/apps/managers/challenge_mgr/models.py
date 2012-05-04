@@ -10,9 +10,13 @@ class ChallengeSettings(models.Model):
         default="University of Hawaii at Manoa",
         help_text="The name of the site.",
         max_length=50,)
+    site_domain = models.CharField(
+        default="kukuicup.manoa.hawaii.edu",
+        help_text="The domain name of the site.",
+        max_length=100,)
     site_logo = models.ImageField(
         upload_to="challenge",
-        max_length=1024, blank=True, null=True,
+        max_length=255, blank=True, null=True,
         help_text="The logo of the site.",)
     competition_name = models.CharField(
         default="Kukui Cup",
@@ -51,10 +55,10 @@ class ChallengeSettings(models.Model):
         help_text="Use TLS in the email server?",)
 
     # landing page content settings
-    landing_slogan = models.CharField(
+    landing_slogan = models.TextField(
         default="The Kukui Cup: Lights out, game on!",
-        max_length=255,
-        help_text="The slogan text in the landing page.")
+        help_text="The slogan text in the landing page. " + settings.MARKDOWN_TEXT,
+        max_length=255,)
     landing_introduction = models.TextField(
         default="Aloha!",
         help_text="The introduction in the landing page. " + settings.MARKDOWN_TEXT,
@@ -70,9 +74,15 @@ class ChallengeSettings(models.Model):
         help_text="The text of the non participant button in the landing page. " +
                   settings.MARKDOWN_TEXT)
     landing_sponsors = models.TextField(
-        default="text",
+        default="",
         help_text="The sponsors in the landing page. " + settings.MARKDOWN_TEXT,
         max_length=255,)
+
+    # home page T & C
+    term_conditions = models.TextField(
+        default="",
+        help_text="The term and conditions in the home page. " + settings.MARKDOWN_TEXT,
+        max_length=4095,)
 
     # should be using environment variables
     facebook_app_id = models.CharField(
@@ -94,7 +104,7 @@ class ChallengeSettings(models.Model):
 
     @staticmethod
     def set_settings():
-        """get the CALLENGE setting from DB."""
+        """get the CALLENGE setting from DB and set the global django settings."""
         settings.CHALLENGE, _ = ChallengeSettings.objects.get_or_create(pk=1)
 
         # required setting for the CAS authentication service.

@@ -6,12 +6,11 @@
        align="top"/>
 </div>
 
-{% with member.user as user %}
 <div class="team-member-details span3">
   <a name="{{member.name|slugify}}">
       <h4>{{ member.name }}</h4>
 
-      {% for badge in user.badges_earned.all %}
+      {% for badge in member.user.badges_earned.all %}
           <a href="{% url profile_badges %}"><img class="member-badges"
                                                   src="{{STATIC_URL}}{{badge.image}}"
                                                   alt="{{badge.badge.name}}"
@@ -19,7 +18,7 @@
       {% endfor %}
   </a>
   
-  {% if user.is_superuser or user.is_staff %}
+  {% if member.user.is_superuser or member.user.is_staff %}
   <!-- Downloaded from http://www.iconarchive.com/show/silk-icons-by-famfamfam/award-star-gold-3-icon.html -->
   <img src="{{STATIC_URL}}images/award-star-gold-3-icon.png">Administrator
   {% endif %}
@@ -47,17 +46,18 @@
 </div>
 
 <div class="span8">
-    {% with user.actionmember_set.all as action_members %}
+        {% with action_members=member.user.actionmember_set.all %}
         {% if action_members.count > 0 %}
-            <h4>{{ member.name }}&apos;s Actions</h4>
+            <h4>{{ member.name }}&apos;s Current Commitments and RSVPs</h4>
             <ul class="team-member-commitments">
                 {% for action_member in action_members %}
+                    {% if not action_member.award_date and not action_member.action.activity %}
                     <li>
                         <a href="{% url activity_task action_member.action.type action_member.action.slug %}">{{ action_member.action }}</a>
                     </li>
+                    {% endif %}
                 {% endfor %}
             </ul>
         {% endif %}
-    {% endwith %}
 </div>
 {% endwith %}

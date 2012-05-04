@@ -51,7 +51,7 @@ def supply(request, page_name):
         else:
             posts = Post.objects.filter(team=team).select_related('user__profile').order_by("-id")
 
-        title = page_name + " News Feed"
+        title = "News Feed"
         description = ""
 
     post_count = posts.count()

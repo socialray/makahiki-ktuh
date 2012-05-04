@@ -276,6 +276,10 @@ table#activities-grid td table td{
 	padding: 1px;
 }
 
+.activity div a, .commitment div a, .event div a, .survey div a, .excursion div a, .yellow-green div a {    
+    color: #000;
+}
+
 .activity p, .commitment p, .event p, .survey p, .excursion p, .yellow-green p {
 	font-size: 12pt;
 	font-weight: bold;	
@@ -311,12 +315,14 @@ table#activities-grid td table td{
 .excursion-legend {
 	background-color: #AB441B;
 	}
-		
-#purr-container {
-	position: absolute;
-	top: 400px;
-	left: 450px;
-}
+	
+/* #purr-container { */
+/* 	position: absolute; */
+/* 	top: 50%; */
+/* 	left: 450px; */
+/*     margin-left: auto; */
+/*     margin-right: auto; */
+/* } */
 
 .notice {
   background-color: #646666;

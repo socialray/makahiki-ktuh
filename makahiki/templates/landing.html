@@ -21,16 +21,17 @@
 {% block body %}
 <div class="container-fluid">
     <div class="row-fluid">
-        <div class="content-box logo-header-box">
-                <img class="logo" src="{{STATIC_URL}}css/default/images/old-logo.png"></img>
-                <div class="logo-header-text"> 
-                  {{ CHALLENGE.landing_slogan }}
+        <div class="content-box logo-header-box"> 
+                <img class="logo" src="{{STATIC_URL}}css/default/images/old-logo.png"></img> 
+                <img class="logo-branding" src="{{STATIC_URL}}images/icons/uhseal.png"></img> 
+                <div class="logo-header-text" style="text-align: center;"> 
+                  {{ CHALLENGE.landing_slogan|markdown }}
                 </div> 
         </div>
     </div>
     <div class="row-fluid">
         <div class="content-box landing-body">
-            {{ CHALLENGE.landing_introduction }}
+            {{ CHALLENGE.landing_introduction|markdown }}
             <p>
 
             <p>
@@ -50,7 +51,7 @@
         </div>
     </div>
     <div class="row-fluid">
-        <div class="landing-sponsors content-box"> 
+        <div class="landing-sponsors content-box" style="text-align: center;"> 
                     <h4>Sponsored by:</h4> 
                 <div id="landing-sponsors-list">
                     <ul>

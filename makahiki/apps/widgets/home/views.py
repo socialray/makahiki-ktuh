@@ -25,7 +25,8 @@ import apps.lib.facebook_api.facebook as facebook
 from apps.managers.challenge_mgr import challenge_mgr
 from apps.managers.score_mgr import score_mgr
 from apps.widgets.home.forms import ProfileForm, ReferralForm
-from apps.widgets.smartgrid.models import Action
+from apps.widgets.smartgrid.models import Action, ActionMember
+from apps.widgets.help.models import HelpTopic
 
 
 def supply(request, page_name):
@@ -34,6 +35,12 @@ def supply(request, page_name):
 :return: an empty dict."""
     _ = request
     _ = page_name
+    if page_name == 'terms':
+        tcObj = HelpTopic.objects.filter(slug="terms-and-conditions")[0]
+        termsObj = tcObj.contents
+        return {
+        "terms": termsObj,
+        }
     return {}
 
 
@@ -73,7 +80,9 @@ def setup_welcome(request):
 def terms(request):
     """Display page 2 (terms and conditions) of first login wizard."""
     if request.is_ajax():
+        tc = supply(request, 'terms')
         response = render_to_string("first-login/terms.html", {
+            "terms": tc
         }, context_instance=RequestContext(request))
 
         return HttpResponse(json.dumps({
@@ -119,6 +128,7 @@ def referral(request):
         response = render_to_string('first-login/referral.html', {
             'form': form,
             'referral_points': score_mgr.referral_points(),
+            'active_threshold_points': score_mgr.active_threshold_points(),
             }, context_instance=RequestContext(request))
 
         return HttpResponse(json.dumps({
@@ -345,9 +355,11 @@ def setup_complete(request):
             # User got the question right.
             # link it to an activity.
             if "smartgrid" in settings.INSTALLED_WIDGET_APPS:
-                module = importlib.import_module("apps.widgets.smartgrid.smartgrid")
-                module.complete_setup_activity(request.user)
-
+                activity = get_object_or_404(Action, slug="intro-video")
+                points_awarded = ActionMember.objects.filter(user=request.user, action=activity)
+                if not points_awarded:
+                    module = importlib.import_module("apps.widgets.smartgrid.smartgrid")
+                    module.complete_setup_activity(request.user)
         profile.setup_complete = True
         profile.completion_date = datetime.datetime.today()
         profile.save()

@@ -6,7 +6,7 @@
     width: 180px;
 }
 
-@media ( max-width : 651px) {
+@media ( max-width : 660px) {
   .upload-form { 
     display: none;
   } 
@@ -533,3 +533,7 @@ iframe {
             left no-repeat;
     }
 }
+
+#gohome > a{
+  color: white;
+

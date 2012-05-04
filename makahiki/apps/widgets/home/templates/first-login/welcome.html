@@ -14,8 +14,7 @@
           <p style="margin: 5px 0">
               According to our records, your name
               is <b>{{ user.get_profile.first_name }} {{ user.get_profile.last_name }}</b> and you live
-              in <b>{{ user.get_profile.team }}</b>.<br/>If this is not correct, please <a
-                  href="mailto:{{CONTACT_EMAIL}}">email the admins</a>.
+              in <b>{{ user.get_profile.team }}</b>.<br/>If this is not correct, please <a class="contact-link" href="mailto:{{ CHALLENGE.contact_email }}">email the admins</a>.
           </p>
       </div>
   </div>
