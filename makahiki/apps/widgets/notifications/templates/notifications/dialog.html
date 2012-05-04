@@ -7,9 +7,7 @@
                 <!-- FIXME: Don't like the width 530px -->
                 <div class="notification-contents"
                      {% if notification.is_success %}style="width: 530px"{% endif %}>
-                    <div class='notice-icon'>
-                        <span class="ui-icon {{notification.icon_class}}"></span>
-                    </div>
+                    <span class="notice-icon ui-icon {{notification.icon_class}}"></span>
                     <!--  FIXME: Don't like the width 600px -->
                     <div class='notice-content' {% if notification.is_success %}style="width: 470px"
                          {% else %}style="width: 600px"{% endif %}>
