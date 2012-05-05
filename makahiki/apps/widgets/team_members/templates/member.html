@@ -1,7 +1,7 @@
 {% load avatar_tags %}
 
 <div class="span1">
-  <img class="member-image" src="{% avatar_url member 40 %}"
+  <img class="member-image" src="{% avatar_url member.user 40 %}"
        alt="Photo of {{ member.name }}" title="Photo of {{ member.name }}"
        align="top"/>
 </div>
