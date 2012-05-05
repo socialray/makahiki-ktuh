@@ -41,7 +41,7 @@
         {% if action.social_bonus > 0 %}
             <b>Social Bonus : {{ action.social_bonus }} points. </b>
             <a href="#">
-                <img src="{{ STATIC_URL}}/css/default/images/icon-help-sm.png" width="20"
+                <img src="{{ STATIC_URL}}images/icons/icon-help-sm.png" width="20"
                      align="center"
                      title="What is the Social Bonus ?"
                      onclick="toggleHelp('widget', 'social-bonus'); return false;"
@@ -92,7 +92,7 @@
             {% if action.is_canopy %}
                 <a href="/canopy">
                     <button style="cursor:pointer;">
-                        <img src="{{ STATIC_URL}}/css/default/images/left.png" width="50"
+                        <img src="{{ STATIC_URL}}images/left.png" width="50"
                              align="top">
                         <br/>Back to the Canopy
                     </button>
@@ -100,7 +100,7 @@
             {% else %}
                 <a href="/learn/">
                     <button style="cursor:pointer;">
-                        <img src="{{ STATIC_URL}}/css/default/images/left.png" width="50"
+                        <img src="{{ STATIC_URL}}images/left.png" width="50"
                              align="top">
                         <br/>Back to Smart Grid Game
                     </button>

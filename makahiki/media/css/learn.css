@@ -45,20 +45,6 @@
 	text-align: left;
 }
 
-/*
-#activity-task-details-info {
-	background: transparent url(/site_media/static/css/default/images/bkg-message-tray-large.png) top left no-repeat;
-	width: 450px;
-	height: 108px;
-	line-height: 20px;
-	display: block;
-	margin: .5em auto 5px auto;
-	color: #FFF;
-	font-weight: bold;
-	text-align: center;
-}
-*/
-
 #activity-task-details-info {
   background-color: #404242;
   border: 2px solid gray;
@@ -351,7 +337,7 @@ table#activities-grid td table td{
 .notice .close	{
 	position: absolute; top: 5px; right: 5px; display: block; 
 	width: 18px; height: 17px; text-indent: -9999px; 
-	background: url(/site_media/static/css/default/images/purrClose.png) no-repeat 0 10px;
+	background: url(/site_media/static/images/purrClose.png) no-repeat 0 10px;
 }
 		
 #grid-about {

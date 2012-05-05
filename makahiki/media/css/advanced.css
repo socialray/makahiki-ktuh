@@ -8,14 +8,6 @@ body {
   background-color: #BDCBDF;
 }
 
-.container-top {
-  background: transparent url(/site_media/static/css/default/images/canopytop.png) top center no-repeat;
-}
-
-.container-bottom {
-  background: transparent url(/site_media/static/css/default/images/canopybottom.jpg) bottom center no-repeat;
-}
-
 /*------- mission styles -----*/
 #mission-list {
   margin: 0;

@@ -12,20 +12,20 @@
 <div class="modal-footer">
     <div style="float:left">
         <a class="btn btn-primary" id="back">
-            <img src="{{ STATIC_URL}}/css/default/images/left.png" width="24" align="top">
+            <img src="{{ STATIC_URL}}/images/left.png" width="24" align="top">
             Back
         </a>
     </div>
 
     <div style="float:right">
         <a class="btn btn-success" id="agree" style="margin-bottom: 10px">I Agree 
-            <img src="{{ STATIC_URL}}/css/default/images/right.png" width="24" align="top">
+            <img src="{{ STATIC_URL}}/images/right.png" width="24" align="top">
         </a>
     </div>
     <div style="clear: right; float:right;">
         <a href="/account/cas/logout?next={% url about %}">
             <button class="btn btn-danger" id="decline" style="text-align: right">I don't agree <img
-                    src="{{ STATIC_URL}}/css/default/images/stop.png" width="24" align="top"><br/>Take
+                    src="{{ STATIC_URL}}/images/stop.png" width="24" align="top"><br/>Take
                 me to non-participant page
             </button>
         </a>
