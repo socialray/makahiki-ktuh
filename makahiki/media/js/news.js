@@ -40,7 +40,7 @@ $(document).ready(function() {
     height = $(item).height();
     // console.log("height of item is " + height);
     if (height > maxHeight){
-      height = maxHeight;
+      maxHeight = height;
     }
   });
   
