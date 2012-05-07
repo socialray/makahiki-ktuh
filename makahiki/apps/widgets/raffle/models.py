@@ -2,13 +2,16 @@
 
 from django.db import models
 from django.contrib.auth.models import User
-from apps.utils.utils import media_file_path, OverwriteStorage
+from apps.utils.utils import media_file_path
 
 POINTS_PER_TICKET = 25
 """Number of points required to earn a raffle ticket"""
 
 RAFFLE_END_PERIOD = 2
 """Number of hours prior to the end of a round that the raffle closes."""
+
+_MEDIA_LOCATION = "raffle"
+"""location for uploaded files."""
 
 
 class RafflePrize(models.Model):
@@ -22,8 +25,7 @@ class RafflePrize(models.Model):
     )
     image = models.ImageField(
         max_length=1024,
-        upload_to=media_file_path(),
-        storage=OverwriteStorage(),
+        upload_to=media_file_path(_MEDIA_LOCATION),
         blank=True,
         help_text="A picture of your raffle prize."
     )

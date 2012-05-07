@@ -7,7 +7,6 @@ import urllib2
 
 from django.conf import settings
 from django.shortcuts import render_to_response
-from django.shortcuts import get_object_or_404
 from django.template import RequestContext
 from django.template.loader import render_to_string
 from django.http import Http404, HttpResponse, HttpResponseRedirect
@@ -15,7 +14,6 @@ from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
 from django.core.files import File
 from django.core.files.temp import NamedTemporaryFile
-from django.utils import importlib
 from django.views.decorators.cache import never_cache
 from django.views.decorators.csrf import csrf_exempt
 from django.core.urlresolvers import reverse
@@ -25,7 +23,7 @@ import apps.lib.facebook_api.facebook as facebook
 from apps.managers.challenge_mgr import challenge_mgr
 from apps.managers.score_mgr import score_mgr
 from apps.widgets.home.forms import ProfileForm, ReferralForm
-from apps.widgets.smartgrid.models import Action, ActionMember
+from apps.widgets.smartgrid import smartgrid
 from apps.widgets.help.models import HelpTopic
 
 
@@ -298,8 +296,10 @@ def _get_profile_form(request, form=None, non_xhr=False):
 def setup_activity(request):
     """Display page 5 (activity) of the first login wizard."""
 
+    activity = smartgrid.get_setup_activity()
+
     if request.is_ajax():
-        template = render_to_string("first-login/activity.html", {},
+        template = render_to_string("first-login/activity.html", {'activity': activity},
             context_instance=RequestContext(request))
 
         response = HttpResponse(json.dumps({
@@ -310,7 +310,7 @@ def setup_activity(request):
         return response
 
     else:
-        template = render_to_string("first-login/activity.html", {},
+        template = render_to_string("first-login/activity.html", {'activity': activity},
             context_instance=RequestContext(request))
 
         response = HttpResponse("<textarea>" + json.dumps({
@@ -329,7 +329,7 @@ def setup_question(request):
     if request.is_ajax():
         template = render_to_string("first-login/question.html", {},
             context_instance=RequestContext(request))
-        activity = get_object_or_404(Action, slug="intro-video")
+        activity = smartgrid.get_setup_activity()
         points = str(activity.point_value) + " points"
 
         response = HttpResponse(json.dumps({
@@ -354,12 +354,8 @@ def setup_complete(request):
         if request.method == "POST":
             # User got the question right.
             # link it to an activity.
-            if "smartgrid" in settings.INSTALLED_WIDGET_APPS:
-                activity = get_object_or_404(Action, slug="intro-video")
-                points_awarded = ActionMember.objects.filter(user=request.user, action=activity)
-                if not points_awarded:
-                    module = importlib.import_module("apps.widgets.smartgrid.smartgrid")
-                    module.complete_setup_activity(request.user)
+            smartgrid.complete_setup_activity(request.user)
+
         profile.setup_complete = True
         profile.completion_date = datetime.datetime.today()
         profile.save()

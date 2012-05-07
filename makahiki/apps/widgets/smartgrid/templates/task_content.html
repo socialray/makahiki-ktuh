@@ -141,13 +141,17 @@
 {% if action.image %}
     <center><img src="{{ action.image.url }}" /> </center>
 {% endif %}
-<p/>
 
+<p/>
 {{ action.description|markdown }}
 
 <p/>
-<center>
+{% if action.video_id %}
+    {% include "components/action_video.html" with action=action %}
+{% endif %}
 
+<p/>
+<center>
     {% if not action.is_pau %}              <!-- not done yet  -->
         {% if action.type == "commitment" %}
             {% if action.can_commit %}

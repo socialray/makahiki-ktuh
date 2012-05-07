@@ -63,11 +63,8 @@ for widget in settings.INSTALLED_WIDGET_APPS:
 
 if settings.SERVE_MEDIA:
     urlpatterns += patterns('',
-            (r'^site_media/media/(?P<path>.*)$', 'django.views.static.serve',
-                    {'document_root': settings.MEDIA_ROOT}),
-       )
-
+        (r'^' + settings.STATIC_URL[1:] + '(?P<path>.*)$', 'django.views.static.serve',
+             {'document_root': settings.STATIC_ROOT}), )
     urlpatterns += patterns('',
-            (r'^site_media/(?P<path>.*)$', 'django.views.static.serve',
-                    {'document_root': settings.STATIC_ROOT}),
-       )
+        (r'^' + settings.MEDIA_URL[1:] + '(?P<path>.*)$', 'django.views.static.serve',
+             {'document_root': settings.MEDIA_ROOT}), )

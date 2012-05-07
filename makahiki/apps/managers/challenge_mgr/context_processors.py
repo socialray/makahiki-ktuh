@@ -36,16 +36,16 @@ def competition(request):
         "CHALLENGE": settings.CHALLENGE,
         "CSS_THEME": settings.CHALLENGE.theme,
         "TEAM_LABEL": settings.CHALLENGE.competition_team_label,
+        "FACEBOOK_APP_ID": settings.FACEBOOK_APP_ID,
+        "MAKAHIKI_USE_COMPILED_LESS": settings.MAKAHIKI_USE_COMPILED_LESS,
+        "CURRENT_ROUND_INFO": challenge_mgr.get_current_round_info(),
+        "IN_COMPETITION": challenge_mgr.in_competition(),
         "TEAM_COUNT": team_count,
         "TEAM_MEMBER_COUNT": team_member_count,
         "OVERALL_MEMBER_COUNT": overall_member_count,
-        "CURRENT_ROUND_INFO": challenge_mgr.get_current_round_info(),
-        "FACEBOOK_APP_ID": settings.FACEBOOK_APP_ID,
-        "IN_COMPETITION": challenge_mgr.in_competition(),
         "DEFAULT_VIEW_OBJECTS": default_view_objects,
         "AVAILABLE_EVENTS": available_events,
         "PAGE_INFO": page_info,
-        "MAKAHIKI_USE_COMPILED_LESS": settings.MAKAHIKI_USE_COMPILED_LESS,
     }
 
 

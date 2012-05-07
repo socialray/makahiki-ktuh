@@ -11,51 +11,6 @@ from django.forms import TextInput, Textarea
 from django.core.urlresolvers import reverse
 
 
-class CommitmentAdmin(admin.ModelAdmin):
-    """Commitment Admin."""
-    fieldsets = (
-        ("Basic Information", {
-            'fields': ('name', 'slug', 'title', 'image', 'description', 'social_bonus', 'duration',
-                       'depends_on', 'depends_on_text', 'related_resource',
-                       ('is_canopy', 'is_group')),
-            }),
-        ("Points", {"fields": ("point_value",)}),
-        ("Ordering", {"fields": ("priority", "category")}),
-        )
-    prepopulated_fields = {"slug": ("name",)}
-
-    list_display = ["title", "category", "priority", ]
-
-    actions = ["delete_selected", "increment_priority", "decrement_priority"]
-
-    def delete_selected(self, request, queryset):
-        """override the delete selected."""
-        _ = request
-        for obj in queryset:
-            obj.delete()
-
-    delete_selected.short_description = "Delete the selected objects."
-
-    def increment_priority(self, request, queryset):
-        """increment the priority."""
-        _ = request
-        for obj in queryset:
-            obj.priority += 1
-            obj.save()
-
-    increment_priority.short_description = "Increment selected objects' priority by 1."
-
-    def decrement_priority(self, request, queryset):
-        """decrement the priority."""
-        _ = request
-        for obj in queryset:
-            obj.priority -= 1
-            obj.save()
-
-    decrement_priority.short_description = "Decrement selected objects' priority by 1."
-
-admin.site.register(Commitment, CommitmentAdmin)
-
 # Category Admin
 admin.site.register(Category)
 
@@ -299,13 +254,18 @@ class ActivityAdmin(admin.ModelAdmin):
     """Activity Admin"""
     fieldsets = (
         ("Basic Information",
-         {'fields': ('name', 'slug', 'type', 'title', 'image', 'description', 'duration',
+         {'fields': (('name', 'type'),
+                     ('slug', 'related_resource'),
+                     ('title', 'duration'),
+                     'image',
+                     'description',
+                     ('video_id', 'video_source'),
                      ('pub_date', 'expire_date'),
                      ('depends_on', 'depends_on_text'),
-                     'related_resource', ('is_canopy', 'is_group'))}),
+                     ('is_canopy', 'is_group'))}),
         ("Points",
-         {"fields": ("point_value", "social_bonus", ("point_range_start", "point_range_end"))}),
-        ("Ordering", {"fields": ("priority", "category")}),
+         {"fields": (("point_value", "social_bonus"), ("point_range_start", "point_range_end"), )}),
+        ("Ordering", {"fields": (("category", "priority"), )}),
         ("Confirmation Type", {'fields': ('confirm_type', 'confirm_prompt')}),
     )
     prepopulated_fields = {"slug": ("name",)}
@@ -313,7 +273,7 @@ class ActivityAdmin(admin.ModelAdmin):
     inlines = [TextQuestionInline]
 
     formfield_overrides = {
-        models.CharField: {'widget': TextInput(attrs={'size': '100'})},
+        models.CharField: {'widget': TextInput(attrs={'size': '80'})},
         }
 
     list_display = ["title", "type", "category", "priority", "pub_date",
@@ -354,20 +314,24 @@ class EventAdmin(admin.ModelAdmin):
     """Event Admin"""
     fieldsets = (
         ("Basic Information",
-         {'fields': ('name', 'slug', 'type', 'title', 'image', 'description', 'duration',
+         {'fields': (('name', 'type'),
+                     ('slug', 'related_resource'),
+                     ('title', 'duration'),
+                     'image',
+                     'description',
                      ('pub_date', 'expire_date'),
-                     ('event_date', 'event_max_seat', 'event_location'),
+                     ('event_date', 'event_location', 'event_max_seat'),
                      ('depends_on', 'depends_on_text'),
-                     'related_resource', ('is_canopy', 'is_group'))}),
-        ("Points", {"fields": ("point_value", "social_bonus",)}),
-        ("Ordering", {"fields": ("priority", "category")}),
+                     ('is_canopy', 'is_group'))}),
+        ("Points", {"fields": (("point_value", "social_bonus"),)}),
+        ("Ordering", {"fields": (("category", "priority"), )}),
         ("Confirmation Code", {'fields': ('num_codes',)}),
         )
     prepopulated_fields = {"slug": ("name",)}
     form = EventAdminForm
 
     formfield_overrides = {
-        models.CharField: {'widget': TextInput(attrs={'size': '100'})},
+        models.CharField: {'widget': TextInput(attrs={'size': '80'})},
         }
 
     list_display = ["title", "type", "category", "priority", "pub_date",
@@ -402,6 +366,60 @@ class EventAdmin(admin.ModelAdmin):
     decrement_priority.short_description = "Decrement selected objects' priority by 1."
 
 admin.site.register(Event, EventAdmin)
+
+
+class CommitmentAdmin(admin.ModelAdmin):
+    """Commitment Admin."""
+    fieldsets = (
+        ("Basic Information", {
+            'fields': ('name',
+                       ('slug', 'related_resource'),
+                       ('title', 'duration'),
+                       'image',
+                       'description',
+                       'depends_on', 'depends_on_text',
+                       ('is_canopy', 'is_group')),
+            }),
+        ("Points", {"fields": (("point_value", 'social_bonus'), )}),
+        ("Ordering", {"fields": (("category", "priority"), )}),
+        )
+    prepopulated_fields = {"slug": ("name",)}
+
+    formfield_overrides = {
+        models.CharField: {'widget': TextInput(attrs={'size': '80'})},
+        }
+
+    list_display = ["title", "category", "priority", ]
+
+    actions = ["delete_selected", "increment_priority", "decrement_priority"]
+
+    def delete_selected(self, request, queryset):
+        """override the delete selected."""
+        _ = request
+        for obj in queryset:
+            obj.delete()
+
+    delete_selected.short_description = "Delete the selected objects."
+
+    def increment_priority(self, request, queryset):
+        """increment the priority."""
+        _ = request
+        for obj in queryset:
+            obj.priority += 1
+            obj.save()
+
+    increment_priority.short_description = "Increment selected objects' priority by 1."
+
+    def decrement_priority(self, request, queryset):
+        """decrement the priority."""
+        _ = request
+        for obj in queryset:
+            obj.priority -= 1
+            obj.save()
+
+    decrement_priority.short_description = "Decrement selected objects' priority by 1."
+
+admin.site.register(Commitment, CommitmentAdmin)
 
 
 class ActionMemberAdminForm(forms.ModelForm):

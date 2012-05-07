@@ -10,5 +10,5 @@ NOSHOW_PENALTY_DAYS = 2
 NUM_GOLOW_ACTIONS = 3
 """Number of go low actions to display."""
 
-SETUP_WIZARD_ACTIVITY_NAME = "Intro video"
-"""Name of the activity used in the setup wizard."""
+SETUP_WIZARD_ACTIVITY = "intro-video"
+"""Slug of the activity used in the setup wizard."""

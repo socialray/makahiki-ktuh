@@ -9,55 +9,7 @@
             website. Pay close attention, because on the next screen you will be asked a question about
             the video to earn some more points!</p>
 
-
-            <div id="help-video-box"> 
-                <div id="help-video-content" class="content-box-contents video-container">
-                    <iframe id="player" type="text/html"
-                            src="http://www.youtube.com/embed/T37kNTkZCrA?fs=1&hl=en_US&rel=0&enablejsapi=1"
-                            frameborder="0"></iframe>
-                </div>
-            </div>
-           <script>  
-          var player;   
-     
-          player = new YT.Player('player', {
-              events: {
-                'onReady': onPlayerReady,
-                'onStateChange': onPlayerStateChange
-              }
-          });
-               
-          // The API will call this function when the video player is ready.
-          function onPlayerReady(event) { 
-          }
-
-          // The API calls this function when the player's state changes.
-            function onPlayerStateChange(event) { 
-                var state = "";
-                switch (event.data) {
-                    case -1:
-                        state = "unstarted";
-                        break;
-                    case 0:
-                        state = "end";
-                        break;
-                    case 1:
-                        state = "playing";
-                        break;
-                    case 2:
-                        state = "paused";
-                        break;
-                    case 3:
-                        state = "buffering";
-                        break;
-                    case 5:
-                        state = "cued";
-                        break;
-                }
-                log_js_action("home", "setup-video", "video-" + state);
-            }
-     
-        </script>
+        {% include "components/action_video.html" with action=activity %}
 
     </div>
 </div>

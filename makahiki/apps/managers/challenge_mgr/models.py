@@ -2,7 +2,14 @@
 import datetime
 from django.conf import settings
 from django.db import models
-from apps.utils.utils import media_file_path, OverwriteStorage
+from django.shortcuts import get_object_or_404
+from django_auth_ldap.config import LDAPSearch
+import ldap
+from apps.utils.utils import media_file_path
+
+
+_MEDIA_LOCATION = "challenge"
+"""location for uploaded files."""
 
 
 class ChallengeSettings(models.Model):
@@ -16,8 +23,7 @@ class ChallengeSettings(models.Model):
         help_text="The domain name of the site.",
         max_length=100,)
     site_logo = models.ImageField(
-        upload_to=media_file_path(),
-        storage=OverwriteStorage(),
+        upload_to=media_file_path(_MEDIA_LOCATION),
         max_length=255, blank=True, null=True,
         help_text="The logo of the site.",)
     competition_name = models.CharField(
@@ -32,9 +38,22 @@ class ChallengeSettings(models.Model):
         default="Lounge",
         help_text="The display label for team.",
         max_length=50,)
+
+    # CAS settings
     cas_server_url = models.CharField(
-        default="https://login.its.hawaii.edu/cas/",
-        help_text="The URL for CAS authentication service.",
+        null=True, blank=True,
+        help_text="The URL for CAS authentication service. " \
+                  "Example: https://login.its.hawaii.edu/cas/",
+        max_length=100,)
+
+    # LDAP settings
+    ldap_server_url = models.CharField(
+        null=True, blank=True,
+        help_text="The URL for LDAP authentication service. Example: ldap://localhost:10389",
+        max_length=100,)
+    ldap_search_base = models.CharField(
+        null=True, blank=True,
+        help_text="The search base for the ldap service. Example: ou=users,ou=system",
         max_length=100,)
 
     # email settings
@@ -75,10 +94,10 @@ class ChallengeSettings(models.Model):
         max_length=255,
         help_text="The text of the non participant button in the landing page. " +
                   settings.MARKDOWN_TEXT)
-    landing_sponsors = models.TextField(
-        default="",
-        help_text="The sponsors in the landing page. " + settings.MARKDOWN_TEXT,
-        max_length=255,)
+
+    class Meta:
+        """Meta."""
+        verbose_name_plural = "Challenge settings"
 
     def __unicode__(self):
         return self.site_name
@@ -93,9 +112,6 @@ class ChallengeSettings(models.Model):
         """get the CALLENGE setting from DB and set the global django settings."""
         settings.CHALLENGE, _ = ChallengeSettings.objects.get_or_create(pk=1)
 
-        # required setting for the CAS authentication service.
-        settings.CAS_SERVER_URL = settings.CHALLENGE.cas_server_url
-
         # email settings
         if settings.CHALLENGE.email_enabled:
             settings.SERVER_EMAIL = settings.CHALLENGE.contact_email
@@ -103,6 +119,52 @@ class ChallengeSettings(models.Model):
             settings.EMAIL_PORT = settings.CHALLENGE.email_port
             settings.EMAIL_USE_TLS = settings.CHALLENGE.email_use_tls
             settings.ADMINS = (('Admin', settings.CHALLENGE.contact_email),)
+
+        # setting for the CAS authentication service.
+        if settings.CHALLENGE.cas_server_url:
+            settings.CAS_SERVER_URL = settings.CHALLENGE.cas_server_url
+            settings.CAS_REDIRECT_URL = '/home'
+            settings.CAS_IGNORE_REFERER = True
+
+        # ldap settings
+        if settings.CHALLENGE.ldap_server_url:
+            settings.AUTH_LDAP_SERVER_URI = settings.CHALLENGE.ldap_server_url
+            settings.AUTH_LDAP_USER_SEARCH = LDAPSearch("%s" % settings.CHALLENGE.ldap_search_base,
+                                               ldap.SCOPE_SUBTREE, "(uid=%(user)s)")
+            settings.AUTH_LDAP_USER_ATTR_MAP = {
+                "first_name": "cn",
+                "last_name": "sn",
+            }
+
+
+class Sponsor(models.Model):
+    """Defines the sponsor for this challenge."""
+    challenge = models.ForeignKey("ChallengeSettings")
+
+    priority = models.IntegerField(
+        default="1",
+        help_text="The priority of the sponsor")
+    name = models.CharField(
+        help_text="The name of the sponsor.",
+        max_length=200,)
+    url = models.CharField(
+        help_text="The url of the sponsor.",
+        max_length=200,)
+    logo_url = models.CharField(
+        blank=True, null=True,
+        help_text="The url of the sponsor logo.",
+        max_length=200,)
+    logo = models.ImageField(
+        upload_to=media_file_path(_MEDIA_LOCATION),
+        max_length=255, blank=True, null=True,
+        help_text="The logo of the sponsor.",)
+
+    class Meta:
+        """meta"""
+        ordering = ['priority', 'name', ]
+
+    def __unicode__(self):
+        return self.name
 
 
 class RoundSettings(models.Model):
@@ -126,6 +188,7 @@ class RoundSettings(models.Model):
     class Meta:
         """Meta"""
         ordering = ['start']
+        verbose_name_plural = "Round settings"
 
     def __unicode__(self):
         return self.name
@@ -211,6 +274,7 @@ class PageSettings(models.Model):
         """meta"""
         unique_together = (("page", "widget", ), )
         ordering = ['page', 'widget', ]
+        verbose_name_plural = "Page settings"
 
     def __unicode__(self):
         return ""

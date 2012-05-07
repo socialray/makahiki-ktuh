@@ -15,20 +15,24 @@ import os
 from apps.managers.score_mgr import score_mgr
 from apps.managers.score_mgr.models import PointsTransaction
 from apps.managers.team_mgr.models import Post
-from apps.utils.utils import media_file_path, OverwriteStorage
+from apps.utils.utils import media_file_path
 from apps.widgets.notifications.models import UserNotification
 from apps.managers.cache_mgr import cache_mgr
 from apps.widgets.smartgrid import NOSHOW_PENALTY_DAYS
 
-MEDIA_LOCATION = "smartgrid"
-"""location for the uploaded files."""
+_MEDIA_LOCATION_ACTION = os.path.join("smartgrid", "action")
+"""location for the uploaded files for actions."""
+
+_MEDIA_LOCATION_MEMBER = os.path.join("smartgrid", "member")
+"""location for the uploaded files for actionmembers."""
 
 
 def activity_image_file_path(instance=None, filename=None, user=None):
     """Returns the file path used to save an activity confirmation image."""
     if instance:
         user = user or instance.user
-    return os.path.join(settings.MAKAHIKI_MEDIA_PREFIX, MEDIA_LOCATION, user.username, filename)
+    return os.path.join(settings.MAKAHIKI_MEDIA_PREFIX, _MEDIA_LOCATION_MEMBER,
+                        user.username, filename)
 
 
 class Category(models.Model):
@@ -126,6 +130,11 @@ class Action(models.Model):
         ('water', 'Water'),
         ('waste', 'Waste'),
     )
+
+    VIDEO_SOURCE_CHOICES = (
+        ('youtube', 'youtube'),
+    )
+
     users = models.ManyToManyField(User, through="ActionMember")
 
     name = models.CharField(
@@ -139,15 +148,22 @@ class Action(models.Model):
         help_text="The title of the action.")
     image = models.ImageField(
         max_length=255, blank=True, null=True,
-        upload_to=media_file_path(),
-        storage=OverwriteStorage(),
+        upload_to=media_file_path(_MEDIA_LOCATION_ACTION),
         help_text="Uploaded image for the activity.")
+    video_id = models.CharField(
+        null=True, blank=True,
+        max_length=200,
+        help_text="The id of the video.")
+    video_source = models.CharField(
+        null=True, blank=True,
+        max_length=20,
+        choices=VIDEO_SOURCE_CHOICES,
+        help_text="The source of the video.")
     description = models.TextField(
         help_text=settings.MARKDOWN_TEXT)
     type = models.CharField(
         max_length=20,
         choices=TYPE_CHOICES,
-        verbose_name="Activity Type",
         help_text="The type of the actions."
     )
     category = models.ForeignKey(Category,
@@ -155,8 +171,7 @@ class Action(models.Model):
         help_text="The category of the action.")
     priority = models.IntegerField(
         default=1000,
-        help_text="Orders the activities in the available activities list. " \
-                  "Activities with lower values (higher priority) will be listed first."
+        help_text="Activities with lower values (higher priority) will be listed first."
     )
     pub_date = models.DateField(
         default=datetime.date.today(),
@@ -367,7 +382,6 @@ class ActionMember(models.Model):
     image = models.ImageField(
         max_length=1024, blank=True,
         upload_to=activity_image_file_path,
-        storage=OverwriteStorage(),
         help_text="Uploaded image for verification.")
     points_awarded = models.IntegerField(
         blank=True, null=True,

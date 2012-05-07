@@ -3,7 +3,7 @@ from django.contrib import admin
 from django.db import models
 from django.forms.widgets import Textarea
 from apps.managers.challenge_mgr.models import ChallengeSettings, RoundSettings, PageSettings, \
-    PageInfo
+    PageInfo, Sponsor
 
 
 class PageSettingsInline(admin.TabularInline):
@@ -57,6 +57,12 @@ class RoundSettingsAdmin(admin.ModelAdmin):
 admin.site.register(RoundSettings, RoundSettingsAdmin)
 
 
+class SponsorsInline(admin.TabularInline):
+    """SponsorsInline admin."""
+    model = Sponsor
+    extra = 0
+
+
 class ChallengeSettingsAdmin(admin.ModelAdmin):
     """ChallengeSettings administrator interface definition."""
 
@@ -79,9 +85,10 @@ class ChallengeSettingsAdmin(admin.ModelAdmin):
                   ("landing_slogan",
                    "landing_introduction",
                    "landing_participant_text",
-                   "landing_non_participant_text",
-                   "landing_sponsors", )}),
+                   "landing_non_participant_text", )}),
     )
+
+    inlines = [SponsorsInline]
 
     formfield_overrides = {
         models.TextField: {'widget': Textarea(attrs={'rows': 3, 'cols': 70})},

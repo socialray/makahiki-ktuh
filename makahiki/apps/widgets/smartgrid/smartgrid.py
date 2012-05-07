@@ -7,29 +7,28 @@ from django.db.models.query_utils import Q
 from django.shortcuts import get_object_or_404
 from apps.managers.cache_mgr import cache_mgr
 from apps.utils import utils
-from apps.widgets.smartgrid import NUM_GOLOW_ACTIONS, SETUP_WIZARD_ACTIVITY_NAME
-from apps.widgets.smartgrid.models import Action, Category, Activity, ActionMember
+from apps.widgets.smartgrid import NUM_GOLOW_ACTIONS, SETUP_WIZARD_ACTIVITY
+from apps.widgets.smartgrid.models import Action, Category, ActionMember
 from apps.widgets.smartgrid.models import Event
 from apps.widgets.smartgrid import  MAX_COMMITMENTS
 
 
+def get_setup_activity():
+    """Returns the setup activity object."""
+    return get_object_or_404(Action, slug=SETUP_WIZARD_ACTIVITY)
+
+
 def complete_setup_activity(user):
     """complete the setup activity."""
-    try:
-        activity = Activity.objects.get(name=SETUP_WIZARD_ACTIVITY_NAME)
-        try:
-            member = ActionMember.objects.get(
-                action=activity,
-                user=user)
-        except ObjectDoesNotExist:
-            member = ActionMember(
-                action=activity,
-                user=user)
 
+    # error out if we can't find to the activity.
+    activity = get_setup_activity()
+    members = ActionMember.objects.filter(user=user, action=activity)
+    if not members:
+        # if points not awarded, do so.
+        member = ActionMember(action=activity, user=user)
         member.approval_status = "approved"
         member.save()
-    except ObjectDoesNotExist:
-        pass  # Don't add anything if we can't find to the activity.
 
 
 def get_action(slug):
@@ -239,16 +238,28 @@ SMARTGRID_PREDICATES = {
     }
 
 
+SMARTGRID_ACTION_PREDICATES = (
+    "completed",
+    "afterPublished",
+    )
+
+
 def eval_unlock(user, action):
     """Determine the unlock status of a task by dependency expression"""
     predicates = action.depends_on
     if not predicates:
         return False
 
-    return utils.eval_predicates(predicates, user, SMARTGRID_PREDICATES)
+    # append the action to the predicate parameter
+    for name in SMARTGRID_ACTION_PREDICATES:
+        predicates = predicates.replace(name + "()", name + "('" + action.slug + "')")
+
+    return utils.eval_predicates(predicates,
+                                 user,
+                                 SMARTGRID_PREDICATES)
 
 
-def has_action(user, slug=None, action_type=None):
+def has_action(user, slug=None, name=None, action_type=None):
     """Determines if the user is participating in a task.
 
         * For a activity, this returns True if the user submitted or completed the activity.
@@ -258,16 +269,19 @@ def has_action(user, slug=None, action_type=None):
 
        If a action_type is specified, then checks to see if a user has completed a task of that type.
        Only one of name and action_type should be specified."""
-    if not slug and not action_type:
-        raise Exception("Either slug or action_type must be specified.")
+    if not slug and not action_type and not name:
+        raise Exception("Either slug, name or action_type must be specified.")
 
-    if slug:
+    if slug or name:
         try:
-            task = Action.objects.get(slug=slug)
+            if slug:
+                action = Action.objects.get(slug=slug)
+            if name:
+                action = Action.objects.get(name=name)
         except ObjectDoesNotExist:
             return False
 
-        return is_pau(user, task)
+        return is_pau(user, action)
     else:
         action_type = action_type.lower()
         return user.actionmember_set.filter(action__type=action_type).count() > 0

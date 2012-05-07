@@ -13,9 +13,9 @@ def has_points(user, points, round_name="Overall"):
     return score_mgr.player_has_points(user.get_profile(), points, round_name)
 
 
-def has_action(user, slug=None, action_type=None):
+def has_action(user, slug=None, name=None, action_type=None):
     """Determines if the user is participating in a task."""
-    return smartgrid.has_action(user, slug, action_type)
+    return smartgrid.has_action(user, slug, name, action_type)
 
 
 def completed_action(user, slug=None, action_type=None):

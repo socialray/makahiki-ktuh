@@ -7,7 +7,6 @@ from django.contrib.auth.models import User
 from django.core.files.base import ContentFile
 from django.utils.translation import ugettext as _
 from apps.managers.cache_mgr import cache_mgr
-from apps.utils.utils import OverwriteStorage
 
 try:
     from cStringIO import StringIO
@@ -34,7 +33,6 @@ class Avatar(models.Model):
     primary = models.BooleanField(default=False)
     avatar = models.ImageField(max_length=1024,
                                upload_to=avatar_file_path,
-                               storage=OverwriteStorage(),
                                blank=True)
     date_uploaded = models.DateTimeField(default=datetime.datetime.now)
 

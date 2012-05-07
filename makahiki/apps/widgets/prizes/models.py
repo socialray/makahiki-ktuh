@@ -4,7 +4,11 @@ from apps.managers.player_mgr import player_mgr
 
 from apps.managers.team_mgr import team_mgr
 from apps.managers.team_mgr.models import Group, Team
-from apps.utils.utils import media_file_path, OverwriteStorage
+from apps.utils.utils import media_file_path
+
+
+_MEDIA_LOCATION = "prize"
+"""location for uploaded files."""
 
 
 class Prize(models.Model):
@@ -31,8 +35,7 @@ class Prize(models.Model):
     value = models.IntegerField(help_text="The value of the prize.")
     image = models.ImageField(
         max_length=1024,
-        upload_to=media_file_path(),
-        storage=OverwriteStorage(),
+        upload_to=media_file_path(_MEDIA_LOCATION),
         blank=True,
         help_text="A picture of your prize."
     )

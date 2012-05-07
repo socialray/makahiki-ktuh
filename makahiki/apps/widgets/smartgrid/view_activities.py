@@ -1,5 +1,6 @@
 """handles rendering activities."""
 import datetime
+from django.conf import settings
 from django.core.exceptions import ObjectDoesNotExist
 from django.db import  IntegrityError
 from django.http import HttpResponseRedirect
@@ -75,7 +76,13 @@ def add(request, activity):
                 path = activity_image_file_path(user=user,
                     filename=request.FILES['image_response'].name)
                 action_member.image = path
+
+                # if S3, set the user upload files as private
+                if settings.MAKAHIKI_USE_S3:
+                    print action_member.image.storage.acl
+                    action_member.image.storage.acl = "private"
                 action_member.image.storage.save(path, request.FILES["image_response"])
+
                 action_member.approval_status = "pending"
             # Attach text prompt question if one is provided
             elif "question" in form.cleaned_data:

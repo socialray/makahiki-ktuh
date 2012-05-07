@@ -4,7 +4,11 @@ from django.db import models
 from django.contrib.auth.models import User
 from apps.managers.challenge_mgr import challenge_mgr
 from apps.managers.score_mgr import score_mgr
-from apps.utils.utils import media_file_path, OverwriteStorage
+from apps.utils.utils import media_file_path
+
+
+_MEDIA_LOCATION = "team"
+"""location for uploaded files."""
 
 
 class Group(models.Model):
@@ -29,8 +33,7 @@ class Team(models.Model):
     slug = models.SlugField(help_text="Automatically generated if left blank.", null=True)
     logo = models.ImageField(
         max_length=1024, blank=True, null=True,
-        upload_to=media_file_path(),
-        storage=OverwriteStorage(),
+        upload_to=media_file_path(_MEDIA_LOCATION),
         help_text="The logo of the team.",)
 
     def __unicode__(self):

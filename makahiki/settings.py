@@ -18,13 +18,10 @@ FIXTURE_DIRS = [
 # directories which hold static files
 STATICFILES_DIRS = (
     os.path.join(PROJECT_ROOT, 'media'),
-)
+    )
 
-# Absolute path to the directory that holds media.
-MEDIA_ROOT = os.path.join(PROJECT_ROOT, 'site_media', 'media')
-
-# Absolute path to the directory that holds static files like app media.
-STATIC_ROOT = os.path.join(PROJECT_ROOT, 'site_media')
+# prefix for all uploaded media files
+MAKAHIKI_MEDIA_PREFIX = "media"
 
 #######################
 # Template settings
@@ -80,6 +77,7 @@ MIDDLEWARE_CLASSES = (
 AUTHENTICATION_BACKENDS = (
     'django.contrib.auth.backends.ModelBackend',
     'apps.managers.auth_mgr.models.MakahikiCASBackend',
+    'apps.managers.auth_mgr.models.MakahikiLDAPBackend',
     )
 
 AUTH_PROFILE_MODULE = 'player_mgr.Profile'
@@ -87,9 +85,6 @@ AUTH_PROFILE_MODULE = 'player_mgr.Profile'
 ###################
 # Authentication
 ###################
-CAS_REDIRECT_URL = '/home'
-CAS_IGNORE_REFERER = True
-
 LOGIN_URL = "/account/cas/login/"
 LOGIN_REDIRECT_URLNAME = "home_index"
 LOGIN_REDIRECT_URL = "/home"
@@ -282,6 +277,10 @@ LANGUAGE_CODE = 'en_US.UTF-8'
 MARKDOWN_LINK = "http://daringfireball.net/projects/markdown/syntax"
 MARKDOWN_TEXT = "Uses <a href=\"" + MARKDOWN_LINK + "\" target=\"_blank\">Markdown</a> formatting."
 
+SERIALIZATION_MODULES = {
+    'csv': 'snippetscream.csv_serializer',
+    }
+
 
 ##############################
 # Dummy setting for CHALLENGE
@@ -350,33 +349,43 @@ else:
                 {'BACKEND': 'django.core.cache.backends.dummy.DummyCache'}}
 
 # static media settings
-if env('MAKAHIKI_USE_S3', '').lower() == "true":
+MAKAHIKI_USE_S3 = env('MAKAHIKI_USE_S3', '').lower() == "true"
+if MAKAHIKI_USE_S3:
+    MAKAHIKI_USE_S3 = True
     DEFAULT_FILE_STORAGE = 'storages.backends.s3boto.S3BotoStorage'
     STATICFILES_STORAGE = 'storages.backends.s3boto.S3BotoStorage'
     AWS_ACCESS_KEY_ID = env('AWS_ACCESS_KEY_ID', '')
     AWS_SECRET_ACCESS_KEY = env('AWS_SECRET_ACCESS_KEY', '')
     AWS_STORAGE_BUCKET_NAME = env('AWS_STORAGE_BUCKET_NAME', '')
-    AWS_DEFAULT_ACL = "private"
 
     STATIC_URL = 'https://s3.amazonaws.com/%s/' % AWS_STORAGE_BUCKET_NAME
+    MEDIA_URL = STATIC_URL + "./"
     SERVE_MEDIA = False
 else:
     # URL that handles the static files like app media.
-    STATIC_URL = '/site_media/'
+    STATIC_URL = "/site_media/static/"
+    MEDIA_URL = "/site_media/media/"
+    # Absolute path to the directory that holds media.
+    STATIC_ROOT = os.path.join(PROJECT_ROOT, 'site_media', 'static')
+    # Absolute path to the directory that holds static files like app media.
+    MEDIA_ROOT = os.path.join(PROJECT_ROOT, 'site_media', 'media')
     # serve media through django.views.static.serve.
     SERVE_MEDIA = True
 
-MAKAHIKI_MEDIA_PREFIX = "media"
-# URL that handles the media served from MEDIA_ROOT.
-MEDIA_URL = STATIC_URL + MAKAHIKI_MEDIA_PREFIX
-
-# settings to use less or compiled css
-if env('MAKAHIKI_USE_COMPILED_LESS', '').lower() == "true":
+# settings to use less or compiled css, if S3 is enabled, always compiled less
+if env('MAKAHIKI_USE_S3', '').lower() == "true" or\
+   env('MAKAHIKI_USE_COMPILED_LESS', '').lower() == "true":
     MAKAHIKI_USE_COMPILED_LESS = True
+else:
+    MAKAHIKI_USE_COMPILED_LESS = False
+
+# LDAP settings
+AUTH_LDAP_BIND_DN = env('MAKAHIKI_LDAP_BIND_DN', '')
+AUTH_LDAP_BIND_PASSWORD = env('MAKAHIKI_LDAP_BIND_PWD', '')
 
 # django secret key
-SECRET_KEY = env('SECRET_KEY', '')
+SECRET_KEY = env('MAKAHIKI_SECRET_KEY', '')
 
 # facebook key
-FACEBOOK_APP_ID = env('FACEBOOK_APP_ID', '')
-FACEBOOK_SECRET_KEY = env('FACEBOOK_SECRET_KEY', '')
+FACEBOOK_APP_ID = env('MAKAHIKI_FACEBOOK_APP_ID', '')
+FACEBOOK_SECRET_KEY = env('MAKAHIKI_FACEBOOK_SECRET_KEY', '')

@@ -1,12 +1,10 @@
-    <div id="help-video" class="content-box">
-        <div id="help-video-box">
-            <div id="help-video-title" class="content-box-title">
-                Introduction to the Kukui Cup
-            </div>
-            <div id="help-video-content" class="content-box-contents video-container">
-                <iframe id="player" type="text/html" width="100%" height="300"
-                        src="http://www.youtube.com/embed/T37kNTkZCrA?fs=1&hl=en_US&rel=0&enablejsapi=1"
-                        frameborder="0"></iframe>
-            </div>
+<div id="help-video" class="content-box">
+    <div id="help-video-box">
+        <div id="help-video-title" class="content-box-title">
+            Introduction to the Kukui Cup
+        </div>
+        <div>
+            {% include "components/action_video.html" with action=view_objects.help_intro.video_action %}
         </div>
     </div>
+</div>

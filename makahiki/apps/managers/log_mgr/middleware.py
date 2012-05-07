@@ -7,7 +7,7 @@ from time import strftime  # Timestamp
 # Filter out requests to media and site_media.
 MEDIA_REGEXP = r'^\/(site_)?media'
 SENTRY_REGEXP = r'^\/sentry\/'
-URL_FILTER = ("/favicon.ico", "/admin/jsi18n/",)
+URL_FILTER = ("/favicon.ico", "/admin/jsi18n/", "/account/login/")
 
 
 class LoggingMiddleware(object):
