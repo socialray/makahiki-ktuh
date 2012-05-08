@@ -8,6 +8,9 @@ from apps.utils.utils import media_file_path
 
 
 _MEDIA_LOCATION = "challenge"
+"""location for challenge files."""
+
+_MEDIA_LOCATION_UPLOAD = "uploads"
 """location for uploaded files."""
 
 
@@ -277,3 +280,14 @@ class PageSettings(models.Model):
 
     def __unicode__(self):
         return ""
+
+
+class UploadImage(models.Model):
+    """Defines the global settings for the challenge."""
+    image = models.ImageField(
+        upload_to=media_file_path(_MEDIA_LOCATION_UPLOAD),
+        max_length=255, blank=True, null=True,
+        help_text="The uploaded image.",)
+
+    def __unicode__(self):
+        return self.image.name

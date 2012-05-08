@@ -10,7 +10,7 @@ POINTS_PER_TICKET = 25
 RAFFLE_END_PERIOD = 2
 """Number of hours prior to the end of a round that the raffle closes."""
 
-_MEDIA_LOCATION = "raffle"
+_MEDIA_LOCATION = "prizes"
 """location for uploaded files."""
 
 

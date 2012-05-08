@@ -5,7 +5,7 @@
     "fields": {
       "title": "iPod Touch", 
       "round_name": "Round 1", 
-      "image": "prizes/ipod-nano.jpg", 
+      "image": "media/prizes/ipod-nano.jpg", 
       "award_to": "individual_overall", 
       "value": 20, 
       "competition_type": "points", 
@@ -19,7 +19,7 @@
     "fields": {
       "title": "Pizza Party", 
       "round_name": "Round 1", 
-      "image": "prizes/Pizza.jpg", 
+      "image": "media/prizes/Pizza.jpg", 
       "award_to": "team_group",
       "value": 20, 
       "competition_type": "energy", 
@@ -33,7 +33,7 @@
     "fields": {
       "title": "Ice Cream Party", 
       "round_name": "Round 1", 
-      "image": "prizes/ice-cream-cone.jpg", 
+      "image": "media/prizes/ice-cream-cone.jpg", 
       "award_to": "team_group",
       "value": 20, 
       "competition_type": "points", 
@@ -47,7 +47,7 @@
     "fields": {
       "title": "iPod Touch", 
       "round_name": "Round 2", 
-      "image": "prizes/ipod-nano.jpg", 
+      "image": "media/prizes/ipod-nano.jpg", 
       "award_to": "individual_overall", 
       "value": 20, 
       "competition_type": "points", 
@@ -61,7 +61,7 @@
     "fields": {
       "title": "iPod Touch", 
       "round_name": "Overall", 
-      "image": "prizes/ipod-nano.jpg", 
+      "image": "media/prizes/ipod-nano.jpg", 
       "award_to": "individual_overall", 
       "value": 20, 
       "competition_type": "points", 
@@ -75,7 +75,7 @@
     "fields": {
       "title": "Pizza Party", 
       "round_name": "Round 2", 
-      "image": "prizes/Pizza.jpg", 
+      "image": "media/prizes/Pizza.jpg", 
       "award_to": "team_group",
       "value": 20, 
       "competition_type": "energy", 
@@ -89,7 +89,7 @@
     "fields": {
       "title": "Pizza Party", 
       "round_name": "Overall", 
-      "image": "prizes/Pizza.jpg", 
+      "image": "media/prizes/Pizza.jpg", 
       "award_to": "team_group",
       "value": 20, 
       "competition_type": "energy", 
@@ -103,7 +103,7 @@
     "fields": {
       "title": "Ice Cream Party", 
       "round_name": "Round 2", 
-      "image": "prizes/ice-cream-cone.jpg", 
+      "image": "media/prizes/ice-cream-cone.jpg", 
       "award_to": "team_group",
       "value": 20, 
       "competition_type": "points", 
@@ -117,7 +117,7 @@
     "fields": {
       "title": "Ice Cream Party", 
       "round_name": "Overall", 
-      "image": "prizes/ice-cream-cone.jpg", 
+      "image": "media/prizes/ice-cream-cone.jpg", 
       "award_to": "team_group",
       "value": 20, 
       "competition_type": "points", 
@@ -131,7 +131,7 @@
     "fields": {
       "description": "A bike helmet.", 
       "title": "Bike Helmet", 
-      "image": "prizes/bikehelmet_1.jpg", 
+      "image": "media/prizes/bikehelmet.jpg",
       "winner": null, 
       "value": 10, 
       "round_name": "Round 1"
@@ -143,7 +143,7 @@
     "fields": {
       "description": "A surfboard.", 
       "title": "Surfboard", 
-      "image": "prizes/surf_lessons_1.jpg", 
+      "image": "media/prizes/surf_lessons.jpg",
       "winner": null, 
       "value": 10,
         "round_name": "Round 1"
@@ -155,7 +155,7 @@
     "fields": {
       "description": "A gift certificate for a double dip cone from Bubbies Ice Cream Parlor, voted Best Ice Cream of 2010!", 
       "title": "Bubbies Gift Certificate", 
-      "image": "prizes/bubbies.png", 
+      "image": "media/prizes/bubbies.png", 
       "winner": null, 
       "value": 10,
         "round_name": "Round 1"
@@ -167,7 +167,7 @@
     "fields": {
       "description": "A bike helmet.",
       "title": "Bike Helmet for Overall",
-      "image": "prizes/bikehelmet_1.jpg",
+      "image": "media/prizes/bikehelmet.jpg",
       "winner": null,
       "value": 10,
       "round_name": "Overall"
@@ -179,7 +179,7 @@
     "fields": {
       "description": "A surfboard.",
       "title": "Surfboard for Overall",
-      "image": "prizes/surf_lessons_1.jpg",
+      "image": "media/prizes/surf_lessons.jpg",
       "winner": null,
       "value": 10,
         "round_name": "Overall"
@@ -191,7 +191,7 @@
     "fields": {
       "description": "A gift certificate for a double dip cone from Bubbies Ice Cream Parlor, voted Best Ice Cream of 2010!",
       "title": "Bubbies Gift Certificate for Overall",
-      "image": "prizes/bubbies.png",
+      "image": "media/prizes/bubbies.png",
       "winner": null,
       "value": 10,
         "round_name": "Overall"

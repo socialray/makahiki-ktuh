@@ -1,37 +1,98 @@
 [
-  {
-    "pk": 1,
-    "model": "challenge_mgr.challengesettings",
-    "fields": {
-      "competition_name": "Kukui Cup/UH",
-      "site_domain": "kukuicup.manoa.hawaii.edu",
-      "site_name": "University of Hawaii at Manoa",
-      "landing_sponsors": "[<img src=\"/site_media/static/images/sponsors/logo.csdl.gif\" title=\"Collaborative Software Development Laboratory\">](http://csdl.ics.hawaii.edu)\r\n[<img src=\"/site_media/static/images/sponsors/logo.reis.2.png\" title=\"Renewable Energy & Island Sustainability\">](http://manoa.hawaii.edu/reis)\r\n[<img src=\"/site_media/static/images/sponsors/logo.manoa.2.png\" title=\"Student Housing Services, UH Manoa\">](http://manoa.hawaii.edu/housing)\r\n[<img src=\"http://www.nsf.gov/images/logos/nsf1sm.gif\" width=\"75px title=\"National Science Foundation\">](http://www.nsf.gov)\r\n[<img src=\"/site_media/static/images/sponsors/dbedt-logo.jpg\" title=\"DBEDT\">](http://energy.hawaii.gov)",
-      "landing_slogan": "##The Kukui Cup: Lights out, game on!",
-      "email_use_tls": true,
-      "landing_non_participant_text": "###I'm not registered\r\n#####but I'd like to know more about the Kukui Cup</h5>",
-      "email_port": 587,
-      "theme": "default",
-      "cas_server_url": "https://login.its.hawaii.edu/cas/",
-      "contact_email": "test",
-      "email_enabled": false,
-      "site_logo": "",
-      "landing_participant_text": "### I'm a registered player  \r\n##### You will be prompted for \r\n##### your UH username and password, it's safe",
-      "landing_introduction": "Aloha! The Kukui Cup is an energy challenge that can be played by all first year UH students living in the Hale Aloha residence halls.",
-      "competition_team_label": "Lounge",
-      "email_host": "localhost"
+    {
+        "pk": 1,
+        "model": "challenge_mgr.challengesettings",
+        "fields": {
+            "competition_name": "Kukui Cup/UH",
+            "site_domain": "kukuicup.manoa.hawaii.edu",
+            "site_name": "University of Hawaii at Manoa",
+            "ldap_search_base": null,
+            "landing_slogan": "##The Kukui Cup: Lights out, game on!",
+            "email_use_tls": true,
+            "landing_non_participant_text": "###I'm not registered\r\n#####but I'd like to know more about the Kukui Cup</h5>",
+            "email_port": 587,
+            "theme": "default",
+            "cas_server_url": "https://login.its.hawaii.edu/cas/",
+            "contact_email": "kukuicup@hawaii.edu",
+            "email_enabled": false,
+            "site_logo": "media/challenge/icon-uh-logo.png",
+            "ldap_server_url": null,
+            "landing_participant_text": "### I'm a registered player  \r\n##### You will be prompted for \r\n##### your UH username and password, it's safe",
+            "landing_introduction": "Aloha! The Kukui Cup is an energy challenge that can be played by all first year UH students living in the Hale Aloha residence halls.",
+            "competition_team_label": "Lounge",
+            "email_host": "smtp.gmail.com"
+        }
+    },
+    {
+        "pk": 1,
+        "model": "score_mgr.scoresettings",
+        "fields": {
+            "active_threshold_points": 50,
+            "quest_bonus_points": 0,
+            "setup_points": 5,
+            "signup_bonus_points": 2,
+            "noshow_penalty_points": 4,
+            "referral_bonus_points": 10
+        }
+    },
+    {
+        "pk": 2,
+        "model": "challenge_mgr.sponsor",
+        "fields": {
+            "name": "Collaborative Software Development Laboratory",
+            "url": "http://csdl.ics.hawaii.edu",
+            "challenge": 1,
+            "priority": 1,
+            "logo": "media/challenge/logo.csdl.gif",
+            "logo_url": ""
+        }
+    },
+    {
+        "pk": 4,
+        "model": "challenge_mgr.sponsor",
+        "fields": {
+            "name": "Student Housing Services, UH Manoa",
+            "url": "http://manoa.hawaii.edu/housing",
+            "challenge": 1,
+            "priority": 2,
+            "logo": "media/challenge/logo.manoa.2.png",
+            "logo_url": ""
+        }
+    },
+    {
+        "pk": 3,
+        "model": "challenge_mgr.sponsor",
+        "fields": {
+            "name": "Renewable Energy & Island Sustainability",
+            "url": "http://manoa.hawaii.edu/reis",
+            "challenge": 1,
+            "priority": 3,
+            "logo": "media/challenge/logo.reis.2.png",
+            "logo_url": ""
+        }
+    },
+    {
+        "pk": 5,
+        "model": "challenge_mgr.sponsor",
+        "fields": {
+            "name": "National Science Foundation",
+            "url": "http://www.nsf.gov",
+            "challenge": 1,
+            "priority": 4,
+            "logo": "",
+            "logo_url": "http://www.nsf.gov/images/logos/nsf1sm.gif"
+        }
+    },
+    {
+        "pk": 6,
+        "model": "challenge_mgr.sponsor",
+        "fields": {
+            "name": "DBEDT",
+            "url": "http://energy.hawaii.gov",
+            "challenge": 1,
+            "priority": 5,
+            "logo": "media/challenge/dbedt-logo.jpg",
+            "logo_url": ""
+        }
     }
-  },
-  {
-    "pk": 1,
-    "model": "score_mgr.scoresettings",
-    "fields": {
-      "active_threshold_points": 50,
-      "quest_bonus_points": 0,
-      "setup_points": 5,
-      "signup_bonus_points": 2,
-      "noshow_penalty_points": 4,
-      "referral_bonus_points": 10
-    }
-  }
 ]

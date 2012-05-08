@@ -901,7 +901,7 @@
             "name": "Turn Off Music",
             "video_source": null,
             "pub_date": "2012-04-21",
-            "image": "",
+            "image": "media/smartgrid/actions/iPod-stereo.jpg",
             "title": "I will turn off my music when leaving my room",
             "is_group": false,
             "priority": 700,
@@ -911,7 +911,7 @@
             "is_canopy": false,
             "type": "commitment",
             "slug": "turn-off-music",
-            "description": "<center>![Altec Lansing iPod stereo](/site_media/media/gblocks/iPod-stereo.jpg)</center>\r\n\r\nCommit to turning off your music (from computer, stereo, etc) when you leave your room. You save electricity when you turn off your music when you aren't there to enjoy it."
+            "description": "Commit to turning off your music (from computer, stereo, etc) when you leave your room. You save electricity when you turn off your music when you aren't there to enjoy it."
         }
     },
     {
@@ -951,7 +951,7 @@
             "name": "Full load laundry",
             "video_source": null,
             "pub_date": "2012-04-21",
-            "image": "",
+            "image": "media/smartgrid/actions/washing-machines.jpg",
             "title": "I will wash only full loads of laundry",
             "is_group": false,
             "priority": 500,
@@ -961,7 +961,7 @@
             "is_canopy": false,
             "type": "commitment",
             "slug": "full-load-laundry",
-            "description": "<center>![Row of washing machines](/site_media/media/gblocks/washing-machines.jpg)</center>\r\n\r\nCommit to always washing full loads of laundry. Washing less than a full load is less efficient, leading to more electricity and water being used per piece of laundry washed."
+            "description": "Commit to always washing full loads of laundry. Washing less than a full load is less efficient, leading to more electricity and water being used per piece of laundry washed."
         }
     },
     {
@@ -976,7 +976,7 @@
             "name": "Turn off sink",
             "video_source": null,
             "pub_date": "2012-04-21",
-            "image": "",
+            "image": "media/smartgrid/actions/sink.jpg",
             "title": "I will turn off water when brushing my teeth or shaving",
             "is_group": false,
             "priority": 300,
@@ -986,7 +986,7 @@
             "is_canopy": false,
             "type": "commitment",
             "slug": "turn-off-water",
-            "description": "<center>![sink](/site_media/media/gblocks/sink.jpg)</center>\r\n\r\nCommit to turning off water at sinks when you aren't actually using the water, such as when brushing your teeth, shaving, applying makeup, etc. Clean water is a valuable resource that shouldn't be wasted. Also pumping water from the ground into a building, heating it, and then treating the used water takes energy, so reducing the amount of water used saves energy."
+            "description": "Commit to turning off water at sinks when you aren't actually using the water, such as when brushing your teeth, shaving, applying makeup, etc. Clean water is a valuable resource that shouldn't be wasted. Also pumping water from the ground into a building, heating it, and then treating the used water takes energy, so reducing the amount of water used saves energy."
         }
     },
     {
@@ -1026,7 +1026,7 @@
             "name": "Use sunlight",
             "video_source": null,
             "pub_date": "2012-04-21",
-            "image": "",
+            "image": "media/smartgrid/actions/sun-window.jpg",
             "title": "I will use sunlight instead of electric lighting",
             "is_group": false,
             "priority": 400,
@@ -1036,7 +1036,7 @@
             "is_canopy": false,
             "type": "commitment",
             "slug": "use-sunlight",
-            "description": "<center>![Sun coming through window](/site_media/media/gblocks/sun-window.jpg)</center>\r\n\r\nCommit to using sunlight from windows or outdoors instead of turning on electric lighting. This can mean opening shades instead of turning on the lights, and/or planning your day so that tasks that require light (like reading books) are done during the day."
+            "description": "Commit to using sunlight from windows or outdoors instead of turning on electric lighting. This can mean opening shades instead of turning on the lights, and/or planning your day so that tasks that require light (like reading books) are done during the day."
         }
     },
     {
@@ -1051,7 +1051,7 @@
             "name": "Printer off",
             "video_source": null,
             "pub_date": "2012-04-21",
-            "image": "",
+            "image": "media/smartgrid/actions/inkjet-printer-small.jpg",
             "title": "I will turn off printer when not printing",
             "is_group": false,
             "priority": 500,
@@ -1061,7 +1061,7 @@
             "is_canopy": false,
             "type": "commitment",
             "slug": "printer-off",
-            "description": "<center>![Injet printer](/site_media/media/gblocks/inkjet-printer-small.jpg)</center>\r\n\r\nCommit to turning off your printer when you aren't actively printing something out. This will reduce electricity use, since printers draw some power if they are turned on even when they aren't printing."
+            "description": "Commit to turning off your printer when you aren't actively printing something out. This will reduce electricity use, since printers draw some power if they are turned on even when they aren't printing."
         }
     },
     {
@@ -1076,7 +1076,7 @@
             "name": "Use stairs",
             "video_source": null,
             "pub_date": "2012-04-21",
-            "image": "",
+            "image": "media/smartgrid/actions/stairwell.jpg",
             "title": "I will use stairs instead of elevator",
             "is_group": false,
             "priority": 300,
@@ -1086,7 +1086,7 @@
             "is_canopy": false,
             "type": "commitment",
             "slug": "use-stairs",
-            "description": "<center>![Stairwell looking down](/site_media/media/gblocks/stairwell.jpg)</center>\r\n\r\nCommit to using the stairs instead of elevators during your day, whenever that is feasible. Elevators use electricity, so by using the stairs you will save some energy. Also, using the stairs is good exercise!"
+            "description": "Commit to using the stairs instead of elevators during your day, whenever that is feasible. Elevators use electricity, so by using the stairs you will save some energy. Also, using the stairs is good exercise!"
         }
     },
     {
@@ -1101,7 +1101,7 @@
             "name": "Recycle cans",
             "video_source": null,
             "pub_date": "2012-04-21",
-            "image": "",
+            "image": "media/smartgrid/actions/recycling-can-lid.jpg",
             "title": "I will recycle all beverage containers",
             "is_group": false,
             "priority": 200,
@@ -1111,7 +1111,7 @@
             "is_canopy": false,
             "type": "commitment",
             "slug": "recycle-cans",
-            "description": "<center>![Lid of a recycling bin](/site_media/media/gblocks/recycling-can-lid.jpg)</center>\r\n\r\nCommit to recycling all (recyclable) beverage containers at one of the recycling bins on campus or around town. Making things from recycled materials generally costs less and uses less energy than making them from raw materials."
+            "description": "Commit to recycling all (recyclable) beverage containers at one of the recycling bins on campus or around town. Making things from recycled materials generally costs less and uses less energy than making them from raw materials."
         }
     },
     {
@@ -1126,7 +1126,7 @@
             "name": "Turn off lights",
             "video_source": null,
             "pub_date": "2012-04-21",
-            "image": "",
+            "image": "media/smartgrid/actions/lightswitch-sticker.jpg",
             "title": "I will turn off the lights when leaving any room",
             "is_group": false,
             "priority": 200,
@@ -1136,7 +1136,7 @@
             "is_canopy": false,
             "type": "commitment",
             "slug": "turn-off-lights",
-            "description": "<center>![lightswitch with sticker](/site_media/media/gblocks/lightswitch-sticker.jpg)</center>\r\n\r\nLeaving lights on wastes energy for no purpose. Commit to turning off the lights when leaving any room."
+            "description": "Leaving lights on wastes energy for no purpose. Commit to turning off the lights when leaving any room."
         }
     },
     {
@@ -1151,7 +1151,7 @@
             "name": "Car pool",
             "video_source": null,
             "pub_date": "2012-04-21",
-            "image": "",
+            "image": "media/smartgrid/actions/carpool.jpg",
             "title": "I won't drive alone",
             "is_group": false,
             "priority": 400,
@@ -1161,7 +1161,7 @@
             "is_canopy": false,
             "type": "commitment",
             "slug": "car-pool",
-            "description": "<center>![Picture of 3 people in a car](/site_media/media/gblocks/carpool.jpg)</center>\r\n\r\nCommit to not driving in a car by yourself. Try riding the bus, riding a bike, walking, driving a moped, or using a vehicle with 3+ occupants instead. Transportation fuel is a major use of energy and it generates a lot of greenhouse gases, so traveling more efficiently saves energy and the planet."
+            "description": "Commit to not driving in a car by yourself. Try riding the bus, riding a bike, walking, driving a moped, or using a vehicle with 3+ occupants instead. Transportation fuel is a major use of energy and it generates a lot of greenhouse gases, so traveling more efficiently saves energy and the planet."
         }
     },
     {
@@ -1176,7 +1176,7 @@
             "name": "Take bus",
             "video_source": null,
             "pub_date": "2012-04-21",
-            "image": "",
+            "image": "media/smartgrid/actions/TheBus-small.jpg",
             "title": "I will take public transportation",
             "is_group": false,
             "priority": 500,
@@ -1186,7 +1186,7 @@
             "is_canopy": false,
             "type": "commitment",
             "slug": "take-bus",
-            "description": "<center>![Bus from TheBus](/site_media/media/gblocks/TheBus-small.jpg)</center>\r\n\r\nCommit to taking public transportation whenever you go off campus during the commitment period. Every UH Manoa student gets a U-Pass sticker for their ID that allows unlimited free rides on the bus each semester! If for some reason you don't have your U-Pass, go to the ID counter in Campus Center.\r\n\r\n<a href=\"http://thebus.org/\" target=\"_blank\">TheBus</a> has a great website that will help you plan trips, and even tell you when the next bus will arrive based on GPS location!"
+            "description": "Commit to taking public transportation whenever you go off campus during the commitment period. Every UH Manoa student gets a U-Pass sticker for their ID that allows unlimited free rides on the bus each semester! If for some reason you don't have your U-Pass, go to the ID counter in Campus Center.\r\n\r\n<a href=\"http://thebus.org/\" target=\"_blank\">TheBus</a> has a great website that will help you plan trips, and even tell you when the next bus will arrive based on GPS location!"
         }
     },
     {
@@ -1201,7 +1201,7 @@
             "name": "Walk < 1 mi",
             "video_source": null,
             "pub_date": "2012-04-21",
-            "image": "",
+            "image": "media/smartgrid/actions/Hale-Aloha-1mi.png",
             "title": "I will walk to destinations less than one mile away",
             "is_group": false,
             "priority": 600,
@@ -1211,7 +1211,7 @@
             "is_canopy": false,
             "type": "commitment",
             "slug": "walk",
-            "description": "<center><a href=\"http://www.freemaptools.com/radius-around-point.htm?clat=21.294387595537966&clng=-157.81301338391114&r=1.61&lc=FFFFFF&lw=1&fc=00FF00\" target=\"_blank\"><img src=\"/site_media/media/gblocks/Hale-Aloha-1mi.png\" alt=\"Map of 1 mile radius around Hale Aloha\"/></a></center>\r\n\r\nCommit to walking to any destination less than one mile away. Walking saves energy, costs nothing, and is good exercise."
+            "description": "<center><a href=\"http://www.freemaptools.com/radius-around-point.htm?clat=21.294387595537966&clng=-157.81301338391114&r=1.61&lc=FFFFFF&lw=1&fc=00FF00\" target=\"_blank\">Map of 1 mile radius around Hale Aloha</a></center>\r\n\r\nCommit to walking to any destination less than one mile away. Walking saves energy, costs nothing, and is good exercise."
         }
     },
     {
@@ -1326,7 +1326,7 @@
             "name": "Door Art",
             "video_source": null,
             "pub_date": "2011-09-14",
-            "image": "",
+            "image": "media/smartgrid/actions/door-art-small.jpg",
             "title": "Door Art Challenge",
             "is_group": false,
             "priority": 700,
@@ -1336,7 +1336,7 @@
             "is_canopy": false,
             "type": "activity",
             "slug": "door-art",
-            "description": "<center>![Twitter logo](/site_media/media/gblocks/door-art-small.jpg)</center>\r\n\r\nShow your support for the Kukui Cup by decorating your door in an \"energy conscious\" fashion. You can do any of the following: include Kukui Cup logos or screen shots, invent new tag lines, show pictures related to energy, or anything else that communicates energy consciousness. When completed, take a photo of your door and click the **I Did This** button to submit the picture. Based on the awesomeness of your design, you will get between 5-15 points!\r\n\r\nIf you want to show off your mad skillz, in addition to uploading your photo to us, you can publicly post your door art picture to the <a href=\"http://www.flickr.com/groups/kukuicup-2011-door-art/\" target=\"_blank\">Kukui Cup 2011 Door Art Flickr group</a> (will open in a new window). If you don't already have a Flickr account, you can sign up for one for free."
+            "description": "Show your support for the Kukui Cup by decorating your door in an \"energy conscious\" fashion. You can do any of the following: include Kukui Cup logos or screen shots, invent new tag lines, show pictures related to energy, or anything else that communicates energy consciousness. When completed, take a photo of your door and click the **I Did This** button to submit the picture. Based on the awesomeness of your design, you will get between 5-15 points!\r\n\r\nIf you want to show off your mad skillz, in addition to uploading your photo to us, you can publicly post your door art picture to the <a href=\"http://www.flickr.com/groups/kukuicup-2011-door-art/\" target=\"_blank\">Kukui Cup 2011 Door Art Flickr group</a> (will open in a new window). If you don't already have a Flickr account, you can sign up for one for free."
         }
     },
     {
@@ -1351,7 +1351,7 @@
             "name": "Resuable bag",
             "video_source": null,
             "pub_date": "2012-04-21",
-            "image": "",
+            "image": "media/smartgrid/actions/KukuiCup-eco-tote-small.jpg",
             "title": "I will bring reusable bags when shopping",
             "is_group": false,
             "priority": 300,
@@ -1361,7 +1361,7 @@
             "is_canopy": false,
             "type": "commitment",
             "slug": "resuable-bag",
-            "description": "<center>![Kukui Cup eco-tote](/site_media/media/gblocks/KukuiCup-eco-tote-small.jpg)</center>\r\n\r\nCommit to bringing and using reusable bags when shopping instead of the paper or plastic ones offered by stores. Making disposable bags requires energy, and often the bags end up in our landfills or worse yet they blow away into the ocean. Using a reusable bag saves energy and keeps trash out of our landfills."
+            "description": "Commit to bringing and using reusable bags when shopping instead of the paper or plastic ones offered by stores. Making disposable bags requires energy, and often the bags end up in our landfills or worse yet they blow away into the ocean. Using a reusable bag saves energy and keeps trash out of our landfills."
         }
     },
     {
@@ -1401,7 +1401,7 @@
             "name": "Off b4 bed",
             "video_source": null,
             "pub_date": "2012-04-21",
-            "image": "",
+            "image": "media/smartgrid/actions/dorm-bed.jpg",
             "title": "I will turn off all appliances every night before going to sleep",
             "is_group": false,
             "priority": 400,
@@ -1411,7 +1411,7 @@
             "is_canopy": false,
             "type": "commitment",
             "slug": "off-b4-bed",
-            "description": "<center>![Dorm bed](/site_media/media/gblocks/dorm-bed.jpg)</center>\r\n\r\nCommit to turning off all appliances in your room (computer, TVs, DVD/Blu-ray players, game consoles) every night before you go to sleep. Appliances use a significant amount of electricity, so turning them off when you definitely won't be using them (like when you are asleep) will save energy."
+            "description": "Commit to turning off all appliances in your room (computer, TVs, DVD/Blu-ray players, game consoles) every night before you go to sleep. Appliances use a significant amount of electricity, so turning them off when you definitely won't be using them (like when you are asleep) will save energy."
         }
     },
     {
@@ -1426,7 +1426,7 @@
             "name": "Task lighting",
             "video_source": null,
             "pub_date": "2012-04-21",
-            "image": "",
+            "image": "media/smartgrid/actions/desk-lamp.jpg",
             "title": "I will use task lighting instead of overhead lights",
             "is_group": false,
             "priority": 300,
@@ -1436,7 +1436,7 @@
             "is_canopy": false,
             "type": "commitment",
             "slug": "task-lighting",
-            "description": "<center>![desk lamp](/site_media/media/gblocks/desk-lamp.jpg)</center>\r\n\r\nCommit to using task lighting (like a desk lamp) instead of overhead room lights when possible. Often overhead lights provide more light than you need, or might not provide the light where you need it. Using a desk lamp will reduce your electricity use while giving you the light you need, where you need it."
+            "description": "Commit to using task lighting (like a desk lamp) instead of overhead room lights when possible. Often overhead lights provide more light than you need, or might not provide the light where you need it. Using a desk lamp will reduce your electricity use while giving you the light you need, where you need it."
         }
     },
     {
@@ -1451,7 +1451,7 @@
             "name": "Turn off vampires",
             "video_source": null,
             "pub_date": "2012-04-21",
-            "image": "",
+            "image": "media/smartgrid/actions/powerstrip.jpg",
             "title": "I will turn off vampire loads using a power strip",
             "is_group": false,
             "priority": 300,
@@ -1461,7 +1461,7 @@
             "is_canopy": false,
             "type": "commitment",
             "slug": "turn-off-vampires",
-            "description": "<center>![Power strip with multiple things plugged in](/site_media/media/gblocks/powerstrip.jpg)</center>\r\n\r\nA vampire load is a device that uses power when plugged in, even when it is turned off and not doing anything. Commit to turning off any vampire loads (cell phone charger, iPod charger, game consoles, TVs) using a power strip when you are not using them, thereby saving energy. If you need a power strip, you can buy them at the UH Bookstore, or many other stores (grocery stores, drug stores, etc)."
+            "description": "A vampire load is a device that uses power when plugged in, even when it is turned off and not doing anything. Commit to turning off any vampire loads (cell phone charger, iPod charger, game consoles, TVs) using a power strip when you are not using them, thereby saving energy. If you need a power strip, you can buy them at the UH Bookstore, or many other stores (grocery stores, drug stores, etc)."
         }
     },
     {
@@ -1526,7 +1526,7 @@
             "name": "Audit Room",
             "video_source": null,
             "pub_date": "2010-10-18",
-            "image": "",
+            "image": "media/smartgrid/actions/Belkin_Insight-crop.jpg",
             "title": "Find out how much power your stuff uses",
             "is_group": false,
             "priority": 600,
@@ -1536,7 +1536,7 @@
             "is_canopy": false,
             "type": "activity",
             "slug": "audit-room",
-            "description": "<center>![Belkin Conserve Insight meter](/site_media/media/gblocks/Belkin_Insight-crop.jpg)</center>\r\n\r\nCheck out a Belkin Conserve Insight meter from your tower's front desk (CDC), and then check 5 plug-in devices in your room to see how much power they use when turned on & when turned off. Write down both the on and off values for each device as you check them because you will need that to get your points!"
+            "description": "Check out a Belkin Conserve Insight meter from your tower's front desk (CDC), and then check 5 plug-in devices in your room to see how much power they use when turned on & when turned off. Write down both the on and off values for each device as you check them because you will need that to get your points!"
         }
     },
     {
@@ -1951,7 +1951,7 @@
             "name": "Like Cup",
             "video_source": null,
             "pub_date": "2010-07-16",
-            "image": "",
+            "image": "media/smartgrid/actions/facebook-logo-small.png",
             "title": "Like Kukui Cup on Facebook",
             "is_group": false,
             "priority": 400,
@@ -1961,7 +1961,7 @@
             "is_canopy": false,
             "type": "activity",
             "slug": "like-cup",
-            "description": "<center>![Facebook logo](/site_media/media/gblocks/facebook-logo-small.png)</center>\r\n\r\nShow support for the Kukui Cup by Liking the <a href=\"https://www.facebook.com/kukuicup\" target=\"_blank\">Kukui Cup page on Facebook</a> (it will open in a new window). Follow the link, click on the \"Like\" button, and then back on this page click the **I Did This!** button. You will be prompted for your name on Facebook so we can verify your Like.\r\n\r\nFor you eager beavers that have already liked the Kukui Cup before the competition started, you can get points too. Just click **I Did This!** and tell us your Facebook name."
+            "description": "Show support for the Kukui Cup by Liking the <a href=\"https://www.facebook.com/kukuicup\" target=\"_blank\">Kukui Cup page on Facebook</a> (it will open in a new window). Follow the link, click on the \"Like\" button, and then back on this page click the **I Did This!** button. You will be prompted for your name on Facebook so we can verify your Like.\r\n\r\nFor you eager beavers that have already liked the Kukui Cup before the competition started, you can get points too. Just click **I Did This!** and tell us your Facebook name."
         }
     },
     {
@@ -2001,7 +2001,7 @@
             "name": "Power Hogs",
             "video_source": null,
             "pub_date": "2010-07-16",
-            "image": "",
+            "image": "media/smartgrid/actions/Xbox-label.jpg",
             "title": "Label power hogs in your room",
             "is_group": false,
             "priority": 650,
@@ -2011,7 +2011,7 @@
             "is_canopy": false,
             "type": "activity",
             "slug": "power-hogs",
-            "description": "<center>![Xbox w/ label](/site_media/media/gblocks/Xbox-label.jpg)</center>\r\n\r\nThis is a followup activity to the [energy audit](/activities/activity/audit-room/) activity. If you haven't performed that activity, do it first and keep your notes around for this activity.\r\n\r\nBased on the audit results, make a label for each device in your room that shows the number of watts consumed when on and off, and put it close to the power switch for those devices that have them.\r\n\r\nOnce you have made the labels, take a photo of the labels of as many devices as you can fit in one picture to be used for verification."
+            "description": "This is a followup activity to the [energy audit](/activities/activity/audit-room/) activity. If you haven't performed that activity, do it first and keep your notes around for this activity.\r\n\r\nBased on the audit results, make a label for each device in your room that shows the number of watts consumed when on and off, and put it close to the power switch for those devices that have them.\r\n\r\nOnce you have made the labels, take a photo of the labels of as many devices as you can fit in one picture to be used for verification."
         }
     },
     {
@@ -2026,7 +2026,7 @@
             "name": "Tweet link",
             "video_source": null,
             "pub_date": "2010-07-16",
-            "image": "",
+            "image": "media/smartgrid/actions/twitter-logo-small.png",
             "title": "Tweet about Kukui Cup",
             "is_group": false,
             "priority": 500,
@@ -2036,7 +2036,7 @@
             "is_canopy": false,
             "type": "activity",
             "slug": "tweet-link",
-            "description": "<center>![Twitter logo](/site_media/media/gblocks/twitter-logo-small.png)</center>\r\n\r\nIf you use Twitter, tweet a link to the Kukui Cup website by pressing this button (will open in a new window) so other folks will learn about the competition:\r\n\r\n<center><a href=\"https://twitter.com/share\" class=\"twitter-share-button\" data-url=\"http://kukuicup.manoa.hawaii.edu/\" data-text=\"I'm on the quest for the Kukui Cup! #kukuicup\" data-count=\"none\" data-via=\"kukuicup\">Tweet Kukui Cup</a><script type=\"text/javascript\" src=\"//platform.twitter.com/widgets.js\"></script></center>\r\n\r\nOnce you have tweeted, come back to this page and click the \"I Did This!\" button. You will be prompted for your Twitter username so we can confirm your tweet."
+            "description": "If you use Twitter, tweet a link to the Kukui Cup website by pressing this button (will open in a new window) so other folks will learn about the competition:\r\n\r\n<center><a href=\"https://twitter.com/share\" class=\"twitter-share-button\" data-url=\"http://kukuicup.manoa.hawaii.edu/\" data-text=\"I'm on the quest for the Kukui Cup! #kukuicup\" data-count=\"none\" data-via=\"kukuicup\">Tweet Kukui Cup</a><script type=\"text/javascript\" src=\"//platform.twitter.com/widgets.js\"></script></center>\r\n\r\nOnce you have tweeted, come back to this page and click the \"I Did This!\" button. You will be prompted for your Twitter username so we can confirm your tweet."
         }
     },
     {
@@ -2051,7 +2051,7 @@
             "name": "Share link",
             "video_source": null,
             "pub_date": "2010-07-16",
-            "image": "",
+            "image": "media/smartgrid/actions/google-plus-logo.png",
             "title": "Share Kukui Cup link on Google+",
             "is_group": false,
             "priority": 600,
@@ -2061,7 +2061,7 @@
             "is_canopy": false,
             "type": "activity",
             "slug": "share-link",
-            "description": "<center>![Google+ logo](/site_media/media/gblocks/google-plus-logo.png)</center>\r\n\r\nIf you have an account on Google's new social network <a href=\"https://plus.google.com/\" target=\"_blank\">Google+</a>, share the Kukui Cup website <http://kukuicup.manoa.hawaii.edu/> there  to get the word out about the competition. Go to <a href=\"https://plus.google.com/\" target=\"_blank\">Google+</a> (will open in a new window) and click on the small paperclip icon to share a link: \r\n\r\n<center>![Share link area](/site_media/media/gblocks/Google-plus-share-link-small.png)</center>\r\n\r\nEnter the text \"http://kukuicup.manoa.hawaii.edu/\" next to the paperclip icon and press the **Add** button. Above that, type something about the Kukui Cup. Make sure this post is set to be shared with the **Public**, you may have to click the \"+Add more people\" link to see the Public circle. If you do not share the link publicly, we will not be able to verify it. Then press the **Share** button.\r\n\r\nOnce you have updated your status, go to your <a href=\"https://plus.google.com/me\" target=\"_blank\">Google+ profile ![Google+ profile button](/site_media/media/gblocks/Google-profile-button.png)</a> and copy the URL which will look something like \"https://plus.google.com/\" followed by a long number. Then come back to this page and click the \"I Did This!\" button. Paste in that profile URL so we can see your snazzy public post."
+            "description": "If you have an account on Google's new social network <a href=\"https://plus.google.com/\" target=\"_blank\">Google+</a>, share the Kukui Cup website <http://kukuicup.manoa.hawaii.edu/> there  to get the word out about the competition. Go to <a href=\"https://plus.google.com/\" target=\"_blank\">Google+</a> (will open in a new window) and click on the small paperclip icon to share a link: \r\n\r\nEnter the text \"http://kukuicup.manoa.hawaii.edu/\" next to the paperclip icon and press the **Add** button. Above that, type something about the Kukui Cup. Make sure this post is set to be shared with the **Public**, you may have to click the \"+Add more people\" link to see the Public circle. If you do not share the link publicly, we will not be able to verify it. Then press the **Share** button.\r\n\r\nOnce you have updated your status, go to your <a href=\"https://plus.google.com/me\" target=\"_blank\">Google+ profile</a> and copy the URL which will look something like \"https://plus.google.com/\" followed by a long number. Then come back to this page and click the \"I Did This!\" button. Paste in that profile URL so we can see your snazzy public post."
         }
     },
     {
@@ -2251,7 +2251,7 @@
             "name": "Shower flow",
             "video_source": null,
             "pub_date": "2011-10-31",
-            "image": "",
+            "image": "media/smartgrid/actions/shower-head.jpg",
             "title": "Measure shower water flow",
             "is_group": false,
             "priority": 800,
@@ -2261,7 +2261,7 @@
             "is_canopy": false,
             "type": "activity",
             "slug": "shower-flow",
-            "description": "<center>![shower head with water coming out](/site_media/media/gblocks/shower-head.jpg)</center>\r\n\r\nFigure out how much water is used by the showers in your floor's bathroom. To do this, you will need a large container with a known volume (like a water bottle or bucket) that you can fill in the shower, and a clock of some type (like your watch or cell phone). Make sure to not get your clock wet if it isn't waterproof!\r\n\r\nHold the container up to the shower head, turn on the shower faucet to the level you use normally when showering, and note the time on the clock (or use a stopwatch). Watch the container fill, and note the time when it is completely full of water.\r\n\r\nNow you know the volume of water that the shower put out, and the amount of time it was running. From these two values, you can compute the flow rate of your shower by dividing the volume by the number of seconds it took to fill. For example, if you filled a 1 gallon bucket and it took 30 seconds, then the flow rate is 2 gallons per minute.\r\n\r\nAs you will see, water comes out of shower heads pretty fast, which is why it is important to turn off the water when you aren't actively using it, like while soaping up."
+            "description": "Figure out how much water is used by the showers in your floor's bathroom. To do this, you will need a large container with a known volume (like a water bottle or bucket) that you can fill in the shower, and a clock of some type (like your watch or cell phone). Make sure to not get your clock wet if it isn't waterproof!\r\n\r\nHold the container up to the shower head, turn on the shower faucet to the level you use normally when showering, and note the time on the clock (or use a stopwatch). Watch the container fill, and note the time when it is completely full of water.\r\n\r\nNow you know the volume of water that the shower put out, and the amount of time it was running. From these two values, you can compute the flow rate of your shower by dividing the volume by the number of seconds it took to fill. For example, if you filled a 1 gallon bucket and it took 30 seconds, then the flow rate is 2 gallons per minute.\r\n\r\nAs you will see, water comes out of shower heads pretty fast, which is why it is important to turn off the water when you aren't actively using it, like while soaping up."
         }
     },
     {
@@ -2726,7 +2726,7 @@
             "name": "Pedal palooza",
             "video_source": null,
             "pub_date": "2011-10-16",
-            "image": "",
+            "image": "media/smartgrid/actions/bicycleparts.png",
             "title": "Pedalpalooza",
             "is_group": false,
             "priority": 800,
@@ -2736,7 +2736,7 @@
             "is_canopy": false,
             "type": "event",
             "slug": "pedalpalooza",
-            "description": "<center>![Bicycle picture](/site_media/media/gblocks/bicycleparts.png)</center>\r\n\r\nIs the Queen song \"I want to ride my bicycle\" whirring furiously through your brain while you stare down at your broken two wheeler?  Have no fear, Freddy Mercury fans! Cycle Manoa is here to save your day with the Pedalpalooza workshop. If your wheels are broken, they'll teach you how to fix them for free.  If your wheels are rocking, join them for a quick one hour ride around Manoa.   And you can even cool down afterwards with a free bicycle-powered smoothie.\r\n\r\nMeet at Hale Aloha Courtyard at 3pm with your wheels for a guided 1 hour ride, ending up at the Cycle Manoa HQ. If you don't have a bike but would like to attend, meet in the courtyard at 3:40 and we'll walk up to the Cycle Manoa together. At 4 PM you'll hear from the Cycle Manoa team about bicycle advocacy and bicycle repair."
+            "description": "Is the Queen song \"I want to ride my bicycle\" whirring furiously through your brain while you stare down at your broken two wheeler?  Have no fear, Freddy Mercury fans! Cycle Manoa is here to save your day with the Pedalpalooza workshop. If your wheels are broken, they'll teach you how to fix them for free.  If your wheels are rocking, join them for a quick one hour ride around Manoa.   And you can even cool down afterwards with a free bicycle-powered smoothie.\r\n\r\nMeet at Hale Aloha Courtyard at 3pm with your wheels for a guided 1 hour ride, ending up at the Cycle Manoa HQ. If you don't have a bike but would like to attend, meet in the courtyard at 3:40 and we'll walk up to the Cycle Manoa together. At 4 PM you'll hear from the Cycle Manoa team about bicycle advocacy and bicycle repair."
         }
     },
     {
@@ -2901,7 +2901,7 @@
             "name": "Food Day",
             "video_source": null,
             "pub_date": "2011-10-18",
-            "image": "",
+            "image": "media/smartgrid/actions/Food-Day.png",
             "title": "UH Manoa Food Day",
             "is_group": false,
             "priority": 1100,
@@ -2911,7 +2911,7 @@
             "is_canopy": false,
             "type": "event",
             "slug": "food-day",
-            "description": "<center>![Food Day logo](/site_media/media/gblocks/Food-Day.png)</center>\r\n\r\nDo you care about your food? Want to find out more about how to eat tasty, healthy food? Come to the UH Manoa Food Day event, which will include presentations on nutrition and food followed by Dr. Ted Radovitch a CTAHR specialist in Sustainable and Organic Farming Systems, and Dean Okimoto from Nalo Farms.\r\n \r\nFollowing the presentations will be a food demonstration by Philip Shon, UH Sodexo Executive Chef who works in collaboration with Donna Ojiri, RD, General Manager of Sodexo. Taste local fresh produce, sample grass-fed Big Island beef, and local fruit beverages. By celebrating food day, helps emphasize the importance of making healthy food choices, and promote changes in food and farm policies that benefit health, the environment and well-being of us all in Hawaii.\r\n\r\nSince this is an external event, you should sign up here but also RSVP on the <a href=\"http://www.foodday.org/participate/event_memberships/attend/1033\" target=\"_blank\">UHM Food Day website</a> (will open in a new window). When you get to the event, look for a Kukui Cup staff member (white t-shirt), and they will give you your attendance code that will get you the points for this event."
+            "description": "Do you care about your food? Want to find out more about how to eat tasty, healthy food? Come to the UH Manoa Food Day event, which will include presentations on nutrition and food followed by Dr. Ted Radovitch a CTAHR specialist in Sustainable and Organic Farming Systems, and Dean Okimoto from Nalo Farms.\r\n \r\nFollowing the presentations will be a food demonstration by Philip Shon, UH Sodexo Executive Chef who works in collaboration with Donna Ojiri, RD, General Manager of Sodexo. Taste local fresh produce, sample grass-fed Big Island beef, and local fruit beverages. By celebrating food day, helps emphasize the importance of making healthy food choices, and promote changes in food and farm policies that benefit health, the environment and well-being of us all in Hawaii.\r\n\r\nSince this is an external event, you should sign up here but also RSVP on the <a href=\"http://www.foodday.org/participate/event_memberships/attend/1033\" target=\"_blank\">UHM Food Day website</a> (will open in a new window). When you get to the event, look for a Kukui Cup staff member (white t-shirt), and they will give you your attendance code that will get you the points for this event."
         }
     },
     {
@@ -3001,7 +3001,7 @@
             "name": "Sink Flow",
             "video_source": null,
             "pub_date": "2011-10-31",
-            "image": "",
+            "image": "media/smartgrid/actions/sink-water.jpg",
             "title": "Measure sink water flow",
             "is_group": false,
             "priority": 900,
@@ -3011,7 +3011,7 @@
             "is_canopy": false,
             "type": "activity",
             "slug": "sink-flow",
-            "description": "<center>![Sink with water flowing](/site_media/media/gblocks/sink-water.jpg)</center>\r\n\r\nFigure out how much water is used by the sinks in your floor's bathroom. To do this, you will need a large container with a known volume (like a water bottle or bucket) that you can fit in the sink, and a clock of some type (like your watch or cell phone). Make sure to keep your clock dry if it isn't waterproof!\r\n\r\nHold the container up to the faucet in the sink, turn on the water to the level you use normally when using the sink, and note the time on the clock (or use a stopwatch). Watch the container fill, and note the time when it is completely full of water.\r\n\r\nNow you know the volume of water that the sink put out, and the amount of time it was running. From these two values, you can compute the flow rate of your sink by dividing the volume by the number of seconds it took to fill. For example, if you filled a 1 gallon bucket and it took 30 seconds, then the flow rate is 2 gallons per minute.\r\n\r\nAs you will see, water comes out of faucets pretty fast, which is why it is important to turn off the water when you aren't actively using it, like while brushing your teeth."
+            "description": "Figure out how much water is used by the sinks in your floor's bathroom. To do this, you will need a large container with a known volume (like a water bottle or bucket) that you can fit in the sink, and a clock of some type (like your watch or cell phone). Make sure to keep your clock dry if it isn't waterproof!\r\n\r\nHold the container up to the faucet in the sink, turn on the water to the level you use normally when using the sink, and note the time on the clock (or use a stopwatch). Watch the container fill, and note the time when it is completely full of water.\r\n\r\nNow you know the volume of water that the sink put out, and the amount of time it was running. From these two values, you can compute the flow rate of your sink by dividing the volume by the number of seconds it took to fill. For example, if you filled a 1 gallon bucket and it took 30 seconds, then the flow rate is 2 gallons per minute.\r\n\r\nAs you will see, water comes out of faucets pretty fast, which is why it is important to turn off the water when you aren't actively using it, like while brushing your teeth."
         }
     },
     {
@@ -3151,7 +3151,7 @@
             "name": "Reppun Farm",
             "video_source": null,
             "pub_date": "2011-10-23",
-            "image": "",
+            "image": "media/smartgrid/actions/charliereppun-small.jpg",
             "title": "Off-The-Grid Living",
             "is_group": false,
             "priority": 700,
@@ -3161,7 +3161,7 @@
             "is_canopy": false,
             "type": "excursion",
             "slug": "reppun-farm",
-            "description": "<center>![Charlie Reppun with the Reppun farm in the background](/site_media/media/gblocks/charliereppun-small.jpg)</center>\r\n\r\nThe Reppun family has been living on their farm and growing taro, coffee, honey and other food in beautiful Waihole valley for over 20 years.  Though they have the Internet, they don't any power lines.  See how they live off the grid in comfort and style through hydro-electric and solar power.  You'll take a bus over to the Windward side, hike into the valley to their farm, and see an amazing blend of old school and next generation Hawaii. Make sure you eat breakfast beforehand; we won't be back until after lunch.\r\n\r\nMake sure to wear clothes and shoes that you don't mind getting wet or muddy on the farm!\r\n\r\nReserve your seat on the bus by clicking the **I want to sign up** button below. \r\n\r\nMeet in the Hale Aloha courtyard, from there we'll get on the bus.  Don't be late!"
+            "description": "The Reppun family has been living on their farm and growing taro, coffee, honey and other food in beautiful Waihole valley for over 20 years.  Though they have the Internet, they don't any power lines.  See how they live off the grid in comfort and style through hydro-electric and solar power.  You'll take a bus over to the Windward side, hike into the valley to their farm, and see an amazing blend of old school and next generation Hawaii. Make sure you eat breakfast beforehand; we won't be back until after lunch.\r\n\r\nMake sure to wear clothes and shoes that you don't mind getting wet or muddy on the farm!\r\n\r\nReserve your seat on the bus by clicking the **I want to sign up** button below. \r\n\r\nMeet in the Hale Aloha courtyard, from there we'll get on the bus.  Don't be late!"
         }
     },
     {
@@ -3176,7 +3176,7 @@
             "name": "Photo Chain",
             "video_source": null,
             "pub_date": "2011-09-18",
-            "image": "",
+            "image": "media/smartgrid/actions/photo-chain-game.jpg",
             "title": "Play the photo chain game",
             "is_group": false,
             "priority": 750,
@@ -3186,7 +3186,7 @@
             "is_canopy": false,
             "type": "activity",
             "slug": "photo-chain",
-            "description": "<center>![Woman holding eco-tote by sculpture](/site_media/media/gblocks/photo-chain-game.jpg)\r\n\r\n**Note, this picture is an example, you must check Flickr to see what the last picture in the chain is**\r\n</center>\r\n\r\nShow off the Kukui Cup and your creativity at the same time by playing the Kukui Cup Photo Chain Game. The rules are simple. You are going to add a photo of yourself to the end of the chain of photos in the [Flickr Kukui Cup 2011 Photo Chain Game group](http://www.flickr.com/groups/kukuicup-2011-photo-chain-game/).  Each photo contains:\r\n\r\n1. yourself in some kind of \"pose\"\r\n2. taken at some location on the UH Manoa Campus\r\n3. you holding or wearing some Kukui Cup item (t-shirt, water bottle, eco-tote, or tumbler)\r\n\r\nTo make the sequence of photos a chain, your photo must \"match\" the preceding photo posted to the group with respect to either the pose, the location, or the Kukui Cup item.\r\n\r\nThe caption to each photo should list the pose, the location, and the item.\r\n\r\nHere's how you do it:\r\n\r\n1. Go to the [Flickr Kukui Cup 2011 Photo Chain Game group](http://www.flickr.com/groups/kukuicup-2011-photo-chain-game/). See what photo is at the end of the list.\r\n2. Take a photo of yourself in a way that extends the chain (match either the pose, location, or item)\r\n3. Upload your photo to your own Flickr account (creating it if necessary).\r\n4. Go back to the [Flickr Kukui Cup 2011 Photo Chain Game group](http://www.flickr.com/groups/kukuicup-2011-photo-chain-game/), and \"join\" the group. \r\n5. Click \"Add Photos\" and select your photo. \r\n6. Provide a title, such as \"Photo Chain Game 12\" (or whatever the next number is in the chain).\r\n7. Provide a caption that indicates: pose, location, item, and which of the three matches.\r\n8. Save.\r\n9. Click **I Did This!** button and tell us your Flickr name so we can confirm your upload to the group and award your points."
+            "description": "**Note, this picture is an example, you must check Flickr to see what the last picture in the chain is**\r\n</center>\r\n\r\nShow off the Kukui Cup and your creativity at the same time by playing the Kukui Cup Photo Chain Game. The rules are simple. You are going to add a photo of yourself to the end of the chain of photos in the [Flickr Kukui Cup 2011 Photo Chain Game group](http://www.flickr.com/groups/kukuicup-2011-photo-chain-game/).  Each photo contains:\r\n\r\n1. yourself in some kind of \"pose\"\r\n2. taken at some location on the UH Manoa Campus\r\n3. you holding or wearing some Kukui Cup item (t-shirt, water bottle, eco-tote, or tumbler)\r\n\r\nTo make the sequence of photos a chain, your photo must \"match\" the preceding photo posted to the group with respect to either the pose, the location, or the Kukui Cup item.\r\n\r\nThe caption to each photo should list the pose, the location, and the item.\r\n\r\nHere's how you do it:\r\n\r\n1. Go to the [Flickr Kukui Cup 2011 Photo Chain Game group](http://www.flickr.com/groups/kukuicup-2011-photo-chain-game/). See what photo is at the end of the list.\r\n2. Take a photo of yourself in a way that extends the chain (match either the pose, location, or item)\r\n3. Upload your photo to your own Flickr account (creating it if necessary).\r\n4. Go back to the [Flickr Kukui Cup 2011 Photo Chain Game group](http://www.flickr.com/groups/kukuicup-2011-photo-chain-game/), and \"join\" the group. \r\n5. Click \"Add Photos\" and select your photo. \r\n6. Provide a title, such as \"Photo Chain Game 12\" (or whatever the next number is in the chain).\r\n7. Provide a caption that indicates: pose, location, item, and which of the three matches.\r\n8. Save.\r\n9. Click **I Did This!** button and tell us your Flickr name so we can confirm your upload to the group and award your points."
         }
     },
     {
@@ -3376,7 +3376,7 @@
             "name": "CFL swap",
             "video_source": null,
             "pub_date": "2010-05-12",
-            "image": "",
+            "image": "media/smartgrid/actions/CFL-small.jpg",
             "title": "Replace incandescent bulb with compact fluorescent (CFL)",
             "is_group": false,
             "priority": 100,
@@ -3386,7 +3386,7 @@
             "is_canopy": false,
             "type": "activity",
             "slug": "cfl-bulb",
-            "description": "<center>![CFL](/site_media/media/gblocks/CFL-small.jpg)</center>\r\n\r\nFind an incandescent bulb and replace it with a CFL (compact fluorescent). If you've already replaced all the incandescent bulbs in your room with CFLs or LEDs, you might have to go hunt for one elsewhere. You should throw away the incandescent bulb, because even though it isn't burned out it is a massive energy hog and you don't want someone using it later.\r\n\r\nFor verification, please take a single photo showing both the incandescent bulb you replaced and the CFL you installed."
+            "description": "Find an incandescent bulb and replace it with a CFL (compact fluorescent). If you've already replaced all the incandescent bulbs in your room with CFLs or LEDs, you might have to go hunt for one elsewhere. You should throw away the incandescent bulb, because even though it isn't burned out it is a massive energy hog and you don't want someone using it later.\r\n\r\nFor verification, please take a single photo showing both the incandescent bulb you replaced and the CFL you installed."
         }
     },
     {
@@ -3401,7 +3401,7 @@
             "name": "Computer Sleep",
             "video_source": null,
             "pub_date": "2011-10-24",
-            "image": "",
+            "image": "media/smartgrid/actions/SleepyMacBookPro-small.png",
             "title": "Configure your computer to sleep after inactivity",
             "is_group": false,
             "priority": 1100,
@@ -3411,7 +3411,7 @@
             "is_canopy": false,
             "type": "activity",
             "slug": "computer-sleep",
-            "description": "<center>![Laptop falling asleep](/site_media/media/gblocks/SleepyMacBookPro-small.png)</center>\r\n\r\nConfigure your computer and any external monitor to sleep after 20 minutes of inactivity (or less). You can find instructions on enabling sleep functionality at the [EnergySTAR website](http://www.energystar.gov/index.cfm?c=power_mgt.pr_power_mgt_users).\r\n\r\nOnce you have changed your settings, please take a screenshot showing the new settings for use in verification:\r\n\r\n  * [How to take a screenshot on Windows](http://www.wikihow.com/Take-a-Screenshot-in-Microsoft-Windows)\r\n  * [How to take a screenshot on Mac OS X](/help/faq/how-screenshot-mac/)"
+            "description": "Configure your computer and any external monitor to sleep after 20 minutes of inactivity (or less). You can find instructions on enabling sleep functionality at the [EnergySTAR website](http://www.energystar.gov/index.cfm?c=power_mgt.pr_power_mgt_users).\r\n\r\nOnce you have changed your settings, please take a screenshot showing the new settings for use in verification:\r\n\r\n  * [How to take a screenshot on Windows](http://www.wikihow.com/Take-a-Screenshot-in-Microsoft-Windows)\r\n  * [How to take a screenshot on Mac OS X](/help/faq/how-screenshot-mac/)"
         }
     },
     {

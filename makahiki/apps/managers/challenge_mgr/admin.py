@@ -3,7 +3,7 @@ from django.contrib import admin
 from django.db import models
 from django.forms.widgets import Textarea
 from apps.managers.challenge_mgr.models import ChallengeSettings, RoundSettings, PageSettings, \
-    PageInfo, Sponsor
+    PageInfo, Sponsor, UploadImage
 
 
 class PageSettingsInline(admin.TabularInline):
@@ -95,3 +95,4 @@ class ChallengeSettingsAdmin(admin.ModelAdmin):
         }
 
 admin.site.register(ChallengeSettings, ChallengeSettingsAdmin)
+admin.site.register(UploadImage)

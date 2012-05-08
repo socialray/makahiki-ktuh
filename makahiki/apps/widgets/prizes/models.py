@@ -7,7 +7,7 @@ from apps.managers.team_mgr.models import Group, Team
 from apps.utils.utils import media_file_path
 
 
-_MEDIA_LOCATION = "prize"
+_MEDIA_LOCATION = "prizes"
 """location for uploaded files."""
 
 

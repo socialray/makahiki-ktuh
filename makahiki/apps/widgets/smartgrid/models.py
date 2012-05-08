@@ -20,10 +20,10 @@ from apps.widgets.notifications.models import UserNotification
 from apps.managers.cache_mgr import cache_mgr
 from apps.widgets.smartgrid import NOSHOW_PENALTY_DAYS
 
-_MEDIA_LOCATION_ACTION = os.path.join("smartgrid", "action")
+_MEDIA_LOCATION_ACTION = os.path.join("smartgrid", "actions")
 """location for the uploaded files for actions."""
 
-_MEDIA_LOCATION_MEMBER = os.path.join("smartgrid", "member")
+_MEDIA_LOCATION_MEMBER = os.path.join("smartgrid", "members")
 """location for the uploaded files for actionmembers."""
 
 
