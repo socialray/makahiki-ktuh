@@ -3,7 +3,6 @@ import datetime
 
 from django.core import management
 from apps.managers.resource_mgr import resource_mgr
-from apps.managers.team_mgr.models import Team
 
 
 class Command(management.base.BaseCommand):
@@ -15,6 +14,4 @@ class Command(management.base.BaseCommand):
         date = datetime.datetime.today()
         print '****** Processing energy usage updater at %s *******\n' % date
 
-        for team in Team.objects.all():
-            resource_mgr.update_energy_usage(date, team)
-            print 'team %s energy usage updated.' % team
+        resource_mgr.update_energy_usage(date)

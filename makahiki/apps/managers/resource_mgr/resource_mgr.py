@@ -3,6 +3,7 @@ import datetime
 from django.core.exceptions import ObjectDoesNotExist
 from django.db.models.aggregates import Count, Sum
 import requests
+from requests.exceptions import Timeout
 from apps.managers.team_mgr.models import Team
 from apps.widgets.energy_goal.models import EnergyGoal
 from apps.managers.resource_mgr.models import EnergyUsage, WaterUsage, ResourceSettings, \
@@ -76,36 +77,46 @@ def team_hourly_energy_baseline(date, team):
         return 0
 
 
-def update_energy_usage(date, team):
+def update_energy_usage(date):
     """Update the energy usage from wattdepot server."""
 
+    # workaround the issue that wattdepot might not have the latest data yet.
     date = date - datetime.timedelta(minutes=5)
 
     start_time = date.strftime("%Y-%m-%dT00:00:00")
     end_time = date.strftime("%Y-%m-%dT%H:%M:%S")
-    rest_url = "%s/wattdepot/sources/%s/energy/" % (WATTDEPOT_SERVER_URL, team.name)
 
-    query_args = {'startTime': start_time,
-                  'endTime': end_time}
-    response = requests.get(url=rest_url, params=query_args)
-    #print response.text
+    s = requests.session()
+    #s.config['verbose'] = sys.stderr
+    s.timeout = 2
+    s.params = {'startTime': start_time, 'endTime': end_time}
 
-    usage = 0
-    property_elements = ElementTree.XML(response.text).findall(".//Property")
-    for p in property_elements:
-        key_value = p.getchildren()
-        if key_value and key_value[0].text == "energyConsumed":
-            usage = key_value[1].text
+    for team in Team.objects.all():
+        rest_url = "%s/wattdepot/sources/%s/energy/" % (WATTDEPOT_SERVER_URL, team.name)
 
-    #print usage
-    try:
-        latest_usage = EnergyUsage.objects.get(team=team, date=date.date())
-    except ObjectDoesNotExist:
-        latest_usage = EnergyUsage(team=team, date=date.date())
+        try:
+            response = s.get(url=rest_url)
 
-    latest_usage.time = date.time()
-    latest_usage.usage = int(round(float(usage) / 1000))
-    latest_usage.save()
+            #print response.text
+            usage = 0
+            property_elements = ElementTree.XML(response.text).findall(".//Property")
+            for p in property_elements:
+                key_value = p.getchildren()
+                if key_value and key_value[0].text == "energyConsumed":
+                    usage = key_value[1].text
+
+            #print usage
+            try:
+                latest_usage = EnergyUsage.objects.get(team=team, date=date.date())
+            except ObjectDoesNotExist:
+                latest_usage = EnergyUsage(team=team, date=date.date())
+
+            latest_usage.time = date.time()
+            latest_usage.usage = int(round(float(usage) / 1000))
+            latest_usage.save()
+            print 'team %s energy usage updated.' % team
+        except Timeout:
+            print 'team %s energy usage update timeout.' % team
 
 
 def resource_ranks(name):
