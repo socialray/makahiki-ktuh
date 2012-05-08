@@ -65,4 +65,3 @@ class Command(MakahikiBaseCommand):
             user.delete()
             total_count += 1
         self.stdout.write("%d test users deleted.\n" % total_count)
-
