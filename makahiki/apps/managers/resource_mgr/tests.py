@@ -10,7 +10,7 @@ from apps.managers.team_mgr.models import Team
 
 class ResourceManagerTestCase(TransactionTestCase):
     """ResourceManager Test"""
-    fixtures = ["base_teams.json"]
+    fixtures = ["test_teams.json"]
 
     def setUp(self):
         """Initialize a user and log them in."""

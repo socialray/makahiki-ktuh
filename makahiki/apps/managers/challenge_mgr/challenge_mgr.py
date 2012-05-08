@@ -7,6 +7,7 @@ from django.core.exceptions import ObjectDoesNotExist
 from apps.managers.challenge_mgr.models import ChallengeSettings, RoundSettings, PageSettings, \
     PageInfo
 from apps.utils import utils
+from django.core import management
 
 
 def init():
@@ -160,7 +161,6 @@ def get_round(submission_date):
        :returns Overall if it doesn't correspond to anything.
     """
     rounds = settings.COMPETITION_ROUNDS
-
     # Find which round this belongs to.
     if rounds is not None:
         for key in rounds:
@@ -176,3 +176,16 @@ def in_competition():
     """Returns true if we are still in the competition."""
     today = datetime.datetime.today()
     return settings.COMPETITION_START < today and today < settings.COMPETITION_END
+
+
+class MakahikiBaseCommand(management.base.BaseCommand):
+    """The base class for Makahiki command. It is to be used when the init method of the
+    challenge_mgr need to be called."""
+    def __init__(self, *args, **kwargs):
+        """initiailze the challenge_mgr."""
+        init()
+        super(MakahikiBaseCommand, self).__init__(*args, **kwargs)
+
+    def handle(self, *args, **options):
+        """handle the command. should be override by sub class."""
+        pass

@@ -11,7 +11,7 @@ from apps.widgets.help.models import HelpTopic
 
 class HelpFunctionalTestCase(TransactionTestCase):
     """test cases"""
-    fixtures = ["base_teams.json"]
+    fixtures = ["test_teams.json"]
 
     def setUp(self):
         self.user = User.objects.create_user("user", "user@test.com",

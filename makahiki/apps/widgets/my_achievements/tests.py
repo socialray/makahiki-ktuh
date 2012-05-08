@@ -13,7 +13,7 @@ from apps.widgets.quests.models import Quest
 
 class MyAchievementsTestCase(TransactionTestCase):
     """Profile page test"""
-    fixtures = ["base_teams.json"]
+    fixtures = ["test_teams.json"]
 
     def setUp(self):
         """setup"""

@@ -83,7 +83,7 @@ Things that need to be changed:
   MakahikiSeleniumTestCase. Note that MakahikiSeleniumTestCase has a few useful
   functions, like ``login(username, password)`` and ``logout()``.
 - After the class definition, add in a few base test fixtures
-  (i.e. `fixtures = ["base_teams.json", "base_pages.json"]`). You may want to
+  (i.e. `fixtures = ["test_teams.json", "base_pages.json"]`). You may want to
   enter additional fixtures from the fixtures directory. The two fixtures in
   the example are highly recommended unless you have a specific reason not to
   include them.
@@ -103,7 +103,7 @@ After this, your test should look something like this:
 
     class LandingSeleniumTestCase(MakahikiSeleniumTestCase):
         """Selenium tests for the home page."""
-        fixtures = ["base_teams.json", "base_pages.json"]
+        fixtures = ["test_teams.json", "base_pages.json"]
 
         def testLogin(self):
             self.login("username", "password")

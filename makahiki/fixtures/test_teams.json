@@ -24,6 +24,14 @@
     }
   }, 
   {
+    "pk": 4,
+    "model": "team_mgr.group",
+    "fields": {
+      "name": "Lokelani",
+      "slug": "hale-lokelani"
+    }
+  },
+  {
     "pk": 1, 
     "model": "team_mgr.team",
     "fields": {
@@ -156,6 +164,51 @@
       "group": 3,
       "name": "Mokihana-E",
         "slug": "Mokihana-E"
+    }
+  },
+  {
+    "pk": 16,
+    "model": "team_mgr.team",
+    "fields": {
+      "group": 4,
+      "name": "Lokelani-A",
+        "slug": "Lokelani-A"
+    }
+  },
+  {
+    "pk": 17,
+    "model": "team_mgr.team",
+    "fields": {
+      "group": 4,
+      "name": "Lokelani-B",
+        "slug": "Lokelani-B"
+    }
+  },
+  {
+    "pk": 18,
+    "model": "team_mgr.team",
+    "fields": {
+      "group": 4,
+      "name": "Lokelani-C",
+        "slug": "Lokelani-C"
+    }
+  },
+  {
+    "pk": 19,
+    "model": "team_mgr.team",
+    "fields": {
+      "group": 4,
+      "name": "Lokelani-D",
+        "slug": "Lokelani-D"
+    }
+  },
+  {
+    "pk": 20,
+    "model": "team_mgr.team",
+    "fields": {
+      "group": 4,
+      "name": "Lokelani-E",
+        "slug": "Lokelani-E"
     }
   }
 ]

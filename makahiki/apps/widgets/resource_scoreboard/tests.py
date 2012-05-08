@@ -12,7 +12,7 @@ from apps.widgets.energy_goal.models import EnergyGoal
 
 class EnergyFunctionalTestCase(TransactionTestCase):
     """Energy Test"""
-    fixtures = ["base_teams.json"]
+    fixtures = ["test_teams.json"]
 
     def setUp(self):
         """Initialize a user and log them in."""

@@ -9,8 +9,7 @@
       "is_active": true, 
       "is_superuser": true, 
       "is_staff": true, 
-      "last_login": "2011-07-26 12:18:06", 
-      "groups": [], 
+      "groups": [],
       "user_permissions": [], 
       "password": "sha1$1ec42$55198a04ae01b5a33a031535dc93e91ca8ddf916", 
       "email": "gelee@hawaii.edu", 
@@ -27,8 +26,7 @@
       "is_active": true, 
       "is_superuser": false, 
       "is_staff": false, 
-      "last_login": "2011-06-29 15:47:00", 
-      "groups": [], 
+      "groups": [],
       "user_permissions": [], 
       "password": "sha1$ed587$e36891186a5bf9499d9c2fbd9f8bc181368e67e9", 
       "email": "johnson@hawaii.edu", 
@@ -45,7 +43,6 @@
             "is_active": true,
             "is_superuser": false,
             "is_staff": false,
-            "last_login": "2011-07-26 12:09:07",
             "groups": [],
             "user_permissions": [],
             "password": "sha1$1b38c$7ad62450e30a1c294e34d610758c3989f2547efb",
@@ -63,7 +60,6 @@
             "is_active": true,
             "is_superuser": true,
             "is_staff": true,
-            "last_login": "2011-06-30 13:46:27",
             "groups": [],
             "user_permissions": [],
             "password": "sha1$a47a7$d890cff6b00bc5e948b681983a6b948308f31b1c",
@@ -81,8 +77,7 @@
       "is_active": true, 
       "is_superuser": true, 
       "is_staff": true, 
-      "last_login": "2011-07-19 15:06:29", 
-      "groups": [], 
+      "groups": [],
       "user_permissions": [], 
       "password": "sha1$93087$3e290bb035b2a6380aed58334d437ed1ed6d1739", 
       "email": "gburgess@hawaii.edu", 
@@ -99,7 +94,6 @@
             "is_active": true,
             "is_superuser": false,
             "is_staff": false,
-            "last_login": "2011-04-23 15:31:44",
             "groups": [],
             "user_permissions": [],
             "password": "sha1$f44fa$e66caacfb55c14c0f8fc6a6697513419148c93cc",
@@ -108,169 +102,7 @@
         }
     },
     {
-        "pk": 7,
-        "model": "auth.user",
-        "fields": {
-            "username": "testuser1",
-            "first_name": "",
-            "last_name": "",
-            "is_active": true,
-            "is_superuser": false,
-            "is_staff": false,
-            "last_login": "2011-04-23 15:31:44",
-            "groups": [],
-            "user_permissions": [],
-            "password": "sha1$f44fa$e66caacfb55c14c0f8fc6a6697513419148c93cc",
-            "email": "",
-            "date_joined": "2011-04-23 15:30:54"
-        }
-    },
-    {
-        "pk": 8,
-        "model": "auth.user",
-        "fields": {
-            "username": "testuser2",
-            "first_name": "",
-            "last_name": "",
-            "is_active": true,
-            "is_superuser": false,
-            "is_staff": false,
-            "last_login": "2011-04-23 15:31:44",
-            "groups": [],
-            "user_permissions": [],
-            "password": "sha1$f44fa$e66caacfb55c14c0f8fc6a6697513419148c93cc",
-            "email": "",
-            "date_joined": "2011-04-23 15:30:54"
-        }
-    },
-    {
-        "pk": 9,
-        "model": "auth.user",
-        "fields": {
-            "username": "testuser3",
-            "first_name": "",
-            "last_name": "",
-            "is_active": true,
-            "is_superuser": false,
-            "is_staff": false,
-            "last_login": "2011-04-23 15:31:44",
-            "groups": [],
-            "user_permissions": [],
-            "password": "sha1$f44fa$e66caacfb55c14c0f8fc6a6697513419148c93cc",
-            "email": "",
-            "date_joined": "2011-04-23 15:30:54"
-        }
-    },
-    {
-        "pk": 10,
-        "model": "auth.user",
-        "fields": {
-            "username": "testuser4",
-            "first_name": "",
-            "last_name": "",
-            "is_active": true,
-            "is_superuser": false,
-            "is_staff": false,
-            "last_login": "2011-04-23 15:31:44",
-            "groups": [],
-            "user_permissions": [],
-            "password": "sha1$f44fa$e66caacfb55c14c0f8fc6a6697513419148c93cc",
-            "email": "",
-            "date_joined": "2011-04-23 15:30:54"
-        }
-    },
-    {
-        "pk": 11,
-        "model": "auth.user",
-        "fields": {
-            "username": "testuser5",
-            "first_name": "",
-            "last_name": "",
-            "is_active": true,
-            "is_superuser": false,
-            "is_staff": false,
-            "last_login": "2011-04-23 15:31:44",
-            "groups": [],
-            "user_permissions": [],
-            "password": "sha1$f44fa$e66caacfb55c14c0f8fc6a6697513419148c93cc",
-            "email": "",
-            "date_joined": "2011-04-23 15:30:54"
-        }
-    },
-    {
-        "pk": 12,
-        "model": "auth.user",
-        "fields": {
-            "username": "testuser6",
-            "first_name": "",
-            "last_name": "",
-            "is_active": true,
-            "is_superuser": false,
-            "is_staff": false,
-            "last_login": "2011-04-23 15:31:44",
-            "groups": [],
-            "user_permissions": [],
-            "password": "sha1$f44fa$e66caacfb55c14c0f8fc6a6697513419148c93cc",
-            "email": "",
-            "date_joined": "2011-04-23 15:30:54"
-        }
-    },
-    {
-        "pk": 13,
-        "model": "auth.user",
-        "fields": {
-            "username": "testuser7",
-            "first_name": "",
-            "last_name": "",
-            "is_active": true,
-            "is_superuser": false,
-            "is_staff": false,
-            "last_login": "2011-04-23 15:31:44",
-            "groups": [],
-            "user_permissions": [],
-            "password": "sha1$f44fa$e66caacfb55c14c0f8fc6a6697513419148c93cc",
-            "email": "",
-            "date_joined": "2011-04-23 15:30:54"
-        }
-    },
-    {
-        "pk": 14,
-        "model": "auth.user",
-        "fields": {
-            "username": "testuser8",
-            "first_name": "",
-            "last_name": "",
-            "is_active": true,
-            "is_superuser": false,
-            "is_staff": false,
-            "last_login": "2011-04-23 15:31:44",
-            "groups": [],
-            "user_permissions": [],
-            "password": "sha1$f44fa$e66caacfb55c14c0f8fc6a6697513419148c93cc",
-            "email": "",
-            "date_joined": "2011-04-23 15:30:54"
-        }
-    },
-    {
-        "pk": 15,
-        "model": "auth.user",
-        "fields": {
-            "username": "testuser9",
-            "first_name": "",
-            "last_name": "",
-            "is_active": true,
-            "is_superuser": false,
-            "is_staff": false,
-            "last_login": "2011-04-23 15:31:44",
-            "groups": [],
-            "user_permissions": [],
-            "password": "sha1$f44fa$e66caacfb55c14c0f8fc6a6697513419148c93cc",
-            "email": "",
-            "date_joined": "2011-04-23 15:30:54"
-        }
-    },
-    {
-    "pk": 20, 
+    "pk": 7,
     "model": "auth.user", 
     "fields": {
       "username": "cmoore", 
@@ -279,8 +111,7 @@
       "is_active": true, 
       "is_superuser": true, 
       "is_staff": true, 
-      "last_login": "2012-02-22 11:25:06", 
-      "groups": [], 
+      "groups": [],
       "user_permissions": [], 
       "password": "sha1$7c360$6fccb69328988b8a57b5debf73b2704b1917c26c", 
       "email": "cammymoore07@gmail.com", 
@@ -291,38 +122,32 @@
     "pk": 1, 
     "model": "player_mgr.profile", 
     "fields": {
-      "last_visit_date": "2011-07-26", 
-      "first_name": "George", 
+      "first_name": "George",
       "last_name": "Lee", 
       "name": "George L.", 
       "team": 10,
-      "daily_visit_count": 3,
-      "completion_date": "2011-06-02 14:52:23",
-      "setup_complete": false, 
+      "setup_complete": false,
       "contact_text": "", 
       "contact_email": "gelee@hawaii.edu",
       "user": 1, 
       "contact_carrier": null, 
-      "setup_profile": true
+      "setup_profile": false
     }
   }, 
   {
     "pk": 2, 
     "model": "player_mgr.profile", 
     "fields": {
-      "last_visit_date": "2011-06-29", 
-      "first_name": "Philip", 
+      "first_name": "Philip",
       "last_name": "Johnson", 
       "name": "pmj", 
       "team": 11,
-      "daily_visit_count": 1,
-      "completion_date": "2011-06-02 14:52:23",
-      "setup_complete": false, 
-      "contact_text": "808-387-6663", 
+      "setup_complete": false,
+      "contact_text": "808-888-8888",
       "contact_email": "johnson@hawaii.edu",
       "user": 2, 
       "contact_carrier": "verizon", 
-      "setup_profile": true
+      "setup_profile": false
     }
   },
 
@@ -330,57 +155,48 @@
     "pk": 3,
     "model": "player_mgr.profile", 
     "fields": {
-      "last_visit_date": "2011-07-26", 
-      "first_name": "Robert", 
+      "first_name": "Robert",
       "last_name": "Brewer", 
       "name": "Robert McFly", 
       "team": 12,
-      "daily_visit_count": 1,
-      "completion_date": "2011-07-05 14:53:43",
-      "setup_complete": false, 
+      "setup_complete": false,
       "contact_text": "", 
       "contact_email": "",
       "user": 3,
       "contact_carrier": null,
-      "setup_profile": true
+      "setup_profile": false
     }
   },
     {
         "pk": 4,
         "model": "player_mgr.profile",
         "fields": {
-            "last_visit_date": null,
             "first_name": "Yongwen",
             "last_name": "Xu",
             "name": "Yongwen X.",
             "team": 13,
-            "daily_visit_count": 0,
-            "completion_date": null,
             "setup_complete": false,
             "contact_text": "",
             "contact_email": "",
             "user": 4,
             "contact_carrier": null,
-            "setup_profile": true
+            "setup_profile": false
         }
     },
     {
         "pk": 5,
         "model": "player_mgr.profile",
         "fields": {
-            "last_visit_date": "2011-07-25",
             "first_name": "Greg",
             "last_name": "Burgess",
             "name": "Greg B.",
             "team": 14,
-            "daily_visit_count": 4,
-            "completion_date": "2011-06-30 10:33:23",
             "setup_complete": false,
             "contact_text": "",
             "contact_email": "",
             "user": 5,
             "contact_carrier": null,
-            "setup_profile": true
+            "setup_profile": false
         }
     },
 
@@ -388,209 +204,32 @@
         "pk": 6,
         "model": "player_mgr.profile",
         "fields": {
-            "last_visit_date": "2011-04-23",
             "first_name": "Test",
             "last_name": "User",
             "name": "test",
             "team": 15,
-            "daily_visit_count": 1,
-            "completion_date": "2011-06-02 14:52:23",
             "setup_complete": false,
             "contact_text": "",
             "contact_email": "",
             "user": 6,
             "contact_carrier": null,
-            "setup_profile": true
-        }
-    },
-    {
-        "pk": 7,
-        "model": "player_mgr.profile",
-        "fields": {
-            "last_visit_date": "2011-04-23",
-            "first_name": "Test",
-            "last_name": "User1",
-            "name": "test1",
-            "team": 1,
-            "daily_visit_count": 1,
-            "completion_date": "2011-06-02 14:52:23",
-            "setup_complete": false,
-            "contact_text": "",
-            "contact_email": "",
-            "user": 7,
-            "contact_carrier": null,
-            "setup_profile": true
-        }
-    },
-    {
-        "pk": 8,
-        "model": "player_mgr.profile",
-        "fields": {
-            "last_visit_date": "2011-04-23",
-            "first_name": "Test",
-            "last_name": "User2",
-            "name": "test2",
-            "team": 2,
-            "daily_visit_count": 1,
-            "completion_date": "2011-06-02 14:52:23",
-            "setup_complete": false,
-            "contact_text": "",
-            "contact_email": "",
-            "user": 8,
-            "contact_carrier": null,
-            "setup_profile": true
-        }
-    },
-    {
-        "pk": 9,
-        "model": "player_mgr.profile",
-        "fields": {
-            "last_visit_date": "2011-04-23",
-            "first_name": "Test",
-            "last_name": "User",
-            "name": "test3",
-            "team": 3,
-            "daily_visit_count": 1,
-            "completion_date": "2011-06-02 14:52:23",
-            "setup_complete": false,
-            "contact_text": "",
-            "contact_email": "",
-            "user": 9,
-            "contact_carrier": null,
-            "setup_profile": true
-        }
-    },
-    {
-        "pk": 10,
-        "model": "player_mgr.profile",
-        "fields": {
-            "last_visit_date": "2011-04-23",
-            "first_name": "Test",
-            "last_name": "User",
-            "name": "test4",
-            "team": 4,
-            "daily_visit_count": 1,
-            "completion_date": "2011-06-02 14:52:23",
-            "setup_complete": false,
-            "contact_text": "",
-            "contact_email": "",
-            "user": 10,
-            "contact_carrier": null,
-            "setup_profile": true
-        }
-    },
-    {
-        "pk": 11,
-        "model": "player_mgr.profile",
-        "fields": {
-            "last_visit_date": "2011-04-23",
-            "first_name": "Test",
-            "last_name": "User",
-            "name": "test5",
-            "team": 5,
-            "daily_visit_count": 1,
-            "completion_date": "2011-06-02 14:52:23",
-            "setup_complete": false,
-            "contact_text": "",
-            "contact_email": "",
-            "user": 11,
-            "contact_carrier": null,
-            "setup_profile": true
-        }
-    },
-    {
-        "pk": 12,
-        "model": "player_mgr.profile",
-        "fields": {
-            "last_visit_date": "2011-04-23",
-            "first_name": "Test",
-            "last_name": "User",
-            "name": "test6",
-            "team": 6,
-            "daily_visit_count": 1,
-            "completion_date": "2011-06-02 14:52:23",
-            "setup_complete": false,
-            "contact_text": "",
-            "contact_email": "",
-            "user": 12,
-            "contact_carrier": null,
-            "setup_profile": true
-        }
-    },
-    {
-        "pk": 13,
-        "model": "player_mgr.profile",
-        "fields": {
-            "last_visit_date": "2011-04-23",
-            "first_name": "Test",
-            "last_name": "User7",
-            "name": "test7",
-            "team": 7,
-            "daily_visit_count": 1,
-            "completion_date": "2011-06-02 14:52:23",
-            "setup_complete": false,
-            "contact_text": "",
-            "contact_email": "",
-            "user": 13,
-            "contact_carrier": null,
-            "setup_profile": true
-        }
-    },
-    {
-        "pk": 14,
-        "model": "player_mgr.profile",
-        "fields": {
-            "last_visit_date": "2011-04-23",
-            "first_name": "Test",
-            "last_name": "User8",
-            "name": "test8",
-            "team": 8,
-            "daily_visit_count": 1,
-            "completion_date": "2011-06-02 14:52:23",
-            "setup_complete": false,
-            "contact_text": "",
-            "contact_email": "",
-            "user": 14,
-            "contact_carrier": null,
-            "setup_profile": true
-        }
-    },
-    {
-        "pk": 15,
-        "model": "player_mgr.profile",
-        "fields": {
-            "last_visit_date": "2011-04-23",
-            "first_name": "Test",
-            "last_name": "User9",
-            "name": "test9",
-            "team": 9,
-            "daily_visit_count": 1,
-            "completion_date": "2011-06-02 14:52:23",
-            "setup_complete": false,
-            "contact_text": "",
-            "contact_email": "",
-            "user": 15,
-            "contact_carrier": null,
-            "setup_profile": true
+            "setup_profile": false
         }
     },
   {
-    "pk": 20, 
+    "pk": 7,
     "model": "player_mgr.profile", 
     "fields": {
-      "last_visit_date": "2011-07-26", 
-      "first_name": "Cam", 
+      "first_name": "Cam",
       "last_name": "Moore", 
       "name": "Cam", 
       "team": 11,
-      "daily_visit_count": 3,
-      "completion_date": "2012-02-18 13:12:48",
-      "setup_complete": false, 
+      "setup_complete": false,
       "contact_text": "", 
       "contact_email": "cammymoore07@gmail.com",
-      "user": 20, 
+      "user": 7,
       "contact_carrier": null, 
-      "setup_profile": true
+      "setup_profile": false
     }
   }
 ]

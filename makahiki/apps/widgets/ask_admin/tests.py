@@ -10,7 +10,7 @@ from apps.managers.team_mgr.models import Team
 
 class AskAdminFunctionalTests(TransactionTestCase):
     """AskAdmin test cases."""
-    fixtures = ["base_teams.json"]
+    fixtures = ["test_teams.json"]
 
     def setUp(self):
         """setup"""
