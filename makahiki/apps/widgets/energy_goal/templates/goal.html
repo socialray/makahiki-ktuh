@@ -26,17 +26,17 @@
                   {% if goal.goal_status == "Over the goal"%}
                       <div class="goal_tooltip">
                           <img rel="tooltip" title="{{ goal.verbose_info }}"
-                               src="/site_media/static/images/energy/bad32.png"/>
+                               src="{{ STATIC_URL }}images/energy/bad32.png"/>
                       </div>
                   {% elif goal.goal_status == "Below the goal"%}
                       <div class="goal_tooltip">
                         <img rel="tooltip" title="{{ goal.verbose_info }}"
-                             src="/site_media/static/images/energy/good32.png"/>
+                             src="{{ STATIC_URL }}images/energy/good32.png"/>
                       </div>
                   {% elif goal.goal_status == "Unknown" %}
                       <div class="goal_tooltip">
                           <img rel="tooltip" title="{{ goal.verbose_info }}"
-                               src="/site_media/static/images/energy/unknown32.png"/>
+                               src="{{ STATIC_URL }}images/energy/unknown32.png"/>
                       </div>
                   {% else %}
                       <table><tr><td height="32"></td></tr></table>
@@ -47,11 +47,11 @@
         </tr>
       </table>
     <tr><td style="font-size: 0.8em" align="left">
-        <img src="/site_media/static/images/energy/good32.png" width="16"/>: Awarded (Made the goal)</td></tr>
+        <img src="{{ STATIC_URL }}images/energy/good32.png" width="16"/>: Awarded (Made the goal)</td></tr>
     <tr><td style="font-size: 0.8em" align="left">
-        <img src="/site_media/static/images/energy/bad32.png"  width="16"/>: Not awarded (Did not make the goal)</td></tr>
+        <img src="{{ STATIC_URL }}images/energy/bad32.png"  width="16"/>: Not awarded (Did not make the goal)</td></tr>
     <tr><td style="font-size: 0.8em" align="left">
-        <img src="/site_media/static/images/energy/unknown32.png"  width="16"/>: Not awarded (Can not determine)</td></tr>
+        <img src="{{ STATIC_URL }}images/energy/unknown32.png"  width="16"/>: Not awarded (Can not determine)</td></tr>
     </td> </tr>
     </table>
 

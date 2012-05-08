@@ -4,7 +4,7 @@
     <div {% get_id_and_classes "activity-categories-title" %}>
         The Smart Grid Game
         <a href="#" style="float: right">
-            <img src="{{ STATIC_URL}}css/default/images/icon-help-sm.png" width="20" align="center"
+            <img src="{{ STATIC_URL}}images/icons/icon-help-sm.png" width="20" align="center"
                  title="Click to get help about this window"
                  onclick="toggleHelp('widget', 'smart-grid-game'); return false;"
                     /></a>
@@ -43,16 +43,16 @@
                                                             {% if task.type != 'commitment' %}
                                                                 {% if task.is_pau %}
                                                                     {% if task.member.approval_status == "rejected" %}
-                                                                        <img src="{{ STATIC_URL}}css/default/images/icon-exclamation2.png"
+                                                                        <img src="{{ STATIC_URL}}images/icons/icon-exclamation2.png"
                                                                              width="12"
                                                                              align="left"/>
                                                                     {% else %}
                                                                         {% if task.member.approval_status == "pending" and task.is_event_pau %}
-                                                                            <img src="{{ STATIC_URL}}css/default/images/icon-exclamation2.png"
+                                                                            <img src="{{ STATIC_URL}}images/icons/icon-exclamation2.png"
                                                                                  width="12"
                                                                                  align="left"/>
                                                                         {% else %}
-                                                                            <img src="{{ STATIC_URL}}css/default/images/icon-done.png"
+                                                                            <img src="{{ STATIC_URL}}images/icons/icon-done.png"
                                                                                  width="12"
                                                                                  align="left"/>
                                                                         {% endif %}
@@ -71,11 +71,11 @@
                                                                 {# ------ is commitment #}
                                                                 {% if task.is_pau %}
                                                                     {% if task.member.days_left != 0 or task.member.award_date %}
-                                                                        <img src="{{ STATIC_URL}}css/default/images/icon-done.png"
+                                                                        <img src="{{ STATIC_URL}}images/icons/icon-done.png"
                                                                              width="12"
                                                                              align="left">
                                                                     {% else %}
-                                                                        <img src="{{ STATIC_URL}}css/default/images/icon-exclamation2.png"
+                                                                        <img src="{{ STATIC_URL}}images/icons/icon-exclamation2.png"
                                                                              width="12"
                                                                              align="left"/>
                                                                     {% endif %}
@@ -92,7 +92,7 @@
                                                         <br/>
                                                         <a class="whatever"
                                                            href="javascript:void(0);">
-                                                            <img src="{{ STATIC_URL}}css/default/images/lock24.png"
+                                                            <img src="{{ STATIC_URL}}images/lock24.png"
                                                                  width="22" align="top"
                                                                  title="Click to see how to unlock"
                                                                  onclick="unlock_dialog('{{task.type}}','{{task.slug}}',

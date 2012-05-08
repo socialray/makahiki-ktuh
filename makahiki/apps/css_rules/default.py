@@ -11,29 +11,27 @@ widget.
 RETURN_CLASSES = True
 
 CSS_IMPORTS = """
-<link rel="stylesheet" href="{0}css/{1}/jquery-ui.css">
-<link rel="stylesheet" href="{0}css/{1}/screen.css">
-
+<link rel="stylesheet" href="{0}jquery-ui/jquery-ui.css">
 """
 
 LOGGED_IN_CSS_IMPORT = '<link rel="stylesheet" ' \
                        'href="{0}css/{1}/logged_in_base.css">'
 
 PAGE_CSS_IMPORT = {
-    "home": '<link rel="stylesheet" href="{0}css/{1}/pages/home.css">',
-    "landing": '<link rel="stylesheet" href="{0}css/{1}/pages/landing.css">',
-    "news": '<link rel="stylesheet" href="{0}css/{1}/pages/news'
+    "home": '<link rel="stylesheet" href="{0}css/home.css">',
+    "landing": '<link rel="stylesheet" href="{0}css/landing.css">',
+    "news": '<link rel="stylesheet" href="{0}css/news'
             '.css">\n<script src="{0}js/news.js" '
             'type="text/javascript"></script>',
-    "learn": '<link rel="stylesheet" href="{0}css/{1}/pages/learn.css">',
-    "energy": '<link rel="stylesheet" href="{0}css/{1}/pages/energy'
+    "learn": '<link rel="stylesheet" href="{0}css/learn.css">',
+    "energy": '<link rel="stylesheet" href="{0}css/energy'
               '.css">\n<script src="{0}js/news.js" '
               'type="text/javascript"></script>',
-    "help": '<link rel="stylesheet" href="{0}css/{1}/pages/help.css">',
-    "win": '<link rel="stylesheet" href="{0}css/{1}/pages/win.css">',
-    "profile": '<link rel="stylesheet" href="{0}css/{1}/pages/profile.css">',
-    "advanced": '<link rel="stylesheet" href="{0}css/{1}/pages/advanced.css">',
-    "status": '<link rel="stylesheet" href="{0}css/{1}/pages/status.css">',
+    "help": '<link rel="stylesheet" href="{0}css/help.css">',
+    "win": '<link rel="stylesheet" href="{0}css/win.css">',
+    "profile": '<link rel="stylesheet" href="{0}css/profile.css">',
+    "advanced": '<link rel="stylesheet" href="{0}css/advanced.css">',
+    "status": '<link rel="stylesheet" href="{0}css/status.css">',
     }
 
 CSS_IDS = {
