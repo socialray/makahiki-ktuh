@@ -20,6 +20,7 @@ requests==0.11.2
 django-storages==1.1.4
 boto==2.3.0
 python-ldap==2.3.13
+django-auth-ldap==1.0.19
 django-snippetscream==0.0.7
 #pylibmc==1.2.2
 #django-pylibmc-sasl==0.2.4
