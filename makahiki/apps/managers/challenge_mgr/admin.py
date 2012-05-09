@@ -78,6 +78,9 @@ class ChallengeSettingsAdmin(admin.ModelAdmin):
             {"fields":
                   ("cas_server_url",
                    ("ldap_server_url", "ldap_search_base"), )}),
+        ("WattDepot server for real time energy data",
+            {"fields":
+                  ("wattdepot_server_url", )}),
         ("Email",
              {"fields":
                   ("email_enabled",

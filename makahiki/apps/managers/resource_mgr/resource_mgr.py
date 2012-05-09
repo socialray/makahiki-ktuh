@@ -1,5 +1,6 @@
 """resource manager module"""
 import datetime
+from django.conf import settings
 from django.core.exceptions import ObjectDoesNotExist
 from django.db.models.aggregates import Count, Sum
 import requests
@@ -9,9 +10,6 @@ from apps.widgets.energy_goal.models import EnergyGoal
 from apps.managers.resource_mgr.models import EnergyUsage, WaterUsage, ResourceSettings, \
     WasteUsage
 from xml.etree import ElementTree
-
-WATTDEPOT_SERVER_URL = "http://server.wattdepot.org:8194"
-"""Wattdepot server url."""
 
 
 def init():
@@ -92,7 +90,8 @@ def update_energy_usage(date):
     s.params = {'startTime': start_time, 'endTime': end_time}
 
     for team in Team.objects.all():
-        rest_url = "%s/wattdepot/sources/%s/energy/" % (WATTDEPOT_SERVER_URL, team.name)
+        rest_url = "%s/wattdepot/sources/%s/energy/" % (
+            settings.CHALLENGE.wattdepot_server_url, team.name)
 
         try:
             response = s.get(url=rest_url)

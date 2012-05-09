@@ -13,6 +13,7 @@
             "email_port": 587,
             "theme": "default",
             "cas_server_url": "https://login.its.hawaii.edu/cas/",
+            "wattdepot_server_url": "http://server.wattdepot.org:8194",
             "contact_email": "kukuicup@hawaii.edu",
             "email_enabled": false,
             "site_logo": "media/challenge/icon-uh-logo.png",

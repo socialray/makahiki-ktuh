@@ -7,7 +7,7 @@ from time import strftime  # Timestamp
 # Filter out requests to media and site_media.
 MEDIA_REGEXP = r'^\/(site_)?media'
 SENTRY_REGEXP = r'^\/sentry\/'
-URL_FILTER = ("/favicon.ico", "/admin/jsi18n/", "/account/login/")
+URL_FILTER = ("/favicon.ico", "/admin/jsi18n/")
 
 
 class LoggingMiddleware(object):
@@ -23,7 +23,7 @@ class LoggingMiddleware(object):
 
         # Retrieve the username either from a cookie (when logging out) or
         # the authenticated user.
-        username = None
+        username = "not-login"
         if hasattr(request, "session") and "logged-out-user" in request.session:
             username = request.session["logged-out-user"]
             del request.session["logged-out-user"]
@@ -37,17 +37,26 @@ class LoggingMiddleware(object):
 
         return response
 
+
+
     def __write_log_entry(self, username, request, response=None):
         """Write a log entry corresponding to the passed request."""
+
+        # Helper lambda for retrieving environment variables:
+        header = lambda e, d: request.META[e] if e in request.META else d
+
         path = request.get_full_path()
         code = response.status_code if response else 500
         method = request.method
-        ip_addr = request.META["REMOTE_ADDR"] if "REOMTE_ADDR" in request.META else "no-ip"
+        ip_addr = header("REMOTE_ADDR", "no-ip")
+        referer = header("HTTP_REFERER", "no-referer")
+        user_agent = header("HTTP_USER_AGENT", "no-user-agent")
+
         timestamp = strftime("%Y-%m-%d %H:%M:%S")
 
         # Create the log entry.
-        entry = "%s %s %s %s %s %d" % (
-            timestamp, ip_addr, username, method, path, code)
+        entry = "%s %s %s %s %s %d %s %s" % (
+            timestamp, ip_addr, username, method, path, code, referer, user_agent)
         if request.method == "POST":
             # Dump the POST parameters, but we don't need the CSRF token.
             query_dict = request.POST.copy()

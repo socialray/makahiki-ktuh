@@ -56,6 +56,13 @@ class ChallengeSettings(models.Model):
         help_text="The search base for the ldap service. Example: ou=users,ou=system",
         max_length=100,)
 
+    # Wattdepot server
+    wattdepot_server_url = models.CharField(
+        null=True, blank=True,
+        help_text="The URL for Wattdepot service. " \
+                  "Example: http://localhost:<port>",
+        max_length=100,)
+
     # email settings
     email_enabled = models.BooleanField(
         default=False,
@@ -123,7 +130,7 @@ class ChallengeSettings(models.Model):
         # setting for the CAS authentication service.
         if settings.CHALLENGE.cas_server_url:
             settings.CAS_SERVER_URL = settings.CHALLENGE.cas_server_url
-            settings.CAS_REDIRECT_URL = '/home'
+            settings.CAS_REDIRECT_URL = '/'
             settings.CAS_IGNORE_REFERER = True
 
         # ldap settings

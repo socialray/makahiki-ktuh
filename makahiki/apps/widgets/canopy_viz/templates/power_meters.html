@@ -61,7 +61,7 @@
 
     function drawOne(id) {
         var source = document.getElementById("lounge_" + id).value;
-        spreadsheetUrl = "http://server.wattdepot.org:8194/wattdepot/sources/"+source+"/gviz/sensordata/latest?tq=select%20timePoint%2C%20powerConsumed";
+        spreadsheetUrl = "{{ CHALLENGE.wattdepot_server_url }}/wattdepot/sources/"+source+"/gviz/sensordata/latest?tq=select%20timePoint%2C%20powerConsumed";
         var loader = new org.wattdepot.gdata.GDataLoader(displayOne, spreadsheetUrl, refreshInterval);
 
         function displayOne(datatable) {
