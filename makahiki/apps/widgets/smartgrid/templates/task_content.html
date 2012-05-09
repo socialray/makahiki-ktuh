@@ -1,8 +1,4 @@
 {% load markup %}
-{% load markup %}
-
-{% load class_tags %}
-
 <div class="content-box">
 <div class="content-box-title">
     <table>
@@ -22,7 +18,7 @@
 <div class="content-box-contents">
 {% if action.is_pau %}
     {% if action.member.approval_status == "approved" or action.member.award_date %}
-        <div {% get_id_and_classes "activity-task-details-info" %}>
+        <div id="activity-task-details-info">
             <p/>
             Congratulations! You did it and earned {{ action.member.points_awarded }}
             {% if action.is_canopy %} Karma {% endif %} points! <br/>
@@ -43,7 +39,7 @@
         </div>
     {% else %}
         {% if action.type == "event" or action.type == "excursion" %}
-            <div {% get_id_and_classes "activity-task-details-info" %}>
+            <div id="activity-task-details-info">
                 <p/>
                 {% if action.event.is_event_completed %}
                     Thank you for attending the event. <br/>
@@ -73,7 +69,7 @@
             </div>
         {% endif %}
         {% if action.type == "commitment" %}
-            <div {% get_id_and_classes "activity-task-details-info" %}>
+            <div id="activity-task-details-info">
                 <p/>
                 {% if action.member.days_left > 0 %}
                     Thank you! You've earned 2 {% if action.is_canopy %}
@@ -103,14 +99,14 @@
         {% endif %}
         {% if action.type == "activity" %}
             {% if action.member.approval_status != "rejected" %}
-                <div {% get_id_and_classes "activity-task-details-info" %}>
+                <div id="activity-task-details-info">
                     <p/>
                     Thank you for submitting your response. <br/>
                     An administrator is reviewing your response. <br/>
                     Come back soon to see your new total.
                 </div>
             {% else %}
-                <div {% get_id_and_classes "activity-task-details-info" %}>
+                <div id="activity-task-details-info">
                     <p/>
 
                     <div style="text-align:left; margin-left:10px;">

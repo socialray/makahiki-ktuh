@@ -1,6 +1,4 @@
-{% load class_tags %}
-
-<div {% get_id_and_classes "activity-task-form-content" %}>
+<div id="activity-task-form-content">
     {% if form.is_multipart %}
         <form id="myform" enctype="multipart/form-data"
               action="{% url activity_add_task action.type action.slug %}" method="post">
@@ -39,12 +37,12 @@
                 {{ form.social_email2.errors }}
                 email #2 : {{ form.social_email2 }}
             {% endif %}
-            <div {% get_id_and_classes "activity-task-form-content-button" %}>
-                <button id="submit_form_button1" style="cursor:pointer;"
+            <div id="activity-task-form-content-button">
+                <button id="submit_form_button1" class="btn" style="cursor:pointer;"
                         onclick='$("#submit_form_button1").attr("disabled", "disabled");javascript:this.form.submit(); return false;'>
                     Submit
                 </button>
-                <button style="cursor:pointer;"
+                <button class="btn" style="cursor:pointer;"
                         onclick='$("#taskModal").modal("hide"); return false;'>Cancel
                 </button>
 
@@ -52,12 +50,12 @@
         {% else %}
             You will earn 2 {% if action.is_canopy %} Karma {% endif %} points for signing up for
             the {{ action.type }}.
-            <div {% get_id_and_classes "activity-task-form-content-button" %}>
-                <button id="submit_form_button2" style="cursor:pointer;"
+            <div id="activity-task-form-content-button">
+                <button id="submit_form_button2" class="btn" style="cursor:pointer;"
                         onclick='$("#submit_form_button2").attr("disabled", "disabled");javascript:this.form.submit(); return false;'>
                     OK
                 </button>
-                <button style="cursor:pointer;"
+                <button class="btn" style="cursor:pointer;"
                         onclick='$("#taskModal").modal("hide"); return false;'>Cancel
                 </button>
             </div>
@@ -89,8 +87,8 @@
                 {{ form.social_email2.errors }}
                 email #2 : {{ form.social_email2 }}
             {% endif %}
-            <div {% get_id_and_classes "activity-task-form-content-button" %}>
-                <button id="submit_form_button3" style="cursor:pointer;"
+            <div id="activity-task-form-content-button">
+                <button id="submit_form_button3" class="btn" style="cursor:pointer;"
                         onclick='$("#submit_form_button3").attr("disabled", "disabled");javascript:this.form.submit(); return false;'>
                     OK
                 </button>
@@ -116,8 +114,8 @@
                 {{ form.social_email2.errors }}
                 email #2 : {{ form.social_email2 }}
             {% endif %}
-            <div {% get_id_and_classes "activity-task-form-content-button" %}>
-                <button id="submit_form_button4" style="cursor:pointer;"
+            <div id="activity-task-form-content-button">
+                <button id="submit_form_button4" class="btn" style="cursor:pointer;"
                         onclick='$("#submit_form_button4").attr("disabled", "disabled");javascript:this.form.submit(); return false;'>
                     OK
                 </button>
@@ -172,12 +170,12 @@
             {{ form.social_email2.errors }}
             email #2 : {{ form.social_email2 }}
         {% endif %}
-        <div {% get_id_and_classes "activity-task-form-content-button" %}>
-            <button id="submit_form_button5" style="cursor:pointer;"
+        <div id="activity-task-form-content-button">
+            <button id="submit_form_button5" class="btn" style="cursor:pointer;"
                     onclick='$("#submit_form_button5").attr("disabled", "disabled");javascript:this.form.submit(); return false;'>
                 Submit
             </button>
-            <button style="cursor:pointer;"
+            <button class="btn" style="cursor:pointer;"
                     onclick='$("#taskModal").modal("hide"); return false;'>Cancel
             </button>
         </div>
@@ -191,12 +189,12 @@
             {{ field }}
             <p/>
         {% endfor %}
-        <div {% get_id_and_classes "activity-task-form-content-button" %}>
-            <button id="submit_form_button6" style="cursor:pointer;"
+        <div id="activity-task-form-content-button">
+            <button id="submit_form_button6" class="btn" style="cursor:pointer;"
                     onclick='$("#submit_form_button6").attr("disabled", "disabled");javascript:this.form.submit(); return false;'>
                 Submit
             </button>
-            <button style="cursor:pointer;"
+            <button class="btn" style="cursor:pointer;"
                     onclick='$("#taskModal").modal("hide"); return false;'>Cancel
             </button>
         </div>

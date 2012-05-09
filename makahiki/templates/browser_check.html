@@ -1,5 +1,4 @@
 {% extends "site_base.html" %}
-{% load class_tags %}
 {% block page_title %} Welcome to KukuiCup! {% endblock %}
 
 {% block extra_head %}
@@ -47,7 +46,7 @@
                     not work as intended.</p>
 
                 <div>
-                    <button id="landing-button-continue"
+                    <button id="landing-button-continue" class="btn"
                     onclick="javascript:location.href='{% url home_index %}'">
                         <h3>I understand that some things may not
                             work correctly. Click to continue.</h3>

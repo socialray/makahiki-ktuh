@@ -4,7 +4,7 @@
     class="{{notification.style_class}} notification-item">
     <div class="notification-contents">
         <div class='notice-icon'>
-            <span class="ui-icon {{notification.icon_class}}"></span>
+            <i class="{{notification.icon_class}}"></i>
         </div>
         <div class='notice-list-content'>
             {{ notification.contents|safe }}
@@ -15,7 +15,7 @@
         {% if notification.is_success %}
             <a class="notification-share" href="javascript:void(0);">Share on Facebook</a>
         {% endif %}
-        <span class="notification-read ui-icon ui-icon-circle-close"></span>
+        <i class="notification-read icon-remove-sign"></i>
 <!--         <br style="clear: both"/> -->
     </div>
     <div style="clear:both"></div>

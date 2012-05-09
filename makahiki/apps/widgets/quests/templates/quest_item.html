@@ -14,18 +14,18 @@
                 <form action="{% url quests_cancel quest.quest_slug %}" method="POST"
                       style="display: inline">
                     {% csrf_token %}
-                    <button type="submit" style="margin-right: 20px">Cancel this quest</button>
+                    <button class="btn" type="submit" style="margin-right: 20px">Cancel this quest</button>
                 </form>
             {% else %}
                 <form action="{% url quests_accept quest.quest_slug %}" method="POST"
                       style="display: inline">
                     {% csrf_token %}
-                    <button type="submit" style="margin-right: 20px">I accept this quest</button>
+                    <button class="btn" type="submit" style="margin-right: 20px">I accept this quest</button>
                 </form>
                 <form action="{% url quests_opt_out quest.quest_slug %}" method="POST"
                       style="display: inline">
                     {% csrf_token %}
-                    <button type="submit">I am not interested in this quest</button>
+                    <button class="btn" type="submit">I am not interested in this quest</button>
                 </form>
             {% endif %}
         </div>

@@ -1,7 +1,5 @@
 {% extends "logged_in_base.html" %}
 
-{% load class_tags %}
-
 {% block page_title %}
     Energy
 {% endblock %}
@@ -9,7 +7,12 @@
 {% block selected_icon %}selected-energy{% endblock %}
 
 {% block extra_head %}
-    {% import_page_css "energy" STATIC_URL CSS_THEME %}
+  {% if MAKAHIKI_USE_COMPILED_LESS %}
+    <link rel="stylesheet" href="{{STATIC_URL}}css/energy.css">
+  {% else %}
+    <link rel="stylesheet/less" type="text/css" href="{{STATIC_URL}}css/energy.less">
+  {% endif %}
+    <script src="{{STATIC_URL}}js/news.js" type="text/javascript"></script>
     <link rel="stylesheet" href="{{ STATIC_URL }}css/resource_scoreboard.css">
 {% endblock %}
 

@@ -72,11 +72,11 @@ class UserNotification(models.Model):
     def icon_class(self):
         """Return the css class for the icon."""
         if self.level == constants.ERROR:
-            return "ui-icon-alert"
+            return "icon-warning-sign"
         elif self.level == constants.SUCCESS:
-            return "ui-icon-star"
+            return "icon-star"
 
-        return "ui-icon-info"
+        return "icon-info-sign"
 
     @property
     def style_class(self):

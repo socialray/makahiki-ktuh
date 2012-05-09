@@ -1,13 +1,15 @@
 {% extends "site_base.html" %}
 
-{% load class_tags %}
-
 {% block page_title %}
     Restricted
 {% endblock %}
 
 {% block extra_head %}
-    {% import_page_css "landing" STATIC_URL CSS_THEME %}
+  {% if MAKAHIKI_USE_COMPILED_LESS %}
+    <link rel="stylesheet" href="{{STATIC_URL}}css/landing.css">
+  {% else %}
+    <link rel="stylesheet/less" type="text/css" href="{{STATIC_URL}}css/landing.less">
+  {% endif %}
 {% endblock %}
 
 {% block body %}

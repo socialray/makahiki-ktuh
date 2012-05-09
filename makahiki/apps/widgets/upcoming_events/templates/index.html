@@ -1,7 +1,5 @@
-{% load class_tags %}
-
-<div {% get_id_and_classes "activity-events-box" %}>
-    <div {% get_id_and_classes "activity-events-title" %}>
+<div id="activity-events-box" class="content-box">
+    <div id="activity-events-title" class="content-box-title">
         Upcoming Events (Next 7 days)
         <a href="#" style="float: right">
             <img src="{{ STATIC_URL}}images/icons/icon-help-sm.png" width="20" align="center"
@@ -9,7 +7,7 @@
                  onclick="toggleHelp('widget', 'upcoming-events'); return false;"
                     /></a>
     </div>
-    <div {% get_id_and_classes "activity-events-content" %}>
+    <div id="activity-events-content" class="content-box-contents">
 
         <table>
             <thead>
@@ -41,26 +39,26 @@
         </table>
         <p/>
 
-        <form {% get_id_and_classes "event-code-form" %} action="{% url activity_attend_code %}"
+        <form id="event-code-form" action="{% url activity_attend_code %}"
                                                          method="POST">
             {% csrf_token %}
-            <div {% get_id_and_classes "event-code" %}>
+            <div id="event-code">
                 <b>Enter Attendance Code:</b>
                 {{ view_objects.upcoming_events.event_form.response }}
 
-                <button id="event-code-submit">
+                <button class="btn" id="event-code-submit">
                     Submit
                 </button>
 
             </div>
             <br/>
 
-            <div {% get_id_and_classes "social_email" %} style="display: None;">
+            <div id="social_email" style="display: None;">
                 Optional Social Bonus
                 Email: {{ view_objects.upcoming_events.event_form.social_email }}
             </div>
 
-            <div {% get_id_and_classes "event-code-errors" %} style="color:red; display:None"></div>
+            <div id="event-code-errors" style="color:red; display:None"></div>
         </form>
 
     </div>

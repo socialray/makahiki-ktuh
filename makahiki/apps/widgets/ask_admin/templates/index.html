@@ -1,5 +1,3 @@
-{% load class_tags %}
-
 {% with DEFAULT_VIEW_OBJECTS.ask_admin as ask_admin %}
 <div class="content-box">
     <div class="content-box-title">
@@ -17,7 +15,7 @@
             {% endif %}
             {{ ask_admin.form.question }}
             <div>
-                <button id="help-ask-submit" disabled="true" href="javascript:void(0);">Send</button>
+                <button id="help-ask-submit" class="btn" disabled="true" href="javascript:void(0);">Send</button>
                 <span id="help-ask-spinner" style="display:none">
                 Sending
                 <img src="{{STATIC_URL}}images/spinner.gif"/>

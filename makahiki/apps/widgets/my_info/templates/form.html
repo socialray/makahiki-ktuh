@@ -1,6 +1,4 @@
 {% load avatar_tags %}
-{% load class_tags %}
-
 {%  with view_objects.my_info.form as form %}
 <form action="{% url profile_index %}" method="post">
     {% csrf_token %}

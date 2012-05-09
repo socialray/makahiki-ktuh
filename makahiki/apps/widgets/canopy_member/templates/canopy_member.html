@@ -1,10 +1,9 @@
-{% load class_tags %}
 {% load avatar_tags %}
 
 <img class="member-image" src="{% avatar_url member 40 %}"
      alt="Photo of {{ member.get_profile.name }}" title="Photo of {{ member.get_profile.name }}"
      align="top"/>
-<ul {% get_id_and_classes "canopy-member-details" %}>
+<ul id="canopy-member-details">
     <li class="canopy-member-name">
         <a name="{{member.get_profile.name|slugify}}">
             {{ member.get_profile.name }}
@@ -49,7 +48,7 @@
     {% with member.commitmentmember_set.active as commitment_members %}
         {% if commitment_members.count > 0 %}
             <h4 style="margin: 0; padding: 0">{{ member.get_profile.name }}&apos;s Commitments</h4>
-            <ul {% get_id_and_classes "canopy-member-commitments" %}>
+            <ul>
                 {% for commitment_member in commitment_members %}
                     <li>
                         <a href="{% url activity_task 'commitment' commitment_member.commitment.slug %}">{{ commitment_member.commitment }}</a>

@@ -1,17 +1,15 @@
-{% load class_tags %}
-
-    <div {% get_id_and_classes "help-faq" %}>
-        <div {% get_id_and_classes "help-faq-box" %}>
-            <div {% get_id_and_classes "help-faq-title" %}>
-                Frequently Asked Questions
-            </div>
-            <div {% get_id_and_classes "help-faq-content" %}>
-                <ul>
-                    {% for topic in view_objects.help_faq.faqs %}
-                        {% include "help/topic-item.html" %}
-                    {% endfor %}
-                </ul>
-            </div>
+<div id="help-faq" class="content-box">
+    <div id="help-faq-box">
+        <div id="help-faq-title" class="content-box-title">
+            Frequently Asked Questions
         </div>
+        <div id="help-faq-content" class="content-box-contents">
+            <ul>
+                {% for topic in view_objects.help_faq.faqs %}
+                    {% include "help/topic-item.html" %}
+                {% endfor %}
+            </ul>
+         </div>
     </div>
+</div>
 
