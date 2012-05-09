@@ -1,5 +1,4 @@
 {% load avatar_tags %} 
-{% load class_tags %} 
 {% if user.is_authenticated %}
 <div id="info-bar-wide" class="container-fluid makahiki-box info-bar">
     <div class="row-fluid">
@@ -23,7 +22,7 @@
                 </div>
             </div>
             <div class="span2">
-                <button id="header-feedback" href="javascript:void(0);">Send Feedback</button>
+                <button id="header-feedback" href="javascript:void(0);" class="btn">Send Feedback</button>
                 <a href="{% url cas_logout %}?next=/landing">Logout</a>
             </div>
         </div>
@@ -32,7 +31,7 @@
 <div id="info-bar-single" class="container makahiki-box info-bar">
     <div class="row">
         <div id="feedback-single" class="span2">
-            <button id="header-feedback" href="javascript:void(0);">Send Feedback</button>
+            <button id="header-feedback" href="javascript:void(0);" class="btn">Send Feedback</button>
         </div>
         <div id="feedback-logout" class="span2 offset9">
             <a href="{% url cas_logout %}">Logout</a>

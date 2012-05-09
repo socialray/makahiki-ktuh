@@ -1,7 +1,5 @@
-{% load class_tags %}
-
 {% with events=view_objects.status_rsvps.events excursions=view_objects.status_rsvps.excursions %}
-<div {% get_id_and_classes "status-rsvps" %}>
+<div id="status-rsvps">
         <div class="content-box" style='float:left; margin: 15px'>
             <div class="content-box-title">
                 Event RSVPs

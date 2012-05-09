@@ -1,5 +1,4 @@
 {% extends "avatar/base.html" %}
-{% load class_tags %}
 {% load avatar_tags %}
 
 {% block body %}
@@ -27,7 +26,7 @@
             <div style="color: red">{{file_error}}</div>
             {% endif %}
             <input type="file" name="avatar" value="Avatar Image" />
-            <button type="submit">Upload New Image</button>
+            <button class="btn" type="submit">Upload New Image</button>
         </form>
       </div>
       <!--Avatar-Facebook-->

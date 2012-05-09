@@ -1,6 +1,5 @@
-{% load class_tags %}
 {% with todays_users=view_objects.status_users.todays_users logins=view_objects.status_users.logins %}
-<div {% get_id_and_classes "status-users" %}>
+<div id="status-users">
         <div class="content-box">
             <div class="content-box-title">
                 {{ todays_users|length }} users logged in today
@@ -15,7 +14,7 @@
         </div>
     </div>
 
-    <div {% get_id_and_classes "status-users" %}>
+    <div id="status-users">
         <div class="content-box">
             <div class="content-box-title">
                 New Signups

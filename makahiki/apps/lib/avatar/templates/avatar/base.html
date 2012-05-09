@@ -1,5 +1,4 @@
 {% extends "logged_in_base.html" %}
-{% load class_tags %}
 
 {% block page_title %}
     Change Your Avatar
@@ -8,5 +7,9 @@
 {% block selected_icon %}selected-profile{% endblock %}
 
 {% block extra_head %}
-    {% import_page_css "profile" STATIC_URL CSS_THEME %}
+  {% if MAKAHIKI_USE_COMPILED_LESS %}
+    <link rel="stylesheet" href="{{STATIC_URL}}css/profile.css">
+  {% else %}
+    <link rel="stylesheet/less" type="text/css" href="{{STATIC_URL}}css/profile.less">
+  {% endif %}  
 {% endblock %}

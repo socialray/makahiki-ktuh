@@ -1,11 +1,9 @@
-{% load class_tags %}
-
-<div {% get_id_and_classes "help-rules" %}>
-    <div {% get_id_and_classes "help-rules-box" %}>
-        <div {% get_id_and_classes "help-rules-title" %}>
+<div id="help-rules" class="content-box">
+    <div id="help-rules-box">
+        <div id="help-rules-title" class="content-box-title">
             Rules of the competition
         </div>
-        <div {% get_id_and_classes "help-rules-content" %}>
+        <div id="help-rules-content" class="content-box-contents">
             <ul>
                 {% for topic in view_objects.help_rule.rules %}
                     {% include "help/topic-item.html" %}

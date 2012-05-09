@@ -1,15 +1,13 @@
 {% extends "logged_in_base.html" %}
 
-{% load class_tags %}
-
 {% block body %}
-    <div {% get_id_and_classes "canopy-members" %}>
-        <div {% get_id_and_classes "canopy-members-title" %}>
+    <div id="canopy-members" class="content-box">
+        <div id="canopy-members-title" class="content-box-title">
             Canopy Members
         </div>
-        <div {% get_id_and_classes "canopy-members-content" %}>
+        <div id="canopy-members-content" class="content-box-contents">
             <a href="{% url advanced_index %}">Back to the canopy</a>
-            <ul {% get_id_and_classes "canopy-member-detail-list" %}>
+            <ul id="canopy-member-detail-list">
                 {% for member in members %}
                     <!-- {% cycle 'alt-row' '' as cycle_class %} -->
                     <li class="{{cycle_class}}">

@@ -1,8 +1,6 @@
 {% load avatar_tags %}
-{% load class_tags %}
-
-    <div {% get_id_and_classes "canopy-members" %}>
-        <div {% get_id_and_classes "canopy-members-title" %}>
+    <div id="canopy-members" class="content-box">
+        <div id="canopy-members-title" class="content-box-title">
             Canopy Members
             <a href="#" style="float: right">
                 <img src="{{ STATIC_URL}}images/icons/icon-help-sm.png" width="20"
@@ -11,8 +9,8 @@
                      onclick="toggleHelp('widget', 'canopy-directory'); return false;"
                         /></a>
         </div>
-        <div {% get_id_and_classes "canopy-members-content" %}>
-            <ul {% get_id_and_classes "canopy-member-list" %}>
+        <div id="canopy-members-content" class="content-box-contents">
+            <ul id="canopy-member-list">
                 {% for member in view_objects.canopy_member.members %}
                     <li>
                         <div>

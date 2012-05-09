@@ -1,7 +1,5 @@
-{% load class_tags %}
-
 {% if not action.event.is_event_completed %}
-    <div {% get_id_and_classes "task-reminder" %}>
+    <div id="task-reminder">
         <p>
             {% if reminders.email or reminders.text %}
                 {% if reminders.email %}
@@ -10,17 +8,14 @@
                 {% if reminders.text %}
                     Text reminder: {{ reminders.text.send_at }}<br/>
                 {% endif %}
-                <button {% get_id_and_classes "task-reminder-button" %}>Change Reminder</button>
+                <button id="task-reminder-button" class="btn">Change Reminder</button>
             {% else %}
                 Get a text or email reminder
-                <button {% get_id_and_classes "task-reminder-button" %}>Remind Me</button>
+                <button id="task-reminder-button" class="btn">Remind Me</button>
             {% endif %}
         </p>
     </div>
 
-    <div {% get_id_and_classes "task-reminder-dialog" %} title="Remind Me" style="display: none">
-        {% include "reminder_form.html" %}
-    </div>
     <div class="modal hide fade" id="reminderModal">
         <div class="modal-header">
             <a class="close" data-dismiss="modal">x</a>

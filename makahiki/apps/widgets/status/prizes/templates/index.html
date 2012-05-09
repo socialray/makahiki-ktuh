@@ -1,7 +1,5 @@
-{% load class_tags %}
-
 {% with unused=view_objects.status_prizes.unused errors=view_objects.status_prizes.errors raffle_prizes=view_objects.status_prizes.raffle_prizes %}
-<div {% get_id_and_classes "status-prizes" %}>
+<div is="status-prizes">
         <div class="content-box" style='clear: both; margin: 15px auto; width: 500px'>
             <div class="content-box-title">
                 Unused Tickets

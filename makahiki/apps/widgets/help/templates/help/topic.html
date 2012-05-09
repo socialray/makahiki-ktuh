@@ -1,6 +1,5 @@
 {% extends "logged_in_base.html" %}
 
-{% load class_tags %}
 {% load markup %}
 
 {% block page_title %}
@@ -10,17 +9,21 @@
 {% block selected_icon %}selected-help{% endblock %}
 
 {% block extra_head %}
-    {% import_page_css "help" STATIC_URL CSS_THEME %}
+  {% if MAKAHIKI_USE_COMPILED_LESS %}
+    <link rel="stylesheet" href="{{STATIC_URL}}css/help.css">
+  {% else %}
+    <link rel="stylesheet/less" type="text/css" href="{{STATIC_URL}}css/help.less">
+  {% endif %}
 {% endblock %}
 
 {% block body %}
 
-    <div {% get_id_and_classes "help-topic" %}>
-        <div {% get_id_and_classes "help-topic-box" %}>
-            <div {% get_id_and_classes "help-topic-title" %}>
+    <div id="help-topic" class="content-box">
+        <div id="help-topic-box">
+            <div id="help-topic-title" class="content-box-title">
                 {{ topic.title }}
             </div>
-            <div {% get_id_and_classes "help-topic-content" %}>
+            <div id="help-topic-content" class="content-box-contents">
                 <a href="{% url help_index %}">Back to help page</a>
 
                 <p>
