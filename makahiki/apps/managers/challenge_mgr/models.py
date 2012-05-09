@@ -2,8 +2,6 @@
 import datetime
 from django.conf import settings
 from django.db import models
-from django_auth_ldap.config import LDAPSearch
-import ldap
 from apps.utils.utils import media_file_path
 
 
@@ -130,6 +128,9 @@ class ChallengeSettings(models.Model):
 
         # ldap settings
         if settings.CHALLENGE.ldap_server_url:
+            from django_auth_ldap.config import LDAPSearch
+            import ldap
+
             settings.AUTH_LDAP_SERVER_URI = settings.CHALLENGE.ldap_server_url
             settings.AUTH_LDAP_USER_SEARCH = LDAPSearch("%s" % settings.CHALLENGE.ldap_search_base,
                                                ldap.SCOPE_SUBTREE, "(uid=%(user)s)")

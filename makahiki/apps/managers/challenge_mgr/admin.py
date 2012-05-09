@@ -72,15 +72,18 @@ class ChallengeSettingsAdmin(admin.ModelAdmin):
                   (("site_name", "site_logo"),
                    ("competition_name", "site_domain"),
                    "theme",
-                   "cas_server_url",
                    "competition_team_label",
                   )}),
-        ("Email Settings",
+        ("CAS or LDAP authentication",
+            {"fields":
+                  ("cas_server_url",
+                   ("ldap_server_url", "ldap_search_base"), )}),
+        ("Email",
              {"fields":
                   ("email_enabled",
                    "contact_email",
                    ("email_host", "email_port", "email_use_tls"), )}),
-        ("Landing Page Settings",
+        ("Landing Page",
              {"fields":
                   ("landing_slogan",
                    "landing_introduction",

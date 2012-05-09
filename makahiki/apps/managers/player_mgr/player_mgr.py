@@ -9,6 +9,15 @@ from apps.managers.score_mgr import score_mgr
 from apps.managers.team_mgr.models import Team
 
 
+def get_active_player(username):
+    """return User object if the player is active, otherwise, return None"""
+    try:
+        user = User.objects.get(username=username)
+        return user if user.is_active else None
+    except ObjectDoesNotExist:
+        return None
+
+
 def players(num_results=10):
     """Get some numbers of players."""
     return Profile.objects.all()[:num_results]
