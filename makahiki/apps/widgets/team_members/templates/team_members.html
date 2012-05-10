@@ -9,7 +9,11 @@
 {% block selected_icon %}selected-news{% endblock %}
 
 {% block extra_head %}
-  <link rel="stylesheet" href="{{STATIC_URL}}css/news.css">
+  {% if MAKAHIKI_USE_COMPILED_LESS %}
+    <link rel="stylesheet" href="{{STATIC_URL}}css/news.css">
+  {% else %}
+    <link rel="stylesheet/less" type="text/css" href="{{STATIC_URL}}less/news.less">
+  {% endif %}
 {% endblock %}
 
 {% block body %}

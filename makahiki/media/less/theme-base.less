@@ -6,6 +6,9 @@
  * 
  * Uses Twitter Bootstrap v2.
  */
+// some overrides that we need to do at the end.
+@navbarBackground: @navbar-grad-start;
+@navbarBackgroundHighlight: @navbar-grad-end;
  
  /* Set background picture, center it, make sure it doesn't repeat and that it covers the background for any size on any browser */
 body {
@@ -15,6 +18,8 @@ body {
     -moz-background-size: cover;
     -o-background-size: cover;
     background-size: cover;
+    background-color: @body-bg;
+    color: @body-text;
 }
 
 .brand img {
@@ -27,39 +32,39 @@ body {
 // Smart grid game colors
 .activity,.activity-legend, .activity a {
     background-color: @sgg-activity;
-    color: @black;
+    color: @sgg-text;
 }
 
 .commitment, .commitment-legend, .commitment a {
     background-color: @sgg-commitment;
-    color: @black;
+    color: @sgg-text;
 }
 
 .event, .event-legend, .event a {
     background-color: @sgg-event;
-    color: @black;
+    color: @sgg-text;
 }
 
 .excursion, .excursion-legend, .excursion a {
     background-color: @sgg-excursion;
-    color: @black;
+    color: @sgg-text;
 }
 
 .survey, .survey-legend, .survey a {
     background-color: @sgg-survey;
-    color: @black;
+    color: @sgg-text;
 }
 
 .btn-navbar {
-    background-color: fadeout(@base, 60%);
-    .background-gradient(fadeout(@base, 60%), fadeout(@base, 60%));
-    border-color: @base @base #000000;
+    background-color: darken(@navbar-grad-start, 40%);
+    .background-gradient(fadeout(@navbar-grad-start, 60%), fadeout(@navbar-grad-end, 60%));
+    border-color: @navbar-grad-start @navbar-grad-start #000000;
 }
 
 
 .btn-navbar:hover,.btn-navbar:active,.btn-navbar.active,.btn-navbar.disabled,.btn-navbar[disabled]
     {
-    background-color: @base;
+    background-color: @navbar-grad-start;
 }
 
 /* Container Styles, make sure they're transparent */
@@ -69,17 +74,14 @@ body {
 
 /* Elements which will use the ocean blue gradients, lightest-blue on the bottom, mid-blue on top */
 .content-box-title {
-    .background-gradient(@title-gradient-start, @title-gradient-end);
-    border-bottom: 1px solid @con-border;
+    .background-gradient(@title-grad-start, @title-grad-end);
+    border-bottom: 1px solid @title-div;
+    color: @title-text;
 }
 
 /* Set background color for elements which will use the darker ocean blue */
 .content-box,.alt-row,fieldset {
     background-color: @content-alt;
-}
-
-.content-box th {
-    background-color: @content-box-table-header;
 }
 
 .modal-header {
@@ -95,55 +97,40 @@ body {
 }
 
 .navbar {
-    background-image: -moz-linear-gradient(100% 50% 90deg, @nav-gradient-start, @nav-gradient-end);
-    background-image: -webkit-gradient(linear, 0% 0%, 0% 90%, from(@nav-gradient-start), to(@nav-gradient-end));    
+    .background-gradient(@navbar-grad-start, @navbar-grad-end);
+    color: @navbar-text;
 }
 
 .navbar .nav>li>a {
-    color: @nav;
+    color: @navbar-text;
 }
 
 .navbar .nav>li>a:hover {
-    color: @hover-color;
+    color: @navbar-text-sel;
 }
 
 .navbar .nav .active>a,.navbar .nav .active>a:hover {
-    color: @hover-color;
-}
-
-.navbar-inner {
-    background: @nav-inner;
+    color: @navbar-text-sel;
 }
 
 .notifications {
-    background: @notifications;
+    .background-gradient(@notif-grad-start, @notif-grad-end);
+    color: @notif-text;
 }
 
 @media ( max-width : 979px) {
     .navbar .nav>li>a,.navbar .dropdown-menu a {
-        color: #f8f8ff;
+        color: @navbar-text-sel;
     }
     .navbar .nav>li>a:hover,.navbar .dropdown-menu a:hover {
         background-color: transparent;
     }
 }
 
-/* Styles for header */
-#info-bar-wide {
-//  background: @rib-bkg;
-//  background-image: -moz-linear-gradient(100% 50% 90deg, @rib-bkg,
-//      @rib-bkg2 );
-//  background-image: -webkit-gradient(linear, 0% 0%, 0% 90%, from(@rib-bkg), to(@rib-bkg2) );
-}
-
-/* Set common border thickness and color for header elements that use it. */
-#header-info,#header-nav-links,#header-round-info {
-    border: 2px solid @hover-color;
-}
-
-/* hover color should be slightly lighter blue such that people can see when they hover */
-#header-nav-links a:hover h4 {
-    color: @base;
+/* info-bar */
+.info-bar {
+    .background-gradient(@infobar-grad-start, @infobar-grad-end);
+    color: @infobar-text;
 }
 
 /* for small screen widths hide the wide info-bar */
@@ -151,60 +138,60 @@ body {
     .brand img {
         display: none;
     }
-    #info-bar-single {
-        background: @rib-bkg;
-        background-image: -moz-linear-gradient(100% 50% 90deg, @rib-bkg,
-            @rib-bkg2 );
-        background-image: -webkit-gradient(linear, 0% 0%, 0% 90%, from(@rib-bkg), to(@rib-bkg2) );
-    }
 }
 
-/* Elements sharing background color mid-light blue */
-#activity-category .get-started,#activity-category .basic-energy,#activity-category .lights-out,#activity-category .make-watts,#activity-category .moving-on,#activity-category .opala,#activity-category .wet-wild,#activity-category .potpourri
-    {
-    background-color: @activity-bkg;
+// Smart Grid Game 
+.activity-category {
+    background-color: @sgg-category;
 }
+
+.activity-legend {
+    background-color: @sgg-activity;
+}
+
+.commitment-legend {
+    background-color: @sgg-commitment;
+}
+
+.event-legend {
+    background-color: @sgg-event;
+}
+
+.excursion-legend {
+    background-color: @sgg-excursion;
+}
+
+.survey-legend {
+    background-color: @sgg-survey;
+}
+
 
 /* ===== Page specific coloring for Energy ===== */
-#energy-status-how-activities-table th {
-    background: #C1EBEC;
+#energy-status-how-activities-table {
+    border: 1px solid @title-div;    
 }
 
-/* Set common transparency background for various elements, note that this effect stacks on header elements. */
-#header,#header-info,#header-round-info,.container-landing-about,#header-nav-links,#header
-    {
-    background: none repeat scroll 0 0 rgba(255, 255, 255, 0.5);
+#energy-status-how-activities-table th {
+    background: @content;
 }
 
 /* ===== Page specific coloring for Prizes ===== */
 #prizes-raffle-table .number {
-  color: #03b710;
+  color: @prizes-raffle-table;
 }
 
 .prize-round-name {
-  background: @news
+  background: @prizes-banner;
 }
 
 #prizes-raffle-info {
     font-weight: bold;
-    background: @news;
+    background: @prizes-banner;
 }
-
-/* ===== Page specific coloring for Profile ===== */
-#profile-badges-content h5,#profile-achievements h5,table#profile-form-table
-    {
-    background-color: @nav;
-}
-
-#profile-form-table td.profile-section-header {
-    background-color: #A2C0D2;
-}
-
-/* ===== Page specific coloring for Quests ===== */
 
 .quest-box {
     .makahiki-box();
-    .background-gradient(@quest-gradient-start, @quest-gradient-end);
+    .background-gradient(@quest-grad-start, @quest-grad-end);
     color: @quest-text;
 }
 
@@ -213,7 +200,7 @@ body {
 }
 
 .quest-hide {
-    color: @nav;
+    color: @quest-text-sel;
 }
 
 .quest-list li a {
@@ -221,25 +208,11 @@ body {
 }
 
 .quest-list li.selected a {
-    color: @white;
+    color: @quest-text-sel;
 }
-
-//.quest-list li a.quest-user-quest {
-//  color: @quest-text;
-//}
-
-/* Set override to custom text color for colors that are specific to certain sections. */
-body,#header-nav-links ul li h4,#header-nav-links {
-    color: @hover-color;
-}
-
-/* ===== Page specific coloring for News ===== */
-/*th {
-  background: @news;
-}*/
 
 /* ===== Page specific coloring for Landing ===== */
 .landing-sponsors { 
-  background-color: @landingSponsorDiv;
+  background-color: @landingSponsors;
 }
  
