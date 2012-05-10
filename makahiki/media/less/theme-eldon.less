@@ -1,0 +1,224 @@
+@color-skyblue: #2d76fe; /* Leaderboard text, text color for 'selected' page */
+@color-black: #000;
+@background-fieldset: #7db1ff;
+@border-color: #0066FF;
+@landing-text: #06F;
+@content-box: #accdff;
+@game-activity: #03F;
+@game-commitment: #2d76fe;
+@game-event: #0CF;
+@game-excursion: #FFF;
+@game-special: #C18E22;
+@home-gradient-border: #A1A1A1;
+@home-outset: #DDD;
+
+@image-background: "../images/bubbles.jpg";
+@image-topnav-bg: "../images/960bkg-profile-topnav.png";
+@image-smoke: "../images/smoke.png";
+@image-gradient: "../images/gradient.png";
+@image-gradient-sm: "../images/gradient-small.png";
+
+@charset "utf-8";
+/* Body Settings */
+body { background: url("@{image-background}") fixed; background-size: cover;} /* taken out background-size: cover to speed up testing (slow browser resizing) */
+fieldset {background: @background-fieldset;}
+a { color: @color-black; }
+fieldset {
+  width: 95%;
+  margin-left: 2.5%;
+}
+fieldset legend {
+	font-weight: bold;
+	font-size: 13px;
+	text-align: left;
+	text-decoration: underline;
+	padding: 25px 0 0 0;
+	margin: 0 -25px 0 0;
+}
+
+/* OVERRIDES */
+.row {
+  text-align: left;
+  margin: 2px 2px 2px 2px;
+}
+.row table {
+  width: 100%;
+}
+
+.centered {
+  text-align: center;
+}
+.noShadow {
+	box-shadow: 0px 0px 0px #000;
+	-moz-box-shadow: 0px 0px 0px #000;
+	-webkit-box-shadow: 0px 0px 0px #000;
+}
+
+/* NAVBAR */
+.navbar {
+  background-image: -moz-linear-gradient(100% 50% 90deg, @border-color, @home-gradient-border);
+  background-image: -webkit-gradient(linear, 0% 0%, 0% 90%, from(@border-color), to(@home-gradient-border));	
+}
+
+/* QUEST BOX */
+#quest-box {
+  background: url("@{image-gradient}");
+}
+
+/*------- Box styles --------*/
+.widget { 
+  background-color: @content-box;
+  border-radius: 8px;
+  border: solid 1px #000;
+  margin-bottom: 10px;
+  box-shadow: 3px 3px 8px @color-black;
+}
+.widget-title {
+  background: url("@{image-gradient-sm}"); 
+  color: @color-black;
+  height: 29px;	
+  line-height: 29px;
+  font-weight: bold;
+  border-top-left-radius: 8px;
+  border-top-right-radius: 8px;
+  border-bottom: 1px solid @color-black;
+  text-align: center;
+}
+.alt-row { background: @background-fieldset; }
+
+/* --- NEWS --- */
+.italic-row {
+  font-style: italic;
+  font-size: 8pt;
+  text-align: left;
+  margin: 2px 2px 2px 20px;
+}
+
+#news-members-list {
+  list-style: none;
+  margin: 0;
+  margin-left: 5px;
+  padding: 5px;
+}
+
+#news-members-list li {
+  float: left;
+  width: 75px;
+  text-align: center;
+  min-height: 80px;
+}
+
+#news-wall-content ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+/* --- ABOUT --- */
+#landing-page, #landing-about { border: 2px solid @landing-text; border-radius: 8px;}
+#landing-about a { color: @landing-text;}
+
+/* ---ACTIVITIES --- */
+#activity-events-content th, #activity-scoreboard-content th { background: @background-fieldset; }
+.get-started, #activity-category .basic-energy, #activity-category .lights-out, #activity-category .make-watts, #activity-category .moving-on, #activity-category .opala, #activity-category .wet-wild, #activity-category .potpourri { background-color: @background-fieldset; }
+.activity, .activity-legend { background-color: @game-activity; }
+.commitment, .commitment-legend { background-color: @game-commitment; }
+.event, .event-legend  { background-color: @game-event; }
+.survey, .survey-legend { background-color: @game-special; }
+.excursion, .excursion-legend { background-color: @game-excursion;}
+.get-started, .activity, .event, .excursion, .commitment {
+  border: 1px solid;
+  border-radius: 8px;
+  min-height: 70px;
+  min-width: 30px;
+}
+.gridTable td {
+  width: 11%;
+  font-size: 11px;
+}
+.gridTable h5, .gridTable h3{
+  color: black;
+}
+.activity-legend, .commitment-legend, .event-legend, .survey-legend, .excursion-legend {
+  width: 12px;
+  height: 12px;
+  border: 1px solid #000;
+  border-radius: 4px;
+  -moz-border-radius: 4px;
+  -webkit-border-radius: 4px;
+}
+@media ( max-width : 480px) {
+  body {
+    background: none; /* Mobile page should be more lightweight, 3G is super slow */
+  }
+  .container-fluid {
+    width: 100%;
+  }
+  .widget {
+    width: 100%;
+    margin-left: -20px;
+  }
+  .get-started, .activity, .event, .excursion, .commitment {
+    border: 1px solid;
+    border-radius: 8px;
+    height: 55px;
+    width: 32px;
+}
+  .gridTable td {
+    font-size: 9px;
+  }
+  .get-started h5 {
+    font-size: 9px;
+  }
+}
+
+/* --- ENERGY --- */
+#energy-status-how-activities-table { border: 1px solid @background-fieldset;}
+#energy-status-how-activities-table th { background: @background-fieldset; color: @color-black;}
+
+/* --- PRIZES --- */
+#prizes-raffle-info {
+  text-align: center;
+  background: url("@{image-gradient}");
+  border: white solid 2px; border-radius: 8px;
+  width: 80%;
+  margin-left: 10%;
+}
+#prizes-winners {
+  position: relative; height: 400px;
+  margin: 3px;
+}
+#prizes-winners table {
+  width: 99%;
+}
+#prizes-winners #prizes-header {
+  width: 25%;
+}
+#prizes-winners #criteria-header {
+  width: 74%;
+}
+#prizes-winners td{
+  text-align: left;
+}
+
+/* --- PROFILE ---*/
+#profile-form-table td.profile-section-header, #profile-badges-content h5, #profile-history-content h5 { background-color: @background-fieldset; }
+#profile-form-submit a, #profile-badge-catalog a { color: @color-black;}
+
+/* --- HALP --- */
+.content-box-contents a { color: @color-black;}
+
+/* --- HOME --- */
+#spacerhome {height: 19px;}
+#home-content{ background: url("@{image-smoke}") repeat; background-size: 100%; border: 2px solid @border-color; border-radius: 8px;}
+#home-energy-icon, #home-energy-icon:hover, #home-activities-icon, #home-activities-icon:hover, #home-news-icon, #home-news-icon:hover, #home-prizes-icon, #home-prizes-icon:hover, #home-help-icon, #home-help-icon:hover, #home-profile-icon, #home-profile-icon:hover { border-radius:100px; /* borrowed sean chung's idea */}
+.content .tile {
+  border: 3px outset @home-outset;
+  margin-top: -.5em;
+  background-image: -moz-linear-gradient(100% 50% 90deg, @border-color, @home-gradient-border);
+  background-image: -webkit-gradient(linear, 0% 0%, 0% 90%, from(@border-color), to(@home-gradient-border));	
+  border-radius: 10px;
+.homePlate {
+  max-width: 33%;
+}
+}

@@ -1,0 +1,61 @@
+/*
+ * One of the Makahiki2 styles. Based upon the Eldon theme.
+ * 
+ * Copyright 2012 CSDL.
+ * 
+ * Uses Twitter Bootstrap v2.
+ */
+ 
+
+@makahikiBaseColor: #34A230; // green color
+@complement1: spin(@makahikiBaseColor, 90);
+@complement2: darken(@complement1, 5%);
+@lighten1: lighten(@makahikiBaseColor, 15%);
+@lighten2: lighten(@makahikiBaseColor, 30%);
+
+@base: @makahikiBaseColor;
+@nav: @white;
+@nav-inner: fadeout(@complement1, 55%);
+@navbarBackground: fadeout(@complement1, 55%);
+@hover-color: @complement2;
+@rib-bkg: fadeout(@lighten2, 55%);
+@rib-bkg2: fadeout(@lighten2, 55%);
+@sgg-activity: @makahikiBaseColor;
+@sgg-commitment: @complement1;
+@sgg-event: @complement2;
+@sgg-excursion: @lighten1;
+@sgg-survey: @lighten2;
+@activity-bkg: #84C4FF;
+@activity-legend: #70A21F;
+@commit: @blue;
+@commitment-legend: #845D18;
+@event-legend: #A09E43;
+@excursion-legend: #AB441B;
+@survey-legend: #C18E22;
+@content: #C1D8EB;
+@content-alt: #E3F9F8;
+@con-border: #000;
+@quest-box: fadeout(#468250, 55%);
+@quest-text: @black;
+@quest-list-sel: #282A2A;
+@news: #A2C0D2;
+@notifications: fadeout(#b6d7ee, 45%);
+@content-box-table-header: #A2C0D2;
+@landingSponsorDiv: #E3E3E3;
+@nav-gradient-start: #0066FF;
+@nav-gradient-end: #A1A1A1;
+@quest-gradient-start: #338FCF;
+@quest-gradient-end: #FBFDFE;
+@title-gradient-start: #4397D2;
+@title-gradient-end: #DDECF7;
+
+@image-background: "../images/bubbles.jpg";
+@image-smoke: "../images/smoke.png";
+@image-gradient: "../images/gradient.png";
+@image-gradient-sm: "../images/gradient-small.png";
+@image-logo: "../images/icons/icon-uh-logo.png";
+
+ // makahiki base style
+ @import "makahiki.less";
+
+ @import "theme-base.less";
