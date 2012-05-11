@@ -47,6 +47,9 @@ urlpatterns = patterns('',
         name='browser_check'),
     url(r'^coming-soon/$', direct_to_template, {'template': 'coming_soon.html'},
         name='coming_soon'),
+
+    url(r'^404/$', 'django.views.defaults.page_not_found'),
+    url(r'^500/$', 'django.views.defaults.server_error'),
     )
 
 for widget in settings.INSTALLED_DEFAULT_WIDGET_APPS:
