@@ -1,46 +1,9 @@
 @charset "UTF-8";
-/* CSS Document */
-
-/********************** help styles ******************************/
-
-#help-body {
-  padding-top: 10px;
-}
-
-#help-video-box {
-    text-align: center;
-}
-
-#help-video-content .content-box-contents {
-    text-align: center;
-}
-
-#help-rules-content, #help-faq-content {
-	padding-top: 1em;
-	padding-bottom: .7em;
-	line-height: 15pt;
-}
-
-#help-faq, #help-ask {
-
-}
-
-#help-ask-content {
-	padding: 1em;
-}
-
-#help-ask-form textarea {
-	width: 97%;
-	height: 50px;
-}
-
-#form-success {
-  text-align: left;
-}
-
-/******* Help topic styles *******/
-
-#help-topic-content {
-  padding: 1em 1em 0.7em 1em;
-	line-height: 15pt;
-}
+#help-body{padding-top:10px;}
+#help-video-box{text-align:center;}
+#help-video-content .content-box-contents{text-align:center;}
+#help-rules-content,#help-faq-content{padding-top:1em;padding-bottom:.7em;line-height:15pt;}
+#help-ask-content{padding:1em;}
+#help-ask-form textarea{width:97%;height:50px;}
+#form-success{text-align:left;}
+#help-topic-content{padding:1em 1em 0.7em 1em;line-height:15pt;}
