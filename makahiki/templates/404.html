@@ -1,34 +1,14 @@
-{% extends "site_base.html" %}
+{% extends "logo_bar_base.html" %}
 
 {% block page_title %}
-  Welcome to KukuiCup!
+  Error 404
 {% endblock %}
-
-{% block extra_head %}
-    {% if MAKAHIKI_USE_COMPILED_LESS %}
-        <link rel="stylesheet" href="{{STATIC_URL}}css/{{CSS_THEME}}.css">
-        <link rel="stylesheet" href="{{STATIC_URL}}css/landing.css">
-    {% else %}
-        <link rel="stylesheet/less" type="text/css" href="{{STATIC_URL}}css/{{CSS_THEME}}.less">
-        <link rel="stylesheet/less" type="text/css" href="{{STATIC_URL}}css/landing.less">
-        <script src="{{STATIC_URL}}js/less-1.3.0.min.js" type="text/javascript"></script>
-    {% endif %}
-{% endblock %}
-
-{% block body %}
-
-<div id="landing-page" class="content-box">
-  <div id="landing-logo">
-    <a href="{% url landing %}"><img src="{{STATIC_URL}}images/logo.png"/></a>
-  </div>
-  <div id="landing-title">
-    <h2>The Kukui Cup: Lights out, game on!</h2>
-  </div>
-</div>
-
-<div id="landing-about" class="content-box">
-Sorry, but the page you requested could not be found.
-<a href="{% url root_index %}" style="display:block; margin-top: 10px;">Back to the home page</a>
+ 
+{% block content %} 
+<div id="landing-about" class="content-box landing-body">
+<br/>
+Sorry, but the page you requested could not be found.<br/><br/>
+<a href="{% url root_index %}">Back to the home page</a>
 </div>
 
 {% endblock %}
