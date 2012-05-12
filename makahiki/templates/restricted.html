@@ -1,5 +1,4 @@
-{% extends "site_base.html" %}
-{% load class_tags %}
+{% extends "logo_bar_base.html" %} 
 
 {% load markup %}
 {% block page_title %}
@@ -18,19 +17,10 @@
   {% endif %}
 {% endblock %}
 
-{% block body %}
-<div class="container-fluid">
-    <div class="row-fluid">
-        <div class="content-box logo-header-box"> 
-                <img class="logo" src="{{STATIC_URL}}css/default/images/old-logo.png"></img> 
-                <img class="logo-branding" src="{{STATIC_URL}}images/icons/uhseal.png"></img> 
-                <div class="logo-header-text" style="text-align: center;"> 
-                  {{ CHALLENGE.landing_slogan|markdown }}
-                </div> 
-        </div>
-    </div>
+{% block content %}
+<div class="container-fluid"> 
     <div class="row">
-        <div class="content-box content-box-contents span8 offset2">
+        <div class="content-box content-box-contents landing-body">
         Thank you for your interest in the Kukui Cup!
         <p/>
         According to our records, you are not a resident of the Hale Aloha Residence Halls. If this
