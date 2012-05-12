@@ -5,20 +5,20 @@
 Compiles all the themes and individual page style sheets."""
 
 import os
+import glob
 
 
 def main():
     """main function."""
 
-    theme_names = ['theme', 'default']
     page_names = ['advanced', 'energy', 'help', 'home', 'landing', 'learn',
                   'news', 'profile', 'status', 'win']
-    media_dir = "media"
-    less_path = os.path.join(media_dir, "less")
+    less_path = "media/less"
     os.chdir(less_path)
+    theme_names = glob.glob('theme-*.less')
     for theme in theme_names:
-        os.system("lessc %s.less > ../css/%s.css" % (theme, theme))
-        os.system("lessc %s-advanced.less > ../css/%s-advanced.css" % (theme, theme))
+        (theme_name, theme_ext) = os.path.splitext(theme)
+        os.system("lessc %s.less > ../css/%s.css" % (theme_name, theme_name))
     for page in page_names:
         os.system("lessc %s.less > ../css/%s.css" % (page, page))
 

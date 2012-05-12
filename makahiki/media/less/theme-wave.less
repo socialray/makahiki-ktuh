@@ -1,0 +1,91 @@
+/*
+ * One of the Makahiki2 styles.
+ * 
+ * Copyright (c) 2012 CSDL.
+ * 
+ * Uses Twitter Bootstrap v2.
+ */
+
+ // makahiki base style
+ @import "makahiki.less";
+
+// Bootstrap color variables
+@black:                 #000;
+@grayDarker:            #222;
+@grayDark:              #333;
+@gray:                  #555;
+@grayLight:             #999;
+@grayLighter:           #eee;
+@white:                 #fff;
+@blue:                  #049cdb;
+@blueDark:              #0064cd;
+@green:                 #46a546;
+@red:                   #9d261d;
+@yellow:                #ffc40d;
+@orange:                #f89406;
+@pink:                  #c3325f;
+@purple:                #7a43b6;
+
+// Theme specific colors
+@steelBlue: #2B93AD;
+@lightSteelBlue: #C1D8EB;
+@darkerSteelBlue: #A2C0D2;
+@lightPaleBlue: #E0FFFF;
+@skyBlue: #4F95CD;
+@lightPurpleBlue: #7093DB;
+@veryDarkBlueBlack: #24333B;
+@yellowGreen: #adff2f;
+@darkGreen: #468250;
+@lightCyan: #E3F9F8;
+@oliveGreen: #70A21F;
+@brown: #845D18;
+@lightBrown: #A09E43;
+@brickRed: #AB441B;
+@orangeBrown: #C18E22;
+
+// Theme stylable elements
+@body-bg: @steelBlue; // bg color for the body
+@body-text: @steelBlue;
+// infobar colors
+@infobar-grad-start: fadeout(@lightPaleBlue, 55%);
+@infobar-grad-end: fadeout(@skyBlue, 55%);
+@infobar-text: @black;
+// navbar colors
+@navbar-grad-start: fadeout(@lightPurpleBlue, 55%);
+@navbar-grad-end: fadeout(@lightPurpleBlue, 55%);
+@navbar-text: @white;
+@navbar-text-sel: @veryDarkBlueBlack;
+// notification colors
+@notif-grad-start: fadeout(@yellowGreen, 45%);
+@notif-grad-end: fadeout(@yellowGreen, 45%);
+@notif-text: @black;
+// quest colors
+@quest-grad-start: fadeout(@darkGreen, 55%);
+@quest-grad-end: fadeout(@darkGreen, 55%);
+@quest-text: @black;
+@quest-text-sel: @veryDarkBlueBlack;
+// content
+@title-grad-start: @skyBlue;
+@title-grad-end: @skyBlue;
+@title-div: @black;
+@title-text: @black;
+@content: @lightSteelBlue;
+@content-alt: @lightCyan;
+// smart grid game
+@sgg-activity: @oliveGreen;
+@sgg-commitment: @brown;
+@sgg-event: @lightBrown;
+@sgg-excursion: @brickRed;
+@sgg-survey: @orangeBrown;
+@sgg-text: @black;
+@sgg-category: @white;
+// prizes table
+@prizes-banner: @darkerSteelBlue;
+@prizes-raffle-table: @green;
+// landing page
+@landingSponsors: @grayLighter;
+
+@image-background: "../images/oceanWave.jpg";
+@image-logo: "../images/icons/icon-uh-logo.png";
+
+ @import "base-styles.less";
