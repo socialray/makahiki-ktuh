@@ -1,8 +1,8 @@
 {% load markup %}
 
 {% with resource=view_objects.energy_goal.resource %}
-        <div id="energy-status-box" class="content-box">
-            <div id="energy-status-title" class="content-box-title">
+        <div class="content-box">
+            <div class="content-box-title">
                 Daily {{ resource.name|capfirst }} Goal Game
                 <a href="#" style="float: right">
                     <img src="{{ STATIC_URL}}images/icons/icon-help-sm.png" width="20"
@@ -11,12 +11,12 @@
                          onclick="toggleHelp('widget', 'energy-goal-game'); return false;"
                             /></a>
             </div>
-            <div id="energy-status-content" class="content-box-contents">
+            <div class="content-box-contents">
                 <b>Each member receives 20 points each day that we make our goal. </b>
               {% if not view_objects.energy_goal.is_manual_entry and view_objects.energy_goal.goal%}
-                <fieldset id="energy-status-progress">
+                <fieldset>
                     <legend>Current Status</legend>
-                    <div id="energy-power-box">
+                    <div class="energy-power-box">
                         {% if user.get_profile.team %}
                           <center>{% include "usage.html" %}</center>
                         {% endif %}
@@ -24,19 +24,19 @@
                 </fieldset>
               {% endif %}
               {% if view_objects.energy_goal.daily_goal%}
-                <fieldset id="energy-status-progress">
+                <fieldset>
                     <legend>Current Round Daily Goal Status</legend>
-                    <div id="energy-power-box">
+                    <div class="energy-power-box">
                         {% if user.get_profile.team %}
                             <center>{% include "goal.html" %}</center>
                         {% endif %}
                     </div>
                 </fieldset>
                 {% endif %}
-                <fieldset id="energy-status-how">
+                <fieldset>
                     <legend>How can we make our daily goal?</legend>
                     <table id="energy-status-how-table">
-                        <tr id="energy-status-how-calculator">
+                        <tr>
                             <td id="energy-status-how-activities-content">
                                 The following activities can help your {{ TEAM_LABEL.lower }}
                                 conserve {{ resource.name }}, and you earn points!

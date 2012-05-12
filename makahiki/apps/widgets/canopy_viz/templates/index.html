@@ -5,8 +5,8 @@
 
 {% with viz=view_objects.canopy_viz.viz all_lounges=view_objects.canopy_viz.all_lounges group_lounges=view_objects.canopy_viz.group_lounges all_groups=view_objects.canopy_viz.all_groups %}
 
-<div id="canopy-viz" class="content-box">
-    <div is="canopy-viz-title" class="content-box-title">
+<div class="content-box">
+    <div class="content-box-title">
         Advanced Visualizations
         <a href="#" style="float: right">
             <img src="{{ STATIC_URL}}images/icons/icon-help-sm.png" width="20" align="center"
@@ -14,43 +14,39 @@
                  onclick="toggleHelp('widget', 'advanced-visualizations'); return false;"
                     /></a>
     </div>
-    <div id="canopy-viz-content" class="content-box-contents">
-        <ul is="canopy-viz-list">
+    <div class="content-box-contents">
+        <ul id="canopy-viz-list">
 
-        <li id="canopy-hot-spot-link"
-                {% if viz == '1' %}
+        <li {% if viz == '1' %}
             class="selected"
-                {% endif %}
-                >
+            {% endif %}
+           >
             <h3><a href="/advanced?viz=1">Hot Spots</a></h3>
         </li>
         <li>|</li>
-        <li id="canopy-heat-map-link"
-                {% if viz == '2' %}
+        <li {% if viz == '2' %}
             class="selected"
-                {% endif %}
-                >
+            {% endif %}
+           >
             <h3><a href="/advanced?viz=2">Heat Map</a></h3>
         </li>
         <li>|</li>
-        <li id="canopy-wattdepot-link"
-                {% if viz == '3' %}
+        <li {% if viz == '3' %}
             class="selected"
-                {% endif %}
-                >
+            {% endif %}
+           >
             <h3><a href="/advanced?viz=3">Line Graph</a></h3>
         </li>
         <li>|</li>
-        <li id="canopy-power-meters-link"
-                {% if viz == '4' %}
+        <li {% if viz == '4' %}
             class="selected"
-                {% endif %}
-                >
+            {% endif %}
+           >
             <h3><a href="/advanced?viz=4">Power Meters</a></h3>
         </li>
         </ul>
 
-        <div id="canopy-visualizations">
+        <div>
             {% if viz == None %}
                 <div style='margin-left: 250px; width: 500px; text-align:left;'>
                     "You can't manage what you can't measure".
