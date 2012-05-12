@@ -145,6 +145,9 @@ def water_ranks():
 
 def energy_team_rank_info(team):
     """Get the overall rank for the team. Return a dict of the rank number and usage."""
-    for idx, rank in enumerate(energy_ranks()):
-        if rank["team__name"] == team.name:
-            return {"rank": idx + 1, "usage": rank["total"]}
+    if team:
+        for idx, rank in enumerate(energy_ranks()):
+            if rank["team__name"] == team.name:
+                return {"rank": idx + 1, "usage": rank["total"]}
+    else:
+        return None

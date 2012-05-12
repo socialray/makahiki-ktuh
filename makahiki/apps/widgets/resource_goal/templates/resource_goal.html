@@ -11,7 +11,7 @@
             </div>
             <div class="content-box-contents">
                 <b>Each member receives 20 points each day that we make our goal. </b>
-              {% if not hourly_goal%}
+              {% if hourly_goal %}
                 <fieldset>
                     <legend>Current Status</legend>
                     <div class="energy-power-box">
@@ -19,7 +19,7 @@
                     </div>
                 </fieldset>
               {% endif %}
-              {% if daily_goal%}
+              {% if daily_goal %}
                 <fieldset>
                     <legend>Current Round Daily Goal Status</legend>
                     <div class="energy-power-box">
