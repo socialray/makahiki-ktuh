@@ -1,0 +1,89 @@
+/*
+ * One of the Makahiki2 styles. Based upon the Eldon theme.
+ * 
+ * Copyright 2012 CSDL.
+ * 
+ * Uses Twitter Bootstrap v2.
+ */
+ 
+// makahiki base style
+@import "makahiki.less";
+
+// Bootstrap color variables
+@black:                 #000;
+@grayDarker:            #222;
+@grayDark:              #333;
+@gray:                  #555;
+@grayLight:             #999;
+@grayLighter:           #eee;
+@white:                 #fff;
+@blue:                  #049cdb;
+@blueDark:              #0064cd;
+@green:                 #46a546;
+@red:                   #9d261d;
+@yellow:                #ffc40d;
+@orange:                #f89406;
+@pink:                  #c3325f;
+@purple:                #7a43b6;
+
+// Theme specific colors
+@steelBlue: #2B93AD;
+@lightSteelBlue: #C1D8EB;
+@darkerSteelBlue: #A2C0D2;
+@lightPaleBlue: #E0FFFF;
+@skyBlue: #4F95CD;
+@brightBlue: #0066FF;
+@lighterBrightBlue: #2D76FE;
+@veryDarkBlueBlack: #24333B;
+@lightGrayBlue: #b6d7ee;
+@darkGreen: #468250;
+@lightCyan: #E3F9F8;
+@blueCyan: #00CCFF;
+@darkTan: #C18E22;
+
+// Theme stylable elements
+@body-bg: @steelBlue; // bg color for the body
+@body-text: @black;  
+// infobar colors
+@infobar-grad-start: fadeout(@lightPaleBlue, 55%);
+@infobar-grad-end: fadeout(@skyBlue, 55%);
+@infobar-text: @black;
+// navbar colors
+@navbar-grad-start: fadeout(@brightBlue, 20%);
+@navbar-grad-end: darken(@navbar-grad-start, 10%);
+@navbar-text: @white;
+@navbar-text-sel: @veryDarkBlueBlack;
+// notification colors
+@notif-grad-start: fadeout(@lightGrayBlue, 45%);
+@notif-grad-end: fadeout(@lightGrayBlue, 45%);
+@notif-text: @black;
+// quest colors
+@quest-grad-start: fadeout(@darkGreen, 55%);
+@quest-grad-end: fadeout(@darkGreen, 55%);
+@quest-text: @black;
+@quest-text-sel: @veryDarkBlueBlack;
+// content
+@title-grad-start: @skyBlue;
+@title-grad-end: darken(@title-grad-start, 25%);
+@title-div: @black;
+@title-text: @black;
+@content: @lightSteelBlue;
+@content-alt: @lightCyan;
+// smart grid game
+@sgg-activity: @brightBlue;
+@sgg-commitment: @lighterBrightBlue;
+@sgg-event: @blueCyan;
+@sgg-excursion: @white;
+@sgg-survey: @darkTan;
+@sgg-text: @black;
+@sgg-category: @skyBlue;
+// prizes table
+@prizes-banner: @darkerSteelBlue;
+@prizes-raffle-table: @green;
+// landing page
+@landingSponsors: @grayLighter;
+
+@image-background: "../images/bubbles.jpg";
+@image-logo: "../images/icons/icon-uh-logo.png";
+
+@import "base-styles.less";

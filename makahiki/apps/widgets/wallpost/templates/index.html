@@ -9,7 +9,7 @@
                      onclick="toggleHelp('widget', 'news-feed'); return false;"
                         /></a>
         </div>
-        <div id="news-wall-content">
+        <div id="news-wall-content" class="content-box-content">
             {{ view_objects.wallpost.description }}
             <div id="wall-form">
               <form id="news-post-form" action="{% url news_post %}" method="POST">

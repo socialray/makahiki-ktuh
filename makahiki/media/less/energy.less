@@ -1,56 +1,21 @@
 @charset "UTF-8";
-
-fieldset {
-	border: 0;
-	border-radius: 8px;
-	moz-border-radius: 8px;
-	webkit-border-radius: 8px;
-	margin-top: -10px;
-}
-
 fieldset legend {
-	font-weight: bold;
-	text-align: left;
-	text-decoration: underline;
-	padding: 25px 0 0 0;
+    font-weight: bold;
+    text-align: center;
+    padding: 25px 0 0 0;
 }
 
-textarea {
- margin-left: 5%;
- width: 90%; 
-}
-
-button {
-  margin-left: 5%;
-}
-
-#news-wall-content {
-  margin-left: 10px;
-}
-#energy-status {
-	width: 595px;
-}
-
-#energy-status-content {
-	padding: .5em .5em 0 .5em;
-	}
-
-#energy-smiley {
-    font-size:200%;
-    }
-    
-#energy-power-box {
-	padding: 5px;
-	
-	margin-right: 1em;
+.energy-power-box {
+    padding: 5px;
+    margin-right: 1em;
 }
 
 #energy-power-goal-updated {
-	font-size: 8pt;
+    font-size: 8pt;
 }
 
-#energy-power-gauge-label, #energy-power-gauge-table-goal, #energy-power-gauge-table-actual, #energy-power-goal-info {
-	font-weight: bold;
+#energy-power-gauge-label , #energy-power-gauge-table-goal , #energy-power-gauge-table-actual , #energy-power-goal-info {
+    font-weight: bold;
 }
 
 td#energy-status-how-calculator-content {
@@ -63,25 +28,23 @@ td#energy-status-how-activities-content {
     vertical-align: text-top;
 }
 
-#energy-status-how-table, #energy-status-how-activities-content, #energy-status-how-activities-table { 
-  width: 100%;
+#energy-status-how-table , #energy-status-how-activities-content , #energy-status-how-activities-table {
+    width: 100%;
 }
 
 #energy-status-how-activities-table {
-	border-collapse: collapse;
-	margin-top: .5em;
+    border-collapse: collapse;
+    margin-top: .5em;
 }
 
 #energy-status-how-activities-table th {
-	text-align: left;
-	padding-left: 20px;
+    text-align: left;
+    padding-left: 20px;
 }
 
 #energy-status-how-activities-table td {
-	padding: 4px 4px 4px 20px;
-	text-align: left;
+    padding: 4px 4px 4px 20px;
+    text-align: left;
 }
 
-#resource-scoreboard-message {
-  margin-left: 10px;
-}
+@import "wall-post.less";

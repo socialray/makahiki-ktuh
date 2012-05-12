@@ -21,36 +21,21 @@
             <!-- left column -->
             <div class="span5">
                 {% if view_objects.energy_power_meter %}
-                <div id='energy_power_meter'>
                     {% include "widgets/energy_power_meter/templates/index.html" %}
-                </div>
                 {% endif %}
                 {% if view_objects.resource_scoreboard__energy %}
-                <div id='resource_scoreboard'>
                     {% include "widgets/resource_scoreboard/energy/templates/index.html" %}
-                </div>
                 {% endif %}
             </div>
             <!-- right column -->
             <div class="span7">
                 {% if view_objects.resource_goal__energy %}
-                <div id='energy_goal'>
                     {% include "widgets/resource_goal/energy/templates/index.html" %}
-                </div>
                 {% endif %}
                 {% if view_objects.wallpost %}
-                <div id='wallpost'>
                     {% include "widgets/wallpost/templates/index.html" %}
-                </div>
                 {% endif %}
             </div>
         </div>
     </div>
-
-    <table>
-    <tr><td width="40%" valign="top">
-    </td><td width="60%" valign="top">
-    </td>
-    </tr>
-    </table>
 {% endblock %}
