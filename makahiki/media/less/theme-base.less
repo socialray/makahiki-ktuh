@@ -1,0 +1,218 @@
+/*
+ * Base of the Makahiki2 styles. Uses the Makahiki standard color and image 
+ * variables.
+ * 
+ * Copyright 2012 CSDL.
+ * 
+ * Uses Twitter Bootstrap v2.
+ */
+// some overrides that we need to do at the end.
+@navbarBackground: @navbar-grad-start;
+@navbarBackgroundHighlight: @navbar-grad-end;
+ 
+ /* Set background picture, center it, make sure it doesn't repeat and that it covers the background for any size on any browser */
+body {
+    background: url("@{image-background}") center fixed;
+    background-repeat: no-repeat;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+    background-color: @body-bg;
+    color: @body-text;
+}
+
+.brand img {
+    background: transparent url("@{image-logo}") top left
+        no-repeat;
+    display: block;
+    margin: 0 auto;
+}
+
+// Smart grid game colors
+.activity,.activity-legend, .activity a {
+    background-color: @sgg-activity;
+    color: @sgg-text;
+}
+
+.commitment, .commitment-legend, .commitment a {
+    background-color: @sgg-commitment;
+    color: @sgg-text;
+}
+
+.event, .event-legend, .event a {
+    background-color: @sgg-event;
+    color: @sgg-text;
+}
+
+.excursion, .excursion-legend, .excursion a {
+    background-color: @sgg-excursion;
+    color: @sgg-text;
+}
+
+.survey, .survey-legend, .survey a {
+    background-color: @sgg-survey;
+    color: @sgg-text;
+}
+
+.btn-navbar {
+    background-color: darken(@navbar-grad-start, 40%);
+    .background-gradient(fadeout(@navbar-grad-start, 60%), fadeout(@navbar-grad-end, 60%));
+    border-color: @navbar-grad-start @navbar-grad-start #000000;
+}
+
+
+.btn-navbar:hover,.btn-navbar:active,.btn-navbar.active,.btn-navbar.disabled,.btn-navbar[disabled]
+    {
+    background-color: @navbar-grad-start;
+}
+
+/* Container Styles, make sure they're transparent */
+.container,.container-top,.container-bottom {
+    background: transparent;
+}
+
+/* Elements which will use the ocean blue gradients, lightest-blue on the bottom, mid-blue on top */
+.content-box-title {
+    .background-gradient(@title-grad-start, @title-grad-end);
+    border-bottom: 1px solid @title-div;
+    color: @title-text;
+}
+
+/* Set background color for elements which will use the darker ocean blue */
+.content-box,.alt-row,fieldset {
+    background-color: @content-alt;
+}
+
+.modal-header {
+    background-color: darken(@content, 10%);
+}
+
+.modal-body {
+    background-color: @content;
+}
+
+.modal {
+    background-color: @content;
+}
+
+.navbar {
+    .background-gradient(@navbar-grad-start, @navbar-grad-end);
+    color: @navbar-text;
+}
+
+.navbar .nav>li>a {
+    color: @navbar-text;
+}
+
+.navbar .nav>li>a:hover {
+    color: @navbar-text-sel;
+}
+
+.navbar .nav .active>a,.navbar .nav .active>a:hover {
+    color: @navbar-text-sel;
+}
+
+.notifications {
+    .background-gradient(@notif-grad-start, @notif-grad-end);
+    color: @notif-text;
+}
+
+@media ( max-width : 979px) {
+    .navbar .nav>li>a,.navbar .dropdown-menu a {
+        color: @navbar-text-sel;
+    }
+    .navbar .nav>li>a:hover,.navbar .dropdown-menu a:hover {
+        background-color: transparent;
+    }
+}
+
+/* info-bar */
+.info-bar {
+    .background-gradient(@infobar-grad-start, @infobar-grad-end);
+    color: @infobar-text;
+}
+
+/* for small screen widths hide the wide info-bar */
+@media ( max-width : 640px) {
+    .brand img {
+        display: none;
+    }
+}
+
+// Smart Grid Game 
+.activity-category {
+    background-color: @sgg-category;
+}
+
+.activity-legend {
+    background-color: @sgg-activity;
+}
+
+.commitment-legend {
+    background-color: @sgg-commitment;
+}
+
+.event-legend {
+    background-color: @sgg-event;
+}
+
+.excursion-legend {
+    background-color: @sgg-excursion;
+}
+
+.survey-legend {
+    background-color: @sgg-survey;
+}
+
+
+/* ===== Page specific coloring for Energy ===== */
+#energy-status-how-activities-table {
+    border: 1px solid @title-div;    
+}
+
+#energy-status-how-activities-table th {
+    background: @content;
+}
+
+/* ===== Page specific coloring for Prizes ===== */
+#prizes-raffle-table .number {
+  color: @prizes-raffle-table;
+}
+
+.prize-round-name {
+  background: @prizes-banner;
+}
+
+#prizes-raffle-info {
+    font-weight: bold;
+    background: @prizes-banner;
+}
+
+.quest-box {
+    .makahiki-box();
+    .background-gradient(@quest-grad-start, @quest-grad-end);
+    color: @quest-text;
+}
+
+#quest-details a {
+    color: @quest-text;
+}
+
+.quest-hide {
+    color: @quest-text-sel;
+}
+
+.quest-list li a {
+    color: @quest-text;
+}
+
+.quest-list li.selected a {
+    color: @quest-text-sel;
+}
+
+/* ===== Page specific coloring for Landing ===== */
+.landing-sponsors { 
+  background-color: @landingSponsors;
+}
+ 

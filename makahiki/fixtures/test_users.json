@@ -191,7 +191,7 @@
             "last_name": "Burgess",
             "name": "Greg B.",
             "team": 14,
-            "setup_complete": false,
+            "setup_complete": true,
             "contact_text": "",
             "contact_email": "",
             "user": 5,

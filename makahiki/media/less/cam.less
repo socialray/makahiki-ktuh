@@ -6,22 +6,25 @@
  * Uses Twitter Bootstrap v2.
  */
  
- // makahiki base style
- @import "makahiki.less";
 
+@makahikiBaseColor: #34A230; // green color
+@complement1: spin(@makahikiBaseColor, 90);
+@complement2: darken(@complement1, 5%);
+@lighten1: lighten(@makahikiBaseColor, 15%);
+@lighten2: lighten(@makahikiBaseColor, 30%);
 
-@base: #2B93AD;
+@base: @makahikiBaseColor;
 @nav: @white;
-@nav-inner: fadeout(#7093DB, 55%);
-@navbarBackground: fadeout(#7093DB, 55%);
-@hover-color: #24333B;
-@rib-bkg: fadeout(#E0FFFF, 55%);
-@rib-bkg2: fadeout(#4F95CD, 55%);
-@sgg-activity: #03F;
-@sgg-commitment: #2D76FE;
-@sgg-event: #0CF;
-@sgg-excursion: #FFF;
-@sgg-survey: #C18E22;
+@nav-inner: fadeout(@complement1, 55%);
+@navbarBackground: fadeout(@complement1, 55%);
+@hover-color: @complement2;
+@rib-bkg: fadeout(@lighten2, 55%);
+@rib-bkg2: fadeout(@lighten2, 55%);
+@sgg-activity: @makahikiBaseColor;
+@sgg-commitment: @complement1;
+@sgg-event: @complement2;
+@sgg-excursion: @lighten1;
+@sgg-survey: @lighten2;
 @activity-bkg: #84C4FF;
 @activity-legend: #70A21F;
 @commit: @blue;
@@ -51,5 +54,8 @@
 @image-gradient: "../images/gradient.png";
 @image-gradient-sm: "../images/gradient-small.png";
 @image-logo: "../images/icons/icon-uh-logo.png";
+
+ // makahiki base style
+ @import "makahiki.less";
 
  @import "theme-base.less";
