@@ -5,7 +5,7 @@
         </div>
         <div id="help-rules-content" class="content-box-contents">
             <ul>
-                {% for topic in view_objects.help_rule.rules %}
+                {% for topic in view_objects.help__rule.rules %}
                     {% include "help/topic-item.html" %}
                 {% endfor %}
             </ul>

@@ -21,7 +21,7 @@
         <div class="row-fluid">
             <!-- left column -->
             <div class="span5">
-                {% if view_objects.resource_scoreboard_water %}
+                {% if view_objects.resource_scoreboard__water %}
                     <div id='resource_scoreboard'>
                         {% include "widgets/resource_scoreboard/water/templates/index.html" %}
                     </div>
@@ -29,9 +29,9 @@
             </div>
             <!-- right column -->
             <div class="span7">
-                {% if view_objects.energy_goal %}
+                {% if view_objects.resource_goal__water %}
                     <div id='energy_goal'>
-                        {% include "widgets/energy_goal/templates/index.html" %}
+                        {% include "widgets/resource_goal/water/templates/index.html" %}
                     </div>
                 {% endif %}
                 {% if view_objects.wallpost %}

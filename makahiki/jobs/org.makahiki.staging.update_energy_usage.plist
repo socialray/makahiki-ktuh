@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+    <key>Label</key>
+    <string>Makahiki: Update energy usage (staging)</string>
+    <key>WorkingDirectory</key>
+    <string>/Users/kukuicup/staging/makahiki2/makahiki</string>
+    <key>ProgramArguments</key>
+    <array>
+      <string>/Users/kukuicup/Envs/makahiki2/bin/python</string>
+      <string>manage.py</string>
+      <string>update_energy_usage</string>
+    </array>
+
+    <!-- Only applies if the task is run as root. -->
+    <key>UserName</key>
+    <string>kukuicup</string>
+    
+    <!-- Run this task every 10 minutes with the last update in the hour is 59 minute -->
+    <key>StartCalendarInterval</key>
+    <array>
+      <dict>
+        <key>Minute</key>
+        <integer>9</integer>
+      </dict>
+      <dict>
+        <key>Minute</key>
+        <integer>19</integer>
+      </dict>
+      <dict>
+        <key>Minute</key>
+        <integer>29</integer>
+      </dict>
+      <dict>
+        <key>Minute</key>
+        <integer>39</integer>
+      </dict>
+      <dict>
+        <key>Minute</key>
+        <integer>49</integer>
+      </dict>
+      <dict>
+        <key>Minute</key>
+        <integer>59</integer>
+      </dict>
+    </array>
+    
+    <key>StandardErrorPath</key>
+  	<string>/Users/kukuicup/staging/log/update_energy_usage.err</string>
+  	<key>StandardOutPath</key>
+  	<string>/Users/kukuicup/staging/log/update_energy_usage.out</string>
+
+    <key>RunAtLoad</key>
+    <true/>
+</dict>
+</plist>

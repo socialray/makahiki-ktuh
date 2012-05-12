@@ -1,6 +1,4 @@
-{% load markup %}
 
-{% with resource=view_objects.energy_goal.resource %}
         <div id="energy-status-box" class="content-box">
             <div id="energy-status-title" class="content-box-title">
                 Daily {{ resource.name|capfirst }} Goal Game
@@ -13,22 +11,22 @@
             </div>
             <div id="energy-status-content" class="content-box-contents">
                 <b>Each member receives 20 points each day that we make our goal. </b>
-              {% if not view_objects.energy_goal.is_manual_entry and view_objects.energy_goal.goal%}
+              {% if hourly_goal%}
                 <fieldset id="energy-status-progress">
                     <legend>Current Status</legend>
                     <div id="energy-power-box">
                         {% if user.get_profile.team %}
-                          <center>{% include "usage.html" %}</center>
+                          <center>{% include "hourly_goal.html" %}</center>
                         {% endif %}
                     </div>
                 </fieldset>
               {% endif %}
-              {% if view_objects.energy_goal.daily_goal%}
+              {% if daily_goal%}
                 <fieldset id="energy-status-progress">
                     <legend>Current Round Daily Goal Status</legend>
                     <div id="energy-power-box">
                         {% if user.get_profile.team %}
-                            <center>{% include "goal.html" %}</center>
+                            <center>{% include "daily_goal.html" %}</center>
                         {% endif %}
                     </div>
                 </fieldset>
@@ -47,4 +45,3 @@
                 </fieldset>
             </div>
         </div>
-{% endwith %}

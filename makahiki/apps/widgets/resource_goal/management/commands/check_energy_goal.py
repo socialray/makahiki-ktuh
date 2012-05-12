@@ -3,7 +3,7 @@ import datetime
 
 from django.core import management
 from apps.managers.team_mgr.models import Team
-from apps.widgets.energy_goal import energy_goal
+from apps.widgets.resource_goal import resource_goal
 
 
 class Command(management.base.BaseCommand):
@@ -16,7 +16,7 @@ class Command(management.base.BaseCommand):
 
         is_awarded = False
         for team in Team.objects.all():
-            count = energy_goal.check_daily_energy_goal(team)
+            count = resource_goal.check_daily_energy_goal(team)
             if count:
                 goal_points = team.energygoalsettings_set.all()[0].goal_points
                 print '%s users in %s are awarded %s points each.' % (count,

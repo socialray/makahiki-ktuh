@@ -113,6 +113,7 @@ INSTALLED_APPS = (
     'apps.managers.player_mgr',
     'apps.managers.score_mgr',
     'apps.managers.cache_mgr',
+    'apps.test_helpers',
 
     # 3rd party libraries
     'apps.lib.django_cas',
@@ -157,7 +158,9 @@ INSTALLED_WIDGET_APPS = (
     'badges',
     'canopy_viz',
     'canopy_member',
-    'energy_goal',
+    'resource_goal',
+    'resource_goal.energy',
+    'resource_goal.water',
     'energy_power_meter',
     'resource_scoreboard',
     'resource_scoreboard.energy',

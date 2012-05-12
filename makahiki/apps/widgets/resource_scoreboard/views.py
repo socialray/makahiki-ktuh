@@ -3,6 +3,7 @@
 import datetime
 from apps.managers.challenge_mgr import challenge_mgr
 from apps.managers.resource_mgr import resource_mgr
+from apps.widgets.resource_goal import resource_goal
 
 
 def supply(request, page_name):
@@ -29,7 +30,7 @@ def resource_supply(request, resource):
         if today >= rounds[key]["start"]:
             scoreboard_rounds.append(key)
 
-    goals_scoreboard = resource_mgr.energy_goal_ranks()
+    goals_scoreboard = resource_goal.energy_goal_ranks()
 
     energy_ranks = resource_mgr.resource_ranks(resource)
 

@@ -1,12 +1,12 @@
 """resource manager module"""
 import datetime
+from xml.etree.ElementTree import ParseError
 from django.conf import settings
 from django.core.exceptions import ObjectDoesNotExist
-from django.db.models.aggregates import Count, Sum
+from django.db.models.aggregates import Sum
 import requests
 from requests.exceptions import Timeout
 from apps.managers.team_mgr.models import Team
-from apps.widgets.energy_goal.models import EnergyGoal
 from apps.managers.resource_mgr.models import EnergyUsage, WaterUsage, ResourceSettings, \
     WasteUsage
 from xml.etree import ElementTree
@@ -36,41 +36,22 @@ def get_resource_settings(name):
     return ResourceSettings.objects.get(name=name)
 
 
-def team_energy_data(date, team):
+def team_resource_data(date, team, resource):
     """Return the latest energy data of the current date."""
-    energy_data = EnergyUsage.objects.filter(team=team, date=date)
+
+    usage = _get_resource_usage(resource)
+    energy_data = usage.objects.filter(team=team, date=date)
     if energy_data:
         return energy_data[0]
     else:
         return None
 
 
-def team_energy_usage(date, team):
+def team_resource_usage(date, team, resource):
     """Return the latest energy usage of the current date."""
-    energy_data = team_energy_data(date, team)
+    energy_data = team_resource_data(date, team, resource)
     if energy_data:
         return energy_data.usage
-    else:
-        return 0
-
-
-def team_daily_energy_baseline(date, team):
-    """Returns the energy baseline usage for the date."""
-    day = date.weekday()
-    baseline = team.dailyenergybaseline_set.filter(day=day)
-    if baseline:
-        return baseline[0].usage
-    else:
-        return 0
-
-
-def team_hourly_energy_baseline(date, team):
-    """Returns the energy baseline usage for the date."""
-    day = date.weekday()
-    hour = date.time().hour
-    baseline = team.hourlyenergybaseline_set.filter(day=day, hour=hour)
-    if baseline:
-        return baseline[0].usage
     else:
         return 0
 
@@ -115,20 +96,27 @@ def update_energy_usage(date):
             latest_usage.save()
             print 'team %s energy usage updated.' % team
         except Timeout:
-            print 'team %s energy usage update timeout.' % team
+            print 'team %s energy usage update error with connection timeout.' % team
+        except ParseError as exception:
+            print 'team %s energy usage update with ParseError : %s' % (team, exception)
+
+
+def _get_resource_usage(name):
+    """return the resourceusage object by name."""
+    if name == "energy":
+        return EnergyUsage
+    elif name == "water":
+        return WaterUsage
+    elif name == "waste":
+        return WasteUsage
+    else:
+        return None
 
 
 def resource_ranks(name):
     """return the resource ranking for all teams."""
     team_count = Team.objects.count()
-    if name == "energy":
-        resource = EnergyUsage
-    elif name == "water":
-        resource = WaterUsage
-    elif name == "waste":
-        resource = WasteUsage
-    else:
-        return None
+    resource = _get_resource_usage(name)
 
     resource_settings = get_resource_settings(name)
     if resource_settings.winning_order == "Ascending":
@@ -136,8 +124,8 @@ def resource_ranks(name):
     else:
         ordering = "-total"
 
-    return resource.objects.annotate(total=Sum("usage")).order_by(
-        "-date", ordering)[:team_count]
+    return resource.objects.values("team__name").annotate(
+        total=Sum("usage")).order_by(ordering)[:team_count]
 
 
 def energy_ranks():
@@ -158,16 +146,5 @@ def water_ranks():
 def energy_team_rank_info(team):
     """Get the overall rank for the team. Return a dict of the rank number and usage."""
     for idx, rank in enumerate(energy_ranks()):
-        if rank.team == team:
-            return {"rank": idx + 1, "usage": rank.usage}
-
-
-def energy_goal_ranks():
-    """Generate the scoreboard for energy goals."""
-    # We could aggregate the energy goals in teams, but there's a bug in Django.
-    # See https://code.djangoproject.com/ticket/13461
-    return EnergyGoal.objects.filter(
-        goal_status="Below the goal"
-    ).values(
-        "team__name"
-    ).annotate(completions=Count("team")).order_by("-completions")
+        if rank["team__name"] == team.name:
+            return {"rank": idx + 1, "usage": rank["total"]}

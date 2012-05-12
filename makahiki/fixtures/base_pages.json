@@ -147,7 +147,7 @@
     "pk": 7,
     "model": "challenge_mgr.pagesettings",
     "fields": {
-      "widget": "energy_goal",
+      "widget": "resource_goal.energy",
       "enabled": true,
       "page": 3
     }
@@ -183,7 +183,7 @@
     "pk": 30,
     "model": "challenge_mgr.pagesettings",
     "fields": {
-      "widget": "energy_goal",
+      "widget": "resource_goal.water",
       "enabled": true,
       "page": 4
     }

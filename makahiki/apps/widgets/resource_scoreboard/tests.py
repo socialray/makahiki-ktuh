@@ -7,7 +7,7 @@ from django.contrib.auth.models import User
 from apps.managers.challenge_mgr import challenge_mgr
 
 from apps.managers.team_mgr.models import Team
-from apps.widgets.energy_goal.models import EnergyGoal
+from apps.widgets.resource_goal.models import EnergyGoal
 
 
 class EnergyFunctionalTestCase(TransactionTestCase):
@@ -35,7 +35,7 @@ class EnergyFunctionalTestCase(TransactionTestCase):
     def testEnergyScoreboard(self):
         """test Energy scoreboard."""
         response = self.client.get(reverse("energy_index"))
-        goals = response.context["view_objects"]["resource_scoreboard_energy"]["goals_scoreboard"]
+        goals = response.context["view_objects"]["resource_scoreboard__energy"]["goals_scoreboard"]
         for goal in goals:
             self.assertEqual(goal["completions"], 0, "No team should have completed a goal.")
 
@@ -46,7 +46,7 @@ class EnergyFunctionalTestCase(TransactionTestCase):
         )
 
         response = self.client.get(reverse("energy_index"))
-        goals = response.context["view_objects"]["resource_scoreboard_energy"]["goals_scoreboard"]
+        goals = response.context["view_objects"]["resource_scoreboard__energy"]["goals_scoreboard"]
         for goal in goals:
             self.assertEqual(goal["completions"], 0, "No team should have completed a goal.")
 
@@ -54,7 +54,7 @@ class EnergyFunctionalTestCase(TransactionTestCase):
         energy_goal.save()
 
         response = self.client.get(reverse("energy_index"))
-        goals = response.context["view_objects"]["resource_scoreboard_energy"]["goals_scoreboard"]
+        goals = response.context["view_objects"]["resource_scoreboard__energy"]["goals_scoreboard"]
         for team in goals:
             if team["team__name"] == self.team.name:
                 # print team.teamenergygoal_set.all()

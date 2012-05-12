@@ -127,15 +127,15 @@ def get_current_commitment_members(user):
     ).order_by("submission_date")
 
 
-def get_available_golow_actions(user):
+def get_available_golow_actions(user, related_resource):
     """Retrieves only the golow activities that a user can participate in (excluding events)."""
 
     actions = Action.objects.exclude(
         actionmember__user=user,
     ).filter(
-        related_resource="energy",
+        Q(expire_date__isnull=True) | Q(expire_date__gte=datetime.date.today()),
+        related_resource=related_resource,
         pub_date__lte=datetime.date.today(),
-        expire_date__gte=datetime.date.today(),
     ).order_by("type", "priority")
 
     # pick one activity per type, until reach NUM_GOLOW_ACTIONS

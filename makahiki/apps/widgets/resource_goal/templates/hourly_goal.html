@@ -1,5 +1,3 @@
-{% with view_objects.energy_goal.goal as goal %}
-{% if goal %}
 <div id="EnergyGoalGame-visualization">
     <table cellpadding="5"
            style="text-align: center; vertical-align: top">
@@ -10,14 +8,14 @@
                      Consumption Today <br>(So Far)
                      </td></tr>
                  <tr><td style="text-align: center; font-size: 2.5em; font-weight: bold">
-                     {{ goal.actual_usage }} kWh
+                     {{ hourly_goal.actual_usage }} kWh
                      </td></tr>
              </table>
          </td>
          <td>
-             {% if goal.actual_usage > goal.goal_usage %}
+             {% if hourly_goal.actual_usage > hourly_goal.goal_usage %}
                  <img src="{{ STATIC_URL }}images/energy/stop_light_red.png"/>
-             {% elif goal.actual_usage > goal.warning_usage %}
+             {% elif hourly_goal.actual_usage > hourly_goal.warning_usage %}
                  <img src="{{ STATIC_URL }}images/energy/stop_light_yellow.png"/>
              {% else %}
                  <img src="{{ STATIC_URL }}images/energy/stop_light_green.png"/>
@@ -29,25 +27,22 @@
                      Goal for Today <br>(So Far)
                  </td></tr>
                  <tr><td style="text-align: center; font-size: 2.5em; font-weight: bold">
-                     {{ goal.goal_usage }} kWh
+                     {{ hourly_goal.goal_usage }} kWh
                  </td></tr>
              </table>
          </td>
       </tr>
       <tr> <td colspan="3" style="font-size: 0.8em">
-          {% if goal.actual_usage > goal.goal_usage %}
-            Your lounge is currently over the goal by {{ goal.actual_diff }} kWh.  See below for ways to conserve.
-          {% elif goal.actual_usage > goal.warning_usage %}
-            Your lounge is currently making the goal, but just barely ( {{ goal.actual_diff }} kWh).  See below for ways to conserve.
+          {% if hourly_goal.actual_usage > hourly_goal.goal_usage %}
+            Your lounge is currently over the goal by {{ hourly_goal.actual_diff }} kWh.  See below for ways to conserve.
+          {% elif hourly_goal.actual_usage > hourly_goal.warning_usage %}
+            Your lounge is currently making the goal, but just barely ( {{ hourly_goal.actual_diff }} kWh).  See below for ways to conserve.
           {% else %}
-            Your lounge is currently beating the goal by {{ goal.actual_diff }} kWh. Great job!
+            Your lounge is currently beating the goal by {{ hourly_goal.actual_diff }} kWh. Great job!
           {% endif %}
           <br/>
-          Last check: {{ goal.updated_at }}
+          Last check: {{ hourly_goal.updated_at }}
 
       </td> </tr>
     </table>
 </div>
-
-{% endif %}
-{% endwith %}

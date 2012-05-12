@@ -8,9 +8,9 @@ from django.test import TransactionTestCase
 from django.contrib.auth.models import User
 
 from apps.managers.team_mgr.models import Team
-from apps.widgets.energy_goal import energy_goal
-from apps.widgets.energy_goal.models import EnergyGoalSettings
-from apps.managers.resource_mgr.models import EnergyUsage, DailyEnergyBaseline
+from apps.widgets.resource_goal import resource_goal
+from apps.widgets.resource_goal.models import EnergyGoalSetting, EnergyBaselineDaily
+from apps.managers.resource_mgr.models import EnergyUsage
 
 
 class TeamEnergyGoalTest(TransactionTestCase):
@@ -34,7 +34,7 @@ class TeamEnergyGoalTest(TransactionTestCase):
         profile = self.user.get_profile()
         points = profile.points()
 
-        goal_settings = EnergyGoalSettings(
+        goal_settings = EnergyGoalSetting(
             team=self.team,
             goal_percent_reduction=5,
             goal_points=20,
@@ -42,7 +42,7 @@ class TeamEnergyGoalTest(TransactionTestCase):
             manual_entry_time=datetime.time(hour=15),
         )
         goal_settings.save()
-        goal_baseline = DailyEnergyBaseline(
+        goal_baseline = EnergyBaselineDaily(
             team=self.team,
             day=datetime.date.today().weekday(),
             usage=150,
@@ -56,7 +56,7 @@ class TeamEnergyGoalTest(TransactionTestCase):
         )
         energy_data.save()
 
-        energy_goal.check_daily_energy_goal(self.team)
+        resource_goal.check_daily_energy_goal(self.team)
 
         profile = Profile.objects.get(user__username="user")
         self.assertEqual(profile.points(), points,
@@ -67,7 +67,7 @@ class TeamEnergyGoalTest(TransactionTestCase):
 
         energy_data.usage = 150
         energy_data.save()
-        energy_goal.check_daily_energy_goal(self.team)
+        resource_goal.check_daily_energy_goal(self.team)
 
         profile = Profile.objects.get(user__username="user")
         self.assertEqual(profile.points(), points,
@@ -75,7 +75,7 @@ class TeamEnergyGoalTest(TransactionTestCase):
 
         energy_data.usage = 100
         energy_data.save()
-        energy_goal.check_daily_energy_goal(self.team)
+        resource_goal.check_daily_energy_goal(self.team)
 
         profile = Profile.objects.get(user__username="user")
         self.assertEqual(profile.points(), points + goal_settings.goal_points,

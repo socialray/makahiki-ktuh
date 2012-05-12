@@ -21,15 +21,15 @@
                     </tr>
                     {% for entry in energy_ranks %}
                     <tr>
-                        <td>{%  if entry.team == user.get_profile.team %}<b>{% endif %}
+                        <td>{%  if entry.team__name == user.get_profile.team.name %}<b>{% endif %}
                                {{ forloop.counter }}
                         </td>
-                        <td>{%  if entry.team == user.get_profile.team %}<b>{% endif %}
-                               {{ entry.team.name }}
+                        <td>{%  if entry.team__name == user.get_profile.team.name %}<b>{% endif %}
+                               {{ entry.team__name }}
                         </td>
                         <td style="text-align: right; padding-right: 20px">
-                               {%  if entry.team == user.get_profile.team %}<b>{% endif %}
-                               {{ entry.usage }}
+                               {%  if entry.team__name == user.get_profile.team.name %}<b>{% endif %}
+                               {{ entry.total }}
                         </td>
                     </tr>
                     {% endfor %}

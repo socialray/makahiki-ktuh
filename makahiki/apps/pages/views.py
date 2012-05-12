@@ -61,7 +61,7 @@ def supply_view_objects(request, page_name, view_objects):
         widget = page_setting.widget
         view_module_name = 'apps.widgets.' + widget + '.views'
         page_views = importlib.import_module(view_module_name)
-        widget = widget.replace(".", "_")
+        widget = widget.replace(".", "__")
         view_objects[widget] = page_views.supply(request, page_name)
 
         widget_template = "widgets/" + \
