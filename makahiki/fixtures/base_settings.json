@@ -11,7 +11,7 @@
             "email_use_tls": true,
             "landing_non_participant_text": "###I'm not registered\r\n#####but I'd like to know more about the Kukui Cup</h5>",
             "email_port": 587,
-            "theme": "default",
+            "theme": "theme-default",
             "cas_server_url": "https://login.its.hawaii.edu/cas/",
             "contact_email": "kukuicup@hawaii.edu",
             "email_enabled": false,

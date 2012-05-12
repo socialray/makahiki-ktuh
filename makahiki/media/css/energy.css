@@ -1,13 +1,7 @@
 @charset "UTF-8";
-fieldset{border:0;border-radius:8px;moz-border-radius:8px;webkit-border-radius:8px;margin-top:-10px;}
-fieldset legend{font-weight:bold;text-align:left;text-decoration:underline;padding:25px 0 0 0;}
-textarea{margin-left:5%;width:90%;}
-button{margin-left:5%;}
-#news-wall-content{margin-left:10px;}
-#energy-status{width:595px;}
-#energy-status-content{padding:.5em .5em 0 .5em;}
+fieldset legend{font-weight:bold;text-align:center;padding:25px 0 0 0;}
 #energy-smiley{font-size:200%;}
-#energy-power-box{padding:5px;margin-right:1em;}
+.energy-power-box{padding:5px;margin-right:1em;}
 #energy-power-goal-updated{font-size:8pt;}
 #energy-power-gauge-label,#energy-power-gauge-table-goal,#energy-power-gauge-table-actual,#energy-power-goal-info{font-weight:bold;}
 td#energy-status-how-calculator-content{vertical-align:text-top;padding-right:20px;width:50%;}
@@ -16,4 +10,13 @@ td#energy-status-how-activities-content{vertical-align:text-top;}
 #energy-status-how-activities-table{border-collapse:collapse;margin-top:.5em;}
 #energy-status-how-activities-table th{text-align:left;padding-left:20px;}
 #energy-status-how-activities-table td{padding:4px 4px 4px 20px;text-align:left;}
-#resource-scoreboard-message{margin-left:10px;}
+#news-wall-content{padding:5px 10px;}
+#wall-post textarea{box-sizing:border-box;-webkit-box-sizing:border-box;-moz-box-sizing:border-box;-ms-box-sizing:border-box;width:90%;}
+#wall-posts{list-style:none;margin:0;}
+#wall-posts li{margin:0;padding:5px 0;border-top:1px outset gray;}
+#wall-posts li .row{margin-left:0;}
+#wall-posts .wallpost-image{margin-left:0;margin-right:10px;}
+#wall-posts .wallpost-text{margin-left:0;}
+.wallpost-username{font-weight:bold;}
+.wallpost-posted{font-style:italic;font-size:0.9em;}
+@media (max-width:767px){#wall-posts .wallpost-image{float:left;display:inline;}}
