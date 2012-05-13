@@ -30,5 +30,8 @@
   	<string>/Users/kukuicup/staging/log/check-energy-goal.err</string>
   	<key>StandardOutPath</key>
   	<string>/Users/kukuicup/staging/log/check-energy-goal.out</string>
+
+  	<key>RunAtLoad</key>
+    <true/>
 </dict>
 </plist>
