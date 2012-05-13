@@ -12,17 +12,17 @@
 
                 <p>
 
-                {% if not CHALLENGE.use_internal_auth %}
-                    {% if CHALLENGE.use_cas_auth %}
-                    <button id="landing-button-participant" class="landing-intro button"
+                {% if not CHALLENGE.is_multi_auth %}
+                    {%  if CHALLENGE.use_cas_auth %}
+                        <button id="landing-button-participant" class="landing-intro button"
                             onclick="javascript:location.href='{% url home_index %}'">
-                        {{ CHALLENGE.landing_participant_text|markdown }}
-                    </button>
+                            {{ CHALLENGE.landing_participant_text|markdown }}
+                        </button>
                     {% else %}
-                    <button id="landing-button-participant" class="landing-intro button"
-                            onclick="javascript:location.href='{% url auth_login %}'">
-                        {{ CHALLENGE.landing_participant_text|markdown }}
-                    </button>
+                        <button id="landing-button-participant" class="landing-intro button"
+                                onclick="javascript:location.href='{% url auth_login %}'">
+                            {{ CHALLENGE.landing_participant_text|markdown }}
+                        </button>
                     {% endif %}
                 {% else %}
                     <button id="landing-button-participant" class="landing-intro button"
@@ -33,14 +33,12 @@
                     <div id="auth_buttons" hidden="true">
                         <center>
                         <table><tr>
-                        {% if CHALLENGE.use_cas_auth %}
                         <td>
                           <button class="landing-intro button"
                                 onclick="javascript:location.href='{% url home_index %}'">
                             <h4> I have a UH email </h4><br/>
                           </button>
                         </td>
-                        {% endif %}
                         <td>
                         <button class="landing-intro button"
                                 onclick="javascript:location.href='{% url auth_login %}'">

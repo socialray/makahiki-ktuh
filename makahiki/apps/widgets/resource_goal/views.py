@@ -73,12 +73,15 @@ def get_daily_goal_data(team, resource):
         goal_info = {"date": date}
         goal = resource_goal.team_goal(date, team, resource)
         if goal:
+            unit = resource_mgr.get_resource_settings(resource).unit
             goal_info["goal_status"] = goal.goal_status
-            goal_info["verbose_info"] = "%d kWh used within the last 24 hours (ends at %s). " \
-                                        "The goal is %d kWh." % (
-                resource_mgr.team_resource_usage(date, team, resource),
+            goal_info["verbose_info"] = "%d %s used within the last 24 hours (ends at %s). " \
+                                        "The goal is %d %s." % (
+                resource_mgr.team_resource_usage(date, team, resource) / 1000,
+                unit,
                 resource_goal.team_goal_settings(team, resource).manual_entry_time,
-                resource_goal.team_daily_goal_usage(date, team, resource)
+                resource_goal.team_daily_goal_usage(date, team, resource) / 1000,
+                unit
             )
 
         data_table.append(goal_info)

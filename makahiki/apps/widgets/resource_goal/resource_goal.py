@@ -3,6 +3,7 @@
 import datetime
 from django.db.models.aggregates import Count
 from apps.managers.resource_mgr import resource_mgr
+from apps.managers.team_mgr.models import Team
 from apps.widgets.resource_goal.models import EnergyGoal, WaterGoal, WaterGoalSetting, \
     EnergyGoalSetting, EnergyBaselineDaily, WaterBaselineDaily, EnergyBaselineHourly, \
     WaterBaselineHourly
@@ -149,16 +150,20 @@ def check_daily_resource_goal(team, resource):
     return count
 
 
-def check_daily_energy_goal(team):
-    """check the daily energy goal, award points to the team members if the goal is meet.
-    Returns the number of players in the team got the award."""
-    return check_daily_resource_goal(team, "energy")
+def check_all_daily_resource_goals(resource):
+    """check the daily resource goal for all teams."""
+    is_awarded = False
+    for team in Team.objects.all():
+        count = check_daily_resource_goal(team, resource)
+        if count:
+            print '%s users in %s are awarded %s points each.' % (
+                count,
+                team,
+                team_goal_settings(team, resource).goal_points)
+            is_awarded = True
 
-
-def check_daily_water_goal(team):
-    """check the daily energy goal, award points to the team members if the goal is meet.
-    Returns the number of players in the team got the award."""
-    return check_daily_resource_goal(team, "energy")
+    if not is_awarded:
+        print 'No user are awarded daily goal points.'
 
 
 def energy_goal_ranks():

@@ -17,8 +17,14 @@ FIXTURE_DIRS = [
 
 # directories which hold static files
 STATICFILES_DIRS = (
-    os.path.join(PROJECT_ROOT, 'media'),
+    os.path.join(PROJECT_ROOT, 'static'),
     )
+
+# URL that handles the static files such as css, img, and js
+STATIC_URL = "/site_media/static/"
+
+# Absolute path to the directory that holds static files.
+STATIC_ROOT = os.path.join(PROJECT_ROOT, 'site_media', 'static')
 
 # prefix for all uploaded media files
 MAKAHIKI_MEDIA_PREFIX = "media"
@@ -354,33 +360,24 @@ else:
 # static media settings
 MAKAHIKI_USE_S3 = env('MAKAHIKI_USE_S3', '').lower() == "true"
 if MAKAHIKI_USE_S3:
-    MAKAHIKI_USE_S3 = True
     DEFAULT_FILE_STORAGE = 'storages.backends.s3boto.S3BotoStorage'
-    STATICFILES_STORAGE = 'storages.backends.s3boto.S3BotoStorage'
+    #STATICFILES_STORAGE = DEFAULT_FILE_STORAGE
     AWS_ACCESS_KEY_ID = env('AWS_ACCESS_KEY_ID', '')
     AWS_SECRET_ACCESS_KEY = env('AWS_SECRET_ACCESS_KEY', '')
     AWS_STORAGE_BUCKET_NAME = env('AWS_STORAGE_BUCKET_NAME', '')
 
-    STATIC_URL = 'https://s3.amazonaws.com/%s/' % AWS_STORAGE_BUCKET_NAME
-    MEDIA_URL = STATIC_URL + "./"
+    MEDIA_URL = 'https://s3.amazonaws.com/%s/' % AWS_STORAGE_BUCKET_NAME
     SERVE_MEDIA = False
 else:
-    # URL that handles the static files like app media.
-    STATIC_URL = "/site_media/static/"
-    MEDIA_URL = "/site_media/media/"
+    # URL that handles the media files such as uploads.
+    MEDIA_URL = "/site_media/"
     # Absolute path to the directory that holds media.
-    STATIC_ROOT = os.path.join(PROJECT_ROOT, 'site_media', 'static')
-    # Absolute path to the directory that holds static files like app media.
-    MEDIA_ROOT = os.path.join(PROJECT_ROOT, 'site_media', 'media')
+    MEDIA_ROOT = os.path.join(PROJECT_ROOT, 'site_media')
     # serve media through django.views.static.serve.
     SERVE_MEDIA = True
 
-# settings to use less or compiled css, if S3 is enabled, always compiled less
-if env('MAKAHIKI_USE_S3', '').lower() == "true" or\
-   env('MAKAHIKI_USE_COMPILED_LESS', '').lower() == "true":
-    MAKAHIKI_USE_COMPILED_LESS = True
-else:
-    MAKAHIKI_USE_COMPILED_LESS = False
+# settings to use less files
+MAKAHIKI_USE_LESS = env('MAKAHIKI_USE_LESS', '').lower() == "true"
 
 # LDAP settings
 AUTH_LDAP_BIND_DN = env('MAKAHIKI_LDAP_BIND_DN', '')

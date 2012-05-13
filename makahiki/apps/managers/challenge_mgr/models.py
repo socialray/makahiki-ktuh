@@ -103,14 +103,19 @@ class ChallengeSettings(models.Model):
         help_text="The introduction in the landing page. " + settings.MARKDOWN_TEXT,
         max_length=500,)
     landing_participant_text = models.TextField(
-        default="Let me in",
+        default="I am registered",
         max_length=255,
         help_text="The text of the participant button in the landing page. " +
                   settings.MARKDOWN_TEXT)
     landing_non_participant_text = models.TextField(
-        default="About",
+        default="I am not registered.",
         max_length=255,
         help_text="The text of the non participant button in the landing page. " +
+                  settings.MARKDOWN_TEXT)
+
+    about_page_text = models.TextField(
+        default="About",
+        help_text="The text of the about page. " +
                   settings.MARKDOWN_TEXT)
 
     class Meta:
@@ -138,6 +143,10 @@ class ChallengeSettings(models.Model):
             settings.EMAIL_USE_TLS = settings.CHALLENGE.email_use_tls
             settings.ADMINS = (('Admin', settings.CHALLENGE.contact_email),)
 
+        # set the is_multi_auth to true if use_cas and either use ldap or internal
+        settings.CHALLENGE.is_multi_auth = settings.CHALLENGE.use_cas_auth and \
+            (settings.CHALLENGE.use_ldap_auth or settings.CHALLENGE.use_internal_auth)
+
         # setting for the CAS authentication service.
         if settings.CHALLENGE.cas_server_url:
             settings.CAS_SERVER_URL = settings.CHALLENGE.cas_server_url
@@ -152,12 +161,11 @@ class ChallengeSettings(models.Model):
             settings.AUTH_LDAP_SERVER_URI = settings.CHALLENGE.ldap_server_url
             settings.AUTH_LDAP_USER_SEARCH = LDAPSearch("%s" % settings.CHALLENGE.ldap_search_base,
                                                ldap.SCOPE_SUBTREE, "(uid=%(user)s)")
-
-            import logging
-
-            logger = logging.getLogger('django_auth_ldap')
-            logger.addHandler(logging.StreamHandler())
-            logger.setLevel(logging.DEBUG)
+            # Uncomment below to turn on LDAP logging
+            #import logging
+            #logger = logging.getLogger('django_auth_ldap')
+            #logger.addHandler(logging.StreamHandler())
+            #logger.setLevel(logging.DEBUG)
 
 
 class Sponsor(models.Model):

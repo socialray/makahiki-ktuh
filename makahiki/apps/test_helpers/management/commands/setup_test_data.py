@@ -5,7 +5,7 @@ from apps.managers.challenge_mgr.challenge_mgr import MakahikiBaseCommand
 from apps.managers.challenge_mgr.models import RoundSettings
 from apps.managers.team_mgr.models import Team
 from apps.widgets.resource_goal.models import EnergyGoalSetting, EnergyBaselineHourly, \
-    EnergyBaselineDaily, WaterGoalSetting
+    EnergyBaselineDaily, WaterGoalSetting, WaterBaselineDaily
 from apps.widgets.smartgrid.models import Event
 
 
@@ -64,6 +64,13 @@ class Command(MakahikiBaseCommand):
         for team in Team.objects.all():
             for day in range(0, 7):
                 EnergyBaselineDaily(team=team, day=day, usage=1000 * 24).save()
+
+        for baseline in WaterBaselineDaily.objects.all():
+            baseline.delete()
+
+        for team in Team.objects.all():
+            for day in range(0, 7):
+                WaterBaselineDaily(team=team, day=day, usage=1000 * 24).save()
 
     def setup_resource_goalsetting(self):
         """set up the resource goal data. all existing data will be delete."""

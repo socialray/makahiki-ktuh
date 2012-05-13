@@ -94,13 +94,16 @@ class ChallengeSettingsAdmin(admin.ModelAdmin):
                    "landing_introduction",
                    "landing_participant_text",
                    "landing_non_participant_text", )}),
+        ("About Page",
+            {"fields":
+                  ("about_page_text", )}),
     )
 
     inlines = [SponsorsInline]
 
-    formfield_overrides = {
-        models.TextField: {'widget': Textarea(attrs={'rows': 3, 'cols': 70})},
-        }
+    #formfield_overrides = {
+    #    models.TextField: {'widget': Textarea(attrs={'rows': 5, 'cols': 70})},
+    #    }
 
 admin.site.register(ChallengeSettings, ChallengeSettingsAdmin)
 admin.site.register(UploadImage)

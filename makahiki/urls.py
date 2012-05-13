@@ -64,10 +64,12 @@ for widget in settings.INSTALLED_WIDGET_APPS:
         urlpatterns += patterns('',
             (r'^%s/' % widget, include('apps.widgets.%s.urls' % widget)), )
 
+# use django to serve static files FOR NOW
+urlpatterns += patterns('',
+    (r'^' + settings.STATIC_URL[1:] + '(?P<path>.*)$', 'django.views.static.serve',
+         {'document_root': settings.STATIC_ROOT}), )
+
 if settings.SERVE_MEDIA:
-    urlpatterns += patterns('',
-        (r'^' + settings.STATIC_URL[1:] + '(?P<path>.*)$', 'django.views.static.serve',
-             {'document_root': settings.STATIC_ROOT}), )
     urlpatterns += patterns('',
         (r'^' + settings.MEDIA_URL[1:] + '(?P<path>.*)$', 'django.views.static.serve',
              {'document_root': settings.MEDIA_ROOT}), )

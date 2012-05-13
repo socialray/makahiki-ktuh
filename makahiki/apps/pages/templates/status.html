@@ -7,7 +7,7 @@
 {% block extra_head %}
     <link rel="stylesheet" href="{{STATIC_URL}}jquery-ui/jquery-ui.css">
 
-    {% if MAKAHIKI_USE_COMPILED_LESS %}
+    {% if not MAKAHIKI_USE_LESS %}
         <link rel="stylesheet" href="{{STATIC_URL}}css/{{CSS_THEME}}.css">
     {% else %}
         <link rel="stylesheet/less" type="text/css" href="{{STATIC_URL}}less/{{CSS_THEME}}.less">
@@ -18,7 +18,7 @@
     <script src="{{STATIC_URL}}bootstrap/js/bootstrap.min.js" type="text/javascript"></script>
     <script src="{{STATIC_URL}}bootstrap/js/bootstrap-tooltip.js" type="text/javascript"></script>
 
-  {% if MAKAHIKI_USE_COMPILED_LESS %}
+  {% if not MAKAHIKI_USE_LESS %}
     <link rel="stylesheet" href="{{STATIC_URL}}css/status.css">
   {% else %}
     <link rel="stylesheet/less" type="text/css" href="{{STATIC_URL}}less/status.less">

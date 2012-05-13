@@ -3,12 +3,12 @@
 <plist version="1.0">
 <dict>
     <key>Label</key>
-    <string>Makahiki: Check Energy Goal (Production)</string>
+    <string>Makahiki: Check Energy Goal (Staging)</string>
     <key>WorkingDirectory</key>
-    <string>/Users/kukuicup/production/makahiki</string>
+    <string>/Users/kukuicup/staging/makahiki2/makahiki</string>
     <key>ProgramArguments</key>
     <array>
-      <string>/Users/kukuicup/Envs/kukuicup/bin/python</string>
+      <string>/Users/kukuicup/Envs/makahiki2/bin/python</string>
       <string>manage.py</string>
       <string>check_energy_goal</string>
     </array>
@@ -27,8 +27,8 @@
     </dict>
     
     <key>StandardErrorPath</key>
-  	<string>/Users/kukuicup/production/log/check-energy-goal.err</string>
+  	<string>/Users/kukuicup/staging/log/check-energy-goal.err</string>
   	<key>StandardOutPath</key>
-  	<string>/Users/kukuicup/production/log/check-energy-goal.out</string>
+  	<string>/Users/kukuicup/staging/log/check-energy-goal.out</string>
 </dict>
 </plist>

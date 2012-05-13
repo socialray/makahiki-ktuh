@@ -5,7 +5,7 @@
 {% endblock %}
 
 {% block extra_head %}
-  {% if MAKAHIKI_USE_COMPILED_LESS %}
+  {% if not MAKAHIKI_USE_LESS %}
     <link rel="stylesheet" href="{{STATIC_URL}}css/landing.css">
   {% else %}
     <link rel="stylesheet/less" type="text/css" href="{{STATIC_URL}}less/landing.less">

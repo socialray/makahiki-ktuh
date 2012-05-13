@@ -56,7 +56,7 @@ class TeamEnergyGoalTest(TransactionTestCase):
         )
         energy_data.save()
 
-        resource_goal.check_daily_energy_goal(self.team)
+        resource_goal.check_daily_resource_goal(self.team, "energy")
 
         profile = Profile.objects.get(user__username="user")
         self.assertEqual(profile.points(), points,
@@ -67,7 +67,7 @@ class TeamEnergyGoalTest(TransactionTestCase):
 
         energy_data.usage = 150
         energy_data.save()
-        resource_goal.check_daily_energy_goal(self.team)
+        resource_goal.check_daily_resource_goal(self.team, "energy")
 
         profile = Profile.objects.get(user__username="user")
         self.assertEqual(profile.points(), points,
@@ -75,7 +75,7 @@ class TeamEnergyGoalTest(TransactionTestCase):
 
         energy_data.usage = 100
         energy_data.save()
-        resource_goal.check_daily_energy_goal(self.team)
+        resource_goal.check_daily_resource_goal(self.team, "energy")
 
         profile = Profile.objects.get(user__username="user")
         self.assertEqual(profile.points(), points + goal_settings.goal_points,

@@ -937,7 +937,7 @@
         "model": "smartgrid.action",
         "fields": {
             "category": 7,
-            "related_resource": null,
+            "related_resource": "water",
             "social_bonus": 5,
             "video_id": null,
             "depends_on": "completed(\"cup-secrets\") or completed(\"power-energy\")",
@@ -961,7 +961,7 @@
         "model": "smartgrid.action",
         "fields": {
             "category": 7,
-            "related_resource": null,
+            "related_resource": "water",
             "social_bonus": 5,
             "video_id": null,
             "depends_on": "completed(\"cup-secrets\") or completed(\"power-energy\")",
@@ -985,7 +985,7 @@
         "model": "smartgrid.action",
         "fields": {
             "category": 7,
-            "related_resource": null,
+            "related_resource": "water",
             "social_bonus": 5,
             "video_id": null,
             "depends_on": "completed(\"cup-secrets\") or completed(\"power-energy\")",
@@ -1201,7 +1201,7 @@
         "model": "smartgrid.action",
         "fields": {
             "category": 7,
-            "related_resource": null,
+            "related_resource": "water",
             "social_bonus": 5,
             "video_id": null,
             "depends_on": "completed(\"cup-secrets\") or completed(\"power-energy\")",
@@ -1225,7 +1225,7 @@
         "model": "smartgrid.action",
         "fields": {
             "category": 7,
-            "related_resource": null,
+            "related_resource": "water",
             "social_bonus": 5,
             "video_id": null,
             "depends_on": "completed(\"cup-secrets\") or completed(\"power-energy\")",
@@ -1705,7 +1705,7 @@
         "model": "smartgrid.action",
         "fields": {
             "category": 7,
-            "related_resource": null,
+            "related_resource": "water",
             "social_bonus": 0,
             "video_id": null,
             "depends_on": "False",
@@ -2185,7 +2185,7 @@
         "model": "smartgrid.action",
         "fields": {
             "category": 7,
-            "related_resource": null,
+            "related_resource": "water",
             "social_bonus": 5,
             "video_id": null,
             "depends_on": "completed(\"energy-intuition\") and afterPublished()",
@@ -2833,7 +2833,7 @@
         "model": "smartgrid.action",
         "fields": {
             "category": 7,
-            "related_resource": null,
+            "related_resource": "water",
             "social_bonus": 0,
             "video_id": null,
             "depends_on": "False",
@@ -2905,7 +2905,7 @@
         "model": "smartgrid.action",
         "fields": {
             "category": 7,
-            "related_resource": null,
+            "related_resource": "water",
             "social_bonus": 5,
             "video_id": null,
             "depends_on": "completed(\"energy-intuition\") and afterPublished()",
