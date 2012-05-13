@@ -13,7 +13,7 @@ def main():
 
     page_names = ['advanced', 'energy', 'help', 'home', 'landing', 'learn',
                   'news', 'profile', 'status', 'win']
-    less_path = "media/less"
+    less_path = "static/less"
     os.chdir(less_path)
     theme_names = glob.glob('theme-*.less')
     for theme in theme_names:

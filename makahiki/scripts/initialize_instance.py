@@ -13,9 +13,8 @@ def main():
     os.system("python manage.py migrate")
     os.system("python scripts/load_data.py")
     os.system("python manage.py collectstatic --noinput")
-    os.system("rm -rf site_media/media; mkdir site_media/media; "
-              "mv site_media/static/media site_media/media")
-
+    os.system("cp -r media site_media")
+    # if use S3, need to upload the media directory to S3 bucket
 
 if __name__ == '__main__':
     main()
