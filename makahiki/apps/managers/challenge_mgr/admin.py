@@ -76,8 +76,10 @@ class ChallengeSettingsAdmin(admin.ModelAdmin):
                   )}),
         ("CAS or LDAP authentication",
             {"fields":
-                  ("cas_server_url",
-                   ("ldap_server_url", "ldap_search_base"), )}),
+                  (("use_cas_auth", "cas_server_url"),
+                   ("use_ldap_auth", "ldap_server_url", "ldap_search_base"),
+                   ("use_internal_auth"),
+                  )}),
         ("WattDepot server for real time energy data",
             {"fields":
                   ("wattdepot_server_url", )}),

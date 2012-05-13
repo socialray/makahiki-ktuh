@@ -40,6 +40,9 @@ class ChallengeSettings(models.Model):
         max_length=50,)
 
     # CAS settings
+    use_cas_auth = models.BooleanField(
+        default=False,
+        help_text="Use CAS authentication ?")
     cas_server_url = models.CharField(
         null=True, blank=True,
         help_text="The URL for CAS authentication service. " \
@@ -47,6 +50,9 @@ class ChallengeSettings(models.Model):
         max_length=100,)
 
     # LDAP settings
+    use_ldap_auth = models.BooleanField(
+        default=False,
+        help_text="Use LDAP authentication ?")
     ldap_server_url = models.CharField(
         null=True, blank=True,
         help_text="The URL for LDAP authentication service. Example: ldap://localhost:10389",
@@ -55,6 +61,11 @@ class ChallengeSettings(models.Model):
         null=True, blank=True,
         help_text="The search base for the ldap service. Example: ou=users,ou=system",
         max_length=100,)
+
+    # internal authentication
+    use_internal_auth = models.BooleanField(
+        default=False,
+        help_text="Use internal authentication ?")
 
     # Wattdepot server
     wattdepot_server_url = models.CharField(
@@ -66,7 +77,7 @@ class ChallengeSettings(models.Model):
     # email settings
     email_enabled = models.BooleanField(
         default=False,
-        help_text="Enable email?",
+        help_text="Enable email ?",
         )
     contact_email = models.CharField(
         help_text="The contact email of the admin.",
@@ -80,7 +91,7 @@ class ChallengeSettings(models.Model):
         help_text="The port of the email server",)
     email_use_tls = models.BooleanField(
         default=True,
-        help_text="Use TLS in the email server?",)
+        help_text="Use TLS in the email server ?",)
 
     # landing page content settings
     landing_slogan = models.TextField(
@@ -141,10 +152,12 @@ class ChallengeSettings(models.Model):
             settings.AUTH_LDAP_SERVER_URI = settings.CHALLENGE.ldap_server_url
             settings.AUTH_LDAP_USER_SEARCH = LDAPSearch("%s" % settings.CHALLENGE.ldap_search_base,
                                                ldap.SCOPE_SUBTREE, "(uid=%(user)s)")
-            settings.AUTH_LDAP_USER_ATTR_MAP = {
-                "first_name": "cn",
-                "last_name": "sn",
-            }
+
+            import logging
+
+            logger = logging.getLogger('django_auth_ldap')
+            logger.addHandler(logging.StreamHandler())
+            logger.setLevel(logging.DEBUG)
 
 
 class Sponsor(models.Model):

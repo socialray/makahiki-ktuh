@@ -1,8 +1,8 @@
-{% extends "logo_bar_base.html" %} 
+{% extends "logo_bar_base.html" %}
 {% load markup %}
 {% block page_title %}
     Welcome to KukuiCup!
-{% endblock %} 
+{% endblock %}
 
     {% block content %}
         <div class="row-fluid">
@@ -12,11 +12,45 @@
 
                 <p>
 
+                {% if not CHALLENGE.use_internal_auth %}
+                    {% if CHALLENGE.use_cas_auth %}
                     <button id="landing-button-participant" class="landing-intro button"
-                            onclick='javascript:location.href="{% url home_index %}"'>
+                            onclick="javascript:location.href='{% url home_index %}'">
+                        {{ CHALLENGE.landing_participant_text|markdown }}
+                    </button>
+                    {% else %}
+                    <button id="landing-button-participant" class="landing-intro button"
+                            onclick="javascript:location.href='{% url auth_login %}'">
+                        {{ CHALLENGE.landing_participant_text|markdown }}
+                    </button>
+                    {% endif %}
+                {% else %}
+                    <button id="landing-button-participant" class="landing-intro button"
+                            onclick="show_auth_buttons()">
                         {{ CHALLENGE.landing_participant_text|markdown }}
                     </button>
 
+                    <div id="auth_buttons" hidden="true">
+                        <center>
+                        <table><tr>
+                        {% if CHALLENGE.use_cas_auth %}
+                        <td>
+                          <button class="landing-intro button"
+                                onclick="javascript:location.href='{% url home_index %}'">
+                            <h4> I have a UH email </h4><br/>
+                          </button>
+                        </td>
+                        {% endif %}
+                        <td>
+                        <button class="landing-intro button"
+                                onclick="javascript:location.href='{% url auth_login %}'">
+                            <h4> I don't have a UH email </h4><br/>
+                        </button>
+                        </td>
+                        </tr></table>
+                        </center>
+                    </div>
+                {% endif %}
                 <p>
 
                     <button id="landing-button-non-participant" class="landing-intro button"
@@ -27,8 +61,8 @@
             </div>
         </div>
         <div class="row-fluid">
-            <div class="landing-sponsors content-box" style="text-align: center;"> 
-                        <h4>Sponsored by:</h4> 
+            <div class="landing-sponsors content-box" style="text-align: center;">
+                        <h4>Sponsored by:</h4>
                     <div id="landing-sponsors-list">
                         {% for sponsor in CHALLENGE.sponsor_set.all %}
                             <a href="{{ sponsor.url }}">
@@ -44,7 +78,15 @@
                         {% endfor %}
                     </div>
                     <a class="contact-link" href="mailto:{{ CHALLENGE.contact_email }}">Contact the Kukui Cup administrators</a>
-            </div>    
+            </div>
 
-    {% endblock %} 
- 
+        <script type="text/javascript">
+            function show_auth_buttons() {
+                $('#landing-button-participant').hide()
+                $('#auth_buttons').show()
+                return false;
+            }
+        </script>
+
+    {% endblock %}
+
