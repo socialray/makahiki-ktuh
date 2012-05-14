@@ -1,6 +1,5 @@
 @charset "UTF-8";
 fieldset legend{font-weight:bold;text-align:center;padding:25px 0 0 0;}
-#energy-smiley{font-size:200%;}
 .energy-power-box{padding:5px;margin-right:1em;}
 #energy-power-goal-updated{font-size:8pt;}
 #energy-power-gauge-label,#energy-power-gauge-table-goal,#energy-power-gauge-table-actual,#energy-power-goal-info{font-weight:bold;}

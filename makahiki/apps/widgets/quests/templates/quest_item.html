@@ -1,13 +1,13 @@
 {% load markup %}
 
 <li>
+    <i class="icon-cog"></i>
     <a href="javascript:void(0)" id="{{quest.quest_slug}}"
        class="quest-title {% if user_quest %}quest-user-quest{%endif%}">
         {{ quest.name }}
     </a>
 
     <div class="quest-description" style="display:none">
-        <h4>This is a level {{ quest.level }} quest</h4>
         {{ quest.description|markdown }}
         <div class="quest-options">
             {% if user_quest %}

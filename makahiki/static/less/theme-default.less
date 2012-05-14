@@ -42,48 +42,69 @@
 @darkTan: #C18E22;
 
 // Theme stylable elements
-@body-bg: @steelBlue; // bg color for the body
-@body-text: @black;  
-// infobar colors
-@infobar-grad-start: fadeout(@lightPaleBlue, 55%);
-@infobar-grad-end: fadeout(@skyBlue, 55%);
-@infobar-text: @black;
-// navbar colors
-@navbar-grad-start: fadeout(@brightBlue, 20%);
-@navbar-grad-end: darken(@navbar-grad-start, 10%);
-@navbar-text: @white;
-@navbar-text-sel: @veryDarkBlueBlack;
-// notification colors
-@notif-grad-start: fadeout(@lightGrayBlue, 45%);
-@notif-grad-end: fadeout(@lightGrayBlue, 45%);
-@notif-text: @black;
-// quest colors
-@quest-grad-start: fadeout(@darkGreen, 55%);
-@quest-grad-end: fadeout(@darkGreen, 55%);
-@quest-text: @black;
-@quest-text-sel: @veryDarkBlueBlack;
-// content
-@title-grad-start: @skyBlue;
-@title-grad-end: darken(@title-grad-start, 25%);
-@title-div: @black;
-@title-text: @black;
-@content: @lightSteelBlue;
-@content-alt: @lightCyan;
-// smart grid game
-@sgg-activity: @brightBlue;
-@sgg-commitment: @lighterBrightBlue;
-@sgg-event: @blueCyan;
-@sgg-excursion: @white;
-@sgg-survey: @darkTan;
-@sgg-text: @black;
-@sgg-category: @skyBlue;
-// prizes table
-@prizes-banner: @darkerSteelBlue;
+// every page
+@page-bkg-color: @steelBlue; 
+@page-bkg-image: "../images/bubbles.jpg";
+@page-logo: "../images/icons/icon-uh-logo.png"; 
+@page-font-color: @black;
+@page-link-color: @blueCyan;
+// Questbar
+@questbar-bkg-color-start: @darkGreen;
+@questbar-bkg-color-end: @darkGreen;
+@questbar-font-color: @black;
+@questbar-transparency: 55%;
+// Navbar
+@navbar-bkg-color-start: @brightBlue;
+@navbar-bkg-color-end: darken(@navbar-bkg-color-start, 10%);
+@navbar-font-color: @white;
+@navbar-curr-page-bkg-color: @navbar-bkg-color-end;
+@navbar-curr-path-font-color: @black;
+@navbar-transparency: 20%;
+// Infobar
+@infobar-bkg-color-start: @lightPaleBlue;
+@infobar-bkg-color-end: @skyBlue;
+@infobar-font-color: @black;
+//@infobar-feedback-bkg-color: @darkerSteelBlue; // bootstrap buttons do not like this
+@infobar-feedback-font-color: @black;
+@infobar-transparency: 55%;
+// Notifications
+@notification-bkg-color-start: @lightGrayBlue;
+@notification-bkg-color-end: @lightGrayBlue;
+@notification-font-color: @black;
+@notification-transparency: 45%;
+// Page infobox
+@pageinfobox-bkg-color-start: @white;
+@pageinfobox-bkg-color-end: @white;
+@pageinfobox-font-color: @black;
+@pageinfobox-transparency: 20%;
+// Widgets
+@widget-title-bkg-color-start: @skyBlue;
+@widget-title-bkg-color-end: darken(@skyBlue, 25%);
+@widget-title-font-color: @black;
+@widget-title-transparency: 0%;
+@widget-body-bkg-color: @lightSteelBlue; 
+@widget-body-font-color: @black;
+@widget-body-transparency: 0%;
+@widget-button-bkg-color: darken(@widget-body-bkg-color, 50%);
+@widget-button-font-color: @widget-body-bkg-color; 
+@widget-table-row-color-1: @widget-body-bkg-color;
+@widget-table-row-color-2: lighten(@widget-body-bkg-color, 40%);
+@widget-subtitle-bkg-color: @darkerSteelBlue;
+@widget-subtitle-font-color: @black;
+@widget-text-area-bkg-color: lighten(@lightGrayBlue, 30%);
+@widget-text-area-font-color: @grayDarker;
+// Smart grid game
+@sgg-header-bkg-color: @skyBlue;
+@sgg-header-font-color: @black; 
+@sgg-entry-font-color: @black;
+@sgg-activity-cell-bkg-color: @brightBlue;
+@sgg-commitment-cell-bkg-color: @lighterBrightBlue;  
+@sgg-event-cell-bkg-color: @blueCyan;   
+@sgg-excursion-cell-bkg-color: @white;
+@sgg-special-cell-bkg-color: @darkTan;
+
 @prizes-raffle-table: @green;
 // landing page
 @landingSponsors: @grayLighter;
-
-@image-background: "../images/bubbles.jpg";
-@image-logo: "../images/icons/icon-uh-logo.png";
 
 @import "base-styles.less";

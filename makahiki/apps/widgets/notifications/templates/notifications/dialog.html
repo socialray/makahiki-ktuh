@@ -7,7 +7,7 @@
                 <!-- FIXME: Don't like the width 530px -->
                 <div class="notification-contents"
                      {% if notification.is_success %}style="width: 530px"{% endif %}>
-                    <span class="notice-icon ui-icon {{notification.icon_class}}"></span>
+                     <i class="{{notification.icon_class}}"></i>
                     <!--  FIXME: Don't like the width 600px -->
                     <div class='notice-content' {% if notification.is_success %}style="width: 470px"
                          {% else %}style="width: 600px"{% endif %}>
@@ -57,7 +57,7 @@
                     class="{{notification.style_class}} notification-item">
                     <div class="notification-contents">
                         <div class='notice-icon'>
-                            <span class="ui-icon {{notification.icon_class}}"></span>
+                            <i class="{{notification.icon_class}}"></i>
                         </div>
                         <div class='notice-content'>
                             {{ notification.contents|safe }}

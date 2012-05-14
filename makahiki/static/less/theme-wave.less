@@ -44,48 +44,69 @@
 @orangeBrown: #C18E22;
 
 // Theme stylable elements
-@body-bg: @steelBlue; // bg color for the body
-@body-text: @steelBlue;
-// infobar colors
-@infobar-grad-start: fadeout(@lightPaleBlue, 55%);
-@infobar-grad-end: fadeout(@skyBlue, 55%);
-@infobar-text: @black;
-// navbar colors
-@navbar-grad-start: fadeout(@lightPurpleBlue, 55%);
-@navbar-grad-end: fadeout(@lightPurpleBlue, 55%);
-@navbar-text: @white;
-@navbar-text-sel: @veryDarkBlueBlack;
-// notification colors
-@notif-grad-start: fadeout(@yellowGreen, 45%);
-@notif-grad-end: fadeout(@yellowGreen, 45%);
-@notif-text: @black;
-// quest colors
-@quest-grad-start: fadeout(@darkGreen, 55%);
-@quest-grad-end: fadeout(@darkGreen, 55%);
-@quest-text: @black;
-@quest-text-sel: @veryDarkBlueBlack;
-// content
-@title-grad-start: @skyBlue;
-@title-grad-end: @skyBlue;
-@title-div: @black;
-@title-text: @black;
-@content: @lightSteelBlue;
-@content-alt: @lightCyan;
-// smart grid game
-@sgg-activity: @oliveGreen;
-@sgg-commitment: @brown;
-@sgg-event: @lightBrown;
-@sgg-excursion: @brickRed;
-@sgg-survey: @orangeBrown;
-@sgg-text: @black;
-@sgg-category: @white;
-// prizes table
-@prizes-banner: @darkerSteelBlue;
+// every page
+@page-bkg-color: @steelBlue; 
+@page-bkg-image: "../images/oceanWave.jpg";
+@page-logo: "../images/icons/icon-uh-logo.png"; 
+@page-font-color: @steelBlue;
+@page-link-color: @steelBlue;
+// Questbar
+@questbar-bkg-color-start: @darkGreen;
+@questbar-bkg-color-end: @darkGreen;
+@questbar-font-color: @black;
+@questbar-transparency: 55%;
+// Navbar
+@navbar-bkg-color-start: @lightPurpleBlue;
+@navbar-bkg-color-end: @lightPurpleBlue;
+@navbar-font-color: @white;
+@navbar-curr-page-bkg-color: darken(@lightPurpleBlue, 20%);
+@navbar-curr-path-font-color: @black;
+@navbar-transparency: 55%;
+// Infobar
+@infobar-bkg-color-start: @lightPaleBlue;
+@infobar-bkg-color-end: @skyBlue;
+@infobar-font-color: @black;
+//@infobar-feedback-bkg-color: @darkerSteelBlue; // bootstrap buttons do not like this
+@infobar-feedback-font-color: @black;
+@infobar-transparency: 55%;
+// Notifications
+@notification-bkg-color-start: @yellowGreen;
+@notification-bkg-color-end: @yellowGreen;
+@notification-font-color: @black;
+@notification-transparency: 45%;
+// Page infobox
+@pageinfobox-bkg-color-start: @white;
+@pageinfobox-bkg-color-end: @white;
+@pageinfobox-font-color: @black;
+@pageinfobox-transparency: 20%;
+// Widgets
+@widget-title-bkg-color-start: @skyBlue;
+@widget-title-bkg-color-end: @skyBlue;
+@widget-title-font-color: @black;
+@widget-title-transparency: 0%;
+@widget-body-bkg-color: @lightSteelBlue; 
+@widget-body-font-color: @black;
+@widget-body-transparency: 0%;
+@widget-button-bkg-color: darken(@widget-body-bkg-color, 50%);
+@widget-button-font-color: @widget-body-bkg-color; 
+@widget-table-row-color-1: @widget-body-bkg-color;
+@widget-table-row-color-2: lighten(@widget-body-bkg-color, 40%);
+@widget-subtitle-bkg-color: @darkerSteelBlue;
+@widget-subtitle-font-color: @black;
+@widget-text-area-bkg-color: lighten(@lightSteelBlue, 30%);
+@widget-text-area-font-color: @grayDarker;
+// Smart grid game
+@sgg-header-bkg-color: @white;
+@sgg-header-font-color: @black; 
+@sgg-entry-font-color: @black;
+@sgg-activity-cell-bkg-color: @oliveGreen;
+@sgg-commitment-cell-bkg-color: @brown;  
+@sgg-event-cell-bkg-color: @lightBrown;   
+@sgg-excursion-cell-bkg-color: @brickRed;
+@sgg-special-cell-bkg-color: @orangeBrown;
+
 @prizes-raffle-table: @green;
 // landing page
 @landingSponsors: @grayLighter;
-
-@image-background: "../images/oceanWave.jpg";
-@image-logo: "../images/icons/icon-uh-logo.png";
 
  @import "base-styles.less";

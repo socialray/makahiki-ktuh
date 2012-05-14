@@ -8,13 +8,11 @@
 .homecontent>ul>li:nth-of-type(7)>.home-item{margin-left:16%;}
 .homecontent>ul>li{list-style:none;}
 .tile>ul{list-style:none;margin-left:0px;}
-.tile>ul>li{margin-bottom:3px;}
 .content p{font-size:8pt;line-height:14px;text-align:left;white-space:nowrap;padding-left:13px;}
 .content img{border:0;}
 .tile>h6{text-transform:uppercase;font-weight:bold;font-size:14pt;}
 .home-item{width:28%;height:210px;display:block;padding-bottom:2px;margin:10px 10px 0px 10px;float:left;}
 .content .container-fluid{padding-left:20;padding-right:20;}
-.tile{height:80px;padding:1px;background-color:rgba(255, 255, 255, 0.8);border:3px outset #DDD;border-radius:8px;box-shadow:3px 3px 5px #000;-moz-box-shadow:3px 3px 5px #000;-webkit-box-shadow:3px 3px 5px #000;position:relative;z-index:100;}
 #home-prizes{clear:left;}
 .home-item img{float:none;}
 .home-advanced-icon{background:transparent url(../images/icons/icon-advanced-lg.png) top left no-repeat;width:120px;height:124px;}

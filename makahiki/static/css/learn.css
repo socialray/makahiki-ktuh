@@ -28,7 +28,7 @@ table#activities-grid td table td{padding:1px;margin:0;vertical-align:middle;}
 .activity-catogory a{margin:0;padding:0;text-decoration:none;}
 .activity-category p{margin:0;padding:0;}
 .activity-category h3{font-size:12pt;margin:0;padding:0;}
-.activity-category{width:12.5%;height:40px;display:table-cell;vertical-align:middle;text-align:center;margin:0;padding:0;border-radius:8px;-moz-border-radius:8px;-webkit-border-radius:8px;text-transform:capitalize;}
+.activity-category{height:48px;vertical-align:middle;text-align:center;margin:0;padding:0;border:1px solid #000;border-radius:8px;-moz-border-radius:8px;-webkit-border-radius:8px;text-transform:capitalize;}
 .activity-category div{position:relative;font-size:9pt;margin:0 auto 0 auto;padding:2px;}
 .activity,.commitment,.event,.survey,.excursion,.yellow-green{height:48px;border:1px solid #000;border-radius:8px;-moz-border-radius:8px;-webkit-border-radius:8px;}
 .activity div,.commitment div,.event div,.survey div,.excursion div,.yellow-green div{font-size:9pt;padding:1px;}
