@@ -10,7 +10,7 @@
                             /></a>
             </div>
             <div class="content-box-contents">
-                <b>Each member receives 20 points each day that we make our goal. </b>
+                
               {% if hourly_goal %}
                 <fieldset>
                     <legend>Current Status</legend>
@@ -32,8 +32,8 @@
                     <table id="energy-status-how-table">
                         <tr>
                             <td id="energy-status-how-activities-content">
-                                The following activities can help your {{ TEAM_LABEL.lower }}
-                                conserve {{ resource.name }}, and you earn points!
+                                <center>The following activities can help your {{ TEAM_LABEL.lower }}
+                                conserve {{ resource.name }}, and you earn points!</center>
                                 {% include "golow_activities.html" %}
                             </td>
                         </tr>

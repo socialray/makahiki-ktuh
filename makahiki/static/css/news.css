@@ -8,7 +8,8 @@
 #news-members-list li{width:75px;text-align:center;min-height:80px;float:left;}
 #news-members-link{text-align:center;clear:both;}
 #news-wall-content{padding:5px 10px;}
-#wall-post textarea{box-sizing:border-box;-webkit-box-sizing:border-box;-moz-box-sizing:border-box;-ms-box-sizing:border-box;width:90%;}
+#wall-post textarea{box-sizing:border-box;-webkit-box-sizing:border-box;-moz-box-sizing:border-box;-ms-box-sizing:border-box;width:92%;margin-left:4%;}
+.padded{margin-left:5%;}
 #wall-posts{list-style:none;margin:0;}
 #wall-posts li{margin:0;padding:5px 0;border-top:1px outset gray;}
 #wall-posts li .row{margin-left:0;}
