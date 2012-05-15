@@ -28,7 +28,7 @@ urlpatterns = patterns('',
     url(r'^log/', include('apps.managers.log_mgr.urls')),
     url(r'^help/', include('apps.widgets.help.urls')),
     url(r'^avatar/', include('apps.lib.avatar.urls')),
-
+    url(r'^facebook/$', include('apps.lib.facebook_api.urls')),
 
     url(r'^account/cas/login/$', 'apps.lib.django_cas.views.login', name='cas_login'),
     url(r'^account/cas/logout/$', 'apps.lib.django_cas.views.logout', name='cas_logout'),

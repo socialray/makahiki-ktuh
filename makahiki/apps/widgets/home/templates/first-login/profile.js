@@ -52,6 +52,4 @@ $(document).ready(function () {
         $("#ui-dialog-title-setup-dialog").html(data.title);
         $("#setup-dialog").html(data.contents);
     }
-
-    FB.init({appId:'{{FACEBOOK_APP_ID}}', status:true, cookie:true, xfbml:true});
 });
