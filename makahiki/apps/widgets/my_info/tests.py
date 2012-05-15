@@ -31,6 +31,7 @@ class ProfileFunctionalTestCase(TransactionTestCase):
         user_form = {
             "display_name": "Test User",
             "about": "I rock",
+            "theme": "theme-default",
             "contact_email": "user@test.com",
             "contact_text": "8088675309",
             "contact_carrier": "tmobile",

@@ -1,4 +1,5 @@
 """Define the model for Player state."""
+from django.conf import settings
 from django.db import models
 from django.contrib.auth.models import User
 from django.db.models.signals import post_save, pre_save
@@ -12,6 +13,8 @@ class Profile(models.Model):
     """Profile represents a player's profile info, and his points,
        and other book keeping.
     """
+    THEME_CHOICES = ((key, key) for key in settings.INSTALLED_THEMES)
+
     user = models.ForeignKey(User, unique=True, verbose_name='user', related_name='profile',
                              help_text="The login user")
     name = models.CharField('name', unique=True, max_length=50,
@@ -22,6 +25,8 @@ class Profile(models.Model):
                                  help_text="The last name of the player")
     team = models.ForeignKey(Team, null=True, blank=True,
                              help_text="The team of the player")
+    theme = models.CharField(default="theme-default", choices=THEME_CHOICES, max_length=50,
+                             help_text="The UI theme for this player.")
     contact_email = models.EmailField(null=True, blank=True,
                                       help_text="The contact email of the player")
     contact_text = PhoneNumberField(null=True, blank=True,

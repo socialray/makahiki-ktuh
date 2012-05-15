@@ -30,6 +30,10 @@
             </td>
         </tr>
         <tr>
+            <td class="profile-form-label">{{ form.theme.label_tag }}</td>
+            <td>{{ form.theme }}</td>
+        </tr>
+        <tr>
             <td class="profile-section-header" colspan="2">Reminder
                 Settings
             </td>
@@ -60,10 +64,10 @@
         </tr>
     </table>
     <div>
-        <a href="#" class="textlink">Save Changes</a>
+        <a href="#" id="profile-form-submit-button">Save Changes</a>
         <script type="text/javascript">
             $(document).ready(function () {
-                $(".profile-form-submit-button").click(function () {
+                $("#profile-form-submit-button").click(function () {
                     $(this).parents("form").submit();
                 });
             });

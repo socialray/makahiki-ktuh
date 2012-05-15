@@ -21,20 +21,27 @@ def competition(request):
     available_events = None
     default_view_objects = None
     page_info = None
-
-    if user.is_authenticated() and user.get_profile().team:
-        team_member_count = user.get_profile().team.profile_set.count()
-        team_count = Team.objects.count()
-        overall_member_count = Profile.objects.count()
-        available_events = smartgrid.get_available_events(user)
+    css_theme = settings.CHALLENGE.theme
 
     if user.is_authenticated():
+        profile = user.get_profile()
+
         default_view_objects = _get_default_view_objects(request)
         page_info = challenge_mgr.page_info(user)
 
+        if profile.team:
+            team_member_count = user.get_profile().team.profile_set.count()
+            team_count = Team.objects.count()
+            overall_member_count = Profile.objects.count()
+            available_events = smartgrid.get_available_events(user)
+
+        # override the site theme if there is any
+        if profile.theme:
+            css_theme = profile.theme
+
     return {
         "CHALLENGE": settings.CHALLENGE,
-        "CSS_THEME": settings.CHALLENGE.theme,
+        "CSS_THEME": css_theme,
         "TEAM_LABEL": settings.CHALLENGE.competition_team_label,
         "FACEBOOK_APP_ID": settings.FACEBOOK_APP_ID,
         "MAKAHIKI_USE_LESS": settings.MAKAHIKI_USE_LESS,

@@ -44,7 +44,7 @@ org.wattdepot.gdata.makahiki.PowerMeter = function() {
   function draw(id, source, spreadsheetDatatable, options) {
     // Define look and feel parameters using options object to override defaults. 
     var width = options.width || 300;
-    var backgroundColor = options.backgroundColor || "F5F3E5";
+    var backgroundColor = options.backgroundColor;
     var globalStyle = options.globalStyle || {};
     var titleStyle = options.titleStyle || {};
     var captionStyle = options.captionStyle || {};
@@ -66,7 +66,8 @@ org.wattdepot.gdata.makahiki.PowerMeter = function() {
 
   // Adds 'global' CSS styling to the top-level div passed into this instance.
   function addGlobalStyle(element, backgroundColor, width, globalStyle) {
-    element.style.backgroundColor = backgroundColor;
+    if (backgroundColor != null)
+        element.style.backgroundColor = backgroundColor;
     element.style.margin = '0 auto';
     element.style.width = width + 'px';
     addStyleProperties(element, globalStyle);
@@ -95,7 +96,8 @@ org.wattdepot.gdata.makahiki.PowerMeter = function() {
     var divId = id + '__PowerMeter';
     var div = getElementByIdOrCreate(divId, 'div');
     element.appendChild(div);
-    div.style.backgroundColor = backgroundColor;
+    if (backgroundColor != null)
+        div.style.backgroundColor = backgroundColor;
     var powerVal = datatable.getValue(0,1);
     var baselineVal = datatable.getValue(0,2);
     var minVal = baselineVal - (powerRange / 2);
@@ -118,7 +120,7 @@ org.wattdepot.gdata.makahiki.PowerMeter = function() {
     var chart = new google.visualization.ImageChart(div);
     chart.draw(view, {cht: 'gom',
                       chs:  width + 'x108',
-                      chf: 'bg,s,' + backgroundColor,
+                      chf: 'bg,s,' + '00000000',  //the last 00 indicates transparency
                       chxl: '0:|' + powerVal + ' W|1:|' + minVal + ' W|' + maxVal + ' W',
                       chxt: 'x,y',
                       chco: '3CB371,FFFF00,FF0000',

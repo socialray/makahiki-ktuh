@@ -3,6 +3,7 @@ import datetime
 
 from apps.managers.challenge_mgr.challenge_mgr import MakahikiBaseCommand
 from apps.managers.challenge_mgr.models import RoundSettings
+from apps.managers.resource_mgr.models import EnergyUsage
 from apps.managers.team_mgr.models import Team
 from apps.widgets.resource_goal.models import EnergyGoalSetting, EnergyBaselineHourly, \
     EnergyBaselineDaily, WaterGoalSetting, WaterBaselineDaily
@@ -18,6 +19,7 @@ class Command(MakahikiBaseCommand):
         """set up the test data"""
         self.setup_rounds()
         self.setup_event_dates()
+        self.setup_resource_usage()
         self.setup_resource_baseline()
         self.setup_resource_goalsetting()
 
@@ -37,8 +39,8 @@ class Command(MakahikiBaseCommand):
         RoundSettings(name="Overall", start=end2, end=overall_end).save()
 
     def setup_event_dates(self):
-        """set up event dates."""
-        for event in Event.objects.all():
+        """adjust event dates to start from the beginning of the competition"""
+        for event in Event.objects.filter(event_date__lte=datetime.datetime.today()):
             event_day_delta = event.event_date.date() - datetime.date(2011, 10, 17)
             event.event_date = datetime.datetime.today() + event_day_delta
 
@@ -46,6 +48,11 @@ class Command(MakahikiBaseCommand):
             event.pub_date = datetime.date.today() + pub_day_delta
 
             event.save()
+
+    def setup_resource_usage(self):
+        """remove any resource usage before the competition"""
+        for usage in EnergyUsage.objects.filter(date__lte=datetime.date.today()):
+            usage.delete()
 
     def setup_resource_baseline(self):
         """set up the resource baseline data, all existing data will be delete."""

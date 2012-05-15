@@ -18,6 +18,11 @@ def supply(request, page_name):
             if name != profile.name:
                 profile.name = name
 
+            theme = form.cleaned_data["theme"].strip()
+
+            if theme and theme != profile.theme:
+                profile.theme = theme
+
             profile.contact_email = form.cleaned_data["contact_email"]
             profile.contact_text = form.cleaned_data["contact_text"]
             profile.contact_carrier = form.cleaned_data["contact_carrier"]

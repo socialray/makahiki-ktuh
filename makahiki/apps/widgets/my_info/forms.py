@@ -1,4 +1,5 @@
 """Provide the forms for the My_Info widget."""
+from django.conf import settings
 import re
 
 from django import forms
@@ -17,6 +18,8 @@ class ProfileForm(forms.Form):
         super(ProfileForm, self).__init__(*args, **kwargs)
 
     display_name = forms.CharField(required=True, max_length=20, min_length=1)
+    THEME_CHOICES = ((key, key) for key in settings.INSTALLED_THEMES)
+    theme = forms.ChoiceField(choices=THEME_CHOICES)
 
     # Event notifications
     contact_email = forms.EmailField(required=False)

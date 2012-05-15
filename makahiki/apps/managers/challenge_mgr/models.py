@@ -14,6 +14,9 @@ _MEDIA_LOCATION_UPLOAD = "uploads"
 
 class ChallengeSettings(models.Model):
     """Defines the global settings for the challenge."""
+
+    THEME_CHOICES = ((key, key) for key in settings.INSTALLED_THEMES)
+
     site_name = models.CharField(
         default="University of Hawaii at Manoa",
         help_text="The name of the site.",
@@ -30,10 +33,13 @@ class ChallengeSettings(models.Model):
         default="Kukui Cup",
         help_text="The name of the competition.",
         max_length=50,)
+
     theme = models.CharField(
-        default="default",
+        default="theme-default",
         help_text="The UI theme for this installation.",
+        choices=THEME_CHOICES,
         max_length=50,)
+
     competition_team_label = models.CharField(
         default="Lounge",
         help_text="The display label for team.",

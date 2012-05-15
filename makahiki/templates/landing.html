@@ -14,44 +14,38 @@
 
                 {% if not CHALLENGE.is_multi_auth %}
                     {%  if CHALLENGE.use_cas_auth %}
-                        <button id="landing-button-participant" class="landing-intro button"
+                        <button id="landing-button-participant" class="landing-button"
                             onclick="javascript:location.href='{% url home_index %}'">
                             {{ CHALLENGE.landing_participant_text|markdown }}
                         </button>
                     {% else %}
-                        <button id="landing-button-participant" class="landing-intro button"
+                        <button id="landing-button-participant" class="landing-button"
                                 onclick="javascript:location.href='{% url auth_login %}'">
                             {{ CHALLENGE.landing_participant_text|markdown }}
                         </button>
                     {% endif %}
                 {% else %}
-                    <button id="landing-button-participant" class="landing-intro button"
+                    <button id="landing-button-participant" class="landing-button"
                             onclick="show_auth_buttons()">
                         {{ CHALLENGE.landing_participant_text|markdown }}
                     </button>
-
+                    <p/>
                     <div id="auth_buttons" hidden="true">
-                        <center>
-                        <table><tr>
-                        <td>
-                          <button class="landing-intro button"
+                        <button class="landing-button-smaller"
                                 onclick="javascript:location.href='{% url home_index %}'">
-                            <h4> I have a UH email </h4><br/>
-                          </button>
-                        </td>
-                        <td>
-                        <button class="landing-intro button"
-                                onclick="javascript:location.href='{% url auth_login %}'">
-                            <h4> I don't have a UH email </h4><br/>
+                            <h3> I have a UH email </h3><br/>
                         </button>
-                        </td>
-                        </tr></table>
-                        </center>
+                        <p/>
+                        <p/>
+                        <button class="landing-button-smaller"
+                                onclick="javascript:location.href='{% url auth_login %}'">
+                            <h3> I don't have a UH email </h3><br/>
+                        </button>
                     </div>
                 {% endif %}
                 <p>
 
-                    <button id="landing-button-non-participant" class="landing-intro button"
+                    <button id="landing-button-non-participant" class="landing-button"
                             onclick="javascript:location.href='{% url about %}'">
                         {{ CHALLENGE.landing_non_participant_text|markdown }}
                     </button>

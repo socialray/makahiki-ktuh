@@ -144,7 +144,7 @@ INSTALLED_APPS = (
 )
 
 ################################
-# INSTALLED Widgets
+# INSTALLED DEFAULT Widgets for all pages
 ################################
 INSTALLED_DEFAULT_WIDGET_APPS = (
     'quests',
@@ -199,6 +199,14 @@ for widget in INSTALLED_WIDGET_APPS:
 # migration support, need to be the last app.
 # nose has to be after south!
 INSTALLED_APPS += ('south', 'django_nose',)
+
+################
+# INSTALLED Theme
+################
+INSTALLED_THEMES = (
+    'theme-default',
+    'theme-wave',
+)
 
 ################
 # TEST settings
