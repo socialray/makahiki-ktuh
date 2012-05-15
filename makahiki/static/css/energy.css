@@ -6,7 +6,6 @@ fieldset legend{font-weight:bold;text-align:center;padding:25px 0 0 0;}
 td#energy-status-how-calculator-content{vertical-align:text-top;padding-right:20px;width:50%;}
 td#energy-status-how-activities-content{vertical-align:text-top;}
 #energy-status-how-table,#energy-status-how-activities-content,#energy-status-how-activities-table{width:100%;}
-#energy-status-how-activities-table{border-collapse:collapse;margin-top:.5em;}
 #energy-status-how-activities-table th{text-align:left;padding-left:20px;}
 #energy-status-how-activities-table td{padding:4px 4px 4px 20px;text-align:left;}
 #news-wall-content{padding:5px 10px;}

@@ -4,14 +4,9 @@
 .content-box{text-align:left;}
 .content-box table{width:100%;margin:0;padding:0;border-spacing:0;}
 .content-box th,.content-box td{padding:4px;}
-.news-event-name,.news-event-date,.news-most-popular-activity,.news-commitments-name{border-right:1px solid #000;}
 #news-members-list{list-style:none;margin:0;margin-left:5px;padding:5px;}
 #news-members-list li{width:75px;text-align:center;min-height:80px;float:left;}
 #news-members-link{text-align:center;clear:both;}
-#team-member-detail-list{list-style:none;margin:0;}
-#team-member-detail-list>li{margin:5px 0;}
-.team-member-details h4{color:black;}
-.team-member-details p{margin:0;}
 #news-wall-content{padding:5px 10px;}
 #wall-post textarea{box-sizing:border-box;-webkit-box-sizing:border-box;-moz-box-sizing:border-box;-ms-box-sizing:border-box;width:90%;}
 #wall-posts{list-style:none;margin:0;}
