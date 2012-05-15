@@ -195,7 +195,6 @@ class SetupWizardFunctionalTestCase(TransactionTestCase):
             HTTP_X_REQUESTED_WITH='XMLHttpRequest')
         self.assertTemplateUsed(response, "first-login/profile.html")
         self.assertContains(response, profile.name)
-        self.assertNotContains(response, "facebook_photo")
         try:
             json.loads(response.content)
         except ValueError:
