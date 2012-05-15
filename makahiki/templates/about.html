@@ -1,45 +1,14 @@
-{% extends "site_base.html" %}
+{% extends "logo_bar_base.html" %}
 
 {% load markup %}
 
 {% block page_title %}
     Welcome to Kukui Cup!
 {% endblock %}
+ 
 
-{% block extra_head %}
-    {% if not MAKAHIKI_USE_LESS %}
-      <link rel="stylesheet" href="{{STATIC_URL}}css/{{CSS_THEME}}.css">
-    {% else %}
-      <link rel="stylesheet/less" type="text/css" href="{{STATIC_URL}}less/{{CSS_THEME}}.less">
-      <script src="{{STATIC_URL}}js/less-1.3.0.min.js" type="text/javascript"></script>
-    {% endif %}
-  <style>
-          /* Override for the footer on the index page.*/
-      #footer {
-          margin: 0;
-      }
-  </style>
-  <meta name="format-detection" content="telephone=no">
-{% endblock %}
-
-{% block body %}
-
-<div class="container">
-    <div class="row">
-        <div class="content-box span5 offset3">
-            <div id="landing-title" class="content-box-contents">
-                {# <a href="{% url landing %}"> #}
-                <img src="{{STATIC_URL}}images/old-logo.png"/>
-                {# </a> #}
-                <h2>The Kukui Cup: Lights out, game on!</h2>
-            </div>
-        </div>
-    </div>
-    <div class="row">
-        <div class="content-box content-box-contents span10 offset1">
+{% block content %}  
+        <div class="content-box landing-body">
           {{ CHALLENGE.about_page_text|markdown }}
-        </div>
-    </div>
-
-</div>
+        </div> 
 {% endblock %}
