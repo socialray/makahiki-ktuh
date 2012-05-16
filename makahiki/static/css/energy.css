@@ -1,7 +1,8 @@
 @charset "UTF-8";
 fieldset legend{font-weight:bold;text-align:center;margin-bottom:0px;}
 legend{border:none;}
-.energy-power-box{padding:5px;margin-right:1em;}
+.energy-display-text{text-align:center;font-size:32pt;font-weight:bold;line-height:32pt;}
+@media (max-width:920px){.energy-display-text{text-align:center;font-size:22pt;font-weight:bold;line-height:22pt;}}.energy-power-box{padding:5px;margin-right:1em;}
 #energy-power-goal-updated{font-size:8pt;}
 #energy-power-gauge-label,#energy-power-gauge-table-goal,#energy-power-gauge-table-actual,#energy-power-goal-info{font-weight:bold;}
 td#energy-status-how-calculator-content{vertical-align:text-top;padding-right:20px;width:50%;}
