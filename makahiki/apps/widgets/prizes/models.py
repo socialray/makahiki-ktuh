@@ -92,16 +92,19 @@ class Prize(models.Model):
 
         elif self.award_to == "team_group":
             if team:
-                return team.group.team_points_leaders(num_results=1, round_name=round_name)[0]
-            else:
-                return None
+                leaders = team.group.team_points_leaders(num_results=1, round_name=round_name)
+                if leaders:
+                    return leaders[0]
+            return None
 
         elif self.award_to == "team_overall":
             return team_mgr.team_points_leader(round_name=round_name)
 
         elif self.award_to == "individual_team":
             if team:
-                return team.points_leaders(num_results=1, round_name=round_name)[0]
+                leaders = team.points_leaders(num_results=1, round_name=round_name)
+                if leaders:
+                    return leaders[0]
             return None
 
         raise Exception("'%s' is not implemented yet." % self.award_to)

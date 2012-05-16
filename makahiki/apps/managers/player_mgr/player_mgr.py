@@ -59,7 +59,7 @@ def points_leaders(num_results=None, round_name="Overall"):
     """Returns the points leaders out of all users, as a dictionary object
     with profile__name and points.
     """
-    entries = score_mgr. player_points_leaders(num_results=num_results, round_name=round_name)
+    entries = score_mgr.player_points_leaders(num_results=num_results, round_name=round_name)
     if entries:
         return entries
     else:

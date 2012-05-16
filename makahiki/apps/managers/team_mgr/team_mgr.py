@@ -11,6 +11,9 @@ def team_members(team):
 
 def team_points_leader(round_name="Overall"):
     """Returns the team points leader (the first place) across all groups, as a Team object."""
+    if not round_name:
+        round_name = "Overall"
+
     team_id = score_mgr.team_points_leader(round_name=round_name)
     if team_id:
         return Team.objects.get(id=team_id)
@@ -34,11 +37,14 @@ def team_points_leaders(num_results=None, round_name="Overall"):
         return results
 
 
-def team_active_participation(num_results=None):
+def team_active_participation(num_results=None, round_name="Overall"):
     """Calculate active participation."""
+    if not round_name:
+        round_name = "Overall"
+
     active_participation = Team.objects.filter(
         profile__scoreboardentry__points__gte=score_mgr.active_threshold_points(),
-        profile__scoreboardentry__round_name="Overall").annotate(
+        profile__scoreboardentry__round_name=round_name).annotate(
             user_count=Count('profile')).order_by('-user_count').select_related(
                 'group')
 
