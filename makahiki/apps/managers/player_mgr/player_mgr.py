@@ -12,6 +12,7 @@ from apps.managers.team_mgr.models import Team
 def get_active_player(username):
     """return User object if the player is active, otherwise, return None"""
     try:
+        username = username.lower()
         user = User.objects.get(username=username)
         return user if user.is_active else None
     except ObjectDoesNotExist:
