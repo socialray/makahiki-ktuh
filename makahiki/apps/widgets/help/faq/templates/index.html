@@ -1,15 +1,13 @@
-<div id="help-faq" class="content-box">
-    <div id="help-faq-box">
-        <div id="help-faq-title" class="content-box-title">
-            Frequently Asked Questions
-        </div>
-        <div id="help-faq-content" class="content-box-contents">
-            <ul>
-                {% for topic in view_objects.help__faq.faqs %}
-                    {% include "help/topic-item.html" %}
-                {% endfor %}
-            </ul>
-         </div>
+<div class="content-box">
+    <div class="content-box-title">
+        Frequently Asked Questions
+    </div>
+    <div class="content-box-contents">
+         <ul>
+             {% for topic in view_objects.help__faq.faqs %}
+                 {% include "help/topic-item.html" %}
+             {% endfor %}
+        </ul>
     </div>
 </div>
 

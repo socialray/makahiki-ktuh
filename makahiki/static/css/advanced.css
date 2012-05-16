@@ -11,12 +11,12 @@
 #mission-box h4{margin:5px 0;}
 #mission-complete-dialog{text-align:left;}
 #mission-hide{float:right;display:block;font-weight:bold;padding-right:10px;padding-top:3px;}
-#canopy-about{text-align:left;padding:5px 10px;margin-bottom:10px;}
+#canopy-about{padding:5px 10px;}
 #canopy-feed-members .content-box{float:left;width:47%;}
 #canopy-viz-list{list-style:none;}
-#canopy-viz-list li{display:inline;margin:0 10px;padding:5px;padding-left:10px;}
-#canopy-viz-list li.selected a{text-decoration:none;}
-#canopy-viz-list li h3{display:inline;}
+.canopy-viz-list li{display:inline;margin:0 10px;padding:5px;padding-left:10px;}
+.canopy-viz-list li.selected a{text-decoration:none;}
+.canopy-viz-list li h3{display:inline;}
 #canopy-feed{margin-right:20px;text-align:left;}
 #canopy-feed-content{padding:5px 20px;}
 .news-image{float:left;}
@@ -30,9 +30,8 @@
 .karma-rank{width:6.25%;}
 .karma-points{width:10.4%;text-align:right;padding-right:5px;}
 #canopy-karma-prize{text-align:center;width:100%;margin-top:10px;font-weight:bold;}
-#canopy-member-list{list-style:none;margin:0;padding:0;}
-#canopy-member-list li{float:left;width:20%;margin:0;padding:0;text-align:center;min-height:80px;}
-#canopy-member-list li img{padding:2px;}
+.canopy-member-list li{float:left;width:20%;margin:0;padding:0;text-align:center;min-height:80px;}
+.canopy-member-list li img{padding:2px;}
 #canopy-member-detail-list,#canopy-member-details{list-style:none;margin:0;padding:0;}
 #canopy-member-detail-list>li{padding:5px 0;}
 #canopy-member-detail-list>li .member-image{padding:4px 2px;float:left;}

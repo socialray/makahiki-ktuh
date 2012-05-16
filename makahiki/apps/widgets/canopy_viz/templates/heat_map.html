@@ -4,10 +4,10 @@
 
 
 <p/>
-<div id="HeatMap">
-    <div id="title" style="font-weight: bold; text-align: center;">Heat Map Analysis</div>
+<div>
+    <div style="font-weight: bold; text-align: center;">Heat Map Analysis</div>
 
-    <div id="control-dorm">
+    <div>
         Dorm :
         {% for group in all_groups %}
             <input type="radio" name="heatmap-dorm" value="{{ group.name }}"
@@ -24,7 +24,7 @@
 
     </div>
 
-    <div id="control-period">
+    <div>
         Time :
         <input type="radio" name="period" value="last24hours" checked="checked"
                onchange="updatePeriod();"/>

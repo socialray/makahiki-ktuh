@@ -1,9 +1,9 @@
 <script type="text/javascript" src="{{ STATIC_URL}}js/org.wattdepot.makahiki.HotSpot.js"></script>
 
 
-<div id="hotSpotChart">
+<div>
 
-    <div id="title" style="font-weight: bold; text-align: center;">
+    <div style="font-weight: bold; text-align: center;">
         Hot Spot Analysis : {{ TEAM_LABEL }}
         <select id='lounge' onchange='updateLounge();'>
             {% for lounge in all_lounges %}

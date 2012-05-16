@@ -3,7 +3,7 @@
 <img class="member-image" src="{% avatar_url member 40 %}"
      alt="Photo of {{ member.get_profile.name }}" title="Photo of {{ member.get_profile.name }}"
      align="top"/>
-<ul id="canopy-member-details">
+<ul>
     <li class="canopy-member-name">
         <a name="{{member.get_profile.name|slugify}}">
             {{ member.get_profile.name }}
