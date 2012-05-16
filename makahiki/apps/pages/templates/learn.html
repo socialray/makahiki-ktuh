@@ -18,6 +18,14 @@
     <div class="container-fluid">
         <div class="row-fluid">
             <!-- left column -->
+            <div class="span7">
+                {% if view_objects.smartgrid %}
+                <div id='smartgrid'>
+                    {% include "widgets/smartgrid/templates/index.html" %}
+                </div>
+                {% endif %}
+            </div>
+            <!-- right column -->
             <div class="span5">
                 {% if view_objects.upcoming_events %}
                 <div id='upcoming_events'>
@@ -28,14 +36,6 @@
 <!--                 <div id='scoreboard'> -->
                     {% include "widgets/scoreboard/templates/index.html" %}
 <!--                 </div> -->
-                {% endif %}
-            </div>
-            <!-- right column -->
-            <div class="span7">
-                {% if view_objects.smartgrid %}
-                <div id='smartgrid'>
-                    {% include "widgets/smartgrid/templates/index.html" %}
-                </div>
                 {% endif %}
             </div>
         </div>
