@@ -50,7 +50,7 @@
     </div>   
     {% for event in AVAILABLE_EVENTS %}
     <div class="item">
-        <h4>{{event.title}}</h4>
+        <h4><a href="{% url activity_task event.type event.slug %}">{{ event.title }}</a></h4>
         {{event.event_date}}
     </div>
     {% empty %}

@@ -62,11 +62,16 @@ jQuery(document).ready(function() {
       log_js_action("feedback", "form", 'feedback-success-close');
   });
   
-  jQuery("#header-feedback").click(function() {
+  jQuery("#header-feedback1").click(function() {
 //    jQuery("#feedback-dialog").dialog("open");
 	  $('#feedbackModal').modal('show');
   });
   
+  jQuery("#header-feedback2").click(function() {
+//    jQuery("#feedback-dialog").dialog("open");
+	  $('#feedbackModal').modal('show');
+  });
+
   jQuery("#feedback-submit").click(function() {
     if(!jQuery(this).attr("disabled")) {
       jQuery(this).attr("disabled", true);
