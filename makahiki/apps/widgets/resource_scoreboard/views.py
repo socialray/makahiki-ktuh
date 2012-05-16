@@ -30,7 +30,7 @@ def resource_supply(request, resource):
         if today >= rounds[key]["start"]:
             scoreboard_rounds.append(key)
 
-    goals_scoreboard = resource_goal.energy_goal_ranks()
+    goals_scoreboard = resource_goal.resource_goal_ranks(resource)
 
     energy_ranks = resource_mgr.resource_ranks(resource)
 
