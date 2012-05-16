@@ -149,7 +149,7 @@ def player_points_leader(round_name="Overall"):
         return None
 
 
-def player_points_leaders(num_results=10, round_name="Overall"):
+def player_points_leaders(num_results=None, round_name="Overall"):
     """Returns the points leaders out of all users, as a dictionary object
     with profile__name and points.
     """
@@ -157,7 +157,9 @@ def player_points_leaders(num_results=10, round_name="Overall"):
         "-points",
         "-last_awarded_submission").values('profile', 'profile__name', 'points')
     if entries:
-        return entries[:num_results]
+        if num_results:
+            entries = entries[:num_results]
+        return entries
     else:
         return None
 
@@ -281,12 +283,15 @@ def player_has_points(profile, points, round_name="Overall"):
         return False
 
 
-def player_points_leaders_in_team(team, num_results=10, round_name="Overall"):
+def player_points_leaders_in_team(team, num_results=None, round_name="Overall"):
     """Gets the individual points leaders for the team, as Profile objects"""
-    return team.profile_set.select_related('scoreboardentry').filter(
+    results = team.profile_set.select_related('scoreboardentry').filter(
         scoreboardentry__round_name=round_name
     ).order_by("-scoreboardentry__points",
-               "-scoreboardentry__last_awarded_submission", )[:num_results]
+               "-scoreboardentry__last_awarded_submission", )
+    if num_results:
+        results = results[:num_results]
+    return results
 
 
 def team_rank(team, round_name="Overall"):
@@ -331,27 +336,32 @@ def team_points_leader(round_name="Overall"):
         return None
 
 
-def team_points_leaders(num_results=10, round_name="Overall"):
+def team_points_leaders(num_results=None, round_name="Overall"):
     """Returns the team points leaders across all groups, as a dictionary profile__team__name
     and points.
     """
-    entry = ScoreboardEntry.objects.values("profile__team__name").filter(
+    entries = ScoreboardEntry.objects.values("profile__team__name").filter(
         round_name=round_name).annotate(
             points=Sum("points"),
             last=Max("last_awarded_submission")).order_by("-points", "-last")
-    if entry:
-        return entry[:num_results]
+    if entries:
+        if num_results:
+            entries = entries[:num_results]
+        return entries
     else:
         return None
 
 
-def team_points_leaders_in_group(group, num_results=10, round_name="Overall"):
+def team_points_leaders_in_group(group, num_results=None, round_name="Overall"):
     """Returns the top points leaders for the given group."""
-    return group.team_set.filter(
+    results = group.team_set.filter(
         profile__scoreboardentry__round_name=round_name).annotate(
         points=Sum("profile__scoreboardentry__points"),
         last=Max("profile__scoreboardentry__last_awarded_submission")).order_by(
-        "-points", "-last")[:num_results]
+        "-points", "-last")
+    if num_results:
+        results = results[:num_results]
+    return results
 
 
 def award_referral_bonus(instance, referrer):

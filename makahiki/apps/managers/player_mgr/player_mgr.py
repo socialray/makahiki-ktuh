@@ -18,9 +18,13 @@ def get_active_player(username):
         return None
 
 
-def players(num_results=10):
+def players(num_results=None):
     """Get some numbers of players."""
-    return Profile.objects.all()[:num_results]
+
+    results = Profile.objects.all()
+    if num_results:
+        results = results[:num_results]
+    return results
 
 
 def canopy_members():
@@ -50,7 +54,7 @@ def points_leader(round_name="Overall"):
         return Profile.objects.all()[0]
 
 
-def points_leaders(num_results=10, round_name="Overall"):
+def points_leaders(num_results=None, round_name="Overall"):
     """Returns the points leaders out of all users, as a dictionary object
     with profile__name and points.
     """
@@ -58,8 +62,11 @@ def points_leaders(num_results=10, round_name="Overall"):
     if entries:
         return entries
     else:
-        return Profile.objects.all().extra(select={'profile__name': 'name', 'points': 0}).values(
-            'profile__name', 'points')[:num_results]
+        results = Profile.objects.all().extra(select={'profile__name': 'name', 'points': 0}).values(
+            'profile__name', 'points')
+        if num_results:
+            results = results[:num_results]
+        return results
 
 
 def create_player(username, email, firstname, lastname, team_name):

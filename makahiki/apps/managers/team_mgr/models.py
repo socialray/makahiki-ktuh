@@ -20,7 +20,7 @@ class Group(models.Model):
     def __unicode__(self):
         return self.name
 
-    def team_points_leaders(self, num_results=10, round_name="Overall"):
+    def team_points_leaders(self, num_results=None, round_name="Overall"):
         """Returns the top points leaders for the given group."""
         return score_mgr.team_points_leaders_in_group(self, num_results, round_name)
 
@@ -57,7 +57,7 @@ class Team(models.Model):
         """Returns the total number of points for the team.  Optional parameter for a round."""
         return score_mgr.team_points(self, round_name)
 
-    def points_leaders(self, num_results=10, round_name="Overall"):
+    def points_leaders(self, num_results=None, round_name="Overall"):
         """Gets the individual points leaders for the team."""
         return score_mgr.player_points_leaders_in_team(self, num_results, round_name)
 

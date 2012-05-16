@@ -35,6 +35,7 @@ def resource_supply(request, resource):
     energy_ranks = resource_mgr.resource_ranks(resource)
 
     resource_settings = resource_mgr.get_resource_settings(resource)
+
     return {
         "team": team,
         "resource": resource_settings,
