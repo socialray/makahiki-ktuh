@@ -11,7 +11,7 @@ class LandingSeleniumTestCase(MakahikiSeleniumTestCase):
 
     def testLanding(self):
         """Test getting the landing page."""
-        self.selenium.get('%s%s' % (self.live_server_url, "/"))
+        self.selenium.get('%s%s' % (self.live_server_url, "/landing/"))
         self.selenium.find_element_by_id("landing-button-participant")
 
     def testLogin(self):
