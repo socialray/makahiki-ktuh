@@ -17,6 +17,20 @@
 
 <script type="text/javascript">
     $(document).ready(function () {
+        // Calculate the height of the items in the scoreboard.
+        // Fix the height of all items to that height.
+        var maxHeight = 45;
+        var height = 0;
+        $("#prizes-carousel .item").each(function(index, item) {
+          height = $(item).height();
+          // console.log("height of item is " + height);
+          if (height > maxHeight){
+            maxHeight = height;
+          }
+        });
+        
+        $("#prizes-carousel").height(maxHeight);
+
         $("#prizes-carousel").carousel();
     });
 </script>
