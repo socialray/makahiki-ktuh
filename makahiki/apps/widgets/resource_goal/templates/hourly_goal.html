@@ -7,7 +7,7 @@
                  <tr><td valign="top" style="text-align: center; vertical-align: top">
                      Consumption Today <br>(So Far)
                      </td></tr>
-                 <tr><td style="text-align: center; font-size: 2.5em; font-weight: bold">
+                 <tr><td class="energy-display-text">
                      {{ hourly_goal.actual_usage }} kWh
                      </td></tr>
              </table>
@@ -26,13 +26,14 @@
                  <tr><td valign="top" style="text-align: center; vertical-align: top">
                      Goal for Today <br>(So Far)
                  </td></tr>
-                 <tr><td style="text-align: center; font-size: 2.5em; font-weight: bold">
+                 <tr><td class="energy-display-text">
                      {{ hourly_goal.goal_usage }} kWh
                  </td></tr>
              </table>
          </td>
       </tr>
       <tr> <td colspan="3" style="font-size: 0.8em">
+          <b>Each member receives 20 points each day that we make our goal. </b> </br>
           {% if hourly_goal.actual_usage > hourly_goal.goal_usage %}
             Your lounge is currently over the goal by {{ hourly_goal.actual_diff }} kWh.  See below for ways to conserve.
           {% elif hourly_goal.actual_usage > hourly_goal.warning_usage %}
@@ -42,10 +43,6 @@
           {% endif %}
           <br/>
           Last check: {{ hourly_goal.updated_at }}
-
-      </td> </tr> 
-      <tr>
-        <center><b>Each member receives 20 points each day that we make our goal. </b></center>
-      </tr>
+      </td> </tr>  
     </table>
 </div>

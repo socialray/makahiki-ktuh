@@ -12,15 +12,20 @@ from apps.managers.team_mgr.models import Team
 def get_active_player(username):
     """return User object if the player is active, otherwise, return None"""
     try:
+        username = username.lower()
         user = User.objects.get(username=username)
         return user if user.is_active else None
     except ObjectDoesNotExist:
         return None
 
 
-def players(num_results=10):
+def players(num_results=None):
     """Get some numbers of players."""
-    return Profile.objects.all()[:num_results]
+
+    results = Profile.objects.all()
+    if num_results:
+        results = results[:num_results]
+    return results
 
 
 def canopy_members():
@@ -50,16 +55,19 @@ def points_leader(round_name="Overall"):
         return Profile.objects.all()[0]
 
 
-def points_leaders(num_results=10, round_name="Overall"):
+def points_leaders(num_results=None, round_name="Overall"):
     """Returns the points leaders out of all users, as a dictionary object
     with profile__name and points.
     """
-    entries = score_mgr. player_points_leaders(num_results=num_results, round_name=round_name)
+    entries = score_mgr.player_points_leaders(num_results=num_results, round_name=round_name)
     if entries:
         return entries
     else:
-        return Profile.objects.all().extra(select={'profile__name': 'name', 'points': 0}).values(
-            'profile__name', 'points')[:num_results]
+        results = Profile.objects.all().extra(select={'profile__name': 'name', 'points': 0}).values(
+            'profile__name', 'points')
+        if num_results:
+            results = results[:num_results]
+        return results
 
 
 def create_player(username, email, firstname, lastname, team_name):

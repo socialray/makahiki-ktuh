@@ -166,11 +166,12 @@ def check_all_daily_resource_goals(resource):
         print 'No user are awarded daily goal points.'
 
 
-def energy_goal_ranks():
-    """Generate the scoreboard for energy goals."""
-    # We could aggregate the energy goals in teams, but there's a bug in Django.
-    # See https://code.djangoproject.com/ticket/13461
-    return EnergyGoal.objects.filter(
+def resource_goal_ranks(resource):
+    """Generate the scoreboard for resource goals."""
+
+    goal = _get_resource_goal(resource)
+
+    return goal.objects.filter(
         goal_status="Below the goal"
     ).values(
         "team__name"

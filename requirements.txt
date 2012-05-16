@@ -20,10 +20,10 @@ django-snippetscream==0.0.7
 requests==0.12.1
 django-storages==1.1.4
 boto==2.3.0
-python-ldap==2.3.13
-django-auth-ldap==1.0.19
-#pylibmc==1.2.2
-#django-pylibmc-sasl==0.2.4
+pylibmc==1.2.3
+django-pylibmc-sasl==0.2.4
+#python-ldap==2.3.13
+#django-auth-ldap==1.0.19
 
 #django-debug-toolbar==0.9.4
 #django-frontendadmin==0.4

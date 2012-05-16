@@ -6,4 +6,7 @@ def supply(request, page_name):
     """Supply the view_objects content."""
     _ = request
     _ = page_name
-    return resource_supply(request, "water")
+
+    view_objects = resource_supply(request, "water")
+    view_objects["no_carousel"] = (page_name == "status")
+    return view_objects

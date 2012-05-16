@@ -33,7 +33,7 @@ class ScoreboardTest(TransactionTestCase):
         profile.save()
 
         response = self.client.get(reverse("learn_index"))
-        self.assertContains(response, "Round 1 Scoreboard", count=1,
+        self.assertContains(response, "Round 1 Point Scoreboard", count=1,
             msg_prefix="This should display the current round scoreboard.")
         self.assertEqual(response.context["view_objects"]["scoreboard"]["team_standings"][
             0]["profile__team__name"],

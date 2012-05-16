@@ -150,7 +150,7 @@ def get_current_round_info():
 def get_current_round():
     """Get the current round name."""
     round_info = get_current_round_info()
-    if round_info is not None:
+    if round_info:
         return round_info["name"]
     else:
         return None
