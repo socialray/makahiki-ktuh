@@ -53,13 +53,6 @@ jQuery(document).ready(function($) {
   
   $(".rejection-date").prettyDate();
   
-  // setup help modal
-  $('#helpModal').modal({
-      backdrop: true,
-      keyboard: true,
-      show: false
-  });	
-  
 });
 
 // Function to handle AJAX post requests.

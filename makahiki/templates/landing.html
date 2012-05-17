@@ -4,81 +4,86 @@
     Welcome to KukuiCup!
 {% endblock %}
 
-    {% block content %}
-        <div class="row-fluid">
-            <div class="content-box landing-body">
-                {{ CHALLENGE.landing_introduction|markdown }}
-                <p>
+{% block content %}
+    <div class="row-fluid">
+        <div class="content-box landing-body">
+            {{ CHALLENGE.landing_introduction|markdown }}
+            <p>
 
-                <p>
+            <p>
 
+            <button id="landing-button-participant" class="landing-button"
+                    onclick="show_auth_buttons()">
+                {{ CHALLENGE.landing_participant_text|markdown }}
+            </button>
+
+            <p/>
+            <div id="auth_buttons" style="display:none;">
+                <button class="landing-button-smaller"
+                        onclick="javascript:location.href='{% url home_index %}'">
+                    <h3> I have a UH email </h3><br/>
+                </button>
+                <p/>
+
+                <p/>
+                <button class="landing-button-smaller"
+                        onclick="javascript:location.href='{% url auth_login %}'">
+                    <h3> I don't have a UH email </h3><br/>
+                </button>
+            </div>
+
+            <p>
+            <button id="landing-button-non-participant" class="landing-button"
+                    onclick="javascript:location.href='{% url about %}'">
+                {{ CHALLENGE.landing_non_participant_text|markdown }}
+            </button>
+
+        </div>
+    </div>
+    <div class="row-fluid">
+        <div class="landing-sponsors content-box" style="text-align: center;">
+            <h4>Sponsored by:</h4>
+
+            <div id="landing-sponsors-list">
+                {% for sponsor in CHALLENGE.sponsor_set.all %}
+                    <a href="{{ sponsor.url }}">
+                        <img
+                                {% if sponsor.logo_url %}
+                                    src="{{ sponsor.logo_url }}"
+                                {% else %}
+                                    src="{{ sponsor.logo.url }}"
+                                {% endif %}
+                                    title="{{ sponsor.name }}"
+                                />
+                    </a>
+                {% endfor %}
+            </div>
+            <a class="contact-link" href="mailto:{{ CHALLENGE.contact_email }}">Contact the Kukui Cup
+                administrators</a>
+        </div>
+    </div>
+    <script type="text/javascript">
+
+        function show_auth_buttons() {
+            if (!jQuery.support.opacity) {
+                window.location.href = '{% url browser_check %}';
+            }
+            else {
                 {% if not CHALLENGE.is_multi_auth %}
-                    {%  if CHALLENGE.use_cas_auth %}
-                        <button id="landing-button-participant" class="landing-button"
-                            onclick="javascript:location.href='{% url home_index %}'">
-                            {{ CHALLENGE.landing_participant_text|markdown }}
-                        </button>
+                    {% if CHALLENGE.use_cas_auth %}
+                        location.href='{% url home_index %}';
                     {% else %}
-                        <button id="landing-button-participant" class="landing-button"
-                                onclick="javascript:location.href='{% url auth_login %}'">
-                            {{ CHALLENGE.landing_participant_text|markdown }}
-                        </button>
+                        location.href='{% url auth_login %}';
                     {% endif %}
                 {% else %}
-                    <button id="landing-button-participant" class="landing-button"
-                            onclick="show_auth_buttons()">
-                        {{ CHALLENGE.landing_participant_text|markdown }}
-                    </button>
-                    <p/>
-                    <div id="auth_buttons" hidden="true">
-                        <button class="landing-button-smaller"
-                                onclick="javascript:location.href='{% url home_index %}'">
-                            <h3> I have a UH email </h3><br/>
-                        </button>
-                        <p/>
-                        <p/>
-                        <button class="landing-button-smaller"
-                                onclick="javascript:location.href='{% url auth_login %}'">
-                            <h3> I don't have a UH email </h3><br/>
-                        </button>
-                    </div>
+                    $('#landing-button-participant').hide();
+                    $('#auth_buttons').show();
                 {% endif %}
-                <p>
-
-                    <button id="landing-button-non-participant" class="landing-button"
-                            onclick="javascript:location.href='{% url about %}'">
-                        {{ CHALLENGE.landing_non_participant_text|markdown }}
-                    </button>
-
-            </div>
-        </div>
-        <div class="row-fluid">
-            <div class="landing-sponsors content-box" style="text-align: center;">
-                        <h4>Sponsored by:</h4>
-                    <div id="landing-sponsors-list">
-                        {% for sponsor in CHALLENGE.sponsor_set.all %}
-                            <a href="{{ sponsor.url }}">
-                                <img
-                                        {% if sponsor.logo_url %}
-                                            src="{{ sponsor.logo_url }}"
-                                        {% else %}
-                                            src="{{ sponsor.logo.url }}"
-                                        {% endif %}
-                                            title="{{ sponsor.name }}"
-                                        />
-                            </a>
-                        {% endfor %}
-                    </div>
-                    <a class="contact-link" href="mailto:{{ CHALLENGE.contact_email }}">Contact the Kukui Cup administrators</a>
-            </div>
-
-        <script type="text/javascript">
-            function show_auth_buttons() {
-                $('#landing-button-participant').hide()
-                $('#auth_buttons').show()
-                return false;
             }
-        </script>
 
-    {% endblock %}
+            return false;
+        }
+    </script>
+
+{% endblock %}
 

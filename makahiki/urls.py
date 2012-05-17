@@ -33,7 +33,7 @@ urlpatterns = patterns('',
     url(r'^account/cas/login/$', 'apps.lib.django_cas.views.login', name='cas_login'),
     url(r'^account/cas/logout/$', 'apps.lib.django_cas.views.logout', name='cas_logout'),
     url(r'^account/login/$', 'apps.managers.auth_mgr.views.login', name='auth_login'),
-    url(r'^admin/logout/$', 'apps.lib.django_cas.views.logout', name='cas_logout'),
+    url(r'^admin/logout/$', 'apps.lib.django_cas.views.logout', name='admin_logout'),
 
     url(r'^admin/', include(admin.site.urls)),
     url(r'^admin/doc/', include('django.contrib.admindocs.urls')),
