@@ -21,4 +21,4 @@ li{margin-bottom:10px;}
 .landing-sponsors-list p{clear:both;float:none;margin:0;text-indent:0;padding:10px 0;display:block;}
 .landing-sponsors .landing-sponsors-list p a{clear:both;margin:0;padding:0;display:inline;float:none;}
 .about{padding-left:10px;padding-right:10px;}
-.tabbed{padding-left:120px;}
+@media (min-width:1020px){.tabbed{padding-left:120px;}}

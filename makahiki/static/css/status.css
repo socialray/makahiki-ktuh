@@ -1,2 +1,6 @@
 body{background:none;background-color:#BDCBDF;}
 .container{width:auto;background:none;background-color:#BDCBDF;}
+.content-box{display:inline block;padding-bottom:5px;}
+table{width:100%;}
+#scoreboard .item{display:inline block;float:left;border-style:solid;border-width:1px;border-color:#000;margin-right:5px;}
+#round-1-resource-scoreboard tr:nth-child(odd){background-color:#fff;}

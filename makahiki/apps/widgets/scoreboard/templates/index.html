@@ -104,7 +104,7 @@
         {% endif %}
     </div>
 </div>
-
+{% if not view_objects.scoreboard.no_carousel %}
 <script type="text/javascript">
     $(document).ready(function () {
     	  // Calculate the height of the items in the scoreboard.
@@ -124,4 +124,5 @@
 
         $("#score-carousel").carousel();
     });
+{% endif %}
 </script>

@@ -1,12 +1,12 @@
 {% with unused=view_objects.status__prizes.unused errors=view_objects.status__prizes.errors raffle_prizes=view_objects.status__prizes.raffle_prizes %}
 <div is="status-prizes">
-        <div class="content-box" style='clear: both; margin: 15px auto; width: 500px'>
+        <div class="content-box tickets">
             <div class="content-box-title">
                 Unused Tickets
             </div>
             <div class="content-body"
                  style='font-weight: bold;{% if pending_members > 50 %}color: red{% endif %}'>
-                There are {{ unused }} tickets that have not been allocated.<br/>
+                <center>There are {{ unused }} tickets that have not been allocated.<br/></center>
                 {% if has_errors %}
                     <div style='color: red; font-weight: bold'>
                         The following users have more tickets than points
@@ -21,12 +21,12 @@
         </div>
 
         {% for raffle_prize in raffle_prizes %}
-            <div class="content-box" style='float:left; margin: 15px'>
+            <div class="content-box">
                 <div class="content-box-title">
                     {{ raffle_prize.round_name.round_name }} Raffle Prizes
                 </div>
                 <div class="content-body">
-                    <table style="margin: 10px; padding: 0 10px; width: 300px">
+                    <table style="margin: 10px; padding: 0 10px;">
                         <tr>
                             <th style="text-align: left">Prize</th>
                             <th>Tickets</th>
