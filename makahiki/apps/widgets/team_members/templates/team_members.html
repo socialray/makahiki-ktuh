@@ -23,7 +23,7 @@
         </div>
         <div id="team-members-content">
             <a href="{% url news_index %}">Back to the news page</a>
-            <ul id="team-member-detail-list" class="row-fluid">
+            <ul id="team-member-detail-list">
                 {% for member in team_members %}
                     <!-- {% cycle 'alt-row' '' as cycle_class %} -->
                     <li class="{{cycle_class}}">
