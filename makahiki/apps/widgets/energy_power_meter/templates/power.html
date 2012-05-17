@@ -1,30 +1,27 @@
-<script type="text/javascript" src="http://www.google.com/jsapi"></script>
-<script type="text/javascript" src="{{STATIC_URL}}js/com.iskitz.ajile.js?mvcoff,mvcshareoff,refresh"></script>
-<script type="text/javascript" src="{{STATIC_URL}}js/org.wattdepot.gdata.GDataLoader.js"></script>
-<script type="text/javascript" src="{{STATIC_URL}}js/org.wattdepot.gdata.makahiki.PowerMeter.js"></script>
 
 <div id="visualization"></div>
 
+
+<script type="text/javascript" src="http://www.google.com/jsapi"></script>
+<script type="text/javascript" src="{{STATIC_URL}}js/org.wattdepot.makahiki.PowerMeter.js"></script>
+
 <script type="text/javascript">
     // Wrap this code in an anonymous self-invoking function to avoid polluting global namespace.
-    (function power_meter() {
-        var spreadsheetUrl = "{{ CHALLENGE.wattdepot_server_url }}/wattdepot/sources/{{user.get_profile.team.name}}/gviz/sensordata/latest?tq=select%20timePoint%2C%20powerConsumed";
+    (function () {
         var refreshInterval = 15; // refresh every 15 seconds.
+        var server_url = "{{ CHALLENGE.wattdepot_server_url }}";
+        var source = "{{user.get_profile.team.name}}";
+        var options = {
+            source: source,
+            width: 300,
+            powerRange: 2000};
 
         // Load the visualization API and the spreadsheet, then call displayEnergy.
-        var loader = new org.wattdepot.gdata.GDataLoader(displayEnergy, spreadsheetUrl, refreshInterval);
-
-        function displayEnergy(datatable) {
-            var source = '{{user.get_profile.team.name}}';
-            var options = {width:300,
-                title:source,
-                captionStyle:{fontSize:'0.70em'},
-                titleStyle:{fontWeight:'bold'},
-                globalStyle:{fontFamily:'sans-serif'},
-                powerRange:2000};
-            var energyChart = new org.wattdepot.gdata.makahiki.PowerMeter();
-            energyChart.draw('visualization', source, datatable, options);
-        }
+        new Makahiki_PowerMeter( server_url,
+                        source,
+                        refreshInterval,
+                        'visualization',
+                        options);
     })();
 
 </script>

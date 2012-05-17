@@ -7,7 +7,6 @@ from apps.test_helpers import test_utils
 
 class LandingSeleniumTestCase(MakahikiSeleniumTestCase):
     """Selenium tests for the home page."""
-    fixtures = ["test_teams.json", "base_pages.json"]
 
     def testLanding(self):
         """Test getting the landing page."""
