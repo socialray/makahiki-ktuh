@@ -7,6 +7,7 @@ fieldset legend {
 
 legend {
     border: none;
+    line-height: 19.5pt;
 }
 
 
@@ -45,22 +46,26 @@ td#energy-status-how-calculator-content {
     width: 50%;
 }
 
-td#energy-status-how-activities-content {
+td.energy-status-how-activities-content {
     vertical-align: text-top;
 }
 
-#energy-status-how-table , #energy-status-how-activities-content , #energy-status-how-activities-table {
+.energy-status-how-table , .energy-status-how-activities-content , #energy-status-how-activities-table {
     width: 100%;
 } 
 
-#energy-status-how-activities-table th {
+.energy-status-how-activities-table th {
     text-align: left;
     padding-left: 20px;
 }
 
-#energy-status-how-activities-table td {
+.energy-status-how-activities-table td {
     padding: 4px 4px 4px 20px;
     text-align: left;
+}
+
+.energy-status-how-activities-content td:nth-child(even) {
+    padding-left: 14px;
 }
 
 @import "wall-post.less";
