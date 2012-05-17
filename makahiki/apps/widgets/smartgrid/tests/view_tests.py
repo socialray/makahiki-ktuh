@@ -11,7 +11,6 @@ from apps.test_helpers import test_utils
 
 class ActivitiesFunctionalTest(TransactionTestCase):
     """Activities View Test."""
-    fixtures = ["test_teams.json"]
 
     def setUp(self):
         """setup"""

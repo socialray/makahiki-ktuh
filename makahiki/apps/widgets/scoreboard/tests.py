@@ -9,7 +9,6 @@ from apps.test_helpers import test_utils
 
 class ScoreboardTest(TransactionTestCase):
     """Scoreboard Test."""
-    fixtures = ["test_teams.json"]
 
     def setUp(self):
         """

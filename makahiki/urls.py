@@ -32,13 +32,14 @@ urlpatterns = patterns('',
 
     url(r'^account/cas/login/$', 'apps.lib.django_cas.views.login', name='cas_login'),
     url(r'^account/cas/logout/$', 'apps.lib.django_cas.views.logout', name='cas_logout'),
-    url(r'^account/login/$', 'apps.managers.auth_mgr.views.login', name='auth_login'),
-    url(r'^admin/logout/$', 'apps.lib.django_cas.views.logout', name='admin_logout'),
+    url(r'^account/login/$', 'apps.managers.auth_mgr.views.login', name='account_login'),
+    url(r'^account/logout/$', 'apps.managers.auth_mgr.views.logout', name='account_logout'),
+    url(r'^admin/logout/$', 'apps.managers.auth_mgr.views.logout', name='admin_logout'),
 
     url(r'^admin/', include(admin.site.urls)),
     url(r'^admin/doc/', include('django.contrib.admindocs.urls')),
     url(r'^admin/login-as/(?P<user_id>\d+)/$', 'apps.managers.auth_mgr.views.login_as',
-        name='auth_login_as'),
+        name='account_login_as'),
 
     url(r'^landing/$', direct_to_template, {'template': 'landing.html'}, name='landing'),
     url(r'^restricted/$', direct_to_template, {"template": 'restricted.html'}, name="restricted"),

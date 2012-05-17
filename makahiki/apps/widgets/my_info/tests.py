@@ -10,7 +10,6 @@ from apps.test_helpers import test_utils
 
 class ProfileFunctionalTestCase(TransactionTestCase):
     """Profile page test"""
-    fixtures = ["test_teams.json"]
 
     def setUp(self):
         """setup"""

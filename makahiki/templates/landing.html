@@ -27,7 +27,7 @@
 
                 <p/>
                 <button class="landing-button-smaller"
-                        onclick="javascript:location.href='{% url auth_login %}'">
+                        onclick="javascript:location.href='{% url account_login %}'">
                     <h3> I don't have a UH email </h3><br/>
                 </button>
             </div>
@@ -73,7 +73,7 @@
                     {% if CHALLENGE.use_cas_auth %}
                         location.href='{% url home_index %}';
                     {% else %}
-                        location.href='{% url auth_login %}';
+                        location.href='{% url account_login %}';
                     {% endif %}
                 {% else %}
                     $('#landing-button-participant').hide();

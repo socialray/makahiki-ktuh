@@ -13,7 +13,6 @@ from apps.widgets.wallpost.views import DEFAULT_POST_COUNT
 
 class NewsFunctionalTestCase(TransactionTestCase):
     """News page test"""
-    fixtures = ["test_teams.json"]
 
     def setUp(self):
         self.user = test_utils.setup_user(username="user", password="changeme")
