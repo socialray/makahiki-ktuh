@@ -8,25 +8,56 @@ body {
   background: none;
   background-color: #BDCBDF;
 } 
-
-.content-box{
-  display: inline block;
-  padding-bottom: 5px;
+ 
+.content-box {
+  text-align: center;
 }
 
-table {
+table, .table {
   width: 100%;
 }
 
-#scoreboard .item {
-  display: inline block;
+table th, table td, .table td ,.table th{
+  padding: 0px;
+  text-align: center;
+}
+
+.scoreboard .item {
+  display: block inline;
   float: left;
+}
+
+.scoreboard .item, .energy-score table {
   border-style: solid;
   border-width: 1px;
   border-color: #000;
-  margin-right: 5px;
+  margin-right: 5px; 
 }
 
-#round-1-resource-scoreboard tr:nth-child(odd) { 
+
+@media(min-width: 1130px) {
+  .scoreboard .item {
+    width: 24%;
+  }
+}
+
+.energy-score table tr:nth-child(odd), #energy-goals-scoreboard tr:nth-child(odd), .water-score table tr:nth-child(odd){ 
   background-color:#fff; 
 }
+ 
+.energy-score .item {
+  float: left;
+  width: 50%;
+}
+
+@media (max-width: 768px) { 
+  .item {
+    width:100%;
+  }
+
+ .energy-score .item {
+    float: none;
+    width: 100%;
+  }
+}
+ 

@@ -12,6 +12,7 @@
             you will both be awarded <b>{{ referral_points }} extra points</b>!
         </p>
         <form id="setup-referrer-form" class="well" action="{% url setup_referral %}" method="post">
+            {% csrf_token %}
             {{ form.as_p }}
         </form>
     </div>

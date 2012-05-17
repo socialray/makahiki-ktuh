@@ -5,7 +5,7 @@
                 {{ todays_users|length }} users logged in today
             </div>
             <div class="content-body">
-                <ul style="list-style: none; text-align: left; width: 100px">
+                <ul style="list-style: none;">
                     {% for profile in todays_users %}
                         <li style="margin: 0">{{ profile.name }}</li>
                     {% endfor %}
@@ -20,7 +20,7 @@
                 New Signups
             </div>
             <div class="content-body">
-                <ul style="list-style: none; text-align: left; width: 100px">
+                <ul style="list-style: none;">
                     {% for item in logins|dictsort:'date' %}
                         <li style="margin: 0">{{ item.date }}: {{ item.logins }} users</li>
                     {% endfor %}
