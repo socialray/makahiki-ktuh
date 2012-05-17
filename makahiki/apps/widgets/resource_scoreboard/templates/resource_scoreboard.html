@@ -30,7 +30,7 @@
                         <td>{%  if entry.team__name == user.get_profile.team.name %}<b>{% endif %}
                                {{ entry.team__name }}
                         </td>
-                        <td style="text-align: right; padding-right: 20px">
+                        <td>
                                {%  if entry.team__name == user.get_profile.team.name %}<b>{% endif %}
                                {{ entry.total }}
                         </td>
@@ -66,7 +66,7 @@
                             <td>
                                 {{ entry.team__name }}
                             </td>
-                            <td style="text-align: right; padding-right: 20px">{{ entry.completions }}</td>
+                            <td>{{ entry.completions }}</td>
                         </tr>
                     {% endfor %}
                 </table>
