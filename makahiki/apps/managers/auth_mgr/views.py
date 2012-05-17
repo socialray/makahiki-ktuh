@@ -1,4 +1,5 @@
 """Admin method for logging in as another user."""
+from django.conf import settings
 
 from django.contrib.auth import SESSION_KEY
 from django.contrib.auth.decorators import user_passes_test
@@ -39,7 +40,16 @@ def login(request):
 
 def logout(request):
     """
-    redirect to CAS logout
+    simply logout and redirect to landing page
     """
-    _ = request
-    return HttpResponseRedirect("/account/cas/logout/?next=/landing")
+    username = request.user.username
+    from django.contrib.auth import logout
+    logout(request)
+
+    # Sets a logout variable so that we can capture it in the logger.
+    request.session["logged-out-user"] = username
+
+    if settings.CHALLENGE.use_cas_auth:
+        return HttpResponseRedirect(reverse("cas_logout")+"?next="+reverse("landing"))
+    else:
+        return HttpResponseRedirect(reverse("landing"))

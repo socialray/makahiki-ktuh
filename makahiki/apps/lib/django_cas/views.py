@@ -96,17 +96,11 @@ def login(request, next_page=None, required=False):
 
 def logout(request, next_page=None):
     """Redirects to CAS logout page"""
-    from django.contrib.auth import logout
-    username = request.user.username
-    logout(request)
     if not next_page:
         next_page = _redirect_url(request)
-    response = None
     if settings.CAS_LOGOUT_COMPLETELY:
         response = HttpResponseRedirect(_logout_url(request, next_page))
     else:
         response = HttpResponseRedirect(next_page)
-        
-    # Sets a logout variable so that we can capture it in the logger.
-    request.session["logged-out-user"] = username
+
     return response

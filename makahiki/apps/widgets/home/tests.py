@@ -95,8 +95,7 @@ class SetupWizardFunctionalTestCase(TransactionTestCase):
         response = self.client.get(reverse("setup_terms"), {},
             HTTP_X_REQUESTED_WITH='XMLHttpRequest')
         self.assertTemplateUsed(response, "first-login/terms.html")
-        self.assertContains(response, "/account/cas/logout?next=" +
-                                      reverse("about"))
+        self.assertContains(response, reverse("account_logout"))
         try:
             json.loads(response.content)
         except ValueError:

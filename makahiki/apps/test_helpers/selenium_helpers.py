@@ -26,7 +26,7 @@ class MakahikiSeleniumTestCase(LiveServerTestCase):
 
     def login(self, username, password):
         """Log in using the standard login."""
-        self.selenium.get('%s%s' % (self.live_server_url, reverse("auth_login")))
+        self.selenium.get('%s%s' % (self.live_server_url, reverse("account_login")))
         self.selenium.find_element_by_id("id_username").clear()
         self.selenium.find_element_by_id("id_username").send_keys(username)
         self.selenium.find_element_by_id("id_password").clear()
@@ -35,4 +35,4 @@ class MakahikiSeleniumTestCase(LiveServerTestCase):
 
     def logout(self):
         """Logout through the logout url."""
-        self.selenium.get('%s%s' % (self.live_server_url, reverse("cas_logout")))
+        self.selenium.get('%s%s' % (self.live_server_url, reverse("account_logout")))

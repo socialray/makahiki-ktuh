@@ -26,7 +26,7 @@
                 <h3>Log In</h3>
             </div>
             <div class="content-box-contents  landing-body">
-                <form class="login" method="POST" action="{% url auth_login %}">
+                <form class="login" method="POST" action="{% url account_login %}">
                     <fieldset class="inlineLabels">
                         {% csrf_token %}
                         {{ form.as_p }}
