@@ -2,26 +2,17 @@
 
 from django.test import TransactionTestCase
 from django.core.urlresolvers import reverse
-from django.contrib.auth.models import User
 from apps.managers.challenge_mgr import challenge_mgr
+from apps.test_helpers import test_utils
 
-from apps.managers.team_mgr.models import Team
 from apps.widgets.help.models import HelpTopic
 
 
 class HelpFunctionalTestCase(TransactionTestCase):
     """test cases"""
-    fixtures = ["test_teams.json"]
 
     def setUp(self):
-        self.user = User.objects.create_user("user", "user@test.com",
-                                             password="changeme")
-        team = Team.objects.all()[0]
-        profile = self.user.get_profile()
-        profile.team = team
-        profile.setup_complete = True
-        profile.setup_profile = True
-        profile.save()
+        self.user = test_utils.setup_user(username="user", password="changeme")
 
         challenge_mgr.register_page_widget("help", "help.rule")
 

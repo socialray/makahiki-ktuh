@@ -2,20 +2,18 @@
 import datetime
 
 from django.test import TransactionTestCase
-from django.contrib.auth.models import User
 from apps.managers.resource_mgr import resource_mgr
 from apps.managers.resource_mgr.models import EnergyUsage
-from apps.managers.team_mgr.models import Team
+from apps.test_helpers import test_utils
 
 
 class ResourceManagerTestCase(TransactionTestCase):
     """ResourceManager Test"""
-    fixtures = ["test_teams.json"]
 
     def setUp(self):
         """Initialize a user and log them in."""
-        self.user = User.objects.create_user("user", "user@test.com", password="changeme")
-        self.team = Team.objects.all()[0]
+        self.user = test_utils.setup_user("user", "changeme")
+        self.team = self.user.get_profile().team
 
     def testEnergy(self):
         """test Energy."""
@@ -30,4 +28,4 @@ class ResourceManagerTestCase(TransactionTestCase):
         rank = resource_mgr.energy_team_rank_info(self.team)["rank"]
         usage = resource_mgr.team_resource_usage(date=date, team=self.team, resource="energy")
         self.assertEqual(rank, 1, "The team should be first rank.")
-        self.assertEqual(usage, 100, "The team usage.is not correct.")
+        self.assertEqual(usage, 100, "The team usage is not correct.")

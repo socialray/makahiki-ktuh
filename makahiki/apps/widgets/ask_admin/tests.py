@@ -2,28 +2,18 @@
 ask admin tests.
 """
 from django.test import TransactionTestCase
-from django.contrib.auth.models import User
 from django.core.urlresolvers import reverse
 
-from apps.managers.team_mgr.models import Team
+from apps.test_helpers import test_utils
 
 
 class AskAdminFunctionalTests(TransactionTestCase):
     """AskAdmin test cases."""
-    fixtures = ["test_teams.json"]
 
     def setUp(self):
         """setup"""
-        self.user = User.objects.create_user("user", "user@test.com",
-                                             password="bogus")
-        team = Team.objects.all()[0]
-        profile = self.user.get_profile()
-        profile.name = 'test'
-        profile.team = team
-        profile.setup_complete = True
-        profile.setup_profile = True
-        profile.save()
-
+        self.user = test_utils.setup_user(username="user",
+                                          password="bogus")
         self.client.login(username="user", password="bogus")
 
     def testAjaxPost(self):

@@ -43,13 +43,13 @@ def logout(request):
     simply logout and redirect to landing page
     """
     username = request.user.username
-    from django.contrib.auth import logout
-    logout(request)
+    from django.contrib import auth
+    auth.logout(request)
 
     # Sets a logout variable so that we can capture it in the logger.
     request.session["logged-out-user"] = username
 
     if settings.CHALLENGE.use_cas_auth:
-        return HttpResponseRedirect(reverse("cas_logout")+"?next="+reverse("landing"))
+        return HttpResponseRedirect(reverse("cas_logout") + "?next=" + reverse("landing"))
     else:
         return HttpResponseRedirect(reverse("landing"))
