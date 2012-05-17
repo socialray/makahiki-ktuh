@@ -32,64 +32,66 @@
 
 {% block body %}   
 <div class="row-fluid">
-  <div class="span10">
+  <div class="span9">
     <!-- The busy little row-->
     <div class="row-fluid">
     <div class="span4">
     {% if view_objects.status__actions %}
-        <div id="status-actions">
+        <div class="status-actions">
         {% include "widgets/status/actions/templates/index.html" %}
         </div>
     {% endif %} 
     </div>
     <div class="span4">
     {% if view_objects.status__prizes %}
-        <div id="status-prizes">
+        <div class="status-prizes">
         {% include "widgets/status/prizes/templates/index.html" %}
         </div>
     {% endif %} 
     </div>
     <div class="span4">
     {% if view_objects.status__rsvps %}
-        <div id="status-rsvp">
+        <div class="status-rsvp">
         {% include "widgets/status/rsvps/templates/index.html" %}
         </div>
     {% endif %}
     </div>
     </div>
 
-
+    <!--energy & water-->
     <div class="row-fluid">
-    {% if view_objects.resource_scoreboard__energy %}
-        <div id="energy-score" class="span6">
-        {% include "widgets/resource_scoreboard/energy/templates/index.html" %}
-        </div> 
-    {% endif %}
+      {% if view_objects.resource_scoreboard__energy %}
+          <div class="energy-score span8">
+            {% include "widgets/resource_scoreboard/energy/templates/index.html" %}
+          </div> 
+      {% endif %}
 
-    {% if view_objects.resource_scoreboard__water %}
-        <div id="water-score" class="span6">
-        {% include "widgets/resource_scoreboard/water/templates/index.html" %}
-        </div>
-    {% endif %}
+      {% if view_objects.resource_scoreboard__water %}
+          <div class="water-score span4">
+            {% include "widgets/resource_scoreboard/water/templates/index.html" %}
+          </div>
+      {% endif %}
     </div>
 
-
+    <!--point scoreboards-->
     {% if view_objects.scoreboard %} 
-        <div id="scoreboard">
+    <div class="row-fluid">
+        <div class="scoreboard span12">
         {% include "widgets/scoreboard/templates/index.html" %} 
         </div>
     {% endif %}
   </div>
-  <div class="span2">
+
+
+  </div>
+  <!--sidebar for user logins-->
+  <div class="span3">
     {% if view_objects.status__users %}
-        <div id="status-users">
+        <div class="status-users">
         {% include "widgets/status/users/templates/index.html" %}
         </div>
     {% endif %}
-  </div>
-</div>
-
-
+</div> 
 
 
 {% endblock %}
