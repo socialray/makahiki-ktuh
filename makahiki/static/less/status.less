@@ -1,63 +1,67 @@
 body {
-  background: none;
-  background-color: #BDCBDF;
+  background:none;
+  background-color:#BDCBDF;
 }
 
-.container {
-  width: auto;
-  background: none;
-  background-color: #BDCBDF;
-} 
- 
+.container { 
+  width:auto;
+  background:none;
+  background-color:#BDCBDF;
+}
+
 .content-box {
-  text-align: center;
+  text-align:center;
 }
 
-table, .table {
-  width: 100%;
+table,.table {
+  width:100%;
 }
 
-table th, table td, .table td ,.table th{
-  padding: 0px;
-  text-align: center;
+tr {
+  border: none;
+  border-bottom-width: 0px;
+}
+
+table th, table td, .table td, .table th {
+  padding:0px;
+  text-align:center;
 }
 
 .scoreboard .item {
-  display: block inline;
-  float: left;
+  display:block inline;
+  float:left;
+  margin-right: 0.5%;
+  margin-left: 0.5%;
 }
 
-.scoreboard .item, .energy-score table {
-  border-style: solid;
-  border-width: 1px;
-  border-color: #000;
-  margin-right: 5px; 
+.scoreboard .item .table, .energy-score table {
+  border-style:solid;
+  border-width:1px;
+  border-color:#000;
 }
 
-
-@media(min-width: 1130px) {
+@media (min-width:1130px) {
   .scoreboard .item {
-    width: 24%;
+    width:23.75%;
   }
 }
 
-.energy-score table tr:nth-child(odd), #energy-goals-scoreboard tr:nth-child(odd), .water-score table tr:nth-child(odd){ 
-  background-color:#fff; 
-}
- 
 .energy-score .item {
-  float: left;
-  width: 50%;
+  float:left;
+  width:50%;
 }
 
-@media (max-width: 768px) { 
+@media (max-width:768px) {
   .item {
     width:100%;
-  }
+  } 
 
- .energy-score .item {
-    float: none;
-    width: 100%;
+.energy-score .item {
+  float:none;
+  width:100%;
   }
 }
- 
+
+.padding-right {
+  padding-right:10%;
+}

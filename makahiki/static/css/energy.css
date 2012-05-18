@@ -1,5 +1,7 @@
 @charset "UTF-8";
 fieldset legend{font-weight:bold;text-align:center;margin-bottom:0px;}
+table{width:100%;}
+th,td{text-align:center;font-size:13px;line-height:13px;padding-top:3px;padding-bottom:3px;}
 legend{border:none;line-height:19.5pt;}
 .energy-display-text{text-align:center;font-size:32pt;font-weight:bold;line-height:32pt;}
 @media (max-width:920px){.energy-display-text{text-align:center;font-size:22pt;font-weight:bold;line-height:22pt;}}.energy-power-box{padding:5px;margin-right:1em;}

@@ -18,6 +18,7 @@
 
 @makahikiBorderRadius: 8px;
 @contentBoxBottomMargin: 15px;
+@contentBoxBottomPadding: 10px;
 
 .background-gradient(@start, @end) {
     background-image: -moz-linear-gradient(top, @start, @end);
@@ -103,12 +104,14 @@
     text-align: left;
     .makahiki-box;
     margin-bottom: @contentBoxBottomMargin;
+    padding-bottom: @contentBoxBottomPadding;
 }
 
 .content-box-centered {
     text-align: center;
     .makahiki-box;
-    margin-bottom: @contentBoxBottomMargin;
+    margin-bottom: @contentBoxBottomMargin; 
+    padding-bottom: @contentBoxBottomPadding;
 }
 
 .content-box-contents {
