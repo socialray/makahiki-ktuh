@@ -37,7 +37,7 @@
                 </div>
                     <table>
                         <tr>
-                            <th style="width: 70%">{{ key }}</th>
+                            <th class="padding-right">Name</th>
                             <th>Submissions</th>
                             <th>Completions</th>
                         </tr>
@@ -46,8 +46,8 @@
                                 <td>
                                     <a href="{% url activity_task task.type task.slug %}">{{ task.title }}</a>
                                 </td>
-                                <td>{{ task.submissions }}</td>
-                                <td>{{ task.completions }}</td>
+                                <td>{{ task.submissions }} </td>
+                                <td> {{ task.completions }}</td>
                             </tr>
                         {% endfor %}
                     </table>

@@ -12,19 +12,19 @@ def supply(request, page_name):
     return {}
 
 
-def resource_supply(request, resource):
+def resource_supply(request, resource, page_name):
     """Supply the view_objects content.
        :return: team, goals_scoreboard, resource_round_ranks"""
 
     user = request.user
     team = user.get_profile().team
-
-    rounds = challenge_mgr.get_round_info()
     round_resource_ranks = {}
+
+    current_round = challenge_mgr.get_current_round()
+    rounds = challenge_mgr.get_round_info()
     for key in rounds.keys():
-        ranks = resource_mgr.resource_ranks(resource, key)
-        if ranks:
-            round_resource_ranks[key] = ranks
+        if key == current_round or page_name == "status":
+            round_resource_ranks[key] = resource_mgr.resource_ranks(resource, key)
 
     goals_scoreboard = resource_goal.resource_goal_ranks(resource)
 
