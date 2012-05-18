@@ -1,6 +1,6 @@
 {% with pending_members=view_objects.status__actions.pending_members oldest_member=view_objects.status__actions.oldest_member quests=view_objects.status__actions.quests %}
 <div id="status-activities">
-        <div class="content-box">
+        <div class="content-box-centered">
             <div class="content-box-title">
                 Approval Queue
             </div>
@@ -15,11 +15,10 @@
         <div class="content-box" >
             <div class="content-box-title">
                 Popular Quests
-            </div>
-            <div class="content-body">
-                <table style="margin: 10px; padding: 0 10px;">
+            </div> 
+                <table>
                     <tr>
-                        <th style='text-align: left'>Name</th>
+                        <th>Name</th>
                         <th>Completions</th>
                     </tr>
                     {% for quest in quests %}
@@ -28,8 +27,7 @@
                             <td>{{ quest.completions }}</td>
                         </tr>
                     {% endfor %}
-                </table>
-            </div>
+                </table> 
         </div>
 
         <br style="clear: both"/>

@@ -1,21 +1,21 @@
-<div class="content-box">
-    <div class="content-box-title">
-        {{ view_objects.scoreboard.current_round }} Point Scoreboard
-        {% if not view_objects.scoreboard.no_carousel %}
-            <a href="#" style="float: right">
-                <img src="{{ STATIC_URL}}images/icons/icon-help-sm.png"
-                    width="20" align="center"
-                    title="Click to get help about this window"
-                    onclick="toggleHelp('widget', 'points-scoreboard'); return false;" />
-            </a>
-        {% endif %}
-    </div>
+<div class="content-box"> 
     <div class="row-fluid">
         {% if not view_objects.scoreboard.no_carousel %}
         <div id="score-carousel" class="span12 carousel">
             <div class="carousel-inner">
         {% endif %}
                 <div class="item active">
+                    <div class="content-box-title">
+                        {{ view_objects.scoreboard.current_round }} Point Scoreboard
+                        {% if not view_objects.scoreboard.no_carousel %}
+                            <a href="#" style="float: right">
+                                <img src="{{ STATIC_URL}}images/icons/icon-help-sm.png"
+                                    width="20" align="center"
+                                    title="Click to get help about this window"
+                                    onclick="toggleHelp('widget', 'points-scoreboard'); return false;" />
+                            </a>
+                        {% endif %}
+                    </div>
                     <table class="table table-striped">
                         <thead>
                             <tr>
@@ -36,6 +36,17 @@
                     </table>
                 </div>
                 <div class="item">
+                        <div class="content-box-title">
+                            {{ view_objects.scoreboard.current_round }} Point Scoreboard
+                            {% if not view_objects.scoreboard.no_carousel %}
+                                <a href="#" style="float: right">
+                                    <img src="{{ STATIC_URL}}images/icons/icon-help-sm.png"
+                                        width="20" align="center"
+                                        title="Click to get help about this window"
+                                        onclick="toggleHelp('widget', 'points-scoreboard'); return false;" />
+                                </a>
+                            {% endif %}
+                        </div>
                     <table class="table table-striped">
                         <thead>
                             <tr>
@@ -56,6 +67,17 @@
                     </table>
                 </div>
                 <div class="item">
+                        <div class="content-box-title">
+                          {{ view_objects.scoreboard.current_round }} Point Scoreboard
+                          {% if not view_objects.scoreboard.no_carousel %}
+                              <a href="#" style="float: right">
+                                  <img src="{{ STATIC_URL}}images/icons/icon-help-sm.png"
+                                      width="20" align="center"
+                                      title="Click to get help about this window"
+                                      onclick="toggleHelp('widget', 'points-scoreboard'); return false;" />
+                              </a>
+                          {% endif %}
+                      </div>
                     <table class="table table-striped">
                         <thead>
                             <tr>
@@ -76,6 +98,17 @@
                     </table>
                 </div>
                 <div class="item">
+                        <div class="content-box-title">
+                          {{ view_objects.scoreboard.current_round }} Participation Scoreboard
+                          {% if not view_objects.scoreboard.no_carousel %}
+                              <a href="#" style="float: right">
+                                  <img src="{{ STATIC_URL}}images/icons/icon-help-sm.png"
+                                      width="20" align="center"
+                                      title="Click to get help about this window"
+                                      onclick="toggleHelp('widget', 'points-scoreboard'); return false;" />
+                              </a>
+                          {% endif %}
+                      </div>
                     <table class="table table-striped">
                         <thead>
                             <tr>

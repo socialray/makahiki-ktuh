@@ -16,7 +16,7 @@
                     </a>
                 {% endif %}
             </div> 
-                <table id="{{round_name|slugify}}-resource-scoreboard" class="table">
+                <table id="{{round_name|slugify}}-resource-scoreboard" class="table-striped">
                     <tr>
                         <th>Rank</th>
                         <th>{{ TEAM_LABEL }}</th>
@@ -54,7 +54,7 @@
                 {% endif %}
             </div>
             <div>
-                <table id="energy-goals-scoreboard" class="table">
+                <table id="energy-goals-scoreboard" class="table-striped">
                     <tr>
                         <th>Rank</th>
                         <th>{{ TEAM_LABEL }}</th>
@@ -76,8 +76,8 @@
     {% if not no_carousel %}
     </div>
     </div>
-    <div class="content-box-contents">#1 at end of round wins a
+    <center>#1 at end of round wins a
       <a href="/prizes"> prize!</a>
-    </div>
+    </center>
     {% endif %}
 </div>
