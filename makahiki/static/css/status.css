@@ -1,67 +1,7 @@
-body {
-  background:none;
-  background-color:#BDCBDF;
-}
-
-.container { 
-  width:auto;
-  background:none;
-  background-color:#BDCBDF;
-}
-
-.content-box {
-  text-align:center;
-}
-
-table,.table {
-  width:100%;
-}
-
-tr {
-  border: none;
-  border-bottom-width: 0px;
-}
-
-table th, table td, .table td, .table th {
-  padding:0px;
-  text-align:center;
-}
-
-.scoreboard .item {
-  display:block inline;
-  float:left;
-  margin-right: 0.5%;
-  margin-left: 0.5%;
-}
-
-.scoreboard .item .table, .energy-score table {
-  border-style:solid;
-  border-width:1px;
-  border-color:#000;
-}
-
-@media (min-width:1130px) {
-  .scoreboard .item {
-    width:23.75%;
-  }
-}
-
-.energy-score .item {
-  float:left;
-  width:50%;
-}
-
-@media (max-width:768px) {
-  .item {
-    width:100%;
-  } 
-
-.energy-score .item {
-  float:none;
-  width:100%;
-  }
-}
-
-.padding-right {
-  padding-right:10%;
-}
+.content-box{text-align:center;margin-left:1%;margin-right:1%;}
+table,.table{width:100%;border-collapse:separate;}
+table th,table td,.table td,.table th{padding:0px;text-align:center;}
+.scoreboard .item{display:block inline;float:left;margin-right:0.5%;margin-left:0.5%;}
+.scoreboard .item .table,.energy-score table{border-style:solid;border-width:1px;border-color:#000;}
+@media (min-width:1130px){.scoreboard .item{width:23.75%;}}.energy-score .item,.water-score .item{float:left;width:25%;}
+@media (max-width:768px){.item{width:100%;} .energy-score .item,.waterscore .item{float:none;width:100%;}}.padding-right{padding-right:10%;}
