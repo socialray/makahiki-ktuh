@@ -12,6 +12,9 @@ def main():
     os.system("python manage.py syncdb --noinput")
     os.system("python manage.py migrate")
     os.system("python scripts/load_data.py")
+    os.system("python manage.py test_users delete")
+    os.system("python manage.py test_users create 2")
+    os.system("python manage.py setup_test_data")
     os.system("python manage.py collectstatic --noinput")
     os.system("cp -r media site_media")
     # if use S3, need to upload the media directory to S3 bucket
