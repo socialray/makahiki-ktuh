@@ -1,5 +1,3 @@
-{% with no_carousel=view_objects.resource_scoreboard__water.no_carousel resource=view_objects.resource_scoreboard__water.resource scoreboard_rounds=view_objects.resource_scoreboard__water.scoreboard_rounds energy_ranks=view_objects.resource_scoreboard__water.energy_ranks goals_scoreboard=view_objects.resource_scoreboard__water.goals_scoreboard %}
-
-{% include "resource_scoreboard.html" %}
-
+{% with no_carousel=view_objects.resource_scoreboard__water.no_carousel resource=view_objects.resource_scoreboard__water.resource round_resource_ranks=view_objects.resource_scoreboard__water.round_resource_ranks goals_scoreboard=view_objects.resource_scoreboard__water.goals_scoreboard %}
+    {% include "resource_scoreboard.html" %}
 {% endwith %}

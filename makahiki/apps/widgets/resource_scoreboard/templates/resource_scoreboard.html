@@ -3,7 +3,7 @@
     <div class="carousel">
     <div class="carousel-inner">
     {% endif %}
-    {% for round_name in scoreboard_rounds %}
+    {% for round_name, ranks in round_resource_ranks.items %}
         <div class="item {% if forloop.first %}active{% endif %}">
             <div class="content-box-title">
                 {{ round_name }} {{ resource.name|capfirst }} Score Board
@@ -22,7 +22,7 @@
                         <th>{{ TEAM_LABEL }}</th>
                         <th>{{ resource.unit  }} used</th>
                     </tr>
-                    {% for entry in energy_ranks %}
+                    {% for entry in ranks %}
                     <tr>
                         <td>{%  if entry.team__name == user.get_profile.team.name %}<b>{% endif %}
                                {{ forloop.counter }}
@@ -36,7 +36,7 @@
                         </td>
                     </tr>
                     {% endfor %}
-                </table> 
+                </table>
         </div>
     {% endfor %}
     {# Additional scoreboard entry for the energy goals #}

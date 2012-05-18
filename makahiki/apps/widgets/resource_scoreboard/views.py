@@ -15,31 +15,25 @@ def supply(request, page_name):
 
 def resource_supply(request, resource):
     """Supply the view_objects content.
-
-       :return: team, scoreboard_round, goals_scoreboard, energy_ranks"""
+       :return: team, goals_scoreboard, resource_round_ranks"""
 
     user = request.user
     team = user.get_profile().team
 
     rounds = challenge_mgr.get_round_info()
-    scoreboard_rounds = []
-    today = datetime.datetime.today()
+    round_resource_ranks = {}
     for key in rounds.keys():
-        # Check if this round happened already or if it is in progress.
-        # We don't care if the round happens in the future.
-        if today >= rounds[key]["start"]:
-            scoreboard_rounds.append(key)
+        ranks = resource_mgr.resource_ranks(resource, key)
+        if ranks:
+            round_resource_ranks[key] = ranks
 
     goals_scoreboard = resource_goal.resource_goal_ranks(resource)
-
-    energy_ranks = resource_mgr.resource_ranks(resource)
 
     resource_settings = resource_mgr.get_resource_settings(resource)
 
     return {
         "team": team,
         "resource": resource_settings,
-        "scoreboard_rounds": scoreboard_rounds,
         "goals_scoreboard": goals_scoreboard,
-        "energy_ranks": energy_ranks,
+        "round_resource_ranks": round_resource_ranks,
         }
