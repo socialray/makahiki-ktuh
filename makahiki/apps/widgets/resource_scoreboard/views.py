@@ -1,6 +1,5 @@
 """Handle the rendering of the energy scoreboard widget."""
 
-import datetime
 from apps.managers.challenge_mgr import challenge_mgr
 from apps.managers.resource_mgr import resource_mgr
 from apps.widgets.resource_goal import resource_goal

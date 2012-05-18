@@ -4,6 +4,7 @@ from django.contrib.auth.models import User
 from django.test import TransactionTestCase
 from django.core import mail
 from django.conf import settings
+from apps.managers.challenge_mgr import challenge_mgr
 from apps.managers.score_mgr import score_mgr
 from apps.test_helpers import test_utils
 
@@ -18,6 +19,7 @@ class ActivitiesTest(TransactionTestCase):
     def setUp(self):
         """Generate test user and activity. Set the competition settings to the
         current date for testing."""
+        challenge_mgr.init()
         self.user = User.objects.create_user('user', 'user@test.com')
         self.user.save()
         self.activity = test_utils.create_activity()
@@ -45,8 +47,8 @@ class ActivitiesTest(TransactionTestCase):
         activity_member.approval_status = "approved"
         activity_member.save()
 
-        activities = smartgrid.get_popular_tasks()
-        self.assertEqual(activities["Activity"][0].title, self.activity.title)
+        activities = smartgrid.get_popular_actions("activity", "approved")
+        self.assertEqual(activities[0].title, self.activity.title)
 
     def testGetEvents(self):
         """Verify that get_available_events does retrieve events."""
@@ -188,9 +190,9 @@ class CommitmentsUnitTestCase(TransactionTestCase):
         commitment_member.approval_status = "approved"
         commitment_member.save()
 
-        commitments = smartgrid.get_popular_tasks()
-        self.assertEqual(commitments["Commitment"][0].title, self.commitment.title)
-        self.assertEqual(commitments["Commitment"][0].completions, 1,
+        commitments = smartgrid.get_popular_actions("commitment", "approved")
+        self.assertEqual(commitments[0].title, self.commitment.title)
+        self.assertEqual(commitments[0].completions, 1,
             "Most popular commitment should have one completion.")
 
     def testCompletionAddsPoints(self):

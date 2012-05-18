@@ -14,6 +14,8 @@ class ScoreboardTest(TransactionTestCase):
         """
         setup
         """
+        challenge_mgr.init()
+
         self.user = test_utils.setup_user(username="user", password="changeme")
 
         challenge_mgr.register_page_widget("learn", "smartgrid")
@@ -34,26 +36,29 @@ class ScoreboardTest(TransactionTestCase):
         response = self.client.get(reverse("learn_index"))
         self.assertContains(response, "Round 1", count=12,
             msg_prefix="This should display the current round scoreboard.")
-        self.assertEqual(response.context["view_objects"]["scoreboard"]["team_standings"][
-            0]["profile__team__name"],
+        self.assertEqual(response.context["view_objects"]["scoreboard"][
+            "round_standings"]["Round 1"]["team_standings"][0]["profile__team__name"],
             profile.team.name,
             "The user's team should be leading.")
-        self.assertEqual(response.context["view_objects"]["scoreboard"]["profile_standings"][
-            0]["profile__name"],
+        self.assertEqual(response.context["view_objects"]["scoreboard"][
+            "round_standings"]["Round 1"]["profile_standings"][0]["profile__name"],
             profile.name,
             "The user's should be leading the overall standings.")
-        self.assertEqual(response.context["view_objects"]["scoreboard"]["user_team_standings"][0],
+        self.assertEqual(response.context["view_objects"]["scoreboard"][
+            "round_standings"]["Round 1"]["user_team_standings"][0],
             profile,
             "The user should be leading in their own team.")
-        self.assertEqual(response.context["view_objects"]["scoreboard"]["team_standings"][
-            0]["points"],
+        self.assertEqual(response.context["view_objects"]["scoreboard"][
+            "round_standings"]["Round 1"]["team_standings"][0]["points"],
             10,
             "The user's team should have 10 points this round.")
-        self.assertEqual(response.context["view_objects"]["scoreboard"]["profile_standings"][
-            0]["points"], 10,
+        self.assertEqual(response.context["view_objects"]["scoreboard"][
+            "round_standings"]["Round 1"]["profile_standings"][0]["points"],
+            10,
             "The user should have 10 points this round.")
-        self.assertEqual(response.context["view_objects"]["scoreboard"]["user_team_standings"][
-                         0].current_round_points(), 10,
+        self.assertEqual(response.context["view_objects"]["scoreboard"][
+            "round_standings"]["Round 1"]["user_team_standings"][0].current_round_points(),
+            10,
             "The user should have 10 points this round.")
 
         # Get points outside of the round and see if affects the standings.
@@ -61,13 +66,15 @@ class ScoreboardTest(TransactionTestCase):
         profile.save()
 
         response = self.client.get(reverse("learn_index"))
-        self.assertEqual(response.context["view_objects"]["scoreboard"]["team_standings"][
-            0]["points"],
+        self.assertEqual(response.context["view_objects"]["scoreboard"][
+            "round_standings"]["Round 1"]["team_standings"][0]["points"],
             10,
             "Test that the user's team still has 10 points.")
-        self.assertEqual(response.context["view_objects"]["scoreboard"]["profile_standings"][
-            0]["points"], 10,
+        self.assertEqual(response.context["view_objects"]["scoreboard"][
+            "round_standings"]["Round 1"]["profile_standings"][0]["points"],
+            10,
             "The user still should have 10 points this round.")
-        self.assertEqual(response.context["view_objects"]["scoreboard"]["user_team_standings"][
-                         0].current_round_points(), 10,
+        self.assertEqual(response.context["view_objects"]["scoreboard"][
+            "round_standings"]["Round 1"]["user_team_standings"][0].current_round_points(),
+            10,
             "The user still should have 10 points this round.")

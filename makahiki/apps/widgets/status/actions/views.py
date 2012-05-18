@@ -3,13 +3,31 @@
 from django.db.models import Count
 
 from apps.widgets.quests.models import Quest
-from apps.widgets.smartgrid.models import ActionMember
+from apps.widgets.smartgrid import smartgrid
+from apps.widgets.smartgrid.models import ActionMember, Action
 
 
 def supply(request, page_name):
     """supply the view objects for action status."""
     _ = page_name
     _ = request
+
+    popular_tasks = {}
+    for type_choice in Action.TYPE_CHOICES:
+        action_type = type_choice[0]
+        task_list = []
+        actions = smartgrid.get_popular_actions(action_type, "approved")
+        if not actions:
+            actions = Action.objects.filter(type=action_type)
+        for action in actions:
+            task = {"type": action.type,
+                    "slug": action.slug,
+                    "title": action.title,
+                    "completions": action.completions if hasattr("action", "completions") else 0,
+                    "submissions": ActionMember.objects.filter(action=action).count(),
+                    }
+            task_list.append(task)
+        popular_tasks[action_type] = task_list
 
     quests = Quest.objects.filter(
         questmember__completed=True,
@@ -26,6 +44,7 @@ def supply(request, page_name):
         oldest_member = members[0]
 
     return {
+        "popular_tasks": popular_tasks,
         "quests": quests,
         "pending_members": pending_members,
         "oldest_member": oldest_member,

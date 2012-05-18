@@ -1,35 +1,58 @@
-{% with pending_members=view_objects.status__actions.pending_members oldest_member=view_objects.status__actions.oldest_member quests=view_objects.status__actions.quests %}
+{% with pending_members=view_objects.status__actions.pending_members oldest_member=view_objects.status__actions.oldest_member quests=view_objects.status__actions.quests popular_tasks=view_objects.status__actions.popular_tasks%}
 <div id="status-activities">
-        <div class="content-box-centered">
-            <div class="content-box-title">
-                Approval Queue
-            </div>
-            <div class="content-body"
-                 style='font-weight: bold;{% if pending_members > 50 %}color: red{% endif %}'>
-                There are {{ pending_members }} pending ActivityMember(s) in the queue.<br/>
-                {% if oldest_member %}The oldest item was submitted
-                    at {{ oldest_member.submission_date }}{% endif %}
-            </div>
+    <div class="content-box-centered">
+        <div class="content-box-title">
+            Approval Queue
         </div>
-
-        <div class="content-box" >
-            <div class="content-box-title">
-                Popular Quests
-            </div> 
-                <table>
-                    <tr>
-                        <th>Name</th>
-                        <th>Completions</th>
-                    </tr>
-                    {% for quest in quests %}
-                        <tr>
-                            <td>{{ quest.name }}</td>
-                            <td>{{ quest.completions }}</td>
-                        </tr>
-                    {% endfor %}
-                </table> 
+        <div class="content-body"
+             style='font-weight: bold;{% if pending_members > 50 %}color: red{% endif %}'>
+            There are {{ pending_members }} pending ActivityMember(s) in the queue.<br/>
+            {% if oldest_member %}The oldest item was submitted
+                at {{ oldest_member.submission_date }}{% endif %}
         </div>
-
-        <br style="clear: both"/>
     </div>
+
+    <div class="content-box" >
+        <div class="content-box-title">
+            Popular Quests
+        </div>
+            <table>
+                <tr>
+                    <th>Name</th>
+                    <th>Completions</th>
+                </tr>
+                {% for quest in quests %}
+                    <tr>
+                        <td>{{ quest.name }}</td>
+                        <td>{{ quest.completions }}</td>
+                    </tr>
+                {% endfor %}
+            </table>
+    </div>
+
+    <div class="content-box">
+        {% for key, value in popular_tasks.items %}
+                <div class="content-box-title">
+                    Most Popular {{ key }}
+                </div>
+                    <table>
+                        <tr>
+                            <th style="width: 70%">{{ key }}</th>
+                            <th>Submissions</th>
+                            <th>Completions</th>
+                        </tr>
+                        {% for task in value %}
+                            <tr>
+                                <td>
+                                    <a href="{% url activity_task task.type task.slug %}">{{ task.title }}</a>
+                                </td>
+                                <td>{{ task.submissions }}</td>
+                                <td>{{ task.completions }}</td>
+                            </tr>
+                        {% endfor %}
+                    </table>
+        {% endfor %}
+    </div>
+
+</div>
 {% endwith %}

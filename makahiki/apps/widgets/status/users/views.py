@@ -4,6 +4,7 @@ import datetime
 from django.contrib.auth.models import User
 from django.conf import settings
 from django.db.models import Min
+from django.db.models.aggregates import Count
 from apps.managers.player_mgr.models import Profile
 
 
@@ -28,7 +29,14 @@ def supply(request, page_name):
         logins.append(result)
         start += datetime.timedelta(days=1)
 
+    # Find referrals.
+    referrals = Profile.objects.filter(referring_user__isnull=False).values(
+        'referring_user__profile__name', 'referring_user__username').annotate(
+            referrals=Count('referring_user')
+    )
+
     return {
         "todays_users": todays_users,
         'logins': logins,
+        "referrals": referrals,
         }

@@ -94,22 +94,13 @@ def get_category_actions(user):
     return categories
 
 
-def get_popular_tasks():
-    """Returns a dictionary containing the most popular tasks.
-       The keys are the type of the task and the values are a list of tasks."""
-    return {
-        "Activity": get_popular_actions("activity", "approved")[:5],
-        "Commitment": get_popular_actions("commitment", "approved")[:5],
-        "Event": get_popular_actions("event", "pending")[:5],
-        "Excursion": get_popular_actions("excursion", "pending")[:5],
-        }
-
-
-def get_popular_actions(action_type, approval_status):
+def get_popular_actions(action_type, approval_status, num_results=None):
     """Gets the most popular activities in terms of completions."""
-    return Action.objects.filter(actionmember__approval_status=approval_status,
+    results = Action.objects.filter(actionmember__approval_status=approval_status,
                                  type=action_type,
         ).annotate(completions=Count("actionmember")).order_by("-completions")
+
+    return results[:num_results] if num_results else results
 
 
 def get_in_progress_members(user):

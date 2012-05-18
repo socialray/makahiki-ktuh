@@ -13,8 +13,7 @@ def supply(request, page_name):
     # get the raffle_prizes for all rounds
     raffle_prizes = {}
     for round_name in challenge_mgr.get_round_info():
-        for p in RafflePrize.objects.filter(round_name=round_name).all():
-            raffle_prizes[round_name] = p
+        raffle_prizes[round_name] = RafflePrize.objects.filter(round_name=round_name).all()
 
     # Calculate unused raffle tickets for every user.
     elig_entries = ScoreboardEntry.objects.filter(

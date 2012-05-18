@@ -21,11 +21,11 @@
     </div>
 </div>
 
-{% for raffle_prize in raffle_prizes %}
+{% for round_name, raffle_prizes in raffle_prizes.items %}
     <div class="span4">
         <div class="content-box">
             <div class="content-box-title">
-                {{ raffle_prize.round_name.round_name }} Raffle Prizes
+                {{ round_name }} Raffle Prizes
             </div>
             <div class="content-body">
                 <table>
@@ -34,7 +34,7 @@
                         <th>Tickets</th>
                         <th>Winner</th>
                     </tr>
-                    {% for prize in raffle_prize.round_name.prizes %}
+                    {% for prize in raffle_prizes %}
                         <tr>
                             <td>{{ prize.title }}</td>
                             <td>{{ prize.raffleticket_set.count }}</td>

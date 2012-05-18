@@ -11,27 +11,25 @@ def supply(request, page_name):
     user = request.user
 
     team = user.get_profile().team
-    user_team_standings = None
+    num_results = 10 if page_name != "status" else None
+    round_standings = {}
 
     current_round = challenge_mgr.get_current_round()
-    round_name = current_round if current_round else None
-
-    num_results = 10 if page_name != "status" else None
-
-    team_standings = team_mgr.team_points_leaders(num_results, round_name)
-    profile_standings = player_mgr.points_leaders(num_results, round_name)
-    if team:
-        user_team_standings = team.points_leaders(num_results, round_name)
-
-    team_participation = team_mgr.team_active_participation(num_results)
+    rounds = challenge_mgr.get_round_info()
+    for key in rounds.keys():
+        if key == current_round or page_name == "status":
+            round_standings[key] = {
+                "team_standings": team_mgr.team_points_leaders(num_results, key),
+                "profile_standings": player_mgr.points_leaders(num_results, key),
+                "team_participation": team_mgr.team_active_participation(num_results, key),
+                "user_team_standings": team.points_leaders(num_results, key) if \
+                                            team and page_name != "status" else None,
+            }
 
     return {
         "profile": user.get_profile(),
         "team": team,
-        "current_round": round_name or "Overall",
-        "team_standings": team_standings,
-        "profile_standings": profile_standings,
-        "user_team_standings": user_team_standings,
-        "team_participation": team_participation,
+        "current_round": current_round or "Overall",
+        "round_standings": round_standings,
         "no_carousel": page_name == "status",
     }

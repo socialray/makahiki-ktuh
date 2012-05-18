@@ -1,21 +1,56 @@
-{% load avatar_tags %}
+{% load cache %}
 
-
+{% cache 600 news-popular-tasks %}
 <div id="news-most-popular" class="content-box">
-    <div id="news-most-popular-title" class="content-box-title">
-        Most Popular
-        <a href="#" style="float: right">
-            <img src="{{ STATIC_URL}}images/icons/icon-help-sm.png" width="20"
-                 align="center"
-                 title="Click to get help about this window"
-                 onclick="toggleHelp('widget', 'most-popular'); return false;"/>
-        </a>
-    </div>
-    <div id="news-most-popular-content">
-        <div id="news-most-popular-actions" class="carousel">
-            <div class="carousel-inner">
-              {% include "popular_tasks.html" %}
-            </div>
+    {% if not view_objects.popular_tasks.no_carousel %}
+    <div id="news-most-popular-actions" class="carousel">
+        <div class="carousel-inner">
+    {% endif %}
+
+    {% for key, value in view_objects.popular_tasks.popular_tasks.items %}
+    <div class="item {% if forloop.counter == 1 %}active{% endif %}">
+        <div id="news-most-popular-title" class="content-box-title">
+            Most Popular {{ key }}
+            {% if not view_objects.popular_tasks.no_carousel %}
+            <a href="#" style="float: right">
+                <img src="{{ STATIC_URL}}images/icons/icon-help-sm.png" width="20"
+                     align="center"
+                     title="Click to get help about this window"
+                     onclick="toggleHelp('widget', 'most-popular'); return false;"/>
+            </a>
+            {% endif %}
+        </div>
+        <div id="news-most-popular-content">
+                    {% if value %}
+                        <table id="news-popular-{{key|slugify}}-table">
+                            <tr>
+                                <th style="width: 80%">{{ key }}</th>
+                                <th>{% if key == 'Excursion' or key == 'Event' %}Sign ups{% else %}
+                                    Completions{% endif %}</th>
+                            </tr>
+                            {% for task in value %}
+                                <tr>
+                                    <td>
+                                        <a href="{% url activity_task task.type task.slug %}">{{ task.title }}</a>
+                                    </td>
+                                    <td>{{ task.completions }}</td>
+                                </tr>
+                            {% endfor %}
+                        </table>
+                    {% else %}
+                        {% if not view_objects.popular_tasks.no_carousel %}
+                        <p>Be the first to
+                            {% if key == 'Excursion' or key == 'Event' %}sign up for{% else %}
+                                complete{% endif %} a {{ key.lower }}!</p>
+                        {% endif %}
+                    {% endif %}
         </div>
     </div>
+    {% endfor %}
+
+    {% if not view_objects.popular_tasks.no_carousel %}
+        </div>
+    </div>
+    {% endif %}
 </div>
+{% endcache %}

@@ -4,9 +4,10 @@
         <div id="score-carousel" class="span12 carousel">
             <div class="carousel-inner">
         {% endif %}
-                <div class="item active">
+                {% for round_name, standings in view_objects.scoreboard.round_standings.items %}
+                <div class="item {% if forloop.first %}active{% endif %}">
                     <div class="content-box-title">
-                        {{ view_objects.scoreboard.current_round }} Point Scoreboard
+                        {{ round_name }} Point Scoreboard
                         {% if not view_objects.scoreboard.no_carousel %}
                             <a href="#" style="float: right">
                                 <img src="{{ STATIC_URL}}images/icons/icon-help-sm.png"
@@ -21,11 +22,11 @@
                             <tr>
                                 <th>Rank</th>
                                 <th>{{ TEAM_LABEL.capitalize }}</th>
-                                <th>Overall</th>
+                                <th>Points</th>
                             </tr>
                         </thead>
                         <tbody>
-                            {% for f in view_objects.scoreboard.team_standings %}
+                            {% for f in standings.team_standings %}
                             <tr>
                                 <td>{{ forloop.counter }}</td>
                                 <td>{{ f.profile__team__name }}</td>
@@ -37,7 +38,7 @@
                 </div>
                 <div class="item">
                         <div class="content-box-title">
-                            {{ view_objects.scoreboard.current_round }} Point Scoreboard
+                            {{ round_name }} Point Scoreboard
                             {% if not view_objects.scoreboard.no_carousel %}
                                 <a href="#" style="float: right">
                                     <img src="{{ STATIC_URL}}images/icons/icon-help-sm.png"
@@ -52,11 +53,11 @@
                             <tr>
                                 <th>Rank</th>
                                 <th>Individual</th>
-                                <th>Overall</th>
+                                <th>Points</th>
                             </tr>
                         </thead>
                         <tbody>
-                            {% for p in view_objects.scoreboard.profile_standings %}
+                            {% for p in standings.profile_standings %}
                             <tr>
                                 <td>{{ forloop.counter }}</td>
                                 <td>{{ p.profile__name }}</td>
@@ -66,9 +67,10 @@
                         </tbody>
                     </table>
                 </div>
+                {% if standings.user_team_standings %}
                 <div class="item">
                         <div class="content-box-title">
-                          {{ view_objects.scoreboard.current_round }} Point Scoreboard
+                          {{ round_name }} Point Scoreboard
                           {% if not view_objects.scoreboard.no_carousel %}
                               <a href="#" style="float: right">
                                   <img src="{{ STATIC_URL}}images/icons/icon-help-sm.png"
@@ -82,12 +84,12 @@
                         <thead>
                             <tr>
                                 <th>Rank</th>
-                                <th>Individual</th>
-                                <th>{{ view_objects.scoreboard.team }}</th>
+                                <th>Individual in {{ view_objects.scoreboard.team }}</th>
+                                <th>Points</th>
                             </tr>
                         </thead>
                         <tbody>
-                            {% for p in view_objects.scoreboard.user_team_standings %}
+                            {% for p in standings.user_team_standings %}
                             <tr>
                                 <td>{{ forloop.counter }}</td>
                                 <td>{{ p.name }}</td>
@@ -97,9 +99,10 @@
                         </tbody>
                     </table>
                 </div>
+                {% endif %}
                 <div class="item">
                         <div class="content-box-title">
-                          {{ view_objects.scoreboard.current_round }} Participation Scoreboard
+                          {{ round_name }} Participation Scoreboard
                           {% if not view_objects.scoreboard.no_carousel %}
                               <a href="#" style="float: right">
                                   <img src="{{ STATIC_URL}}images/icons/icon-help-sm.png"
@@ -118,7 +121,7 @@
                             </tr>
                         </thead>
                         <tbody>
-                            {% for f in view_objects.scoreboard.team_participation %}
+                            {% for f in standings.team_participation %}
                             <tr>
                                 <td>{{ forloop.counter }}</td>
                                 <td>{{ f }}</td>
@@ -128,6 +131,7 @@
                         </tbody>
                     </table>
                 </div>
+                {% endfor %}
         {% if not view_objects.scoreboard.no_carousel %}
             </div>
             <div id="resource-scoreboard-message">#1 at end of round wins a

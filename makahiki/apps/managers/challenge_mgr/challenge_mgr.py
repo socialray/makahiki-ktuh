@@ -13,6 +13,16 @@ from django.core import management
 def init():
     """initialize the challenge."""
 
+    #if settings.DEBUG:
+    #    import logging
+    #    logger = logging.getLogger('django.db.backends')
+    #    logger.setLevel(logging.DEBUG)
+    #    logger.addHandler(logging.StreamHandler())
+
+    #    logger = logging.getLogger('django_auth_ldap')
+    #    logger.addHandler(logging.StreamHandler())
+    #    logger.setLevel(logging.DEBUG)
+
     if settings.CHALLENGE.competition_name is not None:
         return
 
@@ -123,10 +133,13 @@ def enabled_widgets():
     return info_str
 
 
-def get_round_info():
+def get_round_info(round_name=None):
     """Returns a dictionary containing round information."""
     rounds = settings.COMPETITION_ROUNDS
-    return rounds
+    if not round_name:
+        return rounds
+    else:
+        return rounds[round_name]
 
 
 def get_current_round_info():

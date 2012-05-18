@@ -6,6 +6,7 @@ from django.core.exceptions import ObjectDoesNotExist
 from django.db.models.aggregates import Sum
 import requests
 from requests.exceptions import Timeout
+from apps.managers.challenge_mgr import challenge_mgr
 from apps.managers.team_mgr.models import Team
 from apps.managers.resource_mgr.models import EnergyUsage, WaterUsage, ResourceSettings, \
     WasteUsage
@@ -113,10 +114,9 @@ def _get_resource_usage(name):
         return None
 
 
-def resource_ranks(name):
+def resource_ranks(name, round_name):
     """return the resource ranking for all teams."""
-    team_count = Team.objects.count()
-    resource = _get_resource_usage(name)
+    resource_usage = _get_resource_usage(name)
 
     resource_settings = get_resource_settings(name)
     if resource_settings.winning_order == "Ascending":
@@ -124,29 +124,25 @@ def resource_ranks(name):
     else:
         ordering = "-total"
 
-    return resource.objects.values("team__name").annotate(
-        total=Sum("usage")).order_by(ordering)[:team_count]
+    round_info = challenge_mgr.get_round_info(round_name)
+    if round_name == "Overall":
+        start = settings.COMPETITION_START
+        end = settings.COMPETITION_END
+    else:
+        start = round_info["start"]
+        end = round_info["end"]
 
-
-def energy_ranks():
-    """Get the overall energy ranking for all teams, return an ordered query set."""
-    return resource_ranks("energy")
-
-
-def waste_ranks():
-    """Get the overall waste ranking for all teams, return an ordered query set."""
-    return resource_ranks("waste")
-
-
-def water_ranks():
-    """Get the overall water ranking for all teams, return an ordered query set."""
-    return resource_ranks("water")
+    ranks = resource_usage.objects.filter(
+        date__gte=start.date,
+        date__lt=end.date).values("team__name").annotate(
+            total=Sum("usage")).order_by(ordering)
+    return ranks
 
 
 def energy_team_rank_info(team):
     """Get the overall rank for the team. Return a dict of the rank number and usage."""
     if team:
-        for idx, rank in enumerate(energy_ranks()):
+        for idx, rank in enumerate(resource_ranks("energy", "Overall")):
             if rank["team__name"] == team.name:
                 return {"rank": idx + 1, "usage": rank["total"]}
     else:

@@ -167,11 +167,6 @@ class ChallengeSettings(models.Model):
             settings.AUTH_LDAP_SERVER_URI = settings.CHALLENGE.ldap_server_url
             settings.AUTH_LDAP_USER_SEARCH = LDAPSearch("%s" % settings.CHALLENGE.ldap_search_base,
                                                ldap.SCOPE_SUBTREE, "(uid=%(user)s)")
-            # Uncomment below to turn on LDAP logging
-            #import logging
-            #logger = logging.getLogger('django_auth_ldap')
-            #logger.addHandler(logging.StreamHandler())
-            #logger.setLevel(logging.DEBUG)
 
 
 class Sponsor(models.Model):
@@ -247,13 +242,13 @@ class RoundSettings(models.Model):
         rounds_dict = {}
         settings.COMPETITION_START = None
         last_round = None
-        for competition_round in rounds:
+        for r in rounds:
             if settings.COMPETITION_START is None:
-                settings.COMPETITION_START = competition_round.start
-            rounds_dict[competition_round.name] = {
-                "start": competition_round.start,
-                "end": competition_round.end, }
-            last_round = competition_round
+                settings.COMPETITION_START = r.start
+            rounds_dict[r.name] = {
+                "start": r.start,
+                "end": r.end, }
+            last_round = r
         if last_round:
             settings.COMPETITION_END = last_round.end
         settings.COMPETITION_ROUNDS = rounds_dict
