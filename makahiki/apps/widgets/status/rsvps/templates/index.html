@@ -1,5 +1,7 @@
 {% with events=view_objects.status__rsvps.events excursions=view_objects.status__rsvps.excursions %}
 <div id="status-rsvps">
+    <div class="row-fluid">
+        <div class="span6">
         <div class="content-box">
             <div class="content-box-title">
                 Event RSVPs
@@ -27,7 +29,8 @@
                 </table>
             </div>
         </div>
-
+    </div>
+    <div class="span6">
         <div class="content-box">
             <div class="content-box-title">
                 Excursion RSVPs
@@ -58,4 +61,6 @@
 
         <br style="clear: both"/>
     </div>
+</div>
+</div>
 {% endwith %}

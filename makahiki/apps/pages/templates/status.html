@@ -32,7 +32,7 @@
 
 {% block body %}   
 <div class="row-fluid">
-  <div class="span9">
+  <div class="span10">
 
     <!-- The prize row-->
     <div class="row-fluid"> 
@@ -45,16 +45,18 @@
     <!--The action/rsvp row-->
     <div class="row-fluid"> 
     <!--RSVPS-->
-    <div class="span6">
+    <div class="span12">
     {% if view_objects.status__rsvps %}
         <div class="status-rsvp">
         {% include "widgets/status/rsvps/templates/index.html" %}
         </div> 
     </div>
     {% endif %}
+    </div>
+    <div class="row-fluid">
     <!--Actions-->
     {% if view_objects.status__actions %}
-    <div class="span6">
+    <div class="span12">
         <div class="status-actions">
         {% include "widgets/status/actions/templates/index.html" %}
         </div> 
@@ -92,7 +94,7 @@
 
   </div>
   <!--sidebar for user logins-->
-  <div class="span3">
+  <div class="span2">
     {% if view_objects.status__users %}
         <div class="status-users">
         {% include "widgets/status/users/templates/index.html" %}

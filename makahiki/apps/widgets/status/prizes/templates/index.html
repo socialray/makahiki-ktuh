@@ -1,5 +1,5 @@
 {% with unused=view_objects.status__prizes.unused errors=view_objects.status__prizes.errors raffle_prizes=view_objects.status__prizes.raffle_prizes %} 
-<div class="span4">
+<div class="span3">
     <div class="content-box">
         <div class="content-box-title">
             Unused Tickets
@@ -22,7 +22,7 @@
 </div>
 
 {% for round_name, raffle_prizes in raffle_prizes.items %}
-    <div class="span4">
+    <div class="span3">
         <div class="content-box">
             <div class="content-box-title">
                 {{ round_name }} Raffle Prizes
