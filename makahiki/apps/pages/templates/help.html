@@ -20,27 +20,19 @@
             <!-- left column -->
             <div class="span6">
                 {% if view_objects.help__intro %}
-                <div id='help_intro'>
                     {% include "widgets/help/intro/templates/index.html" %}
-                </div>
                 {% endif %}
                 {% if view_objects.help__faq %}
-                <div id='help_faq'>
                     {% include "widgets/help/faq/templates/index.html" %}
-                </div>
                 {% endif %}
             </div>
             <!-- right column -->
             <div class="span6">
                 {% if view_objects.help__rule %}
-                <div id='help_rule'>
                     {% include "widgets/help/rule/templates/index.html" %}
-                </div>
                 {% endif %}
                 {% if view_objects.ask_admin %}
-                <div id='ask_admin'>
                     {% include "widgets/ask_admin/templates/index.html" %}
-                </div>
                 {% endif %}
             </div>
         </div>

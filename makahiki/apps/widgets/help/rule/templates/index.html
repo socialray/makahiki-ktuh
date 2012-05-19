@@ -1,14 +1,12 @@
-<div id="help-rules" class="content-box">
-    <div id="help-rules-box">
-        <div id="help-rules-title" class="content-box-title">
-            Rules of the competition
-        </div>
-        <div id="help-rules-content" class="content-box-contents">
-            <ul>
-                {% for topic in view_objects.help__rule.rules %}
-                    {% include "help/topic-item.html" %}
-                {% endfor %}
-            </ul>
-        </div>
+<div class="content-box">
+    <div class="content-box-title">
+        Rules of the competition
+    </div>
+    <div class="content-box-contents help-content">
+        <ul>
+            {% for topic in view_objects.help__rule.rules %}
+                {% include "help/topic-item.html" %}
+            {% endfor %}
+        </ul>
     </div>
 </div>
