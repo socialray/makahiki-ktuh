@@ -35,7 +35,7 @@
                 Referrals
             </div>
             <div class="content-body">
-            <table style='padding: 15px; width: 300px'>
+            <table>
                 <tr>
                     <th>Rank</th>
                     <th>User</th>
@@ -44,7 +44,7 @@
                 {% for item in referrals|dictsortreversed:'referrals' %}
                     <tr>
                         <td>{{forloop.counter}}</td>
-                        <td>{{item.referring_user__profile__name}} ({{item.referring_user__username}})</td>
+                        <td>{{item.referring_user__profile__name}}</td>
                         <td>{{item.referrals}}</td>
                     </tr>
                 {% endfor %}

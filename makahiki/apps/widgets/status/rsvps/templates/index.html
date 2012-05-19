@@ -1,33 +1,38 @@
 {% with events=view_objects.status__rsvps.events excursions=view_objects.status__rsvps.excursions %}
 <div id="status-rsvps">
+  <div class="row-fluid">
+    <div class="span6">
         <div class="content-box">
             <div class="content-box-title">
                 Event RSVPs
             </div>
             <div class="content-body">
-                <table >
+                <table>
                     {% if events %}
-                    <tr>
-                        <th class="padding-right">Event</th>
-                        <th>Seats </th>
-                        <th>RSVPs</th>
-                    </tr>
-                    {% for event in events %}
                         <tr>
-                            <td><a
-                                    href='{% url activity_view_rsvps event.type event.slug %}'>{{ event.title }}</a>
-                            </td>
-                            <td>{{ event.event.event_max_seat }}</td>
-                            <td>{{ event.rsvps }}</td>
+                            <th class="padding-right">Event</th>
+                            <th>Seats</th>
+                            <th>RSVPs</th>
                         </tr>
-                    {% endfor %}
+                        {% for event in events %}
+                            <tr>
+                                <td><a
+                                        href='{% url activity_view_rsvps event.type event.slug %}'>{{ event.title }}</a>
+                                </td>
+                                <td>{{ event.event.event_max_seat }}</td>
+                                <td>{{ event.rsvps }}</td>
+                            </tr>
+                        {% endfor %}
                     {% else %}
-                        <tr><td>There are no RSVPs</td></tr>
+                        <tr>
+                            <td>There are no RSVPs</td>
+                        </tr>
                     {% endif %}
                 </table>
             </div>
         </div>
-
+    </div>
+    <div class="span6">
         <div class="content-box">
             <div class="content-box-title">
                 Excursion RSVPs
@@ -35,22 +40,24 @@
             <div class="content-body">
                 <table>
                     {% if excursions %}
-                    <tr>
-                        <th class="padding-right">Event</th>
-                        <th>Seats </th>
-                        <th>RSVPs</th>
-                    </tr>
-                    {% for excursion in excursions %}
                         <tr>
-                            <td><a
-                                    href='{% url activity_view_rsvps excursion.type excursion.slug %}'>{{ excursion.title }}</a>
-                            </td>
-                            <td>{{ excursion.event.event_max_seat }}</td>
-                            <td>{{ excursion.rsvps }}</td>
+                            <th class="padding-right">Event</th>
+                            <th>Seats</th>
+                            <th>RSVPs</th>
                         </tr>
-                    {% endfor %}
+                        {% for excursion in excursions %}
+                            <tr>
+                                <td><a
+                                        href='{% url activity_view_rsvps excursion.type excursion.slug %}'>{{ excursion.title }}</a>
+                                </td>
+                                <td>{{ excursion.event.event_max_seat }}</td>
+                                <td>{{ excursion.rsvps }}</td>
+                            </tr>
+                        {% endfor %}
                     {% else %}
-                        <tr><td>There are no RSVPs</td></tr>
+                        <tr>
+                            <td>There are no RSVPs</td>
+                        </tr>
                     {% endif %}
                 </table>
             </div>
@@ -58,4 +65,6 @@
 
         <br style="clear: both"/>
     </div>
+  </div>
+</div>
 {% endwith %}

@@ -65,13 +65,16 @@ $PATH so that ``pg_config`` and ``psql`` are defined.  Note for Linux users:
 you must download postgres-dev in order to get the pg_config command. It is
 important that the user "postgres" is "trusted" so that you can connect to the
 server as the user "postgres" locally without authentication. If that is not the case, you
-must edit the pg_hba.conf file and change "local all postgres ident" to "local all postgres trust".
+must edit the pg_hba.conf file and change "local all postgres ident" to "local all
+postgres trust". Or, you may be able to create a .pgpass file containing the credentials.
 
 
 `Memcache`_.  Makahiki can optionally use Memcache to improve performance.
 To avoid the need for alternative configuration files, we require local installations to install
-Memcache even if they aren't intending to use it.  Fortunately,
-installation is simple.  Just follow `Heroku's memcache installation instructions`_. 
+Memcache and an associated library even if they aren't intending to use it.  On Mac OS X, if you have installed
+`Homebrew`_, you can install these with ``brew install memcached`` and ``brew install
+libmemcached``. For other environments, one place to start is `Heroku's memcache
+installation instructions`_, although this instructions do not explain installation of libmemcached.
 
 .. _Python: http://www.python.org/download/
 .. _Python Imaging Library: http://www.pythonware.com/products/pil/
