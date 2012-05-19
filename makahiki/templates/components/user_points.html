@@ -2,51 +2,41 @@
 
 {% cache 600 infobar request.user.username %}
 {% with user.get_profile as profile %}
-{% if CURRENT_ROUND_INFO and CURRENT_ROUND_INFO.name != 'Overall' %}
-<!-- First slideshow element -->
-<div id="header-user-overall-rank1" class="item active">
-    <h4>{{profile.name}}</h4>
-    <ul>
-        <li>{{CURRENT_ROUND_INFO.name}}: {{profile.current_round_points}} points #{{profile.current_round_team_rank}}/{{TEAM_MEMBER_COUNT}} in {{profile.team.name}}.</li>
-    </ul>
+  {% if CURRENT_ROUND_INFO and CURRENT_ROUND_INFO.name != 'Overall' %}
+<div>
+    <div class="span3">
+<h4>{{profile.name}}</h4>{{CURRENT_ROUND_INFO.name}}: {{profile.current_round_points}} points #{{profile.current_round_team_rank}}/{{TEAM_MEMBER_COUNT}} in {{profile.team.name}}.
+    </div>
 </div>
-<!-- Second slideshow element -->
-<div id="header-user-overall-rank2" class="item">
-    <h4>{{profile.name}}</h4>
-    <ul>
-        <li>{{CURRENT_ROUND_INFO.name}}: {{profile.current_round_points}} points #{{profile.current_round_overall_rank}}/{{OVERALL_MEMBER_COUNT}} overall.</li>
-    </ul>        
+<div>
+    <div class="span3">
+<h4>{{profile.name}}</h4>{{CURRENT_ROUND_INFO.name}}: {{profile.current_round_points}} points #{{profile.current_round_overall_rank}}/{{OVERALL_MEMBER_COUNT}} overall.
+    </div>
 </div>
-{% endif %}
-<!-- Third slideshow element -->
-<div id="header-user-team-rank3" class="item">
-    <h4>{{profile.name}}</h4>
-  <ul>
-    <li>Overall: {{profile.points}} points #{{profile.team_rank}}/{{TEAM_MEMBER_COUNT}} in {{profile.team.name}}</li>
-  </ul>
+  {% endif %}
+<div>
+    <div class="span3">
+<h4>{{profile.name}}</h4>Overall: {{profile.points}} points #{{profile.team_rank}}/{{TEAM_MEMBER_COUNT}} in {{profile.team.name}}
+    </div>
 </div>
-<!-- Fourth slideshow element -->
-<div id="header-user-overall-rank4" class="item">
-    <h4>{{profile.name}}</h4>
-    <ul>
-        <li>Overall: {{profile.points}} points #{{profile.overall_rank}}/{{OVERALL_MEMBER_COUNT}}</li>
-    </ul>
+<div>
+    <div class="span3">
+<h4>{{profile.name}}</h4>Overall: {{profile.points}} points #{{profile.overall_rank}}/{{OVERALL_MEMBER_COUNT}}
+    </div>
 </div>
-
-{% if profile.canopy_member %}
-<!-- Fifth slideshow element -->
-{% with canopy_info=profile.canopy_karma_info %}
-<div id="header-user-overall-rank5" >
-  <div id="header-user-points" class="item">
-    <h4>{{profile.name}}</h4>
-    <div>{{profile.canopy_karma}} Canopy Karma points</div>
-  </div>
-  <div id="header-user-rank" class="item">
-    <h4>{{profile.name}}</h4>
-    <div>#{{canopy_info.rank}} out of {{canopy_info.total}} overall</div>
-  </div>
+  {% if profile.canopy_member %}
+    {% with canopy_info=profile.canopy_karma_info %}
+<div>
+    <div class="span3">
+<h4>{{profile.name}}</h4>{{profile.canopy_karma}} Canopy Karma points
+    </div>
 </div>
-{% endwith %}
-{% endif %}
+<div>
+    <div class="span3">
+<h4>{{profile.name}}</h4>#{{canopy_info.rank}} out of {{canopy_info.total}} overall
+    </div>
+</div>
+    {% endwith %}
+  {% endif %}
 {% endwith %}
 {% endcache %}

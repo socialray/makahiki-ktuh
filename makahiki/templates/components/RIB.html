@@ -1,35 +1,63 @@
 {% load avatar_tags %} 
 {% if user.is_authenticated %}
+{% with user.get_profile as profile %}
+{% with user.get_profile.team as team %}
+<script type="text/javascript">
+$(document).ready(function() {
+$('#wide-personal-cycle').cycle({
+    fx: "fade",
+    timeout: 3500,
+    delay:  -1000,
+    sync: true
+});
+$('#wide-team-cycle').cycle({
+    fx: "fade",
+    timeout: 3500,
+    delay:  -1000,
+    sync: true
+});
+$('#wide-round-cycle').cycle({
+    fx: "fade",
+    timeout: 3500,
+    delay:  -1000,
+    sync: true
+});
+$('#single-cycle').cycle({
+    fx: "fade",
+    timeout: 3500,
+    delay:  -1000,
+    sync: true
+});
+});
+</script>
 <div id="info-bar-wide" class="container-fluid makahiki-box info-bar">
     <div class="row-fluid">
-        <div class="span12">
             <div class="span1">
                 <img src="{% avatar_url user 60 %}" />
             </div>
-            <div id="wide-personal-cycle" class="span3 carousel">
-                <div class="carousel-inner">
+            <div class="span3">
+                <div id="wide-personal-cycle">
                     {% include "components/user_points.html" %}
                 </div>
             </div>
-            <div id="wide-team-cycle" class="span3 carousel">
-                <div class="carousel-inner">
+            <div class="span3">
+                <div id="wide-team-cycle">
                     {% include "components/team_points.html" %}
                 </div>
             </div>
-            <div id="wide-round-cycle" class="span3 carousel">
-                <div class="carousel-inner">
+            <div class="span3">
+                <div id="wide-round-cycle">
                     {% include "components/round_cycle.html" %}
                 </div>
             </div>
             <div class="span2">
+                <a href="{% url account_logout %}" class="info-bar-logout">Logout</a>
                 <button id="header-feedback1" href="javascript:void(0);" class="btn">Send Feedback</button>
-                <a href="{% url account_logout %}">Logout</a>
             </div>
         </div>
-    </div>
 </div>
-<div id="info-bar-single" class="container makahiki-box info-bar">
-    <div class="row">
+<div id="info-bar-single" class="container-fluid makahiki-box info-bar">
+    <div class="row-fluid">
         <div id="feedback-single" class="span2">
             <button id="header-feedback2" href="javascript:void(0);" class="btn">Send Feedback</button>
         </div>
@@ -37,12 +65,14 @@
             <a href="{% url account_logout %}">Logout</a>
         </div>
     </div>
-    <div class="row">
-        <div id="sngle-cycle" class="carousel">
-            <div class="carousel-inner">
-                {% include "components/RIB_single.html" %}
-            </div>
+    <div class="row-fluid">
+        <div class="span12">
+        <div id="single-cycle">
+            {% include "components/RIB_single.html" %}
+        </div>
         </div>
     </div>
 </div>
+{% endwith %}
+{% endwith %}
 {% endif %}

@@ -134,7 +134,7 @@
 }
 
 .info-bar h4 {
-    .pagination-centered;
+    text-align: center;
 }
 
 .info-bar h4 a {
@@ -150,13 +150,23 @@
     .show;
 }
 
-.info-bar .carousel {
-    margin-bottom: 0;
+.info-bar div {
+    text-align: center;
 }
 
-.info-bar .carousel-inner .item {
-    height: @baseLineHeight * 3;
+.info-bar #single-cycle div, .info-bar #single-cycle h4 {
+    text-align: center;
+    width: 100%;
 }
+
+.info-bar .btn {
+    float: right;
+}
+
+.info-bar-logout {
+    float: right;
+}
+
 .makahiki-box-title {
     display: inline;
     margin-left: auto;
@@ -393,6 +403,11 @@ body {
     text-align: center;    
 }
 
+#scoreboard-pager a {
+    margin: 0 5px; 
+    padding: 3px 5px; 
+    text-decoration: none
+}
 /***** Help styles *****/
 #widget-help-dialog {
   text-align: left;
