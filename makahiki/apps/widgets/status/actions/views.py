@@ -16,15 +16,14 @@ def supply(request, page_name):
     for type_choice in Action.TYPE_CHOICES:
         action_type = type_choice[0]
         task_list = []
-        actions = smartgrid.get_popular_actions(action_type, "approved")
-        if not actions:
-            actions = Action.objects.filter(type=action_type)
+        actions = smartgrid.get_popular_action_submissions(action_type)
         for action in actions:
             task = {"type": action.type,
                     "slug": action.slug,
                     "title": action.title,
-                    "completions": action.completions if hasattr("action", "completions") else 0,
-                    "submissions": ActionMember.objects.filter(action=action).count(),
+                    "completions": ActionMember.objects.filter(action=action,
+                                                               approval_status="approved").count(),
+                    "submissions": action.submissions,
                     }
             task_list.append(task)
         popular_tasks[action_type] = task_list

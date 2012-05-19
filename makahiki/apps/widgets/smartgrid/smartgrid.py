@@ -103,6 +103,15 @@ def get_popular_actions(action_type, approval_status, num_results=None):
     return results[:num_results] if num_results else results
 
 
+def get_popular_action_submissions(action_type, num_results=None):
+    """Gets the most popular activities in terms of completions."""
+    results = Action.objects.filter(type=action_type,
+                                    actionmember__approval_status__isnull=False,
+        ).annotate(submissions=Count("actionmember")).order_by("-submissions")
+
+    return results[:num_results] if num_results else results
+
+
 def get_in_progress_members(user):
     """Get the user's incomplete activity members."""
     return user.actionmember_set.filter(

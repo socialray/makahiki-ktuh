@@ -7,7 +7,7 @@ from apps.managers.challenge_mgr.models import RoundSettings
 from apps.managers.resource_mgr.models import EnergyUsage, WaterUsage
 from apps.managers.team_mgr.models import Team
 from apps.widgets.resource_goal.models import EnergyGoalSetting, EnergyBaselineHourly, \
-    EnergyBaselineDaily, WaterGoalSetting, WaterBaselineDaily
+    EnergyBaselineDaily, WaterGoalSetting, WaterBaselineDaily, WaterGoal, EnergyGoal
 from apps.widgets.smartgrid.models import Event
 
 
@@ -128,34 +128,34 @@ class Command(MakahikiBaseCommand):
         for usage in WaterUsage.objects.filter(date__lte=today):
             usage.delete()
 
-        # add initialize data
+        # add initialize data for energy and water
         for team in Team.objects.all():
-            WaterUsage(team=team, date=today.date(), time=today.time(), usage=0).save()
-            EnergyUsage(team=team, date=today.date(), time=today.time(), usage=0).save()
+            WaterUsage(team=team, date=today.date(), time=datetime.time(15), usage=1).save()
+            EnergyUsage(team=team, date=today.date(), time=datetime.time(15), usage=1).save()
 
         self.stdout.write("created initial resource usages for all teams.\n")
 
     def setup_resource_baseline(self):
         """set up the resource baseline data, all existing data will be delete."""
 
+        # energy hourly
         for baseline in EnergyBaselineHourly.objects.all():
             baseline.delete()
-
         for team in Team.objects.all():
             for day in range(0, 7):
                 for hour in range(1, 25):
                     EnergyBaselineHourly(team=team, day=day, hour=hour, usage=1000 * hour).save()
 
+        # energy daily
         for baseline in EnergyBaselineDaily.objects.all():
             baseline.delete()
-
         for team in Team.objects.all():
             for day in range(0, 7):
                 EnergyBaselineDaily(team=team, day=day, usage=1000 * 24).save()
 
+        # water daily
         for baseline in WaterBaselineDaily.objects.all():
             baseline.delete()
-
         for team in Team.objects.all():
             for day in range(0, 7):
                 WaterBaselineDaily(team=team, day=day, usage=1000 * 24).save()
@@ -164,6 +164,10 @@ class Command(MakahikiBaseCommand):
 
     def setup_resource_goalsetting(self):
         """set up the resource goal data. all existing data will be delete."""
+
+        #EnergyGoal
+        for goal in EnergyGoal.objects.all():
+            goal.delete()
         for goal_setting in EnergyGoalSetting.objects.all():
             goal_setting.delete()
 
@@ -175,6 +179,9 @@ class Command(MakahikiBaseCommand):
                               manual_entry_time=datetime.time(15),
                               goal_points=20).save()
 
+        # WaterGoal
+        for goal in WaterGoal.objects.all():
+            goal.delete()
         for goal_setting in WaterGoalSetting.objects.all():
             goal_setting.delete()
 
