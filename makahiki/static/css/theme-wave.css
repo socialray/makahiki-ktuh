@@ -842,8 +842,10 @@ input,textarea,select,.uneditable-input{width:150px;}
 .info-bar h4 a{color:#000000;text-decoration:underline;}
 .info-bar ul{list-style:none outside none;}
 .info-bar li{display:block;}
-.info-bar .carousel{margin-bottom:0;}
-.info-bar .carousel-inner .item{height:54px;}
+.info-bar div{text-align:center;}
+.info-bar #single-cycle div,.info-bar #single-cycle h4{text-align:center;width:100%;}
+.info-bar .btn{float:right;}
+.info-bar-logout{float:right;}
 .makahiki-box-title{display:inline;margin-left:auto;margin-right:auto;text-align:center;}
 .makahiki-box-title a{float:right;}
 .notice-icon{float:left;}
@@ -889,9 +891,10 @@ body{margin:0;padding-left:20px;padding-right:20px;text-align:center;}
 #info-bar-single a{float:right;text-align:right;}
 #info-bar-single button{float:left;}
 #info-bar-single h4 a{float:none;text-align:center;}
+#scoreboard-pager a{margin:0 5px;padding:3px 5px;text-decoration:none;}
 #widget-help-dialog{text-align:left;}
 #widget-help-dialog-close{text-align:center;}
-@media (min-width:641px) and (max-width:979px){.nav img{display:none;}}@media (min-width:480px) and (max-width:821px){.nav li a img{display:none;} .nav li a:hover img{display:none;}}@media (max-width:640px){a.learn img,a.learn:hover img,a.advanced img,a.advanced:hover img,a.energy img,a.energy:hover img,a.help img,a.help:hover img,a.home img,a.home:hover img,a.news img,a.news:hover img,a.win img,a.win:hover img,a.profile img,a.profile:hover img,a.water img,a.water:hover img,a.status img,a.status:hover img{display:none;visibility:hidden;} body{padding-left:0;padding-right:0;} .container-fluid{padding-left:0px;padding-right:0px;} .makahiki-box{margin-bottom:5px;} .navbar{margin-bottom:5px;} #info-bar-wide{display:none;visibility:hidden;} #info-bar-single{display:block;visibility:visible;} #quest-list{padding:0px;} #quest-list li{display:block;margin:5px;padding:0px;} #quest-title{margin:0px;}}body{background:url("../images/oceanWave.jpg") center fixed;background-repeat:no-repeat;-webkit-background-size:cover;-moz-background-size:cover;-o-background-size:cover;background-size:cover;background-color:#2b93ad;color:#2b93ad;}
+@media (max-width:767px){#info-bar-wide{display:none;visibility:hidden;} #info-bar-single{display:block;visibility:visible;}}@media (min-width:641px) and (max-width:979px){.nav img{display:none;}}@media (min-width:480px) and (max-width:821px){.nav li a img{display:none;} .nav li a:hover img{display:none;}}@media (max-width:640px){a.learn img,a.learn:hover img,a.advanced img,a.advanced:hover img,a.energy img,a.energy:hover img,a.help img,a.help:hover img,a.home img,a.home:hover img,a.news img,a.news:hover img,a.win img,a.win:hover img,a.profile img,a.profile:hover img,a.water img,a.water:hover img,a.status img,a.status:hover img{display:none;visibility:hidden;} body{padding-left:0;padding-right:0;} .container-fluid{padding-left:0px;padding-right:0px;} .makahiki-box{margin-bottom:5px;} .navbar{margin-bottom:5px;} #info-bar-wide{display:none;visibility:hidden;} #info-bar-single{display:block;visibility:visible;} #quest-list{padding:0px;} #quest-list li{display:block;margin:5px;padding:0px;} #quest-title{margin:0px;}}body{background:url("../images/oceanWave.jpg") center fixed;background-repeat:no-repeat;-webkit-background-size:cover;-moz-background-size:cover;-o-background-size:cover;background-size:cover;background-color:#2b93ad;color:#2b93ad;}
 .brand img{background:transparent url("../images/icons/icon-uh-logo.png") top left no-repeat;display:block;margin:0 auto;}
 .activity,.activity-legend,.activity a{background-color:#70a21f;color:#000000;}
 .commitment,.commitment-legend,.commitment a{background-color:#845d18;color:#000000;}

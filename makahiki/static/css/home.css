@@ -8,12 +8,8 @@
 .homecontent>ul>li:nth-of-type(7)>.home-item{margin-left:16%;}
 .homecontent>ul>li{list-style:none;}
 .tile>ul{list-style:none;margin-left:0px;}
-.content p{font-size:8pt;line-height:14px;text-align:left;white-space:nowrap;padding-left:13px;}
-.content img{border:0;}
 .tile>h6{text-transform:uppercase;font-weight:bold;font-size:14pt;}
 .home-item{width:28%;height:210px;display:block;padding-bottom:2px;margin:10px 10px 0px 10px;float:left;}
-.content .container-fluid{padding-left:20;padding-right:20;}
-#home-prizes{clear:left;}
 .home-item img{float:none;}
 .home-advanced-icon{background:transparent url(../images/icons/icon-advanced-lg.png) top left no-repeat;width:120px;height:124px;}
 .home-advanced-icon:hover{background:transparent url(../images/icons/icon-advanced-lg-over.png) top left no-repeat;}
