@@ -13,6 +13,7 @@
     <link rel="stylesheet/less" type="text/css" href="{{STATIC_URL}}less/energy.less">
   {% endif %}
     <script src="{{STATIC_URL}}js/news.js" type="text/javascript"></script>
+    <script src="{{STATIC_URL}}js/wall-post.js" type="text/javascript"></script>    
 {% endblock %}
 
 {% block body %}
@@ -21,7 +22,7 @@
             <!-- left column -->
             <div class="span5">
                 {% if view_objects.resource_scoreboard__water %}
-                    <div id='resource_scoreboard'>
+                    <div>
                         {% include "widgets/resource_scoreboard/water/templates/index.html" %}
                     </div>
                 {% endif %}
@@ -29,12 +30,12 @@
             <!-- right column -->
             <div class="span7">
                 {% if view_objects.resource_goal__water %}
-                    <div id='energy_goal'>
+                    <div>
                         {% include "widgets/resource_goal/water/templates/index.html" %}
                     </div>
                 {% endif %}
                 {% if view_objects.wallpost %}
-                    <div id='wallpost'>
+                    <div>
                         {% include "widgets/wallpost/templates/index.html" %}
                     </div>
                 {% endif %}

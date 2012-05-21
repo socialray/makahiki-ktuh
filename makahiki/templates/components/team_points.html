@@ -5,28 +5,36 @@
 {% cache 600 infobar team.name %}
 {% if CURRENT_ROUND_INFO and CURRENT_ROUND_INFO.name != 'Overall' %}
 <div>
-    <div class="span3">
+    <div class="row-fluid">
+    <div class="span12">
 <h4>{{team}}</h4>{{CURRENT_ROUND_INFO.name}}: {{team.current_round_points}} points. #{{team.current_round_rank}}/{{TEAM_COUNT}}.
+    </div>
     </div>
 </div> 
 {% if energy_rank_info %}
 <div>
-    <div class="span3">
+    <div class="row-fluid">
+    <div class="span12">
 <h4>{{team}}</h4>{{CURRENT_ROUND_INFO.name}}: <span id="round-energy-value"></span> kWh.
 #<span id="round-energy-rank"></span>  out of {{TEAM_COUNT}}.
+    </div>
     </div>
 </div>
 {% endif %}
 {% endif %}
 <div>
-    <div class="span3">
+    <div class="row-fluid">
+    <div class="span12">
 <h4>{{team}}</h4>Overall: {{team.points}} points. #{{team.rank}} out of {{TEAM_COUNT}}
+    </div>
     </div>
 </div>
 {% if energy_rank_info %}
 <div>
-    <div class="span3">
+    <div class="row-fluid">
+    <div class="span12">
 <h4>{{team}}</h4>Overall: {{ energy_rank_info.usage }} kWh. #{{ energy_rank_info.rank }} out of {{TEAM_COUNT}}.
+    </div>
     </div>
 </div>
 {% endif %}

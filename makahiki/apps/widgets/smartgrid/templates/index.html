@@ -1,5 +1,5 @@
-<div id="activity-categories-box" class="content-box-centered">
-    <div id="activity-categories-title" class="content-box-title">
+<div class="content-box-centered">
+    <div class="content-box-title">
         The Smart Grid Game
         <a href="#" style="float: right">
             <img src="{{ STATIC_URL}}images/icons/icon-help-sm.png" width="20" align="center"
@@ -7,9 +7,9 @@
                  onclick="toggleHelp('widget', 'smart-grid-game'); return false;"
                     /></a>
     </div>
-    <div id="activity-categories-content" class="content-box-contents">
+    <div class="content-box-contents">
         <p>
-        <table id="activities-grid" class="activities-grid">
+        <table class="activities-grid">
             <tr><!-- Start header -->
                 {% for cat in view_objects.smartgrid.categories %}
                     <td>
@@ -32,7 +32,7 @@
                             {% for task in cat.task_list %}
                                 <tr>
                                     <td>
-                                        <div id="activity-category">
+                                        <div>
                                             <div class="{{task.type}}">
                                                 <div class="">
                                                     {% if task.is_unlock %}
@@ -118,7 +118,7 @@
 
         <p/>
 
-        <table id="activities-grid-legend">
+        <table class="activities-grid-legend">
             <tr>
                 <td colspan="10"><b>Legend:</b></td>
             </tr>

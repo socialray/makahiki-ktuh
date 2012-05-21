@@ -1,18 +1,18 @@
 @charset "UTF-8";
-#activity-task-details-info{background-color:#404242;border:2px solid gray;height:auto;margin:.5em auto 5px auto;padding:10px 2px 0 2px;float:center;-moz-border-radius:6px;-webkit-border-radius:6px;color:#FFF;font-weight:bold;text-align:center;line-height:20px;display:block;}
-#activity-task-form-content{float:center;text-align:left;padding-left:30px;font:normal 10pt Arial,Helvetica,sans-serif;}
-#activity-task-form-content-button{padding-left:100px;}
+.activity-task-details-info{background-color:#404242;border:2px solid gray;height:auto;margin:.5em auto 5px auto;padding:10px 2px 0 2px;float:center;-moz-border-radius:6px;-webkit-border-radius:6px;color:#FFF;font-weight:bold;text-align:center;line-height:20px;display:block;}
+.activity-task-form-content{float:center;text-align:left;padding-left:30px;font:normal 10pt Arial,Helvetica,sans-serif;}
+.activity-task-form-content-button{padding-left:100px;}
 #score-carousel th:last-child,#score-carousel td:last-child{text-align:right;}
-#activity-events-content table{margin:0;padding:0;border-spacing:0;width:100%;}
-#activity-events-content th{padding:4px 4px 4px 4px;text-align:left;}
-#activity-events-content td{text-align:left;padding:4px 4px 4px 4px;}
+.activity-events-content table{margin:0;padding:0;border-spacing:0;width:100%;}
+.activity-events-content th{padding:4px 4px 4px 4px;text-align:left;}
+.activity-events-content td{text-align:left;padding:4px 4px 4px 4px;}
 #resource-scoreboard-message{font-size:12pt;margin-left:30px;margin-top:0.5em;text-align:center;}
-table#activities-grid-legend{padding-left:8px;border:2;}
-table#activities-grid-legend td{padding:2px;width:8px;text-align:left;}
-table#activities-grid{padding-left:2px;border:0;margin:0 auto;width:100%;}
-table#activities-grid td{padding:1px;width:10%;vertical-align:top;}
-table#activities-grid td table{padding:0;margin:0;border-spacing:0;}
-table#activities-grid td table td{padding:1px;margin:0;vertical-align:middle;}
+.activities-grid-legend{padding-left:8px;border:2;}
+.activities-grid-legend td{padding:2px;width:8px;text-align:left;}
+.activities-grid{padding-left:2px;border:0;margin:0 auto;width:100%;}
+.activities-grid td{padding:1px;width:10%;vertical-align:top;}
+.activities-grid td table{padding:0;margin:0;border-spacing:0;}
+.activities-grid td table td{padding:1px;margin:0;vertical-align:middle;}
 .activity-category{overflow:hidden;margin:0;padding:0;}
 .activity-category p{margin:0;padding:0;}
 .activity-category{height:48px;vertical-align:middle;text-align:center;margin:0;padding:0;border:1px solid #000;border-radius:8px;-moz-border-radius:8px;-webkit-border-radius:8px;text-transform:capitalize;}
@@ -21,6 +21,5 @@ table#activities-grid td table td{padding:1px;margin:0;vertical-align:middle;}
 .activity div,.commitment div,.event div,.excursion div{font-size:9pt;padding:1px;}
 .activity div a,.commitment div a,.event div a,.excursion div a{color:#000;}
 .activity-legend,.commitment-legend,.event-legend,.survey-legend,.excursion-legend{width:12px;height:12px;border:1px solid #000;border-radius:4px;-moz-border-radius:4px;-webkit-border-radius:4px;}
-#task-reminder-form{text-align:left;}
-#task-reminder-form ul{padding:0;margin:0;}
-#task-reminder-form ul li{padding:0;margin:0;}
+#task-reminder-form ul{list-style:none;padding:0;margin:0;}
+#task-reminder-form li{clear:both;padding-top:15px;}

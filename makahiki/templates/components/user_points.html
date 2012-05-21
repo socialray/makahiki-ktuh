@@ -4,36 +4,48 @@
 {% with user.get_profile as profile %}
   {% if CURRENT_ROUND_INFO and CURRENT_ROUND_INFO.name != 'Overall' %}
 <div>
-    <div class="span3">
+    <div class="row-fluid">
+        <div class="span12">
 <h4>{{profile.name}}</h4>{{CURRENT_ROUND_INFO.name}}: {{profile.current_round_points}} points #{{profile.current_round_team_rank}}/{{TEAM_MEMBER_COUNT}} in {{profile.team.name}}.
+        </div>
     </div>
 </div>
 <div>
-    <div class="span3">
+    <div class="row-fluid">
+    <div class="span12">
 <h4>{{profile.name}}</h4>{{CURRENT_ROUND_INFO.name}}: {{profile.current_round_points}} points #{{profile.current_round_overall_rank}}/{{OVERALL_MEMBER_COUNT}} overall.
+    </div>
     </div>
 </div>
   {% endif %}
 <div>
-    <div class="span3">
+    <div class="row-fluid">
+    <div class="span12">
 <h4>{{profile.name}}</h4>Overall: {{profile.points}} points #{{profile.team_rank}}/{{TEAM_MEMBER_COUNT}} in {{profile.team.name}}
+    </div>
     </div>
 </div>
 <div>
-    <div class="span3">
+    <div class="row-fluid">
+    <div class="span12">
 <h4>{{profile.name}}</h4>Overall: {{profile.points}} points #{{profile.overall_rank}}/{{OVERALL_MEMBER_COUNT}}
+    </div>
     </div>
 </div>
   {% if profile.canopy_member %}
     {% with canopy_info=profile.canopy_karma_info %}
 <div>
-    <div class="span3">
+    <div class="row-fluid">
+    <div class="span12">
 <h4>{{profile.name}}</h4>{{profile.canopy_karma}} Canopy Karma points
+    </div>
     </div>
 </div>
 <div>
-    <div class="span3">
+    <div class="row-fluid">
+    <div class="span12">
 <h4>{{profile.name}}</h4>#{{canopy_info.rank}} out of {{canopy_info.total}} overall
+    </div>
     </div>
 </div>
     {% endwith %}

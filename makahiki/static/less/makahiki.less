@@ -417,6 +417,18 @@ body {
   .pagination-centered;
 }
 
+// switch to single info-bar when bootstrap messes up the 
+// fluid rows
+@media (max-width: 767px) {
+    #info-bar-wide {
+        .hidden;
+    }
+    #info-bar-single {
+        .show;
+        visibility: visible;
+    }
+}
+
 @media ( min-width : 641px) and (max-width: 979px) {
     /* hide icons from nav bar */
     .nav img {

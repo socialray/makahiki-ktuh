@@ -1,6 +1,6 @@
-<div id="news-wall" class="content-box">
-    <div id="news-wall-box">
-        <div id="news-wall-title" class="content-box-title">
+<div class="content-box">
+    <div>
+        <div class="content-box-title">
             {{ view_objects.wallpost.title }}
             <a href="#" style="float: right">
                 <img src="{{ STATIC_URL}}images/icons/icon-help-sm.png" width="20"
@@ -9,9 +9,9 @@
                      onclick="toggleHelp('widget', 'news-feed'); return false;"
                         /></a>
         </div>
-        <div id="news-wall-content" class="content-box-content">
+        <div class="content-box-content wallpost-content">
             {{ view_objects.wallpost.description }}
-            <div id="wall-form">
+            <div>
               <form id="news-post-form" action="{% url news_post %}" method="POST">
                   {% csrf_token %}
                   <div id="wall-post-errors"></div>

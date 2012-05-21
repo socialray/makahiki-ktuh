@@ -14,6 +14,7 @@ import getopt
 
 
 def main(argv):
+    """Verify main function. Usage: verify.py [-v | --verbose]"""
     verbose = 0
     try:
         opts, args = getopt.getopt(argv, "v", ["verbose"])

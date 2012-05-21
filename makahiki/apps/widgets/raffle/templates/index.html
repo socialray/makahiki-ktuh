@@ -1,6 +1,6 @@
 {% with view_objects.raffle as raffle %}
 <div id="prizes-raffle" class="content-box span12">
-    <div id="prizes-raffle-title" class="content-box-title">
+    <div class="content-box-title">
         <h3>{{ raffle.round_name }} Raffle Game</h3>
         <a href="#" style="float: right">
             <img src="{{ STATIC_URL}}images/icons/icon-help-sm.png" width="20"
@@ -9,7 +9,7 @@
                  onclick="toggleHelp('widget', 'raffle-game'); return false;"
                     /></a>
     </div>
-    <div id="prizes-raffle-content">
+    <div>
         <div id="prizes-raffle-info">
             Your total raffle tickets: {{ raffle.tickets.total }} Allocated right now: {{ raffle.tickets.allocated }} Available: {{ raffle.tickets.available }}
         </div>

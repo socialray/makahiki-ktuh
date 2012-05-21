@@ -1,4 +1,4 @@
-<div id="activity-task-form-content">
+<div class="activity-task-form-content">
     {% if form.is_multipart %}
         <form id="myform" enctype="multipart/form-data"
               action="{% url activity_add_task action.type action.slug %}" method="post">
@@ -37,7 +37,7 @@
                 {{ form.social_email2.errors }}
                 email #2 : {{ form.social_email2 }}
             {% endif %}
-            <div id="activity-task-form-content-button">
+            <div class="activity-task-form-content-button">
                 <button id="submit_form_button1" class="btn" style="cursor:pointer;"
                         onclick='$("#submit_form_button1").attr("disabled", "disabled");javascript:this.form.submit(); return false;'>
                     Submit
@@ -50,7 +50,7 @@
         {% else %}
             You will earn 2 {% if action.is_canopy %} Karma {% endif %} points for signing up for
             the {{ action.type }}.
-            <div id="activity-task-form-content-button">
+            <div class="activity-task-form-content-button">
                 <button id="submit_form_button2" class="btn" style="cursor:pointer;"
                         onclick='$("#submit_form_button2").attr("disabled", "disabled");javascript:this.form.submit(); return false;'>
                     OK
@@ -87,7 +87,7 @@
                 {{ form.social_email2.errors }}
                 email #2 : {{ form.social_email2 }}
             {% endif %}
-            <div id="activity-task-form-content-button">
+            <div class="activity-task-form-content-button">
                 <button id="submit_form_button3" class="btn" style="cursor:pointer;"
                         onclick='$("#submit_form_button3").attr("disabled", "disabled");javascript:this.form.submit(); return false;'>
                     OK
@@ -114,7 +114,7 @@
                 {{ form.social_email2.errors }}
                 email #2 : {{ form.social_email2 }}
             {% endif %}
-            <div id="activity-task-form-content-button">
+            <div class="activity-task-form-content-button">
                 <button id="submit_form_button4" class="btn" style="cursor:pointer;"
                         onclick='$("#submit_form_button4").attr("disabled", "disabled");javascript:this.form.submit(); return false;'>
                     OK
@@ -170,7 +170,7 @@
             {{ form.social_email2.errors }}
             email #2 : {{ form.social_email2 }}
         {% endif %}
-        <div id="activity-task-form-content-button">
+        <div class="activity-task-form-content-button">
             <button id="submit_form_button5" class="btn" style="cursor:pointer;"
                     onclick='$("#submit_form_button5").attr("disabled", "disabled");javascript:this.form.submit(); return false;'>
                 Submit
@@ -189,7 +189,7 @@
             {{ field }}
             <p/>
         {% endfor %}
-        <div id="activity-task-form-content-button">
+        <div class="activity-task-form-content-button">
             <button id="submit_form_button6" class="btn" style="cursor:pointer;"
                     onclick='$("#submit_form_button6").attr("disabled", "disabled");javascript:this.form.submit(); return false;'>
                 Submit

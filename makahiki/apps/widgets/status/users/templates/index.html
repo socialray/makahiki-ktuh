@@ -1,5 +1,5 @@
 {% with todays_users=view_objects.status__users.todays_users logins=view_objects.status__users.logins referrals=view_objects.status__users.referrals %}
-    <div id="status-users">
+    <div>
         <div class="content-box">
             <div class="content-box-title">
                 {{ todays_users|length }} users logged in today
@@ -14,7 +14,7 @@
         </div>
     </div>
 
-    <div id="status-users">
+    <div>
         <div class="content-box">
             <div class="content-box-title">
                 New Signups
@@ -29,7 +29,7 @@
         </div>
     </div>
 
-    <div id="status-users">
+    <div>
         <div class="content-box">
             <div class="content-box-title">
                 Referrals

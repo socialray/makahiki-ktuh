@@ -1,22 +1,28 @@
 {% if IN_COMPETITION %}
 <div>
-    <div class="span3">
+    <div class="row-fluid">
+    <div class="span12">
     <h4>{{ CURRENT_ROUND_INFO.name }}</h4>
     Ends on {{CURRENT_ROUND_INFO.end}}
+    </div>
     </div>
 </div>
 {% endif %}
 {% for event in AVAILABLE_EVENTS %}
 <div>
-    <div class="span3">
+    <div class="row-fluid">
+    <div class="span12">
 <h4><a href="{% url activity_task event.type event.slug %}">{{ event.title }}</a></h4>
 {{event.event_date}}
+    </div>
     </div>
 </div>
 {% empty %}
 <div>
-    <div class="span3">
+    <div class="row-fluid">
+    <div class="span12">
 Sorry, no upcoming events. Check back later.
+    </div>
     </div>
 </div>
 {% endfor %}
