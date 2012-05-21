@@ -1,45 +1,9 @@
-#mission-list{margin:0;margin-left:40px;text-align:left;list-style:none;padding:0 10px 5px 5px;}
-#mission-list .canopy-mission{float:left;width:175px;text-align:center;margin:10px 5px 0;padding:5px;}
-#mission-list li{margin:10px;padding:5px 10px;border-radius:8px;-moz-border-radius:8px;-webkit-border-radius:8px;display:inline;}
-#mission-list li a{color:white;font-size:1.1em;}
-#mission-title{margin:0;display:inline;vertical-align:bottom;float:left;text-align:center;width:88%;margin-left:25px;}
-#mission-help-icon{height:17px;cursor:pointer;float:right;}
-.mission-users{float:left;padding-left:10px;width:48%;}
-.mission-users>h4{text-align:center;}
-.mission-options{float:right;}
-#mission-contents{text-align:left;}
-#mission-box h4{margin:5px 0;}
-#mission-complete-dialog{text-align:left;}
-#mission-hide{float:right;display:block;font-weight:bold;padding-right:10px;padding-top:3px;}
 #canopy-about{padding:5px 10px;}
-#canopy-feed-members .content-box{float:left;width:47%;}
-#canopy-viz-list{list-style:none;}
 .canopy-viz-list li{display:inline;margin:0 10px;padding:5px;padding-left:10px;}
 .canopy-viz-list li.selected a{text-decoration:none;}
 .canopy-viz-list li h3{display:inline;}
-#canopy-feed{margin-right:20px;text-align:left;}
-#canopy-feed-content{padding:5px 20px;}
-.news-image{float:left;}
-.news-image img{padding:10px 5px;}
-.news-text{float:left;margin-left:20px;padding:10px 0;width:80%;}
-.news-text p{margin:0;margin-bottom:11px;}
-.news-posted{font-style:italic;font-size:0.9em;}
-#canopy-karma-content{text-align:left;margin:0;padding:5px 10px;}
-#canopy-karma-scoreboard{width:100%;border:0;border-spacing:0;}
-#canopy-karma-scoreboard td{padding-top:5px;}
-.karma-rank{width:6.25%;}
-.karma-points{width:10.4%;text-align:right;padding-right:5px;}
-#canopy-karma-prize{text-align:center;width:100%;margin-top:10px;font-weight:bold;}
 .canopy-member-list li{float:left;width:20%;margin:0;padding:0;text-align:center;min-height:80px;}
 .canopy-member-list li img{padding:2px;}
-#canopy-member-detail-list,#canopy-member-details{list-style:none;margin:0;padding:0;}
-#canopy-member-detail-list>li{padding:5px 0;}
-#canopy-member-detail-list>li .member-image{padding:4px 2px;float:left;}
-#canopy-member-details{float:left;margin-left:5px;}
-#canopy-member-details>li{padding:2px 0;}
-#canopy-member-details .canopy-member-name{font-weight:bold;font-size:1.0em;}
-#canopy-member-details .member-badges{vertical-align:middle;padding-left:2px;}
-#canopy-member-details .canopy-member-admin{font-style:italic;}
 #news-wall-content{padding:5px 10px;}
 #wall-post textarea{box-sizing:border-box;-webkit-box-sizing:border-box;-moz-box-sizing:border-box;-ms-box-sizing:border-box;width:92%;margin-left:4%;}
 .padded{margin-left:5%;}

@@ -58,7 +58,6 @@ jQuery(document).ready(function() {
   jQuery("#quest-hide").click(function() {
     // Remove classes from the list of quests/missions.
     jQuery("#quest-box li").removeClass("selected");
-    jQuery('#mission-list li').removeClass("selected");
     
     if(jQuery(this).parent().hasClass('canopy-quest')) {
       deleteCookie("visible-mission");

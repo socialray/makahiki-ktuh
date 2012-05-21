@@ -1,6 +1,6 @@
 <div class="content-box">
 {% if not no_carousel %}
-    <div class="carousel">
+    <div id="score-carousel" class="carousel">
     <div class="carousel-inner">
     {% endif %}
     {% for round_name, ranks in round_resource_ranks.items %}
@@ -76,8 +76,31 @@
     {% if not no_carousel %}
     </div>
     </div>
+    <div id="resource-scoreboard-message">
     <center>#1 at end of round wins a
       <a href="/prizes"> prize!</a>
     </center>
+    </div>
     {% endif %}
 </div>
+{% if not no_carousel %}
+<script type="text/javascript">
+    $(document).ready(function () {
+          // Calculate the height of the items in the scoreboard.
+          // Fix the height of all items to that height.
+          var maxHeight = 45;
+          var height = 0;
+          $("#score-carousel .item").each(function(index, item) {
+            height = $(item).height();
+            // console.log("height of item is " + height);
+            if (height > maxHeight){
+              maxHeight = height;
+            }
+          });
+          maxHeight += $("#resource-scoreboard-message").height();        
+          $("#score-carousel").height(maxHeight);
+
+        $("#score-carousel").carousel();
+    });
+{% endif %}
+</script>
