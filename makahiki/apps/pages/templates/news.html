@@ -22,12 +22,12 @@
             <!-- left column -->
             <div class="span6">
                 {% if view_objects.team_members %}
-                <div id='team_members'>
+                <div>
                     {% include "widgets/team_members/templates/index.html" %}
                 </div>
                 {% endif %}
                 {% if view_objects.wallpost %}
-                <div id='wallpost'>
+                <div>
                     {% include "widgets/wallpost/templates/index.html" %}
                 </div>
                 {% endif %}
@@ -36,17 +36,17 @@
             <div class="span6">
 
                 {% if view_objects.upcoming_events %}
-                <div id='upcoming_events'>
+                <div>
                     {% include "widgets/upcoming_events/templates/index.html" %}
                 </div>
                 {% endif %}
                 {% if view_objects.popular_tasks %}
-                <div id='popular_tasks'>
+                <div>
                     {% include "widgets/popular_tasks/templates/index.html" %}
                 </div>
                 {% endif %}
                 {% if view_objects.my_commitments %}
-                <div id='my_commitments'>
+                <div>
                     {% include "widgets/my_commitments/templates/index.html" %}
                 </div>
                 {% endif %}

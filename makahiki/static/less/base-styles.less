@@ -196,7 +196,7 @@ a {
     background-color: @sgg-special-cell-bkg-color;
 } 
 
-#energy-status-how-activities-table th {
+.energy-status-how-activities-table th {
     background: @widget-body-bkg-color;
 }
 
@@ -213,6 +213,8 @@ a {
     font-weight: bold;
     background: @widget-subtitle-bkg-color;
     color: @widget-subtitle-font-color;
+    text-align: center;
+    padding: 8px 0;
 }
 
 .quest-box {
@@ -241,3 +243,9 @@ a {
     background-color: fadeout(@widget-body-bkg-color, @widget-body-transparency);
 }
 
+.notice {
+    .makahiki-box();
+    .content-box-contents();
+    .background-gradient (@questbar-bkg-color-start, @questbar-bkg-color-end);
+    color: @questbar-font-color;
+}

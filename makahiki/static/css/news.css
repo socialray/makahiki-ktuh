@@ -1,5 +1,4 @@
 @charset "UTF-8";
-#news-members{margin-left:5px;}
 ul{list-style:none;}
 #news-most-popular-actions p{text-align:center;}
 .content-box{text-align:left;}
@@ -8,7 +7,7 @@ ul{list-style:none;}
 #news-members-list{list-style:none;margin:0;margin-left:5px;padding:5px;}
 #news-members-list li{width:75px;text-align:center;min-height:80px;float:left;}
 #news-members-link{text-align:center;clear:both;}
-#news-wall-content{padding:5px 10px;}
+.wallpost-content{padding:5px 10px;}
 #wall-post textarea{box-sizing:border-box;-webkit-box-sizing:border-box;-moz-box-sizing:border-box;-ms-box-sizing:border-box;width:92%;margin-left:4%;}
 .padded{margin-left:5%;}
 #wall-posts{list-style:none;margin:0;}
@@ -18,4 +17,4 @@ ul{list-style:none;}
 #wall-posts .wallpost-text{margin-left:0;}
 .wallpost-username{font-weight:bold;}
 .wallpost-posted{font-style:italic;font-size:0.9em;}
-@media (max-width:767px){#wall-posts .wallpost-image{float:left;display:inline;}}#my-commitments-contents p{text-align:center;}
+@media (max-width:767px){#wall-posts .wallpost-image{float:left;display:inline;}}.my-commitments-contents p{text-align:center;}

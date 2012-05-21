@@ -7,17 +7,13 @@
   </div>
 
   <div class="team-member-details span3">
-    <a name="{{member.name|slugify}}">
-        <h4>{{ member.name }}</h4>
-
-        {% for badge in member.user.badges_earned.all %}
-            <a href="{% url profile_badges %}"><img class="member-badges"
-                                                    src="{{STATIC_URL}}{{badge.image}}"
-                                                    alt="{{badge.badge.name}}"
-                                                    title="{{badge.badge.name}}"/></a>
-        {% endfor %}
-    </a>
-    
+    <h4>{{ member.name }}</h4>
+    {% for badge in member.user.badges_earned.all %}
+      <a href="{% url profile_badges %}"><img class="member-badges"
+                                              src="{{STATIC_URL}}{{badge.image}}"
+                                              alt="{{badge.badge.name}}"
+                                              title="{{badge.badge.name}}"/></a>
+    {% endfor %}
     {% if member.user.is_superuser or member.user.is_staff %}
     <!-- Downloaded from http://www.iconarchive.com/show/silk-icons-by-famfamfam/award-star-gold-3-icon.html -->
     <img src="{{STATIC_URL}}images/award-star-gold-3-icon.png">Administrator

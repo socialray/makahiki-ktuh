@@ -17,13 +17,13 @@
 {% endblock %}
 
 {% block body %}
-    <div id="team-members" class="content-box">
-        <div id="team-members-title" class="content-box-title">
+    <div class="content-box">
+        <div class="content-box-title">
             {{ TEAM_LABEL }} Members
         </div>
-        <div id="team-members-content">
+        <div>
             <a href="{% url news_index %}">Back to the news page</a>
-            <ul id="team-member-detail-list">
+            <ul>
                 {% for member in team_members %}
                     <!-- {% cycle 'alt-row' '' as cycle_class %} -->
                     <li class="{{cycle_class}}">

@@ -20,7 +20,7 @@
             <!-- left column -->
             <div class="span7">
                 {% if view_objects.smartgrid %}
-                <div id='smartgrid'>
+                <div>
                     {% include "widgets/smartgrid/templates/index.html" %}
                 </div>
                 {% endif %}
@@ -28,14 +28,12 @@
             <!-- right column -->
             <div class="span5">
                 {% if view_objects.upcoming_events %}
-                <div id='upcoming_events'>
+                <div>
                     {% include "widgets/upcoming_events/templates/index.html" %}
                 </div>
                 {% endif %}
                 {% if view_objects.scoreboard %}
-<!--                 <div id='scoreboard'> -->
                     {% include "widgets/scoreboard/templates/index.html" %}
-<!--                 </div> -->
                 {% endif %}
             </div>
         </div>

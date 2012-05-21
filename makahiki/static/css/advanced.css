@@ -4,7 +4,7 @@
 .canopy-viz-list li h3{display:inline;}
 .canopy-member-list li{float:left;width:20%;margin:0;padding:0;text-align:center;min-height:80px;}
 .canopy-member-list li img{padding:2px;}
-#news-wall-content{padding:5px 10px;}
+.wallpost-content{padding:5px 10px;}
 #wall-post textarea{box-sizing:border-box;-webkit-box-sizing:border-box;-moz-box-sizing:border-box;-ms-box-sizing:border-box;width:92%;margin-left:4%;}
 .padded{margin-left:5%;}
 #wall-posts{list-style:none;margin:0;}
