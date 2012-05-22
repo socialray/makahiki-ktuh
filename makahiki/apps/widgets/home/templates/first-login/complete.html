@@ -71,9 +71,8 @@
           });
 
           $("#gohome").button().click(function() {
-              $('#setup-dialog').modal('hide');
-              $('#setup-dialog').style.display = 'none';
-              window.location.href = '{% url home_index %}';
+              $('#setup-dialog').modal('hide'); 
+              location.reload();
 
             });
       });
