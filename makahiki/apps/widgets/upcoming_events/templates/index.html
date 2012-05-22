@@ -38,10 +38,10 @@
         </table>
         <p/>
 
-        <form id="event-code-form" action="{% url activity_attend_code %}"
+        <form action="{% url activity_attend_code %}"
                                                          method="POST">
             {% csrf_token %}
-            <div id="event-code">
+            <div class="event-code">
                 <b>Enter Attendance Code:</b>
                 {{ view_objects.upcoming_events.event_form.response }}
 

@@ -862,6 +862,7 @@ input,textarea,select,.uneditable-input{width:150px;}
 .quest-list{list-style:none;margin-left:auto;margin-right:auto;}
 .quest-list li{margin:0px;padding:0 2px;display:inline;}
 .quest-pad{float:right;}
+.event-code input{margin-bottom:0px;}
 .ui-dialog .ui-dialog-buttonpane{text-align:center;}
 .ui-widget-overlay{opacity:.75;filter:alpha(opacity=75);}
 button{-webkit-appearance:none;}
