@@ -27,7 +27,7 @@ class Command(MakahikiBaseCommand):
         """set up the test data"""
 
         if len(args) == 0:
-            self.stdout.write(help)
+            self.stdout.write(self.help)
             return
 
         operation = args[0]
@@ -47,19 +47,19 @@ class Command(MakahikiBaseCommand):
         elif operation == 'event_dates':
             self.setup_event_dates()
         elif operation == 'resource_usages':
-            self.setup_resource_usage()
-        elif operation == 'resource_baseline':
-            self.setup_resource_baseline()
+            self.setup_resource_usages()
+        elif operation == 'resource_baselines':
+            self.setup_resource_baselines()
         elif operation == 'resource_goalsettings':
-            self.setup_resource_goalsetting()
-        elif operation == "all":
+            self.setup_resource_goalsettings()
+        elif operation == 'all':
             self.delete_users()
             self.create_users(5)
             self.setup_rounds()
             self.setup_event_dates()
-            self.setup_resource_usage()
-            self.setup_resource_baseline()
-            self.setup_resource_goalsetting()
+            self.setup_resource_usages()
+            self.setup_resource_baselines()
+            self.setup_resource_goalsettings()
         else:
             self.stdout.write("Invalid command. see help for supported commands.\n")
 
@@ -120,7 +120,7 @@ class Command(MakahikiBaseCommand):
             event.save()
         self.stdout.write("event dates adjusted to round date.\n")
 
-    def setup_resource_usage(self):
+    def setup_resource_usages(self):
         """remove any resource usage before the competition"""
         today = datetime.datetime.today()
         for usage in EnergyUsage.objects.filter(date__lte=today):
@@ -135,7 +135,7 @@ class Command(MakahikiBaseCommand):
 
         self.stdout.write("created initial resource usages for all teams.\n")
 
-    def setup_resource_baseline(self):
+    def setup_resource_baselines(self):
         """set up the resource baseline data, all existing data will be delete."""
 
         # energy hourly
@@ -162,7 +162,7 @@ class Command(MakahikiBaseCommand):
 
         self.stdout.write("created test baselines for all teams.\n")
 
-    def setup_resource_goalsetting(self):
+    def setup_resource_goalsettings(self):
         """set up the resource goal data. all existing data will be delete."""
 
         #EnergyGoal
