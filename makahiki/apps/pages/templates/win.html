@@ -19,10 +19,8 @@
         <div class="row-fluid">
             <!-- left column -->
             <div class="span6">
-                {% if view_objects.prizes %}
-                <div class="row-fluid">
-                    {% include "widgets/prizes/templates/index.html" %}
-                </div>
+                {% if view_objects.prizes %} 
+                    {% include "widgets/prizes/templates/index.html" %} 
                 {% endif %}
             </div>
             <!-- right column -->
