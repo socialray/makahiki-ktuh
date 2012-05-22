@@ -1,7 +1,12 @@
 """log manager module provides methods to operate on log records."""
-import logging
+#import logging
 import datetime
 from apps.managers.log_mgr.models import MakahikiLog
+
+
+def clear():
+    """clear the log content from the log table."""
+    MakahikiLog.objects.all().delete()
 
 
 def write_log_entry(request, response=None, exception=None):
@@ -13,26 +18,26 @@ def write_log_entry(request, response=None, exception=None):
     get_request_headers(log, request, response)
 
     # Create the log entry.
-    entry = "%s %s %s %s %s %d %s %s " % (
-        log.request_time.strftime("%Y-%m-%d %H:%M:%S"), log.remote_ip, log.remote_user,
-        log.request_method, log.request_url, log.response_status, log.http_referer,
-        log.http_user_agent)
+    #entry = "%s %s %s %s %s %d %s %s " % (
+    #    log.request_time.strftime("%Y-%m-%d %H:%M:%S"), log.remote_ip, log.remote_user,
+    #    log.request_method, log.request_url, log.response_status, log.http_referer,
+    #    log.http_user_agent)
 
-    logger = logging.getLogger("makahiki_logger")
+    #logger = logging.getLogger("makahiki_logger")
 
     if exception:
         log.post_content = "%s" % exception
-        entry += log.post_content
-
         log.level = "ERROR"
-        logger.error(entry)
+
+        #entry += log.post_content
+        #logger.error(entry)
     else:
         if request.FILES:
             # Append the filenames to the log.
             filenames = (f.name for f in request.FILES.values())
             file_str = "<Files: %s>" % " ".join(filenames)
             log.post_content = "%s" % (file_str,)
-            entry += log.post_content
+            #entry += log.post_content
         elif request.method == "POST":
             # Dump the POST parameters, but we don't need the CSRF token and password.
             query_dict = request.POST.copy()
@@ -42,10 +47,10 @@ def write_log_entry(request, response=None, exception=None):
             if u"password" in query_dict:
                 del query_dict[u'password']
             log.post_content = "%s" % (query_dict,)
-            entry += log.post_content
+            #entry += log.post_content
 
         log.level = "INFO"
-        logger.info(entry)
+        #logger.info(entry)
 
     log.save()
 

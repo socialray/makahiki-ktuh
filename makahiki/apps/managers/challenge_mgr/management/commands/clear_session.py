@@ -14,3 +14,4 @@ class Command(management.base.BaseCommand):
         """delete all persistent web sessions"""
 
         Session.objects.all().delete()
+        print "makahiki session cleared.\n"

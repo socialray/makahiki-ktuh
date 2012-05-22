@@ -11,3 +11,4 @@ class Command(MakahikiBaseCommand):
         """handle clear cache"""
 
         cache_mgr.clear()
+        print "makahiki cache cleared.\n"
