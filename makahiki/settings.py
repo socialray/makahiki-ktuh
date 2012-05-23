@@ -410,7 +410,7 @@ else:
 
 # settings to use less files
 MAKAHIKI_USE_LESS = env('MAKAHIKI_USE_LESS', '').lower() == "true"
-"""[Optional] If "true", load LESS files into pages. Otherwise load CSS."""
+"""[Optional] If "true", use LESS files to style pages. Otherwise use the latest version of CSS."""
 
 # LDAP settings
 MAKAHIKI_LDAP_BIND_DN = ""

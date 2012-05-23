@@ -1,3 +1,5 @@
+.. _section-scripts:
+
 Scripts Reference Guide
 =======================
 

@@ -164,7 +164,7 @@ user and database.
 6. Setup environment variables
 ------------------------------
 
-Makahiki requires two environment variables: DATABASE_URL and
+At a minimum, Makahiki requires two environment variables: DATABASE_URL and
 MAKAHIKI_ADMIN_INFO.  
 
 In Unix, these environment variables can be defined this way::
@@ -183,6 +183,9 @@ always available, or you can edit the ``postactivate`` file (in Unix, found in
 Note that you will want to provide a stronger password for the makahiki
 admin account if this server is publically accessible. 
 
+Makahiki also utilizes a variety of other environment variables. For complete
+documentation, see :ref:`section-environment-variables`.
+
 7.  Initialize your instance
 ----------------------------
 
@@ -198,6 +201,10 @@ This command  will:
 
 Under normal circumstances, invoking this script after pulling any new changes from the
 repository is sufficient to bring your local installation up to date. 
+
+Makahiki has several other scripts useful for development. For complete
+documentation, see :ref:`section-scripts`.
+
 
 8. Test your installation
 -------------------------
