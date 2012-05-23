@@ -1,4 +1,5 @@
-"""Django settings file containing system-level settings."""
+"""Provides system-level settings and access to environment variables.
+All variables corresponding to environment variables have documentation for ReadTheDocs."""
 
 import os
 import urlparse
@@ -301,21 +302,25 @@ SERIALIZATION_MODULES = {
 
 
 ##############################
-# Dummy setting for CHALLENGE
+# Dummy settings for CHALLENGE
 ##############################
-# set the dummpy challenge object to by pass reference check.
-# It should be overridden from the DB ChallengeSettings object.
+# Create a dummy challenge object and variables so that IDEs are OK.
+# This object will be instantiated for real from the DB ChallengeSettings object.
 class Challenge():
-    """Defines the dummy global settings for the challenge. """
     competition_name = None
 
 CHALLENGE = Challenge()
 COMPETITION_ROUNDS = None
 
-#############################################
-# Load sensitive settings from OS environment
-#############################################
+##################################################################################################
+# Load environment variables
+# Note: All environment variables have a corresponding Python variable for documentation purposes.
+##################################################################################################
+
 # DB settings
+DATABASE_URL = ''
+"""[Required] Specify the Database URL.
+Example: postgres://makahiki:makahiki@localhost:5432/makahiki"""
 if 'DATABASE_URL' in os.environ:
     urlparse.uses_netloc.append('postgres')
     url = urlparse.urlparse(os.environ['DATABASE_URL'])
@@ -335,6 +340,9 @@ else:
         sys.exit(1)
 
 # Admin info Settings
+MAKAHIKI_ADMIN_INFO = ''
+"""[Required]  Specify the makahiki admin account and password. 
+Example:  admin:changeme"""
 if 'MAKAHIKI_ADMIN_INFO' in os.environ:
     admin_info = os.environ['MAKAHIKI_ADMIN_INFO'].split(":")
     ADMIN_USER = admin_info[0]
@@ -345,6 +353,9 @@ else:
         sys.exit(1)
 
 # email Settings
+MAKAHIKI_EMAIL_INFO = ''
+"""[Required]  Specify the email host user and password.
+Example:  kukuicup@gmail.com:changeme"""
 if 'MAKAHIKI_EMAIL_INFO' in os.environ:
     email_info = os.environ['MAKAHIKI_EMAIL_INFO'].split(":")
     EMAIL_HOST_USER = email_info[0]
@@ -355,10 +366,13 @@ env = lambda e, d: os.environ[e] if e in os.environ else d
 
 # DEBUG settings
 MAKAHIKI_DEBUG = env('MAKAHIKI_DEBUG', '').lower() == "true"
+"""[Optional]  If "true", enable debug mode, with better error messages. Otherwise use production mode.""" 
 DEBUG = MAKAHIKI_DEBUG
 TEMPLATE_DEBUG = MAKAHIKI_DEBUG
 
 # CACHE settings
+MAKAHIKI_MEMCACHED_ENABLED = 'false'
+"""[Optional] If "true", enable memcache. Otherwise use built-in cache."""
 if env('MAKAHIKI_MEMCACHED_ENABLED', '').lower() == "true":
     CACHES = {'default':
                 {'BACKEND': 'django_pylibmc.memcached.PyLibMCCache'}}
@@ -368,6 +382,15 @@ else:
 
 # static media settings
 MAKAHIKI_USE_S3 = env('MAKAHIKI_USE_S3', '').lower() == "true"
+"""[Optional] If "true", use the Amazon S3 storage facility. Otherwise use local folder."""
+
+AWS_ACCESS_KEY_ID = ''
+"""[Required if MAKAHIKI_USE_S3 is true]  The Amazon access key ID."""
+AWS_SECRET_ACCESS_KEY = ''
+"""[Required if MAKAHIKI_USE_S3 is true]  The Amazon secret access key."""
+AWS_STORAGE_BUCKET_NAME = ''
+"""[Required if MAKAHIKI_USE_S3 is true]  The Amazon storage bucket name."""
+
 if MAKAHIKI_USE_S3:
     DEFAULT_FILE_STORAGE = 'storages.backends.s3boto.S3BotoStorage'
     #STATICFILES_STORAGE = DEFAULT_FILE_STORAGE
@@ -387,14 +410,25 @@ else:
 
 # settings to use less files
 MAKAHIKI_USE_LESS = env('MAKAHIKI_USE_LESS', '').lower() == "true"
+"""[Optional] If "true", load LESS files into pages. Otherwise load CSS."""
 
 # LDAP settings
+MAKAHIKI_LDAP_BIND_DN = ""
+"""[Required for LDAP services] Provide the Bind domain name."""
 AUTH_LDAP_BIND_DN = env('MAKAHIKI_LDAP_BIND_DN', '')
+
+MAKAHIKI_LDAP_BIND_PASSWORD = ""
+"""[Required for LDAP services] Provide the Bind password."""
 AUTH_LDAP_BIND_PASSWORD = env('MAKAHIKI_LDAP_BIND_PWD', '')
 
-# django secret key
+MAKAHIKI_SECRET_KEY = ''
+"""[Optional]  Specifies the Django secret key setting.
+See https://docs.djangoproject.com/en/dev/ref/settings/#secret-key"""
 SECRET_KEY = env('MAKAHIKI_SECRET_KEY', '')
 
-# facebook key
+MAKAHIKI_FACEBOOK_APP_ID = ''
+"""[Required] App ID required for Facebook integration."""
 FACEBOOK_APP_ID = env('MAKAHIKI_FACEBOOK_APP_ID', '')
+MAKAHIKI_FACEBOOK_SECRET_KEY = ''
+"""[Required] Secret key required for Facebook integration."""
 FACEBOOK_SECRET_KEY = env('MAKAHIKI_FACEBOOK_SECRET_KEY', '')

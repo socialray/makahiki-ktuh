@@ -183,26 +183,21 @@ always available, or you can edit the ``postactivate`` file (in Unix, found in
 Note that you will want to provide a stronger password for the makahiki
 admin account if this server is publically accessible. 
 
-7.  Configure Postgres database some more
------------------------------------------
+7.  Initialize your instance
+----------------------------
 
-Now you can further configure the postgres database with the models in the
-Makahiki system::
+Next, invoke the initialize_instance script::
 
+  % scripts/initialize_instance.py
 
-  % ./manage.py syncdb --noinput
-    Syncing...
-    Creating tables ...
-    Creating table challenge_mgr_challengesettings
-     :
-    Not synced (use migrations):
-    - 
-   (use ./manage.py migrate to migrate these)
+This command  will:
+  * Check that any changes to requirements are installed.
+  * Sync the database and perform any needed database migrations. 
+  * Re-initialize the system with default data and users.
+  * Set up static files. 
 
-To make sure that the schemas are fully up to date, you invoke the migrate
-script::
-
-  % ./manage.py migrate
+Under normal circumstances, invoking this script after pulling any new changes from the
+repository is sufficient to bring your local installation up to date. 
 
 8. Test your installation
 -------------------------
@@ -211,16 +206,8 @@ To see if the system has been installed correctly, run the tests::
 
   % ./manage.py test
 
-9. Load sample data (optional)
-------------------------------
 
-You might want to load some sample data into the system to provide a more
-realistic display on login.  If so, do the following::
-
-  % scripts/load_data.py
-
-
-10. Bring up the server
+9. Bring up the server
 -----------------------
 
 Finally, you can start the Makahiki server::
@@ -230,7 +217,7 @@ Finally, you can start the Makahiki server::
 Open a browser and go to http://localhost:8000 to see the home page. 
 
 
-11. Login to administrative interface
+10. Login to administrative interface
 -------------------------------------
 
 Once the server is running, you must login as admin in order to continue
