@@ -1,4 +1,6 @@
-"""Send reminder commands."""
+"""Invocation:  python manage.py send_reminders
+
+If a user has requested a reminder regarding an event, send it to them."""
 
 import datetime
 

@@ -1,4 +1,9 @@
-"""Regenerate codes for the Smart Grid Game."""
+"""Invocation:  python manage.py regenerate_codes [<slug1> <slug2> ...]
+
+Regenerates confirmation codes.  If a list of activity slug IDs are provided, then
+regenerates the codes for only those activities.  If no slug IDs are provided, then
+regenerates the confirmation codes for all activities with current confirmation codes.
+All old confirmation codes are no longer valid."""
 
 from django.core import management
 
@@ -12,9 +17,7 @@ class Command(management.base.BaseCommand):
            "slug(s)."
 
     def handle(self, *args, **options):
-        """
-        Regenerate the confirmation codes for all activities that use confirmation codes.
-        """
+        """Regenerate the confirmation codes for all activities that use confirmation codes."""
         # If we don't have any args, find all activities with confirmation type code.
         if len(args) == 0:
             activities = Activity.objects.filter(confirm_type='code')
@@ -41,7 +44,7 @@ class Command(management.base.BaseCommand):
         self._regenerate_codes(activities)
 
     def _regenerate_codes(self, activities):
-        """regenerate code."""
+        """Regenerate code."""
         for activity in activities:
             if not activity.confirm_type == 'code':
                 self.stdout.write("ERROR: '%s' has confirmation type %s\n" % (

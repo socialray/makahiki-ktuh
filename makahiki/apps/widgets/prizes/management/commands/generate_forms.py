@@ -1,4 +1,11 @@
-"""Generate the hardcopy forms for winners after a round is completed."""
+"""Invocation:  python manage.py generate_forms
+
+Generates hardcopy forms specifying the prize and raffle game winners after a round is completed.
+Created in a directory called "prizes" in (I think) the application's home directory.
+You will normally want to run the 'pick_winners' management command prior to this command.
+
+.. note:: How will this work in Heroku where we do not have local file space?"""
+
 import os
 from django.db.models import Q
 from django.template.loader import render_to_string
@@ -12,8 +19,8 @@ from apps.widgets.prizes.models import Prize
 
 
 class Command(management.base.BaseCommand):
-    """Pick the raffle game winners."""
-    help = 'Picks winners for raffle deadlines that have passed.'
+    """Management command."""
+    help = 'Generates forms for prize and raffle game winners.'
 
     def handle(self, *args, **options):
         """Generates forms for winners."""

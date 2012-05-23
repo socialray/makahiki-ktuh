@@ -1,4 +1,15 @@
-"""Process Notice command."""
+"""Invocation:  python manage.py process_notices
+
+Run periodically and automatically to see if any events should be displayed to the user
+as a notification when they visit the system.
+
+Notifications are generated when:
+
+  * A new round starts.
+  * A user's commitment period has ended (and points are awarded).
+  * A user has signed up for an event. Remind them of it.
+  * A user failed to enter the confirmation code for an event. Deduct points and tell them."""
+
 
 import datetime
 from django.conf import settings
@@ -14,7 +25,7 @@ from django.db.models import Q
 
 
 def notify_round_started():
-    """notify the start of a round"""
+    """Notify the user of a start of a round."""
     if not challenge_mgr.in_competition():
         return
 
@@ -48,7 +59,7 @@ def notify_round_started():
 
 
 def notify_commitment_end():
-    """notify the end of a commitment period and award points"""
+    """Notify the user of the end of a commitment period and award their points."""
     members = ActionMember.objects.filter(
         completion_date=datetime.date.today(), award_date__isnull=True)
 
@@ -80,7 +91,7 @@ def notify_commitment_end():
 
 
 def process_rsvp():
-    """process RSVP notification and penalty"""
+    """Process RSVP notification and penalty"""
     members = ActionMember.objects.filter(
         Q(action__type="event") | Q(action__type="excursion"),
         approval_status="pending")

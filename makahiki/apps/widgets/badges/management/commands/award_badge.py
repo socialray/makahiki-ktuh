@@ -1,4 +1,6 @@
-"""award badge command"""
+"""Invocation:  python manage.py award_badge <badge-slug> <user>
+
+Awards the badge (identified by its slug) to the user (identified by user name)."""
 
 from django.core import management
 from django.contrib.auth.models import User

@@ -1,4 +1,8 @@
-"""check water goal command"""
+"""Invocation:  python manage.py check_water_goal
+
+Checks whether or not each team made their water goal, and awards points to team members if it's
+at the end of the day."""
+
 import datetime
 
 from django.core import management

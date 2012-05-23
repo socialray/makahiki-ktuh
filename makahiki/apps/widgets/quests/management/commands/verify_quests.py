@@ -1,4 +1,7 @@
-"""Verify quests admin command."""
+"""Invocation:  python manage.py verify_quests
+
+Verifies that all of the existing quest lock and unlock condition strings are valid.
+Prints out the names of any invalid quest conditions."""
 
 import sys
 
@@ -27,9 +30,7 @@ class Command(management.base.BaseCommand):
                 quest.name, error_msg)
 
     def validate_conditions(self, conditions):
-        """
-        Validate the conditions string.
-        """
+        """Validate the conditions string."""
         # Pick a user and see if the conditions result is true or false.
         error_msg = None
         user = User.objects.order_by("?")[0]

@@ -6,8 +6,37 @@ Mahahiki implements the following `Django management commands`_ to facilitate se
 
 .. _Django management commands: https://docs.djangoproject.com/en/1.3/howto/custom-management-commands
 
-User management
-***************
+Development management
+**********************
+
+These management commands are used by developers for testing enhancements to 
+the system and debugging.
+
+clear_cache
+-----------
+
+.. automodule:: apps.managers.challenge_mgr.management.commands.clear_cache
+
+clear_log
+---------
+
+.. automodule:: apps.managers.challenge_mgr.management.commands.clear_log
+
+clear_session
+-------------
+
+.. automodule:: apps.managers.challenge_mgr.management.commands.clear_session
+
+setup_test_data
+---------------
+
+.. automodule:: apps.test_helpers.management.commands.setup_test_data
+
+
+Challenge configuration
+***********************
+
+These management commands are used to set up a challenge.
 
 load_users
 ----------
@@ -18,6 +47,77 @@ reset_users
 -----------
 
 .. automodule:: apps.managers.player_mgr.management.commands.reset_users
+
+verify_quests
+-------------
+
+.. automodule:: apps.widgets.quests.management.commands.verify_quests
+
+add_codes
+---------
+
+.. automodule:: apps.widgets.smartgrid.management.commands.add_codes
+
+regenerate_codes
+----------------
+
+.. automodule:: apps.widgets.smartgrid.management.commands.regenerate_codes
+
+
+Challenge management
+********************
+
+These management commands are used by administrators to facilitate the running of
+a challenge.
+
+
+award_badge
+-----------
+
+.. automodule:: apps.widgets.badges.management.commands.award_badge
+
+
+pick_winners
+------------
+
+.. automodule:: apps.widgets.prizes.management.commands.pick_winners
+
+generate_forms
+--------------
+
+.. automodule:: apps.widgets.prizes.management.commands.generate_forms
+
+
+Automated management
+********************
+
+These management commands are typically invoked automatically during a challenge in order
+to manage resource and game data.
+
+update_energy_usage
+-------------------
+
+.. automodule:: apps.managers.resource_mgr.management.commands.update_energy_usage
+
+check_energy_goal
+-----------------
+
+.. automodule:: apps.widgets.resource_goal.management.commands.check_energy_goal
+
+check_water_goal
+----------------
+
+.. automodule:: apps.widgets.resource_goal.management.commands.check_water_goal
+
+process_notices
+---------------
+
+.. automodule:: apps.widgets.smartgrid.management.commands.process_notices
+
+send_reminders
+--------------
+
+.. automodule:: apps.widgets.smartgrid.management.commands.send_reminders
 
 
 

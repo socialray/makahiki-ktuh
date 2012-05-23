@@ -10,10 +10,10 @@ Package: apps.managers
 
    Authentication Manager <packages/auth_mgr>
    Cache Manager <packages/cache_mgr>
+   Challenge Manager <packages/challenge_mgr>
    Log Manager <packages/log_mgr>
    Player Manager <packages/player_mgr>
    Score Manager <packages/score_mgr>
-   Challenge Manager <packages/challenge_mgr>
    Team Manager <packages/team_mgr>
 
 Package: apps.widgets

@@ -1,4 +1,18 @@
-"""setup test data command"""
+"""Invocation:  python manage.py setup_test_data <command>
+
+Sets up test data given the specified <command>.  Possible commands are:
+
+  * create_users <number users for each team>
+  * delete_users
+  * rounds
+  * event_dates
+  * resource_usages
+  * resource_baselines
+  * resource_goalsettings
+  * all
+
+If 'all', the number of users per team is set to 5."""
+
 import datetime
 from django.contrib.auth.models import User
 
