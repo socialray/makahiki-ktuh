@@ -22,23 +22,6 @@
                 {% endif %}
                 <br style="clear: both"/>
             </li>
-            <script type="text/javascript">
-                jQuery(document).ready(function ($) {
-                    $("#notification-dialog-{{notification.id}} .notification-share").unbind("click").click(function (event) {
-                        FB.ui(
-                                {
-                                    method:'feed',
-                                    name:'Kukui Cup',
-                                    link:'http://{{request.META.HTTP_HOST}}',
-                                    picture:'http://{{request.META.HTTP_HOST}}{{STATIC_URL}}images/logo.png',
-                                    description:'{{notification.contents}}',
-                                    display:'popup'
-                                }
-                        );
-                        return false;
-                    });
-                });
-             </script>
         {% endfor %}
     </ul>
     <center>
@@ -72,20 +55,38 @@
                 </li>
                 <script type="text/javascript">
                     jQuery(document).ready(function ($) {
-                        $("#notification-dialog-{{notification.id}} .notification-share").unbind("click").click(function (event) {
-                            FB.ui(
-                                    {
-                                        method:'feed',
-                                        name:'Kukui Cup',
-                                        link:'http://{{request.META.HTTP_HOST}}',
-                                        picture:'http://{{request.META.HTTP_HOST}}{{STATIC_URL}}images/logo.png',
-                                        description:'{{notification.contents}}',
-                                        display:'popup'
-                                    }
-                            );
-                            return false;
-                        });
-                    });
+            $(".modal-footer .btn").click(function () {
+                $.post("{% url notifications_read notification.id %}", function (data) {
+                    $("#notification-item-{{notification.id}}").fadeOut();
+                });
+            });
+
+            $(".notification-options .notification-share").click(function () {
+                log_js_action("notification", "{{notification.id}}", "share");
+                FB.ui(
+                        {
+                            method:'feed',
+                            name:'Kukui Cup',
+                            link:'http://{{request.META.HTTP_HOST}}',
+                            picture:'http://{{request.META.HTTP_HOST}}{{STATIC_URL}}images/old-logo.png',
+                            description:'{{notification.contents}}',
+                            display:'popup'
+                        },
+
+                        function (response) {
+                            if (response && response.post_id) {
+                                log_js_action("notification", "{{notification.id}}", "shared");
+                                $.post("{% url notifications_read notification.id %}", function (data) {
+                                    $("#notification-item-{{notification.id}}").fadeOut();
+                                });
+                            }
+                            else {
+                                log_js_action("notification", "{{notification.id}}", "share-canceled");
+                            }
+                        }
+                );
+            });
+        });
                 </script>
             {% endfor %}
         </ul>
