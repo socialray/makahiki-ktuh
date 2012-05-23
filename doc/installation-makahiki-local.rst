@@ -164,7 +164,7 @@ user and database.
 6. Setup environment variables
 ------------------------------
 
-Makahiki requires two environment variables: DATABASE_URL and
+At a minimum, Makahiki requires two environment variables: DATABASE_URL and
 MAKAHIKI_ADMIN_INFO.  
 
 In Unix, these environment variables can be defined this way::
@@ -183,26 +183,28 @@ always available, or you can edit the ``postactivate`` file (in Unix, found in
 Note that you will want to provide a stronger password for the makahiki
 admin account if this server is publically accessible. 
 
-7.  Configure Postgres database some more
------------------------------------------
+Makahiki also utilizes a variety of other environment variables. For complete
+documentation, see :ref:`section-environment-variables`.
 
-Now you can further configure the postgres database with the models in the
-Makahiki system::
+7.  Initialize your instance
+----------------------------
 
+Next, invoke the initialize_instance script::
 
-  % ./manage.py syncdb --noinput
-    Syncing...
-    Creating tables ...
-    Creating table challenge_mgr_challengesettings
-     :
-    Not synced (use migrations):
-    - 
-   (use ./manage.py migrate to migrate these)
+  % scripts/initialize_instance.py
 
-To make sure that the schemas are fully up to date, you invoke the migrate
-script::
+This command  will:
+  * Check that any changes to requirements are installed.
+  * Sync the database and perform any needed database migrations. 
+  * Re-initialize the system with default data and users.
+  * Set up static files. 
 
-  % ./manage.py migrate
+Under normal circumstances, invoking this script after pulling any new changes from the
+repository is sufficient to bring your local installation up to date. 
+
+Makahiki has several other scripts useful for development. For complete
+documentation, see :ref:`section-scripts`.
+
 
 8. Test your installation
 -------------------------
@@ -211,16 +213,8 @@ To see if the system has been installed correctly, run the tests::
 
   % ./manage.py test
 
-9. Load sample data (optional)
-------------------------------
 
-You might want to load some sample data into the system to provide a more
-realistic display on login.  If so, do the following::
-
-  % scripts/load_data.py
-
-
-10. Bring up the server
+9. Bring up the server
 -----------------------
 
 Finally, you can start the Makahiki server::
@@ -230,7 +224,7 @@ Finally, you can start the Makahiki server::
 Open a browser and go to http://localhost:8000 to see the home page. 
 
 
-11. Login to administrative interface
+10. Login to administrative interface
 -------------------------------------
 
 Once the server is running, you must login as admin in order to continue

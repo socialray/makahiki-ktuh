@@ -1,6 +1,7 @@
 #!/usr/bin/python
 
 """Invocation:  scripts/dump_data.py
+
 Creates a set of json files in the dumped_data directory containing the current state.
 This state can be loaded into a new instance using load_data.
 """

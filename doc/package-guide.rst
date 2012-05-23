@@ -13,7 +13,7 @@ Package: apps.managers
    Log Manager <packages/log_mgr>
    Player Manager <packages/player_mgr>
    Score Manager <packages/score_mgr>
-   Challenge Manager <packages/challenge__mgr>
+   Challenge Manager <packages/challenge_mgr>
    Team Manager <packages/team_mgr>
 
 Package: apps.widgets
@@ -25,9 +25,7 @@ Package: apps.widgets
 
    Ask Admin widget <packages/ask_admin>
    Badges widget <packages/badges>
-   Energy Goal widget <packages/energy_goal>
    Energy Power Meter widget <packages/energy_power_meter>
-   Energy Scoreboard widget <packages/energy_scoreboard>
    Help widgets <packages/help>
    Home and first login wizard widget <packages/home>
    My Achievements widget <packages/my_achievements>
@@ -44,15 +42,6 @@ Package: apps.widgets
    Upcoming events widget <packages/upcoming_events>
    Wall Post widget <packages/wallpost>
 
-
-Package: css_rules
-------------------
-.. automodule:: apps.css_rules
-
-.. toctree::
-   :maxdepth: 1
-
-   Package: apps.css_rules <packages/css_rules>
 
 Package: apps.lib
 -----------------

@@ -1,9 +1,10 @@
 #!/usr/bin/python
 
-"""load initial data into makahiki system.
+"""Invocation:  scripts/load_data
 
-When the system is stable, could run python manage.py loaddata fixturs/* to load everything
-there.
+Loads the default configuration of data into makahiki.
+
+Note: when the system is stable, could simply run python manage.py loaddata fixtures/* 
 """
 
 import os
