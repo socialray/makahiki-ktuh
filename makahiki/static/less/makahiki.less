@@ -1,33 +1,258 @@
 /*
- * Makahiki2 style.
+ * Makahiki2 style. Uses the Makahiki standard color and image 
+ * variables.
  * 
  * Copyright 2012 CSDL.
  * 
  * Uses Twitter Bootstrap v2.
  */
- 
- 
- // Bootstrap
- @import "../bootstrap/less/bootstrap.less";
- 
- // Responsiveness
- @import "../bootstrap/less/responsive.less";
-
- // Overrides for bootstrap variables
- @import "makahiki-override.less";
-
-@makahikiBorderRadius: 8px;
+@charset "UTF-8";
+@import "../bootstrap/less/bootstrap.less";
+@import "../bootstrap/less/responsive.less";
 @contentBoxBottomMargin: 15px;
 @contentBoxBottomPadding: 10px;
+@gridGutterWidth: 20px;
+@makahikiBorderRadius: 8px;
+@navbarBackground: fadeout(@navbar-bkg-color-start, @navbar-transparency);
+@navbarBackgroundHighlight: fadeout(@navbar-curr-page-bkg-color, @navbar-transparency);
+@navbarLinkBackgroundActive: darken(@navbarBackground, 15%);
 
-.background-gradient(@start, @end) {
+form {
+    margin: 0px;
+}
+
+h6 {
+    color: @black;
+}
+
+input , select , textarea , .uneditable-input {
+    width: 80%;
+}
+
+legend {
+    border: none;
+    line-height: 19.5pt;
+}
+
+table, tr {
+    width: 100%;
+}
+
+td , h5 {
+    padding: 4px;
+    vertical-align: middle;
+}
+
+th {
+    text-transform: capitalize;
+}
+
+th , td {
+    text-align: center;
+    font-size: 13px;
+    line-height: 13px;
+    padding-top: 3px;
+    padding-bottom: 3px;
+}
+
+ul {
+    list-style: none;
+}
+
+.brand img {
+    background: transparent url("@{page-logo}") top left no-repeat;
+    display: block;
+    margin: 0 auto;
+}
+
+.btn-navbar {
+    background-color: darken(@navbar-bkg-color-start, 40%);
+    .background-gradient (fadeout(@navbar-bkg-color-start, @navbar-transparency) , fadeout(@navbar-bkg-color-end, @navbar-transparency));
+    border-color: @navbar-bkg-color-start @navbar-bkg-color-start #000000;
+}
+
+.btn-navbar:hover , .btn-navbar:active , .btn-navbar.active , .btn-navbar.disabled , .btn-navbar[disabled] {
+    background-color: fadeout(@navbar-bkg-color-end, @navbar-transparency);
+}
+
+.container , .container-top , .container-bottom {
+    background: transparent;
+}
+
+.content-box-title {
+    .background-gradient (fadeout(@widget-title-bkg-color-start, @widget-title-transparency) , fadeout(@widget-title-bkg-color-end, @widget-title-transparency));
+    border-bottom: 1px solid @widget-title-font-color;
+    color: @widget-title-font-color;
+    opacity: 1;
+}
+
+.content-box , .content-box-centered {
+    background-color: fadeout(@widget-body-bkg-color, @widget-body-transparency);
+    color: @widget-body-font-color;
+    opacity: 1;
+}
+
+// for tables in widgets
+.content-box .table-striped tbody tr:nth-child(2n) td , .content-box .table-striped tbody tr:nth-child(2n) th {
+    background-color: fadeout(@widget-table-row-color-1, @widget-body-transparency);
+}
+
+.content-box .table-striped tbody tr:nth-child(2n + 1) td , .content-box .table-striped tbody tr:nth-child(2n + 1) th {
+    background-color: fadeout(@widget-table-row-color-2, @widget-body-transparency);
+}
+
+.content-box table {
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    border-spacing: 0;
+}
+
+.content-box th, .content-box td {
+    padding: 4px;
+} 
+
+.content-box textarea {
+    background-color: @widget-text-area-bkg-color;
+    color: @widget-text-area-font-color;
+}
+
+.modal-header {
+    .background-gradient (@modal-title-bkg-color-start , @modal-title-bkg-color-end);
+    color: @modal-title-font-color;
+}
+
+.modal-body {
+    background-color: @modal-body-bkg-color;
+    color: @modal-body-font-color;
+}
+
+.modal {
+    background-color: @modal-body-bkg-color;
+    color: @modal-body-font-color;
+}
+
+.modal-footer {
+    background-color: @modal-body-bkg-color;
+    color: @modal-body-font-color;
+}
+
+.navbar {
+    .background-gradient (fadeout(@navbar-bkg-color-start, @navbar-transparency) , fadeout(@navbar-bkg-color-end, @navbar-transparency));
+    color: @navbar-font-color;
+}
+
+.navbar .nav > li > a {
+    color: @navbar-font-color;
+}
+
+.navbar .nav > li > a:hover {
+    color: @navbar-curr-path-font-color;
+}
+
+.navbar .nav .active > a , .navbar .nav .active > a:hover {
+    color: @navbar-curr-path-font-color;
+}
+
+.notifications {
+    .background-gradient (fadeout(@notification-bkg-color-start, @notification-transparency) , fadeout(@notification-bkg-color-end, @notification-transparency));
+    color: @notification-font-color;
+}
+
+@media (max-width: 979px) {
+    .navbar .nav > li > a , .navbar .dropdown-menu a {
+        color: @navbar-curr-path-font-color;
+    }
+
+    .navbar .nav > li > a:hover , .navbar .dropdown-menu a:hover {
+        background-color: transparent;
+    }
+}
+
+.info-bar {
+    .background-gradient (fadeout(@infobar-bkg-color-start, @infobar-transparency) , fadeout(@infobar-bkg-color-end, @infobar-transparency));
+    color: @infobar-font-color;
+}
+
+.info-bar .btn {
+    color: @infobar-feedback-font-color;
+}
+
+.tile {
+    .makahiki-box ();
+    height: 80px;
+    padding: 1px;
+    .background-gradient (fadeout(@pageinfobox-bkg-color-start, @pageinfobox-transparency) , fadeout(@pageinfobox-bkg-color-end, @pageinfobox-transparency));
+    position: relative;
+    z-index: 100;
+    color: @pageinfobox-font-color;
+}
+
+a {
+    color: @page-link-color;
+}
+
+.energy-status-how-activities-table th {
+    background: @widget-body-bkg-color;
+}
+
+#prizes-raffle-table .number {
+    color: @prizes-raffle-table;
+}
+
+.prize-round-name {
+    background: @widget-subtitle-bkg-color;
+    color: @widget-subtitle-font-color;
+}
+
+#prizes-raffle-info {
+    font-weight: bold;
+    background: @widget-subtitle-bkg-color;
+    color: @widget-subtitle-font-color;
+    text-align: center;
+    padding: 8px 0;
+}
+
+.quest-box {
+    .makahiki-box ();
+    .background-gradient (fadeout(@questbar-bkg-color-start, @questbar-transparency) , fadeout(@questbar-bkg-color-end, @questbar-transparency));
+    color: @questbar-font-color;
+}
+
+#quest-details a {
+    color: @questbar-font-color;
+}
+
+.quest-hide {
+    color: @questbar-font-color;
+}
+
+.quest-list li a {
+    color: @questbar-font-color;
+}
+
+.quest-list li.selected a {
+    color: @questbar-font-color;
+}
+
+.landing-sponsors {
+    background-color: fadeout(@widget-body-bkg-color, @widget-body-transparency);
+}
+
+.notice {
+    .makahiki-box ();
+    .content-box-contents ();
+    .background-gradient (@questbar-bkg-color-start , @questbar-bkg-color-end);
+    color: @questbar-font-color;
+}
+
+.background-gradient (@start , @end) {
     background-image: -moz-linear-gradient(top, @start, @end);
     background-image: -ms-linear-gradient(top, @start, @end);
-    background-image: -webkit-gradient(linear, 0 0, 0 100%, from(@start),
-        to(@end));
+    background-image: -webkit-gradient(linear, 0 0, 0 100%, from(@start), to(@end));
     background-image: -webkit-linear-gradient(top, @start, @end);
     background-image: -o-linear-gradient(top, @start, @end);
-    background-image: linear-gradient(top, @start, @end);    
+    background-image: linear-gradient(top, @start, @end);
 }
 
 .top-border-radius (@radius: 5px) {
@@ -36,45 +261,23 @@
     border-top-left-radius: @radius;
     -webkit-border-top-right-radius: @radius;
     -moz-border-radius-topright: @radius;
-    border-top-right-radius: @radius;    
+    border-top-right-radius: @radius;
 }
 
 .makahiki-box {
-    .border-radius(@makahikiBorderRadius);
-    .box-shadow(3px 3px @makahikiBorderRadius @black);
+    .border-radius (@makahikiBorderRadius);
+    .box-shadow (3px 3px @makahikiBorderRadius @black);
     margin-bottom: @gridGutterWidth;
 }
 
+.container-fluid {
+    padding-left: 0;
+    padding-right: 0;
+    .clearfix ();
+}
+
 .centered-div {
-    .center-block();
-}
-
-#mainwrap{
-    background:#ffffcc;
-    width:100%;
-    overflow:hidden;
-    text-align:center;
-}
-
-#mainwrap ul {
-    float:left;
-    margin:auto;
-    padding:0;
-    list-style:none;
-    position:relative;
-    left:50%;
-}
-
-#mainwrap ul li {
-    padding:15px;
-    margin:15px;
-    display:-moz-inline-box;/* older gecko*/
-    display:inline-block;
-    position:relative;
-    left:-50%;
-}
-.activities-grid {
-    line-height: 15px;
+    .center-block ();
 }
 
 .centered-row {
@@ -85,19 +288,18 @@
     letter-spacing: 80px;
     line-height: 12px;
     overflow: hidden;
-    width: 100%;    
+    width: 100%;
 }
 
 .centered-row-child {
     width: 18%;
-//    height: 100px;
     border: solid 1px #ccc;
     display: inline-block;
     letter-spacing: normal;
     font-size: normal;
     white-space: normal;
     text-align: normal;
-    vertical-align: middle;    
+    vertical-align: middle;
 }
 
 .content-box {
@@ -110,7 +312,7 @@
 .content-box-centered {
     text-align: center;
     .makahiki-box;
-    margin-bottom: @contentBoxBottomMargin; 
+    margin-bottom: @contentBoxBottomMargin;
     padding-bottom: @contentBoxBottomPadding;
 }
 
@@ -124,13 +326,13 @@
     height: 29px;
     line-height: 29px;
     font-weight: bold;
-    .top-border-radius(@makahikiBorderRadius);    
+    .top-border-radius (@makahikiBorderRadius);
 }
 
 .content-box-title h3 {
-  padding-left: 20px;
-  display: inline;
-  font-size: 1em;
+    padding-left: 20px;
+    display: inline;
+    font-size: 1em;
 }
 
 .info-bar h4 {
@@ -154,7 +356,7 @@
     text-align: center;
 }
 
-.info-bar #single-cycle div, .info-bar #single-cycle h4 {
+.info-bar #single-cycle div , .info-bar #single-cycle h4 {
     text-align: center;
     width: 100%;
 }
@@ -171,25 +373,28 @@
     display: inline;
     margin-left: auto;
     margin-right: auto;
-    .pagination-centered;     
+    .pagination-centered;
 }
 
 .makahiki-box-title a {
-    float: right;    
+    float: right;
 }
 
 .notice-icon {
     float: left;
 }
+
 .notice-content {
     margin: 0 0 0 10px;
     float: left;
     width: 90%;
 }
+
 .notice-list-content {
     margin: 0 0 0 10px;
     float: left;
 }
+
 .notification-contents {
     display: inline;
 }
@@ -198,27 +403,26 @@
     float: left;
     margin: 0 10px 0 10px;
 }
+
 .notification-share {
     float: left;
     margin: 0 10px 0 10px;
 }
+
 .notifications {
     .makahiki-box;
 }
+
 .notification-item {
     display: inline;
-//    margin: 5px auto;
-//    padding: 5px;
-//    clear:both; 
-//    text-align: left;
 }
 
-.notification-list, .messages {
+.notification-list , .messages {
     list-style: none;
 }
 
 .makahiki-box-title img {
-    float: right;    
+    float: right;
 }
 
 .quest-description {
@@ -234,24 +438,21 @@
 .quest-list li {
     margin: 0px;
     padding: 0 2px;
-    display: inline;    
+    display: inline;
 }
 
 .quest-pad {
     float: right;
 }
 
-/* Vertically centers the text area in the Upcoming events widget. */
 .event-code input {
     margin-bottom: 0px;
 }
 
-/*------- General Dialog style to center the OK button. ---*/
 .ui-dialog .ui-dialog-buttonpane {
-  text-align: center;
+    text-align: center;
 }
 
-/*------- Modal Overlay override -------*/
 .ui-widget-overlay {
     opacity: .75;
     filter: Alpha(Opacity=75);
@@ -261,53 +462,43 @@ button {
     -webkit-appearance: none;
 }
 
-/* ====================
- * Navbar icons.
- * ==================== */ 
 a.learn img {
-    background: transparent url(../images/icons/icon-scoreboard.png) top left
-        no-repeat;    
+    background: transparent url(../images/icons/icon-scoreboard.png) top left no-repeat;
     .show
 }
+
 a.learn:hover img {
-    background: transparent url(../images/icons/icon-scoreboard-over.png) top left
-        no-repeat;
+    background: transparent url(../images/icons/icon-scoreboard-over.png) top left no-repeat;
     .show
 }
 
 a.advanced img {
-    background: transparent url(../images/icons/icon-advanced.png) top left
-        no-repeat;
+    background: transparent url(../images/icons/icon-advanced.png) top left no-repeat;
     .show
 }
 
 a.advanced:hover img {
-    background: transparent url(../images/icons/icon-advanced-over.png) top left
-        no-repeat;
+    background: transparent url(../images/icons/icon-advanced-over.png) top left no-repeat;
     .show
 }
 
 a.status img {
-    background: transparent url(../images/icons/icon-status.png) top left
-    no-repeat;
+    background: transparent url(../images/icons/icon-status.png) top left no-repeat;
     .show
 }
 
 a.status:hover img {
-    background: transparent url(../images/icons/icon-status-over.png) top left
-    no-repeat;
+    background: transparent url(../images/icons/icon-status-over.png) top left no-repeat;
     .show
 }
 
 a.energy img {
-    background: transparent url(../images/icons/icon-go-low.png) top left
-        no-repeat;
+    background: transparent url(../images/icons/icon-go-low.png) top left no-repeat;
     .show
 }
 
 a.energy:hover img {
-    background: transparent url(../images/icons/icon-go-low-over.png) top left
-        no-repeat;
+    background: transparent url(../images/icons/icon-go-low-over.png) top left no-repeat;
     .show
 }
 
@@ -317,8 +508,7 @@ a.help img {
 }
 
 a.help:hover img {
-    background: transparent url(../images/icons/icon-help-over.png) top left
-        no-repeat;
+    background: transparent url(../images/icons/icon-help-over.png) top left no-repeat;
     .show
 }
 
@@ -328,8 +518,7 @@ a.home img {
 }
 
 a.home:hover img {
-    background: transparent url(../images/icons/icon-home-over.png) top left
-        no-repeat;
+    background: transparent url(../images/icons/icon-home-over.png) top left no-repeat;
     .show
 }
 
@@ -339,32 +528,27 @@ a.news img {
 }
 
 a.news:hover img {
-    background: transparent url(../images/icons/icon-news-over.png) top left
-        no-repeat;
+    background: transparent url(../images/icons/icon-news-over.png) top left no-repeat;
     .show
 }
 
 a.win img {
-    background: transparent url(../images/icons/icon-prizes.png) top left
-        no-repeat;
+    background: transparent url(../images/icons/icon-prizes.png) top left no-repeat;
     .show
 }
 
 a.win:hover img {
-    background: transparent url(../images/icons/icon-prizes-over.png) top left
-        no-repeat;
+    background: transparent url(../images/icons/icon-prizes-over.png) top left no-repeat;
     .show
 }
 
 a.profile img {
-    background: transparent url(../images/icons/icon-profile.png) top left
-        no-repeat;
+    background: transparent url(../images/icons/icon-profile.png) top left no-repeat;
     .show
 }
 
 a.profile:hover img {
-    background: transparent url(../images/icons/icon-profile-over.png) top left
-        no-repeat;
+    background: transparent url(../images/icons/icon-profile-over.png) top left no-repeat;
     .show
 }
 
@@ -374,8 +558,7 @@ a.water img {
 }
 
 a.water:hover img {
-    background: transparent url(../images/icons/icon-water-over.png) top left
-        no-repeat;
+    background: transparent url(../images/icons/icon-water-over.png) top left no-repeat;
     .show
 }
 
@@ -384,10 +567,18 @@ body {
     padding-left: 20px;
     padding-right: 20px;
     .pagination-centered;
+    background: url("@{page-bkg-image}") center fixed;
+    background-repeat: no-repeat;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+    background-color: @page-bkg-color;
+    color: @page-font-color;
 }
 
-#learn-grid {
-    line-height: 12px;
+#canopy-about {
+    padding: 5px 10px;
 }
 
 #info-bar-single {
@@ -405,88 +596,101 @@ body {
 
 #info-bar-single h4 a {
     float: none;
-    text-align: center;    
+    text-align: center;
 }
 
-#scoreboard-pager a {
-    margin: 0 5px; 
-    padding: 3px 5px; 
-    text-decoration: none
-}
-/***** Help styles *****/
-#widget-help-dialog {
-  text-align: left;
-}
-
-#widget-help-dialog-close {
-  .pagination-centered;
-}
-
-// switch to single info-bar when bootstrap messes up the 
-// fluid rows
 @media (max-width: 767px) {
     #info-bar-wide {
         .hidden;
     }
+
     #info-bar-single {
         .show;
         visibility: visible;
     }
 }
 
-@media ( min-width : 641px) and (max-width: 979px) {
-    /* hide icons from nav bar */
+@media (min-width: 641px) and (max-width: 979px) {
     .nav img {
         display: none;
     }
 }
 
-/* Query to remove images up to tablet width.*/
-@media ( min-width : 480px) and (max-width: 821px) {
+@media (min-width: 480px) and (max-width: 821px) {
     .nav li a img {
         display: none;
     }
+
     .nav li a:hover img {
         display: none;
     }
 }
 
-/* for small screen widths hide the wide info-bar */
-@media ( max-width : 640px) {
-    a.learn img,a.learn:hover img,a.advanced img,a.advanced:hover img,a.energy img,a.energy:hover img,a.help img,a.help:hover img,a.home img,a.home:hover img,a.news img,a.news:hover img,a.win img,a.win:hover img,a.profile img,a.profile:hover img,a.water img,a.water:hover img,a.status img,a.status:hover img
-        {
+@media (max-width: 640px) {
+    a.learn img , a.learn:hover img , a.advanced img , a.advanced:hover img , a.energy img , a.energy:hover img , a.help img , a.help:hover img , a.home img , a.home:hover img , a.news img , a.news:hover img , a.win img , a.win:hover img , a.profile img , a.profile:hover img , a.water img , a.water:hover img , a.status img , a.status:hover img {
         .hidden;
     }
+
     body {
         padding-left: 0;
         padding-right: 0;
     }
+
+    .brand img {
+        display: none;
+    }
+
     .container-fluid {
         padding-left: 0px;
         padding-right: 0px;
-    }    
+    }
+
     .makahiki-box {
         margin-bottom: 5px;
     }
+
     .navbar {
         margin-bottom: 5px;
     }
+
     #info-bar-wide {
         .hidden;
     }
+
     #info-bar-single {
         .show;
         visibility: visible;
     }
+
     #quest-list {
         padding: 0px;
     }
+
     #quest-list li {
-        display: block; /* make them vertical */
+        display: block;
         margin: 5px;
         padding: 0px;
     }
+
     #quest-title {
         margin: 0px;
     }
 }
+
+@import "widget-badges.less";
+@import "widget-canopy-members.less";
+@import "widget-canopy-viz.less";
+@import "widget-first-login.less";
+@import "widget-help.less";
+@import "widget-home.less";
+@import "widget-my-achievements.less";
+@import "widget-my-commitments.less";
+@import "widget-popular-tasks.less";
+@import "widget-prizes.less";
+@import "widget-raffle.less";
+@import "widget-resource-goal.less";
+@import "widget-resource-scoreboard.less";
+@import "widget-smartgrid.less";
+@import "widget-team-members.less";
+@import "widget-upcoming-events.less";
+@import "widget-wallpost.less";

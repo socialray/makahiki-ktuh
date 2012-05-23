@@ -1,73 +1,73 @@
+@charset "UTF-8";
+table , .table {
+    width: 100%;
+    border-collapse: separate;
+}
 
+table th , table td , .table td , .table th {
+    padding: 0px;
+    text-align: center;
+}
+
+ul , ol {
+    margin: 0;
+}
 
 .content-box {
-  text-align:center;
-  margin-left: 1%;
-  margin-right: 1%;
-} 
-
-table,.table {
-  width:100%; 
-  border-collapse: separate;
+    text-align: center;
+    margin-left: 1%;
+    margin-right: 1%;
 }
 
+.energy-score .item , .water-score .item {
+    float: left;
+    width: 24%;
+    margin-left: .5%;
+    margin-right: .5%;
+}
 
-table th, table td, .table td, .table th {
-  padding:0px;
-  text-align:center;
-} 
+.padding-right {
+    padding-right: 10%;
+}
 
 .scoreboard .item {
-  display:block inline;
-  float:left;
-  margin-right: 0.5%;
-  margin-left: 0.5%;
+    display: block inline;
+    float: left;
+    margin-right: 0.5%;
+    margin-left: 0.5%;
 }
 
-.scoreboard .item .table, .energy-score table {
-  border-style:solid;
-  border-width:1px;
-  border-color:#000;
-}
-
-@media (min-width:1130px) {
-  .scoreboard .item {
-    width:23.75%;
-  }
-}
-
-.energy-score .item, .water-score .item {
-  float:left;
-  width:24%;
-  margin-left: .5%;
-  margin-right: .5%;
+.scoreboard .item .table , .energy-score table {
+    border-style: solid;
+    border-width: 1px;
+    border-color: #000;
 }
 
 .status-activities .item {
-  float: left;
-  width: 24.5%;
+    float: left;
+    width: 24.5%;
 }
 
 .status-activities .content-box {
-  margin-left: 2px;
-  margin-right: 2px;
+    margin-left: 2px;
+    margin-right: 2px;
 }
 
-@media (max-width:768px) {
-  .item {
-    width:100%;
-    float: none;
-  }
-
-.energy-score .item, .waterscore .item{
-  float:none;
-  width:100%;
-  }
+@media (min-width: 1130px) {
+    .scoreboard .item {
+        width: 23.75%;
+    }
 }
 
+@media (max-width: 768px) {
+    .item {
+        width: 100%;
+        float: none;
+    }
 
-
-
-.padding-right {
-  padding-right:10%;
+    .energy-score .item , .waterscore .item {
+        float: none;
+        width: 100%;
+    }
 }
+

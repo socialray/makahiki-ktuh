@@ -7,11 +7,6 @@
 {% block selected_icon %}selected-win{% endblock %}
 
 {% block extra_head %}
-    {% if not MAKAHIKI_USE_LESS %}
-    <link rel="stylesheet" href="{{STATIC_URL}}css/win.css">
-    {% else %}
-    <link rel="stylesheet/less" type="text/css" href="{{STATIC_URL}}less/win.less">
-    {% endif %}
 {% endblock %}
 
 {% block body %}

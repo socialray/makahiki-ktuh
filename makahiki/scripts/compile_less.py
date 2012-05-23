@@ -22,8 +22,8 @@ def main(argv):
         if opt in ("-v", "--verbose"):
             verbose = 1
 
-    page_names = ['advanced', 'energy', 'help', 'home', 'landing', 'learn',
-                  'news', 'profile', 'status', 'win']
+    page_names = ['landing',
+                  'status']
     less_path = "static/less"
     os.chdir(less_path)
     theme_names = glob.glob('theme-*.less')

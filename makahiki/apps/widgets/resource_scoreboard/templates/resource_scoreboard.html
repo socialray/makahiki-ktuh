@@ -1,8 +1,8 @@
-<div class="content-box">
+<div {%if not no_carousel %}class="content-box"{% endif %}>
 {% if not no_carousel %}
     <div id="score-carousel" class="carousel">
     <div class="carousel-inner">
-    {% endif %}
+{% endif %}
     {% for round_name, ranks in round_resource_ranks.items %}
         <div class="item {% if forloop.first %}active{% endif %}">
             <div class="content-box-title">
