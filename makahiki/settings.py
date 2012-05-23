@@ -307,6 +307,7 @@ SERIALIZATION_MODULES = {
 # Create a dummy challenge object and variables so that IDEs are OK.
 # This object will be instantiated for real from the DB ChallengeSettings object.
 class Challenge():
+    "Encapsulates settings for the challenge."
     competition_name = None
 
 CHALLENGE = Challenge()
@@ -341,7 +342,7 @@ else:
 
 # Admin info Settings
 MAKAHIKI_ADMIN_INFO = ''
-"""[Required]  Specify the makahiki admin account and password. 
+"""[Required]  Specify the makahiki admin account and password.
 Example:  admin:changeme"""
 if 'MAKAHIKI_ADMIN_INFO' in os.environ:
     admin_info = os.environ['MAKAHIKI_ADMIN_INFO'].split(":")
@@ -366,7 +367,8 @@ env = lambda e, d: os.environ[e] if e in os.environ else d
 
 # DEBUG settings
 MAKAHIKI_DEBUG = env('MAKAHIKI_DEBUG', '').lower() == "true"
-"""[Optional]  If "true", enable debug mode, with better error messages. Otherwise use production mode.""" 
+"""[Optional]  If "true", enable debug mode, with better error messages.
+Otherwise use production mode."""
 DEBUG = MAKAHIKI_DEBUG
 TEMPLATE_DEBUG = MAKAHIKI_DEBUG
 

@@ -298,10 +298,16 @@ def process_docstring(app, what, name, obj, options, lines):
     
     # Return the extended docstring
     return lines  
+
+def skip_challenge_def_in_settings(app, what, name, obj, skip, options):
+    # Settings file autodoc should only show environment variable definitions.
+    if name == "Challenge":
+        return True
   
 def setup(app):
     # Register the docstring processor with sphinx
     app.connect('autodoc-process-docstring', process_docstring)  
+    app.connect('autodoc-skip-member', skip_challenge_def_in_settings)
 
 #=================================================================================
 # Mocking out modules that readthedocs can't import.
