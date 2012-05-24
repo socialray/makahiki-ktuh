@@ -3,7 +3,7 @@ from datetime import datetime
 
 from django.template import Library
 
-from apps.managers.log_mgr import create_server_log
+from apps.managers.log_mgr import log_mgr
 
 register = Library()
 
@@ -14,7 +14,7 @@ def mark_alerts_displayed(request, alerts):
     Simple tag to mark the alerts displayed.
     """
     for alert in alerts:
-        create_server_log(request, "/slog/notifications/alert/%d/" % alert.pk)
+        log_mgr.write_log_entry(request, 200, "/slog/notifications/alert/%d/" % alert.pk)
 
     alerts.update(display_alert=False)
     return ""

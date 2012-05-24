@@ -9,13 +9,14 @@ def clear():
     MakahikiLog.objects.all().delete()
 
 
-def write_log_entry(request, response=None, exception=None):
-    """Write a log entry corresponding to the passed request."""
+def write_log_entry(request, response_status_code, path=None, exception=None):
+    """Write a log entry corresponding to the passed request.
+    if path is provided, it override the request.path."""
 
     log = MakahikiLog()
 
     # get the request header and response code into log record
-    get_request_headers(log, request, response)
+    get_request_headers(log, request, response_status_code, path)
 
     # Create the log entry.
     #entry = "%s %s %s %s %s %d %s %s " % (
@@ -55,7 +56,7 @@ def write_log_entry(request, response=None, exception=None):
     log.save()
 
 
-def get_request_headers(log, request, response):
+def get_request_headers(log, request, response_status_code, path):
     """returns a string consists of interesting request headers."""
     # Helper lambda for retrieving environment variables:
     header = lambda e, d: request.META[e] if e in request.META else d
@@ -64,8 +65,8 @@ def get_request_headers(log, request, response):
     log.remote_ip = header("REMOTE_ADDR", "no-ip")
     log.remote_user = get_username(request)
     log.request_method = request.method
-    log.request_url = request.get_full_path()
-    log.response_status = response.status_code if response else 500
+    log.request_url = path or request.get_full_path()
+    log.response_status = response_status_code
     log.http_referer = header("HTTP_REFERER", "no-referer")
     log.http_user_agent = header("HTTP_USER_AGENT", "no-user-agent")
 
