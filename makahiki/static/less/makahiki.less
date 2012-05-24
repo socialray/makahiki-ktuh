@@ -17,460 +17,10 @@
 @navbarBackgroundHighlight: fadeout(@navbar-curr-page-bkg-color, @navbar-transparency);
 @navbarLinkBackgroundActive: darken(@navbarBackground, 15%);
 
-form {
-    margin: 0px;
-}
-
-h6 {
-    color: @black;
-}
-
-input , select , textarea , .uneditable-input {
-    width: 80%;
-}
-
-legend {
-    border: none;
-    line-height: 19.5pt;
-}
-
-table, tr {
-    width: 100%;
-}
-
-td , h5 {
-    padding: 4px;
-    vertical-align: middle;
-}
-
-th {
-    text-transform: capitalize;
-}
-
-th , td {
-    text-align: center;
-    font-size: 13px;
-    line-height: 13px;
-    padding-top: 3px;
-    padding-bottom: 3px;
-}
-
-ul {
-    list-style: none;
-}
-
-.brand img {
-    background: transparent url("@{page-logo}") top left no-repeat;
-    display: block;
-    margin: 0 auto;
-}
-
-.btn-navbar {
-    background-color: darken(@navbar-bkg-color-start, 40%);
-    .background-gradient (fadeout(@navbar-bkg-color-start, @navbar-transparency) , fadeout(@navbar-bkg-color-end, @navbar-transparency));
-    border-color: @navbar-bkg-color-start @navbar-bkg-color-start #000000;
-}
-
-.btn-navbar:hover , .btn-navbar:active , .btn-navbar.active , .btn-navbar.disabled , .btn-navbar[disabled] {
-    background-color: fadeout(@navbar-bkg-color-end, @navbar-transparency);
-}
-
-.container , .container-top , .container-bottom {
-    background: transparent;
-}
-
-.content-box-title {
-    .background-gradient (fadeout(@widget-title-bkg-color-start, @widget-title-transparency) , fadeout(@widget-title-bkg-color-end, @widget-title-transparency));
-    border-bottom: 1px solid @widget-title-font-color;
-    color: @widget-title-font-color;
-    opacity: 1;
-}
-
-.content-box , .content-box-centered {
-    background-color: fadeout(@widget-body-bkg-color, @widget-body-transparency);
-    color: @widget-body-font-color;
-    opacity: 1;
-}
-
-// for tables in widgets
-.content-box .table-striped tbody tr:nth-child(2n) td , .content-box .table-striped tbody tr:nth-child(2n) th {
-    background-color: fadeout(@widget-table-row-color-1, @widget-body-transparency);
-}
-
-.content-box .table-striped tbody tr:nth-child(2n + 1) td , .content-box .table-striped tbody tr:nth-child(2n + 1) th {
-    background-color: fadeout(@widget-table-row-color-2, @widget-body-transparency);
-}
-
-.content-box table {
-    width: 100%;
-    margin: 0;
-    padding: 0;
-    border-spacing: 0;
-}
-
-.content-box th, .content-box td {
-    padding: 4px;
-} 
-
-.content-box textarea {
-    background-color: @widget-text-area-bkg-color;
-    color: @widget-text-area-font-color;
-}
-
-.modal-header {
-    .background-gradient (@modal-title-bkg-color-start , @modal-title-bkg-color-end);
-    color: @modal-title-font-color;
-}
-
-.modal-body {
-    background-color: @modal-body-bkg-color;
-    color: @modal-body-font-color;
-}
-
-.modal {
-    background-color: @modal-body-bkg-color;
-    color: @modal-body-font-color;
-}
-
-.modal-footer {
-    background-color: @modal-body-bkg-color;
-    color: @modal-body-font-color;
-}
-
-.navbar {
-    .background-gradient (fadeout(@navbar-bkg-color-start, @navbar-transparency) , fadeout(@navbar-bkg-color-end, @navbar-transparency));
-    color: @navbar-font-color;
-}
-
-.navbar .nav > li > a {
-    color: @navbar-font-color;
-}
-
-.navbar .nav > li > a:hover {
-    color: @navbar-curr-path-font-color;
-}
-
-.navbar .nav .active > a , .navbar .nav .active > a:hover {
-    color: @navbar-curr-path-font-color;
-}
-
-.notifications {
-    .background-gradient (fadeout(@notification-bkg-color-start, @notification-transparency) , fadeout(@notification-bkg-color-end, @notification-transparency));
-    color: @notification-font-color;
-}
-
-@media (max-width: 979px) {
-    .navbar .nav > li > a , .navbar .dropdown-menu a {
-        color: @navbar-curr-path-font-color;
-    }
-
-    .navbar .nav > li > a:hover , .navbar .dropdown-menu a:hover {
-        background-color: transparent;
-    }
-}
-
-.info-bar {
-    .background-gradient (fadeout(@infobar-bkg-color-start, @infobar-transparency) , fadeout(@infobar-bkg-color-end, @infobar-transparency));
-    color: @infobar-font-color;
-}
-
-.info-bar .btn {
-    color: @infobar-feedback-font-color;
-}
-
-.tile {
-    .makahiki-box ();
-    height: 80px;
-    padding: 1px;
-    .background-gradient (fadeout(@pageinfobox-bkg-color-start, @pageinfobox-transparency) , fadeout(@pageinfobox-bkg-color-end, @pageinfobox-transparency));
-    position: relative;
-    z-index: 100;
-    color: @pageinfobox-font-color;
-}
-
 a {
     color: @page-link-color;
 }
 
-.energy-status-how-activities-table th {
-    background: @widget-body-bkg-color;
-}
-
-#prizes-raffle-table .number {
-    color: @prizes-raffle-table;
-}
-
-.prize-round-name {
-    background: @widget-subtitle-bkg-color;
-    color: @widget-subtitle-font-color;
-}
-
-#prizes-raffle-info {
-    font-weight: bold;
-    background: @widget-subtitle-bkg-color;
-    color: @widget-subtitle-font-color;
-    text-align: center;
-    padding: 8px 0;
-}
-
-.quest-box {
-    .makahiki-box ();
-    .background-gradient (fadeout(@questbar-bkg-color-start, @questbar-transparency) , fadeout(@questbar-bkg-color-end, @questbar-transparency));
-    color: @questbar-font-color;
-}
-
-#quest-details a {
-    color: @questbar-font-color;
-}
-
-.quest-hide {
-    color: @questbar-font-color;
-}
-
-.quest-list li a {
-    color: @questbar-font-color;
-}
-
-.quest-list li.selected a {
-    color: @questbar-font-color;
-}
-
-.landing-sponsors {
-    background-color: fadeout(@widget-body-bkg-color, @widget-body-transparency);
-}
-
-.notice {
-    .makahiki-box ();
-    .content-box-contents ();
-    .background-gradient (@questbar-bkg-color-start , @questbar-bkg-color-end);
-    color: @questbar-font-color;
-}
-
-.background-gradient (@start , @end) {
-    background-image: -moz-linear-gradient(top, @start, @end);
-    background-image: -ms-linear-gradient(top, @start, @end);
-    background-image: -webkit-gradient(linear, 0 0, 0 100%, from(@start), to(@end));
-    background-image: -webkit-linear-gradient(top, @start, @end);
-    background-image: -o-linear-gradient(top, @start, @end);
-    background-image: linear-gradient(top, @start, @end);
-}
-
-.top-border-radius (@radius: 5px) {
-    -webkit-border-top-left-radius: @radius;
-    -moz-border-radius-topleft: @radius;
-    border-top-left-radius: @radius;
-    -webkit-border-top-right-radius: @radius;
-    -moz-border-radius-topright: @radius;
-    border-top-right-radius: @radius;
-}
-
-.makahiki-box {
-    .border-radius (@makahikiBorderRadius);
-    .box-shadow (3px 3px @makahikiBorderRadius @black);
-    margin-bottom: @gridGutterWidth;
-}
-
-.container-fluid {
-    padding-left: 0;
-    padding-right: 0;
-    .clearfix ();
-}
-
-.centered-div {
-    .center-block ();
-}
-
-.centered-row {
-    border: solid 1px #aaa;
-    text-align: centered;
-    white-space: nowrap;
-    font-size: 20px;
-    letter-spacing: 80px;
-    line-height: 12px;
-    overflow: hidden;
-    width: 100%;
-}
-
-.centered-row-child {
-    width: 18%;
-    border: solid 1px #ccc;
-    display: inline-block;
-    letter-spacing: normal;
-    font-size: normal;
-    white-space: normal;
-    text-align: normal;
-    vertical-align: middle;
-}
-
-.content-box {
-    text-align: left;
-    .makahiki-box;
-    margin-bottom: @contentBoxBottomMargin;
-    padding-bottom: @contentBoxBottomPadding;
-}
-
-.content-box-centered {
-    text-align: center;
-    .makahiki-box;
-    margin-bottom: @contentBoxBottomMargin;
-    padding-bottom: @contentBoxBottomPadding;
-}
-
-.content-box-contents {
-    padding-left: @gridGutterWidth;
-    padding-right: @gridGutterWidth;
-}
-
-.content-box-title {
-    text-align: center;
-    height: 29px;
-    line-height: 29px;
-    font-weight: bold;
-    .top-border-radius (@makahikiBorderRadius);
-}
-
-.content-box-title h3 {
-    padding-left: 20px;
-    display: inline;
-    font-size: 1em;
-}
-
-.info-bar h4 {
-    text-align: center;
-}
-
-.info-bar h4 a {
-    color: @black;
-    text-decoration: underline;
-}
-
-.info-bar ul {
-    list-style: none outside none;
-}
-
-.info-bar li {
-    .show;
-}
-
-.info-bar div {
-    text-align: center;
-}
-
-.info-bar #single-cycle div , .info-bar #single-cycle h4 {
-    text-align: center;
-    width: 100%;
-}
-
-.info-bar .btn {
-    float: right;
-}
-
-.info-bar-logout {
-    float: right;
-}
-
-.makahiki-box-title {
-    display: inline;
-    margin-left: auto;
-    margin-right: auto;
-    .pagination-centered;
-}
-
-.makahiki-box-title a {
-    float: right;
-}
-
-.notice-icon {
-    float: left;
-}
-
-.notice-content {
-    margin: 0 0 0 10px;
-    float: left;
-    width: 90%;
-}
-
-.notice-list-content {
-    margin: 0 0 0 10px;
-    float: left;
-}
-
-.notification-contents {
-    display: inline;
-}
-
-.notification-read {
-    float: left;
-    margin: 0 10px 0 10px;
-}
-
-.notification-share {
-    float: left;
-    margin: 0 10px 0 10px;
-}
-
-.notifications {
-    .makahiki-box;
-}
-
-.notification-item {
-    display: inline;
-}
-
-.notification-list , .messages {
-    list-style: none;
-}
-
-.makahiki-box-title img {
-    float: right;
-}
-
-.quest-description {
-    text-align: left;
-}
-
-.quest-list {
-    list-style: none;
-    margin-left: auto;
-    margin-right: auto;
-}
-
-.quest-list li {
-    margin: 0px;
-    padding: 0 2px;
-    display: inline;
-}
-
-.quest-pad {
-    float: right;
-}
-
-.event-code input {
-    margin-bottom: 0px;
-}
-
-.ui-dialog .ui-dialog-buttonpane {
-    text-align: center;
-}
-
-.ui-widget-overlay {
-    opacity: .75;
-    filter: Alpha(Opacity=75);
-}
-
-button {
-    -webkit-appearance: none;
-}
-
-a.learn img {
-    background: transparent url(../images/icons/icon-scoreboard.png) top left no-repeat;
-    .show
-}
-
-a.learn:hover img {
-    background: transparent url(../images/icons/icon-scoreboard-over.png) top left no-repeat;
-    .show
-}
 
 a.advanced img {
     background: transparent url(../images/icons/icon-advanced.png) top left no-repeat;
@@ -479,16 +29,6 @@ a.advanced img {
 
 a.advanced:hover img {
     background: transparent url(../images/icons/icon-advanced-over.png) top left no-repeat;
-    .show
-}
-
-a.status img {
-    background: transparent url(../images/icons/icon-status.png) top left no-repeat;
-    .show
-}
-
-a.status:hover img {
-    background: transparent url(../images/icons/icon-status-over.png) top left no-repeat;
     .show
 }
 
@@ -522,6 +62,16 @@ a.home:hover img {
     .show
 }
 
+a.learn img {
+    background: transparent url(../images/icons/icon-scoreboard.png) top left no-repeat;
+    .show
+}
+
+a.learn:hover img {
+    background: transparent url(../images/icons/icon-scoreboard-over.png) top left no-repeat;
+    .show
+}
+
 a.news img {
     background: transparent url(../images/icons/icon-news.png) top left no-repeat;
     .show
@@ -529,16 +79,6 @@ a.news img {
 
 a.news:hover img {
     background: transparent url(../images/icons/icon-news-over.png) top left no-repeat;
-    .show
-}
-
-a.win img {
-    background: transparent url(../images/icons/icon-prizes.png) top left no-repeat;
-    .show
-}
-
-a.win:hover img {
-    background: transparent url(../images/icons/icon-prizes-over.png) top left no-repeat;
     .show
 }
 
@@ -552,6 +92,16 @@ a.profile:hover img {
     .show
 }
 
+a.status img {
+    background: transparent url(../images/icons/icon-status.png) top left no-repeat;
+    .show
+}
+
+a.status:hover img {
+    background: transparent url(../images/icons/icon-status-over.png) top left no-repeat;
+    .show
+}
+
 a.water img {
     background: transparent url(../images/icons/icon-water.png) top left no-repeat;
     .show
@@ -559,6 +109,16 @@ a.water img {
 
 a.water:hover img {
     background: transparent url(../images/icons/icon-water-over.png) top left no-repeat;
+    .show
+}
+
+a.win img {
+    background: transparent url(../images/icons/icon-prizes.png) top left no-repeat;
+    .show
+}
+
+a.win:hover img {
+    background: transparent url(../images/icons/icon-prizes-over.png) top left no-repeat;
     .show
 }
 
@@ -577,8 +137,429 @@ body {
     color: @page-font-color;
 }
 
+button {
+    -webkit-appearance: none;
+}
+
+form {
+    margin: 0px;
+}
+
+h6 {
+    color: @black;
+}
+
+input , select , textarea , .uneditable-input {
+    width: 80%;
+}
+
+legend {
+    border: none;
+    line-height: 19.5pt;
+}
+
+table , tr {
+    width: 100%;
+}
+
+td , h5 {
+    padding: 4px;
+    vertical-align: middle;
+}
+
+th {
+    text-transform: capitalize;
+}
+
+th , td {
+    text-align: center;
+    font-size: 13px;
+    line-height: 13px;
+    padding-top: 3px;
+    padding-bottom: 3px;
+}
+
+ul {
+    list-style: none;
+}
+
+/* 
+ * Classes!
+ */
+
+.background-gradient (@start , @end) {
+    background-image: -moz-linear-gradient(top, @start, @end);
+    background-image: -ms-linear-gradient(top, @start, @end);
+    background-image: -webkit-gradient(linear, 0 0, 0 100%, from(@start), to(@end));
+    background-image: -webkit-linear-gradient(top, @start, @end);
+    background-image: -o-linear-gradient(top, @start, @end);
+    background-image: linear-gradient(top, @start, @end);
+}
+
+.brand img {
+    background: transparent url("@{page-logo}") top left no-repeat;
+    display: block;
+    margin: 0 auto;
+}
+
+.btn-navbar {
+    background-color: darken(@navbar-bkg-color-start, 40%);
+    .background-gradient (fadeout(@navbar-bkg-color-start, @navbar-transparency) , fadeout(@navbar-bkg-color-end, @navbar-transparency));
+    border-color: @navbar-bkg-color-start @navbar-bkg-color-start #000000;
+}
+
+.btn-navbar:hover , .btn-navbar:active , .btn-navbar.active , .btn-navbar.disabled , .btn-navbar[disabled] {
+    background-color: fadeout(@navbar-bkg-color-end, @navbar-transparency);
+}
+
+.centered-div {
+    .center-block ();
+}
+
+.centered-row {
+    border: solid 1px #aaa;
+    text-align: centered;
+    white-space: nowrap;
+    font-size: 20px;
+    letter-spacing: 80px;
+    line-height: 12px;
+    overflow: hidden;
+    width: 100%;
+}
+
+.centered-row-child {
+    width: 18%;
+    border: solid 1px #ccc;
+    display: inline-block;
+    letter-spacing: normal;
+    font-size: normal;
+    white-space: normal;
+    text-align: normal;
+    vertical-align: middle;
+}
+
+.container , .container-top , .container-bottom {
+    background: transparent;
+}
+
+.container-fluid {
+    padding-left: 0;
+    padding-right: 0;
+    .clearfix ();
+}
+
+.content-box {
+    text-align: left;
+    .makahiki-box;
+    margin-bottom: @contentBoxBottomMargin;
+    padding-bottom: @contentBoxBottomPadding;
+}
+
+.content-box , .content-box-centered {
+    background-color: fadeout(@widget-body-bkg-color, @widget-body-transparency);
+    color: @widget-body-font-color;
+    opacity: 1;
+}
+
+// for tables in widgets
+.content-box .table-striped tbody tr:nth-child(2n) td , .content-box .table-striped tbody tr:nth-child(2n) th {
+    background-color: fadeout(@widget-table-row-color-1, @widget-body-transparency);
+}
+
+.content-box .table-striped tbody tr:nth-child(2n + 1) td , .content-box .table-striped tbody tr:nth-child(2n + 1) th {
+    background-color: fadeout(@widget-table-row-color-2, @widget-body-transparency);
+}
+
+.content-box table {
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    border-spacing: 0;
+}
+
+.content-box textarea {
+    background-color: @widget-text-area-bkg-color;
+    color: @widget-text-area-font-color;
+}
+
+.content-box th , .content-box td {
+    padding: 4px;
+}
+
+.content-box-centered {
+    text-align: center;
+    .makahiki-box;
+    margin-bottom: @contentBoxBottomMargin;
+    padding-bottom: @contentBoxBottomPadding;
+}
+
+.content-box-contents {
+    padding-left: @gridGutterWidth;
+    padding-right: @gridGutterWidth;
+}
+
+.content-box-title {
+    text-align: center;
+    height: 29px;
+    line-height: 29px;
+    font-weight: bold;
+    .top-border-radius (@makahikiBorderRadius);
+    .background-gradient (fadeout(@widget-title-bkg-color-start, @widget-title-transparency) , fadeout(@widget-title-bkg-color-end, @widget-title-transparency));
+    border-bottom: 1px solid @widget-title-font-color;
+    color: @widget-title-font-color;
+    opacity: 1;
+}
+
+.content-box-title h3 {
+    padding-left: 20px;
+    display: inline;
+    font-size: 1em;
+}
+
+.energy-status-how-activities-table th {
+    background: @widget-body-bkg-color;
+}
+
+.event-code input {
+    margin-bottom: 0px;
+}
+
+.info-bar {
+    .background-gradient (fadeout(@infobar-bkg-color-start, @infobar-transparency) , fadeout(@infobar-bkg-color-end, @infobar-transparency));
+    color: @infobar-font-color;
+}
+.info-bar h4 {
+    text-align: center;
+}
+
+.info-bar h4 a {
+    color: @black;
+    text-decoration: underline;
+}
+
+.info-bar ul {
+    list-style: none outside none;
+}
+
+.info-bar li {
+    .show;
+}
+
+.info-bar div {
+    text-align: center;
+}
+
+.info-bar .btn {
+    float: right;
+    color: @infobar-feedback-font-color;
+}
+
+.info-bar #single-cycle div , .info-bar #single-cycle h4 {
+    text-align: center;
+    width: 100%;
+}
+
+.info-bar-logout {
+    float: right;
+}
+
+.landing-sponsors {
+    background-color: fadeout(@widget-body-bkg-color, @widget-body-transparency);
+}
+
+.login input {
+    width: auto;
+}
+
+.makahiki-box {
+    .border-radius (@makahikiBorderRadius);
+    .box-shadow (3px 3px @makahikiBorderRadius @black);
+    margin-bottom: @gridGutterWidth;
+}
+
+.makahiki-box-title {
+    display: inline;
+    margin-left: auto;
+    margin-right: auto;
+    .pagination-centered;
+}
+
+.makahiki-box-title a {
+    float: right;
+}
+
+.makahiki-box-title img {
+    float: right;
+}
+
+.modal {
+    background-color: @modal-body-bkg-color;
+    color: @modal-body-font-color;
+}
+
+.modal-body {
+    background-color: @modal-body-bkg-color;
+    color: @modal-body-font-color;
+}
+
+.modal-footer {
+    background-color: @modal-body-bkg-color;
+    color: @modal-body-font-color;
+}
+
+.modal-header {
+    .background-gradient (@modal-title-bkg-color-start , @modal-title-bkg-color-end);
+    color: @modal-title-font-color;
+}
+
+.navbar {
+    .background-gradient (fadeout(@navbar-bkg-color-start, @navbar-transparency) , fadeout(@navbar-bkg-color-end, @navbar-transparency));
+    color: @navbar-font-color;
+}
+
+.navbar .nav > li > a {
+    color: @navbar-font-color;
+}
+
+.navbar .nav > li > a:hover {
+    color: @navbar-curr-path-font-color;
+}
+
+.navbar .nav .active > a , .navbar .nav .active > a:hover {
+    color: @navbar-curr-path-font-color;
+}
+
+.notice {
+    .makahiki-box ();
+    .content-box-contents ();
+    .background-gradient (@questbar-bkg-color-start , @questbar-bkg-color-end);
+    color: @questbar-font-color;
+}
+
+.notice-content {
+    margin: 0 0 0 10px;
+    float: left;
+    width: 90%;
+}
+
+.notice-icon {
+    float: left;
+}
+
+.notice-list-content {
+    margin: 0 0 0 10px;
+    float: left;
+}
+
+.notification-contents {
+    display: inline;
+}
+
+.notification-item {
+    display: inline;
+}
+
+.notification-list , .messages {
+    list-style: none;
+}
+
+.notification-read {
+    float: left;
+    margin: 0 10px 0 10px;
+}
+
+.notification-share {
+    float: left;
+    margin: 0 10px 0 10px;
+}
+
+.notifications {
+    .background-gradient (fadeout(@notification-bkg-color-start, @notification-transparency) , fadeout(@notification-bkg-color-end, @notification-transparency));
+    color: @notification-font-color;
+    .makahiki-box;
+}
+
+.prize-round-name {
+    background: @widget-subtitle-bkg-color;
+    color: @widget-subtitle-font-color;
+}
+
+.quest-box {
+    .makahiki-box ();
+    .background-gradient (fadeout(@questbar-bkg-color-start, @questbar-transparency) , fadeout(@questbar-bkg-color-end, @questbar-transparency));
+    color: @questbar-font-color;
+}
+
+.quest-description {
+    text-align: left;
+}
+
+.quest-hide {
+    color: @questbar-font-color;
+}
+
+.quest-list {
+    list-style: none;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.quest-list li {
+    margin: 0px;
+    padding: 0 2px;
+    display: inline;
+}
+
+.quest-list li a {
+    color: @questbar-font-color;
+}
+
+.quest-list li.selected a {
+    color: @questbar-font-color;
+}
+
+.quest-pad {
+    float: right;
+}
+
+.tile {
+    .makahiki-box ();
+    height: 80px;
+    padding: 1px;
+    .background-gradient (fadeout(@pageinfobox-bkg-color-start, @pageinfobox-transparency) , fadeout(@pageinfobox-bkg-color-end, @pageinfobox-transparency));
+    position: relative;
+    z-index: 100;
+    color: @pageinfobox-font-color;
+}
+
+.top-border-radius (@radius: 5px) {
+    -webkit-border-top-left-radius: @radius;
+    -moz-border-radius-topleft: @radius;
+    border-top-left-radius: @radius;
+    -webkit-border-top-right-radius: @radius;
+    -moz-border-radius-topright: @radius;
+    border-top-right-radius: @radius;
+}
+
+.ui-dialog .ui-dialog-buttonpane {
+    text-align: center;
+}
+
+.ui-widget-overlay {
+    opacity: .75;
+    filter: Alpha(Opacity=75);
+}
+
+/*
+ * Ids!
+ */
+ 
 #canopy-about {
     padding: 5px 10px;
+}
+
+#feedbackModal.modal.fade.in , #successModal.modal.fade.in {
+    top: 10px;
 }
 
 #info-bar-single {
@@ -599,6 +580,36 @@ body {
     text-align: center;
 }
 
+#prizes-raffle-info {
+    font-weight: bold;
+    background: @widget-subtitle-bkg-color;
+    color: @widget-subtitle-font-color;
+    text-align: center;
+    padding: 8px 0;
+}
+
+#prizes-raffle-table .number {
+    color: @prizes-raffle-table;
+}
+
+#quest-details a {
+    color: @questbar-font-color;
+}
+
+/*
+ * Media queries
+ */
+
+@media (max-width: 979px) {
+    .navbar .nav > li > a , .navbar .dropdown-menu a {
+        color: @navbar-curr-path-font-color;
+    }
+
+    .navbar .nav > li > a:hover , .navbar .dropdown-menu a:hover {
+        background-color: transparent;
+    }
+}
+
 @media (max-width: 767px) {
     #info-bar-wide {
         .hidden;
@@ -612,16 +623,6 @@ body {
 
 @media (min-width: 641px) and (max-width: 979px) {
     .nav img {
-        display: none;
-    }
-}
-
-@media (min-width: 480px) and (max-width: 821px) {
-    .nav li a img {
-        display: none;
-    }
-
-    .nav li a:hover img {
         display: none;
     }
 }
@@ -676,6 +677,17 @@ body {
         margin: 0px;
     }
 }
+
+@media (min-width: 480px) and (max-width: 821px) {
+    .nav li a img {
+        display: none;
+    }
+
+    .nav li a:hover img {
+        display: none;
+    }
+}
+
 
 @import "widget-badges.less";
 @import "widget-canopy-members.less";
