@@ -1,3 +1,4 @@
+import tempfile
 import urllib2
 import simplejson as json
 
@@ -39,49 +40,6 @@ def _get_next(request):
     return next_req
 
 
-def get_facebook_photo(request):
-    """
-    Connect to Facebook to get the user's facebook photo..
-    """
-    if request.is_ajax():
-        fb_user = facebook.get_user_from_cookie(request.COOKIES,
-            settings.FACEBOOK_APP_ID, settings.FACEBOOK_SECRET_KEY)
-        fb_id = None
-        fb_error = None
-        if not fb_user:
-            return HttpResponse(json.dumps({
-                "error": "We could not access your info.  Please log in again."
-            }), mimetype="application/json")
-
-        try:
-            graph = facebook.GraphAPI(fb_user["access_token"])
-            graph_profile = graph.get_object("me")
-            fb_id = graph_profile["id"]
-        except facebook.GraphAPIError:
-            return HttpResponse(json.dumps({
-                "contents": "Facebook is not available at the moment, "
-                            "please try later",
-                }), mimetype='application/json')
-
-        # Insert the form into the response.
-        form = FacebookPictureForm(initial={
-            "facebook_photo":
-                "http://graph.facebook.com/%s/picture?type=large" % fb_id
-        })
-
-        response = render_to_string("avatar/avatar_facebook.html", {
-            "fb_error": fb_error,
-            "fb_id": fb_id,
-            "fb_form": form,
-            }, context_instance=RequestContext(request))
-
-        return HttpResponse(json.dumps({
-            "contents": response,
-            }), mimetype='application/json')
-
-    raise Http404
-
-
 def upload_fb(request):
     """Uploads the user's picture from Facebook."""
     if request.method == "POST":
@@ -114,6 +72,7 @@ def upload_fb(request):
                 reverse("profile_index") + "?changed_avatar=True")
 
     raise Http404
+
 
 SIZE_LIMIT = 1024 * 1024 * 2 # 2MB size limit
 
@@ -170,17 +129,8 @@ def change(request, extra_context=None, next_override=None):
             return HttpResponseRedirect(
                 reverse("profile_index") + "?changed_avatar=True")
 
-    fb_user = facebook.get_user_from_cookie(request.COOKIES,
+    fb_id = facebook.get_user_from_cookie(request.COOKIES,
         settings.FACEBOOK_APP_ID, settings.FACEBOOK_SECRET_KEY)
-    fb_id = None
-
-    if fb_user:
-        try:
-            graph = facebook.GraphAPI(fb_user["access_token"])
-            graph_profile = graph.get_object("me")
-            fb_id = graph_profile["id"]
-        except facebook.GraphAPIError:
-            pass
 
     fb_form = FacebookPictureForm(initial={
         "facebook_photo":

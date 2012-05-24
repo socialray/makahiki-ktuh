@@ -1,3 +1,6 @@
+<div id="fb-root"></div>
+<script src="//connect.facebook.net/en_US/all.js"></script>
+
 <div id="avatar-fb-form" style="display: none">
   <h4 style="margin-top: 0px">Use your picture from Facebook:</h4>
   <form action="{% url avatar_upload_fb %}" method="POST">
@@ -11,51 +14,35 @@
   <p id="avatar-fb-error" style='margin-top: 0'>
       Or, to use your Facebook picture,<br/>
       click here to log in:
-  </p> 
+  </p>
   <fb:login-button style="display: block"
                    id="fb_login" length="long">
   </fb:login-button>
 </div>
 
-<div id="fb-root"></div>
 <script>
-    window.fbAsyncInit = function() {
-      FB.init({
-        appId      : '{{FACEBOOK_APP_ID}}',
-        channelUrl : '//' + window.location.hostname + '/facebook/channel',
-        status     : true, 
-        cookie     : true,
-        xfbml      : true,
-        oauth      : true,
-      });
+    FB.init({
+        appId      : '{{ FACEBOOK_APP_ID }}',
+        status     : true, // check login status
+        cookie     : true, // enable cookies to allow the server to access the session
+        xfbml      : true  // parse XFBML
+    });
 
-      // listen for and handle auth.statusChange events
-      FB.Event.subscribe('auth.statusChange', function(response) {
+    // listen for and handle auth.statusChange events
+    FB.Event.subscribe('auth.statusChange', function(response) {
         if (response.authResponse) {
-          // user has auth'd your app and is logged into Facebook
-          FB.api('/me', function(me){
-            if (me.id) {
-              var pictureUrl = "http://graph.facebook.com/" + me.id + "/picture";
-              $("#avatar-fb-form img").attr("src", pictureUrl);
-              $("#id_facebook_photo").attr("value", pictureUrl);
-            }
-          });
-          
-          $("#avatar-fb-form").fadeIn();
-          $("#avatar-fb-login").fadeOut();
-        }
-      });
+            // user has auth'd your app and is logged into Facebook
+            FB.api('/me', function(me){
+                if (me.id) {
+                    var pictureUrl = "http://graph.facebook.com/" + me.id + "/picture";
+                    $("#avatar-fb-form img").attr("src", pictureUrl);
+                    $("#id_facebook_photo").attr("value", pictureUrl);
+                }
+            });
 
-      // respond to clicks on the login and logout links
-      document.getElementById('fb_login').addEventListener('click', function(){
-        FB.login();
-      });
-    };
-    (function(d){
-       var js, id = 'facebook-jssdk'; if (d.getElementById(id)) {return;}
-       js = d.createElement('script'); js.id = id; js.async = true;
-       js.src = "http://connect.facebook.net/en_US/all.js";
-       d.getElementsByTagName('head')[0].appendChild(js);
-     }(document));
+            $("#avatar-fb-form").fadeIn();
+            $("#avatar-fb-login").fadeOut();
+        }
+    });
+
 </script>
-  

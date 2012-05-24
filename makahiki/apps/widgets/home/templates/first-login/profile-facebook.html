@@ -1,57 +1,50 @@
-<div id="wizard-fb-form" style="display: none">
-  <p>
-      {{ form.use_fb_photo }} Use your Facebook photo
-  </p>
-  <img src="http://graph.facebook.com/{{fb_id}}/picture"/>
-  {{ form.facebook_photo }}
+
+{% if fb_id %}
+    <h4 style="margin-top: 0px">Use your picture from Facebook:</h4>
+    <img src="http://graph.facebook.com/{{fb_id}}/picture"/>
+    {{ form.facebook_photo }}
+{% else %}
+
+<div id="avatar-fb-form" style="display: none">
+    <h4 style="margin-top: 0px">Use your picture from Facebook:</h4>
+        <img src=""/>
+    {{ form.facebook_photo }}
+</div>
+<div id="avatar-fb-login">
+    <p id="avatar-fb-error" style='margin-top: 0'>
+        Or, to use your Facebook picture,
+        click here to log in:
+    </p>
+    <fb:login-button style="display: block"
+                     id="fb_login" length="long">
+    </fb:login-button>
 </div>
 
-<div id="wizard-fb-login">
-  <p id="profile-picture-fb-text">Or, to use your Facebook picture, click here to log in:</p>
-  <fb:login-button size="large"
-                   onlogin="Log.info('onlogin callback')">
-    Login with Facebook
-  </fb:login-button>
-</div>
+    <script>
+        FB.init({
+            appId      : '{{ FACEBOOK_APP_ID }}',
+            status     : true, // check login status
+            cookie     : true, // enable cookies to allow the server to access the session
+            xfbml      : true  // parse XFBML
+        });
 
-<div id="fb-root"></div>
-<script src="http://connect.facebook.net/en_US/all.js"></script>
-<script>
-  window.fbAsyncInit = function() {
-    FB.init({
-      appId  : {{FACEBOOK_APP_ID}},
-      status : true, // check login status
-      cookie : true, // enable cookies to allow the server to access the session
-      xfbml  : true,  // parse XFBML
-      oauth: true, // enable OAuth 2.0
-    });
-    
-    load();
-  }
-  
-  var load = function() {
-    if (typeof FB !== 'undefined') {
-      // listen for and handle auth.statusChange events
-      FB.Event.subscribe('auth.statusChange', function(response) {
-        if (response.authResponse) {
-          // user has auth'd your app and is logged into Facebook
-          FB.api('/me', function(me){
-            if (me.id) {
-              var pictureUrl = "http://graph.facebook.com/" + me.id + "/picture";
-              $("#wizard-fb-form img").attr("src", pictureUrl);
-              $("#id_facebook_photo").attr("value", pictureUrl);
+        // listen for and handle auth.statusChange events
+        FB.Event.subscribe('auth.statusChange', function(response) {
+            if (response.authResponse) {
+                // user has auth'd your app and is logged into Facebook
+                FB.api('/me', function(me){
+                    if (me.id) {
+                        var pictureUrl = "http://graph.facebook.com/" + me.id + "/picture";
+                        $("#avatar-fb-form img").attr("src", pictureUrl);
+                        $("#id_facebook_photo").attr("value", pictureUrl);
+                    }
+                });
+
+                $("#avatar-fb-form").fadeIn();
+                $("#avatar-fb-login").fadeOut();
             }
-          });
+        });
 
-          $("#wizard-fb-form").fadeIn();
-          $("#wizard-fb-login").fadeOut();
-        }
-      });
+    </script>
 
-      FB.XFBML.parse();
-    }
-  }
-  
-  load();
-   
-</script>
+{%  endif %}

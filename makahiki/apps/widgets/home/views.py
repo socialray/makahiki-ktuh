@@ -184,7 +184,6 @@ def profile_facebook(request):
 @login_required
 def setup_profile(request):
     """Display page 4 (profile) of the first login wizard."""
-
     if request.is_ajax():
         return _get_profile_form(request)
 
@@ -193,7 +192,6 @@ def setup_profile(request):
         form = ProfileForm(request.POST, user=request.user)
         profile = request.user.get_profile()
 
-        # print request
         if form.is_valid():
             profile.name = form.cleaned_data["display_name"].strip()
             if not profile.setup_profile:
@@ -212,16 +210,13 @@ def setup_profile(request):
                     primary=True,
                     avatar=path,
                 )
-                # print "saving avatar to " + path
                 avatar.avatar.storage.save(path, request.FILES['avatar'])
                 avatar.save()
 
-            elif form.cleaned_data["use_fb_photo"] and form\
-            .cleaned_data["facebook_photo"]:
+            elif form.cleaned_data["facebook_photo"]:
                 # Need to download the image from the url and save it.
                 photo_temp = NamedTemporaryFile(delete=True)
                 fb_url = form.cleaned_data["facebook_photo"]
-                # print fb_url
                 photo_temp.write(urllib2.urlopen(fb_url).read())
                 photo_temp.flush()
 
@@ -232,7 +227,6 @@ def setup_profile(request):
                     primary=True,
                     avatar=path,
                 )
-                # print "saving facebook photo to " + path
                 avatar.avatar.storage.save(path, File(photo_temp))
                 avatar.save()
 
@@ -247,27 +241,16 @@ def setup_profile(request):
 def _get_profile_form(request, form=None, non_xhr=False):
     """Helper method to render the profile form."""
     try:
-        fb_user = facebook.get_user_from_cookie(request.COOKIES,
+        fb_id = facebook.get_user_from_cookie(request.COOKIES,
                                                 settings.FACEBOOK_APP_ID,
                                                 settings.FACEBOOK_SECRET_KEY)
     except AttributeError:
-        fb_user = None
+        fb_id = None
 
-    fb_id = None
     facebook_photo = None
-    if fb_user:
-        try:
-            graph = facebook.GraphAPI(fb_user["access_token"])
-            graph_profile = graph.get_object("me")
-            fb_id = graph_profile["id"]
+    if fb_id:
             facebook_photo = "http://graph.facebook.com/%s/picture" \
-                             "?type=large" % fb_id
-        except facebook.GraphAPIError:
-            return HttpResponse(json.dumps({
-                "contents": "Facebook is not available at the moment, "
-                            "please try later",
-                }), mimetype='application/json')
-
+                             "?type=normal" % fb_id
     if not form:
         form = ProfileForm(initial={
             "display_name": request.user.get_profile().name,
