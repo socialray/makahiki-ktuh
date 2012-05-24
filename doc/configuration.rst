@@ -1,24 +1,31 @@
-Configuration and Customization
-===============================
+Configuration
+=============
 
-.. note:: When completed, this chapter will discuss: (a) The various
-          settings files and how to configure them; (b) How to define the
-          set of game elements in a challenge, and 
-          (c) How to customize the look-and-feel of the challenge.
+.. note:: When completed, this chapter will discuss: (a) setting the branding, 
+          (b) setting the displayed pages and widgets; (c) setting the 
+          authentication strategy; (d) configuring individual games (like the 
+          DEGG baseline, the SGG contents, the raffle game prizes, the top-scorer
+          prizes); (e) specifying round dates; (f) loading the users.
 
-Settings Files
---------------
 
-Makahiki includes a variety of settings files to support system, game,
-local, and page-level configuration, as documented further below:
+Developing a theme
+------------------
 
-.. toctree::
-   :maxdepth: 1
+Steps:
 
-   System configuration (settings.py) <configuration/settings.py>
-   Challenge configuration (challenge_settings.py) <configuration/challenge_settings.py>
-   Local configuration (local_settings.py) <configuration/local_settings.py>
-   Page configuration (page_settings.py) <configuration/page_settings.py>
+  * cd to makahiki/static/less
+  * copy theme-default.less to a new file named theme-<name>.less
+  * edit makahiki/settings.py to add your new theme to INSTALLED_THEMES.
+  * make sure MAKAHIKI_USE_LESS is True
+  * start the server.
+  * test your new theme by going to the profile page and changing your theme. 
+    Save your changes. you should see your new theme.
+  * Edit the theme-<name>.less file and reload the profile page. 
+  * Once happy with the theme compile it using scripts/compile_less.py.   
+    The script will compile all the theme-*.less files. 
+  * Add, Commit and Push the new theme files (.less and .css) and the 
+    updated settings.py. 
+
 
 
 
