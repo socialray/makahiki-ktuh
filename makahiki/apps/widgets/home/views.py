@@ -249,7 +249,7 @@ def _get_profile_form(request, form=None, non_xhr=False):
 
     facebook_photo = None
     if fb_id:
-            facebook_photo = "http://graph.facebook.com/%s/picture" \
+        facebook_photo = "http://graph.facebook.com/%s/picture" \
                              "?type=normal" % fb_id
     if not form:
         form = ProfileForm(initial={
