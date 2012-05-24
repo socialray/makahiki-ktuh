@@ -7,11 +7,6 @@
 {% block selected_icon %}selected-profile{% endblock %}
 
 {% block extra_head %}
-  {% if not MAKAHIKI_USE_LESS %}
-    <link rel="stylesheet" href="{{STATIC_URL}}css/profile.css">
-  {% else %}
-    <link rel="stylesheet/less" type="text/css" href="{{STATIC_URL}}less/profile.less">
-  {% endif %}
 {% endblock %}
 
 {% block body %}
@@ -19,7 +14,6 @@
         <div class="content-box-title">
             Badge Catalog
         </div>
-        <div class="content-box">
             <p class="centered">
               <a class="textlink" href="{% url profile_index %}">Back to profile</a>
             </p>
@@ -46,6 +40,5 @@
             <p class="centered">
               <a class="textlink" href="{% url profile_index %}">Back to profile</a>
             </p>
-        </div>
     </div>
 {% endblock %}

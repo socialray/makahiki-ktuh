@@ -1,4 +1,8 @@
-"""check energy goal command"""
+"""Invocation:  python manage.py update_energy_usage
+
+For each team, queries WattDepot server to find out cumulative energy usage from
+midnight to now. Used for updating the status of the Energy Goal Game."""
+
 import datetime
 
 from apps.managers.challenge_mgr.challenge_mgr import MakahikiBaseCommand

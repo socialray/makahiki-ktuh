@@ -1,4 +1,8 @@
-"""check energy goal command"""
+"""Invocation:  python manage.py check_energy_goal
+
+Checks whether or not each team made their energy goal, and awards points to team members if it's
+at the end of the day."""
+
 import datetime
 
 from django.core import management

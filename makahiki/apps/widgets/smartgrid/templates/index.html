@@ -15,10 +15,8 @@
                     <td>
                         <div class="activity-category">
                             <div class="get-started">
-                                <div class="">
-                                    <p></p>
-                                    <h5> {{ cat.name }}</h5>
-                                </div>
+                                <p></p>
+                                <h5> {{ cat.name }}</h5>
                             </div>
                         </div>
                     </td>
@@ -34,76 +32,73 @@
                                     <td>
                                         <div>
                                             <div class="{{task.type}}">
-                                                <div class="">
-                                                    {% if task.is_unlock %}
-                                                        <a href="{% url activity_task task.type task.slug %}"
-                                                           title="{{task.name}}">
-                                                            {% if task.type != 'commitment' %}
-                                                                {% if task.is_pau %}
-                                                                    {% if task.member.approval_status == "rejected" %}
+                                                {% if task.is_unlock %}
+                                                    <a href="{% url activity_task task.type task.slug %}"
+                                                       title="{{task.name}}">
+                                                        {% if task.type != 'commitment' %}
+                                                            {% if task.is_pau %}
+                                                                {% if task.member.approval_status == "rejected" %}
+                                                                    <img src="{{ STATIC_URL}}images/icons/icon-exclamation2.png"
+                                                                         width="12"
+                                                                         align="left"/>
+                                                                 {% else %}
+                                                                    {% if task.member.approval_status == "pending" and task.is_event_pau %}
                                                                         <img src="{{ STATIC_URL}}images/icons/icon-exclamation2.png"
                                                                              width="12"
                                                                              align="left"/>
-                                                                    {% else %}
-                                                                        {% if task.member.approval_status == "pending" and task.is_event_pau %}
-                                                                            <img src="{{ STATIC_URL}}images/icons/icon-exclamation2.png"
-                                                                                 width="12"
-                                                                                 align="left"/>
-                                                                        {% else %}
-                                                                            <img src="{{ STATIC_URL}}images/icons/icon-done.png"
-                                                                                 width="12"
-                                                                                 align="left"/>
-                                                                        {% endif %}
-                                                                    {% endif %}
-                                                                    <br/>
-                                                                    {{ task.name }}
-                                                                {% else %}
-                                                                    <br/>
-                                                                    {% if task.point_value %}
-                                                                        <h3>{{ task.point_value }}</h3>
-                                                                    {% else %}
-                                                                        <h3>{{ task.point_range_end }}</h3>
+                                                                     {% else %}
+                                                                         <img src="{{ STATIC_URL}}images/icons/icon-done.png"
+                                                                              width="12"
+                                                                              align="left"/>
                                                                     {% endif %}
                                                                 {% endif %}
+                                                                <br/>
+                                                                {{ task.name }}
                                                             {% else %}
-                                                                {# ------ is commitment #}
-                                                                {% if task.is_pau %}
-                                                                    {% if task.member.days_left != 0 or task.member.award_date %}
-                                                                        <img src="{{ STATIC_URL}}images/icons/icon-done.png"
-                                                                             width="12"
-                                                                             align="left">
-                                                                    {% else %}
-                                                                        <img src="{{ STATIC_URL}}images/icons/icon-exclamation2.png"
-                                                                             width="12"
-                                                                             align="left"/>
-                                                                    {% endif %}
-                                                                    <br/>
-                                                                    {{ task.name }}
-                                                                {% else %}
-                                                                    <br/>
+                                                                <br/>
+                                                                {% if task.point_value %}
                                                                     <h3>{{ task.point_value }}</h3>
-                                                                {% endif %} {# end task.is_pau #}
+                                                                {% else %}
+                                                                    <h3>{{ task.point_range_end }}</h3>
+                                                                {% endif %}
                                                             {% endif %}
-                                                            {# ------- end task.type #}
-                                                        </a>
-                                                    {% else %}        {# ------ is lock #}
-                                                        <br/>
-                                                        <a class="whatever"
-                                                           href="javascript:void(0);">
-                                                            <img src="{{ STATIC_URL}}images/lock24.png"
-                                                                 width="22" align="top"
-                                                                 title="Click to see how to unlock"
-                                                                 onclick="unlock_dialog('{{task.type}}','{{task.slug}}',
-                                                                         {% if task.depends_on_text %}
-                                                                             '{{task.depends_on_text}}'
-                                                                         {% else %}
-                                                                             '{{task.depends_on}}'
-                                                                         {% endif %}
-                                                                         )">
-                                                        </a>
-
-                                                    {% endif %}
-                                                </div>
+                                                        {% else %}
+                                                            {# ------ is commitment #}
+                                                            {% if task.is_pau %}
+                                                                {% if task.member.days_left != 0 or task.member.award_date %}
+                                                                    <img src="{{ STATIC_URL}}images/icons/icon-done.png"
+                                                                         width="12"
+                                                                         align="left">
+                                                                {% else %}
+                                                                    <img src="{{ STATIC_URL}}images/icons/icon-exclamation2.png"
+                                                                         width="12"
+                                                                         align="left"/>
+                                                                {% endif %}
+                                                                <br/>
+                                                                {{ task.name }}
+                                                            {% else %}
+                                                                <br/>
+                                                                <h3>{{ task.point_value }}</h3>
+                                                            {% endif %} {# end task.is_pau #}
+                                                        {% endif %}
+                                                        {# ------- end task.type #}
+                                                    </a>
+                                                {% else %}        {# ------ is lock #}
+                                                    <br/>
+                                                    <a class="whatever"
+                                                       href="javascript:void(0);">
+                                                        <img src="{{ STATIC_URL}}images/lock24.png"
+                                                             width="22" align="top"
+                                                             title="Click to see how to unlock"
+                                                             onclick="unlock_dialog('{{task.type}}','{{task.slug}}',
+                                                                     {% if task.depends_on_text %}
+                                                                         '{{task.depends_on_text}}'
+                                                                     {% else %}
+                                                                         '{{task.depends_on}}'
+                                                                     {% endif %}
+                                                                     )">
+                                                    </a>
+                                                {% endif %}
                                             </div>
                                         </div>
                                     </td>

@@ -189,7 +189,7 @@ of a scoring system that provides their own personal data?**
 (George) I prefer the idea of each player/team having an instance of a scoring system. Seems more "relational" and cuts down additional database queries.
 
 :mod:`apps.managers.challenge_mgr`
----------------------------------
+----------------------------------
 
 **10. Where should one specify the organizational logo that goes in the header bar?**
 

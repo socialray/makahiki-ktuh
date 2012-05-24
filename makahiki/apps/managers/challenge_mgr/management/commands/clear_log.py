@@ -1,11 +1,14 @@
-"""Command to clear all content in the makahiki log table."""
+"""Invocation:  python manage.py clear_log
+
+Clear all content in the Makahiki log table."""
+
 from apps.managers.log_mgr import log_mgr
 from apps.managers.challenge_mgr.challenge_mgr import MakahikiBaseCommand
 
 
 class Command(MakahikiBaseCommand):
     """command"""
-    help = 'clear all content in the makahiki cache.'
+    help = 'Clear all content in the makahiki log.'
 
     def handle(self, *args, **options):
         """handle clear log"""

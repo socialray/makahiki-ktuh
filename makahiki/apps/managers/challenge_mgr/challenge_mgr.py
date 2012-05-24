@@ -11,7 +11,7 @@ from django.core import management
 
 
 def init():
-    """initialize the challenge."""
+    """Initialize the challenge."""
 
     #if settings.DEBUG:
     #    import logging
@@ -37,10 +37,8 @@ def init():
 
 
 def create_admin_user():
-    """Create admin user.
-
-    Create the admin user if not exists. otherwise, reset the password to the ENV.
-    """
+    """Create the admin user.
+    Creates the admin user if it does not exist. Otherwise, reset the password to the ENV."""
     try:
         user = User.objects.get(username=settings.ADMIN_USER)
         if not user.check_password(settings.ADMIN_PASSWORD):
@@ -56,14 +54,14 @@ def create_admin_user():
 
 
 def info():
-    """returns the information about the challenge."""
+    """Returns the challenge name and site."""
     init()
     return "Challenge name : %s @ %s" % (settings.CHALLENGE.competition_name,
                                             settings.CHALLENGE.site_name)
 
 
 def rounds_info():
-    """returns the round info about the challenge."""
+    """Returns round info for this challenge."""
     init()
 
     info_str = ""
@@ -76,12 +74,12 @@ def rounds_info():
 
 
 def pages():
-    """returns all the page name in the challenge."""
+    """Returns a list of page names in this challenge."""
     return PageInfo.objects.all().values_list("name", flat=True)
 
 
 def has_points(user, points):
-    """returns True if the user has more than the specific points."""
+    """Returns True if the user has more than the specified points."""
     return user.get_profile().points() >= points
 
 
@@ -91,7 +89,7 @@ PAGE_PREDICATES = {
 
 
 def eval_page_unlock(user, page):
-    """Determine the unlock status of a task by dependency expression"""
+    """Returns True if the given page is unlocked based upon evaluation of its dependencies."""
     predicates = page.unlock_condition
     if not predicates:
         return False
@@ -100,7 +98,7 @@ def eval_page_unlock(user, page):
 
 
 def page_info(user):
-    """returns the page settings."""
+    """Returns a list of all pages with their current lock state."""
     all_pages = PageInfo.objects.all().order_by("priority")
     for page in all_pages:
         page.is_unlock = eval_page_unlock(user, page)
@@ -108,12 +106,12 @@ def page_info(user):
 
 
 def page_settings(page_name):
-    """return the page widget settings of the page."""
+    """Returns the page settings for the specified page."""
     return PageSettings.objects.filter(page__name=page_name, enabled=True)
 
 
 def register_page_widget(page_name, widget, label=None):
-    """ register the page and widget."""
+    """Register the page and widget."""
     if not label:
         label = page_name
     page, _ = PageInfo.objects.get_or_create(name=page_name, label=label)
@@ -121,12 +119,12 @@ def register_page_widget(page_name, widget, label=None):
 
 
 def available_widgets():
-    """returns all the available widgets for the challenge."""
+    """Returns a list of all the available widgets for the challenge."""
     return settings.INSTALLED_WIDGET_APPS
 
 
 def enabled_widgets():
-    """returns all the enabled widgets in the challenge."""
+    """Returns a list of all the enabled widgets in the challenge."""
     info_str = ""
     for p in PageSettings.objects.filter(enabled=True):
         info_str += p.name + " : " + p.widget + "\n"
@@ -143,7 +141,7 @@ def get_round_info(round_name=None):
 
 
 def get_current_round_info():
-    """Gets the current round and associated dates."""
+    """Returns the current round and associated dates, or None if not in a round."""
     rounds = get_round_info()
     today = datetime.datetime.today()
     for key in rounds.keys():
@@ -161,7 +159,7 @@ def get_current_round_info():
 
 
 def get_current_round():
-    """Get the current round name."""
+    """Return the current round name, or None if not in a round."""
     round_info = get_current_round_info()
     if round_info:
         return round_info["name"]
@@ -170,9 +168,7 @@ def get_current_round():
 
 
 def get_round(submission_date):
-    """Get the round that the specified date corresponds to.
-       :returns Overall if it doesn't correspond to anything.
-    """
+    """Return the round associated with the specified date, or else "Overall"."""
     rounds = settings.COMPETITION_ROUNDS
     # Find which round this belongs to.
     if rounds is not None:
@@ -186,19 +182,19 @@ def get_round(submission_date):
 
 
 def in_competition():
-    """Returns true if we are still in the competition."""
+    """Return True if we are currently in the competition."""
     today = datetime.datetime.today()
     return settings.COMPETITION_START < today and today < settings.COMPETITION_END
 
 
 class MakahikiBaseCommand(management.base.BaseCommand):
-    """The base class for Makahiki command. It is to be used when the init method of the
-    challenge_mgr need to be called."""
+    """The base class for Makahiki command. Used when the init method of the
+    challenge_mgr is called."""
     def __init__(self, *args, **kwargs):
-        """initiailze the challenge_mgr."""
+        """Initialize the challenge_mgr."""
         init()
         super(MakahikiBaseCommand, self).__init__(*args, **kwargs)
 
     def handle(self, *args, **options):
-        """handle the command. should be override by sub class."""
+        """Handle the command. Should be overridden by sub class."""
         pass

@@ -1,8 +1,11 @@
 #!/usr/bin/python
 
-"""Compiles the less styles into CSS.
+"""Invocation: compile_less.py [-v | --verbose]
 
-Compiles all the themes and individual page style sheets."""
+Compiles all of the LESS style files into CSS.
+
+Compiles all the themes and individual page style sheets, creating CSS files for each theme
+containing all necessary definitions."""
 
 import os
 import glob
@@ -22,8 +25,8 @@ def main(argv):
         if opt in ("-v", "--verbose"):
             verbose = 1
 
-    page_names = ['advanced', 'energy', 'help', 'home', 'landing', 'learn',
-                  'news', 'profile', 'status', 'win']
+    page_names = ['landing',
+                  'status']
     less_path = "static/less"
     os.chdir(less_path)
     theme_names = glob.glob('theme-*.less')

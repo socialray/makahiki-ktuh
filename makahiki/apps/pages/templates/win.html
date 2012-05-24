@@ -7,11 +7,6 @@
 {% block selected_icon %}selected-win{% endblock %}
 
 {% block extra_head %}
-    {% if not MAKAHIKI_USE_LESS %}
-    <link rel="stylesheet" href="{{STATIC_URL}}css/win.css">
-    {% else %}
-    <link rel="stylesheet/less" type="text/css" href="{{STATIC_URL}}less/win.less">
-    {% endif %}
 {% endblock %}
 
 {% block body %}
@@ -19,10 +14,8 @@
         <div class="row-fluid">
             <!-- left column -->
             <div class="span6">
-                {% if view_objects.prizes %}
-                <div class="row-fluid">
-                    {% include "widgets/prizes/templates/index.html" %}
-                </div>
+                {% if view_objects.prizes %} 
+                    {% include "widgets/prizes/templates/index.html" %} 
                 {% endif %}
             </div>
             <!-- right column -->

@@ -7,11 +7,6 @@
 {% block selected_icon %}selected-news{% endblock %}
 
 {% block extra_head %}
-    {% if not MAKAHIKI_USE_LESS %}
-    <link rel="stylesheet" href="{{STATIC_URL}}css/news.css">
-    {% else %}
-    <link rel="stylesheet/less" type="text/css" href="{{STATIC_URL}}less/news.less">
-    {% endif %}
     <script src="{{STATIC_URL}}js/news.js" type="text/javascript"></script>
     <script src="{{STATIC_URL}}js/wall-post.js" type="text/javascript"></script>
 {% endblock %}

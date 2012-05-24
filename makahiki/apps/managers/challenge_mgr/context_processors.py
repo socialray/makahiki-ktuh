@@ -57,7 +57,7 @@ def competition(request):
 
 
 def _get_default_view_objects(request):
-    """load default widgets view objects for all pages."""
+    """Load the default widgets view objects for all pages."""
 
     default_view_objects = {}
     for widget in settings.INSTALLED_DEFAULT_WIDGET_APPS:

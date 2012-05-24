@@ -7,11 +7,6 @@
 {% block selected_icon %}selected-learn{% endblock %}
 
 {% block extra_head %}
-  {% if not MAKAHIKI_USE_LESS %}
-    <link rel="stylesheet" href="{{STATIC_URL}}css/learn.css">
-  {% else %}
-    <link rel="stylesheet/less" type="text/css" href="{{STATIC_URL}}less/learn.less">
-  {% endif %}
 {% endblock %}
 
 {% block body %}

@@ -1,4 +1,9 @@
-"""Pick the raffle prize winners."""
+"""Invocation:  python manage.py pick_winners
+
+Picks the raffle game winners for the raffle deadline that has passed.
+Sends an email to the user notifying them that they are a winner.
+Confirms the raffle pick choice with the admin via command line prompt prior to sending."""
+
 import random
 from django.core import management
 from apps.managers.challenge_mgr import challenge_mgr
@@ -11,9 +16,7 @@ class Command(management.base.BaseCommand):
     help = 'Picks winners for raffle deadlines that have passed.'
 
     def handle(self, *args, **options):
-        """
-        Picks winners for raffle deadlines that have passed.
-        """
+        """Picks winners for raffle deadlines that have passed."""
         round_name = challenge_mgr.get_current_round_info()["name"]
         self.stdout.write("Picking winners for %s prizes\n" % round_name)
         self.__pick_winners(RafflePrize.objects.filter(round_name=round_name,

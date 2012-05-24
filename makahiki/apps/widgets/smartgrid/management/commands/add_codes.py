@@ -1,4 +1,6 @@
-"""Add a confirmation code."""
+"""Invocation:  python manage.py add_codes <num_codes> <slug1> <slug2> ...
+
+Generates (additional) confirmation codes for the activities with the specified IDs."""
 
 from django.core import management
 
