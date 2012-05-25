@@ -21,6 +21,8 @@ state_pairs = [("teams.group teams.team", "base_teams"),
 
 
 def main():
+    """main"""
+
     # Ensure dump_dir/ exists, creating it if not found.
     dump_dir = os.path.dirname("dumped_data/")
     if not os.path.exists(dump_dir):

@@ -130,7 +130,7 @@ def change(request, extra_context=None, next_override=None):
                 reverse("profile_index") + "?changed_avatar=True")
 
     fb_id = facebook.get_user_from_cookie(request.COOKIES,
-        settings.FACEBOOK_APP_ID, settings.FACEBOOK_SECRET_KEY)
+        settings.MAKAHIKI_FACEBOOK_APP_ID, settings.MAKAHIKI_FACEBOOK_SECRET_KEY)
 
     fb_form = FacebookPictureForm(initial={
         "facebook_photo":

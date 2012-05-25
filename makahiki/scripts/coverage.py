@@ -8,6 +8,7 @@ import os
 
 
 def main():
+    """main"""
     os.system("coverage erase")
     os.system("python manage.py clean_pyc")
     os.system("coverage run --source=apps manage.py test")
