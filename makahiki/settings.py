@@ -428,8 +428,8 @@ MAKAHIKI_SECRET_KEY = env('MAKAHIKI_SECRET_KEY', '')
 See https://docs.djangoproject.com/en/dev/ref/settings/#secret-key"""
 SECRET_KEY = MAKAHIKI_SECRET_KEY
 
-"""[Required if use Facebook] App ID required for Facebook integration."""
+
 MAKAHIKI_FACEBOOK_APP_ID = env('MAKAHIKI_FACEBOOK_APP_ID', '')
-"""[Required if use Facebook] App ID required for Facebook integration."""
+"""[Required if using Facebook] App ID required for Facebook integration."""
 MAKAHIKI_FACEBOOK_SECRET_KEY = env('MAKAHIKI_FACEBOOK_SECRET_KEY', '')
-"""[Required] Secret key required for Facebook integration."""
+"""[Required if using Facebook] Secret key required for Facebook integration."""
