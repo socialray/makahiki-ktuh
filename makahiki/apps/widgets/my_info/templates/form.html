@@ -18,11 +18,11 @@
                 <td colspan="2">{{ form.display_name.errors }}</td>
             </tr>
         {% endif %}
-        <tr>
+        <tr class="profile-section">
             <td class="profile-form-label">{{ form.display_name.label_tag }}</td>
             <td>{{ form.display_name }}</td>
         </tr>
-        <tr>
+        <tr class="profile-section">
             <td class="profile-form-label"><label
                     for="picture">Picture</label></td>
             <td>
@@ -30,7 +30,7 @@
                 <a href="{% url avatar_change %}" style="padding-left: 15px">change picture</a>
             </td>
         </tr>
-        <tr>
+        <tr class="profile-section">
             <td class="profile-form-label">{{ form.theme.label_tag }}</td>
             <td>{{ form.theme }}</td>
         </tr>
@@ -44,7 +44,7 @@
                 <td colspan="2">{{ form.contact_email.errors }}</td>
             </tr>
         {% endif %}
-        <tr>
+        <tr class="profile-section">
             <td class="profile-form-label"><label
                     for="id_event_email">Email</label></td>
             <td>{{ form.contact_email }}</td>
@@ -54,7 +54,7 @@
                 <td colspan="2">{{ form.contact_text.errors }}{{ form.contact_carrier.errors }}</td>
             </tr>
         {% endif %}
-        <tr >
+        <tr class="profile-section">
             <td class="profile-form-label">         <label for="id_event_text">Text</label>
             </td>
             <td>

@@ -8,7 +8,7 @@
   </a>
 </div> 
   <!--Current & Pending-->
-  <h5>Current and Pending</h5>
+  <h4 class="content-box-subtitle">Current and Pending</h4>
   {% if view_objects.my_achievements.in_progress_members %}
       {% include "in_progress_members.html" %}
   {% else %}
@@ -16,7 +16,7 @@
           progress or pending.</p>
   {% endif %}
   <!--Previously Awarded-->
-  <h5>Previously Awarded</h5>
+  <h4 class="content-box-subtitle">Previously Awarded</h4>
   {% if view_objects.my_achievements.points_logs %}
       <table>
           <tr >

@@ -149,10 +149,6 @@ h6 {
     color: @black;
 }
 
-input , select , textarea , .uneditable-input {
-    width: 80%;
-}
-
 legend {
     border: none;
     line-height: 19.5pt;
@@ -162,6 +158,9 @@ table , tr {
     width: 100%;
 }
 
+table.activities-grid-legend {
+    width: auto;
+}
 td , h5 {
     padding: 4px;
     vertical-align: middle;
@@ -296,6 +295,11 @@ ul {
 .content-box-contents {
     padding-left: @gridGutterWidth;
     padding-right: @gridGutterWidth;
+}
+
+.content-box-subtitle {
+    background: @widget-subtitle-bkg-color;
+    color: @widget-subtitle-font-color;    
 }
 
 .content-box-title {
@@ -483,6 +487,15 @@ ul {
     color: @widget-subtitle-font-color;
 }
 
+.profile-section {
+    background-color: darken(@widget-text-area-bkg-color, 20%);
+}
+
+.profile-section-header {
+    font-weight: bold;
+    text-align: left;
+}
+
 .quest-box {
     .makahiki-box ();
     .background-gradient (fadeout(@questbar-bkg-color-start, @questbar-transparency) , fadeout(@questbar-bkg-color-end, @questbar-transparency));
@@ -552,7 +565,10 @@ ul {
 /*
  * Ids!
  */
- 
+
+#avatar-change-content .btn {
+    vertical-align: top;
+} 
 #canopy-about {
     padding: 5px 10px;
 }
