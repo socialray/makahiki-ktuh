@@ -28,15 +28,15 @@ def main(argv):
     if verbose == 1:
         print "running pep8"
     pep8_command = os.path.join("scripts", "run_pep8.sh")
-    pep8_status = os.system(pep8_command)
-    if pep8_status:
+    status = os.system(pep8_command)
+    if status:
         sys.exit(1)
 
     if verbose == 1:
         print "running pylint"
     pylint_command = os.path.join("scripts", "run_pylint.sh")
-    pylint_status = os.system(pylint_command)
-    if pylint_status:
+    status = os.system(pylint_command)
+    if status:
         sys.exit(1)
 
     if verbose == 1:
@@ -45,10 +45,15 @@ def main(argv):
 
     if verbose == 1:
         print "running tests"
-    tests_status = os.system("python manage.py test")
-    if tests_status:
+    status = os.system("python manage.py test")
+    if status:
         sys.exit(1)
 
+    if verbose == 1:
+        print "building docs"
+    status = os.system("pushd .; cd ../doc; make clean html; popd;")
+    if status:
+        sys.exit(1)
 
 if __name__ == '__main__':
     main(sys.argv[1:])

@@ -323,25 +323,30 @@ COMPETITION_ROUNDS = None
 env = lambda e, d: os.environ[e] if e in os.environ else d
 
 # DB settings
+MAKAHIKI_USE_HEROKU = env('MAKAHIKI_USE_HEROKU', '').lower() == "true"
+"""[Optional] If "true", use Heroku hosting, Otherwise, use local hosting."""
+
 MAKAHIKI_DATABASE_URL = env('MAKAHIKI_DATABASE_URL', '')
-"""[Required] Specify the Database URL.
+"""[Required if MAKAHIKI_USE_HEROKU is not true] Specify the Database URL.
 Example: postgres://db_user_name:passwd@db_host:db_port/db_name"""
-if MAKAHIKI_DATABASE_URL:
-    urlparse.uses_netloc.append('postgres')
-    url = urlparse.urlparse(MAKAHIKI_DATABASE_URL)
-    if url.scheme == 'postgres':
-        DATABASES = {'default': {
-            'ENGINE': 'django.db.backends.postgresql_psycopg2',
-            'NAME': url.path[1:],
-            'USER': url.username,
-            'PASSWORD': url.password,
-            'HOST': url.hostname,
-            'PORT': url.port,
-            }}
-else:
-    if 'READTHEDOCS' not in os.environ:
-        print "Environment variable MAKAHIKI_DATABASE_URL not defined. Exiting."
-        sys.exit(1)
+
+if not MAKAHIKI_USE_HEROKU:
+    if MAKAHIKI_DATABASE_URL:
+        urlparse.uses_netloc.append('postgres')
+        url = urlparse.urlparse(MAKAHIKI_DATABASE_URL)
+        if url.scheme == 'postgres':
+            DATABASES = {'default': {
+                'ENGINE': 'django.db.backends.postgresql_psycopg2',
+                'NAME': url.path[1:],
+                'USER': url.username,
+                'PASSWORD': url.password,
+                'HOST': url.hostname,
+                'PORT': url.port,
+                }}
+    else:
+        if 'READTHEDOCS' not in os.environ:
+            print "Environment variable MAKAHIKI_DATABASE_URL not defined. Exiting."
+            sys.exit(1)
 
 # Admin info Settings
 MAKAHIKI_ADMIN_INFO = env('MAKAHIKI_ADMIN_INFO', '')
@@ -358,7 +363,7 @@ else:
 
 # email Settings
 MAKAHIKI_EMAIL_INFO = env('MAKAHIKI_EMAIL_INFO', '')
-"""[Required]  Specify the email host user and password.
+"""[Required if enabling email]  Specify the email host user and password.
 Example:  kukuicup@gmail.com:changeme"""
 if MAKAHIKI_EMAIL_INFO:
     email_info = MAKAHIKI_EMAIL_INFO.split(":")
@@ -427,7 +432,6 @@ MAKAHIKI_SECRET_KEY = env('MAKAHIKI_SECRET_KEY', '')
 """[Optional]  Specifies the Django secret key setting.
 See https://docs.djangoproject.com/en/dev/ref/settings/#secret-key"""
 SECRET_KEY = MAKAHIKI_SECRET_KEY
-
 
 MAKAHIKI_FACEBOOK_APP_ID = env('MAKAHIKI_FACEBOOK_APP_ID', '')
 """[Required if using Facebook] App ID required for Facebook integration."""
