@@ -9,7 +9,7 @@ from apps.widgets.smartgrid import smartgrid
 
 
 def supply(request, page_name):
-    """base view supply is not used. The child widget view supply should call resource_supply."""
+    """Base view supply is not used. The child widget view supply should call resource_supply."""
     _ = request
     _ = page_name
     return {}

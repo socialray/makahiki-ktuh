@@ -13,6 +13,7 @@ Package: apps.managers
    Challenge Manager <packages/challenge_mgr>
    Log Manager <packages/log_mgr>
    Player Manager <packages/player_mgr>
+   Resource Manager <packages/resource_mgr>
    Score Manager <packages/score_mgr>
    Team Manager <packages/team_mgr>
 
@@ -36,6 +37,7 @@ Package: apps.widgets
    Prizes widget <packages/prizes>
    Quests widget <packages/quests>
    Raffle widget <packages/raffle>
+   Resource goal widget <packages/resource_goal>
    Scoreboard widget <packages/scoreboard>
    Smart Grid Game widget <packages/smartgrid>
    Team Members widget <packages/team_members>

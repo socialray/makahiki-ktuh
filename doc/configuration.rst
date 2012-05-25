@@ -22,7 +22,7 @@ Steps:
     Save your changes. you should see your new theme.
   * Edit the theme-<name>.less file and reload the profile page. 
   * Once happy with the theme compile it using scripts/compile_less.py.   
-    The script will compile all the theme-*.less files. 
+    The script will compile all the theme-`*`.less files. 
   * Add, Commit and Push the new theme files (.less and .css) and the 
     updated settings.py. 
 
