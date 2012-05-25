@@ -16,11 +16,11 @@ Steps:
   * cd to makahiki/static/less
   * copy theme-default.less to a new file named theme-<name>.less
   * edit makahiki/settings.py to add your new theme to INSTALLED_THEMES.
-  * make sure MAKAHIKI_USE_LESS is True
+  * set both MAKAHIKI_USE_LESS and MAKAHIKI_DEBUG to True
   * start the server.
   * test your new theme by going to the profile page and changing your theme. 
     Save your changes. you should see your new theme.
-  * Edit the theme-<name>.less file and reload the profile page. 
+  * Edit and save the theme-<name>.less file, then reload the page to see the change.
   * Once happy with the theme compile it using scripts/compile_less.py.   
     The script will compile all the theme-`*`.less files. 
   * Add, Commit and Push the new theme files (.less and .css) and the 
