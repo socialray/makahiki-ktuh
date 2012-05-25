@@ -1,0 +1,112 @@
+/*
+ * One of the Makahiki2 styles. Based upon the Eldon theme.
+ * 
+ * Copyright 2012 CSDL.
+ * 
+ * Uses Twitter Bootstrap v2.
+ */
+ 
+// makahiki base style
+@import "makahiki.less";
+
+// Bootstrap color variables
+@black:                 #000;
+@grayDarker:            #222;
+@grayDark:              #333;
+@gray:                  #555;
+@grayLight:             #999;
+@grayLighter:           #eee;
+@white:                 #fff;
+@blue:                  #049cdb;
+@blueDark:              #0064cd;
+@green:                 #46a546;
+@red:                   #9d261d;
+@yellow:                #ffc40d;
+@orange:                #f89406;
+@pink:                  #c3325f;
+@purple:                #7a43b6;
+
+// Theme specific colors
+@steelBlue: #2B93AD;
+@lightSteelBlue: #C1D8EB;
+@darkerSteelBlue: #A2C0D2;
+@lightPaleBlue: #E0FFFF;
+@skyBlue: #4F95CD;
+@brightBlue: #0066FF;
+@lighterBrightBlue: #2D76FE;
+@veryDarkBlueBlack: #24333B;
+@lightGrayBlue: #b6d7ee;
+@darkGreen: #468250;
+@lightCyan: #E3F9F8;
+@blueCyan: #00CCFF;
+@darkTan: #C18E22;
+
+// Theme stylable elements
+// every page
+@page-bkg-color: @steelBlue; 
+@page-bkg-image: "../images/bubbles.jpg";
+@page-logo: "../images/icons/icon-uh-logo.png"; 
+@page-font-color: @black;
+@page-link-color: @blueDark;
+// Questbar
+@questbar-bkg-color-start: @darkGreen;
+@questbar-bkg-color-end: @darkGreen;
+@questbar-font-color: @black;
+@questbar-transparency: 55%;
+// Navbar
+@navbar-bkg-color-start: @brightBlue;
+@navbar-bkg-color-end: darken(@navbar-bkg-color-start, 10%);
+@navbar-font-color: @white;
+@navbar-curr-page-bkg-color: @navbar-bkg-color-end;
+@navbar-curr-path-font-color: @black;
+@navbar-transparency: 20%;
+// Infobar
+@infobar-bkg-color-start: @lightPaleBlue;
+@infobar-bkg-color-end: @skyBlue;
+@infobar-font-color: @black;
+//@infobar-feedback-bkg-color: @darkerSteelBlue; // bootstrap buttons do not like this
+@infobar-feedback-font-color: @black;
+@infobar-transparency: 55%;
+// Notifications
+@notification-bkg-color-start: @lightGrayBlue;
+@notification-bkg-color-end: @lightGrayBlue;
+@notification-font-color: @black;
+@notification-transparency: 45%;
+// Modal dialog box
+@modal-title-bkg-color-start: @skyBlue;
+@modal-title-bkg-color-end: @skyBlue;
+@modal-title-font-color: @black;
+@modal-body-bkg-color: @lightSteelBlue;
+@modal-body-font-color: @black;
+// Page infobox
+@pageinfobox-bkg-color-start: @white;
+@pageinfobox-bkg-color-end: @white;
+@pageinfobox-font-color: @black;
+@pageinfobox-transparency: 20%;
+// Widgets
+@widget-title-bkg-color-start: @skyBlue;
+@widget-title-bkg-color-end: darken(@skyBlue, 25%);
+@widget-title-font-color: @black;
+@widget-title-transparency: 0%;
+@widget-body-bkg-color: @lightSteelBlue; 
+@widget-body-font-color: @black;
+@widget-body-transparency: 0%;
+@widget-button-bkg-color: darken(@widget-body-bkg-color, 50%);
+@widget-button-font-color: @widget-body-bkg-color; 
+@widget-table-row-color-1: @widget-body-bkg-color;
+@widget-table-row-color-2: lighten(@widget-body-bkg-color, 40%);
+@widget-subtitle-bkg-color: @darkerSteelBlue;
+@widget-subtitle-font-color: @black;
+@widget-text-area-bkg-color: @white;
+@widget-text-area-font-color: @grayDarker;
+// Smart grid game
+@sgg-header-bkg-color: @skyBlue;
+@sgg-header-font-color: @black; 
+@sgg-entry-font-color: @black;
+@sgg-activity-cell-bkg-color: @brightBlue;
+@sgg-commitment-cell-bkg-color: @lighterBrightBlue;  
+@sgg-event-cell-bkg-color: @blueCyan;   
+@sgg-excursion-cell-bkg-color: @white;
+@sgg-special-cell-bkg-color: @darkTan;
+
+@prizes-raffle-table: @green;

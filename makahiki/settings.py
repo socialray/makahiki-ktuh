@@ -208,6 +208,7 @@ INSTALLED_APPS += ('south', 'django_nose',)
 INSTALLED_THEMES = (
     'theme-default',
     'theme-wave',
+    'theme-united',
 )
 
 ################
