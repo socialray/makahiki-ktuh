@@ -30,9 +30,11 @@
         </form>
       </div>
       <!--Avatar-Facebook-->
-      <div class="span3 offset1 avatar-box"
-        {% include "avatar/avatar_facebook.html" %}
-      </div>
+      {% if CHALLENGE.use_facebook %}
+        <div class="span3 offset1 avatar-box"
+          {% include "avatar/avatar_facebook.html" %}
+        </div>
+      {% endif %}
     </div>
     <div style="clear: both"></div>
   </div>

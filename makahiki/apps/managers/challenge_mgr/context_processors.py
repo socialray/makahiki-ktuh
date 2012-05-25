@@ -43,7 +43,7 @@ def competition(request):
         "CHALLENGE": settings.CHALLENGE,
         "CSS_THEME": css_theme,
         "TEAM_LABEL": settings.CHALLENGE.competition_team_label,
-        "FACEBOOK_APP_ID": settings.FACEBOOK_APP_ID,
+        "MAKAHIKI_FACEBOOK_APP_ID": settings.MAKAHIKI_FACEBOOK_APP_ID,
         "MAKAHIKI_USE_LESS": settings.MAKAHIKI_USE_LESS,
         "CURRENT_ROUND_INFO": challenge_mgr.get_current_round_info(),
         "IN_COMPETITION": challenge_mgr.in_competition(),

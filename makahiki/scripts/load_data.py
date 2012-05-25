@@ -4,7 +4,7 @@
 
 Loads the default configuration of data into makahiki.
 
-Note: when the system is stable, could simply run python manage.py loaddata fixtures/* 
+Note: when the system is stable, could simply run python manage.py loaddata fixtures/*
 """
 
 import os
@@ -23,6 +23,7 @@ def main():
     os.system("python manage.py loaddata %s" % os.path.join(fixture_path, "test_teams.json"))
     os.system("python manage.py loaddata %s" % os.path.join(fixture_path, "test_prizes.json"))
     os.system("python manage.py loaddata %s" % os.path.join(fixture_path, "test_users.json"))
+
 
 if __name__ == '__main__':
     main()

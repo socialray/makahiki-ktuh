@@ -24,7 +24,7 @@ class LoggingMiddleware(object):
             request.path) or request.path in URL_FILTER:
             return response
 
-        log_mgr.write_log_entry(request=request, response=response)
+        log_mgr.write_log_entry(request=request, response_status_code=response.status_code)
 
         return response
 
@@ -36,4 +36,4 @@ def log_request_exception(sender, **kwargs):
     _ = sender
     exception = traceback.format_exc()
     request = kwargs["request"]
-    log_mgr.write_log_entry(request=request, exception=exception)
+    log_mgr.write_log_entry(request=request, response_status_code=500, exception=exception)
