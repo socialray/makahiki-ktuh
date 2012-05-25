@@ -17,7 +17,7 @@ Steps:
   * copy theme-default.less to a new file named theme-<name>.less
   * edit makahiki/settings.py to add your new theme to INSTALLED_THEMES.
   * set both MAKAHIKI_USE_LESS and MAKAHIKI_DEBUG to True
-  * start the server.
+  * start the server using "manage.py runserver" (not run_gunicorn)
   * test your new theme by going to the profile page and changing your theme. 
     Save your changes. you should see your new theme.
   * Edit and save the theme-<name>.less file, then reload the page to see the change.

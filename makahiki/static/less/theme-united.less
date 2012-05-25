@@ -41,72 +41,88 @@
 @blueCyan: #00CCFF;
 @darkTan: #C18E22;
 
+//United colors
+@united-grey: #484F5B;
+@united-lightblue: #6A8BBD;
+@united-blue: #005BFF;
+@united-white: #DFDBD9;
+@united-gold: #C7A56E;
+
 // Theme stylable elements
 // every page
-@page-bkg-color: @skyBlue; 
+// Issue: can we support gradients for page-bkg-color?
+@page-bkg-color: @united-gold; 
 @page-bkg-image: "";
 @page-logo: "../images/icons/icon-uh-logo.png"; 
 @page-font-color: @black;
-@page-link-color: @blueDark;
+@page-link-color: @black;
 // Questbar
-@questbar-bkg-color-start: @darkGreen;
-@questbar-bkg-color-end: @darkGreen;
+@questbar-bkg-color-start: @united-grey;
+@questbar-bkg-color-end: lighten(@united-grey, 40%);
 @questbar-font-color: @black;
 @questbar-transparency: 55%;
-// Navbar
-@navbar-bkg-color-start: @brightBlue;
-@navbar-bkg-color-end: darken(@navbar-bkg-color-start, 10%);
-@navbar-font-color: @white;
+// Issue: Navbar start-end is bottom to top, not top to bottom.
+// Issue: why does debug mode enable page refresh changes?
+@navbar-bkg-color-start: @united-blue;
+@navbar-bkg-color-end: lighten(@navbar-bkg-color-start, 30%);
+@navbar-font-color: @united-white;
 @navbar-curr-page-bkg-color: @navbar-bkg-color-end;
-@navbar-curr-path-font-color: @black;
-@navbar-transparency: 20%;
+@navbar-curr-path-font-color: @united-gold;
+@navbar-transparency: 70%;
 // Infobar
-@infobar-bkg-color-start: @lightPaleBlue;
-@infobar-bkg-color-end: @skyBlue;
+@infobar-bkg-color-start: lighten(@united-grey, 20%);
+@infobar-bkg-color-end: lighten(@united-grey, 50%);
 @infobar-font-color: @black;
-//@infobar-feedback-bkg-color: @darkerSteelBlue; // bootstrap buttons do not like this
 @infobar-feedback-font-color: @black;
-@infobar-transparency: 55%;
+@infobar-transparency: 0%;
 // Notifications
 @notification-bkg-color-start: @lightGrayBlue;
 @notification-bkg-color-end: @lightGrayBlue;
 @notification-font-color: @black;
 @notification-transparency: 45%;
-// Modal dialog box
-@modal-title-bkg-color-start: @skyBlue;
-@modal-title-bkg-color-end: @skyBlue;
+// Modal dialog box 
+// Issue: Remind Me dialog not styled via these variables.
+@modal-title-bkg-color-start: @united-gold;
+@modal-title-bkg-color-end: lighten(@united-gold, 30%);
 @modal-title-font-color: @black;
-@modal-body-bkg-color: @lightSteelBlue;
+@modal-body-bkg-color: @united-lightblue;
 @modal-body-font-color: @black;
 // Page infobox
-@pageinfobox-bkg-color-start: @white;
-@pageinfobox-bkg-color-end: @white;
+@pageinfobox-bkg-color-start: @united-gold;
+@pageinfobox-bkg-color-end: @united-white;
 @pageinfobox-font-color: @black;
 @pageinfobox-transparency: 20%;
 // Widgets
-@widget-title-bkg-color-start: @skyBlue;
-@widget-title-bkg-color-end: darken(@skyBlue, 25%);
+@widget-title-bkg-color-start: lighten(@united-grey, 20%);
+@widget-title-bkg-color-end: lighten(@united-grey, 50%);
 @widget-title-font-color: @black;
 @widget-title-transparency: 0%;
-@widget-body-bkg-color: @lightSteelBlue; 
+@widget-body-bkg-color: lighten(@united-grey, 60%); 
 @widget-body-font-color: @black;
 @widget-body-transparency: 0%;
 @widget-button-bkg-color: darken(@widget-body-bkg-color, 50%);
 @widget-button-font-color: @widget-body-bkg-color; 
 @widget-table-row-color-1: @widget-body-bkg-color;
 @widget-table-row-color-2: lighten(@widget-body-bkg-color, 40%);
-@widget-subtitle-bkg-color: @darkerSteelBlue;
+@widget-subtitle-bkg-color: lighten(@widget-title-bkg-color-start, 20%);
 @widget-subtitle-font-color: @black;
-@widget-text-area-bkg-color: @white;
-@widget-text-area-font-color: @grayDarker;
-// Smart grid game
-@sgg-header-bkg-color: @skyBlue;
-@sgg-header-font-color: @black; 
-@sgg-entry-font-color: @black;
-@sgg-activity-cell-bkg-color: @brightBlue;
-@sgg-commitment-cell-bkg-color: @lighterBrightBlue;  
-@sgg-event-cell-bkg-color: @blueCyan;   
-@sgg-excursion-cell-bkg-color: @white;
-@sgg-special-cell-bkg-color: @darkTan;
 
-@prizes-raffle-table: @green;
+@widget-text-area-bkg-color: @united-white;
+@widget-text-area-font-color: @black;
+
+// Smart grid game
+@sgg-header-bkg-color: lighten(@united-gold, 10%);
+// Issue: following variable does not work. 
+@sgg-header-font-color: @united-blue;
+@sgg-entry-font-color: @black;
+@sgg-activity-cell-bkg-color: lighten(@united-blue, 15%);
+@sgg-commitment-cell-bkg-color: @united-lightblue;  
+@sgg-event-cell-bkg-color: darken(@united-white, 10%);   
+@sgg-excursion-cell-bkg-color: @united-gold;
+@sgg-special-cell-bkg-color: @united-grey;
+
+@prizes-raffle-table: @united-blue;
+// Issue: need to override prize (link) style 
+// Issue: need to make change button color changable.
+
+//Issue: Manual DEGG does not state what the goal is (for water)
