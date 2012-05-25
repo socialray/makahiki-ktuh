@@ -1,15 +1,12 @@
-import tempfile
 import urllib2
-import simplejson as json
 
 from apps.lib.avatar.models import Avatar, avatar_file_path
 from apps.lib.avatar.forms import PrimaryAvatarForm, DeleteAvatarForm, FacebookPictureForm
 import apps.lib.facebook_api.facebook as facebook
 
-from django.http import HttpResponse, HttpResponseRedirect, Http404
+from django.http import HttpResponseRedirect, Http404
 from django.shortcuts import render_to_response
 from django.template import RequestContext
-from django.template.loader import render_to_string
 from django.contrib.auth.decorators import login_required
 from django.core.files import File
 from django.core.files.temp import NamedTemporaryFile
@@ -129,13 +126,17 @@ def change(request, extra_context=None, next_override=None):
             return HttpResponseRedirect(
                 reverse("profile_index") + "?changed_avatar=True")
 
-    fb_id = facebook.get_user_from_cookie(request.COOKIES,
-        settings.MAKAHIKI_FACEBOOK_APP_ID, settings.MAKAHIKI_FACEBOOK_SECRET_KEY)
+    fb_id = None
+    fb_form = None
+    if settings.CHALLENGE.use_facebook:
+        fb_id = facebook.get_user_from_cookie(request.COOKIES,
+            settings.MAKAHIKI_FACEBOOK_APP_ID, settings.MAKAHIKI_FACEBOOK_SECRET_KEY)
 
-    fb_form = FacebookPictureForm(initial={
-        "facebook_photo":
-            "http://graph.facebook.com/%s/picture?type=large" % fb_id
-    })
+        fb_form = FacebookPictureForm(initial={
+            "facebook_photo":
+                "http://graph.facebook.com/%s/picture?type=large" % fb_id
+        })
+
     return render_to_response(
         'avatar/change.html',
         extra_context,

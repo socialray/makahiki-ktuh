@@ -35,9 +35,11 @@
                       <p>Upload a new picture (optional):</p>
                       {{ form.avatar }}
                   </div>
-                  <div id="profile-picture-facebook">
-                      {% include "first-login/profile-facebook.html" %}
-                  </div>
+                  {% if CHALLENGE.use_facebook %}
+                    <div id="profile-picture-facebook">
+                       {% include "first-login/profile-facebook.html" %}
+                    </div>
+                  {% endif %}
               </div>
               <div style="clear: both"></div>
           </div>

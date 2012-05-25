@@ -33,17 +33,18 @@ class ChallengeSettings(models.Model):
         default="Kukui Cup",
         help_text="The name of the competition.",
         max_length=50,)
-
     theme = models.CharField(
         default="theme-default",
         help_text="The UI theme for this installation.",
         choices=THEME_CHOICES,
         max_length=50,)
-
     competition_team_label = models.CharField(
         default="Lounge",
         help_text="The display label for team.",
         max_length=50,)
+    use_facebook = models.BooleanField(
+        default=False,
+        help_text="Use Facebook ?")
 
     # CAS settings
     use_cas_auth = models.BooleanField(
