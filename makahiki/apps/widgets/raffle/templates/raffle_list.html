@@ -5,7 +5,7 @@
 {% with prize|user_tickets:user as user_tickets %}
 <tr>
     <td class="raffle-prize">
-        <a id="raffle-{{prize.title|slugify}}" href="#raffle-{{prize.title|slugify}}-description" data-toggle="modal">
+        <a href="#raffle-{{prize.title|slugify}}-description" data-toggle="modal">
             {{ prize.title }}
         </a>
 
