@@ -1,8 +1,8 @@
 """Tests the cache_mgr module."""
 
 from django.test import TransactionTestCase
-import os
 from apps.managers.cache_mgr import cache_mgr
+from django.conf import settings
 
 
 class BaseUnitTestCase(TransactionTestCase):
@@ -18,8 +18,7 @@ class BaseUnitTestCase(TransactionTestCase):
         self.assertEqual(len(cache_mgr.keys()), 1,
                          "Test that the current cache is not empty after set.")
 
-        if 'MAKAHIKI_MEMCACHED_ENABLED' in os.environ and \
-            os.environ['MAKAHIKI_MEMCACHED_ENABLED'] == "True":
+        if settings.MAKAHIKI_USE_MEMCACHED:
             self.assertEqual(cache_mgr.get_cache('test_key'), 'test_value',
                              "Test get the correct value from cache.")
 

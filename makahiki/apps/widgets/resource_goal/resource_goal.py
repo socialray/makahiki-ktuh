@@ -1,4 +1,4 @@
-"""daily energy_goal game module."""
+"""Implements the Daily Energy (or Water) Goal Game."""
 
 import datetime
 from django.db.models.aggregates import Count
@@ -10,7 +10,7 @@ from apps.widgets.resource_goal.models import EnergyGoal, WaterGoal, WaterGoalSe
 
 
 def team_goal_settings(team, resource):
-    """returns the energy goal settings for the team."""
+    """Returns the goal settings for the given team and resource."""
     if resource == "energy":
         goalsetting = EnergyGoalSetting
     elif resource == "water":
@@ -24,12 +24,12 @@ def team_goal_settings(team, resource):
 
 
 def is_manual_entry(team, resource):
-    """returns true if the team's data is manual entry."""
+    """Returns true if the game uses manual entry for the given team and resource."""
     return team_goal_settings(team, resource).manual_entry
 
 
 def _get_resource_goal(resource):
-    """return the resource goal object."""
+    """Return the resource goal object."""
     if resource == "energy":
         return EnergyGoal
     elif resource == "water":
@@ -39,8 +39,7 @@ def _get_resource_goal(resource):
 
 
 def team_goal(date, team, resource):
-    """returns the team's goal status."""
-
+    """Returns the team's goal status for the given resource."""
     goal = _get_resource_goal(resource)
     goals = goal.objects.filter(date=date, team=team)
     if goals:
@@ -50,18 +49,15 @@ def team_goal(date, team, resource):
 
 
 def team_daily_goal_usage(date, team, resource):
-    """Returns the goal usage of the current date."""
+    """Returns the goal usage of the current date and resource."""
     goal_percentage = team_goal_settings(team, resource).goal_percent_reduction
-
     baseline_usage = team_daily_resource_baseline(date, team, resource)
-
     usage = (baseline_usage * 100 - baseline_usage * goal_percentage) / 100
     return usage
 
 
 def team_daily_resource_baseline(date, team, resource):
-    """Returns the energy baseline usage for the date."""
-
+    """Returns the baseline usage for the date and resource."""
     if resource == "energy":
         daily_baseline = EnergyBaselineDaily
     elif resource == "water":
@@ -78,8 +74,7 @@ def team_daily_resource_baseline(date, team, resource):
 
 
 def team_hourly_resource_baseline(date, team, resource):
-    """Returns the energy baseline usage for the date."""
-
+    """Returns the baseline usage for the date and resource."""
     if resource == "energy":
         hourly_baseline = EnergyBaselineHourly
     elif resource == "water":
@@ -97,9 +92,8 @@ def team_hourly_resource_baseline(date, team, resource):
 
 
 def check_daily_resource_goal(team, resource):
-    """check the daily energy goal, award points to the team members if the goal is meet.
-    Returns the number of players in the team got the award."""
-
+    """Check the daily goal, award points to the team members if the goal is met.
+    Returns the number of players in the team that got the award."""
     date = datetime.date.today()
     goal_settings = team_goal_settings(team, resource)
     goal_usage = team_daily_goal_usage(date, team, resource)
@@ -151,7 +145,7 @@ def check_daily_resource_goal(team, resource):
 
 
 def check_all_daily_resource_goals(resource):
-    """check the daily resource goal for all teams."""
+    """Check the daily resource goal for all teams."""
     is_awarded = False
     for team in Team.objects.all():
         count = check_daily_resource_goal(team, resource)
@@ -168,9 +162,7 @@ def check_all_daily_resource_goals(resource):
 
 def resource_goal_ranks(resource):
     """Generate the scoreboard for resource goals."""
-
     goal = _get_resource_goal(resource)
-
     return goal.objects.filter(
         goal_status="Below the goal"
     ).values(

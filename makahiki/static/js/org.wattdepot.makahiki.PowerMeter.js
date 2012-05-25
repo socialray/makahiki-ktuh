@@ -75,7 +75,7 @@ Makahiki_PowerMeter = function (server_url, source, refresh_interval, viz_id, op
         powerTable.setCell(0, 0, timestampVal);
         powerTable.setCell(0, 1, powerVal);
         powerTable.setCell(0, 2, baselineVal);
-        var dateFormatter = new google.visualization.DateFormat({pattern:'MM/dd/yy h:mm:ss a'});
+        var dateFormatter = new google.visualization.DateFormat({pattern:'MMM d, yyyy, h:mm:ss a'});
         dateFormatter.format(powerTable, 0);
         return powerTable;
     }

@@ -71,8 +71,8 @@ class ChallengeSettingsAdmin(admin.ModelAdmin):
             {"fields":
                   (("site_name", "site_logo"),
                    ("competition_name", "site_domain"),
-                   "theme",
                    "competition_team_label",
+                   ("theme", "use_facebook"),
                   )}),
         ("CAS or LDAP authentication",
             {"fields":

@@ -139,49 +139,6 @@ def referral(request):
 
 @never_cache
 @login_required
-def profile_facebook(request):
-    """Connect to Facebook to get the user's facebook photo."""
-    if request.is_ajax():
-        fb_user = facebook.get_user_from_cookie(request.COOKIES,
-                                                settings.FACEBOOK_APP_ID,
-                                                settings.FACEBOOK_SECRET_KEY)
-        fb_id = None
-        if not fb_user:
-            return HttpResponse(json.dumps({
-                "error": "We could not access your info. Please log in again."
-            }), mimetype="application/json")
-
-        try:
-            graph = facebook.GraphAPI(fb_user["access_token"])
-            graph_profile = graph.get_object("me")
-            fb_id = graph_profile["id"]
-        except facebook.GraphAPIError:
-            return HttpResponse(json.dumps({
-                "contents": "Facebook is not available at the moment, "
-                            "please try later",
-                }), mimetype='application/json')
-
-        # Insert the form into the response.
-        user_info = {
-            "facebook_photo":
-                "http://graph.facebook.com/%s/picture?type=large" % fb_id
-        }
-        form = ProfileForm(initial=user_info)
-
-        response = render_to_string("first-login/profile-facebook.html", {
-            "fb_id": fb_id,
-            "form": form,
-            }, context_instance=RequestContext(request))
-
-        return HttpResponse(json.dumps({
-            "contents": response,
-            }), mimetype='application/json')
-
-    raise Http404
-
-
-@never_cache
-@login_required
 def setup_profile(request):
     """Display page 4 (profile) of the first login wizard."""
     if request.is_ajax():
@@ -240,17 +197,17 @@ def setup_profile(request):
 @never_cache
 def _get_profile_form(request, form=None, non_xhr=False):
     """Helper method to render the profile form."""
-    try:
-        fb_id = facebook.get_user_from_cookie(request.COOKIES,
-                                                settings.FACEBOOK_APP_ID,
-                                                settings.FACEBOOK_SECRET_KEY)
-    except AttributeError:
-        fb_id = None
-
+    fb_id = None
     facebook_photo = None
+    if settings.CHALLENGE.use_facebook:
+        fb_id = facebook.get_user_from_cookie(
+            request.COOKIES,
+            settings.MAKAHIKI_FACEBOOK_APP_ID,
+            settings.MAKAHIKI_FACEBOOK_SECRET_KEY)
+
     if fb_id:
-        facebook_photo = "http://graph.facebook.com/%s/picture" \
-                             "?type=normal" % fb_id
+        facebook_photo = "http://graph.facebook.com/%s/picture?type=normal" % fb_id
+
     if not form:
         form = ProfileForm(initial={
             "display_name": request.user.get_profile().name,

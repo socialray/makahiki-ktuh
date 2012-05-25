@@ -1,1 +1,1 @@
-"""Implements the Energy goal widget."""
+"""Implements the widgets for resource goal games (energy, water, etc.)"""
