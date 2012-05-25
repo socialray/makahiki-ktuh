@@ -18,63 +18,110 @@ Our estimated hardware requirements (for production use) are:
   * RAM: 8 GB
   * Disk space: 10 GB
 
-1. Install prerequisite software
---------------------------------
+1. Install Python
+-----------------
 
 `Python`_ 2.7.1 or higher (but not Python 3). On Windows machines, it
 is recommended that you use the 32 bit version.
 
-`Apple Developer Tools`_ (Mac OS X only). If you are using Mac OS X, install
-the Apple Developer Tools (i.e. Xcode 4). This is required in order to 
+To check that python is installed and has the correct version::
+
+  & python --version 
+    Python 2.7.1
+
+2. Install C++
+--------------
+
+2a. Mac OS X: Install Apple Developer Tools
+*******************************************
+
+
+If you are using Mac OS X, install
+`Apple Developer Tools`_ (i.e. Xcode 4). This is required in order to 
 build certain libraries (PIL, etc.) that require GCC (which is bundled with
 Xcode). Xcode can either be found in your OS X installation DVD, or in the Mac
 App Store.
 
-`Visual C++`_ (Windows only).  If on Windows, you will need to install
-Visual Studio.  Please read and follow this `blog post on Django
-installation on Windows`_.
+2b. Windows: Install Visual C++
+*******************************
 
-`Python Imaging Library`_ (PIL). If you are on Mac OS X, we have found 
+If on Windows, you will need to install `Visual C++`_ 
+Please read and follow this `blog post on Django installation on Windows`_.
+
+3. Install Python Imaging Library
+---------------------------------
+
+Makahiki requires the `Python Imaging Library`_ (PIL). If you are on Mac OS X, we have found 
 `Homebrew`_ to be the most reliable way to install PIL. 
-Once Homebrew is installed, install PIL by typing
-``brew install pil``. If you are brave enough to install from source, make sure
-you have both libjpeg (for JPEG) and zlib (for PNG). On Linux, a developer has reported
-that the PIL system installed by apt-get does not support JPEG (April, 2012).  To fix, the developer
-downloaded and installed from source.
+Once Homebrew is installed, install PIL by typing::
 
-Git. Find a package for your operating system at the `GitHub install
+  % brew install pil 
+
+If you are brave enough to install from source, make sure you have both libjpeg (for JPEG)
+and zlib (for PNG). On Linux, a developer has reported that the PIL system installed by
+apt-get does not support JPEG (April, 2012).  To fix, the developer downloaded and
+installed from source.
+
+4. Install Git
+--------------
+
+Find a package for your operating system at the `GitHub install
 wiki`_. It is recommended that you also configure Git so that it
 handles line endings from Windows users correctly. See `Dealing With
 Line Endings`_.
 
-Pip. Check if it is installed by typing ``pip help``. If not, install it by
-typing ``easy_install pip``. Depending on your system configuration, you may
+5. Install Pip
+--------------
+
+Install it by typing::
+
+  %  easy_install pip
+
+Depending on your system configuration, you may
 have to type ``sudo easy_install pip``. If you do not have easy_install,
 download and install it from the `setuptools website`_.
 
-`Virtualenvwrapper`_. Virtualenv and Virtualenvwrapper allow you to install
-libraries separately from your global Python path. Follow the
-`virtualenvwrapper installation instructions`_ through the Quick Start section,
-making a virtualenv for Makahiki (i.e. ``mkvirtualenv makahiki``).
+6. Install Virtual Environment Wrapper
+---------------------------------------
 
-`PostgreSQL`_.  Makahiki uses PostgreSQL as its standard backend database.
+`Virtualenvwrapper`_ allows you to install
+libraries separately from your global Python path. Follow the
+`virtualenvwrapper installation instructions`_ through the Quick Start section.
+
+Once virtualenv is installed, create a virtual environment for makahiki as follows::
+
+
+  % mkvirtualenv makahiki
+
+7. Install PostgreSQL
+---------------------
+
+Makahiki uses `PostgreSQL`_ as its standard backend database.
 Note that on Mac OS X, the installer will need to make changes in the
 ``sysctl`` settings and a reboot before installation can proceed. Once
 installed, be sure that your PostgreSQL installation's bin/ directory is on
-$PATH so that ``pg_config`` and ``psql`` are defined.  Note for Linux users:
-you must download postgres-dev in order to get the pg_config command. It is
-important that the user "postgres" is "trusted" so that you can connect to the
-server as the user "postgres" locally without authentication. If that is not the case, you
-must edit the pg_hba.conf file and change "local all postgres ident" to "local all
-postgres trust". Or, you may be able to create a .pgpass file containing the credentials.
+$PATH so that ``pg_config`` and ``psql`` are defined.  
 
+.. note:: For Linux users: you must download postgres-dev in order to get the pg_config
+          command. It is important that the user "postgres" is "trusted" so that you can
+          connect to the server as the user "postgres" locally without authentication. If
+          that is not the case, you must edit the pg_hba.conf file and change "local all
+          postgres ident" to "local all postgres trust". Or, you may be able to create a
+          .pgpass file containing the credentials.
 
-`Memcache`_.  Makahiki can optionally use Memcache to improve performance.
+8. Install Memcache
+-------------------
+
+Makahiki can optionally use `Memcache`_ to improve performance.
 To avoid the need for alternative configuration files, we require local installations to install
-Memcache and an associated library even if they aren't intending to use it.  On Mac OS X, if you have installed
-`Homebrew`_, you can install these with ``brew install memcached`` and ``brew install
-libmemcached``. For other environments, one place to start is `Heroku's memcache
-installation instructions`_, although this instructions do not explain installation of libmemcached.
+Memcache and an associated library even if they aren't intending to use it.  On Mac OS X,
+if you have installed `Homebrew`_, you can install these by typing::
+
+  % brew install memcached
+  % brew install libmemcached
+
+For other environments, one place to start is `Heroku's memcache
+installation instructions`_, although these instructions do not explain installation of libmemcached.
 
 .. _Python: http://www.python.org/download/
 .. _Python Imaging Library: http://www.pythonware.com/products/pil/
@@ -91,8 +138,8 @@ installation instructions`_, although this instructions do not explain installat
 .. _Memcache: http://memcached.org
 .. _Heroku's memcache installation instructions: http://devcenter.heroku.com/articles/memcache#local_memcache_setup
 
-2. Download the Makahiki source
--------------------------------
+9. Download the Makahiki source
+---------------------------------
 
 To download the source for your own fork::
 
@@ -116,8 +163,8 @@ This will create the new folder and download the code from the repository.
 .. _SSH keys: http://help.github.com/key-setup-redirect
 .. _email settings: http://help.github.com/git-email-settings/
 
-3. cd to makahiki, and workon makahiki
---------------------------------------
+10. Workon makahiki
+-------------------
 
 The remaining steps require you to be in the makahiki/ directory and to have
 activated that virtual environment::
@@ -129,8 +176,8 @@ If you start a new shell in the midst of this process, you must be sure to invok
 and of course cd to the appropriate directory before continuing. 
 
 
-4. Download and install libraries
----------------------------------
+11. Install python libraries
+----------------------------
 
 Once you have the source, you must next install a set of third party
 libraries into your Makahiki virtual environment::
@@ -141,8 +188,8 @@ This command will produce a lot of output, but it should terminate without
 indicating that an error occurred.
 
 
-5. Configure Postgres database
-------------------------------
+12. Configure Postgres
+----------------------
 
 Next, create a makahiki user and database in your postgres server::
 
@@ -161,8 +208,8 @@ likely created when you ran the PostgreSQL installer in step 1).
 As you can see, executing the script should echo the commands to create the
 user and database. 
 
-6. Setup environment variables
-------------------------------
+13. Setup environment variables
+-------------------------------
 
 At a minimum, Makahiki requires two environment variables: DATABASE_URL and
 MAKAHIKI_ADMIN_INFO.  
@@ -186,8 +233,8 @@ admin account if this server is publically accessible.
 Makahiki also utilizes a variety of other environment variables. For complete
 documentation, see :ref:`section-environment-variables`.
 
-7.  Initialize your instance
-----------------------------
+14.  Initialize Makahiki
+------------------------
 
 Next, invoke the initialize_instance script::
 
@@ -206,16 +253,16 @@ Makahiki has several other scripts useful for development. For complete
 documentation, see :ref:`section-scripts`.
 
 
-8. Test your installation
--------------------------
+15. Test your installation
+--------------------------
 
 To see if the system has been installed correctly, run the tests::
 
   % ./manage.py test
 
 
-9. Bring up the server
------------------------
+16. Start the server
+--------------------
 
 Finally, you can start the Makahiki server::
 
@@ -224,7 +271,7 @@ Finally, you can start the Makahiki server::
 Open a browser and go to http://localhost:8000 to see the home page. 
 
 
-10. Login to administrative interface
+17. Login to administrative interface
 -------------------------------------
 
 Once the server is running, you must login as admin in order to continue
@@ -235,4 +282,7 @@ Once you are logged in, go to the administrator page at
 http://localhost:8000/admin
 
 (Documentation of page and widget configuration coming soon.)
+
+
+
 

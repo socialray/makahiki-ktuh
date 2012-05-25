@@ -1,4 +1,5 @@
-"""resource manager module"""
+"""Provides services for a specific sustainability "resource" such as energy or water."""
+
 import datetime
 from xml.etree.ElementTree import ParseError
 from django.conf import settings
@@ -14,7 +15,7 @@ from xml.etree import ElementTree
 
 
 def init():
-    """initialize the resource manager."""
+    """Initialize the resource manager."""
 
     if ResourceSettings.objects.count() == 0:
         ResourceSettings.objects.create(name="energy", unit="kWh", winning_order="Ascending")
@@ -23,7 +24,7 @@ def init():
 
 
 def resources_info():
-    """returns the managed resource's name."""
+    """Returns the managed resource's name."""
     init()
     info = ""
     for resource in ResourceSettings.objects.all():
@@ -32,13 +33,13 @@ def resources_info():
 
 
 def get_resource_settings(name):
-    """returns the resource settings for the specified name."""
+    """Returns the resource settings for the specified name."""
     init()
     return ResourceSettings.objects.get(name=name)
 
 
 def team_resource_data(date, team, resource):
-    """Return the latest energy data of the current date."""
+    """Returns the latest data for the specified resource on the current date."""
 
     usage = _get_resource_usage(resource)
     energy_data = usage.objects.filter(team=team, date=date)
@@ -49,7 +50,7 @@ def team_resource_data(date, team, resource):
 
 
 def team_resource_usage(date, team, resource):
-    """Return the latest energy usage of the current date."""
+    """Returns the latest usage of the specified resource for the current date."""
     energy_data = team_resource_data(date, team, resource)
     if energy_data:
         return energy_data.usage
@@ -58,7 +59,7 @@ def team_resource_usage(date, team, resource):
 
 
 def update_energy_usage(date):
-    """Update the energy usage from wattdepot server."""
+    """Update the energy usage from WattDepot server."""
 
     # workaround the issue that wattdepot might not have the latest data yet.
     date = date - datetime.timedelta(minutes=5)
@@ -103,7 +104,7 @@ def update_energy_usage(date):
 
 
 def _get_resource_usage(name):
-    """return the resourceusage object by name."""
+    """Returns the resource usage object by name, or None if not found."""
     if name == "energy":
         return EnergyUsage
     elif name == "water":
@@ -115,7 +116,7 @@ def _get_resource_usage(name):
 
 
 def resource_ranks(name, round_name):
-    """return the resource ranking for all teams."""
+    """Return the ranking of resource use for all teams."""
     resource_usage = _get_resource_usage(name)
 
     resource_settings = get_resource_settings(name)
