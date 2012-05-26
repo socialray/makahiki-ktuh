@@ -1,6 +1,7 @@
 {% with todays_users=view_objects.status__users.todays_users logins=view_objects.status__users.logins referrals=view_objects.status__users.referrals %}
-    <div>
-        <div class="content-box">
+    <div class="span2">
+        <div class="content-box widget">
+            <div class="widget-contents">
             <div class="content-box-title">
                 {{ todays_users|length }} users logged in today
             </div>
@@ -12,10 +13,12 @@
                 </ul>
             </div>
         </div>
+        </div>
     </div>
 
-    <div>
-        <div class="content-box">
+    <div class="span2">
+        <div class="content-box widget">
+            <div class="widget-contents">
             <div class="content-box-title">
                 New Signups
             </div>
@@ -27,10 +30,12 @@
                 </ul>
             </div>
         </div>
+        </div>
     </div>
 
-    <div>
-        <div class="content-box">
+    <div class="span2">
+        <div class="content-box widget">
+            <div class="widget-contents">
             <div class="content-box-title">
                 Referrals
             </div>
@@ -50,6 +55,7 @@
                 {% endfor %}
             </table>
             </div>
+        </div>
         </div>
     </div>
 

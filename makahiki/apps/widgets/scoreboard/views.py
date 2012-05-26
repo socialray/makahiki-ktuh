@@ -1,5 +1,4 @@
 """Prepares the views for point scoreboard widget."""
-
 from apps.managers.challenge_mgr import challenge_mgr
 from apps.managers.player_mgr import player_mgr
 from apps.managers.team_mgr import team_mgr
@@ -33,3 +32,8 @@ def supply(request, page_name):
         "round_standings": round_standings,
         "no_carousel": page_name == "status",
     }
+
+
+def remote_supply(request, page_name):
+    """Supplies data to remote views."""
+    return supply(request, page_name)

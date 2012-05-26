@@ -1,0 +1,23 @@
+
+<div class="content-box widget">
+    <div class="widget-contents">
+        <div class="content-box-title">
+            Unused Tickets
+        </div>
+
+        <div class="content-body"
+             style='font-weight: bold;{% if pending_members > 50 %}color: red{% endif %}'>
+            <center>There are {{ unused }} tickets that have not been allocated.<br/></center>
+            {% if has_errors %}
+                <div style='color: red; font-weight: bold'>
+                    The following users have more tickets than points
+                    <ul>
+                        {% for profile in errors %}
+                            <li>{{ profile.name }} ({{ profile.user.username }})</li>
+                        {% endfor %}
+                    </ul>
+                </div>
+            {% endif %}
+        </div>
+    </div>
+</div> 

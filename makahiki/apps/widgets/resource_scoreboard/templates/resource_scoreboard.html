@@ -1,12 +1,37 @@
-<div id="outer-box" {%if not no_carousel %}class="content-box"{% endif %}>
-{% if not no_carousel %}
-    <div id="score-carousel" class="carousel">
+{%if not no_carousel %}
+<div id="outer-box" class="content-box">
+    <div id="score-cycle">
+{% else %}
+<div class="content-box widget">
+    <div class="widget-content">
+        <div class="content-box-title">
+          {{ resource.name|capfirst }} Scoreboard
+        </div>
+        <ul id="{{resource.name}}-tab" class="nav nav-tabs">
+            {% for round_name, ranks in round_resource_ranks.items %}
+            <li class="">
+                <a data-toggle="tab" href="#{{resource.name}}-{{round_name|cut:" "}}">{{round_name }}</a>
+            </li>
+            {% endfor %}  
+            {% if goals_scoreboard and goals_scoreboard|length > 0 %}
+            <li class="">
+                <a data-toggle="tab" href="#{{resource.name}}-goal">Goal</a>
+            </li>
+            {% endif %} 
+        </ul>
+        <div class="tab-content">
 {% endif %}
-    {% for round_name, ranks in round_resource_ranks.items %}
+
+{% for round_name, ranks in round_resource_ranks.items %}
+    {%if not no_carousel %}
         <div class="item">
             <div class="set-width-outer-width">
+    {% else %}
+            <div id="{{resource.name}}-{{round_name|cut:" "}}" class="tab-pane fade active in"> 
+    {% endif %}
             <div class="content-box-title">
-                {{ round_name }} {{ resource.name|capfirst }} Score Board
+                {{ round_name }} {{ resource.name|capfirst }} {% if not no_carousel %}Score Board{% endif %}
+
                 {% if not no_carousel %}
                     <a href="#" style="float: right">
                         <img src="{{ STATIC_URL}}images/icons/icon-help-sm.png" width="20"
@@ -16,34 +41,40 @@
                     </a>
                 {% endif %}
             </div> 
-                <table class="table-striped">
-                    <tr>
-                        <th>Rank</th>
-                        <th>{{ TEAM_LABEL }}</th>
-                        <th>{{ resource.unit  }} used</th>
-                    </tr>
-                    {% for entry in ranks %}
-                    <tr>
-                        <td>{%  if entry.team__name == user.get_profile.team.name %}<b>{% endif %}
-                               {{ forloop.counter }}
-                        </td>
-                        <td>{%  if entry.team__name == user.get_profile.team.name %}<b>{% endif %}
-                               {{ entry.team__name }}
-                        </td>
-                        <td>
-                               {%  if entry.team__name == user.get_profile.team.name %}<b>{% endif %}
-                               {{ entry.total }}
-                        </td>
-                    </tr>
-                    {% endfor %}
-                </table>
-            </div>
+            <table class="table-striped">
+                <tr>
+                    <th>Rank</th>
+                    <th>{{ TEAM_LABEL }}</th>
+                    <th>{{ resource.unit  }} used</th>
+                </tr>
+                {% for entry in ranks %}
+                <tr>
+                    <td>{%  if entry.team__name == user.get_profile.team.name %}<b>{% endif %}
+                           {{ forloop.counter }}
+                    </td>
+                    <td>{%  if entry.team__name == user.get_profile.team.name %}<b>{% endif %}
+                           {{ entry.team__name }}
+                    </td>
+                    <td>{%  if entry.team__name == user.get_profile.team.name %}<b>{% endif %}
+                           {{ entry.total }}
+                    </td>
+                </tr>
+                {% endfor %}
+            </table>
         </div>
-    {% endfor %}
+        {% if not no_carousel %}
+        </div>
+        {% endif %}
+{% endfor %}
+
     {# Additional scoreboard entry for the energy goals #}
-    {% if goals_scoreboard and goals_scoreboard|length > 0 %}
+{% if goals_scoreboard and goals_scoreboard|length > 0 %}
+    {% if not no_carousel %}
         <div class="item">
             <div class="set-width-outer-width">
+    {% else %}
+         <div id="{{resource.name}}-goal" class="tab-pane fade active in"> 
+    {% endif %}
             <div class="content-box-title">
                 Completed Energy Goals
                 {% if not no_carousel %}
@@ -55,37 +86,39 @@
                     </a>
                 {% endif %}
             </div>
-            <div>
-                <table class="table-striped">
-                    <tr>
-                        <th>Rank</th>
-                        <th>{{ TEAM_LABEL }}</th>
-                        <th>Days met goal</th>
-                    </tr>
-                    {% for entry in goals_scoreboard %}
-                        <tr>
-                            <td>{{ forloop.counter }}</td>
-                            <td>
-                                {{ entry.team__name }}
-                            </td>
-                            <td>{{ entry.completions }}</td>
-                        </tr>
-                    {% endfor %}
-                </table>
-            </div>
-            </div>
+            <table class="table-striped">
+                <tr>
+                    <th>Rank</th>
+                    <th>{{ TEAM_LABEL }}</th>
+                    <th>Days met goal</th>
+                </tr>
+                {% for entry in goals_scoreboard %}
+                <tr>
+                    <td>{{ forloop.counter }}</td>
+                    <td>{{ entry.team__name }}</td>
+                    <td>{{ entry.completions }}</td>
+                </tr>
+                {% endfor %}
+            </table>
         </div>
+        {% if not no_carousel %}
+        </div>
+        {% endif %}
     {% endif %}
-    {% if not no_carousel %}
-    </div>
+</div>
+{% if no_carousel %}
+</div>
+</div>
+<script type="text/javascript">
+$('#{{resource.name}}-tab.nav-tabs a:first').tab('show');
+</script> 
+{% else %}
     <div id="resource-scoreboard-message">
     <center>#1 at end of round wins a
       <a href="/prizes"> prize!</a>
     </center>
-    </div>
-    {% endif %}
+    </div> 
 </div>
-{% if not no_carousel %}
 <script type="text/javascript">
     $(document).ready(function () {
           // Calculate the height of the items in the scoreboard.
@@ -103,23 +136,28 @@
           $("#score-carousel").height(maxHeight);
 
           var outerWidth = $("#outer-box").width();
-          $("set-width-outer-width").each (function(index, item) {
-        	  $(item).style.width = outerWidth;
+//        console.log("Outer width is " + outerWidth);
+          $(".set-width-outer-width").each (function(index, item) {
+              item.style.width = outerWidth + "px";
           });
-        //$("#score-carousel").carousel();
-        $("#score-carousel").cycle({
-            fx: "fade",
-            timeout: 3500,
-            delay:  -1000,
-            sync: true
-            });
-    });
-    
+          
+//         $("#score-carousel").carousel();
+          $("#score-cycle").cycle({
+        	  fx: "fade",
+        	  timeout: 3500,
+        	  delay: -1000,
+        	  sync: true
+          });
+    }); 
+
     $(window).resize(function() {
         var outerWidth = $("#outer-box").width();
-        $("set-width-outer-width").each (function(index, item) {
-            $(item).width(outerWidth);
-        });    	
-    });
+//         console.log("Outer width is " + outerWidth);
+        $(".set-width-outer-width").each (function(index, item) {
+//          console.log("Setting " + item + "'s width to " + outerWidth);
+            item.style.width = outerWidth + "px";
+        });     
+    }); 
+
 </script>
 {% endif %}

@@ -31,76 +31,80 @@
     {% include "components/navbar.html" %}
 {% endblock %}
 
-{% block body %}
-<div class="row-fluid">
-    <div class="span10">
+{% block body %}  
+            <div class="row-fluid">   
+                <!--point scoreboards-->   
+                <div class="scoreboard span2 ">
+                    {% include "widgets/status/score/templates/team_point.html" %}
+                </div>
+                <div class="scoreboard span2 ">
+                    {% include "widgets/status/score/templates/individual_point.html" %}
+                </div>
+                <div class="scoreboard span2 ">
+                    {% include "widgets/status/score/templates/team_participation.html" %}
+                </div>
 
-        <!-- The prize row-->
-        <div class="row-fluid">
-            {% if view_objects.status__prizes %}
-                <!--Prizes-->
-                {% include "widgets/status/prizes/templates/index.html" %}
-            {% endif %}
-        </div>
-
-        <!--The action/rsvp row-->
-        <div class="row-fluid">
-            <!--RSVPS-->
-            <div class="span12">
-                {% if view_objects.status__rsvps %}
-                    <div class="status-rsvp">
-                        {% include "widgets/status/rsvps/templates/index.html" %}
+                <!--energy--> 
+                {% if view_objects.resource_scoreboard__energy %} 
+                    <div class="span2">
+                        {% include "widgets/resource_scoreboard/energy/templates/index.html" %} 
                     </div>
                 {% endif %}
-            </div>
-        </div>
-        <div class="row-fluid">
-            <!--Actions-->
-            {% if view_objects.status__actions %}
-                <div class="span12">
-                    <div class="status-actions">
-                        {% include "widgets/status/actions/templates/index.html" %}
+                
+
+                <!--Water-->
+                {% if view_objects.resource_scoreboard__water %} 
+                    <div class="span2">
+                            {% include "widgets/resource_scoreboard/water/templates/index.html" %} 
                     </div>
-                </div>
-            {% endif %}
+                {% endif %} 
 
+                <!--Prizes--> 
+                {% if view_objects.status__prizes %} 
+                    <div class="span2 ">
+                        {% include "widgets/status/prizes/templates/index.html" %} 
+                    </div>
+                {% endif %}         
+                </div>      
+        </div>  
+
+
+        
+        
+        
+        <div class="row-fluid"> 
+                 <!--RSVPs-->
+                {% if view_objects.status__rsvps %}  
+                    <div class="span2"> 
+                        {% include "widgets/status/rsvps/templates/index.html" %} 
+                    </div>
+                {% endif %}  
+
+                <!--Actions-->
+                {% if view_objects.status__actions %} 
+                            {% include "widgets/status/actions/templates/index.html" %} 
+                        <div class="span2">
+                           {% include "widgets/status/actions/templates/quests.html" %}
+                        </div>
+                {% endif %}   
         </div>
 
-        <!--energy & water-->
+
         <div class="row-fluid">
-            {% if view_objects.resource_scoreboard__energy %}
-                <div class="energy-score content-box span12">
-                    {% include "widgets/resource_scoreboard/energy/templates/index.html" %}
-                </div>
+            <!--Users -->
+            {% if view_objects.status__users %} 
+                    {% include "widgets/status/users/templates/index.html" %} 
             {% endif %}
-        </div>
-        <div class="row-fluid">
-            <!--Water-->
-            {% if view_objects.resource_scoreboard__water %}
-                <div class="water-score content-box span12">
-                    {% include "widgets/resource_scoreboard/water/templates/index.html" %}
+ 
+            {% if view_objects.status__actions %}
+                <div class="span2">  
+                            {% include "widgets/status/actions/templates/approval_queue.html" %} 
                 </div>
-            {% endif %}
-        </div>
+            {% endif %} 
 
-        <!--point scoreboards-->
-        {% if view_objects.scoreboard %}
-            <div class="row-fluid">
-                <div class="scoreboard span12">
-                    {% include "widgets/scoreboard/templates/index.html" %}
-                </div>
+            <div class="span2">
+              {% include "widgets/status/prizes/templates/unused_tickets.html" %} 
             </div>
-        {% endif %}
-
-    </div>
-    <!--sidebar for user logins-->
-    <div class="span2">
-        {% if view_objects.status__users %}
-            <div>
-                {% include "widgets/status/users/templates/index.html" %}
-            </div>
-        {% endif %}
-    </div>
-
-</div>
+            <div class="span2"></div>
+      </div>
 {% endblock %}
