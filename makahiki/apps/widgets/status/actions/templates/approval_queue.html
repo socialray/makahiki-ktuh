@@ -1,0 +1,14 @@
+ 
+<div class="content-box-centered widget">
+    <div class="content-box-title">
+        <div class="widget-content">
+            Approval Queue
+        </div>
+        <div class="content-body"
+             style='font-weight: bold;{% if pending_members > 50 %}color: red{% endif %}'>
+            There are {{ pending_members }} pending ActivityMember(s) in the queue.<br/>
+            {% if oldest_member %}The oldest item was submitted
+                at {{ oldest_member.submission_date }}{% endif %}
+        </div>
+    </div>
+</div> 

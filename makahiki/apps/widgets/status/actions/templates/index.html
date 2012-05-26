@@ -1,64 +1,32 @@
 {% with pending_members=view_objects.status__actions.pending_members oldest_member=view_objects.status__actions.oldest_member quests=view_objects.status__actions.quests popular_tasks=view_objects.status__actions.popular_tasks%}
 
-<div class="status-activities">
-  <div class="row-fluid">
-    <div class="span6">
-        <div class="content-box-centered">
-            <div class="content-box-title">
-                Approval Queue
-            </div>
-            <div class="content-body"
-                 style='font-weight: bold;{% if pending_members > 50 %}color: red{% endif %}'>
-                There are {{ pending_members }} pending ActivityMember(s) in the queue.<br/>
-                {% if oldest_member %}The oldest item was submitted
-                    at {{ oldest_member.submission_date }}{% endif %}
-            </div>
-        </div>
-    </div>
-    <div class="span6">
-        <div class="content-box" >
-            <div class="content-box-title">
-                Popular Quests
-            </div>
-                <table>
-                    <tr>
-                        <th>Name</th>
-                        <th>Completions</th>
-                    </tr>
-                    {% for quest in quests %}
-                        <tr>
-                            <td>{{ quest.name }}</td>
-                            <td>{{ quest.completions }}</td>
-                        </tr>
-                    {% endfor %}
-                </table>
-        </div>
-    </div>
-</div>
-<div class="row-fluid">
+ 
+
         {% for key, value in popular_tasks.items %}
-             <div class="content-box item">
-                <div class="content-box-title">
-                    Most Popular {{ key }}
-                </div>
-                    <table>
-                        <tr>
-                            <th style="width: 70%">{{ key }}</th>
-                            <th>Submits</th>
-                            <th>Completed</th>
-                        </tr>
-                        {% for task in value %}
+        <div class="span2 ">
+             <div class="content-box widget">
+                <div class="widget-content">
+                    <div class="content-box-title">
+                        Popular {{ key|capfirst }}
+                    </div>
+                        <table>
                             <tr>
-                                <td>
-                                    <a href="{% url activity_task task.type task.slug %}">{{ task.title }}</a>
-                                </td>
-                                <td>{{ task.submissions }}</td>
-                                <td>{{ task.completions }}</td>
+                                <th style="width: 70%">{{ key }}</th>
+                                <th>Submits</th>
+                                <th>Completed</th>
                             </tr>
-                        {% endfor %}
-                    </table>
-              </div>
+                            {% for task in value %}
+                                <tr>
+                                    <td>
+                                        <a href="{% url activity_task task.type task.slug %}">{{ task.title }}</a>
+                                    </td>
+                                    <td>{{ task.submissions }}</td>
+                                    <td>{{ task.completions }}</td>
+                                </tr>
+                            {% endfor %}
+                        </table>
+                  </div>
+              </div> 
+      </div> 
         {% endfor %}
-  </div>
-</div>
 {% endwith %}

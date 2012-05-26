@@ -1,56 +1,53 @@
 {% with unused=view_objects.status__prizes.unused errors=view_objects.status__prizes.errors raffle_prizes=view_objects.status__prizes.raffle_prizes %} 
-<div class="span3">
-    <div class="content-box">
-        <div class="content-box-title">
-            Unused Tickets
-        </div>
-        <div class="content-body"
-             style='font-weight: bold;{% if pending_members > 50 %}color: red{% endif %}'>
-            <center>There are {{ unused }} tickets that have not been allocated.<br/></center>
-            {% if has_errors %}
-                <div style='color: red; font-weight: bold'>
-                    The following users have more tickets than points
-                    <ul>
-                        {% for profile in errors %}
-                            <li>{{ profile.name }} ({{ profile.user.username }})</li>
-                        {% endfor %}
-                    </ul>
-                </div>
-            {% endif %}
-        </div>
-    </div>
-</div>
 
-{% for round_name, raffle_prizes in raffle_prizes.items %}
-    <div class="span3">
-        <div class="content-box">
-            <div class="content-box-title">
-                {{ round_name }} Raffle Prizes
-            </div>
-            <div class="content-body">
-                <table>
-                    <tr>
-                        <th>Prize</th>
-                        <th>Tickets</th>
-                        <th>Winner</th>
-                    </tr>
-                    {% for prize in raffle_prizes %}
-                        <tr>
-                            <td>{{ prize.title }}</td>
-                            <td>{{ prize.raffleticket_set.count }}</td>
-                            <td>
-                                {% if prize.winner %}
-                                    {{ prize.winner.get_profile.name }}
-                                {% else %}
-                                    N/A
-                                {% endif %}
-                            </td>
-                        </tr>
-                    {% endfor %}
-                </table>
-            </div>
+<!--start test-->  
+  <div class="content-box">
+  <div class="content-box-title">
+    Raffle Prizes
+  </div>
+  <ul id="prize-tab" class="nav nav-tabs">
+  {% for round_name, raffle_prizes in raffle_prizes.items %}
+    <li class="">
+    <a data-toggle="tab" href="#prize{{round_name|cut:" "}}">{{round_name }}</a>
+    </li>
+  {% endfor %}  
+  </ul>
+  <div class="tab-content">
+    {% for round_name, raffle_prizes in raffle_prizes.items %}
+      <div id="prize{{round_name|cut:" "}}" class="tab-pane fade active in"> 
+          <div class="content-box">
+              <div class="content-box-title">
+                  {{ round_name|cut:" " }} Raffle Prizes
+              </div>
+              <div class="content-body">
+                  <table class="table-striped">
+                      <tr>
+                          <th>Prize</th>
+                          <th>Tickets</th>
+                          <th>Winner</th>
+                      </tr>
+                      {% for prize in raffle_prizes %}
+                          <tr>
+                              <td>{{ prize.title }}</td>
+                              <td>{{ prize.raffleticket_set.count }}</td>
+                              <td>
+                                  {% if prize.winner %}
+                                      {{ prize.winner.get_profile.name }}
+                                  {% else %}
+                                      N/A
+                                  {% endif %}
+                              </td>
+                          </tr>
+                      {% endfor %}
+                  </table>
+              </div>
+          </div>
         </div>
-    </div>
-{% endfor %}
-<br style="clear: both"/>
+      {% endfor %}
+  </div> 
+  </div> 
+<script type="text/javascript">
+$('#prize-tab.nav-tabs a:first').tab('show');
+</script> 
+<!--end test-->  
 {% endwith %}

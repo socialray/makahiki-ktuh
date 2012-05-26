@@ -1,0 +1,19 @@
+<div class="content-box widget" >
+    <div class="widget-contents">
+    <div class="content-box-title">
+        Popular Quests
+    </div>
+        <table>
+            <tr>
+                <th>Name</th>
+                <th>Completions</th>
+            </tr>
+            {% for quest in quests %}
+                <tr>
+                    <td>{{ quest.name }}</td>
+                    <td>{{ quest.completions }}</td>
+                </tr>
+            {% endfor %}
+        </table>
+    </div>
+</div> 
