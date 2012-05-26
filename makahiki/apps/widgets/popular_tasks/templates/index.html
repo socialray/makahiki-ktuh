@@ -1,14 +1,14 @@
 {% load cache %}
 
 {% cache 600 news-popular-tasks %}
-<div class="content-box">
+<div id="outer-box" class="content-box">
     {% if not view_objects.popular_tasks.no_carousel %}
-    <div id="news-most-popular-actions" class="carousel">
-        <div class="carousel-inner">
+    <div id="news-most-popular-actions">
     {% endif %}
 
     {% for key, value in view_objects.popular_tasks.popular_tasks.items %}
-    <div class="item {% if forloop.counter == 1 %}active{% endif %}">
+    <div class="item">
+        <div class="set-width-outer-width">
         <div class="content-box-title">
             Most Popular {{ key }}
             {% if not view_objects.popular_tasks.no_carousel %}
@@ -45,12 +45,54 @@
                         {% endif %}
                     {% endif %}
         </div>
+        </div>
     </div>
     {% endfor %}
 
     {% if not view_objects.popular_tasks.no_carousel %}
-        </div>
     </div>
     {% endif %}
 </div>
+{% if not no_carousel %}
+<script type="text/javascript">
+$(document).ready(function() {
+	  // Calculate the height of the items in the carousel.
+	  // Fix the height of all items to that height.
+	  var maxHeight = 45;
+	  var height = 0;
+	  $("#news-most-popular-actions .item").each(function(index, item) {
+	    height = $(item).height();
+	    // console.log("height of item is " + height);
+	    if (height > maxHeight){
+	      maxHeight = height;
+	    }
+	  });
+	  
+	  $("#news-most-popular-actions").height(maxHeight);
+
+	  var outerWidth = $("#outer-box").width();
+// 	  console.log("Outer width is " + outerWidth);
+      $(".set-width-outer-width").each (function(index, item) {
+          item.style.width = outerWidth + "px";
+      });
+	  
+// 	  $(".carousel").carousel();
+	  $("#news-most-popular-actions").cycle({
+          fx: "fade",
+          timeout: 3500,
+          delay:  -1000,
+          sync: true
+          });
+	});
+	
+$(window).resize(function() {
+    var outerWidth = $("#outer-box").width();
+//     console.log("Outer width is " + outerWidth);
+    $(".set-width-outer-width").each (function(index, item) {
+//     	console.log("Setting " + item + "'s width to " + outerWidth);
+        item.style.width = outerWidth + "px";
+    });     
+});	
+</script>
+{% endif %}
 {% endcache %}

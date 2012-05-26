@@ -2,8 +2,8 @@
 
 {% for name, prizes in view_objects.prizes.prizes.items reversed %}
 {# note: This is NOT an extraneous div! These classes cannot go into the table! #}
-<div class="item {% if forloop.first %}active{% endif %}">
-    <table class="table table-striped">
+<div class="item">
+    <table class="table table-striped set-width-outer-width">
         <thead>
             <tr>
                 <th colspan=2 class="prize-round-name">{{ name }} prizes</th>

@@ -1,10 +1,10 @@
-<div {%if not no_carousel %}class="content-box"{% endif %}>
+<div id="outer-box" {%if not no_carousel %}class="content-box"{% endif %}>
 {% if not no_carousel %}
     <div id="score-carousel" class="carousel">
-    <div class="carousel-inner">
 {% endif %}
     {% for round_name, ranks in round_resource_ranks.items %}
-        <div class="item {% if forloop.first %}active{% endif %}">
+        <div class="item">
+            <div class="set-width-outer-width">
             <div class="content-box-title">
                 {{ round_name }} {{ resource.name|capfirst }} Score Board
                 {% if not no_carousel %}
@@ -37,11 +37,13 @@
                     </tr>
                     {% endfor %}
                 </table>
+            </div>
         </div>
     {% endfor %}
     {# Additional scoreboard entry for the energy goals #}
     {% if goals_scoreboard and goals_scoreboard|length > 0 %}
         <div class="item">
+            <div class="set-width-outer-width">
             <div class="content-box-title">
                 Completed Energy Goals
                 {% if not no_carousel %}
@@ -71,10 +73,10 @@
                     {% endfor %}
                 </table>
             </div>
+            </div>
         </div>
     {% endif %}
     {% if not no_carousel %}
-    </div>
     </div>
     <div id="resource-scoreboard-message">
     <center>#1 at end of round wins a
@@ -100,7 +102,24 @@
           maxHeight += $("#resource-scoreboard-message").height();        
           $("#score-carousel").height(maxHeight);
 
-        $("#score-carousel").carousel();
+          var outerWidth = $("#outer-box").width();
+          $("set-width-outer-width").each (function(index, item) {
+        	  $(item).style.width = outerWidth;
+          });
+        //$("#score-carousel").carousel();
+        $("#score-carousel").cycle({
+            fx: "fade",
+            timeout: 3500,
+            delay:  -1000,
+            sync: true
+            });
     });
-{% endif %}
+    
+    $(window).resize(function() {
+        var outerWidth = $("#outer-box").width();
+        $("set-width-outer-width").each (function(index, item) {
+            $(item).width(outerWidth);
+        });    	
+    });
 </script>
+{% endif %}

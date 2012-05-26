@@ -32,12 +32,12 @@
     $(window).resize(function() {
     	// see if we need to expand the RIB height.
     	var maxHeight = $("#info-bar-wide").height();
-    	console.log("info-bar height is " + maxHeight);
+//     	console.log("info-bar height is " + maxHeight);
     	var oldHeight = maxHeight;
     	var height = 0;
     	$("#info-bar-wide .span12").each(function(index, item) {
     		height = $(item).height();
-    		console.log("height of item is " + height);
+//     		console.log("height of item is " + height);
     		if (height > maxHeight) {
     			maxHeight = height;
     		}
