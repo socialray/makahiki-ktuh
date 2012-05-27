@@ -43,7 +43,9 @@
 
 // Theme stylable elements
 // every page
-@page-bkg-color: @steelBlue; 
+@use-bkg-image: true;
+@page-bkg-color-start: @steelBlue; 
+@page-bkg-color-end: @steelBlue; 
 @page-bkg-image: "../images/bubbles.jpg";
 @page-logo: "../images/icons/icon-uh-logo.png"; 
 @page-font-color: @black;
@@ -55,7 +57,7 @@
 @questbar-transparency: 55%;
 // Navbar
 @navbar-bkg-color-start: @brightBlue;
-@navbar-bkg-color-end: darken(@navbar-bkg-color-start, 10%);
+@navbar-bkg-color-end: @white;
 @navbar-font-color: @white;
 @navbar-curr-page-bkg-color: @navbar-bkg-color-end;
 @navbar-curr-path-font-color: @black;
@@ -73,11 +75,11 @@
 @notification-font-color: @black;
 @notification-transparency: 45%;
 // Modal dialog box
-@modal-title-bkg-color-start: @skyBlue;
-@modal-title-bkg-color-end: @skyBlue;
-@modal-title-font-color: @black;
-@modal-body-bkg-color: @lightSteelBlue;
-@modal-body-font-color: @black;
+@modal-title-bkg-color-start: @yellow;
+@modal-title-bkg-color-end: @orange;
+@modal-title-font-color: @blue;
+@modal-body-bkg-color: @green;
+@modal-body-font-color: @white;
 // Page infobox
 @pageinfobox-bkg-color-start: @white;
 @pageinfobox-bkg-color-end: @white;
@@ -109,4 +111,4 @@
 @sgg-excursion-cell-bkg-color: @white;
 @sgg-special-cell-bkg-color: @darkTan;
 
-@prizes-raffle-table: @green;
+@prizes-raffle-table-entry-color: @steelBlue;

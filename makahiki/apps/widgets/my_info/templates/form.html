@@ -20,19 +20,19 @@
         {% endif %}
         <tr class="profile-section">
             <td class="profile-form-label">{{ form.display_name.label_tag }}</td>
-            <td>{{ form.display_name }}</td>
+            <td class="profile-form-body">{{ form.display_name }}</td>
         </tr>
         <tr class="profile-section">
             <td class="profile-form-label"><label
                     for="picture">Picture</label></td>
-            <td>
+            <td class="profile-form-body">
                 <img src="{% avatar_url user 60 %}"/>
                 <a href="{% url avatar_change %}" style="padding-left: 15px">change picture</a>
             </td>
         </tr>
         <tr class="profile-section">
             <td class="profile-form-label">{{ form.theme.label_tag }}</td>
-            <td>{{ form.theme }}</td>
+            <td class="profile-form-body">{{ form.theme }}</td>
         </tr>
         <tr>
             <td class="profile-section-header" colspan="2">Reminder
@@ -47,7 +47,7 @@
         <tr class="profile-section">
             <td class="profile-form-label"><label
                     for="id_event_email">Email</label></td>
-            <td>{{ form.contact_email }}</td>
+            <td class="profile-form-body">{{ form.contact_email }}</td>
         </tr>
         {% if form.contact_text.errors %}
             <tr>
@@ -57,15 +57,15 @@
         <tr class="profile-section">
             <td class="profile-form-label">         <label for="id_event_text">Text</label>
             </td>
-            <td>
+            <td class="profile-form-body">
                 {{ form.contact_text }}
                 {{ form.contact_carrier }}
             </td>
         </tr>
         </tr>
     </table>
-    <div>
-        <a href="#" id="profile-form-submit-button">Save Changes</a>
+    <div class="profile-save">
+        <a href="#" id="profile-form-submit-button" class="btn">Save Changes</a>
         <script type="text/javascript">
             $(document).ready(function () {
                 $("#profile-form-submit-button").click(function () {

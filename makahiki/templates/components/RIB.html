@@ -2,59 +2,16 @@
 {% if user.is_authenticated %}
 {% with user.get_profile as profile %}
 {% with user.get_profile.team as team %}
-<script type="text/javascript">
-//$(document).ready(function() {
-    $('#wide-personal-cycle').cycle({
-        fx: "fade",
-        timeout: 3500,
-        delay:  -1000,
-        sync: true
-        });
-    $('#wide-team-cycle').cycle({
-        fx: "fade",
-        timeout: 3500,
-        delay:  -1000,
-        sync: true
-        });
-    $('#wide-round-cycle').cycle({
-        fx: "fade",
-        timeout: 3500,
-        delay:  -1000,
-        sync: true
-        });
-    $('#single-cycle').cycle({
-        fx: "fade",
-        timeout: 3500,
-        delay:  -1000,
-        sync: true
-        });
-//});
-    $(window).resize(function() {
-    	// see if we need to expand the RIB height.
-    	var maxHeight = $("#info-bar-wide").height();
-//     	console.log("info-bar height is " + maxHeight);
-    	var oldHeight = maxHeight;
-    	var height = 0;
-    	$("#info-bar-wide .span12").each(function(index, item) {
-    		height = $(item).height();
-//     		console.log("height of item is " + height);
-    		if (height > maxHeight) {
-    			maxHeight = height;
-    		}
-    	});
-    	if (oldHeight < maxHeight) {
-    		$("#info-bar-wide").height(maxHeight);
-    	}
-    });
-</script>
 <div id="info-bar-wide" class="container-fluid makahiki-box info-bar">
     <div class="row-fluid">
             <div class="span1">
                 <img src="{% avatar_url user 60 %}" />
             </div>
             <div class="span3">
+                <div id="rib-outer-box" style="width=100%">
                 <div id="wide-personal-cycle">
                     {% include "components/user_points.html" %}
+                </div>
                 </div>
             </div>
             <div class="span3">
@@ -90,6 +47,68 @@
         </div>
     </div>
 </div>
+<script type="text/javascript">
+$(document).ready(function() {
+
+	var outerWidth = $("#rib-outer-box").width();
+	console.log("Init: outer width is " + outerWidth);
+    $(".rib-set-width-outer-width").each (function(index, item) {
+    	console.log("setting div " + index + "'s width to " + outerWidth)
+        item.style.width = outerWidth + "px";
+    });
+
+    $('#wide-personal-cycle').cycle({
+        fx: "fade",
+        timeout: 3500,
+        delay:  -1000,
+        sync: true
+        });
+    $('#wide-team-cycle').cycle({
+        fx: "fade",
+        timeout: 3500,
+        delay:  -1000,
+        sync: true
+        });
+    $('#wide-round-cycle').cycle({
+        fx: "fade",
+        timeout: 3500,
+        delay:  -1000,
+        sync: true
+        });
+    $('#single-cycle').cycle({
+        fx: "fade",
+        timeout: 3500,
+        delay:  -1000,
+        sync: true
+        });
+});
+    $(window).resize(function() {
+        // see if we need to expand the RIB height.
+        var maxHeight = $("#info-bar-wide").height();
+//       console.log("info-bar height is " + maxHeight);
+        var oldHeight = maxHeight;
+        var height = 0;
+        $("#info-bar-wide .rib-set-width-outer-width").each(function(index, item) {
+            height = $(item).height();
+//           console.log("height of item is " + height);
+            if (height > maxHeight) {
+                maxHeight = height;
+            }
+        });
+        if (oldHeight < maxHeight) {
+//         	console.log("Changing RIB height to " + maxHeight);
+            $("#info-bar-wide").height(maxHeight);
+        }
+        
+        var outerWidth = $("#rib-outer-box").width();
+        console.log("Outer width is " + outerWidth);
+        $(".rib-set-width-outer-width").each (function(index, item) {
+            console.log("setting div " + index + "'s width to " + outerWidth)
+            item.style.width = outerWidth + "px";
+        });
+
+    });
+</script>
 {% endwith %}
 {% endwith %}
 {% endif %}

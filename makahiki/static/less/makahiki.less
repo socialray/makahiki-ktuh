@@ -13,8 +13,8 @@
 @contentBoxBottomPadding: 10px;
 @gridGutterWidth: 20px;
 @makahikiBorderRadius: 8px;
-@navbarBackground: fadeout(@navbar-bkg-color-start, @navbar-transparency);
-@navbarBackgroundHighlight: fadeout(@navbar-curr-page-bkg-color, @navbar-transparency);
+@navbarBackgroundHighlight: fadeout(@navbar-bkg-color-start, @navbar-transparency);
+@navbarBackground: fadeout(@navbar-bkg-color-end, @navbar-transparency);
 @navbarLinkBackgroundActive: darken(@navbarBackground, 15%);
 
 a {
@@ -127,13 +127,12 @@ body {
     padding-left: 20px;
     padding-right: 20px;
     .pagination-centered;
-    background: url("@{page-bkg-image}") center fixed;
     background-repeat: no-repeat;
     -webkit-background-size: cover;
     -moz-background-size: cover;
     -o-background-size: cover;
     background-size: cover;
-    background-color: @page-bkg-color;
+    .background-choice;
     color: @page-font-color;
 }
 
@@ -185,6 +184,13 @@ ul {
 /* 
  * Classes!
  */
+.background-choice() when (@use-bkg-image) {
+    background: url("@{page-bkg-image}") center fixed;       
+}
+
+.background-choice() when (@use-bkg-image = false) {
+    .background-gradient(@page-bkg-color-start, @page-bkg-color-end);
+}
 
 .background-gradient (@start , @end) {
     background-image: -moz-linear-gradient(top, @start, @end);
@@ -337,7 +343,7 @@ ul {
 }
 
 .info-bar h4 a {
-    color: @black;
+    color: @infobar-font-color;
     text-decoration: underline;
 }
 
@@ -417,7 +423,6 @@ ul {
 }
 
 .navbar {
-    .background-gradient (fadeout(@navbar-bkg-color-start, @navbar-transparency) , fadeout(@navbar-bkg-color-end, @navbar-transparency));
     color: @navbar-font-color;
 }
 
@@ -485,15 +490,6 @@ ul {
 .prize-round-name {
     background: @widget-subtitle-bkg-color;
     color: @widget-subtitle-font-color;
-}
-
-.profile-section {
-    background-color: darken(@widget-body-bkg-color, 20%);
-}
-
-.profile-section-header {
-    font-weight: bold;
-    text-align: left;
 }
 
 .quest-box {
@@ -593,18 +589,6 @@ ul {
 #info-bar-single h4 a {
     float: none;
     text-align: center;
-}
-
-#prizes-raffle-info {
-    font-weight: bold;
-    background: @widget-subtitle-bkg-color;
-    color: @widget-subtitle-font-color;
-    text-align: center;
-    padding: 8px 0;
-}
-
-#prizes-raffle-table .number {
-    color: @prizes-raffle-table;
 }
 
 #quest-details a {
@@ -718,6 +702,7 @@ ul {
 @import "widget-home.less";
 @import "widget-my-achievements.less";
 @import "widget-my-commitments.less";
+@import "widget-my-info.less";
 @import "widget-popular-tasks.less";
 @import "widget-prizes.less";
 @import "widget-raffle.less";

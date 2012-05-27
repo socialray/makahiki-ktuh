@@ -51,7 +51,9 @@
 // Theme stylable elements
 // every page
 // Issue: can we support gradients for page-bkg-color?
-@page-bkg-color: @united-gold; 
+@use-bkg-image: false;
+@page-bkg-color-start: @united-gold; 
+@page-bkg-color-end: @united-gold; 
 @page-bkg-image: "";
 @page-logo: "../images/icons/icon-uh-logo.png"; 
 @page-font-color: @black;
@@ -112,7 +114,6 @@
 
 // Smart grid game
 @sgg-header-bkg-color: lighten(@united-gold, 10%);
-// Issue: following variable does not work. 
 @sgg-header-font-color: @united-blue;
 @sgg-entry-font-color: @black;
 @sgg-activity-cell-bkg-color: lighten(@united-blue, 15%);
@@ -121,8 +122,6 @@
 @sgg-excursion-cell-bkg-color: @united-gold;
 @sgg-special-cell-bkg-color: @united-grey;
 
-@prizes-raffle-table: @united-blue;
-// Issue: need to override prize (link) style 
-// Issue: need to make change button color changable.
+@prizes-raffle-table-entry-color: @united-blue;
 
 //Issue: Manual DEGG does not state what the goal is (for water)
