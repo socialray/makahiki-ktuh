@@ -1,9 +1,9 @@
-<div class="content-box outer-box"> 
+<div id="outer-box" class="content-box"> 
     {% if not view_objects.scoreboard.no_carousel %}
-    <div id="score-carousel" class="span12 carousel">
+    <div id="score-carousel">
     {% endif %}
         {% for round_name, standings in view_objects.scoreboard.round_standings.items %}
-        <div class="item {% if forloop.first %}active{% endif %}">
+        <div class="item">
             <div class="content-box-title set-width-outer-width">
                 {{ round_name }} Point Scoreboard
                 {% if not view_objects.scoreboard.no_carousel %}
@@ -35,7 +35,7 @@
             </table>
         </div>
         <div class="item">
-            <div class="content-box-title">
+            <div class="content-box-title set-width-outer-width">
                 {{ round_name }} Point Scoreboard
                 {% if not view_objects.scoreboard.no_carousel %}
                     <a href="#" style="float: right">
@@ -65,76 +65,76 @@
                 </tbody>
             </table>
         </div>
-                {% if standings.user_team_standings %}
-                <div class="item">
-                        <div class="content-box-title">
-                          {{ round_name }} Point Scoreboard
-                          {% if not view_objects.scoreboard.no_carousel %}
-                              <a href="#" style="float: right">
-                                  <img src="{{ STATIC_URL}}images/icons/icon-help-sm.png"
-                                      width="20" align="center"
-                                      title="Click to get help about this window"
-                                      onclick="toggleHelp('widget', 'points-scoreboard'); return false;" />
-                              </a>
-                          {% endif %}
-                      </div>
-                    <table class="table table-striped">
-                        <thead>
-                            <tr>
-                                <th>Rank</th>
-                                <th>Individual in {{ view_objects.scoreboard.team }}</th>
-                                <th>Points</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            {% for p in standings.user_team_standings %}
-                            <tr>
-                                <td>{{ forloop.counter }}</td>
-                                <td>{{ p.name }}</td>
-                                <td>{{ p.current_round_points }}</td>
-                            </tr>
-                            {% endfor %}
-                        </tbody>
-                    </table>
-                </div>
+        {% if standings.user_team_standings %}
+        <div class="item">
+            <div class="content-box-title set-width-outer-width">
+                {{ round_name }} Point Scoreboard
+                {% if not view_objects.scoreboard.no_carousel %}
+                   <a href="#" style="float: right">
+                       <img src="{{ STATIC_URL}}images/icons/icon-help-sm.png"
+                            width="20" align="center"
+                            title="Click to get help about this window"
+                            onclick="toggleHelp('widget', 'points-scoreboard'); return false;" />
+                   </a>
                 {% endif %}
-                <div class="item">
-                        <div class="content-box-title">
-                          {{ round_name }} Participation Scoreboard
-                          {% if not view_objects.scoreboard.no_carousel %}
-                              <a href="#" style="float: right">
-                                  <img src="{{ STATIC_URL}}images/icons/icon-help-sm.png"
-                                      width="20" align="center"
-                                      title="Click to get help about this window"
-                                      onclick="toggleHelp('widget', 'points-scoreboard'); return false;" />
-                              </a>
-                          {% endif %}
-                      </div>
-                    <table class="table table-striped">
-                        <thead>
-                            <tr>
-                                <th>Rank</th>
-                                <th>{{ TEAM_LABEL.capitalize }}</th>
-                                <th>Participation</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            {% for f in standings.team_participation %}
-                            <tr>
-                                <td>{{ forloop.counter }}</td>
-                                <td>{{ f }}</td>
-                                <td>{{ f.active_participation }}%</td>
-                            </tr>
-                            {% endfor %}
-                        </tbody>
-                    </table>
-                </div>
-                {% endfor %}
-        {% if not view_objects.scoreboard.no_carousel %}
-            <div id="resource-scoreboard-message">#1 at end of round wins a
-                <a href="/win"> prize!</a>
             </div>
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>Rank</th>
+                        <th>Individual in {{ view_objects.scoreboard.team }}</th>
+                        <th>Points</th>
+                    </tr>
+                </thead>
+                <tbody>
+                {% for p in standings.user_team_standings %}
+                    <tr>
+                        <td>{{ forloop.counter }}</td>
+                        <td>{{ p.name }}</td>
+                        <td>{{ p.current_round_points }}</td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
         </div>
+        {% endif %}
+        <div class="item">
+            <div class="content-box-title set-width-outer-width">
+                {{ round_name }} Participation Scoreboard
+                {% if not view_objects.scoreboard.no_carousel %}
+                   <a href="#" style="float: right">
+                       <img src="{{ STATIC_URL}}images/icons/icon-help-sm.png"
+                            width="20" align="center"
+                            title="Click to get help about this window"
+                            onclick="toggleHelp('widget', 'points-scoreboard'); return false;" />
+                   </a>
+                {% endif %}
+            </div>
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>Rank</th>
+                        <th>{{ TEAM_LABEL.capitalize }}</th>
+                        <th>Participation</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for f in standings.team_participation %}
+                    <tr>
+                        <td>{{ forloop.counter }}</td>
+                        <td>{{ f }}</td>
+                        <td>{{ f.active_participation }}%</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+        {% endfor %}
+        {% if not view_objects.scoreboard.no_carousel %}
+        </div>
+        <div id="resource-scoreboard-message" class="scoreboard-message">#1 at end of round wins a
+             <a href="/win"> prize!</a>
+        </div>       
         {% endif %}
     </div>
 {% if not view_objects.scoreboard.no_carousel %}
@@ -155,14 +155,27 @@
           $("#score-carousel").height(maxHeight);
           
           var outerWidth = $("#outer-box").width();
-//        console.log("Outer width is " + outerWidth);
+//           console.log("Outer width is " + outerWidth);
           $(".set-width-outer-width").each (function(index, item) {
               item.style.width = outerWidth + "px";
           });
 
-
-//         $("#score-carousel").carousel();
-          $('#score-carousel').
+          $('#score-carousel').cycle({
+              fx: "fade",
+              timeout: 3500,
+              delay: -1000,
+              sync: true
+          });
     });
+
+    $(window).resize(function() {
+        var outerWidth = $("#outer-box").width();
+//         console.log("Outer width is " + outerWidth);
+        $(".set-width-outer-width").each (function(index, item) {
+//          console.log("Setting " + item + "'s width to " + outerWidth);
+            item.style.width = outerWidth + "px";
+        });     
+    }); 
+    
 {% endif %}
 </script>

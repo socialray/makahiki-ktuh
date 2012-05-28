@@ -221,28 +221,6 @@ ul {
     .center-block ();
 }
 
-.centered-row {
-    border: solid 1px #aaa;
-    text-align: centered;
-    white-space: nowrap;
-    font-size: 20px;
-    letter-spacing: 80px;
-    line-height: 12px;
-    overflow: hidden;
-    width: 100%;
-}
-
-.centered-row-child {
-    width: 18%;
-    border: solid 1px #ccc;
-    display: inline-block;
-    letter-spacing: normal;
-    font-size: normal;
-    white-space: normal;
-    text-align: normal;
-    vertical-align: middle;
-}
-
 .container , .container-top , .container-bottom {
     background: transparent;
 }
@@ -364,6 +342,7 @@ ul {
     color: @infobar-feedback-font-color;
 }
 
+/* the id single-cycle is used by jquery.cycle to set up the cycle. */
 .info-bar #single-cycle div , .info-bar #single-cycle h4 {
     text-align: center;
     width: 100%;
@@ -558,21 +537,22 @@ ul {
     filter: Alpha(Opacity=75);
 }
 
+.wallpost-content button {
+    float: none;
+    line-height: 18px;
+    width: auto;
+}
+
 /*
  * Ids!
  */
 
-#avatar-change-content .btn {
-    vertical-align: top;
-} 
+/* canopy-about used by java script to hide the about info. */
 #canopy-about {
     padding: 5px 10px;
 }
 
-#feedbackModal.modal.fade.in , #successModal.modal.fade.in {
-    top: 10px;
-}
-
+/* used to hide the info-bar-single */
 #info-bar-single {
     .hidden;
 }
@@ -589,16 +569,6 @@ ul {
 #info-bar-single h4 a {
     float: none;
     text-align: center;
-}
-
-#quest-details a {
-    color: @questbar-font-color;
-}
-
-#wall-post-submit {
-    float: none;
-    line-height: 18px;
-    width: auto;
 }
 
 /*
@@ -668,18 +638,14 @@ ul {
         visibility: visible;
     }
 
-    #quest-list {
+    .quest-list {
         padding: 0px;
     }
 
-    #quest-list li {
+    .quest-list li {
         display: block;
         margin: 5px;
         padding: 0px;
-    }
-
-    #quest-title {
-        margin: 0px;
     }
 }
 
@@ -708,6 +674,7 @@ ul {
 @import "widget-raffle.less";
 @import "widget-resource-goal.less";
 @import "widget-resource-scoreboard.less";
+@import "widget-scoreboard.less";
 @import "widget-smartgrid.less";
 @import "widget-team-members.less";
 @import "widget-upcoming-events.less";

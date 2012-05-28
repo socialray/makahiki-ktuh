@@ -1,43 +1,33 @@
 /* Wall post styles */
+.padded {
+  margin-left: 5%;
+}
 
 .wallpost-content {
   padding: 5px 10px;
 }
 
-#wall-post textarea {
-  box-sizing: border-box;
-  -webkit-box-sizing:border-box;
-  -moz-box-sizing: border-box;
-  -ms-box-sizing: border-box;
-  width: 92%;
-  margin-left: 4%;
-}
-
-.padded {
-  margin-left: 5%;
-}
-
-#wall-posts {
+.wall-posts {
   list-style: none;
   margin: 0;
 }
 
-#wall-posts li {
+.wall-posts li {
   margin: 0;
   padding: 5px 0;
   border-top: 1px outset gray;
 }
 
-#wall-posts li .row {
+.wall-posts li .row {
   margin-left: 0;
 }
 
-#wall-posts .wallpost-image {
+.wall-posts .wallpost-image {
   margin-left: 0;
   margin-right: 10px;
 }
 
-#wall-posts .wallpost-text {
+.wall-posts .wallpost-text {
   margin-left: 0;
 }
 
@@ -50,8 +40,18 @@
   font-size: 0.9em;
 }
 
+/* used by javascript to enable/disable the post button */
+#id_post {
+  box-sizing: border-box;
+  -webkit-box-sizing:border-box;
+  -moz-box-sizing: border-box;
+  -ms-box-sizing: border-box;
+  width: 92%;
+  margin-left: 4%;
+}
+
 @media (max-width: 767px) {
-  #wall-posts .wallpost-image {
+  .wall-posts .wallpost-image {
     float: left;
     display: inline;
   }

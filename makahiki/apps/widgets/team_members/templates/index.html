@@ -1,6 +1,6 @@
 {% load avatar_tags %}
 
-<div class="content-box">
+<div class="content-box news">
     <div class="content-box-title">
         <h3>{{ TEAM_LABEL }} members</h3>
         <a href="#" style="float: right">
@@ -11,7 +11,7 @@
         <br style="clear: both"/>
     </div>
     <div>
-        <ul id="news-members-list" >
+        <ul>
         {% for member in view_objects.team_members.team_members %}
         <li>
           <a href="{% url news_team_members %}#{{member.name|slugify}}">
@@ -25,7 +25,7 @@
         </li>
         {% endfor %}
         </ul>
-        <div id='news-members-link'>
+        <div class='news-members-link'>
             <a href="{% url news_team_members %}">View all members</a>
         </div>
     </div>
