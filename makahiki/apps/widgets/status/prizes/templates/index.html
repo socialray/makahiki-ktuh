@@ -14,8 +14,7 @@
   </ul>
   <div class="tab-content">
     {% for round_name, raffle_prizes in raffle_prizes.items %}
-      <div id="prize{{round_name|cut:" "}}" class="tab-pane fade active in"> 
-          <div class="content-box">
+      <div id="prize{{round_name|cut:" "}}" class="tab-pane fade active in">  
               <div class="content-box-title">
                   {{ round_name|cut:" " }} Raffle Prizes
               </div>
@@ -41,8 +40,7 @@
                       {% endfor %}
                   </table>
               </div>
-          </div>
-        </div>
+          </div> 
       {% endfor %}
   </div> 
   </div> 
