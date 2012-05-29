@@ -8,5 +8,5 @@ ul,ol{margin:0;}
 .content-box{text-align:center;margin-left:1%;margin-right:1%;}
 .widget{height:997px;}
 @media (max-width:1125px){.widget{height:600px;}}.tab-pane{height:835px;overflow:scroll;}
-.padding-right{padding-right:10%;}
+@media (max-width:1650px){.wrap{height:806px;overflow:scroll;}}.padding-right{padding-right:10%;}
 .status-activities .content-box{margin-left:2px;margin-right:2px;}
