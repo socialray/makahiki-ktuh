@@ -20,7 +20,7 @@ import sys
 
 def main(argv):
     """main function."""
-    type = "default"
+    instance_type = "default"
 
     try:
         opts, args = getopt.getopt(argv, "t:", ["type="])
@@ -30,7 +30,7 @@ def main(argv):
 
     for opt in opts:
         if opt[0] == "-t" or opt[0] == "--type":
-            type = opt[1]
+            instance_type = opt[1]
 
     if len(args) == 0:
         print "Please specify a site_name for the instance."
@@ -71,7 +71,7 @@ def main(argv):
     os.system("python manage.py loaddata %s" % os.path.join(fixture_path, "base_settings.json"))
     os.system("python manage.py loaddata %s" % os.path.join(fixture_path, "base_smartgrid.json"))
 
-    if type == "test":
+    if instance_type == "test":
         print "setting up test data..."
         os.system("python manage.py loaddata %s" % os.path.join(fixture_path,
                                                                 "test_challenge.json"))
