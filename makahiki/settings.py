@@ -223,9 +223,6 @@ TEST_RUNNER = 'django_nose.NoseTestSuiteRunner'
 ##############################
 # LOGGING settings
 ##############################
-# Default log file location.
-LOG_FILE = 'makahiki.log'
-
 LOGGING = {
     'version': 1,
     'disable_existing_loggers': True,
@@ -252,12 +249,6 @@ LOGGING = {
             'level': 'ERROR',
             'class': 'django.utils.log.AdminEmailHandler',
             },
-        'file': {
-            'level': 'INFO',
-            'class': 'logging.FileHandler',
-            'filename': LOG_FILE,
-            'formatter': 'simple',
-            }
     },
     'loggers': {
         'django': {
@@ -270,10 +261,6 @@ LOGGING = {
             'level': 'ERROR',
             'propagate': False,
             },
-        'makahiki_logger': {
-            'handlers': ['file'],
-            'level': 'INFO',
-            }
     }
 }
 
@@ -328,7 +315,7 @@ MAKAHIKI_USE_HEROKU = env('MAKAHIKI_USE_HEROKU', '').lower() == "true"
 
 MAKAHIKI_DATABASE_URL = env('MAKAHIKI_DATABASE_URL', '')
 """[Required if MAKAHIKI_USE_HEROKU is not true] Specify the Database URL.
-Example: postgres://db_user_name:passwd@db_host:db_port/db_name"""
+Example: postgres://username:password@db_host:db_port/db_name"""
 
 if not MAKAHIKI_USE_HEROKU:
     if MAKAHIKI_DATABASE_URL:
@@ -379,7 +366,7 @@ TEMPLATE_DEBUG = MAKAHIKI_DEBUG
 
 # CACHE settings
 MAKAHIKI_USE_MEMCACHED = env('MAKAHIKI_USE_MEMCACHED', '').lower() == "true"
-"""[Optional] If "true", use memcache. Otherwise use built-in cache."""
+"""[Optional] If "true", use memcache. Otherwise no caching is used."""
 if MAKAHIKI_USE_MEMCACHED:
     CACHES = {'default':
                 {'BACKEND': 'django_pylibmc.memcached.PyLibMCCache'}}
@@ -437,3 +424,19 @@ MAKAHIKI_FACEBOOK_APP_ID = env('MAKAHIKI_FACEBOOK_APP_ID', '')
 """[Required if using Facebook] App ID required for Facebook integration."""
 MAKAHIKI_FACEBOOK_SECRET_KEY = env('MAKAHIKI_FACEBOOK_SECRET_KEY', '')
 """[Required if using Facebook] Secret key required for Facebook integration."""
+
+MAKAHIKI_USE_LOGFILE = env('MAKAHIKI_USE_LOGFILE', '').lower() == "true"
+"""[Optional] if "true", use logfile to store application logs."""
+if MAKAHIKI_USE_LOGFILE:
+    # Default log file location.
+    LOG_FILE = 'makahiki.log'
+    LOGGING['loggers']['makahiki_logger'] = {
+        'handlers': ['file'],
+        'level': 'INFO',
+        }
+    LOGGING['handlers']['file'] = {
+        'level': 'INFO',
+        'class': 'logging.FileHandler',
+        'filename': LOG_FILE,
+        'formatter': 'simple',
+        }
