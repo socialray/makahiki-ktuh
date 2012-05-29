@@ -18,11 +18,11 @@ class ChallengeSettings(models.Model):
     THEME_CHOICES = ((key, key) for key in settings.INSTALLED_THEMES)
 
     site_name = models.CharField(
-        default="University of Hawaii at Manoa",
+        default="My site",
         help_text="The name of the site.",
         max_length=50,)
     site_domain = models.CharField(
-        default="kukuicup.manoa.hawaii.edu",
+        default="localhost",
         help_text="The domain name of the site.",
         max_length=100,)
     site_logo = models.ImageField(
@@ -39,7 +39,7 @@ class ChallengeSettings(models.Model):
         choices=THEME_CHOICES,
         max_length=50,)
     competition_team_label = models.CharField(
-        default="Lounge",
+        default="Team",
         help_text="The display label for team.",
         max_length=50,)
     use_facebook = models.BooleanField(

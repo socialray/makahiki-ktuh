@@ -1,6 +1,7 @@
 """log manager module provides methods to operate on log records."""
-#import logging
 import datetime
+import logging
+from django.conf import settings
 from apps.managers.log_mgr.models import MakahikiLog
 
 
@@ -18,27 +19,15 @@ def write_log_entry(request, response_status_code, path=None, exception=None):
     # get the request header and response code into log record
     get_request_headers(log, request, response_status_code, path)
 
-    # Create the log entry.
-    #entry = "%s %s %s %s %s %d %s %s " % (
-    #    log.request_time.strftime("%Y-%m-%d %H:%M:%S"), log.remote_ip, log.remote_user,
-    #    log.request_method, log.request_url, log.response_status, log.http_referer,
-    #    log.http_user_agent)
-
-    #logger = logging.getLogger("makahiki_logger")
-
     if exception:
         log.post_content = "%s" % exception
         log.level = "ERROR"
-
-        #entry += log.post_content
-        #logger.error(entry)
     else:
         if request.FILES:
             # Append the filenames to the log.
             filenames = (f.name for f in request.FILES.values())
             file_str = "<Files: %s>" % " ".join(filenames)
             log.post_content = "%s" % (file_str,)
-            #entry += log.post_content
         elif request.method == "POST":
             # Dump the POST parameters, but we don't need the CSRF token and password.
             query_dict = request.POST.copy()
@@ -48,12 +37,22 @@ def write_log_entry(request, response_status_code, path=None, exception=None):
             if u"password" in query_dict:
                 del query_dict[u'password']
             log.post_content = "%s" % (query_dict,)
-            #entry += log.post_content
-
         log.level = "INFO"
-        #logger.info(entry)
 
-    log.save()
+    if settings.MAKAHIKI_USE_LOGFILE:
+        logger = logging.getLogger("makahiki_logger")
+        # Create the log entry.
+        entry = "%s %s %s %s %s %d %s %s %s" % (
+            log.request_time.strftime("%Y-%m-%d %H:%M:%S"), log.remote_ip, log.remote_user,
+            log.request_method, log.request_url, log.response_status, log.http_referer,
+            log.http_user_agent,
+            log.post_content)
+        if log.level == "ERROR":
+            logger.error(entry)
+        else:
+            logger.info(entry)
+    else:
+        log.save()
 
 
 def get_request_headers(log, request, response_status_code, path):

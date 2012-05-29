@@ -19,7 +19,9 @@ def main():
     if 'MAKAHIKI_DATABASE_URL' in os.environ:
         urlparse.uses_netloc.append('postgres')
         url = urlparse.urlparse(os.environ['MAKAHIKI_DATABASE_URL'])
+        username = url.username
         password = url.password
+        database = url.path[1:]
     else:
         print "Environment variable DATABASE_URL not defined. Exiting."
         sys.exit(1)
@@ -28,9 +30,10 @@ def main():
         print "password not in the Environment variable DATABASE_URL. Exiting."
         sys.exit(1)
 
-    sqls = ("DROP DATABASE makahiki",
-            "DROP USER makahiki; CREATE USER makahiki with CREATEDB PASSWORD '%s'" % password,
-            "CREATE DATABASE makahiki OWNER makahiki",)
+    sqls = ("DROP DATABASE %s" % database,
+            "DROP USER %s" % username,
+            "CREATE USER %s with CREATEDB PASSWORD '%s'" % (username, password),
+            "CREATE DATABASE %s OWNER %s" % (database, username),)
 
     for sql in sqls:
         command = 'psql -U postgres -c "%s"' % sql

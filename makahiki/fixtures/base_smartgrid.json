@@ -1437,30 +1437,6 @@
         }
     },
     {
-        "pk": 81,
-        "model": "smartgrid.action",
-        "fields": {
-            "category": 1,
-            "related_resource": null,
-            "social_bonus": 10,
-            "video_id": null,
-            "depends_on": "afterPublished()",
-            "name": "Kickoff Party",
-            "video_source": null,
-            "pub_date": "2011-10-16",
-            "image": "",
-            "title": "Kickoff Party",
-            "is_group": false,
-            "priority": 800,
-            "point_value": 20,
-            "depends_on_text": "This event will be unlocked 7 days before it takes place.",
-            "is_canopy": false,
-            "type": "event",
-            "slug": "kickoff-party",
-            "description": "It has begun: The Quest for the Kukui Cup 2011!\r\n\r\nIf you've been wondering about the Kukui Cup banners, all will be revealed at the Kickoff Party, hosted by MC Kai and MC Cookie and featuring sick beatz by the infamous DJ Mr Nick. Get there early to score your **free** limited edition Kukui Cup 2011 t-shirt and a **secret high tech gadget** to help you in your quest for energy saving supremacy."
-        }
-    },
-    {
         "pk": 15,
         "model": "smartgrid.action",
         "fields": {
@@ -1581,30 +1557,6 @@
         }
     },
     {
-        "pk": 84,
-        "model": "smartgrid.action",
-        "fields": {
-            "category": 1,
-            "related_resource": null,
-            "social_bonus": 5,
-            "video_id": null,
-            "depends_on": "afterPublished()",
-            "name": "Cafe Play 1",
-            "video_source": null,
-            "pub_date": "2011-10-16",
-            "image": "",
-            "title": "Play outside the cafe (1)",
-            "is_group": false,
-            "priority": 1100,
-            "point_value": 10,
-            "depends_on_text": "This event will be unlocked 7 days before it takes place.",
-            "is_canopy": false,
-            "type": "event",
-            "slug": "swag-game-1",
-            "description": "On your way to dinner?  Stop by the Kukui Cup table outside the Hale Aloha cafeteria to play an energy game.  If you succeed, you can win a **free** prize.  Even if you don't, you can get an Attendance Code and earn some points.  The prizes vary from night to night, so stop by every time and try to collect them all.  The table goes away when all the prizes have been given out, so get there early to maximize your chances!  This is the first of four Play Outside The Cafe events."
-        }
-    },
-    {
         "pk": 77,
         "model": "smartgrid.action",
         "fields": {
@@ -1626,30 +1578,6 @@
             "type": "activity",
             "slug": "lighting-video",
             "description": "Watch this video about the ways we use energy to generate light.\r\n"
-        }
-    },
-    {
-        "pk": 90,
-        "model": "smartgrid.action",
-        "fields": {
-            "category": 3,
-            "related_resource": "energy",
-            "social_bonus": 10,
-            "video_id": null,
-            "depends_on": "afterPublished()",
-            "name": "Energy Hunt",
-            "video_source": null,
-            "pub_date": "2011-10-16",
-            "image": "",
-            "title": "Energy scavenger hunt",
-            "is_group": false,
-            "priority": 800,
-            "point_value": 20,
-            "depends_on_text": "This event will be unlocked 7 days before it takes place.",
-            "is_canopy": false,
-            "type": "event",
-            "slug": "energy-hunt",
-            "description": "(Note, this event was previously listed as happening in Mokihana, but actually it's in **Lokelani**! Sorry!)\r\n\r\nYes, we've all scavenged for leaves and cute rocks and flowers in grade school.  But this isn't Miss Mizumoto's second grade science class: you're going after the big game now---Kilowatts!   \r\n\r\nWe'll start by teaching you how to measure power. Then, you'll divide up into teams, and get exactly 30 minutes to go back to your tower and measure the power used by appliances. Prizes will be awarded to both the team that finds the appliance that uses the least amount of power as well as well as the team that finds the appliance that uses the most amount of power. \r\n\r\nNote: at least one member of each team needs a camera (cell phone camera OK) in order to take a picture of the appliance reading.  Free food at the end of the night? We've got you covered."
         }
     },
     {
@@ -1917,30 +1845,6 @@
         }
     },
     {
-        "pk": 83,
-        "model": "smartgrid.action",
-        "fields": {
-            "category": 1,
-            "related_resource": null,
-            "social_bonus": 10,
-            "video_id": null,
-            "depends_on": "afterPublished()",
-            "name": "Round 2 Party",
-            "video_source": null,
-            "pub_date": "2011-10-26",
-            "image": "",
-            "title": "Round 2 Awards Party",
-            "is_group": false,
-            "priority": 1000,
-            "point_value": 20,
-            "depends_on_text": "This event will be unlocked 7 days before it takes place.",
-            "is_canopy": false,
-            "type": "event",
-            "slug": "round-2-party",
-            "description": "If you went to the Kickoff and Round 1 parties (which were, obviously, awesome), you might be thinking you can skip the Round 2 party.  But that would be a huge FAIL because the Round 2 party is going to totally kick it.\r\n\r\nThere will be live music by Breath of Fire, speakers from local organizations like Blue Planet Foundation and Sustainable UH, awards to Round 2 winners, and some special surprises.   The Round 2 award party is being organized by the [Aloha Movement Project](http://www.alohamovementproject.com/) so you know it's gonna rock.  \r\n\r\nThe party starts at 5:30pm, awards are at 6:30pm, and Breath of Fire is playing two sets at 6 and 7pm."
-        }
-    },
-    {
         "pk": 11,
         "model": "smartgrid.action",
         "fields": {
@@ -2205,54 +2109,6 @@
         }
     },
     {
-        "pk": 98,
-        "model": "smartgrid.action",
-        "fields": {
-            "category": 4,
-            "related_resource": null,
-            "social_bonus": 10,
-            "video_id": null,
-            "depends_on": "afterPublished()",
-            "name": "Wind Farm",
-            "video_source": null,
-            "pub_date": "2011-10-16",
-            "image": "",
-            "title": "Kahuku Wind Farm",
-            "is_group": false,
-            "priority": 1100,
-            "point_value": 30,
-            "depends_on_text": "This event will be unlocked 7 days before it takes place.",
-            "is_canopy": false,
-            "type": "excursion",
-            "slug": "wind-farm",
-            "description": "<center>![Wind turbine being assembled with crane](http://media.staradvertiser.com/images/312*467/20101009_biz_windfarm.jpg)</center>\r\n\r\nWant to see sky farmers harvesting the winds? Come with us to Kahuku to see firsthand how energy is plucked from the sky and generated for our use by First Wind's turbines. \r\n\r\nThe wind farm staff requests that everyone wear long pants and closed toe shoes.  We hope to stop in Kahuku for lunch, so bring some money.  \r\n\r\nYou need to register for this free event to reserve your seat on the bus by clicking the **I want to sign up** button below.\r\n\r\nMeet in the Hale Aloha courtyard, from there we'll get on the bus.  Don't be late!"
-        }
-    },
-    {
-        "pk": 82,
-        "model": "smartgrid.action",
-        "fields": {
-            "category": 1,
-            "related_resource": null,
-            "social_bonus": 10,
-            "video_id": null,
-            "depends_on": "afterPublished()",
-            "name": "Round 1 Party",
-            "video_source": null,
-            "pub_date": "2011-10-18",
-            "image": "",
-            "title": "Round 1 Awards Party",
-            "is_group": false,
-            "priority": 900,
-            "point_value": 20,
-            "depends_on_text": "This event will be unlocked 7 days before it takes place",
-            "is_canopy": false,
-            "type": "event",
-            "slug": "round-1-party",
-            "description": "If you have an indiscernible memory of attending an awesome awards party before, you may be experiencing some pre-deja-vu of what is soon to come: the Kukui Cup's first Round 1 Awards Party - a melange of interactive energy awareness games, an ultra-cool student DJ who goes by the oh-so-natural name of Pearl, the last of the custom limited edition Kukui Cup t-shirts, and the ever-popular smart strips. \r\n\r\nAs you are reading this, you may experience pre-withdrawals from the general awesomeness of this Party, oh, and did I mention that Awards will be being handed out as well? Yes, it may be implied in the name of this event, but along with the natural high you will inevitably feel from all the free goodies while simultaneously doing something good for the earth and jamming out to clam shell beats, you may just find yourself going home with a cool prize. \r\n\r\nDeja-vu or dream come true? You decide."
-        }
-    },
-    {
         "pk": 66,
         "model": "smartgrid.action",
         "fields": {
@@ -2301,30 +2157,6 @@
         }
     },
     {
-        "pk": 110,
-        "model": "smartgrid.action",
-        "fields": {
-            "category": 6,
-            "related_resource": null,
-            "social_bonus": 10,
-            "video_id": null,
-            "depends_on": "afterPublished()",
-            "name": "Movie Night",
-            "video_source": null,
-            "pub_date": "2011-10-21",
-            "image": "",
-            "title": "Movie Night",
-            "is_group": false,
-            "priority": 600,
-            "point_value": 20,
-            "depends_on_text": "This event will be unlocked 7 days before it takes place.",
-            "is_canopy": false,
-            "type": "event",
-            "slug": "movie-night",
-            "description": "<center>![Garbage Warrior DVD](http://www.garbagewarrior.com/wp-content/themes/garbagewarrior/images/dvd.png)</center>\r\n\r\nWatch two of the artsiest and the most hilarious shorts from the Bike Shorts Film Festival Hawaii and continue the night with the journey of a revolutionary architect in a maze of obstacles towards sustainable communities of \"Earth Ships\", completely energy autonomous off-the-grid houses built with recycled materials.\r\n\r\nAn adventure full of beautiful images and extraordinary personages. Accompanied by free pop corn and free delicious lemonade!"
-        }
-    },
-    {
         "pk": 85,
         "model": "smartgrid.action",
         "fields": {
@@ -2370,54 +2202,6 @@
             "type": "activity",
             "slug": "power-energy-2",
             "description": "While you've watched the Power & Energy video once, this activity gives you a chance to learn more about the topic. You can rewatch the video below and explore the resource links provided. When you are done, you can get your points by answering a more difficult question. The question may require information from the video, the resource links or both.\r\n\r\n<div id=\"videoDiv\">Loading Video ...</div>\r\n<script type=\"text/javascript\">\r\n      google.load(\"swfobject\", \"2.1\");\r\n</script>\r\n<script type=\"text/javascript\">\r\n      google.setOnLoadCallback(function() \r\n         {\r\n            var videoID = \"hBUg7bsR0d0\";\r\n            var width = \"471\";\r\n            var length = \"298\";\r\n            var params = { allowScriptAccess: \"always\", wmode: \"opaque\" };\r\n            var atts = { id: \"ytPlayer\" };\r\n            swfobject.embedSWF(\"http://www.youtube.com/v/\" + videoID + \r\n                           \"?fs=1&hl=en_US&rel=0&enablejsapi=1\", \r\n                           \"videoDiv\", width, length, \"8\", null, null, params, atts);\r\n         });\r\n</script>\r\n\r\nResource links (will open in new windows/tabs):\r\n\r\n* <a href=\"http://www.youtube.com/watch?v=pA0LE0iFU00\" target=\"_blank\">What is a kilowatt?</a>\r\n* <a href=\"http://www.youtube.com/watch?v=Pg0tGi9VY0I\" target=\"_blank\">What is electricity?</a>\r\n"
-        }
-    },
-    {
-        "pk": 105,
-        "model": "smartgrid.action",
-        "fields": {
-            "category": 5,
-            "related_resource": null,
-            "social_bonus": 5,
-            "video_id": null,
-            "depends_on": "afterPublished()",
-            "name": "Cafe Play 2",
-            "video_source": null,
-            "pub_date": "2011-10-16",
-            "image": "",
-            "title": "Play outside the cafe (2)",
-            "is_group": false,
-            "priority": 900,
-            "point_value": 10,
-            "depends_on_text": "This event will be unlocked 7 days before it takes place.",
-            "is_canopy": false,
-            "type": "event",
-            "slug": "swag-game-2",
-            "description": "On your way to dinner?  Stop by the Kukui Cup table outside the Hale Aloha cafeteria to play an energy game.  If you succeed, you can win a free prize.  Even if you don't, you can get an Attendance Code and earn some points.  The prizes vary from night to night, so stop by every time and try to collect them all.  The table goes away when all the prizes have been given out, so get there early to maximize your chances!  This is the second of four Play Outside The Cafe events.\r\n\r\n**Tonight's secret word is \"kilowatt-hour\"**"
-        }
-    },
-    {
-        "pk": 126,
-        "model": "smartgrid.action",
-        "fields": {
-            "category": 9,
-            "related_resource": null,
-            "social_bonus": 10,
-            "video_id": null,
-            "depends_on": "afterPublished()",
-            "name": "Art & Music",
-            "video_source": null,
-            "pub_date": "2011-10-27",
-            "image": "",
-            "title": "High Energy Art and Music",
-            "is_group": false,
-            "priority": 1000,
-            "point_value": 20,
-            "depends_on_text": "This event will be unlocked 7 days before it takes place.",
-            "is_canopy": false,
-            "type": "event",
-            "slug": "art-music",
-            "description": "    Electric blood flows through the veins of the city\r\n    drip, drip, drip, every drip a drop of oil\r\n    do I flip the switch or does the switch flip me? \r\n\r\nOh. hey there. We just get carried away when we think of slam poetry. And saving electricity. If you feel the same way, join us with [Kealoha](http://www.kealohapoetry.com/), Hawaii's premier slam poet. Afterwards, you'll have a chance to lay down verse of your own with the open mic session and munch on free snacks."
         }
     },
     {
@@ -2589,30 +2373,6 @@
         }
     },
     {
-        "pk": 102,
-        "model": "smartgrid.action",
-        "fields": {
-            "category": 5,
-            "related_resource": null,
-            "social_bonus": 10,
-            "video_id": null,
-            "depends_on": "afterPublished()",
-            "name": "Design Flashmob",
-            "video_source": null,
-            "pub_date": "2011-10-16",
-            "image": "",
-            "title": "Flashmob design",
-            "is_group": false,
-            "priority": 700,
-            "point_value": 20,
-            "depends_on_text": "This event will be unlocked 7 days before it takes place.",
-            "is_canopy": false,
-            "type": "event",
-            "slug": "design-flashmob",
-            "description": "Do you ever experience an intense, uncontrollable urge to break into song and dance in large, public places? If you've got that fever, we've got the cure: a heaping helping of the Kukui Cup Flashmob.  \r\n\r\nAt this workshop, you'll start designing a clandestine energy-related song and dance skit to be busted out near the end of the Kukui Cup while consuming free munchies. Who knows, it could be the YouTube hit of November, 2011."
-        }
-    },
-    {
         "pk": 101,
         "model": "smartgrid.action",
         "fields": {
@@ -2634,30 +2394,6 @@
             "type": "activity",
             "slug": "transport-video-2",
             "description": "While you've watched the Transportation video once, this activity gives you a chance to learn more about the topic. You can rewatch the video below and explore the resource links provided. When you are done, you can get your points by answering a more difficult question. The question may require information from the video, the resource links or both.\r\n\r\n<div id=\"videoDiv\">Loading Video ...</div>\r\n<script type=\"text/javascript\">\r\n      google.load(\"swfobject\", \"2.1\");\r\n</script>\r\n<script type=\"text/javascript\">\r\n      google.setOnLoadCallback(function() \r\n         {\r\n            var videoID = \"Yt13tkdi_Dk\";\r\n            var width = \"471\";\r\n            var length = \"298\";\r\n            var params = { allowScriptAccess: \"always\", wmode: \"opaque\" };\r\n            var atts = { id: \"ytPlayer\" };\r\n            swfobject.embedSWF(\"http://www.youtube.com/v/\" + videoID + \r\n                           \"?fs=1&hl=en_US&rel=0&enablejsapi=1\", \r\n                           \"videoDiv\", width, length, \"8\", null, null, params, atts);\r\n         });\r\n</script>\r\n\r\nResource links (will open in new windows/tabs):\r\n\r\n* <a href=\"http://www.terrapass.com/carbon-footprint-calculator/#air\" target=\"_blank\">Carbon Footprint Calculator</a>\r\n* <a href=\"http://www.youtube.com/watch?v=UGlqkVirSI8\" target=\"_blank\">Keep Pedalling (bicycle hip hop)</a>\r\n* <a href=\"http://www.cyclemanoa.org/\" target=\"_blank\">Cycle Manoa</a>\r\n* <a href=\"http://planetgreen.discovery.com/tech-transport/plane-train-automobile-travel.html\" target=\"_blank\">Trains, Planes, and Automobiles: Which is the greenest way to travel long distances in the US?</a>"
-        }
-    },
-    {
-        "pk": 103,
-        "model": "smartgrid.action",
-        "fields": {
-            "category": 5,
-            "related_resource": null,
-            "social_bonus": 10,
-            "video_id": null,
-            "depends_on": "afterPublished()",
-            "name": "Pedal palooza",
-            "video_source": null,
-            "pub_date": "2011-10-16",
-            "image": "media/smartgrid/actions/bicycleparts.png",
-            "title": "Pedalpalooza",
-            "is_group": false,
-            "priority": 800,
-            "point_value": 20,
-            "depends_on_text": "This event will be unlocked 7 days before it takes place.",
-            "is_canopy": false,
-            "type": "event",
-            "slug": "pedalpalooza",
-            "description": "Is the Queen song \"I want to ride my bicycle\" whirring furiously through your brain while you stare down at your broken two wheeler?  Have no fear, Freddy Mercury fans! Cycle Manoa is here to save your day with the Pedalpalooza workshop. If your wheels are broken, they'll teach you how to fix them for free.  If your wheels are rocking, join them for a quick one hour ride around Manoa.   And you can even cool down afterwards with a free bicycle-powered smoothie.\r\n\r\nMeet at Hale Aloha Courtyard at 3pm with your wheels for a guided 1 hour ride, ending up at the Cycle Manoa HQ. If you don't have a bike but would like to attend, meet in the courtyard at 3:40 and we'll walk up to the Cycle Manoa together. At 4 PM you'll hear from the Cycle Manoa team about bicycle advocacy and bicycle repair."
         }
     },
     {
@@ -2685,150 +2421,6 @@
         }
     },
     {
-        "pk": 106,
-        "model": "smartgrid.action",
-        "fields": {
-            "category": 5,
-            "related_resource": null,
-            "social_bonus": 5,
-            "video_id": null,
-            "depends_on": "afterPublished()",
-            "name": "Cafe Play 3",
-            "video_source": null,
-            "pub_date": "2011-10-19",
-            "image": "",
-            "title": "Play outside the cafe (3)",
-            "is_group": false,
-            "priority": 1000,
-            "point_value": 10,
-            "depends_on_text": "This event will be unlocked 7 days before it takes place.",
-            "is_canopy": false,
-            "type": "event",
-            "slug": "swag-game-3",
-            "description": "On your way to dinner?  Stop by the Kukui Cup table outside the Hale Aloha cafeteria to play an energy game.  If you succeed, you can win a free prize.  Even if you don't, you can get an Attendance Code and earn some points.  The prizes vary from night to night, so stop by every time and try to collect them all.  The table goes away when all the prizes have been given out, so get there early to maximize your chances!  This is the third of four Play Outside The Cafe events.\r\n\r\n**You will need to know your lounge's approximate energy use for the day to win today's swag!** Your your lounge's [current energy use](/energy) is available through the website."
-        }
-    },
-    {
-        "pk": 111,
-        "model": "smartgrid.action",
-        "fields": {
-            "category": 6,
-            "related_resource": null,
-            "social_bonus": 10,
-            "video_id": null,
-            "depends_on": "afterPublished()",
-            "name": "Recycled Fashion",
-            "video_source": null,
-            "pub_date": "2011-10-16",
-            "image": "",
-            "title": "Recycled fashion design",
-            "is_group": false,
-            "priority": 700,
-            "point_value": 20,
-            "depends_on_text": "This event will be unlocked 7 days before it takes place.",
-            "is_canopy": false,
-            "type": "event",
-            "slug": "recycled-fashion",
-            "description": "As Heidi Klum reminds us, \"In fashion, one day you're in, and the next day you're out\".  Go fashion forward by attending the Recycled Fashion Design Workshop, hosted by Project Runway Season 8 Finalist Andy South. \r\n\r\nAssisted by UH Manoa fashion design students, you'll form small groups and use recycled materials to create a new look, while Andy provides advice and encouragement.  Then a model will walk the runway to show off your creation.  No matter what colors you choose, your look will be green!  If you just want to watch, that's fine too.\r\n\r\nAfter party snacks included, so sign up soon!"
-        }
-    },
-    {
-        "pk": 112,
-        "model": "smartgrid.action",
-        "fields": {
-            "category": 6,
-            "related_resource": null,
-            "social_bonus": 10,
-            "video_id": null,
-            "depends_on": "afterPublished()",
-            "name": "Beach Cleanup",
-            "video_source": null,
-            "pub_date": "2011-10-30",
-            "image": "",
-            "title": "North Shore Beach Cleanup",
-            "is_group": false,
-            "priority": 800,
-            "point_value": 45,
-            "depends_on_text": "This event will be unlocked 7 days before it takes place.",
-            "is_canopy": false,
-            "type": "excursion",
-            "slug": "beach-cleanup",
-            "description": "According to Wikipedia, \"utopia\" is an ideal community or society possessing a perfect socio-politico-legal system. Hawaii, perhaps the closest thing we have to environmental perfection on earth, is regularly polluted by all the garbage washing up on our precious beaches.  \r\n\r\nDo your part to bring Oahu one step closer to utopia by attending this beach cleanup sponsored by [Surfrider Foundation](http://ww2.surfrider.org/oahu/).  Yes, you'll have to wake up early, but it's totally worth it: a free ride to the North Shore,  a couple of hours making Haleiwa Beach even more beautiful than it already is, then a free lunch and prizes provided by Spy Optics!\r\n\r\nMake sure you bring a hat, sunscreen, swim suit, and water (in a reusable water bottle, of course!) \r\n\r\nReserve your spot on the bus by clicking the **I want to sign up** button below. Spaces are limited. \r\n\r\nMeet in the Hale Aloha courtyard, from there we'll get on the bus.  Don't be late, this one leaves early.  Note that this excursion is worth the most points of all!   Good attendance by your lounge could just put you over the top!"
-        }
-    },
-    {
-        "pk": 113,
-        "model": "smartgrid.action",
-        "fields": {
-            "category": 6,
-            "related_resource": null,
-            "social_bonus": 10,
-            "video_id": null,
-            "depends_on": "afterPublished()",
-            "name": "Kokua Market",
-            "video_source": null,
-            "pub_date": "2011-10-24",
-            "image": "",
-            "title": "Kokua Market Excursion",
-            "is_group": false,
-            "priority": 900,
-            "point_value": 25,
-            "depends_on_text": "This event will be unlocked 7 days before it takes place.",
-            "is_canopy": false,
-            "type": "excursion",
-            "slug": "kokua-market",
-            "description": "Does purchasing groceries from corporate supermarkets leave a negative taste in your mouth? Satiate your craving to support local farmers and businesses by taking a tour of the [Kokua Market](http://www.kokua.coop/), the only natural foods cooperative in Hawaii. \r\n\r\nSample foods whilst browsing a bountiful bulk selection, innovative deli items, and a plethora of produce, and learn why Coops are so crucial to the food chain of Hawaii.  At Kokua Market, the customer reigns supreme, not profit.  \r\n\r\nMeet at Hale Aloha Courtyard and we'll walk over---it's just five minutes away!"
-        }
-    },
-    {
-        "pk": 114,
-        "model": "smartgrid.action",
-        "fields": {
-            "category": 6,
-            "related_resource": null,
-            "social_bonus": 5,
-            "video_id": null,
-            "depends_on": "afterPublished()",
-            "name": "Cafe Play 4",
-            "video_source": null,
-            "pub_date": "2011-10-21",
-            "image": "",
-            "title": "Play outside the cafe (4)",
-            "is_group": false,
-            "priority": 1000,
-            "point_value": 10,
-            "depends_on_text": "This event will be unlocked 7 days before it takes place.",
-            "is_canopy": false,
-            "type": "event",
-            "slug": "swag-game-4",
-            "description": "On your way to dinner?  Stop by the Kukui Cup table outside the Hale Aloha cafeteria to play an energy game.  If you succeed, you can win a free prize.  Even if you don't, you can get an Attendance Code and earn some points.  The prizes vary from night to night, so stop by every time and try to collect them all.  The table goes away when all the prizes have been given out, so get there early to maximize your chances!  This is the final Play Outside The Cafe event.\r\n\r\n**Be prepared to take aim and answer an energy related question!**"
-        }
-    },
-    {
-        "pk": 115,
-        "model": "smartgrid.action",
-        "fields": {
-            "category": 6,
-            "related_resource": null,
-            "social_bonus": 10,
-            "video_id": null,
-            "depends_on": "afterPublished()",
-            "name": "Food Day",
-            "video_source": null,
-            "pub_date": "2011-10-18",
-            "image": "media/smartgrid/actions/Food-Day.png",
-            "title": "UH Manoa Food Day",
-            "is_group": false,
-            "priority": 1100,
-            "point_value": 20,
-            "depends_on_text": "This event will be unlocked 7 days before it takes place.",
-            "is_canopy": false,
-            "type": "event",
-            "slug": "food-day",
-            "description": "Do you care about your food? Want to find out more about how to eat tasty, healthy food? Come to the UH Manoa Food Day event, which will include presentations on nutrition and food followed by Dr. Ted Radovitch a CTAHR specialist in Sustainable and Organic Farming Systems, and Dean Okimoto from Nalo Farms.\r\n \r\nFollowing the presentations will be a food demonstration by Philip Shon, UH Sodexo Executive Chef who works in collaboration with Donna Ojiri, RD, General Manager of Sodexo. Taste local fresh produce, sample grass-fed Big Island beef, and local fruit beverages. By celebrating food day, helps emphasize the importance of making healthy food choices, and promote changes in food and farm policies that benefit health, the environment and well-being of us all in Hawaii.\r\n\r\nSince this is an external event, you should sign up here but also RSVP on the <a href=\"http://www.foodday.org/participate/event_memberships/attend/1033\" target=\"_blank\">UHM Food Day website</a> (will open in a new window). When you get to the event, look for a Kukui Cup staff member (white t-shirt), and they will give you your attendance code that will get you the points for this event."
-        }
-    },
-    {
         "pk": 117,
         "model": "smartgrid.action",
         "fields": {
@@ -2850,30 +2442,6 @@
             "type": "activity",
             "slug": "water-energy-2",
             "description": "While you've watched the Water & Energy video once, this activity gives you a chance to learn more about the topic. You can rewatch the video below and explore the resource links provided. When you are done, you can get your points by answering a more difficult question. The question may require information from the video, the resource links or both.\r\n\r\n(placeholder)\r\n\r\nResource links:\r\n\r\n* Foo\r\n* Bar"
-        }
-    },
-    {
-        "pk": 124,
-        "model": "smartgrid.action",
-        "fields": {
-            "category": 9,
-            "related_resource": null,
-            "social_bonus": 10,
-            "video_id": null,
-            "depends_on": "afterPublished()",
-            "name": "Organic Farming",
-            "video_source": null,
-            "pub_date": "2011-10-16",
-            "image": "",
-            "title": "Sustainable and Organic Farming",
-            "is_group": false,
-            "priority": 600,
-            "point_value": 20,
-            "depends_on_text": "This event will be unlocked 7 days before it takes place.",
-            "is_canopy": false,
-            "type": "event",
-            "slug": "organic-farming",
-            "description": "Your mother always told you to eat your vegetables, but did you ever consider where they came from while you  forced down that last bite of rutabaga? The Sustainable Organic Farm Training (SOFT) club is a student-run organization devoted to getting at the \"roots\" of fresh produce, literally and figuratively. \r\n\r\nAt this workshop you'll get a chance to help out at the farm, taste fresh produce, and discover out what it really means to eat natural, local, organic, sustainable produce! Yum!! "
         }
     },
     {
@@ -2925,54 +2493,6 @@
         }
     },
     {
-        "pk": 119,
-        "model": "smartgrid.action",
-        "fields": {
-            "category": 7,
-            "related_resource": null,
-            "social_bonus": 10,
-            "video_id": null,
-            "depends_on": "afterPublished()",
-            "name": "Your Future",
-            "video_source": null,
-            "pub_date": "2011-10-19",
-            "image": "",
-            "title": "Your Sustainable Future",
-            "is_group": false,
-            "priority": 1000,
-            "point_value": 20,
-            "depends_on_text": "This event will be unlocked 7 days before it takes place.",
-            "is_canopy": false,
-            "type": "event",
-            "slug": "efficient-networking",
-            "description": "A [famous British poet](http://en.wikipedia.org/wiki/John_Lennon) once wrote: \"You say you want a revolution? Well, you know, we'd all love to see the plan.\" \r\n\r\nIf you're interested in helping create an energy and sustainability revolution in your classes, university and community, come plan with representatives from [Blue Planet Foundation](http://blueplanetfoundation.org/), [Sustainable UH](http://sustainable.hawaii.edu/), [Surfrider Foundation](http://ww2.surfrider.org/oahu/), [Kokua Hawaii Foundation](http://kokuahawaiifoundation.org/), [College of Engineering](http://www.eng.hawaii.edu/), [School of Architecture](http://www.arch.hawaii.edu/), [Shidler College of Business](http://shidler.hawaii.edu/), [Environmental Studies](http://www.hawaii.edu/envctr/), and more.  \r\n\r\nPlanning the overthrow of our oil-based economy will work up an appetite, so we'll also provide snacks."
-        }
-    },
-    {
-        "pk": 120,
-        "model": "smartgrid.action",
-        "fields": {
-            "category": 7,
-            "related_resource": null,
-            "social_bonus": 10,
-            "video_id": null,
-            "depends_on": "afterPublished()",
-            "name": "Sustain Corps",
-            "video_source": null,
-            "pub_date": "2011-10-29",
-            "image": "",
-            "title": "Manoa Sustainability Corps",
-            "is_group": false,
-            "priority": 1100,
-            "point_value": 20,
-            "depends_on_text": "This event will be unlocked 7 days before it takes place.",
-            "is_canopy": false,
-            "type": "event",
-            "slug": "sustainability-corps",
-            "description": "Want to find out how UH's sustainability efforts tie together? Come to the monthly meeting of the [UH Manoa Sustainability Corps](http://manoa.hawaii.edu/planning/sustainability/sustain.html). The Sustainability Corps is a forum for all of us to share information, ideas, data, and suggestions regarding sustainability on campus. It is also a forum to propose projects and programs that will make UH Manoa a green leader in Hawai'i and abroad.\r\n\r\nThis external event is being held in Krauss Hall, Room 012, known as the Yukiyoshi Room [campus map](http://manoa.hawaii.edu/campusmap/). When you get to the event, look for a Kukui Cup staff member (white t-shirt), and they will give you your attendance code that will get you the points for this event."
-        }
-    },
-    {
         "pk": 121,
         "model": "smartgrid.action",
         "fields": {
@@ -2994,78 +2514,6 @@
             "type": "activity",
             "slug": "climate-change-2",
             "description": "While you've watched the Climate Change video once, this activity gives you a chance to learn more about the topic. You can rewatch the video below and explore the resource links provided. When you are done, you can get your points by answering a more difficult question. The question may require information from the video, the resource links or both.\r\n\r\n<div id=\"videoDiv\">Loading Video ...</div>\r\n<script type=\"text/javascript\">\r\n      google.load(\"swfobject\", \"2.1\");\r\n</script>\r\n<script type=\"text/javascript\">\r\n      google.setOnLoadCallback(function() \r\n         {\r\n            var videoID = \"wSquej2rFXM\";\r\n            var width = \"471\";\r\n            var length = \"298\";\r\n            var params = { allowScriptAccess: \"always\", wmode: \"opaque\" };\r\n            var atts = { id: \"ytPlayer\" };\r\n            swfobject.embedSWF(\"http://www.youtube.com/v/\" + videoID + \r\n                           \"?fs=1&hl=en_US&rel=0&enablejsapi=1\", \r\n                           \"videoDiv\", width, length, \"8\", null, null, params, atts);\r\n         });\r\n</script>\r\n\r\nResource links (will open in new windows/tabs):\r\n\r\n* <a href=\"http://www.youtube.com/watch?v=QkByMwwYWKw\" target=\"_blank\">Hawaii's Climate Crisis Sea Level Rise</a> is a seven minute video that includes interviews with Chip Fletcher discussing the impact of climate change, specifically rising sea levels, on Hawaii.\r\n* <a href=\"http://www.youtube.com/watch?v=mF_anaVcCXg\" target=\"_blank\">How it all ends</a> is Greg Craven's followup to his \"The Most Terrifying Video You'll Ever See\", which got 7M views on YouTube.\r\n* This <a href=\"http://www.scientificamerican.com/article.cfm?id=why-are-americans-so-ill\" target=\"_blank\">Scientific American article</a> discusses why Americans are so ill-informed about climate change."
-        }
-    },
-    {
-        "pk": 122,
-        "model": "smartgrid.action",
-        "fields": {
-            "category": 9,
-            "related_resource": null,
-            "social_bonus": 10,
-            "video_id": null,
-            "depends_on": "afterPublished()",
-            "name": "Chill axation",
-            "video_source": null,
-            "pub_date": "2011-10-28",
-            "image": "",
-            "title": "Energy Efficient Chillaxation",
-            "is_group": false,
-            "priority": 400,
-            "point_value": 20,
-            "depends_on_text": "This event will be unlocked 7 days before it takes place.",
-            "is_canopy": false,
-            "type": "event",
-            "slug": "chillaxation",
-            "description": "Stress is the cancer of emotions, and undue amounts can lead to the demise of your study habits! \r\n\r\nAt the Energy Efficient Chillaxation Workshop, discover green methods to reduce stress, such as pranayama (deep breathing techniques), massage, and yoga.  We'll provide you with free herbal tea and snacks, teach you some techniques, and help you blow off steam. \r\n\r\nBut don\u2019t stress out too much about being on time!"
-        }
-    },
-    {
-        "pk": 123,
-        "model": "smartgrid.action",
-        "fields": {
-            "category": 9,
-            "related_resource": null,
-            "social_bonus": 10,
-            "video_id": null,
-            "depends_on": "afterPublished()",
-            "name": "Eating Well",
-            "video_source": null,
-            "pub_date": "2011-10-20",
-            "image": "",
-            "title": "Energy Efficient Eating",
-            "is_group": false,
-            "priority": 500,
-            "point_value": 20,
-            "depends_on_text": "This event will be unlocked 7 days before it takes place.",
-            "is_canopy": false,
-            "type": "event",
-            "slug": "low-energy-eating",
-            "description": "Has cafeteria food got you down in the dumps?  Are you no longer amused by mystery meat?  Want to get new ideas for late night munchies?   \r\n\r\nJoin experts from Kokua Market in a discussion of where our food comes from in Hawaii, and inexpensive, residence hall friendly groceries.  You'll sample a variety of free gourmet popcorn toppings and learn how to make your own for just pennies a serving.  \r\n\r\nWe'll even stuff your goodie bag with a custom recipe book to cure those Hale Aloha hunger pangs. "
-        }
-    },
-    {
-        "pk": 125,
-        "model": "smartgrid.action",
-        "fields": {
-            "category": 9,
-            "related_resource": null,
-            "social_bonus": 10,
-            "video_id": null,
-            "depends_on": "afterPublished()",
-            "name": "Reppun Farm",
-            "video_source": null,
-            "pub_date": "2011-10-23",
-            "image": "media/smartgrid/actions/charliereppun-small.jpg",
-            "title": "Off-The-Grid Living",
-            "is_group": false,
-            "priority": 700,
-            "point_value": 40,
-            "depends_on_text": "This event will be unlocked 7 days before it takes place.",
-            "is_canopy": false,
-            "type": "excursion",
-            "slug": "reppun-farm",
-            "description": "The Reppun family has been living on their farm and growing taro, coffee, honey and other food in beautiful Waihole valley for over 20 years.  Though they have the Internet, they don't any power lines.  See how they live off the grid in comfort and style through hydro-electric and solar power.  You'll take a bus over to the Windward side, hike into the valley to their farm, and see an amazing blend of old school and next generation Hawaii. Make sure you eat breakfast beforehand; we won't be back until after lunch.\r\n\r\nMake sure to wear clothes and shoes that you don't mind getting wet or muddy on the farm!\r\n\r\nReserve your seat on the bus by clicking the **I want to sign up** button below. \r\n\r\nMeet in the Hale Aloha courtyard, from there we'll get on the bus.  Don't be late!"
         }
     },
     {
@@ -3114,30 +2562,6 @@
             "type": "activity",
             "slug": "refer-friend",
             "description": "Starting in Round 2, the Kukui Cup provides a new feature: referral bonuses. Each time you get a new user to sign up for the Kukui Cup, you can earn 10 points. All you need to do is have the new user enter your email address on the new \"Referral Bonus\" page during their initial login.   Both you and they will earn 10 extra points as soon as the new user earns 30 points with regular game play. There is **NO LIMIT** to the number of times you can earn a referral bonus, so start signing up your friends now!\r\n\r\nTo help you get started, you can earn five extra points for one of your referrals by completing this activity. Just type in the email address of the new user you brought to the Kukui Cup in the box below. You will get your five points after the new user gets to 30 points.\r\n\r\nNote that while this activity is just a one-shot deal, the referral bonus feature that it introduces you to can be done repeatedly.  You do not have to wait for your first referral to complete before getting new referrals.   Nor do you have to even do this activity at all in order to get referral bonuses.  So, go out there, get as many new players to sign up and enter your email as possible, and you will get 10 points each time they achieve 30 points.  (You can even coach them through their first 30 points to make sure they get a proper introduction to the game).    "
-        }
-    },
-    {
-        "pk": 130,
-        "model": "smartgrid.action",
-        "fields": {
-            "category": 10,
-            "related_resource": null,
-            "social_bonus": 5,
-            "video_id": null,
-            "depends_on": "afterPublished()",
-            "name": "1st Green Friday",
-            "video_source": null,
-            "pub_date": "2011-10-29",
-            "image": "",
-            "title": "First Green Friday",
-            "is_group": false,
-            "priority": 1000,
-            "point_value": 15,
-            "depends_on_text": "This event will be unlocked 7 days before it takes place.",
-            "is_canopy": false,
-            "type": "event",
-            "slug": "first-green-friday",
-            "description": "First Green Friday is a showcase is to bring together faculty, students, and staff to showcase UHM's sustainability education, research, and demonstration projects. This new event is launching for the first time this Friday! Check out groups like the Environmental Center, the Ecology Club, Surfrider and the UHM Sustainability Corps. The Kukui Cup will have a table there as well!\r\n\r\nThis event is taking place in the Sustainability Courtyard, which is between Kuykendall Hall and the Hawaii Institute for Geophysics [campus map](http://manoa.hawaii.edu/campusmap/). Check out the booths at the event, and find the Kukui Cup table to get your attendance code."
         }
     },
     {
@@ -4159,246 +3583,6 @@
             "confirm_type": "text",
             "point_range_start": null,
             "confirm_prompt": ""
-        }
-    },
-    {
-        "pk": 81,
-        "model": "smartgrid.event",
-        "fields": {
-            "duration": 120,
-            "event_date": "2011-10-17T18:30:00",
-            "event_max_seat": 1000,
-            "event_location": "Hale Aloha courtyard"
-        }
-    },
-    {
-        "pk": 84,
-        "model": "smartgrid.event",
-        "fields": {
-            "duration": 60,
-            "event_date": "2011-10-18T18:30:00",
-            "event_max_seat": 200,
-            "event_location": "Hale Aloha courtyard"
-        }
-    },
-    {
-        "pk": 90,
-        "model": "smartgrid.event",
-        "fields": {
-            "duration": 60,
-            "event_date": "2011-10-18T22:00:00",
-            "event_max_seat": 50,
-            "event_location": "Lokelani rooftop"
-        }
-    },
-    {
-        "pk": 83,
-        "model": "smartgrid.event",
-        "fields": {
-            "duration": 120,
-            "event_date": "2011-11-01T18:30:00",
-            "event_max_seat": 1000,
-            "event_location": "Hale Aloha courtyard"
-        }
-    },
-    {
-        "pk": 98,
-        "model": "smartgrid.event",
-        "fields": {
-            "duration": 240,
-            "event_date": "2011-10-22T10:00:00",
-            "event_max_seat": 25,
-            "event_location": "Hale Aloha courtyard"
-        }
-    },
-    {
-        "pk": 82,
-        "model": "smartgrid.event",
-        "fields": {
-            "duration": 120,
-            "event_date": "2011-10-24T18:30:00",
-            "event_max_seat": 1000,
-            "event_location": "Hale Aloha courtyard"
-        }
-    },
-    {
-        "pk": 110,
-        "model": "smartgrid.event",
-        "fields": {
-            "duration": 120,
-            "event_date": "2011-10-27T22:00:00",
-            "event_max_seat": 50,
-            "event_location": "Lokelani rooftop"
-        }
-    },
-    {
-        "pk": 105,
-        "model": "smartgrid.event",
-        "fields": {
-            "duration": 60,
-            "event_date": "2011-10-20T18:30:00",
-            "event_max_seat": 200,
-            "event_location": "Hale Aloha courtyard"
-        }
-    },
-    {
-        "pk": 126,
-        "model": "smartgrid.event",
-        "fields": {
-            "duration": 60,
-            "event_date": "2011-11-02T22:00:00",
-            "event_max_seat": 50,
-            "event_location": "Lehua rooftop"
-        }
-    },
-    {
-        "pk": 102,
-        "model": "smartgrid.event",
-        "fields": {
-            "duration": 60,
-            "event_date": "2011-10-20T22:00:00",
-            "event_max_seat": 50,
-            "event_location": "Lehua rooftop"
-        }
-    },
-    {
-        "pk": 103,
-        "model": "smartgrid.event",
-        "fields": {
-            "duration": 120,
-            "event_date": "2011-10-23T15:00:00",
-            "event_max_seat": 25,
-            "event_location": "Hale Aloha courtyard"
-        }
-    },
-    {
-        "pk": 106,
-        "model": "smartgrid.event",
-        "fields": {
-            "duration": 60,
-            "event_date": "2011-10-25T18:30:00",
-            "event_max_seat": 200,
-            "event_location": "Hale Aloha courtyard"
-        }
-    },
-    {
-        "pk": 111,
-        "model": "smartgrid.event",
-        "fields": {
-            "duration": 60,
-            "event_date": "2011-10-19T22:00:00",
-            "event_max_seat": 40,
-            "event_location": "Ilima rooftop"
-        }
-    },
-    {
-        "pk": 112,
-        "model": "smartgrid.event",
-        "fields": {
-            "duration": 240,
-            "event_date": "2011-11-05T09:00:00",
-            "event_max_seat": 12,
-            "event_location": "Hale Aloha courtyard"
-        }
-    },
-    {
-        "pk": 113,
-        "model": "smartgrid.event",
-        "fields": {
-            "duration": 60,
-            "event_date": "2011-10-30T12:00:00",
-            "event_max_seat": 20,
-            "event_location": "Hale Aloha courtyard"
-        }
-    },
-    {
-        "pk": 114,
-        "model": "smartgrid.event",
-        "fields": {
-            "duration": 60,
-            "event_date": "2011-10-27T18:30:00",
-            "event_max_seat": 200,
-            "event_location": "Hale Aloha courtyard"
-        }
-    },
-    {
-        "pk": 115,
-        "model": "smartgrid.event",
-        "fields": {
-            "duration": 60,
-            "event_date": "2011-10-24T13:00:00",
-            "event_max_seat": 30,
-            "event_location": "Campus Center Executive Dining Room"
-        }
-    },
-    {
-        "pk": 124,
-        "model": "smartgrid.event",
-        "fields": {
-            "duration": 120,
-            "event_date": "2011-10-22T16:00:00",
-            "event_max_seat": 25,
-            "event_location": "Hale Aloha courtyard"
-        }
-    },
-    {
-        "pk": 119,
-        "model": "smartgrid.event",
-        "fields": {
-            "duration": 60,
-            "event_date": "2011-10-25T22:00:00",
-            "event_max_seat": 50,
-            "event_location": "Lehua rooftop"
-        }
-    },
-    {
-        "pk": 120,
-        "model": "smartgrid.event",
-        "fields": {
-            "duration": 60,
-            "event_date": "2011-11-02T15:30:00",
-            "event_max_seat": 20,
-            "event_location": "Krauss Hall, Room 012"
-        }
-    },
-    {
-        "pk": 122,
-        "model": "smartgrid.event",
-        "fields": {
-            "duration": 60,
-            "event_date": "2011-11-03T22:00:00",
-            "event_max_seat": 25,
-            "event_location": "Ilima rooftop"
-        }
-    },
-    {
-        "pk": 123,
-        "model": "smartgrid.event",
-        "fields": {
-            "duration": 60,
-            "event_date": "2011-10-26T22:00:00",
-            "event_max_seat": 50,
-            "event_location": "Mokihana rooftop"
-        }
-    },
-    {
-        "pk": 125,
-        "model": "smartgrid.event",
-        "fields": {
-            "duration": 240,
-            "event_date": "2011-10-29T10:30:00",
-            "event_max_seat": 9,
-            "event_location": "Hale Aloha courtyard"
-        }
-    },
-    {
-        "pk": 130,
-        "model": "smartgrid.event",
-        "fields": {
-            "duration": 30,
-            "event_date": "2011-11-04T10:00:00",
-            "event_max_seat": 100,
-            "event_location": "Sustainability Courtyard"
         }
     }
 ]

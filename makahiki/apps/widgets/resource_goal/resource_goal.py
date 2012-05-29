@@ -25,7 +25,8 @@ def team_goal_settings(team, resource):
 
 def is_manual_entry(team, resource):
     """Returns true if the game uses manual entry for the given team and resource."""
-    return team_goal_settings(team, resource).manual_entry
+    gs = team_goal_settings(team, resource)
+    return gs.manual_entry if gs else None
 
 
 def _get_resource_goal(resource):
