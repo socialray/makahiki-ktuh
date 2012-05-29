@@ -1,0 +1,33 @@
+{% with events=view_objects.status__rsvps.events excursions=view_objects.status__rsvps.excursions %} 
+
+<div class="content-box widget">
+    <div class="content-box-title">
+        Event RSVPs
+    </div>
+    <div class="content-body">
+        <table>
+            {% if events %}
+                <tr>
+                    <th class="padding-right">Event</th>
+                    <th>Seats</th>
+                    <th>RSVPs</th>
+                </tr>
+                {% for event in events %}
+                    <tr>
+                        <td><a
+                                href='{% url activity_view_rsvps event.type event.slug %}'>{{ event.title }}</a>
+                        </td>
+                        <td>{{ event.event.event_max_seat }}</td>
+                        <td>{{ event.rsvps }}</td>
+                    </tr>
+                {% endfor %}
+            {% else %}
+                <tr>
+                    <td>There are no RSVPs</td>
+                </tr>
+            {% endif %}
+        </table>
+    </div>
+</div> 
+ 
+{% endwith %}
