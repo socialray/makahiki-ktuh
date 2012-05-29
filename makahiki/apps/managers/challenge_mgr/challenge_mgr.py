@@ -83,8 +83,14 @@ def has_points(user, points):
     return user.get_profile().points() >= points
 
 
+def is_admin(user):
+    """Returns True if the user is an admin."""
+    return user.is_staff
+
+
 PAGE_PREDICATES = {
     "has_points": has_points,
+    "is_admin": is_admin,
 }
 
 
@@ -136,8 +142,10 @@ def get_round_info(round_name=None):
     rounds = settings.COMPETITION_ROUNDS
     if not round_name:
         return rounds
-    else:
+    elif round_name in rounds:
         return rounds[round_name]
+    else:
+        return None
 
 
 def get_current_round_info():
