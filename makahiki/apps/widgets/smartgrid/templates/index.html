@@ -4,7 +4,7 @@
         <a href="#" style="float: right">
             <img src="{{ STATIC_URL}}images/icons/icon-help-sm.png" width="20" align="center"
                  title="Click to get help about this window"
-                 onclick="toggleHelp('widget', 'smart-grid-game'); return false;"
+                 onclick="toggleHelp(event, 'widget', 'smart-grid-game'); return false;"
                     /></a>
     </div>
     <div class="content-box-contents">
@@ -87,7 +87,7 @@
                                                         <img src="{{ STATIC_URL}}images/lock24.png"
                                                              width="22" align="top"
                                                              title="Click to see how to unlock"
-                                                             onclick="unlock_dialog('{{task.type}}','{{task.slug}}',
+                                                             onclick="unlock_dialog(event, '{{task.type}}','{{task.slug}}',
                                                                      {% if task.depends_on_text %}
                                                                          '{{task.depends_on_text}}'
                                                                      {% else %}
@@ -179,16 +179,19 @@
         }
     });
 
-    function unlock_dialog(type, slug, depends_on) {
+    function unlock_dialog(event, type, slug, depends_on) {
         var modalElement = $('#unlockModal');
-
+           
+        var pos_y = event.pageY;
+        var body_y = $('body').height();
+        console.log("event y " + pos_y + " body height " + body_y);
+        document.getElementById('unlockModal').style.top = (pos_y - 50) + "px";
         modalElement.modal({
             backdrop: true,
             keyboard: true,
             show: false
         }); 
         modalElement.find('#depends_on').html(depends_on);
-        
         // set up event logging
         modalElement.on('shown', function() {
             log_js_action(type, slug, 'view-lock-open');

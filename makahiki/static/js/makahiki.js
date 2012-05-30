@@ -86,7 +86,7 @@ var log_js_action = function(type, object, action) {
   jQuery.get("/log/" + type + "/" + object + "/" + action + "/");
 }
 
-var toggleHelp = function(category, slug) {
+var toggleHelp = function(event, category, slug) {
 	var modalElement = $('#helpModal');
     // set up event logging
     modalElement.on('shown', function() {
@@ -109,6 +109,7 @@ var toggleHelp = function(category, slug) {
         	          "' and slug '" + slug + "'.");
         }
     });
+    document.getElementById('helpModal').style.top = event.pageY + "px";
     modalElement.modal('show');
 }
 
