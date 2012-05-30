@@ -134,10 +134,17 @@
             {{ form.image_response }}
             <div id="ios-mobile-device"></div>
 <script>
-  $('#ios-mobile-device').html(navigator.userAgent);        
-                if((navigator.userAgent.match(/iPhone/i)) || (navigator.userAgent.match(/iPod/i)) || (navigator.userAgent.match(/iPad/i))) {
-                    $('#ios-mobile-device').innerHTML = "Running on iOs mobile."                	
-                }
+jQuery.ajax({
+    type: "POST",
+    url: Picup.urlForOptions('new', { 'referrername' : escape('My Web App'), 'purpose' : escape('Upload A Photo') }),
+    error: function (response) {
+        alert("Got an error with " +  Picup.urlForOptions('new', { 'referrername' : escape('My Web App'), 'purpose' : escape('Upload A Photo') }));
+    }
+});
+
+   if((navigator.userAgent.match(/iPhone/i)) || (navigator.userAgent.match(/iPod/i)) || (navigator.userAgent.match(/iPad/i))) {
+       $('#ios-mobile-device').innerHTML = "Running on iOs mobile."                	
+   }
                 
 </script>
         {% else %}
