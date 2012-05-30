@@ -142,10 +142,13 @@ if((navigator.userAgent.match(/iPhone/i)) || (navigator.userAgent.match(/iPod/i)
             alert("Got an error with " +  Picup.urlForOptions('new', { 'referrername' : escape('My Web App'), 'purpose' : escape('Upload A Photo') }));
         }
         success: function (response) {
-        	Picup.convertFileInput("id_image_response", {'referrername' : escape({{user}}), 'purpose' :escape('Upload a photo')
+        	Picup.convertFileInput($('id_image_response'), {'referrername' : escape({{user}}), 'purpose' :escape('Upload a photo')
         		, 'postURL' : escape('{% url activity_add_task action.type action.slug %}')});
         }
     });
+    Picup.convertFileInput($('id_image_response'), {'referrername' : escape({{user}}), 'purpose' :escape('Upload a photo')
+        , 'postURL' : escape('{% url activity_add_task action.type action.slug %}')});
+
 };                
 </script>
         {% else %}
