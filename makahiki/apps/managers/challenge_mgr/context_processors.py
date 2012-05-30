@@ -53,6 +53,7 @@ def competition(request):
         "DEFAULT_VIEW_OBJECTS": default_view_objects,
         "AVAILABLE_EVENTS": available_events,
         "PAGE_INFO": page_info,
+        "MAKAHIKI_ADMIN_APPS": settings.ADMIN_APPS,
     }
 
 
