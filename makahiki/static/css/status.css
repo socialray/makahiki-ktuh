@@ -6,7 +6,8 @@ ul,ol{margin:0;}
 .nav li a{padding:4px;}
 .nav-tabs{margin-bottom:0px;}
 .content-box{text-align:center;margin-left:1%;margin-right:1%;}
-.widget{height:997px;}
-@media (max-width:1125px){.widget{height:600px;}}.tab-pane{height:835px;overflow:scroll;}
-.padding-right{padding-right:10%;}
+.widget .widget-content{height:1000px;overflow-y:scroll;}
+.demi-widget .widget-content,.demi-widget .content-body{height:472px;overflow-y:scroll;}
+.tab-pane{height:745px;overflow-y:scroll;}
+@media (max-width:1650px){.wrap{height:806px;overflow-y:scroll;}}.padding-right{padding-right:10%;}
 .status-activities .content-box{margin-left:2px;margin-right:2px;}

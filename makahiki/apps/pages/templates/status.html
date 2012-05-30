@@ -75,13 +75,19 @@
         
         
         <div class="row-fluid"> 
+                <!--Approval Queue & Unused tickets-->
+                {% if view_objects.status__actions %}
+                <div class="span2">  
+                    {% include "widgets/status/actions/templates/approval_queue.html" %}  
+                {% endif %} 
+     
+                  {% include "widgets/status/prizes/templates/unused_tickets.html" %} 
+                </div> 
+
                  <!--RSVPs-->
                 {% if view_objects.status__rsvps %}  
                     <div class="span2"> 
-                        {% include "widgets/status/rsvps/templates/events.html" %} 
-                    </div>
-
-                    <div class="span2"> 
+                        {% include "widgets/status/rsvps/templates/events.html" %}  
                         {% include "widgets/status/rsvps/templates/excursions.html" %} 
                     </div>
                 {% endif %}  
@@ -91,32 +97,43 @@
                             {% include "widgets/status/actions/templates/index.html" %} 
 
                 {% endif %}   
+
+
+                {% if view_objects.status__actions %}
+                <!--Quests-->
+                <div class="span2">
+                   {% include "widgets/status/actions/templates/quests.html" %}
+                </div>          
+                {% endif %} 
         </div>
 
 
         <div class="row-fluid">
-            {% if view_objects.status__actions %}
-            <!--Quests-->
-            <div class="span2">
-               {% include "widgets/status/actions/templates/quests.html" %}
-            </div>          
-            {% endif %}
 
             <!--Users -->
             {% if view_objects.status__users %} 
-                    {% include "widgets/status/users/templates/index.html" %} 
+                {% include "widgets/status/users/templates/index.html" %} 
             {% endif %}
  
-            {% if view_objects.status__actions %}
-                <div class="span2">  
-                            {% include "widgets/status/actions/templates/approval_queue.html" %} 
+            <div class="span2">
+                <div class="content-box widget">
+                    <div class="content-box-title">
+                        Watt-Depot Status
+                    </div>
+                    <div class="widget-content">
+                    </div>
                 </div>
-            {% endif %} 
+            </div>
 
             <div class="span2">
-              {% include "widgets/status/prizes/templates/unused_tickets.html" %} 
+                <div class="content-box widget">
+                    <div class="content-box-title">
+                        Logging
+                    </div>
+                    <div class="widget-content">
+                    </div>
+                </div>
             </div>
-            <div class="span2"></div>
       </div> 
 {% endblock %}
 

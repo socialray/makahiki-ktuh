@@ -1,10 +1,10 @@
 {% with events=view_objects.status__rsvps.events excursions=view_objects.status__rsvps.excursions %} 
-<div class="content-box widget">
+<div class="content-box demi-widget">
     <div class="content-box-title">
         Excursion RSVPs
     </div>
-    <div class="content-body">
-        <table>
+    <div class="widget-content"> 
+        <table class="table-striped">
             {% if excursions %}
                 <tr>
                     <th class="padding-right">Event</th>

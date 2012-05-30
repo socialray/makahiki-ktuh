@@ -27,7 +27,7 @@
         <div class="item">
             <div class="set-width-outer-width">
     {% else %}
-            <div id="{{resource.name}}-{{round_name|cut:" "}}" class="tab-pane fade active in"> 
+            <div id="{{resource.name}}-{{round_name|cut:" "}}" class="tab-pane fade active in {% if goals_scoreboard and goals_scoreboard|length > 0 %}wrap{%endif%}"> 
     {% endif %}
             <div class="content-box-title">
                 {{ round_name }} {{ resource.name|capfirst }} {% if not no_carousel %}Score Board{% endif %}
@@ -37,7 +37,7 @@
                         <img src="{{ STATIC_URL}}images/icons/icon-help-sm.png" width="20"
                          align="center"
                          title="Click to get help about this window"
-                         onclick="toggleHelp('widget', 'resource-scoreboard'); return false;"/>
+                         onclick="toggleHelp(event, 'widget', 'resource-scoreboard'); return false;"/>
                     </a>
                 {% endif %}
             </div> 
@@ -73,7 +73,7 @@
         <div class="item">
             <div class="set-width-outer-width">
     {% else %}
-         <div id="{{resource.name}}-goal" class="tab-pane fade active in"> 
+         <div id="{{resource.name}}-goal" class="tab-pane fade active in{% if goals_scoreboard and goals_scoreboard|length > 0 %}wrap{%endif%}"> 
     {% endif %}
             <div class="content-box-title">
                 Completed Energy Goals
@@ -82,7 +82,7 @@
                         <img src="{{ STATIC_URL}}images/icons/icon-help-sm.png" width="20"
                          align="center"
                          title="Click to get help about this window"
-                         onclick="toggleHelp('widget', 'resource-scoreboard'); return false;"/>
+                         onclick="toggleHelp(event, 'widget', 'resource-scoreboard'); return false;"/>
                     </a>
                 {% endif %}
             </div>

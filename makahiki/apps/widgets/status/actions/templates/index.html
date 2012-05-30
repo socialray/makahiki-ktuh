@@ -1,15 +1,14 @@
 {% with pending_members=view_objects.status__actions.pending_members oldest_member=view_objects.status__actions.oldest_member quests=view_objects.status__actions.quests popular_tasks=view_objects.status__actions.popular_tasks%}
 
- 
-
-        {% for key, value in popular_tasks.items %}
-        <div class="span2 ">
-             <div class="content-box widget">
-                <div class="widget-content">
+        {% for key, value in popular_tasks.items%}
+        {% if key != "excursion" %}<div class="span2 ">{%endif%}
+             <div class="content-box {% if key == "excursion" or key == "event"%}demi-{% endif %}widget">
                     <div class="content-box-title">
                         Popular {{ key|capfirst }}
                     </div>
-                        <table>
+                        
+                        <div class="widget-content">
+                        <table class="table-striped">
                             <tr>
                                 <th>{{ key }}</th>
                                 <th>Submts</th>
@@ -27,6 +26,6 @@
                         </table>
                   </div>
               </div> 
-      </div> 
+     {% if key != "event" %} </div> {%endif%}
         {% endfor %}
 {% endwith %}

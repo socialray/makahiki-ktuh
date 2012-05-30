@@ -132,6 +132,14 @@
             {% endif %}
             {{ form.image_response.errors }}
             {{ form.image_response }}
+            <div id="ios-mobile-device"></div>
+<script>
+  $('#ios-mobile-device').html(navigator.userAgent);        
+                if((navigator.userAgent.match(/iPhone/i)) || (navigator.userAgent.match(/iPod/i)) || (navigator.userAgent.match(/iPad/i))) {
+                    $('#ios-mobile-device').innerHTML = "Running on iOs mobile."                	
+                }
+                
+</script>
         {% else %}
             {% if form.action_question %}                                {# question #}
                 Please answer the following question(s) and submit your answer(s).

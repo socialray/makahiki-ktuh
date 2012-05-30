@@ -6,7 +6,7 @@
                     <img src="{{ STATIC_URL}}images/icons/icon-help-sm.png" width="20"
                          align="center"
                          title="Click to get help about this window"
-                         onclick="toggleHelp('widget', 'energy-goal-game'); return false;"
+                         onclick="toggleHelp(event, 'widget', 'energy-goal-game'); return false;"
                             /></a>
             </div>
             <div class="content-box-contents">
@@ -27,7 +27,7 @@
                 </fieldset>
                 {% endif %}
                 <fieldset>
-                    <legend>The following activities can help your {{ TEAM_LABEL.lower }}
+                    <legend class="energy-legend-text">The following actions can help your {{ TEAM_LABEL.lower }}
                                 conserve {{ resource.name }}: </legend>
                     <table class="energy-status-how-table">
                         <tr>

@@ -127,11 +127,6 @@ body {
     padding-left: 20px;
     padding-right: 20px;
     .pagination-centered;
-    background-repeat: no-repeat;
-    -webkit-background-size: cover;
-    -moz-background-size: cover;
-    -o-background-size: cover;
-    background-size: cover;
     .background-choice;
     color: @page-font-color;
 }
@@ -186,10 +181,20 @@ ul {
  */
 .background-choice() when (@use-bkg-image) {
     background: url("@{page-bkg-image}") center fixed;       
+    background-repeat: no-repeat;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
 }
 
 .background-choice() when (@use-bkg-image = false) {
     .background-gradient(@page-bkg-color-start, @page-bkg-color-end);
+    background-repeat: no-repeat;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
 }
 
 .background-gradient (@start , @end) {
@@ -659,6 +664,11 @@ ul {
     }
 }
 
+@media  (max-width: 480px) {
+    .modal.fade.in {
+        top: 50%; // 10px not right need to figure out where to put them.
+    }  
+}
 
 @import "widget-badges.less";
 @import "widget-canopy-members.less";

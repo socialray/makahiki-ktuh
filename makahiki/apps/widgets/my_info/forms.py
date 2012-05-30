@@ -19,6 +19,7 @@ class ProfileForm(forms.Form):
 
     display_name = forms.CharField(required=True, max_length=20, min_length=1)
     THEME_CHOICES = ((key, key[6:].capitalize()) for key in settings.INSTALLED_THEMES)
+
     theme = forms.ChoiceField(choices=THEME_CHOICES)
 
     # Event notifications
