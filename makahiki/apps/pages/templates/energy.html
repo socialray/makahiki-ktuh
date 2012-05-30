@@ -13,15 +13,6 @@
     <div class="container-fluid">
         <div class="row-fluid">
             <!-- left column -->
-            <div class="span5">
-                {% if view_objects.energy_power_meter %}
-                    {% include "widgets/energy_power_meter/templates/index.html" %}
-                {% endif %}
-                {% if view_objects.resource_scoreboard__energy %}
-                    {% include "widgets/resource_scoreboard/energy/templates/index.html" %}
-                {% endif %}
-            </div>
-            <!-- right column -->
             <div class="span7">
                 {% if view_objects.resource_goal__energy %}
                     {% include "widgets/resource_goal/energy/templates/index.html" %}
@@ -30,6 +21,17 @@
                     {% include "widgets/wallpost/templates/index.html" %}
                 {% endif %}
             </div>
+
+            <!-- right column -->
+            <div class="span5">
+                {% if view_objects.energy_power_meter %}
+                    {% include "widgets/energy_power_meter/templates/index.html" %}
+                {% endif %}
+                {% if view_objects.resource_scoreboard__energy %}
+                    {% include "widgets/resource_scoreboard/energy/templates/index.html" %}
+                {% endif %}
+            </div>
+
         </div>
     </div>
 {% endblock %}
