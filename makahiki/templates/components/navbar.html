@@ -26,7 +26,7 @@
                             </a>
                         </li>
 
-                        {% for page in PAGE_INFO %}
+                        {% for page in ALL_PAGE_INFO %}
                           {% if page.is_unlock  %}
                             <!-- Choose the correct active page by adding active to the class list -->
                             <li {% if view_objects.active == page.name %}class="active" {% endif %}>

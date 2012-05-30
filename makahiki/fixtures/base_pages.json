@@ -113,7 +113,7 @@
       "label": "Status",
       "priority": 10,
       "url": "/status",
-      "unlock_condition": "True"
+      "unlock_condition": "is_admin()"
     }
   },
   {

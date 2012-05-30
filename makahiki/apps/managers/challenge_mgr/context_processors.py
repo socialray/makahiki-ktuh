@@ -20,14 +20,14 @@ def competition(request):
     overall_member_count = None
     available_events = None
     default_view_objects = None
-    page_info = None
+    all_page_info = None
     css_theme = settings.CHALLENGE.theme
 
     if user.is_authenticated():
         profile = user.get_profile()
 
         default_view_objects = _get_default_view_objects(request)
-        page_info = challenge_mgr.page_info(user)
+        all_page_info = challenge_mgr.all_page_info(user)
 
         if profile.team:
             team_member_count = user.get_profile().team.profile_set.count()
@@ -52,7 +52,7 @@ def competition(request):
         "OVERALL_MEMBER_COUNT": overall_member_count,
         "DEFAULT_VIEW_OBJECTS": default_view_objects,
         "AVAILABLE_EVENTS": available_events,
-        "PAGE_INFO": page_info,
+        "ALL_PAGE_INFO": all_page_info,
         "MAKAHIKI_ADMIN_APPS": settings.ADMIN_APPS,
     }
 

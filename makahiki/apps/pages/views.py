@@ -5,7 +5,7 @@ from django.shortcuts import render_to_response
 from django.template import RequestContext
 from django.utils import importlib
 from django.views.decorators.cache import never_cache
-from django.http import HttpResponseRedirect
+from django.http import HttpResponseRedirect, HttpResponseForbidden, Http404
 from django.core.urlresolvers import reverse
 from django.contrib.auth.decorators import login_required
 from django.conf import settings
@@ -30,13 +30,20 @@ def index(request):
     handle dynamically lay-outed pages defined in page_settings.
     """
     page_name = request.path[1:][:-1]
-
-    # get the view_objects
     view_objects = {}
-    is_page_defined = supply_view_objects(request, page_name, view_objects)
 
-    if not is_page_defined:
-        page_name = "home"
+    if page_name != "home":
+        page_info = challenge_mgr.page_info(request.user, page_name)
+        if not page_info:
+            raise Http404
+        elif not page_info.is_unlock:
+            return HttpResponseForbidden('<h1>Permission denied</h1>')
+
+        # get the view_objects
+        is_page_defined = supply_view_objects(request, page_name, view_objects)
+
+        if not is_page_defined:
+            raise Http404
 
     # sets the active page
     view_objects['active'] = page_name
@@ -52,6 +59,7 @@ def index(request):
 
 def supply_view_objects(request, page_name, view_objects):
     """ Returns view_objects supplied widgets defined in PageSettings. """
+
     page_settings = challenge_mgr.page_settings(page_name)
     if not page_settings:
         return False

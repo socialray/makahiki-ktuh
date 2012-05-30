@@ -85,7 +85,7 @@ def has_points(user, points):
 
 def is_admin(user):
     """Returns True if the user is an admin."""
-    return user.is_staff
+    return user.is_staff or user.is_superuser
 
 
 PAGE_PREDICATES = {
@@ -103,12 +103,23 @@ def eval_page_unlock(user, page):
     return utils.eval_predicates(predicates, user, PAGE_PREDICATES)
 
 
-def page_info(user):
+def all_page_info(user):
     """Returns a list of all pages with their current lock state."""
     all_pages = PageInfo.objects.all().order_by("priority")
     for page in all_pages:
         page.is_unlock = eval_page_unlock(user, page)
     return all_pages
+
+
+def page_info(user, page_name):
+    """Returns the specific page info object with its current lock state."""
+    page = PageInfo.objects.filter(name=page_name)
+    if page:
+        page = page[0]
+        page.is_unlock = eval_page_unlock(user, page)
+        return page
+    else:
+        return None
 
 
 def page_settings(page_name):
