@@ -134,18 +134,19 @@
             {{ form.image_response }}
             <div id="ios-mobile-device"></div>
 <script>
-jQuery.ajax({
-    type: "POST",
-    url: Picup.urlForOptions('new', { 'referrername' : escape('My Web App'), 'purpose' : escape('Upload A Photo') }),
-    error: function (response) {
-        alert("Got an error with " +  Picup.urlForOptions('new', { 'referrername' : escape('My Web App'), 'purpose' : escape('Upload A Photo') }));
-    }
-});
-
-   if((navigator.userAgent.match(/iPhone/i)) || (navigator.userAgent.match(/iPod/i)) || (navigator.userAgent.match(/iPad/i))) {
-       $('#ios-mobile-device').innerHTML = "Running on iOs mobile."                	
-   }
-                
+if((navigator.userAgent.match(/iPhone/i)) || (navigator.userAgent.match(/iPod/i)) || (navigator.userAgent.match(/iPad/i))) {
+    jQuery.ajax({
+        type: "POST",
+        url: Picup.urlForOptions('new', { 'referrername' : escape('My Web App'), 'purpose' : escape('Upload A Photo') }),
+        error: function (response) {
+            alert("Got an error with " +  Picup.urlForOptions('new', { 'referrername' : escape('My Web App'), 'purpose' : escape('Upload A Photo') }));
+        }
+        success: function (response) {
+        	Picup.convertFileInput("id_image_response", {'referrername' : escape({{user}}), 'purpose' :escape('Upload a photo')
+        		, 'postURL' : escape('{% url activity_add_task action.type action.slug %}')});
+        }
+    });
+};                
 </script>
         {% else %}
             {% if form.action_question %}                                {# question #}
