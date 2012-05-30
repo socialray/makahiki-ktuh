@@ -193,6 +193,7 @@ INSTALLED_WIDGET_APPS = (
     'status.rsvps',
     'status.users',
     'status.actions',
+    'logging',
 )
 
 for widget in INSTALLED_WIDGET_APPS:

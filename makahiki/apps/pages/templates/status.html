@@ -114,25 +114,28 @@
             {% if view_objects.status__users %} 
                 {% include "widgets/status/users/templates/index.html" %} 
             {% endif %}
- 
+
             <div class="span2">
-                <div class="content-box widget">
+              <div class="content-box widget">
+                  <div class="content-box-title">
+                      Empty
+                  </div>
+                  <div class="widget-content"></div>
+              </div>
+            </div>
+
+            <div class="span4">
+                <div class="content-box demi-widget">
                     <div class="content-box-title">
                         Watt-Depot Status
                     </div>
                     <div class="widget-content">
                     </div>
-                </div>
-            </div>
+                </div> 
 
-            <div class="span2">
-                <div class="content-box widget">
-                    <div class="content-box-title">
-                        Logging
-                    </div>
-                    <div class="widget-content">
-                    </div>
-                </div>
+                {% if view_objects.logging %}
+                    {% include "widgets/logging/templates/index.html" %}
+                {% endif %}
             </div>
       </div> 
 {% endblock %}

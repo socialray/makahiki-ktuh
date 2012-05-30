@@ -378,6 +378,15 @@
     }
   },
   {
+    "pk": 39,
+    "model": "challenge_mgr.pagesettings",
+    "fields": {
+      "widget": "logging",
+      "enabled": true,
+      "page": 10
+    }
+  },
+  {
     "pk": 38,
     "model": "challenge_mgr.pagesettings",
     "fields": {

@@ -1,0 +1,18 @@
+{% with log_entries=view_objects.logging %} 
+
+<!--start test-->  
+  <div class="content-box demi-widget">
+      <div class="content-box-title">
+        Logging
+      </div>
+      <div class="widget-content">
+          <ul>
+              {% for entry in log_entries.entries %}
+                  <li>
+                      <p>{{entry.request_time}} {{entry.remote_ip}} {{entry.remote_user}} {{entry.request_method}} {{entry.request_url}} <b>{{entry.response_status}}</b>
+                  </li>
+              {% endfor%}
+          </ul>
+      </div>
+  </div>
+{% endwith %}
