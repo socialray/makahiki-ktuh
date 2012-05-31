@@ -446,14 +446,23 @@ MAKAHIKI_LDAP_BIND_PASSWORD = env('MAKAHIKI_LDAP_BIND_PWD', '')
 AUTH_LDAP_BIND_PASSWORD = MAKAHIKI_LDAP_BIND_PASSWORD
 
 MAKAHIKI_SECRET_KEY = env('MAKAHIKI_SECRET_KEY', '')
-"""[Optional]  Specifies the Django secret key setting.
+"""[Optional] Specifies the Django secret key setting.
 See https://docs.djangoproject.com/en/dev/ref/settings/#secret-key"""
 SECRET_KEY = MAKAHIKI_SECRET_KEY
 
+MAKAHIKI_USE_FACEBOOK = env('MAKAHIKI_USE_FACEBOOK', '').lower() == "true"
+"""[Optional] If "true", use facebook integration."""
 MAKAHIKI_FACEBOOK_APP_ID = env('MAKAHIKI_FACEBOOK_APP_ID', '')
 """[Required if using Facebook] App ID required for Facebook integration."""
 MAKAHIKI_FACEBOOK_SECRET_KEY = env('MAKAHIKI_FACEBOOK_SECRET_KEY', '')
 """[Required if using Facebook] Secret key required for Facebook integration."""
+if MAKAHIKI_USE_FACEBOOK:
+    if not MAKAHIKI_FACEBOOK_APP_ID:
+        print "Environment variable MAKAHIKI_FACEBOOK_APP_ID not defined. Exiting."
+        sys.exit(1)
+    if not MAKAHIKI_FACEBOOK_SECRET_KEY:
+        print "Environment variable MAKAHIKI_FACEBOOK_SECRET_KEY not defined. Exiting."
+        sys.exit(1)
 
 MAKAHIKI_USE_LOGFILE = env('MAKAHIKI_USE_LOGFILE', '').lower() == "true"
 """[Optional] if "true", use logfile to store application logs."""

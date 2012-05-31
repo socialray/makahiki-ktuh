@@ -212,14 +212,12 @@ def get_user_from_cookie(cookies, app_id, app_secret):
     authentication at http://developers.facebook.com/docs/authentication/.
     """
     cookie = cookies.get("fbsr_" + app_id, "")
-    print cookie
-    if not cookie: 
+    if not cookie:
         return None
 
     sig, payload = cookie.split(u'.', 1)
     sig = base64_url_decode(sig)
     data = json.loads(base64_url_decode(payload))
-    print data
     expected_sig = hmac.new(
         app_secret, msg=payload, digestmod=hashlib.sha256).digest()
 

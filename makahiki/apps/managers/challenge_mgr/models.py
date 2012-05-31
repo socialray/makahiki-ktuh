@@ -42,9 +42,6 @@ class ChallengeSettings(models.Model):
         default="Team",
         help_text="The display label for team.",
         max_length=50,)
-    use_facebook = models.BooleanField(
-        default=False,
-        help_text="Use Facebook ?")
 
     # CAS settings
     use_cas_auth = models.BooleanField(

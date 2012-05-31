@@ -199,7 +199,7 @@ def _get_profile_form(request, form=None, non_xhr=False):
     """Helper method to render the profile form."""
     fb_id = None
     facebook_photo = None
-    if settings.CHALLENGE.use_facebook:
+    if settings.MAKAHIKI_USE_FACEBOOK:
         fb_id = facebook.get_user_from_cookie(
             request.COOKIES,
             settings.MAKAHIKI_FACEBOOK_APP_ID,

@@ -35,7 +35,7 @@
                       <p>Upload a new picture (optional):</p>
                       {{ form.avatar }}
                   </div>
-                  {% if CHALLENGE.use_facebook %}
+                  {% if MAKAHIKI_FACEBOOK_APP_ID %}
                     <div id="profile-picture-facebook">
                        {% include "first-login/profile-facebook.html" %}
                     </div>
