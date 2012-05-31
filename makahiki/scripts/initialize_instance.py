@@ -1,16 +1,16 @@
 #!/usr/bin/python
 
 """Invocation:  scripts/initialize_instance
-Useful for initial configuration of a makahiki instance, and for re-configuration after
-pulling changes from the repository.
+Use this script to create an instance with the default or test configuration.
+
+Usage: initialize_instance.py [-t|--type=[default|test]] <site_name>
 
 Performs the following:
   * Updates and/or installation of any modules in requirements.txt
-  * Syncs the database.
-  * Migrates the database schemas.
-  * Loads the default configuration of data (via scripts/load_data)
-  * Reinitializes the test users and sets up test data.
-  * Deals with static media locations.
+  * Syncs the database and migrates the database schemas.
+  * collect and copy the static and media files to the desired location.
+  * create the specified challenge
+  * Loads the default or test configuration of data
   """
 import getopt
 
@@ -83,8 +83,6 @@ def main(argv):
         os.system("python manage.py loaddata %s" % os.path.join(fixture_path, "test_users.json"))
 
         os.system("python manage.py setup_test_data all")
-
-    # set the site_name
 
 
 if __name__ == '__main__':

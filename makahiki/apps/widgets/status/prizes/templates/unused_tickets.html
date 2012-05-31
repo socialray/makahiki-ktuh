@@ -1,5 +1,5 @@
 
-<div class="content-box widget">
+<div class="content-box demi-widget">
     <div class="widget-contents">
         <div class="content-box-title">
             Unused Tickets
@@ -11,7 +11,7 @@
             {% if has_errors %}
                 <div style='color: red; font-weight: bold'>
                     The following users have more tickets than points
-                    <ul>
+                    <ul class="table-striped">
                         {% for profile in errors %}
                             <li>{{ profile.name }} ({{ profile.user.username }})</li>
                         {% endfor %}

@@ -113,7 +113,7 @@
       "label": "Status",
       "priority": 10,
       "url": "/status",
-      "unlock_condition": "True"
+      "unlock_condition": "is_admin()"
     }
   },
   {
@@ -373,6 +373,15 @@
     "model": "challenge_mgr.pagesettings",
     "fields": {
       "widget": "resource_scoreboard.energy",
+      "enabled": true,
+      "page": 10
+    }
+  },
+  {
+    "pk": 39,
+    "model": "challenge_mgr.pagesettings",
+    "fields": {
+      "widget": "logging",
       "enabled": true,
       "page": 10
     }

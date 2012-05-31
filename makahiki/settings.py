@@ -193,6 +193,7 @@ INSTALLED_WIDGET_APPS = (
     'status.rsvps',
     'status.users',
     'status.actions',
+    'logging',
 )
 
 for widget in INSTALLED_WIDGET_APPS:
@@ -201,6 +202,35 @@ for widget in INSTALLED_WIDGET_APPS:
 # migration support, need to be the last app.
 # nose has to be after south!
 INSTALLED_APPS += ('south', 'django_nose',)
+
+################
+# ADMIN APPS
+################
+ADMIN_APPS = (
+    ("Challenge", ({"name": "Challenge settings", "url": "challenge_mgr/challengesettings"},
+                   {"name": "Round settings", "url": "challenge_mgr/roundsettings"},
+                   {"name": "Page info", "url": "challenge_mgr/pageinfo"},
+                   {"name": "Score settings", "url": "score_mgr/scoresettings"})),
+    ("Player", ({"name": "Groups", "url": "team_mgr/group"},
+                   {"name": "Teams", "url": "team_mgr/team"},
+                   {"name": "Users", "url": "auth/user"},
+                   {"name": "Profiles", "url": "player_mgr/profile"},
+                   {"name": "Team Posts", "url": "team_mgr/post"})),
+    ("Resource", ({"name": "Energy goal settings", "url": "resouce_goal/energygoalsetting"},
+                   {"name": "Energy usages", "url": "resource_mgr/energyusage"},
+                   {"name": "Water goal settings", "url": "resource_goal/watergoalsetting"},
+                   {"name": "Water usages", "url": "resource_mgr/waterusage"})),
+    ("Smartgrid", ({"name": "Categories", "url": "smartgrid/category"},
+                   {"name": "Activities", "url": "smartgrid/activity"},
+                   {"name": "Commitments", "url": "smartgrid/commitment"},
+                   {"name": "Events", "url": "smartgrid/event"},
+                   {"name": "Action members", "url": "smartgrid/actionmember"})),
+    ("Prize", ({"name": "Challenge Prizes", "url": "prizes/prize"},
+                   {"name": "Raffle Prizes", "url": "raffle/raffleprize"})),
+    ("Misc", ({"name": "Helps", "url": "help/helptopic"},
+                   {"name": "Quests", "url": "quests/quest"},
+                   {"name": "Makahiki logs", "url": "log_mgr/makahikilog"})),
+    )
 
 ################
 # INSTALLED Theme
