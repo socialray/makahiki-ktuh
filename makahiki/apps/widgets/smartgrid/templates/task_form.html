@@ -132,24 +132,48 @@
             {% endif %}
             {{ form.image_response.errors }}
             {{ form.image_response }}
-            <div id="ios-mobile-device"></div>
-<script>
-if((navigator.userAgent.match(/iPhone/i)) || (navigator.userAgent.match(/iPod/i)) || (navigator.userAgent.match(/iPad/i))) {
-    jQuery.ajax({
-        type: "POST",
-        url: Picup.urlForOptions('new', { 'referrername' : escape('My Web App'), 'purpose' : escape('Upload A Photo') }),
-        error: function (response) {
-            alert("Got an error with " +  Picup.urlForOptions('new', { 'referrername' : escape('My Web App'), 'purpose' : escape('Upload A Photo') }));
-        }
-        success: function (response) {
-        	Picup.convertFileInput($('id_image_response'), {'referrername' : escape({{user}}), 'purpose' :escape('Upload a photo')
-        		, 'postURL' : escape('{% url activity_add_task action.type action.slug %}')});
-        }
-    });
-    Picup.convertFileInput($('id_image_response'), {'referrername' : escape({{user}}), 'purpose' :escape('Upload a photo')
-        , 'postURL' : escape('{% url activity_add_task action.type action.slug %}')});
 
-};                
+            <div id="ios-mobile-device"></div>
+<script src="{{STATIC_URL}}js/picup.js" type="text/javascript"></script>
+<script>
+var currentParams = {
+		'callbackURL'       : escape(window.location),
+        'debug'             : 'true',
+        'postURL'           : escape('{% url activity_add_task action.type action.slug %}'),
+        'purpose'           : escape('Upload image to Makahiki2.'),
+	    'referrername'      : escape('{{user}}'),
+}
+
+// Picup callback function
+function picUploaded(paramHash) {
+	
+}
+
+var canHandleFileupload = true;
+$(document).ready(function() {
+	var submit_button = document.getElementById('submit_form_button5');
+	var cancel_button = document.getElementById('cancel_form_button5');
+	var ios_mobile_div = document.getElementById('ios-mobile-device');
+if((navigator.userAgent.match(/iPhone/i)) || 
+   (navigator.userAgent.match(/iPod/i)) ||
+   (navigator.userAgent.match(/iPad/i))) {
+	    jQuery.ajax({
+            type: "POST",
+            url: Picup.urlForOptions('new', currentParams),
+            error: function (response) {
+                canHandleFileupload = false;
+            	alert("Got an error with " +  Picup.urlForOptions('new', currentParams));
+            }
+	    });
+ 	    if (canHandleFileupload) {
+	    	Picup.convertFileInput('id_image_response', currentParams);
+	    	submit_button.style.visibility = 'hidden'; 
+	    	cancel_button.style.visibility = 'hidden';
+ 	    } else {
+	    	ios_mobile_div.innerHTML = "<p>To upload photos from iOs mobile devices, please install the picup app <a href=\"http://www.picupapp.com\">http://www.picupapp.com</a>.</p>"
+ 	    }
+   };
+});
 </script>
         {% else %}
             {% if form.action_question %}                                {# question #}
@@ -194,7 +218,7 @@ if((navigator.userAgent.match(/iPhone/i)) || (navigator.userAgent.match(/iPod/i)
                     onclick='$("#submit_form_button5").attr("disabled", "disabled");javascript:this.form.submit(); return false;'>
                 Submit
             </button>
-            <button class="btn" style="cursor:pointer;"
+            <button id="cancel_form_button5" class="btn" style="cursor:pointer;"
                     onclick='$("#taskModal").modal("hide"); return false;'>Cancel
             </button>
         </div>
