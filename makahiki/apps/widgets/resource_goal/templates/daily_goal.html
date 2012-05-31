@@ -1,64 +1,100 @@
+<table cellpadding="1">
+    <tr>
+        <td>
+            <table cellpadding="2" border="1">
+                <tr>
+                    <td align="center" bgcolor="gray">
+                        <b>Mon</b>
+                    </td>
+                    <td align="center" bgcolor="gray">
+                        <b>Tue</b>
+                    </td>
+                    <td align="center" bgcolor="gray">
+                        <b>Wed</b>
+                    </td>
+                    <td align="center" bgcolor="gray">
+                        <b>Thu</b>
+                    </td>
+                    <td align="center" bgcolor="gray">
+                        <b>Fri</b>
+                    </td>
+                    <td align="center" bgcolor="gray">
+                        <b>Sat</b>
+                    </td>
+                    <td align="center" bgcolor="gray">
+                        <b>Sun</b>
+                    </td>
+                </tr>
+                <tr>
+                    {% for goal in daily_goal %}
+                        {% if forloop.first %}
+                            {% for day in goal.filler_days %}
+                                <td width="50"></td>
+                            {% endfor %}
+                        {% endif %}
+                        {% if not forloop.first and goal.date.weekday == 0 %}
+                            </tr>
+                            <tr>
+                        {% endif %}
+                        <td width="50">
+                            <span style="float: left; font-size: 0.7em; font-weight: bold;">
+                                  {{ goal.date|date:"n/j" }} </span>
+                            <br/>
 
-    <table cellpadding="1"
-           align="center">
-    <tr><td>
-      <table cellpadding="2" border="1"
-               style="text-align: center; vertical-align: top">
-        <tr>
-        {% for goal in daily_goal %}
-          {% if forloop.counter <= 7 %}
-            <td align="center" bgcolor="gray">
-              <b>{{ goal.date|date:"D"  }}</b>
-            </td>
-          {% endif %}
-        {% endfor %}
-        </tr>
-        <tr>
-        {% for goal in daily_goal %}
-            {% if forloop.counter == 8 %}
-                </tr><tr>
-            {% endif %}
-            <td width="50">
-              <span style="font-size: 0.7em;">{{ goal.date|date:"n/j" }} </span> <br/>
-              <div class="goal_tooltip">
-                  {% if goal.goal_status == "Over the goal"%}
-                      <div class="goal_tooltip">
-                          <img rel="tooltip" title="{{ goal.verbose_info }}"
-                               src="{{ STATIC_URL }}images/energy/bad32.png"/>
-                      </div>
-                  {% elif goal.goal_status == "Below the goal"%}
-                      <div class="goal_tooltip">
-                        <img rel="tooltip" title="{{ goal.verbose_info }}"
-                             src="{{ STATIC_URL }}images/energy/good32.png"/>
-                      </div>
-                  {% elif goal.goal_status == "Unknown" %}
-                      <div class="goal_tooltip">
-                          <img rel="tooltip" title="{{ goal.verbose_info }}"
-                               src="{{ STATIC_URL }}images/energy/unknown32.png"/>
-                      </div>
-                  {% else %}
-                      <table><tr><td height="32"></td></tr></table>
-                  {%  endif %}
-              </div>
-            </td>
-        {% endfor %}
-        </tr>
-      </table>
-    <tr><td style="font-size: 0.8em" align="left">
-        <img src="{{ STATIC_URL }}images/energy/good32.png" width="16"/>: Awarded (Made the goal)</td></tr>
-    <tr><td style="font-size: 0.8em" align="left">
-        <img src="{{ STATIC_URL }}images/energy/bad32.png"  width="16"/>: Not awarded (Did not make the goal)</td></tr>
-    <tr><td style="font-size: 0.8em" align="left">
-        <img src="{{ STATIC_URL }}images/energy/unknown32.png"  width="16"/>: Not awarded (Can not determine)</td></tr>
-    </td> </tr>
-    </table>
+                            <p/>
+
+                            <div class="goal_tooltip">
+                                {% if goal.goal_status == "Over the goal" %}
+                                    <div class="goal_tooltip">
+                                        <img rel="tooltip" title="{{ goal.verbose_info }}"
+                                             src="{{ STATIC_URL }}images/energy/bad32.png"/>
+                                    </div>
+                                {% elif goal.goal_status == "Below the goal" %}
+                                    <div class="goal_tooltip">
+                                        <img rel="tooltip" title="{{ goal.verbose_info }}"
+                                             src="{{ STATIC_URL }}images/energy/good32.png"/>
+                                    </div>
+                                {% elif goal.goal_status == "Unknown" %}
+                                    <div class="goal_tooltip">
+                                        <img rel="tooltip" title="{{ goal.verbose_info }}"
+                                             src="{{ STATIC_URL }}images/energy/unknown32.png"/>
+                                    </div>
+                                {% else %}
+                                    <table>
+                                        <tr>
+                                            <td height="25"></td>
+                                        </tr>
+                                    </table>
+                                {% endif %}
+                            </div>
+
+                            <span style="font-size: 0.7em;">
+                                  goal: {{ goal.goal_info }}
+                            </span>
+                        </td>
+                    {% endfor %}
+                </tr>
+            </table>
+        </td>
+    </tr>
+    <tr>
+        <td style="font-size: 0.8em; text-align: center;">
+            <img src="{{ STATIC_URL }}images/energy/good32.png" width="16"/>: Awarded
+            (Made the goal)
+            <img src="{{ STATIC_URL }}images/energy/bad32.png" width="16"/>: Not awarded
+            (Did not make the goal)
+            <img src="{{ STATIC_URL }}images/energy/unknown32.png" width="16"/>: Not
+            awarded (Can not determine)
+        </td>
+    </tr>
+</table>
 
 
 <script type="text/javascript">
 
     // tooltip demo
     $('.goal_tooltip').tooltip({
-        selector: "img[rel=tooltip]"
+        selector:"img[rel=tooltip]"
     })
 
 </script>

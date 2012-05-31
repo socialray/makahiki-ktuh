@@ -13,14 +13,6 @@
     <div class="container-fluid">
         <div class="row-fluid">
             <!-- left column -->
-            <div class="span5">
-                {% if view_objects.resource_scoreboard__water %}
-                    <div>
-                        {% include "widgets/resource_scoreboard/water/templates/index.html" %}
-                    </div>
-                {% endif %}
-            </div>
-            <!-- right column -->
             <div class="span7">
                 {% if view_objects.resource_goal__water %}
                     <div>
@@ -30,6 +22,14 @@
                 {% if view_objects.wallpost %}
                     <div>
                         {% include "widgets/wallpost/templates/index.html" %}
+                    </div>
+                {% endif %}
+            </div>
+            <!-- right column -->
+            <div class="span5">
+                {% if view_objects.resource_scoreboard__water %}
+                    <div>
+                        {% include "widgets/resource_scoreboard/water/templates/index.html" %}
                     </div>
                 {% endif %}
             </div>

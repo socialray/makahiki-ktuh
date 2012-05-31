@@ -26,7 +26,7 @@
         "fields": {
             "winning_order": "Ascending",
             "name": "water",
-            "unit": "Gallon"
+            "unit": "gal"
         }
     },
     {
@@ -35,7 +35,7 @@
         "fields": {
             "winning_order": "Descending",
             "name": "waste",
-            "unit": "Ton"
+            "unit": "ton"
         }
     }
 ]

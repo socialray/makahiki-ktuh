@@ -216,7 +216,7 @@ ADMIN_APPS = (
                    {"name": "Users", "url": "auth/user"},
                    {"name": "Profiles", "url": "player_mgr/profile"},
                    {"name": "Team Posts", "url": "team_mgr/post"})),
-    ("Resource", ({"name": "Energy goal settings", "url": "resouce_goal/energygoalsetting"},
+    ("Resource", ({"name": "Energy goal settings", "url": "resource_goal/energygoalsetting"},
                    {"name": "Energy usages", "url": "resource_mgr/energyusage"},
                    {"name": "Water goal settings", "url": "resource_goal/watergoalsetting"},
                    {"name": "Water usages", "url": "resource_mgr/waterusage"})),

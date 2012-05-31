@@ -69,22 +69,29 @@ def get_daily_goal_data(team, resource):
 
     start = round_info["start"].date()
     end = round_info["end"].date()
-    delta = (end - start).days
+    delta = (end - start).days + 1
     data_table = []
     for day in range(0, delta):
         date = start + datetime.timedelta(days=day)
 
         goal_info = {"date": date}
+
+        if day == 0:
+            # cal and store the filler_days in the first day goal_info
+            goal_info["filler_days"] = range(0, date.weekday())
+
         goal = resource_goal.team_goal(date, team, resource)
+        unit = resource_mgr.get_resource_settings(resource).unit
+        goal_usage = resource_goal.team_daily_goal_usage(date, team, resource) / 1000
+        goal_info["goal_info"] = "%d %s" % (goal_usage, unit)
         if goal:
-            unit = resource_mgr.get_resource_settings(resource).unit
             goal_info["goal_status"] = goal.goal_status
             goal_info["verbose_info"] = "%d %s used within the last 24 hours (ends at %s). " \
                                         "The goal is %d %s." % (
                 resource_mgr.team_resource_usage(date, team, resource) / 1000,
                 unit,
                 resource_goal.team_goal_settings(team, resource).manual_entry_time,
-                resource_goal.team_daily_goal_usage(date, team, resource) / 1000,
+                goal_usage,
                 unit
             )
 
