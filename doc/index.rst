@@ -6,6 +6,11 @@
 Welcome to Makahiki
 ===================
 
+.. figure:: figs/kukuicup-header.jpg
+   :width: 800 px
+   :align: center
+
+
 Goals
 -----
 
