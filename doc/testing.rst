@@ -3,11 +3,30 @@ Testing
 
 This document contains notes on writing and executing tests.
 
+Because we use Firefox for our browser test, Please make sure the Firefox
+is installed before running the test.
+
 Run ``python manage.py test`` to run all of the tests.
 
-You can also run tests for individual apps by passing in those apps as
-parameters. For example, ``python manage.py test widgets.profile`` will
-run the tests in ``apps/widgets/profile``.
+You can also run tests for individual apps by passing in the test modules in
+those apps as parameters. For example, ``python manage.py test
+apps.widgets.scoreboard.tests`` will run the tests in module
+``apps/widgets/scoreboard/tests.py``.
+
+Creating Tests
+--------------
+
+Test modules are normally named ``tests.py`` under the individual apps directory. If there
+are more than one test modules, they could be named ``*_tests.py`` and located under the
+``tests`` directory of the individual apps.
+
+We use ``django.test.TransactionTestCase`` for non-browser test cases, and
+``LiveServerTestCase`` for browser test cases, which use the selenium test tool.
+
+See `django testing`_ for more details in Django testing framework.
+
+.. _django testing: http://docs.djangoproject.com/en/1.4/topics/testing/
+
 
 Creating Selenium Tests
 -----------------------
@@ -23,10 +42,6 @@ Selenium IDE, your actions on the website can be recorded and then
 exported to Python. Use Firefox and go to [[http://seleniumhq.org/download/]] 
 to download and install the plugin. After it is downloaded, restart Firefox 
 to complete the installation.
-
-Next, start up a test server using
-``python manage.py testserver fixtures/*``. This creates a test database
-(separate from your development database) and loads the fixture data.
 
 In Firefox, go to ``http://localhost:8000``. Start the Selenium IDE by
 going to Tools->Selenium IDE. By default, it starts recording once you

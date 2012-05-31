@@ -188,39 +188,17 @@ This command will produce a lot of output, but it should terminate without
 indicating that an error occurred.
 
 
-12. Configure Postgres
-----------------------
-
-Next, create a makahiki user and database in your postgres server::
-
-  % cd makahiki
-  % scripts/initialize_postgres.py
-    CREATE ROLE
-    ALTER ROLE
-    CREATE DATABASE
-    REVOKE
-    GRANT
-    GRANT
-
-(you may be prompted for the password you set for the postgres user, which was
-likely created when you ran the PostgreSQL installer in step 1).
-
-As you can see, executing the script should echo the commands to create the
-user and database. 
-
-13. Setup environment variables
+12. Setup environment variables
 -------------------------------
 
-At a minimum, Makahiki requires two environment variables: DATABASE_URL and
+At a minimum, Makahiki requires two environment variables: MAKAHIKI_DATABASE_URL and
 MAKAHIKI_ADMIN_INFO.  
 
 In Unix, these environment variables can be defined this way::
 
-  % DATABASE_URL=postgres://makahiki:makahiki@localhost:5432/makahiki
-  % export DATABASE_URL
+  % export MAKAHIKI_DATABASE_URL=postgres://db_user:password@db_host:db_port/db_name
 
-  % MAKAHIKI_ADMIN_INFO=admin:admin
-  % export MAKAHIKI_ADMIN_INFO
+  % export MAKAHIKI_ADMIN_INFO=admin:admin_password
 
 You will want to either add these variables to a login script so they are
 always available, or you can edit the ``postactivate`` file (in Unix, found in
@@ -233,12 +211,33 @@ admin account if this server is publically accessible.
 Makahiki also utilizes a variety of other environment variables. For complete
 documentation, see :ref:`section-environment-variables`.
 
+
+13. Configure Postgres
+----------------------
+
+Next, create a makahiki user and database in your postgres server::
+
+  % cd makahiki
+  % scripts/initialize_postgres.py
+
+(you may be prompted for the password you set for the postgres user, which was
+likely created when you ran the PostgreSQL installer in step 1).
+
+As you can see, executing the script should echo the commands to create the
+user and database. It will create the user name, password and database name as specified in the
+MAKAHIKI_DATABASE_URL environment variable.
+
+
 14.  Initialize Makahiki
 ------------------------
 
 Next, invoke the initialize_instance script::
 
-  % scripts/initialize_instance.py
+  % scripts/initialize_instance.py <site_name>
+
+Example::
+
+  % scripts/intialize_instance.py "University of Hawaii at Manoa"
 
 This command  will:
   * Check that any changes to requirements are installed.
@@ -259,6 +258,9 @@ documentation, see :ref:`section-scripts`.
 To see if the system has been installed correctly, run the tests::
 
   % ./manage.py test
+
+.. note:: Because the tests use Firefox for browser testing, Please make sure the Firefox
+          is installed before running the tests.
 
 
 16. Start the server
@@ -282,7 +284,3 @@ Once you are logged in, go to the administrator page at
 http://localhost:8000/admin
 
 (Documentation of page and widget configuration coming soon.)
-
-
-
-
