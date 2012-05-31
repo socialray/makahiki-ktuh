@@ -1,16 +1,17 @@
 #!/usr/bin/python
 
-"""Invocation:  scripts/initialize_instance
+"""Invocation:  scripts/initialize_instance .py [--type=[default|test]] <site_name>
 Use this script to create an instance with the default or test configuration.
+Defaults to creating an instance with the default configuration.
+You must provide a site name.
 
-Usage: initialize_instance.py [-t|--type=[default|test]] <site_name>
 
 Performs the following:
   * Updates and/or installation of any modules in requirements.txt
   * Syncs the database and migrates the database schemas.
-  * collect and copy the static and media files to the desired location.
-  * create the specified challenge
-  * Loads the default or test configuration of data
+  * Collects and copies the static and media files to the desired location.
+  * Creates the specified challenge.
+  * Loads the default or test configuration of data.
   """
 import getopt
 
