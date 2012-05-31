@@ -154,16 +154,19 @@ $(document).ready(function() {
 	var submit_button = document.getElementById('submit_form_button5');
 	var cancel_button = document.getElementById('cancel_form_button5');
 	var ios_mobile_div = document.getElementById('ios-mobile-device');
-if((navigator.userAgent.match(/iPhone/i)) || 
-   (navigator.userAgent.match(/iPod/i)) ||
-   (navigator.userAgent.match(/iPad/i))) {
+// if((navigator.userAgent.match(/iPhone/i)) || 
+//    (navigator.userAgent.match(/iPod/i)) ||
+//    (navigator.userAgent.match(/iPad/i))) {
 	    jQuery.ajax({
             type: "POST",
             url: Picup.urlForOptions('new', currentParams),
+            success: function (response) {
+            	canHandleFileupload = true;
+            },
             error: function (response) {
                 canHandleFileupload = false;
             	alert("Got an error with " +  Picup.urlForOptions('new', currentParams));
-            }
+            },
 	    });
  	    if (canHandleFileupload) {
 	    	Picup.convertFileInput('id_image_response', currentParams);
@@ -172,7 +175,7 @@ if((navigator.userAgent.match(/iPhone/i)) ||
  	    } else {
 	    	ios_mobile_div.innerHTML = "<p>To upload photos from iOs mobile devices, please install the picup app <a href=\"http://www.picupapp.com\">http://www.picupapp.com</a>.</p>"
  	    }
-   };
+//    };
 });
 </script>
         {% else %}
