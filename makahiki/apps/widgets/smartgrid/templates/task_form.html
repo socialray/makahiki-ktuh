@@ -139,7 +139,7 @@
 var currentParams = {
 		'callbackURL'       : escape(window.location),
         'debug'             : 'true',
-        'postURL'           : escape('{% url activity_add_task action.type action.slug %}'),
+        'postURL'           : escape(window.location.protocol + '//'+ window.location.host + '{% url activity_add_task action.type action.slug %}'),
         'purpose'           : escape('Upload image to Makahiki2.'),
 	    'referrername'      : escape('{{user}}'),
 }
@@ -154,28 +154,15 @@ $(document).ready(function() {
 	var submit_button = document.getElementById('submit_form_button5');
 	var cancel_button = document.getElementById('cancel_form_button5');
 	var ios_mobile_div = document.getElementById('ios-mobile-device');
-// if((navigator.userAgent.match(/iPhone/i)) || 
-//    (navigator.userAgent.match(/iPod/i)) ||
-//    (navigator.userAgent.match(/iPad/i))) {
-	    jQuery.ajax({
-            type: "POST",
-            url: Picup.urlForOptions('new', currentParams),
-            success: function (response) {
-            	canHandleFileupload = true;
-            },
-            error: function (response) {
-                canHandleFileupload = false;
-            	alert("Got an error with " +  Picup.urlForOptions('new', currentParams));
-            },
-	    });
- 	    if (canHandleFileupload) {
-	    	Picup.convertFileInput('id_image_response', currentParams);
-	    	submit_button.style.visibility = 'hidden'; 
-	    	cancel_button.style.visibility = 'hidden';
- 	    } else {
-	    	ios_mobile_div.innerHTML = "<p>To upload photos from iOs mobile devices, please install the picup app <a href=\"http://www.picupapp.com\">http://www.picupapp.com</a>.</p>"
- 	    }
-//    };
+	
+if((navigator.userAgent.match(/iPhone/i)) || 
+   (navigator.userAgent.match(/iPod/i)) ||
+   (navigator.userAgent.match(/iPad/i))) {
+   	Picup.convertFileInput('id_image_response', currentParams);
+	submit_button.style.visibility = 'hidden'; 
+	cancel_button.style.visibility = 'hidden';
+    ios_mobile_div.innerHTML = "<p>To upload photos from iOs mobile devices, please install the <a href=\"http://http://itunes.com/apps/picupapp/\">Picup app</a>.</p>"
+   };
 });
 </script>
         {% else %}
