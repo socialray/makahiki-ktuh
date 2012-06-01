@@ -82,23 +82,32 @@ class Command(MakahikiBaseCommand):
         total_count = 0
         for team in Team.objects.all():
             for i in range(0, count):
-                username = "testuser-%s-%d" % (team.slug, i)
+                username = "testuser%d-%s" % (i, team.slug)
                 user = User.objects.create_user(username,
                                                 username + "@test.com",
                                                 password="testuser")
+                # make the first user in the team to go through first-login,
+                # for the rest users, set their profile and setup as completed.
+                if i == 0:
+                    is_completed = False
+                else:
+                    is_completed = True
+
                 profile = user.get_profile()
-                profile.setup_complete = True
-                profile.setup_profile = True
+                profile.setup_complete = is_completed
+                profile.setup_profile = is_completed
                 profile.team = team
                 profile.save()
-                profile.add_points(25, datetime.datetime.today(), 'test points for raffle')
+                if is_completed:
+                    profile.add_points(25, datetime.datetime.today(), 'setup completed')
+
                 total_count += 1
 
         self.stdout.write("%d test users created.\n" % total_count)
 
     def delete_users(self):
         """delete the test users name start with 'testuser-'."""
-        users = User.objects.filter(username__startswith="testuser-")
+        users = User.objects.filter(username__startswith="testuser")
         total_count = 0
         for user in users:
             user.delete()

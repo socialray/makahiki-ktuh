@@ -13,7 +13,7 @@ from apps.test_helpers import test_utils
 
 class RafflePrizesTestCase(TransactionTestCase):
     """Raffle Test"""
-    fixtures = ["test_teams.json"]
+    fixtures = ["demo_teams.json"]
 
     def setUp(self):
         """Set up rounds, team, and a user."""
