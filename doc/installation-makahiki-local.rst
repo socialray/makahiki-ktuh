@@ -1,3 +1,5 @@
+.. _section-installation-makahiki-local:
+
 Makahiki Installation (Local)
 =============================
 

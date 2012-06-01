@@ -238,6 +238,7 @@ ADMIN_APPS = (
 INSTALLED_THEMES = (
     'theme-default',
     'theme-forest',
+    'theme-google',
     'theme-sonora',
     'theme-wave',
 )

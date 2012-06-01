@@ -97,6 +97,7 @@ Information for development of the Makahiki system.
    Script documentation <scripts>
    Environment variable documentation <environment_variables>
    Coding standards <coding-standards>
+   Developing a new theme <theme-development>
    Data logging and analysis <logging-and-analysis>
    Developing a new game plugin <plugin-development>
    Developing and running tests <testing>
