@@ -19,17 +19,26 @@
 
             <p/>
             <div id="auth_buttons" style="display:none;">
+                {% if CHALLENGE.use_cas_auth %}
                 <button class="landing-button-smaller"
                         onclick="javascript:location.href='{% url home_index %}'">
-                    <h3> I have a UH email </h3><br/>
+                    {{ CHALLENGE.cas_auth_text|markdown }}
                 </button>
-                <p/>
-
-                <p/>
+                <p/><p/>
+                {% endif %}
+                {% if CHALLENGE.use_ldap_auth %}
                 <button class="landing-button-smaller"
                         onclick="javascript:location.href='{% url account_login %}'">
-                    <h3> I don't have a UH email </h3><br/>
+                    {{ CHALLENGE.ldap_auth_text|markdown }}
                 </button>
+                <p/><p/>
+                {% endif %}
+                {% if CHALLENGE.use_internal_auth %}
+                <button class="landing-button-smaller"
+                        onclick="javascript:location.href='{% url account_login %}'">
+                    {{ CHALLENGE.internal_auth_text|markdown }}
+                </button>
+                {% endif %}
             </div>
 
             <p>
@@ -42,10 +51,11 @@
     </div>
     <div class="row-fluid">
         <div class="landing-sponsors content-box" style="text-align: center;">
-            <h4>Sponsored by:</h4>
-
             <div id="landing-sponsors-list">
                 {% for sponsor in CHALLENGE.sponsor_set.all %}
+                    {% if forloop.first %}
+                        <h4>Sponsored by:</h4>
+                    {% endif %}
                     <a href="{{ sponsor.url }}">
                         <img
                                 {% if sponsor.logo_url %}

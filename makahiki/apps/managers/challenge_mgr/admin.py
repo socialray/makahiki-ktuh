@@ -73,11 +73,11 @@ class ChallengeSettingsAdmin(admin.ModelAdmin):
                    ("competition_name", "site_domain"),
                    ("competition_team_label", "theme"),
                   )}),
-        ("CAS or LDAP authentication",
+        ("Authentication",
             {"fields":
-                  (("use_cas_auth", "cas_server_url"),
-                   ("use_ldap_auth", "ldap_server_url", "ldap_search_base"),
-                   ("use_internal_auth"),
+                  (("use_cas_auth", "cas_server_url", "cas_auth_text"),
+                   ("use_ldap_auth", "ldap_server_url", "ldap_search_base", "ldap_auth_text"),
+                   ("use_internal_auth", "internal_auth_text"),
                   )}),
         ("WattDepot server for real time energy data",
             {"fields":
@@ -100,9 +100,9 @@ class ChallengeSettingsAdmin(admin.ModelAdmin):
 
     inlines = [SponsorsInline]
 
-    #formfield_overrides = {
-    #    models.TextField: {'widget': Textarea(attrs={'rows': 5, 'cols': 70})},
-    #    }
+    formfield_overrides = {
+        models.TextField: {'widget': Textarea(attrs={'rows': 2, 'cols': 70})},
+        }
 
 admin.site.register(ChallengeSettings, ChallengeSettingsAdmin)
 admin.site.register(UploadImage)

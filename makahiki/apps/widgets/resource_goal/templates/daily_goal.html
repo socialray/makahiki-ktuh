@@ -72,6 +72,11 @@
                                   goal: {{ goal.goal_info }}
                             </span>
                         </td>
+                        {% if forloop.last %}
+                            {% for day in goal.filler_days %}
+                                <td width="50"></td>
+                            {% endfor %}
+                        {% endif %}
                     {% endfor %}
                 </tr>
             </table>

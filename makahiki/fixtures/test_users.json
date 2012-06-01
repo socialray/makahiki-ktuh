@@ -11,8 +11,7 @@
       "is_staff": true, 
       "groups": [],
       "user_permissions": [], 
-      "password": "sha1$1ec42$55198a04ae01b5a33a031535dc93e91ca8ddf916", 
-      "email": "gelee@hawaii.edu", 
+      "email": "gelee@hawaii.edu",
       "date_joined": "2010-06-24 22:01:32"
     }
   }, 
@@ -28,8 +27,7 @@
       "is_staff": false, 
       "groups": [],
       "user_permissions": [], 
-      "password": "sha1$ed587$e36891186a5bf9499d9c2fbd9f8bc181368e67e9", 
-      "email": "johnson@hawaii.edu", 
+      "email": "johnson@hawaii.edu",
       "date_joined": "2010-06-24 22:11:13"
     }
   },
@@ -45,7 +43,6 @@
             "is_staff": false,
             "groups": [],
             "user_permissions": [],
-            "password": "sha1$1b38c$7ad62450e30a1c294e34d610758c3989f2547efb",
             "email": "rbrewer@hawaii.edu",
             "date_joined": "2011-07-01 21:09:03"
         }
@@ -62,7 +59,6 @@
             "is_staff": true,
             "groups": [],
             "user_permissions": [],
-            "password": "sha1$a47a7$d890cff6b00bc5e948b681983a6b948308f31b1c",
             "email": "yxu@hawaii.edu",
             "date_joined": "2011-06-30 13:46:27"
         }
@@ -79,8 +75,7 @@
       "is_staff": true, 
       "groups": [],
       "user_permissions": [], 
-      "password": "sha1$93087$3e290bb035b2a6380aed58334d437ed1ed6d1739", 
-      "email": "gburgess@hawaii.edu", 
+      "email": "gburgess@hawaii.edu",
       "date_joined": "2011-06-29 17:53:01"
     }
   },
@@ -96,8 +91,7 @@
             "is_staff": false,
             "groups": [],
             "user_permissions": [],
-            "password": "sha1$f44fa$e66caacfb55c14c0f8fc6a6697513419148c93cc",
-            "email": "",
+            "email": "testuser@testuser.com",
             "date_joined": "2011-04-23 15:30:54"
         }
     },
@@ -113,8 +107,7 @@
       "is_staff": true, 
       "groups": [],
       "user_permissions": [], 
-      "password": "sha1$7c360$6fccb69328988b8a57b5debf73b2704b1917c26c", 
-      "email": "cammymoore07@gmail.com", 
+      "email": "cammymoore07@gmail.com",
       "date_joined": "2012-02-15 22:01:32"
     }
   },

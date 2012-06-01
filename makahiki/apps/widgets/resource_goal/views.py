@@ -80,6 +80,10 @@ def get_daily_goal_data(team, resource):
             # cal and store the filler_days in the first day goal_info
             goal_info["filler_days"] = range(0, date.weekday())
 
+        if day == (delta - 1):
+            # cal and store the filler_days in the last day goal_info
+            goal_info["filler_days"] = range(0, 6 - date.weekday())
+
         goal = resource_goal.team_goal(date, team, resource)
         unit = resource_mgr.get_resource_settings(resource).unit
         goal_usage = resource_goal.team_daily_goal_usage(date, team, resource) / 1000

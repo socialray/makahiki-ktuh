@@ -65,19 +65,6 @@
     }
   },
   {
-    "pk": 5,
-    "model": "challenge_mgr.pageinfo",
-    "fields": {
-      "name": "advanced",
-      "title": "Advanced",
-      "introduction": "* Compare team usage\r\n* See historical trends\r\n* Help others conserve",
-      "label": "Advanced",
-      "priority": 5,
-      "url": "/advanced",
-      "unlock_condition": "has_points(60)"
-    }
-  },
-  {
     "pk": 2,
     "model": "challenge_mgr.pageinfo",
     "fields": {
@@ -204,33 +191,6 @@
       "widget": "wallpost",
       "enabled": true,
       "page": 4
-    }
-  },
-  {
-    "pk": 27,
-    "model": "challenge_mgr.pagesettings",
-    "fields": {
-      "widget": "canopy_member",
-      "enabled": true,
-      "page": 5
-    }
-  },
-  {
-    "pk": 26,
-    "model": "challenge_mgr.pagesettings",
-    "fields": {
-      "widget": "canopy_viz",
-      "enabled": true,
-      "page": 5
-    }
-  },
-  {
-    "pk": 28,
-    "model": "challenge_mgr.pagesettings",
-    "fields": {
-      "widget": "wallpost",
-      "enabled": true,
-      "page": 5
     }
   },
   {

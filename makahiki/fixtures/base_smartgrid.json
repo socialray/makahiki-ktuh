@@ -2092,7 +2092,7 @@
             "related_resource": "water",
             "social_bonus": 5,
             "video_id": null,
-            "depends_on": "completed(\"energy-intuition\") and afterPublished()",
+            "depends_on": "completed(\"intro-video\")",
             "name": "Shower flow",
             "video_source": null,
             "pub_date": "2011-10-31",
