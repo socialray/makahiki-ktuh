@@ -232,14 +232,16 @@ ADMIN_APPS = (
                    {"name": "Makahiki logs", "url": "log_mgr/makahikilog"})),
     )
 
-################
-# INSTALLED Theme
-################
+##########################################################
+# INSTALLED Themes. Please keep them in alphabetical order
+##########################################################
 INSTALLED_THEMES = (
     'theme-default',
+    'theme-forest',
+    'theme-sonora',
     'theme-wave',
-    'theme-united',
 )
+
 
 ################
 # TEST settings

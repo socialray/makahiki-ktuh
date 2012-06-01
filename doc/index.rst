@@ -10,6 +10,7 @@ Welcome to Makahiki
    :width: 800 px
    :align: center
 
+   *Partial screen capture from the 2011 Kukui Cup challenge, built using Makahiki.*
 
 Goals
 -----

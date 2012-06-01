@@ -42,36 +42,35 @@
 @darkTan: #C18E22;
 
 //United colors
-@united-grey: #484F5B;
-@united-lightblue: #6A8BBD;
-@united-blue: #005BFF;
-@united-white: #DFDBD9;
-@united-gold: #C7A56E;
+@sonora-grey: #484F5B;
+@sonora-lightblue: #6A8BBD;
+@sonora-blue: #005BFF;
+@sonora-white: #DFDBD9;
+@sonora-gold: #C7A56E;
 
 // Theme stylable elements
 @use-bkg-image: false;
-@page-bkg-color-start: @united-gold; 
-@page-bkg-color-end: lighten(@united-gold, 10%); 
+@page-bkg-color-start: @sonora-gold; 
+@page-bkg-color-end: lighten(@sonora-gold, 10%); 
 @page-bkg-image: "";
 @page-logo: "../images/icons/icon-uh-logo.png"; 
 @page-font-color: @black;
 @page-link-color: @black;
 // Questbar
-@questbar-bkg-color-start: @united-grey;
-@questbar-bkg-color-end: lighten(@united-grey, 40%);
+@questbar-bkg-color-start: @sonora-grey;
+@questbar-bkg-color-end: lighten(@sonora-grey, 40%);
 @questbar-font-color: @black;
 @questbar-transparency: 55%;
-// Issue: Navbar start-end is bottom to top, not top to bottom.
-// Issue: why does debug mode enable page refresh changes?
-@navbar-bkg-color-start: @united-blue;
+// Navbar
+@navbar-bkg-color-start: @sonora-blue;
 @navbar-bkg-color-end: lighten(@navbar-bkg-color-start, 30%);
-@navbar-font-color: @united-white;
+@navbar-font-color: @sonora-white;
 @navbar-curr-page-bkg-color: @navbar-bkg-color-end;
-@navbar-curr-path-font-color: @united-gold;
+@navbar-curr-path-font-color: @sonora-gold;
 @navbar-transparency: 70%;
 // Infobar
-@infobar-bkg-color-start: lighten(@united-grey, 20%);
-@infobar-bkg-color-end: lighten(@united-grey, 50%);
+@infobar-bkg-color-start: lighten(@sonora-grey, 20%);
+@infobar-bkg-color-end: lighten(@sonora-grey, 50%);
 @infobar-font-color: @black;
 @infobar-feedback-font-color: @black;
 @infobar-transparency: 0%;
@@ -81,23 +80,22 @@
 @notification-font-color: @black;
 @notification-transparency: 45%;
 // Modal dialog box 
-// Issue: Remind Me dialog not styled via these variables.
-@modal-title-bkg-color-start: @united-gold;
-@modal-title-bkg-color-end: lighten(@united-gold, 30%);
+@modal-title-bkg-color-start: @sonora-gold;
+@modal-title-bkg-color-end: lighten(@sonora-gold, 30%);
 @modal-title-font-color: @black;
-@modal-body-bkg-color: @united-lightblue;
+@modal-body-bkg-color: @sonora-lightblue;
 @modal-body-font-color: @black;
 // Page infobox
-@pageinfobox-bkg-color-start: @united-gold;
-@pageinfobox-bkg-color-end: @united-white;
+@pageinfobox-bkg-color-start: @sonora-gold;
+@pageinfobox-bkg-color-end: @sonora-white;
 @pageinfobox-font-color: @black;
 @pageinfobox-transparency: 20%;
 // Widgets
-@widget-title-bkg-color-start: lighten(@united-grey, 20%);
-@widget-title-bkg-color-end: lighten(@united-grey, 50%);
+@widget-title-bkg-color-start: lighten(@sonora-grey, 20%);
+@widget-title-bkg-color-end: lighten(@sonora-grey, 60%);
 @widget-title-font-color: @black;
 @widget-title-transparency: 0%;
-@widget-body-bkg-color: lighten(@united-grey, 60%); 
+@widget-body-bkg-color: lighten(@sonora-grey, 60%); 
 @widget-body-font-color: @black;
 @widget-body-transparency: 0%;
 @widget-button-bkg-color: darken(@widget-body-bkg-color, 50%);
@@ -107,19 +105,19 @@
 @widget-subtitle-bkg-color: lighten(@widget-title-bkg-color-start, 20%);
 @widget-subtitle-font-color: @black;
 
-@widget-text-area-bkg-color: @united-white;
+@widget-text-area-bkg-color: @sonora-white;
 @widget-text-area-font-color: @black;
 
 // Smart grid game
-@sgg-header-bkg-color: lighten(@united-gold, 10%);
-@sgg-header-font-color: @united-blue;
+@sgg-header-bkg-color: lighten(@sonora-gold, 10%);
+@sgg-header-font-color: @sonora-blue;
 @sgg-entry-font-color: @black;
-@sgg-activity-cell-bkg-color: lighten(@united-blue, 15%);
-@sgg-commitment-cell-bkg-color: @united-lightblue;  
-@sgg-event-cell-bkg-color: darken(@united-white, 10%);   
-@sgg-excursion-cell-bkg-color: @united-gold;
-@sgg-special-cell-bkg-color: @united-grey;
+@sgg-activity-cell-bkg-color: lighten(@sonora-blue, 15%);
+@sgg-commitment-cell-bkg-color: @sonora-lightblue;  
+@sgg-event-cell-bkg-color: darken(@sonora-white, 10%);   
+@sgg-excursion-cell-bkg-color: @sonora-gold;
+@sgg-special-cell-bkg-color: @sonora-grey;
 
-@prizes-raffle-table-entry-color: @united-grey;
+@prizes-raffle-table-entry-color: @sonora-grey;
 
 
