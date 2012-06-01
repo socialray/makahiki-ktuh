@@ -240,6 +240,7 @@ INSTALLED_THEMES = (
     'theme-forest',
     'theme-google',
     'theme-sonora',
+    'theme-space',
     'theme-wave',
 )
 
