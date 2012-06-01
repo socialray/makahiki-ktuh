@@ -1,16 +1,14 @@
 
 # script to deploy to heroku.
-# command parameter: $1 -- the instance name, e.g., hpu, ewc
-# currently it deploy to staging, it could be paramtered to production etc.
+# command parameter: $1 -- the instance name, e.g., makahiki-staging-uh, makahiki-prod-ewc, etc
+# will use the instance name as the app name, remote name, and aws bucket name.
 
-heroku create makahiki-staging-$1 --stack cedar --remote heroku-$1
+heroku create $1 --stack cedar --remote $1
 
-git push heroku-$1 master
-
-MAKAHIKI_AWS_STORAGE_BUCKET_NAME=makahiki-$1
+MAKAHIKI_AWS_STORAGE_BUCKET_NAME=$1
 MAKAHIKI_USE_HEROKU=True
 
-heroku config:add --app makahiki-staging-$1 MAKAHIKI_ADMIN_INFO=$MAKAHIKI_ADMIN_INFO \
+heroku config:add --app $1 MAKAHIKI_ADMIN_INFO=$MAKAHIKI_ADMIN_INFO \
     MAKAHIKI_USE_MEMCACHED=$MAKAHIKI_USE_MEMCACHED \
     MAKAHIKI_USE_HEROKU=$MAKAHIKI_USE_HEROKU \
     MAKAHIKI_USE_S3=$MAKAHIKI_USE_S3 \
@@ -18,15 +16,13 @@ heroku config:add --app makahiki-staging-$1 MAKAHIKI_ADMIN_INFO=$MAKAHIKI_ADMIN_
     MAKAHIKI_AWS_SECRET_ACCESS_KEY=$MAKAHIKI_AWS_SECRET_ACCESS_KEY \
     MAKAHIKI_AWS_STORAGE_BUCKET_NAME=$MAKAHIKI_AWS_STORAGE_BUCKET_NAME
 
-heroku addons:add --app makahiki-staging-$1 memcache
+heroku addons:add --app $1 memcache
 
-heroku run --app makahiki-staging-$1 python makahiki/manage.py syncdb --noinput
+git push $1 master
 
-heroku run --app makahiki-staging-$1 python makahiki/manage.py migrate
+heroku run --app $1 python makahiki/manage.py syncdb --noinput --migrate
 
-heroku run --app makahiki-staging-$1 python makahiki/manage.py loaddata makahiki/fixtures/base*.json
-heroku run --app makahiki-staging-$1 python makahiki/manage.py loaddata makahiki/fixtures/test*.json
+heroku run --app $1 python makahiki/manage.py loaddata makahiki/fixtures/base*.json
+heroku run --app $1 python makahiki/manage.py loaddata makahiki/fixtures/test*.json
 
-heroku run --app makahiki-staging-$1 python makahiki/manage.py setup_test_data
-
-heroku run --app makahiki-staging-$1 python makahiki/manage.py update_energy_usage
+heroku run --app $1 python makahiki/manage.py setup_test_data all
