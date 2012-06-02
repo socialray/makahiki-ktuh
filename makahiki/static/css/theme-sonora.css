@@ -7218,12 +7218,12 @@ ul {
   -webkit-border-top-right-radius: 8px;
   -moz-border-radius-topright: 8px;
   border-top-right-radius: 8px;
-  background-image: -moz-linear-gradient(top, #768193, #ccd0d6);
-  background-image: -ms-linear-gradient(top, #768193, #ccd0d6);
-  background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#768193), to(#ccd0d6));
-  background-image: -webkit-linear-gradient(top, #768193, #ccd0d6);
-  background-image: -o-linear-gradient(top, #768193, #ccd0d6);
-  background-image: linear-gradient(top, #768193, #ccd0d6);
+  background-image: -moz-linear-gradient(top, #768193, #e8eaed);
+  background-image: -ms-linear-gradient(top, #768193, #e8eaed);
+  background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#768193), to(#e8eaed));
+  background-image: -webkit-linear-gradient(top, #768193, #e8eaed);
+  background-image: -o-linear-gradient(top, #768193, #e8eaed);
+  background-image: linear-gradient(top, #768193, #e8eaed);
   border-bottom: 1px solid #000000;
   color: #000000;
   opacity: 1;

@@ -528,11 +528,23 @@ compile_less script, which can be invoked as follows::
 
   % scripts/compile_less.py 
 
-Note that you need to have the lessc compiler installed, which requires node to be
-installed. 
+.. note:: Installing the lessc compiler
 
-If this seems like too much hassle, just inform the Makahiki Development Team that you
-have developed a new theme and would like it compiled, and one of them will do it for you.
+   For the above script to run, you must have the lessc compiler installed.  
+   On Mac OS X, the following suffices::
+   
+      $ brew install node 
+      $ curl http://npmjs.org/install.sh | sh 
+      $ npm install --global less 
+
+   At least, sometimes.  During a June, 2012 installation on Lion the installation of node
+   failed.  To fix it, I followed the directions in 
+   https://github.com/mxcl/homebrew/issues/11216, where it was suggested to::
+
+      sudo xcode-select -switch /Applications/Xcode.app/Contents/Developer
+
+   If this seems like too much hassle, just inform the Makahiki Development Team that you
+   have developed a new theme and would like it compiled, and one of them will do it for you.
 
 Push your changes
 -----------------
