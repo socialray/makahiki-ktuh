@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+    <key>KeepAlive</key>
+    <true/>
+    
+    <key>Label</key>
+    <string>org.makahiki.staging.server</string>
+    
+    <key>WorkingDirectory</key>
+    <string>/Users/kukuicup/staging/makahiki2/makahiki</string>
+    
+    <!-- Makahiki needs some environment variables to be set -->
+    <key>EnvironmentVariables</key>
+    <dict>
+      <key>MAKAHIKI_DATABASE_URL</key>
+      <!-- Replace with actual database URL -->
+      <string>postgres://makahiki:ACTUAL-PASSWORD@localhost:5432/makahiki</string>
+      <!-- Replace with actual admin info -->
+      <key>MAKAHIKI_ADMIN_INFO</key>
+      <string>admin:ACTUAL-PASSWORD</string>
+    </dict>
+    
+    <key>ProgramArguments</key>
+    <array>
+      <string>/Users/kukuicup/Envs/makahiki2/bin/python</string>
+      <string>manage.py</string>
+      <string>run_gunicorn</string>
+      <string>--daemon</string>
+      <string>--pid</string>
+      <string>/tmp/gunicorn.pid</string>
+      <string>-b</string>
+      <string>0.0.0.0:8151</string>
+      <string>-w</string>
+      <string>2</string>
+      <string>--error-logfile</string>
+      <string>gunicorn.err</string>
+      <string>--access-logfile</string>
+      <string>gunicorn.log</string>
+    </array>
+
+    <!-- Only applies if the task is run as root. -->
+    <key>UserName</key>
+    <string>kukuicup</string>
+        
+    <key>StandardErrorPath</key>
+  	<string>/Users/kukuicup/staging/log/update_energy_usage.err</string>
+  	
+  	<key>StandardOutPath</key>
+  	<string>/Users/kukuicup/staging/log/update_energy_usage.out</string>
+
+    <key>RunAtLoad</key>
+    <true/>
+</dict>
+</plist>
