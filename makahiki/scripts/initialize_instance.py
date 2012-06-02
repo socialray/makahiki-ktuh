@@ -49,7 +49,7 @@ def main(argv):
     instance_type = None
 
     try:
-        opts, args = getopt.getopt(argv, "t:h", ["type=","help"])
+        opts, args = getopt.getopt(argv, "t:h", ["type=", "help"])
     except getopt.GetoptError:
         exit_with_help()
 

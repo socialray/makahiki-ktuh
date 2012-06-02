@@ -235,7 +235,7 @@ MAKAHIKI_DATABASE_URL environment variable.
 
 Next, invoke the initialize_instance script::
 
-  % scripts/initialize_instance.py
+  % scripts/initialize_instance.py -t default
 
 This command  will:
   * Check that any changes to requirements are installed.
@@ -245,6 +245,13 @@ This command  will:
 
 Under normal circumstances, invoking this script after pulling any new changes from the
 repository is sufficient to bring your local installation up to date. 
+
+If you want to try out an demo instance that is populated with demo data, you can invoke
+the initailize_instance script as::
+
+  % scripts/initialize_instance.py -t demo
+
+This will create an demo instance that you could login and start playing right away.
 
 Makahiki has several other scripts useful for development. For complete
 documentation, see :ref:`section-scripts`.
@@ -274,9 +281,9 @@ Open a browser and go to http://localhost:8000 to see the home page.
 17. Login to administrative interface
 -------------------------------------
 
-Once the server is running, you must login as admin in order to continue
-configuration. To do this, go to http://localhost:8000
-and login using the credentials you specified in Step (6) above. If the challenge
-is not setup, it will redirect you to the site admin page.
+If you create the instance with the "default" configuration, Once the server is running,
+you must login as admin in order to continue configuring the challenge. To do this, go to
+http://localhost:8000 and login using the credentials you specified in Step (6) above.
+It will redirect you to the site admin page.
 
 (Documentation of page and widget configuration coming soon.)
