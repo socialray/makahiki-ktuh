@@ -1,0 +1,29 @@
+@charset "UTF-8";
+table th,
+table td,
+.table td,
+.table th {
+  text-align: left;
+}
+body {
+  text-align: left;
+}
+h2 {
+  font-size: 16px;
+}
+label,
+input,
+button,
+select,
+textarea {
+  font-size: 13px;
+  font-weight: normal;
+  line-height: 18px;
+  font-size: 13px;
+  font-weight: normal;
+  line-height: 18px;
+  padding: 1px;
+  margin-bottom: 1px;
+  height: auto;
+  width: auto;
+}

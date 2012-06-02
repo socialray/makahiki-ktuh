@@ -27,7 +27,8 @@ def main(argv):
             verbose = 1
 
     page_names = ['landing',
-                  'status']
+                  'status',
+                  'admin']
     less_path = "static/less"
     os.chdir(less_path)
     theme_names = glob.glob('theme-*.less')

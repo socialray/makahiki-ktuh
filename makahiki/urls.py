@@ -37,7 +37,6 @@ urlpatterns = patterns('',
     url(r'^admin/logout/$', 'apps.managers.auth_mgr.views.logout', name='admin_logout'),
 
     url(r'^admin/', include(admin.site.urls)),
-    url(r'^admin/doc/', include('django.contrib.admindocs.urls')),
     url(r'^admin/login-as/(?P<user_id>\d+)/$', 'apps.managers.auth_mgr.views.login_as',
         name='account_login_as'),
 
