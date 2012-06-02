@@ -176,6 +176,7 @@ ul {
     list-style: none;
 }
 
+
 /* 
  * Classes!
  */
@@ -189,19 +190,19 @@ ul {
 }
 
 .background-choice() when (@use-bkg-image = false) {
-    .background-gradient(@page-bkg-color-start, @page-bkg-color-end);
-    background-repeat: no-repeat;
+    .background-gradient (@page-bkg-color-start, @page-bkg-color-end);
+//    background-repeat: no-repeat;
+    background-size: cover;
     -webkit-background-size: cover;
     -moz-background-size: cover;
     -o-background-size: cover;
-    background-size: cover;
 }
 
 .background-gradient (@start , @end) {
-    background-image: -moz-linear-gradient(top, @start, @end);
-    background-image: -ms-linear-gradient(top, @start, @end);
     background-image: -webkit-gradient(linear, 0 0, 0 100%, from(@start), to(@end));
     background-image: -webkit-linear-gradient(top, @start, @end);
+    background-image: -moz-linear-gradient(top, @start, @end);
+    background-image: -ms-linear-gradient(top, @start, @end);
     background-image: -o-linear-gradient(top, @start, @end);
     background-image: linear-gradient(top, @start, @end);
 }

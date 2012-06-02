@@ -6,7 +6,7 @@
         <form id="myform" action="{% url activity_add_task action.type action.slug %}" method="post">
     {% endif %}
 
-    {# % csrf_token % #}
+    {% csrf_token %}
 
     {% if admin_message %}
         Admin message: {{ admin_message }}
