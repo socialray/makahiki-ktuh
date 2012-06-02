@@ -25,7 +25,7 @@ class Profile(models.Model):
                                  help_text="The last name of the player")
     team = models.ForeignKey(Team, null=True, blank=True,
                              help_text="The team of the player")
-    theme = models.CharField(default="theme-default", choices=THEME_CHOICES, max_length=50,
+    theme = models.CharField(null=True, blank=True, choices=THEME_CHOICES, max_length=50,
                              help_text="The UI theme for this player.")
     contact_email = models.EmailField(null=True, blank=True,
                                       help_text="The contact email of the player")
