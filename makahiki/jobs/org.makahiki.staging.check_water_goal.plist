@@ -3,7 +3,7 @@
 <plist version="1.0">
 <dict>
     <key>Label</key>
-    <string>Makahiki: Check Water Goal (Staging)</string>
+    <string>org.makahiki.staging.check_water_goal</string>
     <key>WorkingDirectory</key>
     <string>/Users/kukuicup/staging/makahiki2/makahiki</string>
     <key>ProgramArguments</key>

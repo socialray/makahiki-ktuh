@@ -3,7 +3,7 @@
 <plist version="1.0">
 <dict>
     <key>Label</key>
-    <string>Makahiki: Update energy usage (staging)</string>
+    <string>org.makahiki.staging.update_energy_usage</string>
     <key>WorkingDirectory</key>
     <string>/Users/kukuicup/staging/makahiki2/makahiki</string>
     <key>ProgramArguments</key>

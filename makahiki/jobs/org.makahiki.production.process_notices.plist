@@ -3,7 +3,7 @@
 <plist version="1.0">
 <dict>
     <key>Label</key>
-    <string>Makahiki: Process Notices (Production)</string>
+    <string>org.makahiki.production.process_notices</string>
     <key>WorkingDirectory</key>
     <string>/Users/kukuicup/production/makahiki</string>
     <key>ProgramArguments</key>
