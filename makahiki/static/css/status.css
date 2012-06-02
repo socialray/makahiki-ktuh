@@ -9,5 +9,5 @@ ul,ol{margin:0;}
 .widget .widget-content{height:970px;overflow-y:scroll;}
 .demi-widget .widget-content,.demi-widget .content-body{height:457px;overflow-y:scroll;}
 .tab-pane{height:723px;overflow-y:scroll;}
-@media (max-width:1650px){.wrap{height:696px;overflow-y:scroll;}}.padding-right{padding-right:10%;}
+@media (max-width:1650px){.wrap{height:696px;overflow-y:scroll;}}@media (max-width:760px){.wrap,.tab-pane,.demi-widget .widget-content,.demi-widget .content-body,.widget .widget-content{height:auto;}}.padding-right{padding-right:10%;}
 .status-activities .content-box{margin-left:2px;margin-right:2px;}

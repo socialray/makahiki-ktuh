@@ -1,0 +1,16 @@
+{% with todays_users=view_objects.status__users.todays_users logins=view_objects.status__users.logins referrals=view_objects.status__users.referrals %}
+
+<div class="content-box widget">
+    <div class="content-box-title">
+        New Signups
+    </div> 
+    <div class="widget-content">
+        <table class="table-striped">
+            {% for item in logins|dictsort:'date' %}
+                <tr style="margin: 0"><td>{{ item.date }}: {{ item.logins }} users</td></tr>
+            {% endfor %}
+        </table>
+    </div> 
+</div>
+
+{% endwith %}

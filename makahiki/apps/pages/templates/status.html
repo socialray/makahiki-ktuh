@@ -91,34 +91,41 @@
                         {% include "widgets/status/rsvps/templates/excursions.html" %} 
                     </div>
                 {% endif %}  
-
-                <!--Actions-->
-                {% if view_objects.status__actions %} 
-                            {% include "widgets/status/actions/templates/index.html" %} 
-
-                {% endif %}   
-
-
+                
+                
+                <!--Actions--> 
                 {% if view_objects.status__actions %}
-                <!--Quests-->
                 <div class="span2">
                    {% include "widgets/status/actions/templates/quests.html" %}
-                </div>          
-                {% endif %} 
+                   {% include "widgets/status/actions/templates/commitments.html" %}
+                </div>       
+                  {% include "widgets/status/actions/templates/index.html" %}  
+               {% endif %}    
+
+               {% if view_objects.status__users %} 
+
+               <div class="span2">
+                  {% include "widgets/status/users/templates/referrals.html" %} 
+              </div>
+               {% endif %}
         </div>
 
 
-        <div class="row-fluid">
-
+        <div class="row-fluid"> 
             <!--Users -->
             {% if view_objects.status__users %} 
-                {% include "widgets/status/users/templates/index.html" %} 
+                <div class="span2">
+                {% include "widgets/status/users/templates/new_users.html" %}               
+                </div>
+                <div class="span2">
+                {% include "widgets/status/users/templates/users_logged_in.html" %} 
+                </div>
             {% endif %}
 
-            <div class="span2">
+            <div class="span4">
               <div class="content-box widget">
                   <div class="content-box-title">
-                      Empty
+                      Your Ad Here
                   </div>
                   <div class="widget-content"></div>
               </div>

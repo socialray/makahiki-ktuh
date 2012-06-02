@@ -1,0 +1,25 @@
+{% with todays_users=view_objects.status__users.todays_users logins=view_objects.status__users.logins referrals=view_objects.status__users.referrals %} 
+   
+<div class="content-box widget">
+    <div class="content-box-title">
+        Referrals
+    </div> 
+    <div class="widget-content">
+    <table clas="table-striped">
+        <tr>
+            <th>Rank</th>
+            <th>User</th>
+            <th>Referrals</th>
+        </tr>
+        {% for item in referrals|dictsortreversed:'referrals' %}
+            <tr>
+                <td>{{forloop.counter}}</td>
+                <td>{{item.referring_user__profile__name}}</td>
+                <td>{{item.referrals}}</td>
+            </tr>
+        {% endfor %}
+    </table>
+    </div> 
+</div> 
+
+{% endwith %}

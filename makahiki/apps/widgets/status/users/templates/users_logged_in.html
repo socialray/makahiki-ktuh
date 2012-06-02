@@ -1,0 +1,16 @@
+{% with todays_users=view_objects.status__users.todays_users logins=view_objects.status__users.logins referrals=view_objects.status__users.referrals %} 
+
+<div class="content-box widget">
+    <div class="content-box-title">
+        Today's logins
+    </div> 
+    <div class="widget-content">
+        <table class="table-striped">
+                <tr><td>{{ todays_users|length }} users logged in today</td></tr>
+            {% for profile in todays_users %}
+                <tr style="margin: 0"><td>{{ profile.name }}</td></tr>
+            {% endfor %}
+        </table>
+    </div> 
+</div> 
+{% endwith %}

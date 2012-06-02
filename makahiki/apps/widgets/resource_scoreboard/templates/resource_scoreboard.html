@@ -29,24 +29,26 @@
     {% else %}
             <div id="{{resource.name}}-{{round_name|cut:" "}}" class="tab-pane fade active in {% if goals_scoreboard and goals_scoreboard|length > 0 %}wrap{%endif%}"> 
     {% endif %}
-            <div class="content-box-title">
-                {{ round_name }} {{ resource.name|capfirst }} {% if not no_carousel %}Score Board{% endif %}
 
-                {% if not no_carousel %}
+          {% if not no_carousel %}
+            <div class="content-box-title">
+                {{ round_name }} {{ resource.name|capfirst }} Score Board
                     <a href="#" style="float: right">
                         <img src="{{ STATIC_URL}}images/icons/icon-help-sm.png" width="20"
                          align="center"
                          title="Click to get help about this window"
                          onclick="toggleHelp(event, 'widget', 'resource-scoreboard'); return false;"/>
-                    </a>
-                {% endif %}
+                    </a> 
             </div> 
+            {% endif %}
             <table class="table-striped">
-                <tr>
-                    <th>Rank</th>
-                    <th>{{ TEAM_LABEL }}</th>
-                    <th>{{ resource.unit  }} used</th>
-                </tr>
+                <thead>
+                  <tr>
+                      <th>Rank</th>
+                      <th>{{ TEAM_LABEL }}</th>
+                      <th>{{ resource.unit  }} used</th>
+                  </tr>
+                </thead>
                 {% for entry in ranks %}
                 <tr>
                     <td>{%  if entry.team__name == user.get_profile.team.name %}<b>{% endif %}

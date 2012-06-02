@@ -16,9 +16,6 @@
     <div class="tab-content">   
         {% for round_name, standings in view_objects.scoreboard.round_standings.items %}  
         <div id="team-part-{{round_name|cut:" "}}" class="tab-pane">  
-                <div class="content-box-title">
-                  {{ round_name }} Participation
-              </div>
             <table class="table-striped">
                 <thead>
                     <tr>

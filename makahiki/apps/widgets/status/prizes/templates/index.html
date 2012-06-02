@@ -14,17 +14,16 @@
   </ul>
   <div class="tab-content">
     {% for round_name, raffle_prizes in raffle_prizes.items %}
-      <div id="prize{{round_name|cut:" "}}" class="tab-pane fade active in">  
-              <div class="content-box-title">
-                  {{ round_name|cut:" " }} Raffle Prizes
-              </div>
+      <div id="prize{{round_name|cut:" "}}" class="tab-pane fade active in">   
               <div class="content-body">
                   <table class="table-striped">
-                      <tr>
-                          <th>Prize</th>
-                          <th>Tickets</th>
-                          <th>Winner</th>
-                      </tr>
+                      <thead>
+                          <tr>
+                              <th>Prize</th>
+                              <th>Tickets</th>
+                              <th>Winner</th>
+                          </tr>
+                      </thead>
                       {% for prize in raffle_prizes %}
                           <tr>
                               <td>{{ prize.title }}</td>

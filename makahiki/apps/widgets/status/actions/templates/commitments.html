@@ -1,21 +1,18 @@
 {% with pending_members=view_objects.status__actions.pending_members oldest_member=view_objects.status__actions.oldest_member quests=view_objects.status__actions.quests popular_tasks=view_objects.status__actions.popular_tasks%}
-
-{% for key, value in popular_tasks.items%}
-  {% if key != "commitment" %}
-    {% if key != "excursion" %}<div class="span2 ">{%endif%}
-     <div class="content-box {% if key == "excursion" or key == "event"%}demi-{% endif %}widget">
+ 
+     <div class="content-box demi-widget">
             <div class="content-box-title">
-                Popular {{ key|capfirst }}
+                Popular Commitments
             </div>
                 
                 <div class="widget-content">
                 <table class="table-striped">
                     <tr>
-                        <th>{{ key }}</th>
+                        <th>Commitment</th>
                         <th>Submts</th>
                         <th>Cmpltd</th>
                     </tr>
-                    {% for task in value %}
+                    {% for task in popular_tasks.commitment %}
                         <tr>
                             <td>
                                 <a href="{% url activity_task task.type task.slug %}">{{ task.title }}</a>
@@ -26,8 +23,5 @@
                     {% endfor %}
                 </table>
           </div>
-      </div> 
-  {% if key != "event" %} </div> {%endif%}
-  {% endif %}
-{% endfor %}
+      </div>    
 {% endwith %}

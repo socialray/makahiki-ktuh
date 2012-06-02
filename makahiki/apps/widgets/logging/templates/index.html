@@ -9,7 +9,7 @@
           <ul>
               {% for entry in log_entries.entries %}
                   <li>
-                      <p>{{entry.request_time}} {{entry.remote_ip}} {{entry.remote_user}} {{entry.request_method}} {{entry.request_url}} <b>{{entry.response_status}}</b>
+                      <tt>{{entry.request_time}} {{entry.remote_ip}} {{entry.remote_user}} {{entry.request_method}} {{entry.request_url}} <b>{{entry.response_status}}</b></tt>
                   </li>
               {% endfor%}
           </ul>
