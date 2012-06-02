@@ -65,14 +65,10 @@
         </tr>
     </table>
     <div class="profile-save">
-        <a href="#" id="profile-form-submit-button" class="btn">Save Changes</a>
-        <script type="text/javascript">
-            $(document).ready(function () {
-                $("#profile-form-submit-button").click(function () {
-                    $(this).parents("form").submit();
-                });
-            });
-        </script>
+        <button id="profile-form-submit-button" class="btn"
+                onclick='$("#profile-form-submit-button").attr("disabled", "disabled");javascript:this.form.submit(); return false;'>
+            Save Changes
+        </button>
     </div>
 </form>
 </div>
