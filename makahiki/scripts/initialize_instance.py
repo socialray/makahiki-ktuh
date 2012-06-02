@@ -2,13 +2,16 @@
 
 """Invocation:  scripts/initialize_instance .py [--type=[default|demo|test]]
 Use this script to create an instance with different types of configuration:
+
 [default]: includes all the basic configuration. User will need to create the round info,
-           resource settings, resource goal settings, team, etc.
+resource settings, resource goal settings, team, etc.
+
 [demo]:  includes all the "default" configuration, with the additions of demo information, such
-         as rounds, resource and goal settings, demo team, demo users, and use internal
-         authentication.
+as rounds, resource and goal settings, demo team, demo users, and use internal
+authentication.
+
 [test]:  similar to "demo" configuration, with the additions of more test users and use
-         CAS authentication instead of internal authentication.
+CAS authentication instead of internal authentication.
 
 Defaults to creating an instance with the default configuration.
 
