@@ -8,6 +8,7 @@ from django.core.exceptions import ObjectDoesNotExist
 from django.core.urlresolvers import reverse
 from django.template import RequestContext
 from django.contrib.auth.decorators import login_required
+from django.utils import importlib
 from django.views.decorators.cache import never_cache
 from apps.managers.score_mgr import score_mgr
 
@@ -33,6 +34,7 @@ def view_action(request, action_type, slug):
     action = smartgrid.get_action(slug=slug)
     user = request.user
     team = user.get_profile().team
+    view_objects = {}
 
     if not smartgrid.is_unlock(user, action):
         response = HttpResponseRedirect(reverse("learn_index", args=()))
@@ -49,7 +51,15 @@ def view_action(request, action_type, slug):
         form = view_commitments.view(request, action)
     elif action_type == "activity":
         form = view_activities.view(request, action)
-    else:  # events
+
+        # if there is embedded widget, get the supplied objects
+        if action.embedded_widget:
+            view_module_name = 'apps.widgets.' + action.embedded_widget + '.views'
+            view_objects[action.embedded_widget] = importlib.import_module(
+                view_module_name).supply(request, None)
+            view_objects['embedded_widget_template'] = "widgets/" + \
+                action.embedded_widget + "/templates/index.html"
+    else:  # action.event:
         form = view_events.view(request, action)
         # calculate available seat
         action.available_seat = action.event.event_max_seat - completed_count
@@ -63,6 +73,7 @@ def view_action(request, action_type, slug):
         "team_members": team_members,
         "display_form": True if "display_form" in request.GET else False,
         "reminders": user_reminders,
+        "view_objects": view_objects
         }, context_instance=RequestContext(request))
 
 

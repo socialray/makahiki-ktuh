@@ -146,6 +146,10 @@
     {% include "components/action_video.html" with action=action %}
 {% endif %}
 
+{% if action.embedded_widget %}
+    {% include view_objects.embedded_widget_template %}
+{% endif %}
+
 <p/>
 <center>
 

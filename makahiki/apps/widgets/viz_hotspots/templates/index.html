@@ -1,0 +1,55 @@
+
+{% with all_lounges=view_objects.viz_hotspots.all_lounges %}
+
+<p/>
+
+<center>
+<div>
+
+    <div>
+        <b> Hot Spot Analysis : {{ TEAM_LABEL }} </b>
+        <select id='lounge' onchange='updateLounge();'>
+            {% for lounge in all_lounges %}
+                <option {% if user.get_profile.team.name == lounge.name %}
+                    selected {% endif %}
+                    value='{{ lounge.name}}'>{{ lounge.name }}
+                </option>
+            {% endfor %}
+        </select>
+    </div>
+    <p/>
+
+    <!-- Loading div that displays an animated gif, display is set to none when displaying a BioHeatMap -->
+    <div id="loading"><img src="{{STATIC_URL}}images/spinner.gif"/></div>
+
+    <div id="img"></div>
+    <div id="tooltip"></div>
+
+    <div style="display: none" id="chart_div"></div>
+
+    <!-- Container to display when the Gadget was last updated. -->
+    <div id="lastchecked"> </div>
+
+    <p/>
+
+    <div>
+        This visualization shows the relative level of energy consumption over
+        the past 7 days for a single lounge.
+
+        Bigger spots mean more energy used. Red spots are the top five spots that consume the most
+        energy.
+
+        The size of the dot indicates the relative energy consumption during that hour.
+
+        You can use this visualization to look for trends in energy data, such
+        as days (rows) or hours of the day (columns) with relatively large (or
+        small) consumption.
+    </div>
+
+</div>
+</center>
+{% endwith %}
+
+<script type="text/javascript" src="{{ STATIC_URL}}js/com.iskitz.ajile.js"></script>
+<script type="text/javascript" src="http://www.google.com/jsapi"></script>
+<script type="text/javascript" src="{{ STATIC_URL}}js/org.wattdepot.makahiki.HotSpot.js"></script>

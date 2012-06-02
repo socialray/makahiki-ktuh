@@ -164,8 +164,6 @@ for widget in INSTALLED_DEFAULT_WIDGET_APPS:
 INSTALLED_WIDGET_APPS = (
     'ask_admin',
     'badges',
-    'canopy_viz',
-    'canopy_member',
     'resource_goal',
     'resource_goal.energy',
     'resource_goal.water',

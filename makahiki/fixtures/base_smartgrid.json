@@ -2448,8 +2448,8 @@
         "pk": 148,
         "model": "smartgrid.action",
         "fields": {
-            "category": null,
-            "related_resource": null,
+            "category": 3,
+            "related_resource": "energy",
             "social_bonus": 0,
             "video_id": null,
             "depends_on": "True",
@@ -2457,15 +2457,16 @@
             "video_source": null,
             "pub_date": "2011-10-28",
             "image": "",
+            "embedded_widget": "viz_power_meters",
             "title": "How Powerful are the Lounges?",
             "is_group": false,
-            "priority": 1000,
+            "priority": 2000,
             "point_value": 10,
             "depends_on_text": "",
             "is_canopy": false,
             "type": "activity",
             "slug": "power-meters",
-            "description": "Check out the [Power Meter visualization](/canopy?viz=4) on the Canopy page, which shows the real-time power usage 5 selectable lounges. Come up with answers to the questions below, and submit them:\r\n\r\n1. Compare the 5 lounges in your tower. How does their power usage compare right now?\r\n2. Pick a particular lounge letter and compare that lounge across the 4 towers. How does the power consumption differ?\r\n3. What are your thoughts on this visualization? What are its strengths and weaknesses?"
+            "description": "Check out the Power Meter visualization below on the Canopy page, which shows the real-time power usage 5 selectable lounges. Come up with answers to the questions below, and submit them:\r\n\r\n1. Compare the 5 lounges in your tower. How does their power usage compare right now?\r\n2. Pick a particular lounge letter and compare that lounge across the 4 towers. How does the power consumption differ?\r\n3. What are your thoughts on this visualization? What are its strengths and weaknesses?"
         }
     },
     {
@@ -2592,8 +2593,8 @@
         "pk": 141,
         "model": "smartgrid.action",
         "fields": {
-            "category": null,
-            "related_resource": null,
+            "category": 1,
+            "related_resource": "energy",
             "social_bonus": 0,
             "video_id": null,
             "depends_on": "True",
@@ -2601,23 +2602,24 @@
             "video_source": null,
             "pub_date": "2011-09-19",
             "image": "",
+            "embedded_widget": "viz_hotspots",
             "title": "Hitting the Hotspots",
             "is_group": false,
-            "priority": 1000,
+            "priority": 2000,
             "point_value": 10,
             "depends_on_text": "",
             "is_canopy": false,
             "type": "activity",
             "slug": "hot-spots",
-            "description": "Check out the [Hot Spot visualization](/canopy?viz=1) on the Canopy page, which shows hourly energy use over a weeklong period for a particular lounge. Come up with answers to the questions below, and submit them below:\r\n\r\n1. What hours of the day seem to have the highest energy use? How does that compare to your own energy use patterns?\r\n2. What differences in energy use do you notice between lounges?\r\n3. What are your thoughts on this visualization? What are its strengths and weaknesses?"
+            "description": "Check out the Hot Spot visualization below, which shows hourly energy use over a weeklong period for a particular lounge. Come up with answers to the questions below, and submit them below:\r\n\r\n1. What hours of the day seem to have the highest energy use? How does that compare to your own energy use patterns?\r\n2. What differences in energy use do you notice between lounges?\r\n3. What are your thoughts on this visualization? What are its strengths and weaknesses?"
         }
     },
     {
         "pk": 142,
         "model": "smartgrid.action",
         "fields": {
-            "category": null,
-            "related_resource": null,
+            "category": 2,
+            "related_resource": "energy",
             "social_bonus": 0,
             "video_id": null,
             "depends_on": "True",
@@ -2625,15 +2627,16 @@
             "video_source": null,
             "pub_date": "2011-09-19",
             "image": "",
+            "embedded_widget": "viz_heatmap",
             "title": "The Heat is On",
             "is_group": false,
-            "priority": 1000,
+            "priority": 2000,
             "point_value": 10,
             "depends_on_text": "",
             "is_canopy": false,
             "type": "activity",
             "slug": "heat-map",
-            "description": "Check out the [Heat Map visualization](/canopy?viz=2) on the Canopy page, which shows hourly or daily energy use for all lounges in a tower. Come up with answers to the questions below, and submit them:\r\n\r\n1. What patterns do you see in the data?\r\n2. Do you notice any spatial patterns?\r\n3. What are your thoughts on this visualization? What are its strengths and weaknesses?"
+            "description": "Check out the Heat Map visualization below, which shows hourly or daily energy use for all lounges in a tower. Come up with answers to the questions below, and submit them:\r\n\r\n1. What patterns do you see in the data?\r\n2. Do you notice any spatial patterns?\r\n3. What are your thoughts on this visualization? What are its strengths and weaknesses?"
         }
     },
     {
@@ -2664,8 +2667,8 @@
         "pk": 147,
         "model": "smartgrid.action",
         "fields": {
-            "category": null,
-            "related_resource": null,
+            "category": 4,
+            "related_resource": "energy",
             "social_bonus": 0,
             "video_id": null,
             "depends_on": "True",
@@ -2673,15 +2676,16 @@
             "video_source": null,
             "pub_date": "2011-10-28",
             "image": "",
+            "embedded_widget": "viz_chart",
             "title": "Gotta Line On You",
             "is_group": false,
-            "priority": 1000,
+            "priority": 2000,
             "point_value": 10,
             "depends_on_text": "",
             "is_canopy": false,
             "type": "activity",
             "slug": "line-graph",
-            "description": "Check out the [Line Graph visualization](/canopy?viz=3) on the Canopy page, which shows a zoomable chart of energy or power usage for one or more lounges. Come up with answers to the questions below, and submit them:\r\n\r\n1. What interesting differences do you notice in energy use when looking at the 3 different timescales?\r\n2. How different are the graphs of power and energy?\r\n3. Pick 2 lounges and compare their energy use across 2 different time scales.\r\n4. What are your thoughts on this visualization? What are its strengths and weaknesses?"
+            "description": "Check out the Line Graph visualization below, which shows a zoomable chart of energy or power usage for one or more lounges. Come up with answers to the questions below, and submit them:\r\n\r\n1. What interesting differences do you notice in energy use when looking at the 3 different timescales?\r\n2. How different are the graphs of power and energy?\r\n3. Pick 2 lounges and compare their energy use across 2 different time scales.\r\n4. What are your thoughts on this visualization? What are its strengths and weaknesses?"
         }
     },
     {

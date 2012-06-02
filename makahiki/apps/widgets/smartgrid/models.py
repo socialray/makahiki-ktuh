@@ -159,6 +159,10 @@ class Action(models.Model):
         max_length=20,
         choices=VIDEO_SOURCE_CHOICES,
         help_text="The source of the video.")
+    embedded_widget = models.CharField(
+        null=True, blank=True,
+        max_length=50,
+        help_text="The name of the embedded widget.")
     description = models.TextField(
         help_text=settings.MARKDOWN_TEXT)
     type = models.CharField(

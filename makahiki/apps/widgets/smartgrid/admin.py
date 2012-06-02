@@ -260,6 +260,7 @@ class ActivityAdmin(admin.ModelAdmin):
                      'image',
                      'description',
                      ('video_id', 'video_source'),
+                     'embedded_widget',
                      ('pub_date', 'expire_date'),
                      ('depends_on', 'depends_on_text'),
                      ('is_canopy', 'is_group'))}),
