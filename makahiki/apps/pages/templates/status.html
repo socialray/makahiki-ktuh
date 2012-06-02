@@ -120,17 +120,12 @@
                 <div class="span2">
                 {% include "widgets/status/users/templates/users_logged_in.html" %} 
                 </div>
-            {% endif %}
+            
 
             <div class="span4">
-              <div class="content-box widget">
-                  <div class="content-box-title">
-                      Your Ad Here
-                  </div>
-                  <div class="widget-content"></div>
-              </div>
+                {% include "widgets/status/users/templates/twitter.html" %} 
             </div>
-
+            {% endif %}
             <div class="span4">
                 <div class="content-box demi-widget">
                     <div class="content-box-title">
@@ -144,6 +139,6 @@
                     {% include "widgets/logging/templates/index.html" %}
                 {% endif %}
             </div>
-      </div> 
+      </div>  
 {% endblock %}
 

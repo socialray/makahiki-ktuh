@@ -1,6 +1,7 @@
 @charset "UTF-8";
 table,.table{width:100%;border-collapse:separate;}
 table th,table td,.table td,.table th{text-align:center;}
+.left-content table td{text-align:left;vertical-align:top;}
 .content-box th,.content-box td{padding:4px 0px 4px 0px;}
 ul,ol{margin:0;}
 .nav li a{padding:4px;}
