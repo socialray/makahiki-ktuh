@@ -8,10 +8,10 @@
                 {% if reminders.text %}
                     Text reminder: {{ reminders.text.send_at }}<br/>
                 {% endif %}
-                <button id="task-reminder-button" class="btn">Change Reminder</button>
+                <button id="task-reminder-button" class="btn" onclick="toggleReminder(event); return false;">Change Reminder</button>
             {% else %}
                 Get a text or email reminder
-                <button id="task-reminder-button" class="btn">Remind Me</button>
+                <button id="task-reminder-button" class="btn" onclick="toggleReminder(event); return false;">Remind Me</button>
             {% endif %}
         </p>
     </div>
@@ -43,9 +43,9 @@
                 log_js_action("{{action.type}}", "{{action.slug}}", 'reminder-close');
             });
 
-            $("#task-reminder-button").click(function () {
-                $("#reminderModal").modal('show');
-            });
+//             $("#task-reminder-button").click(function () {
+//                 $("#reminderModal").modal('show');
+//             });
 
             function createDateString(offset) {
                 var d = new Date('{{action.event.event_date|date:"r"}}');
@@ -127,5 +127,11 @@
 
             bindReminderForm();
         });
+        
+        var toggleReminder= function(event) {
+        	var modalElement = $('#reminderModal');
+            document.getElementById('reminderModal').style.top = event.pageY + "px";        
+            modalElement.modal('show');
+        }
     </script>
 {% endif %}

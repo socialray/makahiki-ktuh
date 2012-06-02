@@ -422,7 +422,7 @@ ul {
 .notice {
     .makahiki-box ();
     .content-box-contents ();
-    .background-gradient (@questbar-bkg-color-start , @questbar-bkg-color-end);
+    .background-gradient (fadeout(@questbar-bkg-color-start, @questbar-transparency / 2) , fadeout(@questbar-bkg-color-end, @questbar-transparency / 2));
     color: @questbar-font-color;
 }
 
