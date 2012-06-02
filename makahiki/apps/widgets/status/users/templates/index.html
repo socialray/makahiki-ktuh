@@ -5,11 +5,11 @@
                 {{ todays_users|length }} users logged in today
             </div> 
             <div class="widget-content">
-                <ul class="table-striped">
+                <table class="table-striped">
                     {% for profile in todays_users %}
-                        <li style="margin: 0">{{ profile.name }}</li>
+                        <tr style="margin: 0"><td>{{ profile.name }}</td></tr>
                     {% endfor %}
-                </ul>
+                </table>
             </div> 
         </div>
     </div>
@@ -20,11 +20,11 @@
                 New Signups
             </div> 
             <div class="widget-content">
-                <ul class="table-striped">
+                <table class="table-striped">
                     {% for item in logins|dictsort:'date' %}
-                        <li style="margin: 0">{{ item.date }}: {{ item.logins }} users</li>
+                        <tr style="margin: 0"><td>{{ item.date }}: {{ item.logins }} users</td></tr>
                     {% endfor %}
-                </ul>
+                </table>
             </div> 
         </div>
     </div>

@@ -79,23 +79,7 @@
       "date_joined": "2011-06-29 17:53:01"
     }
   },
-    {
-        "pk": 6,
-        "model": "auth.user",
-        "fields": {
-            "username": "testuser",
-            "first_name": "",
-            "last_name": "",
-            "is_active": true,
-            "is_superuser": false,
-            "is_staff": false,
-            "groups": [],
-            "user_permissions": [],
-            "email": "testuser@testuser.com",
-            "date_joined": "2011-04-23 15:30:54"
-        }
-    },
-    {
+  {
     "pk": 7,
     "model": "auth.user", 
     "fields": {
@@ -188,23 +172,6 @@
             "contact_text": "",
             "contact_email": "",
             "user": 5,
-            "contact_carrier": null,
-            "setup_profile": false
-        }
-    },
-
-    {
-        "pk": 6,
-        "model": "player_mgr.profile",
-        "fields": {
-            "first_name": "Test",
-            "last_name": "User",
-            "name": "test",
-            "team": 15,
-            "setup_complete": false,
-            "contact_text": "",
-            "contact_email": "",
-            "user": 6,
             "contact_carrier": null,
             "setup_profile": false
         }

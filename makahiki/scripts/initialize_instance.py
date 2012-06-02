@@ -1,10 +1,19 @@
 #!/usr/bin/python
 
-"""Invocation:  scripts/initialize_instance .py [--type=[default|test]] <site_name>
-Use this script to create an instance with the default or test configuration.
-Defaults to creating an instance with the default configuration.
-You must provide a site name.
+"""Invocation:  scripts/initialize_instance .py [--type=[default|demo|test]]
+Use this script to create an instance with different types of configuration:
 
+[default]: includes all the basic configuration. User will need to create the round info,
+resource settings, resource goal settings, team, etc.
+
+[demo]:  includes all the "default" configuration, with the additions of demo information, such
+as rounds, resource and goal settings, demo team, demo users, and use internal
+authentication.
+
+[test]:  similar to "demo" configuration, with the additions of more test users and use
+CAS authentication instead of internal authentication.
+
+Defaults to creating an instance with the default configuration.
 
 Performs the following:
   * Updates and/or installation of any modules in requirements.txt
@@ -26,18 +35,14 @@ def main(argv):
     try:
         opts, args = getopt.getopt(argv, "t:", ["type="])
     except getopt.GetoptError:
-        print "Usage: initialize_instance.py [-t|--type=[default|test]] <site_name>"
+        print "Usage: initialize_instance.py [-t|--type=[default|demo|test]]"
         sys.exit(2)
 
     for opt in opts:
         if opt[0] == "-t" or opt[0] == "--type":
             instance_type = opt[1]
 
-    if len(args) == 0:
-        print "Please specify a site_name for the instance."
-        sys.exit(2)
-
-    site_name = args[0]
+    _ = args
 
     print "installing requirements..."
     os.system("pip install -r ../requirements.txt --quiet")
@@ -61,29 +66,18 @@ def main(argv):
         print command
         os.system(command)
 
-    print "creating the challenge..."
-    os.system("python manage.py create_challenge %s" % site_name)
-
     print "loading base data..."
     fixture_path = "fixtures"
-    os.system("python manage.py loaddata %s" % os.path.join(fixture_path, "base_help.json"))
-    os.system("python manage.py loaddata %s" % os.path.join(fixture_path, "base_pages.json"))
-    os.system("python manage.py loaddata %s" % os.path.join(fixture_path, "base_quests.json"))
-    os.system("python manage.py loaddata %s" % os.path.join(fixture_path, "base_settings.json"))
-    os.system("python manage.py loaddata %s" % os.path.join(fixture_path, "base_smartgrid.json"))
+    os.system("python manage.py loaddata %s" % os.path.join(fixture_path, "base_*.json"))
+
+    if instance_type == "demo" or instance_type == "test":
+        print "setting up demo data..."
+        os.system("python manage.py loaddata %s" % os.path.join(fixture_path, "demo_*.json"))
+        os.system("python manage.py setup_test_data all")
 
     if instance_type == "test":
         print "setting up test data..."
-        os.system("python manage.py loaddata %s" % os.path.join(fixture_path,
-                                                                "test_challenge.json"))
-        os.system("python manage.py loaddata %s" % os.path.join(fixture_path,
-                                                                "test_prizes.json"))
-        os.system("python manage.py loaddata %s" % os.path.join(fixture_path,
-                                                                "test_smartgrid_events.json"))
-        os.system("python manage.py loaddata %s" % os.path.join(fixture_path, "test_teams.json"))
-        os.system("python manage.py loaddata %s" % os.path.join(fixture_path, "test_users.json"))
-
-        os.system("python manage.py setup_test_data all")
+        os.system("python manage.py loaddata %s" % os.path.join(fixture_path, "test_*.json"))
 
 
 if __name__ == '__main__':
