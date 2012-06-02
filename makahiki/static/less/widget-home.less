@@ -16,17 +16,6 @@
     list-style: none;
 }
 
-.tile > ul {
-    list-style: none;
-    margin-left: 0px;
-}
-
-.tile > h6 { 
-    text-transform: uppercase;
-    font-weight: bold;
-    font-size: 14pt;
-}
-
 .home-item { 
     width: 28%;
     height: 210px;
@@ -162,6 +151,18 @@
     background: transparent
         url(../images/icons/icon-water-lg-over.png) top
         left no-repeat;
+}
+
+.tile > ul {
+    list-style: none;
+    margin-left: 0px;
+}
+
+.tile > h6 {
+    color: @pageinfobox-header-font-color; 
+    font-size: 14pt;
+    font-weight: bold;
+    text-transform: uppercase;
 }
 
 @media ( max-width : 639px) {
