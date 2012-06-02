@@ -1,19 +1,20 @@
 #!/usr/bin/python
 
-"""Invocation:  scripts/initialize_instance .py [--type=[default|demo|test]]
+"""
 Use this script to create an instance with different types of configuration:
 
-[default]: includes all the basic configuration. User will need to create the round info,
-resource settings, resource goal settings, team, etc.
+Usage:  scripts/initialize_instance .py -t|--type [=] default|demo|test
 
-[demo]:  includes all the "default" configuration, with the additions of demo information, such
-as rounds, resource and goal settings, demo team, demo users, and use internal
-authentication.
+[default]: includes the basic configuration. The admin needs to create
+           the settings for rounds, resources, resource goals, teams and
+           users, prizes, etc. Uses internal authentication.
 
-[test]:  similar to "demo" configuration, with the additions of more test users and use
-CAS authentication instead of internal authentication.
+[demo]   : includes all of the [default] configuration, with the additions of
+           demo data, such as demo rounds, resource and goal settings, demo
+           team, demo users, demo prizes. Uses internal authentication.
 
-Defaults to creating an instance with the default configuration.
+[test]   : includes all of "demo" configuration, with more test users. Uses
+           CAS authentication.
 
 Performs the following:
   * Updates and/or installation of any modules in requirements.txt
@@ -28,19 +29,41 @@ import os
 import sys
 
 
+def exit_with_help():
+    """print the usage of the command."""
+    print """
+Usage:  scripts/initialize_instance .py -t|--type [=] default|demo|test
+[default]: includes the basic configuration. The admin needs to create
+           the settings for rounds, resources, resource goals, teams and
+           users, prizes, etc. Uses internal authentication.
+[demo]   : includes all of the [default] configuration, with the additions of
+           demo data, such as demo rounds, resource and goal settings, demo
+           team, demo users, demo prizes. Uses internal authentication.
+[test]   : includes all of "demo" configuration, with more test users. Uses
+           CAS authentication."""
+    sys.exit(2)
+
+
 def main(argv):
     """main function."""
-    instance_type = "default"
+    instance_type = None
 
     try:
-        opts, args = getopt.getopt(argv, "t:", ["type="])
+        opts, args = getopt.getopt(argv, "t:h", ["type=","help"])
     except getopt.GetoptError:
-        print "Usage: initialize_instance.py [-t|--type=[default|demo|test]]"
-        sys.exit(2)
+        exit_with_help()
+
+    if not opts:
+        exit_with_help()
 
     for opt in opts:
+        if opt[0] == "-h" or opt[0] == "--help":
+            exit_with_help()
         if opt[0] == "-t" or opt[0] == "--type":
             instance_type = opt[1]
+
+    if not instance_type in ("default", "demo", "test"):
+        exit_with_help()
 
     _ = args
 
