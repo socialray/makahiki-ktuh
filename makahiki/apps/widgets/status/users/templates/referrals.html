@@ -5,12 +5,12 @@
         Referrals
     </div> 
     <div class="widget-content">
-    <table clas="table-striped">
-        <tr>
-            <th>Rank</th>
-            <th>User</th>
-            <th>Referrals</th>
-        </tr>
+    <table class="table-striped"> 
+            <tr>
+                <th>Rank</th>
+                <th>User</th>
+                <th>Referrals</th>
+            </tr> 
         {% for item in referrals|dictsortreversed:'referrals' %}
             <tr>
                 <td>{{forloop.counter}}</td>
