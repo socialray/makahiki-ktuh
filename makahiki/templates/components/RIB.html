@@ -63,12 +63,16 @@ $(document).ready(function() {
         delay:  -1000,
         sync: true
         });
+    {% with user.get_profile.team as team %}
+    {% if team and team.group %}
     $('#wide-team-cycle').cycle({
         fx: "fade",
         timeout: 3500,
         delay:  -1000,
         sync: true
         });
+    {% endif %}
+    {% endwith %}
     $('#wide-round-cycle').cycle({
         fx: "fade",
         timeout: 3500,
