@@ -1,14 +1,14 @@
 {% load cache %}
 
 {% cache 600 news-popular-tasks %}
-<div id="outer-box" class="content-box">
+<div id="popular-outer-box" class="content-box">
     {% if not view_objects.popular_tasks.no_carousel %}
     <div id="news-most-popular-actions">
     {% endif %}
 
     {% for key, value in view_objects.popular_tasks.popular_tasks.items %}
     <div class="item">
-        <div class="set-width-outer-width">
+        <div class="set-popular-width-outer-width">
         <div class="content-box-title">
             Most Popular {{ key }}
             {% if not view_objects.popular_tasks.no_carousel %}
@@ -70,9 +70,9 @@ $(document).ready(function() {
 	  
 	  $("#news-most-popular-actions").height(maxHeight);
 
-      var outerWidth = $("#outer-box").width();
+      var outerWidth = $("#popular-outer-box").width();
 //    console.log("Outer width is " + outerWidth);
-      $(".set-width-outer-width").each (function(index, item) {
+      $(".set-popular-width-outer-width").each (function(index, item) {
           item.style.width = outerWidth + "px";
       });
 	  
@@ -81,14 +81,15 @@ $(document).ready(function() {
           fx: "fade",
           timeout: 3500,
           delay:  -1000,
+          slideResize:   0,
           sync: true
           });
 	});
 	
 $(window).resize(function() {
-    var outerWidth = $("#outer-box").width();
+    var outerWidth = $("#popular-outer-box").width();
 //     console.log("Outer width is " + outerWidth);
-    $(".set-width-outer-width").each (function(index, item) {
+    $(".set-popular-width-outer-width").each (function(index, item) {
 //     	console.log("Setting " + item + "'s width to " + outerWidth);
         item.style.width = outerWidth + "px";
     });     

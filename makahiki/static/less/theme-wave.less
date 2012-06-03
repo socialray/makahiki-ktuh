@@ -71,7 +71,8 @@
 @infobar-bkg-color-start: @lightPaleBlue;
 @infobar-bkg-color-end: @skyBlue;
 @infobar-font-color: @black;
-//@infobar-feedback-bkg-color: @darkerSteelBlue; // bootstrap buttons do not like this
+@infobar-feedback-button-bkg-color-start: darken(@infobar-bkg-color-start, 20%); 
+@infobar-feedback-button-bkg-color-end: darken(@infobar-bkg-color-end, 20%); 
 @infobar-feedback-button-font-color: @black;
 @infobar-transparency: 55%;
 
@@ -103,7 +104,8 @@
 @widget-body-bkg-color: @lightSteelBlue; 
 @widget-body-font-color: @black;
 @widget-body-transparency: 0%;
-@widget-button-bkg-color: darken(@widget-body-bkg-color, 50%);
+@widget-button-bkg-color-start: darken(@widget-body-bkg-color, 50%);
+@widget-button-bkg-color-end: darken(@widget-body-bkg-color, 50%);
 @widget-button-font-color: @widget-body-bkg-color; 
 @widget-table-row-color-1: @widget-body-bkg-color;
 @widget-table-row-color-2: lighten(@widget-body-bkg-color, 40%);
