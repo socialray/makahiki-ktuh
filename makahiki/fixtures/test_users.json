@@ -90,7 +90,8 @@
       "is_superuser": true, 
       "is_staff": true, 
       "groups": [],
-      "user_permissions": [], 
+      "user_permissions": [],
+      "password": "sha1$7c360$6fccb69328988b8a57b5debf73b2704b1917c26c",
       "email": "cammymoore07@gmail.com",
       "date_joined": "2012-02-15 22:01:32"
     }
