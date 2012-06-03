@@ -142,8 +142,12 @@ form {
 h6 {
     color: @black;
 }
+label {
+    color: @widget-body-font-color;
+}
 
 legend {
+    color: @widget-title-font-color;
     border: none;
     line-height: 19.5pt;
 }
@@ -310,14 +314,6 @@ ul {
     font-size: 1em;
 }
 
-.energy-status-how-activities-table th {
-    background: @widget-body-bkg-color;
-}
-
-.event-code input {
-    margin-bottom: 0px;
-}
-
 .info-bar {
     .background-gradient (fadeout(@infobar-bkg-color-start, @infobar-transparency) , fadeout(@infobar-bkg-color-end, @infobar-transparency));
     color: @infobar-font-color;
@@ -345,7 +341,7 @@ ul {
 
 .info-bar .btn {
     float: right;
-    color: @infobar-feedback-font-color;
+    color: @infobar-feedback-button-font-color;
 }
 
 /* the id single-cycle is used by jquery.cycle to set up the cycle. */
@@ -426,7 +422,7 @@ ul {
 .notice {
     .makahiki-box ();
     .content-box-contents ();
-    .background-gradient (@questbar-bkg-color-start , @questbar-bkg-color-end);
+    .background-gradient (fadeout(@questbar-bkg-color-start, @questbar-transparency / 2) , fadeout(@questbar-bkg-color-end, @questbar-transparency / 2));
     color: @questbar-font-color;
 }
 

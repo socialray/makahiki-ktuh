@@ -18,22 +18,23 @@
         <tr>
             <td class="prize">
                 {% if prize.image %}<img src="{{prize.image.url}}"/>{% endif %}
-                <a id="{{name|slugify}}-{{prize.title|slugify}}-link" data-toggle="modal"
-                        href="#{{name|slugify}}-{{prize.title|slugify}}">
+                <a id="{{name|slugify}}-{{prize.title|slugify}}-link" 
+                   onClick="togglePrize(event, '{{name|escape}}', '{{prize.title|escape}}', '{{prize.long_description|escapejs|markdown}}'); return false;"
+                        href="#">
                     {{ prize.title }}
                 </a>
                 <!-- Modal Dialog stuff -->
-                <div id="{{name|slugify}}-{{prize.title|slugify}}" class="modal hide fade">
-                    <div class="modal-header">
-                        <h3>{{name}}: {{prize.title}}</h3>
-                    </div>
-                    <div class="modal-body">
-                        {{ prize.long_description|markdown }}
-                    </div>
-                    <div class="modal-footer">
-                        <a href="#" class="btn" data-dismiss="modal">Close</a>
-                    </div>
-                </div>
+<!--                 <div id="{{name|slugify}}-{{prize.title|slugify}}" class="modal hide fade"> -->
+<!--                     <div class="modal-header"> -->
+<!--                         <h3>{{name}}: {{prize.title}}</h3> -->
+<!--                     </div> -->
+<!--                     <div class="modal-body"> -->
+<!--                         {{ prize.long_description|markdown }} -->
+<!--                     </div> -->
+<!--                     <div class="modal-footer"> -->
+<!--                         <a href="#" class="btn" data-dismiss="modal">Close</a> -->
+<!--                     </div> -->
+<!--                 </div> -->
             </td>
             <td>
                {{ prize.short_description|markdown }} <br/>

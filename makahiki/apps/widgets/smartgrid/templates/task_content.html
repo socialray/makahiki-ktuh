@@ -31,7 +31,7 @@
             {% endif %}
             {% if action.type == "commitment" and action.can_commit %}
                 <br/>
-                <a onclick="task_form_overlay()">
+                <a onclick="task_form_overlay(event)">
                     <button style="cursor:pointer;">I will do this again!</button>
                 </a>
             {% endif %}
@@ -45,7 +45,7 @@
                     Thank you for attending the event. <br/>
                     Click on the "I Did it" button to get the rest of your points.
                     <br/>
-                    <a onclick="task_form_overlay()">
+                    <a onclick="task_form_overlay(event)">
                         <button style="cursor:pointer;">I Did it</button>
                     </a>
                 {% else %}
@@ -91,7 +91,7 @@
                     <br/>
                     Click on the "I Did it" button to get the rest of your points.
                     <br/>
-                    <a onclick="task_form_overlay()">
+                    <a onclick="task_form_overlay(event)">
                         <button style="cursor:pointer;">I Did it</button>
                     </a>
                 {% endif %}
@@ -116,7 +116,7 @@
                         <span style="color:orange">{{ action.member.admin_comment }}</span>
                     </div>
                     {% if user == action.member.user %}
-                        <a onclick="task_form_overlay()">
+                        <a onclick="task_form_overlay(event)">
                             <button style="cursor:pointer;">I will try again
                             </button>
                         </a>
@@ -157,7 +157,7 @@
         {% if action.type == "commitment" %}
             {% if action.can_commit %}
                 {% if action.social_bonus > 0 %}
-                    <a onclick="task_form_overlay()">
+                    <a onclick="task_form_overlay(event)">
                         <button style="cursor:pointer;">I will do this!
                             <img src="{{ STATIC_URL}}images/right.png"
                                  width="50" align="center">
@@ -187,7 +187,7 @@
                 <b>This event was already completed at {{ action.event.event_date }} <br/>
                     If you attended the event, Click on the "I Did it" button to get
                     your points. <p/>
-                    <a onclick="task_form_overlay()">
+                    <a onclick="task_form_overlay(event)">
                         <button style="cursor:pointer;">
                             I Did it
                             <img src="{{ STATIC_URL}}images/right.png"
@@ -216,7 +216,7 @@
             {% endif %}
         {% endif %}
         {% if action.type == "survey" %}
-            <a onclick="task_form_overlay()">
+            <a onclick="task_form_overlay(event)">
                 <button style="cursor:pointer;">I want to do it
                     <img src="{{ STATIC_URL}}images/right.png"
                          width="50" align="center">
@@ -228,7 +228,7 @@
                 Once you are done, click the button below to get your points!
             </b>
             <p/>
-            <a onclick="task_form_overlay()">
+            <a onclick="task_form_overlay(event)">
                 <button style="cursor:pointer;">
                     I Did This!
                     <img src="{{ STATIC_URL}}images/right.png"
@@ -300,7 +300,7 @@ $(document).ready(function () {
         {% endif %}
     });
 
-    function task_form_overlay() {
+    function task_form_overlay(event) {
         var modalElement = $('#taskModal');
 
         modalElement.modal({
@@ -315,6 +315,9 @@ $(document).ready(function () {
         modalElement.on('hidden', function() {
         	log_js_action("smartgrid", "{{action.slug}}", "close-form");
         });
+        if (event) {
+        	document.getElementById('taskModal').style.top = event.pageY + "px";  
+        }
         modalElement.modal('show');
 
         $('#id_response').focus();
