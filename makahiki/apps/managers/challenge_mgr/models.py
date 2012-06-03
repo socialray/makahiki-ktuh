@@ -34,7 +34,7 @@ class ChallengeSettings(models.Model):
         help_text="The name of the competition.",
         max_length=50,)
     theme = models.CharField(
-        default="theme-default",
+        default="theme-forest",
         help_text="The UI theme for this installation.",
         choices=THEME_CHOICES,
         max_length=50,)

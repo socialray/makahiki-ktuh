@@ -9,7 +9,7 @@ class Migration(SchemaMigration):
     def forwards(self, orm):
         
         # Adding field 'Profile.theme'
-        db.add_column('player_mgr_profile', 'theme', self.gf('django.db.models.fields.CharField')(default='theme-default', max_length=50), keep_default=False)
+        db.add_column('player_mgr_profile', 'theme', self.gf('django.db.models.fields.CharField')(default='theme-forest', max_length=50), keep_default=False)
 
 
     def backwards(self, orm):
@@ -72,7 +72,7 @@ class Migration(SchemaMigration):
             'setup_complete': ('django.db.models.fields.BooleanField', [], {'default': 'False'}),
             'setup_profile': ('django.db.models.fields.BooleanField', [], {'default': 'False'}),
             'team': ('django.db.models.fields.related.ForeignKey', [], {'to': "orm['team_mgr.Team']", 'null': 'True', 'blank': 'True'}),
-            'theme': ('django.db.models.fields.CharField', [], {'default': "'theme-default'", 'max_length': '50'}),
+            'theme': ('django.db.models.fields.CharField', [], {'default': "'theme-forest'", 'max_length': '50'}),
             'user': ('django.db.models.fields.related.ForeignKey', [], {'related_name': "'profile'", 'unique': 'True', 'to': "orm['auth.User']"})
         },
         'team_mgr.group': {

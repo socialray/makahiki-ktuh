@@ -40,7 +40,7 @@ class Migration(SchemaMigration):
             'site_domain': ('django.db.models.fields.CharField', [], {'default': "'kukuicup.manoa.hawaii.edu'", 'max_length': '100'}),
             'site_logo': ('django.db.models.fields.files.ImageField', [], {'max_length': '255', 'null': 'True', 'blank': 'True'}),
             'site_name': ('django.db.models.fields.CharField', [], {'default': "'University of Hawaii at Manoa'", 'max_length': '50'}),
-            'theme': ('django.db.models.fields.CharField', [], {'default': "'theme-default'", 'max_length': '50'}),
+            'theme': ('django.db.models.fields.CharField', [], {'default': "'theme-forest'", 'max_length': '50'}),
             'use_cas_auth': ('django.db.models.fields.BooleanField', [], {'default': 'False'}),
             'use_facebook': ('django.db.models.fields.BooleanField', [], {'default': 'False'}),
             'use_internal_auth': ('django.db.models.fields.BooleanField', [], {'default': 'False'}),
