@@ -70,6 +70,9 @@ def main(argv):
     print "installing requirements..."
     os.system("pip install -r ../requirements.txt --quiet")
 
+    print "resetting the db..."
+    os.system("python scripts/initialize_postgres.py")
+
     print "syncing and migrating db..."
     os.system("python manage.py syncdb --noinput --migrate --verbosity 0")
 
