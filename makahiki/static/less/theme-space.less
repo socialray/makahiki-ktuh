@@ -36,7 +36,6 @@
 @google-darkblue:       #1249E0;
 @google-red:            #D41C34;
 
-
 // Page Background 
 @use-bkg-image: true;
 @page-bkg-image: "../images/space-theme-background.jpg";
@@ -67,6 +66,8 @@
 @infobar-bkg-color-start: @white;
 @infobar-bkg-color-end: @white;
 @infobar-font-color: @white;
+@infobar-feedback-button-bkg-color-start: darken(@infobar-bkg-color-start, 20%); 
+@infobar-feedback-button-bkg-color-end: darken(@infobar-bkg-color-end, 20%); 
 @infobar-feedback-button-font-color: @black;
 @infobar-transparency: 80%;
 
@@ -98,7 +99,8 @@
 @widget-body-bkg-color: @white;
 @widget-body-font-color: @white;
 @widget-body-transparency: 80%;
-@widget-button-bkg-color: @black;
+@widget-button-bkg-color-start: @black;
+@widget-button-bkg-color-end: @black;
 @widget-button-font-color: @white;
 @widget-table-row-color-1: lighten(@black, 25%);
 @widget-table-row-color-2: lighten(@black, 50%);
@@ -116,7 +118,6 @@
 @sgg-commitment-cell-bkg-color: lighten(@black, 40%);
 @sgg-event-cell-bkg-color: lighten(@black, 60%);
 @sgg-excursion-cell-bkg-color: lighten(@black, 80%);
-
 
 // Raffle game
 @prizes-raffle-table-entry-color: @white;

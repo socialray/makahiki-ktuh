@@ -12,7 +12,7 @@
             "email_use_tls": true,
             "landing_non_participant_text": "###I'm not registered\r\n#####but I'd like to know more about the Kukui Cup",
             "email_port": 587,
-            "theme": "theme-default",
+            "theme": "theme-forest",
             "use_cas_auth": true,
             "cas_server_url": "https://login.its.hawaii.edu/cas/",
             "wattdepot_server_url": "http://server.wattdepot.org:8194",

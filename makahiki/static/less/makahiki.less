@@ -16,11 +16,9 @@
 @navbarBackgroundHighlight: fadeout(@navbar-bkg-color-start, @navbar-transparency);
 @navbarBackground: fadeout(@navbar-bkg-color-end, @navbar-transparency);
 @navbarLinkBackgroundActive: darken(@navbarBackground, 15%);
-
 a {
     color: @page-link-color;
 }
-
 
 a.admin img {
     background: transparent url(../images/icons/icon-admin.png) top left no-repeat;
@@ -123,12 +121,15 @@ a.win:hover img {
 }
 
 body {
+    height: 100%;
     margin: 0;
     padding-left: 20px;
     padding-right: 20px;
     .pagination-centered;
     .background-choice;
     color: @page-font-color;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
 }
 
 button {
@@ -142,6 +143,11 @@ form {
 h6 {
     color: @black;
 }
+
+html {
+    height: 100%;
+}
+
 label {
     color: @widget-body-font-color;
 }
@@ -159,6 +165,7 @@ table , tr {
 table.activities-grid-legend {
     width: auto;
 }
+
 td , h5 {
     padding: 4px;
     vertical-align: middle;
@@ -180,12 +187,8 @@ ul {
     list-style: none;
 }
 
-
-/* 
- * Classes!
- */
-.background-choice() when (@use-bkg-image) {
-    background: url("@{page-bkg-image}") center fixed;       
+.background-choice () when (@use-bkg-image) {
+    background: url("@{page-bkg-image}") center fixed;
     background-repeat: no-repeat;
     -webkit-background-size: cover;
     -moz-background-size: cover;
@@ -193,13 +196,11 @@ ul {
     background-size: cover;
 }
 
-.background-choice() when (@use-bkg-image = false) {
-    .background-gradient (@page-bkg-color-start, @page-bkg-color-end);
-//    background-repeat: no-repeat;
-    background-size: cover;
-    -webkit-background-size: cover;
-    -moz-background-size: cover;
-    -o-background-size: cover;
+.background-choice () when (@use-bkg-image= false) {
+    .background-gradient (@page-bkg-color-start , @page-bkg-color-end) ;
+    background-size: cover; -webkit-background-size: cover;
+-moz-background-size: cover;
+-o-background-size: cover;
 }
 
 .background-gradient (@start , @end) {
@@ -215,6 +216,36 @@ ul {
     background: transparent url("@{page-logo}") top left no-repeat;
     display: block;
     margin: 0 auto;
+}
+
+.btn-widget {
+    background-color: @widget-button-bkg-color-start ! important;
+    background-repeat: repeat-x;
+    background-image: -moz-linear-gradient(top, @widget-button-bkg-color-start, @widget-button-bkg-color-end);
+    background-image: -ms-linear-gradient(top, @widget-button-bkg-color-start, @widget-button-bkg-color-end);
+    background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0%, @widget-button-bkg-color-start), color-stop(100%, @widget-button-bkg-color-end));
+    background-image: -webkit-linear-gradient(top, @widget-button-bkg-color-start, @widget-button-bkg-color-end);
+    background-image: -o-linear-gradient(top, @widget-button-bkg-color-start, @widget-button-bkg-color-end);
+    background-image: linear-gradient(@widget-button-bkg-color-start, @widget-button-bkg-color-end);
+    border-color: @widget-button-bkg-color-end @widget-button-bkg-color-end @widget-button-bkg-color-start;
+    color: @widget-button-font-color ! important;
+    text-shadow: 0 -1px 0 fade(@widget-button-font-color, 39%);
+    -webkit-font-smoothing: antialiased;    
+}
+
+.btn-feedback {
+    background-color: @infobar-feedback-button-bkg-color-start ! important;
+    background-repeat: repeat-x;
+    background-image: -moz-linear-gradient(top, @infobar-feedback-button-bkg-color-start, @infobar-feedback-button-bkg-color-end);
+    background-image: -ms-linear-gradient(top, @infobar-feedback-button-bkg-color-start, @infobar-feedback-button-bkg-color-end);
+    background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0%, @infobar-feedback-button-bkg-color-start), color-stop(100%, @infobar-feedback-button-bkg-color-end));
+    background-image: -webkit-linear-gradient(top, @infobar-feedback-button-bkg-color-start, @infobar-feedback-button-bkg-color-end);
+    background-image: -o-linear-gradient(top, @infobar-feedback-button-bkg-color-start, @infobar-feedback-button-bkg-color-end);
+    background-image: linear-gradient(@infobar-feedback-button-bkg-color-start, @infobar-feedback-button-bkg-color-end);
+    border-color: @infobar-feedback-button-bkg-color-end @infobar-feedback-button-bkg-color-end @infobar-feedback-button-bkg-color-start;
+    color: @infobar-feedback-button-font-color ! important;
+    text-shadow: 0 -1px 0 fade(@infobar-feedback-button-font-color, 39%);
+    -webkit-font-smoothing: antialiased;    
 }
 
 .btn-navbar {
@@ -293,7 +324,7 @@ ul {
 
 .content-box-subtitle {
     background: @widget-subtitle-bkg-color;
-    color: @widget-subtitle-font-color;    
+    color: @widget-subtitle-font-color;
 }
 
 .content-box-title {
@@ -318,6 +349,7 @@ ul {
     .background-gradient (fadeout(@infobar-bkg-color-start, @infobar-transparency) , fadeout(@infobar-bkg-color-end, @infobar-transparency));
     color: @infobar-font-color;
 }
+
 .info-bar h4 {
     text-align: center;
 }
@@ -344,7 +376,6 @@ ul {
     color: @infobar-feedback-button-font-color;
 }
 
-/* the id single-cycle is used by jquery.cycle to set up the cycle. */
 .info-bar #single-cycle div , .info-bar #single-cycle h4 {
     text-align: center;
     width: 100%;
@@ -545,16 +576,10 @@ ul {
     width: auto;
 }
 
-/*
- * Ids!
- */
-
-/* canopy-about used by java script to hide the about info. */
 #canopy-about {
     padding: 5px 10px;
 }
 
-/* used to hide the info-bar-single */
 #info-bar-single {
     .hidden;
 }
@@ -572,10 +597,6 @@ ul {
     float: none;
     text-align: center;
 }
-
-/*
- * Media queries
- */
 
 @media (max-width: 979px) {
     .navbar .nav > li > a , .navbar .dropdown-menu a {
@@ -661,10 +682,10 @@ ul {
     }
 }
 
-@media  (max-width: 480px) {
+@media (max-width: 480px) {
     .modal.fade.in {
-        top: 50%; // 10px not right need to figure out where to put them.
-    }  
+        top: 50%;
+    }
 }
 
 @import "widget-badges.less";

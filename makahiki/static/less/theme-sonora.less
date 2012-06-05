@@ -26,27 +26,13 @@
 @pink:                  #c3325f;
 @purple:                #7a43b6;
 
-// Theme specific colors
-@steelBlue: #2B93AD;
-@lightSteelBlue: #C1D8EB;
-@darkerSteelBlue: #A2C0D2;
-@lightPaleBlue: #E0FFFF;
-@skyBlue: #4F95CD;
-@brightBlue: #0066FF;
-@lighterBrightBlue: #2D76FE;
-@veryDarkBlueBlack: #24333B;
-@lightGrayBlue: #b6d7ee;
-@darkGreen: #468250;
-@lightCyan: #E3F9F8;
-@blueCyan: #00CCFF;
-@darkTan: #C18E22;
-
-//United colors
-@sonora-grey: #484F5B;
-@sonora-lightblue: #6A8BBD;
-@sonora-blue: #005BFF;
-@sonora-white: #DFDBD9;
-@sonora-gold: #C7A56E;
+//Sonora theme palette
+@sonora-grey:           #484F5B;
+@sonora-lightblue:      #6A8BBD;
+@sonora-blue:           #005BFF;
+@sonora-white:          #DFDBD9;
+@sonora-gold:           #C7A56E;
+@sonora-lightGrayBlue:  #b6d7ee;
 
 // Theme stylable elements
 @use-bkg-image: false;
@@ -75,12 +61,14 @@
 @infobar-bkg-color-start: lighten(@sonora-grey, 20%);
 @infobar-bkg-color-end: lighten(@sonora-grey, 50%);
 @infobar-font-color: @black;
+@infobar-feedback-button-bkg-color-start: darken(@infobar-bkg-color-start, 20%); 
+@infobar-feedback-button-bkg-color-end: darken(@infobar-bkg-color-end, 20%); 
 @infobar-feedback-button-font-color: @black;
 @infobar-transparency: 0%;
 
 // Notifications
-@notification-bkg-color-start: @lightGrayBlue;
-@notification-bkg-color-end: @lightGrayBlue;
+@notification-bkg-color-start: @sonora-lightGrayBlue;
+@notification-bkg-color-end: @sonora-lightGrayBlue;
 @notification-font-color: @black;
 @notification-transparency: 45%;
 
@@ -106,7 +94,8 @@
 @widget-body-bkg-color: lighten(@sonora-grey, 60%); 
 @widget-body-font-color: @black;
 @widget-body-transparency: 0%;
-@widget-button-bkg-color: darken(@widget-body-bkg-color, 50%);
+@widget-button-bkg-color-start: darken(@widget-body-bkg-color, 50%);
+@widget-button-bkg-color-end: darken(@widget-body-bkg-color, 50%);
 @widget-button-font-color: @widget-body-bkg-color; 
 @widget-table-row-color-1: @widget-body-bkg-color;
 @widget-table-row-color-2: lighten(@widget-body-bkg-color, 40%);

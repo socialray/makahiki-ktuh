@@ -234,7 +234,7 @@ ADMIN_APPS = (
 # INSTALLED Themes. Please keep them in alphabetical order
 ##########################################################
 INSTALLED_THEMES = (
-    'theme-default',
+    'theme-bubbles',
     'theme-forest',
     'theme-google',
     'theme-sonora',

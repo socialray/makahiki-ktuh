@@ -26,66 +26,64 @@
 @pink:                  #c3325f;
 @purple:                #7a43b6;
 
-// Theme specific colors
-@steelBlue: #2B93AD;
-@lightSteelBlue: #C1D8EB;
-@darkerSteelBlue: #A2C0D2;
-@lightPaleBlue: #E0FFFF;
-@skyBlue: #4F95CD;
-@lightPurpleBlue: #7093DB;
-@veryDarkBlueBlack: #24333B;
-@yellowGreen: #adff2f;
-@darkGreen: #468250;
-@lightCyan: #E3F9F8;
-@oliveGreen: #70A21F;
-@brown: #845D18;
-@lightBrown: #A09E43;
-@brickRed: #AB441B;
-@orangeBrown: #C18E22;
+// Wave color palette
+@wave-steelBlue:        #2B93AD;
+@wave-lightSteelBlue:   #C1D8EB;
+@wave-darkerSteelBlue:  #A2C0D2;
+@wave-lightPaleBlue:    #E0FFFF;
+@wave-skyBlue:          #4F95CD;
+@wave-lightPurpleBlue:  #7093DB;
+@wave-yellowGreen:      #adff2f;
+@wave-darkGreen:        #468250;
+@wave-oliveGreen:       #70A21F;
+@wave-brown:            #845D18;
+@wave-lightBrown:       #A09E43;
+@wave-brickRed:         #AB441B;
 
 // Theme stylable elements
 // every page
 @use-bkg-image: true;
-@page-bkg-color-start: @steelBlue; 
-@page-bkg-color-end: @steelBlue; 
+@page-bkg-color-start: @wave-steelBlue; 
+@page-bkg-color-end: @wave-steelBlue; 
 @page-bkg-image: "../images/oceanWave.jpg";
 @page-logo: "../images/icons/icon-uh-logo.png"; 
-@page-font-color: @steelBlue;
-@page-link-color: @steelBlue;
+@page-font-color: @wave-steelBlue;
+@page-link-color: @wave-steelBlue;
 
 // Questbar
-@questbar-bkg-color-start: @darkGreen;
-@questbar-bkg-color-end: @darkGreen;
+@questbar-bkg-color-start: @wave-darkGreen;
+@questbar-bkg-color-end: @wave-darkGreen;
 @questbar-font-color: @black;
 @questbar-transparency: 55%;
 
 // Navbar
-@navbar-bkg-color-start: @lightPurpleBlue;
-@navbar-bkg-color-end: @lightPurpleBlue;
+@navbar-bkg-color-start: @wave-lightPurpleBlue;
+@navbar-bkg-color-end: @wave-lightPurpleBlue;
 @navbar-font-color: @white;
-@navbar-curr-page-bkg-color: darken(@lightPurpleBlue, 20%);
+@navbar-curr-page-bkg-color: darken(@wave-lightPurpleBlue, 20%);
 @navbar-curr-path-font-color: @black;
 @navbar-transparency: 55%;
 
 // Infobar
-@infobar-bkg-color-start: @lightPaleBlue;
-@infobar-bkg-color-end: @skyBlue;
+@infobar-bkg-color-start: @wave-lightPaleBlue;
+@infobar-bkg-color-end: @wave-skyBlue;
 @infobar-font-color: @black;
-//@infobar-feedback-bkg-color: @darkerSteelBlue; // bootstrap buttons do not like this
+@infobar-feedback-button-bkg-color-start: darken(@infobar-bkg-color-start, 20%); 
+@infobar-feedback-button-bkg-color-end: darken(@infobar-bkg-color-end, 20%); 
 @infobar-feedback-button-font-color: @black;
 @infobar-transparency: 55%;
 
 // Notifications
-@notification-bkg-color-start: @yellowGreen;
-@notification-bkg-color-end: @yellowGreen;
+@notification-bkg-color-start: @wave-yellowGreen;
+@notification-bkg-color-end: @wave-yellowGreen;
 @notification-font-color: @black;
 @notification-transparency: 45%;
 
 // Modal dialog box
-@modal-title-bkg-color-start: @skyBlue;
-@modal-title-bkg-color-end: @skyBlue;
+@modal-title-bkg-color-start: @wave-skyBlue;
+@modal-title-bkg-color-end: @wave-skyBlue;
 @modal-title-font-color: @black;
-@modal-body-bkg-color: @lightSteelBlue;
+@modal-body-bkg-color: @wave-lightSteelBlue;
 @modal-body-font-color: @black;
 
 // Page infobox
@@ -96,30 +94,31 @@
 @pageinfobox-transparency: 20%;
 
 // Widgets
-@widget-title-bkg-color-start: @skyBlue;
-@widget-title-bkg-color-end: @skyBlue;
+@widget-title-bkg-color-start: @wave-skyBlue;
+@widget-title-bkg-color-end: @wave-skyBlue;
 @widget-title-font-color: @black;
 @widget-title-transparency: 0%;
-@widget-body-bkg-color: @lightSteelBlue; 
+@widget-body-bkg-color: @wave-lightSteelBlue; 
 @widget-body-font-color: @black;
 @widget-body-transparency: 0%;
-@widget-button-bkg-color: darken(@widget-body-bkg-color, 50%);
+@widget-button-bkg-color-start: darken(@widget-body-bkg-color, 50%);
+@widget-button-bkg-color-end: darken(@widget-body-bkg-color, 50%);
 @widget-button-font-color: @widget-body-bkg-color; 
 @widget-table-row-color-1: @widget-body-bkg-color;
 @widget-table-row-color-2: lighten(@widget-body-bkg-color, 40%);
-@widget-subtitle-bkg-color: @darkerSteelBlue;
+@widget-subtitle-bkg-color: @wave-darkerSteelBlue;
 @widget-subtitle-font-color: @black;
-@widget-text-area-bkg-color: lighten(@lightSteelBlue, 30%);
+@widget-text-area-bkg-color: lighten(@wave-lightSteelBlue, 30%);
 @widget-text-area-font-color: @grayDarker;
 
 // Smart grid game
 @sgg-header-bkg-color: @white;
 @sgg-header-font-color: @black; 
 @sgg-entry-font-color: @black;
-@sgg-activity-cell-bkg-color: @oliveGreen;
-@sgg-commitment-cell-bkg-color: @brown;  
-@sgg-event-cell-bkg-color: @lightBrown;   
-@sgg-excursion-cell-bkg-color: @brickRed;
+@sgg-activity-cell-bkg-color: @wave-oliveGreen;
+@sgg-commitment-cell-bkg-color: @wave-brown;  
+@sgg-event-cell-bkg-color: @wave-lightBrown;   
+@sgg-excursion-cell-bkg-color: @wave-brickRed;
 
 // Prizes
 @prizes-raffle-table-entry-color: @green;
