@@ -841,10 +841,11 @@ a.water img{background:transparent url(../images/icons/icon-water.png) top left 
 a.water:hover img{background:transparent url(../images/icons/icon-water-over.png) top left no-repeat;display:block;}
 a.win img{background:transparent url(../images/icons/icon-prizes.png) top left no-repeat;display:block;}
 a.win:hover img{background:transparent url(../images/icons/icon-prizes-over.png) top left no-repeat;display:block;}
-body{margin:0;padding-left:20px;padding-right:20px;text-align:center;background-image:-webkit-gradient(linear, 0 0, 0 100%, from(#ffffff), to(#ffffff));background-image:-webkit-linear-gradient(top, #ffffff, #ffffff);background-image:-moz-linear-gradient(top, #ffffff, #ffffff);background-image:-ms-linear-gradient(top, #ffffff, #ffffff);background-image:-o-linear-gradient(top, #ffffff, #ffffff);background-image:linear-gradient(top, #ffffff, #ffffff);background-size:cover;-webkit-background-size:cover;-moz-background-size:cover;-o-background-size:cover;color:#000000;}
+body{height:100%;margin:0;padding-left:20px;padding-right:20px;text-align:center;background-image:-webkit-gradient(linear, 0 0, 0 100%, from(#ffffff), to(#ffffff));background-image:-webkit-linear-gradient(top, #ffffff, #ffffff);background-image:-moz-linear-gradient(top, #ffffff, #ffffff);background-image:-ms-linear-gradient(top, #ffffff, #ffffff);background-image:-o-linear-gradient(top, #ffffff, #ffffff);background-image:linear-gradient(top, #ffffff, #ffffff);background-size:cover;-webkit-background-size:cover;-moz-background-size:cover;-o-background-size:cover;color:#000000;background-repeat:no-repeat;background-attachment:fixed;}
 button{-webkit-appearance:none;}
 form{margin:0px;}
 h6{color:#000000;}
+html{height:100%;}
 label{color:#000000;}
 legend{color:#000000;border:none;line-height:19.5pt;}
 table,tr{width:100%;}
@@ -853,7 +854,9 @@ td,h5{padding:4px;vertical-align:middle;}
 th{text-transform:capitalize;}
 th,td{text-align:center;font-size:13px;line-height:13px;padding-top:3px;padding-bottom:3px;}
 ul{list-style:none;}
-.brand img{background:transparent url("../images/icons/icon-uh-logo.png") top left no-repeat;display:block;margin:0 auto;}
+.brand img{display:block;margin:0 auto;}
+.btn-widget{background-color:#808080 ! important;background-repeat:repeat-x;background-image:-moz-linear-gradient(top, #808080, #808080);background-image:-ms-linear-gradient(top, #808080, #808080);background-image:-webkit-gradient(linear, left top, left bottom, color-stop(0%, #808080), color-stop(100%, #808080));background-image:-webkit-linear-gradient(top, #808080, #808080);background-image:-o-linear-gradient(top, #808080, #808080);background-image:linear-gradient(#808080, #808080);border-color:#808080 #808080 #808080;color:#ffffff ! important;text-shadow:0 -1px 0 rgba(255, 255, 255, 0.39);-webkit-font-smoothing:antialiased;}
+.btn-feedback{background-color:#a3b8d5 ! important;background-repeat:repeat-x;background-image:-moz-linear-gradient(top, #a3b8d5, #a3b8d5);background-image:-ms-linear-gradient(top, #a3b8d5, #a3b8d5);background-image:-webkit-gradient(linear, left top, left bottom, color-stop(0%, #a3b8d5), color-stop(100%, #a3b8d5));background-image:-webkit-linear-gradient(top, #a3b8d5, #a3b8d5);background-image:-o-linear-gradient(top, #a3b8d5, #a3b8d5);background-image:linear-gradient(#a3b8d5, #a3b8d5);border-color:#a3b8d5 #a3b8d5 #a3b8d5;color:#000000 ! important;text-shadow:0 -1px 0 rgba(0, 0, 0, 0.39);-webkit-font-smoothing:antialiased;}
 .btn-navbar{background-color:#030b23;background-image:-webkit-gradient(linear, 0 0, 0 100%, from(#1249e0), to(#95aff6));background-image:-webkit-linear-gradient(top, #1249e0, #95aff6);background-image:-moz-linear-gradient(top, #1249e0, #95aff6);background-image:-ms-linear-gradient(top, #1249e0, #95aff6);background-image:-o-linear-gradient(top, #1249e0, #95aff6);background-image:linear-gradient(top, #1249e0, #95aff6);border-color:#1249e0 #1249e0 #000000;}
 .btn-navbar:hover,.btn-navbar:active,.btn-navbar.active,.btn-navbar.disabled,.btn-navbar[disabled]{background-color:#95aff6;}
 .centered-div{display:block;margin-left:auto;margin-right:auto;display:block;margin-left:auto;margin-right:auto;}
