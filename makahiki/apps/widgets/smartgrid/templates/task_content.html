@@ -229,7 +229,7 @@
             </b>
             <p/>
             <a onclick="task_form_overlay(event)">
-                <button style="cursor:pointer;">
+                <button style="cursor:pointer;" class="btn btn-widget">
                     I Did This!
                     <img src="{{ STATIC_URL}}images/right.png"
                          width="50" align="center"></button>
@@ -300,6 +300,21 @@ $(document).ready(function () {
         {% endif %}
     });
 
+    function hasClass(ele,cls) {
+        return ele.className.match(new RegExp('(\\s|^)'+cls+'(\\s|$)'));
+    }
+
+    function addClass(ele,cls) {
+        if (!this.hasClass(ele,cls)) ele.className += " "+cls;
+    }
+
+    function removeClass(ele,cls) {
+        if (hasClass(ele,cls)) {
+            var reg = new RegExp('(\\s|^)'+cls+'(\\s|$)');
+            ele.className=ele.className.replace(reg,' ');
+        }
+    }
+
     function task_form_overlay(event) {
         var modalElement = $('#taskModal');
 
@@ -322,7 +337,9 @@ $(document).ready(function () {
 
         $('#id_response').focus();
 
+        removeClass(document.getElementById('task-feedback'), 'hidden');
         return false;
+        
     }
 
 </script>
