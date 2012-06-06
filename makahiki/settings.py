@@ -235,6 +235,7 @@ ADMIN_APPS = (
 ##########################################################
 INSTALLED_THEMES = (
     'theme-bubbles',
+    'theme-bumblebee',
     'theme-forest',
     'theme-google',
     'theme-sonora',
