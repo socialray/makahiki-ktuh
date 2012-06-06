@@ -1,16 +1,5 @@
-<div class="content-box-centered">
-    <div class="content-box-title">
-        The Smart Grid Game
-        <a href="#" style="float: right">
-            <img src="{{ STATIC_URL}}images/icons/icon-help-sm.png" width="20" align="center"
-                 title="Click to get help about this window"
-                 onclick="toggleHelp(event, 'widget', 'smart-grid-game'); return false;"
-                    /></a>
-    </div>
-    <div class="content-box-contents">
-        <p>
-        <table class="activities-grid">
-            <tr><!-- Start header -->
+<table class="activities-grid">
+          <tr><!-- Start header -->
                 {% for cat in categories %}
                     <td>
                         <div class="activity-category">
@@ -134,66 +123,4 @@
             </tr>
         </table>
 
-    </div>
-</div>
 
-<div class="modal hide fade" id="unlockModal">
-    <div class="modal-header">
-        <a class="close" data-dismiss="modal">x</a>
-        <h3>Locked Activity</h3>
-    </div>
-    <div class="modal-body" id="modal-body">
-        <p><b>This activity is locked.</b></p>
-        <p> To unlock this activity, please do the following: <br/>
-        <div id="depends_on">
-        </div>
-        </p>
-    </div>
-    <div class="modal-footer">
-        <a href="#" class="btn btn-widget" data-dismiss="modal">Close</a>
-    </div>
-</div>
-
-<script type="text/javascript">
-    $(document).ready(function () {
-        var task_depends_on = getCookie("task_depends_on");
-        if (task_depends_on != null)
-        {
-            deleteCookie("task_depends_on");
-
-            var modalElement = $('#unlockModal');
-
-            modalElement.modal({
-                backdrop: true,
-                keyboard: true,
-                show: false
-            });
-            modalElement.find('#depends_on').html(task_depends_on);
-
-            modalElement.modal('show');
-        }
-    });
-
-    function unlock_dialog(event, type, slug, depends_on) {
-        var modalElement = $('#unlockModal');
-           
-        var pos_y = event.pageY;
-        var body_y = $('body').height();
-        console.log("event y " + pos_y + " body height " + body_y);
-        document.getElementById('unlockModal').style.top = (pos_y - 50) + "px";
-        modalElement.modal({
-            backdrop: true,
-            keyboard: true,
-            show: false
-        }); 
-        modalElement.find('#depends_on').html(depends_on);
-        // set up event logging
-        modalElement.on('shown', function() {
-            log_js_action(type, slug, 'view-lock-open');
-        });
-        modalElement.on('hidden', function() {
-            log_js_action(type, slug, 'view-lock-close');
-        });
-        modalElement.modal('show');
-    }
-</script>

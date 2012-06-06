@@ -783,6 +783,7 @@
             "point_value": 0,
             "depends_on_text": "Complete Energy Intuition video activity, and wait for Overall Round",
             "is_canopy": false,
+            "level": 3,
             "type": "activity",
             "slug": "design-tshirt",
             "description": "We already have awesome 2011 Kukui Cup T-shirts, but what about 2012? For this activity, you will create a design for the 2012 Kukui Cup T-shirt. Things to keep in mind:\r\n\r\n* Include our logo & the words \"Kukui Cup\"\r\n* Include 2012 somewhere\r\n* Include our URL: kukuicup.manoa.hawaii.edu\r\n* Make it stylin' and awesome\r\n\r\nYou will submit an image file with your T-shirt design for us to look at."
@@ -807,6 +808,7 @@
             "point_value": 0,
             "depends_on_text": "Complete Energy Intuition video activity",
             "is_canopy": false,
+            "level": 2,
             "type": "activity",
             "slug": "letter-editor",
             "description": "This activity is an opportunity to creatively explore one of the topics of the Kukui Cup in more depth. For this activity, you will write a **letter to the editor** of a local publication on the subject of one of the categories from the Smart Grid such as energy, lighting, transportation, etc. Note that this activity will require significantly more effort than normal activities, but it is also worth more points. This activity is worth a variable number of points, so the more effort and the higher quality of your letter, the more points you will receive.\r\n\r\nSome local publications you might write to:\r\n\r\n* [Honolulu Weekly](http://honoluluweekly.com/contact-us/)\r\n* [Star-Advertiser](http://www.staradvertiser.com/info/Star-Advertiser_Letter_to_the_Editor.html)\r\n* [MidWeek](http://www.midweek.com/content/columns/lte_article/letters_to_the_editor1031/) (scroll to bottom for submission info)"
@@ -831,6 +833,7 @@
             "point_value": 0,
             "depends_on_text": "Complete Energy Intuition video activity",
             "is_canopy": false,
+            "level": 2,
             "type": "activity",
             "slug": "make-video",
             "description": "This activity is an opportunity to creatively explore one of the topics of the Kukui Cup in more depth. For this activity, you will make a **video** on the subject of one of the categories from the Smart Grid such as energy, lighting, transportation and post it on YouTube. Note that this activity will require significantly more effort than normal activities, but it is also worth more points. This activity is worth a variable number of points, so the more effort and the higher quality of your video, the more points you will receive.\r\n\r\nMaking a interesting video can be hard work. You'll find it much easier if you write out a little \"screenplay\" beforehand and think about what you want to communicate. YouTube has a [Handbook](http://www.youtube.com/t/yt_handbook_produce) with lots of great tips on making videos. Points will be awarded based on your video's originality, quality, and impact. For example, you talking into your webcam will get fewer points than visualizing your points with images or outdoor video. Make sure you mention the Kukui Cup either in your video or in the description field. When your video is ready, you can submit the URL for verification and scoring.\r\n\r\n*When submitting a video created by a group of players, please let us know how many people are planning to submit the video for points so we can divide the credit.*"
@@ -855,6 +858,7 @@
             "point_value": 0,
             "depends_on_text": "Complete Energy Intuition video activity, and wait for Round 2",
             "is_canopy": false,
+            "level": 2,
             "type": "activity",
             "slug": "write-song",
             "description": "This activity is an opportunity to creatively explore one of the topics of the Kukui Cup in more depth. For this activity, you will write a **song** on the subject of one of the categories from the Smart Grid such as energy, lighting, or transportation. Note that this activity will require significantly more effort than normal activities, but it is also worth more points. This activity is worth a variable number of points, so the more effort and the higher quality of your song, the more points you will receive.\r\n\r\nFor example, writing new energy-oriented lyrics to an existing song is pretty easy, and so not worth that many points. Writing an original song with lyrics and music is harder. Recording an original song is even harder, and so worth the most points."
@@ -879,6 +883,7 @@
             "point_value": 0,
             "depends_on_text": "Complete Energy Intuition video activity, and wait for Round 2",
             "is_canopy": false,
+            "level": 2,
             "type": "activity",
             "slug": "interview",
             "description": "This activity is an opportunity to creatively explore one of the topics of the Kukui Cup in more depth. For this activity, you will **interview** an expert on one of the subjects used as categories in the Smart Grid such as energy, lighting, or transportation. Note that this activity will require significantly more effort than normal activities, but it is also worth more points. This activity is worth a variable number of points, so the more effort and the higher quality of your interview, the more points you will receive.\r\n\r\nSome possible interview subjects:\r\n\r\n* UH Manoa administrators (Facilities Management, Manoa Sustainability Corps)\r\n* UH Manoa faculty (SOEST, HNEI, REIS)\r\n* Local environmental organizations (Blue Planet Foundation, Kanu Hawaii, Surfrider Foundation)\r\n* Local politicians (City Council, State Legislature, Congressional delegation)\r\n* Local industry (First Wind, solar installation companies)\r\n* Local government (DBEDT energy office, PUC)\r\n\r\nYou will have to find someone to interview, figure out what questions you want to ask them in advance, and then go interview them. You will probably want to record your interview so that you can refer to it later, but make sure you ask your subject if recording them is OK!\r\n\r\nYour resulting interview can be written (like you might see in a magazine), and audio recording, or even a video. Note that making a quality audio and video interview is quite challenging, so make sure you know what you are getting into."
@@ -903,6 +908,7 @@
             "point_value": 5,
             "depends_on_text": "Complete Power & Energy or Cup Secrets video activity",
             "is_canopy": false,
+            "level": 1,
             "type": "commitment",
             "slug": "turn-off-music",
             "description": "Commit to turning off your music (from computer, stereo, etc) when you leave your room. You save electricity when you turn off your music when you aren't there to enjoy it."
@@ -927,6 +933,7 @@
             "point_value": 0,
             "depends_on_text": "",
             "is_canopy": false,
+            "level": 1,
             "type": "activity",
             "slug": "find-waste",
             "description": "By now you're an expert in finding energy waste in your lounge. For this activity, you will roam around campus, looking for places where you think energy is being wasted on campus. Energy waste can happen in many ways, here are a few ideas to get you started:\r\n\r\n* Lights not getting turned off at night (try looking around campus after dark)\r\n* Air conditioners running when doors or windows are open\r\n* Air conditioning systems that make buildings too cold\r\n* Computers left on in a lab even when nobody is using them\r\n\r\nReport to us your list of energy waste going on around campus, and how each one might be fixed. For every distinct wasting situation you find, we'll award 5 Canopy Karma points, up to 50 points. We'll also pass your list on the the appropriate people to try to get the wasting stopped!"
@@ -951,6 +958,7 @@
             "point_value": 5,
             "depends_on_text": "Complete Power & Energy or Cup Secrets video activity",
             "is_canopy": false,
+            "level": 1,
             "type": "commitment",
             "slug": "full-load-laundry",
             "description": "Commit to always washing full loads of laundry. Washing less than a full load is less efficient, leading to more electricity and water being used per piece of laundry washed."
@@ -975,6 +983,7 @@
             "point_value": 5,
             "depends_on_text": "Complete Power & Energy or Cup Secrets video activity",
             "is_canopy": false,
+            "level": 1,
             "type": "commitment",
             "slug": "turn-off-water",
             "description": "Commit to turning off water at sinks when you aren't actually using the water, such as when brushing your teeth, shaving, applying makeup, etc. Clean water is a valuable resource that shouldn't be wasted. Also pumping water from the ground into a building, heating it, and then treating the used water takes energy, so reducing the amount of water used saves energy."
@@ -999,6 +1008,7 @@
             "point_value": 5,
             "depends_on_text": "Complete Power & Energy or Cup Secrets video activity",
             "is_canopy": false,
+            "level": 1,
             "type": "commitment",
             "slug": "turn-off-shower",
             "description": "Commit to turning off water when showering except when actively rinsing off soap or shampoo. Clean water is a valuable resource that shouldn't be wasted. Also pumping water from the ground into a building, heating it, and then treating the used water takes energy, so reducing the amount of water used saves energy."
@@ -1023,6 +1033,7 @@
             "point_value": 5,
             "depends_on_text": "Complete Power & Energy or Cup Secrets video activity",
             "is_canopy": false,
+            "level": 1,
             "type": "commitment",
             "slug": "use-sunlight",
             "description": "Commit to using sunlight from windows or outdoors instead of turning on electric lighting. This can mean opening shades instead of turning on the lights, and/or planning your day so that tasks that require light (like reading books) are done during the day."
@@ -1047,6 +1058,7 @@
             "point_value": 5,
             "depends_on_text": "Complete Power & Energy or Cup Secrets video activity",
             "is_canopy": false,
+            "level": 1,
             "type": "commitment",
             "slug": "printer-off",
             "description": "Commit to turning off your printer when you aren't actively printing something out. This will reduce electricity use, since printers draw some power if they are turned on even when they aren't printing."
@@ -1071,6 +1083,7 @@
             "point_value": 5,
             "depends_on_text": "Complete Power & Energy or Cup Secrets video activity",
             "is_canopy": false,
+            "level": 1,
             "type": "commitment",
             "slug": "use-stairs",
             "description": "Commit to using the stairs instead of elevators during your day, whenever that is feasible. Elevators use electricity, so by using the stairs you will save some energy. Also, using the stairs is good exercise!"
@@ -1095,6 +1108,7 @@
             "point_value": 5,
             "depends_on_text": "Complete Power & Energy or Cup Secrets video activity",
             "is_canopy": false,
+            "level": 1,
             "type": "commitment",
             "slug": "recycle-cans",
             "description": "Commit to recycling all (recyclable) beverage containers at one of the recycling bins on campus or around town. Making things from recycled materials generally costs less and uses less energy than making them from raw materials."
@@ -1119,6 +1133,7 @@
             "point_value": 5,
             "depends_on_text": "Complete Power & Energy or Cup Secrets video activity",
             "is_canopy": false,
+            "level": 1,
             "type": "commitment",
             "slug": "turn-off-lights",
             "description": "Leaving lights on wastes energy for no purpose. Commit to turning off the lights when leaving any room."
@@ -1143,6 +1158,7 @@
             "point_value": 5,
             "depends_on_text": "Complete Power & Energy or Cup Secrets video activity",
             "is_canopy": false,
+            "level": 1,
             "type": "commitment",
             "slug": "car-pool",
             "description": "Commit to not driving in a car by yourself. Try riding the bus, riding a bike, walking, driving a moped, or using a vehicle with 3+ occupants instead. Transportation fuel is a major use of energy and it generates a lot of greenhouse gases, so traveling more efficiently saves energy and the planet."
@@ -1167,6 +1183,7 @@
             "point_value": 5,
             "depends_on_text": "Complete Power & Energy or Cup Secrets video activity",
             "is_canopy": false,
+            "level": 1,
             "type": "commitment",
             "slug": "take-bus",
             "description": "Commit to taking public transportation whenever you go off campus during the commitment period. Every UH Manoa student gets a U-Pass sticker for their ID that allows unlimited free rides on the bus each semester! If for some reason you don't have your U-Pass, go to the ID counter in Campus Center.\r\n\r\n<a href=\"http://thebus.org/\" target=\"_blank\">TheBus</a> has a great website that will help you plan trips, and even tell you when the next bus will arrive based on GPS location!"
@@ -1191,6 +1208,7 @@
             "point_value": 5,
             "depends_on_text": "Complete Power & Energy or Cup Secrets video activity",
             "is_canopy": false,
+            "level": 1,
             "type": "commitment",
             "slug": "walk",
             "description": "<center><a href=\"http://www.freemaptools.com/radius-around-point.htm?clat=21.294387595537966&clng=-157.81301338391114&r=1.61&lc=FFFFFF&lw=1&fc=00FF00\" target=\"_blank\">Map of 1 mile radius around Hale Aloha</a></center>\r\n\r\nCommit to walking to any destination less than one mile away. Walking saves energy, costs nothing, and is good exercise."
@@ -1215,6 +1233,7 @@
             "point_value": 5,
             "depends_on_text": "Complete Power & Energy or Cup Secrets video activity",
             "is_canopy": false,
+            "level": 1,
             "type": "commitment",
             "slug": "cold-laundry",
             "description": "<center>![Tide cold water detergent](http://www.tide.com/images/en-US/products/tide_cold_fresh_scent_173x287.png)</center>\r\n\r\nCommit to washing your laundry in cold water instead of warm or hot water. There are now detergents designed to be used in cold water, and it takes lots of energy to heat water up. By using cold water, you will be saving energy. Note, Tide Coldwater is just an example detergent: you don't have to use Tide."
@@ -1239,6 +1258,7 @@
             "point_value": 5,
             "depends_on_text": "Complete Power & Energy or Cup Secrets video activity",
             "is_canopy": false,
+            "level": 1,
             "type": "commitment",
             "slug": "reduce-shower-time",
             "description": "Commit to measuring the length of your shower with a watch or phone, and reducing the time by 1 minute. Clean water is a valuable resource that shouldn't be wasted. Also pumping water from the ground into a building, heating it, and then treating the used water takes energy, so reducing the amount of water used saves energy."
@@ -1263,6 +1283,7 @@
             "point_value": 5,
             "depends_on_text": "Complete Power & Energy or Cup Secrets video activity",
             "is_canopy": false,
+            "level": 2,
             "type": "commitment",
             "slug": "limit-tv",
             "description": "Commit to using your TV (watching shows, movies, playing games) for less than 1 hour per day. Widescreen TVs use a lot of electricity, so putting a limit on how much you use them will reduce your electricity use."
@@ -1287,6 +1308,7 @@
             "point_value": 5,
             "depends_on_text": "Complete Power & Energy or Cup Secrets video activity",
             "is_canopy": false,
+            "level": 2,
             "type": "commitment",
             "slug": "go-unplugged",
             "description": "Commit to turning off your computer/TV/game console and doing something that doesn't require electricity instead every day. There are many things you can do both on and off campus that don't require electricity, go find them!"
@@ -1311,6 +1333,7 @@
             "point_value": 0,
             "depends_on_text": "Complete Secrets of the Kukui Cup video activity",
             "is_canopy": false,
+            "level": 1,
             "type": "activity",
             "slug": "door-art",
             "description": "Show your support for the Kukui Cup by decorating your door in an \"energy conscious\" fashion. You can do any of the following: include Kukui Cup logos or screen shots, invent new tag lines, show pictures related to energy, or anything else that communicates energy consciousness. When completed, take a photo of your door and click the **I Did This** button to submit the picture. Based on the awesomeness of your design, you will get between 5-15 points!\r\n\r\nIf you want to show off your mad skillz, in addition to uploading your photo to us, you can publicly post your door art picture to the <a href=\"http://www.flickr.com/groups/kukuicup-2011-door-art/\" target=\"_blank\">Kukui Cup 2011 Door Art Flickr group</a> (will open in a new window). If you don't already have a Flickr account, you can sign up for one for free."
@@ -1335,6 +1358,7 @@
             "point_value": 5,
             "depends_on_text": "Complete Power & Energy or Cup Secrets video activity",
             "is_canopy": false,
+            "level": 2,
             "type": "commitment",
             "slug": "resuable-bag",
             "description": "Commit to bringing and using reusable bags when shopping instead of the paper or plastic ones offered by stores. Making disposable bags requires energy, and often the bags end up in our landfills or worse yet they blow away into the ocean. Using a reusable bag saves energy and keeps trash out of our landfills."
@@ -1359,6 +1383,7 @@
             "point_value": 5,
             "depends_on_text": "Complete Power & Energy or Cup Secrets video activity",
             "is_canopy": false,
+            "level": 3,
             "type": "commitment",
             "slug": "no-meat",
             "description": "Commit to not eating any meat (beef, pork, chicken, fish, shellfish, etc) during the commitment period. Producing meat (beef in particular) uses a great deal of energy, and produces a great deal of greenhouse gasses. A vegetarian diet uses less energy and emits less greenhouse gas. There are many of vegetarian food options both on campus and around Honolulu, try them out!"
@@ -1383,6 +1408,7 @@
             "point_value": 5,
             "depends_on_text": "Complete Power & Energy or Cup Secrets video activity",
             "is_canopy": false,
+            "level": 1,
             "type": "commitment",
             "slug": "off-b4-bed",
             "description": "Commit to turning off all appliances in your room (computer, TVs, DVD/Blu-ray players, game consoles) every night before you go to sleep. Appliances use a significant amount of electricity, so turning them off when you definitely won't be using them (like when you are asleep) will save energy."
@@ -1407,6 +1433,7 @@
             "point_value": 5,
             "depends_on_text": "Complete Power & Energy or Cup Secrets video activity",
             "is_canopy": false,
+            "level": 2,
             "type": "commitment",
             "slug": "task-lighting",
             "description": "Commit to using task lighting (like a desk lamp) instead of overhead room lights when possible. Often overhead lights provide more light than you need, or might not provide the light where you need it. Using a desk lamp will reduce your electricity use while giving you the light you need, where you need it."
@@ -1431,6 +1458,7 @@
             "point_value": 5,
             "depends_on_text": "Complete Power & Energy or Cup Secrets video activity",
             "is_canopy": false,
+            "level": 2,
             "type": "commitment",
             "slug": "turn-off-vampires",
             "description": "A vampire load is a device that uses power when plugged in, even when it is turned off and not doing anything. Commit to turning off any vampire loads (cell phone charger, iPod charger, game consoles, TVs) using a power strip when you are not using them, thereby saving energy. If you need a power strip, you can buy them at the UH Bookstore, or many other stores (grocery stores, drug stores, etc)."
@@ -1455,6 +1483,7 @@
             "point_value": 10,
             "depends_on_text": "Complete Power & Energy video activity",
             "is_canopy": false,
+            "level": 1,
             "type": "activity",
             "slug": "energy-intuition",
             "description": "Watch this video about improving your energy intuition.\r\n"
@@ -1479,6 +1508,7 @@
             "point_value": 30,
             "depends_on_text": "Watch the \"How to audit energy\" video",
             "is_canopy": false,
+            "level": 2,
             "type": "activity",
             "slug": "audit-room",
             "description": "Check out a Belkin Conserve Insight meter from your tower's front desk (CDC), and then check 5 plug-in devices in your room to see how much power they use when turned on & when turned off. Write down both the on and off values for each device as you check them because you will need that to get your points!"
@@ -1503,6 +1533,7 @@
             "point_value": 10,
             "depends_on_text": "Complete Energy Intuition video activity",
             "is_canopy": false,
+            "level": 1,
             "type": "activity",
             "slug": "check-energy",
             "description": "<center>![Go Low icon](/site_media/staticimages/icons/icon-go-low-lg.jpg)</center>\r\n\r\nOne important aspect of the Kukui Cup is the Daily Energy Goal Game, which can be found on the [Go Low](/energy) page. Every lounge is assigned a daily energy goal that represents a 5% reduction in electricity use from what the lounge was using before the competition. The Energy Goal Game shows how much energy your lounge has used so far today, and how that compares to the energy goal. The game also shows some activities that might be helpful in getting your lounge to reduce its energy use.\r\n\r\nFor this activity, you will check out the [Go Low](/energy) page. Read the page over, and come back to here and report three things: is your lounge above or below the energy goal, by how much, and name one activity that might help your lounge conserve energy."
@@ -1527,6 +1558,7 @@
             "point_value": 15,
             "depends_on_text": "Complete Energy Intuition video activity, and wait for Round 2",
             "is_canopy": false,
+            "level": 2,
             "type": "activity",
             "slug": "energy-intuition-2",
             "description": "While you've watched the Energy Intuition video once, this activity gives you a chance to learn more about the topic. You can rewatch the video below and explore the resource links provided. When you are done, you can get your points by answering a more difficult question. The question may require information from the video, the resource links or both.\r\n\r\n<div id=\"videoDiv\">Loading Video ...</div>\r\n<script type=\"text/javascript\">\r\n      google.load(\"swfobject\", \"2.1\");\r\n</script>\r\n<script type=\"text/javascript\">\r\n      google.setOnLoadCallback(function() \r\n         {\r\n            var videoID = \"E4MLXlUiRv0\";\r\n            var width = \"471\";\r\n            var length = \"298\";\r\n            var params = { allowScriptAccess: \"always\", wmode: \"opaque\" };\r\n            var atts = { id: \"ytPlayer\" };\r\n            swfobject.embedSWF(\"http://www.youtube.com/v/\" + videoID + \r\n                           \"?fs=1&hl=en_US&rel=0&enablejsapi=1\", \r\n                           \"videoDiv\", width, length, \"8\", null, null, params, atts);\r\n         });\r\n</script>\r\n\r\nResource links (will open in new windows/tabs):\r\n\r\n* <a href=\"http://www.hawaiienergy.com/11/hawaii-oil-use-graph\" target=\"_blank\">Chart of Hawaii's oil consumption over the past five years</a>\r\n* <a href=\"http://www.youtube.com/watch?v=SAB4YKfIGQM\" target=\"_blank\">Watts, Volts, Amps, and Butter Heaters</a>"
@@ -1551,6 +1583,7 @@
             "point_value": 15,
             "depends_on_text": "Complete Lighting video activity, and wait for Round 2",
             "is_canopy": false,
+            "level": 2,
             "type": "activity",
             "slug": "lighting-video-2",
             "description": "While you've watched the Lighting video once, this activity gives you a chance to learn more about the topic. You can rewatch the video below and explore the resource links provided. When you are done, you can get your points by answering a more difficult question. The question may require information from the video, the resource links or both.\r\n\r\n<div id=\"videoDiv\">Loading Video ...</div>\r\n<script type=\"text/javascript\">\r\n      google.load(\"swfobject\", \"2.1\");\r\n</script>\r\n<script type=\"text/javascript\">\r\n      google.setOnLoadCallback(function() \r\n         {\r\n            var videoID = \"ZsgmnCxzHao\";\r\n            var width = \"471\";\r\n            var length = \"298\";\r\n            var params = { allowScriptAccess: \"always\", wmode: \"opaque\" };\r\n            var atts = { id: \"ytPlayer\" };\r\n            swfobject.embedSWF(\"http://www.youtube.com/v/\" + videoID + \r\n                           \"?fs=1&hl=en_US&rel=0&enablejsapi=1\", \r\n                           \"videoDiv\", width, length, \"8\", null, null, params, atts);\r\n         });\r\n</script>\r\n\r\nResource links (will open in new windows/tabs):\r\n\r\n* <a href=\"http://www.youtube.com/watch?v=LyVU470TQBk\" target=\"_blank\">Incandescent lighting and chocolate bunnies</a>\r\n"
@@ -1575,6 +1608,7 @@
             "point_value": 10,
             "depends_on_text": "Complete Energy Intuition video activity",
             "is_canopy": false,
+            "level": 1,
             "type": "activity",
             "slug": "lighting-video",
             "description": "Watch this video about the ways we use energy to generate light.\r\n"
@@ -1599,6 +1633,7 @@
             "point_value": 15,
             "depends_on_text": "Complete Energy Intuition video activity",
             "is_canopy": false,
+            "level": 1,
             "type": "activity",
             "slug": "audit-video",
             "description": "Watch this video that explains how to figure out how much energy your stuff uses.\r\n"
@@ -1623,6 +1658,7 @@
             "point_value": 10,
             "depends_on_text": "Complete Energy Intuition video activity",
             "is_canopy": false,
+            "level": 1,
             "type": "activity",
             "slug": "transport-video",
             "description": "Watch this video that explains how your choice of transportation impacts your energy use.\r\n"
@@ -1647,6 +1683,7 @@
             "point_value": 10,
             "depends_on_text": "This square can't be unlocked (for now)",
             "is_canopy": false,
+            "level": 1,
             "type": "activity",
             "slug": "water-energy",
             "description": "(placeholder)"
@@ -1671,6 +1708,7 @@
             "point_value": 0,
             "depends_on_text": "Complete Energy Intuition video activity, and wait for Overall Round",
             "is_canopy": false,
+            "level": 3,
             "type": "activity",
             "slug": "wildcard",
             "description": "If you have a really creative idea for exploring one of the Kukui Cup topics that isn't covered by the other advanced activities, this is the place. We strongly recommend you contact the Kukui Cup admins using the **Send Feedback** button at the top right corner of this web page and pitch your idea to us before you start on it. This will let us give you feedback on whether or not we think it is appropriate for this activity, and how many points it might be worth."
@@ -1695,6 +1733,7 @@
             "point_value": 0,
             "depends_on_text": "Complete Energy Intuition video activity, and wait for Overall Round",
             "is_canopy": false,
+            "level": 3,
             "type": "activity",
             "slug": "geo-trek",
             "description": "Want to go on a \"geo trek\"? Have a smart phone that can display Google Maps (or a friend who has one and wants to play with you)? Have an hour to walk around campus and learn about UH energy and sustainability projects? Then you're all set!\r\n\r\nHere's the deal: you'll use your smartphone (and your own smarts) to follow a trail of clues around campus and discover eight different locations related to energy or sustainability. Each location is tagged with a special Kukui Cup sign so you'll know when you've found it. Once there, take a picture of yourself with the sign in the background for verification, and upload to [Flickr](http://www.flickr.com/). You will earn 5 Kukui Cup points for each location you find.  The sign also contains a URL that you can retrieve to obtain directions to the next location.\r\n\r\nReady?  Here's the first clue (you'll want to open it on your smartphone): [http://goo.gl/psXER](http://goo.gl/psXER)\r\n\r\nWhen you are done, come back here, click **I Did This!** and provide us with a link to your Flickr account so we can verify your trek."
@@ -1719,6 +1758,7 @@
             "point_value": 0,
             "depends_on_text": "",
             "is_canopy": false,
+            "level": 2,
             "type": "activity",
             "slug": "good-samaritan",
             "description": "The Kukui Cup is a competition, but the energy problems that Hawaii and the planet face will potentially affect everyone and everything. For this group activity, you will pick one of the lounges doing the worst in the energy competition, and go help them to conserve more.\r\n\r\nIf you have friends in the lounge, that might be a good place to start. You can also approach the RAs for the lounge to find out what steps they have taken so far.\r\n\r\nWhen you are done, click the button below and tell us what you did, and how much energy you think you are helping them to save. Depending on what you've done, you'll earn between 15 to 50 Canopy Karma."
@@ -1743,6 +1783,7 @@
             "point_value": 0,
             "depends_on_text": "Complete Energy Intuition video activity, and wait for Round 2",
             "is_canopy": false,
+            "level": 2,
             "type": "activity",
             "slug": "window-art",
             "description": "Every night, the Hale Aloha residence halls create a mosaic of lit windows as students quietly study in their rooms. At least, that's what we hope you're doing in there.\r\n\r\nIt occurs to us that this mosaic of lit windows provides an opportunity for you to both be creative and inform fellow students coming back from the library about the Kukui Cup and/or energy conservation.\r\n\r\nSo, for this activity, create art on your room window that is visible from outside at night. The art should have some relationship to the theme of the Kukui Cup: use your imagination. To receive credit for this activity, take a picture of it (preferably at night) and include some text describing what your art is about. The more amazing, creative, and energy-related your window art, the more points you can earn. Since you still want to save energy, we recommend that you light up your art between 9-9:15 PM, you don't need to keep it lit all night long.\r\n\r\nAnother way to get more points for this activity is to enlist your neighbors beside you, above you, or below you to create a coordinated group window art effort. Take a photo of all of the windows, then tell us in the description which one is yours.\r\n\r\nThe more awesome your art, the closer to 50 points you'll earn.\r\n"
@@ -1767,6 +1808,7 @@
             "point_value": 0,
             "depends_on_text": "Complete Energy Intuition video activity",
             "is_canopy": false,
+            "level": 1,
             "type": "activity",
             "slug": "write-poem",
             "description": "This activity is an opportunity to creatively explore one of the topics of the Kukui Cup in more depth. For this activity, you will write a **poem** (or limerick or haiku) on the subject of one of the categories from the Smart Grid such as energy, lighting, transportation, etc. Note that this activity will require significantly more effort than normal activities, but it is also worth more points. This activity is worth a variable number of points, so the more effort and the higher quality of your poem, the more points you will receive."
@@ -1791,6 +1833,7 @@
             "point_value": 0,
             "depends_on_text": "Complete Energy Intuition video activity, and wait for Round 2",
             "is_canopy": false,
+            "level": 2,
             "type": "activity",
             "slug": "photo-blog",
             "description": "This activity is an opportunity to creatively explore one of the topics of the Kukui Cup in more depth. For this activity, you will create a **photo blog** around one of the subjects used as categories in the Smart Grid such as energy, lighting, or transportation. Note that this activity will require significantly more effort than normal activities, but it is also worth more points. This activity is worth a variable number of points, so the more effort and the higher quality of your photo blog, the more points you will receive.\r\n\r\nA photo blog is a series of photographs on a particular subject, possibly with some explanatory text on each photo. You will need to find a place to host your photo blog, some options are: [Tumblr](https://www.tumblr.com/), [Flickr](http://www.flickr.com/), or [Wordpress](http://wordpress.com/). Remember to pick a theme for your photos related to the Kukui Cup. Here are some starter ideas:\r\n\r\n* Pictures of things using electricity across campus\r\n* Pictures of energy generators (harder to find)\r\n* Pictures of trash across campus (litter, recycling, dumpsters)\r\n* Pictures of the different types of lighting used across campus\r\n* Or something else Kukui Cup-related"
@@ -1815,6 +1858,7 @@
             "point_value": 0,
             "depends_on_text": "Complete Energy Intuition video activity, and wait for Overall Round",
             "is_canopy": false,
+            "level": 3,
             "type": "activity",
             "slug": "make-art",
             "description": "This activity is an opportunity to creatively explore one of the topics of the Kukui Cup in more depth. For this activity, you will create a **work of art** around one of the subjects used as categories in the Smart Grid such as energy, lighting, or transportation. Note that this activity will require significantly more effort than normal activities, but it is also worth more points. This activity is worth a variable number of points, so the more effort and the higher quality of your art, the more points you will receive.\r\n\r\nThe art you create for this activity should be different from the other options in this category. Here are some ideas:\r\n\r\n* painting\r\n* sculpture\r\n* collage\r\n* sketch\r\n\r\nYou will have to capture your art in some way (scan, photograph, etc) so you can present it to us for verification and scoring."
@@ -1839,6 +1883,7 @@
             "point_value": 5,
             "depends_on_text": "Complete Secrets of the Kukui Cup video activity",
             "is_canopy": false,
+            "level": 1,
             "type": "activity",
             "slug": "like-cup",
             "description": "Show support for the Kukui Cup by Liking the <a href=\"https://www.facebook.com/kukuicup\" target=\"_blank\">Kukui Cup page on Facebook</a> (it will open in a new window). Follow the link, click on the \"Like\" button, and then back on this page click the **I Did This!** button. You will be prompted for your name on Facebook so we can verify your Like.\r\n\r\nFor you eager beavers that have already liked the Kukui Cup before the competition started, you can get points too. Just click **I Did This!** and tell us your Facebook name."
@@ -1863,6 +1908,7 @@
             "point_value": 15,
             "depends_on_text": "Complete room energy audit activity",
             "is_canopy": false,
+            "level": 1,
             "type": "activity",
             "slug": "power-hogs",
             "description": "This is a followup activity to the [energy audit](/activities/activity/audit-room/) activity. If you haven't performed that activity, do it first and keep your notes around for this activity.\r\n\r\nBased on the audit results, make a label for each device in your room that shows the number of watts consumed when on and off, and put it close to the power switch for those devices that have them.\r\n\r\nOnce you have made the labels, take a photo of the labels of as many devices as you can fit in one picture to be used for verification."
@@ -1887,6 +1933,7 @@
             "point_value": 5,
             "depends_on_text": "Complete Secrets of the Kukui Cup video activity",
             "is_canopy": false,
+            "level": 1,
             "type": "activity",
             "slug": "tweet-link",
             "description": "If you use Twitter, tweet a link to the Kukui Cup website by pressing this button (will open in a new window) so other folks will learn about the competition:\r\n\r\n<center><a href=\"https://twitter.com/share\" class=\"twitter-share-button\" data-url=\"http://kukuicup.manoa.hawaii.edu/\" data-text=\"I'm on the quest for the Kukui Cup! #kukuicup\" data-count=\"none\" data-via=\"kukuicup\">Tweet Kukui Cup</a><script type=\"text/javascript\" src=\"//platform.twitter.com/widgets.js\"></script></center>\r\n\r\nOnce you have tweeted, come back to this page and click the \"I Did This!\" button. You will be prompted for your Twitter username so we can confirm your tweet."
@@ -1911,6 +1958,7 @@
             "point_value": 5,
             "depends_on_text": "Complete Secrets of the Kukui Cup video activity",
             "is_canopy": false,
+            "level": 1,
             "type": "activity",
             "slug": "share-link",
             "description": "If you have an account on Google's new social network <a href=\"https://plus.google.com/\" target=\"_blank\">Google+</a>, share the Kukui Cup website <http://kukuicup.manoa.hawaii.edu/> there  to get the word out about the competition. Go to <a href=\"https://plus.google.com/\" target=\"_blank\">Google+</a> (will open in a new window) and click on the small paperclip icon to share a link: \r\n\r\nEnter the text \"http://kukuicup.manoa.hawaii.edu/\" next to the paperclip icon and press the **Add** button. Above that, type something about the Kukui Cup. Make sure this post is set to be shared with the **Public**, you may have to click the \"+Add more people\" link to see the Public circle. If you do not share the link publicly, we will not be able to verify it. Then press the **Share** button.\r\n\r\nOnce you have updated your status, go to your <a href=\"https://plus.google.com/me\" target=\"_blank\">Google+ profile</a> and copy the URL which will look something like \"https://plus.google.com/\" followed by a long number. Then come back to this page and click the \"I Did This!\" button. Paste in that profile URL so we can see your snazzy public post."
@@ -1935,6 +1983,7 @@
             "point_value": 15,
             "depends_on_text": "Complete Energy Issues video activity, and wait for Round 2",
             "is_canopy": false,
+            "level": 2,
             "type": "activity",
             "slug": "energy-gen-1-2",
             "description": "While you've watched the Energy Issues video once, this activity gives you a chance to learn more about the topic. You can rewatch the video below and explore the resource links provided. When you are done, you can get your points by answering a more difficult question. The question may require information from the video, the resource links or both.\r\n\r\n<div id=\"videoDiv\">Loading Video ...</div>\r\n<script type=\"text/javascript\">\r\n      google.load(\"swfobject\", \"2.1\");\r\n</script>\r\n<script type=\"text/javascript\">\r\n      google.setOnLoadCallback(function() \r\n         {\r\n            var videoID = \"sAClKZPhcPI\";\r\n            var width = \"471\";\r\n            var length = \"298\";\r\n            var params = { allowScriptAccess: \"always\", wmode: \"opaque\" };\r\n            var atts = { id: \"ytPlayer\" };\r\n            swfobject.embedSWF(\"http://www.youtube.com/v/\" + videoID + \r\n                           \"?fs=1&hl=en_US&rel=0&enablejsapi=1\", \r\n                           \"videoDiv\", width, length, \"8\", null, null, params, atts);\r\n         });\r\n</script>\r\n\r\nResource links (will open in new windows/tabs):\r\n\r\n* <a href=\"http://vimeo.com/20275608\" target=\"_blank\">Hawaii: The State of Clean Energy</a>\r\n"
@@ -1959,6 +2008,7 @@
             "point_value": 10,
             "depends_on_text": "Complete Energy Intuition video activity",
             "is_canopy": false,
+            "level": 1,
             "type": "activity",
             "slug": "climate-change",
             "description": "Watch this video talking about climate change and how it will affect Hawaii.\r\n"
@@ -1983,6 +2033,7 @@
             "point_value": 10,
             "depends_on_text": "This square can't be unlocked (for now)",
             "is_canopy": false,
+            "level": 1,
             "type": "activity",
             "slug": "energy-gen-4",
             "description": "(placeholder)"
@@ -2007,6 +2058,7 @@
             "point_value": 20,
             "depends_on_text": "",
             "is_canopy": false,
+            "level": 1,
             "type": "activity",
             "slug": "intro-video",
             "description": "If you missed it during your the first login process, watch this video explaining the competition and this website."
@@ -2031,6 +2083,7 @@
             "point_value": 10,
             "depends_on_text": "Complete Energy Intuition video activity",
             "is_canopy": false,
+            "level": 1,
             "type": "activity",
             "slug": "energy-gen-1",
             "description": "Watch this video that talks about how we generate our energy in Hawaii, and what the fuss is about.\r\n"
@@ -2055,6 +2108,7 @@
             "point_value": 10,
             "depends_on_text": "Complete Energy Intuition video activity",
             "is_canopy": false,
+            "level": 1,
             "type": "activity",
             "slug": "trash-video",
             "description": "Check out this video called Trash is Treasure and maybe change your thinking about trash."
@@ -2079,6 +2133,7 @@
             "point_value": 10,
             "depends_on_text": "Complete Energy Issues video activity, and wait for Round 2",
             "is_canopy": false,
+            "level": 2,
             "type": "activity",
             "slug": "solar-energy",
             "description": "Watch this video that explains how we can get energy directly from the sun.\r\n"
@@ -2103,6 +2158,7 @@
             "point_value": 15,
             "depends_on_text": "Complete Energy Intuition video activity, and wait for Overall Round",
             "is_canopy": false,
+            "level": 3,
             "type": "activity",
             "slug": "shower-flow",
             "description": "Figure out how much water is used by the showers in your floor's bathroom. To do this, you will need a large container with a known volume (like a water bottle or bucket) that you can fill in the shower, and a clock of some type (like your watch or cell phone). Make sure to not get your clock wet if it isn't waterproof!\r\n\r\nHold the container up to the shower head, turn on the shower faucet to the level you use normally when showering, and note the time on the clock (or use a stopwatch). Watch the container fill, and note the time when it is completely full of water.\r\n\r\nNow you know the volume of water that the shower put out, and the amount of time it was running. From these two values, you can compute the flow rate of your shower by dividing the volume by the number of seconds it took to fill. For example, if you filled a 1 gallon bucket and it took 30 seconds, then the flow rate is 2 gallons per minute.\r\n\r\nAs you will see, water comes out of shower heads pretty fast, which is why it is important to turn off the water when you aren't actively using it, like while soaping up."
@@ -2127,6 +2183,7 @@
             "point_value": 10,
             "depends_on_text": "Complete Intro video activity",
             "is_canopy": false,
+            "level": 1,
             "type": "activity",
             "slug": "cup-secrets",
             "description": "Watch this video that provides some hints on how to get the most out of the Kukui Cup."
@@ -2151,6 +2208,7 @@
             "point_value": 10,
             "depends_on_text": "Complete Energy Issues video activity, and wait for Round 2",
             "is_canopy": false,
+            "level": 2,
             "type": "activity",
             "slug": "energy-gen-2",
             "description": "Watch this video that talks about how we generate our energy in Hawaii right now, and how that differs from the mainland US."
@@ -2175,6 +2233,7 @@
             "point_value": 35,
             "depends_on_text": "Complete room energy audit activity",
             "is_canopy": false,
+            "level": 2,
             "type": "activity",
             "slug": "room-energy",
             "description": "Ever wonder how much energy your room consumes in a day? Here's a simple procedure to figure it out.\r\n\r\n1. Check out a Belkin Conserve Insight meter from your tower's front desk (CDC)\r\n2. Find out how much energy your appliances use on average. For refrigerators, monitor their energy consumption for 30 minutes, then multiply by 48 to get an estimate of its total consumption for 24 hours. For microwaves, monitor its energy consumption during a 1 minute period, then multiply by the number of minutes per day that you and your roommate typically use it. Do the same for your other appliances: computer, Xbox, fans, etc.\r\n3. To receive credit for this activity, submit a list of the appliances in your room, your estimate of the energy each of them consume per day, and the total amount of energy your entire room uses per day (in watt-hours or kilowatt-hours). Remember to include an estimate for the overhead light if you use it. Are you surprised by this data?"
@@ -2199,6 +2258,7 @@
             "point_value": 15,
             "depends_on_text": "Complete Power & Energy video activity and wait for Round 2",
             "is_canopy": false,
+            "level": 2,
             "type": "activity",
             "slug": "power-energy-2",
             "description": "While you've watched the Power & Energy video once, this activity gives you a chance to learn more about the topic. You can rewatch the video below and explore the resource links provided. When you are done, you can get your points by answering a more difficult question. The question may require information from the video, the resource links or both.\r\n\r\n<div id=\"videoDiv\">Loading Video ...</div>\r\n<script type=\"text/javascript\">\r\n      google.load(\"swfobject\", \"2.1\");\r\n</script>\r\n<script type=\"text/javascript\">\r\n      google.setOnLoadCallback(function() \r\n         {\r\n            var videoID = \"hBUg7bsR0d0\";\r\n            var width = \"471\";\r\n            var length = \"298\";\r\n            var params = { allowScriptAccess: \"always\", wmode: \"opaque\" };\r\n            var atts = { id: \"ytPlayer\" };\r\n            swfobject.embedSWF(\"http://www.youtube.com/v/\" + videoID + \r\n                           \"?fs=1&hl=en_US&rel=0&enablejsapi=1\", \r\n                           \"videoDiv\", width, length, \"8\", null, null, params, atts);\r\n         });\r\n</script>\r\n\r\nResource links (will open in new windows/tabs):\r\n\r\n* <a href=\"http://www.youtube.com/watch?v=pA0LE0iFU00\" target=\"_blank\">What is a kilowatt?</a>\r\n* <a href=\"http://www.youtube.com/watch?v=Pg0tGi9VY0I\" target=\"_blank\">What is electricity?</a>\r\n"
@@ -2223,6 +2283,7 @@
             "point_value": 10,
             "depends_on_text": "Complete Energy Intuition video activity, and wait for Overall Round",
             "is_canopy": false,
+            "level": 3,
             "type": "activity",
             "slug": "no-impact-date",
             "description": "While traditional ideas of a date include significant consumption, here's your chance to do something radical:  have a good time with a friend while using the minimum amount of electrical energy possible! Use this as an opportunity to be creative: how many different things can you do with a friend while using the least possible energy? Consider your transportation: can you walk, ride a bike, or take public transportation? Consider your food: what can you eat together that is delicious but was grown, delivered, and prepared with minimal energy? Consider your entertainment: what can you do together that is interesting, novel, and fun that does not consume resources?"
@@ -2247,6 +2308,7 @@
             "point_value": 15,
             "depends_on_text": "Complete Energy Now video activity, and wait for Overall Round",
             "is_canopy": false,
+            "level": 3,
             "type": "activity",
             "slug": "energy-gen-2-2",
             "description": "While you've watched the Energy Issues video once, this activity gives you a chance to learn more about the topic. You can rewatch the video below and explore the resource links provided. When you are done, you can get your points by answering a more difficult question. The question may require information from the video, the resource links or both.\r\n\r\n<div id=\"videoDiv\">Loading Video ...</div>\r\n<script type=\"text/javascript\">\r\n      google.load(\"swfobject\", \"2.1\");\r\n</script>\r\n<script type=\"text/javascript\">\r\n      google.setOnLoadCallback(function() \r\n         {\r\n            var videoID = \"c5lgCDtTzyQ\";\r\n            var width = \"471\";\r\n            var length = \"298\";\r\n            var params = { allowScriptAccess: \"always\", wmode: \"opaque\" };\r\n            var atts = { id: \"ytPlayer\" };\r\n            swfobject.embedSWF(\"http://www.youtube.com/v/\" + videoID + \r\n                           \"?fs=1&hl=en_US&rel=0&enablejsapi=1\", \r\n                           \"videoDiv\", width, length, \"8\", null, null, params, atts);\r\n         });\r\n</script>\r\n\r\nResource links (will open in new windows/tabs):\r\n\r\n* <a href=\"http://www.eia.gov/state/state-energy-rankings.cfm?keyid=18&orderid=1\" target=\"_blank\">State by State Energy Prices</a>, by the US Energy Information Office\r\n* <a href=\"http://www.eia.gov/energyexplained/index.cfm?page=us_energy_home\" target=\"_blank\">US Energy Facts</a>, by the US Energy Information Office\r\n"
@@ -2271,6 +2333,7 @@
             "point_value": 15,
             "depends_on_text": "Complete HCEI video activity, and wait for Overall Round",
             "is_canopy": false,
+            "level": 3,
             "type": "activity",
             "slug": "energy-gen-3-2",
             "description": "While you've watched the Hawaii Clean Energy Initiative video once, this activity gives you a chance to learn more about the topic. You can rewatch the video below and explore the resource links provided. When you are done, you can get your points by answering a more difficult question. The question may require information from the video, the resource links or both.\r\n\r\n<div id=\"videoDiv\">Loading Video ...</div>\r\n<script type=\"text/javascript\">\r\n      google.load(\"swfobject\", \"2.1\");\r\n</script>\r\n<script type=\"text/javascript\">\r\n      google.setOnLoadCallback(function() \r\n         {\r\n            var videoID = \"QgZ7AEE3ntY\";\r\n            var width = \"471\";\r\n            var length = \"298\";\r\n            var params = { allowScriptAccess: \"always\", wmode: \"opaque\" };\r\n            var atts = { id: \"ytPlayer\" };\r\n            swfobject.embedSWF(\"http://www.youtube.com/v/\" + videoID + \r\n                           \"?fs=1&hl=en_US&rel=0&enablejsapi=1\", \r\n                           \"videoDiv\", width, length, \"8\", null, null, params, atts);\r\n         });\r\n</script>\r\n\r\nResource links (will open in new windows/tabs):\r\n\r\n* <a href=\"http://www.heco.com/vcmcontent/StaticFiles/pdf/HCEI_2YearUpdate.pdf\" target=\"_blank\">HCEI Update: Year 2 (PDF)</a>\r\n* <a href=\"http://www.hawaiicleanenergyinitiative.org/island-projects-table/\" target=\"_blank\">Island Energy Projects</a> to move toward HCEI goals"
@@ -2295,6 +2358,7 @@
             "point_value": 40,
             "depends_on_text": "Wait for Round 3 to start",
             "is_canopy": false,
+            "level": 2,
             "type": "activity",
             "slug": "take-survey",
             "description": "We're in Round 3 of the Kukui Cup now, and we'd like to get some feedback from you about the competition. Click the following link to the survey, which will open in a new window. Once you are done, return here and just tell us you completed the survey, and we'll award your points.\r\n\r\n<center><a href=\"https://edu.surveygizmo.com/s3/696557/kukui-cup-survey\" target=\"_blank\">Round 3 Survey</a></center>\r\n"
@@ -2319,6 +2383,7 @@
             "point_value": 10,
             "depends_on_text": "Complete Energy Now video activity, and wait for Round 2",
             "is_canopy": false,
+            "level": 2,
             "type": "activity",
             "slug": "energy-gen-3",
             "description": "Watch this video that talks about the Hawaii Clean Energy Initiative, a plan for increasing clean energy use in Hawaii.\r\n"
@@ -2343,6 +2408,7 @@
             "point_value": 10,
             "depends_on_text": "Complete Energy Intuition video activity, and wait for Overall Round to start",
             "is_canopy": false,
+            "level": 3,
             "type": "activity",
             "slug": "otec-video",
             "description": "Watch this video that explains how energy can be cleanly extracted from cold ocean depths here in Hawaii.\r\n"
@@ -2367,6 +2433,7 @@
             "point_value": 15,
             "depends_on_text": "Complete Solar Energy video activity, and wait for Overall Round",
             "is_canopy": false,
+            "level": 3,
             "type": "activity",
             "slug": "solar-energy-2",
             "description": "While you've watched the Solar Energy video once, this activity gives you a chance to learn more about the topic. You can rewatch the video below and explore the resource links provided. When you are done, you can get your points by answering a more difficult question. The question may require information from the video, the resource links or both.\r\n\r\n<div id=\"videoDiv\">Loading Video ...</div>\r\n<script type=\"text/javascript\">\r\n      google.load(\"swfobject\", \"2.1\");\r\n</script>\r\n<script type=\"text/javascript\">\r\n      google.setOnLoadCallback(function() \r\n         {\r\n            var videoID = \"zK_cz7A7qVw\";\r\n            var width = \"471\";\r\n            var length = \"298\";\r\n            var params = { allowScriptAccess: \"always\", wmode: \"opaque\" };\r\n            var atts = { id: \"ytPlayer\" };\r\n            swfobject.embedSWF(\"http://www.youtube.com/v/\" + videoID + \r\n                           \"?fs=1&hl=en_US&rel=0&enablejsapi=1\", \r\n                           \"videoDiv\", width, length, \"8\", null, null, params, atts);\r\n         });\r\n</script>\r\n\r\nResource links (will open in new windows/tabs):\r\n\r\n* <a href=\"http://www.youtube.com/watch?v=NDZzAIcCQLQ\" target=\"_blank\">Energy 101: Solar Power</a>\r\n* <a href=\"http://www.youtube.com/watch?v=2mCTSV2f36A\" target=\"_blank\">Introduction to PV</a>\r\n* <a href=\"http://www.youtube.com/watch?v=K76r41jaGJg\" target=\"_blank\">How PV cells produce electricity</a>"
@@ -2391,6 +2458,7 @@
             "point_value": 15,
             "depends_on_text": "Complete Transport video activity",
             "is_canopy": false,
+            "level": 2,
             "type": "activity",
             "slug": "transport-video-2",
             "description": "While you've watched the Transportation video once, this activity gives you a chance to learn more about the topic. You can rewatch the video below and explore the resource links provided. When you are done, you can get your points by answering a more difficult question. The question may require information from the video, the resource links or both.\r\n\r\n<div id=\"videoDiv\">Loading Video ...</div>\r\n<script type=\"text/javascript\">\r\n      google.load(\"swfobject\", \"2.1\");\r\n</script>\r\n<script type=\"text/javascript\">\r\n      google.setOnLoadCallback(function() \r\n         {\r\n            var videoID = \"Yt13tkdi_Dk\";\r\n            var width = \"471\";\r\n            var length = \"298\";\r\n            var params = { allowScriptAccess: \"always\", wmode: \"opaque\" };\r\n            var atts = { id: \"ytPlayer\" };\r\n            swfobject.embedSWF(\"http://www.youtube.com/v/\" + videoID + \r\n                           \"?fs=1&hl=en_US&rel=0&enablejsapi=1\", \r\n                           \"videoDiv\", width, length, \"8\", null, null, params, atts);\r\n         });\r\n</script>\r\n\r\nResource links (will open in new windows/tabs):\r\n\r\n* <a href=\"http://www.terrapass.com/carbon-footprint-calculator/#air\" target=\"_blank\">Carbon Footprint Calculator</a>\r\n* <a href=\"http://www.youtube.com/watch?v=UGlqkVirSI8\" target=\"_blank\">Keep Pedalling (bicycle hip hop)</a>\r\n* <a href=\"http://www.cyclemanoa.org/\" target=\"_blank\">Cycle Manoa</a>\r\n* <a href=\"http://planetgreen.discovery.com/tech-transport/plane-train-automobile-travel.html\" target=\"_blank\">Trains, Planes, and Automobiles: Which is the greenest way to travel long distances in the US?</a>"
@@ -2415,6 +2483,7 @@
             "point_value": 15,
             "depends_on_text": "Complete Trash is Treasure video activity, and wait for Overall Round",
             "is_canopy": false,
+            "level": 3,
             "type": "activity",
             "slug": "trash-video-2",
             "description": "While you've watched the Trash is Treasure video once, this activity gives you a chance to learn more about the topic. You can rewatch the video below and explore the resource links provided. When you are done, you can get your points by answering a more difficult question. The question may require information from the video, the resource links or both.\r\n\r\n<div id=\"videoDiv\">Loading Video ...</div>\r\n<script type=\"text/javascript\">\r\n      google.load(\"swfobject\", \"2.1\");\r\n</script>\r\n<script type=\"text/javascript\">\r\n      google.setOnLoadCallback(function() \r\n         {\r\n            var videoID = \"6FeXBOyQerA\";\r\n            var width = \"471\";\r\n            var length = \"298\";\r\n            var params = { allowScriptAccess: \"always\", wmode: \"opaque\" };\r\n            var atts = { id: \"ytPlayer\" };\r\n            swfobject.embedSWF(\"http://www.youtube.com/v/\" + videoID + \r\n                           \"?fs=1&hl=en_US&rel=0&enablejsapi=1\", \r\n                           \"videoDiv\", width, length, \"8\", null, null, params, atts);\r\n         });\r\n</script>\r\n\r\nResource links (will open in new windows/tabs):\r\n\r\n* <a href=\"http://www.opala.org/solid_waste/archive/How_our_City_manages_our_waste.html\" target=\"_blank\"> How the City Manages Our Waste</a>\r\n* <a href=\"http://www.instructables.com/id/Make-A-Juicer-Out-Of-A-Plastic-Bottle/\" target=\"_blank\"> Make A Juicer Out Of A Plastic Bottle</a>"
@@ -2439,6 +2508,7 @@
             "point_value": 15,
             "depends_on_text": "This square can't be unlocked (for now)",
             "is_canopy": false,
+            "level": 2,
             "type": "activity",
             "slug": "water-energy-2",
             "description": "While you've watched the Water & Energy video once, this activity gives you a chance to learn more about the topic. You can rewatch the video below and explore the resource links provided. When you are done, you can get your points by answering a more difficult question. The question may require information from the video, the resource links or both.\r\n\r\n(placeholder)\r\n\r\nResource links:\r\n\r\n* Foo\r\n* Bar"
@@ -2464,6 +2534,7 @@
             "point_value": 10,
             "depends_on_text": "",
             "is_canopy": false,
+            "level": 3,
             "type": "activity",
             "slug": "power-meters",
             "description": "Check out the Power Meter visualization below on the Canopy page, which shows the real-time power usage 5 selectable lounges. Come up with answers to the questions below, and submit them:\r\n\r\n1. Compare the 5 lounges in your tower. How does their power usage compare right now?\r\n2. Pick a particular lounge letter and compare that lounge across the 4 towers. How does the power consumption differ?\r\n3. What are your thoughts on this visualization? What are its strengths and weaknesses?"
@@ -2488,6 +2559,7 @@
             "point_value": 15,
             "depends_on_text": "Complete Energy Intuition video activity, and wait for Overall Round",
             "is_canopy": false,
+            "level": 3,
             "type": "activity",
             "slug": "sink-flow",
             "description": "Figure out how much water is used by the sinks in your floor's bathroom. To do this, you will need a large container with a known volume (like a water bottle or bucket) that you can fit in the sink, and a clock of some type (like your watch or cell phone). Make sure to keep your clock dry if it isn't waterproof!\r\n\r\nHold the container up to the faucet in the sink, turn on the water to the level you use normally when using the sink, and note the time on the clock (or use a stopwatch). Watch the container fill, and note the time when it is completely full of water.\r\n\r\nNow you know the volume of water that the sink put out, and the amount of time it was running. From these two values, you can compute the flow rate of your sink by dividing the volume by the number of seconds it took to fill. For example, if you filled a 1 gallon bucket and it took 30 seconds, then the flow rate is 2 gallons per minute.\r\n\r\nAs you will see, water comes out of faucets pretty fast, which is why it is important to turn off the water when you aren't actively using it, like while brushing your teeth."
@@ -2512,6 +2584,7 @@
             "point_value": 15,
             "depends_on_text": "Complete Climate Change video activity, and wait for Round 2",
             "is_canopy": false,
+            "level": 2,
             "type": "activity",
             "slug": "climate-change-2",
             "description": "While you've watched the Climate Change video once, this activity gives you a chance to learn more about the topic. You can rewatch the video below and explore the resource links provided. When you are done, you can get your points by answering a more difficult question. The question may require information from the video, the resource links or both.\r\n\r\n<div id=\"videoDiv\">Loading Video ...</div>\r\n<script type=\"text/javascript\">\r\n      google.load(\"swfobject\", \"2.1\");\r\n</script>\r\n<script type=\"text/javascript\">\r\n      google.setOnLoadCallback(function() \r\n         {\r\n            var videoID = \"wSquej2rFXM\";\r\n            var width = \"471\";\r\n            var length = \"298\";\r\n            var params = { allowScriptAccess: \"always\", wmode: \"opaque\" };\r\n            var atts = { id: \"ytPlayer\" };\r\n            swfobject.embedSWF(\"http://www.youtube.com/v/\" + videoID + \r\n                           \"?fs=1&hl=en_US&rel=0&enablejsapi=1\", \r\n                           \"videoDiv\", width, length, \"8\", null, null, params, atts);\r\n         });\r\n</script>\r\n\r\nResource links (will open in new windows/tabs):\r\n\r\n* <a href=\"http://www.youtube.com/watch?v=QkByMwwYWKw\" target=\"_blank\">Hawaii's Climate Crisis Sea Level Rise</a> is a seven minute video that includes interviews with Chip Fletcher discussing the impact of climate change, specifically rising sea levels, on Hawaii.\r\n* <a href=\"http://www.youtube.com/watch?v=mF_anaVcCXg\" target=\"_blank\">How it all ends</a> is Greg Craven's followup to his \"The Most Terrifying Video You'll Ever See\", which got 7M views on YouTube.\r\n* This <a href=\"http://www.scientificamerican.com/article.cfm?id=why-are-americans-so-ill\" target=\"_blank\">Scientific American article</a> discusses why Americans are so ill-informed about climate change."
@@ -2536,6 +2609,7 @@
             "point_value": 10,
             "depends_on_text": "Complete Secrets of the Kukui Cup video activity",
             "is_canopy": false,
+            "level": 1,
             "type": "activity",
             "slug": "photo-chain",
             "description": "**Note, this picture is an example, you must check Flickr to see what the last picture in the chain is**\r\n</center>\r\n\r\nShow off the Kukui Cup and your creativity at the same time by playing the Kukui Cup Photo Chain Game. The rules are simple. You are going to add a photo of yourself to the end of the chain of photos in the [Flickr Kukui Cup 2011 Photo Chain Game group](http://www.flickr.com/groups/kukuicup-2011-photo-chain-game/).  Each photo contains:\r\n\r\n1. yourself in some kind of \"pose\"\r\n2. taken at some location on the UH Manoa Campus\r\n3. you holding or wearing some Kukui Cup item (t-shirt, water bottle, eco-tote, or tumbler)\r\n\r\nTo make the sequence of photos a chain, your photo must \"match\" the preceding photo posted to the group with respect to either the pose, the location, or the Kukui Cup item.\r\n\r\nThe caption to each photo should list the pose, the location, and the item.\r\n\r\nHere's how you do it:\r\n\r\n1. Go to the [Flickr Kukui Cup 2011 Photo Chain Game group](http://www.flickr.com/groups/kukuicup-2011-photo-chain-game/). See what photo is at the end of the list.\r\n2. Take a photo of yourself in a way that extends the chain (match either the pose, location, or item)\r\n3. Upload your photo to your own Flickr account (creating it if necessary).\r\n4. Go back to the [Flickr Kukui Cup 2011 Photo Chain Game group](http://www.flickr.com/groups/kukuicup-2011-photo-chain-game/), and \"join\" the group. \r\n5. Click \"Add Photos\" and select your photo. \r\n6. Provide a title, such as \"Photo Chain Game 12\" (or whatever the next number is in the chain).\r\n7. Provide a caption that indicates: pose, location, item, and which of the three matches.\r\n8. Save.\r\n9. Click **I Did This!** button and tell us your Flickr name so we can confirm your upload to the group and award your points."
@@ -2560,6 +2634,7 @@
             "point_value": 5,
             "depends_on_text": "Complete Intro video activity, and wait for Round 2",
             "is_canopy": false,
+            "level": 2,
             "type": "activity",
             "slug": "refer-friend",
             "description": "Starting in Round 2, the Kukui Cup provides a new feature: referral bonuses. Each time you get a new user to sign up for the Kukui Cup, you can earn 10 points. All you need to do is have the new user enter your email address on the new \"Referral Bonus\" page during their initial login.   Both you and they will earn 10 extra points as soon as the new user earns 30 points with regular game play. There is **NO LIMIT** to the number of times you can earn a referral bonus, so start signing up your friends now!\r\n\r\nTo help you get started, you can earn five extra points for one of your referrals by completing this activity. Just type in the email address of the new user you brought to the Kukui Cup in the box below. You will get your five points after the new user gets to 30 points.\r\n\r\nNote that while this activity is just a one-shot deal, the referral bonus feature that it introduces you to can be done repeatedly.  You do not have to wait for your first referral to complete before getting new referrals.   Nor do you have to even do this activity at all in order to get referral bonuses.  So, go out there, get as many new players to sign up and enter your email as possible, and you will get 10 points each time they achieve 30 points.  (You can even coach them through their first 30 points to make sure they get a proper introduction to the game).    "
@@ -2584,6 +2659,7 @@
             "point_value": 30,
             "depends_on_text": "",
             "is_canopy": false,
+            "level": 1,
             "type": "activity",
             "slug": "attend-outside-event",
             "description": "As part of the Kukui Cup, we've tried to introduce you to other groups in UH and the community that are interested in energy and sustainability. For this activity, you will find an event hosted by one of those groups, attend and tell us how it went. Here's a list of possible groups to check for events, but feel free to go beyond it:\r\n\r\n* [Student Organic Farm Training](http://www.ctahr.hawaii.edu/sustainag/soft/)\r\n* [Sustainable UH](http://sustainable.hawaii.edu/)\r\n* [Kanu Hawaii](http://www.kanuhawaii.org/)\r\n* [Sierra Club](http://www.sierraclubhawaii.com/)\r\n* [Cycle Manoa](http://cyclemanoa.org/)\r\n* Or check out [Honolulu Weekly's Green page](http://honoluluweekly.com/your-inbox/green.html)\r\n\r\nTake a picture of the meeting or event, and come back here to submit the picture and tell us what happened and what you learned."
@@ -2609,6 +2685,7 @@
             "point_value": 10,
             "depends_on_text": "",
             "is_canopy": false,
+            "level": 3,
             "type": "activity",
             "slug": "hot-spots",
             "description": "Check out the Hot Spot visualization below, which shows hourly energy use over a weeklong period for a particular lounge. Come up with answers to the questions below, and submit them below:\r\n\r\n1. What hours of the day seem to have the highest energy use? How does that compare to your own energy use patterns?\r\n2. What differences in energy use do you notice between lounges?\r\n3. What are your thoughts on this visualization? What are its strengths and weaknesses?"
@@ -2634,6 +2711,7 @@
             "point_value": 10,
             "depends_on_text": "",
             "is_canopy": false,
+            "level": 3,
             "type": "activity",
             "slug": "heat-map",
             "description": "Check out the Heat Map visualization below, which shows hourly or daily energy use for all lounges in a tower. Come up with answers to the questions below, and submit them:\r\n\r\n1. What patterns do you see in the data?\r\n2. Do you notice any spatial patterns?\r\n3. What are your thoughts on this visualization? What are its strengths and weaknesses?"
@@ -2658,6 +2736,7 @@
             "point_value": 30,
             "depends_on_text": "",
             "is_canopy": false,
+            "level": 3,
             "type": "activity",
             "slug": "compare-homes",
             "description": "Now that you know more about your energy use while you live in Hale Aloha, we want you to think about your family's energy use at home. Each member of your group should ask their own family for a copy of their latest energy bill (or the information from it), or even the last few bills if they have them.\r\n\r\nAs a group, sit down and compare the energy use between your families and think about the following questions:\r\n\r\n* How much energy does each family use on average?\r\n* How does the energy usage between families compare when you take into account the number of people living in the home?\r\n* The members of your groups probably live in different places, how do you think their locations affect the amount of energy they use? Mainland US vs. Hawaii or even International?\r\n* For each family, what do you think the 3 biggest consumers of energy are?\r\n\r\nOnce you are done, submit the results of your comparison below. What have you learned?"
@@ -2683,6 +2762,7 @@
             "point_value": 10,
             "depends_on_text": "",
             "is_canopy": false,
+            "level": 3,
             "type": "activity",
             "slug": "line-graph",
             "description": "Check out the Line Graph visualization below, which shows a zoomable chart of energy or power usage for one or more lounges. Come up with answers to the questions below, and submit them:\r\n\r\n1. What interesting differences do you notice in energy use when looking at the 3 different timescales?\r\n2. How different are the graphs of power and energy?\r\n3. Pick 2 lounges and compare their energy use across 2 different time scales.\r\n4. What are your thoughts on this visualization? What are its strengths and weaknesses?"
@@ -2707,6 +2787,7 @@
             "point_value": 10,
             "depends_on_text": "Complete Lighting video activity",
             "is_canopy": false,
+            "level": 1,
             "type": "activity",
             "slug": "cfl-bulb",
             "description": "Find an incandescent bulb and replace it with a CFL (compact fluorescent). If you've already replaced all the incandescent bulbs in your room with CFLs or LEDs, you might have to go hunt for one elsewhere. You should throw away the incandescent bulb, because even though it isn't burned out it is a massive energy hog and you don't want someone using it later.\r\n\r\nFor verification, please take a single photo showing both the incandescent bulb you replaced and the CFL you installed."
@@ -2731,6 +2812,7 @@
             "point_value": 20,
             "depends_on_text": "Complete Energy Intuition video activity, and wait for Round 2",
             "is_canopy": false,
+            "level": 2,
             "type": "activity",
             "slug": "computer-sleep",
             "description": "Configure your computer and any external monitor to sleep after 20 minutes of inactivity (or less). You can find instructions on enabling sleep functionality at the [EnergySTAR website](http://www.energystar.gov/index.cfm?c=power_mgt.pr_power_mgt_users).\r\n\r\nOnce you have changed your settings, please take a screenshot showing the new settings for use in verification:\r\n\r\n  * [How to take a screenshot on Windows](http://www.wikihow.com/Take-a-Screenshot-in-Microsoft-Windows)\r\n  * [How to take a screenshot on Mac OS X](/help/faq/how-screenshot-mac/)"
@@ -2755,6 +2837,7 @@
             "point_value": 10,
             "depends_on_text": "Complete Intro video activity",
             "is_canopy": false,
+            "level": 1,
             "type": "activity",
             "slug": "power-energy",
             "description": "Watch this video explaining the difference between power and energy.\r\n"
