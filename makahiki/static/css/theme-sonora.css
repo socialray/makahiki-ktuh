@@ -1010,7 +1010,7 @@ iframe{width:100%;height:300px;}
 #prizes-list table{margin:0;padding:0;border-spacing:1;border:0;}
 #prizes-list th{text-align:center;}
 @charset "UTF-8";
-.circle{height:14px;width:14px;-moz-border-radius:14px;-webkit-border-radius:14px;padding:7px;text-align:center;color:#000000;}
+.circle{height:14px;width:14px;border-radius:14px;-webkit-border-radius:14px;-moz-border-radius:14px;padding:7px;text-align:center;color:#000000;}
 .disabled{background:rgba(72, 79, 91, 0.2);}
 .enabled{background:#484f5b;}
 .enabled,.disabled{display:block;margin:.2em .5em .2em 0;color:#ffffff;font-weight:bold;line-height:14px;text-decoration:none;text-align:center;float:left;}
