@@ -3,6 +3,7 @@
 import datetime
 from django.db.models import  Count
 from django.core.exceptions import ObjectDoesNotExist
+from django.db.models.aggregates import Max
 from django.db.models.query_utils import Q
 from django.shortcuts import get_object_or_404
 from apps.managers.cache_mgr import cache_mgr
@@ -74,24 +75,30 @@ def get_action_members(action):
     return ActionMember.objects.filter(action=action)
 
 
-def get_category_actions(user):
-    """Return the category list with the tasks info"""
-    categories = cache_mgr.get_cache('smartgrid-categories-%s' % user.username)
-    if not categories:
-        categories = Category.objects.all()
-        for cat in categories:
-            action_list = []
-            for action in cat.action_set.all().order_by("priority"):
-                action = annotate_action_status(user, action)
-                action_list.append(action)
+def get_level_actions(user):
+    """Return the level list with the action info in categories"""
+    levels = cache_mgr.get_cache('smartgrid-levels-%s' % user.username)
+    if not levels:
+        max_level = Action.objects.all().aggregate(Max('level'))['level__max']
 
-            cat.task_list = action_list
+        levels = []
+        if max_level:
+            for level in range(0, max_level):
+                categories = Category.objects.all()
+                for cat in categories:
+                    action_list = []
+                    for action in cat.action_set.filter(level=level + 1).order_by("priority"):
+                        action = annotate_action_status(user, action)
+                        action_list.append(action)
+
+                    cat.task_list = action_list
+                levels.append(categories)
 
         # Cache the categories for an hour (or until they are invalidated)
-        cache_mgr.set_cache('smartgrid-categories-%s' % user,
-            categories, 60 * 60)
+        cache_mgr.set_cache('smartgrid-levels-%s' % user,
+            levels, 60 * 60)
 
-    return categories
+    return levels
 
 
 def get_popular_actions(action_type, approval_status, num_results=None):
@@ -216,16 +223,16 @@ def afterPublished(user, action_slug):
 
 def is_unlock(user, action):
     """Returns the unlock status of the user action."""
-
-    categories = cache_mgr.get_cache('smartgrid-categories-%s' % user.username)
-    if not categories:
+    levels = cache_mgr.get_cache('smartgrid-levels-%s' % user.username)
+    if not levels:
         return eval_unlock(user, action)
 
-    for cat in categories:
-        if cat.id == action.category_id:
-            for t in cat.task_list:
-                if t.id == action.id:
-                    return t.is_unlock
+    for level in levels:
+        for cat in level:
+            if cat.id == action.category_id:
+                for t in cat.task_list:
+                    if t.id == action.id:
+                        return t.is_unlock
 
     return False
 

@@ -23,7 +23,7 @@ def supply(request, page_name):
     user = request.user
 
     return {
-        "categories": smartgrid.get_category_actions(user),
+        "levels": smartgrid.get_level_actions(user),
         }
 
 

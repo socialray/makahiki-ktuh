@@ -263,10 +263,10 @@ class ActivityAdmin(admin.ModelAdmin):
                      'embedded_widget',
                      ('pub_date', 'expire_date'),
                      ('depends_on', 'depends_on_text'),
-                     ('is_canopy', 'is_group'))}),
+                     )}),
         ("Points",
          {"fields": (("point_value", "social_bonus"), ("point_range_start", "point_range_end"), )}),
-        ("Ordering", {"fields": (("category", "priority"), )}),
+        ("Ordering", {"fields": (("level", "category", "priority"), )}),
         ("Confirmation Type", {'fields': ('confirm_type', 'confirm_prompt')}),
     )
     prepopulated_fields = {"slug": ("name",)}
@@ -323,9 +323,9 @@ class EventAdmin(admin.ModelAdmin):
                      ('pub_date', 'expire_date'),
                      ('event_date', 'event_location', 'event_max_seat'),
                      ('depends_on', 'depends_on_text'),
-                     ('is_canopy', 'is_group'))}),
+                     )}),
         ("Points", {"fields": (("point_value", "social_bonus"),)}),
-        ("Ordering", {"fields": (("category", "priority"), )}),
+        ("Ordering", {"fields": (("level", "category", "priority"), )}),
         ("Confirmation Code", {'fields': ('num_codes',)}),
         )
     prepopulated_fields = {"slug": ("name",)}
@@ -379,10 +379,10 @@ class CommitmentAdmin(admin.ModelAdmin):
                        'image',
                        'description',
                        'depends_on', 'depends_on_text',
-                       ('is_canopy', 'is_group')),
+                       ),
             }),
         ("Points", {"fields": (("point_value", 'social_bonus'), )}),
-        ("Ordering", {"fields": (("category", "priority"), )}),
+        ("Ordering", {"fields": (("level", "category", "priority"), )}),
         )
     prepopulated_fields = {"slug": ("name",)}
 

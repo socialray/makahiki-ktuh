@@ -170,6 +170,9 @@ class Action(models.Model):
         choices=TYPE_CHOICES,
         help_text="The type of the actions."
     )
+    level = models.IntegerField(
+        default=1,
+        help_text="The level of the action.")
     category = models.ForeignKey(Category,
         null=True, blank=True,
         help_text="The category of the action.")
@@ -618,7 +621,7 @@ class ActionMember(models.Model):
 
     def invalidate_cache(self):
         """Invalidate the categories cache."""
-        cache_mgr.delete('smartgrid-categories-%s' % self.user.username)
+        cache_mgr.delete('smartgrid-levels-%s' % self.user.username)
         cache_mgr.delete('user_events-%s' % self.user.username)
         cache_mgr.invalidate_team_avatar_cache(self.action, self.user)
         cache_mgr.invalidate_commitments_cache(self.user)

@@ -1,0 +1,199 @@
+<div class="content-box-centered">
+    <div class="content-box-title">
+        The Smart Grid Game
+        <a href="#" style="float: right">
+            <img src="{{ STATIC_URL}}images/icons/icon-help-sm.png" width="20" align="center"
+                 title="Click to get help about this window"
+                 onclick="toggleHelp(event, 'widget', 'smart-grid-game'); return false;"
+                    /></a>
+    </div>
+    <div class="content-box-contents">
+        <p>
+        <table class="activities-grid">
+            <tr><!-- Start header -->
+                {% for cat in categories %}
+                    <td>
+                        <div class="activity-category">
+                            <h5> {{ cat.name }}</h5>
+                        </div>
+                    </td>
+                {% endfor %}
+            </tr>
+            <!-- End header -->
+            <tr>
+                {% for cat in categories %}
+                    <td>
+                        <table>
+                            {% for task in cat.task_list %}
+                                <tr>
+                                    <td>
+                                        <div>
+                                            <div class="{{task.type}}">
+                                                {% if task.is_unlock %}
+                                                    <a href="{% url activity_task task.type task.slug %}"
+                                                       title="{{task.name}}">
+                                                        {% if task.type != 'commitment' %}
+                                                            {% if task.is_pau %}
+                                                                {% if task.member.approval_status == "rejected" %}
+                                                                    <img src="{{ STATIC_URL}}images/icons/icon-exclamation2.png"
+                                                                         width="12"
+                                                                         align="left"/>
+                                                                 {% else %}
+                                                                    {% if task.member.approval_status == "pending" and task.is_event_pau %}
+                                                                        <img src="{{ STATIC_URL}}images/icons/icon-exclamation2.png"
+                                                                             width="12"
+                                                                             align="left"/>
+                                                                     {% else %}
+                                                                         <img src="{{ STATIC_URL}}images/icons/icon-done.png"
+                                                                              width="12"
+                                                                              align="left"/>
+                                                                    {% endif %}
+                                                                {% endif %}
+                                                                <br/>
+                                                                {{ task.name }}
+                                                            {% else %}
+                                                                <br/>
+                                                                {% if task.point_value %}
+                                                                    <h3>{{ task.point_value }}</h3>
+                                                                {% else %}
+                                                                    <h3>{{ task.activity.point_range_end }}</h3>
+                                                                {% endif %}
+                                                            {% endif %}
+                                                        {% else %}
+                                                            {# ------ is commitment #}
+                                                            {% if task.is_pau %}
+                                                                {% if task.member.days_left != 0 or task.member.award_date %}
+                                                                    <img src="{{ STATIC_URL}}images/icons/icon-done.png"
+                                                                         width="12"
+                                                                         align="left">
+                                                                {% else %}
+                                                                    <img src="{{ STATIC_URL}}images/icons/icon-exclamation2.png"
+                                                                         width="12"
+                                                                         align="left"/>
+                                                                {% endif %}
+                                                                <br/>
+                                                                {{ task.name }}
+                                                            {% else %}
+                                                                <br/>
+                                                                <h3>{{ task.point_value }}</h3>
+                                                            {% endif %} {# end task.is_pau #}
+                                                        {% endif %}
+                                                        {# ------- end task.type #}
+                                                    </a>
+                                                {% else %}        {# ------ is lock #}
+                                                    <br/>
+                                                    <a class="whatever"
+                                                       href="javascript:void(0);">
+                                                        <img src="{{ STATIC_URL}}images/lock24.png"
+                                                             width="22" align="top"
+                                                             title="Click to see how to unlock"
+                                                             onclick="unlock_dialog(event, '{{task.type}}','{{task.slug}}',
+                                                                     {% if task.depends_on_text %}
+                                                                         '{{task.depends_on_text}}'
+                                                                     {% else %}
+                                                                         '{{task.depends_on}}'
+                                                                     {% endif %}
+                                                                     )">
+                                                    </a>
+                                                {% endif %}
+                                            </div>
+                                        </div>
+                                    </td>
+                                </tr>
+                            {% endfor %}
+
+                        </table>
+                    </td>
+                {% endfor %}
+            </tr>
+        </table>
+
+        <p/>
+
+        <table class="activities-grid-legend">
+            <tr>
+                <td colspan="10"><b>Legend:</b></td>
+            </tr>
+            <tr>
+                <td>
+                    <div class="activity-legend"></div>
+                </td>
+                <td width=100>activity</td>
+                <td>
+                    <div class="commitment-legend"></div>
+                </td>
+                <td width=100>commitment</td>
+                <td>
+                    <div class="event-legend"></div>
+                </td>
+                <td width=100>event</td>
+                <td>
+                    <div class="excursion-legend"></div>
+                </td>
+                <td width=100>excursion</td>
+            </tr>
+        </table>
+
+    </div>
+</div>
+
+<div class="modal hide fade" id="unlockModal">
+    <div class="modal-header">
+        <a class="close" data-dismiss="modal">x</a>
+        <h3>Locked Activity</h3>
+    </div>
+    <div class="modal-body" id="modal-body">
+        <p><b>This activity is locked.</b></p>
+        <p> To unlock this activity, please do the following: <br/>
+        <div id="depends_on">
+        </div>
+        </p>
+    </div>
+    <div class="modal-footer">
+        <a href="#" class="btn btn-widget" data-dismiss="modal">Close</a>
+    </div>
+</div>
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        var task_depends_on = getCookie("task_depends_on");
+        if (task_depends_on != null)
+        {
+            deleteCookie("task_depends_on");
+
+            var modalElement = $('#unlockModal');
+
+            modalElement.modal({
+                backdrop: true,
+                keyboard: true,
+                show: false
+            });
+            modalElement.find('#depends_on').html(task_depends_on);
+
+            modalElement.modal('show');
+        }
+    });
+
+    function unlock_dialog(event, type, slug, depends_on) {
+        var modalElement = $('#unlockModal');
+           
+        var pos_y = event.pageY;
+        var body_y = $('body').height();
+        console.log("event y " + pos_y + " body height " + body_y);
+        document.getElementById('unlockModal').style.top = (pos_y - 50) + "px";
+        modalElement.modal({
+            backdrop: true,
+            keyboard: true,
+            show: false
+        }); 
+        modalElement.find('#depends_on').html(depends_on);
+        // set up event logging
+        modalElement.on('shown', function() {
+            log_js_action(type, slug, 'view-lock-open');
+        });
+        modalElement.on('hidden', function() {
+            log_js_action(type, slug, 'view-lock-close');
+        });
+        modalElement.modal('show');
+    }
+</script>
