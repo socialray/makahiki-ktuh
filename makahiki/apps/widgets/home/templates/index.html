@@ -3,6 +3,7 @@
 <div id="fb-root"></div>
 <script src="//connect.facebook.net/en_US/all.js"></script>
 
+{% if user.get_profile.setup_complete %}
 <!-- Top Row-->
 <ul>
     {% for page in ALL_PAGE_INFO %}
@@ -23,20 +24,18 @@
     {% endfor %}
 </ul>
 
-{% if not user.get_profile.setup_complete %}
-    <div id="setup-dialog" class="modal">
-        <div style="display: none;">
-          Introduction: Step 1 of 6
-        </div>
-        {% include "first-login/welcome.html" %}
-    </div>
-    <script type="text/javascript">
-            jQuery(document).ready(function ($) {
-                $("#setup-dialog").modal({ 
-                    keyboard:false,
-                    backdrop: "static",
-                    show:true, 
-                });//.modal() end 
-            });//opening
-    </script>
+{% else %}
+</div>
+<div class="first-login-content">
+<script type="text/javascript">
+$(".navbar").hide();
+$("#quests").hide();
+$("#info-bar-single").hide();
+$("#info-bar-wide").hide();  
+$("#notifications").hide();
+</script>
+
+<div id="setup-dialog">
+{% include "first-login/welcome.html" %}
+</div>
 {% endif %}

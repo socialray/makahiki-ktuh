@@ -866,7 +866,7 @@ ul{list-style:none;}
 .container-fluid:before,.container-fluid:after{display:table;content:"";}
 .container-fluid:after{clear:both;}
 .content-box{text-align:left;-webkit-border-radius:8px;-moz-border-radius:8px;border-radius:8px;-webkit-border-radius:8px;-moz-border-radius:8px;border-radius:8px;-webkit-box-shadow:3px 3px 8px #000000;-moz-box-shadow:3px 3px 8px #000000;box-shadow:3px 3px 8px #000000;-webkit-box-shadow:3px 3px 8px #000000;-moz-box-shadow:3px 3px 8px #000000;box-shadow:3px 3px 8px #000000;margin-bottom:20px;margin-bottom:15px;padding-bottom:10px;}
-.content-box,.content-box-centered{background-color:rgba(235, 232, 185, 0.75);color:#000000;opacity:1;}
+.content-box,.content-box-centered,.well{background-color:rgba(235, 232, 185, 0.75);color:#000000;opacity:1;}
 .content-box .table-striped tbody tr:nth-child(2n) td,.content-box .table-striped tbody tr:nth-child(2n) th{background-color:rgba(235, 232, 185, 0.75);}
 .content-box .table-striped tbody tr:nth-child(2n + 1) td,.content-box .table-striped tbody tr:nth-child(2n + 1) th{background-color:rgba(255, 255, 255, 0.75);}
 .content-box table{width:100%;margin:0;padding:0;border-spacing:0;}
@@ -942,6 +942,7 @@ iframe{width:100%;height:300px;}
 .setup-form-photo{float:left;width:40%;padding-right:5px;}
 .setup-form-photo p{margin:5px 0;}
 .setup-profile-help-text{font-style:italic;font-size:0.8em;margin:5px 0;}
+.well{margin-bottom:0px;}
 #gohome>a{color:white;}
 #profile-form img{vertical-align:baseline;}
 #profile-form ul{list-style:none;padding:0;padding-bottom:5px;margin:5px 0;}
@@ -952,15 +953,16 @@ iframe{width:100%;height:300px;}
 #progressbar-header p{margin:3px 0;}
 #setup-activity-form{border:1px solid black;margin-top:10px;padding:5px;}
 #setup-activity-form label{margin-bottom:5px;display:block;}
-#setup-content{margin-bottom:10px;}
+#setup-content{margin-bottom:0px;}
 #setup-dialog{text-align:left;z-index:10000;}
 #setup-dialog h2{text-align:center;}
 #setup-dialog input{width:180px;}
 #setup-dialog .progress{margin-bottom:5px;}
 #setup-dialog .ui-progressbar-value{background:none;background-color:#528EE3;}
-#setup-terms-content{padding:5px;}
+#setup-terms-content{padding:5px;max-height:200px;}
 #setup-welcome-info{border:1px solid black;padding:10px;margin-bottom:5px;text-align:center;}
-@media (max-width:660px){.upload-form{display:none;}}@media (max-width:350px){iframe{width:100%;height:150px;} #setup-dialog{margin-top:0px;position:fixed;max-height:410px;min-width:270px;} #setup-dialog .modal-body{max-height:165px;overflow-y:scroll;} #setup-dialog .modal-header>h2{font-size:13pt;line-height:13pt;} #setup-dialog .modal-footer{max-height:155px;padding-bottom:0px;padding-top:5px;}}@media (min-width:350px){#setup-dialog{margin-top:-300px;} #setup-dialog .modal-body{height:40%;max-height:360px;overflow-y:scroll;} #setup-dialog .modal-header{height:5%;max-height:30px;} #setup-dialog .modal-footer{height:15%;max-height:130px;}}@charset "UTF-8";
+@media (max-width:660px){.upload-form{display:none;}}.modal-header{margin:0px 15px;}
+@media (max-width:350px){iframe{width:100%;height:150px;} #setup-dialog{margin-top:0px;position:fixed;max-height:410px;min-width:270px;} #setup-dialog .modal-body{max-height:165px;overflow-y:scroll;} #setup-dialog .modal-header>h2{font-size:13pt;line-height:13pt;} #setup-dialog .modal-footer{max-height:155px;padding-bottom:0px;padding-top:5px;}}@media (min-width:350px){#setup-dialog .modal-body{height:40%;} #setup-dialog .modal-header{height:5%;max-height:30px;} #setup-dialog .modal-footer{height:15%;}}@charset "UTF-8";
 .help-content{padding-top:1em;padding-bottom:.7em;line-height:15pt;}
 #help-ask-form textarea{width:97%;height:5em;}
 .homecontent{margin-left:7%;}
