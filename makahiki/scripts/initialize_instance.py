@@ -1,9 +1,8 @@
 #!/usr/bin/python
 
-"""
-Use this script to create an instance with different types of configuration:
+"""Invocation:  scripts/initialize_instance .py -t|--type [=] default|demo|test
 
-Usage:  scripts/initialize_instance .py -t|--type [=] default|demo|test
+Use this script to create an instance with different types of configuration:
 
 [default]: includes the basic configuration. The admin needs to create
            the settings for rounds, resources, resource goals, teams and
@@ -20,9 +19,9 @@ Performs the following:
   * Updates and/or installation of any modules in requirements.txt
   * Syncs the database and migrates the database schemas.
   * Collects and copies the static and media files to the desired location.
-  * Creates the specified challenge.
   * Loads the default or test configuration of data.
-  """
+"""
+
 import getopt
 
 import os
@@ -30,17 +29,8 @@ import sys
 
 
 def exit_with_help():
-    """print the usage of the command."""
-    print """
-Usage:  scripts/initialize_instance .py -t|--type [=] default|demo|test
-[default]: includes the basic configuration. The admin needs to create
-           the settings for rounds, resources, resource goals, teams and
-           users, prizes, etc. Uses internal authentication.
-[demo]   : includes all of the [default] configuration, with the additions of
-           demo data, such as demo rounds, resource and goal settings, demo
-           team, demo users, demo prizes. Uses internal authentication.
-[test]   : includes all of "demo" configuration, with more test users. Uses
-           CAS authentication."""
+    """Print usage of the command, then exit with error code."""
+    print __doc__
     sys.exit(2)
 
 

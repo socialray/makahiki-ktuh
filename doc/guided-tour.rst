@@ -266,31 +266,3 @@ The final page to be shown in this guided tour is the settings page, which is al
 
 Administrators use the Settings page to configure the system before the beginning of a challenge.  This process is documented in :ref:`section-configuration`.
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

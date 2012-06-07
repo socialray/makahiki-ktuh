@@ -177,19 +177,6 @@ activated that virtual environment::
 If you start a new shell in the midst of this process, you must be sure to invoke ``workon makahiki``
 and of course cd to the appropriate directory before continuing. 
 
-
-Install python libraries
-----------------------------
-
-Once you have the source, you must next install a set of third party
-libraries into your Makahiki virtual environment::
-
-  % pip install -r requirements.txt
-  
-This command will produce a lot of output, but it should terminate without
-indicating that an error occurred.
-
-
 Setup environment variables
 -------------------------------
 
@@ -213,45 +200,36 @@ admin account if this server is publically accessible.
 Makahiki also utilizes a variety of other environment variables. For complete
 documentation, see :ref:`section-environment-variables`.
 
-
-Configure Postgres
-----------------------
-
-Next, create a makahiki user and database in your postgres server::
-
-  % cd makahiki
-  % scripts/initialize_postgres.py
-
-(you may be prompted for the password you set for the postgres user, which was
-likely created when you ran the PostgreSQL installer in step 1).
-
-As you can see, executing the script should echo the commands to create the
-user and database. It will create the user name, password and database name as specified in the
-MAKAHIKI_DATABASE_URL environment variable.
-
-
 Initialize Makahiki
 ------------------------
 
-Next, invoke the initialize_instance script::
+Next, invoke the initialize_instance script, passing it an argument to specify what kind
+of initial data to load.  In most cases, you will want to load the default dataset, as
+shown next::
 
   % scripts/initialize_instance.py -t default
 
-This command  will:
-  * Check that any changes to requirements are installed.
-  * Sync the database and perform any needed database migrations. 
-  * Initialize the system with default data.
+This command will:
+  * Install and/or update all Python packages required by Makahiki;
+  * Reinitialize the database contents and perform any needed database migrations. 
+  * Initialize the system with data.
   * Set up static files. 
 
 Under normal circumstances, invoking this script after pulling any new changes from the
 repository is sufficient to bring your local installation up to date. 
 
-If you want to try out an demo instance that is populated with demo data, you can invoke
-the initailize_instance script as::
+If you instead want to create a demo instance to facilitate training or sample use, you can invoke
+the initialize_instance script as::
 
   % scripts/initialize_instance.py -t demo
 
-This will create an demo instance that you could login and start playing right away.
+This will create a demo instance that enables people to play a simple version of the Kukui
+Cup with minimal additional configuration.
+
+Finally, if you are doing development of the system, you will normally want to populate
+your instance with test data, accomplished as follows::
+
+  % scripts/initialize_instance.py -t test
 
 Makahiki has several other scripts useful for development. For complete
 documentation, see :ref:`section-scripts`.
@@ -260,33 +238,46 @@ documentation, see :ref:`section-scripts`.
 Test your installation
 --------------------------
 
-To see if the system has been installed correctly, run the tests::
+If you have configured the system with the test data set, then you can invoke the test
+suite as follows::
 
   % ./manage.py test
 
-.. note:: Because the tests use Firefox for browser testing, Please make sure the Firefox
+.. note:: Because the tests use Firefox for browser testing, Please make sure that Firefox
           is installed before running the tests.
 
 
 Start the server
 --------------------
 
-Finally, you can start the Makahiki server::
+Finally, you can start the Makahiki server using either::
 
   % ./manage.py run_gunicorn
 
-Open a browser and go to http://localhost:8000 to see the home page. 
+or::
+
+  % ./manage.py runserver
+
+The first alternative (run_gunicorn) runs a more efficient web server, while the second (runserver) invokes a server
+that is better for development (for example, :ref:`section-theme-development`).
+
+Verify that Makahiki is running
+-------------------------------
+
+Open a browser and go to http://localhost:8000 to see the landing page, which should look
+something like this:
+
+.. figure:: figs/guided-tour/landing.png
+   :width: 600 px
+   :align: center
 
 
-Login to administrative interface
--------------------------------------
+Configure your Makahiki instance
+--------------------------------
 
-If you create the instance with the "default" configuration, Once the server is running,
-you must login as admin in order to continue configuring the challenge. To do this, go to
-http://localhost:8000 and login using the credentials you specified in Step (6) above.
-It will redirect you to the site admin page.
+Now that you have a running Makahiki instance, it is time to configure it for your
+challenge, as documented in :ref:`section-configuration`.
 
-(Documentation of page and widget configuration coming soon.)
 
 
 

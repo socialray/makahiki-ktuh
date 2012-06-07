@@ -1,3 +1,5 @@
+.. _section-theme-development:
+ 
 Theme Development
 =================
 

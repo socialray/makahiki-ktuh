@@ -1,8 +1,8 @@
 .. _section-configuration:
 
 
-Configuration
-=============
+Configuring Makahiki
+====================
 
 .. note:: When completed, this chapter will discuss: (a) setting the branding, 
           (b) setting the displayed pages and widgets; (c) setting the 

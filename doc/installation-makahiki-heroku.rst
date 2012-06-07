@@ -73,31 +73,41 @@ well::
     * [new branch]      master -> master
 
 
-Configure the Heroku installation of Makahiki
-------------------------------------------------
+Initialize Makahiki
+-------------------
 
-A few final commands are needed to get your Makahiki application running on Heroku::
+To initialize your Makahiki instance with the default data set, invoke the following::
 
-  % heroku run python makahiki/manage.py syncdb --noinput
-  % heroku run python makahiki/manage.py migrate
+  % heroku run python scripts/initialize_instance.py -t default
 
-Login to administrative interface
--------------------------------------
+When deploying to Heroku, the "default" Makahiki configuration is normally the only one you will
+want to use. 
 
-Once the server is running, you must login as admin in order to continue
-configuration. To do this, go to::
+Start the server
+----------------
 
-  http://<heroku-appname>.herokuapp.com/account/login
+To start up the server with this configuration, invoke::
 
-Of course, replace <heroku-appname> with the name of your heroku
-application (such as makahiki-hpu).
+  % heroku ps:restart
 
-Login using the credentials you specified in MAKAHIKI_ADMIN_INFO above. 
+Verify that Makahiki is running
+-------------------------------
 
-Once you are logged in, go to the administrator page at::
+Open a browser and go to http://<heroku-appname>.herokuapp.com/ (where <heroku-appname> is
+replaced by your app's name) to see the landing page, which should look like::
 
-  http://<heroku-appname>.herokuapp.com/admin
- 
-(Documentation of page and widget configuration coming soon.)
+.. figure:: figs/guided-tour/landing.png
+   :width: 600 px
+   :align: center
+
+
+Configure your Makahiki instance
+--------------------------------
+
+Now that you have a running Makahiki instance, it is time to configure it for your
+challenge, as documented in :ref:`section-configuration`.
+
+
+
 
 
