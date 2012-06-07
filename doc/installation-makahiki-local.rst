@@ -20,7 +20,7 @@ Our estimated hardware requirements (for production use) are:
   * RAM: 8 GB
   * Disk space: 10 GB
 
-1. Install Python
+Install Python
 -----------------
 
 `Python`_ 2.7.1 or higher (but not Python 3). On Windows machines, it
@@ -31,10 +31,10 @@ To check that python is installed and has the correct version::
   & python --version 
     Python 2.7.1
 
-2. Install C++
+Install C++
 --------------
 
-2a. Mac OS X: Install Apple Developer Tools
+Mac OS X: Install Apple Developer Tools
 *******************************************
 
 
@@ -44,13 +44,13 @@ build certain libraries (PIL, etc.) that require GCC (which is bundled with
 Xcode). Xcode can either be found in your OS X installation DVD, or in the Mac
 App Store.
 
-2b. Windows: Install Visual C++
+Windows: Install Visual C++
 *******************************
 
 If on Windows, you will need to install `Visual C++`_ 
 Please read and follow this `blog post on Django installation on Windows`_.
 
-3. Install Python Imaging Library
+Install Python Imaging Library
 ---------------------------------
 
 Makahiki requires the `Python Imaging Library`_ (PIL). If you are on Mac OS X, we have found 
@@ -64,7 +64,7 @@ and zlib (for PNG). On Linux, a developer has reported that the PIL system insta
 apt-get does not support JPEG (April, 2012).  To fix, the developer downloaded and
 installed from source.
 
-4. Install Git
+Install Git
 --------------
 
 Find a package for your operating system at the `GitHub install
@@ -72,7 +72,7 @@ wiki`_. It is recommended that you also configure Git so that it
 handles line endings from Windows users correctly. See `Dealing With
 Line Endings`_.
 
-5. Install Pip
+Install Pip
 --------------
 
 Install it by typing::
@@ -83,7 +83,7 @@ Depending on your system configuration, you may
 have to type ``sudo easy_install pip``. If you do not have easy_install,
 download and install it from the `setuptools website`_.
 
-6. Install Virtual Environment Wrapper
+Install Virtual Environment Wrapper
 ---------------------------------------
 
 `Virtualenvwrapper`_ allows you to install
@@ -95,7 +95,7 @@ Once virtualenv is installed, create a virtual environment for makahiki as follo
 
   % mkvirtualenv makahiki
 
-7. Install PostgreSQL
+Install PostgreSQL
 ---------------------
 
 Makahiki uses `PostgreSQL`_ as its standard backend database.
@@ -111,7 +111,7 @@ $PATH so that ``pg_config`` and ``psql`` are defined.
           postgres ident" to "local all postgres trust". Or, you may be able to create a
           .pgpass file containing the credentials.
 
-8. Install Memcache
+Install Memcache
 -------------------
 
 Makahiki can optionally use `Memcache`_ to improve performance.
@@ -140,7 +140,7 @@ installation instructions`_, although these instructions do not explain installa
 .. _Memcache: http://memcached.org
 .. _Heroku's memcache installation instructions: http://devcenter.heroku.com/articles/memcache#local_memcache_setup
 
-9. Download the Makahiki source
+Download the Makahiki source
 ---------------------------------
 
 To download the source for your own fork::
@@ -165,7 +165,7 @@ This will create the new folder and download the code from the repository.
 .. _SSH keys: http://help.github.com/key-setup-redirect
 .. _email settings: http://help.github.com/git-email-settings/
 
-10. Workon makahiki
+Workon makahiki
 -------------------
 
 The remaining steps require you to be in the makahiki/ directory and to have
@@ -178,7 +178,7 @@ If you start a new shell in the midst of this process, you must be sure to invok
 and of course cd to the appropriate directory before continuing. 
 
 
-11. Install python libraries
+Install python libraries
 ----------------------------
 
 Once you have the source, you must next install a set of third party
@@ -190,7 +190,7 @@ This command will produce a lot of output, but it should terminate without
 indicating that an error occurred.
 
 
-12. Setup environment variables
+Setup environment variables
 -------------------------------
 
 At a minimum, Makahiki requires two environment variables: MAKAHIKI_DATABASE_URL and
@@ -214,7 +214,7 @@ Makahiki also utilizes a variety of other environment variables. For complete
 documentation, see :ref:`section-environment-variables`.
 
 
-13. Configure Postgres
+Configure Postgres
 ----------------------
 
 Next, create a makahiki user and database in your postgres server::
@@ -230,7 +230,7 @@ user and database. It will create the user name, password and database name as s
 MAKAHIKI_DATABASE_URL environment variable.
 
 
-14.  Initialize Makahiki
+Initialize Makahiki
 ------------------------
 
 Next, invoke the initialize_instance script::
@@ -257,7 +257,7 @@ Makahiki has several other scripts useful for development. For complete
 documentation, see :ref:`section-scripts`.
 
 
-15. Test your installation
+Test your installation
 --------------------------
 
 To see if the system has been installed correctly, run the tests::
@@ -268,7 +268,7 @@ To see if the system has been installed correctly, run the tests::
           is installed before running the tests.
 
 
-16. Start the server
+Start the server
 --------------------
 
 Finally, you can start the Makahiki server::
@@ -278,7 +278,7 @@ Finally, you can start the Makahiki server::
 Open a browser and go to http://localhost:8000 to see the home page. 
 
 
-17. Login to administrative interface
+Login to administrative interface
 -------------------------------------
 
 If you create the instance with the "default" configuration, Once the server is running,
@@ -287,3 +287,6 @@ http://localhost:8000 and login using the credentials you specified in Step (6) 
 It will redirect you to the site admin page.
 
 (Documentation of page and widget configuration coming soon.)
+
+
+

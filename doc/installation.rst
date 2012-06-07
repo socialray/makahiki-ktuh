@@ -18,7 +18,6 @@ that no hardware or IT resources are required.
 Makahiki Installation
 ---------------------
 .. toctree::
-   :maxdepth: 1
 
    Local installation <installation-makahiki-local>
    Heroku installation <installation-makahiki-heroku>
@@ -32,7 +31,6 @@ your energy challenge, then you will also need to install
 WattDepot. Here are similar instructions for WattDepot:
 
 .. toctree::
-   :maxdepth: 1
 
    Local installation <installation-wattdepot-local>
    Heroku installation <installation-wattdepot-heroku>

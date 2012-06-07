@@ -1,7 +1,7 @@
 Makahiki Installation (Heroku)
 ==============================
 
-1. Install Heroku
+Install Heroku
 -----------------
 
 Sign up for an account and install the Heroku toolbelt following
@@ -15,7 +15,7 @@ This involves:
   * Logging in to Heroku.
 
 
-2. Download the Makahiki system
+Download the Makahiki system
 -------------------------------
 
 To download the Makahiki system, type the following::
@@ -25,7 +25,7 @@ To download the Makahiki system, type the following::
 This will create a directory called "makahiki" containing the source code
 for the system.
 
-3. Create your Heroku Makahiki application
+Create your Heroku Makahiki application
 ------------------------------------------
 
 Change directory to makahiki, and create the heroku application.  Heroku
@@ -41,7 +41,7 @@ following these two commands::
 
 Use an application name appropriate for your organization.
 
-4. Define a Makahiki admin account and password
+Define a Makahiki admin account and password
 -----------------------------------------------
 
 Now tell Heroku the administrator account name and its password.  Choose a
@@ -50,7 +50,7 @@ below. You can also choose a different admin account name if you wish::
 
   % heroku config:add MAKAHIKI_ADMIN_INFO=admin:Dog4Days56
 
-5. Send the Makahiki system to Heroku
+Send the Makahiki system to Heroku
 -------------------------------------
 
 To upload the Makahiki source code to Heroku, do the following::
@@ -73,7 +73,7 @@ well::
     * [new branch]      master -> master
 
 
-6. Configure the Heroku installation of Makahiki
+Configure the Heroku installation of Makahiki
 ------------------------------------------------
 
 A few final commands are needed to get your Makahiki application running on Heroku::
@@ -81,7 +81,7 @@ A few final commands are needed to get your Makahiki application running on Hero
   % heroku run python makahiki/manage.py syncdb --noinput
   % heroku run python makahiki/manage.py migrate
 
-7. Login to administrative interface
+Login to administrative interface
 -------------------------------------
 
 Once the server is running, you must login as admin in order to continue
@@ -99,4 +99,5 @@ Once you are logged in, go to the administrator page at::
   http://<heroku-appname>.herokuapp.com/admin
  
 (Documentation of page and widget configuration coming soon.)
+
 
