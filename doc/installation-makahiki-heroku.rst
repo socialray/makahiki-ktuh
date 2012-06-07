@@ -94,7 +94,7 @@ Verify that Makahiki is running
 -------------------------------
 
 Open a browser and go to http://<heroku-appname>.herokuapp.com/ (where <heroku-appname> is
-replaced by your app's name) to see the landing page, which should look like::
+replaced by your app's name) to see the landing page, which should look like:
 
 .. figure:: figs/guided-tour/landing.png
    :width: 600 px
