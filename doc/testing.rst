@@ -3,10 +3,27 @@ Testing
 
 This document contains notes on writing and executing tests.
 
-Because we use Firefox for our browser test, Please make sure the Firefox
+Install Firefox
+---------------
+
+Because we use Firefox for our browser test, please make sure that Firefox
 is installed before running the test.
 
-Run ``python manage.py test`` to run all of the tests.
+Initialize Makahiki for testing
+-------------------------------
+
+Invoke the initialize_instance script and pass it the test argument to load the test data set::
+
+  % scripts/initialize_instance.py -t test
+
+
+Run the test suite
+------------------
+
+Now invoke the test suite as follows::
+
+  % ./manage.py test
+
 
 You can also run tests for individual apps by passing in the test modules in
 those apps as parameters. For example, ``python manage.py test

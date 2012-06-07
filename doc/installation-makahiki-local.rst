@@ -201,7 +201,7 @@ Makahiki also utilizes a variety of other environment variables. For complete
 documentation, see :ref:`section-environment-variables`.
 
 Initialize Makahiki
-------------------------
+-------------------
 
 Next, invoke the initialize_instance script, passing it an argument to specify what kind
 of initial data to load.  In most cases, you will want to load the default dataset, as
@@ -226,26 +226,8 @@ the initialize_instance script as::
 This will create a demo instance that enables people to play a simple version of the Kukui
 Cup with minimal additional configuration.
 
-Finally, if you are doing development of the system, you will normally want to populate
-your instance with test data, accomplished as follows::
-
-  % scripts/initialize_instance.py -t test
-
 Makahiki has several other scripts useful for development. For complete
 documentation, see :ref:`section-scripts`.
-
-
-Test your installation
---------------------------
-
-If you have configured the system with the test data set, then you can invoke the test
-suite as follows::
-
-  % ./manage.py test
-
-.. note:: Because the tests use Firefox for browser testing, Please make sure that Firefox
-          is installed before running the tests.
-
 
 Start the server
 --------------------
