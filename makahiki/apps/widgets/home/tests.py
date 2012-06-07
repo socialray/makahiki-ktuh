@@ -88,7 +88,7 @@ class SetupWizardFunctionalTestCase(TransactionTestCase):
         """Check that the setup wizard is shown for new users."""
         response = self.client.get(reverse("home_index"))
         self.failUnlessEqual(response.status_code, 200)
-        self.assertContains(response, "Introduction: Step 1 of 6")
+        self.assertContains(response, "Welcome to the Kukui Cup")
 
     def testSetupTerms(self):
         """Check that we can access the terms page of the setup wizard."""
