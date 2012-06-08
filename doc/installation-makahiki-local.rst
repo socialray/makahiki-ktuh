@@ -249,7 +249,7 @@ Verify that Makahiki is running
 Open a browser and go to http://localhost:8000 to see the landing page, which should look
 something like this:
 
-.. figure:: figs/guided-tour/landing.png
+.. figure:: figs/guided-tour/guided-tour-landing.png
    :width: 600 px
    :align: center
 

@@ -46,7 +46,7 @@ Setup environment variables
 
 Makahiki requires several environment variables to be set.
 
-First, you need to define the admin account name and password.  For example:
+First, you need to define the admin account name and password.  For example::
 
   % heroku config:add MAKAHIKI_ADMIN_INFO=admin:Dog4Days56
 
@@ -95,10 +95,10 @@ To start up the server with this configuration, invoke::
 Verify that Makahiki is running
 -------------------------------
 
-Open a browser and go to http://<heroku-appname>.herokuapp.com/ (where <heroku-appname> is
+Open a browser and go to `http://<heroku-appname>.herokuapp.com/` (where <heroku-appname> is
 replaced by your app's name) to see the landing page, which should look like:
 
-.. figure:: figs/guided-tour/landing.png
+.. figure:: figs/guided-tour/guided-tour-landing.png
    :width: 600 px
    :align: center
 

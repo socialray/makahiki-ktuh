@@ -8,7 +8,7 @@ This guided tour illustrates the laptop user interface.  Makahiki is designed in
 
 Landing
 -------
-.. figure:: figs/guided-tour/landing.png
+.. figure:: figs/guided-tour/guided-tour-landing.png
    :width: 600 px
    :align: center
 
@@ -19,7 +19,7 @@ Most of the content on this page is configurable, including the University logo,
 About
 -----
 
-.. figure:: figs/guided-tour/about.png
+.. figure:: figs/guided-tour/guided-tour-about.png
    :width: 600 px
    :align: center
 
@@ -28,7 +28,7 @@ Users who click on the bottom button on the landing page are taken to this About
 Authentication
 --------------
 
-.. figure:: figs/guided-tour/authentication.png
+.. figure:: figs/guided-tour/guided-tour-authentication.png
    :width: 600 px
    :align: center
 
@@ -41,20 +41,20 @@ First login sequence
 
 If a user provides acceptable credentials during the authentication process, then the first time they access the system they enter the "first login" process, which is a series of modal dialogs intended to help orient them to the system. 
 
-.. figure:: figs/guided-tour/first-login-1.png
+.. figure:: figs/guided-tour/guided-tour-first-login-1.png
    :width: 600 px
    :align: center
 
 The above dialog provides initial information about logging in and requests verification that the system's internal records about the user are correct.
 
-.. figure:: figs/guided-tour/first-login-terms.png
+.. figure:: figs/guided-tour/guided-tour-first-login-terms.png
    :width: 600 px
    :align: center
 
 The above dialog ensures that the user has consented to the terms and conditions of the system. (The terms and conditions are configurable.) 
 
 
-.. figure:: figs/guided-tour/first-login-referral-bonus.png
+.. figure:: figs/guided-tour/guided-tour-first-login-referral-bonus.png
    :width: 600 px
    :align: center
 
@@ -62,7 +62,7 @@ The next dialog illustrates one of Makahiki's game mechanics: the referral bonus
 
 The use of the referral bonus game mechanic, and the number of points awarded, is configurable. 
 
-.. figure:: figs/guided-tour/first-login-profile.png
+.. figure:: figs/guided-tour/guided-tour-first-login-profile.png
    :width: 600 px
    :align: center
 
@@ -70,19 +70,19 @@ The dialog above enables users to customize aspects of their profile.
 
 If Facebook integration is enabled, then users can choose to use their Facebook profile picture.  (Facebook integration is not enabled in this configuration.)
 
-.. figure:: figs/guided-tour/first-login-video.png
+.. figure:: figs/guided-tour/guided-tour-first-login-video.png
    :width: 600 px
    :align: center
 
 When first time players get to the above dialog box, they are asked to watch a short, 3 minute video that introduces them to the Kukui Cup.  They are notified that they will be quizzed on this material in the next screen.
 
-.. figure:: figs/guided-tour/first-login-video-verification.png
+.. figure:: figs/guided-tour/guided-tour-first-login-video-verification.png
    :width: 600 px
    :align: center
 
 Players answer the question in order to proceed and obtain points for doing so. 
 
-.. figure:: figs/guided-tour/first-login-final.png
+.. figure:: figs/guided-tour/guided-tour-first-login-final.png
    :width: 600 px
    :align: center
 
@@ -93,7 +93,7 @@ Home
 
 After finishing the first login sequence, the players are taken to the following Home page.   The system sets a cookie when the player authenticates, and notes that the first login sequence has been completed.  Thus, after the first visit, the player will normally go directly to this page when retrieving the challenge URL. 
 
-.. figure:: figs/guided-tour/home.png
+.. figure:: figs/guided-tour/guided-tour-home.png
    :width: 600 px
    :align: center
 
@@ -116,7 +116,7 @@ The Quest Bar shows the next three quests available for the player. Clicking on 
 
 Here is the expanded window corresponding to the "Learn Secrets of Kukui Cup Masters" quest:
 
-.. figure:: figs/guided-tour/quests.png
+.. figure:: figs/guided-tour/guided-tour-quests.png
    :width: 600 px
    :align: center
 
@@ -127,7 +127,7 @@ The "Get Nutz" page provides the user interface to the primary "literacy" game, 
 
 Here is an example of the Get Nutz page (the name of this page and any other top-level page can be configured by site administrators):
 
-.. figure:: figs/guided-tour/get-nutz.png
+.. figure:: figs/guided-tour/guided-tour-get-nutz.png
    :width: 600 px
    :align: center
 
@@ -135,7 +135,7 @@ The page also provides widgets about upcoming events and a scoreboard showing po
 
 Clicking on the 30 point purple link in the middle of the smart grid game takes the player to a page explaining that excursion.  Here is an example of that page:
 
-.. figure:: figs/guided-tour/excursion.png
+.. figure:: figs/guided-tour/guided-tour-excursion.png
    :width: 600 px
    :align: center
 
@@ -143,7 +143,7 @@ This page also provides social details (how many other students have signed up) 
 
 It also implements the "signup bonus" game mechanic. After clicking on the "I want to sign up" link, the page displays the following additional information to the player:
 
-.. figure:: figs/guided-tour/excursion-signup.png
+.. figure:: figs/guided-tour/guided-tour-excursion-signup.png
    :width: 600 px
    :align: center
 
@@ -152,7 +152,7 @@ Go Low
 
 The "Go Low" page provides the user interface to two "energy" games, as shown below:
 
-.. figure:: figs/guided-tour/go-low.png
+.. figure:: figs/guided-tour/guided-tour-go-low.png
    :width: 600 px
    :align: center
 
@@ -175,7 +175,7 @@ Drop Down
 
 The "Drop Down" page provides a user interface to a "water" game, as shown below:
 
-.. figure:: figs/guided-tour/drop-down.png
+.. figure:: figs/guided-tour/guided-tour-drop-down.png
    :width: 600 px
    :align: center
 
@@ -190,7 +190,7 @@ News
 
 The "News" page provides information about the state of the challenge and the team of which this player is a member:
 
-.. figure:: figs/guided-tour/news.png
+.. figure:: figs/guided-tour/guided-tour-news.png
    :width: 600 px
    :align: center
 
@@ -201,7 +201,7 @@ Prizes
 
 The "Prizes" page provides access to two games:  the "Top Scorer" game and the "Raffle" game:
 
-.. figure:: figs/guided-tour/prizes.png
+.. figure:: figs/guided-tour/guided-tour-prizes.png
    :width: 600 px
    :align: center
 
@@ -217,7 +217,7 @@ Profile
 
 The "Profile" page provides access to profile information for this player:
 
-.. figure:: figs/guided-tour/profile.png
+.. figure:: figs/guided-tour/guided-tour-profile.png
    :width: 600 px
    :align: center
 
@@ -225,13 +225,13 @@ The user can set their display name, their picture, and how they wish to be cont
 
 The profile page also allows them to change the theme associated with the site.   A variety of themes are available. In this configuration, the default theme is "Forest", but the user can go to the Profile page to set a different them for their own use.  For example, here is the "Wave" theme:
 
-.. figure:: figs/guided-tour/profile-wave.png
+.. figure:: figs/guided-tour/guided-tour-profile-wave.png
    :width: 600 px
    :align: center
 
 And here is the "Space" theme:
 
-.. figure:: figs/guided-tour/profile-space.png
+.. figure:: figs/guided-tour/guided-tour-profile-space.png
    :width: 600 px
    :align: center
 
@@ -240,7 +240,7 @@ Help
 
 The final page available to players is the Help page, which simply provides access to explanatory material about the system:
 
-.. figure:: figs/guided-tour/help.png
+.. figure:: figs/guided-tour/guided-tour-help.png
    :width: 600 px
    :align: center
 
@@ -249,7 +249,7 @@ Status (Admin only)
 
 Administrators have access to special pages.  One of these is called the "Status" page, which displays a large number of different widgets with various kinds of information about the state of an ongoing challenge. Here is a screenshot of part of the Status page (with the "Bumblebee" theme enabled):
 
-.. figure:: figs/guided-tour/status.png
+.. figure:: figs/guided-tour/guided-tour-status.png
    :width: 600 px
    :align: center
 
@@ -260,7 +260,7 @@ Settings (Admin only)
 
 The final page to be shown in this guided tour is the settings page, which is also restricted to Administrators:
 
-.. figure:: figs/guided-tour/settings.png
+.. figure:: figs/guided-tour/guided-tour-settings.png
    :width: 600 px
    :align: center
 

@@ -16,6 +16,13 @@ now running.
 Logging in as admin
 -------------------
 
+To login as an administrator, go to the internal (Django) login page at: http://127.0.0.1/account/login:
+
+.. figure:: figs/configuration/configuration-account-login.png
+   :width: 600 px
+   :align: center
+
+
 
 
 
