@@ -19,9 +19,10 @@ class Migration(SchemaMigration):
         # Adding model 'Team'
         db.create_table('team_mgr_team', (
             ('id', self.gf('django.db.models.fields.AutoField')(primary_key=True)),
+            ('group', self.gf('django.db.models.fields.related.ForeignKey')(to=orm['team_mgr.Group'])),
             ('name', self.gf('django.db.models.fields.CharField')(max_length=50)),
             ('slug', self.gf('django.db.models.fields.SlugField')(max_length=50, null=True, db_index=True)),
-            ('group', self.gf('django.db.models.fields.related.ForeignKey')(to=orm['team_mgr.Group'])),
+            ('logo', self.gf('django.db.models.fields.files.ImageField')(max_length=1024, null=True, blank=True)),
         ))
         db.send_create_signal('team_mgr', ['Team'])
 
@@ -36,15 +37,14 @@ class Migration(SchemaMigration):
         ))
         db.send_create_signal('team_mgr', ['Post'])
 
-        # Adding model 'PostComment'
-        db.create_table('team_mgr_postcomment', (
+        # Adding model 'CanopyPost'
+        db.create_table('team_mgr_canopypost', (
             ('id', self.gf('django.db.models.fields.AutoField')(primary_key=True)),
             ('user', self.gf('django.db.models.fields.related.ForeignKey')(to=orm['auth.User'])),
-            ('post', self.gf('django.db.models.fields.related.ForeignKey')(to=orm['team_mgr.Post'])),
             ('text', self.gf('django.db.models.fields.TextField')()),
             ('created_at', self.gf('django.db.models.fields.DateTimeField')(auto_now_add=True, blank=True)),
         ))
-        db.send_create_signal('team_mgr', ['PostComment'])
+        db.send_create_signal('team_mgr', ['CanopyPost'])
 
 
     def backwards(self, orm):
@@ -58,8 +58,8 @@ class Migration(SchemaMigration):
         # Deleting model 'Post'
         db.delete_table('team_mgr_post')
 
-        # Deleting model 'PostComment'
-        db.delete_table('team_mgr_postcomment')
+        # Deleting model 'CanopyPost'
+        db.delete_table('team_mgr_canopypost')
 
 
     models = {
@@ -78,7 +78,7 @@ class Migration(SchemaMigration):
         },
         'auth.user': {
             'Meta': {'object_name': 'User'},
-            'date_joined': ('django.db.models.fields.DateTimeField', [], {'default': 'datetime.datetime(2012, 4, 21, 1, 18, 34, 626557)'}),
+            'date_joined': ('django.db.models.fields.DateTimeField', [], {'default': 'datetime.datetime(2012, 6, 8, 0, 43, 25, 821564)'}),
             'email': ('django.db.models.fields.EmailField', [], {'max_length': '75', 'blank': 'True'}),
             'first_name': ('django.db.models.fields.CharField', [], {'max_length': '30', 'blank': 'True'}),
             'groups': ('django.db.models.fields.related.ManyToManyField', [], {'to': "orm['auth.Group']", 'symmetrical': 'False', 'blank': 'True'}),
@@ -86,7 +86,7 @@ class Migration(SchemaMigration):
             'is_active': ('django.db.models.fields.BooleanField', [], {'default': 'True'}),
             'is_staff': ('django.db.models.fields.BooleanField', [], {'default': 'False'}),
             'is_superuser': ('django.db.models.fields.BooleanField', [], {'default': 'False'}),
-            'last_login': ('django.db.models.fields.DateTimeField', [], {'default': 'datetime.datetime(2012, 4, 21, 1, 18, 34, 626352)'}),
+            'last_login': ('django.db.models.fields.DateTimeField', [], {'default': 'datetime.datetime(2012, 6, 8, 0, 43, 25, 821376)'}),
             'last_name': ('django.db.models.fields.CharField', [], {'max_length': '30', 'blank': 'True'}),
             'password': ('django.db.models.fields.CharField', [], {'max_length': '128'}),
             'user_permissions': ('django.db.models.fields.related.ManyToManyField', [], {'to': "orm['auth.Permission']", 'symmetrical': 'False', 'blank': 'True'}),
@@ -98,6 +98,13 @@ class Migration(SchemaMigration):
             'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
             'model': ('django.db.models.fields.CharField', [], {'max_length': '100'}),
             'name': ('django.db.models.fields.CharField', [], {'max_length': '100'})
+        },
+        'team_mgr.canopypost': {
+            'Meta': {'object_name': 'CanopyPost'},
+            'created_at': ('django.db.models.fields.DateTimeField', [], {'auto_now_add': 'True', 'blank': 'True'}),
+            'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
+            'text': ('django.db.models.fields.TextField', [], {}),
+            'user': ('django.db.models.fields.related.ForeignKey', [], {'to': "orm['auth.User']"})
         },
         'team_mgr.group': {
             'Meta': {'object_name': 'Group'},
@@ -114,18 +121,11 @@ class Migration(SchemaMigration):
             'text': ('django.db.models.fields.TextField', [], {}),
             'user': ('django.db.models.fields.related.ForeignKey', [], {'to': "orm['auth.User']"})
         },
-        'team_mgr.postcomment': {
-            'Meta': {'object_name': 'PostComment'},
-            'created_at': ('django.db.models.fields.DateTimeField', [], {'auto_now_add': 'True', 'blank': 'True'}),
-            'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
-            'post': ('django.db.models.fields.related.ForeignKey', [], {'to': "orm['team_mgr.Post']"}),
-            'text': ('django.db.models.fields.TextField', [], {}),
-            'user': ('django.db.models.fields.related.ForeignKey', [], {'to': "orm['auth.User']"})
-        },
         'team_mgr.team': {
             'Meta': {'object_name': 'Team'},
             'group': ('django.db.models.fields.related.ForeignKey', [], {'to': "orm['team_mgr.Group']"}),
             'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
+            'logo': ('django.db.models.fields.files.ImageField', [], {'max_length': '1024', 'null': 'True', 'blank': 'True'}),
             'name': ('django.db.models.fields.CharField', [], {'max_length': '50'}),
             'slug': ('django.db.models.fields.SlugField', [], {'max_length': '50', 'null': 'True', 'db_index': 'True'})
         }

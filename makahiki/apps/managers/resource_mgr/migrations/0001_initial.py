@@ -141,6 +141,7 @@ class Migration(SchemaMigration):
             'Meta': {'object_name': 'Team'},
             'group': ('django.db.models.fields.related.ForeignKey', [], {'to': "orm['team_mgr.Group']"}),
             'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
+            'logo': ('django.db.models.fields.files.ImageField', [], {'max_length': '1024', 'null': 'True', 'blank': 'True'}),
             'name': ('django.db.models.fields.CharField', [], {'max_length': '50'}),
             'slug': ('django.db.models.fields.SlugField', [], {'max_length': '50', 'null': 'True', 'db_index': 'True'})
         }

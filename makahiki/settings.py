@@ -125,7 +125,6 @@ INSTALLED_APPS = (
 
     # 3rd party libraries
     'apps.lib.django_cas',
-    'apps.lib.brabeion',
     'apps.lib.facebook_api',
     'apps.lib.avatar',
 
@@ -226,6 +225,7 @@ ADMIN_APPS = (
                    {"name": "Action members", "url": "smartgrid/actionmember"})),
     ("Prize", ({"name": "Challenge Prizes", "url": "prizes/prize"},
                    {"name": "Raffle Prizes", "url": "raffle/raffleprize"})),
+    ("Badge", ({"name": "Badges", "url": "badges/badge"},)),
     ("Misc", ({"name": "Helps", "url": "help/helptopic"},
                    {"name": "Quests", "url": "quests/quest"},
                    {"name": "Makahiki logs", "url": "log_mgr/makahikilog"})),

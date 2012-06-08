@@ -11,7 +11,7 @@ Sets up test data given the specified <command>.  Possible commands are:
   * resource_goalsettings
   * all
 
-If 'all', the number of users per team is set to 5."""
+If 'all', the number of users per team is set to 2."""
 
 import datetime
 from django.contrib.auth.models import User
@@ -23,6 +23,9 @@ from apps.managers.team_mgr.models import Team
 from apps.widgets.resource_goal.models import EnergyGoalSetting, EnergyBaselineHourly, \
     EnergyBaselineDaily, WaterGoalSetting, WaterBaselineDaily, WaterGoal, EnergyGoal
 from apps.widgets.smartgrid.models import Event
+
+
+DEFAULT_TESTUSER_COUNT = 2
 
 
 class Command(MakahikiBaseCommand):
@@ -68,7 +71,7 @@ class Command(MakahikiBaseCommand):
             self.setup_resource_goalsettings()
         elif operation == 'all':
             self.delete_users()
-            self.create_users(5)
+            self.create_users(DEFAULT_TESTUSER_COUNT)
             self.setup_rounds()
             self.setup_event_dates()
             self.setup_resource_usages()

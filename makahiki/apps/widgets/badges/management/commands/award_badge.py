@@ -5,18 +5,20 @@ Awards the badge (identified by its slug) to the user (identified by user name).
 from django.core import management
 from django.contrib.auth.models import User
 import sys
-from apps.lib.brabeion import badges
+from apps.widgets.badges import badges
 
 
 def award_badge(slug, username):
     """award the badge"""
     try:
         user = User.objects.get(username=username)
-        badges.possibly_award_badge(slug, user=user)
+        badge = badges.get_badge(slug)
+        if badge:
+            badges.award_badge(user=user, badge=badge)
+        else:
+            sys.stderr.write("Badge with the slug %s does not exist.\n" % slug)
     except User.DoesNotExist:
         sys.stderr.write("User with the username %s does not exist.\n" % username)
-    except KeyError:
-        sys.stderr.write("Badge with the slug %s does not exist.\n" % slug)
 
 
 class Command(management.base.BaseCommand):

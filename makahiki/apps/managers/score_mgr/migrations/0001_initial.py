@@ -13,6 +13,7 @@ class Migration(SchemaMigration):
             ('id', self.gf('django.db.models.fields.AutoField')(primary_key=True)),
             ('setup_points', self.gf('django.db.models.fields.IntegerField')(default=5)),
             ('referral_bonus_points', self.gf('django.db.models.fields.IntegerField')(default=10)),
+            ('active_threshold_points', self.gf('django.db.models.fields.IntegerField')(default=50)),
             ('signup_bonus_points', self.gf('django.db.models.fields.IntegerField')(default=2)),
             ('quest_bonus_points', self.gf('django.db.models.fields.IntegerField')(default=0)),
             ('noshow_penalty_points', self.gf('django.db.models.fields.IntegerField')(default=4)),
@@ -44,9 +45,15 @@ class Migration(SchemaMigration):
         ))
         db.send_create_signal('score_mgr', ['PointsTransaction'])
 
+        # Adding unique constraint on 'PointsTransaction', fields ['user', 'transaction_date', 'message']
+        db.create_unique('score_mgr_pointstransaction', ['user_id', 'transaction_date', 'message'])
+
 
     def backwards(self, orm):
         
+        # Removing unique constraint on 'PointsTransaction', fields ['user', 'transaction_date', 'message']
+        db.delete_unique('score_mgr_pointstransaction', ['user_id', 'transaction_date', 'message'])
+
         # Removing unique constraint on 'ScoreboardEntry', fields ['profile', 'round_name']
         db.delete_unique('score_mgr_scoreboardentry', ['profile_id', 'round_name'])
 
@@ -76,7 +83,7 @@ class Migration(SchemaMigration):
         },
         'auth.user': {
             'Meta': {'object_name': 'User'},
-            'date_joined': ('django.db.models.fields.DateTimeField', [], {'default': 'datetime.datetime(2012, 4, 21, 1, 18, 26, 510112)'}),
+            'date_joined': ('django.db.models.fields.DateTimeField', [], {'default': 'datetime.datetime(2012, 6, 8, 0, 43, 18, 449372)'}),
             'email': ('django.db.models.fields.EmailField', [], {'max_length': '75', 'blank': 'True'}),
             'first_name': ('django.db.models.fields.CharField', [], {'max_length': '30', 'blank': 'True'}),
             'groups': ('django.db.models.fields.related.ManyToManyField', [], {'to': "orm['auth.Group']", 'symmetrical': 'False', 'blank': 'True'}),
@@ -84,7 +91,7 @@ class Migration(SchemaMigration):
             'is_active': ('django.db.models.fields.BooleanField', [], {'default': 'True'}),
             'is_staff': ('django.db.models.fields.BooleanField', [], {'default': 'False'}),
             'is_superuser': ('django.db.models.fields.BooleanField', [], {'default': 'False'}),
-            'last_login': ('django.db.models.fields.DateTimeField', [], {'default': 'datetime.datetime(2012, 4, 21, 1, 18, 26, 509936)'}),
+            'last_login': ('django.db.models.fields.DateTimeField', [], {'default': 'datetime.datetime(2012, 6, 8, 0, 43, 18, 449194)'}),
             'last_name': ('django.db.models.fields.CharField', [], {'max_length': '30', 'blank': 'True'}),
             'password': ('django.db.models.fields.CharField', [], {'max_length': '128'}),
             'user_permissions': ('django.db.models.fields.related.ManyToManyField', [], {'to': "orm['auth.Permission']", 'symmetrical': 'False', 'blank': 'True'}),
@@ -114,10 +121,11 @@ class Migration(SchemaMigration):
             'setup_complete': ('django.db.models.fields.BooleanField', [], {'default': 'False'}),
             'setup_profile': ('django.db.models.fields.BooleanField', [], {'default': 'False'}),
             'team': ('django.db.models.fields.related.ForeignKey', [], {'to': "orm['team_mgr.Team']", 'null': 'True', 'blank': 'True'}),
+            'theme': ('django.db.models.fields.CharField', [], {'max_length': '50', 'null': 'True', 'blank': 'True'}),
             'user': ('django.db.models.fields.related.ForeignKey', [], {'related_name': "'profile'", 'unique': 'True', 'to': "orm['auth.User']"})
         },
         'score_mgr.pointstransaction': {
-            'Meta': {'object_name': 'PointsTransaction'},
+            'Meta': {'ordering': "('-transaction_date',)", 'unique_together': "(('user', 'transaction_date', 'message'),)", 'object_name': 'PointsTransaction'},
             'content_type': ('django.db.models.fields.related.ForeignKey', [], {'to': "orm['contenttypes.ContentType']", 'null': 'True'}),
             'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
             'message': ('django.db.models.fields.CharField', [], {'max_length': '255'}),
@@ -136,6 +144,7 @@ class Migration(SchemaMigration):
         },
         'score_mgr.scoresettings': {
             'Meta': {'object_name': 'ScoreSettings'},
+            'active_threshold_points': ('django.db.models.fields.IntegerField', [], {'default': '50'}),
             'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
             'noshow_penalty_points': ('django.db.models.fields.IntegerField', [], {'default': '4'}),
             'quest_bonus_points': ('django.db.models.fields.IntegerField', [], {'default': '0'}),
@@ -153,6 +162,7 @@ class Migration(SchemaMigration):
             'Meta': {'object_name': 'Team'},
             'group': ('django.db.models.fields.related.ForeignKey', [], {'to': "orm['team_mgr.Group']"}),
             'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
+            'logo': ('django.db.models.fields.files.ImageField', [], {'max_length': '1024', 'null': 'True', 'blank': 'True'}),
             'name': ('django.db.models.fields.CharField', [], {'max_length': '50'}),
             'slug': ('django.db.models.fields.SlugField', [], {'max_length': '50', 'null': 'True', 'db_index': 'True'})
         }

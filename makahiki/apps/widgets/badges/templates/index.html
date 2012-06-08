@@ -16,12 +16,12 @@
               Achievement
           </th>
       </tr>
-      {% if user.badges_earned.count > 0 %}
-          {% for awarded in user.badges_earned.all %}
+      {% if user.badgeaward_set.count > 0 %}
+          {% for awarded in user.badgeaward_set.all %}
               <tr>
-                  <td><img src="{{STATIC_URL}}{{awarded.badge.image}}"/></td>
+                  <td><img src="{{MEDIA_URL}}{{awarded.badge.image}}"/></td>
                   <td>{{ awarded.badge.name }}</td>
-                  <td>{{ awarded.badge.description.0 }}</td>
+                  <td>{{ awarded.badge.description }}</td>
               </tr>
           {% endfor %}
       {% else %}

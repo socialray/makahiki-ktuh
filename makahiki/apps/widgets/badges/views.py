@@ -4,9 +4,9 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
 from django.shortcuts import render_to_response
 from django.template.context import RequestContext
-from apps.lib.brabeion.models import BadgeAward
-from apps.lib.brabeion import badges
-from apps.widgets.badges import user_badges
+from apps.utils import utils
+from apps.widgets.badges import badges
+from apps.widgets.badges.models import Badge, BadgeAward
 
 
 def supply(request, page_name):
@@ -29,13 +29,10 @@ def award_badges(user):
     which means the awarding part needs to be in the middleware for every page.
     """
 
-    badges_slug = user_badges.DailyVisitorBadge.slug
-    if user.badges_earned.filter(slug=badges_slug).count() == 0:
-        badges.possibly_award_badge(badges_slug, user=user)
-
-    badges_slug = user_badges.FullyCommittedBadge.slug
-    if user.badges_earned.filter(slug=badges_slug).count() == 0:
-        badges.possibly_award_badge(badges_slug, user=user)
+    for badge in Badge.objects.all():
+        if not BadgeAward.objects.filter(badge=badge) and \
+           utils.eval_predicates(badge.award_condition, user):
+            badges.award_badge(user=user, badge=badge)
 
 
 @login_required
@@ -51,24 +48,26 @@ def badge_catalog(request):
 
 def get_badge_catalog(request):
     """Returns the badge catalog."""
-    awarded_badges = [earned.badge for earned in request.user.badges_earned.all()]
-    registry = badges.get_registry().copy()
-    # Remove badges that are already earned
-    for badge in awarded_badges:
-        registry.pop(badge.slug)
 
-    locked_badges = registry.values()
+    user = request.user
+    awarded_badges = []
+    locked_badges = []
+
+    for awarded in user.badgeaward_set.all():
+        awarded_badges.append(awarded.badge)
+
+    for badge in Badge.objects.all():
+        if not badge in awarded_badges:
+            locked_badges.append(badge)
 
     # For each badge, get the number of people who have the badge.
     team = request.user.get_profile().team
     for badge in awarded_badges:
-        badge.total_users = BadgeAward.objects.filter(slug=badge.slug).count()
-        badge.team_users = User.objects.filter(badges_earned__slug=badge.slug,
-            profile__team=team)
+        badge.total_users = BadgeAward.objects.filter(badge=badge).count()
+        badge.team_users = User.objects.filter(badgeaward__badge=badge, profile__team=team)
     for badge in locked_badges:
-        badge.total_users = BadgeAward.objects.filter(slug=badge.slug).count()
-        badge.team_users = User.objects.filter(badges_earned__slug=badge.slug,
-            profile__team=team)
+        badge.total_users = BadgeAward.objects.filter(badge=badge).count()
+        badge.team_users = User.objects.filter(badgeaward__badge=badge, profile__team=team)
 
     return {
         "awarded_badges": awarded_badges,

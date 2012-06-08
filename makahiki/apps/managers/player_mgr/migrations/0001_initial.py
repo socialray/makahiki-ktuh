@@ -16,6 +16,7 @@ class Migration(SchemaMigration):
             ('first_name', self.gf('django.db.models.fields.CharField')(max_length=50, null=True, blank=True)),
             ('last_name', self.gf('django.db.models.fields.CharField')(max_length=50, null=True, blank=True)),
             ('team', self.gf('django.db.models.fields.related.ForeignKey')(to=orm['team_mgr.Team'], null=True, blank=True)),
+            ('theme', self.gf('django.db.models.fields.CharField')(max_length=50, null=True, blank=True)),
             ('contact_email', self.gf('django.db.models.fields.EmailField')(max_length=75, null=True, blank=True)),
             ('contact_text', self.gf('django.contrib.localflavor.us.models.PhoneNumberField')(max_length=20, null=True, blank=True)),
             ('contact_carrier', self.gf('django.db.models.fields.CharField')(max_length=50, null=True, blank=True)),
@@ -52,7 +53,7 @@ class Migration(SchemaMigration):
         },
         'auth.user': {
             'Meta': {'object_name': 'User'},
-            'date_joined': ('django.db.models.fields.DateTimeField', [], {'default': 'datetime.datetime(2012, 4, 21, 1, 17, 59, 153006)'}),
+            'date_joined': ('django.db.models.fields.DateTimeField', [], {'default': 'datetime.datetime(2012, 6, 8, 0, 43, 1, 377509)'}),
             'email': ('django.db.models.fields.EmailField', [], {'max_length': '75', 'blank': 'True'}),
             'first_name': ('django.db.models.fields.CharField', [], {'max_length': '30', 'blank': 'True'}),
             'groups': ('django.db.models.fields.related.ManyToManyField', [], {'to': "orm['auth.Group']", 'symmetrical': 'False', 'blank': 'True'}),
@@ -60,7 +61,7 @@ class Migration(SchemaMigration):
             'is_active': ('django.db.models.fields.BooleanField', [], {'default': 'True'}),
             'is_staff': ('django.db.models.fields.BooleanField', [], {'default': 'False'}),
             'is_superuser': ('django.db.models.fields.BooleanField', [], {'default': 'False'}),
-            'last_login': ('django.db.models.fields.DateTimeField', [], {'default': 'datetime.datetime(2012, 4, 21, 1, 17, 59, 152831)'}),
+            'last_login': ('django.db.models.fields.DateTimeField', [], {'default': 'datetime.datetime(2012, 6, 8, 0, 43, 1, 377331)'}),
             'last_name': ('django.db.models.fields.CharField', [], {'max_length': '30', 'blank': 'True'}),
             'password': ('django.db.models.fields.CharField', [], {'max_length': '128'}),
             'user_permissions': ('django.db.models.fields.related.ManyToManyField', [], {'to': "orm['auth.Permission']", 'symmetrical': 'False', 'blank': 'True'}),
@@ -90,6 +91,7 @@ class Migration(SchemaMigration):
             'setup_complete': ('django.db.models.fields.BooleanField', [], {'default': 'False'}),
             'setup_profile': ('django.db.models.fields.BooleanField', [], {'default': 'False'}),
             'team': ('django.db.models.fields.related.ForeignKey', [], {'to': "orm['team_mgr.Team']", 'null': 'True', 'blank': 'True'}),
+            'theme': ('django.db.models.fields.CharField', [], {'max_length': '50', 'null': 'True', 'blank': 'True'}),
             'user': ('django.db.models.fields.related.ForeignKey', [], {'related_name': "'profile'", 'unique': 'True', 'to': "orm['auth.User']"})
         },
         'team_mgr.group': {
@@ -102,6 +104,7 @@ class Migration(SchemaMigration):
             'Meta': {'object_name': 'Team'},
             'group': ('django.db.models.fields.related.ForeignKey', [], {'to': "orm['team_mgr.Group']"}),
             'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
+            'logo': ('django.db.models.fields.files.ImageField', [], {'max_length': '1024', 'null': 'True', 'blank': 'True'}),
             'name': ('django.db.models.fields.CharField', [], {'max_length': '50'}),
             'slug': ('django.db.models.fields.SlugField', [], {'max_length': '50', 'null': 'True', 'db_index': 'True'})
         }

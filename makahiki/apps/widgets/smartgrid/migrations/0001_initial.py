@@ -8,11 +8,22 @@ class Migration(SchemaMigration):
 
     def forwards(self, orm):
         
+        # Adding model 'Level'
+        db.create_table('smartgrid_level', (
+            ('id', self.gf('django.db.models.fields.AutoField')(primary_key=True)),
+            ('name', self.gf('django.db.models.fields.CharField')(max_length=50)),
+            ('priority', self.gf('django.db.models.fields.IntegerField')(default=1)),
+            ('unlock_condition', self.gf('django.db.models.fields.CharField')(max_length=400, null=True, blank=True)),
+            ('unlock_condition_text', self.gf('django.db.models.fields.CharField')(max_length=400, null=True, blank=True)),
+        ))
+        db.send_create_signal('smartgrid', ['Level'])
+
         # Adding model 'Category'
         db.create_table('smartgrid_category', (
             ('id', self.gf('django.db.models.fields.AutoField')(primary_key=True)),
             ('name', self.gf('django.db.models.fields.CharField')(max_length=255)),
             ('slug', self.gf('django.db.models.fields.SlugField')(max_length=50, null=True, db_index=True)),
+            ('priority', self.gf('django.db.models.fields.IntegerField')(default=1)),
         ))
         db.send_create_signal('smartgrid', ['Category'])
 
@@ -49,11 +60,16 @@ class Migration(SchemaMigration):
             ('name', self.gf('django.db.models.fields.CharField')(max_length=20)),
             ('slug', self.gf('django.db.models.fields.SlugField')(max_length=50, db_index=True)),
             ('title', self.gf('django.db.models.fields.CharField')(max_length=200)),
+            ('image', self.gf('django.db.models.fields.files.ImageField')(max_length=255, null=True, blank=True)),
+            ('video_id', self.gf('django.db.models.fields.CharField')(max_length=200, null=True, blank=True)),
+            ('video_source', self.gf('django.db.models.fields.CharField')(max_length=20, null=True, blank=True)),
+            ('embedded_widget', self.gf('django.db.models.fields.CharField')(max_length=50, null=True, blank=True)),
             ('description', self.gf('django.db.models.fields.TextField')()),
             ('type', self.gf('django.db.models.fields.CharField')(max_length=20)),
+            ('level', self.gf('django.db.models.fields.related.ForeignKey')(to=orm['smartgrid.Level'], null=True, blank=True)),
             ('category', self.gf('django.db.models.fields.related.ForeignKey')(to=orm['smartgrid.Category'], null=True, blank=True)),
             ('priority', self.gf('django.db.models.fields.IntegerField')(default=1000)),
-            ('pub_date', self.gf('django.db.models.fields.DateField')(default=datetime.date(2012, 4, 21))),
+            ('pub_date', self.gf('django.db.models.fields.DateField')(default=datetime.date(2012, 6, 8))),
             ('expire_date', self.gf('django.db.models.fields.DateField')(null=True, blank=True)),
             ('unlock_condition', self.gf('django.db.models.fields.CharField')(max_length=400, null=True, blank=True)),
             ('unlock_condition_text', self.gf('django.db.models.fields.CharField')(max_length=400, null=True, blank=True)),
@@ -98,6 +114,7 @@ class Migration(SchemaMigration):
             ('id', self.gf('django.db.models.fields.AutoField')(primary_key=True)),
             ('user', self.gf('django.db.models.fields.related.ForeignKey')(to=orm['auth.User'])),
             ('action', self.gf('django.db.models.fields.related.ForeignKey')(to=orm['smartgrid.Action'])),
+            ('question', self.gf('django.db.models.fields.related.ForeignKey')(to=orm['smartgrid.TextPromptQuestion'], null=True, blank=True)),
             ('submission_date', self.gf('django.db.models.fields.DateTimeField')()),
             ('completion_date', self.gf('django.db.models.fields.DateField')(null=True, blank=True)),
             ('award_date', self.gf('django.db.models.fields.DateTimeField')(null=True, blank=True)),
@@ -163,6 +180,9 @@ class Migration(SchemaMigration):
         # Removing unique constraint on 'ActionMember', fields ['user', 'action', 'submission_date']
         db.delete_unique('smartgrid_actionmember', ['user_id', 'action_id', 'submission_date'])
 
+        # Deleting model 'Level'
+        db.delete_table('smartgrid_level')
+
         # Deleting model 'Category'
         db.delete_table('smartgrid_category')
 
@@ -213,7 +233,7 @@ class Migration(SchemaMigration):
         },
         'auth.user': {
             'Meta': {'object_name': 'User'},
-            'date_joined': ('django.db.models.fields.DateTimeField', [], {'default': 'datetime.datetime(2012, 4, 21, 1, 20, 23, 513168)'}),
+            'date_joined': ('django.db.models.fields.DateTimeField', [], {'default': 'datetime.datetime(2012, 6, 8, 0, 44, 51, 736311)'}),
             'email': ('django.db.models.fields.EmailField', [], {'max_length': '75', 'blank': 'True'}),
             'first_name': ('django.db.models.fields.CharField', [], {'max_length': '30', 'blank': 'True'}),
             'groups': ('django.db.models.fields.related.ManyToManyField', [], {'to': "orm['auth.Group']", 'symmetrical': 'False', 'blank': 'True'}),
@@ -221,7 +241,7 @@ class Migration(SchemaMigration):
             'is_active': ('django.db.models.fields.BooleanField', [], {'default': 'True'}),
             'is_staff': ('django.db.models.fields.BooleanField', [], {'default': 'False'}),
             'is_superuser': ('django.db.models.fields.BooleanField', [], {'default': 'False'}),
-            'last_login': ('django.db.models.fields.DateTimeField', [], {'default': 'datetime.datetime(2012, 4, 21, 1, 20, 23, 512986)'}),
+            'last_login': ('django.db.models.fields.DateTimeField', [], {'default': 'datetime.datetime(2012, 6, 8, 0, 44, 51, 736127)'}),
             'last_name': ('django.db.models.fields.CharField', [], {'max_length': '30', 'blank': 'True'}),
             'password': ('django.db.models.fields.CharField', [], {'max_length': '128'}),
             'user_permissions': ('django.db.models.fields.related.ManyToManyField', [], {'to': "orm['auth.Permission']", 'symmetrical': 'False', 'blank': 'True'}),
@@ -248,7 +268,7 @@ class Migration(SchemaMigration):
             'updated_at': ('django.db.models.fields.DateTimeField', [], {'auto_now': 'True', 'blank': 'True'})
         },
         'score_mgr.pointstransaction': {
-            'Meta': {'object_name': 'PointsTransaction'},
+            'Meta': {'ordering': "('-transaction_date',)", 'unique_together': "(('user', 'transaction_date', 'message'),)", 'object_name': 'PointsTransaction'},
             'content_type': ('django.db.models.fields.related.ForeignKey', [], {'to': "orm['contenttypes.ContentType']", 'null': 'True'}),
             'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
             'message': ('django.db.models.fields.CharField', [], {'max_length': '255'}),
@@ -260,23 +280,28 @@ class Migration(SchemaMigration):
         'smartgrid.action': {
             'Meta': {'object_name': 'Action'},
             'category': ('django.db.models.fields.related.ForeignKey', [], {'to': "orm['smartgrid.Category']", 'null': 'True', 'blank': 'True'}),
-            'unlock_condition': ('django.db.models.fields.CharField', [], {'max_length': '400', 'null': 'True', 'blank': 'True'}),
-            'unlock_condition_text': ('django.db.models.fields.CharField', [], {'max_length': '400', 'null': 'True', 'blank': 'True'}),
             'description': ('django.db.models.fields.TextField', [], {}),
+            'embedded_widget': ('django.db.models.fields.CharField', [], {'max_length': '50', 'null': 'True', 'blank': 'True'}),
             'expire_date': ('django.db.models.fields.DateField', [], {'null': 'True', 'blank': 'True'}),
             'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
+            'image': ('django.db.models.fields.files.ImageField', [], {'max_length': '255', 'null': 'True', 'blank': 'True'}),
             'is_canopy': ('django.db.models.fields.BooleanField', [], {'default': 'False'}),
             'is_group': ('django.db.models.fields.BooleanField', [], {'default': 'False'}),
+            'level': ('django.db.models.fields.related.ForeignKey', [], {'to': "orm['smartgrid.Level']", 'null': 'True', 'blank': 'True'}),
             'name': ('django.db.models.fields.CharField', [], {'max_length': '20'}),
             'point_value': ('django.db.models.fields.IntegerField', [], {'default': '0'}),
             'priority': ('django.db.models.fields.IntegerField', [], {'default': '1000'}),
-            'pub_date': ('django.db.models.fields.DateField', [], {'default': 'datetime.date(2012, 4, 21)'}),
+            'pub_date': ('django.db.models.fields.DateField', [], {'default': 'datetime.date(2012, 6, 8)'}),
             'related_resource': ('django.db.models.fields.CharField', [], {'max_length': '20', 'null': 'True', 'blank': 'True'}),
             'slug': ('django.db.models.fields.SlugField', [], {'max_length': '50', 'db_index': 'True'}),
             'social_bonus': ('django.db.models.fields.IntegerField', [], {'default': '0'}),
             'title': ('django.db.models.fields.CharField', [], {'max_length': '200'}),
             'type': ('django.db.models.fields.CharField', [], {'max_length': '20'}),
-            'users': ('django.db.models.fields.related.ManyToManyField', [], {'to': "orm['auth.User']", 'through': "orm['smartgrid.ActionMember']", 'symmetrical': 'False'})
+            'unlock_condition': ('django.db.models.fields.CharField', [], {'max_length': '400', 'null': 'True', 'blank': 'True'}),
+            'unlock_condition_text': ('django.db.models.fields.CharField', [], {'max_length': '400', 'null': 'True', 'blank': 'True'}),
+            'users': ('django.db.models.fields.related.ManyToManyField', [], {'to': "orm['auth.User']", 'through': "orm['smartgrid.ActionMember']", 'symmetrical': 'False'}),
+            'video_id': ('django.db.models.fields.CharField', [], {'max_length': '200', 'null': 'True', 'blank': 'True'}),
+            'video_source': ('django.db.models.fields.CharField', [], {'max_length': '20', 'null': 'True', 'blank': 'True'})
         },
         'smartgrid.actionmember': {
             'Meta': {'unique_together': "(('user', 'action', 'submission_date'),)", 'object_name': 'ActionMember'},
@@ -290,6 +315,7 @@ class Migration(SchemaMigration):
             'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
             'image': ('django.db.models.fields.files.ImageField', [], {'max_length': '1024', 'blank': 'True'}),
             'points_awarded': ('django.db.models.fields.IntegerField', [], {'null': 'True', 'blank': 'True'}),
+            'question': ('django.db.models.fields.related.ForeignKey', [], {'to': "orm['smartgrid.TextPromptQuestion']", 'null': 'True', 'blank': 'True'}),
             'response': ('django.db.models.fields.TextField', [], {'blank': 'True'}),
             'social_bonus_awarded': ('django.db.models.fields.BooleanField', [], {'default': 'False'}),
             'social_email': ('django.db.models.fields.TextField', [], {'null': 'True', 'blank': 'True'}),
@@ -311,6 +337,7 @@ class Migration(SchemaMigration):
             'Meta': {'object_name': 'Category'},
             'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
             'name': ('django.db.models.fields.CharField', [], {'max_length': '255'}),
+            'priority': ('django.db.models.fields.IntegerField', [], {'default': '1'}),
             'slug': ('django.db.models.fields.SlugField', [], {'max_length': '50', 'null': 'True', 'db_index': 'True'})
         },
         'smartgrid.commitment': {
@@ -343,6 +370,14 @@ class Migration(SchemaMigration):
             'event_date': ('django.db.models.fields.DateTimeField', [], {'null': 'True', 'blank': 'True'}),
             'event_location': ('django.db.models.fields.CharField', [], {'max_length': '200', 'null': 'True', 'blank': 'True'}),
             'event_max_seat': ('django.db.models.fields.IntegerField', [], {'default': '1000'})
+        },
+        'smartgrid.level': {
+            'Meta': {'object_name': 'Level'},
+            'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
+            'name': ('django.db.models.fields.CharField', [], {'max_length': '50'}),
+            'priority': ('django.db.models.fields.IntegerField', [], {'default': '1'}),
+            'unlock_condition': ('django.db.models.fields.CharField', [], {'max_length': '400', 'null': 'True', 'blank': 'True'}),
+            'unlock_condition_text': ('django.db.models.fields.CharField', [], {'max_length': '400', 'null': 'True', 'blank': 'True'})
         },
         'smartgrid.questionchoice': {
             'Meta': {'object_name': 'QuestionChoice'},

@@ -1,0 +1,50 @@
+[
+    {
+        "pk": 1,
+        "model": "badges.badge",
+        "fields": {
+            "name": "Daily Visitor",
+            "award_condition": "daily_visit_count(3)",
+            "description": "Visited the site 3 days in a row.",
+            "hint": "Keep coming back!",
+            "slug": "daily-visitor",
+            "label": "3",
+            "image": "media/badges/Threepeater.gif"}
+    },
+    {
+        "pk": 2,
+        "model": "badges.badge",
+        "fields": {
+            "name": "Fully Committed",
+            "award_condition": "completed_some_of(5, action_type='commitment')",
+            "description": "Participating in 5 commitments at the same time.",
+            "hint": "How committed are you?",
+            "slug": "fully-committed",
+            "label": "Full",
+            "image": "media/badges/badge.gif"}
+    },
+    {
+        "pk": 3,
+        "model": "badges.badge",
+        "fields": {
+            "name": "Energy Savy",
+            "award_condition": "completed_some_of(resource='energy')",
+            "description": "Completed one energy related action.",
+            "hint": "check the energy related actions",
+            "slug": "energy-savy",
+            "label": "Energy",
+            "image": "media/badges/badge.gif"}
+    },
+    {
+        "pk": 4,
+        "model": "badges.badge",
+        "fields": {
+            "name": "Bug Hunter",
+            "award_condition": "False",
+            "description": "Filed a bug report.",
+            "hint": "Found a bug?  Let us know!",
+            "slug": "bug-hunter",
+            "label": "Hacker",
+            "image": "media/badges/badge.gif"}
+    }
+]

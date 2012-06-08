@@ -18,8 +18,8 @@ class Migration(SchemaMigration):
             ('request_method', self.gf('django.db.models.fields.CharField')(max_length=10, null=True, blank=True)),
             ('request_url', self.gf('django.db.models.fields.CharField')(max_length=1000, null=True, blank=True)),
             ('response_status', self.gf('django.db.models.fields.IntegerField')(null=True, blank=True)),
-            ('http_referer', self.gf('django.db.models.fields.TextField')(max_length=1000, null=True, blank=True)),
-            ('http_user_agent', self.gf('django.db.models.fields.TextField')(max_length=300, null=True, blank=True)),
+            ('http_referer', self.gf('django.db.models.fields.CharField')(max_length=1000, null=True, blank=True)),
+            ('http_user_agent', self.gf('django.db.models.fields.CharField')(max_length=300, null=True, blank=True)),
             ('post_content', self.gf('django.db.models.fields.TextField')(null=True, blank=True)),
         ))
         db.send_create_signal('log_mgr', ['MakahikiLog'])
@@ -33,9 +33,9 @@ class Migration(SchemaMigration):
 
     models = {
         'log_mgr.makahikilog': {
-            'Meta': {'object_name': 'MakahikiLog'},
-            'http_referer': ('django.db.models.fields.TextField', [], {'max_length': '1000', 'null': 'True', 'blank': 'True'}),
-            'http_user_agent': ('django.db.models.fields.TextField', [], {'max_length': '300', 'null': 'True', 'blank': 'True'}),
+            'Meta': {'ordering': "['-request_time']", 'object_name': 'MakahikiLog'},
+            'http_referer': ('django.db.models.fields.CharField', [], {'max_length': '1000', 'null': 'True', 'blank': 'True'}),
+            'http_user_agent': ('django.db.models.fields.CharField', [], {'max_length': '300', 'null': 'True', 'blank': 'True'}),
             'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
             'level': ('django.db.models.fields.CharField', [], {'max_length': '10', 'null': 'True', 'blank': 'True'}),
             'post_content': ('django.db.models.fields.TextField', [], {'null': 'True', 'blank': 'True'}),

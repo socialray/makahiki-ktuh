@@ -25,17 +25,19 @@
                     <th></th>
                 </tr>
 
-                {% for badge in view_objects.badges.awarded_badges %}
+                {% with awarded_badges=view_objects.badges.awarded_badges locked_badges=view_objects.badges.locked_badges %}
+                {% for badge in awarded_badges %}
                     <tr class="{% cycle '' 'alt-row' as cycle_class %}">
-                        {% include "catalog-item.html" %}
+                        {% include "catalog-item.html" with badge=badge awarded_badges=awarded_badges %}
                     </tr>
                 {% endfor %}
 
-                {% for badge in view_objects.badges.locked_badges %}
+                {% for badge in locked_badges %}
                     <tr class="{% cycle cycle_class %}">
-                        {% include "catalog-item.html" %}
+                        {% include "catalog-item.html" with badge=badge awarded_badges=awarded_badges %}
                     </tr>
                 {% endfor %}
+                {% endwith %}
             </table>
             <p class="centered">
               <a class="textlink" href="{% url profile_index %}">Back to profile</a>

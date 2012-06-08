@@ -1,1 +1,0 @@
-"""canopy member module."""

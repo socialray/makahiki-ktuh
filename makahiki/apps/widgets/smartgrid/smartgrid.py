@@ -74,7 +74,6 @@ def get_action_members(action):
     return ActionMember.objects.filter(action=action)
 
 
-
 def get_level_actions(user):
     """Return the level list with the action info in categories"""
     levels = cache_mgr.get_cache('smartgrid-levels-%s' % user.username)
@@ -184,11 +183,12 @@ def is_unlock(user, action):
         return eval_unlock(user, action)
 
     for level in levels:
-        for cat in level:
-            if cat.id == action.category_id:
-                for t in cat.task_list:
-                    if t.id == action.id:
-                        return t.is_unlock
+        if hasattr(level, "cat_list"):
+            for cat in level.cat_list:
+                if cat.id == action.category_id:
+                    for t in cat.task_list:
+                        if t.id == action.id:
+                            return t.is_unlock
 
     return False
 

@@ -2,6 +2,7 @@
 from django.contrib import admin
 from apps.managers.team_mgr.models import Group, Team, Post
 
+
 class GroupAdmin(admin.ModelAdmin):
     """Category Admin"""
     prepopulated_fields = {"slug": ("name",)}
