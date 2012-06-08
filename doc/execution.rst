@@ -1,3 +1,5 @@
+.. _section-execution:
+
 Running a challenge 
 ===================
 
