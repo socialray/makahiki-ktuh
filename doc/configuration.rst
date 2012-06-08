@@ -4,11 +4,22 @@
 Configuring Makahiki
 ====================
 
-.. note:: When completed, this chapter will discuss: (a) setting the branding, 
-          (b) setting the displayed pages and widgets; (c) setting the 
-          authentication strategy; (d) configuring individual games (like the 
-          DEGG baseline, the SGG contents, the raffle game prizes, the top-scorer
-          prizes); (e) specifying round dates; (f) loading the users.
+This section explains how to configure a freshly initialized instance of Makahiki.  It
+assumes you have completed the steps to install Makahiki either locally or globally 
+following the instructions in :ref:`section-installing-makahiki`, and that the server is
+now running.  
+
+.. note:: In this section, all URLs will refer to a locally running instance of Makahiki
+          (i.e. http://127.0.0.1:8000).  Please substitute the host and port number of
+          your instance when following the instructions below.
+
+Logging in as admin
+-------------------
+
+
+
+
+
 
 
 

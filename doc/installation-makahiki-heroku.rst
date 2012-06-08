@@ -41,14 +41,16 @@ following these two commands::
 
 Use an application name appropriate for your organization.
 
-Define a Makahiki admin account and password
------------------------------------------------
+Setup environment variables
+---------------------------
 
-Now tell Heroku the administrator account name and its password.  Choose a
-password that is not easily guessed and is different from that shown
-below. You can also choose a different admin account name if you wish::
+Makahiki requires several environment variables to be set.
+
+First, you need to define the admin account name and password.  For example:
 
   % heroku config:add MAKAHIKI_ADMIN_INFO=admin:Dog4Days56
+
+(Add instructions for other environment variables here.)
 
 Send the Makahiki system to Heroku
 -------------------------------------

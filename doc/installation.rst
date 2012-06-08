@@ -1,3 +1,6 @@
+.. _section-installing-makahiki:
+
+
 Installing Makahiki
 ===================
 
