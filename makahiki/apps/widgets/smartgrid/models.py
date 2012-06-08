@@ -461,6 +461,26 @@ class ActionMember(models.Model):
             # Check for any notifications and mark them as read.
             self.notifications.update(unread=False)
 
+            # Check for admin message and generate notification
+            if self.admin_comment:
+                # Construct the message to be sent.
+                message = "An admin made the following comment about your submission to "
+                message += "<a href='%s'>%s</a> %s:" % (
+                    reverse("activity_task", args=(self.action.type, self.action.slug,)),
+                    self.action.title,
+                    # The below is to tell the javascript to convert into a pretty date.
+                    # See the prettyDate function in media/js/makahiki.js
+                    "<span class='rejection-date' title='%s'></span>"
+                    % self.submission_date.isoformat(),
+                ) + "</br></br>" + self.admin_comment
+
+                UserNotification.create_info_notification(
+                    self.user,
+                    message,
+                    True,
+                    content_object=self
+                )
+
             if self.approval_status == u"pending":
                 # Mark pending items as submitted.
 
@@ -496,6 +516,7 @@ class ActionMember(models.Model):
                 if self.social_bonus_awarded:
                     super(ActionMember, self).save(args, kwargs)
 
+                # generate notification if feedback is present
         self.post_to_wall()
         self.invalidate_cache()
 
