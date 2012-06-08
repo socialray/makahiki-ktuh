@@ -9,14 +9,6 @@ Install Firefox
 Because we use Firefox for our browser test, please make sure that Firefox
 is installed before running the test.
 
-Initialize Makahiki for testing
--------------------------------
-
-Invoke the initialize_instance script and pass it the test argument to load the test data set::
-
-  % scripts/initialize_instance.py -t test
-
-
 Run the test suite
 ------------------
 
