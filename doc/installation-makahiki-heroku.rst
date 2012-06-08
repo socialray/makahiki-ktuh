@@ -15,8 +15,8 @@ This involves:
   * Logging in to Heroku.
 
 
-Download the Makahiki system
--------------------------------
+Download the Makahiki source
+----------------------------
 
 To download the Makahiki system, type the following::
 
