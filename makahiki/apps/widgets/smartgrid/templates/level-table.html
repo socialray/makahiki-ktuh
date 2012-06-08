@@ -22,7 +22,7 @@
                                                     <a href="{% url activity_task task.type task.slug %}"
                                                        title="{{task.name}}">
                                                         {% if task.type != 'commitment' %}
-                                                            {% if task.is_pau %}
+                                                            {% if task.completed %}
                                                                 {% if task.member.approval_status == "rejected" %}
                                                                     <img src="{{ STATIC_URL}}images/icons/icon-exclamation2.png"
                                                                          width="12"
@@ -50,7 +50,7 @@
                                                             {% endif %}
                                                         {% else %}
                                                             {# ------ is commitment #}
-                                                            {% if task.is_pau %}
+                                                            {% if task.completed %}
                                                                 {% if task.member.days_left != 0 or task.member.award_date %}
                                                                     <img src="{{ STATIC_URL}}images/icons/icon-done.png"
                                                                          width="12"
@@ -65,7 +65,7 @@
                                                             {% else %}
                                                                 <br/>
                                                                 <h3>{{ task.point_value }}</h3>
-                                                            {% endif %} {# end task.is_pau #}
+                                                            {% endif %} {# end task.completed #}
                                                         {% endif %}
                                                         {# ------- end task.type #}
                                                     </a>
@@ -77,10 +77,10 @@
                                                              width="22" align="top"
                                                              title="Click to see how to unlock"
                                                              onclick="unlock_dialog(event, '{{task.type}}','{{task.slug}}',
-                                                                     {% if task.depends_on_text %}
-                                                                         '{{task.depends_on_text}}'
+                                                                     {% if task.unlock_condition_text %}
+                                                                         '{{task.unlock_condition_text}}'
                                                                      {% else %}
-                                                                         '{{task.depends_on}}'
+                                                                         '{{task.unlock_condition}}'
                                                                      {% endif %}
                                                                      )">
                                                     </a>

@@ -6,6 +6,7 @@ from django.conf import settings
 from django.db import models
 from django.contrib.auth.models import User
 from apps.managers.score_mgr import score_mgr
+from apps.utils import utils
 
 
 class Quest(models.Model):
@@ -32,15 +33,11 @@ class Quest(models.Model):
 
     def can_add_quest(self, user):
         """Returns True if the user can add the quest."""
-        from apps.widgets.quests.quests import process_conditions_string
-
-        return process_conditions_string(self.unlock_conditions, user)
+        return utils.eval_predicates(self.unlock_conditions, user)
 
     def completed_quest(self, user):
         """Returns True if the user completed the quest."""
-        from apps.widgets.quests.quests import process_conditions_string
-
-        return process_conditions_string(self.completion_conditions, user)
+        return utils.eval_predicates(self.completion_conditions, user)
 
     def accept(self, user):
         """Lets the user accept the quest.  Returns True if successful."""

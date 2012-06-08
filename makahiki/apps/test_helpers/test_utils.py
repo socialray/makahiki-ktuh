@@ -81,7 +81,7 @@ def create_event(slug=None):
         pub_date=datetime.datetime.today(),
         expire_date=datetime.datetime.today() + datetime.timedelta(days=7),
         event_date=datetime.datetime.today() + datetime.timedelta(days=1),
-        depends_on=True,
+        unlock_condition=True,
         type="event",
     )
 

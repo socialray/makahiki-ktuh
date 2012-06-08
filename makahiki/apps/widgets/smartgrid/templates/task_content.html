@@ -16,7 +16,7 @@
     </table>
 </div>
 <div class="content-box-contents">
-{% if action.is_pau %}
+{% if action.completed %}
     {% if action.member.approval_status == "approved" or action.member.award_date %}
         <div class="activity-task-details-info">
             <p/>
@@ -153,7 +153,7 @@
 <p/>
 <center>
 
-    {% if not action.is_pau %}              <!-- not done yet  -->
+    {% if not action.completed %}              <!-- not done yet  -->
         {% if action.type == "commitment" %}
             {% if action.can_commit %}
                 {% if action.social_bonus > 0 %}

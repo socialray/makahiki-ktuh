@@ -2,17 +2,13 @@
 from django.db import models
 from apps.widgets.smartgrid.models import ActionMember, Activity, Category, Event, \
                                      Commitment, ConfirmationCode, TextPromptQuestion, \
-                                     QuestionChoice
+                                     QuestionChoice, Level
 from django.contrib import admin
 from django import forms
 from django.forms.models import BaseInlineFormSet
 from django.forms.util import ErrorList
 from django.forms import TextInput, Textarea
 from django.core.urlresolvers import reverse
-
-
-# Category Admin
-admin.site.register(Category)
 
 
 class TextQuestionInlineFormSet(BaseInlineFormSet):
@@ -250,6 +246,16 @@ class EventAdminForm(forms.ModelForm):
         return activity
 
 
+admin.site.register(Level)
+
+
+class CategoryAdmin(admin.ModelAdmin):
+    """Category Admin"""
+    prepopulated_fields = {"slug": ("name",)}
+
+admin.site.register(Category, CategoryAdmin)
+
+
 class ActivityAdmin(admin.ModelAdmin):
     """Activity Admin"""
     fieldsets = (
@@ -262,7 +268,7 @@ class ActivityAdmin(admin.ModelAdmin):
                      ('video_id', 'video_source'),
                      'embedded_widget',
                      ('pub_date', 'expire_date'),
-                     ('depends_on', 'depends_on_text'),
+                     ('unlock_condition', 'unlock_condition_text'),
                      )}),
         ("Points",
          {"fields": (("point_value", "social_bonus"), ("point_range_start", "point_range_end"), )}),
@@ -322,7 +328,7 @@ class EventAdmin(admin.ModelAdmin):
                      'description',
                      ('pub_date', 'expire_date'),
                      ('event_date', 'event_location', 'event_max_seat'),
-                     ('depends_on', 'depends_on_text'),
+                     ('unlock_condition', 'unlock_condition_text'),
                      )}),
         ("Points", {"fields": (("point_value", "social_bonus"),)}),
         ("Ordering", {"fields": (("level", "category", "priority"), )}),
@@ -378,7 +384,7 @@ class CommitmentAdmin(admin.ModelAdmin):
                        ('title', 'duration'),
                        'image',
                        'description',
-                       'depends_on', 'depends_on_text',
+                       'unlock_condition', 'unlock_condition_text',
                        ),
             }),
         ("Points", {"fields": (("point_value", 'social_bonus'), )}),

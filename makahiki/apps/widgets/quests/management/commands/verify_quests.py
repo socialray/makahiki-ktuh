@@ -7,9 +7,9 @@ import sys
 
 from django.core import management
 from django.contrib.auth.models import User
+from apps.utils import utils
 
 from apps.widgets.quests.models import Quest
-from apps.widgets.quests.quests import process_conditions_string
 
 
 class Command(management.base.BaseCommand):
@@ -35,7 +35,7 @@ class Command(management.base.BaseCommand):
         error_msg = None
         user = User.objects.order_by("?")[0]
         try:
-            result = process_conditions_string(conditions, user)
+            result = utils.eval_predicates(conditions, user)
             # Check if the result type is a boolean
             if type(result) != type(True):
                 error_msg = "Expected boolean value but got %s" % type(result)

@@ -10,16 +10,24 @@
     <div class="content-box-contents">
         <!-- Tabs for the levels -->
         <ul id="sgg-levels-tab" class="nav nav-tabs">
-        {% for levels in view_objects.smartgrid.levels %}
+        {% for level in view_objects.smartgrid.levels %}
             <li class="">
-                <a {% if forloop.counter < 4 %}data-toggle="tab" title="Level {{forloop.counter}} Actions"{% else %}style="cursor:no-drop;" title="Unlock Level {{forloop.counter}} by completing more actions"{% endif %} href="#sgg-level-{{forloop.counter}}" rel="tooltip" >Level {{forloop.counter}}</a>
+                <a
+                  {% if level.is_unlock %}
+                      data-toggle="tab" title="{{ level.name }} Actions"
+                  {% else %}
+                      style="cursor:no-drop;" title="{{ level.unlock_condition_text }}"
+                  {% endif %}
+                  href="#sgg-level-{{forloop.counter}}" rel="tooltip" >
+                    {{ level.name }}
+                </a>
         {% endfor %}
         </ul>
         <!-- Tab contents -->
         <div class="tab-content">
-        {% for cats in view_objects.smartgrid.levels %}
+        {% for level in view_objects.smartgrid.levels %}
             <div id="sgg-level-{{forloop.counter}}" class="tab-pane">
-            {% include "level-table.html" with categories=cats%}
+            {% include "level-table.html" with categories=level.cat_list%}
             </div>
         {% endfor %}
         </div>
@@ -33,7 +41,7 @@
     <div class="modal-body" id="modal-body">
         <p><b>This activity is locked.</b></p>
         <p> To unlock this activity, please do the following: <br/>
-        <div id="depends_on">
+        <div id="unlock_condition">
         </div>
         </p>
     </div>
@@ -45,10 +53,10 @@
 <script type="text/javascript">
     $(document).ready(function () {
     	$('#sgg-levels-tab a:first').tab('show');
-        var task_depends_on = getCookie("task_depends_on");
-        if (task_depends_on != null)
+        var task_unlock_condition = getCookie("task_unlock_condition");
+        if (task_unlock_condition != null)
         {
-            deleteCookie("task_depends_on");
+            deleteCookie("task_unlock_condition");
 
             var modalElement = $('#unlockModal');
 
@@ -57,13 +65,13 @@
                 keyboard: true,
                 show: false
             });
-            modalElement.find('#depends_on').html(task_depends_on);
+            modalElement.find('#unlock_condition').html(task_unlock_condition);
 
             modalElement.modal('show');
         }
     });
 
-    function unlock_dialog(event, type, slug, depends_on) {
+    function unlock_dialog(event, type, slug, unlock_condition) {
         var modalElement = $('#unlockModal');
            
         var pos_y = event.pageY;
@@ -75,7 +83,7 @@
             keyboard: true,
             show: false
         }); 
-        modalElement.find('#depends_on').html(depends_on);
+        modalElement.find('#unlock_condition').html(unlock_condition);
         // set up event logging
         modalElement.on('shown', function() {
             log_js_action(type, slug, 'view-lock-open');

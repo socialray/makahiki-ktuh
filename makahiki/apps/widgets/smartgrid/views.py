@@ -38,7 +38,7 @@ def view_action(request, action_type, slug):
 
     if not smartgrid.is_unlock(user, action):
         response = HttpResponseRedirect(reverse("learn_index", args=()))
-        response.set_cookie("task_depends_on", action.depends_on_text)
+        response.set_cookie("task_unlock_condition", action.unlock_condition_text)
         return response
 
     action = smartgrid.annotate_action_status(user, action)

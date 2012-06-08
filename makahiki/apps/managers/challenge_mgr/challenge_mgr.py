@@ -78,29 +78,13 @@ def pages():
     return PageInfo.objects.all().values_list("name", flat=True)
 
 
-def has_points(user, points):
-    """Returns True if the user has more than the specified points."""
-    return user.get_profile().points() >= points
-
-
-def is_admin(user):
-    """Returns True if the user is an admin."""
-    return user.is_staff or user.is_superuser
-
-
-PAGE_PREDICATES = {
-    "has_points": has_points,
-    "is_admin": is_admin,
-}
-
-
 def eval_page_unlock(user, page):
     """Returns True if the given page is unlocked based upon evaluation of its dependencies."""
     predicates = page.unlock_condition
     if not predicates:
         return False
 
-    return utils.eval_predicates(predicates, user, PAGE_PREDICATES)
+    return utils.eval_predicates(predicates, user)
 
 
 def all_page_info(user):

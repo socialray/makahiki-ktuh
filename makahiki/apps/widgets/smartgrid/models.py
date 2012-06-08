@@ -35,12 +35,35 @@ def activity_image_file_path(instance=None, filename=None, user=None):
                         user.username, filename)
 
 
+class Level(models.Model):
+    """Associates the actions to different levels."""
+    name = models.CharField(max_length=50,
+                            help_text="The name of the level.")
+    priority = models.IntegerField(
+        default=1,
+        help_text="Levels with lower values (higher priority) will be listed first."
+    )
+    unlock_condition = models.CharField(
+        max_length=400, null=True, blank=True,
+        help_text="if the condition is True, the level will be unlocked.")
+    unlock_condition_text = models.CharField(
+        max_length=400, null=True, blank=True,
+        help_text="The description of the unlock condition.")
+
+    def __unicode__(self):
+        return self.name
+
+
 class Category(models.Model):
-    """Categories used to group commitments and activities."""
+    """Categories used to group actions."""
     name = models.CharField(max_length=255,
                             help_text="The name of the category (max 255 characters).")
     slug = models.SlugField(help_text="Automatically generated if left blank.",
                             null=True)
+    priority = models.IntegerField(
+        default=1,
+        help_text="Categories with lower values (higher priority) will be listed first."
+    )
 
     class Meta:
         """Meta"""
@@ -170,8 +193,8 @@ class Action(models.Model):
         choices=TYPE_CHOICES,
         help_text="The type of the actions."
     )
-    level = models.IntegerField(
-        default=1,
+    level = models.ForeignKey(Level,
+        null=True, blank=True,
         help_text="The level of the action.")
     category = models.ForeignKey(Category,
         null=True, blank=True,
@@ -190,12 +213,12 @@ class Action(models.Model):
         verbose_name="Expiration date",
         help_text="Date at which the action will be removed."
     )
-    depends_on = models.CharField(
+    unlock_condition = models.CharField(
         max_length=400, null=True, blank=True,
-        help_text="The condition that the unlocking of this action depends on.")
-    depends_on_text = models.CharField(
+        help_text="if the condition is True, the action will be unlocked.")
+    unlock_condition_text = models.CharField(
         max_length=400, null=True, blank=True,
-        help_text="The description of the depends on condition.")
+        help_text="The description of the unlock condition.")
     related_resource = models.CharField(
         max_length=20,
         null=True, blank=True,

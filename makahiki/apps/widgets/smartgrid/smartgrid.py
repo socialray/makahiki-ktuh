@@ -2,16 +2,15 @@
 
 import datetime
 from django.db.models import  Count
-from django.core.exceptions import ObjectDoesNotExist
-from django.db.models.aggregates import Max
 from django.db.models.query_utils import Q
 from django.shortcuts import get_object_or_404
 from apps.managers.cache_mgr import cache_mgr
 from apps.utils import utils
 from apps.widgets.smartgrid import NUM_GOLOW_ACTIONS, SETUP_WIZARD_ACTIVITY
-from apps.widgets.smartgrid.models import Action, Category, ActionMember
+from apps.widgets.smartgrid.models import Action, Category, ActionMember, Level
 from apps.widgets.smartgrid.models import Event
 from apps.widgets.smartgrid import  MAX_COMMITMENTS
+from apps.widgets.smartgrid.predicates import completed_action
 
 
 def get_setup_activity():
@@ -40,7 +39,7 @@ def get_action(slug):
 def annotate_action_status(user, action):
     """retrieve the action status for the user."""
     action.is_unlock = is_unlock(user, action)
-    action.is_pau = is_pau(user, action)
+    action.completed = completed_action(user, action.slug)
 
     members = ActionMember.objects.filter(user=user, action=action)
     if members:
@@ -75,24 +74,30 @@ def get_action_members(action):
     return ActionMember.objects.filter(action=action)
 
 
+
 def get_level_actions(user):
     """Return the level list with the action info in categories"""
     levels = cache_mgr.get_cache('smartgrid-levels-%s' % user.username)
     if not levels:
-        max_level = Action.objects.all().aggregate(Max('level'))['level__max']
-
         levels = []
-        if max_level:
-            for level in range(0, max_level):
-                categories = Category.objects.all()
-                for cat in categories:
+        for level in Level.objects.all().order_by("priority"):
+            level.is_unlock = utils.eval_predicates(level.unlock_condition, user)
+
+            if level.is_unlock:
+                categories = []
+                for cat in Category.objects.all().order_by("priority"):
                     action_list = []
-                    for action in cat.action_set.filter(level=level + 1).order_by("priority"):
+                    for action in cat.action_set.filter(level=level).order_by("priority"):
                         action = annotate_action_status(user, action)
                         action_list.append(action)
+                    if action_list:
+                        cat.task_list = action_list
+                        categories.append(cat)
 
-                    cat.task_list = action_list
-                levels.append(categories)
+                if categories:
+                    level.cat_list = categories
+
+            levels.append(level)
 
         # Cache the categories for an hour (or until they are invalidated)
         cache_mgr.set_cache('smartgrid-levels-%s' % user,
@@ -162,55 +167,6 @@ def get_available_golow_actions(user, related_resource):
     return golow_actions
 
 
-def is_pau(user, action):
-    """Return true if the task is done for the user."""
-    members = ActionMember.objects.filter(user=user, action=action)
-    if members:
-        return True
-    else:
-        return False
-
-
-def completed(user, action_slug):
-    """Return true if the user complete the action."""
-    actions = Action.objects.filter(slug=action_slug)
-    if actions:
-        return is_pau(user, actions[0])
-    else:
-        return False
-
-
-def completedAllOf(user, cat_slug):
-    """Return true if completed all of the category."""
-    try:
-        cat = Category.objects.get(slug=cat_slug)
-    except ObjectDoesNotExist:
-        return False
-
-    for action in cat.action_set.all():
-        if not is_pau(user, action):
-            return False
-
-    return True
-
-
-def completedSomeOf(user, some, cat_slug):
-    """Return true if completed some of the category."""
-    try:
-        cat = Category.objects.get(slug=cat_slug)
-    except ObjectDoesNotExist:
-        return False
-
-    count = 0
-    for action in cat.action_set.all():
-        if is_pau(user, action):
-            count = count + 1
-        if count == some:
-            return True
-
-    return False
-
-
 def afterPublished(user, action_slug):
     """Return true if the event/excursion has been published"""
     _ = user
@@ -237,115 +193,18 @@ def is_unlock(user, action):
     return False
 
 
-SMARTGRID_PREDICATES = {
-    "completedAllOf": completedAllOf,
-    "completedSomeOf": completedSomeOf,
-    "completed": completed,
-    "afterPublished": afterPublished,
-    }
-
-
-SMARTGRID_ACTION_PREDICATES = (
-    "completed",
-    "afterPublished",
-    )
-
-
 def eval_unlock(user, action):
     """Determine the unlock status of a task by dependency expression"""
-    predicates = action.depends_on
+    predicates = action.unlock_condition
     if not predicates:
         return False
 
-    # append the action to the predicate parameter
-    for name in SMARTGRID_ACTION_PREDICATES:
-        predicates = predicates.replace(name + "()", name + "('" + action.slug + "')")
+    # after published is the default unlock rule for action
+    if not afterPublished(user, action.slug):
+        return False
 
     return utils.eval_predicates(predicates,
-                                 user,
-                                 SMARTGRID_PREDICATES)
-
-
-def has_action(user, slug=None, name=None, action_type=None):
-    """Determines if the user is participating in a task.
-
-        * For a activity, this returns True if the user submitted or completed the activity.
-        * For a commitment, this returns True if the user made or completed the commitment.
-        * For a event or excursion, this returns True if the user entered their attendance code.
-        * For a survey, this returns True if the user completed the survey.
-
-       If a action_type is specified, then checks to see if a user has completed a task of that type.
-       Only one of name and action_type should be specified."""
-    if not slug and not action_type and not name:
-        raise Exception("Either slug, name or action_type must be specified.")
-
-    if slug or name:
-        try:
-            if slug:
-                action = Action.objects.get(slug=slug)
-            if name:
-                action = Action.objects.get(name=name)
-        except ObjectDoesNotExist:
-            return False
-
-        return is_pau(user, action)
-    else:
-        action_type = action_type.lower()
-        return user.actionmember_set.filter(action__type=action_type).count() > 0
-
-
-def completed_action(user, slug=None, action_type=None):
-    """Determines if the user has completed the named task or completed a task of the given type.
-       In general, if a user-task member is approved or has an award date, it is completed.
-       Only one of name and action_type should be specified.  Specifying neither raises an Exception.
-       Specifying both results in an error."""
-    if not slug and not action_type:
-        raise Exception("Either name or action_type must be specified.")
-
-    if action_type:
-        action_type = action_type.lower()
-
-        return user.actionmember_set.filter(
-            action__type=action_type,
-            approval_status="approved",
-        ).count() > 0
-
-    if slug:
-        action = Action.objects.get(slug=slug)
-
-        return user.actionmember_set.filter(
-            action=action,
-            approval_status="approved",
-        ).count() > 0
-
-
-def num_actions_completed(user, num_tasks, category_name=None, action_type=None):
-    """Returns True if the user has completed the requested number of tasks."""
-    # Check if we have a type and/or category.
-    if action_type:
-        action_type = action_type.lower()
-
-    category = None
-    if category_name:
-        category = Category.objects.get(name=category_name)
-
-    user_completed = 0
-    if not action_type or action_type != "commitment":
-        # Build the query for non-commitment tasks.
-        query = ActionMember.objects.filter(
-            user=user,
-            award_date__isnull=False,
-        )
-
-        if action_type:
-            query.filter(action__type=action_type)
-
-        if category:
-            query.filter(action__category=category)
-
-        user_completed += query.count()
-
-    return user_completed >= num_tasks
+                                 user)
 
 
 def can_add_commitment(user):
