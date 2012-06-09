@@ -12,7 +12,7 @@
 
             <p>
 
-            <button id="landing-button-participant" class="landing-button"
+            <button id="landing-button-participant" class="btn btn-widget landing-button"
                     onclick="show_auth_buttons()">
                 {{ CHALLENGE.landing_participant_text|markdown }}
             </button>
@@ -20,21 +20,21 @@
             <p/>
             <div id="auth_buttons" style="display:none;">
                 {% if CHALLENGE.use_cas_auth %}
-                <button class="landing-button-smaller"
+                <button class="btn btn-widget landing-button-smaller"
                         onclick="javascript:location.href='{% url home_index %}'">
                     {{ CHALLENGE.cas_auth_text|markdown }}
                 </button>
                 <p/><p/>
                 {% endif %}
                 {% if CHALLENGE.use_ldap_auth %}
-                <button class="landing-button-smaller"
+                <button class="btn btn-widget landing-button-smaller"
                         onclick="javascript:location.href='{% url account_login %}'">
                     {{ CHALLENGE.ldap_auth_text|markdown }}
                 </button>
                 <p/><p/>
                 {% endif %}
                 {% if CHALLENGE.use_internal_auth %}
-                <button class="landing-button-smaller"
+                <button class="btn btn-widget landing-button-smaller"
                         onclick="javascript:location.href='{% url account_login %}'">
                     {{ CHALLENGE.internal_auth_text|markdown }}
                 </button>
@@ -42,7 +42,7 @@
             </div>
 
             <p>
-            <button id="landing-button-non-participant" class="landing-button"
+            <button id="landing-button-non-participant" class="btn btn-widget landing-button"
                     onclick="javascript:location.href='{% url about %}'">
                 {{ CHALLENGE.landing_non_participant_text|markdown }}
             </button>
