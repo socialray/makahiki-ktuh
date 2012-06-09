@@ -29,7 +29,7 @@
                         {% for page in ALL_PAGE_INFO %}
                           {% if page.is_unlock  %}
                             <!-- Choose the correct active page by adding active to the class list -->
-                            <li {% if view_objects.active == page.name %}class="active" {% endif %}>
+                            <li {% if ACTIVE_PAGE == page.name %}class="active" {% endif %}>
                                 <a href="{{ page.url }}?ref=nav-button" class="{{ page.name }}">
                                     <img src="{{ STATIC_URL }}images/spacer-54.png">{{ page.label }}
                                 </a>
