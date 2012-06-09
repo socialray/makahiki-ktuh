@@ -1,0 +1,61 @@
+{% extends "logged_in_base.html" %}
+
+{% block page_title %}
+    Raffle Prize List
+{% endblock %}
+
+{% block selected_icon %}selected-win{% endblock %}
+
+{% block extra_head %}
+{% endblock %}
+
+{% block body %}
+<center>
+      <a class="textlink" href="{% url profile_index %}">Back to Prizes</a>
+</center>
+
+<div class="content-box">
+        <div class="content-box-title">
+            List of Raffle Prizes
+        </div> 
+        {% regroup raffle_list by round_name as round_name_list %}  
+
+        <ul id="prize-tab" class="nav nav-tabs">
+        {% for round_name in round_name_list %} 
+            <li class="">
+                <a data-toggle="tab" href="#prize-{{round_name.grouper|capfirst|cut:" "}}">{{ round_name.grouper|capfirst }} </a>
+            </li>
+        {% endfor %}  
+        </ul>  
+<div class="tab-content">
+    {% for round_name in round_name_list %}
+      <div id="prize-{{round_name.grouper|capfirst|cut:" "}}" class="tab-pane fade active in">   
+              <div class="content-body"> 
+                      <table class="table-striped">
+                                  <thead>
+                                      <tr><td style="width: 20%;"><b>Raffle Prize</b></td><td><b>Description</b></td></tr>
+                                  </thead>
+
+                                  {% for item in round_name.list|dictsort:"title" %}  
+                                      <tr>
+                                        <td><b>{{ item.title }}</b></td><td style="text-align:left;">{{item.description}}</td>
+                                      </tr>
+                                  {% endfor %} 
+                          
+                      </table>
+              </div>
+          </div> 
+      {% endfor %}
+  </div> 
+  </div> 
+
+<script type="text/javascript">
+$('#prize-tab.nav-tabs a:first').tab('show');
+</script>  
+
+<center>
+  <a class="textlink" href="{% url profile_index %}">Back to Prizes</a>
+</center>
+    </div>
+{% endblock %}
+
