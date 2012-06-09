@@ -22,7 +22,7 @@ def competition(request):
     default_view_objects = None
     all_page_info = None
     css_theme = settings.CHALLENGE.theme
-
+    page_name = request.path[1:][:-1]
     if user.is_authenticated():
         profile = user.get_profile()
 
@@ -55,6 +55,7 @@ def competition(request):
         "AVAILABLE_EVENTS": available_events,
         "ALL_PAGE_INFO": all_page_info,
         "MAKAHIKI_ADMIN_APPS": settings.ADMIN_APPS,
+        "ACTIVE_PAGE": page_name
     }
 
 

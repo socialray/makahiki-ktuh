@@ -1,0 +1,1 @@
+Although figures are organized into subdirectories, Sphinx copies them all into the same directory for processing.  Thus, figure file names must be unique across all subdirectories. You probably want to prefix figure names with the section in which they are referred to in order to guarantee uniqueness.

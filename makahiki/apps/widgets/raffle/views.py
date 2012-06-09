@@ -7,6 +7,7 @@ from django.contrib import messages
 from django.contrib.auth.decorators import login_required, user_passes_test
 from django.core.urlresolvers import reverse
 from django.views.decorators.cache import never_cache
+from django.template.context import RequestContext
 
 from apps.managers.challenge_mgr import  challenge_mgr
 from apps.widgets.raffle.models import  RafflePrize, RaffleTicket, POINTS_PER_TICKET, \
@@ -100,3 +101,11 @@ def raffle_form(request, prize_id):
         'prize': prize,
         'round': prize.deadline.round_name
     }, mimetype='text/plain')
+
+
+def raffle_prize_list(request):
+    """Generates the raffle prize list and renders to page."""
+    raffle_prizes = RafflePrize.objects.all().order_by('round_name')
+    return render_to_response("raffle_prize_list.html", {
+        "raffle_list": raffle_prizes
+        }, context_instance=RequestContext(request))

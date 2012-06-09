@@ -129,7 +129,7 @@ Then browse to the development server, login, go to the Profile page, and
 select your new theme from the drop-down list in the My Info widget.  Press "Save Changes" to install your new
 theme.  The following figure shows a portion of the Profile page after choosing the brand new google theme:
 
-.. figure:: figs/theme-dev-new-google.png
+.. figure:: figs/theme-dev/theme-dev-new-google.png
    :width: 600 px
    :align: center
 
@@ -151,7 +151,7 @@ All themes are based upon a set of complementary colors represented in RGB notat
 you come up with the color palette is up to you.   In the case of our new Google theme, we
 will use the same colors that appear on the Google home page:
 
-.. figure:: figs/theme-dev-google-home.png
+.. figure:: figs/theme-dev/theme-dev-google-home.png
    :width: 600 px
    :align: center
 
@@ -163,7 +163,7 @@ can upload an image and it will determine the RGB colors present in that image f
 After uploading the google home page image above, Color Explorer indicates the colors
 as follows:
 
-.. figure:: figs/theme-dev-color-explorer.png
+.. figure:: figs/theme-dev/theme-dev-color-explorer.png
    :width: 600 px
    :align: center
 
@@ -310,7 +310,7 @@ definitions so that `use-bkg-image` is false, and provide white as the backgroun
 Once we've made the change and saved the file, all we need to do is refresh the page in a
 browser to see the change:
 
-.. figure:: figs/theme-dev-google-page-background.png
+.. figure:: figs/theme-dev/theme-dev-google-page-background.png
    :width: 600 px
    :align: center
 
@@ -335,7 +335,7 @@ will be the start color lightened by 30%.  The variables also enable you to high
 current page.  Since there is no background color, I set transparency to zero.  Here's
 what the new blue nav bar looks like:
 
-.. figure:: figs/theme-dev-google-navbar.png
+.. figure:: figs/theme-dev/theme-dev-google-navbar.png
    :width: 600 px
    :align: center
 
@@ -354,7 +354,7 @@ style, let's just make it offwhite::
 
 Here's the result:
 
-.. figure:: figs/theme-dev-google-infobar.png
+.. figure:: figs/theme-dev/theme-dev-google-infobar.png
    :width: 600 px
    :align: center
 
@@ -371,7 +371,7 @@ We'll make the Quest Bar the same as the Info Bar::
 
 Here's the result:
 
-.. figure:: figs/theme-dev-google-questbar.png
+.. figure:: figs/theme-dev/theme-dev-google-questbar.png
    :width: 600 px
    :align: center
 
@@ -402,7 +402,7 @@ Subelements of the widget will just use slight variants of these colors::
 
 Here's what the whole profile page looks like at this point:
 
-.. figure:: figs/theme-dev-google-widgets.png
+.. figure:: figs/theme-dev/theme-dev-google-widgets.png
    :width: 600 px
    :align: center
 
@@ -445,7 +445,7 @@ revised the formatting.
 
 Here's what the modal dialog looks like:
 
-.. figure:: figs/theme-dev-google-modal.png
+.. figure:: figs/theme-dev/theme-dev-google-modal.png
    :width: 400 px
    :align: center
 
@@ -463,7 +463,7 @@ explanatory text.  Let's style these as follows::
 
 Now the home page looks like:
 
-.. figure:: figs/theme-dev-google-infobox.png
+.. figure:: figs/theme-dev/theme-dev-google-infobox.png
    :width: 600 px
    :align: center
 
@@ -484,7 +484,7 @@ Let's introduce some color into the Smart Grid Game::
 
 And it looks like this:
 
-.. figure:: figs/theme-dev-google-sgg.png
+.. figure:: figs/theme-dev/theme-dev-google-sgg.png
    :width: 400 px
    :align: center
 
@@ -497,7 +497,7 @@ It is possible to set the Raffle Game entry color.  Let's just make it black::
 
 With this result:
 
-.. figure:: figs/theme-dev-google-raffle.png
+.. figure:: figs/theme-dev/theme-dev-google-raffle.png
    :width: 400 px
    :align: center
 
