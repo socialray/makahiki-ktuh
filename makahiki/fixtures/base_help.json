@@ -281,7 +281,7 @@
             "category": "widget",
             "parent_topic": null,
             "slug": "social-bonus",
-            "contents": "The **social bonus** is a way to have fun doing things with your friends and earn extra points! Certain activities and events are eligible for the social bonus. It's really easy:\r\n\r\n1. Plan to attend an event, make a commitment, or perform an activity with one or more friends\r\n2. Make sure you have your friend's UH email address\r\n3. When you click the button to get your points, you will be prompted for your friend's UH email address\r\n4. If the friend you entered does the same activity, you get the social bonus points\r\n5. Your friend can enter your email address so they can also get the social bonus",
+            "contents": "The **social bonus** is a way to have fun doing things with your friends and earn extra points! Certain activities and events are eligible for the social bonus. It's really easy:\r\n\r\n1. Plan to attend an event, make a commitment, or perform an activity with one or more friends\r\n2. Make sure you have your friend's Kukui Cup email address\r\n3. When you click the button to get your points, you will be prompted for your friend's Kukui Cup email address\r\n4. If the friend you entered does the same activity, you get the social bonus points\r\n5. Your friend can enter your email address so they can also get the social bonus",
             "title": "Social bonus"
         }
     },
@@ -516,15 +516,5 @@
             "title": "Canopy Scoreboard"
         }
     },
-    {
-        "pk": 49,
-        "model": "help.helptopic",
-        "fields": {
-            "category": "widget",
-            "parent_topic": null,
-            "slug": "canopy-karma-prize",
-            "contents": "The prize for earning the most Canopy Karma at the end of the competition is a $25 gift card from the UH Bookstore! Of course, you should participate for the Karma...",
-            "title": "Canopy Karma Prize"
-        }
-    }
+
 ]

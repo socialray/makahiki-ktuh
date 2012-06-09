@@ -65,8 +65,8 @@ class ProfileForm(forms.Form):
     """Form for modified profile info"""
     display_name = forms.CharField(
         max_length=20,
-        help_text="This name will be shown in scoreboards and on your " \
-                  "profile instead of your UH username."
+        help_text="This is the name others in your lounge will see, and how you"\
+                  " will be identified on scoreboards"
     )
     facebook_photo = forms.URLField(widget=forms.HiddenInput, required=False)
     use_fb_photo = forms.BooleanField(required=False)
