@@ -112,7 +112,7 @@ class ChallengeSettings(models.Model):
 
     # landing page content settings
     landing_slogan = models.TextField(
-        default="The Kukui Cup: Lights out, game on!",
+        default="The Kukui Cup: Lights off, game on!",
         help_text="The slogan text in the landing page. " + settings.MARKDOWN_TEXT,
         max_length=255,)
     landing_introduction = models.TextField(
