@@ -212,6 +212,38 @@ ul {
     background-image: linear-gradient(top, @start, @end);
 }
 
+.badge-large(@bkg-color-start, @bkg-color-end, @font-color) {
+    height: 32px;
+    width: 32px;
+    .background-gradient(@bkg-color-start, @bkg-color-end);
+    .border-radius(32px);
+    .threedee-text(@font-color);    
+}
+
+.badge-theme-1 {
+    .badge-large(@badge-theme-1-bkg-color-start, @badge-theme-1-bkg-color-end, @badge-theme-1-text-color);
+}
+
+.badge-theme-2 {
+    .badge-large(@badge-theme-2-bkg-color-start, @badge-theme-2-bkg-color-end, @badge-theme-2-text-color);
+}
+
+.badge-theme-3 {
+    .badge-large(@badge-theme-3-bkg-color-start, @badge-theme-3-bkg-color-end, @badge-theme-3-text-color);
+}
+
+.badge-theme-4 {
+    .badge-large(@badge-theme-4-bkg-color-start, @badge-theme-4-bkg-color-end, @badge-theme-4-text-color);
+}
+
+.badge-theme-5 {
+    .badge-large(@badge-theme-5-bkg-color-start, @badge-theme-5-bkg-color-end, @badge-theme-5-text-color);
+}
+
+.badge-theme-6 {
+    .badge-large(@badge-theme-6-bkg-color-start, @badge-theme-6-bkg-color-end, @badge-theme-6-text-color);
+}
+
 .brand img {
     display: block;
     margin: 0 auto;
@@ -541,6 +573,16 @@ ul {
 
 .quest-pad {
     float: right;
+}
+
+.threedee-text(@color) {
+  color: @color;
+  text-shadow: 0 1px 0 darken(@color, 14%),
+    0 2px 0 darken(@color, 16%),
+    0 3px 0 darken(@color, 18%),
+    0 4px 0 darken(@color, 20%),
+    3px 8px 15px rgba(0,0,0,0.1),
+    3px 8px 5px rgba(0,0,0,0.3);
 }
 
 .tile {
