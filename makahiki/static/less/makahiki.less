@@ -220,28 +220,140 @@ ul {
     .threedee-text(@font-color);    
 }
 
+.badge-small(@bkg-color-start, @bkg-color-end, @font-color) {
+    height: 16px;
+    width: 16px;
+    .background-gradient(@bkg-color-start, @bkg-color-end);
+    .border-radius(16px);
+    .threedee-text(@font-color);    
+}
+
 .badge-theme-1 {
     .badge-large(@badge-theme-1-bkg-color-start, @badge-theme-1-bkg-color-end, @badge-theme-1-text-color);
+}
+
+.badge-theme-1 p {
+    padding-top: 8px;
+    line-height: 12px;
+    text-align: center;
+}
+
+.badge-theme-1-small {
+    .badge-small(@badge-theme-1-bkg-color-start, @badge-theme-1-bkg-color-end, @badge-theme-1-text-color);    
+}
+
+.badge-theme-1-small p {
+    font-size: 8px;
+    padding-top: 4px;
+    line-height: 6px;
+    text-align: center;    
 }
 
 .badge-theme-2 {
     .badge-large(@badge-theme-2-bkg-color-start, @badge-theme-2-bkg-color-end, @badge-theme-2-text-color);
 }
 
+.badge-theme-2 p {
+    padding-top: 8px;
+    line-height: 12px;
+    text-align: center;
+}
+
+.badge-theme-2-small {
+    .badge-small(@badge-theme-2-bkg-color-start, @badge-theme-2-bkg-color-end, @badge-theme-2-text-color);    
+}
+
+.badge-theme-2-small p {
+    font-size: 8px;
+    padding-top: 4px;
+    line-height: 6px;
+    text-align: center;    
+}
+
 .badge-theme-3 {
     .badge-large(@badge-theme-3-bkg-color-start, @badge-theme-3-bkg-color-end, @badge-theme-3-text-color);
+}
+
+.badge-theme-3 p {
+    padding-top: 8px;
+    margin: 14px, 0, 0, 0;
+    line-height: 12px;
+    text-align: center;
+}
+
+.badge-theme-3-small {
+    .badge-small(@badge-theme-3-bkg-color-start, @badge-theme-3-bkg-color-end, @badge-theme-3-text-color);    
+}
+
+.badge-theme-3-small p {
+    font-size: 8px;
+    padding-top: 4px;
+    line-height: 6px;
+    text-align: center;    
 }
 
 .badge-theme-4 {
     .badge-large(@badge-theme-4-bkg-color-start, @badge-theme-4-bkg-color-end, @badge-theme-4-text-color);
 }
 
+.badge-theme-4 p {
+    padding-top: 8px;
+    margin: 14px, 0, 0, 0;
+    line-height: 12px;
+    text-align: center;
+}
+
+.badge-theme-4-small {
+    .badge-small(@badge-theme-4-bkg-color-start, @badge-theme-4-bkg-color-end, @badge-theme-4-text-color);    
+}
+
+.badge-theme-4-small p {
+    font-size: 8px;
+    padding-top: 4px;
+    line-height: 6px;
+    text-align: center;    
+}
+
 .badge-theme-5 {
     .badge-large(@badge-theme-5-bkg-color-start, @badge-theme-5-bkg-color-end, @badge-theme-5-text-color);
 }
 
+.badge-theme-5 p {
+    padding-top: 8px;
+    line-height: 12px;
+    text-align: center;
+}
+
+.badge-theme-5-small {
+    .badge-small(@badge-theme-5-bkg-color-start, @badge-theme-5-bkg-color-end, @badge-theme-5-text-color);    
+}
+
+.badge-theme-5-small p {
+    font-size: 8px;
+    padding-top: 4px;
+    line-height: 6px;
+    text-align: center;    
+}
+
 .badge-theme-6 {
     .badge-large(@badge-theme-6-bkg-color-start, @badge-theme-6-bkg-color-end, @badge-theme-6-text-color);
+}
+
+.badge-theme-6 p {
+    padding-top: 8px;
+    line-height: 12px;
+    text-align: center;
+}
+
+.badge-theme-6-small {
+    .badge-small(@badge-theme-6-bkg-color-start, @badge-theme-6-bkg-color-end, @badge-theme-6-text-color);    
+}
+
+.badge-theme-6-small p {
+    font-size: 8px;
+    padding-top: 4px;
+    line-height: 6px;
+    text-align: center;    
 }
 
 .brand img {
