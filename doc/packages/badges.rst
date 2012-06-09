@@ -4,10 +4,16 @@ Package :mod:`apps.widgets.badges`
 .. automodule:: apps.widgets.badges
    :members:
 
-Module :mod:`apps.widgets.badges.user_badges`
----------------------------------------------
+Module :mod:`apps.widgets.badges.models`
+----------------------------------------
 
-.. automodule:: apps.widgets.badges.user_badges
+.. automodule:: apps.widgets.badges.models
+   :members:
+
+Module :mod:`apps.widgets.badges.badges`
+----------------------------------------
+
+.. automodule:: apps.widgets.badges.badges
    :members:
 
 Module :mod:`apps.widgets.badges.views`

@@ -246,11 +246,16 @@ class EventAdminForm(forms.ModelForm):
         return activity
 
 
-admin.site.register(Level)
+class LevelAdmin(admin.ModelAdmin):
+    """Level Admin"""
+    list_display = ["name", "priority"]
+
+admin.site.register(Level, LevelAdmin)
 
 
 class CategoryAdmin(admin.ModelAdmin):
     """Category Admin"""
+    list_display = ["name", "priority"]
     prepopulated_fields = {"slug": ("name",)}
 
 admin.site.register(Category, CategoryAdmin)
@@ -283,8 +288,7 @@ class ActivityAdmin(admin.ModelAdmin):
         models.CharField: {'widget': TextInput(attrs={'size': '80'})},
         }
 
-    list_display = ["title", "type", "category", "priority", "pub_date",
-                    "expire_date", ]
+    list_display = ["title", "level", "category", "priority", "point_value"]
 
     actions = ["delete_selected", "increment_priority", "decrement_priority"]
 
@@ -341,8 +345,8 @@ class EventAdmin(admin.ModelAdmin):
         models.CharField: {'widget': TextInput(attrs={'size': '80'})},
         }
 
-    list_display = ["title", "type", "category", "priority", "pub_date",
-                    "event_date", "expire_date", ]
+    list_display = ["title", "level", "category", "priority", "type",
+                    "event_date", "point_value", ]
 
     actions = ["delete_selected", "increment_priority", "decrement_priority"]
 
@@ -396,7 +400,7 @@ class CommitmentAdmin(admin.ModelAdmin):
         models.CharField: {'widget': TextInput(attrs={'size': '80'})},
         }
 
-    list_display = ["title", "category", "priority", ]
+    list_display = ["title", "level", "category", "priority", "point_value"]
 
     actions = ["delete_selected", "increment_priority", "decrement_priority"]
 
