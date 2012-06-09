@@ -33,6 +33,7 @@
         "model": "smartgrid.category",
         "fields": {
             "name": "Get Started",
+            "priority": 1,
             "slug": "get-started"
         }
     },
@@ -41,6 +42,7 @@
         "model": "smartgrid.category",
         "fields": {
             "name": "Basic Energy",
+            "priority": 2,
             "slug": "basic-energy"
         }
     },
@@ -49,6 +51,7 @@
         "model": "smartgrid.category",
         "fields": {
             "name": "Lights Out!",
+            "priority": 3,
             "slug": "lights-out"
         }
     },
@@ -57,6 +60,7 @@
         "model": "smartgrid.category",
         "fields": {
             "name": "Make Watts",
+            "priority": 4,
             "slug": "make-watts"
         }
     },
@@ -65,6 +69,7 @@
         "model": "smartgrid.category",
         "fields": {
             "name": "Moving on",
+            "priority": 5,
             "slug": "moving-on"
         }
     },
@@ -73,6 +78,7 @@
         "model": "smartgrid.category",
         "fields": {
             "name": "Opala",
+            "priority": 6,
             "slug": "opala"
         }
     },
@@ -81,6 +87,7 @@
         "model": "smartgrid.category",
         "fields": {
             "name": "Wet and Wild",
+            "priority": 7,
             "slug": "wet-and-wild"
         }
     },
@@ -89,6 +96,7 @@
         "model": "smartgrid.category",
         "fields": {
             "name": "Mixed Bag",
+            "priority": 8,
             "slug": "mixed-bag"
         }
     },
@@ -97,6 +105,7 @@
         "model": "smartgrid.category",
         "fields": {
             "name": "Creative",
+            "priority": 9,
             "slug": "creative"
         }
     },

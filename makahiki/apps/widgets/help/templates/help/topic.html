@@ -17,13 +17,15 @@
 {% endblock %}
 
 {% block body %}
-
     <div class="content-box">
         <div>
             <div class="content-box-title">
                 {{ topic.title }}
             </div>
             <div class="content-box-contents help-content">
+
+rn:{{round_names}}
+prizes:{{prize_list}}
                 <a href="{% url help_index %}">Back to help page</a>
 
                 <p>

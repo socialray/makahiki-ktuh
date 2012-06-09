@@ -53,6 +53,10 @@ class Level(models.Model):
     def __unicode__(self):
         return self.name
 
+    class Meta:
+        """Meta"""
+        ordering = ("priority",)
+
 
 class Category(models.Model):
     """Categories used to group actions."""
@@ -68,6 +72,7 @@ class Category(models.Model):
     class Meta:
         """Meta"""
         verbose_name_plural = "categories"
+        ordering = ("priority",)
 
     def __unicode__(self):
         return self.name
@@ -247,6 +252,10 @@ class Action(models.Model):
     def get_action(self, action_type):
         """Returns the concrete action object by type."""
         return action_type.objects.get(action_ptr=self.pk)
+
+    class Meta:
+        """Meta"""
+        ordering = ("level", "category", "priority")
 
 
 class Commitment(Action):
