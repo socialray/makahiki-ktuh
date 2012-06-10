@@ -1,0 +1,8 @@
+
+{% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}
+<div class="content-box-contents">
+    Please provide feedback on this action.
+    <form action="?" method="POST">
+         {% csrf_token %}
+    </form>
+</div>
