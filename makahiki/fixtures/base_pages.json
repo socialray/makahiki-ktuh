@@ -108,9 +108,9 @@
         "model": "challenge_mgr.pageinfo",
         "fields": {
             "name": "admin",
-            "title": "Admin",
+            "title": "Settings",
             "introduction": "* Admin\r\n* Settings\r\n* Logs",
-            "label": "Admin",
+            "label": "Settings",
             "priority": 11,
             "url": "/admin",
             "unlock_condition": "is_admin()"
