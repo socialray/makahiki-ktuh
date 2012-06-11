@@ -1,6 +1,5 @@
 """action_feedback model."""
 
-from datetime import datetime
 from django.db import models
 from django.contrib.auth.models import User
 
@@ -25,4 +24,5 @@ class ActionFeedback(models.Model):
     changed = models.DateTimeField(editable=False, help_text="The time the feedback was changed.")
 
     def __unicode__(self):
-        return self.user.name + " rated " + self.action.name + ": " + self.rating + " " + self.comment
+        return self.user.name + " rated " + self.action.name + ": " + \
+            self.rating + " " + self.comment

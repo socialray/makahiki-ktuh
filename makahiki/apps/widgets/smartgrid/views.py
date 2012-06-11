@@ -69,7 +69,6 @@ def view_action(request, action_type, slug):
         action.available_seat = action.event.event_max_seat - completed_count
 
     user_reminders = view_reminders.load_reminders(action, user)
-    feedback_form = ActionFeedbackForm()
     feedback = ActionFeedback.objects.filter(user=user.pk, action=action.pk)
 
     return render_to_response("task.html", {
@@ -80,7 +79,6 @@ def view_action(request, action_type, slug):
         "display_form": True if "display_form" in request.GET else False,
         "reminders": user_reminders,
         "view_objects": view_objects,
-        "feedback": feedback_form,
         "feedback_p": feedback,
         }, context_instance=RequestContext(request))
 
@@ -139,8 +137,6 @@ def action_feedback(request, action_type, slug):
     if form.is_valid():
         print form.cleaned_data
 
-    print "feedback for %s by %s" % (action, user)
-    print request.POST
     feedback = ActionFeedback()
     feedback.user = user
     feedback.action = action
