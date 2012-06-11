@@ -2,6 +2,8 @@
 
 from django.contrib import messages
 
+import datetime
+
 from django.shortcuts import  render_to_response
 from django.http import HttpResponseRedirect
 from django.core.exceptions import ObjectDoesNotExist
@@ -15,6 +17,7 @@ from apps.managers.score_mgr import score_mgr
 from apps.widgets.smartgrid import smartgrid, view_commitments, view_events, view_activities, \
     view_reminders
 from apps.widgets.smartgrid.forms import ActionFeedbackForm
+from apps.widgets.action_feedback.models import ActionFeedback
 
 
 def supply(request, page_name):
@@ -67,6 +70,7 @@ def view_action(request, action_type, slug):
 
     user_reminders = view_reminders.load_reminders(action, user)
     feedback_form = ActionFeedbackForm()
+    feedback = ActionFeedback.objects.filter(user=user.pk, action=action.pk)
 
     return render_to_response("task.html", {
         "action": action,
@@ -77,6 +81,7 @@ def view_action(request, action_type, slug):
         "reminders": user_reminders,
         "view_objects": view_objects,
         "feedback": feedback_form,
+        "feedback_p": feedback,
         }, context_instance=RequestContext(request))
 
 
@@ -136,5 +141,13 @@ def action_feedback(request, action_type, slug):
 
     print "feedback for %s by %s" % (action, user)
     print request.POST
+    feedback = ActionFeedback()
+    feedback.user = user
+    feedback.action = action
+    feedback.rating = request.POST['Score']
+    feedback.comment = request.POST['comments']
+    feedback.added = datetime.datetime.now()
+    feedback.changed = datetime.datetime.now()
+    feedback.save()
     # Take them back to the action page.
     return HttpResponseRedirect(reverse("activity_task", args=(action.type, action.slug,)))

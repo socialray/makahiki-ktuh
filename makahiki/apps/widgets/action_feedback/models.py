@@ -17,7 +17,7 @@ class ActionFeedback(models.Model):
                              help_text="The user providing the feedback.")
     rating = models.IntegerField(help_text="The user's rating of the action.")
     comment = models.CharField(
-                               max_length=500,
+                               max_length=1500,
                                blank=True,
                                null=True,
                                help_text="The user's comments about the action.")
