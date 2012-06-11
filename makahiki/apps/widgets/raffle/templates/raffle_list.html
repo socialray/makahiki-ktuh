@@ -5,7 +5,7 @@
 {% with prize|user_tickets:user as user_tickets %}
 <tr>
     <td class="raffle-prize">
-        <a href="#raffle-{{prize.title|slugify}}-description" onclick="toggleRafflePrize(event,  raffle-{{prize.title|slugify}}-description)" data-toggle="modal">
+        <a href="#raffle-{{prize.title|slugify}}-description" onclick="toggleRafflePrize(event,  'raffle-{{prize.title|slugify}}-description')" >
             {{ prize.title }}
         </a>
 
@@ -64,6 +64,19 @@
     });
     
     var toggleRafflePrize = function (event, name) {
-   	    document.getElementById(name).style.top = event.pageY + "px";
+        var y = event.pageY;
+        if (y < 500) {
+        	
+        } else if (y < 1000) {
+        	y = y / 2;
+        } else {
+        	y = y / 3;
+        }
+//         console.log("event y = " + event.pageY + " y = " + y)
+//         console.log("name = " + name);
+    	var modalElement = $('#' + name);
+   	    document.getElementById(name).style.top = y + "px";
+        modalElement.modal('show');
+
     }
 </script>
