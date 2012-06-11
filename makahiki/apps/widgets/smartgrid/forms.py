@@ -257,3 +257,11 @@ class ReminderForm(forms.Form):
             raise forms.ValidationError("A valid phone number is required.")
 
         return cleaned_data
+
+FEEDBACK_CHOICES = [['1', 1], ['2', 2], ['3', 3], ['4', 4], ['5', 5]]
+
+
+class ActionFeedbackForm(forms.Form):
+    """Action Feedback form"""
+    comments = forms.CharField(widget=forms.widgets.Textarea())
+    score = forms.IntegerField(widget=forms.widgets.RadioSelect())

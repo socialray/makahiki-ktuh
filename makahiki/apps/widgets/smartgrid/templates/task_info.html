@@ -108,6 +108,10 @@
         </center>
         <br />
         <br />
-        {% include "task_feedback.html" %}
+        {% if action.completed and not feedback_p %}
+        {% include "widgets/action_feedback/templates/index.html" %}
+        {% else %}
+        <p>Thank you for your feedback!</p>
+        {% endif %}
     </div>
 </div>
