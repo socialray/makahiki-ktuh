@@ -600,6 +600,33 @@
         }
     },
     {
+        "pk": 149,
+        "model": "smartgrid.action",
+        "fields": {
+            "category": 15,
+            "related_resource": null,
+            "social_bonus": 0,
+            "video_id": null,
+            "name": "Customize tshirt",
+            "video_source": null,
+            "pub_date": "2012-06-12",
+            "image": "",
+            "title": "Customize your Kukui Cup tshirt",
+            "is_group": false,
+            "unlock_condition_text": "",
+            "priority": 300,
+            "embedded_widget": null,
+            "point_value": 0,
+            "expire_date": null,
+            "is_canopy": false,
+            "level": 1,
+            "type": "event",
+            "slug": "customize-tshirt",
+            "unlock_condition": "",
+            "description": "This workshop provides students with materials and advice on how to cut up, paint, stencil, and otherwise customize their Kukui Cup tshirts.   If the student has already received a Kukui Cup tshirt, then they must bring it (or another tshirt) to be customized.  If the student has not already received a Kukui Cup tshirt, then the first 10 attendees w/o a Kukui Cup tshirt will receive one free. "
+        }
+    },
+    {
         "pk": 81,
         "model": "smartgrid.event",
         "fields": {
@@ -837,6 +864,16 @@
             "event_date": "2011-11-04T10:00:00",
             "event_max_seat": 100,
             "event_location": "Sustainability Courtyard"
+        }
+    },
+    {
+        "pk": 149,
+        "model": "smartgrid.event",
+        "fields": {
+            "duration": 30,
+            "event_date": "2012-06-12T11:53:23",
+            "event_max_seat": 1000,
+            "event_location": ""
         }
     }
 ]

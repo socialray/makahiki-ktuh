@@ -3081,6 +3081,33 @@
         }
     },
     {
+        "pk": 150,
+        "model": "smartgrid.action",
+        "fields": {
+            "category": 24,
+            "related_resource": "energy",
+            "social_bonus": 0,
+            "video_id": "",
+            "name": "Energy City",
+            "video_source": null,
+            "pub_date": "2012-06-12",
+            "image": "",
+            "title": "Play Energy City",
+            "is_group": false,
+            "unlock_condition_text": "",
+            "priority": 200,
+            "embedded_widget": "",
+            "point_value": 20,
+            "expire_date": null,
+            "is_canopy": false,
+            "level": 3,
+            "type": "activity",
+            "slug": "energy-city",
+            "unlock_condition": "",
+            "description": "This activity involves the student playing the online game <a href=\"http://www.filamentgames.com/projects/energy-city\" rel=\"nofollow\">Energy City</a>.  One of the scenarios, \"Pele's Island\", appears to be based on the Big Island's energy situation.  It is unclear how to award points for this activity, but we want to be able to:<div><ul><li>Verify that the student has played the game;</li><li>Find out the student's highest score;</li></ul>"
+        }
+    },
+    {
         "pk": 30,
         "model": "smartgrid.commitment",
         "fields": {
@@ -3903,6 +3930,17 @@
         "model": "smartgrid.activity",
         "fields": {
             "duration": 5,
+            "point_range_end": null,
+            "confirm_type": "text",
+            "point_range_start": null,
+            "confirm_prompt": ""
+        }
+    },
+    {
+        "pk": 150,
+        "model": "smartgrid.activity",
+        "fields": {
+            "duration": 60,
             "point_range_end": null,
             "confirm_type": "text",
             "point_range_start": null,
