@@ -3,48 +3,240 @@
         "pk": 1,
         "model": "badges.badge",
         "fields": {
-            "name": "Daily Visitor",
-            "award_condition": "daily_visit_count(3)",
-            "description": "Visited the site 3 days in a row.",
-            "hint": "Keep coming back!",
+            "name": "Novice",
+            "award_condition": "completed_some_of(5)",
+            "description": "Finish any five actions successfully.",
+            "hint": "Keep doing actions!",
             "slug": "daily-visitor",
-            "label": "3",
-            "image": "media/badges/Threepeater.gif"}
+            "label": "NOV",
+            "image": ""}
     },
     {
         "pk": 2,
         "model": "badges.badge",
         "fields": {
-            "name": "Fully Committed",
-            "award_condition": "completed_some_of(5, action_type='commitment')",
-            "description": "Participating in 5 commitments at the same time.",
-            "hint": "How committed are you?",
-            "slug": "fully-committed",
-            "label": "Full",
-            "image": "media/badges/badge.gif"}
+            "name": "Three Peater",
+            "award_condition": "daily_visit_count(3)",
+            "description": "Visited the site 3 days in a row.",
+            "hint": "Keep coming back!",
+            "slug": "three-peater",
+            "label": "3PT",
+            "image": ""}
     },
     {
         "pk": 3,
         "model": "badges.badge",
         "fields": {
-            "name": "Energy Savy",
-            "award_condition": "completed_some_of(resource='energy')",
-            "description": "Completed one energy related action.",
-            "hint": "check the energy related actions",
-            "slug": "energy-savy",
-            "label": "Energy",
-            "image": "media/badges/badge.gif"}
+            "name": "Six Peater",
+            "award_condition": "daily_visit_count(6)",
+            "description": "Have visited the site six days in a row.",
+            "hint": "Keep coming back!",
+            "slug": "six-peater",
+            "label": "6PT",
+            "image": ""}
     },
     {
         "pk": 4,
         "model": "badges.badge",
         "fields": {
-            "name": "Bug Hunter",
+            "name": "Nine Peater",
+            "award_condition": "daily_visit_count(9)",
+            "description": "Have visited the site nine days in a row.",
+            "hint": "Keep coming back!",
+            "slug": "nine-peater",
+            "label": "9PT",
+            "image": ""}
+    },
+    {
+        "pk": 5,
+        "model": "badges.badge",
+        "fields": {
+            "name": "Energy Hat Trick",
             "award_condition": "False",
-            "description": "Filed a bug report.",
+            "description": "The team has achieved DEGG three days in a row.",
+            "hint": "Keep team energy use low!",
+            "slug": "energy-hat-trick",
+            "label": "HTR",
+            "image": ""}
+    },
+    {
+        "pk": 6,
+        "model": "badges.badge",
+        "fields": {
+            "name": "Super Committted",
+            "award_condition": "False",
+            "description": "Have committed to five commitments simultaneously.",
+            "hint": "Keep making commitments!",
+            "slug": "super-committed",
+            "label": "SPC",
+            "image": ""}
+    },
+    {
+        "pk": 7,
+        "model": "badges.badge",
+        "fields": {
+            "name": "Ultra Committed",
+            "award_condition": "False",
+            "description": "Have been committed to all possible commitments.",
+            "hint": "Keep making commitments!",
+            "slug": "ultra-committed",
+            "label": "ULC",
+            "image": ""}
+    },
+    {
+        "pk": 8,
+        "model": "badges.badge",
+        "fields": {
+            "name": "Level 1 Master",
+            "award_condition": "False",
+            "description": "Have completed all Level 1 non-event/excursion actions.",
+            "hint": "Complete more actions!",
+            "slug": "level-1-master",
+            "label": "LV1",
+            "image": ""}
+    },
+    {
+        "pk": 9,
+        "model": "badges.badge",
+        "fields": {
+            "name": "Level 2 Master",
+            "award_condition": "False",
+            "description": "Have completed all Level 2 non-event/excursion actions.",
+            "hint": "Complete more actions!",
+            "slug": "level-2-master",
+            "label": "LV2",
+            "image": ""}
+    },
+    {
+        "pk": 10,
+        "model": "badges.badge",
+        "fields": {
+            "name": "Level 3 Master",
+            "award_condition": "False",
+            "description": "Have completed all Level 3 non-event/excursion actions.",
+            "hint": "Complete more actions!",
+            "slug": "level-3-master",
+            "label": "LV3",
+            "image": ""}
+    },
+    {
+        "pk": 11,
+        "model": "badges.badge",
+        "fields": {
+            "name": "Level 4 Master",
+            "award_condition": "False",
+            "description": "Have completed all Level 4 non-event/excursion actions.",
+            "hint": "Complete more actions!",
+            "slug": "level-4-master",
+            "label": "LV4",
+            "image": ""}
+    },
+    {
+        "pk": 12,
+        "model": "badges.badge",
+        "fields": {
+            "name": "Super Social",
+            "award_condition": "False",
+            "description": "Have received the social bonus five times.",
+            "hint": "Work together!",
+            "slug": "super-social",
+            "label": "SSC",
+            "image": ""}
+    },
+    {
+        "pk": 13,
+        "model": "badges.badge",
+        "fields": {
+            "name": "Super Referrer",
+            "award_condition": "False",
+            "description": " Have referred at least 10 new players to Kukui Cup.",
+            "hint": "Gather more players!",
+            "slug": "super-referrer",
+            "label": "SRF",
+            "image": ""}
+    },
+    {
+        "pk": 14,
+        "model": "badges.badge",
+        "fields": {
+            "name": "Mega Referrer",
+            "award_condition": "False",
+            "description": " Have referred at least 20 new players to Kukui Cup.",
+            "hint": "Gather more players!",
+            "slug": "mega-referrer",
+            "label": "MRF",
+            "image": ""}
+    },
+    {
+        "pk": 15,
+        "model": "badges.badge",
+        "fields": {
+            "name": "Ultra Referrer",
+            "award_condition": "False",
+            "description": " Have referred at least 30 new players to Kukui Cup.",
+            "hint": "Gather more players!",
+            "slug": "ultra-referrer",
+            "label": "URF",
+            "image": ""}
+    },
+    {
+        "pk": 16,
+        "model": "badges.badge",
+        "fields": {
+            "name": "White Hat",
+            "award_condition": "False",
+            "description": "Have reported one legitimate bug to administrators.",
             "hint": "Found a bug?  Let us know!",
-            "slug": "bug-hunter",
-            "label": "Hacker",
-            "image": "media/badges/badge.gif"}
+            "slug": "white-hat",
+            "label": "DBG",
+            "image": ""}
+    },
+    {
+        "pk": 17,
+        "model": "badges.badge",
+        "fields": {
+            "name": "Super Team",
+            "award_condition": "False",
+            "description": "At least 50% of possible team members have at least 50 points.",
+            "hint": "Encourage team-mates to participate!",
+            "slug": "super-team",
+            "label": "STM",
+            "image": ""}
+    },
+    {
+        "pk": 18,
+        "model": "badges.badge",
+        "fields": {
+            "name": "Mega Team",
+            "award_condition": "False",
+            "description": "At least 75% of possible team members have at least 75 points.",
+            "hint": "Encourage team-mates to participate!",
+            "slug": "mega-team",
+            "label": "MTM",
+            "image": ""}
+    },
+    {
+        "pk": 19,
+        "model": "badges.badge",
+        "fields": {
+            "name": "Ultra Team",
+            "award_condition": "False",
+            "description": "At least 90% of possible team members have at least 90 points.",
+            "hint": "Encourage team-mates to participate!",
+            "slug": "ultra-team",
+            "label": "UTM",
+            "image": ""}
+    },
+    {
+        "pk": 20,
+        "model": "badges.badge",
+        "fields": {
+            "name": "KC Champion",
+            "award_condition": "False",
+            "description": "Have been selected to champion the challenge.",
+            "hint": "",
+            "slug": "kc-champion",
+            "label": "KCC",
+            "image": ""}
     }
 ]
