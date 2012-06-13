@@ -64,7 +64,7 @@
         "model": "badges.badge",
         "fields": {
             "name": "Super Committted",
-            "award_condition": "False",
+            "award_condition": "completed_some_of(5, action_type='commitment')",
             "description": "Have committed to five commitments simultaneously.",
             "hint": "Keep making commitments!",
             "slug": "super-committed",
@@ -76,7 +76,7 @@
         "model": "badges.badge",
         "fields": {
             "name": "Ultra Committed",
-            "award_condition": "False",
+            "award_condition": "completed_all_of(action_type='commitment')",
             "description": "Have been committed to all possible commitments.",
             "hint": "Keep making commitments!",
             "slug": "ultra-committed",
