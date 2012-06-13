@@ -425,9 +425,9 @@ class ActionMember(models.Model):
     points_awarded = models.IntegerField(
         blank=True, null=True,
         help_text="Number of points to award for activities with variable point values.")
-
     created_at = models.DateTimeField(editable=False, auto_now_add=True)
     updated_at = models.DateTimeField(editable=False, auto_now=True, null=True)
+    admin_link = models.CharField(max_length=100, blank=True, null=True)
 
     class Meta:
         """meta"""
@@ -450,8 +450,16 @@ class ActionMember(models.Model):
 
         return diff.days
 
+    def check_admin_link(self):
+        """Sets admin_link if not already set."""
+        if not self.admin_link:
+            link = "/admin/smartgrid/" + self.action.type + "/" + str(self.action.id)
+            self.admin_link = link
+
     def save(self, *args, **kwargs):
         """custom save method."""
+
+        self.check_admin_link()
 
         if self.social_bonus_awarded:
             # only awarding social bonus

@@ -484,9 +484,10 @@ class ActionMemberAdmin(admin.ModelAdmin):
     """ActionMember Admin."""
     radio_fields = {"approval_status": admin.HORIZONTAL}
     fields = (
-        "user", "action", "question", "full_response", "image", "admin_comment", "approval_status",)
+        "user", "action", "question", "admin_link", "full_response", "image",
+        "admin_comment", "approval_status",)
     readonly_fields = (
-        "question", "full_response", "social_email", "social_email2",)
+        "question", "admin_link", "full_response", "social_email", "social_email2",)
     list_display = (
         "action", "submission_date", "approval_status", "short_question", "short_response")
     list_filter = ["approval_status", "action__type"]
@@ -545,10 +546,10 @@ class ActionMemberAdmin(admin.ModelAdmin):
         """Override to remove the points_awarded field if the action
         does not have variable points."""
         if obj and not obj.action.point_value:
-            self.fields = ("user", "action", "question", "response", "image",
+            self.fields = ("user", "action", "question", "admin_link", "response", "image",
                            "admin_comment", "approval_status", "points_awarded", "social_email")
         else:
-            self.fields = ("user", "action", "question", "response", "image",
+            self.fields = ("user", "action", "question", "admin_link", "response", "image",
                            "admin_comment", "approval_status")
 
         return super(ActionMemberAdmin, self).get_form(request, obj, **kwargs)
