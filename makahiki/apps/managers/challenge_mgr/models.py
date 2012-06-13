@@ -96,7 +96,7 @@ class ChallengeSettings(models.Model):
         help_text="Enable email ?",
         )
     contact_email = models.CharField(
-        null=True, blank=True,
+        default="CHANGEME@example.com",
         help_text="The contact email of the admin.",
         max_length=100,)
     email_host = models.CharField(
