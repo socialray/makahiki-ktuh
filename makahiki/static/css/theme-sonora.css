@@ -953,6 +953,8 @@ ul{list-style:none;}
 #info-bar-single button{float:left;}
 #info-bar-single h4 a{float:none;text-align:center;}
 @media (max-width:979px){.navbar .nav>li>a,.navbar .dropdown-menu a{color:#c7a56e;} .navbar .nav>li>a:hover,.navbar .dropdown-menu a:hover{background-color:transparent;}}@media (max-width:767px){#info-bar-wide{display:none;visibility:hidden;} #info-bar-single{display:block;visibility:visible;}}@media (min-width:641px) and (max-width:979px){.nav img{display:none;}}@media (max-width:640px){a.learn img,a.learn:hover img,a.admin img,a.admin:hover img,a.energy img,a.energy:hover img,a.help img,a.help:hover img,a.home img,a.home:hover img,a.news img,a.news:hover img,a.win img,a.win:hover img,a.profile img,a.profile:hover img,a.water img,a.water:hover img,a.status img,a.status:hover img{display:none;visibility:hidden;} body{padding-left:0;padding-right:0;} .brand img{display:none;} .container-fluid{padding-left:0px;padding-right:0px;} .makahiki-box{margin-bottom:5px;} .navbar{margin-bottom:5px;} #info-bar-wide{display:none;visibility:hidden;} #info-bar-single{display:block;visibility:visible;} .quest-list{padding:0px;} .quest-list li{display:block;margin:5px;padding:0px;}}@media (min-width:480px) and (max-width:821px){.nav li a img{display:none;} .nav li a:hover img{display:none;}}@media (max-width:480px){.modal.fade.in{top:50%;}}@charset "UTF-8";
+#task-feedback textarea{width:80%;}
+@charset "UTF-8";
 .margin-one-third{margin-left:35%;margin-right:35%;}
 .width-ten-percent{width:10%;}
 @media screen and (max-width:450px){.badge-members{display:none;}}@charset "UTF-8";

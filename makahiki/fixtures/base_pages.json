@@ -351,6 +351,15 @@
     }
   },
   {
+    "pk": 40,
+    "model": "challenge_mgr.pagesettings",
+    "fields": {
+      "widget": "action_feedback",
+      "enabled": true,
+      "page": 10
+    }
+  },
+  {
     "pk": 39,
     "model": "challenge_mgr.pagesettings",
     "fields": {

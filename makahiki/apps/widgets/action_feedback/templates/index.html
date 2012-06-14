@@ -1,32 +1,32 @@
-{% load markup %}
-<div id="task-feedback">
-<p>Please provide feedback on {{ action.type|capfirst }} : {{ action.name }}.</p>
-<form action="{% url add_activity_feedback action.type action.slug %}" method="post">
-    {% csrf_token %}
-    <table class="table-striped">
-        <tr>
-            <td>Hated it</td>
-            <td>1<input id="radScoreStart" type="radio" name="Score" value="1" /></label></td>
-            <td>2<input type="radio" name="Score" value="2" /></td>
-            <td>3<input type="radio" name="Score" value="3" /></td>
-            <td>4<input type="radio" name="Score" value="4" /></td>
-            <td>5<input id="radScoreEnd" type="radio" name="Score" value="5" /></td>
-            <td>Loved it</td>
-        </tr>
-    </table>
-    Comments about {{ action.name }}.<br/>
-    <textarea rows="2" name="comments"></textarea>
-    <input id="feedback-submit-button" type="submit" value="Submit" class="btn btn-widget"/>
-</form>
-
-<script>
-$(document).ready(function() {
-    var submit_button = $('#feedback-submit-button');
-    if (submit_button) {
-        submit_button.click(function() {
-            $('#task-feedback').addClass("hidden");
-        });
-    }
+    <div class="content-box-title">
+    Activity, Commitment, Event, and Excursion Feedback
+        <a href="#" style="float: right">
+            <img src="{{ STATIC_URL}}images/icons/icon-help-sm.png" width="20"
+                 align="center"
+                 title="Click to get help about this window"
+                 onclick="toggleHelp(event, 'widget', 'action-feedback'); return false;"/>
+        </a>
+    </div>
+    <div class="content-box-contents">
+    <script type="text/javascript" src="{{STATIC_URL}}js/flot/jquery.flot.js"></script>
+    <table>
+    <thead>
+        <th>Action</th>
+        <th>Feedback</th>
+    </thead>
+    <tbody>
+    {% for key,value in view_objects.action_feedback.action_feedback.items %}
+    <tr>
+        <td>{{key}} </td>
+        <td><div id="graph{{forloop.counter}}" class="span3" style="height: 75px;"> </div></td>
+    </tr>
+    <script type="text/javascript">
+    $(document).ready(function () {
+    var d1 = {{value}};
+    $.plot($("#graph{{forloop.counter}}"), [ {data: d1, bars: {show: true, barWidth: 0.6}} ]);
 });
 </script>
-</div>
+    {% endfor %}
+    </tbody>
+    </table>
+    </div>
