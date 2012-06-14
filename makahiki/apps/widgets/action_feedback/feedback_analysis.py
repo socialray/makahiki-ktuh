@@ -55,6 +55,7 @@ def get_feedback_average(action):
 
 
 def get_total_feedback_average():
+    """returns the average rating of all the feedback."""
     running_total = 0
     for action in get_actions_with_feedback():
         running_total += get_feedback_average(action)
