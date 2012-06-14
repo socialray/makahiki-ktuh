@@ -1,6 +1,15 @@
 
-<div id="visualization"></div>
-
+{% if user.get_profile.team %}
+    <div id="visualization"></div>
+{% else %}
+    <table >
+    <tr width="300"><td height="100" valign="center">
+        <b>Power meter is not available.</b> <br/><br/>
+        You are not in a {{ TEAM_LABEL }} that has <br/>
+        the real-time power meter installed.
+    </td></tr>
+    </table>
+{% endif %}
 
 <script type="text/javascript" src="http://www.google.com/jsapi"></script>
 <script type="text/javascript" src="{{STATIC_URL}}js/org.wattdepot.makahiki.PowerMeter.js"></script>
