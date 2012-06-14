@@ -35,6 +35,7 @@ def get_likert_scale_totals(action):
 
 
 def get_action_likert_scales():
+    """returns the likert scale feedback as a dictionary with the action name as key."""
     ret = {}
     for action in get_actions_with_feedback():
         ret[action.name] = get_likert_scale_totals(action)

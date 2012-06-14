@@ -24,4 +24,5 @@ class ActionFeedback(models.Model):
     changed = models.DateTimeField(editable=False, help_text="The time the feedback was changed.")
 
     def __unicode__(self):
-        return "%s rated %s %d and said %s" % (self.user.username, self.action.name, self.rating, self.comment)
+        return "%s rated %s %d and said %s" % \
+            (self.user.username, self.action.name, self.rating, self.comment)

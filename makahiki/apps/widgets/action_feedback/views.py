@@ -8,6 +8,7 @@ from apps.widgets.action_feedback import feedback_analysis
 def supply(request, page_name):
     """Supply view_objects for the Action_Feedback template."""
     _ = page_name
+    _ = request
 
     return {
         "action_feedback": feedback_analysis.get_action_likert_scales()

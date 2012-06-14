@@ -18,12 +18,14 @@
     {% for key,value in view_objects.action_feedback.action_feedback.items %}
     <tr>
         <td>{{key}} </td>
-        <td><div id="graph{{forloop.counter}}" class="span3" style="height: 75px;"> </div></td>
+        <td><div id="graph{{forloop.counter}}" class="span3" style="height: 55px;"> </div></td>
     </tr>
     <script type="text/javascript">
     $(document).ready(function () {
     var d1 = {{value}};
-    $.plot($("#graph{{forloop.counter}}"), [ {data: d1, bars: {show: true, barWidth: 0.6}} ]);
+//    $.plot($("#graph{{forloop.counter}}"), [ {data: d1, bars: {show: true, barWidth: 0.6}} ]);
+    $.plot($("#graph{{forloop.counter}}"), [ {data: d1, lines: {show: true}, xaxis:{show: false, ticks: null}, grid: {
+        show: false}} ]);
 });
 </script>
     {% endfor %}
