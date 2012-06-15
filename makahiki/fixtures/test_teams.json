@@ -1,0 +1,214 @@
+[
+  {
+    "pk": 1, 
+    "model": "team_mgr.group",
+    "fields": {
+      "name": "Lehua", 
+      "slug": "hale-lehua"
+    }
+  }, 
+  {
+    "pk": 2, 
+    "model": "team_mgr.group",
+    "fields": {
+      "name": "Ilima", 
+      "slug": "hale-ilima"
+    }
+  }, 
+  {
+    "pk": 3, 
+    "model": "team_mgr.group",
+    "fields": {
+      "name": "Mokihana", 
+      "slug": "hale-mokihana"
+    }
+  }, 
+  {
+    "pk": 4,
+    "model": "team_mgr.group",
+    "fields": {
+      "name": "Lokelani",
+      "slug": "hale-lokelani"
+    }
+  },
+  {
+    "pk": 1, 
+    "model": "team_mgr.team",
+    "fields": {
+      "group": 1,
+      "name": "Lehua-A",
+      "slug": "Lehua-A"
+    }
+  },
+  {
+    "pk": 2,
+    "model": "team_mgr.team",
+    "fields": {
+      "group": 2,
+      "name": "Ilima-A",
+      "slug": "Ilima-A"
+    }
+  },
+  {
+    "pk": 3,
+    "model": "team_mgr.team",
+    "fields": {
+      "group": 3,
+      "name": "Mokihana-A",
+      "slug": "Mokihana-A"
+    }
+  },
+  {
+    "pk": 4,
+    "model": "team_mgr.team",
+    "fields": {
+      "group": 1,
+      "name": "Lehua-B",
+      "slug": "Lehua-B"
+    }
+  },
+  {
+    "pk": 5,
+    "model": "team_mgr.team",
+    "fields": {
+      "group": 1,
+      "name": "Lehua-C",
+        "slug": "Lehua-C"
+    }
+  },
+  {
+    "pk": 6,
+    "model": "team_mgr.team",
+    "fields": {
+      "group": 1,
+      "name": "Lehua-D",
+        "slug": "Lehua-D"
+    }
+  },
+  {
+    "pk": 7,
+    "model": "team_mgr.team",
+    "fields": {
+      "group": 1,
+      "name": "Lehua-E",
+        "slug": "Lehua-E"
+    }
+  },
+  {
+    "pk": 8,
+    "model": "team_mgr.team",
+    "fields": {
+      "group": 2,
+      "name": "Ilima-B",
+        "slug": "Ilima-B"
+    }
+  },
+  {
+    "pk": 9,
+    "model": "team_mgr.team",
+    "fields": {
+      "group": 2,
+      "name": "Ilima-C",
+        "slug": "Ilima-C"
+    }
+  },
+  {
+    "pk": 10,
+    "model": "team_mgr.team",
+    "fields": {
+      "group": 2,
+      "name": "Ilima-D",
+        "slug": "Ilima-D"
+    }
+  },
+  {
+    "pk": 11,
+    "model": "team_mgr.team",
+    "fields": {
+      "group": 2,
+      "name": "Ilima-E",
+        "slug": "Ilima-E"
+    }
+  },
+  {
+    "pk": 12,
+    "model": "team_mgr.team",
+    "fields": {
+      "group": 3,
+      "name": "Mokihana-B",
+        "slug": "Mokihana-B"
+    }
+  },
+  {
+    "pk": 13,
+    "model": "team_mgr.team",
+    "fields": {
+      "group": 3,
+      "name": "Mokihana-C",
+        "slug": "Mokihana-C"
+    }
+  },
+  {
+    "pk": 14,
+    "model": "team_mgr.team",
+    "fields": {
+      "group": 3,
+      "name": "Mokihana-D",
+        "slug": "Mokihana-D"
+    }
+  },
+  {
+    "pk": 15,
+    "model": "team_mgr.team",
+    "fields": {
+      "group": 3,
+      "name": "Mokihana-E",
+        "slug": "Mokihana-E"
+    }
+  },
+  {
+    "pk": 16,
+    "model": "team_mgr.team",
+    "fields": {
+      "group": 4,
+      "name": "Lokelani-A",
+        "slug": "Lokelani-A"
+    }
+  },
+  {
+    "pk": 17,
+    "model": "team_mgr.team",
+    "fields": {
+      "group": 4,
+      "name": "Lokelani-B",
+        "slug": "Lokelani-B"
+    }
+  },
+  {
+    "pk": 18,
+    "model": "team_mgr.team",
+    "fields": {
+      "group": 4,
+      "name": "Lokelani-C",
+        "slug": "Lokelani-C"
+    }
+  },
+  {
+    "pk": 19,
+    "model": "team_mgr.team",
+    "fields": {
+      "group": 4,
+      "name": "Lokelani-D",
+        "slug": "Lokelani-D"
+    }
+  },
+  {
+    "pk": 20,
+    "model": "team_mgr.team",
+    "fields": {
+      "group": 4,
+      "name": "Lokelani-E",
+        "slug": "Lokelani-E"
+    }
+  }
+]
