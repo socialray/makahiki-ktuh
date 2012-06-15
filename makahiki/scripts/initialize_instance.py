@@ -86,14 +86,17 @@ def main(argv):
     fixture_path = "fixtures"
     os.system("python manage.py loaddata %s" % os.path.join(fixture_path, "base_*.json"))
 
-    if instance_type == "demo" or instance_type == "test":
+    if instance_type == "demo":
         print "setting up demo data..."
         os.system("python manage.py loaddata %s" % os.path.join(fixture_path, "demo_*.json"))
-        os.system("python manage.py setup_test_data all")
+        # setup 1 user per team, and 1 one-week round
+        os.system("python manage.py setup_test_data all 1 1")
 
     if instance_type == "test":
         print "setting up test data..."
         os.system("python manage.py loaddata %s" % os.path.join(fixture_path, "test_*.json"))
+        # setup 2 user per team, and 3 one-week round
+        os.system("python manage.py setup_test_data all 2 3")
 
 
 if __name__ == '__main__':

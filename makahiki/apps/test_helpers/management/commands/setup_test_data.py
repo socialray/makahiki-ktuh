@@ -4,17 +4,18 @@ Sets up test data given the specified <command>.  Possible commands are:
 
   * create_users <number users for each team>
   * delete_users
-  * rounds
+  * rounds <number_of_rounds>
   * event_dates
   * resource_usages
   * resource_baselines
   * resource_goalsettings
-  * all
+  * all <number users for each team>
 
-If 'all', the number of users per team is set to 2."""
+"""
 
 import datetime
 from django.contrib.auth.models import User
+import sys
 
 from apps.managers.challenge_mgr.challenge_mgr import MakahikiBaseCommand
 from apps.managers.challenge_mgr.models import RoundSettings
@@ -25,20 +26,17 @@ from apps.widgets.resource_goal.models import EnergyGoalSetting, EnergyBaselineH
 from apps.widgets.smartgrid.models import Event
 
 
-DEFAULT_TESTUSER_COUNT = 2
-
-
 class Command(MakahikiBaseCommand):
     """command"""
     help = "Setup the test data. Supported commands are : \n" \
            "  create_users <number_of_users for each team>\n" \
            "  delete_users \n" \
-           "  rounds \n" \
+           "  rounds <number_of_rounds>\n" \
            "  event_dates \n" \
            "  resource_usages \n" \
            "  resource_baselines \n" \
            "  resource_goalsettings \n" \
-           "  all \n"
+           "  all <number_of_users for each team> <number_of_rounds>\n"
 
     def handle(self, *args, **options):
         """set up the test data"""
@@ -49,18 +47,13 @@ class Command(MakahikiBaseCommand):
 
         operation = args[0]
         if operation == 'create_users':
-
-            if len(args) == 1:
-                self.stdout.write("Please specify the number of test users for each team.\n")
-                return
-
-            count = int(args[1])
+            count = self._get_count_args(args, "test users for each team")
             self.create_users(count)
-
         elif operation == 'delete_users':
             self.delete_users()
         elif operation == 'rounds':
-            self.setup_rounds()
+            count = self._get_count_args(args, "rounds")
+            self.setup_rounds(count)
         elif operation == 'event_dates':
             self.setup_event_dates()
         elif operation == 'resource_usages':
@@ -70,15 +63,29 @@ class Command(MakahikiBaseCommand):
         elif operation == 'resource_goalsettings':
             self.setup_resource_goalsettings()
         elif operation == 'all':
+            if len(args) < 2:
+                self.stdout.write("Please specify the number of test users for each team "
+                                  "and number of rounds.\n")
+                return
+            user_count = int(args[1])
+            round_count = int(args[2])
+
             self.delete_users()
-            self.create_users(DEFAULT_TESTUSER_COUNT)
-            self.setup_rounds()
+            self.create_users(user_count)
+            self.setup_rounds(round_count)
             self.setup_event_dates()
             self.setup_resource_usages()
             self.setup_resource_baselines()
             self.setup_resource_goalsettings()
         else:
             self.stdout.write("Invalid command. see help for supported commands.\n")
+
+    def _get_count_args(self, args, mesg):
+        """returns the user count specified from command line argument."""
+        if len(args) == 1:
+            self.stdout.write("Please specify the number of %s.\n" % mesg)
+            sys.exit(1)
+        return int(args[1])
 
     def create_users(self, count):
         """Create the specified number of test users for each team."""
@@ -117,22 +124,21 @@ class Command(MakahikiBaseCommand):
             total_count += 1
         self.stdout.write("%d test users deleted.\n" % total_count)
 
-    def setup_rounds(self):
+    def setup_rounds(self, count):
         """set up test rounds, any existing rounds will be deleted."""
 
         for r in RoundSettings.objects.all():
             r.delete()
 
         start = datetime.datetime.today()
-        end1 = start + datetime.timedelta(days=7)
-        end2 = end1 + datetime.timedelta(days=7)
-        overall_end = end2 + datetime.timedelta(days=7)
+        delta = datetime.timedelta(days=7)
 
-        RoundSettings(name="Round 1", start=start, end=end1).save()
-        RoundSettings(name="Round 2", start=end1, end=end2).save()
-        RoundSettings(name="Overall", start=end2, end=overall_end).save()
+        for i in range(0, count):
+            end = start + delta
+            RoundSettings(name="Round %d" % (i + 1), start=start, end=end).save()
+            start = end
 
-        self.stdout.write("set up 3 rounds, starting from today.\n")
+        self.stdout.write("set up %d one-week rounds, starting from today.\n" % count)
 
     def setup_event_dates(self):
         """adjust event dates to start from the beginning of the competition"""
