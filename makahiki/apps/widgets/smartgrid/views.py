@@ -2,8 +2,6 @@
 
 from django.contrib import messages
 
-import datetime
-
 from django.shortcuts import  render_to_response
 from django.http import HttpResponseRedirect
 from django.core.exceptions import ObjectDoesNotExist
@@ -16,7 +14,6 @@ from apps.managers.score_mgr import score_mgr
 
 from apps.widgets.smartgrid import smartgrid, view_commitments, view_events, view_activities, \
     view_reminders
-from apps.widgets.smartgrid.forms import ActionFeedbackForm
 from apps.widgets.action_feedback.models import ActionFeedback
 
 
@@ -121,29 +118,5 @@ def drop_action(request, action_type, slug):
         pass
 
     messages.error = 'It appears that you are not participating in this action.'
-    # Take them back to the action page.
-    return HttpResponseRedirect(reverse("activity_task", args=(action.type, action.slug,)))
-
-
-@never_cache
-@login_required
-def action_feedback(request, action_type, slug):
-    """Handle feedback for an action."""
-    _ = action_type
-    action = smartgrid.get_action(slug=slug)
-    user = request.user
-
-    form = ActionFeedbackForm(request.POST)
-    if form.is_valid():
-        print form.cleaned_data
-
-    feedback = ActionFeedback()
-    feedback.user = user
-    feedback.action = action
-    feedback.rating = request.POST['Score']
-    feedback.comment = request.POST['comments']
-    feedback.added = datetime.datetime.now()
-    feedback.changed = datetime.datetime.now()
-    feedback.save()
     # Take them back to the action page.
     return HttpResponseRedirect(reverse("activity_task", args=(action.type, action.slug,)))

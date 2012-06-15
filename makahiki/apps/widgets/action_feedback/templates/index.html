@@ -1,11 +1,5 @@
     <div class="content-box-title">
     Activity, Commitment, Event, and Excursion Feedback
-        <a href="#" style="float: right">
-            <img src="{{ STATIC_URL}}images/icons/icon-help-sm.png" width="20"
-                 align="center"
-                 title="Click to get help about this window"
-                 onclick="toggleHelp(event, 'widget', 'action-feedback'); return false;"/>
-        </a>
     </div>
     <div class="content-box-contents">
     <script type="text/javascript" src="{{STATIC_URL}}js/flot/jquery.flot.js"></script>
@@ -13,14 +7,16 @@
     <thead>
         <th>Action</th>
         <th>Average Rating ({{view_objects.action_feedback.analysis.overall_average}}) </th>
+        <th># Feedback</th>
         <th>Feedback</th>
     </thead>
     <tbody>
     {% for key,value in view_objects.action_feedback.analysis.items %}
     {% if key != 'overall_average' %}
     <tr {% if value.average < view_objects.action_feedback.analysis.overall_average %} style="color: red" {%endif%}>
-        <td>{{key}} </td>
+        <td><a href="{% url view_feedback value.action.type value.action.slug %}">{{key}}</a> </td>
         <td>{{value.average}}</td>
+        <td>{{value.count}}</td>
         <td><div id="graph{{forloop.counter}}" class="span3" style="height: 45px;"> </div></td>
     </tr>
     <script type="text/javascript">

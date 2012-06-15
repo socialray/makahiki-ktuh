@@ -1,0 +1,63 @@
+{% extends "logged_in_base.html" %}
+
+{% load markup %}
+
+{% load avatar_tags %}
+
+{% block page_title %}
+    Learn
+{% endblock %}
+
+{% block selected_icon %}selected-learn{% endblock %}
+
+{% block extra_head %}
+<script type="text/javascript" src="{{STATIC_URL}}js/flot/jquery.flot.js"></script>
+{% endblock %}
+
+{% block body %}
+<div class="content-box">
+    <div class="content-box-title">
+        {{action.name}} - Detailed Feedback
+    </div>
+    <div class="contentbox-contents" style="height: 165px;">
+        <div class="container-fluid">
+            <div class="row-fluid">
+                <div id="graph" class="span3" style="height: 145px;"></div>
+                <div class="span9">
+                    <table class="table table-striped">
+                        <thead>
+                            <th width=25%>User</th>
+                            <th width=10%>Rating</th>
+                            <th>Comments</th>
+                        </thead>
+                        <tbody>
+                        {% for f in feedback %}
+                            <tr>
+                                <td>{{f.user.username}}</td>
+                                <td>{{f.rating}}</td>
+                                <td>{{f.comment}}</td>
+                            </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+<script type="text/javascript">
+    $(document).ready(function () {
+    var d1 = {{scale}}
+
+    var options = {
+            series: {stack: true,
+                     lines: {show: false, steps: false },
+                     bars: {show: true, horizontal:true},
+                    }
+        };
+
+    $.plot($("#graph"), [ {data: d1, bars: {show: true, barWidth: 0.6}} ]);
+});
+</script>
+        </div>
+        <center><a class="btn btn-widget padded" href="/status/#graph1">Back to Status</a></center>
+    </div>
+</div>
+{% endblock %}
