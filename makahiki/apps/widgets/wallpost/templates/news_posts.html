@@ -11,7 +11,7 @@
             <a href="#" onclick='
                     $.get("{% url news_more_posts %}?last_post={{post.id}}&page_name={{ view_objects.wallpost.page_name }}", function(data) {
                     $("#view-more-posts").remove();
-                    $("#wall-posts").append(data.contents);
+                    $(".wall-posts").append(data.contents);
                     });
 
                     return false;'>See more</a>

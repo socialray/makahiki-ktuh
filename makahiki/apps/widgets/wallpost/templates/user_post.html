@@ -1,6 +1,6 @@
 {% load avatar_tags %}
 
-<li>
+<li class="user-post">
     <div class="{{cycle_class}} row">
         <div class="wallpost-image span1">
             <img src="{% avatar_url post.user 40 %}" alt="Photo of {{ post.user.get_profile.name }}" align="top"/>
