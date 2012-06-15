@@ -11,7 +11,7 @@ from apps.test_helpers import test_utils
 
 class PrizesFunctionalTestCase(TransactionTestCase):
     """test prize page view"""
-    fixtures = ["demo_prizes.json"]
+    fixtures = ["test_prizes.json"]
 
     def setUp(self):
         """Set up a team and log in."""
