@@ -13,8 +13,29 @@
 <div id="content-main">
     {% for app, models in MAKAHIKI_ADMIN_APPS %}
         <div class="module">
+            <table summary="Models available in the {{ app }} application.">
+                <caption>{{ app }}</caption>
+                <tbody>
+                {% for model in models %}
+                    <tr>
+                        <th scope="row"><a href="/admin/{{ model.url }}">{{ model.name }}</a></th>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    {% endfor %}
+
+    {% for app, models in MAKAHIKI_GAME_APPS %}
+        <div class="module">
         <table summary="Models available in the {{ app }} application.">
-        <caption>{{ app }}</caption>
+        <caption>{{ app }}
+            <span style="float: right;">
+                <button href="javascript:void(0);" class="btn">Disable</button>
+            </span>
+        </caption>
         <tbody>
         {% for model in models %}
             <tr>
@@ -27,6 +48,27 @@
         </table>
         </div>
     {% endfor %}
+
+    {% for app, models in MAKAHIKI_GAME_MECHANIC_APPS %}
+        <div class="module">
+            <table summary="Models available in the {{ app }} application.">
+                <caption>{{ app }}</caption>
+                <tbody>
+                {% for model in models %}
+                    <tr>
+                        <th scope="row"><a href="/admin/{{ model.url }}">{{ model.name }}</a></th>
+                        <td></td>
+                        <td><span style="float: right;">
+                            <button href="javascript:void(0);" class="btn">Disable</button>
+                            </span>
+                        </td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    {% endfor %}
+
  {% include "admin/badge-display.html" %}
 </div>
 {% endblock %}

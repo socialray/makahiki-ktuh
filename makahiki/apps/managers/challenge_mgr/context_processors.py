@@ -55,6 +55,8 @@ def competition(request):
         "AVAILABLE_EVENTS": available_events,
         "ALL_PAGE_INFO": all_page_info,
         "MAKAHIKI_ADMIN_APPS": settings.ADMIN_APPS,
+        "MAKAHIKI_GAME_APPS": settings.GAME_APPS,
+        "MAKAHIKI_GAME_MECHANIC_APPS": settings.GAME_MECHANIC_APPS,
         "ACTIVE_PAGE": page_name
     }
 
