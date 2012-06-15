@@ -75,6 +75,7 @@ def create_player(username, email, firstname, lastname, team_name):
     try:
         user = User.objects.get(username=username)
         user.delete()
+        print "Existing user '%s' deleted." % username
     except ObjectDoesNotExist:
         pass
 
@@ -87,7 +88,13 @@ def create_player(username, email, firstname, lastname, team_name):
     profile.first_name = firstname
     profile.last_name = lastname
     profile.name = firstname + " " + lastname[:1] + "."
-    profile.team = Team.objects.get(name=team_name)
+
+    try:
+        Team.objects.get(name=team_name)
+        profile.team = Team.objects.get(name=team_name)
+    except ObjectDoesNotExist:
+        print "Can not find team '%s', set the team of the profile to None." % team_name
+
     try:
         profile.save()
     except IntegrityError:
