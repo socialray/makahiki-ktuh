@@ -74,8 +74,10 @@ def get_action_likert_scales():
 def build_analysis(action):
     """creates the feedback analysis for the given action."""
     analysis = {}
+    analysis['action'] = action
     analysis['scale'] = get_likert_scale_totals(action)
     analysis['average'] = get_feedback_average(action)
+    analysis['count'] = get_action_feedback(action).count()
     return analysis
 
 
