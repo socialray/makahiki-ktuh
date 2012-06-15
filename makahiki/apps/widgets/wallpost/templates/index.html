@@ -29,7 +29,11 @@
                   </div>
                 </form>
             </div>
-
+            </br>
+            <div class="btn-group" data-toggle="buttons-checkbox">
+                <button id="user-post" class="btn">User Posts</button>
+                <button id="system-post" class="btn">System Posts</button>  
+            </div>
             <ul class="wall-posts">
                 {% include "news_posts.html" %}
             </ul>
@@ -43,6 +47,15 @@
 $(document).ready(function() {
 	  var textarea = $("#id_post");
 	  var post_button = $("#wall-post-submit");
+    $('#user-post').click();
+    $('#system-post').click();
+    $('#user-post').click( function() {
+      $('.user-post').toggle();
+    })
+
+    $('#system-post').click( function() {
+      $('.system-post').toggle();
+    })
 	  if (textarea) {
 	      textarea.keyup(function() {
 	          if (this.value.length === 0 && !post_button.hasClass("disabled")) {
@@ -58,7 +71,8 @@ $(document).ready(function() {
 
 	      post_button.click(function() {
 	          if (!post_button.hasClass("disabled")) {
-	              $.post(this.form.action, $("#news-post-form").serialize(), function(data) {
+	              $.post(this.form.action, $("#news-post-form").serialize(), 
+                function(data) {
 	                  if (data.message) {
 	                      $("#wall-post-errors").html(data.message);
 	                  }
@@ -67,7 +81,7 @@ $(document).ready(function() {
 	                      if ($("#wall-no-posts").is(":visible")) {
 	                          $("#wall-no-posts").hide();
 	                      }
-	                      $(data.contents).hide().prependTo("#wall-posts").fadeIn();
+	                      $(data.contents).prependTo(".wall-posts");
 	                      textarea.val("");
 	                      post_button.addClass("disabled");
 	                  }

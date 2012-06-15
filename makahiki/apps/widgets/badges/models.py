@@ -14,6 +14,15 @@ _MEDIA_LOCATION = "badges"
 
 class Badge(models.Model):
     """Defines Badge model."""
+    THEME_CHOICES = (
+                     ('1', "theme 1"),
+                     ('2', "theme 2"),
+                     ('3', "theme 3"),
+                     ('4', "theme 4"),
+                     ('5', "theme 5"),
+                     ('6', "theme 6"),
+                     )
+
     name = models.CharField(max_length=255,
                             help_text="The name of the badge")
     label = models.CharField(max_length=20,
@@ -30,6 +39,8 @@ class Badge(models.Model):
         help_text="The image of the badge.",)
     award_condition = models.CharField(max_length=1024,
                                        help_text="If the condition is true, the badge is awarded.")
+    theme = models.CharField(max_length=1, choices=THEME_CHOICES, default='6',
+                             help_text="The theme for the badge.")
 
     def __unicode__(self):
         return self.name

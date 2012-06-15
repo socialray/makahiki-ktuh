@@ -19,7 +19,7 @@
       {% if user.badgeaward_set.count > 0 %}
           {% for awarded in user.badgeaward_set.all %}
               <tr>
-                  <td><div class="badge-theme-{{forloop.counter}}"><p>{{ awarded.badge.label }}</p></div></td>
+                  <td><div class="badge-theme-{{awarded.badge.theme}}"><p>{{ awarded.badge.label }}</p></div></td>
                   <td>{{ awarded.badge.name }}</td>
                   <td>{{ awarded.badge.description }}</td>
               </tr>
