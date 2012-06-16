@@ -59,9 +59,7 @@
                     <tr>
                         <td>{{ forloop.counter }}</td>
                         <td>{{ p.profile__name }}
-                        {% for awarded in p.profile.user.badgeaward_set.all %}
-                        <div class="badge-theme-{{forloop.counter}}-small"><p>{{ awarded.badge.label }}</p></div>
-                        {% endfor %}
+                        <div class="badge-theme-1-small"><p>{{p.user.badgeaward_set.all.count}}</p></div>
                         </td>
                         <td>{{ p.points }}</td>
                     </tr> 
@@ -94,7 +92,7 @@
                 {% for p in standings.user_team_standings %}
                     <tr>
                         <td>{{ forloop.counter }}</td>
-                        <td>{{ p.name }}</td>
+                        <td>{{ p.name }}<div class="badge-theme-1-small"><p>{{p.user.badgeaward_set.all.count}}</p></div></td>
                         <td>{{ p.current_round_points }}</td>
                     </tr>
                 {% endfor %}

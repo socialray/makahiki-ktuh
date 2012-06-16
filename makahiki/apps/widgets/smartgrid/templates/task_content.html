@@ -330,9 +330,6 @@ $(document).ready(function () {
         modalElement.on('hidden', function() {
         	log_js_action("smartgrid", "{{action.slug}}", "close-form");
         });
-        if (event) {
-        	document.getElementById('taskModal').style.top = event.pageY + "px";  
-        }
         modalElement.css('margin-top', (modalElement.outerHeight() / 2) * -1);
         modalElement.modal('show');
 

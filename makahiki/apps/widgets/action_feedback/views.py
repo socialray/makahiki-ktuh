@@ -44,8 +44,14 @@ def action_feedback(request, action_type, slug):
     feedback = ActionFeedback()
     feedback.user = user
     feedback.action = action
-    feedback.rating = request.POST['Score']
-    feedback.comment = request.POST['comments']
+    if 'Score' in request.POST:
+        feedback.rating = request.POST['Score']
+    else:
+        feedback.rating = 0
+    if 'comments' in request.POST:
+        feedback.comment = request.POST['comments']
+    else:
+        feedback.comment = ""
     feedback.added = datetime.datetime.now()
     feedback.changed = datetime.datetime.now()
     feedback.save()

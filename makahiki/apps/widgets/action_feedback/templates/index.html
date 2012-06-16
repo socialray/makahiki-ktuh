@@ -17,7 +17,7 @@
         <td><a href="{% url view_feedback value.action.type value.action.slug %}">{{key}}</a> </td>
         <td>{{value.average}}</td>
         <td>{{value.count}}</td>
-        <td><div id="graph{{forloop.counter}}" class="span3" style="height: 45px;"> </div></td>
+        <td><div class="row-fluid"><div id="graph{{forloop.counter}}" class="span12" style="height: 45px;"> </div></div></td>
     </tr>
     <script type="text/javascript">
     $(document).ready(function () {

@@ -5,10 +5,10 @@
 {% load avatar_tags %}
 
 {% block page_title %}
-    Learn
+    {{action.name}}: Feedback
 {% endblock %}
 
-{% block selected_icon %}selected-learn{% endblock %}
+{% block selected_icon %}selected-status{% endblock %}
 
 {% block extra_head %}
 <script type="text/javascript" src="{{STATIC_URL}}js/flot/jquery.flot.js"></script>
@@ -17,7 +17,7 @@
 {% block body %}
 <div class="content-box">
     <div class="content-box-title">
-        {{action.name}} - Detailed Feedback
+        {{action.type|capfirst}}: {{action.name}} - Detailed Feedback
     </div>
     <div class="contentbox-contents" style="height: 165px;">
         <div class="container-fluid">

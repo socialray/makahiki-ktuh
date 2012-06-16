@@ -61,6 +61,9 @@ def points_leaders(num_results=None, round_name=None):
     """
     entries = score_mgr.player_points_leaders(num_results=num_results, round_name=round_name)
     if entries:
+        for e in entries:
+            u = Profile.objects.get(pk=e['profile']).user
+            e['user'] = u
         return entries
     else:
         results = Profile.objects.all().extra(select={'profile__name': 'name', 'points': 0}).values(
