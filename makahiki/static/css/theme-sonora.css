@@ -1099,6 +1099,8 @@ td.energy-status-how-activities-content{vertical-align:text-top;}
 .event-legend{background-color:#c8c1bd;}
 .excursion,.excursion-legend,.excursion a{background-color:#c7a56e;color:#000000;}
 .excursion-legend{background-color:#c7a56e;}
+.filler,.filler-legend,.filler a{background-color:#378137;color:#000000;}
+.filler-legend{background-color:#378137;}
 #task-reminder-form ul{list-style:none;padding:0;margin:0;}
 #task-reminder-form li{clear:both;padding-top:15px;}
 @charset "UTF-8";

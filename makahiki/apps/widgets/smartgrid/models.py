@@ -151,6 +151,7 @@ class Action(models.Model):
         ('commitment', 'Commitment'),
         ('event', 'Event'),
         ('excursion', 'Excursion'),
+        ('filler', 'Filler'),
         )
 
     RESOURCE_CHOICES = (
