@@ -18,7 +18,6 @@ class PrizesFunctionalTestCase(TransactionTestCase):
         challenge_mgr.init()
         self.user = test_utils.setup_user(username="user", password="changeme")
 
-        test_utils.set_two_rounds()
         challenge_mgr.register_page_widget("win", "prizes")
 
         profile = self.user.get_profile()
@@ -29,6 +28,8 @@ class PrizesFunctionalTestCase(TransactionTestCase):
 
     def testIndex(self):
         """Check that we can load the index page."""
+        test_utils.set_two_rounds()
+
         response = self.client.get(reverse("win_index"))
         self.failUnlessEqual(response.status_code, 200)
 
@@ -46,17 +47,11 @@ class PrizesFunctionalTestCase(TransactionTestCase):
         profile.save()
 
         response = self.client.get(reverse("win_index"))
-        self.assertContains(response, "Current leader: " + str(profile), count=4,
+        self.assertContains(response, "Current leader: " + str(profile), count=2,
             msg_prefix="Individual prizes should have user as the leader.")
-        self.assertContains(response, "Current leader: " + str(team), count=2,
+        self.assertContains(response, "Current leader: " + str(team), count=1,
             msg_prefix="Team points prizes should have team as the leader")
-        self.assertContains(response, "Current leader: <span id='round-1-leader'></span>", count=1,
-            msg_prefix="Span for round 1 energy prize should be inserted.")
-        self.assertNotContains(response, "Current leader: <span id='round-2-leader'></span>",
-            msg_prefix="Span for round 2 energy prize should not be inserted.")
-        self.assertContains(response, "Current leader: <span id='overall-leader'></span>", count=1,
-            msg_prefix="Span for overall energy prize should be inserted.")
-        self.assertContains(response, "Current leader: TBD", count=0,
+        self.assertContains(response, "Current leader: TBD", count=4,
             msg_prefix="Round 2 prizes should not have a leader yet.")
 
         # Test XSS vulnerability.
@@ -81,11 +76,9 @@ class PrizesFunctionalTestCase(TransactionTestCase):
         response = self.client.get(reverse("win_index"))
         self.assertContains(response, "Winner: ", count=3,
             msg_prefix="There should be winners for three prizes.")
-        self.assertContains(response, "Current leader: " + str(profile), count=4,
+        self.assertContains(response, "Current leader: " + str(profile), count=2,
             msg_prefix="Individual prizes should have user as the leader.")
-        self.assertContains(response, "Current leader: <span id='round-2-leader'></span>", count=1,
-            msg_prefix="Span for round 2 energy prize should be inserted.")
-        self.assertContains(response, "Current leader: " + str(team), count=2,
+        self.assertContains(response, "Current leader: " + str(team), count=1,
             msg_prefix="Team points prizes should have team as the leader")
 
         # Test XSS vulnerability.

@@ -1,6 +1,7 @@
 """Implements the model for prize management."""
 from django.db import models
 from apps.managers.player_mgr import player_mgr
+from apps.managers.resource_mgr import resource_mgr
 
 from apps.managers.team_mgr import team_mgr
 from apps.managers.team_mgr.models import Group, Team
@@ -21,7 +22,8 @@ class Prize(models.Model):
         )
     AWARD_CRITERIA_CHOICES = (
         ("points", "Points"),
-        ("energy", "Energy")
+        ("energy", "Energy"),
+        ("water", "Water"),
         )
 
     title = models.CharField(max_length=50, help_text="The title of your prize.")
@@ -81,8 +83,10 @@ class Prize(models.Model):
         """Return the prize leader."""
         if self.competition_type == "points":
             return self._points_leader(team)
-        else:
-            return self._energy_leader(team)
+        if self.competition_type == "energy":
+            return resource_mgr.resource_leader("energy", round_name=self.round_name)
+        if self.competition_type == "water":
+            return resource_mgr.resource_leader("water", round_name=self.round_name)
 
     def _points_leader(self, team=None):
         """Return the point leader."""
@@ -108,10 +112,3 @@ class Prize(models.Model):
             return None
 
         raise Exception("'%s' is not implemented yet." % self.award_to)
-
-    def _energy_leader(self, team):
-        """Return the energy leader."""
-        _ = team
-        raise Exception(
-            "Energy leader information is not implemented here.  Needs to be implemented at "
-            "view/controller layer.")

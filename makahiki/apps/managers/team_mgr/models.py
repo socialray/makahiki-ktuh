@@ -20,7 +20,7 @@ class Group(models.Model):
     def __unicode__(self):
         return self.name
 
-    def team_points_leaders(self, num_results=None, round_name="Overall"):
+    def team_points_leaders(self, num_results=None, round_name=None):
         """Returns the top points leaders for the given group."""
         return score_mgr.team_points_leaders_in_group(self, num_results, round_name)
 
@@ -41,23 +41,23 @@ class Team(models.Model):
 
     def current_round_rank(self):
         """Gets the ranking of this team during the current round."""
-        current_round = challenge_mgr.get_current_round()
+        current_round = challenge_mgr.get_round_name()
         return score_mgr.team_rank(self, round_name=current_round)
 
-    def rank(self, round_name="Overall"):
+    def rank(self, round_name=None):
         """Returns the rank of the team across all groups."""
         return score_mgr.team_rank(self, round_name=round_name)
 
     def current_round_points(self):
         """Returns the number of points for the current round."""
-        current_round = challenge_mgr.get_current_round()
+        current_round = challenge_mgr.get_round_name()
         return score_mgr.team_points(self, round_name=current_round)
 
-    def points(self, round_name="Overall"):
+    def points(self, round_name=None):
         """Returns the total number of points for the team.  Optional parameter for a round."""
         return score_mgr.team_points(self, round_name)
 
-    def points_leaders(self, num_results=None, round_name="Overall"):
+    def points_leaders(self, num_results=None, round_name=None):
         """Gets the individual points leaders for the team."""
         return score_mgr.player_points_leaders_in_team(self, num_results, round_name)
 

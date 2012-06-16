@@ -1,35 +1,32 @@
 {% load cache %}
 
-{% with user.get_profile.team as team %}
-{% if team and team.group %}
-{% cache 600 infobar team.name %}
-{% if CURRENT_ROUND_INFO and CURRENT_ROUND_INFO.name != 'Overall' %}
-<div>
-    <div class="rib-set-width-outer-width">
-<h4>{{team}}</h4>{{CURRENT_ROUND_INFO.name}}: {{team.current_round_points}} points. #{{team.current_round_rank}}/{{TEAM_COUNT}}.
-    </div>
-</div> 
-{% if energy_rank_info %}
-<div>
-    <div class="rib-set-width-outer-width">
-<h4>{{team}}</h4>{{CURRENT_ROUND_INFO.name}}: <span id="round-energy-value"></span> kWh.
-#<span id="round-energy-rank"></span>  out of {{TEAM_COUNT}}.
-    </div>
-</div>
-{% endif %}
-{% endif %}
-<div>
-    <div class="rib-set-width-outer-width">
-<h4>{{team}}</h4>Overall: {{team.points}} points. #{{team.rank}} out of {{TEAM_COUNT}}
-    </div>
-</div>
-{% if energy_rank_info %}
-<div>
-    <div class="rib-set-width-outer-width">
-<h4>{{team}}</h4>Overall: {{ energy_rank_info.usage }} kWh. #{{ energy_rank_info.rank }} out of {{TEAM_COUNT}}.
-    </div>
-</div>
-{% endif %}
-{% endcache %}
-{% endif %}
+{% with team=user.get_profile.team %}
+    {% if team and team.group %}
+        {% cache 600 infobar team.name %}
+        <div>
+            <div class="rib-set-width-outer-width">
+                <h4>{{team}}</h4>{{team.current_round_points}} points. #{{team.current_round_rank}}/{{TEAM_COUNT}}.
+            </div>
+        </div>
+
+        {% with energy_rank_info=view_objects.energy_rank_info %}
+            {% if energy_rank_info %}
+                <div>
+                    <div class="rib-set-width-outer-width">
+                        <h4>{{team}}</h4>{{ energy_rank_info.usage }} {{ energy_rank_info.unit }}. #{{ energy_rank_info.rank }}/{{TEAM_COUNT}}.
+                    </div>
+                </div>
+            {% endif %}
+        {% endwith %}
+        {% with water_rank_info=view_objects.water_rank_info %}
+            {% if water_rank_info %}
+                <div>
+                    <div class="rib-set-width-outer-width">
+                        <h4>{{team}}</h4>{{ water_rank_info.usage }} {{ water_rank_info.unit }}. #{{ water_rank_info.rank }}/{{TEAM_COUNT}}.
+                    </div>
+                </div>
+            {% endif %}
+        {% endwith %}
+        {% endcache %}
+    {% endif %}
 {% endwith %}

@@ -70,10 +70,10 @@ def quest_points():
     return score_settings().quest_bonus_points
 
 
-def player_rank(profile, round_name="Overall"):
+def player_rank(profile, round_name=None):
     """user round overall rank"""
     if not round_name:
-        round_name = "Overall"
+        round_name = challenge_mgr.get_round_name()
 
     entry = None
     try:
@@ -102,10 +102,10 @@ def player_rank(profile, round_name="Overall"):
         ).count() + 1
 
 
-def player_rank_in_team(profile, round_name="Overall"):
+def player_rank_in_team(profile, round_name=None):
     """Returns user's rank in his team."""
     if not round_name:
-        round_name = "Overall"
+        round_name = challenge_mgr.get_round_name()
 
     team = profile.team
     entry = None
@@ -135,10 +135,10 @@ def player_rank_in_team(profile, round_name="Overall"):
         ).count() + 1
 
 
-def player_points(profile, round_name="Overall"):
+def player_points(profile, round_name=None):
     """Returns the amount of points the user has in the round."""
     if not round_name:
-        round_name = "Overall"
+        round_name = challenge_mgr.get_round_name()
 
     entry = ScoreboardEntry.objects.filter(profile=profile, round_name=round_name)
     if entry:
@@ -147,10 +147,10 @@ def player_points(profile, round_name="Overall"):
         return 0
 
 
-def player_points_leader(round_name="Overall"):
+def player_points_leader(round_name=None):
     """Returns the points leader (the first place) out of all users, as a Profile object."""
     if not round_name:
-        round_name = "Overall"
+        round_name = challenge_mgr.get_round_name()
 
     entries = ScoreboardEntry.objects.filter(round_name=round_name,).order_by(
         "-points",
@@ -161,12 +161,12 @@ def player_points_leader(round_name="Overall"):
         return None
 
 
-def player_points_leaders(num_results=None, round_name="Overall"):
+def player_points_leaders(num_results=None, round_name=None):
     """Returns the points leaders out of all users, as a dictionary object
     with profile__name and points.
     """
     if not round_name:
-        round_name = "Overall"
+        round_name = challenge_mgr.get_round_name()
 
     entries = ScoreboardEntry.objects.filter(round_name=round_name,).order_by(
         "-points",
@@ -181,7 +181,7 @@ def player_points_leaders(num_results=None, round_name="Overall"):
 
 def player_last_awarded_submission(profile):
     """Returns the last awarded submission date for the profile."""
-    entry = profile.scoreboardentry_set.filter(round_name="Overall")
+    entry = profile.scoreboardentry_set.order_by("-last_awarded_submission")
     if entry:
         return entry[0].last_awarded_submission
     else:
@@ -251,13 +251,10 @@ def player_remove_related_points(profile, related_object):
 
 
 def _update_scoreboard_entry(profile, points, transaction_date):
-    """Update the scoreboard entry for the associated round and Overall round."""
+    """Update the scoreboard entry for the associated round."""
 
-    current_round = challenge_mgr.get_round(transaction_date)
-
+    current_round = challenge_mgr.get_round_name(transaction_date)
     _update_round_scoreboard_entry(profile, current_round, points, transaction_date)
-    if current_round != "Overall":
-        _update_round_scoreboard_entry(profile, "Overall", points, transaction_date)
 
 
 def _update_round_scoreboard_entry(profile, round_name, points, transaction_date):
@@ -289,10 +286,10 @@ def _last_submitted_before(user, transaction_date):
         return None
 
 
-def player_has_points(profile, points, round_name="Overall"):
+def player_has_points(profile, points, round_name=None):
     """Returns True if the user has at least the requested number of points."""
     if not round_name:
-        round_name = "Overall"
+        round_name = challenge_mgr.get_round_name()
 
     entry = ScoreboardEntry.objects.filter(profile=profile, round_name=round_name)
     if entry:
@@ -301,10 +298,10 @@ def player_has_points(profile, points, round_name="Overall"):
         return False
 
 
-def player_points_leaders_in_team(team, num_results=None, round_name="Overall"):
+def player_points_leaders_in_team(team, num_results=None, round_name=None):
     """Gets the individual points leaders for the team, as Profile objects"""
     if not round_name:
-        round_name = "Overall"
+        round_name = challenge_mgr.get_round_name()
 
     results = team.profile_set.select_related('scoreboardentry').filter(
         scoreboardentry__round_name=round_name
@@ -315,10 +312,10 @@ def player_points_leaders_in_team(team, num_results=None, round_name="Overall"):
     return results
 
 
-def team_rank(team, round_name="Overall"):
+def team_rank(team, round_name=None):
     """Returns the rank of the team across all groups."""
     if not round_name:
-        round_name = "Overall"
+        round_name = challenge_mgr.get_round_name()
 
     aggregate = ScoreboardEntry.objects.filter(
         profile__team=team,
@@ -342,20 +339,20 @@ def team_rank(team, round_name="Overall"):
     return count + 1
 
 
-def team_points(team, round_name="Overall"):
+def team_points(team, round_name=None):
     """Returns the total number of points for the team.  Optional parameter for a round."""
     if not round_name:
-        round_name = "Overall"
+        round_name = challenge_mgr.get_round_name()
 
     dictionary = ScoreboardEntry.objects.filter(profile__team=team,
                                                 round_name=round_name).aggregate(Sum("points"))
     return dictionary["points__sum"] or 0
 
 
-def team_points_leader(round_name="Overall"):
+def team_points_leader(round_name=None):
     """Returns the team points leader (the first place) across all groups, as a Team ID."""
     if not round_name:
-        round_name = "Overall"
+        round_name = challenge_mgr.get_round_name()
 
     entry = ScoreboardEntry.objects.values("profile__team").filter(round_name=round_name).annotate(
         points=Sum("points"),
@@ -366,12 +363,12 @@ def team_points_leader(round_name="Overall"):
         return None
 
 
-def team_points_leaders(num_results=None, round_name="Overall"):
+def team_points_leaders(num_results=None, round_name=None):
     """Returns the team points leaders across all groups, as a dictionary profile__team__name
     and points.
     """
     if not round_name:
-        round_name = "Overall"
+        round_name = challenge_mgr.get_round_name()
 
     entries = ScoreboardEntry.objects.values("profile__team__name").filter(
         round_name=round_name).annotate(
@@ -385,10 +382,10 @@ def team_points_leaders(num_results=None, round_name="Overall"):
         return None
 
 
-def team_points_leaders_in_group(group, num_results=None, round_name="Overall"):
+def team_points_leaders_in_group(group, num_results=None, round_name=None):
     """Returns the top points leaders for the given group."""
     if not round_name:
-        round_name = "Overall"
+        round_name = challenge_mgr.get_round_name()
 
     results = group.team_set.filter(
         profile__scoreboardentry__round_name=round_name).annotate(

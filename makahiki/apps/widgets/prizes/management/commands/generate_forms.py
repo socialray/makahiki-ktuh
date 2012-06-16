@@ -24,7 +24,7 @@ class Command(management.base.BaseCommand):
 
     def handle(self, *args, **options):
         """Generates forms for winners."""
-        self.__generate_forms(challenge_mgr.get_current_round_info()["name"])
+        self.__generate_forms(challenge_mgr.get_round_info()["name"])
 
     def __generate_forms(self, round_name):
         """Generate both raffle and prize forms."""
@@ -63,7 +63,6 @@ class Command(management.base.BaseCommand):
             round_name=round_name,
         )
 
-        round_name = round_name if round_name != 'Overall' else None
         # Need to calculate winners for each prize.
         for prize in prizes:
             if prize.award_to == 'individual_team':

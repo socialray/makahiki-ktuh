@@ -13,8 +13,8 @@ def supply(request, page_name):
     num_results = 10 if page_name != "status" else None
     round_standings = {}
 
-    current_round = challenge_mgr.get_current_round()
-    rounds = challenge_mgr.get_round_info()
+    current_round = challenge_mgr.get_round_name()
+    rounds = challenge_mgr.get_all_round_info()
     for key in rounds.keys():
         if key == current_round or page_name == "status":
             round_standings[key] = {
@@ -28,7 +28,7 @@ def supply(request, page_name):
     return {
         "profile": user.get_profile(),
         "team": team,
-        "current_round": current_round or "Overall",
+        "current_round": current_round,
         "round_standings": round_standings,
         "no_carousel": page_name == "status",
     }

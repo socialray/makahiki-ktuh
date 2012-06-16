@@ -396,17 +396,6 @@
         }
     },
     {
-        "pk": 46,
-        "model": "help.helptopic",
-        "fields": {
-            "category": "faq",
-            "parent_topic": null,
-            "slug": "list-raffle-prizes",
-            "contents": "## Introduction\r\n\r\nThe [Raffle Game](/help/faq/how-does-raffle-work/) is another way to win prizes in the Kukui Cup. Since raffle tickets don't expire at the end of Round 1 or Round 2, you can decide how you want to use your raffle tickets: use them in the round you earned them, or save them for use in a later round. To help you decide what strategy you wish to use, here is a list of raffle prizes that will be available in each round. It's possible we might add additional prizes, but you can be assured that at least these prizes will be available.\r\n\r\nNote that unallocated raffle tickets **will** expire at the end of the Overall Round, so you should definitely allocate any tickets you have as the competition comes to an end.\r\n\r\n## Round 1 raffle prizes\r\n\r\n* **Custom Skateboard with Kukui Cup design**\r\n* 3 Belkin Conserve Insight Energy Meters (separate items)\r\n* Aloha Salads gift card ($10)\r\n* Bob Marley Cami\r\n* HIC Backpack\r\n* 2 Belly Dance lessons (separate items)\r\n* Board Shorts\r\n* 3 Bubbies double dip cones (separate items)\r\n* Kukui Cup Eco-Tote\r\n* Jack Johnson To The Sea t-shirt (sizes S, M, L, XL)\r\n* North Shore t-shirt\r\n* Papa Luck's coupon\r\n* Rash Guard\r\n* 5 Tea Farm gift certifcates (together)\r\n* Kukui Cup Water Bottle\r\n\r\n## Round 2 raffle prizes\r\n\r\n* **Ukulele signed by Jake Shimabukuro**\r\n* Aloha Salads gift card ($10)\r\n* 2 Belly Dance lessons (separate items)\r\n* 2 Board Shorts (separate items)\r\n* 3 Bubbies double dip cones (separate items)\r\n* Kukui Cup Eco-Tote\r\n* 3 Belkin Conserve Insight Energy Meters (separate items)\r\n* Hinano shirt\r\n* Honu Print\r\n* Jack Johnson To The Sea t-shirt (sizes S, M, L, XL)\r\n* L&L tshirt\r\n* Logitech Revue (Google TV box)\r\n* Rasta Shirt\r\n* 5 Tea Farm gift certifcates (together)\r\n* Kukui Cup Water Bottle\r\n\r\n## Overall Round raffle prizes\r\n\r\n* **Guitar signed by Jack Johnson**\r\n* 2 Aloha Salads gift cards ($10, separate items)\r\n* Belly Dance lesson\r\n* 2 Board Shorts (separate items)\r\n* 3 Bubbies double dip cones (separate items)\r\n* Kukui Cup Eco-Tote\r\n* 3 Belkin Conserve Insight Energy Meters (separate items)\r\n* Jack Johnson To The Sea t-shirt (sizes S, M, L, XL)\r\n* Navigation Print\r\n* Rash Guard\r\n* Rasta Shirt\r\n* 5 Tea Farm gift certifcates (together)\r\n* Kukui Cup Water Bottle\r\n",
-            "title": "List of raffle prizes"
-        }
-    },
-    {
         "pk": 37,
         "model": "help.helptopic",
         "fields": {

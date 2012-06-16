@@ -30,8 +30,8 @@ def notify_round_started():
         return
 
     today = datetime.datetime.today()
-    current_round = "Overall Round"
-    previous_round = 'Overall Round'
+    current_round = None
+    previous_round = None
 
     for key, value in settings.COMPETITION_ROUNDS.items():
         # We're looking for a round that ends today and another that starts

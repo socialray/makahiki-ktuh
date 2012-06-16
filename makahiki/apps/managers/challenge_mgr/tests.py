@@ -17,7 +17,7 @@ class ContextProcessorFunctionalTestCase(TransactionTestCase):
     def testRoundInfo(self):
         """Tests that round info is available for the page to process."""
         test_utils.set_competition_round()
-        current_round = challenge_mgr.get_current_round()
+        current_round = challenge_mgr.get_round_name()
 
         User.objects.create_user("user", "user@test.com", password="changeme")
         self.client.login(username="user", password="changeme")
@@ -38,7 +38,7 @@ class BaseUnitTestCase(TransactionTestCase):
 
         test_utils.set_competition_round()
 
-        current = challenge_mgr.get_current_round()
+        current = challenge_mgr.get_round_name()
         self.assertEqual(current, current_round,
             "Test that the current round is returned.")
 
@@ -47,6 +47,6 @@ class BaseUnitTestCase(TransactionTestCase):
         settings.COMPETITION_ROUNDS = {
             "Round 1": {"start": start, "end": end, }, }
 
-        current_round = challenge_mgr.get_current_round()
+        current_round = challenge_mgr.get_round_name()
         self.assertTrue(current_round is None,
             "Test that there is no current round.")

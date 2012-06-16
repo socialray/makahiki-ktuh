@@ -44,7 +44,7 @@ class RafflePrizesTestCase(TransactionTestCase):
         self.assertContains(response,
             "Your total raffle tickets: 0 Allocated right now: 0 Available: 0",
             msg_prefix="User should not have any raffle tickets.")
-        deadline = challenge_mgr.get_current_round_info()["end"] - datetime.timedelta(hours=2)
+        deadline = challenge_mgr.get_round_info()["end"] - datetime.timedelta(hours=2)
         date_string = deadline.strftime("%A, %B %d, %Y, ")
         # Workaround since strftime doesn't remove the leading 0 in hours.
         hour = deadline.hour

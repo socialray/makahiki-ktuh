@@ -63,7 +63,7 @@ def get_hourly_goal_data(team, resource):
 def get_daily_goal_data(team, resource):
     """:return: the daily energy goal data."""
 
-    round_info = challenge_mgr.get_current_round_info()
+    round_info = challenge_mgr.get_round_info()
     if not round_info:
         return None
 

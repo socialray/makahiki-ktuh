@@ -1,5 +1,6 @@
 """The manager for managing team."""
 from django.db.models.aggregates import Count
+from apps.managers.challenge_mgr import challenge_mgr
 from apps.managers.score_mgr import score_mgr
 from apps.managers.team_mgr.models import Team
 
@@ -9,10 +10,10 @@ def team_members(team):
     return team.profile_set.all()
 
 
-def team_points_leader(round_name="Overall"):
+def team_points_leader(round_name=None):
     """Returns the team points leader (the first place) across all groups, as a Team object."""
     if not round_name:
-        round_name = "Overall"
+        round_name = challenge_mgr.get_round_name()
 
     team_id = score_mgr.team_points_leader(round_name=round_name)
     if team_id:
@@ -21,7 +22,7 @@ def team_points_leader(round_name="Overall"):
         return Team.objects.all()[0]
 
 
-def team_points_leaders(num_results=None, round_name="Overall"):
+def team_points_leaders(num_results=None, round_name=None):
     """Returns the team points leaders across all groups, as a dictionary profile__team__name
     and points.
     """
@@ -37,10 +38,10 @@ def team_points_leaders(num_results=None, round_name="Overall"):
         return results
 
 
-def team_active_participation(num_results=None, round_name="Overall"):
+def team_active_participation(num_results=None, round_name=None):
     """Calculate active participation."""
     if not round_name:
-        round_name = "Overall"
+        round_name = challenge_mgr.get_round_name()
 
     active_participation = Team.objects.filter(
         profile__scoreboardentry__points__gte=score_mgr.active_threshold_points(),

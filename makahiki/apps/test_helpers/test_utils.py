@@ -25,31 +25,31 @@ def setup_user(username, password):
 
 
 def set_competition_round():
-    """set the competition round for test."""
+    """set the competition round for test. current date is in round 1"""
     start = datetime.datetime.today() - datetime.timedelta(days=1)
     end = start + datetime.timedelta(days=7)
-    overall_end = end + datetime.timedelta(days=7)
+    end2 = end + datetime.timedelta(days=7)
     settings.COMPETITION_ROUNDS = {
         "Round 1": {"start": start, "end": end, },
-        "Overall": {"start": end, "end": overall_end}
+        "Round 2": {"start": end, "end": end2}
         }
     settings.COMPETITION_START = start
-    settings.COMPETITION_END = overall_end
+    settings.COMPETITION_END = end2
 
 
 def set_two_rounds():
-    """set two rounds for this test"""
+    """set two rounds for this test. current date is in round 2"""
     start = datetime.datetime.today() - datetime.timedelta(days=8)
     end1 = start + datetime.timedelta(days=7)
     end2 = end1 + datetime.timedelta(days=7)
-    overall_end = end2 + datetime.timedelta(days=7)
+    end3 = end2 + datetime.timedelta(days=7)
     settings.COMPETITION_ROUNDS = {
         "Round 1": {"start": start, "end": end1, },
         "Round 2": {"start": end1, "end": end2, },
-        "Overall": {"start": end2, "end": overall_end, },
+        "Round 3": {"start": end2, "end": end3, },
         }
     settings.COMPETITION_START = start
-    settings.COMPETITION_END = overall_end
+    settings.COMPETITION_END = end3
 
 
 def create_activity():

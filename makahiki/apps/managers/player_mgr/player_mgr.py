@@ -46,7 +46,7 @@ def canopy_members():
     return members
 
 
-def points_leader(round_name="Overall"):
+def points_leader(round_name=None):
     """Returns the points leader (the first place) out of all users, as a Profile object."""
     entry = score_mgr.player_points_leader(round_name=round_name)
     if entry:
@@ -55,7 +55,7 @@ def points_leader(round_name="Overall"):
         return Profile.objects.all()[0]
 
 
-def points_leaders(num_results=None, round_name="Overall"):
+def points_leaders(num_results=None, round_name=None):
     """Returns the points leaders out of all users, as a dictionary object
     with profile__name and points.
     """

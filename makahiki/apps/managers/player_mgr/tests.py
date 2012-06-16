@@ -61,15 +61,6 @@ class ProfileLeadersTests(TransactionTestCase):
             player_mgr.points_leader(round_name=self.current_round), profile2,
             "User 2 should still be the leading profile.")
 
-        # Have the first user earn more points outside of the round.
-        profile.add_points(2,
-            datetime.datetime.today() - datetime.timedelta(days=2), "Test")
-        profile.save()
-
-        self.assertEqual(
-            player_mgr.points_leader(round_name=self.current_round), profile2,
-            "User 2 should still be the leading profile.")
-
     def testLeadersOverall(self):
         """
         Test that we can retrieve the leaders in a given round.
@@ -413,12 +404,3 @@ class ProfileUnitTests(TransactionTestCase):
 
         self.assertEqual(profile.current_round_points(), points + 10,
             "Check that the user has 10 more points in the current round.")
-
-        profile.add_points(10,
-            datetime.datetime.today() - datetime.timedelta(days=2), "Test")
-
-        self.assertEqual(profile.current_round_points(),
-                         points + 10,
-                         "Check that the number of points did "
-                         "not change when points are "
-                         "awarded outside of a round.")

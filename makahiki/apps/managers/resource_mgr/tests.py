@@ -26,7 +26,7 @@ class ResourceManagerTestCase(TransactionTestCase):
             usage=100,
         )
 
-        rank = resource_mgr.energy_team_rank_info(self.team)["rank"]
+        rank = resource_mgr.resource_team_rank_info(self.team, "energy")["rank"]
         usage = resource_mgr.team_resource_usage(date=date, team=self.team, resource="energy")
         self.assertEqual(rank, 1, "The team should be first rank.")
         self.assertEqual(usage, 100, "The team usage is not correct.")

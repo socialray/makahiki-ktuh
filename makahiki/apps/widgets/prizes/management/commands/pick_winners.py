@@ -17,7 +17,7 @@ class Command(management.base.BaseCommand):
 
     def handle(self, *args, **options):
         """Picks winners for raffle deadlines that have passed."""
-        round_name = challenge_mgr.get_current_round_info()["name"]
+        round_name = challenge_mgr.get_round_info()["name"]
         self.stdout.write("Picking winners for %s prizes\n" % round_name)
         self.__pick_winners(RafflePrize.objects.filter(round_name=round_name,
                                                        winner__isnull=False))

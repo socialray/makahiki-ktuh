@@ -68,7 +68,7 @@ def raffle_users():
         r2_tickets = user.raffleticket_set.filter(
             raffle_prize__deadline__round_name='Round 2').count()
         overall_tickets = user.raffleticket_set.filter(
-            raffle_prize__deadline__round_name='Overall').count()
+            raffle_prize__deadline__round_name='Round 3').count()
         r1_points = ScoreboardEntry.objects.get(profile__user=user,
                                                 round_name='Round 1').points
         r1_unused = max((r1_points / 25) - r1_tickets, 0)

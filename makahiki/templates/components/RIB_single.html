@@ -2,52 +2,39 @@
 {% load cache %}
 {# {% cache 600 infobar request.user.username %} #}
   {% with user.get_profile as profile %}
-    {% if CURRENT_ROUND_INFO and CURRENT_ROUND_INFO.name != 'Overall' %}
     <div>
             <h4>{{profile.name}}</h4>
-            {{CURRENT_ROUND_INFO.name}}: {{profile.current_round_points}} points #{{profile.current_round_team_rank}}/{{TEAM_MEMBER_COUNT}} in {{profile.team.name}}.
+            {{profile.current_round_points}} points #{{profile.current_round_team_rank}}/{{TEAM_MEMBER_COUNT}} in {{profile.team.name}}.
     </div>
     <div>
             <h4>{{profile.name}}</h4>
-            {{CURRENT_ROUND_INFO.name}}: {{profile.current_round_points}} points #{{profile.current_round_overall_rank}}/{{OVERALL_MEMBER_COUNT}} overall.
+            {{profile.current_round_points}} points #{{profile.current_round_overall_rank}}/{{OVERALL_MEMBER_COUNT}} overall.
     </div>
-{% endif %}
-    <div>
-            <h4>{{profile.name}}</h4>
-            Overall: {{profile.points}} points #{{profile.team_rank}}/{{TEAM_MEMBER_COUNT}} in {{profile.team.name}}
-    </div>
-    <div>
-            <h4>{{profile.name}}</h4>
-            Overall: {{profile.points}} points #{{profile.overall_rank}}/{{OVERALL_MEMBER_COUNT}}
-    </div>
-{% endwith %}
+  {% endwith %}
 {% with user.get_profile.team as team %}
     <div>
             <h4>{{team}}</h4>
-            {{CURRENT_ROUND_INFO.name}}: {{team.current_round_points}} points. #{{team.current_round_rank}}/{{TEAM_COUNT}}.
+            {{team.current_round_points}} points. #{{team.current_round_rank}}/{{TEAM_COUNT}}.
     </div>               
-{% if energy_rank_info %}
+    {% if view_objects.energy_rank_info %}
     <div>
             <h4>{{team}}</h4>
-            {{CURRENT_ROUND_INFO.name}}: <span id="round-energy-value"></span> kWh.
-            #<span id="round-energy-rank"></span>  out of {{TEAM_COUNT}}.
-    </div>
-{% endif %}
-    <div>
-            <h4>{{team}}</h4>
-            Overall: {{team.points}} points. #{{team.rank}} out of {{TEAM_COUNT}}
-    </div>    
-{% if energy_rank_info %}
-    <div>
-            <h4>{{team}}</h4>
-            Overall: {{ energy_rank_info.usage }} kWh. #{{ energy_rank_info.rank }} out of {{TEAM_COUNT}}.
+            {{ view_objects.energy_rank_info.usage }} kWh. #{{ view_objects.energy_rank_info.rank }}/{{TEAM_COUNT}}.
     </div>
     {% endif %}
-  {% endwith %}  
+    {% if view_objects.water_rank_info %}
+        <div>
+            <h4>{{team}}</h4>
+            {{ view_objects.water_rank_info.usage }} kWh. #{{ view_objects.water_rank_info.rank }}/{{TEAM_COUNT}}.
+        </div>
+    {% endif %}
+{% endwith %}
+
     <div>
             <h4>{{ CURRENT_ROUND_INFO.name }}</h4>
             Ends on {{CURRENT_ROUND_INFO.end}}
-    </div>   
+    </div>
+
     {% for event in AVAILABLE_EVENTS %}
     <div>
             <h4><a href="{% url activity_task event.type event.slug %}">{{ event.title }}</a></h4>

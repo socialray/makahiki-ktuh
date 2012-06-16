@@ -46,12 +46,6 @@ class PrizeTest(TransactionTestCase):
             value=5,
         )
 
-        prize2.round_name = "Overall"
-        try:
-            prize2.save()
-        except IntegrityError:
-            self.fail("IntegrityError exception should not be thrown.")
-
         prize2.round_name = "Round 1"
         prize2.competition_type = "energy"
         try:

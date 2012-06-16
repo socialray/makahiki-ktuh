@@ -65,7 +65,7 @@ class Profile(models.Model):
 
     def current_round_points(self):
         """Returns the total number of points for the user.  Optional parameter for a round."""
-        current_round = challenge_mgr.get_current_round()
+        current_round = challenge_mgr.get_round_name()
         return score_mgr.player_points(self, round_name=current_round)
 
     def points(self):
@@ -78,7 +78,7 @@ class Profile(models.Model):
 
     def current_round_overall_rank(self):
         """Returns the overall rank of the user for the current round."""
-        current_round = challenge_mgr.get_current_round()
+        current_round = challenge_mgr.get_round_name()
         return score_mgr.player_rank(self, round_name=current_round)
 
     def overall_rank(self):
@@ -87,7 +87,7 @@ class Profile(models.Model):
 
     def current_round_team_rank(self):
         """Returns the rank of the user for the current round in their own team."""
-        current_round = challenge_mgr.get_current_round()
+        current_round = challenge_mgr.get_round_name()
         return score_mgr.player_rank_in_team(self, round_name=current_round)
 
     def team_rank(self):

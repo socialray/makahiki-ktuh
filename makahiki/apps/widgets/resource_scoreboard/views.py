@@ -1,4 +1,5 @@
 """Handle the rendering of the energy scoreboard widget."""
+from django.conf import settings
 
 from apps.managers.challenge_mgr import challenge_mgr
 from apps.managers.resource_mgr import resource_mgr
@@ -20,8 +21,8 @@ def resource_supply(request, resource, page_name):
     team = user.get_profile().team
     round_resource_ranks = {}
 
-    current_round = challenge_mgr.get_current_round()
-    rounds = challenge_mgr.get_round_info()
+    current_round = challenge_mgr.get_round_name()
+    rounds = settings.COMPETITION_ROUNDS
     for key in rounds.keys():
         if key == current_round or page_name == "status":
             round_resource_ranks[key] = resource_mgr.resource_ranks(resource, key)

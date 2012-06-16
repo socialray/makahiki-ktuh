@@ -18,7 +18,7 @@ def supply(request, page_name):
     """Supply the view_objects contents, which provides all raffle data."""
     _ = page_name
     user = request.user
-    current_round_info = challenge_mgr.get_current_round_info()
+    current_round_info = challenge_mgr.get_round_info()
     if not current_round_info:
         # no in any round
         return {}
@@ -57,7 +57,7 @@ def add_ticket(request, prize_id):
     if request.method == "POST":
         prize = get_object_or_404(RafflePrize, id=prize_id)
         user = request.user
-        current_round_info = challenge_mgr.get_current_round_info()
+        current_round_info = challenge_mgr.get_round_info()
         deadline = current_round_info["end"] - datetime.timedelta(hours=RAFFLE_END_PERIOD)
         in_deadline = datetime.datetime.today() <= deadline
 

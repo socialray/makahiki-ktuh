@@ -55,18 +55,6 @@ class DormUnitTestCase(TransactionTestCase):
                          profile2.team,
                          "The user's team should have changed.")
 
-        # Test that adding points outside of the round does not affect the
-        # leaders.
-        profile.add_points(10,
-                           datetime.datetime.today() -\
-                           datetime.timedelta(days=2),
-                           "test")
-        profile.save()
-
-        self.assertEqual(self.groups[0].team_points_leaders(round_name=self.current_round)[0],
-                         profile2.team,
-                         "The leader of the team should not change.")
-
         # Test that adding points to a user in a different dorm does not
         # change affect these standings.
         profile1 = self.users[1].get_profile()
@@ -191,18 +179,6 @@ class TeamLeadersTestCase(TransactionTestCase):
                          profile2.team,
                          "The user's team should have changed.")
 
-        # Test that adding points outside of the round does not affect the
-        # leaders.
-        profile.add_points(10,
-                           datetime.datetime.today() -
-                           datetime.timedelta(days=2),
-                           "test")
-        profile.save()
-
-        self.assertEqual(team_mgr.team_points_leader(round_name=self.current_round),
-                         profile2.team,
-                         "The leader of the team should not change.")
-
         # Test that a tie is handled properly.
         profile.add_points(1, datetime.datetime.today(), "test")
         profile.save()
@@ -252,18 +228,6 @@ class TeamLeadersTestCase(TransactionTestCase):
         self.assertEqual(profile.team.points_leaders(round_name=self.current_round)[0],
                          profile2,
                          "User 2 should be in the lead in the user's team.")
-
-        # Test that adding points outside of the round does not affect the
-        # leaders.
-        profile.add_points(10,
-                           datetime.datetime.today() -
-                           datetime.timedelta(days=2),
-                           "test")
-        profile.save()
-
-        self.assertEqual(profile.team.points_leaders(round_name=self.current_round)[0],
-                         profile2,
-                         "The leader of the team should not change.")
 
         # Test that a tie is handled properly.
         profile.add_points(5, datetime.datetime.today(), "test")
@@ -388,16 +352,6 @@ class TeamsUnitTestCase(TransactionTestCase):
                          "Check that the number of points are correct in "
                          "this round.")
 
-        profile.add_points(10,
-                           datetime.datetime.today() -
-                           datetime.timedelta(days=3),
-                           "test")
-        profile.save()
-
-        self.assertEqual(self.test_team.current_round_points(),
-                         10,
-                         "Check that the number of points did not change.")
-
     def testOverallRankWithPoints(self):
         """Check that calculating the rank is correct based on point value."""
         # Create a test user.
@@ -476,16 +430,6 @@ class TeamsUnitTestCase(TransactionTestCase):
                          2,
                          "Check the team is now ranked number 2.")
 
-        user.get_profile().add_points(user_points,
-                                      datetime.datetime.today() -
-                                      datetime.timedelta(days=3),
-                                      "test")
-        user.get_profile().save()
-
-        self.assertEqual(self.test_team.current_round_rank(),
-                         2,
-                         "Check the team is still ranked number 2.")
-
     def testOverallRankWithSubmissionDate(self):
         """Check that rank calculation is correct in the case of ties."""
         # Create a test user.
@@ -494,8 +438,7 @@ class TeamsUnitTestCase(TransactionTestCase):
         user_points = 10
         user.get_profile().team = self.test_team
         user.get_profile().add_points(user_points,
-                                      datetime.datetime.today() -
-                                      datetime.timedelta(days=3),
+                                      datetime.datetime.today(),
                                       "test")
         user.get_profile().save()
 
@@ -507,7 +450,7 @@ class TeamsUnitTestCase(TransactionTestCase):
         user.save()
         user.get_profile().team = test_team2
         user.get_profile().add_points(user_points,
-                                      datetime.datetime.today(),
+                                      datetime.datetime.today() + datetime.timedelta(days=1),
                                       "test")
         user.get_profile().save()
 

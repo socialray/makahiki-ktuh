@@ -65,10 +65,11 @@ def rounds_info():
     init()
 
     info_str = ""
-    for r in settings.COMPETITION_ROUNDS.keys():
+    rounds = get_all_round_info()
+    for r in rounds.keys():
         info_str += r + " ["
-        info_str += "start: %s" % settings.COMPETITION_ROUNDS[r]["start"].date().isoformat()
-        info_str += ", end: %s" % settings.COMPETITION_ROUNDS[r]["end"].date().isoformat()
+        info_str += "start: %s" % rounds[r]["start"].date().isoformat()
+        info_str += ", end: %s" % rounds[r]["end"].date().isoformat()
         info_str += "]"
     return info_str
 
@@ -132,56 +133,42 @@ def enabled_widgets():
     return info_str
 
 
+def get_all_round_info():
+    """Returns a dictionary containing all the round information."""
+    return settings.COMPETITION_ROUNDS
+
+
 def get_round_info(round_name=None):
-    """Returns a dictionary containing round information."""
-    rounds = settings.COMPETITION_ROUNDS
+    """Returns a dictionary containing round information, if round_name is not specified,
+    returns the current round info."""
+    rounds = get_all_round_info()
     if not round_name:
-        return rounds
-    elif round_name in rounds:
-        return rounds[round_name]
+        round_name = get_round_name()
+
+    if round_name in rounds:
+        return {"name": round_name,
+                "start": rounds[round_name]['start'],
+                "end": rounds[round_name]['end'],
+                }
     else:
         return None
 
 
-def get_current_round_info():
-    """Returns the current round and associated dates, or None if not in a round."""
-    rounds = get_round_info()
-    today = datetime.datetime.today()
-    for key in rounds.keys():
+def get_round_name(submission_date=None):
+    """Return the round name associated with the specified date, or else return None.
+    if submission_date is not specified, return the current round name."""
+    rounds = get_all_round_info()
+    if not submission_date:
+        submission_date = datetime.datetime.today()
+
+    # Find which round this belongs to.
+    for key in rounds:
         start = rounds[key]["start"]
         end = rounds[key]["end"]
-        if today >= start and today < end:
-            return {
-                "name": key,
-                "start": start,
-                "end": end,
-                }
+        if submission_date >= start and submission_date < end:
+            return key
 
-    # No current round.
     return None
-
-
-def get_current_round():
-    """Return the current round name, or None if not in a round."""
-    round_info = get_current_round_info()
-    if round_info:
-        return round_info["name"]
-    else:
-        return None
-
-
-def get_round(submission_date):
-    """Return the round associated with the specified date, or else "Overall"."""
-    rounds = settings.COMPETITION_ROUNDS
-    # Find which round this belongs to.
-    if rounds is not None:
-        for key in rounds:
-            start = rounds[key]["start"]
-            end = rounds[key]["end"]
-            if submission_date >= start and submission_date < end:
-                return key
-
-    return "Overall"
 
 
 def in_competition():

@@ -34,8 +34,7 @@ class ScoreboardTest(TransactionTestCase):
         profile.save()
 
         response = self.client.get(reverse("learn_index"))
-        self.assertContains(response, "Round 1", count=12,
-            msg_prefix="This should display the current round scoreboard.")
+
         self.assertEqual(response.context["view_objects"]["scoreboard"][
             "round_standings"]["Round 1"]["team_standings"][0]["profile__team__name"],
             profile.team.name,
@@ -60,21 +59,3 @@ class ScoreboardTest(TransactionTestCase):
             "round_standings"]["Round 1"]["user_team_standings"][0].current_round_points(),
             10,
             "The user should have 10 points this round.")
-
-        # Get points outside of the round and see if affects the standings.
-        profile.add_points(10, datetime.datetime.today() - datetime.timedelta(days=2), "test")
-        profile.save()
-
-        response = self.client.get(reverse("learn_index"))
-        self.assertEqual(response.context["view_objects"]["scoreboard"][
-            "round_standings"]["Round 1"]["team_standings"][0]["points"],
-            10,
-            "Test that the user's team still has 10 points.")
-        self.assertEqual(response.context["view_objects"]["scoreboard"][
-            "round_standings"]["Round 1"]["profile_standings"][0]["points"],
-            10,
-            "The user still should have 10 points this round.")
-        self.assertEqual(response.context["view_objects"]["scoreboard"][
-            "round_standings"]["Round 1"]["user_team_standings"][0].current_round_points(),
-            10,
-            "The user still should have 10 points this round.")

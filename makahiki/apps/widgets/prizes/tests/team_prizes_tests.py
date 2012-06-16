@@ -84,44 +84,6 @@ class DormTeamPrizeTests(TransactionTestCase):
         self.assertEqual(self.prize.leader(profile1.team), profile1.team,
             "The leader in profile1's dorm is not profile1.")
 
-    def testOverallLeader(self):
-        """
-        Tests that we can retrieve the overall individual points leader for a round prize.
-        """
-        self.prize.round_name = "Overall"
-        self.prize.save()
-
-        # Test one user will go ahead in points.
-        profile = self.users[0].get_profile()
-        profile.add_points(10, datetime.datetime.today() + datetime.timedelta(minutes=1), "test")
-        profile.save()
-
-        self.assertEqual(self.prize.leader(profile.team), profile.team,
-            "The user's team is not leading in the prize.")
-
-        # Test a user in a different group.
-        profile1 = self.users[1].get_profile()
-        profile1.add_points(profile.points() + 1,
-            datetime.datetime.today() + datetime.timedelta(minutes=1), "test")
-        profile1.save()
-
-        self.assertEqual(self.prize.leader(profile.team), profile.team,
-            "The leader for this prize in first users dorm should not change.")
-        self.assertEqual(self.prize.leader(profile1.team), profile1.team,
-            "The leader in profile1's dorm is not profile1.")
-
-        # Test that a user in a different team but same dorm changes the leader for
-        # the original user.
-        profile2 = self.users[2].get_profile()
-        profile2.add_points(profile.points() + 1,
-            datetime.datetime.today() + datetime.timedelta(minutes=1), "test")
-        profile2.save()
-
-        self.assertEqual(self.prize.leader(profile.team), profile2.team,
-            "The leader for this prize did not change.")
-        self.assertEqual(self.prize.leader(profile1.team), profile1.team,
-            "The leader in profile1's dorm is not profile1.")
-
     def tearDown(self):
         """
         Deletes the created image file in prizes.
@@ -174,31 +136,6 @@ class OverallTeamPrizeTest(TransactionTestCase):
             "The user's team is not leading in the prize.")
 
         # Test that a user in a different team changes the leader for the original user.
-        profile2 = self.users[2].get_profile()
-        profile2.add_points(profile.points() + 1,
-            datetime.datetime.today() + datetime.timedelta(minutes=1), "test")
-        profile2.save()
-
-        self.assertEqual(self.prize.leader(profile.team), profile2.team,
-            "The leader for this prize did not change.")
-
-    def testOverallLeader(self):
-        """
-        Tests that we can retrieve the overall individual points leader for a round prize.
-        """
-        self.prize.round_name = "Overall"
-        self.prize.save()
-
-        # Test one user will go ahead in points.
-        profile = self.users[0].get_profile()
-        profile.add_points(10, datetime.datetime.today() + datetime.timedelta(minutes=1), "test")
-        profile.save()
-
-        self.assertEqual(self.prize.leader(profile.team), profile.team,
-            "The user's team is not leading in the prize.")
-
-        # Test that a user in a different team but same dorm changes the leader for the
-        # original user.
         profile2 = self.users[2].get_profile()
         profile2.add_points(profile.points() + 1,
             datetime.datetime.today() + datetime.timedelta(minutes=1), "test")
