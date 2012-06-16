@@ -207,30 +207,35 @@ INSTALLED_APPS += ('south', 'django_nose',)
 ADMIN_APPS = (
     ("Challenge", ({"name": "Challenge settings", "url": "challenge_mgr/challengesettings"},
                    {"name": "Round settings", "url": "challenge_mgr/roundsettings"},
-                   {"name": "Page info", "url": "challenge_mgr/pageinfo"},
-                   {"name": "Score settings", "url": "score_mgr/scoresettings"})),
+                   {"name": "Score settings", "url": "score_mgr/scoresettings"},
+                   {"name": "Helps", "url": "help/helptopic"},
+                   {"name": "Makahiki logs", "url": "log_mgr/makahikilog"})),
     ("Player", ({"name": "Groups", "url": "team_mgr/group"},
                    {"name": "Teams", "url": "team_mgr/team"},
                    {"name": "Users", "url": "auth/user"},
                    {"name": "Profiles", "url": "player_mgr/profile"},
-                   {"name": "Team Posts", "url": "team_mgr/post"})),
-    ("Resource", ({"name": "Energy goal settings", "url": "resource_goal/energygoalsetting"},
-                   {"name": "Energy usages", "url": "resource_mgr/energyusage"},
-                   {"name": "Water goal settings", "url": "resource_goal/watergoalsetting"},
+                   {"name": "Team Wall Posts", "url": "team_mgr/post"})),
+)
+
+GAME_APPS = (
+    ("Energy Game", ({"name": "Energy goal settings", "url": "resource_goal/energygoalsetting"},
+                   {"name": "Energy usages", "url": "resource_mgr/energyusage"})),
+    ("Water Game", ({"name": "Water goal settings", "url": "resource_goal/watergoalsetting"},
                    {"name": "Water usages", "url": "resource_mgr/waterusage"})),
-    ("Smartgrid", ({"name": "Levels", "url": "smartgrid/level"},
+    ("Smartgrid Game", ({"name": "Levels", "url": "smartgrid/level"},
                    {"name": "Categories", "url": "smartgrid/category"},
-                   {"name": "Activities", "url": "smartgrid/activity"},
-                   {"name": "Commitments", "url": "smartgrid/commitment"},
-                   {"name": "Events", "url": "smartgrid/event"},
-                   {"name": "Action members", "url": "smartgrid/actionmember"})),
-    ("Prize", ({"name": "Challenge Prizes", "url": "prizes/prize"},
-                   {"name": "Raffle Prizes", "url": "raffle/raffleprize"})),
-    ("Badge", ({"name": "Badges", "url": "badges/badge"},)),
-    ("Misc", ({"name": "Helps", "url": "help/helptopic"},
-                   {"name": "Quests", "url": "quests/quest"},
-                   {"name": "Makahiki logs", "url": "log_mgr/makahikilog"})),
-    )
+                   {"name": "Activity Actions", "url": "smartgrid/activity"},
+                   {"name": "Commitment Actions", "url": "smartgrid/commitment"},
+                   {"name": "Event Actions", "url": "smartgrid/event"},
+                   {"name": "Action Submissions", "url": "smartgrid/actionmember"})),
+    ("Top Scorer Game", ({"name": "Challenge Prizes", "url": "prizes/prize"},)),
+    ("Raffle Game", ({"name": "Raffle Prizes", "url": "raffle/raffleprize"},)),
+)
+
+GAME_MECHANIC_APPS = (
+    ("Game Mechanics", ({"name": "Quests", "url": "quests/quest"},
+                       {"name": "Badges", "url": "badges/badge"},)),
+)
 
 ##########################################################
 # INSTALLED Themes. Please keep them in alphabetical order

@@ -11,6 +11,8 @@
             "use_internal_auth": true,
             "wattdepot_server_url": "http://server.wattdepot.org:8194",
             "email_enabled": false,
+            "landing_participant_text": "### I'm a registered player  \r\n##### Sign in using your registered username and password",
+            "landing_non_participant_text": "###I'm not registered\r\n#####but I'd like to know more about the Kukui Cup",
             "competition_team_label": "Team"
         }
     },
