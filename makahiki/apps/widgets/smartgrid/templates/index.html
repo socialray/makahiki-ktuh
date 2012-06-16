@@ -66,7 +66,7 @@
                 show: false
             });
             modalElement.find('#unlock_condition').html(task_unlock_condition);
-
+            modalElement.css('margin-top', (modalElement.outerHeight() / 2) * -1);
             modalElement.modal('show');
         }
     });
@@ -91,6 +91,7 @@
         modalElement.on('hidden', function() {
             log_js_action(type, slug, 'view-lock-close');
         });
+        modalElement.css('margin-top', (modalElement.outerHeight() / 2) * -1);
         modalElement.modal('show');
     }
 </script>

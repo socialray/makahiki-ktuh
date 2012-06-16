@@ -6,10 +6,11 @@
                  title="Click to get help about this window"
                  onclick="toggleHelp(event, 'widget', 'prizes'); return false;"/></a>
     </div>
+    <div id="outer-box">
     <div class="row-fluid">
-        <div id="prizes-carousel" class="span12">
-            {% include "view_prizes/prize_list.html" %}
-        </div>
+        {% include "view_prizes/prize_list.html" %}
+    </div>
+
     </div>
 </div>
 <div id="prizeModal" class="modal hide fade">
@@ -27,15 +28,15 @@
         // Fix the height of all items to that height.
         var maxHeight = 45;
         var height = 0;
-        $("#prizes-carousel .item").each(function(index, item) {
+        $("#prizes-carousel .table").each(function(index, item) {
           height = $(item).height();
-          // console.log("height of item is " + height);
+//           console.log("height of item is " + height);
           if (height > maxHeight){
             maxHeight = height;
           }
         });
         
-//         $("#prizes-carousel").height(maxHeight);
+        $("#outer-box").height(maxHeight + 200);
 
         var outerWidth = $("#prizes-list").width();
         $(".set-width-outer-width").each (function(index, item) {
@@ -47,7 +48,8 @@
           fx: "fade",
           timeout: 3500,
           delay:  -1000,
-          sync: true        	
+          sync: true,
+          pager: '#nav'         	
         });
     });
     $(window).resize(function() {
@@ -58,19 +60,17 @@
             item.style.width = outerWidth + "px";
         });     
     });    
-    
-    var togglePrize = function(event, name, title, description) {
-        var modalElement = $('#prizeModal');
-        // set up event logging
-        modalElement.on('shown', function() {
-            log_js_action(name, title, 'prize-open');
-        });
-        modalElement.on('hidden', function() {
-            log_js_action(name, title, 'prize-close');
-        });
-        modalElement.find('.modal-header h3').html(name + ": " + title);
-        modalElement.find('.modal-body').html(description);
-        document.getElementById('prizeModal').style.top = event.pageY + "px";        
-        modalElement.modal('show');
-    }   
+var togglePrize = function(event, name, title) {
+    var modalElement = $('#' + name + '-' + title);
+    // set up event logging
+    modalElement.on('shown', function() {
+        log_js_action(name, title, 'prize-open');
+    });
+    modalElement.on('hidden', function() {
+        log_js_action(name, title, 'prize-close');
+    });
+    modalElement.css('margin-top', ($('#prizeModal').outerHeight() / 2) * -1);
+    modalElement.modal('show');
+}   
 </script>
+

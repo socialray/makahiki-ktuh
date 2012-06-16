@@ -17,8 +17,9 @@ def supply(request, page_name):
         "Event": smartgrid.get_popular_actions("event", "pending", num_results),
         "Excursion": smartgrid.get_popular_actions("excursion", "pending", num_results),
         }
-
+    count = len(popular_tasks)
     return {
         "popular_tasks": popular_tasks,
         "no_carousel": page_name == "status",
+        "range": count,
         }

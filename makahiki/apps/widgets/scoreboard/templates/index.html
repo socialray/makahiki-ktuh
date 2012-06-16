@@ -136,9 +136,16 @@
         {% endfor %}
         {% if not view_objects.scoreboard.no_carousel %}
         </div>
+        <center>
+            <div id="nav" class="nav nav-page-list"> 
+            {% for i in range  %} 
+                <a class="" href="#">{{i}}</a> 
+            {% endfor %}
+            </div> 
+        </center>
         <div id="resource-scoreboard-message" class="scoreboard-message">#1 at end of round wins a
              <a href="/win"> prize!</a>
-        </div>       
+        </div> 
         {% endif %}
     </div>
 {% if not view_objects.scoreboard.no_carousel %}
@@ -168,7 +175,8 @@
               fx: "fade",
               timeout: 3500,
               delay: -1000,
-              sync: true
+              sync: true,
+              pager:  '#nav' 
           });
     });
 

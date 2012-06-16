@@ -10,9 +10,10 @@ def supply(request, page_name):
     _ = page_name
     team = request.user.get_profile().team
     prizes = _get_prizes(team)
-
+    count = len(prizes)
     return {
         "prizes": prizes,
+        "range": count,
         }
 
 

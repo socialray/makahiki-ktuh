@@ -24,6 +24,7 @@ def supply(request, page_name):
                 "user_team_standings": team.points_leaders(num_results, key) if \
                                             team and page_name != "status" else None,
             }
+    count = len(rounds)
 
     return {
         "profile": user.get_profile(),
@@ -31,6 +32,7 @@ def supply(request, page_name):
         "current_round": current_round,
         "round_standings": round_standings,
         "no_carousel": page_name == "status",
+        "range": count,
     }
 
 
