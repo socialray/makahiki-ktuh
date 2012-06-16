@@ -7,7 +7,7 @@ from django.contrib.contenttypes import generic
 from django.contrib.contenttypes.models import ContentType
 
 
-class ScoreSettings(models.Model):
+class ScoreSetting(models.Model):
     """score settings models."""
 
     setup_points = models.IntegerField(
@@ -38,8 +38,8 @@ class ScoreSettings(models.Model):
 
     def save(self, *args, **kwargs):
         """Custom save method."""
-        super(ScoreSettings, self).save(*args, **kwargs)
-        settings.CHALLENGE.score_settings = self
+        super(ScoreSetting, self).save(*args, **kwargs)
+        settings.CHALLENGE.score_setting = self
 
 
 class ScoreboardEntry(models.Model):

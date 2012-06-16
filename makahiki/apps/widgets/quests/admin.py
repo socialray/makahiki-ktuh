@@ -5,6 +5,7 @@ import sys
 from django.contrib import admin
 from django import forms
 from django.contrib.auth.models import User
+from apps.managers.challenge_mgr import challenge_mgr
 from apps.utils import utils
 
 from apps.widgets.quests.models import Quest
@@ -56,3 +57,4 @@ class QuestAdmin(admin.ModelAdmin):
     form = QuestAdminForm
 
 admin.site.register(Quest, QuestAdmin)
+challenge_mgr.register_game_admin_model("quests", Quest)

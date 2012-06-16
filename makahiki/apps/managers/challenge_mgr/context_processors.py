@@ -54,9 +54,9 @@ def competition(request):
         "DEFAULT_VIEW_OBJECTS": default_view_objects,
         "AVAILABLE_EVENTS": available_events,
         "ALL_PAGE_INFO": all_page_info,
-        "MAKAHIKI_ADMIN_APPS": settings.ADMIN_APPS,
-        "MAKAHIKI_GAME_APPS": settings.GAME_APPS,
-        "MAKAHIKI_GAME_MECHANIC_APPS": settings.GAME_MECHANIC_APPS,
+        "MAKAHIKI_SITE_ADMIN_MODELS": settings.SITE_ADMIN_MODELS,
+        "MAKAHIKI_SYS_ADMIN_MODELS": settings.SYS_ADMIN_MODELS,
+        "MAKAHIKI_GAME_ADMIN_MODELS": challenge_mgr.get_game_admin_models(),
         "ACTIVE_PAGE": page_name
     }
 
@@ -66,6 +66,7 @@ def _get_default_view_objects(request):
 
     default_view_objects = {}
     for widget in settings.INSTALLED_DEFAULT_WIDGET_APPS:
+
         view_module_name = 'apps.widgets.' + widget + '.views'
         page_views = importlib.import_module(view_module_name)
         widget = widget.replace(".", "_")

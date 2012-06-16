@@ -148,10 +148,8 @@ INSTALLED_APPS = (
 # INSTALLED DEFAULT Widgets for all pages
 ################################
 INSTALLED_DEFAULT_WIDGET_APPS = (
-    'quests',
     'notifications',
     'ask_admin',
-    'home',
     'help',
 )
 for widget in INSTALLED_DEFAULT_WIDGET_APPS:
@@ -164,6 +162,7 @@ INSTALLED_WIDGET_APPS = (
     'action_feedback',
     'ask_admin',
     'badges',
+    'home',
     'resource_goal',
     'resource_goal.energy',
     'resource_goal.water',
@@ -204,10 +203,10 @@ INSTALLED_APPS += ('south', 'django_nose',)
 ################
 # ADMIN APPS
 ################
-ADMIN_APPS = (
-    ("Challenge", ({"name": "Challenge settings", "url": "challenge_mgr/challengesettings"},
-                   {"name": "Round settings", "url": "challenge_mgr/roundsettings"},
-                   {"name": "Score settings", "url": "score_mgr/scoresettings"},
+SITE_ADMIN_MODELS = (
+    ("Challenge", ({"name": "Challenge settings", "url": "challenge_mgr/challengesetting"},
+                   {"name": "Round settings", "url": "challenge_mgr/roundsetting"},
+                   {"name": "Score settings", "url": "score_mgr/scoresetting"},
                    {"name": "Helps", "url": "help/helptopic"},
                    {"name": "Makahiki logs", "url": "log_mgr/makahikilog"})),
     ("Player", ({"name": "Groups", "url": "team_mgr/group"},
@@ -217,24 +216,13 @@ ADMIN_APPS = (
                    {"name": "Team Wall Posts", "url": "team_mgr/post"})),
 )
 
-GAME_APPS = (
-    ("Energy Game", ({"name": "Energy goal settings", "url": "resource_goal/energygoalsetting"},
-                   {"name": "Energy usages", "url": "resource_mgr/energyusage"})),
-    ("Water Game", ({"name": "Water goal settings", "url": "resource_goal/watergoalsetting"},
-                   {"name": "Water usages", "url": "resource_mgr/waterusage"})),
-    ("Smartgrid Game", ({"name": "Levels", "url": "smartgrid/level"},
-                   {"name": "Categories", "url": "smartgrid/category"},
-                   {"name": "Activity Actions", "url": "smartgrid/activity"},
-                   {"name": "Commitment Actions", "url": "smartgrid/commitment"},
-                   {"name": "Event Actions", "url": "smartgrid/event"},
-                   {"name": "Action Submissions", "url": "smartgrid/actionmember"})),
-    ("Top Scorer Game", ({"name": "Challenge Prizes", "url": "prizes/prize"},)),
-    ("Raffle Game", ({"name": "Raffle Prizes", "url": "raffle/raffleprize"},)),
-)
-
-GAME_MECHANIC_APPS = (
-    ("Game Mechanics", ({"name": "Quests", "url": "quests/quest"},
-                       {"name": "Badges", "url": "badges/badge"},)),
+SYS_ADMIN_MODELS = (
+    ("Other Settings", (
+                   {"name": "Page Infos", "url": "challenge_mgr/pageinfo"},
+                   {"name": "Game Infos", "url": "challenge_mgr/gameinfo"},
+                   {"name": "Resource Settings", "url": "resource_mgr/resourcesetting"})),
+    ("Point History", ({"name": "Points Transactions", "url": "score_mgr/pointstransaction"},
+                   {"name": "Scoreboard Entries", "url": "score_mgr/scoreboardentry"})),
 )
 
 ##########################################################
@@ -333,7 +321,7 @@ SERIALIZATION_MODULES = {
 # Dummy settings for CHALLENGE
 ##############################
 # Create a dummy challenge object and variables so that IDEs are OK.
-# This object will be instantiated for real from the DB ChallengeSettings object.
+# This object will be instantiated for real from the DB ChallengeSetting object.
 class Challenge():
     "Encapsulates settings for the challenge."
     competition_name = None

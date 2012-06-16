@@ -3,6 +3,7 @@
 from django.contrib import admin
 from django import forms
 from django.core.urlresolvers import reverse
+from apps.managers.challenge_mgr import challenge_mgr
 
 from apps.widgets.raffle.models import RafflePrize
 
@@ -29,3 +30,4 @@ class RafflePrizeAdmin(admin.ModelAdmin):
     list_display = ('title', 'round_name', 'value')
 
 admin.site.register(RafflePrize, RafflePrizeAdmin)
+challenge_mgr.register_game_admin_model("raffle", RafflePrize)

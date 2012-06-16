@@ -11,6 +11,14 @@ def media_file_path(prefix=None):
         return settings.MAKAHIKI_MEDIA_PREFIX
 
 
+def get_challenge_mgr_predicates():
+    """Returns the predicates defined in smartgrid module."""
+    from apps.managers.challenge_mgr.predicates import game_enabled
+    return {
+            "game_enabled": game_enabled,
+            }
+
+
 def get_smartgrid_predicates():
     """Returns the predicates defined in smartgrid module."""
     from apps.widgets.smartgrid.predicates import completed_action, approved_action, \
@@ -47,6 +55,7 @@ def eval_predicates(predicates, user):
 
     allow_dict = {"True": True, "False": False, "user": user}
     allow_dict.update(get_player_mgr_predicates())
+    allow_dict.update(get_challenge_mgr_predicates())
     allow_dict.update(get_smartgrid_predicates())
 
     return eval(user_predicates, {"__builtins__": None}, allow_dict)

@@ -12,7 +12,7 @@ _MEDIA_LOCATION_UPLOAD = "uploads"
 """location for uploaded files."""
 
 
-class ChallengeSettings(models.Model):
+class ChallengeSetting(models.Model):
     """Defines the global settings for the challenge."""
 
     THEME_CHOICES = ((key, key) for key in settings.INSTALLED_THEMES)
@@ -136,22 +136,18 @@ class ChallengeSettings(models.Model):
         help_text="The text of the about page. " +
                   settings.MARKDOWN_TEXT)
 
-    class Meta:
-        """Meta."""
-        verbose_name_plural = "Challenge settings"
-
     def __unicode__(self):
         return self.site_name
 
     def save(self, *args, **kwargs):
         """Custom save method."""
-        super(ChallengeSettings, self).save(*args, **kwargs)
-        ChallengeSettings.set_settings()
+        super(ChallengeSetting, self).save(*args, **kwargs)
+        ChallengeSetting.set_settings()
 
     @staticmethod
     def set_settings():
         """get the CALLENGE setting from DB and set the global django settings."""
-        settings.CHALLENGE, _ = ChallengeSettings.objects.get_or_create(pk=1)
+        settings.CHALLENGE, _ = ChallengeSetting.objects.get_or_create(pk=1)
 
         # email settings
         if settings.CHALLENGE.email_enabled:
@@ -185,9 +181,20 @@ class ChallengeSettings(models.Model):
                                                ldap.SCOPE_SUBTREE, "(uid=%(user)s)")
 
 
+class UploadImage(models.Model):
+    """Defines the global settings for the challenge."""
+    image = models.ImageField(
+        upload_to=media_file_path(_MEDIA_LOCATION_UPLOAD),
+        max_length=255, blank=True, null=True,
+        help_text="The uploaded image.",)
+
+    def __unicode__(self):
+        return self.image.name
+
+
 class Sponsor(models.Model):
     """Defines the sponsor for this challenge."""
-    challenge = models.ForeignKey("ChallengeSettings")
+    challenge = models.ForeignKey("ChallengeSetting")
 
     priority = models.IntegerField(
         default="1",
@@ -215,7 +222,7 @@ class Sponsor(models.Model):
         return self.name
 
 
-class RoundSettings(models.Model):
+class RoundSetting(models.Model):
     """Defines the round settings for this challenge.
 
     Start means the competition will start at midnight on that date.
@@ -236,23 +243,22 @@ class RoundSettings(models.Model):
     class Meta:
         """Meta"""
         ordering = ['start']
-        verbose_name_plural = "Round settings"
 
     def __unicode__(self):
         return self.name
 
     def save(self, *args, **kwargs):
         """Custom save method."""
-        super(RoundSettings, self).save(*args, **kwargs)
-        RoundSettings.set_settings()
+        super(RoundSetting, self).save(*args, **kwargs)
+        RoundSetting.set_settings()
 
     @staticmethod
     def set_settings():
         """set the round info in the system settings."""
-        rounds = RoundSettings.objects.all()
-        if rounds.count() == 0:
-            RoundSettings.objects.create()
-            rounds = RoundSettings.objects.all()
+        rounds = RoundSetting.objects.all()
+        if not rounds:
+            RoundSetting.objects.create()
+            rounds = RoundSetting.objects.all()
 
         #store in a round dictionary and calculate start and end
         rounds_dict = {}
@@ -298,18 +304,26 @@ class PageInfo(models.Model):
         max_length=255,
         help_text="The conditions string to unlock the page.",)
 
+    class Meta:
+        """meta"""
+        ordering = ['priority', ]
+
     def __unicode__(self):
         return self.name
 
 
-class PageSettings(models.Model):
-    """Defines the page and widget settings."""
+class PageSetting(models.Model):
+    """Defines widgets in a page."""
     WIDGET_CHOICES = ((key, key) for key in settings.INSTALLED_WIDGET_APPS)
 
     page = models.ForeignKey("PageInfo")
 
+    game = models.ForeignKey("GameInfo",
+        blank=True, null=True,
+        help_text="The name of the game in the page.")
+
     widget = models.CharField(
-        default="home",
+        blank=True, null=True,
         help_text="The name of the widget in the page.",
         choices=WIDGET_CHOICES,
         max_length=50,)
@@ -320,20 +334,52 @@ class PageSettings(models.Model):
 
     class Meta:
         """meta"""
-        unique_together = (("page", "widget", ), )
-        ordering = ['page', 'widget', ]
-        verbose_name_plural = "Page settings"
+        unique_together = (("page", "game", "widget", ), )
+        ordering = ['page', "game", 'widget', ]
 
     def __unicode__(self):
         return ""
 
 
-class UploadImage(models.Model):
-    """Defines the global settings for the challenge."""
-    image = models.ImageField(
-        upload_to=media_file_path(_MEDIA_LOCATION_UPLOAD),
-        max_length=255, blank=True, null=True,
-        help_text="The uploaded image.",)
+class GameInfo(models.Model):
+    """Defines the game info."""
+    name = models.CharField(
+        help_text="The name of the game.",
+        max_length=50,)
+    enabled = models.BooleanField(
+        default=True,
+        help_text="Enable ?",)
+    priority = models.IntegerField(
+        default=1,
+        help_text="The priority (ordering) of the game.")
+
+    class Meta:
+        """meta"""
+        ordering = ['priority', ]
 
     def __unicode__(self):
-        return self.image.name
+        return self.name
+
+
+class GameSetting(models.Model):
+    """Defines the widgets in a game."""
+    WIDGET_CHOICES = ((key, key) for key in settings.INSTALLED_WIDGET_APPS)
+
+    game = models.ForeignKey("GameInfo")
+
+    widget = models.CharField(
+        help_text="The name of the widget in the page.",
+        choices=WIDGET_CHOICES,
+        max_length=50,)
+
+    enabled = models.BooleanField(
+        default=True,
+        help_text="Enable ?",)
+
+    class Meta:
+        """meta"""
+        unique_together = (("game", "widget", ), )
+        ordering = ['game', 'widget', ]
+
+    def __unicode__(self):
+        return ""

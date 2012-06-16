@@ -29,13 +29,13 @@ def resource_supply(request, page_name):
         else:
             daily_goal = get_daily_goal_data(team, page_name)
 
-    resource_settings = resource_mgr.get_resource_settings(page_name)
+    resource_setting = resource_mgr.get_resource_setting(page_name)
 
     return {
         "golow_activities": golow_activities,
         "hourly_goal": hourly_goal,
         "daily_goal": daily_goal,
-        "resource": resource_settings,
+        "resource": resource_setting,
         }
 
 
@@ -85,7 +85,7 @@ def get_daily_goal_data(team, resource):
             goal_info["filler_days"] = range(0, 6 - date.weekday())
 
         goal = resource_goal.team_goal(date, team, resource)
-        unit = resource_mgr.get_resource_settings(resource).unit
+        unit = resource_mgr.get_resource_setting(resource).unit
         goal_usage = resource_goal.team_daily_goal_usage(date, team, resource) / 1000
         goal_info["goal_info"] = "%d %s" % (goal_usage, unit)
         if goal:

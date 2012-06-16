@@ -1,7 +1,7 @@
 [
     {
         "pk": 1,
-        "model": "challenge_mgr.challengesettings",
+        "model": "challenge_mgr.challengesetting",
         "fields": {
             "competition_name": "Kukui Cup/Demo",
             "site_name": "Demo Site",

@@ -22,6 +22,8 @@ class HomeFunctionalTestCase(TransactionTestCase):
         User.objects.create_user("user", "user@test.com", password="changeme")
         self.client.login(username="user", password="changeme")
 
+        challenge_mgr.register_page_widget("home", "home")
+
         response = self.client.get(reverse("home_index"))
         self.failUnlessEqual(response.status_code, 200)
 
@@ -81,6 +83,7 @@ class SetupWizardFunctionalTestCase(TransactionTestCase):
         self.user = User.objects.create_user("user",
                                              "user@test.com",
                                              password="changeme")
+        challenge_mgr.register_page_widget("home", "home")
 
         self.client.login(username="user", password="changeme")
 

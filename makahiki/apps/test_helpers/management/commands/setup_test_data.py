@@ -18,7 +18,7 @@ from django.contrib.auth.models import User
 import sys
 
 from apps.managers.challenge_mgr.challenge_mgr import MakahikiBaseCommand
-from apps.managers.challenge_mgr.models import RoundSettings
+from apps.managers.challenge_mgr.models import RoundSetting
 from apps.managers.resource_mgr.models import EnergyUsage, WaterUsage
 from apps.managers.team_mgr.models import Team
 from apps.widgets.resource_goal.models import EnergyGoalSetting, EnergyBaselineHourly, \
@@ -127,7 +127,7 @@ class Command(MakahikiBaseCommand):
     def setup_rounds(self, count):
         """set up test rounds, any existing rounds will be deleted."""
 
-        for r in RoundSettings.objects.all():
+        for r in RoundSetting.objects.all():
             r.delete()
 
         start = datetime.datetime.today()
@@ -135,7 +135,7 @@ class Command(MakahikiBaseCommand):
 
         for i in range(0, count):
             end = start + delta
-            RoundSettings(name="Round %d" % (i + 1), start=start, end=end).save()
+            RoundSetting(name="Round %d" % (i + 1), start=start, end=end).save()
             start = end
 
         self.stdout.write("set up %d one-week rounds, starting from today.\n" % count)

@@ -4,7 +4,7 @@ from django.db import models
 from apps.managers.team_mgr.models import Team
 
 
-class ResourceSettings(models.Model):
+class ResourceSetting(models.Model):
     """resource settings model."""
 
     RESOURCE_CHOICE = (
