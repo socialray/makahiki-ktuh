@@ -1,4 +1,5 @@
 {% load markup %}
+<div id="prizes-carousel" class="span12">
 
 {% for name, prizes in view_objects.prizes.prizes.items reversed %}
 {# note: This is NOT an extraneous div! These classes cannot go into the table! #}
@@ -19,22 +20,10 @@
             <td class="prize">
                 {% if prize.image %}<img src="{{prize.image.url}}"/>{% endif %}
                 <a id="{{name|slugify}}-{{prize.title|slugify}}-link" 
-                   onClick="togglePrize(event, '{{name|escape}}', '{{prize.title|escape}}', '{{prize.long_description|escapejs|markdown}}'); return false;"
+                   onClick="togglePrize(event, '{{name|slugify}}', '{{prize.title|slugify}}'); return false;"
                         href="#">
                     {{ prize.title }}
                 </a>
-                <!-- Modal Dialog stuff -->
-<!--                 <div id="{{name|slugify}}-{{prize.title|slugify}}" class="modal hide fade"> -->
-<!--                     <div class="modal-header"> -->
-<!--                         <h3>{{name}}: {{prize.title}}</h3> -->
-<!--                     </div> -->
-<!--                     <div class="modal-body"> -->
-<!--                         {{ prize.long_description|markdown }} -->
-<!--                     </div> -->
-<!--                     <div class="modal-footer"> -->
-<!--                         <a href="#" class="btn" data-dismiss="modal">Close</a> -->
-<!--                     </div> -->
-<!--                 </div> -->
             </td>
             <td>
                {{ prize.short_description|markdown }} <br/>
@@ -58,4 +47,21 @@
     </table>
 </div>
 {% endfor %}
-
+</div>
+{% for name, prizes in view_objects.prizes.prizes.items reversed %}
+    {% for prize in prizes %}
+       <!-- Modal Dialog stuff -->
+       <div id="{{name|slugify}}-{{prize.title|slugify}}" class="modal hide fade">
+           <div class="modal-header">
+               <a class="close" data-dismiss="modal">x</a>
+               <h3>{{name}}: {{prize.title}}</h3>
+           </div>
+           <div class="modal-body">
+               {{ prize.long_description|markdown }}
+           </div>
+           <div class="modal-footer">
+               <a href="#" class="btn" data-dismiss="modal">Close</a>
+           </div>
+        </div>
+    {% endfor %}
+{% endfor %}    

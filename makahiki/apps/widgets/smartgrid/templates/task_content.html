@@ -333,6 +333,7 @@ $(document).ready(function () {
         if (event) {
         	document.getElementById('taskModal').style.top = event.pageY + "px";  
         }
+        modalElement.css('margin-top', (modalElement.outerHeight() / 2) * -1);
         modalElement.modal('show');
 
         $('#id_response').focus();

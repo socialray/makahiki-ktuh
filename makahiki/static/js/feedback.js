@@ -64,12 +64,16 @@ jQuery(document).ready(function() {
   
   jQuery("#header-feedback1").click(function() {
 //    jQuery("#feedback-dialog").dialog("open");
-	  $('#feedbackModal').modal('show');
+	  var modalElement = $('#feedbackModal');
+      modalElement.css('margin-top', (modalElement.outerHeight() / 2) * -1);
+	  modalElement.modal('show');
   });
   
   jQuery("#header-feedback2").click(function() {
 //    jQuery("#feedback-dialog").dialog("open");
-	  $('#feedbackModal').modal('show');
+	  var modalElement = $('#feedbackModal');
+      modalElement.css('margin-top', (modalElement.outerHeight() / 2) * -1);
+	  modalElement.modal('show');
   });
 
   jQuery("#feedback-submit").click(function() {
@@ -83,6 +87,8 @@ jQuery(document).ready(function() {
           jQuery("#feedback-spinner").hide();
     	  $('#feedbackModal').modal('hide');
     	  $('#feedbackModal textarea').val("");
+    	  var modalElement = $('#successModal');
+          modalElement.css('margin-top', (modalElement.outerHeight() / 2) * -1);
     	  $('#successModal').modal('show');
 //        jQuery("#feedback-success").dialog("open");
       });

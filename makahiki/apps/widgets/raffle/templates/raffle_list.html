@@ -64,19 +64,8 @@
     });
     
     var toggleRafflePrize = function (event, name) {
-        var y = event.pageY;
-        if (y < 500) {
-        	
-        } else if (y < 1000) {
-        	y = y / 2;
-        } else {
-        	y = y / 3;
-        }
-//         console.log("event y = " + event.pageY + " y = " + y)
-//         console.log("name = " + name);
     	var modalElement = $('#' + name);
-   	    document.getElementById(name).style.top = y + "px";
+        modalElement.css('margin-top', (modalElement.outerHeight() / 2) * -1);
         modalElement.modal('show');
-
     }
 </script>
