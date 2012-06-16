@@ -1,0 +1,17 @@
+ 
+<div class="content-box-title url-title"> 
+http://www.kukuicup.org
+</div> 
+<div class="widget-content">
+    <input type="text" id="url"> 
+    <input type="button" onclick="showurl();" value="Go">
+    <iframe name="theiframe" src="http://www.kukuicup.org" type="text/html"></iframe>
+    <script type="text/javascript">
+        function showurl(){ 
+          $('.url-title').html(document.getElementById('url').value);
+          if (document.getElementById('url').value != "") {
+            theiframe.location.href = document.getElementById('url').value; 
+          } 
+        }
+    </script>  
+</div>  

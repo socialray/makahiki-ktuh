@@ -920,6 +920,7 @@ ul{list-style:none;}
 .modal-body{background-color:#6a8bbd;color:#000000;}
 .modal-footer{background-color:#6a8bbd;color:#000000;}
 .modal-header{background-image:-webkit-gradient(linear, 0 0, 0 100%, from(#c7a56e), to(#f2eadc));background-image:-webkit-linear-gradient(top, #c7a56e, #f2eadc);background-image:-moz-linear-gradient(top, #c7a56e, #f2eadc);background-image:-ms-linear-gradient(top, #c7a56e, #f2eadc);background-image:-o-linear-gradient(top, #c7a56e, #f2eadc);background-image:linear-gradient(top, #c7a56e, #f2eadc);color:#000000;}
+.nav-page-list a{padding:5px 0px;}
 .navbar{color:#dfdbd9;}
 .navbar .nav>li>a{color:#dfdbd9;text-align:center;font-size:13px;}
 .navbar .nav>li>a:hover{color:#c7a56e;}
@@ -1070,8 +1071,10 @@ td.energy-status-how-activities-content{vertical-align:text-top;}
 .energy-status-how-table,.energy-status-how-activities-content,.energy-status-how-activities-table{width:100%;}
 @media (max-width:920px){.energy-display-text{text-align:center;font-size:22pt;font-weight:bold;line-height:22pt;}}@media (max-width:920px){.energy-legend-text{font-size:14pt;line-height:18pt;}}@charset "UTF-8";
 #score-carousel th:last-child,#score-carousel td:last-child{text-align:center;}
+.nav-page-list a{padding:0px 5px;}
 @charset "UTF-8";
 .scoreboard-message{font-size:12pt;margin-left:30px;margin-top:0.5em;text-align:center;}
+.nav-page-list a{padding:0px 5px;}
 @charset "UTF-8";
 .activities-grid{line-height:15px;padding-left:2px;border:0;margin:0 auto;width:100%;}
 .activities-grid td{padding:1px;width:10%;vertical-align:top;}

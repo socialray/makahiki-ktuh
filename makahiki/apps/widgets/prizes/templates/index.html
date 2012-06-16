@@ -10,6 +10,7 @@
     <div class="row-fluid">
         {% include "view_prizes/prize_list.html" %}
     </div>
+
     </div>
 </div>
 <div id="prizeModal" class="modal hide fade">
@@ -47,7 +48,8 @@
           fx: "fade",
           timeout: 3500,
           delay:  -1000,
-          sync: true        	
+          sync: true,
+          pager: '#nav'         	
         });
     });
     $(window).resize(function() {
