@@ -204,6 +204,8 @@ ul {
 }
 
 .background-gradient (@start , @end) {
+    background: @start;  /* for non-css3 browsers */
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='@start', endColorstr='@end'); /* for IE */
     background-image: -webkit-gradient(linear, 0 0, 0 100%, from(@start), to(@end));
     background-image: -webkit-linear-gradient(top, @start, @end);
     background-image: -moz-linear-gradient(top, @start, @end);
