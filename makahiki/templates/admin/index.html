@@ -7,9 +7,9 @@
 
 {% block extra_head %}
 
-    <link rel="icon" href="{{ STATIC_URL }}images/favicon.ico" />
+    <link rel="icon" href="{{ STATIC_URL }}images/favicon.ico"/>
     <link rel="stylesheet" type="text/css"
-          href="{% block stylesheet %}{% static "admin/css/base.css" %}{% endblock %}" />
+          href="{% block stylesheet %}{% static "admin/css/base.css" %}{% endblock %}"/>
     {% block extrastyle %}{% endblock %}
     <script type="text/javascript">window.__admin_media_prefix__ = "{% filter escapejs %}{% static "admin/" %}{% endfilter %}";</script>
 
@@ -40,96 +40,21 @@
 {% endblock %}
 
 {% block body %}
-<div class="row-fluid">
-<div class="content-box span4">
-    <div class="content-box-title">
-        Challenge Admin
-    </div>
-    <div> Click on the links below to configure challenge settings or administrate players.</div>
-    {% for app, models in MAKAHIKI_SITE_ADMIN_MODELS %}
-        <div class="module">
-            <table>
-                <caption>{{ app }}</caption>
-                <tbody>
-                {% for model in models %}
-                    <tr>
-                        <th scope="row"><a href="/admin/{{ model.url }}">{{ model.name }}</a></th>
-                        <td></td>
-                        <td></td>
-                    </tr>
-                {% endfor %}
-                </tbody>
-            </table>
+    <div class="container-fluid">
+        <div class="row-fluid">
+            <!-- left column -->
+            <div class="span6">
+                {% include "admin/site_admin.html" %}
+
+                {% include "admin/sys_admin.html" %}
+
+                {% include "admin/badge-display.html" %}
+            </div>
+
+            <div class="span6">
+                {% include "admin/game_admin.html" %}
+            </div>
+
         </div>
-    {% endfor %}
-</div>
-
-<div class="content-box span4">
-    <div class="content-box-title">
-        Game Admin
     </div>
-    <div> Click on the links below to configure game related settings or administrate the games.
-        Clicking on the title of a game will let you enable or disable the game and its widgets. </div>
-    {% for app, enabled, pk, models in MAKAHIKI_GAME_ADMIN_MODELS %}
-        <div class="module">
-        <table>
-        <caption><a title="Click to enable or disable the game"
-                    href="/admin/challenge_mgr/gameinfo/{{ pk }}/">
-            {{ app }}
-            <span style="float: right;">
-                {% if enabled %}
-                    <img src="/site_media/static/admin/img/icon-yes.gif" alt="True">
-                {% else %}
-                    <img src="/site_media/static/admin/img/icon-no.gif" alt="False">
-                {% endif %}
-            </span>
-            </a>
-        </caption>
-        <tbody>
-        {% if enabled %}
-        {% for model in models %}
-            <tr>
-                <th scope="row"><a href="/admin/{{ model.url }}">{{ model.name }}</a></th>
-                <td></td>
-                <td></td>
-            </tr>
-        {% endfor %}
-        {% endif %}
-        </tbody>
-        </table>
-        </div>
-    {% endfor %}
-</div>
-
-{% if user.is_superuser %}
-
-<div class="content-box span4">
-    <div class="content-box-title">
-        Internal Admin
-    </div>
-    <div>Click on the links below for other internal administrations</div>
-    {% for app, models in MAKAHIKI_SYS_ADMIN_MODELS %}
-        <div class="module">
-            <table>
-                <caption>{{ app }}</caption>
-                <tbody>
-                {% for model in models %}
-                    <tr>
-                        <th scope="row"><a href="/admin/{{ model.url }}">{{ model.name }}</a></th>
-                        <td></td>
-                        <td></td>
-                    </tr>
-                {% endfor %}
-                </tbody>
-            </table>
-        </div>
-    {% endfor %}
-</div>
-{% endif %}
-
-</div>
-
-<script type="text/javascript">
-    $('#admin-tab a:first').tab('show');
-</script>
 {% endblock %}

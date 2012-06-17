@@ -1,0 +1,26 @@
+{% if user.is_superuser %}
+    <div class="content-box">
+        <div class="content-box-title">
+            Internal Admin
+        </div>
+        <div>Click on the links below for other internal administrations</div>
+        {% for app, models in MAKAHIKI_SYS_ADMIN_MODELS %}
+            <div class="module">
+                <table>
+                    <caption>{{ app }}</caption>
+                    <tbody>
+                    {% for model in models %}
+                        <tr>
+                            <th scope="row"><a
+                                    href="/admin/{{ model.url }}">{{ model.name }}</a>
+                            </th>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        {% endfor %}
+    </div>
+{% endif %}

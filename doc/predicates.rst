@@ -13,10 +13,13 @@ conditions such as unlocking smartgrid levels, actions, quests, badges etc.
            supplied in the condition string. The predicates can be connected using python boolean
            operators such as "and" or "or" etc.
 
-           For example, the following condition string will
-           check for if the current time has reach round 2 and the user has earned 100 points::
+Example:
+The following condition string will check for if the current time has reach round 2
+and the user has earned 100 points:
+::
 
-           reached_round("Round 2") or has_points(100)
+    reached_round("Round 2") or has_points(100)
+
 
 .. automodule:: apps.managers.challenge_mgr.predicates
    :members:
