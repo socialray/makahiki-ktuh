@@ -29,11 +29,11 @@ def resource_supply(request, resource, page_name):
 
     goals_scoreboard = resource_goal.resource_goal_ranks(resource)
 
-    resource_settings = resource_mgr.get_resource_settings(resource)
+    resource_setting = resource_mgr.get_resource_setting(resource)
     count = len(rounds) + 1
     return {
         "team": team,
-        "resource": resource_settings,
+        "resource": resource_setting,
         "goals_scoreboard": goals_scoreboard,
         "round_resource_ranks": round_resource_ranks,
         "range": count,

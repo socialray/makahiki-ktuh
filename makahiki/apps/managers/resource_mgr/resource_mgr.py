@@ -9,7 +9,7 @@ import requests
 from requests.exceptions import Timeout
 from apps.managers.challenge_mgr import challenge_mgr
 from apps.managers.team_mgr.models import Team
-from apps.managers.resource_mgr.models import EnergyUsage, WaterUsage, ResourceSettings, \
+from apps.managers.resource_mgr.models import EnergyUsage, WaterUsage, ResourceSetting, \
     WasteUsage
 from xml.etree import ElementTree
 
@@ -17,25 +17,25 @@ from xml.etree import ElementTree
 def init():
     """Initialize the resource manager."""
 
-    if ResourceSettings.objects.count() == 0:
-        ResourceSettings.objects.create(name="energy", unit="kWh", winning_order="Ascending")
-        ResourceSettings.objects.create(name="water", unit="Gallon", winning_order="Ascending")
-        ResourceSettings.objects.create(name="waste", unit="Ton", winning_order="Descending")
+    if ResourceSetting.objects.count() == 0:
+        ResourceSetting.objects.create(name="energy", unit="kWh", winning_order="Ascending")
+        ResourceSetting.objects.create(name="water", unit="Gallon", winning_order="Ascending")
+        ResourceSetting.objects.create(name="waste", unit="Ton", winning_order="Descending")
 
 
 def resources_info():
     """Returns the managed resource's name."""
     init()
     info = ""
-    for resource in ResourceSettings.objects.all():
+    for resource in ResourceSetting.objects.all():
         info += resource.name + " : " + resource.unit + " : " + resource.winning_order + "\n"
     return info
 
 
-def get_resource_settings(name):
+def get_resource_setting(name):
     """Returns the resource settings for the specified name."""
     init()
-    return ResourceSettings.objects.get(name=name)
+    return ResourceSetting.objects.get(name=name)
 
 
 def team_resource_data(date, team, resource):
@@ -119,8 +119,8 @@ def resource_ranks(name, round_name=None):
     """Return the ranking of resource use for all teams."""
     resource_usage = _get_resource_usage(name)
 
-    resource_settings = get_resource_settings(name)
-    if resource_settings.winning_order == "Ascending":
+    resource_setting = get_resource_setting(name)
+    if resource_setting.winning_order == "Ascending":
         ordering = "total"
     else:
         ordering = "-total"
@@ -139,7 +139,7 @@ def resource_ranks(name, round_name=None):
 
 def resource_team_rank_info(team, resource):
     """Get the overall rank for the team. Return a dict of the rank number and usage."""
-    unit = get_resource_settings(resource).unit
+    unit = get_resource_setting(resource).unit
     if team:
         for idx, rank in enumerate(resource_ranks(resource)):
             if rank["team__name"] == team.name:

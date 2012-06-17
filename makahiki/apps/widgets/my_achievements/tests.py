@@ -18,6 +18,7 @@ class MyAchievementsTestCase(TransactionTestCase):
         """setup"""
         self.user = test_utils.setup_user(username="user", password="changeme")
         test_utils.set_competition_round()
+        challenge_mgr.register_page_widget("home", "quests")
         challenge_mgr.register_page_widget("profile", "my_achievements")
         challenge_mgr.register_page_widget("profile", "my_commitments")
 

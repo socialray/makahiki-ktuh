@@ -6,26 +6,26 @@ from django.db.models import Q
 from django.core.exceptions import ObjectDoesNotExist
 from django.db.models.aggregates import Sum, Max
 from apps.managers.challenge_mgr import challenge_mgr
-from apps.managers.score_mgr.models import ScoreboardEntry, PointsTransaction, ScoreSettings
+from apps.managers.score_mgr.models import ScoreboardEntry, PointsTransaction, ScoreSetting
 from apps.managers.cache_mgr import cache_mgr
 
 
 def init():
     """initialize score settings and store it in the system challenge settings."""
 
-    if not hasattr(settings.CHALLENGE, "score_settings"):
-        all_score_settings = ScoreSettings.objects.all()
-        if all_score_settings:
-            score_setting = all_score_settings[0]
+    if not hasattr(settings.CHALLENGE, "score_setting"):
+        all_score_setting = ScoreSetting.objects.all()
+        if all_score_setting:
+            s = all_score_setting[0]
         else:
-            score_setting = ScoreSettings.objects.create()
+            s = ScoreSetting.objects.create()
 
-        settings.CHALLENGE.score_settings = score_setting
+        settings.CHALLENGE.score_setting = s
 
 
 def info():
     """returns the score_mgr info."""
-    s = score_settings()
+    s = score_setting()
     return  "referral_points: %d \n" \
             "signup_points: %d \n" \
             "setup_points: %d \n" \
@@ -34,40 +34,40 @@ def info():
                                 s.setup_points, s.noshow_penalty_points, s.quest_bonus_points)
 
 
-def score_settings():
+def score_setting():
     """returns the score settings."""
     init()
-    return settings.CHALLENGE.score_settings
+    return settings.CHALLENGE.score_setting
 
 
 def referral_points():
     """returns the referral point amount from settings."""
-    return score_settings().referral_bonus_points
+    return score_setting().referral_bonus_points
 
 
 def active_threshold_points():
     """returns the referral point amount from settings."""
-    return score_settings().active_threshold_points
+    return score_setting().active_threshold_points
 
 
 def setup_points():
     """returns the setup point amount from settings."""
-    return score_settings().setup_points
+    return score_setting().setup_points
 
 
 def signup_points():
     """returns the signup point amount from settings."""
-    return score_settings().signup_bonus_points
+    return score_setting().signup_bonus_points
 
 
 def noshow_penalty_points():
     """returns the noshow penalty point amount from settings."""
-    return score_settings().noshow_penalty_points
+    return score_setting().noshow_penalty_points
 
 
 def quest_points():
     """returns the signup point amount from settings."""
-    return score_settings().quest_bonus_points
+    return score_setting().quest_bonus_points
 
 
 def player_rank(profile, round_name=None):

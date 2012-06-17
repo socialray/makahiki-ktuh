@@ -1,7 +1,7 @@
 [
     {
         "pk": 1,
-        "model": "score_mgr.scoresettings",
+        "model": "score_mgr.scoresetting",
         "fields": {
             "active_threshold_points": 50,
             "quest_bonus_points": 0,
@@ -13,7 +13,7 @@
     },
     {
         "pk": 1,
-        "model": "resource_mgr.resourcesettings",
+        "model": "resource_mgr.resourcesetting",
         "fields": {
             "winning_order": "Ascending",
             "name": "energy",
@@ -22,7 +22,7 @@
     },
     {
         "pk": 2,
-        "model": "resource_mgr.resourcesettings",
+        "model": "resource_mgr.resourcesetting",
         "fields": {
             "winning_order": "Ascending",
             "name": "water",
@@ -31,7 +31,7 @@
     },
     {
         "pk": 3,
-        "model": "resource_mgr.resourcesettings",
+        "model": "resource_mgr.resourcesetting",
         "fields": {
             "winning_order": "Descending",
             "name": "waste",

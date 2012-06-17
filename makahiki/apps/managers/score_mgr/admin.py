@@ -1,10 +1,10 @@
 """Administrator interface to score_mgr."""
 from django.contrib import admin
 
-from apps.managers.score_mgr.models import ScoreSettings, ScoreboardEntry, PointsTransaction
+from apps.managers.score_mgr.models import ScoreSetting, ScoreboardEntry, PointsTransaction
 
 
-admin.site.register(ScoreSettings)
+admin.site.register(ScoreSetting)
 
 
 class PointsTransactionAdmin(admin.ModelAdmin):

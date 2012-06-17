@@ -16,6 +16,7 @@ class ContextProcessorFunctionalTestCase(TransactionTestCase):
 
     def testRoundInfo(self):
         """Tests that round info is available for the page to process."""
+        challenge_mgr.init()
         test_utils.set_competition_round()
         current_round = challenge_mgr.get_round_name()
 

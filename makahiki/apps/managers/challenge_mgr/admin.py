@@ -2,24 +2,24 @@
 from django.contrib import admin
 from django.db import models
 from django.forms.widgets import Textarea
-from apps.managers.challenge_mgr.models import ChallengeSettings, RoundSettings, PageSettings, \
-    PageInfo, Sponsor, UploadImage
+from apps.managers.challenge_mgr.models import ChallengeSetting, RoundSetting, PageSetting, \
+    PageInfo, Sponsor, UploadImage, GameSetting, GameInfo
 
 
-class PageSettingsInline(admin.TabularInline):
-    """PageSettingsInline admin."""
-    model = PageSettings
-    can_delete = False
-    fields = ['widget', 'enabled', ]
-    readonly_fields = ['widget', ]
+class PageSettingInline(admin.TabularInline):
+    """PageSettingInline admin."""
+    model = PageSetting
+    #can_delete = False
+    fields = ['game', 'widget', 'enabled', ]
+    #readonly_fields = ['widget', ]
     extra = 0
 
-    def has_add_permission(self, request):
-        return False
+    #def has_add_permission(self, request):
+    #    return False
 
 
 class PageInfoAdmin(admin.ModelAdmin):
-    """PageSettings administrator interface definition."""
+    """PageSetting administrator interface definition."""
     list_display = ["name", "unlock_condition"]
 
     fieldsets = (
@@ -33,7 +33,7 @@ class PageInfoAdmin(admin.ModelAdmin):
             }),
     )
 
-    inlines = [PageSettingsInline]
+    inlines = [PageSettingInline]
 
     formfield_overrides = {
         models.TextField: {'widget': Textarea(attrs={'rows': 3, 'cols': 70})},
@@ -42,19 +42,40 @@ class PageInfoAdmin(admin.ModelAdmin):
 admin.site.register(PageInfo, PageInfoAdmin)
 
 
-class PageSettingsAdmin(admin.ModelAdmin):
-    """PageSettings administrator interface definition."""
-    list_display = ["page", "widget", "enabled"]
-    list_editable = ["widget", "enabled"]
+class PageSettingAdmin(admin.ModelAdmin):
+    """PageSetting administrator interface definition."""
+    list_display = ["page", "game", "widget", "enabled"]
+    list_editable = ["game", "widget", "enabled"]
 
-admin.site.register(PageSettings, PageSettingsAdmin)
+admin.site.register(PageSetting, PageSettingAdmin)
 
 
-class RoundSettingsAdmin(admin.ModelAdmin):
-    """PageSettings administrator interface definition."""
+class GameSettingInline(admin.TabularInline):
+    """PageSettingInline admin."""
+    model = GameSetting
+    fields = ['widget', 'enabled', ]
+    extra = 0
+
+
+class GameInfoAdmin(admin.ModelAdmin):
+    """PageSetting administrator interface definition."""
+    list_display = ["name", "enabled"]
+    fieldsets = (
+        (None,
+            {"fields":
+                  (("name", "enabled"), "priority")
+            }),
+    )
+    inlines = [GameSettingInline]
+
+admin.site.register(GameInfo, GameInfoAdmin)
+
+
+class RoundSettingAdmin(admin.ModelAdmin):
+    """PageSetting administrator interface definition."""
     list_display = ["name", "start", "end"]
 
-admin.site.register(RoundSettings, RoundSettingsAdmin)
+admin.site.register(RoundSetting, RoundSettingAdmin)
 
 
 class SponsorsInline(admin.TabularInline):
@@ -63,8 +84,8 @@ class SponsorsInline(admin.TabularInline):
     extra = 0
 
 
-class ChallengeSettingsAdmin(admin.ModelAdmin):
-    """ChallengeSettings administrator interface definition."""
+class ChallengeSettingAdmin(admin.ModelAdmin):
+    """ChallengeSetting administrator interface definition."""
 
     fieldsets = (
         (None,
@@ -104,5 +125,5 @@ class ChallengeSettingsAdmin(admin.ModelAdmin):
         models.TextField: {'widget': Textarea(attrs={'rows': 2, 'cols': 70})},
         }
 
-admin.site.register(ChallengeSettings, ChallengeSettingsAdmin)
+admin.site.register(ChallengeSetting, ChallengeSettingAdmin)
 admin.site.register(UploadImage)

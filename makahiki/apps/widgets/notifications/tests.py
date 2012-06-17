@@ -41,6 +41,7 @@ class NotificationFunctionalTests(TransactionTestCase):
         self.team = self.user.get_profile().team
 
         challenge_mgr.register_page_widget("help", "help.faq")
+        challenge_mgr.register_page_widget("home", "home")
 
         self.client.login(username="user", password="test")
 

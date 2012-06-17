@@ -1,5 +1,6 @@
 """Admin definition for Smart Grid Game widget."""
 from django.db import models
+from apps.managers.challenge_mgr import challenge_mgr
 from apps.widgets.smartgrid.models import ActionMember, Activity, Category, Event, \
                                      Commitment, ConfirmationCode, TextPromptQuestion, \
                                      QuestionChoice, Level
@@ -251,6 +252,7 @@ class LevelAdmin(admin.ModelAdmin):
     list_display = ["name", "priority"]
 
 admin.site.register(Level, LevelAdmin)
+challenge_mgr.register_game_admin_model("smartgrid", Level)
 
 
 class CategoryAdmin(admin.ModelAdmin):
@@ -259,6 +261,7 @@ class CategoryAdmin(admin.ModelAdmin):
     prepopulated_fields = {"slug": ("name",)}
 
 admin.site.register(Category, CategoryAdmin)
+challenge_mgr.register_game_admin_model("smartgrid", Category)
 
 
 class ActivityAdmin(admin.ModelAdmin):
@@ -319,6 +322,7 @@ class ActivityAdmin(admin.ModelAdmin):
     decrement_priority.short_description = "Decrement selected objects' priority by 1."
 
 admin.site.register(Activity, ActivityAdmin)
+challenge_mgr.register_game_admin_model("smartgrid", Activity)
 
 
 class EventAdmin(admin.ModelAdmin):
@@ -377,6 +381,7 @@ class EventAdmin(admin.ModelAdmin):
     decrement_priority.short_description = "Decrement selected objects' priority by 1."
 
 admin.site.register(Event, EventAdmin)
+challenge_mgr.register_game_admin_model("smartgrid", Event)
 
 
 class CommitmentAdmin(admin.ModelAdmin):
@@ -431,6 +436,7 @@ class CommitmentAdmin(admin.ModelAdmin):
     decrement_priority.short_description = "Decrement selected objects' priority by 1."
 
 admin.site.register(Commitment, CommitmentAdmin)
+challenge_mgr.register_game_admin_model("smartgrid", Commitment)
 
 
 class ActionMemberAdminForm(forms.ModelForm):
@@ -555,3 +561,4 @@ class ActionMemberAdmin(admin.ModelAdmin):
         return super(ActionMemberAdmin, self).get_form(request, obj, **kwargs)
 
 admin.site.register(ActionMember, ActionMemberAdmin)
+challenge_mgr.register_game_admin_model("smartgrid", ActionMember)

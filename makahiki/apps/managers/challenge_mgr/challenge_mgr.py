@@ -4,10 +4,15 @@ import datetime
 from django.conf import settings
 from django.contrib.auth.models import User
 from django.core.exceptions import ObjectDoesNotExist
-from apps.managers.challenge_mgr.models import ChallengeSettings, RoundSettings, PageSettings, \
-    PageInfo
+from django.utils.text import capfirst
+from apps.managers.challenge_mgr.models import ChallengeSetting, RoundSetting, PageSetting, \
+    PageInfo, GameInfo, GameSetting
 from apps.utils import utils
 from django.core import management
+
+
+_game_admin_models = {}
+"""private variable to store the registered models for game admin page."""
 
 
 def init():
@@ -27,10 +32,10 @@ def init():
         return
 
     # set the CHALLENGE setting from DB
-    ChallengeSettings.set_settings()
+    ChallengeSetting.set_settings()
 
     # get the Round settings from DB
-    RoundSettings.set_settings()
+    RoundSetting.set_settings()
 
     # create the admin
     create_admin_user()
@@ -90,7 +95,7 @@ def eval_page_unlock(user, page):
 
 def all_page_info(user):
     """Returns a list of all pages with their current lock state."""
-    all_pages = PageInfo.objects.all().order_by("priority")
+    all_pages = PageInfo.objects.exclude(name="home").order_by("priority")
     for page in all_pages:
         page.is_unlock = eval_page_unlock(user, page)
     return all_pages
@@ -107,9 +112,17 @@ def page_info(user, page_name):
         return None
 
 
-def page_settings(page_name):
-    """Returns the page settings for the specified page."""
-    return PageSettings.objects.filter(page__name=page_name, enabled=True)
+def get_enabled_page_widgets(page_name):
+    """Returns the enabled widgets for the specified page, taking into account of the PageSetting
+    and GameSetting."""
+    widgets = []
+    for ps in PageSetting.objects.filter(page__name=page_name, enabled=True):
+        if ps.widget:
+            widgets.append(ps.widget)
+        if ps.game and GameInfo.objects.filter(name=ps.game, enabled=True).count():
+            for gs in GameSetting.objects.filter(game=ps.game, enabled=True):
+                widgets.append(gs.widget)
+    return widgets
 
 
 def register_page_widget(page_name, widget, label=None):
@@ -117,20 +130,12 @@ def register_page_widget(page_name, widget, label=None):
     if not label:
         label = page_name
     page, _ = PageInfo.objects.get_or_create(name=page_name, label=label)
-    PageSettings.objects.get_or_create(page=page, widget=widget)
+    PageSetting.objects.get_or_create(page=page, widget=widget)
 
 
 def available_widgets():
     """Returns a list of all the available widgets for the challenge."""
     return settings.INSTALLED_WIDGET_APPS
-
-
-def enabled_widgets():
-    """Returns a list of all the enabled widgets in the challenge."""
-    info_str = ""
-    for p in PageSettings.objects.filter(enabled=True):
-        info_str += p.name + " : " + p.widget + "\n"
-    return info_str
 
 
 def get_all_round_info():
@@ -175,6 +180,31 @@ def in_competition():
     """Return True if we are currently in the competition."""
     today = datetime.datetime.today()
     return settings.COMPETITION_START < today and today < settings.COMPETITION_END
+
+
+def get_game_admin_models():
+    """Returns the game related apps' info for admin purpose."""
+
+    game_admins = ()
+    for game in GameInfo.objects.all().order_by("priority"):
+        game_admin = (game.name, game.enabled, game.pk,)
+        for game_setting in game.gamesetting_set.all():
+            widget = game_setting.widget
+            if widget in _game_admin_models:
+                game_admin += (_game_admin_models[widget],)
+        game_admins += (game_admin,)
+    return game_admins
+
+
+def register_game_admin_model(widget, model):
+    """Register the model of the game for admin purpose."""
+
+    model_admin_info = {"name": capfirst(model._meta.verbose_name_plural),
+                        "url": "%s/%s" % (model._meta.app_label, model._meta.module_name)}
+    if widget in _game_admin_models:
+        _game_admin_models[widget] += (model_admin_info,)
+    else:
+        _game_admin_models[widget] = (model_admin_info,)
 
 
 class MakahikiBaseCommand(management.base.BaseCommand):

@@ -433,6 +433,7 @@ class ActionMember(models.Model):
     class Meta:
         """meta"""
         unique_together = ('user', 'action', 'submission_date')
+        verbose_name_plural = "Action Submissions"
 
     def __unicode__(self):
         return "%s : %s" % (self.action.title, self.user.username)
