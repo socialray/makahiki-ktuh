@@ -279,12 +279,6 @@ class Commitment(Action):
         help_text="Duration of commitment, in days."
     )
 
-    def save(self, *args, **kwargs):
-        """Custom save method to set fields."""
-        self.type = "commitment"
-        super(Commitment, self).save(args, kwargs)
-        cache_mgr.clear()
-
 
 class Activity(Action):
     """Activities involve verifiable actions that users commit to.  These actions can be
@@ -351,12 +345,6 @@ class Activity(Action):
         else:
             return None
 
-    def save(self, *args, **kwargs):
-        """Custom save method to set fields."""
-        self.type = "activity"
-        super(Activity, self).save(args, kwargs)
-        cache_mgr.clear()
-
 
 class Event(Action):
     """Events will be verified by confirmation code. It includes events and excursions."""
@@ -389,11 +377,6 @@ class Event(Action):
         if result.days >= 0 and result.seconds >= 0:
             return True
         return False
-
-    def save(self, *args, **kwargs):
-        """Custom save method to set fields."""
-        super(Event, self).save(args, kwargs)
-        cache_mgr.clear()
 
 
 class ActionMember(models.Model):

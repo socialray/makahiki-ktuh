@@ -1,5 +1,6 @@
 """Admin definition for Smart Grid Game widget."""
 from django.db import models
+from apps.managers.cache_mgr import cache_mgr
 from apps.managers.challenge_mgr import challenge_mgr
 from apps.utils import utils
 from apps.widgets.smartgrid.models import ActionMember, Activity, Category, Event, \
@@ -147,11 +148,10 @@ class ActivityAdminForm(forms.ModelForm):
         return cleaned_data
 
     def save(self, *args, **kwargs):
-        _ = args
-        _ = kwargs
         activity = super(ActivityAdminForm, self).save(*args, **kwargs)
 
         activity.save()
+        cache_mgr.clear()
 
         # If the activity's confirmation type is text, make sure to save the questions.
         if self.cleaned_data.get("confirm_type") == "text":
@@ -202,7 +202,6 @@ class EventAdminForm(forms.ModelForm):
 
             1.  Events must have an event date.
             2.  Publication date must be before expiration date.
-            3.  If the verification type is "code", then the number of codes is required.
         """
 
         # Data that has passed validation.
@@ -226,22 +225,13 @@ class EventAdminForm(forms.ModelForm):
                     [u"The expiration date must be after the pub date."])
                 del cleaned_data["expire_date"]
 
-        #3 Number of codes is required if the verification type is "code"
-        has_codes = "num_codes" in cleaned_data
-        num_codes = cleaned_data.get("num_codes")
-        if has_codes and not num_codes:
-            self._errors["num_codes"] = ErrorList(
-                [u"The number of codes is required for this confirmation type."])
-            del cleaned_data["num_codes"]
-
         return cleaned_data
 
     def save(self, *args, **kwargs):
-        _ = args
-        _ = kwargs
         activity = super(EventAdminForm, self).save(*args, **kwargs)
 
         activity.save()
+        cache_mgr.clear()
 
         # Generate confirmation codes if needed.
         if self.cleaned_data.get("num_codes") > 0:
@@ -262,6 +252,14 @@ class CommitmentAdminForm(forms.ModelForm):
         data = self.cleaned_data["unlock_condition"]
         utils.validate_form_predicates(data)
         return data
+
+    def save(self, *args, **kwargs):
+        activity = super(CommitmentAdminForm, self).save(*args, **kwargs)
+
+        activity.save()
+        cache_mgr.clear()
+
+        return activity
 
 
 class LevelAdminForm(forms.ModelForm):
