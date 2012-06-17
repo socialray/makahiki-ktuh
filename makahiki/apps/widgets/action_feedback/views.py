@@ -14,7 +14,7 @@ from django.core.urlresolvers import reverse
 from apps.widgets.action_feedback.forms import ActionFeedbackForm
 from django.shortcuts import render_to_response
 from django.template.context import RequestContext
-#from apps.widgets.smartgrid.models import Action
+from apps.managers.score_mgr import score_mgr
 #from django.db.models.aggregates import Count
 
 
@@ -36,6 +36,7 @@ def action_feedback(request, action_type, slug):
     _ = action_type
     action = smartgrid.get_action(slug=slug)
     user = request.user
+    profile = request.user.get_profile()
 
     form = ActionFeedbackForm(request.POST)
     if form.is_valid():
@@ -55,6 +56,11 @@ def action_feedback(request, action_type, slug):
     feedback.added = datetime.datetime.now()
     feedback.changed = datetime.datetime.now()
     feedback.save()
+
+    # Give the user points for providing feedback
+    profile.add_points(score_mgr.feedback_points(),
+                       datetime.datetime.today(),
+                       "%s privided feedback about %s" % (user.username, action.name))
     # Take them back to the action page.
     return HttpResponseRedirect(reverse("activity_task", args=(action.type, action.slug,)))
 

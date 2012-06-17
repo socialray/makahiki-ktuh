@@ -70,6 +70,11 @@ def quest_points():
     return score_setting().quest_bonus_points
 
 
+def feedback_points():
+    """returns the action feedback point amount from settings."""
+    return score_setting().feedback_bonus_points
+
+
 def player_rank(profile, round_name=None):
     """user round overall rank"""
     if not round_name:

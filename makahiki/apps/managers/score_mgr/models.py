@@ -35,6 +35,10 @@ class ScoreSetting(models.Model):
         default=4,
         help_text="The point amount for no show penalty."
     )
+    feedback_bonus_points = models.IntegerField(
+        default=0,
+        help_text="The point amount for providing action feedback."
+    )
 
     def save(self, *args, **kwargs):
         """Custom save method."""
