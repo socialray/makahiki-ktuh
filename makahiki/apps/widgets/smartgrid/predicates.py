@@ -1,4 +1,5 @@
-"""Smartgrid related predicates."""
+"""Predicates indicating the state of the smart grid to determine if a level or cell should be unlocked."""
+
 from apps.widgets.smartgrid.models import Action, Category
 
 

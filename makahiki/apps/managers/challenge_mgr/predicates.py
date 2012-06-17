@@ -1,4 +1,5 @@
-"""Challenge related predicates."""
+"""Predicates regarding the state of the challenge."""
+
 import datetime
 from apps.managers.challenge_mgr import challenge_mgr
 from apps.managers.challenge_mgr.models import GameInfo

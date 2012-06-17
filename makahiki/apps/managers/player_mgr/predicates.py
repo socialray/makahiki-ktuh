@@ -1,4 +1,4 @@
-"""Player related  predicates."""
+"""Predicates providing information about the state of the current player."""
 
 
 def has_points(user, points):

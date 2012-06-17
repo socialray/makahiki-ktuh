@@ -3,7 +3,7 @@
 Supported Predicates
 ====================
 
-The page provides a reference guide to the supported predicates that could be used in evaulating
+This section documents the predicates available for evaluating
 conditions such as unlocking smartgrid levels, actions, quests, badges etc.
 
 .. note::  This documentation is extracted automatically from the predicate definition source
@@ -20,12 +20,20 @@ and the user has earned 100 points:
 
     reached_round("Round 2") or has_points(100)
 
+Challenge Predicates
+--------------------
 
 .. automodule:: apps.managers.challenge_mgr.predicates
    :members:
 
+Player Predicates
+-----------------
+
 .. automodule:: apps.managers.player_mgr.predicates
    :members:
+
+Smart Grid Game Predicates
+--------------------------
 
 .. automodule:: apps.widgets.smartgrid.predicates
    :members:
