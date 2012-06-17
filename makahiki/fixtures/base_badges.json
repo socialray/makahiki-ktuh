@@ -7,7 +7,7 @@
             "award_condition": "completed_some_of(5)",
             "description": "Finish any five actions successfully.",
             "hint": "Keep doing actions!",
-            "theme": "2",
+            "theme": "1",
             "slug": "daily-visitor",
             "label": "NOV",
             "image": ""}
@@ -20,7 +20,7 @@
             "award_condition": "daily_visit_count(3)",
             "description": "Visited the site 3 days in a row.",
             "hint": "Keep coming back!",
-            "theme": "3",
+            "theme": "2",
             "slug": "three-peater",
             "label": "3PT",
             "image": ""}
@@ -33,7 +33,7 @@
             "award_condition": "daily_visit_count(6)",
             "description": "Have visited the site six days in a row.",
             "hint": "Keep coming back!",
-            "theme": "4",
+            "theme": "3",
             "slug": "six-peater",
             "label": "6PT",
             "image": ""}
@@ -46,7 +46,7 @@
             "award_condition": "daily_visit_count(9)",
             "description": "Have visited the site nine days in a row.",
             "hint": "Keep coming back!",
-            "theme": "5",
+            "theme": "4",
             "slug": "nine-peater",
             "label": "9PT",
             "image": ""}
@@ -59,7 +59,7 @@
             "award_condition": "False",
             "description": "The team has achieved DEGG three days in a row.",
             "hint": "Keep team energy use low!",
-            "theme": "6",
+            "theme": "5",
             "slug": "energy-hat-trick",
             "label": "HTR",
             "image": ""}
@@ -72,7 +72,7 @@
             "award_condition": "completed_some_of(5, action_type='commitment')",
             "description": "Have committed to five commitments simultaneously.",
             "hint": "Keep making commitments!",
-            "theme": "2",
+            "theme": "1",
             "slug": "super-committed",
             "label": "SPC",
             "image": ""}
@@ -85,7 +85,7 @@
             "award_condition": "completed_all_of(action_type='commitment')",
             "description": "Have been committed to all possible commitments.",
             "hint": "Keep making commitments!",
-            "theme": "3",
+            "theme": "2",
             "slug": "ultra-committed",
             "label": "ULC",
             "image": ""}
@@ -98,7 +98,7 @@
             "award_condition": "False",
             "description": "Have completed all Level 1 non-event/excursion actions.",
             "hint": "Complete more actions!",
-            "theme": "4",
+            "theme": "3",
             "slug": "level-1-master",
             "label": "LV1",
             "image": ""}
@@ -111,7 +111,7 @@
             "award_condition": "False",
             "description": "Have completed all Level 2 non-event/excursion actions.",
             "hint": "Complete more actions!",
-            "theme": "5",
+            "theme": "4",
             "slug": "level-2-master",
             "label": "LV2",
             "image": ""}
@@ -124,7 +124,7 @@
             "award_condition": "False",
             "description": "Have completed all Level 3 non-event/excursion actions.",
             "hint": "Complete more actions!",
-            "theme": "6",
+            "theme": "5",
             "slug": "level-3-master",
             "label": "LV3",
             "image": ""}
@@ -137,7 +137,7 @@
             "award_condition": "False",
             "description": "Have completed all Level 4 non-event/excursion actions.",
             "hint": "Complete more actions!",
-            "theme": "2",
+            "theme": "1",
             "slug": "level-4-master",
             "label": "LV4",
             "image": ""}
@@ -150,7 +150,7 @@
             "award_condition": "False",
             "description": "Have received the social bonus five times.",
             "hint": "Work together!",
-            "theme": "3",
+            "theme": "2",
             "slug": "super-social",
             "label": "SSC",
             "image": ""}
@@ -163,7 +163,7 @@
             "award_condition": "False",
             "description": " Have referred at least 10 new players to Kukui Cup.",
             "hint": "Gather more players!",
-            "theme": "4",
+            "theme": "3",
             "slug": "super-referrer",
             "label": "SRF",
             "image": ""}
@@ -176,7 +176,7 @@
             "award_condition": "False",
             "description": " Have referred at least 20 new players to Kukui Cup.",
             "hint": "Gather more players!",
-            "theme": "5",
+            "theme": "4",
             "slug": "mega-referrer",
             "label": "MRF",
             "image": ""}
@@ -189,7 +189,7 @@
             "award_condition": "False",
             "description": " Have referred at least 30 new players to Kukui Cup.",
             "hint": "Gather more players!",
-            "theme": "6",
+            "theme": "5",
             "slug": "ultra-referrer",
             "label": "URF",
             "image": ""}
@@ -202,7 +202,7 @@
             "award_condition": "False",
             "description": "Have reported one legitimate bug to administrators.",
             "hint": "Found a bug?  Let us know!",
-            "theme": "2",
+            "theme": "1",
             "slug": "white-hat",
             "label": "DBG",
             "image": ""}
@@ -215,7 +215,7 @@
             "award_condition": "False",
             "description": "At least 50% of possible team members have at least 50 points.",
             "hint": "Encourage team-mates to participate!",
-            "theme": "3",
+            "theme": "2",
             "slug": "super-team",
             "label": "STM",
             "image": ""}
@@ -228,7 +228,7 @@
             "award_condition": "False",
             "description": "At least 75% of possible team members have at least 75 points.",
             "hint": "Encourage team-mates to participate!",
-            "theme": "4",
+            "theme": "3",
             "slug": "mega-team",
             "label": "MTM",
             "image": ""}
@@ -241,7 +241,7 @@
             "award_condition": "False",
             "description": "At least 90% of possible team members have at least 90 points.",
             "hint": "Encourage team-mates to participate!",
-            "theme": "5",
+            "theme": "4",
             "slug": "ultra-team",
             "label": "UTM",
             "image": ""}
@@ -254,7 +254,7 @@
             "award_condition": "False",
             "description": "Have been selected to champion the challenge.",
             "hint": "",
-            "theme": "6",
+            "theme": "5",
             "slug": "kc-champion",
             "label": "KCC",
             "image": ""}

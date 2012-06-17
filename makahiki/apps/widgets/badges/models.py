@@ -16,11 +16,11 @@ _MEDIA_LOCATION = "badges"
 class Badge(models.Model):
     """Defines Badge model."""
     THEME_CHOICES = (
-                     ('2', "theme 1"),
-                     ('3', "theme 2"),
-                     ('4', "theme 3"),
-                     ('5', "theme 4"),
-                     ('6', "theme 5"),
+                     ('1', "theme 1"),
+                     ('2', "theme 2"),
+                     ('3', "theme 3"),
+                     ('4', "theme 4"),
+                     ('5', "theme 5"),
                      )
 
     name = models.CharField(max_length=255,
