@@ -200,31 +200,6 @@ for widget in INSTALLED_WIDGET_APPS:
 # nose has to be after south!
 INSTALLED_APPS += ('south', 'django_nose',)
 
-################
-# ADMIN APPS
-################
-SITE_ADMIN_MODELS = (
-    ("Challenge", ({"name": "Challenge settings", "url": "challenge_mgr/challengesetting"},
-                   {"name": "Round settings", "url": "challenge_mgr/roundsetting"},
-                   {"name": "Score settings", "url": "score_mgr/scoresetting"},
-                   {"name": "Helps", "url": "help/helptopic"},
-                   {"name": "Makahiki logs", "url": "log_mgr/makahikilog"})),
-    ("Player", ({"name": "Groups", "url": "team_mgr/group"},
-                   {"name": "Teams", "url": "team_mgr/team"},
-                   {"name": "Users", "url": "auth/user"},
-                   {"name": "Profiles", "url": "player_mgr/profile"},
-                   {"name": "Team Wall Posts", "url": "team_mgr/post"})),
-)
-
-SYS_ADMIN_MODELS = (
-    ("Other Settings", (
-                   {"name": "Page Infos", "url": "challenge_mgr/pageinfo"},
-                   {"name": "Game Infos", "url": "challenge_mgr/gameinfo"},
-                   {"name": "Resource Settings", "url": "resource_mgr/resourcesetting"})),
-    ("Point History", ({"name": "Points Transactions", "url": "score_mgr/pointstransaction"},
-                   {"name": "Scoreboard Entries", "url": "score_mgr/scoreboardentry"})),
-)
-
 ##########################################################
 # INSTALLED Themes. Please keep them in alphabetical order
 ##########################################################

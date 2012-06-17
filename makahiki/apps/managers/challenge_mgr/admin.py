@@ -2,6 +2,7 @@
 from django.contrib import admin
 from django.db import models
 from django.forms.widgets import Textarea
+from apps.managers.challenge_mgr import challenge_mgr
 from apps.managers.challenge_mgr.models import ChallengeSetting, RoundSetting, PageSetting, \
     PageInfo, Sponsor, UploadImage, GameSetting, GameInfo
 
@@ -127,3 +128,8 @@ class ChallengeSettingAdmin(admin.ModelAdmin):
 
 admin.site.register(ChallengeSetting, ChallengeSettingAdmin)
 admin.site.register(UploadImage)
+
+challenge_mgr.register_site_admin_model("Challenge", ChallengeSetting)
+challenge_mgr.register_site_admin_model("Challenge", RoundSetting)
+challenge_mgr.register_sys_admin_model("Other Settings", PageInfo)
+challenge_mgr.register_sys_admin_model("Other Settings", GameInfo)

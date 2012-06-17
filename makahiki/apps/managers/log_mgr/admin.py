@@ -2,6 +2,7 @@
 from django.contrib import admin
 from django.db import models
 from django.forms.widgets import TextInput
+from apps.managers.challenge_mgr import challenge_mgr
 from apps.managers.log_mgr.models import MakahikiLog
 
 
@@ -13,3 +14,4 @@ class MakahikiLogAdmin(admin.ModelAdmin):
         }
 
 admin.site.register(MakahikiLog, MakahikiLogAdmin)
+challenge_mgr.register_sys_admin_model("Logs", MakahikiLog)

@@ -2,6 +2,7 @@
 
 from django.contrib import admin
 from django import forms
+from apps.managers.challenge_mgr import challenge_mgr
 
 from apps.widgets.help.models import HelpTopic
 
@@ -36,3 +37,4 @@ class HelpTopicAdmin(admin.ModelAdmin):
     form = HelpAdminForm
 
 admin.site.register(HelpTopic, HelpTopicAdmin)
+challenge_mgr.register_sys_admin_model("Other Settings", HelpTopic)

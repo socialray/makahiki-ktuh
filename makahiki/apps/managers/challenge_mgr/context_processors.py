@@ -54,8 +54,8 @@ def competition(request):
         "DEFAULT_VIEW_OBJECTS": default_view_objects,
         "AVAILABLE_EVENTS": available_events,
         "ALL_PAGE_INFO": all_page_info,
-        "MAKAHIKI_SITE_ADMIN_MODELS": settings.SITE_ADMIN_MODELS,
-        "MAKAHIKI_SYS_ADMIN_MODELS": settings.SYS_ADMIN_MODELS,
+        "MAKAHIKI_SITE_ADMIN_MODELS": challenge_mgr.get_site_admin_models(),
+        "MAKAHIKI_SYS_ADMIN_MODELS": challenge_mgr.get_sys_admin_models(),
         "MAKAHIKI_GAME_ADMIN_MODELS": challenge_mgr.get_game_admin_models(),
         "ACTIVE_PAGE": page_name
     }

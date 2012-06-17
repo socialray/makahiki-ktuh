@@ -1,5 +1,6 @@
 """Administrator interface to teams."""
 from django.contrib import admin
+from apps.managers.challenge_mgr import challenge_mgr
 from apps.managers.team_mgr.models import Group, Team, Post
 
 
@@ -31,3 +32,7 @@ class PostAdmin(admin.ModelAdmin):
     delete_selected.short_description = "Delete the selected objects."
 
 admin.site.register(Post, PostAdmin)
+
+challenge_mgr.register_site_admin_model("Players", Group)
+challenge_mgr.register_site_admin_model("Players", Team)
+challenge_mgr.register_site_admin_model("Players", Post)

@@ -15,6 +15,14 @@ _game_admin_models = {}
 """private variable to store the registered models for game admin page."""
 
 
+_site_admin_models = {}
+"""private variable to store the registered models for site admin page."""
+
+
+_sys_admin_models = {}
+"""private variable to store the registered models for sys admin page."""
+
+
 def init():
     """Initialize the challenge."""
 
@@ -196,15 +204,54 @@ def get_game_admin_models():
     return game_admins
 
 
+def get_sys_admin_models():
+    """return the sys admin models."""
+    return get_admin_models(_sys_admin_models)
+
+
+def get_site_admin_models():
+    """return the site admin models."""
+    return get_admin_models(_site_admin_models)
+
+
+def get_admin_models(registry):
+    """return the ordered tuple from the model registry."""
+    models = ()
+    for key in sorted(registry.keys()):
+        models += ((key, registry[key]),)
+    return models
+
+
+def _get_model_admin_info(model):
+    """return the admin info for the model."""
+    return {"name": capfirst(model._meta.verbose_name_plural),
+            "url": "%s/%s" % (model._meta.app_label, model._meta.module_name)}
+
+
 def register_game_admin_model(widget, model):
     """Register the model of the game for admin purpose."""
+    register_admin_model(_game_admin_models, widget, model)
 
-    model_admin_info = {"name": capfirst(model._meta.verbose_name_plural),
-                        "url": "%s/%s" % (model._meta.app_label, model._meta.module_name)}
-    if widget in _game_admin_models:
-        _game_admin_models[widget] += (model_admin_info,)
+
+def register_sys_admin_model(group, model):
+    """Register the model for sys admin."""
+    register_admin_model(_sys_admin_models, group, model)
+
+
+def register_site_admin_model(group, model):
+    """Register the model of site admin."""
+    register_admin_model(_site_admin_models, group, model)
+
+
+def register_admin_model(registry, group, model):
+    """Register the model into a registry."""
+    model_admin_info = _get_model_admin_info(model)
+    if group in registry:
+        registry[group] += (model_admin_info,)
     else:
-        _game_admin_models[widget] = (model_admin_info,)
+        registry[group] = (model_admin_info,)
+
+    registry[group] = sorted(registry[group])
 
 
 class MakahikiBaseCommand(management.base.BaseCommand):

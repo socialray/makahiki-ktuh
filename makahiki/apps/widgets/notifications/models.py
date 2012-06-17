@@ -48,14 +48,29 @@ class NoticeTemplate(models.Model):
 
 class UserNotification(models.Model):
     """User Notification"""
-    recipient = models.ForeignKey(User)
-    contents = models.TextField()
+    LEVEL_CHOICES = (
+        (10, 'DEBUG'),
+        (20, 'INFO'),
+        (25, 'SUCCESS'),
+        (30, 'WARNING'),
+        (40, 'ERROR'),
+    )
+
+    recipient = models.ForeignKey(
+        User,
+        help_text="The recipient of this notification.")
+    contents = models.TextField(
+        help_text="The content of the notification.")
     unread = models.BooleanField(default=True)
     updated_at = models.DateTimeField(auto_now=True)
     created_at = models.DateTimeField(auto_now_add=True)
-    level = models.IntegerField(default=constants.INFO)
-
-    display_alert = models.BooleanField(default=False)
+    level = models.IntegerField(
+        default=constants.INFO,
+        choices=LEVEL_CHOICES,
+        help_text="The notification level, such as INFO or ERROR.")
+    display_alert = models.BooleanField(
+        default=False,
+        help_text="If enabled, display the alert dialog box to user.")
     content_type = models.ForeignKey(ContentType, null=True, blank=True)
     object_id = models.PositiveIntegerField(null=True, blank=True)
     content_object = generic.GenericForeignKey('content_type', 'object_id')

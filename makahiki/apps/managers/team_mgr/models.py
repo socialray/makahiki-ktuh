@@ -75,6 +75,10 @@ class Post(models.Model):
     def __unicode__(self):
         return "%s (%s): %s" % (self.team, self.user.username, self.text)
 
+    class Meta:
+        """meta"""
+        verbose_name_plural = "Wall Posts"
+
     def date_string(self):
         """Formats the created date into a pretty string."""
         return self.created_at.strftime("%m/%d %I:%M %p")

@@ -1,5 +1,6 @@
 """Administrator interface to resource manager."""
 from django.contrib import admin
+from apps.managers.challenge_mgr import challenge_mgr
 
 from apps.managers.resource_mgr.models import EnergyUsage, WaterUsage, ResourceSetting
 
@@ -17,3 +18,5 @@ class ResourceSettingsAdmin(admin.ModelAdmin):
     list_display = ["name", "unit", "winning_order", ]
 
 admin.site.register(ResourceSetting, ResourceSettingsAdmin)
+
+challenge_mgr.register_sys_admin_model("Other Settings", ResourceSetting)
