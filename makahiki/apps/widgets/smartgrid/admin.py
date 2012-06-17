@@ -1,6 +1,7 @@
 """Admin definition for Smart Grid Game widget."""
 from django.db import models
 from apps.managers.challenge_mgr import challenge_mgr
+from apps.utils import utils
 from apps.widgets.smartgrid.models import ActionMember, Activity, Category, Event, \
                                      Commitment, ConfirmationCode, TextPromptQuestion, \
                                      QuestionChoice, Level
@@ -78,16 +79,20 @@ class ActivityAdminForm(forms.ModelForm):
         """Meta"""
         model = Activity
 
+    def clean_unlock_condition(self):
+        """Validates the unlock conditions of the quest."""
+        data = self.cleaned_data["unlock_condition"]
+        utils.validate_form_predicates(data)
+        return data
+
     def clean(self):
         """
           Validates the admin form data based on a set of constraints.
 
-            1.  Events must have an event date.
             2.  If the verification type is "image" or "code", then a confirm prompt is required.
             3.  If the verification type is "text", then additional questions are required
                 (Handled in the formset class below).
             4.  Publication date must be before expiration date.
-            5.  If the verification type is "code", then the number of codes is required.
             6.  Either points or a point range needs to be specified.
         """
 
@@ -188,6 +193,12 @@ class EventAdminForm(forms.ModelForm):
         """Meta"""
         model = Event
 
+    def clean_unlock_condition(self):
+        """Validates the unlock conditions of the quest."""
+        data = self.cleaned_data["unlock_condition"]
+        utils.validate_form_predicates(data)
+        return data
+
     def clean(self):
         """
           Validates the admin form data based on a set of constraints.
@@ -247,9 +258,37 @@ class EventAdminForm(forms.ModelForm):
         return activity
 
 
+class CommitmentAdminForm(forms.ModelForm):
+    """admin form"""
+    class Meta:
+        """meta"""
+        model = Commitment
+
+    def clean_unlock_condition(self):
+        """Validates the unlock conditions of the quest."""
+        data = self.cleaned_data["unlock_condition"]
+        utils.validate_form_predicates(data)
+        return data
+
+
+class LevelAdminForm(forms.ModelForm):
+    """admin form"""
+    class Meta:
+        """meta"""
+        model = Level
+
+    def clean_unlock_condition(self):
+        """Validates the unlock conditions of the quest."""
+        data = self.cleaned_data["unlock_condition"]
+        utils.validate_form_predicates(data)
+        return data
+
+
 class LevelAdmin(admin.ModelAdmin):
     """Level Admin"""
     list_display = ["name", "priority"]
+    form = LevelAdminForm
+
 
 admin.site.register(Level, LevelAdmin)
 challenge_mgr.register_game_admin_model("smartgrid", Level)
@@ -400,6 +439,7 @@ class CommitmentAdmin(admin.ModelAdmin):
         ("Ordering", {"fields": (("level", "category", "priority"), )}),
         )
     prepopulated_fields = {"slug": ("name",)}
+    form = CommitmentAdminForm
 
     formfield_overrides = {
         models.CharField: {'widget': TextInput(attrs={'size': '80'})},

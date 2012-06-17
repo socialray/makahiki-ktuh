@@ -1,6 +1,7 @@
 """Provides common utility functions."""
 from django.conf import settings
 import os
+import sys
 
 
 def media_file_path(prefix=None):
@@ -59,3 +60,37 @@ def eval_predicates(predicates, user):
     allow_dict.update(get_smartgrid_predicates())
 
     return eval(user_predicates, {"__builtins__": None}, allow_dict)
+
+
+def validate_predicates(predicates):
+    """Validate the predicates string."""
+    from django.contrib.auth.models import User
+
+    error_msg = None
+    # Pick a user and see if the conditions result is true or false.
+    user = User.objects.all()[0]
+    try:
+        result = eval_predicates(predicates, user)
+        # Check if the result type is a boolean
+        if type(result) != type(True):
+            error_msg = "Expected boolean value but got %s" % type(result)
+    except Exception:
+        error_msg = "Received exception: %s" % sys.exc_info()[0]
+
+    return error_msg
+
+
+def validate_form_predicates(predicates):
+    """validate the predicates in a form. if error, raise the form validation error."""
+    from django import forms
+    from django.contrib.auth.models import User
+
+    # Pick a user and see if the conditions result is true or false.
+    user = User.objects.all()[0]
+    try:
+        result = eval_predicates(predicates, user)
+        # Check if the result type is a boolean
+        if type(result) != type(True):
+            raise forms.ValidationError("Expected boolean value but got %s" % type(result))
+    except Exception:
+        raise forms.ValidationError("Received exception: %s" % sys.exc_info()[0])
