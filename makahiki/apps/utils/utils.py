@@ -14,9 +14,10 @@ def media_file_path(prefix=None):
 
 def get_challenge_mgr_predicates():
     """Returns the predicates defined in smartgrid module."""
-    from apps.managers.challenge_mgr.predicates import game_enabled
+    from apps.managers.challenge_mgr.predicates import game_enabled, reached_round
     return {
             "game_enabled": game_enabled,
+            "reached_round": reached_round,
             }
 
 

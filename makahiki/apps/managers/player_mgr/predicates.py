@@ -1,4 +1,4 @@
-"""Provides predicate functions for runtime condition evaluation."""
+"""Player related  predicates."""
 
 
 def has_points(user, points):

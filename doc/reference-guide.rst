@@ -7,6 +7,7 @@ Reference Guide
    package-guide
    scripts
    environment_variables
+   predicates
 
 
 

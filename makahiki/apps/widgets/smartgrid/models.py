@@ -45,7 +45,8 @@ class Level(models.Model):
     )
     unlock_condition = models.CharField(
         max_length=400, null=True, blank=True,
-        help_text="if the condition is True, the level will be unlocked.")
+        help_text="if the condition is True, the level will be unlocked. " +
+                   settings.PREDICATE_DOC_TEXT)
     unlock_condition_text = models.CharField(
         max_length=400, null=True, blank=True,
         help_text="The description of the unlock condition.")
@@ -56,6 +57,11 @@ class Level(models.Model):
     class Meta:
         """Meta"""
         ordering = ("priority",)
+
+    def save(self, *args, **kwargs):
+        """Custom save method to set fields."""
+        super(Level, self).save(args, kwargs)
+        cache_mgr.clear()
 
 
 class Category(models.Model):
@@ -76,6 +82,11 @@ class Category(models.Model):
 
     def __unicode__(self):
         return self.name
+
+    def save(self, *args, **kwargs):
+        """Custom save method to set fields."""
+        super(Category, self).save(args, kwargs)
+        cache_mgr.clear()
 
 
 class TextPromptQuestion(models.Model):
@@ -221,7 +232,8 @@ class Action(models.Model):
     )
     unlock_condition = models.CharField(
         max_length=400, null=True, blank=True,
-        help_text="if the condition is True, the action will be unlocked.")
+        help_text="if the condition is True, the action will be unlocked. " +
+                  settings.PREDICATE_DOC_TEXT)
     unlock_condition_text = models.CharField(
         max_length=400, null=True, blank=True,
         help_text="The description of the unlock condition.")
@@ -271,6 +283,7 @@ class Commitment(Action):
         """Custom save method to set fields."""
         self.type = "commitment"
         super(Commitment, self).save(args, kwargs)
+        cache_mgr.clear()
 
 
 class Activity(Action):
@@ -338,6 +351,12 @@ class Activity(Action):
         else:
             return None
 
+    def save(self, *args, **kwargs):
+        """Custom save method to set fields."""
+        self.type = "activity"
+        super(Activity, self).save(args, kwargs)
+        cache_mgr.clear()
+
 
 class Event(Action):
     """Events will be verified by confirmation code. It includes events and excursions."""
@@ -370,6 +389,11 @@ class Event(Action):
         if result.days >= 0 and result.seconds >= 0:
             return True
         return False
+
+    def save(self, *args, **kwargs):
+        """Custom save method to set fields."""
+        super(Event, self).save(args, kwargs)
+        cache_mgr.clear()
 
 
 class ActionMember(models.Model):

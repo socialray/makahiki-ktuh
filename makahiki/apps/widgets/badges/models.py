@@ -1,6 +1,7 @@
 """badge model."""
 
 from datetime import datetime
+from django.conf import settings
 
 from django.db import models
 
@@ -36,8 +37,10 @@ class Badge(models.Model):
         max_length=255, blank=True, null=True,
         upload_to=media_file_path(_MEDIA_LOCATION),
         help_text="The image of the badge.",)
-    award_condition = models.CharField(max_length=1024,
-                                       help_text="If the condition is true, the badge is awarded.")
+    award_condition = models.CharField(
+        max_length=1024,
+        help_text="if the condition is True, the badge will be awarded. " +
+                   settings.PREDICATE_DOC_TEXT)
     theme = models.CharField(max_length=1, choices=THEME_CHOICES, default='6',
                              help_text="The theme for the badge.")
 

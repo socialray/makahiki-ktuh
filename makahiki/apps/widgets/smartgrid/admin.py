@@ -80,26 +80,23 @@ class ActivityAdminForm(forms.ModelForm):
         model = Activity
 
     def clean_unlock_condition(self):
-        """Validates the unlock conditions of the quest."""
+        """Validates the unlock conditions of the action."""
         data = self.cleaned_data["unlock_condition"]
         utils.validate_form_predicates(data)
         return data
 
     def clean(self):
         """
-          Validates the admin form data based on a set of constraints.
-
-            2.  If the verification type is "image" or "code", then a confirm prompt is required.
-            3.  If the verification type is "text", then additional questions are required
-                (Handled in the formset class below).
-            4.  Publication date must be before expiration date.
-            6.  Either points or a point range needs to be specified.
+        Validates the admin form data based on a set of constraints.
+            1.  If the verification type is "image" or "code", then a confirm prompt is required.
+            2.  Publication date must be before expiration date.
+            3.  Either points or a point range needs to be specified.
         """
 
         # Data that has passed validation.
         cleaned_data = self.cleaned_data
 
-        #2 Check the verification type.
+        #1 Check the verification type.
         confirm_type = cleaned_data.get("confirm_type")
         prompt = cleaned_data.get("confirm_prompt")
         if confirm_type != "text" and len(prompt) == 0:
@@ -108,7 +105,7 @@ class ActivityAdminForm(forms.ModelForm):
             del cleaned_data["confirm_type"]
             del cleaned_data["confirm_prompt"]
 
-        #4 Publication date must be before the expiration date.
+        #2 Publication date must be before the expiration date.
         if "pub_date" in cleaned_data and "expire_date" in cleaned_data:
             pub_date = cleaned_data.get("pub_date")
             expire_date = cleaned_data.get("expire_date")
@@ -118,7 +115,7 @@ class ActivityAdminForm(forms.ModelForm):
                     [u"The expiration date must be after the pub date."])
                 del cleaned_data["expire_date"]
 
-        #6 Either points or a point range needs to be specified.
+        #3 Either points or a point range needs to be specified.
         points = cleaned_data.get("point_value")
         point_range_start = cleaned_data.get("point_range_start")
         point_range_end = cleaned_data.get("point_range_end")
@@ -194,22 +191,18 @@ class EventAdminForm(forms.ModelForm):
         model = Event
 
     def clean_unlock_condition(self):
-        """Validates the unlock conditions of the quest."""
+        """Validates the unlock conditions of the action."""
         data = self.cleaned_data["unlock_condition"]
         utils.validate_form_predicates(data)
         return data
 
     def clean(self):
         """
-          Validates the admin form data based on a set of constraints.
+        Validates the admin form data based on a set of constraints.
 
             1.  Events must have an event date.
-            2.  If the verification type is "image" or "code", then a confirm prompt is required.
-            3.  If the verification type is "text", then additional questions are required
-                (Handled in the formset class below).
-            4.  Publication date must be before expiration date.
-            5.  If the verification type is "code", then the number of codes is required.
-            6.  Either points or a point range needs to be specified.
+            2.  Publication date must be before expiration date.
+            3.  If the verification type is "code", then the number of codes is required.
         """
 
         # Data that has passed validation.
@@ -223,7 +216,7 @@ class EventAdminForm(forms.ModelForm):
             self._errors["event_date"] = ErrorList([u"Events require an event date."])
             del cleaned_data["event_date"]
 
-        #4 Publication date must be before the expiration date.
+        #2 Publication date must be before the expiration date.
         if "pub_date" in cleaned_data and "expire_date" in cleaned_data:
             pub_date = cleaned_data.get("pub_date")
             expire_date = cleaned_data.get("expire_date")
@@ -233,7 +226,7 @@ class EventAdminForm(forms.ModelForm):
                     [u"The expiration date must be after the pub date."])
                 del cleaned_data["expire_date"]
 
-        #5 Number of codes is required if the verification type is "code"
+        #3 Number of codes is required if the verification type is "code"
         has_codes = "num_codes" in cleaned_data
         num_codes = cleaned_data.get("num_codes")
         if has_codes and not num_codes:
@@ -265,7 +258,7 @@ class CommitmentAdminForm(forms.ModelForm):
         model = Commitment
 
     def clean_unlock_condition(self):
-        """Validates the unlock conditions of the quest."""
+        """Validates the unlock conditions of the action."""
         data = self.cleaned_data["unlock_condition"]
         utils.validate_form_predicates(data)
         return data
@@ -278,7 +271,7 @@ class LevelAdminForm(forms.ModelForm):
         model = Level
 
     def clean_unlock_condition(self):
-        """Validates the unlock conditions of the quest."""
+        """Validates the unlock conditions of the action."""
         data = self.cleaned_data["unlock_condition"]
         utils.validate_form_predicates(data)
         return data

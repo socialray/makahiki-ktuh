@@ -302,7 +302,8 @@ class PageInfo(models.Model):
     unlock_condition = models.CharField(
         default="True",
         max_length=255,
-        help_text="The conditions string to unlock the page.",)
+        help_text="if the condition is True, the page will be unlocked. " +
+                  settings.PREDICATE_DOC_TEXT)
 
     class Meta:
         """meta"""

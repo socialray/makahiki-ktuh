@@ -312,6 +312,11 @@ LANGUAGE_CODE = 'en_US.UTF-8'
 MARKDOWN_LINK = "http://daringfireball.net/projects/markdown/syntax"
 MARKDOWN_TEXT = "Uses <a href=\"" + MARKDOWN_LINK + "\" target=\"_blank\">Markdown</a> formatting."
 
+# Makahiki Predicates documentation
+PREDICATE_DOC_LINK = "http://makahiki.readthedocs.org/en/latest/predicates.html"
+PREDICATE_DOC_TEXT = "Uses <a href=\"" + PREDICATE_DOC_LINK + "\" target=\"_blank\">"\
+                     "Makahiki Predicates</a>."
+
 SERIALIZATION_MODULES = {
     'csv': 'snippetscream.csv_serializer',
     }

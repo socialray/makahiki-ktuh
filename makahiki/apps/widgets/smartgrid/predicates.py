@@ -1,4 +1,4 @@
-"""Provides predicate functions for runtime condition evaluation."""
+"""Smartgrid related predicates."""
 from apps.widgets.smartgrid.models import Action, Category
 
 
