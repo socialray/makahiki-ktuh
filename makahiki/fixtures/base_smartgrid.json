@@ -14,8 +14,8 @@
         "fields": {
             "name": "Level 2",
             "priority": "2",
-            "unlock_condition": "has_points(100)",
-            "unlock_condition_text": "earn 100 points by completing more actions"
+            "unlock_condition": "completed_level(1)",
+            "unlock_condition_text": "complete all level 1 activities and attempt all level 1 commitments"
         }
     },
     {
@@ -24,8 +24,8 @@
         "fields": {
             "name": "Level 3",
             "priority": "3",
-            "unlock_condition": "has_points(200)",
-            "unlock_condition_text": "earn 200 points by completing more actions"
+            "unlock_condition": "completed_level(2)",
+            "unlock_condition_text": "complete all level 2 activities and attempt all level 2 commitments"
         }
     },
     {
@@ -34,8 +34,8 @@
 	"fields": {
 	    "priority": 4, 
 	    "name": "Level 4", 
-    	    "unlock_condition": "True", 
- 	    "unlock_condition_text": ""
+    	"unlock_condition": "completed_level(3)", 
+ 	    "unlock_condition_text": "complete all level 3 activities and attempt all level 3 commitments"
 	}
     }, 
     {
