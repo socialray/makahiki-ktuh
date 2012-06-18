@@ -109,7 +109,7 @@ var toggleHelp = function(event, category, slug) {
         	          "' and slug '" + slug + "'.");
         }
     });
-    document.getElementById('helpModal').style.top = event.pageY + "px";
+    modalElement.css('margin-top', (modalElement.outerHeight() / 2) * -1);
     modalElement.modal('show');
 }
 
