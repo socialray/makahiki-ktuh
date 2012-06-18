@@ -54,7 +54,10 @@ def annotate_action_status(user, action):
         if action.type == "activity":
             duration = action.activity.duration
         else:  # is event
-            duration = action.event.duration
+            if action.type == "event":
+                duration = action.event.duration
+            else:
+                duration = 0
 
         hours = duration / 60
         minutes = duration % 60
