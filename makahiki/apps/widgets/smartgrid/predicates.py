@@ -1,6 +1,7 @@
 """Predicates indicating if a level or cell should be unlocked."""
 
-from apps.widgets.smartgrid.models import Action, Category
+from datetime import datetime, timedelta
+from apps.widgets.smartgrid.models import Action, Category, Event
 
 
 def completed_action(user, slug):
@@ -54,6 +55,28 @@ def completed_level(user, lvl=1):
     ret = (num_completed_activities == num_level_activities) and \
     (num_attempted_commitments == num_level_commitments)
     return ret
+
+
+def unlock_on_date(user, date_string):
+    """Returns true if the current date is equal to or after the date_string."""
+    _ = user
+    today = datetime.today()
+    unlock_date = datetime.strptime(date_string, "%m/%d/%y")
+    return today >= unlock_date
+
+
+def unlock_on_event(user, event_slug, days=0):
+    """Returns true if the current date is equal to or after the date of the Event
+    defined by the event_slug, optionally days before. days should be a negative number."""
+    _ = user
+    today = datetime.today()
+    day_delta = timedelta(days=days)
+    event = Event.objects.get(slug=event_slug)
+    if event:
+        unlock_date = event.event_date + day_delta
+        return today >= unlock_date
+    else:
+        return True
 
 
 def approved_action(user, slug):

@@ -3103,7 +3103,7 @@
             "level": 3,
             "type": "activity",
             "slug": "energy-city",
-            "unlock_condition": "",
+            "unlock_condition": "True",
             "description": "This activity involves the student playing the online game <a href=\"http://www.filamentgames.com/projects/energy-city\" rel=\"nofollow\">Energy City</a>.  One of the scenarios, \"Pele's Island\", appears to be based on the Big Island's energy situation.  It is unclear how to award points for this activity, but we want to be able to:<div><ul><li>Verify that the student has played the game;</li><li>Find out the student's highest score;</li></ul>"
         }
     },

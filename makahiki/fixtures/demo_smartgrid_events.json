@@ -622,7 +622,7 @@
             "level": 1,
             "type": "event",
             "slug": "customize-tshirt",
-            "unlock_condition": "",
+            "unlock_condition": "True",
             "description": "This workshop provides students with materials and advice on how to cut up, paint, stencil, and otherwise customize their Kukui Cup tshirts.   If the student has already received a Kukui Cup tshirt, then they must bring it (or another tshirt) to be customized.  If the student has not already received a Kukui Cup tshirt, then the first 10 attendees w/o a Kukui Cup tshirt will receive one free. "
         }
     },
