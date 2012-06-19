@@ -10,22 +10,33 @@
                             /></a>
             </div>
             <div class="content-box-contents">
-                
-              {% if hourly_goal %}
-                <fieldset> 
+              {% if user.get_profile.team %}
+                {% if hourly_goal %}
+                  <fieldset>
                     <div class="energy-power-box">
                           <center>{% include "hourly_goal.html" %}</center>
                     </div>
-                </fieldset>
-              {% endif %}
-              {% if daily_goal %}
-                <fieldset>
+                  </fieldset>
+                {% endif %}
+                {% if daily_goal %}
+                  <fieldset>
                     <legend>Current Round Daily Goal Status</legend>
                     <div class="energy-power-box">
                             <center>{% include "daily_goal.html" %}</center>
                     </div>
-                </fieldset>
+                  </fieldset>
                 {% endif %}
+              {% else %}
+                <table >
+                    <tr width="300"><td height="100" valign="center">
+                        <b>The {{ resource.name }} goal data is not available.</b> <br/><br/>
+                        You are not in a {{ TEAM_LABEL|lower }} that has {{ resource.name }} data. <br/>
+                        If you are the admin, you can go to the admin interface and login in <br/>
+                        as a user who is belong to a {{ TEAM_LABEL|lower }} with {{ resource.name }} data.
+                    </td></tr>
+                </table>
+              {% endif %}
+
                 <fieldset>
                     <legend class="energy-legend-text">The following actions can help your {{ TEAM_LABEL.lower }}
                                 conserve {{ resource.name }}: </legend>

@@ -92,24 +92,15 @@ class Command(MakahikiBaseCommand):
         total_count = 0
         for team in Team.objects.all():
             for i in range(0, count):
-                username = "testuser%d-%s" % (i, team.slug)
+                _ = i
+                username = "player%d" % total_count
                 user = User.objects.create_user(username,
                                                 username + "@test.com",
-                                                password="testuser")
-                # make the first user in the team to go through first-login,
-                # for the rest users, set their profile and setup as completed.
-                if i == 0:
-                    is_completed = False
-                else:
-                    is_completed = True
-
+                                                password=username)
                 profile = user.get_profile()
-                profile.setup_complete = is_completed
-                profile.setup_profile = is_completed
+                profile.name = username.capitalize()
                 profile.team = team
                 profile.save()
-                if is_completed:
-                    profile.add_points(25, datetime.datetime.today(), 'setup completed')
 
                 total_count += 1
 
@@ -117,7 +108,7 @@ class Command(MakahikiBaseCommand):
 
     def delete_users(self):
         """delete the test users name start with 'testuser-'."""
-        users = User.objects.filter(username__startswith="testuser")
+        users = User.objects.filter(username__startswith="player")
         total_count = 0
         for user in users:
             user.delete()
@@ -130,12 +121,17 @@ class Command(MakahikiBaseCommand):
         for r in RoundSetting.objects.all():
             r.delete()
 
-        start = datetime.datetime.today()
+        start = datetime.date.today()
         delta = datetime.timedelta(days=7)
 
         for i in range(0, count):
             end = start + delta
-            RoundSetting(name="Round %d" % (i + 1), start=start, end=end).save()
+            end_time = datetime.datetime(year=end.year, month=end.month, day=end.day) - \
+                       datetime.timedelta(seconds=1)
+            RoundSetting(name="Round %d" % (i + 1),
+                         start=start,
+                         end=end_time
+                        ).save()
             start = end
 
         self.stdout.write("set up %d one-week rounds, starting from today.\n" % count)
@@ -176,21 +172,21 @@ class Command(MakahikiBaseCommand):
         for team in Team.objects.all():
             for day in range(0, 7):
                 for hour in range(1, 25):
-                    EnergyBaselineHourly(team=team, day=day, hour=hour, usage=1000 * hour).save()
+                    EnergyBaselineHourly(team=team, day=day, hour=hour, usage=1 * hour).save()
 
         # energy daily
         for baseline in EnergyBaselineDaily.objects.all():
             baseline.delete()
         for team in Team.objects.all():
             for day in range(0, 7):
-                EnergyBaselineDaily(team=team, day=day, usage=1000 * 24).save()
+                EnergyBaselineDaily(team=team, day=day, usage=1 * 24).save()
 
         # water daily
         for baseline in WaterBaselineDaily.objects.all():
             baseline.delete()
         for team in Team.objects.all():
             for day in range(0, 7):
-                WaterBaselineDaily(team=team, day=day, usage=1000 * 24).save()
+                WaterBaselineDaily(team=team, day=day, usage=1 * 24).save()
 
         self.stdout.write("created test baselines for all teams.\n")
 

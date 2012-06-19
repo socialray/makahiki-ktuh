@@ -32,7 +32,7 @@
         "fields": {
             "priority": 4,
             "enabled": true,
-            "name": "Top Scorer Game"
+            "name": "Top Score Game"
         }
     },
     {

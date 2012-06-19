@@ -5,11 +5,11 @@ at the end of the day."""
 
 import datetime
 
-from django.core import management
+from apps.managers.challenge_mgr.challenge_mgr import MakahikiBaseCommand
 from apps.widgets.resource_goal import resource_goal
 
 
-class Command(management.base.BaseCommand):
+class Command(MakahikiBaseCommand):
     """command"""
     help = 'Check the energy goal for all teams, award points for meeting the goal'
 

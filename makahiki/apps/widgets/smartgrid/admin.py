@@ -481,7 +481,7 @@ class ActionMemberAdminForm(forms.ModelForm):
         if member and member.action and not member.action.point_value:
             action = member.action
             message = "Specify the number of points to award.  This value must be between %d and %d"
-            message = message % (action.point_range_start, action.point_range_end)
+            message = message % (action.activity.point_range_start, action.activity.point_range_end)
             self.fields["points_awarded"].help_text = message
 
     class Meta:
@@ -503,10 +503,10 @@ class ActionMemberAdminForm(forms.ModelForm):
                     [u"This action requires that you specify the number of points to award."])
 
             # Check if the point value is valid.
-            elif cleaned_data["points_awarded"] < action.point_range_start or \
-                 cleaned_data["points_awarded"] > action.point_range_end:
+            elif cleaned_data["points_awarded"] < action.activity.point_range_start or \
+                 cleaned_data["points_awarded"] > action.activity.point_range_end:
                 message = "The points to award must be between %d and %d" % (
-                    action.point_range_start, action.point_range_end)
+                    action.activity.point_range_start, action.activity.point_range_end)
                 self._errors["points_awarded"] = ErrorList([message])
                 del cleaned_data["points_awarded"]
         elif status == "approved" and "points_awarded" in cleaned_data:

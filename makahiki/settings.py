@@ -69,8 +69,8 @@ MIDDLEWARE_CLASSES = (
     'django.middleware.doc.XViewMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
-    'apps.lib.django_cas.middleware.CASMiddleware',
 
+    'apps.lib.django_cas.middleware.CASMiddleware',
     'apps.managers.player_mgr.middleware.LoginMiddleware',
     'apps.managers.log_mgr.middleware.LoggingMiddleware',
 
@@ -92,7 +92,7 @@ AUTH_PROFILE_MODULE = 'player_mgr.Profile'
 ###################
 # Authentication
 ###################
-LOGIN_URL = "/account/cas/login/"
+LOGIN_URL = "/landing/"
 LOGIN_REDIRECT_URLNAME = "home_index"
 LOGIN_REDIRECT_URL = "/home"
 RESTRICTED_URL = '/restricted/'

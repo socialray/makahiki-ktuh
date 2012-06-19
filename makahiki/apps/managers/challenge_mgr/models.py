@@ -166,13 +166,16 @@ class ChallengeSetting(models.Model):
             settings.CHALLENGE.is_multi_auth = True
 
         # setting for the CAS authentication service.
-        if settings.CHALLENGE.cas_server_url:
+        if settings.CHALLENGE.use_cas_auth:
             settings.CAS_SERVER_URL = settings.CHALLENGE.cas_server_url
             settings.CAS_REDIRECT_URL = '/'
             settings.CAS_IGNORE_REFERER = True
+            settings.LOGIN_URL = "/account/cas/login/"
+        else:
+            settings.LOGIN_URL = "/account/login/"
 
         # ldap settings
-        if settings.CHALLENGE.ldap_server_url:
+        if settings.CHALLENGE.use_ldap_auth:
             from django_auth_ldap.config import LDAPSearch
             import ldap
 

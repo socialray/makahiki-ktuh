@@ -86,6 +86,7 @@ def syncdb(manage_command):
     """sync db."""
     print "syncing and migrating db..."
     os.system("%s syncdb --noinput --migrate --verbosity 0" % manage_command)
+    os.system("%s clear_cache" % manage_command)
 
 
 def main(argv):

@@ -49,8 +49,8 @@ def get_hourly_goal_data(team, resource):
         goal_percentage = goal_settings.goal_percent_reduction
         warning_percentage = goal_settings.warning_percent_reduction
         baseline = resource_goal.team_hourly_resource_baseline(date, team, resource)
-        goal = {"goal_usage": (baseline * 100 - baseline * goal_percentage) / 100 / 1000,
-                "warning_usage": (baseline * 100 - baseline * warning_percentage) / 100 / 100,
+        goal = {"goal_usage": (baseline * 100 - baseline * goal_percentage) / 100,
+                "warning_usage": (baseline * 100 - baseline * warning_percentage) / 100,
                 "actual_usage": data.usage,
                 "updated_at": datetime.datetime.combine(date=data.date, time=data.time)
                }
@@ -86,13 +86,13 @@ def get_daily_goal_data(team, resource):
 
         goal = resource_goal.team_goal(date, team, resource)
         unit = resource_mgr.get_resource_setting(resource).unit
-        goal_usage = resource_goal.team_daily_goal_usage(date, team, resource) / 1000
+        goal_usage = resource_goal.team_daily_goal_usage(date, team, resource)
         goal_info["goal_info"] = "%d %s" % (goal_usage, unit)
         if goal:
             goal_info["goal_status"] = goal.goal_status
             goal_info["verbose_info"] = "%d %s used within the last 24 hours (ends at %s). " \
                                         "The goal is %d %s." % (
-                resource_mgr.team_resource_usage(date, team, resource) / 1000,
+                resource_mgr.team_resource_usage(date, team, resource),
                 unit,
                 resource_goal.team_goal_settings(team, resource).manual_entry_time,
                 goal_usage,

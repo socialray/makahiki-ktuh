@@ -279,15 +279,15 @@ class Commitment(Action):
         help_text="Duration of commitment, in days."
     )
 
+    class Meta:
+        """meta"""
+        verbose_name_plural = "action: Commitments"
+
 
 class Activity(Action):
     """Activities involve verifiable actions that users commit to.  These actions can be
    verified by asking questions or posting an image attachment that verifies the user did
    the activity."""
-
-    class Meta:
-        """meta"""
-        verbose_name_plural = "activities"
 
     CONFIRM_CHOICES = (
         ('text', 'Question and Answer'),
@@ -345,6 +345,10 @@ class Activity(Action):
         else:
             return None
 
+    class Meta:
+        """meta"""
+        verbose_name_plural = "action: Activities"
+
 
 class Event(Action):
     """Events will be verified by confirmation code. It includes events and excursions."""
@@ -377,6 +381,10 @@ class Event(Action):
         if result.days >= 0 and result.seconds >= 0:
             return True
         return False
+
+    class Meta:
+        """meta"""
+        verbose_name_plural = "action: Events"
 
 
 class ActionMember(models.Model):
