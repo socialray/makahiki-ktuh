@@ -191,6 +191,7 @@ INSTALLED_WIDGET_APPS = (
     'status.users',
     'status.actions',
     'logging',
+    'status.flot',
 )
 
 for widget in INSTALLED_WIDGET_APPS:

@@ -1,6 +1,5 @@
 """handles request for user status."""
 import datetime
-
 from django.contrib.auth.models import User
 from django.conf import settings
 from django.db.models import Min
@@ -23,7 +22,8 @@ def supply(request, page_name):
     logins = []
     while start <= today:
         result = {}
-        result['date'] = start.strftime("%m/%d")
+        result['date'] = start.strftime("%Y,%m,%d")
+
         result['logins'] = users_anno.filter(login_date__gte=start,
             login_date__lt=start + datetime.timedelta(days=1)).count()
         logins.append(result)
@@ -40,3 +40,8 @@ def supply(request, page_name):
         'logins': logins,
         "referrals": referrals,
         }
+
+
+def remote_supply(request, page_name):
+    """Supports remote calls to this view."""
+    return supply(request, page_name)
