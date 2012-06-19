@@ -498,5 +498,15 @@
             "enabled": true,
             "page": 10
         }
+    },
+    {
+        "pk": 41,
+        "model": "challenge_mgr.pagesetting",
+        "fields": {
+            "widget": "status.flot",
+            "game": null,
+            "enabled": true,
+            "page": 10
+        }
     }
 ]
