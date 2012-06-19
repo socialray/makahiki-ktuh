@@ -60,9 +60,12 @@ def get_feedback_average(action):
 def get_total_feedback_average():
     """returns the average rating of all the feedback."""
     running_total = 0
+    count = get_actions_with_feedback().count()
     for action in get_actions_with_feedback():
         running_total += get_feedback_average(action)
-    return running_total / get_actions_with_feedback().count()
+    if count == 0:
+        count = 1
+    return running_total / count
 
 
 def get_action_likert_scales():
