@@ -25,17 +25,17 @@ def get_feedback_comments(action):
 def get_likert_scale_totals(action):
     """returns the totals for the Likert scale for the given action."""
     query_set = get_action_feedback(action)
-#    data = []
-#        {label: 'foo', data: [[1,300], [2,300], [3,300], [4,300], [5,300]]},
-#        {label: 'bar', data: [[1,800], [2,600], [3,400], [4,200], [5,0]]},
-#        {label: 'baz', data: [[1,100], [2,200], [3,300], [4,400], [5,500]]},
-#    ];
+# data = []
+# {label: 'foo', data: [[1,300], [2,300], [3,300], [4,300], [5,300]]},
+# {label: 'bar', data: [[1,800], [2,600], [3,400], [4,200], [5,0]]},
+# {label: 'baz', data: [[1,100], [2,200], [3,300], [4,400], [5,500]]},
+# ];
     scale = []
-#    for i in xrange(1,5):
-#        temp = {}
-#        temp['label'] = i
-#        temp['data'] = [query_set.filter(rating=i).count(), 1]
-#        scale.append(temp)
+# for i in xrange(1,5):
+# temp = {}
+# temp['label'] = i
+# temp['data'] = [query_set.filter(rating=i).count(), 1]
+# scale.append(temp)
 
     scale.append([0.7, query_set.filter(rating=1).count()])
     scale.append([1.7, query_set.filter(rating=2).count()])
@@ -48,21 +48,21 @@ def get_likert_scale_totals(action):
 def get_feedback_average(action):
     """returns the average feedback rating for the given action."""
     query_set = get_action_feedback(action)
-    count = query_set.count()
-    if count == 0:
-        count = 1
     total = 0
     for i in xrange(1, 6):
         total += query_set.filter(rating=i).count() * i
+    count = query_set.count()
+    if count == 0:
+        count = 1
     return total / count
 
 
 def get_total_feedback_average():
     """returns the average rating of all the feedback."""
     running_total = 0
-    count = get_actions_with_feedback().count()
     for action in get_actions_with_feedback():
         running_total += get_feedback_average(action)
+    count = get_actions_with_feedback().count()
     if count == 0:
         count = 1
     return running_total / count
@@ -89,7 +89,7 @@ def build_analysis(action):
 
 def get_analysis():
     """returns the feedback analysis for each of the actions as a dictionary
-    keyed with the action name."""
+keyed with the action name."""
     analysis = {}
     for action in get_actions_with_feedback():
         analysis[action.name] = build_analysis(action)
