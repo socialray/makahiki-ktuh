@@ -18,7 +18,6 @@ def supply(request, page_name):
 
     # award possible badges,
     award_badges(user)
-
     return get_badge_catalog(request)
 
 

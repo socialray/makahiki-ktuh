@@ -13,4 +13,4 @@ def get_badge(slug):
 
 def award_badge(user, badge):
     """award the badge to the user."""
-    BadgeAward(user=user, badge=badge).save()
+    BadgeAward(profile=user.get_profile(), badge=badge).save()

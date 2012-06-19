@@ -423,23 +423,23 @@ class QuestConditionsTest(TransactionTestCase):
         self.assertTrue(self.quest not in get_quests(self.user),
             "User should not be able to participate in this quest.")
 
-        self.quest.unlock_conditions = "not badge_awarded('daily-visitor')"
+        self.quest.unlock_conditions = "not badge_awarded('three-peater')"
         self.quest.save()
         self.assertTrue(self.quest in get_quests(self.user)["available_quests"],
             "User should be able to participate in this quest.")
 
         self.quest.accept(self.user)
-        self.quest.completion_conditions = "badge_awarded('daily-visitor')"
+        self.quest.completion_conditions = "badge_awarded('three-peater')"
         self.quest.save()
         self.assertTrue(self.quest not in possibly_completed_quests(self.user),
             "User should not be able to complete this quest.")
 
         profile.daily_visit_count = 3
         profile.save()
-        badge = badges.get_badge("daily-visitor")
+        badge = badges.get_badge("three-peater")
         badges.award_badge(user=self.user, badge=badge)
-        self.assertTrue(badge_awarded(self.user, "daily-visitor"),
-            "User should have been awarded the daily visitor badge.")
+        self.assertTrue(badge_awarded(self.user, "three-peater"),
+            "User should have been awarded the three-peater badge.")
         self.assertTrue(self.quest in possibly_completed_quests(self.user),
             "User should have completed this quest.")
 

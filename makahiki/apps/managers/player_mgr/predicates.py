@@ -1,4 +1,5 @@
 """Predicates providing information about the state of the current player."""
+from apps.widgets.badges.models import BadgeAward
 
 
 def has_points(user, points):
@@ -18,10 +19,9 @@ def allocated_ticket(user):
 
 def badge_awarded(user, badge_slug):
     """Returns True if the badge is awarded to the user."""
-    for awarded in user.badgeaward_set.all():
+    for awarded in BadgeAward.objects.filter(profile=user.get_profile()):
         if awarded.badge.slug == badge_slug:
             return True
-
     return False
 
 

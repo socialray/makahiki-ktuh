@@ -3,6 +3,7 @@ from django.db import models
 from datetime import datetime
 from django.conf import settings
 from apps.managers.player_mgr.models import Profile
+from apps.widgets.notifications.models import UserNotification
 from apps.utils.utils import media_file_path
 
 
@@ -40,6 +41,10 @@ class Badge(models.Model):
                    settings.PREDICATE_DOC_TEXT)
     theme = models.CharField(max_length=1, choices=THEME_CHOICES, default='6',
                              help_text="The theme for the badge.")
+    points = models.IntegerField(
+        default=0,
+        help_text="Point award for getting badge."
+    )
 
     def __unicode__(self):
         return self.name
@@ -50,3 +55,17 @@ class BadgeAward(models.Model):
     profile = models.ForeignKey(Profile)
     badge = models.ForeignKey(Badge)
     awarded_at = models.DateTimeField(default=datetime.now)
+
+    def save(self, *args, **kwargs):
+        """custom save method."""
+
+        message = "Congratulations, You have been awarded the %s badge." % self.badge.name
+        message += "Check it out <a href= %s >here</a>" % "/profile/?ref=dialog"
+        UserNotification.create_info_notification(
+            self.profile.user,
+            message,
+            True,
+            content_object=self
+        )
+        self.profile.add_points(self.badge.points, self.awarded_at, self.badge.name, self)
+        super(BadgeAward, self).save(args, kwargs)
