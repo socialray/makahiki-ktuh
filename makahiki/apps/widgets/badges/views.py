@@ -1,12 +1,12 @@
 """Views handler for Badge widget rendering."""
 
 from django.contrib.auth.decorators import login_required
-from django.contrib.auth.models import User
 from django.shortcuts import render_to_response
 from django.template.context import RequestContext
 from apps.utils import utils
 from apps.widgets.badges import badges
 from apps.widgets.badges.models import Badge, BadgeAward
+from apps.managers.player_mgr.models import Profile
 
 
 def supply(request, page_name):
@@ -50,10 +50,11 @@ def get_badge_catalog(request):
     """Returns the badge catalog."""
 
     user = request.user
+    profile = user.get_profile()
     awarded_badges = []
     locked_badges = []
 
-    for awarded in user.badgeaward_set.all():
+    for awarded in BadgeAward.objects.filter(profile=profile):
         awarded_badges.append(awarded.badge)
 
     for badge in Badge.objects.all():
@@ -61,13 +62,13 @@ def get_badge_catalog(request):
             locked_badges.append(badge)
 
     # For each badge, get the number of people who have the badge.
-    team = request.user.get_profile().team
+    team = profile.team
     for badge in awarded_badges:
         badge.total_users = BadgeAward.objects.filter(badge=badge).count()
-        badge.team_users = User.objects.filter(badgeaward__badge=badge, profile__team=team)
+        badge.team_users = Profile.objects.filter(badgeaward__badge=badge, team=team)
     for badge in locked_badges:
         badge.total_users = BadgeAward.objects.filter(badge=badge).count()
-        badge.team_users = User.objects.filter(badgeaward__badge=badge, profile__team=team)
+        badge.team_users = Profile.objects.filter(badgeaward__badge=badge, team=team)
 
     return {
         "awarded_badges": awarded_badges,

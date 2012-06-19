@@ -72,7 +72,6 @@
               yaxis: {
                   {% if yaxis_mode != "" %}
                     mode: "{{flot.yaxis_mode}}",
-                    timeformat: "{{flot.time_format}}",
                   {% else %}
                     ticks: {{flot.yaxis_ticks}},
                   {% endif %}

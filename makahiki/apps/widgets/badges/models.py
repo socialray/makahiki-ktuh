@@ -1,11 +1,8 @@
 """badge model."""
-
+from django.db import models
 from datetime import datetime
 from django.conf import settings
-
-from django.db import models
-
-from django.contrib.auth.models import User
+from apps.managers.player_mgr.models import Profile
 from apps.utils.utils import media_file_path
 
 
@@ -50,6 +47,6 @@ class Badge(models.Model):
 
 class BadgeAward(models.Model):
     """Defines model for awarded badge."""
-    user = models.ForeignKey(User)
+    profile = models.ForeignKey(Profile)
     badge = models.ForeignKey(Badge)
     awarded_at = models.DateTimeField(default=datetime.now)
