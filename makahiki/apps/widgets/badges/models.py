@@ -67,5 +67,7 @@ class BadgeAward(models.Model):
             True,
             content_object=self
         )
-        self.profile.add_points(self.badge.points, self.awarded_at, self.badge.name, self)
+
+        message = "Badge: %s" % self.badge.name
+        self.profile.add_points(self.badge.points, self.awarded_at, message, self)
         super(BadgeAward, self).save(args, kwargs)
