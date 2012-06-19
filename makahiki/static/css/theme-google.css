@@ -1082,7 +1082,7 @@ td.energy-status-how-activities-content{vertical-align:text-top;}
 .activities-grid td table td{padding:1px;margin:0;vertical-align:middle;}
 .activities-grid-legend{padding-left:8px;border:2;}
 .activities-grid-legend td{padding:2px;width:8px;text-align:left;}
-.activity,.commitment,.event,.excursion{height:48px;border:1px solid #000;border-radius:8px;-moz-border-radius:8px;-webkit-border-radius:8px;}
+.activity,.commitment,.event,.excursion,.filler{height:48px;border:1px solid #000;border-radius:8px;-moz-border-radius:8px;-webkit-border-radius:8px;}
 .activity,.activity-legend,.activity a{background-color:#8daaeb;color:#000000;}
 .activity div,.commitment div,.event div,.excursion div{font-size:9pt;padding:1px;}
 .activity div a,.commitment div a,.event div a,.excursion div a{color:#000;}
