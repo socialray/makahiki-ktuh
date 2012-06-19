@@ -23,8 +23,13 @@ class LoginMiddleware(object):
         response = self.check_competition_period(request)
         if response is None:
             response = self.check_setup_completed(request)
-            if response is None:
-                response = self.track_login(request)
+
+        if response is None:
+            response = self.track_login(request)
+
+        if response is None and "badges" in challenge_mgr.get_enabled_widgets():
+            self.award_possible_badges(request)
+
         return response
 
     def track_login(self, request):
@@ -82,4 +87,13 @@ class LoginMiddleware(object):
                not re.compile(pattern).match(path) and \
                not challenge_mgr.in_competition():
                 return HttpResponseRedirect(reverse("home_restricted"))
+        return None
+
+    def award_possible_badges(self, request):
+        """award any possible badges for a login user."""
+        user = request.user
+        if user.is_authenticated():
+            from apps.widgets.badges import badges
+            badges.award_possible_badges(user)
+
         return None

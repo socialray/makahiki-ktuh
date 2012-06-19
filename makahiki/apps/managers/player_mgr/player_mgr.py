@@ -7,6 +7,7 @@ from django.db.utils import IntegrityError
 from apps.managers.player_mgr.models import Profile
 from apps.managers.score_mgr import score_mgr
 from apps.managers.team_mgr.models import Team
+from apps.widgets.badges.models import BadgeAward
 
 
 def get_active_player(username):
@@ -63,7 +64,8 @@ def points_leaders(num_results=None, round_name=None):
     if entries:
         for e in entries:
             u = Profile.objects.get(pk=e['profile']).user
-            e['user'] = u
+            p = u.get_profile()
+            e['badges'] = BadgeAward.objects.filter(profile=p)
         return entries
     else:
         results = Profile.objects.all().extra(select={'profile__name': 'name', 'points': 0}).values(

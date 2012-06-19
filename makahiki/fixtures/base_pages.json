@@ -500,7 +500,7 @@
         }
     },
     {
-        "pk": 41,
+        "pk": 53,
         "model": "challenge_mgr.pagesetting",
         "fields": {
             "widget": "status.flot",
