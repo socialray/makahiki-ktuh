@@ -48,10 +48,13 @@ def get_likert_scale_totals(action):
 def get_feedback_average(action):
     """returns the average feedback rating for the given action."""
     query_set = get_action_feedback(action)
+    count = query_set.count()
+    if count == 0:
+        count = 1
     total = 0
     for i in xrange(1, 6):
         total += query_set.filter(rating=i).count() * i
-    return total / query_set.count()
+    return total / count
 
 
 def get_total_feedback_average():
