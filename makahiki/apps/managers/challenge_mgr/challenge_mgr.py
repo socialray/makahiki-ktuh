@@ -120,16 +120,25 @@ def page_info(user, page_name):
         return None
 
 
-def get_enabled_page_widgets(page_name):
+def get_enabled_widgets(page_name=None):
     """Returns the enabled widgets for the specified page, taking into account of the PageSetting
+    and GameSetting. if page_name is not specified, get all the enabled widgets from pageSetting
     and GameSetting."""
+
     widgets = []
-    for ps in PageSetting.objects.filter(page__name=page_name, enabled=True):
+
+    if page_name:
+        page_setting = PageSetting.objects.filter(page__name=page_name, enabled=True)
+    else:
+        page_setting = PageSetting.objects.filter(enabled=True)
+
+    for ps in page_setting:
         if ps.widget:
             widgets.append(ps.widget)
         if ps.game and GameInfo.objects.filter(name=ps.game, enabled=True).count():
             for gs in GameSetting.objects.filter(game=ps.game, enabled=True):
                 widgets.append(gs.widget)
+
     return widgets
 
 

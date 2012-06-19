@@ -63,7 +63,7 @@ def index(request):
 def supply_view_objects(request, page_name, view_objects):
     """ Returns view_objects supplied widgets defined in PageSetting. """
 
-    widgets = challenge_mgr.get_enabled_page_widgets(page_name)
+    widgets = challenge_mgr.get_enabled_widgets(page_name)
     if not widgets:
         return False
 

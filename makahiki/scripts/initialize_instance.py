@@ -133,8 +133,8 @@ def main(argv):
     if instance_type == "demo":
         print "setting up demo data..."
         load_fixtures(manage_command, fixture_path, "demo_")
-        # setup 1 user per team, and 1 one-week round
-        os.system("%s setup_test_data all 1 1" % manage_command)
+        # setup 2 user per team, and 1 one-week round
+        os.system("%s setup_test_data all 2 1" % manage_command)
 
     if instance_type == "test":
         print "setting up test data..."
