@@ -60,10 +60,13 @@ def view_action(request, action_type, slug):
                 view_module_name).supply(request, None)
             view_objects['embedded_widget_template'] = "widgets/" + \
                 action.embedded_widget + "/templates/index.html"
-    else:  # action.event:
+    elif action_type == "event":  # action.event:
         form = view_events.view(request, action)
         # calculate available seat
         action.available_seat = action.event.event_max_seat - completed_count
+    elif action_type == "filler":
+        response = HttpResponseRedirect(reverse("learn_index", args=()))
+        return response
 
     user_reminders = view_reminders.load_reminders(action, user)
     feedback = ActionFeedback.objects.filter(user=user.pk, action=action.pk)
