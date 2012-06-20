@@ -3,7 +3,7 @@
 <p>Please provide feedback on {{ action.type|capfirst }} : {{ action.name }}.</p>
 <form action="{% url add_activity_feedback action.type action.slug %}" method="post">
     {% csrf_token %}
-    <table class="table-striped">
+    <table class="">
         <tr>
             <td>Hated it</td>
             <td>1<input id="radScoreStart" type="radio" name="Score" value="1" /></label></td>

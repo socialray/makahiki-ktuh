@@ -32,7 +32,7 @@
             {% if action.type == "commitment" and action.can_commit %}
                 <br/>
                 <a onclick="task_form_overlay(event)">
-                    <button style="cursor:pointer;">I will do this again!</button>
+                    <button style="cursor:pointer;" class="btn btn-widget">I will do this again!</button>
                 </a>
             {% endif %}
 
@@ -46,7 +46,7 @@
                     Click on the "I Did it" button to get the rest of your points.
                     <br/>
                     <a onclick="task_form_overlay(event)">
-                        <button style="cursor:pointer;">I Did it</button>
+                        <button style="cursor:pointer;" class="btn btn-wdiget">I Did it</button>
                     </a>
                 {% else %}
                     Thank you! You've earned 2 bonus {% if action.is_canopy %}
@@ -64,7 +64,11 @@
                             Take me off the signup list
                         </button>
                     </form>
-
+                {% endif %}
+                {%if  not feedback_p %}
+                    {% include "widgets/action_feedback/templates/feedback_form.html" %}
+                {% else %}
+                    <p>Thank you for your feedback!</p>
                 {% endif %}
             </div>
         {% endif %}
@@ -81,7 +85,7 @@
                     <form action='{% url activity_drop_task action.type action.slug %}'
                           method='post'>
                         {% csrf_token %}
-                        <button id="submit_button2" style="cursor:pointer;"
+                        <button id="submit_button2" style="cursor:pointer;" class="btn btn-widget"
                                 onclick='$("#submit_button2").attr("disabled", "disabled");javascript:this.form.submit(); return false;'>
                             Drop this commitment
                         </button>
@@ -92,8 +96,13 @@
                     Click on the "I Did it" button to get the rest of your points.
                     <br/>
                     <a onclick="task_form_overlay(event)">
-                        <button style="cursor:pointer;">I Did it</button>
+                        <button style="cursor:pointer;" class="btn btn-widget">I Did it</button>
                     </a>
+                {% endif %}
+                {%if  not feedback_p %}
+                    {% include "widgets/action_feedback/templates/feedback_form.html" %}
+                {% else %}
+                    <p>Thank you for your feedback!</p>
                 {% endif %}
             </div>
         {% endif %}
@@ -104,6 +113,11 @@
                     Thank you for submitting your response. <br/>
                     An administrator is reviewing your response. <br/>
                     Come back soon to see your new total.
+                    {%if  not feedback_p %}
+                        {% include "widgets/action_feedback/templates/feedback_form.html" %}
+                    {% else %}
+                        <p>Thank you for your feedback!</p>
+                    {% endif %}
                 </div>
             {% else %}
                 <div class="activity-task-details-info">
@@ -122,6 +136,11 @@
                         </a>
                     {% else %}
                         <br/>Please try again.
+                    {% endif %}
+                    {%if  not feedback_p %}
+                        {% include "widgets/action_feedback/templates/feedback_form.html" %}
+                    {% else %}
+                        <p>Thank you for your feedback!</p>
                     {% endif %}
                 </div>
             {% endif %}
@@ -158,7 +177,7 @@
             {% if action.can_commit %}
                 {% if action.social_bonus > 0 %}
                     <a onclick="task_form_overlay(event)">
-                        <button style="cursor:pointer;">I will do this!
+                        <button style="cursor:pointer;" class="btn btn-widget">I will do this!
                             <img src="{{ STATIC_URL}}images/right.png"
                                  width="50" align="center">
                         </button>
@@ -167,7 +186,7 @@
                     <form action='{% url activity_add_task action.type action.slug %}'
                           method='post'>
                         {% csrf_token %}
-                        <button id="submit_button4" style="cursor:pointer;"
+                        <button id="submit_button4" style="cursor:pointer;" class="btn btn-widget"
                                 onclick='$("#submit_button4").attr("disabled", "disabled");javascript:this.form.submit(); return false;'>
                             I will do this!
                             <img src="{{ STATIC_URL}}images/right.png"
@@ -188,7 +207,7 @@
                     If you attended the event, Click on the "I Did it" button to get
                     your points. <p/>
                     <a onclick="task_form_overlay(event)">
-                        <button style="cursor:pointer;">
+                        <button style="cursor:pointer;" class="btn btn-widget">
                             I Did it
                             <img src="{{ STATIC_URL}}images/right.png"
                                  width="50" align="center">
@@ -201,7 +220,7 @@
                     <form action='{% url activity_add_task action.type action.slug %}'
                           method='post'>
                         {% csrf_token %}
-                        <button id="submit_button5" style="cursor:pointer;"
+                        <button id="submit_button5" style="cursor:pointer;" class="btn btn-widget"
                                 onclick='$("#submit_button5").attr("disabled", "disabled");javascript:this.form.submit(); return false;'>
                             I want to sign up
                             <img src="{{ STATIC_URL }}images/right.png"
@@ -217,7 +236,7 @@
         {% endif %}
         {% if action.type == "survey" %}
             <a onclick="task_form_overlay(event)">
-                <button style="cursor:pointer;">I want to do it
+                <button style="cursor:pointer;" class="btn btn-widget">I want to do it
                     <img src="{{ STATIC_URL}}images/right.png"
                          width="50" align="center">
                 </button>
@@ -251,7 +270,7 @@
         {% include "task_form.html" %}
     </div>
     <div class="modal-footer">
-        <a href="#" class="btn btn-widget" data-dismiss="modal">Close</a>
+        <a href="#" class="btn btn-widget" data-dismiss="modal">Close dialog box</a>
     </div>
 </div>
 
