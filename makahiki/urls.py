@@ -47,6 +47,8 @@ urlpatterns = patterns('',
         name='browser_check'),
     url(r'^coming-soon/$', direct_to_template, {'template': 'coming_soon.html'},
         name='coming_soon'),
+    url(r'^badge-display/$', direct_to_template, {'template': 'admin/badge-display.html'},
+        name='badge-display'),
 
     url(r'^404/$', 'django.views.defaults.page_not_found'),
     url(r'^500/$', 'django.views.defaults.server_error'),
