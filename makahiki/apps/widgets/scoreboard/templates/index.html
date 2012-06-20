@@ -59,7 +59,7 @@
                     <tr>
                         <td>{{ forloop.counter }}</td>
                         <td>{{ p.profile__name }}
-                        <div class="badge-theme-summary-small"><p>{{p.user.badgeaward_set.all.count}}</p></div>
+                        <div class="badge-theme-summary-small"><p>{{p.badges.count}}</p></div>
                         </td>
                         <td>{{ p.points }}</td>
                     </tr> 
@@ -92,7 +92,7 @@
                 {% for p in standings.user_team_standings %}
                     <tr>
                         <td>{{ forloop.counter }}</td>
-                        <td>{{ p.name }}<div class="badge-theme-summary-small"><p>{{p.user.badgeaward_set.all.count}}</p></div></td>
+                        <td>{{ p.name }}<div class="badge-theme-summary-small"><p>{{p.badgeaward_set.all.count}}</p></div></td>
                         <td>{{ p.current_round_points }}</td>
                     </tr>
                 {% endfor %}
@@ -141,9 +141,6 @@
             {% endfor %}
             </div> 
         </center>
-        <div id="resource-scoreboard-message" class="scoreboard-message">#1 at end of round wins a
-             <a href="/win"> prize!</a>
-        </div> 
         {% endif %}
     </div>
 {% if not view_objects.scoreboard.no_carousel %}
@@ -174,7 +171,8 @@
               timeout: 3500,
               delay: -1000,
               sync: true,
-              pager:  '#nav' 
+              pager:  '#nav',
+              pause: 1
           });
     });
 

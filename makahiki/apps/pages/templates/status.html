@@ -115,14 +115,15 @@
                 <!--include "widgets/status/users/templates/users_logged_in.html"--> 
                 <!-- include "widgets/status/users/templates/new_users.html"  -->
                 {% include "widgets/status/flot/templates/index.html" %}
+                <div class="content-box demi-widget">
+                    {%include "widgets/action_feedback/templates/index.html" %}
+                </div>
                 </div> 
             
 
             <div class="span4">
                 {% include "widgets/status/users/templates/twitter.html" %} 
-                <!-- <div class="content-box demi-widget">
-                    include "widgets/action_feedback/templates/index.html" 
-                </div>-->
+                
                 <div class="content-box demi-widget">
                     {% include "widgets/status/iframe/templates/index.html" %}
                 </div>

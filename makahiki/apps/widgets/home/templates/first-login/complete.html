@@ -17,14 +17,24 @@
               <h3 class="makahiki-box-title">Your Quests</h3> 
           </div>
           <div>
-          <img class="quest-pad" src="{{ STATIC_URL}}images/spacer.png" width="20">
-          {%  with DEFAULT_VIEW_OBJECTS.quests as quests %}
-          {% if quests.user_quests or quests.available_quests %}
-              {% include "quest_list.html" %}
-          {% else %}
-              <p style="text-align: center; width: 100%">There are no quests available at this time.  Please check back later!</p>
-          {% endif %}
-          {% endwith %}
+          <img class="quest-pad" src="{{ STATIC_URL}}images/spacer.png" width="20"> 
+              <ul class="quest-list">
+              <li> 
+                     <a class="quest-title quest-user-quest">
+                          Watch Intro Video
+                     </a>
+              </li>
+              <li>
+                    <a class="quest-title quest-user-quest">
+                          Get Social
+                     </a>
+              </li>
+              <li>
+                    <a class="quest-title quest-user-quest">
+                           Learn about energy
+                     </a>
+              </li>
+              </ul>
           </div> 
       </div>
 

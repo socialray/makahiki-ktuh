@@ -114,17 +114,16 @@
 <script type="text/javascript">
 $('#{{resource.name}}-tab.nav-tabs a:first').tab('show');
 </script> 
-{% else %}
-    <div id="resource-scoreboard-message" class="scoreboard-message">
-    #1 at end of round wins a
-      <a href="/prizes"> prize!</a>
-    </div> 
+{% else %} 
     <center>
+        
+        {% if range > 1 %}
         <div id="nav" class="nav nav-page-list"> 
-        {% for i in range  %} 
-            <a class="" href="#">{{i}}</a> 
-        {% endfor %}
-        </div> 
+          {% for i in range  %} 
+              <a class="" href="#">{{i}}</a> 
+          {% endfor %}
+        </div>  
+        {% endif %}
     </center>
 </div>
 <script type="text/javascript">
@@ -155,7 +154,8 @@ $('#{{resource.name}}-tab.nav-tabs a:first').tab('show');
         	  timeout: 3500,
         	  delay: -1000,
         	  sync: true,
-            pager: '#nav'
+            pager: '#nav',
+            pause: 1
           });
     }); 
 
