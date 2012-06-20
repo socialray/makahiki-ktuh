@@ -501,6 +501,47 @@ With this result:
    :width: 400 px
    :align: center
 
+Define the Badge themes
+-----------------------
+
+Makahiki comes with six predefined badge themes, which are specified in terms of a start
+and end color for the badge background, and a color for the text that appears inside the
+badge and for the outline color.  Here's what the definitions for the google theme look like::
+
+  // Badges
+  @badge-theme-1-bkg-color-start: @google-lightlightblue;
+  @badge-theme-1-bkg-color-end: @google-darkblue;
+  @badge-theme-1-text-color: @google-white;
+
+  @badge-theme-2-bkg-color-start: lighten(@google-gold, 40%);
+  @badge-theme-2-bkg-color-end: darken(@google-gold, 20%);
+  @badge-theme-2-text-color: @white;
+
+  @badge-theme-3-bkg-color-start: @google-lightlightblue;
+  @badge-theme-3-bkg-color-end: @google-lightblue;
+  @badge-theme-3-text-color: @google-darkblue;
+
+  @badge-theme-4-bkg-color-start: lighten(@google-darkblue, 20%);
+  @badge-theme-4-bkg-color-end: @google-darkblue;
+  @badge-theme-4-text-color: @white;
+
+  @badge-theme-5-bkg-color-start: @google-red;
+  @badge-theme-5-bkg-color-end: darken(@google-red, 20%);
+  @badge-theme-5-text-color: @google-white;
+
+  @badge-theme-summary-bkg-color-start: @google-white;
+  @badge-theme-summary-bkg-color-end: @google-white;
+  @badge-theme-summary-text-color: @google-darkblue;
+
+
+To see the results, you have to navigate to the special page "badge-display", which looks
+like this:
+
+.. figure:: figs/theme-dev/theme-dev-badge-display.png
+   :width: 600 px
+   :align: center
+
+
 Cleanup:  Delete the prior theme's variable definitions
 -------------------------------------------------------
 
