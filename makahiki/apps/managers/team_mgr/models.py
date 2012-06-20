@@ -5,6 +5,7 @@ from django.contrib.auth.models import User
 from apps.managers.challenge_mgr import challenge_mgr
 from apps.managers.score_mgr import score_mgr
 from apps.utils.utils import media_file_path
+#from apps.widgets.badges.models import BadgeAward
 
 
 _MEDIA_LOCATION = "team"
@@ -59,7 +60,11 @@ class Team(models.Model):
 
     def points_leaders(self, num_results=None, round_name=None):
         """Gets the individual points leaders for the team."""
-        return score_mgr.player_points_leaders_in_team(self, num_results, round_name)
+        entries = score_mgr.player_points_leaders_in_team(self, num_results, round_name)
+        if entries:
+            return entries
+        else:
+            return None
 
 
 class Post(models.Model):
