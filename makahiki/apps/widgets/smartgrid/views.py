@@ -60,7 +60,7 @@ def view_action(request, action_type, slug):
                 view_module_name).supply(request, None)
             view_objects['embedded_widget_template'] = "widgets/" + \
                 action.embedded_widget + "/templates/index.html"
-    elif action_type == "event":  # action.event:
+    elif action_type == "event" or action_type == "excursion":  # action.event:
         form = view_events.view(request, action)
         # calculate available seat
         action.available_seat = action.event.event_max_seat - completed_count
