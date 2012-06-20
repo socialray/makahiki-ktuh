@@ -17,7 +17,7 @@
                       data-toggle="tab" title="{{ level.name }} Actions"
                   {% else %}
                       style="cursor:no-drop;" title="{{ level.unlock_condition_text }}"
-                      onclick="toggleLocked(event, {{ level.unlock_condition_text }}); return false;"
+                      onclick="toggleLocked(event, '{{ level.unlock_condition_text }}'); return false;"
                   {% endif %}
                   href="#sgg-level-{{forloop.counter}}" rel="tooltip" >
                     {{ level.name }}
@@ -92,7 +92,7 @@
         modalElement.modal('show');
     }
     
-    function toggleUnlock(event, unlock_condition) {
+    function toggleLocked(event, unlock_condition) {
         var modalElement = $('#unlockModal');
         
         modalElement.modal({
@@ -103,10 +103,10 @@
         modalElement.find('#unlock_condition').html(unlock_condition);
         // set up event logging
         modalElement.on('shown', function() {
-            log_js_action(type, slug, 'view-lock-open');
+            log_js_action('level', 'locked', 'view-lock-open');
         });
         modalElement.on('hidden', function() {
-            log_js_action(type, slug, 'view-lock-close');
+            log_js_action('level', 'locked', 'view-lock-close');
         });
         modalElement.css('margin-top', (modalElement.outerHeight() / 2) * -1);
         modalElement.modal('show');    	
