@@ -11,17 +11,17 @@
                 <div class="widget-content">
                 <table class="table-striped">
                     <tr>
-                        <th>{{ key }}</th>
-                        <th>Submts</th>
-                        <th>Cmpltd</th>
+                        <th class="column-text">{{ key }}</th>
+                        <th class="column-number">Submts</th>
+                        <th class="column-number">Cmpltd</th>
                     </tr>
                     {% for task in value %}
                         <tr>
-                            <td>
+                            <td class="column-text">
                                 <a href="{% url activity_task task.type task.slug %}">{{ task.title }}</a>
                             </td>
-                            <td>{{ task.submissions }}</td>
-                            <td>{{ task.completions }}</td>
+                            <td class="column-number">{{ task.submissions }}</td>
+                            <td class="column-number">{{ task.completions }}</td>
                         </tr>
                     {% endfor %}
                 </table>

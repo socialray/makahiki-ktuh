@@ -19,17 +19,17 @@
             <table class="table-striped">
                 <thead>
                     <tr>
-                        <th>Rank</th>
-                        <th>{{ TEAM_LABEL.capitalize }}</th>
-                        <th>Participtn</th>
+                        <th class="column-number" style="width: 10%;">Rank</th>
+                        <th class="column-text">{{ TEAM_LABEL.capitalize }}</th>
+                        <th class="column-number">%</th>
                     </tr>
                 </thead>
                 <tbody>
                     {% for f in standings.team_participation %}
                         <tr>
-                            <td>{{ forloop.counter }}</td>
-                            <td>{{ f }}</td>
-                            <td>{{ f.active_participation }}%</td>
+                            <td class="column-number" style="width: 10%;">{{ forloop.counter }}</td>
+                            <td class="column-text">{{ f }}</td>
+                            <td class="column-number">{{ f.active_participation }}%</td>
                         </tr>
                     {% endfor %}
                 </tbody>

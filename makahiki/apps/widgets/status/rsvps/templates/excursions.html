@@ -8,16 +8,16 @@
             {% if excursions %}
                 <tr>
                     <th class="padding-right">Event</th>
-                    <th>Seats</th>
-                    <th>RSVPs</th>
+                    <th class="column-number">Seats</th>
+                    <th class="column-number">RSVPs</th>
                 </tr>
                 {% for excursion in excursions %}
                     <tr>
                         <td><a
                                 href='{% url activity_view_rsvps excursion.type excursion.slug %}'>{{ excursion.title }}</a>
                         </td>
-                        <td>{{ excursion.event.event_max_seat }}</td>
-                        <td>{{ excursion.rsvps }}</td>
+                        <td class="column-number">{{ excursion.event.event_max_seat }}</td>
+                        <td class="column-number">{{ excursion.rsvps }}</td>
                     </tr>
                 {% endfor %}
             {% else %}

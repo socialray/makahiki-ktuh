@@ -19,16 +19,16 @@
                   <table class="table-striped">
                       <thead>
                           <tr>
-                              <th>Prize</th>
-                              <th>Tickets</th>
-                              <th>Winner</th>
+                              <th class="column-text">Prize</th>
+                              <th class="column-number">Tickets</th>
+                              <th class="column-text">Winner</th>
                           </tr>
                       </thead>
                       {% for prize in raffle_prizes %}
                           <tr>
-                              <td>{{ prize.title }}</td>
-                              <td>{{ prize.raffleticket_set.count }}</td>
-                              <td>
+                              <td class="column-text">{{ prize.title }}</td>
+                              <td class="column-number">{{ prize.raffleticket_set.count }}</td>
+                              <td class="column-text">
                                   {% if prize.winner %}
                                       {{ prize.winner.get_profile.name }}
                                   {% else %}
