@@ -30,9 +30,9 @@
                 </form>
             </div>
             </br>
-            <div class="btn-group" data-toggle="buttons-checkbox">
-                <button id="user-post" class="btn">User Posts</button>
-                <button id="system-post" class="btn">System Posts</button>  
+            <div class="btn-group">
+                <button id="user-post" class="btn btn-primary" style="">User Posts</button>
+                <button id="system-post" class="btn btn-primary" style="">System Posts</button>  
             </div>
             <ul class="wall-posts">
                 {% include "news_posts.html" %}
@@ -47,15 +47,37 @@
 $(document).ready(function() {
 	  var textarea = $("#id_post");
 	  var post_button = $("#wall-post-submit");
-    $('#user-post').click();
-    $('#system-post').click();
+    var user_colored = true;
+    var system_colored = true;
+    var btnClass = "";
+    var highlight_class = 'btn btn-primary';
+    var normal_class = 'btn btn-info';
+
     $('#user-post').click( function() {
-      $('.user-post').toggle();
+        $('.user-post').toggle();
+        if(user_colored) {
+          btnClass = normal_class;
+        }
+        else {
+          btnClass = highlight_class;
+        }
+        user_colored = !user_colored;
+        document.getElementById("user-post").setAttribute("class", btnClass);
     })
 
     $('#system-post').click( function() {
-      $('.system-post').toggle();
+        $('.system-post').toggle();
+        if(system_colored) {
+          btnClass = normal_class;
+        }
+        else {
+          btnClass = highlight_class;
+        }
+        system_colored = !system_colored;
+        document.getElementById("system-post").setAttribute("class", btnClass);
     })
+
+
 	  if (textarea) {
 	      textarea.keyup(function() {
 	          if (this.value.length === 0 && !post_button.hasClass("disabled")) {
@@ -90,5 +112,6 @@ $(document).ready(function() {
 	          return false;
 	      });
 	  }
+     
 	});
 </script>
