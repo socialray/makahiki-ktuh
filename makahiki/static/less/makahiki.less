@@ -381,33 +381,25 @@ ul {
 }
 
 .btn-widget {
-    background-color: @widget-button-bkg-color-start ! important;
-    background-repeat: repeat-x;
-    background-image: -moz-linear-gradient(top, @widget-button-bkg-color-start, @widget-button-bkg-color-end);
-    background-image: -ms-linear-gradient(top, @widget-button-bkg-color-start, @widget-button-bkg-color-end);
-    background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0%, @widget-button-bkg-color-start), color-stop(100%, @widget-button-bkg-color-end));
-    background-image: -webkit-linear-gradient(top, @widget-button-bkg-color-start, @widget-button-bkg-color-end);
-    background-image: -o-linear-gradient(top, @widget-button-bkg-color-start, @widget-button-bkg-color-end);
-    background-image: linear-gradient(@widget-button-bkg-color-start, @widget-button-bkg-color-end);
-    border-color: @widget-button-bkg-color-end @widget-button-bkg-color-end @widget-button-bkg-color-start;
-    color: @widget-button-font-color ! important;
+    .buttonBackground(@widget-button-bkg-color-start, @widget-button-bkg-color-end);
+    color: @widget-button-font-color;
     text-shadow: 0 -1px 0 fade(@widget-button-font-color, 39%);
     -webkit-font-smoothing: antialiased;    
 }
 
+.btn-widget.active {
+    color: fade(@widget-button-font-color, 25%);
+}
+
 .btn-feedback {
-    background-color: @infobar-feedback-button-bkg-color-start ! important;
-    background-repeat: repeat-x;
-    background-image: -moz-linear-gradient(top, @infobar-feedback-button-bkg-color-start, @infobar-feedback-button-bkg-color-end);
-    background-image: -ms-linear-gradient(top, @infobar-feedback-button-bkg-color-start, @infobar-feedback-button-bkg-color-end);
-    background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0%, @infobar-feedback-button-bkg-color-start), color-stop(100%, @infobar-feedback-button-bkg-color-end));
-    background-image: -webkit-linear-gradient(top, @infobar-feedback-button-bkg-color-start, @infobar-feedback-button-bkg-color-end);
-    background-image: -o-linear-gradient(top, @infobar-feedback-button-bkg-color-start, @infobar-feedback-button-bkg-color-end);
-    background-image: linear-gradient(@infobar-feedback-button-bkg-color-start, @infobar-feedback-button-bkg-color-end);
-    border-color: @infobar-feedback-button-bkg-color-end @infobar-feedback-button-bkg-color-end @infobar-feedback-button-bkg-color-start;
-    color: @infobar-feedback-button-font-color ! important;
+    .buttonBackground(@infobar-feedback-button-bkg-color-start, @infobar-feedback-button-bkg-color-end);
+    color: @infobar-feedback-button-font-color;
     text-shadow: 0 -1px 0 fade(@infobar-feedback-button-font-color, 39%);
     -webkit-font-smoothing: antialiased;    
+}
+
+.btn-feedback.active {
+    color: fade(@infobar-feedback-button-font-color, 25%);
 }
 
 .btn-navbar {
@@ -535,7 +527,6 @@ ul {
 
 .info-bar .btn {
     float: right;
-    color: @infobar-feedback-button-font-color;
 }
 
 .info-bar #single-cycle div , .info-bar #single-cycle h4 {
