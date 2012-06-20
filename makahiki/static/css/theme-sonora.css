@@ -917,7 +917,7 @@ ul{list-style:none;}
 .makahiki-box-title a{float:right;}
 .makahiki-box-title img{float:right;}
 .modal{background-color:#6a8bbd;color:#000000;}
-.modal-body{background-color:#6a8bbd;color:#000000;}
+.modal-body{text-align:left;background-color:#6a8bbd;color:#000000;}
 .modal-footer{background-color:#6a8bbd;color:#000000;}
 .modal-header{background:#c7a56e;filter:progid:dximagetransform.microsoft.gradient(startColorstr='#c7a56e', endColorstr='#d5bc93');-ms-filter:"progid:DXImageTransform.Microsoft.gradient(startColorstr='#c7a56e', endColorstr='#f2eadc')";background-image:-webkit-gradient(linear, 0 0, 0 100%, from(#c7a56e), to(#f2eadc));background-image:-webkit-linear-gradient(top, #c7a56e, #f2eadc);background-image:-moz-linear-gradient(top, #c7a56e, #f2eadc);background-image:-ms-linear-gradient(top, #c7a56e, #f2eadc);background-image:-o-linear-gradient(top, #c7a56e, #f2eadc);background-image:linear-gradient(top, #c7a56e, #f2eadc);color:#000000;}
 .nav-page-list a{padding:5px 0px;}
