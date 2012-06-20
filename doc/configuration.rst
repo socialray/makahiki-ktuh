@@ -17,17 +17,10 @@ now running.
 .. toctree::
    :maxdepth: 2
 
-   configuration-settings
-   configuration-challenge
-
-configuration-players
-configuration-energy-game
-configuration-water-game
-configuration-smartgrid-game
-configuration-topscore-game
-configuration-raffle-game
-configuration-quest-game
-configuration-badget-game
+   configuration-settings-page
+   configuration-challenge-admin
+   configuration-game-admin
+   configuration-internal-admin
 
 
 
