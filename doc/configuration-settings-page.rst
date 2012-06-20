@@ -1,7 +1,7 @@
 .. _section-configuration-settings:
 
-Go to Settings Page
-===================
+Retrieve Settings Page
+======================
 
 Log in as admin
 ---------------
@@ -36,4 +36,6 @@ Click on the Settings icon in the Nav Bar to go to the Settings page:
 This page presents a set of Django-styled widgets (Challenge, Player, Resource, etc.) that
 provide access to pages that allow configuration of all of the various aspects of
 a Makahiki challenge.
+
+The following sections document these configuration widgets.
 
