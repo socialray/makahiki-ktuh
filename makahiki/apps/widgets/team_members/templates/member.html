@@ -7,34 +7,25 @@
 <td class="column-text">{{ member.name }}</td>
 <td>
 {% for awarded in member.badgeaward_set.all %}
-    <a href="{% url profile_badges %}"><div class="badge-theme-{{awarded.badge.theme}}-small"><p>{{awarded.badge.label}}</p></div></a>
+    <a href="{% url profile_badges %}"><div class="badge-theme-{{awarded.badge.theme}}"><p>{{awarded.badge.label}}</p></div></a>
 {% endfor %}
 </td>
 <td>
     {% if member.user.is_superuser or member.user.is_staff %}
     <!-- Downloaded from http://www.iconarchive.com/show/silk-icons-by-famfamfam/award-star-gold-3-icon.html -->
-        <img src="{{STATIC_URL}}images/award-star-gold-3-icon.png">Admin
+<!--         <img src="{{STATIC_URL}}images/award-star-gold-3-icon.png"> -->
+        Admin
     {% else %}
         Player
     {% endif %}
 </td>
 <td>
-    {% if CURRENT_ROUND %}
-         #{{ member.current_round_overall_rank }} in {{ CURRENT_ROUND }}
-         (#{{ member.overall_rank }} overall)
-    {% else %}
-         #{{ member.overall_rank }} overall
-    {% endif %}
+         #{{ member.overall_rank }}
 </td>
 <td>
     {# Check if the user is a participant or an admin without a team #}
     {% if member.team and member.points > 0 %}
-      {% if CURRENT_ROUND %}
-          {{ member.current_round_points }} points in {{ CURRENT_ROUND }}
-          ({{ member.points }} points overall)
-      {% else %}
-          {{ member.points }} points overall
-      {% endif %}
+          {{ member.points }} points
     {% endif %}
 </td>
 <td>
