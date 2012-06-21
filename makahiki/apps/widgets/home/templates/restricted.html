@@ -39,7 +39,7 @@
             var today = new Date();
             // Calculate the number of days in the difference.
             var hourDiff = (startDate - today) / (1000 * 60 * 60);
-            console.log('today: ' + today + ' start: ' + startDate);
+//             console.log('today: ' + today + ' start: ' + startDate);
             if (hourDiff > 24) {
                 $("#restricted-countdown").countdown({
                     until:startDate,

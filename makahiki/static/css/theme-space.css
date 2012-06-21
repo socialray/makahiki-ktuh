@@ -855,7 +855,7 @@ td input[type="radio"]{margin-top:2px;}
 td.column-text,th.column-text{text-align:left;}
 td.column-number,th.column-number{text-align:right;}
 th{text-transform:capitalize;}
-th,td{text-align:center;font-size:13px;line-height:13px;padding-top:3px;padding-bottom:3px;}
+th,td{font-size:13px;line-height:13px;padding-top:3px;padding-bottom:3px;}
 ul{list-style:none;}
 .badge-theme-1{height:32px;width:32px;border:2px solid #ffffff;background:#049cdb;filter:progid:dximagetransform.microsoft.gradient(startColorstr='#049cdb', endColorstr='#025577');-ms-filter:"progid:DXImageTransform.Microsoft.gradient(startColorstr='#049cdb', endColorstr='#025577')";background-image:-webkit-gradient(linear, 0 0, 0 100%, from(#049cdb), to(#025577));background-image:-webkit-linear-gradient(top, #049cdb, #025577);background-image:-moz-linear-gradient(top, #049cdb, #025577);background-image:-ms-linear-gradient(top, #049cdb, #025577);background-image:-o-linear-gradient(top, #049cdb, #025577);background-image:linear-gradient(top, #049cdb, #025577);-webkit-border-radius:32px;-moz-border-radius:32px;border-radius:32px;-webkit-border-radius:32px;-moz-border-radius:32px;border-radius:32px;color:#ffffff;float:left;}
 .badge-theme-1 p,.badge-theme-1 h6{padding-top:8px;line-height:12px;text-align:center;color:#ffffff;}

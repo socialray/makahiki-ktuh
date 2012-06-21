@@ -44,20 +44,20 @@
             <table class="table-striped">
                 <thead>
                   <tr>
-                      <th class="column-number" style="width: 10%;">Rank</th>
-                      <th class="column-text">{{ TEAM_LABEL }}</th>
-                      <th class="column-number">{{ resource.unit  }} used</th>
+                      <th class="column-number" width="10%">Rank</th>
+                      <th class="column-text" width="75%">{{ TEAM_LABEL }}</th>
+                      <th class="column-number" width="15%">{{ resource.unit  }} used</th>
                   </tr>
                 </thead>
                 {% for entry in ranks %}
                 <tr>
-                    <td class="column-number" style="width: 10%;">{%  if entry.team__name == user.get_profile.team.name %}<b>{% endif %}
+                    <td class="column-number" width="10%">{%  if entry.team__name == user.get_profile.team.name %}<b>{% endif %}
                            {{ forloop.counter }}
                     </td>
-                    <td class="column-text">{%  if entry.team__name == user.get_profile.team.name %}<b>{% endif %}
+                    <td class="column-text" width="75%">{%  if entry.team__name == user.get_profile.team.name %}<b>{% endif %}
                            {{ entry.team__name }}
                     </td>
-                    <td class="column-number">{%  if entry.team__name == user.get_profile.team.name %}<b>{% endif %}
+                    <td class="column-number" width="15%">{%  if entry.team__name == user.get_profile.team.name %}<b>{% endif %}
                            {{ entry.total }}
                     </td>
                 </tr>
@@ -90,15 +90,15 @@
             </div>
             <table class="table-striped">
                 <tr>
-                    <th class="column-number" style="width: 10%;">Rank</th>
-                    <th class="column-text">{{ TEAM_LABEL }}</th>
-                    <th class="column-number">Days met goal</th>
+                    <th class="column-number" width="10%"">Rank</th>
+                    <th class="column-text" width="75%">{{ TEAM_LABEL }}</th>
+                    <th class="column-number" width="15%">Days met goal</th>
                 </tr>
                 {% for entry in goals_scoreboard %}
                 <tr>
-                    <td class="column-number" style="width: 10%;">{{ forloop.counter }}</td>
-                    <td class="column-text">{{ entry.team__name }}</td>
-                    <td class="column-number">{{ entry.completions }}</td>
+                    <td class="column-number" width="10%">{{ forloop.counter }}</td>
+                    <td class="column-text" width="75%">{{ entry.team__name }}</td>
+                    <td class="column-number" width="15%">{{ entry.completions }}</td>
                 </tr>
                 {% endfor %}
             </table>

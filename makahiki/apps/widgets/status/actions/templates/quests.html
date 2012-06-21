@@ -5,13 +5,13 @@
     <div class="widget-content">
         <table class="table-striped">
             <tr>
-                <th class="column-text">Name</th>
-                <th class="column-number">Completions</th>
+                <th class="column-text" width="80%">Name</th>
+                <th class="column-number" width="20%">Completions</th>
             </tr>
             {% for quest in quests %}
                 <tr>
-                    <td class="column-text">{{ quest.name }}</td>
-                    <td class="column-number">{{ quest.completions }}</td>
+                    <td class="column-text" width="80%">{{ quest.name }}</td>
+                    <td class="column-number" width="20%">{{ quest.completions }}</td>
                 </tr>
             {% endfor %}
         </table>
