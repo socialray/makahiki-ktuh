@@ -7,13 +7,13 @@
         <table class="table-striped">
             {% if excursions %}
                 <tr>
-                    <th class="padding-right" width="60%">Event</th>
+                    <th class="column-text" width="60%">Excursion</th>
                     <th class="column-number" width="20%">Seats</th>
                     <th class="column-number" width="20%">RSVPs</th>
                 </tr>
                 {% for excursion in excursions %}
                     <tr>
-                        <td width="60%"><a
+                        <td class="column-text" width="60%"><a
                                 href='{% url activity_view_rsvps excursion.type excursion.slug %}'>{{ excursion.title }}</a>
                         </td>
                         <td class="column-number" width="20%">{{ excursion.event.event_max_seat }}</td>
