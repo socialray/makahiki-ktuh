@@ -4,7 +4,8 @@
 Configuring Makahiki
 ====================
 
-This section explains how to configure a freshly initialized instance of Makahiki.  It
+This section explains how to configure a freshly initialized instance of Makahiki to suit
+the characteristics of your challenge.  It
 assumes you have completed the steps to install Makahiki either locally or globally 
 following the instructions in :ref:`section-installing-makahiki`, and that the server is
 now running.  

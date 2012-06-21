@@ -6,6 +6,8 @@ Challenge Settings Page
 Select challenge setting
 ------------------------
 
+After clicking on the "Challenge Settings" link in the Challenge Admin widget, a page similar to the following should appear:
+
 .. figure:: figs/configuration/configuration-challenge-admin-challenge-settings.1.png
    :width: 600 px
    :align: center
