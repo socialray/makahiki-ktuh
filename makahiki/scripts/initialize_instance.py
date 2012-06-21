@@ -135,6 +135,8 @@ def main(argv):
         load_fixtures(manage_command, fixture_path, "demo_")
         # setup 2 user per team, and 1 one-week round
         os.system("%s setup_test_data all 2 1" % manage_command)
+        # change the commitment duration to 1 day
+        os.system("%s setup_test_data commitment_durations 1" % manage_command)
 
     if instance_type == "test":
         print "setting up test data..."

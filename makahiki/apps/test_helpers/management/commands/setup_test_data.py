@@ -6,10 +6,11 @@ Sets up test data given the specified <command>.  Possible commands are:
   * delete_users
   * rounds <number_of_rounds>
   * event_dates
+  * commitment_durations <days>
   * resource_usages
   * resource_baselines
   * resource_goalsettings
-  * all <number users for each team>
+  * all <number users for each team> <number_of_rounds>
 
 """
 
@@ -23,7 +24,7 @@ from apps.managers.resource_mgr.models import EnergyUsage, WaterUsage
 from apps.managers.team_mgr.models import Team
 from apps.widgets.resource_goal.models import EnergyGoalSetting, EnergyBaselineHourly, \
     EnergyBaselineDaily, WaterGoalSetting, WaterBaselineDaily, WaterGoal, EnergyGoal
-from apps.widgets.smartgrid.models import Event
+from apps.widgets.smartgrid.models import Event, Commitment
 
 
 class Command(MakahikiBaseCommand):
@@ -32,7 +33,8 @@ class Command(MakahikiBaseCommand):
            "  create_users <number_of_users for each team>\n" \
            "  delete_users \n" \
            "  rounds <number_of_rounds>\n" \
-           "  event_dates \n" \
+           "  event_dates \n"\
+           "  commitment_durations <days> \n" \
            "  resource_usages \n" \
            "  resource_baselines \n" \
            "  resource_goalsettings \n" \
@@ -56,6 +58,9 @@ class Command(MakahikiBaseCommand):
             self.setup_rounds(count)
         elif operation == 'event_dates':
             self.setup_event_dates()
+        elif operation == 'commitment_durations':
+            count = self._get_count_args(args, "days for the commitment duration")
+            self.setup_commitment_durations(count)
         elif operation == 'resource_usages':
             self.setup_resource_usages()
         elif operation == 'resource_baselines':
@@ -156,6 +161,13 @@ class Command(MakahikiBaseCommand):
 
             event.save()
         self.stdout.write("event dates adjusted to round date.\n")
+
+    def setup_commitment_durations(self, days):
+        """adjust commitment duration."""
+        for commitment in Commitment.objects.all():
+            commitment.duration = days
+            commitment.save()
+        self.stdout.write("commitment duration adjusted to %s days.\n" % days)
 
     def setup_resource_usages(self):
         """remove any resource usage before the competition"""
