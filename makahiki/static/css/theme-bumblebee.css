@@ -1118,7 +1118,7 @@ td.energy-status-how-activities-content{vertical-align:text-top;}
 .full{width:99%;height:412px;}
 @charset "UTF-8";
 .news-members-link{text-align:center;clear:both;}
-.news li{width:75px;text-align:center;min-height:80px;float:left;}
+.news li{float:left;line-height:15px;min-height:80px;text-align:center;width:60px;}
 .activity-events-content table{margin:0;padding:0;border-spacing:0;width:100%;}
 .activity-events-content th{padding:4px 4px 4px 4px;text-align:left;}
 .activity-events-content td{text-align:left;padding:4px 4px 4px 4px;}
