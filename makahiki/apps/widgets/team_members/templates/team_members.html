@@ -21,16 +21,27 @@
         <div class="content-box-title">
             {{ TEAM_LABEL }} Members
         </div>
-        <div>
-            <a href="{% url news_index %}">Back to the news page</a>
-            <ul>
-                {% for member in team_members %}
-                    <!-- {% cycle 'alt-row' '' as cycle_class %} -->
-                    <li class="{{cycle_class}}">
+        <div class="content-box-contents">
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th colspan=2>Name</th>
+                        <th>Badges</th>
+                        <th>Role</th>
+                        <th>Ranking</th>
+                        <th>Points</th>
+                        <th>Commitments and RSVPs</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for member in team_members %}
+                    <tr>
                         {% include "member.html" %}
-                    </li>
-                {% endfor %}
-            </ul>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+            <center><a href="{% url news_index %}">Back to the news page</a></center>
         </div>
     </div>
 {% endblock %}

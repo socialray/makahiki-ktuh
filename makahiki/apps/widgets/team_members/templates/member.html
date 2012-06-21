@@ -1,71 +1,54 @@
 {% load avatar_tags %}
-<div class="row-fluid">
-  <div class="span1">
+<td>
     <img class="member-image" src="{% avatar_url member.user 40 %}"
          alt="Photo of {{ member.name }}" title="Photo of {{ member.name }}"
          align="top"/>
-  </div>
-
-  <div class="team-member-details span3">
-    <div class="row-fluid">
-        <div class="span4">
-            <h4>{{ member.name }}</h4>
-        {% for awarded in member.user.badgeaward_set.all %}
-          <a href="{% url profile_badges %}"><div class="badge-theme-{{forloop.counter}}-small"><p>{{awarded.badge.label}}</p></div></a>
-        {% endfor %}
-        </div>
-        <div class="span2">
-        {% if member.user.is_superuser or member.user.is_staff %}
-        <!-- Downloaded from http://www.iconarchive.com/show/silk-icons-by-famfamfam/award-star-gold-3-icon.html -->
+</td>
+<td class="column-text">{{ member.name }}</td>
+<td>
+{% for awarded in member.badgeaward_set.all %}
+    <a href="{% url profile_badges %}"><div class="badge-theme-{{awarded.badge.theme}}-small"><p>{{awarded.badge.label}}</p></div></a>
+{% endfor %}
+</td>
+<td>
+    {% if member.user.is_superuser or member.user.is_staff %}
+    <!-- Downloaded from http://www.iconarchive.com/show/silk-icons-by-famfamfam/award-star-gold-3-icon.html -->
         <img src="{{STATIC_URL}}images/award-star-gold-3-icon.png">Admin
-        {% else %}
+    {% else %}
         Player
-        {% endif %}
-        </div>
-        <p>
-        {% if CURRENT_ROUND %}
-        <div class="span2">
-            Ranked #{{ member.current_round_overall_rank }} in {{ CURRENT_ROUND }}
-            (#{{ member.overall_rank }} overall)
-        </div>
-        {% else %}
-        <div class="span2">
-            #{{ member.overall_rank }} overall
-        </div>
-        {% endif %}
-        </p>
+    {% endif %}
+</td>
+<td>
+    {% if CURRENT_ROUND %}
+         #{{ member.current_round_overall_rank }} in {{ CURRENT_ROUND }}
+         (#{{ member.overall_rank }} overall)
+    {% else %}
+         #{{ member.overall_rank }} overall
+    {% endif %}
+</td>
+<td>
     {# Check if the user is a participant or an admin without a team #}
     {% if member.team and member.points > 0 %}
-    <p>
       {% if CURRENT_ROUND %}
-      <div class="span2">
-          Points: {{ member.current_round_points }} points in {{ CURRENT_ROUND }}
+          {{ member.current_round_points }} points in {{ CURRENT_ROUND }}
           ({{ member.points }} points overall)
-      </div>
       {% else %}
-      <div class="span2">
-          Points: {{ member.points }} points overall
-      </div>
+          {{ member.points }} points overall
       {% endif %}
     {% endif %}
-    </p>
-    </div>
-  </div>
-
-  <div class="span8">
-          {% with action_members=member.user.actionmember_set.all %}
-          {% if action_members.count > 0 %}
-              <h4>{{ member.name }}&apos;s Current Commitments and RSVPs</h4>
-              <ul class="team-member-commitments">
-                  {% for action_member in action_members %}
-                      {% if not action_member.award_date and not action_member.action.activity %}
-                      <li>
-                          <a href="{% url activity_task action_member.action.type action_member.action.slug %}">{{ action_member.action }}</a>
-                      </li>
-                      {% endif %}
-                  {% endfor %}
-              </ul>
+</td>
+<td>
+    {% with action_members=member.user.actionmember_set.all %}
+    {% if action_members.count > 0 %}
+       <ul class="team-member-commitments">
+       {% for action_member in action_members %}
+          {% if not action_member.award_date and not action_member.action.activity %}
+             <li>
+                 <a href="{% url activity_task action_member.action.type action_member.action.slug %}">{{ action_member.action }}</a>
+             </li>
           {% endif %}
-  </div>
-</div>
+       {% endfor %}
+       </ul>
+    {% endif %}
+</td>
 {% endwith %}
