@@ -51,7 +51,7 @@
 
 // Questbar
 @questbar-bkg-color-start: @wave-darkGreen;
-@questbar-bkg-color-end: @wave-darkGreen;
+@questbar-bkg-color-end: lighten(@wave-darkGreen, 30%);
 @questbar-font-color: @black;
 @questbar-transparency: 55%;
 
@@ -67,8 +67,8 @@
 @infobar-bkg-color-start: @wave-lightPaleBlue;
 @infobar-bkg-color-end: @wave-skyBlue;
 @infobar-font-color: @black;
-@infobar-feedback-button-bkg-color-start: darken(@infobar-bkg-color-end, 20%); 
-@infobar-feedback-button-bkg-color-end: darken(@infobar-bkg-color-start, 20%); 
+@infobar-feedback-button-bkg-color-start: darken(@infobar-bkg-color-start, 20%); 
+@infobar-feedback-button-bkg-color-end: @infobar-bkg-color-start; 
 @infobar-feedback-button-font-color: @black;
 @infobar-transparency: 55%;
 
@@ -76,7 +76,7 @@
 @notification-bkg-color-start: @wave-yellowGreen;
 @notification-bkg-color-end: @wave-yellowGreen;
 @notification-font-color: @black;
-@notification-transparency: 45%;
+@notification-transparency: 55%;
 
 // Modal dialog box
 @modal-title-bkg-color-start: @wave-skyBlue;
@@ -90,16 +90,16 @@
 @pageinfobox-bkg-color-end: @white;
 @pageinfobox-font-color: @black;
 @pageinfobox-header-font-color: @black;
-@pageinfobox-transparency: 20%;
+@pageinfobox-transparency: 80%;
 
 // Widgets
 @widget-title-bkg-color-start: @wave-skyBlue;
 @widget-title-bkg-color-end: @wave-skyBlue;
 @widget-title-font-color: @black;
-@widget-title-transparency: 0%;
+@widget-title-transparency: 20%;
 @widget-body-bkg-color: @wave-lightSteelBlue; 
 @widget-body-font-color: @black;
-@widget-body-transparency: 0%;
+@widget-body-transparency: 40%;
 @widget-button-bkg-color-start: darken(@widget-body-bkg-color, 50%);
 @widget-button-bkg-color-end: darken(@widget-body-bkg-color, 20%);
 @widget-button-font-color: @widget-body-bkg-color; 
