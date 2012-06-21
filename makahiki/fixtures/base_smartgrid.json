@@ -3942,9 +3942,9 @@
         "fields": {
             "duration": 60,
             "point_range_end": null,
-            "confirm_type": "text",
+            "confirm_type": "image",
             "point_range_start": null,
-            "confirm_prompt": ""
+            "confirm_prompt": "Upload the screen shot of the energy city game that shows you are playing the game."
         }
     }
 ]
