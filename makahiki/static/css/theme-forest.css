@@ -1087,6 +1087,7 @@ td.energy-status-how-activities-content{vertical-align:text-top;}
 @charset "UTF-8";
 .scoreboard-message{font-size:12pt;margin-left:30px;margin-top:0.5em;text-align:center;}
 .nav-page-list a{padding:0px 5px;}
+#score-carousel .column-text{padding-left:20%;}
 @charset "UTF-8";
 .activities-grid{line-height:15px;padding-left:2px;border:0;margin:0 auto;width:100%;}
 .activities-grid td{padding:1px;width:10%;vertical-align:top;}

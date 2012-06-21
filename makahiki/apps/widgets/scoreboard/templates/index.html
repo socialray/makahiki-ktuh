@@ -5,7 +5,7 @@
         {% for round_name, standings in view_objects.scoreboard.round_standings.items %}
         <div class="item">
             <div class="content-box-title set-width-outer-width">
-                {{ round_name }} Point Scoreboard
+                Top Score Game Scoreboard ({{ round_name }})
                 {% if not view_objects.scoreboard.no_carousel %}
                     <a href="#" style="float: right">
                        <img src="{{ STATIC_URL}}images/icons/icon-help-sm.png"
@@ -38,7 +38,7 @@
         </div>
         <div class="item">
             <div class="content-box-title set-width-outer-width">
-                {{ round_name }} Point Scoreboard
+                Top Score Game Scoreboard (Individual, {{round_name}})
                 {% if not view_objects.scoreboard.no_carousel %}
                     <a href="#" style="float: right">
                         <img src="{{ STATIC_URL}}images/icons/icon-help-sm.png"
@@ -74,7 +74,7 @@
         {% if standings.user_team_standings %}
         <div class="item">
             <div class="content-box-title set-width-outer-width">
-                {{ round_name }} Point Scoreboard
+                 Top Score Game Scoreboard ({{view_objects.scoreboard.team}}, {{round_name}})
                 {% if not view_objects.scoreboard.no_carousel %}
                    <a href="#" style="float: right">
                        <img src="{{ STATIC_URL}}images/icons/icon-help-sm.png"
@@ -108,7 +108,7 @@
         {% endif %}
         <div class="item">
             <div class="content-box-title set-width-outer-width">
-                {{ round_name }} Participation Scoreboard
+                 Participation Scoreboard ({{ round_name }})
                 {% if not view_objects.scoreboard.no_carousel %}
                    <a href="#" style="float: right">
                        <img src="{{ STATIC_URL}}images/icons/icon-help-sm.png"
