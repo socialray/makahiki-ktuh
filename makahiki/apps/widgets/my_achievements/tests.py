@@ -16,6 +16,7 @@ class MyAchievementsTestCase(TransactionTestCase):
 
     def setUp(self):
         """setup"""
+        challenge_mgr.init()
         self.user = test_utils.setup_user(username="user", password="changeme")
         test_utils.set_competition_round()
         challenge_mgr.register_page_widget("home", "quests")
@@ -143,7 +144,7 @@ class MyAchievementsTestCase(TransactionTestCase):
         # Note, this test may break if something in the page has the value 314159.
         # Try finding another suitable number.
         # print response.content
-        self.assertContains(response, "314159", count=1,
+        self.assertContains(response, "314159", count=6,
             msg_prefix="314159 points should appear for the activity.")
 
     def testSocialBonusAchievement(self):

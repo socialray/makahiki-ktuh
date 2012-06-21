@@ -19,9 +19,15 @@ def read(request, notification_id):
     if not request.method == "POST":
         raise Http404
 
-    notification = get_object_or_404(UserNotification, pk=notification_id)
-    notification.unread = False
-    notification.save()
+    if notification_id != "0":
+        notification = get_object_or_404(UserNotification, pk=notification_id)
+        notification.unread = False
+        notification.save()
+    else:
+        for notification in UserNotification.objects.filter(recipient=request.user, unread=True):
+            notification.unread = False
+            notification.save()
+
     if request.is_ajax():
         return HttpResponse()
 

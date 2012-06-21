@@ -174,6 +174,8 @@ class CommitmentsUnitTestCase(TransactionTestCase):
         self.user.save()
         self.commitment = Commitment(
             title="Test commitment",
+            name="Test",
+            slug="test",
             description="A commitment!",
             point_value=10,
             type="commitment",

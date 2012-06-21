@@ -1,11 +1,15 @@
 Hi {{object.user.get_profile.name}},
 
 {% with object.action as action %}
-Your response to {{action.title}} was not approved.  Here is our feedback:
+Your response to {{action.title}} was {{status_nicely}}.  Here is our feedback:
 
 {{object.admin_comment}}
 
-You can still receive the points for this {{action.type}}!  Please click the following link to try again.
+{% if status_nicely != "approved" %}
+  You can still receive the points for this {{action.type}}!  Please click the following link to try again.
+{% else %}
+  click the following link to go to this {{action.type}}.
+{% endif %}
 
 http://{{domain}}{% url activity_task action.type action.slug %}
 

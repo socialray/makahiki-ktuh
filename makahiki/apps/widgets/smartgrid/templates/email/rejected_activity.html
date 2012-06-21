@@ -4,7 +4,7 @@ Hi {{ object.user.get_profile.name }},
     <p>
         Your response to "<a
             href='http://{{domain}}{% url activity_task action.type action.slug %}'>{{ action.title }}</a>"
-        was not approved. Here is our feedback:
+        was {{ status_nicely }}. Here is our feedback:
     </p>
 
     <p>
@@ -12,9 +12,14 @@ Hi {{ object.user.get_profile.name }},
     </p>
 
     <p>
+    {% if status_nicely != "approved" %}
         You can still receive points for this {{ action.type.lower }}. Please click <a
             href='http://{{domain}}{% url activity_task action.type action.slug %}'>here</a> to
         try again.
+    {% else %}
+        Click <a href='http://{{domain}}{% url activity_task action.type action.slug %}'>here</a>
+        to go to this {{action.type}}.
+    {% endif %}
     </p>
 {% endwith %}
 

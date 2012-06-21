@@ -8,6 +8,7 @@ from django.contrib.auth.models import User
 from django.conf import settings
 from django.core.files.images import ImageFile
 from django.db.models import signals
+from apps.managers.challenge_mgr import challenge_mgr
 from apps.managers.player_mgr.predicates import badge_awarded, has_points, set_profile_pic, \
     posted_to_wall
 from apps.managers.team_mgr.models import Group, Team, Post
@@ -30,6 +31,7 @@ class QuestConditionsTest(TransactionTestCase):
     fixtures = ["base_badges.json"]
 
     def setUp(self):
+        challenge_mgr.init()
         self.user = User(username="testuser", password="password")
         self.user.save()
 
@@ -76,6 +78,7 @@ class QuestConditionsTest(TransactionTestCase):
         activity = Activity(
             type="activity",
             name="Test",
+            slug="test",
             title="Test activity",
             description="Variable points!",
             duration=10,
@@ -145,6 +148,7 @@ class QuestConditionsTest(TransactionTestCase):
         activity = Activity(
             type="activity",
             name="Test",
+            slug="test",
             title="Test activity",
             description="Variable points!",
             duration=10,
@@ -318,6 +322,7 @@ class QuestConditionsTest(TransactionTestCase):
         commitment = Commitment(
             title="Test commitment",
             type="commitment",
+            slug="test",
             name="Test",
             description="A commitment!",
             point_value=10,

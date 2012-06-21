@@ -15,19 +15,13 @@
         {% if notification.is_success %}
             <a class="notification-share" href="javascript:void(0);">Share on Facebook</a>
         {% endif %}
-        <i class="notification-read icon-remove-sign"></i>
+
 <!--         <br style="clear: both"/> -->
     </div>
     <div style="clear:both"></div>
 
     <script type="text/javascript">
         jQuery(document).ready(function ($) {
-            $("#notification-item-{{notification.id}} .notification-read").click(function () {
-                $.post("{% url notifications_read notification.id %}", function (data) {
-                    $("#notification-item-{{notification.id}}").fadeOut();
-                });
-            });
-
             $("#notification-item-{{notification.id}} .notification-share").click(function () {
                 log_js_action("notification", "{{notification.id}}", "share");
                 FB.ui(

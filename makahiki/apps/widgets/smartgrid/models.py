@@ -18,7 +18,7 @@ from apps.managers.team_mgr.models import Post
 from apps.utils.utils import media_file_path
 from apps.widgets.notifications.models import UserNotification
 from apps.managers.cache_mgr import cache_mgr
-from apps.widgets.smartgrid import NOSHOW_PENALTY_DAYS
+from apps.widgets.smartgrid import NOSHOW_PENALTY_DAYS, SETUP_WIZARD_ACTIVITY
 
 _MEDIA_LOCATION_ACTION = os.path.join("smartgrid", "actions")
 """location for the uploaded files for actions."""
@@ -490,30 +490,10 @@ class ActionMember(models.Model):
             self.award_date = None
             super(ActionMember, self).save(args, kwargs)
 
-            self._handle_activity_rejected()
+            self._handle_activity_notification(self.approval_status)
         else:
             # Check for any notifications and mark them as read.
             self.notifications.update(unread=False)
-
-            # Check for admin message and generate notification
-            if self.admin_comment:
-                # Construct the message to be sent.
-                message = "An admin made the following comment about your submission to "
-                message += "<a href='%s'>%s</a> %s:" % (
-                    reverse("activity_task", args=(self.action.type, self.action.slug,)),
-                    self.action.title,
-                    # The below is to tell the javascript to convert into a pretty date.
-                    # See the prettyDate function in media/js/makahiki.js
-                    "<span class='rejection-date' title='%s'></span>"
-                    % self.submission_date.isoformat(),
-                ) + "</br></br>" + self.admin_comment
-
-                UserNotification.create_info_notification(
-                    self.user,
-                    message,
-                    True,
-                    content_object=self
-                )
 
             if self.approval_status == u"pending":
                 # Mark pending items as submitted.
@@ -549,6 +529,8 @@ class ActionMember(models.Model):
                 self.social_bonus_awarded = self._award_possible_social_bonus()
                 if self.social_bonus_awarded:
                     super(ActionMember, self).save(args, kwargs)
+
+                self._handle_activity_notification(self.approval_status)
 
                 # generate notification if feedback is present
         self.post_to_wall()
@@ -645,35 +627,52 @@ class ActionMember(models.Model):
         else:
             return False
 
-    def _handle_activity_rejected(self):
-        """Creates a notification for rejected tasks.  This also creates an email message if
-        it is configured.
+    def _handle_activity_notification(self, status):
+        """Creates a notification for rejected or approved tasks.
+        This also creates an email message if it is configured.
         """
+
+        # don't create notification if the action is the SETUP_WIZARD_ACTIVITY
+        # that is used in the setup wizard.
+        if self.action.slug == SETUP_WIZARD_ACTIVITY:
+            return
+
         # Construct the message to be sent.
-        message = "Your response to <a href='%s'>%s</a> %s was not approved." % (
+        status_nicely = 'not approved' if status != 'approved' else status
+        message = "Your response to <a href='%s'>%s</a> %s was %s." % (
             reverse("activity_task", args=(self.action.type, self.action.slug,)),
             self.action.title,
             # The below is to tell the javascript to convert into a pretty date.
             # See the prettyDate function in media/js/makahiki.js
             "<span class='rejection-date' title='%s'></span>" % self.submission_date.isoformat(),
+            status_nicely,
             )
 
-        message += " You can still get points by clicking on the link and trying again."
+        if status != 'approved':
+            message += " You can still get points by clicking on the link and trying again."
+            UserNotification.create_error_notification(self.user, message, display_alert=True,
+                                                       content_object=self)
+        else:
+            points = self.action.point_value if self.action.point_value else self.points_awarded
+            message += " You earned %d points!" % points
 
-        UserNotification.create_error_notification(self.user, message, content_object=self)
+            UserNotification.create_success_notification(self.user, message, display_alert=True,
+                                                         content_object=self)
 
-        subject = "[%s] Your response to '%s' was not approved" % (
-            settings.CHALLENGE.competition_name, self.action.title)
+        subject = "[%s] Your response to '%s' was %s" % (
+            settings.CHALLENGE.competition_name, self.action.title, status_nicely)
 
         message = render_to_string("email/rejected_activity.txt", {
             "object": self,
             "COMPETITION_NAME": settings.CHALLENGE.competition_name,
             "domain": settings.CHALLENGE.site_domain,
+            "status_nicely": status_nicely,
             })
         html_message = render_to_string("email/rejected_activity.html", {
             "object": self,
             "COMPETITION_NAME": settings.CHALLENGE.competition_name,
             "domain": settings.CHALLENGE.site_domain,
+            "status_nicely": status_nicely,
             })
 
         UserNotification.create_email_notification(self.user.email, subject, message, html_message)
