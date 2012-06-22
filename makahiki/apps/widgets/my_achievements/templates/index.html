@@ -9,28 +9,32 @@
 </div> 
   <!--Current & Pending-->
   <h4 class="content-box-subtitle">Current and Pending</h4>
-  {% if view_objects.my_achievements.in_progress_members %}
-      {% include "in_progress_members.html" %}
-  {% else %}
-      <p class="Empty-List">You have nothing in
-          progress or pending.</p>
-  {% endif %}
+      <div class="content-box-contents">
+          {% if view_objects.my_achievements.in_progress_members %}
+              {% include "in_progress_members.html" %}
+          {% else %}
+              <p class="Empty-List">You have nothing in
+                  progress or pending.</p>
+          {% endif %}
+      </div>
   <!--Previously Awarded-->
   <h4 class="content-box-subtitle">Previously Awarded</h4>
-  {% if view_objects.my_achievements.points_logs %}
-      <table>
-          <tr >
-              <th class="profile-history-previous-date-header date-column">Date
-              </th>
-              <th class="profile-history-previous-task-header content-column">Task
-              </th>
-              <th class="profile-history-previous-points-header">
-                  Points
-              </th>
-          </tr>
-          {% include "completed_members.html" %}
-      </table>
-  {% else %}
-      <p class="Empty-List">You have not been awarded
-          anything yet!</p>
-  {% endif %}  
+  <div class="content-box-contents">
+      {% if view_objects.my_achievements.points_logs %}
+          <table>
+              <tr >
+                  <th class="profile-history-previous-date-header achievement-date-column">Date
+                  </th>
+                  <th class="profile-history-previous-task-header achievement-content-column">Task
+                  </th>
+                  <th class="profile-history-previous-points-header">
+                      Points
+                  </th>
+              </tr>
+              {% include "completed_members.html" %}
+          </table>
+      {% else %}
+          <p class="Empty-List">You have not been awarded
+              anything yet!</p>
+      {% endif %}  
+  </div>

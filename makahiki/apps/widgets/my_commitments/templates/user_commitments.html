@@ -1,11 +1,11 @@
 {% load cache %}
-
+<div class="content-box-contents">
 {% cache 3600 commitments request.user %}
     {% if view_objects.my_commitments.commitment_members %}
         <table>
             <tr>
-                <th width="84%">Commitment</th>
-                <th width="16%">Expires</th>
+                <th class="content-column">Commitment</th>
+                <th >Expires</th>
             </tr>
             {% for member in view_objects.my_commitments.commitment_members %}
                 <tr>
@@ -21,3 +21,5 @@
         <p>You are not participating in any commitments</p>
     {% endif %}
 {% endcache %}
+
+</div>

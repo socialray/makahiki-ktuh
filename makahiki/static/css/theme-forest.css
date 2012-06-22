@@ -1034,10 +1034,11 @@ iframe{width:100%;height:300px;}
 .logging-content{text-align:left;padding:0 0 0 15px;}
 .logging-content li{line-height:10px;}
 @charset "UTF-8";
-.date-column{width:10%;}
-.content-column{width:74%;}
+.achievement-date-column{width:15%;}
+.achievement-content-column{width:65%;}
 .Empty-List{width:100%;text-align:left;padding:16px;}
 @charset "UTF-8";
+.content-column{width:80%;}
 .my-commitments-contents p{text-align:center;}
 @charset "UTF-8";
 .profile-form-body{text-align:left;}
