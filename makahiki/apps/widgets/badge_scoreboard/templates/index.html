@@ -1,0 +1,131 @@
+<div id="badge-outer-box" class="content-box">
+    {% if not view_objects.badge_scoreboard.no_carousel %}
+    <div id="badge-carousel">
+    {% endif %}
+    <div class="item">
+        <div class="content-box-title set-width-outer-width">
+        Overall Badge Awards
+        {% if not view_objects.badge_scoreboard.no_carousel %}
+            <a href="#" style="float: right">
+               <img src="{{ STATIC_URL}}images/icons/icon-help-sm.png"
+                    width="20" align="center"
+                    title="Click to get help about this window"
+                    onclick="toggleHelp(event, 'widget', 'badge-scoreboard'); return false;" />
+            </a>
+        {% endif %}
+        </div>
+        <div class="set-width-out-width">
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th class="column-number" width="10%">Rank</th>
+                        <th class="column-text" width="25%">Individual</th>
+                        <th class="column-text" width="65%">Badges</th>
+                    </tr>
+                </thead>
+                <tbody>
+                {% for p in view_objects.badge_scoreboard.profiles %}
+                    <tr>
+                        <td class="column-number" width="10%">{{ forloop.counter }}</td>
+                        <td class="column-text" width="25%">{{ p.name }}</td>
+                        <td class="column-text" width="65%">
+                        {% for ba in p.badgeaward_set.all %}
+                        <div class="badge-theme-{{ba.badge.theme}}-small"><p>{{ba.badge.label}}</p></div>
+                        {% endfor %}
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <div class="item">
+        <div class="content-box-title set-width-outer-width">
+        {{view_objects.badge_scoreboard.team_name}} Badge Rankings
+        {% if not view_objects.badge_scoreboard.no_carousel %}
+            <a href="#" style="float: right">
+               <img src="{{ STATIC_URL}}images/icons/icon-help-sm.png"
+                    width="20" align="center"
+                    title="Click to get help about this window"
+                    onclick="toggleHelp(event, 'widget', 'badge-scoreboard'); return false;" />
+            </a>
+        {% endif %}
+        </div>
+        <div class="set-width-out-width">
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th class="column-number" width="10%">Rank</th>
+                        <th class="column-text" width="25%">Individual</th>
+                        <th class="column-text" width="65%">Badges</th>
+                    </tr>
+                </thead>
+                <tbody>
+                {% for p in view_objects.badge_scoreboard.team %}
+                    <tr>
+                        <td class="column-number" width="10%">{{ forloop.counter }}</td>
+                        <td class="column-text" width="25%">{{ p.name }}</td>
+                        <td class="column-text" width="65%">
+                        {% for ba in p.badgeaward_set.all %}
+                        <div class="badge-theme-{{ba.badge.theme}}-small"><p>{{ba.badge.label}}</p></div>
+                        {% endfor %}
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+    {% if not view_objects.badge_scoreboard.no_carousel %}
+    </div>
+    <center>
+        <div id="badge-nav" class="nav nav-page-list"> 
+            {% for i in range  %} 
+                <a class="" href="#">{{i}}</a> 
+            {% endfor %}
+        </div> 
+    </center>
+    {% endif %}
+</div>
+{% if not view_objects.badge_scoreboard.no_carousel %}
+<script type="text/javascript">
+$(document).ready(function () {
+    // Calculate the height of the items in the scoreboard.
+    // Fix the height of all items to that height.
+    var maxHeight = 45;
+    var height = 0;
+    $("#badge-carousel .item").each(function(index, item) {
+      height = $(item).height();
+      // console.log("height of item is " + height);
+      if (height > maxHeight){
+        maxHeight = height;
+      }
+    });
+    $("#badge-carousel").height(maxHeight);
+    
+    var outerWidth = $("#badge-outer-box").width();
+//     console.log("Outer width is " + outerWidth);
+    $(".set-width-outer-width").each (function(index, item) {
+        item.style.width = outerWidth + "px";
+    });
+
+    $('#badge-carousel').cycle({
+        fx: "fade",
+        timeout: 3500,
+        delay: -1000,
+        sync: true,
+        pager:  '#badge-nav',
+        pause: 1
+    });
+});
+
+$(window).resize(function() {
+  var outerWidth = $("#badge-outer-box").width();
+//   console.log("Outer width is " + outerWidth);
+  $(".set-width-outer-width").each (function(index, item) {
+//       console.log("Setting " + item + "'s width to " + outerWidth);
+      item.style.width = outerWidth + "px";
+  });     
+}); 
+
+
+</script>
+{% endif %}

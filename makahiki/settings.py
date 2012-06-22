@@ -161,6 +161,7 @@ for widget in INSTALLED_DEFAULT_WIDGET_APPS:
 INSTALLED_WIDGET_APPS = (
     'action_feedback',
     'ask_admin',
+    'badge_scoreboard',
     'badges',
     'home',
     'resource_goal',

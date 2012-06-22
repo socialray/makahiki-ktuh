@@ -967,6 +967,8 @@ ul{list-style:none;}
 @media (max-width:979px){.navbar .nav>li>a,.navbar .dropdown-menu a{color:#000000;} .navbar .nav>li>a:hover,.navbar .dropdown-menu a:hover{background-color:transparent;}}@media (max-width:767px){#info-bar-wide{display:none;visibility:hidden;} #info-bar-single{display:block;visibility:visible;}}@media (min-width:641px) and (max-width:979px){.nav img{display:none;}}@media (max-width:640px){a.learn img,a.learn:hover img,a.admin img,a.admin:hover img,a.energy img,a.energy:hover img,a.help img,a.help:hover img,a.home img,a.home:hover img,a.news img,a.news:hover img,a.win img,a.win:hover img,a.profile img,a.profile:hover img,a.water img,a.water:hover img,a.status img,a.status:hover img{display:none;visibility:hidden;} body{padding-left:0;padding-right:0;} .brand img{display:none;} .container-fluid{padding-left:0px;padding-right:0px;} .makahiki-box{margin-bottom:5px;} .navbar{margin-bottom:5px;} #info-bar-wide{display:none;visibility:hidden;} #info-bar-single{display:block;visibility:visible;} .quest-list{padding:0px;} .quest-list li{display:block;margin:5px;padding:0px;}}@media (min-width:480px) and (max-width:821px){.nav li a img{display:none;} .nav li a:hover img{display:none;}}@charset "UTF-8";
 #task-feedback textarea{width:80%;}
 @charset "UTF-8";
+#badge-nav a.activeSlide{outline:1px solid;}
+@charset "UTF-8";
 .badge-image{width:50px;float:left;}
 .margin-one-third{margin-left:35%;margin-right:35%;}
 .width-ten-percent{width:10%;}
@@ -1087,7 +1089,7 @@ td.energy-status-how-activities-content{vertical-align:text-top;}
 @charset "UTF-8";
 .scoreboard-message{font-size:12pt;margin-left:30px;margin-top:0.5em;text-align:center;}
 .nav-page-list a{padding:0px 5px;}
-#score-carousel .column-text{padding-left:20%;}
+#score-carousel .column-text{padding-left:27%;}
 @charset "UTF-8";
 .activities-grid{line-height:15px;padding-left:2px;border:0;margin:0 auto;width:100%;}
 .activities-grid td{padding:1px;width:10%;vertical-align:top;}

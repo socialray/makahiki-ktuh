@@ -230,6 +230,16 @@
         }
     },
     {
+        "pk": 53,
+        "model": "challenge_mgr.pagesetting",
+        "fields": {
+            "widget": "badge_scoreboard",
+            "game": null,
+            "enabled": true,
+            "page": 6
+        }
+    },
+    {
         "pk": 23,
         "model": "challenge_mgr.pagesetting",
         "fields": {

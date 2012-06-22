@@ -178,5 +178,14 @@
             "enabled": true,
             "widget": "badges"
         }
+    },
+    {
+        "pk": 16,
+        "model": "challenge_mgr.gamesetting",
+        "fields": {
+            "game": 7,
+            "enabled": true,
+            "widget": "badge_scoreboard"
+        }
     }
 ]
