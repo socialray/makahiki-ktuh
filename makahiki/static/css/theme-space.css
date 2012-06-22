@@ -969,10 +969,10 @@ ul{list-style:none;}
 @charset "UTF-8";
 #badge-nav a.activeSlide{outline:1px solid;}
 @charset "UTF-8";
-.badge-image{width:50px;float:left;}
-.margin-one-third{margin-left:35%;margin-right:35%;}
-.width-ten-percent{width:10%;}
-@media screen and (max-width:450px){.badge-members{display:none;}}@charset "UTF-8";
+.badge-image{width:36px;height:1px;float:left;}
+.content-col{width:60%;}
+.date-col{width:35%;}
+@charset "UTF-8";
 .canopy-member-list li{float:left;width:20%;margin:0;padding:0;text-align:center;min-height:80px;}
 .canopy-member-list li img{padding:2px;}
 @charset "UTF-8";
@@ -1034,6 +1034,8 @@ iframe{width:100%;height:300px;}
 .logging-content{text-align:left;padding:0 0 0 15px;}
 .logging-content li{line-height:10px;}
 @charset "UTF-8";
+.date-column{width:10%;}
+.content-column{width:74%;}
 .Empty-List{width:100%;text-align:left;padding:16px;}
 @charset "UTF-8";
 .my-commitments-contents p{text-align:center;}
@@ -1105,7 +1107,7 @@ td.energy-status-how-activities-content{vertical-align:text-top;}
 .activity-category h5{font-size:9pt;line-height:13px;margin:0 auto 0 auto;padding:2px;position:relative;}
 .activity-legend{background-color:#333333;}
 .activity-legend,.commitment-legend,.event-legend,.excursion-legend{width:12px;height:12px;border:1px solid #000;border-radius:4px;-moz-border-radius:4px;-webkit-border-radius:4px;}
-.activity-task-details-info{background-color:#404242;border:2px solid gray;height:auto;margin:.5em auto 5px auto;padding:10px 2px 0 2px;float:center;-moz-border-radius:6px;-webkit-border-radius:6px;color:#FFF;font-weight:bold;text-align:center;line-height:20px;display:block;}
+.activity-task-details-info{background-color:#000000;font-color:#ffffff;border:2px solid gray;height:auto;margin:.5em auto 5px auto;padding:10px 2px 0 2px;float:center;-moz-border-radius:6px;-webkit-border-radius:6px;color:#FFF;font-weight:bold;text-align:center;line-height:20px;display:block;}
 .activity-task-form-content{float:center;text-align:left;padding-left:30px;font:normal 10pt Arial,Helvetica,sans-serif;}
 .activity-task-form-content-button{padding-left:100px;}
 .commitment,.commitment-legend,.commitment a{background-color:#666666;color:#ffffff;}
