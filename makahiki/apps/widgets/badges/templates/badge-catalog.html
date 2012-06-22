@@ -19,10 +19,9 @@
             </p>
             <table>
                 <tr>
-                    <th></th>
-                    <th>Name</th>
-                    <th>Achievement</th>
-                    <th>Points</th> 
+                    <th class="date-col">Name</th>
+                    <th class="content-col">Achievement</th>
+                    <th class="points-col">Points</th> 
                 </tr>
 
                 {% with awarded_badges=view_objects.badges.awarded_badges locked_badges=view_objects.badges.locked_badges %}
