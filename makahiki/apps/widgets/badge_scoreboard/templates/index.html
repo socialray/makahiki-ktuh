@@ -25,6 +25,7 @@
                 </thead>
                 <tbody>
                 {% for p in view_objects.badge_scoreboard.profiles %}
+                    {% if p.badgeaward_set.count > 0 %}
                     <tr>
                         <td class="column-number" width="10%">{{ forloop.counter }}</td>
                         <td class="column-text" width="25%">{{ p.name }}</td>
@@ -33,6 +34,7 @@
                         <div class="badge-theme-{{ba.badge.theme}}-small"><p>{{ba.badge.label}}</p></div>
                         {% endfor %}
                     </tr>
+                    {% endif %}
                 {% endfor %}
                 </tbody>
             </table>
@@ -61,6 +63,7 @@
                 </thead>
                 <tbody>
                 {% for p in view_objects.badge_scoreboard.team %}
+                    {% if p.badgeaward_set.count > 0 %}
                     <tr>
                         <td class="column-number" width="10%">{{ forloop.counter }}</td>
                         <td class="column-text" width="25%">{{ p.name }}</td>
@@ -69,6 +72,7 @@
                         <div class="badge-theme-{{ba.badge.theme}}-small"><p>{{ba.badge.label}}</p></div>
                         {% endfor %}
                     </tr>
+                    {% endif %}
                 {% endfor %}
                 </tbody>
             </table>

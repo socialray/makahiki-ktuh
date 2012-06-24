@@ -972,7 +972,10 @@ ul{list-style:none;}
 .badge-image{width:36px;height:1px;float:left;}
 .content-col{width:60%;}
 .date-col{width:35%;}
-@charset "UTF-8";
+.margin-one-third{margin-left:35%;margin-right:35%;}
+.points-col{width:5%;}
+.width-ten-percent{width:10%;}
+@media screen and (max-width:450px){.badge-members{display:none;}}@charset "UTF-8";
 .canopy-member-list li{float:left;width:20%;margin:0;padding:0;text-align:center;min-height:80px;}
 .canopy-member-list li img{padding:2px;}
 @charset "UTF-8";
