@@ -241,7 +241,19 @@
             </div>
             <!-- right column -->
             <div class="span6">
-            {% include "admin/badge-display.html" %}
+                {% include "admin/badge-display.html" %}
+                <div class="modal" id="helpModal">
+                    <div class="modal-header">
+                        <a class="close" data-dismiss="modal">x</a>
+                        <h3>Modal header</h3>
+                    </div>
+                    <div class="modal-body" id="modal-body">
+                        <p>One fine body&hellip;</p>
+                    </div>
+                    <div class="modal-footer">
+                        <a href="#" class="btn btn-widget" data-dismiss="modal">Close</a>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
