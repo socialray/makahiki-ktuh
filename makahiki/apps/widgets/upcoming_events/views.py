@@ -1,6 +1,5 @@
 """Prepare the rendering for upcoming_events widget.
    Depends on the smart grid game widget."""
-from apps.managers.cache_mgr import cache_mgr
 from apps.widgets.smartgrid.forms import EventCodeForm
 from apps.widgets.smartgrid import smartgrid
 
@@ -10,13 +9,7 @@ def supply(request, page_name):
 
     _ = page_name
     user = request.user
-    events = cache_mgr.get_cache('user_events-%s' % user.username)
-    if not events:
-        events = smartgrid.get_available_events(user)
-        # Cache the user_event for a day
-        cache_mgr.set_cache('user_events-%s' % user.username,
-            events, 60 * 60)
-
+    events = smartgrid.get_available_events(user)
     event_form = EventCodeForm()
 
     return  {"events": events,

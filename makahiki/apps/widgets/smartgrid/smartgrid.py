@@ -229,15 +229,21 @@ def can_complete_commitment(user, commitment):
 def get_available_events(user):
     """Retrieves only the events that a user can participate in."""
 
-    events = Event.objects.filter(
-        Q(expire_date__isnull=True) | Q(expire_date__gte=datetime.date.today()),
-        pub_date__lte=datetime.date.today(),
-        event_date__gte=datetime.date.today(),
-    ).order_by("event_date")
+    events = cache_mgr.get_cache('user_events-%s' % user.username)
+    if not events:
+        events = Event.objects.filter(
+            Q(expire_date__isnull=True) | Q(expire_date__gte=datetime.date.today()),
+            pub_date__lte=datetime.date.today(),
+            event_date__gte=datetime.date.today(),
+        ).order_by("event_date")
 
-    unlock_events = []
-    for event in events:
-        if is_unlock(user, event) and not event.is_event_completed():
-            unlock_events.append(event)
+        unlock_events = []
+        for event in events:
+            if is_unlock(user, event) and not event.is_event_completed():
+                unlock_events.append(event)
 
-    return unlock_events
+        events = unlock_events
+        # Cache the user_event for a day
+        cache_mgr.set_cache('user_events-%s' % user.username, events, 60 * 60)
+
+    return events
