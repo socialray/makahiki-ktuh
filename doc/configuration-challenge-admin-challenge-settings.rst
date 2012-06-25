@@ -52,7 +52,11 @@ Configure email
    :width: 600 px
    :align: center
 
-It is important to enable email so that the "Send Feedback" button and email-based reminders for users work.   Provide the information here.
+It is important to enable email so that the "Send Feedback" button and email-based reminders for users work.
+To enable email, please make sure the environment variable MAKAHIKI_EMAIL_INFO is set before the server
+started. see :ref:`section-environment-variables` for setting environment variables.
+Once environment variable MAKAHIKI_EMAIL_INFO is set, check the "Email enalbed", and provide
+the "Contact email" and the email host information to enable email.
 
 Configure landing page
 ----------------------
