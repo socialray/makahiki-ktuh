@@ -1,3 +1,5 @@
+{% load admin_static %}
+
 <div class="content-box">
     <div class="content-box-title">
         Game Admin
@@ -15,9 +17,9 @@
                     {{ app }}
                                 <span style="float: right;">
                                     {% if enabled %}
-                                        <img src="/site_media/static/admin/img/icon-yes.gif" alt="True">
+                                        <img src="{% static 'admin/img/icon-yes.gif' %}" alt="True">
                                     {% else %}
-                                        <img src="/site_media/static/admin/img/icon-no.gif" alt="False">
+                                        <img src="{% static 'admin/img/icon-no.gif' %}" alt="False">
                                     {% endif %}
                                 </span>
                 </a>
