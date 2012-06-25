@@ -33,7 +33,7 @@ def competition(request):
             team_member_count = user.get_profile().team.profile_set.count()
             team_count = Team.objects.count()
             overall_member_count = Profile.objects.count()
-            available_events = smartgrid.get_available_events(user)
+            available_events = smartgrid.get_next_available_event(user)
 
         # override the site theme if there is any
         if profile.theme:

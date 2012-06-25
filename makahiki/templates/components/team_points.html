@@ -11,7 +11,7 @@
 
         {% with energy_rank_info=view_objects.energy_rank_info %}
             {% if energy_rank_info %}
-                <div>
+                <div style="display:none;">
                     <div class="rib-set-width-outer-width">
                         <h4>{{team}}</h4>{{ energy_rank_info.usage }} {{ energy_rank_info.unit }}. #{{ energy_rank_info.rank }}/{{TEAM_COUNT}}.
                     </div>
@@ -20,7 +20,7 @@
         {% endwith %}
         {% with water_rank_info=view_objects.water_rank_info %}
             {% if water_rank_info %}
-                <div>
+                <div style="display:none;">
                     <div class="rib-set-width-outer-width">
                         <h4>{{team}}</h4>{{ water_rank_info.usage }} {{ water_rank_info.unit }}. #{{ water_rank_info.rank }}/{{TEAM_COUNT}}.
                     </div>

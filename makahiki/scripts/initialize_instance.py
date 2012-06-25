@@ -48,14 +48,21 @@ def copy_static_media(manage_command, heroku_app):
         os.system("cp -r media site_media")
     else:
         # always use S3 in heorku, need to upload the media directory to S3 bucket
-        command = "s3put -a %s -s %s -b %s -p `pwd` %s" % (
+        command = "s3put -a %s -s %s -b %s -p `pwd`/makahiki %s" % (
             os.environ['MAKAHIKI_AWS_ACCESS_KEY_ID'],
             os.environ['MAKAHIKI_AWS_SECRET_ACCESS_KEY'],
             os.environ['MAKAHIKI_AWS_STORAGE_BUCKET_NAME'],
             "media"
             )
-        print command
-        #os.system(command)
+        #print command
+        os.system(command)
+        command = "s3put -a %s -s %s -b %s -p `pwd`/makahiki %s" % (
+            os.environ['MAKAHIKI_AWS_ACCESS_KEY_ID'],
+            os.environ['MAKAHIKI_AWS_SECRET_ACCESS_KEY'],
+            os.environ['MAKAHIKI_AWS_STORAGE_BUCKET_NAME'],
+            "static"
+            )
+        os.system(command)
 
 
 def reset_db(heroku_app):

@@ -20,9 +20,6 @@ heroku addons:add --app $1 memcache
 
 git push $1 master
 
-heroku run --app $1 python makahiki/manage.py syncdb --noinput --migrate
+cd makahiki
 
-heroku run --app $1 python makahiki/manage.py loaddata makahiki/fixtures/base*.json
-heroku run --app $1 python makahiki/manage.py loaddata makahiki/fixtures/test*.json
-
-heroku run --app $1 python makahiki/manage.py setup_test_data all
+scripts/initialize_instance.py -t demo -h $1

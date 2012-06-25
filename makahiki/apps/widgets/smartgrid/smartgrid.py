@@ -247,3 +247,13 @@ def get_available_events(user):
         cache_mgr.set_cache('user_events-%s' % user.username, events, 60 * 60)
 
     return events
+
+
+def get_next_available_event(user):
+    """retrieves the next available event as of current time."""
+
+    for event in get_available_events(user):
+        if event.event_date > datetime.datetime.today():
+            return [event, ]
+
+    return []
