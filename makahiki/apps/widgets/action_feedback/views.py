@@ -41,10 +41,8 @@ def action_feedback(request, action_type, slug):
     form = ActionFeedbackForm(request.POST)
     if form.is_valid():
         print form.cleaned_data
+    feedback, _ = ActionFeedback.objects.get_or_create(action=action, user=user)
 
-    feedback = ActionFeedback()
-    feedback.user = user
-    feedback.action = action
     if 'Score' in request.POST:
         feedback.rating = request.POST['Score']
     else:
@@ -53,7 +51,6 @@ def action_feedback(request, action_type, slug):
         feedback.comment = request.POST['comments']
     else:
         feedback.comment = ""
-    feedback.added = datetime.datetime.now()
     feedback.changed = datetime.datetime.now()
     feedback.save()
 
@@ -76,4 +73,20 @@ def view_feedback(request, action_type, slug):
         "action": action,
         "feedback": feedback_analysis.get_action_feedback(action),
         "scale": feedback_analysis.get_likert_scale_totals(action)
+        }, context_instance=RequestContext(request))
+
+
+@never_cache
+@login_required
+def change_feedback(request, action_type, slug):
+    """Allows the user to change their feedback for an action."""
+    _ = action_type
+    action = smartgrid.get_action(slug)
+    user = request.user
+    feedback = ActionFeedback.objects.get(action=action.pk, user=user.pk)
+
+    return render_to_response("change_feedback.html", {
+        "action": action,
+        "feedback": feedback,
+        "user": user
         }, context_instance=RequestContext(request))

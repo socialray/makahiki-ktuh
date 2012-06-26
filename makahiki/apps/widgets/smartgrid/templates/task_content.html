@@ -20,6 +20,7 @@
     {% if action.member.approval_status == "approved" or action.member.award_date %}
         <div class="activity-task-details-info">
             <p/>
+            <div style="text-align:left; margin-left:10px;">
             Congratulations! You did it and earned {{ action.member.points_awarded }}
              points! <br/>
             {% if action.member.social_bonus_awarded %}
@@ -31,93 +32,60 @@
                 Here is the feedback: <br/>
                 <span style="color:orange">{{ action.member.admin_comment }}</span> <br/>
             {% endif %}
-            {% if action.type == "commitment" and action.can_commit %}
-                <br/>
-                <a onclick="task_form_overlay(event)">
-                    <button style="cursor:pointer;" class="btn btn-widget">I will do this again!</button>
-                </a>
-            {% endif %}
-
+            </div>
+            {% include "widgets/action_feedback/templates/feedback_form.html" %}
         </div>
     {% else %}
         {% if action.type == "event" or action.type == "excursion" %}
             <div class="activity-task-details-info">
                 <p/>
+                <div style="text-align:left; margin-left:10px;">
                 {% if action.event.is_event_completed %}
-                    Thank you for attending the event. <br/>
+                    Thank you for attending the event. 
                     Click on the "I Did it" button to get the rest of your points.
                     <br/>
-                    <a onclick="task_form_overlay(event)">
-                        <button style="cursor:pointer;" class="btn btn-wdiget">I Did it</button>
-                    </a>
                 {% else %}
-                    Thank you! You've earned 2 bonus points by signing up.<br/>
+                    Thank you! You've earned 2 bonus points by signing up.
                     After the {{ action.type }}, please come back here within 2 days to
                     get your points.
                     If you sign up but do not attend, you will lose the 2 point
                     signing bonus and pay a 2 point "no-show" penalty.
                     <br/>
-                    <form action='{% url activity_drop_task action.type action.slug %}'
-                          method='post'>
-                        {% csrf_token %}
-                        <button id="submit_button1" style="cursor:pointer;"
-                                onclick='$("#submit_button1").attr("disabled", "disabled");javascript:this.form.submit(); return false;'>
-                            Take me off the signup list
-                        </button>
-                    </form>
                 {% endif %}
-                {%if  not feedback_p %}
-                    {% include "widgets/action_feedback/templates/feedback_form.html" %}
-                {% else %}
-                    <p>Thank you for your feedback!</p>
-                {% endif %}
+                </div>
+                {% include "widgets/action_feedback/templates/feedback_form.html" %}
             </div>
         {% endif %}
         {% if action.type == "commitment" %}
             <div class="activity-task-details-info">
                 <p/>
+                <div style="text-align:left; margin-left:10px;">
                 {% if action.member.days_left > 0 %}
-                    Thank you! You've earned 2 points by committing.<br/>
+                    Thank you! You've earned 2 points by committing.
                     Please come back on {{ action.member.completion_date|date:"l m/d" }}
                     ({{ action.member.days_left }} days left) to get the rest of your
                     points.
                     <br/>
-                    <form action='{% url activity_drop_task action.type action.slug %}'
-                          method='post'>
-                        {% csrf_token %}
-                        <button id="submit_button2" style="cursor:pointer;" class="btn btn-widget"
-                                onclick='$("#submit_button2").attr("disabled", "disabled");javascript:this.form.submit(); return false;'>
-                            Drop this commitment
-                        </button>
-                    </form>
                 {% else %}
                     Thank you for committing to this for {{ action.duration }} days.
                     <br/>
                     Click on the "I Did it" button to get the rest of your points.
                     <br/>
-                    <a onclick="task_form_overlay(event)">
-                        <button style="cursor:pointer;" class="btn btn-widget">I Did it</button>
-                    </a>
                 {% endif %}
-                {%if  not feedback_p %}
-                    {% include "widgets/action_feedback/templates/feedback_form.html" %}
-                {% else %}
-                    <p>Thank you for your feedback!</p>
-                {% endif %}
+                </div>
+                {% include "widgets/action_feedback/templates/feedback_form.html" %}
             </div>
         {% endif %}
         {% if action.type == "activity" %}
             {% if action.member.approval_status != "rejected" %}
                 <div class="activity-task-details-info">
                     <p/>
-                    Thank you for submitting your response. <br/>
-                    An administrator is reviewing your response. <br/>
+                    <div style="text-align:left; margin-left:10px;">
+                    Thank you for submitting your response.
+                    An administrator is reviewing your response.
                     Come back soon to see your new total.
-                    {%if  not feedback_p %}
-                        {% include "widgets/action_feedback/templates/feedback_form.html" %}
-                    {% else %}
-                        <p>Thank you for your feedback!</p>
-                    {% endif %}
+                    </div>
+                    {% include "widgets/action_feedback/templates/feedback_form.html" %}
                 </div>
             {% else %}
                 <div class="activity-task-details-info">
@@ -128,20 +96,9 @@
                         submission. <br/>
                         Please try again. Here is the feedback: <br/>
                         <span style="color:orange">{{ action.member.admin_comment }}</span>
-                    </div>
-                    {% if user == action.member.user %}
-                        <a onclick="task_form_overlay(event)">
-                            <button style="cursor:pointer;">I will try again
-                            </button>
-                        </a>
-                    {% else %}
                         <br/>Please try again.
-                    {% endif %}
-                    {%if  not feedback_p %}
-                        {% include "widgets/action_feedback/templates/feedback_form.html" %}
-                    {% else %}
-                        <p>Thank you for your feedback!</p>
-                    {% endif %}
+                    </div>
+                    {% include "widgets/action_feedback/templates/feedback_form.html" %}
                 </div>
             {% endif %}
         {% endif %}
@@ -253,6 +210,62 @@
                     <img src="{{ STATIC_URL}}images/right.png"
                          width="50" align="center"></button>
             </a>
+        {% endif %}
+    {% else %}
+        {% if action.member.approval_status == "approved" or action.member.award_date %}
+            {% if action.type == "commitment" and action.can_commit %}
+                <a onclick="task_form_overlay(event)">
+                    <button style="cursor:pointer;" class="btn btn-widget">I will do this again!
+                        <img src="{{ STATIC_URL}}images/right.png" width="50" align="center">
+                    </button>
+                </a>
+            {% endif %}
+        {% endif %}
+        {% if action.member.approval_status == "rejected" %}
+            <a onclick="task_form_overlay(event)">
+                <button style="cursor:pointer;" class="btn btn-widget">I will try again
+                    <img src="{{ STATIC_URL}}images/right.png" width="50" align="center">
+                </button>
+            </a>
+        {% endif %}
+        {% if action.type == "commitment" %}
+            {% if action.member.days_left > 0 %}
+            <form action='{% url activity_drop_task action.type action.slug %}'
+                  method='post'>
+                {% csrf_token %}
+                <button id="submit_button2" style="cursor:pointer;" class="btn btn-widget"
+                        onclick='$("#submit_button2").attr("disabled", "disabled");javascript:this.form.submit(); return false;'>
+                    Drop this commitment
+                    <img src="{{ STATIC_URL}}images/left.png"
+                         width="50" align="center">
+                </button>
+            </form>
+            {% else %}
+                <a onclick="task_form_overlay(event)">
+                    <button style="cursor:pointer;" class="btn btn-widget">I Did it
+                        <img src="{{ STATIC_URL}}images/right.png" width="50" align="center">
+                    </button>
+                </a>
+            {% endif %}
+        {% endif %}
+        {% if action.type == "event" or action.type == "excursion" %}
+            {% if action.event.is_event_completed %}
+                <a onclick="task_form_overlay(event)">
+                    <button style="cursor:pointer;" class="btn btn-wdiget">I Did it
+                        <img src="{{ STATIC_URL}}images/right.png" width="50" align="center">
+                    </button>
+                </a>
+            {% else %}
+                <form action='{% url activity_drop_task action.type action.slug %}'
+                      method='post'>
+                    {% csrf_token %}
+                    <button id="submit_button1" style="cursor:pointer;" class="btn btn-widget"
+                            onclick='$("#submit_button1").attr("disabled", "disabled");javascript:this.form.submit(); return false;'>
+                        Take me off the signup list
+                        <img src="{{ STATIC_URL}}images/left.png" width="50" align="center">
+                    </button>
+                 </form>
+            {% endif %}
         {% endif %}
     {% endif %}
     <br/> <br/>

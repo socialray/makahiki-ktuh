@@ -1,26 +1,29 @@
 {% load markup %}
 <div id="task-feedback">
-<p>Please provide feedback on {{ action.type|capfirst }} : {{ action.name }}.</p>
 <form action="{% url add_activity_feedback action.type action.slug %}" method="post">
+<div style="text-align:left; margin-left:10px;">
+Please provide feedback:
+
     {% csrf_token %}
     <table class="">
         <tr>
             <td>Hated it</td>
-            <td>1<input id="radScoreStart" type="radio" name="Score" value="1" /></label></td>
-            <td>2<input type="radio" name="Score" value="2" /></td>
-            <td>3<input type="radio" name="Score" value="3" /></td>
-            <td>4<input type="radio" name="Score" value="4" /></td>
-            <td>5<input id="radScoreEnd" type="radio" name="Score" value="5" /></td>
+            <td>1<input id="radScoreStart" type="radio" name="Score" value="1" {% if feedback_p and feedback_p.rating == 1 %} checked {% endif %}/></label></td>
+            <td>2<input type="radio" name="Score" value="2" {% if feedback_p and feedback_p.rating == 2 %} checked {% endif %}/></td>
+            <td>3<input type="radio" name="Score" value="3" {% if feedback_p and feedback_p.rating == 3 %} checked {% endif %}/></td>
+            <td>4<input type="radio" name="Score" value="4" {% if feedback_p and feedback_p.rating == 4 %} checked {% endif %}/></td>
+            <td>5<input id="radScoreEnd" type="radio" name="Score" value="5" {% if feedback_p and feedback_p.rating == 5 %} checked {% endif %}/></td>
             <td>Loved it</td>
         </tr>
     </table>
-    Any comments about the {{ action.name }} {{ action.type }}?<br/>
+    Any comments?<br/>
     <div class="controls">
-        <textarea rows="2" name="comments"></textarea>
+        <textarea rows="1" name="comments">{% if feedback_p %} {{ feedback_p.comment }} {% endif %}</textarea>
     </div>
     <div>
         <input id="feedback-submit-button" type="submit" value="Submit" class="btn btn-widget"/>
     </div>
+</div>
 </form>
 
 <script>
