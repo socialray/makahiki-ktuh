@@ -22,7 +22,7 @@ def supply(request, page_name):
     logins = []
     while start <= today:
         result = {}
-        result['date'] = start.strftime("%Y,%m,%d")
+        result['date'] = start.strftime("%m/%d")
 
         result['logins'] = users_anno.filter(login_date__gte=start,
             login_date__lt=start + datetime.timedelta(days=1)).count()

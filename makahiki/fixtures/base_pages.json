@@ -518,5 +518,15 @@
             "enabled": true,
             "page": 10
         }
+    },
+    {
+        "pk": 54,
+        "model": "challenge_mgr.pagesetting",
+        "fields": {
+            "widget": "status.gchart",
+            "game": null,
+            "enabled": true,
+            "page": 10
+        }
     }
 ]

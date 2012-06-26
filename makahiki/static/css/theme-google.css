@@ -1111,7 +1111,7 @@ td.energy-status-how-activities-content{vertical-align:text-top;}
 .activity-category h5{font-size:9pt;line-height:13px;margin:0 auto 0 auto;padding:2px;position:relative;}
 .activity-legend{background-color:#8daaeb;}
 .activity-legend,.commitment-legend,.event-legend,.excursion-legend{width:12px;height:12px;border:1px solid #000;border-radius:4px;-moz-border-radius:4px;-webkit-border-radius:4px;}
-.activity-task-details-info{background-color:#e9eef5;font-color:#000000;border:2px solid gray;height:auto;margin:.5em auto 5px auto;padding:10px 2px 0 2px;float:center;-moz-border-radius:6px;-webkit-border-radius:6px;color:#FFF;font-weight:bold;text-align:center;line-height:20px;display:block;}
+.activity-task-details-info{background-color:#e9eef5;font-color:#000000;border:2px solid gray;height:auto;margin:.5em auto 5px auto;padding:10px 2px 0 2px;float:center;-moz-border-radius:6px;-webkit-border-radius:6px;font-weight:bold;text-align:center;line-height:20px;display:block;}
 .activity-task-form-content{float:center;text-align:left;padding-left:30px;font:normal 10pt Arial,Helvetica,sans-serif;}
 .activity-task-form-content-button{padding-left:100px;}
 .commitment,.commitment-legend,.commitment a{background-color:#d41c34;color:#000000;}

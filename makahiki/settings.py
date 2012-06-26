@@ -193,6 +193,7 @@ INSTALLED_WIDGET_APPS = (
     'status.actions',
     'logging',
     'status.flot',
+    'status.gchart',
 )
 
 for widget in INSTALLED_WIDGET_APPS:
