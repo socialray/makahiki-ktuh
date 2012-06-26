@@ -69,7 +69,10 @@ def view_action(request, action_type, slug):
         return response
 
     user_reminders = view_reminders.load_reminders(action, user)
-    feedback = ActionFeedback.objects.filter(user=user.pk, action=action.pk)
+    try:
+        feedback = ActionFeedback.objects.get(user=user.pk, action=action.pk)
+    except ObjectDoesNotExist:
+        feedback = None
 
     return render_to_response("task.html", {
         "action": action,

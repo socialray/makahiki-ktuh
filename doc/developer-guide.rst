@@ -5,6 +5,7 @@ Developer Guide
 
    coding-standards
    theme-development
+   heroku-in-a-nutshell
    logging-and-analysis
    plugin-development
    testing

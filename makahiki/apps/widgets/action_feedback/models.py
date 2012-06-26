@@ -14,14 +14,18 @@ class ActionFeedback(models.Model):
     user = models.ForeignKey(User,
                              null=True, blank=True,
                              help_text="The user providing the feedback.")
-    rating = models.IntegerField(help_text="The user's rating of the action.")
+    rating = models.IntegerField(help_text="The user's rating of the action.", default=0)
     comment = models.CharField(
                                max_length=1500,
                                blank=True,
                                null=True,
                                help_text="The user's comments about the action.")
-    added = models.DateTimeField(editable=False, help_text="The time the feedback was made.")
-    changed = models.DateTimeField(editable=False, help_text="The time the feedback was changed.")
+    added = models.DateTimeField(editable=False,
+                                 help_text="The time the feedback was made.",
+                                 auto_now_add=True)
+    changed = models.DateTimeField(editable=False,
+                                   help_text="The time the feedback was changed.",
+                                   auto_now=True)
 
     def __unicode__(self):
         return "%s rated %s %d and said %s" % \
