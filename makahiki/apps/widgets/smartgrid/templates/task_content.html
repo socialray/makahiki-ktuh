@@ -136,7 +136,7 @@
                     <a onclick="task_form_overlay(event)">
                         <button style="cursor:pointer;" class="btn btn-widget">I will do this!
                             <img src="{{ STATIC_URL}}images/right.png"
-                                 width="50" align="center">
+                                 width="25" align="center">
                         </button>
                     </a>
                 {% else %}
@@ -147,7 +147,7 @@
                                 onclick='$("#submit_button4").attr("disabled", "disabled");javascript:this.form.submit(); return false;'>
                             I will do this!
                             <img src="{{ STATIC_URL}}images/right.png"
-                                 width="50" align="center">
+                                 width="25" align="center">
                         </button>
                     </form>
                 {% endif %}
@@ -167,7 +167,7 @@
                         <button style="cursor:pointer;" class="btn btn-widget">
                             I Did it
                             <img src="{{ STATIC_URL}}images/right.png"
-                                 width="50" align="center">
+                                 width="25" align="center">
                         </button>
                     </a>
                 </b>
@@ -181,7 +181,7 @@
                                 onclick='$("#submit_button5").attr("disabled", "disabled");javascript:this.form.submit(); return false;'>
                             I want to sign up
                             <img src="{{ STATIC_URL }}images/right.png"
-                                 width="50" align="center"/>
+                                 width="25" align="center"/>
                         </button>
                     </form>
                     {# </a> #}
@@ -195,7 +195,7 @@
             <a onclick="task_form_overlay(event)">
                 <button style="cursor:pointer;" class="btn btn-widget">I want to do it
                     <img src="{{ STATIC_URL}}images/right.png"
-                         width="50" align="center">
+                         width="25" align="center">
                 </button>
             </a>
         {% endif %}
@@ -208,7 +208,7 @@
                 <button style="cursor:pointer;" class="btn btn-widget">
                     I Did This!
                     <img src="{{ STATIC_URL}}images/right.png"
-                         width="50" align="center"></button>
+                         width="25" align="center"></button>
             </a>
         {% endif %}
     {% else %}
@@ -216,7 +216,7 @@
             {% if action.type == "commitment" and action.can_commit %}
                 <a onclick="task_form_overlay(event)">
                     <button style="cursor:pointer;" class="btn btn-widget">I will do this again!
-                        <img src="{{ STATIC_URL}}images/right.png" width="50" align="center">
+                        <img src="{{ STATIC_URL}}images/right.png" width="25" align="center">
                     </button>
                 </a>
             {% endif %}
@@ -224,7 +224,7 @@
         {% if action.member.approval_status == "rejected" %}
             <a onclick="task_form_overlay(event)">
                 <button style="cursor:pointer;" class="btn btn-widget">I will try again
-                    <img src="{{ STATIC_URL}}images/right.png" width="50" align="center">
+                    <img src="{{ STATIC_URL}}images/right.png" width="25" align="center">
                 </button>
             </a>
         {% endif %}
@@ -237,13 +237,13 @@
                         onclick='$("#submit_button2").attr("disabled", "disabled");javascript:this.form.submit(); return false;'>
                     Drop this commitment
                     <img src="{{ STATIC_URL}}images/left.png"
-                         width="50" align="center">
+                         width="25" align="center">
                 </button>
             </form>
             {% else %}
                 <a onclick="task_form_overlay(event)">
                     <button style="cursor:pointer;" class="btn btn-widget">I Did it
-                        <img src="{{ STATIC_URL}}images/right.png" width="50" align="center">
+                        <img src="{{ STATIC_URL}}images/right.png" width="25" align="center">
                     </button>
                 </a>
             {% endif %}
@@ -252,7 +252,7 @@
             {% if action.event.is_event_completed %}
                 <a onclick="task_form_overlay(event)">
                     <button style="cursor:pointer;" class="btn btn-wdiget">I Did it
-                        <img src="{{ STATIC_URL}}images/right.png" width="50" align="center">
+                        <img src="{{ STATIC_URL}}images/right.png" width="25" align="center">
                     </button>
                 </a>
             {% else %}
@@ -262,7 +262,7 @@
                     <button id="submit_button1" style="cursor:pointer;" class="btn btn-widget"
                             onclick='$("#submit_button1").attr("disabled", "disabled");javascript:this.form.submit(); return false;'>
                         Take me off the signup list
-                        <img src="{{ STATIC_URL}}images/left.png" width="50" align="center">
+                        <img src="{{ STATIC_URL}}images/left.png" width="25" align="center">
                     </button>
                  </form>
             {% endif %}
