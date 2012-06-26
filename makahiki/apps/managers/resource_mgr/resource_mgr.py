@@ -58,6 +58,35 @@ def team_resource_usage(date, team, resource):
         return 0
 
 
+def get_energy_usage(session, source):
+    """Return the energy usage from wattdepot."""
+    rest_url = "%s/wattdepot/sources/%s/energy/" % (
+        settings.CHALLENGE.wattdepot_server_url, source)
+
+    #session.config['verbose'] = sys.stderr
+    session.timeout = 5
+
+    try:
+        response = session.get(url=rest_url)
+
+        #print response.text
+        usage = 0
+        property_elements = ElementTree.XML(response.text).findall(".//Property")
+        for p in property_elements:
+            key_value = p.getchildren()
+            if key_value and key_value[0].text == "energyConsumed":
+                usage = key_value[1].text
+
+        return int(round(float(usage) / 1000))
+
+    except Timeout:
+        print 'team %s energy usage update error with connection timeout.' % source
+    except ParseError as exception:
+        print 'team %s energy usage update with ParseError : %s' % (source, exception)
+
+    return 0
+
+
 def update_energy_usage(date):
     """Update the energy usage from WattDepot server."""
 
@@ -68,39 +97,51 @@ def update_energy_usage(date):
     end_time = date.strftime("%Y-%m-%dT%H:%M:%S")
 
     s = requests.session()
-    #s.config['verbose'] = sys.stderr
-    s.timeout = 2
     s.params = {'startTime': start_time, 'endTime': end_time}
 
     for team in Team.objects.all():
-        rest_url = "%s/wattdepot/sources/%s/energy/" % (
-            settings.CHALLENGE.wattdepot_server_url, team.name)
-
-        try:
-            response = s.get(url=rest_url)
-
-            #print response.text
-            usage = 0
-            property_elements = ElementTree.XML(response.text).findall(".//Property")
-            for p in property_elements:
-                key_value = p.getchildren()
-                if key_value and key_value[0].text == "energyConsumed":
-                    usage = key_value[1].text
-
-            #print usage
+        usage = get_energy_usage(s, team.name)
+        if usage:
             try:
                 latest_usage = EnergyUsage.objects.get(team=team, date=date.date())
             except ObjectDoesNotExist:
                 latest_usage = EnergyUsage(team=team, date=date.date())
 
             latest_usage.time = date.time()
-            latest_usage.usage = int(round(float(usage) / 1000))
+            latest_usage.usage = usage
             latest_usage.save()
             print 'team %s energy usage updated.' % team
-        except Timeout:
-            print 'team %s energy usage update error with connection timeout.' % team
-        except ParseError as exception:
-            print 'team %s energy usage update with ParseError : %s' % (team, exception)
+
+
+def get_daily_energy_baseline_usage(session, team, day, start_date, weeks):
+    """Returns the daily energy baseline usage from the history data."""
+    usage = 0
+    for i in range(0, weeks):
+        start_date += datetime.timedelta(days=(i * 7 + day))
+        end_date = start_date + datetime.timedelta(days=1)
+        start_time = start_date.strftime("%Y-%m-%dT00:00:00")
+        end_time = end_date.strftime("%Y-%m-%dT00:00:00")
+
+        session.params = {'startTime': start_time, 'endTime': end_time}
+
+        usage += get_energy_usage(session, team.name)
+
+    return usage / weeks
+
+
+def get_hourly_energy_baseline_usage(session, team, day, hour, start_date, weeks):
+    """Returns the hourly energy baseline usage from the history data."""
+    usage = 0
+    for i in range(0, weeks):
+        start_date += datetime.timedelta(days=(i * 7 + day))
+        start_time = start_date.strftime("%Y-%m-%dT00:00:00")
+        end_time = start_date.strftime("%Y-%m-%dT") + "%.2d:00:00" % hour
+
+        session.params = {'startTime': start_time, 'endTime': end_time}
+
+        usage += get_energy_usage(session, team.name)
+
+    return usage / weeks
 
 
 def _get_resource_usage(name):

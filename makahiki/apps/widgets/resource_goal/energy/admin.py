@@ -16,3 +16,6 @@ admin.site.register(EnergyBaselineHourly, BaselineHourlyAdmin)
 
 challenge_mgr.register_game_admin_model("resource_goal.energy", EnergyGoalSetting)
 challenge_mgr.register_game_admin_model("resource_goal.energy", EnergyUsage)
+challenge_mgr.register_sys_admin_model("Resource Goals", EnergyGoal)
+challenge_mgr.register_sys_admin_model("Resource Goals", EnergyBaselineDaily)
+challenge_mgr.register_sys_admin_model("Resource Goals", EnergyBaselineHourly)

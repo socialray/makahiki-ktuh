@@ -88,12 +88,19 @@ class WaterGoalSetting(ResourceGoalSetting):
 
 class ResourceBaselineDaily(models.Model):
     """Daily Team resource baseline Model for a week"""
-
+    DAY_CHOICES = ((0, "Monday"),
+                   (1, "Tuesday"),
+                   (2, "Wednesday"),
+                   (3, "Thursday"),
+                   (4, "Friday"),
+                   (5, "Saturday"),
+                   (6, "Sunday"))
     team = models.ForeignKey(
         Team,
         help_text="The team which this baseline is related to.")
 
     day = models.IntegerField(
+        choices=DAY_CHOICES,
         help_text="The day in the week, where Monday is 0 and Sunday is 6",)
 
     usage = models.IntegerField(
@@ -122,11 +129,20 @@ class WaterBaselineDaily(ResourceBaselineDaily):
 class ResourceBaselineHourly(models.Model):
     """Daily Team resource baseline Model for a week"""
 
+    DAY_CHOICES = ((0, "Monday"),
+                   (1, "Tuesday"),
+                   (2, "Wednesday"),
+                   (3, "Thursday"),
+                   (4, "Friday"),
+                   (5, "Saturday"),
+                   (6, "Sunday"))
+
     team = models.ForeignKey(
         Team,
         help_text="The team which this baseline is related to.")
 
     day = models.IntegerField(
+        choices=DAY_CHOICES,
         help_text="The day in the week.",)
 
     hour = models.IntegerField(

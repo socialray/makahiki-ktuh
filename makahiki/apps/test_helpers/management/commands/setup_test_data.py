@@ -206,8 +206,12 @@ class Command(MakahikiBaseCommand):
         for baseline in WaterBaselineDaily.objects.all():
             baseline.delete()
         for team in Team.objects.all():
-            for day in range(0, 7):
-                WaterBaselineDaily(team=team, day=day, usage=1 * 24).save()
+            count = team.profile_set.count()
+            if count:
+                # assume the average water usage is 80 gallon per person per day
+                average_usage = 80
+                for day in range(0, 7):
+                    WaterBaselineDaily(team=team, day=day, usage=average_usage * count).save()
 
         self.stdout.write("created test baselines for all teams.\n")
 

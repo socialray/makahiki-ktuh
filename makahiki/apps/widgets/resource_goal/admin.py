@@ -15,9 +15,9 @@ class GoalAdmin(admin.ModelAdmin):
 
 class BaselineDailyAdmin(admin.ModelAdmin):
     """EnergyGoal administrator interface definition."""
-    list_display = ["day", "team", "usage"]
+    list_display = ["team", "day", "usage"]
 
 
 class BaselineHourlyAdmin(admin.ModelAdmin):
     """EnergyGoal administrator interface definition."""
-    list_display = ["day", "hour", "team", "usage"]
+    list_display = ["team", "day", "hour", "usage"]
