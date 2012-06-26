@@ -94,9 +94,11 @@
                     <div style="text-align:left; margin-left:10px;">
                         Administrator feels that there is a problem with your
                         submission. <br/>
-                        Please try again. Here is the feedback: <br/>
+                        Please try again.
+                        {% if action.member.admin_coment %} 
+                        Here is their feedback: <br/>
                         <span style="color:orange">{{ action.member.admin_comment }}</span>
-                        <br/>Please try again.
+                        {% endif %}
                     </div>
                     {% include "widgets/action_feedback/templates/feedback_form.html" %}
                 </div>
