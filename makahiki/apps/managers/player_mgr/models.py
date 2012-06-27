@@ -129,12 +129,3 @@ def award_possible_referral_bonus(sender, instance=None, **kwargs):
 
 
 pre_save.connect(award_possible_referral_bonus, sender=Profile)
-
-
-class DailyStatus(models.Model):
-    """Stores the number of visitors per day."""
-
-    daily_visitors = models.IntegerField(
-        blank=True, null=True,
-        help_text="Number of visitors.")
-    date = models.DateTimeField(editable=False, auto_now_add=True)
