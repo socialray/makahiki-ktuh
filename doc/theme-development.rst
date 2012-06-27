@@ -316,6 +316,9 @@ browser to see the change:
 
 As you can see, the background is now white.  
 
+
+
+
 Define the Navigation Bar theme
 -------------------------------
 
@@ -400,7 +403,7 @@ Subelements of the widget will just use slight variants of these colors::
   @widget-text-area-bkg-color: @google-offwhite;
   @widget-text-area-font-color: @black;
 
-Here's what the whole profile page looks like at this point:
+Here's what the whole profile page looks like at this point: 
 
 .. figure:: figs/theme-dev/theme-dev-google-widgets.png
    :width: 600 px
@@ -540,6 +543,20 @@ like this:
 .. figure:: figs/theme-dev/theme-dev-badge-display.png
    :width: 600 px
    :align: center
+
+Define the default font and link colors
+---------------------------------------
+
+Once the page is mostly done, go back to the top of the file to specify the default font and link colors through the following
+definitions::
+
+  @page-font-color: @black;
+  @page-link-color: @google-darkblue;
+
+In most cases, you will want the link color to be different from the font color so that
+textual links stand out.   Pages like Profile contain links, so you can check to see that
+the link text stands out on this page.
+
 
 
 Cleanup:  Delete the prior theme's variable definitions
