@@ -1,6 +1,6 @@
 """handles request for flot widget."""
 from apps.widgets.status.users.views import remote_supply
-from apps.managers.player_mgr.models import DailyStatus
+from apps.widgets.status.models import DailyStatus
 
 
 def supply(request, page_name):
