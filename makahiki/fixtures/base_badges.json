@@ -10,7 +10,8 @@
             "theme": "1",
             "slug": "daily-visitor",
             "label": "NOV",
-            "image": ""}
+            "image": "",
+            "points": "10"}
     },
     {
         "pk": 2,
@@ -23,7 +24,8 @@
             "theme": "2",
             "slug": "three-peater",
             "label": "3PT",
-            "image": ""}
+            "image": "",
+            "points": "10"}
     },
     {
         "pk": 3,
@@ -36,7 +38,8 @@
             "theme": "3",
             "slug": "six-peater",
             "label": "6PT",
-            "image": ""}
+            "image": "",
+            "points": "20"}
     },
     {
         "pk": 4,
@@ -49,7 +52,8 @@
             "theme": "4",
             "slug": "nine-peater",
             "label": "9PT",
-            "image": ""}
+            "image": "",
+            "points": "20"}
     },
     {
         "pk": 5,
@@ -62,7 +66,8 @@
             "theme": "5",
             "slug": "energy-hat-trick",
             "label": "HTR",
-            "image": ""}
+            "image": "",
+            "points": "10"}
     },
     {
         "pk": 6,
@@ -75,7 +80,8 @@
             "theme": "1",
             "slug": "super-committed",
             "label": "SPC",
-            "image": ""}
+            "image": "",
+            "points": "10"}
     },
     {
         "pk": 7,
@@ -88,7 +94,8 @@
             "theme": "2",
             "slug": "ultra-committed",
             "label": "ULC",
-            "image": ""}
+            "image": "",
+            "points": "20"}
     },
     {
         "pk": 8,
@@ -101,7 +108,8 @@
             "theme": "3",
             "slug": "level-1-master",
             "label": "LV1",
-            "image": ""}
+            "image": "",
+            "points": "20"}
     },
     {
         "pk": 9,
@@ -114,7 +122,8 @@
             "theme": "4",
             "slug": "level-2-master",
             "label": "LV2",
-            "image": ""}
+            "image": "",
+            "points": "20"}
     },
     {
         "pk": 10,
@@ -127,7 +136,8 @@
             "theme": "5",
             "slug": "level-3-master",
             "label": "LV3",
-            "image": ""}
+            "image": "",
+            "points": "20"}
     },
     {
         "pk": 11,
@@ -140,7 +150,8 @@
             "theme": "1",
             "slug": "level-4-master",
             "label": "LV4",
-            "image": ""}
+            "image": "",
+            "points": "20"}
     },
     {
         "pk": 12,
@@ -153,7 +164,8 @@
             "theme": "2",
             "slug": "super-social",
             "label": "SSC",
-            "image": ""}
+            "image": "",
+            "points": "20"}
     },
     {
         "pk": 13,
@@ -166,7 +178,8 @@
             "theme": "3",
             "slug": "super-referrer",
             "label": "SRF",
-            "image": ""}
+            "image": "",
+            "points": "20"}
     },
     {
         "pk": 14,
@@ -179,7 +192,8 @@
             "theme": "4",
             "slug": "mega-referrer",
             "label": "MRF",
-            "image": ""}
+            "image": "",
+            "points": "20"}
     },
     {
         "pk": 15,
@@ -192,7 +206,8 @@
             "theme": "5",
             "slug": "ultra-referrer",
             "label": "URF",
-            "image": ""}
+            "image": "",
+            "points": "20"}
     },
     {
         "pk": 16,
@@ -205,7 +220,8 @@
             "theme": "1",
             "slug": "white-hat",
             "label": "DBG",
-            "image": ""}
+            "image": "",
+            "points": "20"}
     },
     {
         "pk": 17,
@@ -218,7 +234,8 @@
             "theme": "2",
             "slug": "super-team",
             "label": "STM",
-            "image": ""}
+            "image": "",
+            "points": "10"}
     },
     {
         "pk": 18,
@@ -231,7 +248,8 @@
             "theme": "3",
             "slug": "mega-team",
             "label": "MTM",
-            "image": ""}
+            "image": "",
+            "points": "10"}
     },
     {
         "pk": 19,
@@ -244,7 +262,8 @@
             "theme": "4",
             "slug": "ultra-team",
             "label": "UTM",
-            "image": ""}
+            "image": "",
+            "points": "10"}
     },
     {
         "pk": 20,
