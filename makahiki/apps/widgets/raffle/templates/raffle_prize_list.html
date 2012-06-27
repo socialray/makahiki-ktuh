@@ -10,10 +10,6 @@
 {% endblock %}
 
 {% block body %}
-<center>
-      <a class="textlink" href="{% url profile_index %}">Back to Prizes</a>
-</center>
-
 <div class="content-box">
         <div class="content-box-title">
             List of Raffle Prizes
@@ -47,15 +43,20 @@
           </div> 
       {% endfor %}
   </div> 
-  </div> 
 
 <script type="text/javascript">
 $('#prize-tab.nav-tabs a:first').tab('show');
 </script>  
 
-<center>
-  <a class="textlink" href="{% url profile_index %}">Back to Prizes</a>
-</center>
-    </div>
+    <center>
+        <a href="{% url profile_index %}"">
+            <button class="btn btn-widget" style="cursor:pointer;">
+                <img src="{{ STATIC_URL}}images/left.png" width="25"
+                     align="top">
+                 Back to Prizes
+            </button>
+        </a>
+    </center>
+</div>
 {% endblock %}
 

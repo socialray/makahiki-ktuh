@@ -41,7 +41,15 @@
                     {% endfor %}
                 </tbody>
             </table>
-            <center><a href="{% url news_index %}">Back to the news page</a></center>
+            <center>
+                <a href="{% url news_index %}">
+                    <button class="btn btn-widget" style="cursor:pointer;">
+                        <img src="{{ STATIC_URL}}images/left.png" width="25"
+                             align="top">
+                        Back to the News Page
+                        </button>
+                </a>
+            </center>
         </div>
     </div>
 {% endblock %}
