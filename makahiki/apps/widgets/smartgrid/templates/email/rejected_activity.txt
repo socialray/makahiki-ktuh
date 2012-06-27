@@ -1,9 +1,12 @@
 Hi {{object.user.get_profile.name}},
 
 {% with object.action as action %}
-Your response to {{action.title}} was {{status_nicely}}.  Here is our feedback:
+Your response to {{action.title}} was {{status_nicely}}.  
+{% if object.admin_comment %}
+Here is our feedback:
 
 {{object.admin_comment}}
+{% endif %}
 
 {% if status_nicely != "approved" %}
   You can still receive the points for this {{action.type}}!  Please click the following link to try again.
