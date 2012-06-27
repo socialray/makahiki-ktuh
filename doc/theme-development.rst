@@ -78,7 +78,7 @@ Create your new theme file
 
 The directory makahiki/static/less contains all of the files that define the Makahiki look
 and feel.  All of the information required to define a new theme is specified in a single
-file named "theme-<theme_name>.less".  For example, some of the predefined theme files are: "theme-default.less",
+file named "theme-<theme_name>.less".  For example, some of the predefined theme files are: "theme-sonora.less",
 "theme-wave.less", and "theme-forest.less".  
 
 To create your new theme file, simply make a copy of a current theme file, naming it with
@@ -101,7 +101,7 @@ portion of the settings.py file looks like after I've added my new google theme 
   # INSTALLED Themes. Please keep them in alphabetical order
   ##########################################################
   INSTALLED_THEMES = (
-      'theme-default',
+      'theme-bubbles',
       'theme-forest',
       'theme-google',
       'theme-sonora',
@@ -557,6 +557,8 @@ In most cases, you will want the link color to be different from the font color 
 textual links stand out.   Pages like Profile contain links, so you can check to see that
 the link text stands out on this page.
 
+To see your the results of your theme, you can navigate to the special page "theme-display". 
+It has all of the theme-able elements in a single page.
 
 
 Cleanup:  Delete the prior theme's variable definitions
