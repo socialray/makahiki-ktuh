@@ -21,26 +21,20 @@
     </tr>
     <script type="text/javascript">
     $(document).ready(function () {
-    var d1 = {{value.scale}}
-//     //reverse data
-//     for (i=0;i<d1.length;i++){
-//        var tmp = d1[i][0];
-//        d1[i][0] = d1[i][1];
-//        d1[i][1] = tmp;
-//     }
-
+    var data = {{value.scale}}
     var options = {
-    	    series: {stack: true,
-                     lines: {show: false, steps: false },
-                     bars: {show: true, horizontal:true},
-                    }
+    	   bars: {show: true, barWidth: 0.6},
+    	   grid: {show: false}
         };
 
     var plotarea = $("#graph{{forloop.counter}}");
-//    $.plot(plotarea, d1, options);
-    $.plot($("#graph{{forloop.counter}}"), [ {data: d1, bars: {show: true, barWidth: 0.6}} ]);
-//    $.plot($("#graph{{forloop.counter}}"), [ {data: d1, lines: {show: true}, xaxis:{show: false, ticks: null}, grid: {
-//        show: false}} ]);
+//    $.plot(plotarea, data, options);
+    $.plot($("#graph{{forloop.counter}}"), [data], {
+    	bars: {show: true, barWidth: 0.6}, 
+    	grid: {show: false}
+    	});
+//    $.plot($("#graph{{forloop.counter}}"), data, options); 
+
 });
 </script>
     {% endif %}

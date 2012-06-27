@@ -57,7 +57,7 @@
                     jQuery(document).ready(function ($) {
             $(".modal-footer .btn").click(function () {
                 $.post("{% url notifications_read notification.id %}", function (data) {
-                    $("#notification-item-{{notification.id}}").fadeOut();
+                 //   $("#notification-item-{{notification.id}}").fadeOut();
                 });
             });
 
