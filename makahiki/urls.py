@@ -49,6 +49,7 @@ urlpatterns = patterns('',
         name='coming_soon'),
     url(r'^badge-display/$', direct_to_template, {'template': 'admin/badge-display.html'},
         name='badge-display'),
+    url(r'^theme-display/$', direct_to_template, {'template': 'theme.html'}, name="theme-display"),
 
     url(r'^404/$', 'django.views.defaults.page_not_found'),
     url(r'^500/$', 'django.views.defaults.server_error'),
