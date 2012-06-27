@@ -135,6 +135,99 @@ Process status is obtained with the `ps` command::
     -------  ---------  ------------------------------------  
     web.1    up for 2m  python makahiki/manage.py run_guni..  
 
+To scale an app
+---------------
+
+When using a single (free) dyno, Heroku puts your app into an inactive state after some
+number of minutes, requiring a few seconds for response to start it up again upon the next
+request. 
+
+To prevent this, you must add a dyno (incurring charges).  Here's an example of the command::
+
+  % heroku ps:scale web=2 --app kukuicup-uh
+
+How a collaborator can push a new app
+-------------------------------------
+
+The configuration instructions show how you can set up your environment to push out a new
+version of the app.   If you are working in a team, then someone else might have done
+that for you.  If you later want to push out a new instance to Heroku, the process
+is a little different.
+
+First, go to the makahiki directory, workon makahiki, and get the latest version::
+
+  % cd <makahaki directory>  
+  % workon makahiki
+  % git pull origin master
+
+Next, find out what remotes you have already. Make sure the app of interest is not already in
+your remotes::
+
+  % git remote -v 
+    origin git@github.com:csdl/makahiki.git (fetch)
+    origin git@github.com:csdl/makahiki.git (push)
+
+
+Now add the app of interest (in this case, kukuicup-uh) as a remote::
+
+  % git remote add kukuicup-uh git@heroku.com:kukuicup-uh.git 
+
+Make sure your public keys are available to heroku::
+
+  % heroku keys:add
+    Found existing public key: /Users/johnson/.ssh/id_rsa.pub
+    Uploading SSH public key /Users/johnson/.ssh/id_rsa.pub
+
+Now push the master to heroku::
+
+  % git push kukuicup-uh master
+    Counting objects: 15, done.
+    Delta compression using up to 4 threads.
+    Compressing objects: 100% (3/3), done.
+    Writing objects: 100% (9/9), 5.96 KiB, done.
+    Total 9 (delta 6), reused 9 (delta 6)
+
+    -----> Heroku receiving push
+    -----> Python/Django app detected
+    -----> Preparing Python interpreter (2.7.2)
+    -----> Creating Virtualenv version 1.7
+       New python executable in .heroku/venv/bin/python2.7
+       Not overwriting existing python script .heroku/venv/bin/python (you must use .heroku/venv/bin/python2.7)
+       Installing distribute.....done.
+       Installing pip...............done.
+             :
+    -----> Noticed pylibmc. Bootstrapping libmemcached.
+    -----> Activating virtualenv
+    -----> Installing dependencies using pip version 1.0.2
+             :
+       Cleaning up...
+    -----> Installing dj-database-url...
+       Cleaning up...
+    -----> Injecting Django settings...
+    -----> Discovering process types
+           Procfile declares types -> web
+    -----> Compiled slug size is 26.1MB
+    -----> Launching... done, v37
+           http://kukuicup-uh.herokuapp.com deployed to Heroku
+
+    To git@heroku.com:kukuicup-uh.git
+       dec36d4..3313850  master -> master
+
+It is always a good idea to sync the db after each push::
+
+    %  heroku run --app kukuicup-uh python makahiki/manage.py syncdb 
+       Running python makahiki/manage.py syncdb attached to terminal... up, run.1
+       Syncing...
+       Creating tables ...
+       Installing custom SQL ...
+       Installing indexes ...
+       Installed 0 object(s) from 0 fixture(s)
+
+       Synced:
+        > apps.lib.avatar
+          :
+
+
 
 
 
