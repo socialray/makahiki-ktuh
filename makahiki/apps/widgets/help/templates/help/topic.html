@@ -23,15 +23,18 @@
                 {{ topic.title }}
             </div>
             <div class="content-box-contents help-content">
-
-rn:{{round_names}}
-prizes:{{prize_list}}
-                <a href="{% url help_index %}">Back to help page</a>
-
                 <p>
                     {{ topic.contents|markdown }}
                 </p>
-                <a href="{% url help_index %}">Back to help page</a>
+                <center>
+                    <a href="{% url help_index %}">
+                        <button class="btn btn-widget" style="cursor:pointer;">
+                            <img src="{{ STATIC_URL}}images/left.png" width="25"
+                                 align="top">
+                            Back to Help Page
+                        </button>
+                    </a>
+                </center>
             </div>
         </div>
     </div>
