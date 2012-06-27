@@ -1,9 +1,9 @@
  <div class="content-box demi-widget">
                   <div class="content-box-title">
-                      Twitter
+                      Twitter: {{user|capfirst}}
                   </div>
                   <div class="widget-content left-content">    
-                      <div id ="tweet">
+                      <div id ="tweet{{id}}">
                       </div>
               </div>
               </div>
@@ -13,13 +13,13 @@
 $(document).ready(function() {
  
     // set your twitter id
-    var user = 'kukuicup';
+    var user = "{{user}}";
      
     // using jquery built in get json method with twitter api, return only one result
     $.getJSON('http://twitter.com/statuses/user_timeline.json?screen_name=' + user + '&callback=?', function(data) 		{
          
         // result returned
-        var img ="<img src=\"http://a0.twimg.com/profile_images/1361689451/kukuicup_logo_normal.jpg\"></img></td><td>";
+        var img = "<img src=\"{{img}}\"></img></td><td>";
         var tweets = "<table class=\"table-striped\"><tr><td>"+img;
         var tweet="";
         for (var i=0;i<data.length;i++) {
@@ -28,7 +28,7 @@ $(document).ready(function() {
           tweets += "<b>Kukuicup:</b></br>"+tweet+"</td></tr><tr><td>"+img;  
         }     
           tweets+="</table>";
-        $("#tweet").html(tweets);
+        $("#tweet{{id}}").html(tweets);
 
 
     }); 
