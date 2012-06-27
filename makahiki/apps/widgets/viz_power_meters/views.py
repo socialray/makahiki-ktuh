@@ -17,5 +17,11 @@ def supply(request, page_name):
         group_lounges = all_lounges[:5]
 
     return  {
+        "all_lounges": all_lounges,
         "group_lounges": group_lounges,
         }
+
+
+def remote_supply(request, page_name):
+    """ Supports remote requests."""
+    return supply(request, page_name)
