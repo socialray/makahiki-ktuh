@@ -652,30 +652,32 @@ class ActionMember(models.Model):
             message += " You can still get points by clicking on the link and trying again."
             UserNotification.create_error_notification(self.user, message, display_alert=True,
                                                        content_object=self)
+
+            # only send out email notification for rejected action
+            subject = "[%s] Your response to '%s' was %s" % (
+                settings.CHALLENGE.competition_name, self.action.title, status_nicely)
+
+            message = render_to_string("email/rejected_activity.txt", {
+                "object": self,
+                "COMPETITION_NAME": settings.CHALLENGE.competition_name,
+                "domain": settings.CHALLENGE.site_domain,
+                "status_nicely": status_nicely,
+                })
+            html_message = render_to_string("email/rejected_activity.html", {
+                "object": self,
+                "COMPETITION_NAME": settings.CHALLENGE.competition_name,
+                "domain": settings.CHALLENGE.site_domain,
+                "status_nicely": status_nicely,
+                })
+
+            UserNotification.create_email_notification(
+                self.user.email, subject, message, html_message)
         else:
             points = self.action.point_value if self.action.point_value else self.points_awarded
             message += " You earned %d points!" % points
 
             UserNotification.create_success_notification(self.user, message, display_alert=True,
                                                          content_object=self)
-
-        subject = "[%s] Your response to '%s' was %s" % (
-            settings.CHALLENGE.competition_name, self.action.title, status_nicely)
-
-        message = render_to_string("email/rejected_activity.txt", {
-            "object": self,
-            "COMPETITION_NAME": settings.CHALLENGE.competition_name,
-            "domain": settings.CHALLENGE.site_domain,
-            "status_nicely": status_nicely,
-            })
-        html_message = render_to_string("email/rejected_activity.html", {
-            "object": self,
-            "COMPETITION_NAME": settings.CHALLENGE.competition_name,
-            "domain": settings.CHALLENGE.site_domain,
-            "status_nicely": status_nicely,
-            })
-
-        UserNotification.create_email_notification(self.user.email, subject, message, html_message)
 
     def post_to_wall(self):
         """post to team wall as system post."""

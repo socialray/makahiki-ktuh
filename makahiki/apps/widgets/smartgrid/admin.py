@@ -521,10 +521,10 @@ class ActionMemberAdmin(admin.ModelAdmin):
     """ActionMember Admin."""
     radio_fields = {"approval_status": admin.HORIZONTAL}
     fields = (
-        "user", "action", "question", "admin_link", "full_response", "image",
-        "admin_comment", "approval_status",)
+        "user", "action", "admin_link", "question", "response", "image", "social_email",
+        "approval_status", "admin_comment",)
     readonly_fields = (
-        "question", "admin_link", "full_response", "social_email", "social_email2",)
+        "user", "action", "admin_link", "question", "response", "image", "social_email")
     list_display = (
         "action", "submission_date", "approval_status", "short_question", "short_response")
     list_filter = ["approval_status", "action__type"]
@@ -567,6 +567,11 @@ class ActionMemberAdmin(admin.ModelAdmin):
                     q['approval_status__exact'] = 'pending'
                     request.GET = q
                     request.META['QUERY_STRING'] = request.GET.urlencode()
+                if not 'action__type__exact' in request.GET:
+                    q = request.GET.copy()
+                    q['action__type__exact'] = 'activity'
+                    request.GET = q
+                    request.META['QUERY_STRING'] = request.GET.urlencode()
 
         return super(ActionMemberAdmin, self).changelist_view(request,
             extra_context=extra_context)
@@ -583,11 +588,17 @@ class ActionMemberAdmin(admin.ModelAdmin):
         """Override to remove the points_awarded field if the action
         does not have variable points."""
         if obj and not obj.action.point_value:
-            self.fields = ("user", "action", "question", "admin_link", "response", "image",
-                           "admin_comment", "approval_status", "points_awarded", "social_email")
+            self.fields = (
+                "user", "action", "admin_link", "question", "response", "image", "social_email",
+                "approval_status", "points_awarded", "admin_comment")
         else:
-            self.fields = ("user", "action", "question", "admin_link", "response", "image",
-                           "admin_comment", "approval_status")
+            if obj.action.type == "activity":
+                self.fields = (
+                    "user", "action", "admin_link", "question", "response", "image", "social_email",
+                    "approval_status", "admin_comment")
+            else:
+                self.fields = (
+                        "user", "action", "admin_link", "social_email", "approval_status")
 
         return super(ActionMemberAdmin, self).get_form(request, obj, **kwargs)
 
