@@ -8,6 +8,7 @@ from apps.managers.player_mgr.models import Profile
 from apps.managers.challenge_mgr.challenge_mgr import MakahikiBaseCommand
 from apps.widgets.status.models import DailyStatus
 
+
 class Command(MakahikiBaseCommand):
     """command"""
     help = 'Update the number of daily users.'
