@@ -194,6 +194,8 @@ INSTALLED_WIDGET_APPS = (
     'logging',
     'status.flot',
     'status.gchart',
+    'status.wattdepot',
+    'status.twitter',
 )
 
 for widget in INSTALLED_WIDGET_APPS:

@@ -528,5 +528,15 @@
             "enabled": true,
             "page": 10
         }
+    },
+    {
+        "pk": 55,
+        "model": "challenge_mgr.pagesetting",
+        "fields": {
+            "widget": "status.wattdepot",
+            "game": null,
+            "enabled": true,
+            "page": 10
+        }
     }
 ]
