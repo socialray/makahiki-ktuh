@@ -4,8 +4,9 @@ For each team, queries WattDepot server to find out cumulative energy usage from
 midnight to now. Used for updating the status of the Energy Goal Game."""
 
 import datetime
-from apps.managers.player_mgr.models import DailyStatus, Profile
+from apps.managers.player_mgr.models import Profile
 from apps.managers.challenge_mgr.challenge_mgr import MakahikiBaseCommand
+from apps.widgets.status.models import DailyStatus
 
 
 class Command(MakahikiBaseCommand):
