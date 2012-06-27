@@ -179,11 +179,476 @@
                     </div>
                 </div>
             </div>
-            <div class="content-box">
-                <div class="content-box-title">Plain Widget Title
+            <div class="content-box-centered">
+                <div class="content-box-title">
+                    The Smart Grid Game
+                    <a href="#" style="float: right">
+                        <img src="/site_media/static/images/icons/icon-help-sm.png" width="20" align="center"
+                             title="Click to get help about this window"
+                             onclick="toggleHelp(event, 'widget', 'smart-grid-game'); return false;"/>
+                    </a>
                 </div>
-                <div class="content-box-contents">Plain Widget
-                    body</div>
+                <div class="content-box-contents">
+                <!-- Tabs for the levels -->
+                    <ul id="sgg-levels-tab" class="nav nav-tabs">
+                        <li class="active">
+                            <a data-toggle="tab" title="Level 1 Actions"
+                               href="#sgg-level-1" rel="tooltip" >
+                            Level 1
+                            </a>
+                        <li class="">
+                            <a style="cursor:no-drop;" title="complete all level 1 activities and attempt all level 1 commitments"
+                               onclick="toggleLocked(event, 'complete all level 1 activities and attempt all level 1 commitments'); return false;"
+                               href="#sgg-level-2" rel="tooltip" >
+                            Level 2
+                            </a>
+                        <li class="">
+                            <a style="cursor:no-drop;" title="complete all level 2 activities and attempt all level 2 commitments"
+                               onclick="toggleLocked(event, 'complete all level 2 activities and attempt all level 2 commitments'); return false;"
+                               href="#sgg-level-3" rel="tooltip" >
+                            Level 3
+                            </a>
+                        <li class="">
+                            <a style="cursor:no-drop;" title="complete all level 3 activities and attempt all level 3 commitments"
+                               onclick="toggleLocked(event, 'complete all level 3 activities and attempt all level 3 commitments'); return false;"
+                               href="#sgg-level-4" rel="tooltip" >
+                            Level 4
+                        </a>
+                    </ul>
+                <!-- Tab contents -->
+                    <div class="tab-content">
+                        <div id="sgg-level-1" class="tab-pane active">
+                            <table class="activities-grid">
+                                <tr><!-- Start header -->
+                                    <td>
+                                        <div class="activity-category">
+                                            <h5> Get Started</h5>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="activity-category">
+                                            <h5> Just Do It</h5>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="activity-category">
+                                            <h5> Go Dark</h5>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="activity-category">
+                                            <h5> Play!</h5>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="activity-category">
+                                            <h5> Energize Yourself</h5>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="activity-category">
+                                            <h5> Potpourri</h5>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <!-- End header -->
+                                <tr>
+                                    <td>
+                                        <table>
+                                            <tr>
+                                                <td>
+                                                    <div>
+                                                        <div class="activity">
+                                                            <a href="/smartgrid/activity/intro-video/"
+                                                               title="Intro video">
+                                                                <img src="/site_media/static/images/icons/icon-done.png"
+                                                                     width="12"
+                                                                     align="left"/>
+                                                                <br/>
+                                                                Intro video
+                                                            </a>
+                                                        </div>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    <div>
+                                                        <div class="activity">
+                                                            <a href="/smartgrid/activity/cup-secrets/"
+                                                               title="Cup Secrets">
+                                                                <img src="/site_media/static/images/icons/icon-done.png"
+                                                                     width="12"
+                                                                     align="left"/>
+                                                                <br/>
+                                                                Cup Secrets
+                                                            </a>
+                                                        </div>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    <div>
+                                                        <div class="activity">
+                                                            <a href="/smartgrid/activity/power-energy/"
+                                                               title="Power &amp; Energy">
+                                                                <img src="/site_media/static/images/icons/icon-done.png"
+                                                                     width="12"
+                                                                     align="left"/>
+                                                                <br/>
+                                                                Power &amp; Energy
+                                                            </a>
+                                                        </div>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    <div>
+                                                        <div class="event">
+                                                            <a href="/smartgrid/event/kickoff-party/"
+                                                               title="Kickoff Party">
+                                                                <img src="/site_media/static/images/icons/icon-done.png"
+                                                                     width="12"
+                                                                     align="left"/>
+                                                                <br/>
+                                                                Kickoff Party
+                                                            </a>
+                                                        </div>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                        </table>
+                                    </td>
+                                    <td>
+                                        <table>
+                                            <tr>
+                                                <td>
+                                                    <div>
+                                                        <div class="activity">
+                                                            <a href="/smartgrid/activity/like-cup/"
+                                                               title="Like Cup">
+                                                                <img src="/site_media/static/images/icons/icon-exclamation2.png"
+                                                                     width="12"
+                                                                     align="left"/>
+                                                                <br/>
+                                                                Like Cup
+                                                            </a>
+                                                        </div>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    <div>
+                                                        <div class="activity">
+                                                            <a href="/smartgrid/activity/tweet-link/"
+                                                               title="Tweet link">
+                                                                <img src="/site_media/static/images/icons/icon-exclamation2.png"
+                                                                     width="12"
+                                                                     align="left"/>
+                                                                <br/>
+                                                                Tweet link
+                                                            </a>
+                                                        </div>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    <div>
+                                                        <div class="activity">
+                                                            <a href="/smartgrid/activity/door-art/"
+                                                               title="Door Art">
+                                                                <br/>
+                                                                <h3>15</h3>
+                                                            </a>
+                                                        </div>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    <div>
+                                                        <div class="activity">
+                                                            <a href="/smartgrid/activity/refer-friend/"
+                                                               title="Refer friend">
+                                                                <br/>
+                                                                <h3>5</h3>
+                                                            </a>
+                                                        </div>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                        </table>
+                                    </td>
+                                    <td>
+                                        <table>
+                                            <tr>
+                                                <td>
+                                                    <div>
+                                                        <div class="commitment">
+                                                            <a href="/smartgrid/commitment/turn-off-lights/"
+                                                               title="Turn off lights">
+                                                                <img src="/site_media/static/images/icons/icon-done.png"
+                                                                     width="12"
+                                                                     align="left">
+                                                                <br/>
+                                                                Turn off lights
+                                                            </a>
+                                                        </div>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    <div>
+                                                        <div class="commitment">
+                                                            <a href="/smartgrid/commitment/task-lighting/"
+                                                               title="Task lighting">
+                                                                <br/>
+                                                                <h3>5</h3>
+                                                            </a>
+                                                        </div>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    <div>
+                                                        <div class="commitment">
+                                                            <a href="/smartgrid/commitment/use-sunlight/"
+                                                               title="Use sunlight">
+                                                                <br/>
+                                                                <h3>5</h3>
+                                                            </a>
+                                                        </div>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    <div>
+                                                        <div class="excursion">
+                                                            <br/>
+                                                            <a class="whatever"
+                                                               href="javascript:void(0);">
+                                                                <img src="/site_media/static/images/lock24.png"
+                                                                     width="22" align="top"
+                                                                     title="Click to see how to unlock"
+                                                                     onclick="unlock_dialog(event, 'excursion','reppun-farm',
+                                                                         'This event will be unlocked 7 days before it takes place.'
+                                                                     )">
+                                                            </a>
+                                                        </div>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                        </table>
+                                    </td>
+                                    <td>
+                                        <table>
+                                            <tr>
+                                                <td>
+                                                    <div>
+                                                        <div class="event">
+                                                            <a href="/smartgrid/event/swag-game-1/"
+                                                               title="Cafe Play 1">
+                                                                <br/>
+                                                               <h3>10</h3>
+                                                            </a>
+                                                        </div>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    <div>
+                                                        <div class="event">
+                                                            <a href="/smartgrid/event/swag-game-2/"
+                                                               title="Cafe Play 2">
+                                                                <br/>
+                                                                <h3>10</h3>
+                                                            </a>
+                                                        </div>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    <div>
+                                                        <div class="event">
+                                                            <a href="/smartgrid/event/swag-game-3/"
+                                                               title="Cafe Play 3">
+                                                                <br/>
+                                                                <h3>10</h3>
+                                                            </a>
+                                                        </div>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    <div>
+                                                        <div class="event">
+                                                            <a href="/smartgrid/event/swag-game-4/"
+                                                               title="Cafe Play 4">
+                                                                <br/>
+                                                                <h3>10</h3>
+                                                            </a>
+                                                        </div>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                        </table>
+                                    </td>
+                                    <td>
+                                    <table>
+                                        <tr>
+                                            <td>
+                                                <div>
+                                                    <div class="activity">
+                                                        <a href="/smartgrid/activity/energy-intuition/"
+                                                           title="Energy Intuition">
+                                                            <br/>
+                                                            <h3>10</h3>
+                                                        </a>
+                                                    </div>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <div>
+                                                    <div class="excursion">
+                                                        <a href="/smartgrid/excursion/wind-farm/"
+                                                           title="Wind Farm">
+                                                            <br/>
+                                                            <h3>30</h3>
+                                                        </a>
+                                                    </div>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <div>
+                                                    <div class="event">
+                                                        <a href="/smartgrid/event/energy-hunt/"
+                                                           title="Energy Hunt">
+                                                            <br/>
+                                                            <h3>20</h3>
+                                                        </a>
+                                                    </div>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <div>
+                                                    <div class="event">
+                                                        <a href="/smartgrid/event/design-flashmob/"
+                                                           title="Design Flashmob">
+                                                            <br/>
+                                                            <h3>20</h3>
+                                                        </a>
+                                                    </div>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </td>
+                                <td>
+                                    <table>
+                                        <tr>
+                                            <td>
+                                                <div>
+                                                    <div class="commitment">
+                                                        <a href="/smartgrid/commitment/use-stairs/"
+                                                           title="Use stairs">
+                                                            <br/>
+                                                            <h3>5</h3>
+                                                        </a>
+                                                    </div>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <div>
+                                                    <div class="commitment">
+                                                        <a href="/smartgrid/commitment/turn-off-water/"
+                                                           title="Turn off sink">
+                                                            <br/>
+                                                            <h3>5</h3>
+                                                        </a>
+                                                    </div>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <div>
+                                                    <div class="event">
+                                                        <br/>
+                                                        <a class="whatever"
+                                                           href="javascript:void(0);">
+                                                            <img src="/site_media/static/images/lock24.png"
+                                                                 width="22" align="top"
+                                                                 title="Click to see how to unlock"
+                                                                 onclick="unlock_dialog(event, 'event','customize-tshirt',
+                                                                         'True'
+                                                                     )">
+                                                        </a>
+                                                    </div>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <div>
+                                                    <div class="event">
+                                                        <a href="/smartgrid/event/movie-night/"
+                                                           title="Movie Night">
+                                                            <br/>
+                                                            <h3>20</h3>
+                                                        </a>
+                                                    </div>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </td>
+                            </tr>
+                        </table>
+                            <p/>
+                            <table class="activities-grid-legend">
+                                <tr>
+                                    <td colspan="10"><b>Legend:</b></td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <div class="activity-legend"></div>
+                                    </td>
+                                    <td width=100>activity</td>
+                                    <td>
+                                        <div class="commitment-legend"></div>
+                                    </td>
+                                    <td width=100>commitment</td>
+                                    <td>
+                                        <div class="event-legend"></div>
+                                    </td>
+                                    <td width=100>event</td>
+                                    <td>
+                                        <div class="excursion-legend"></div>
+                                    </td>
+                                    <td width=100>excursion</td>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
         <!-- right column -->
@@ -260,6 +725,136 @@
                                         class="badge-theme-summary-small">
                                         <p>20</p>
                                     </div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="content-box prizes-raffle">
+                <div class="content-box-title">
+                    <h3>Round 1 Raffle Game</h3>
+                    <a href="#" style="float: right">
+                        <img src="/site_media/static/images/icons/icon-help-sm.png" width="20"
+                             align="center"
+                             title="Click to get help about this window"
+                             onclick="toggleHelp(event, 'widget', 'raffle-game'); return false;"/>
+                    </a>
+                </div>
+                <div>
+                    <div class="prizes-raffle-info">
+                        Your total raffle tickets: 2 Allocated right now: 0 Available: 2
+                    </div>
+                    <table class="table table-striped table-condensed prizes-raffle-table">
+                        <thead>
+                            <tr>
+                                <th class="raffle-prize">Prize</th>
+                                <th>Value</th>
+                                <th class="condensed-tickets">Tickets</th>
+                                <th class="user-tickets">Your tickets</th>
+                                <th class="total-tickets">Total tickets</th>
+                                <th>Current odds</th>
+                                <th id="prizes-raffle-options-header" class="ticket-add-remove">Change ticket allocation</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td class="raffle-prize">
+                                    <a href="#raffle-skateboard-description" onclick="toggleRafflePrize(event,  'raffle-skateboard-description')" >
+                                        Skateboard
+                                    </a>
+                                    <div id="raffle-skateboard-description" class="prize-dialog modal hide fade">
+                                        <div class="modal-header">
+                                            <a class="close" data-dismiss="modal">x</a>
+                                            <h3>Skateboard</h3>
+                                        </div>
+                                        <div class="modal-body">
+                                            <img src="/site_media/media/prizes/kukuicup-skateboard-back.jpg"/>
+                                            <p>You'll be the envy of your friends when you cruise campus on this custom Endless Summer 39" Bomber skateboard with a custom Kukui Cup logo.  It features a gray sand friction surface, a gloss finish bottom, with laminated wood substrate, polyurethane wheels, and performance bearings. </p>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <a href="#" class="btn btn-widget" data-dismiss="modal">Close</a>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td class="number">$180.00</td>
+                                <td class="number condensed-tickets">0 / 0</td>
+                                <td class="number user-tickets">0</td>
+                                <td class="number total-tickets">0</td>
+                                <td class="number user-odds"></td>
+                                <td class="ticket-add-remove">
+                                    <form action="/raffle/raffle/4/add_ticket/" method="POST">
+                                    <div style='display:none'><input type='hidden' name='csrfmiddlewaretoken' value='10hULAjVWB0vhezEcyZkd9q0OUC9Kttw' /></div>
+                                        <a class="enabled ticket-add circle" href="#"
+                                           onclick="$(this).parent().submit(); return false;">+1</a>
+                                    </form>
+                                    <div class="disabled ticket-remove circle">-1</div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="raffle-prize">
+                                    <a href="#raffle-energy-meter-2-description" onclick="toggleRafflePrize(event,  'raffle-energy-meter-2-description')" >
+                                    Energy Meter (2)
+                                    </a>
+                                    <div id="raffle-energy-meter-2-description" class="prize-dialog modal hide fade">
+                                        <div class="modal-header">
+                                            <a class="close" data-dismiss="modal">x</a>
+                                            <h3>Energy Meter (2)</h3>
+                                        </div>
+                                        <div class="modal-body">
+                                            <img src="/site_media/media/prizes/belkin-energy-monitor_1.jpg"/>
+                                            <p>Want to keep learning about your energy consumption even after the Kukui Cup is over?  Bid on your very own Belkin Conserve Insight Energy Monitor!</p>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <a href="#" class="btn btn-widget" data-dismiss="modal">Close</a>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td class="number">$30.00</td>
+                                <td class="number condensed-tickets">0 / 0</td>
+                                <td class="number user-tickets">0</td>
+                                <td class="number total-tickets">0</td>
+                                <td class="number user-odds"></td>
+                                <td class="ticket-add-remove">
+                                    <form action="/raffle/raffle/15/add_ticket/" method="POST">
+                                        <div style='display:none'><input type='hidden' name='csrfmiddlewaretoken' value='10hULAjVWB0vhezEcyZkd9q0OUC9Kttw' /></div>
+                                        <a class="enabled ticket-add circle" href="#"
+                                           onclick="$(this).parent().submit(); return false;">+1</a>
+                                    </form>
+                                    <div class="disabled ticket-remove circle">-1</div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="raffle-prize">
+                                    <a href="#raffle-energy-meter-1-description" onclick="toggleRafflePrize(event,  'raffle-energy-meter-1-description')" >
+                                    Energy Meter (1)
+                                    </a>
+                                    <div id="raffle-energy-meter-1-description" class="prize-dialog modal hide fade">
+                                        <div class="modal-header">
+                                            <a class="close" data-dismiss="modal">x</a>
+                                            <h3>Energy Meter (1)</h3>
+                                        </div>
+                                        <div class="modal-body">
+                                            <img src="/site_media/media/prizes/belkin-energy-monitor.jpg"/>
+                                            <p>Want to keep learning about your energy consumption even after the Kukui Cup is over?  Bid on your very own Belkin Conserve Insight Energy Monitor!</p>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <a href="#" class="btn btn-widget" data-dismiss="modal">Close</a>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td class="number">$30.00</td>
+                                <td class="number condensed-tickets">0 / 0</td>
+                                <td class="number user-tickets">0</td>
+                                <td class="number total-tickets">0</td>
+                                <td class="number user-odds"></td>
+                                <td class="ticket-add-remove">
+                                    <form action="/raffle/raffle/14/add_ticket/" method="POST">
+                                        <div style='display:none'><input type='hidden' name='csrfmiddlewaretoken' value='10hULAjVWB0vhezEcyZkd9q0OUC9Kttw' /></div>
+                                        <a class="enabled ticket-add circle" href="#"
+                                           onclick="$(this).parent().submit(); return false;">+1</a>
+                                    </form>
+                                    <div class="disabled ticket-remove circle">-1</div>
                                 </td>
                             </tr>
                         </tbody>
