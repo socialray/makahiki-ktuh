@@ -3,7 +3,10 @@
 Calculate the energy baseline data for all teams, from the history energy data."""
 
 import datetime
+from optparse import make_option
 import requests
+import sys
+import time
 
 from apps.managers.challenge_mgr.challenge_mgr import MakahikiBaseCommand
 from apps.managers.resource_mgr import resource_mgr
@@ -17,17 +20,32 @@ BASELINE_PERIOD_WEEKS = 2
 
 class Command(MakahikiBaseCommand):
     """command"""
+    option_list = MakahikiBaseCommand.option_list + (
+        make_option('--start_date', '-s', dest='start_date',
+                    help='Start date of the baseline data, in the format of YYYY-MM-DD'),
+        )
+
     help = 'Calculate the energy baseline data for all teams'
 
     def handle(self, *args, **options):
         """Calculate the energy baseline data for all teams"""
+        if not options["start_date"]:
+            print "Please specify the start_date. "
+            sys.exit(2)
+
+        start_date = datetime.datetime.strptime(options["start_date"], "%Y-%m-%d").date()
+        print start_date
+        if (datetime.date.today() - start_date) < datetime.timedelta(weeks=BASELINE_PERIOD_WEEKS):
+            print "There is no enough data for the period of %d weeks. "\
+                  "Please change the start_date. " % BASELINE_PERIOD_WEEKS
+            sys.exit(2)
+
         session = requests.session()
 
         # energy daily
         for baseline in EnergyBaselineDaily.objects.all():
             baseline.delete()
 
-        start_date = datetime.date.today() - datetime.timedelta(weeks=BASELINE_PERIOD_WEEKS)
         for team in Team.objects.all():
             for day in range(0, 7):
                 usage = resource_mgr.get_daily_energy_baseline_usage(
