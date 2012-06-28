@@ -4,28 +4,28 @@
   {% with user.get_profile as profile %}
     <div>
             <h4>{{profile.name}}</h4>
-            {{profile.current_round_points}} points #{{profile.current_round_team_rank}}/{{TEAM_MEMBER_COUNT}} in {{profile.team.name}}.
+            {{profile.current_round_points}} points <br/>#{{profile.current_round_team_rank}} of {{TEAM_MEMBER_COUNT}} in {{profile.team.name}}.
     </div>
     <div>
             <h4>{{profile.name}}</h4>
-            {{profile.current_round_points}} points #{{profile.current_round_overall_rank}}/{{OVERALL_MEMBER_COUNT}} overall.
+            {{profile.current_round_points}} points <br/>#{{profile.current_round_overall_rank}} of {{OVERALL_MEMBER_COUNT}} overall.
     </div>
   {% endwith %}
 {% with user.get_profile.team as team %}
     <div>
             <h4>{{team}}</h4>
-            {{team.current_round_points}} points. #{{team.current_round_rank}}/{{TEAM_COUNT}}.
+            {{team.current_round_points}} points. <br/>#{{team.current_round_rank}} of {{TEAM_COUNT}}.
     </div>               
     {% if view_objects.energy_rank_info %}
     <div>
             <h4>{{team}}</h4>
-            {{ view_objects.energy_rank_info.usage }} kWh. #{{ view_objects.energy_rank_info.rank }}/{{TEAM_COUNT}}.
+            {{ view_objects.energy_rank_info.usage }} kWh. <br/>#{{ view_objects.energy_rank_info.rank }} of {{TEAM_COUNT}}.
     </div>
     {% endif %}
     {% if view_objects.water_rank_info %}
         <div>
             <h4>{{team}}</h4>
-            {{ view_objects.water_rank_info.usage }} kWh. #{{ view_objects.water_rank_info.rank }}/{{TEAM_COUNT}}.
+            {{ view_objects.water_rank_info.usage }} kWh. <br/>#{{ view_objects.water_rank_info.rank }} of {{TEAM_COUNT}}.
         </div>
     {% endif %}
 {% endwith %}
