@@ -18,7 +18,7 @@
         {% for prize in prizes %}
         <tr>
             <td class="prize">
-                {% if prize.image %}<img src="{{prize.image.url}}"/>{% endif %}
+                {% if prize.image %}<img src="{{prize.image.url}}" width="100"/>{% endif %}
                 <a id="{{name|slugify}}-{{prize.title|slugify}}-link" 
                    onClick="togglePrize(event, '{{name|slugify}}', '{{prize.title|slugify}}'); return false;"
                         href="#">
