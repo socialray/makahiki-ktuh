@@ -57,7 +57,7 @@ def get_hourly_goal_data(team, resource):
         goal["actual_diff"] = abs(goal["actual_usage"] - goal["goal_usage"])
         return goal
     else:
-        return None
+        return {"actual_usage": None}
 
 
 def get_daily_goal_data(team, resource):

@@ -63,11 +63,11 @@ class ResourceGoalSetting(models.Model):
 
     manual_entry = models.BooleanField(
         default=False,
-        help_text="Manually enter energy data?",)
+        help_text="Manually enter the data?",)
 
     manual_entry_time = models.TimeField(
         blank=True, null=True,
-        help_text="The time for manual energy data entry.",)
+        help_text="The time for manual data entry.",)
 
     class Meta:
         """Meta"""
@@ -101,11 +101,11 @@ class ResourceBaselineDaily(models.Model):
 
     day = models.IntegerField(
         choices=DAY_CHOICES,
-        help_text="The day in the week, where Monday is 0 and Sunday is 6",)
+        help_text="The day in the week",)
 
     usage = models.IntegerField(
         default=0,
-        help_text="The baseline energy usage of the day.",)
+        help_text="The baseline usage of the day.",)
 
     updated_at = models.DateTimeField(editable=False, auto_now=True)
 
@@ -150,7 +150,7 @@ class ResourceBaselineHourly(models.Model):
 
     usage = models.IntegerField(
         default=0,
-        help_text="The baseline energy usage of the day.",)
+        help_text="The baseline usage of the day.",)
 
     updated_at = models.DateTimeField(editable=False, auto_now=True)
 
