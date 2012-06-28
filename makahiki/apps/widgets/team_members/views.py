@@ -5,6 +5,7 @@ from django.template import RequestContext
 from django.contrib.auth.decorators import login_required
 from django.views.decorators.cache import never_cache
 from apps.managers.team_mgr import team_mgr
+from apps.managers.score_mgr import score_mgr
 
 
 def supply(request, page_name):
@@ -14,12 +15,20 @@ def supply(request, page_name):
     # Get the team members.
     team = request.user.get_profile().team
     if team:
-        members = request.user.get_profile().team.points_leaders()
+        members_with_points = []
+        zero_point_members = []
+        for member in team_mgr.team_members(team):
+            if score_mgr.player_points(member) > 0:
+                members_with_points.append(member)
+            else:
+                zero_point_members.append(member)
     else:
-        members = None
+        members_with_points = None
+        zero_point_members = None
 
     return {
-        "team_members": members,
+        "team_members": members_with_points,
+        "zero_members": zero_point_members,
         }
 
 
