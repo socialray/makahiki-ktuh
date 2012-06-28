@@ -78,7 +78,9 @@ class ResourceGoalSetting(models.Model):
 
 class EnergyGoalSetting(ResourceGoalSetting):
     """Energy goal settings."""
-    pass
+    power_meter_interval = models.IntegerField(
+            default=10,
+            help_text="The refresh interval (in seconds) for the power meter display.")
 
 
 class WaterGoalSetting(ResourceGoalSetting):

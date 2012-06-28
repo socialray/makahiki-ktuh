@@ -17,7 +17,7 @@
 <script type="text/javascript">
     // Wrap this code in an anonymous self-invoking function to avoid polluting global namespace.
     (function () {
-        var refreshInterval = 15; // refresh every 15 seconds.
+        var refreshInterval = {{ view_objects.energy_power_meter.interval }};
         var server_url = "{{ CHALLENGE.wattdepot_server_url }}";
         var source = "{{user.get_profile.team.name}}";
         var options = {
