@@ -213,9 +213,10 @@ Now push the master to heroku::
     To git@heroku.com:kukuicup-uh.git
        dec36d4..3313850  master -> master
 
-It is always a good idea to sync the db after each push::
+It is usually a good idea to sync and migrate the db after each push, which you accomplish
+in this way::
 
-    %  heroku run --app kukuicup-uh python makahiki/manage.py syncdb 
+    %  heroku run --app kukuicup-uh python makahiki/manage.py syncdb --noinput --migrate
        Running python makahiki/manage.py syncdb attached to terminal... up, run.1
        Syncing...
        Creating tables ...
@@ -225,6 +226,9 @@ It is always a good idea to sync the db after each push::
 
        Synced:
         > apps.lib.avatar
+          :
+       Migrated:
+        - apps.managers.challenge_mgr
           :
 
 
