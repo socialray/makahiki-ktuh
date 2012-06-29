@@ -96,6 +96,7 @@
     </div>
 
 </div>
+<div id="purr-container"></div>
 <script type="text/javascript">
     $(document).ready(function () {
 //         $("#notification-dialog").dialog({
@@ -120,12 +121,58 @@
             log_js_action("notifications", "alert", 'view-lock-close');
         });
         modalElement.css('margin-top', (modalElement.outerHeight() / 2) * -1);
-        modalElement.modal('show');
+//         modalElement.modal('show');
         
 //         $("#notification-dialog button").click(function () {
 //             log_js_action("notifications", "alert", "close");
 //             $("#notification-dialog").dialog("close");
 //         });
+
+        var notice = '<div class="notice">'
+            + '<ul id="notification-dialog-list">'
+            + '{% for notification in notifications.alerts %}'
+            + '<li id="notification-dialog-{{notification.id}}"'
+            + 'class="{{notification.style_class}} notification-item">'
+            + '<div class="notification-contents"'
+            + '{% if notification.is_success %}style="width: 530px"{% endif %}>'
+            + '<i class="{{notification.icon_class}}"></i>'
+            + '<div class="notice-content" {% if notification.is_success %}style="width: 470px"'
+            + '{% else %}style="width: 600px"{% endif %}>'
+            + '{{ notification.contents|safe|addslashes }}'
+            + '</div>'
+            + '</div>'
+            + '{% if notification.is_success %}'
+            + '<div class="notification-options">'
+            + '<a class="notification-share" href="javascript:void(0);">Click here to share on'
+            + 'Facebook</a>&nbsp;'
+            + '</div>'
+            + '{% endif %}'
+            + '<br style="clear: both"/>'
+            + '</li>'
+            + '{% endfor %}'
+            + '</ul>'
+            + '</div>';
+            $('#purr-container').css({
+                position:'absolute',
+                left: ($(window).width() - $(notice).outerWidth())/2,
+                top: ($(window).height() - $(notice).outerHeight())/2
+            });
+            
+            $(notice).purr(
+                    {
+                        usingTransparentPNG:true,
+                        fadeInSpeed:600,
+                        fadeOutSpeed:600,
+                        removeTimer:6000,
+                        isSticky:false
+                    });
+            $('#purr-container').css({
+                position:'absolute',
+                left: ($(window).width() - $('#purr-container').outerWidth())/2,
+                top: ($(window).height() - $('#purr-container').outerHeight())/2
+            });
+            
+            
     });
 </script>
 
