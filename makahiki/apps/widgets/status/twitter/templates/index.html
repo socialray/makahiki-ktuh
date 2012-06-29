@@ -21,13 +21,14 @@ $(document).ready(function() {
         // result returned
         var img = "<img src=\"{{img}}\"></img></td><td>";
         var tweets = "<table class=\"table-striped\"><tr><td>"+img;
-        var tweet="";
+        var tweet = "";
         for (var i=0;i<data.length;i++) {
-          tweet=data[i].text; 
+          tweet = data[i].text;   
+          date = parseTime(data[i].created_at);
 
-          tweets += "<b>Kukuicup:</b></br>"+tweet+"</td></tr><tr><td>"+img;  
+          tweets += "<b>Kukuicup:</b></br>" + date + "</br>" + findURLS(tweet) + "</td></tr><tr><td>" + img;  
         }     
-          tweets+="</table>";
+          tweets += "</table>";
         $("#tweet{{id}}").html(tweets);
 
 
@@ -35,4 +36,20 @@ $(document).ready(function() {
      
 });
 
+function findURLS(text) {
+    var exp = /(\b(https?|ftp|file):\/\/[-A-Z0-9+&@#\/%?=~_|!:,.;]*[-A-Z0-9+&@#\/%=~_|])/ig;
+    return text.replace(exp,"<a href='$1'>$1</a>"); 
+}
+
+function parseTime($time) {			
+	  var date = new Date(Date.parse($time)).toLocaleString().substr(0, 16);
+    // get the two digit hour //
+	  var hour = date.substr(-5, 2);
+    // convert to AM or PM //
+	  var ampm = hour<12 ? ' AM' : ' PM';
+	  if (hour>12) hour-= 12;
+	  if (hour==0) hour = 12;
+    // return the formatted string //
+	  return date.substr(4, 15)+' • ' + hour + ":" + date.substr(13) + ampm;
+  }
 </script>
