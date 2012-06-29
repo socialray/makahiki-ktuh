@@ -144,7 +144,7 @@ class MyAchievementsTestCase(TransactionTestCase):
         # Note, this test may break if something in the page has the value 314159.
         # Try finding another suitable number.
         # print response.content
-        self.assertContains(response, "314159", count=6,
+        self.assertContains(response, "314159", count=7,
             msg_prefix="314159 points should appear for the activity.")
 
     def testSocialBonusAchievement(self):
