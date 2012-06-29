@@ -24,4 +24,7 @@ urlpatterns = patterns('',
     url(r'^(?P<action_type>[\w]+)/(?P<slug>[\w\d\-]+)/reminder/$',
         'apps.widgets.smartgrid.view_reminders.reminder',
         name='activity_reminder'),
+    url(r'^bulk_change/(?P<action_type>[\w]+)/(?P<attribute>[\w]+)/$',
+        'apps.widgets.smartgrid.views.bulk_change',
+        name="bulk_change"),
 )

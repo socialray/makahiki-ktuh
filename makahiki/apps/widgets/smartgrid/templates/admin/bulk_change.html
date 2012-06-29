@@ -1,0 +1,38 @@
+{% extends "admin/base_site.html" %}
+{% load i18n l10n %}
+{% load url from future %}
+{% load admin_urls %}
+
+{% block breadcrumbs %}
+    <div class="breadcrumbs">
+        <a href="{% url 'admin:index' %}">{% trans 'Home' %}</a>
+        &rsaquo; <a href="/admin/smartgrid/{{ action_type }}">{{ action_type }}</a>
+        &rsaquo; Change {{ attribute }}
+    </div>
+{% endblock %}
+
+{% block content %}
+        <form action="" method="post">{% csrf_token %}
+            <div style="background-color: white;">
+                You've selected the following actions:
+                <ul>
+                {% for obj in actions %}
+                    <li> {{ obj.title }} -
+                        {% if attribute == "level" %}
+                          {{ obj.level }}
+                        {% elif attribute == "category" %}
+                          {{ obj.category }}
+                        {% endif %}
+                    </li>
+                {% endfor %}
+                </ul>
+                Please select a {{ attribute }} to change to: <br/>
+                {% if attribute == "level" %}
+                    {{ form.level_choice }}
+                {% elif attribute == "category" %}
+                    {{ form.category_choice }}
+                {% endif %}
+                <input type="submit" value="Change" />
+            </div>
+        </form>
+{% endblock %}

@@ -19,12 +19,12 @@ class ResourceManagerTestCase(TransactionTestCase):
     def testEnergy(self):
         """test Energy."""
         date = datetime.date.today()
-        _ = EnergyUsage.objects.create(
+        EnergyUsage(
             team=self.team,
             date=date,
             time=datetime.time(hour=15),
             usage=100,
-        )
+        ).save()
 
         rank = resource_mgr.resource_team_rank_info(self.team, "energy")["rank"]
         usage = resource_mgr.team_resource_usage(date=date, team=self.team, resource="energy")

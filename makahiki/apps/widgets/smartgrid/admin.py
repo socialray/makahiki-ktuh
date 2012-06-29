@@ -1,5 +1,6 @@
 """Admin definition for Smart Grid Game widget."""
 from django.db import models
+from django.http import HttpResponseRedirect
 from apps.managers.cache_mgr import cache_mgr
 from apps.managers.challenge_mgr import challenge_mgr
 from apps.utils import utils
@@ -294,7 +295,63 @@ admin.site.register(Category, CategoryAdmin)
 challenge_mgr.register_game_admin_model("smartgrid", Category)
 
 
-class ActivityAdmin(admin.ModelAdmin):
+class ActionAdmin(admin.ModelAdmin):
+    """abstract admin for action."""
+    class META:
+        """meta"""
+        abstract = True
+
+    prepopulated_fields = {"slug": ("name",)}
+
+    actions = ["delete_selected", "increment_priority", "decrement_priority",
+               "change_level", "change_category"]
+
+    def delete_selected(self, request, queryset):
+        """override the delete selected."""
+        _ = request
+        for obj in queryset:
+            obj.delete()
+
+    delete_selected.short_description = "Delete the selected objects."
+
+    def increment_priority(self, request, queryset):
+        """increment priority."""
+        _ = request
+        for obj in queryset:
+            obj.priority += 1
+            obj.save()
+
+    increment_priority.short_description = "Increment selected objects' priority by 1."
+
+    def decrement_priority(self, request, queryset):
+        """decrement priority."""
+        _ = request
+        for obj in queryset:
+            obj.priority -= 1
+            obj.save()
+
+    decrement_priority.short_description = "Decrement selected objects' priority by 1."
+
+    def change_level(self, request, queryset):
+        """change level."""
+        action_type = queryset[0].type
+        selected = request.POST.getlist(admin.ACTION_CHECKBOX_NAME)
+        return HttpResponseRedirect(reverse("bulk_change", args=(action_type, "level",)) +
+                                    "?ids=%s" % (",".join(selected)))
+
+    change_level.short_description = "change the level."
+
+    def change_category(self, request, queryset):
+        """change level."""
+        action_type = queryset[0].type
+        selected = request.POST.getlist(admin.ACTION_CHECKBOX_NAME)
+        return HttpResponseRedirect(reverse("bulk_change", args=(action_type, "category",)) +
+                                    "?ids=%s" % (",".join(selected)))
+
+    change_category.short_description = "change the category."
+
+
+class ActivityAdmin(ActionAdmin):
     """Activity Admin"""
     fieldsets = (
         ("Basic Information",
@@ -313,49 +370,20 @@ class ActivityAdmin(admin.ModelAdmin):
         ("Ordering", {"fields": (("level", "category", "priority"), )}),
         ("Confirmation Type", {'fields': ('confirm_type', 'confirm_prompt')}),
     )
-    prepopulated_fields = {"slug": ("name",)}
     form = ActivityAdminForm
     inlines = [TextQuestionInline]
-
     formfield_overrides = {
         models.CharField: {'widget': TextInput(attrs={'size': '80'})},
         }
 
     list_display = ["title", "level", "category", "priority", "point_value"]
 
-    actions = ["delete_selected", "increment_priority", "decrement_priority"]
-
-    def delete_selected(self, request, queryset):
-        """override the delete selected."""
-        _ = request
-        for obj in queryset:
-            obj.delete()
-
-    delete_selected.short_description = "Delete the selected objects."
-
-    def increment_priority(self, request, queryset):
-        """increment priority."""
-        _ = request
-        for obj in queryset:
-            obj.priority += 1
-            obj.save()
-
-    increment_priority.short_description = "Increment selected objects' priority by 1."
-
-    def decrement_priority(self, request, queryset):
-        """decrement priority."""
-        _ = request
-        for obj in queryset:
-            obj.priority -= 1
-            obj.save()
-
-    decrement_priority.short_description = "Decrement selected objects' priority by 1."
 
 admin.site.register(Activity, ActivityAdmin)
 challenge_mgr.register_game_admin_model("smartgrid", Activity)
 
 
-class EventAdmin(admin.ModelAdmin):
+class EventAdmin(ActionAdmin):
     """Event Admin"""
     fieldsets = (
         ("Basic Information",
@@ -372,7 +400,6 @@ class EventAdmin(admin.ModelAdmin):
         ("Ordering", {"fields": (("level", "category", "priority"), )}),
         ("Confirmation Code", {'fields': ('num_codes',)}),
         )
-    prepopulated_fields = {"slug": ("name",)}
     form = EventAdminForm
 
     formfield_overrides = {
@@ -382,39 +409,11 @@ class EventAdmin(admin.ModelAdmin):
     list_display = ["title", "level", "category", "priority", "type",
                     "event_date", "point_value", ]
 
-    actions = ["delete_selected", "increment_priority", "decrement_priority"]
-
-    def delete_selected(self, request, queryset):
-        """override the delete selected."""
-        _ = request
-        for obj in queryset:
-            obj.delete()
-
-    delete_selected.short_description = "Delete the selected objects."
-
-    def increment_priority(self, request, queryset):
-        """increment priority."""
-        _ = request
-        for obj in queryset:
-            obj.priority += 1
-            obj.save()
-
-    increment_priority.short_description = "Increment selected objects' priority by 1."
-
-    def decrement_priority(self, request, queryset):
-        """decrement priority."""
-        _ = request
-        for obj in queryset:
-            obj.priority -= 1
-            obj.save()
-
-    decrement_priority.short_description = "Decrement selected objects' priority by 1."
-
 admin.site.register(Event, EventAdmin)
 challenge_mgr.register_game_admin_model("smartgrid", Event)
 
 
-class CommitmentAdmin(admin.ModelAdmin):
+class CommitmentAdmin(ActionAdmin):
     """Commitment Admin."""
     fieldsets = (
         ("Basic Information", {
@@ -429,7 +428,6 @@ class CommitmentAdmin(admin.ModelAdmin):
         ("Points", {"fields": (("point_value", 'social_bonus'), )}),
         ("Ordering", {"fields": (("level", "category", "priority"), )}),
         )
-    prepopulated_fields = {"slug": ("name",)}
     form = CommitmentAdminForm
 
     formfield_overrides = {
@@ -438,33 +436,6 @@ class CommitmentAdmin(admin.ModelAdmin):
 
     list_display = ["title", "level", "category", "priority", "point_value"]
 
-    actions = ["delete_selected", "increment_priority", "decrement_priority"]
-
-    def delete_selected(self, request, queryset):
-        """override the delete selected."""
-        _ = request
-        for obj in queryset:
-            obj.delete()
-
-    delete_selected.short_description = "Delete the selected objects."
-
-    def increment_priority(self, request, queryset):
-        """increment the priority."""
-        _ = request
-        for obj in queryset:
-            obj.priority += 1
-            obj.save()
-
-    increment_priority.short_description = "Increment selected objects' priority by 1."
-
-    def decrement_priority(self, request, queryset):
-        """decrement the priority."""
-        _ = request
-        for obj in queryset:
-            obj.priority -= 1
-            obj.save()
-
-    decrement_priority.short_description = "Decrement selected objects' priority by 1."
 
 admin.site.register(Commitment, CommitmentAdmin)
 challenge_mgr.register_game_admin_model("smartgrid", Commitment)

@@ -15,6 +15,8 @@ from apps.managers.score_mgr import score_mgr
 from apps.widgets.smartgrid import smartgrid, view_commitments, view_events, view_activities, \
     view_reminders
 from apps.widgets.action_feedback.models import ActionFeedback
+from apps.widgets.smartgrid.forms import ChangeLevelForm
+from apps.widgets.smartgrid.models import Action, Level, Category
 
 
 def supply(request, page_name):
@@ -126,3 +128,36 @@ def drop_action(request, action_type, slug):
     messages.error = 'It appears that you are not participating in this action.'
     # Take them back to the action page.
     return HttpResponseRedirect(reverse("activity_task", args=(action.type, action.slug,)))
+
+
+@never_cache
+@login_required
+def bulk_change(request, action_type, attribute):
+    """Handle change level from admin interface."""
+
+    action_ids = request.GET["ids"]
+    actions = []
+    for pk in action_ids.split(","):
+        actions.append(Action.objects.get(pk=pk))
+
+    if request.method == "POST":
+        if attribute == "level":
+            level = request.POST["level_choice"]
+            for action in actions:
+                action.level = Level.objects.get(pk=level)
+                action.save()
+        elif attribute == "category":
+            category = request.POST["category_choice"]
+            for action in actions:
+                action.category = Category.objects.get(pk=category)
+                action.save()
+
+        return HttpResponseRedirect("/admin/smartgrid/" + action_type)
+    else:
+        form = ChangeLevelForm(initial={"ids": action_ids})
+        return render_to_response("admin/bulk_change.html", {
+            "action_type": action_type,
+            "attribute": attribute,
+            "actions": actions,
+            "form": form,
+            }, context_instance=RequestContext(request))

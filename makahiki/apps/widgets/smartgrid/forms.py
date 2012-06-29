@@ -3,8 +3,15 @@
 from django import forms
 from django.forms.util import ErrorList
 
-from apps.widgets.smartgrid.models import ConfirmationCode, QuestionChoice, TextReminder
+from apps.widgets.smartgrid.models import ConfirmationCode, QuestionChoice, TextReminder, Level, \
+    Category
 from apps.managers.player_mgr import player_mgr
+
+
+class ChangeLevelForm(forms.Form):
+    """change level form."""
+    level_choice = forms.ModelChoiceField(queryset=Level.objects.all(), required=True)
+    category_choice = forms.ModelChoiceField(queryset=Category.objects.all(), required=True)
 
 
 class ActivityTextForm(forms.Form):

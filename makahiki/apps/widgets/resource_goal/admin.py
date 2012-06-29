@@ -5,7 +5,7 @@ from django.contrib import admin
 
 class GoalSettingsAdmin(admin.ModelAdmin):
     """EnergyGoal administrator interface definition."""
-    list_display = ["team", "goal_percent_reduction", "goal_points", "manual_entry",]
+    list_display = ["team", "goal_percent_reduction", "goal_points", "manual_entry", ]
 
 
 class GoalAdmin(admin.ModelAdmin):

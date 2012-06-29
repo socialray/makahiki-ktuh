@@ -6,7 +6,6 @@ import datetime
 from optparse import make_option
 import requests
 import sys
-import time
 
 from apps.managers.challenge_mgr.challenge_mgr import MakahikiBaseCommand
 from apps.managers.resource_mgr import resource_mgr
