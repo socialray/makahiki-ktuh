@@ -12,7 +12,7 @@ def supply(request, page_name):
     all_lounges = Team.objects.order_by('name').all()
 
     if request.user.get_profile().team:
-        group_lounges = request.user.get_profile().team.group.team_set.all()
+        group_lounges = request.user.get_profile().team.group.team_set.order_by('name').all()
     else:
         group_lounges = all_lounges[:5]
 
