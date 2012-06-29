@@ -5,7 +5,7 @@
         {% cache 600 infobar team.name %}
         <div>
             <div class="rib-set-width-outer-width">
-                <h4>{{team}}</h4>{{team.current_round_points}} points. #{{team.current_round_rank}}/{{TEAM_COUNT}}.
+                <h4>{{team}}</h4>{{team.current_round_points}} points. <br/>#{{team.current_round_rank}} of {{TEAM_COUNT}}.
             </div>
         </div>
 
@@ -13,7 +13,7 @@
             {% if energy_rank_info %}
                 <div style="display:none;">
                     <div class="rib-set-width-outer-width">
-                        <h4>{{team}}</h4>{{ energy_rank_info.usage }} {{ energy_rank_info.unit }}. #{{ energy_rank_info.rank }}/{{TEAM_COUNT}}.
+                        <h4>{{team}}</h4>{{ energy_rank_info.usage }} {{ energy_rank_info.unit }}. <br/>#{{ energy_rank_info.rank }} of {{TEAM_COUNT}}.
                     </div>
                 </div>
             {% endif %}
@@ -22,7 +22,7 @@
             {% if water_rank_info %}
                 <div style="display:none;">
                     <div class="rib-set-width-outer-width">
-                        <h4>{{team}}</h4>{{ water_rank_info.usage }} {{ water_rank_info.unit }}. #{{ water_rank_info.rank }}/{{TEAM_COUNT}}.
+                        <h4>{{team}}</h4>{{ water_rank_info.usage }} {{ water_rank_info.unit }}. <br/>#{{ water_rank_info.rank }} of {{TEAM_COUNT}}.
                     </div>
                 </div>
             {% endif %}

@@ -5,7 +5,8 @@ from django.contrib.auth.models import User
 from django.utils.translation import ugettext as _
 from django.utils.hashcompat import md5_constructor
 
-from apps.lib.avatar import AVATAR_DEFAULT_URL, AVATAR_GRAVATAR_BACKUP
+from apps.lib.avatar import AVATAR_DEFAULT_NO_URL, AVATAR_DEFAULT_YES_URL, AVATAR_GRAVATAR_BACKUP
+from apps.managers.score_mgr import score_mgr
 
 register = template.Library()
 
@@ -14,7 +15,7 @@ def avatar_url(user, size=80):
         try:
             user = User.objects.get(username=user)
         except User.DoesNotExist:
-            return AVATAR_DEFAULT_URL
+            return AVATAR_DEFAULT_NO_URL
     avatars = user.avatar_set.order_by('-date_uploaded')
     primary = avatars.filter(primary=True)
     if primary.count() > 0:
@@ -33,7 +34,10 @@ def avatar_url(user, size=80):
                 md5_constructor(user.email).hexdigest(),
                 urllib.urlencode({'s': str(size)}),)
         else:
-            return AVATAR_DEFAULT_URL
+            if score_mgr.player_points(user.get_profile()) > 0:
+                return AVATAR_DEFAULT_YES_URL
+            else:
+                return AVATAR_DEFAULT_NO_URL
 register.simple_tag(avatar_url)
 
 def avatar(user, size=80):
@@ -43,7 +47,7 @@ def avatar(user, size=80):
             alt = unicode(user)
             url = avatar_url(user, size)
         except User.DoesNotExist:
-            url = AVATAR_DEFAULT_URL
+            url = AVATAR_DEFAULT_NO_URL
             alt = _("Default Avatar")
     else:
         alt = unicode(user)
