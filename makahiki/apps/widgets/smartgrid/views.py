@@ -144,12 +144,18 @@ def bulk_change(request, action_type, attribute):
         if attribute == "level":
             level = request.POST["level_choice"]
             for action in actions:
-                action.level = Level.objects.get(pk=level)
+                if level:
+                    action.level = Level.objects.get(pk=level)
+                else:
+                    action.level = None
                 action.save()
         elif attribute == "category":
             category = request.POST["category_choice"]
             for action in actions:
-                action.category = Category.objects.get(pk=category)
+                if category:
+                    action.category = Category.objects.get(pk=category)
+                else:
+                    action.category = None
                 action.save()
 
         return HttpResponseRedirect("/admin/smartgrid/" + action_type)
