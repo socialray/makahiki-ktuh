@@ -6,7 +6,9 @@ from apps.managers.challenge_mgr import challenge_mgr
 from apps.utils import utils
 from apps.widgets.smartgrid.models import ActionMember, Activity, Category, Event, \
                                      Commitment, ConfirmationCode, TextPromptQuestion, \
-                                     QuestionChoice, Level
+                                     QuestionChoice, Level, Action
+from apps.widgets.smartgrid.views import action_admin, action_admin_list
+
 from django.contrib import admin
 from django import forms
 from django.forms.models import BaseInlineFormSet
@@ -295,16 +297,45 @@ admin.site.register(Category, CategoryAdmin)
 challenge_mgr.register_game_admin_model("smartgrid", Category)
 
 
+def redirect_urls(model_admin, url_type):
+    """change the url redirection."""
+    from django.conf.urls import patterns, url
+    from functools import update_wrapper
+
+    def wrap(view):
+        """wrap the view fuction."""
+        def wrapper(*args, **kwargs):
+            """return the wrapper."""
+            return model_admin.admin_site.admin_view(view)(*args, **kwargs)
+        return update_wrapper(wrapper, view)
+
+    info = model_admin.model._meta.app_label, model_admin.model._meta.module_name
+
+    urlpatterns = patterns('',
+        url(r'^$',
+            wrap(action_admin_list if url_type == "changelist" else model_admin.changelist_view),
+            name='%s_%s_changelist' % info),
+        url(r'^add/$',
+            wrap(model_admin.add_view),
+            name='%s_%s_add' % info),
+        url(r'^(.+)/history/$',
+            wrap(model_admin.history_view),
+            name='%s_%s_history' % info),
+        url(r'^(.+)/delete/$',
+            wrap(model_admin.delete_view),
+            name='%s_%s_delete' % info),
+        url(r'^(.+)/$',
+            wrap(action_admin if url_type == "change" else model_admin.change_view),
+            name='%s_%s_change' % info),
+    )
+    return urlpatterns
+
+
 class ActionAdmin(admin.ModelAdmin):
     """abstract admin for action."""
-    class META:
-        """meta"""
-        abstract = True
-
-    prepopulated_fields = {"slug": ("name",)}
-
     actions = ["delete_selected", "increment_priority", "decrement_priority",
-               "change_level", "change_category"]
+               "change_level", "change_category", "clear_level", "clear_category"]
+    list_display = ["title", "level", "category", "priority", "type", "point_value"]
 
     def delete_selected(self, request, queryset):
         """override the delete selected."""
@@ -332,6 +363,24 @@ class ActionAdmin(admin.ModelAdmin):
 
     decrement_priority.short_description = "Decrement selected objects' priority by 1."
 
+    def clear_level(self, request, queryset):
+        """decrement priority."""
+        _ = request
+        for obj in queryset:
+            obj.level = None
+            obj.save()
+
+    clear_level.short_description = "Set the level to (None)."
+
+    def clear_category(self, request, queryset):
+        """decrement priority."""
+        _ = request
+        for obj in queryset:
+            obj.category = None
+            obj.save()
+
+    clear_category.short_description = "Set the category to (None)."
+
     def change_level(self, request, queryset):
         """change level."""
         action_type = queryset[0].type
@@ -339,7 +388,7 @@ class ActionAdmin(admin.ModelAdmin):
         return HttpResponseRedirect(reverse("bulk_change", args=(action_type, "level",)) +
                                     "?ids=%s" % (",".join(selected)))
 
-    change_level.short_description = "change the level."
+    change_level.short_description = "Change the level."
 
     def change_category(self, request, queryset):
         """change level."""
@@ -348,10 +397,13 @@ class ActionAdmin(admin.ModelAdmin):
         return HttpResponseRedirect(reverse("bulk_change", args=(action_type, "category",)) +
                                     "?ids=%s" % (",".join(selected)))
 
-    change_category.short_description = "change the category."
+    change_category.short_description = "Change the category."
+
+    def get_urls(self):
+        return redirect_urls(self, "change")
 
 
-class ActivityAdmin(ActionAdmin):
+class ActivityAdmin(admin.ModelAdmin):
     """Activity Admin"""
     fieldsets = (
         ("Basic Information",
@@ -370,20 +422,25 @@ class ActivityAdmin(ActionAdmin):
         ("Ordering", {"fields": (("level", "category", "priority"), )}),
         ("Confirmation Type", {'fields': ('confirm_type', 'confirm_prompt')}),
     )
+    prepopulated_fields = {"slug": ("name",)}
+
     form = ActivityAdminForm
     inlines = [TextQuestionInline]
     formfield_overrides = {
         models.CharField: {'widget': TextInput(attrs={'size': '80'})},
         }
 
-    list_display = ["title", "level", "category", "priority", "point_value"]
+    def get_urls(self):
+        return redirect_urls(self, "changelist")
 
+
+admin.site.register(Action, ActionAdmin)
+challenge_mgr.register_game_admin_model("smartgrid", Action)
 
 admin.site.register(Activity, ActivityAdmin)
-challenge_mgr.register_game_admin_model("smartgrid", Activity)
 
 
-class EventAdmin(ActionAdmin):
+class EventAdmin(admin.ModelAdmin):
     """Event Admin"""
     fieldsets = (
         ("Basic Information",
@@ -400,20 +457,22 @@ class EventAdmin(ActionAdmin):
         ("Ordering", {"fields": (("level", "category", "priority"), )}),
         ("Confirmation Code", {'fields': ('num_codes',)}),
         )
+    prepopulated_fields = {"slug": ("name",)}
+
     form = EventAdminForm
 
     formfield_overrides = {
         models.CharField: {'widget': TextInput(attrs={'size': '80'})},
         }
 
-    list_display = ["title", "level", "category", "priority", "type",
-                    "event_date", "point_value", ]
+    def get_urls(self):
+        return redirect_urls(self, "changelist")
+
 
 admin.site.register(Event, EventAdmin)
-challenge_mgr.register_game_admin_model("smartgrid", Event)
 
 
-class CommitmentAdmin(ActionAdmin):
+class CommitmentAdmin(admin.ModelAdmin):
     """Commitment Admin."""
     fieldsets = (
         ("Basic Information", {
@@ -428,17 +487,20 @@ class CommitmentAdmin(ActionAdmin):
         ("Points", {"fields": (("point_value", 'social_bonus'), )}),
         ("Ordering", {"fields": (("level", "category", "priority"), )}),
         )
+    prepopulated_fields = {"slug": ("name",)}
+
     form = CommitmentAdminForm
 
     formfield_overrides = {
         models.CharField: {'widget': TextInput(attrs={'size': '80'})},
         }
 
-    list_display = ["title", "level", "category", "priority", "point_value"]
+    def get_urls(self):
+        """override the url definition."""
+        return redirect_urls(self, "changelist")
 
 
 admin.site.register(Commitment, CommitmentAdmin)
-challenge_mgr.register_game_admin_model("smartgrid", Commitment)
 
 
 class ActionMemberAdminForm(forms.ModelForm):

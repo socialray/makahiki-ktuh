@@ -167,3 +167,22 @@ def bulk_change(request, action_type, attribute):
             "actions": actions,
             "form": form,
             }, context_instance=RequestContext(request))
+
+
+@never_cache
+@login_required
+def action_admin(request, pk):
+    """handle the action admin."""
+    _ = request
+    action = Action.objects.get(pk=pk)
+    action_type = action.type if action.type != "excursion" else "event"
+
+    return HttpResponseRedirect("/admin/smartgrid/%s/%s" % (action_type, pk))
+
+
+@never_cache
+@login_required
+def action_admin_list(request):
+    """handle the action admin."""
+    _ = request
+    return HttpResponseRedirect("/admin/smartgrid/action/")
