@@ -23,11 +23,11 @@ def main():
         password = url.password
         database = url.path[1:]
     else:
-        print "Environment variable DATABASE_URL not defined. Exiting."
+        print "Environment variable MAKAHIKI_DATABASE_URL not defined. Exiting."
         sys.exit(1)
 
     if not password:
-        print "password not in the Environment variable DATABASE_URL. Exiting."
+        print "password not in the Environment variable MAKAHIKI_DATABASE_URL. Exiting."
         sys.exit(1)
 
     sqls = ("DROP DATABASE %s" % database,

@@ -330,19 +330,13 @@ MAKAHIKI_DATABASE_URL = env('MAKAHIKI_DATABASE_URL', '')
 """[Required if MAKAHIKI_USE_HEROKU is not true] Specify the Database URL.
 Example: postgres://username:password@db_host:db_port/db_name"""
 
-if not MAKAHIKI_USE_HEROKU:
+import dj_database_url
+if MAKAHIKI_USE_HEROKU:
+    DATABASE_URL = env('DATABASE_URL', '')
+    DATABASES = {'default': dj_database_url.parse(DATABASE_URL)}
+else:
     if MAKAHIKI_DATABASE_URL:
-        urlparse.uses_netloc.append('postgres')
-        url = urlparse.urlparse(MAKAHIKI_DATABASE_URL)
-        if url.scheme == 'postgres':
-            DATABASES = {'default': {
-                'ENGINE': 'django.db.backends.postgresql_psycopg2',
-                'NAME': url.path[1:],
-                'USER': url.username,
-                'PASSWORD': url.password,
-                'HOST': url.hostname,
-                'PORT': url.port,
-                }}
+        DATABASES = {'default': dj_database_url.parse(MAKAHIKI_DATABASE_URL)}
     else:
         if 'READTHEDOCS' not in os.environ:
             print "Environment variable MAKAHIKI_DATABASE_URL not defined. Exiting."

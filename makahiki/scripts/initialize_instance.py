@@ -74,7 +74,8 @@ def copy_static_media(heroku_app):
 
 def reset_db(heroku_app):
     """reset db."""
-    print "WARNING: This command will reset the existing database. This process is irreversible.\n"
+    print "WARNING: This command will reset the database. " \
+          "All existing data will be deleted. This process is irreversible.\n"
     value = raw_input("Do you wish to continue (Y/n)? ")
     while value != "Y" and value != "n":
         print "Invalid option %s\n" % value
