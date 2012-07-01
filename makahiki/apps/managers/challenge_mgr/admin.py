@@ -133,3 +133,8 @@ challenge_mgr.register_site_admin_model("Challenge", ChallengeSetting)
 challenge_mgr.register_site_admin_model("Challenge", RoundSetting)
 challenge_mgr.register_sys_admin_model("Other Settings", PageInfo)
 challenge_mgr.register_sys_admin_model("Other Settings", GameInfo)
+
+from djcelery.models import CrontabSchedule, PeriodicTask, IntervalSchedule
+challenge_mgr.register_sys_admin_model("Celery Scheduler", CrontabSchedule)
+challenge_mgr.register_sys_admin_model("Celery Scheduler", IntervalSchedule)
+challenge_mgr.register_sys_admin_model("Celery Scheduler", PeriodicTask)

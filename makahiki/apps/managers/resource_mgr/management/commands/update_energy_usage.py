@@ -17,5 +17,4 @@ class Command(MakahikiBaseCommand):
         """Update the energy usage for all teams."""
         date = datetime.datetime.today()
         print '****** Processing energy usage update at %s *******\n' % date
-
-        resource_mgr.update_energy_usage(date)
+        resource_mgr.update_energy_usage()

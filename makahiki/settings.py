@@ -2,7 +2,6 @@
 All variables corresponding to environment variables have documentation for ReadTheDocs."""
 
 import os
-import urlparse
 import sys
 
 ###############
@@ -109,7 +108,6 @@ CACHE_MIDDLEWARE_SECONDS = 600
 #########################
 INSTALLED_APPS = (
     # Makahiki pages
-    'apps.template_support',
     'apps.pages',
 
     # Makahiki components
@@ -142,6 +140,8 @@ INSTALLED_APPS = (
     'django_extensions',
     'gunicorn',
     'storages',
+    'kombu.transport.django',
+    'djcelery',
 )
 
 ################################
@@ -313,6 +313,16 @@ class Challenge():
 
 CHALLENGE = Challenge()
 COMPETITION_ROUNDS = None
+
+##########
+# Celery
+##########
+BROKER_URL = "django://"  # tell kombu to use the Django database as the message queue
+
+import djcelery
+djcelery.setup_loader()
+
+CELERYBEAT_SCHEDULER = 'djcelery.schedulers.DatabaseScheduler'
 
 ##################################################################################################
 # Load environment variables

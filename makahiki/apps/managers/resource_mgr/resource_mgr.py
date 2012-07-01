@@ -87,8 +87,11 @@ def get_energy_usage(session, source):
     return 0
 
 
-def update_energy_usage(date):
+def update_energy_usage():
     """Update the energy usage from WattDepot server."""
+
+    challenge_mgr.init()
+    date = datetime.datetime.today()
 
     # workaround the issue that wattdepot might not have the latest data yet.
     date = date - datetime.timedelta(minutes=5)
@@ -110,7 +113,24 @@ def update_energy_usage(date):
             latest_usage.time = date.time()
             latest_usage.usage = usage
             latest_usage.save()
-            print 'team %s energy usage updated.' % team
+            print 'team %s energy usage updated at %s.' % (team, date)
+
+
+def update_fake_water_usage():
+    """update fake water usage."""
+    challenge_mgr.init()
+    date = datetime.datetime.today()
+    for team in Team.objects.all():
+        count = team.profile_set.count()
+        if count:
+            # assume the average water usage is 80 gallon per person per day
+            average_usage = 80
+            actual_usage = average_usage * 0.9
+            water, _ = WaterUsage.objects.get_or_create(team=team, date=date.date())
+            water.time = date.time()
+            water.usage = actual_usage * count
+            water.save()
+            print 'team %s fake water usage updated at %s.' % (team, date)
 
 
 def get_daily_energy_baseline_usage(session, team, day, start_date, weeks):
