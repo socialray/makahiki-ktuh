@@ -30,7 +30,7 @@ clear_session
 setup_test_data
 ---------------
 
-.. automodule:: apps.test_helpers.management.commands.setup_test_data
+.. automodule:: apps.managers.challenge_mgr.management.commands.setup_test_data
 
 
 Challenge configuration

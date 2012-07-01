@@ -1,8 +1,8 @@
 """
 Tests for the pages module.
 """
-from apps.test_helpers.selenium_helpers import MakahikiSeleniumTestCase
-from apps.test_helpers import test_utils
+from apps.utils import test_utils
+from apps.utils.selenium_helpers import MakahikiSeleniumTestCase
 
 
 class LandingSeleniumTestCase(MakahikiSeleniumTestCase):

@@ -2,9 +2,9 @@
 
 Load and create the users from a csv file. The format of the csv file is:
 
-"team","firstname,middlename,lastname","email"
+team, firstname, lastname, email[, RA]
 
-If the second argument is RA, then the csv file is the RA list.
+quoting around the column is supported.
 
 """
 import csv
@@ -15,10 +15,7 @@ from apps.managers.player_mgr import player_mgr
 class Command(management.base.BaseCommand):
     """Load user command."""
 
-    help = """manage.py load_users <file.csv> [RA] \n
-     load and create the users from a csv file containing team,
-     name, and email, if the second argument is RA, the csv file is the RA
-     list."""
+    help = "manage.py load_users <file.csv> \n load and create the users from a csv file."
 
     lastname = None
     firstname = None
@@ -41,20 +38,12 @@ class Command(management.base.BaseCommand):
                 "Can not open the file: %s , Aborting.\n" % (filename))
             return
 
-        if len(args) > 1:
-            if args[1] == 'RA':
-                self.is_ra = True
-            else:
-                self.stdout.write("the second argument can only be RA.\n")
-                return
-
         load_count = 0
-
         reader = csv.reader(infile)
         for row in reader:
             self.parse(row)
             player_mgr.create_player(self.username, self.email, self.firstname,
-                                     self.lastname, self.team)
+                                     self.lastname, self.team, self.is_ra)
             load_count += 1
 
         infile.close()
@@ -63,17 +52,18 @@ class Command(management.base.BaseCommand):
     def parse(self, items):
         """Parse the line."""
 
-        self.team = items[0]
+        self.team = items[0].strip().capitalize()
 
-        fullname = items[1].split(',')
-        self.firstname = fullname[0].strip().capitalize()
-        middlename = fullname[1].strip().capitalize()
-        if middlename:
-            self.firstname += " " + middlename
-        self.lastname = fullname[2].strip().capitalize()
+        self.firstname = items[1].strip().capitalize()
+        self.lastname = items[2].strip().capitalize()
 
-        self.email = items[2].strip()
+        self.email = items[3].strip()
         self.username = self.email.split("@")[0]
 
-        print "%s,%s,%s,%s,%s" % (self.team, self.firstname, self.lastname, self.email,
-          self.username)
+        if len(items) == 5:
+            self.is_ra = True if items[4].strip().lower() == "ra" else False
+        else:
+            self.is_ra = False
+
+        print "%s,%s,%s,%s,%s,%s" % (self.team, self.firstname, self.lastname, self.email,
+          self.username, self.is_ra)

@@ -5,7 +5,7 @@ from django.test import TransactionTestCase
 from django.contrib.auth.models import User
 
 from apps.managers.player_mgr.models import Profile
-from apps.test_helpers import test_utils
+from apps.utils import test_utils
 
 
 class OverallPrizeTest(TransactionTestCase):

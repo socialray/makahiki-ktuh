@@ -12,6 +12,7 @@ from apps.managers.challenge_mgr import challenge_mgr
 from apps.managers.player_mgr.predicates import badge_awarded, has_points, set_profile_pic, \
     posted_to_wall
 from apps.managers.team_mgr.models import Group, Team, Post
+from apps.utils import test_utils
 from apps.widgets.badges import badges
 
 from apps.widgets.quests.quests import possibly_completed_quests, get_quests
@@ -19,7 +20,6 @@ from apps.widgets.smartgrid.models import Activity, ActionMember, Commitment, Ca
 from apps.lib.avatar import create_default_thumbnails
 from apps.lib.avatar.models import Avatar, avatar_file_path
 from apps.widgets.raffle.models import RafflePrize, RaffleTicket
-from apps.test_helpers import test_utils
 from apps.widgets.smartgrid.predicates import approved_some_of, completed_action, \
     completed_some_of, approved_action
 

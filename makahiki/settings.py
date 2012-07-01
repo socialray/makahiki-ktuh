@@ -119,7 +119,6 @@ INSTALLED_APPS = (
     'apps.managers.score_mgr',
     'apps.managers.cache_mgr',
     'apps.managers.log_mgr',
-    'apps.test_helpers',
 
     # 3rd party libraries
     'apps.lib.django_cas',

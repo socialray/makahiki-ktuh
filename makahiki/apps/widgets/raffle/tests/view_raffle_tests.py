@@ -6,9 +6,9 @@ from django.test import TransactionTestCase
 from django.core.urlresolvers import reverse
 from django.conf import settings
 from apps.managers.challenge_mgr import challenge_mgr
+from apps.utils import test_utils
 
 from apps.widgets.raffle.models import RafflePrize
-from apps.test_helpers import test_utils
 
 
 class RafflePrizesTestCase(TransactionTestCase):

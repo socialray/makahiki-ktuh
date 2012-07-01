@@ -101,7 +101,7 @@ test framework. By default, a test comes out something like this.
 Things that need to be changed:
 
 - Delete the existing imports. Instead, import MakahikiSeleniumTestCase from
-  apps.test_helpers.selenium_helpers and test_utils from apps.test_helpers.
+  apps.utils.selenium_helpers and test_utils from apps.test_helpers.
 - Change the Test class to inherit from MakahikiSeleniumTestCase.
 - Remove the setUp and tearDown methods. These are handled for you in
   MakahikiSeleniumTestCase. Note that MakahikiSeleniumTestCase has a few useful
@@ -121,8 +121,8 @@ After this, your test should look something like this:
     """
     Tests for the pages module.
     """
-    from apps.test_helpers.selenium_helpers import MakahikiSeleniumTestCase
-    from apps.test_helpers import test_utils
+    from apps.utils.selenium_helpers import MakahikiSeleniumTestCase
+    from apps.utils import test_utils
 
 
     class LandingSeleniumTestCase(MakahikiSeleniumTestCase):

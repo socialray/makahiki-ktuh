@@ -23,7 +23,8 @@ def supply(request, page_name):
             if theme and theme != profile.theme:
                 profile.theme = theme
 
-            profile.contact_email = form.cleaned_data["contact_email"]
+            user.email = form.cleaned_data["contact_email"]
+            user.save()
             profile.contact_text = form.cleaned_data["contact_text"]
             profile.contact_carrier = form.cleaned_data["contact_carrier"]
 
@@ -41,7 +42,7 @@ def supply(request, page_name):
             user_theme = settings.CHALLENGE.theme
         form = ProfileForm(initial={
             "display_name": profile.name,
-            "contact_email": profile.contact_email or user.email,
+            "contact_email": user.email,
             "contact_text": profile.contact_text,
             "contact_carrier": profile.contact_carrier,
             "theme": user_theme,

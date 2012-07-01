@@ -7,9 +7,9 @@ from django.conf import settings
 from django.test import TransactionTestCase
 from django.contrib.auth.models import User
 from apps.managers.score_mgr import score_mgr
-from apps.test_helpers import test_utils
 from apps.managers.team_mgr.models import Group, Team
 from apps.managers.score_mgr.models import ScoreboardEntry, PointsTransaction
+from apps.utils import test_utils
 
 
 class ScoreboardEntryUnitTests(TransactionTestCase):

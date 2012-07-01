@@ -1,5 +1,5 @@
 <div class="modal-header">
-  <h2>Welcome to the Kukui Cup, {{ user.get_profile.first_name }}!</h2>
+  <h2>Welcome to the Kukui Cup, {{ user.first_name }}!</h2>
 </div>
 <div class="modal-body">
   <div id="setup-content">
@@ -12,7 +12,7 @@
       <div id="setup-welcome-info">
           <p style="margin: 5px 0">
               According to our records, your name
-              is <b>{{ user.get_profile.first_name }} {{ user.get_profile.last_name }}</b> and you live
+              is <b>{{ user.first_name }} {{ user.last_name }}</b> and you live
               in <b>{{ user.get_profile.team }}</b>.<br/>If this is not correct, please <a class="btn btn-widget contact-link" href="mailto:{{ CHALLENGE.contact_email }}">email the admins</a>.
           </p>
       </div>

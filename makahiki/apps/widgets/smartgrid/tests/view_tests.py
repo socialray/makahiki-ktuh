@@ -3,10 +3,10 @@ import datetime
 from django.core.urlresolvers import reverse
 from django.test import TransactionTestCase
 from apps.managers.challenge_mgr import challenge_mgr
+from apps.utils import test_utils
 from apps.widgets.smartgrid.models import  EmailReminder, ActionMember, \
                                            TextReminder, Commitment, ConfirmationCode
 from apps.managers.player_mgr.models import Profile
-from apps.test_helpers import test_utils
 
 
 class ActivitiesFunctionalTest(TransactionTestCase):
@@ -189,7 +189,7 @@ class ActivitiesFunctionalTest(TransactionTestCase):
             }, HTTP_X_REQUESTED_WITH="XMLHttpRequest")
         self.failUnlessEqual(response.status_code, 200)
         profile = Profile.objects.get(user=self.user)
-        self.assertEqual(profile.contact_email, "foo@test.com",
+        self.assertEqual(profile.user.email, "foo@test.com",
             "Profile should now have a contact email.")
         self.assertEqual(self.user.emailreminder_set.count(), reminders + 1,
             "Should have added a reminder")
@@ -223,7 +223,7 @@ class ActivitiesFunctionalTest(TransactionTestCase):
         profile = Profile.objects.get(user=self.user)
         self.assertEqual(reminder.email_address, "foo@test.com",
             "Email address should have changed.")
-        self.assertEqual(profile.contact_email, "foo@test.com",
+        self.assertEqual(profile.user.email, "foo@test.com",
             "Profile email address should have changed.")
         self.assertNotEqual(reminder.send_at, original_date, "Send time should have changed.")
         self.assertEqual(self.user.emailreminder_set.count(), reminder_count,

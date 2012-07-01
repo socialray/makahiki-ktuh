@@ -4,7 +4,7 @@ ask admin tests.
 from django.test import TransactionTestCase
 from django.core.urlresolvers import reverse
 
-from apps.test_helpers import test_utils
+from apps.utils import test_utils
 
 
 class AskAdminFunctionalTests(TransactionTestCase):

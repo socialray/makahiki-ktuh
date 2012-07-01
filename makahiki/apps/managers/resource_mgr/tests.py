@@ -4,7 +4,7 @@ import datetime
 from django.test import TransactionTestCase
 from apps.managers.resource_mgr import resource_mgr
 from apps.managers.resource_mgr.models import EnergyUsage
-from apps.test_helpers import test_utils
+from apps.utils import test_utils
 
 
 class ResourceManagerTestCase(TransactionTestCase):

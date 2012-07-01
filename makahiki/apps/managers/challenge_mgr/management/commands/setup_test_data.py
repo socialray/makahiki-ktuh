@@ -101,6 +101,9 @@ class Command(MakahikiBaseCommand):
                 user = User.objects.create_user(username,
                                                 username + "@test.com",
                                                 password="testuser")
+                user.first_name = username.capitalize()
+                user.last_name = "Test"
+                user.save()
                 # make the first user in the team to go through first-login,
                 # for the rest users, set their profile and setup as completed.
                 if i == 0:

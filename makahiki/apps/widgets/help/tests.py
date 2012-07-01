@@ -3,7 +3,7 @@
 from django.test import TransactionTestCase
 from django.core.urlresolvers import reverse
 from apps.managers.challenge_mgr import challenge_mgr
-from apps.test_helpers import test_utils
+from apps.utils import test_utils
 
 from apps.widgets.help.models import HelpTopic
 

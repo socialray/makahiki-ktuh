@@ -30,8 +30,27 @@ class BadgeInline(admin.TabularInline):
 class ProfileAdmin(admin.ModelAdmin):
     """Admin configuration for Profiles."""
     search_fields = ["user__username", "user__email"]
-    list_display = ['name', 'last_name', 'first_name', ]
+    list_display = ['name', 'last_name', 'first_name', 'team', 'points', 'setup_complete', 'is_ra',
+                    'user_link']
+
     inlines = [BadgeInline]
+
+    def last_name(self, obj):
+        """return the user last_name."""
+        return obj.user.last_name
+    last_name.short_description = 'Last_name'
+
+    def first_name(self, obj):
+        """return the user first_name."""
+        return obj.user.first_name
+    first_name.short_description = 'First_name'
+
+    def points(self, obj):
+        """return the user first_name."""
+        return obj.points()
+    points.short_description = 'Points'
+
+
 admin.site.register(Profile, ProfileAdmin)
 challenge_mgr.register_site_admin_model("Players", Profile)
 challenge_mgr.register_site_admin_model("Players", User)

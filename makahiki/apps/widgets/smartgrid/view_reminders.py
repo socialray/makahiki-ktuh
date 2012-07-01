@@ -34,8 +34,8 @@ def reminder(request, action_type, slug):
                         )
                         email_reminder.save()
 
-                        profile.contact_email = form.cleaned_data["email"]
-                        profile.save()
+                        profile.user.email = form.cleaned_data["email"]
+                        profile.user.save()
                     else:
                         # If send_email is false, the user does not want the reminder anymore.
                         email_reminder.delete()
@@ -52,8 +52,8 @@ def reminder(request, action_type, slug):
                             )
                         )
 
-                        profile.contact_email = form.cleaned_data["email"]
-                        profile.save()
+                        profile.user.email = form.cleaned_data["email"]
+                        profile.user.save()
 
                 try:
                     text_reminder = TextReminder.objects.get(user=request.user, action=action)
@@ -107,7 +107,7 @@ def load_reminders(action, user):
     reminders = {}
     if action.type == "event" or action.type == "excursion":
         # Store initial reminder fields.
-        reminder_init = {"email": user.get_profile().contact_email or user.email,
+        reminder_init = {"email": user.email,
             "text_number": user.get_profile().contact_text,
             "text_carrier": user.get_profile().contact_carrier}
         # Retrieve an existing reminder and update it accordingly.

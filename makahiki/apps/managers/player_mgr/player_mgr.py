@@ -75,7 +75,7 @@ def points_leaders(num_results=None, round_name=None):
         return results
 
 
-def create_player(username, email, firstname, lastname, team_name):
+def create_player(username, email, firstname, lastname, team_name, is_ra):
     """Create a player with the assigned team"""
     try:
         user = User.objects.get(username=username)
@@ -90,15 +90,15 @@ def create_player(username, email, firstname, lastname, team_name):
     user.save()
 
     profile = user.get_profile()
-    profile.first_name = firstname
-    profile.last_name = lastname
     profile.name = firstname + " " + lastname[:1] + "."
+    profile.is_ra = is_ra
 
     try:
         Team.objects.get(name=team_name)
         profile.team = Team.objects.get(name=team_name)
     except ObjectDoesNotExist:
-        print "Can not find team '%s', set the team of the profile to None." % team_name
+        print "Can not find team '%s', set the team of the player '%s' to None." % \
+              (team_name, profile.name)
 
     try:
         profile.save()
@@ -116,8 +116,6 @@ def reset_user(user):
 
     profile = user.get_profile()
     d_name = profile.name
-    f_name = profile.first_name
-    l_name = profile.last_name
     team = profile.team
 
     # Delete the user and create a new one.
@@ -130,8 +128,6 @@ def reset_user(user):
 
     profile = new_user.get_profile()
     profile.name = d_name
-    profile.first_name = f_name
-    profile.last_name = l_name
     profile.team = team
 
     profile.save()

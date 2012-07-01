@@ -4,9 +4,9 @@ import datetime
 from django.test import TransactionTestCase
 from django.core.urlresolvers import reverse
 from apps.managers.challenge_mgr import challenge_mgr
+from apps.utils import test_utils
 
 from apps.widgets.prizes.models import Prize
-from apps.test_helpers import test_utils
 
 
 class PrizesFunctionalTestCase(TransactionTestCase):

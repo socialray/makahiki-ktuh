@@ -19,21 +19,16 @@ class Profile(models.Model):
                              help_text="The login user")
     name = models.CharField('name', unique=True, max_length=50,
                             help_text="The name of the player")
-    first_name = models.CharField('first_name', max_length=50, null=True, blank=True,
-                                  help_text="The first name of the player")
-    last_name = models.CharField('last_name', max_length=50, null=True, blank=True,
-                                 help_text="The last name of the player")
+    is_ra = models.BooleanField(default=False,
+                                help_text="Is RA?")
     team = models.ForeignKey(Team, null=True, blank=True,
                              help_text="The team of the player")
     theme = models.CharField(null=True, blank=True, choices=THEME_CHOICES, max_length=50,
                              help_text="The UI theme for this player.")
-    contact_email = models.EmailField(null=True, blank=True,
-                                      help_text="The contact email of the player")
     contact_text = PhoneNumberField(null=True, blank=True,
                                     help_text="The contact phone number")
     contact_carrier = models.CharField(max_length=50, null=True, blank=True,
                                        help_text="The phone carrier of the contact number")
-
     # Check first login completion.
     setup_profile = models.BooleanField(default=False, editable=False,
                                         help_text="Has the player's profile setup?")
@@ -41,13 +36,11 @@ class Profile(models.Model):
                                         help_text="Has the player completed the first login?")
     completion_date = models.DateTimeField(null=True, blank=True,
                                            help_text="The date of the first login completed")
-
     # Check visits for daily visitor badge.
     daily_visit_count = models.IntegerField(default=0, editable=False,
                                             help_text="The number of the daily visit")
     last_visit_date = models.DateField(null=True, blank=True,
                                        help_text="The date of the last visit")
-
     # Check for referrer
     referring_user = models.ForeignKey(User, null=True, blank=True,
                                        related_name='referred_profiles',
@@ -62,6 +55,12 @@ class Profile(models.Model):
 
     def __unicode__(self):
         return self.name
+
+    def user_link(self):
+        """return the user first_name."""
+        return '<a href="%s/%d">%s</a>' % ("/admin/auth/user", self.user.pk, self.user.username)
+    user_link.allow_tags = True
+    user_link.short_description = 'Link to User'
 
     def current_round_points(self):
         """Returns the total number of points for the user.  Optional parameter for a round."""

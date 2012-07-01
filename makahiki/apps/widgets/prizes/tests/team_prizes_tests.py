@@ -4,7 +4,7 @@ from django.contrib.auth.models import User
 
 from django.test import TransactionTestCase
 from apps.managers.team_mgr.models import Group, Team
-from apps.test_helpers import test_utils
+from apps.utils import test_utils
 
 
 class DormTeamPrizeTests(TransactionTestCase):

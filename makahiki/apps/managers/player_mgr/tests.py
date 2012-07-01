@@ -8,10 +8,10 @@ from django.test import TransactionTestCase
 from django.contrib.auth.models import User
 from django.db import IntegrityError
 from apps.managers.player_mgr import player_mgr
-from apps.test_helpers import test_utils
 
 from apps.managers.team_mgr.models import Group, Team
 from apps.managers.player_mgr.models import Profile
+from apps.utils import test_utils
 
 
 class ProfileLeadersTests(TransactionTestCase):

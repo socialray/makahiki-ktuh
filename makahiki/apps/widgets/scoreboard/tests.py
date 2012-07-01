@@ -4,7 +4,7 @@ import datetime
 from django.core.urlresolvers import reverse
 from django.test import TransactionTestCase
 from apps.managers.challenge_mgr import challenge_mgr
-from apps.test_helpers import test_utils
+from apps.utils import test_utils
 
 
 class ScoreboardTest(TransactionTestCase):
