@@ -1,0 +1,79 @@
+[
+    {
+        "pk": 1,
+        "model": "djcelery.intervalschedule",
+        "fields": {
+            "every": 1,
+            "period": "hours"
+        }
+    },
+    {
+        "pk": 1,
+        "model": "djcelery.crontabschedule",
+        "fields": {
+            "day_of_week": "*",
+            "hour": "23",
+            "minute": "55"
+        }
+    },
+    {
+        "pk": 1,
+        "model": "djcelery.periodictask",
+        "fields": {
+            "task": "apps.widgets.resource_goal.tasks.check_energy_goal",
+            "name": "check_energy_goal",
+            "args": "[]",
+            "enabled": true,
+            "crontab": 1,
+            "interval": null,
+            "expires": null,
+            "kwargs": "{}",
+            "description": ""
+        }
+    },
+    {
+        "pk": 2,
+        "model": "djcelery.periodictask",
+        "fields": {
+            "task": "apps.widgets.resource_goal.tasks.check_water_goal",
+            "name": "check_water_goal",
+            "args": "[]",
+            "enabled": true,
+            "crontab": 1,
+            "interval": null,
+            "expires": null,
+            "kwargs": "{}",
+            "description": ""
+        }
+    },
+    {
+        "pk": 3,
+        "model": "djcelery.periodictask",
+        "fields": {
+            "task": "apps.managers.resource_mgr.tasks.update_energy_usage",
+            "name": "update_energy_usage",
+            "args": "[]",
+            "enabled": true,
+            "crontab": null,
+            "interval": 1,
+            "expires": null,
+            "kwargs": "{}",
+            "description": ""
+        }
+    },
+    {
+        "pk": 4,
+        "model": "djcelery.periodictask",
+        "fields": {
+            "task": "apps.managers.resource_mgr.tasks.update_fake_water_usage",
+            "name": "update_fake_water_usage",
+            "args": "[]",
+            "enabled": true,
+            "crontab": null,
+            "interval": 1,
+            "expires": null,
+            "kwargs": "{}",
+            "description": ""
+        }
+    }
+]
