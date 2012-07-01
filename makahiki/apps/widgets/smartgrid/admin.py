@@ -334,7 +334,8 @@ def redirect_urls(model_admin, url_type):
 class ActionAdmin(admin.ModelAdmin):
     """abstract admin for action."""
     actions = ["delete_selected", "increment_priority", "decrement_priority",
-               "change_level", "change_category", "clear_level", "clear_category"]
+               "change_level", "change_category", "clear_level", "clear_category",
+               "clear_level_category"]
     list_display = ["title", "level", "category", "priority", "type", "point_value"]
 
     def delete_selected(self, request, queryset):
@@ -380,6 +381,16 @@ class ActionAdmin(admin.ModelAdmin):
             obj.save()
 
     clear_category.short_description = "Set the category to (None)."
+
+    def clear_level_category(self, request, queryset):
+        """decrement priority."""
+        _ = request
+        for obj in queryset:
+            obj.level = None
+            obj.category = None
+            obj.save()
+
+    clear_level_category.short_description = "Set the level and category to (None)."
 
     def change_level(self, request, queryset):
         """change level."""
