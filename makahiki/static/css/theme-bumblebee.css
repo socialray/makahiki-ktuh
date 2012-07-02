@@ -334,9 +334,9 @@ table .span21{float:none;width:1644px;margin-left:0;float:none;width:1644px;marg
 table .span22{float:none;width:1724px;margin-left:0;float:none;width:1724px;margin-left:0;}
 table .span23{float:none;width:1804px;margin-left:0;float:none;width:1804px;margin-left:0;}
 table .span24{float:none;width:1884px;margin-left:0;float:none;width:1884px;margin-left:0;}
-[class^="icon-"],[class*=" icon-"]{display:inline-block;width:14px;height:14px;line-height:14px;vertical-align:text-top;background-image:url("../images/glyphicons-halflings.png");background-position:14px 14px;background-repeat:no-repeat;*margin-right:.3em;*margin-right:.3em;}[class^="icon-"]:last-child,[class*=" icon-"]:last-child{*margin-left:0;}
+[class^="icon-"],[class*=" icon-"]{display:inline-block;width:14px;height:14px;line-height:14px;vertical-align:text-top;background-image:url("../img/glyphicons-halflings.png");background-position:14px 14px;background-repeat:no-repeat;*margin-right:.3em;*margin-right:.3em;}[class^="icon-"]:last-child,[class*=" icon-"]:last-child{*margin-left:0;}
 [class^="icon-"]:last-child,[class*=" icon-"]:last-child{*margin-left:0;}
-.icon-white{background-image:url("../images/glyphicons-halflings-white.png");}
+.icon-white{background-image:url("../img/glyphicons-halflings-white.png");}
 .icon-glass{background-position:0 0;}
 .icon-music{background-position:-24px 0;}
 .icon-search{background-position:-48px 0;}
@@ -1111,7 +1111,7 @@ td.energy-status-how-activities-content{vertical-align:text-top;}
 .activity-category{background-color:#000000;color:#ffc40d;overflow:hidden;margin:0;padding:0;height:48px;vertical-align:middle;text-align:center;border:1px solid #000;border-radius:8px;-moz-border-radius:8px;-webkit-border-radius:8px;text-transform:capitalize;}
 .activity-category h5{font-size:9pt;line-height:13px;margin:0 auto 0 auto;padding:2px;position:relative;}
 .activity-legend{background-color:#333333;}
-.activity-legend,.commitment-legend,.event-legend,.excursion-legend{width:12px;height:12px;border:1px solid #000;border-radius:4px;-moz-border-radius:4px;-webkit-border-radius:4px;}
+.activity-legend,.commitment-legend,.event-legend,.excursion-legend,.filler-legend{width:12px;height:12px;border:1px solid #000;border-radius:4px;-moz-border-radius:4px;-webkit-border-radius:4px;}
 .activity-task-details-info{background-color:#000000;font-color:#ffffff;border:2px solid gray;height:auto;margin:.5em auto 5px auto;padding:10px 2px 0 2px;float:center;-moz-border-radius:6px;-webkit-border-radius:6px;font-weight:bold;text-align:center;line-height:20px;display:block;}
 .activity-task-form-content{float:center;text-align:left;padding-left:30px;font:normal 10pt Arial,Helvetica,sans-serif;}
 .activity-task-form-content-button{padding-left:100px;}

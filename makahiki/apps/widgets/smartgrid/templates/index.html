@@ -68,6 +68,19 @@
     </div>
 </div>
 
+<div class="modal hide fade" id="fillerModal">
+    <div class="modal-header">
+        <a class="close" data-dismiss="modal">x</a>
+        <h3>Filler Cell</h3>
+    </div>
+    <div class="modal-body" id="modal-body">
+        <p> This cell is here only to fill out the grid. There is no action associated with it.</p>
+    </div>
+    <div class="modal-footer">
+        <a href="#" class="btn btn-widget" data-dismiss="modal">Close</a>
+    </div>
+</div>
+
 <script type="text/javascript">
     $(document).ready(function () {
     	$('#sgg-levels-tab a:first').tab('show');
@@ -127,5 +140,23 @@
         });
         modalElement.css('margin-top', (modalElement.outerHeight() / 2) * -1);
         modalElement.modal('show');    	
+    }
+    
+    function showFillerModal(event) {
+    	var modalElement = $('#fillerModal')
+        modalElement.modal({
+            backdrop: true,
+            keyboard: true,
+            show: false
+        }); 
+        // set up event logging
+        modalElement.on('shown', function() {
+            log_js_action('filler', 'cell', 'modal-open');
+        });
+        modalElement.on('hidden', function() {
+            log_js_action('filler', 'cell', 'modal-close');
+        });
+        modalElement.css('margin-top', (modalElement.outerHeight() / 2) * -1);
+        modalElement.modal('show');     
     }
 </script>
