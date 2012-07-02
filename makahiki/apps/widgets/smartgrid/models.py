@@ -271,6 +271,11 @@ class Action(models.Model):
         ordering = ("level", "category", "priority")
 
 
+class Filler(Action):
+    """Filler action. It is always locked"""
+    pass
+
+
 class Commitment(Action):
     """Commitments involve non-verifiable actions that a user can commit to.
     Typically, they will be worth fewer points than activities."""
@@ -278,10 +283,6 @@ class Commitment(Action):
         default=5,
         help_text="Duration of commitment, in days."
     )
-
-    class Meta:
-        """meta"""
-        verbose_name_plural = "action: Commitments"
 
 
 class Activity(Action):
@@ -347,7 +348,7 @@ class Activity(Action):
 
     class Meta:
         """meta"""
-        verbose_name_plural = "action: Activities"
+        verbose_name_plural = "Activities"
 
 
 class Event(Action):
@@ -375,16 +376,14 @@ class Event(Action):
         help_text="Specify the max number of seats available to the event."
     )
 
+    is_excursion = models.BooleanField(default=False, help_text="Is excursion?")
+
     def is_event_completed(self):
         """Determines if the event is completed."""
         result = datetime.datetime.today() - self.event_date
         if result.days >= 0 and result.seconds >= 0:
             return True
         return False
-
-    class Meta:
-        """meta"""
-        verbose_name_plural = "action: Events"
 
 
 class ActionMember(models.Model):

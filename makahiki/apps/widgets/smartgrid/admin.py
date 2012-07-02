@@ -6,7 +6,7 @@ from apps.managers.challenge_mgr import challenge_mgr
 from apps.utils import utils
 from apps.widgets.smartgrid.models import ActionMember, Activity, Category, Event, \
                                      Commitment, ConfirmationCode, TextPromptQuestion, \
-                                     QuestionChoice, Level, Action
+                                     QuestionChoice, Level, Action, Filler
 from apps.widgets.smartgrid.views import action_admin, action_admin_list
 
 from django.contrib import admin
@@ -152,7 +152,7 @@ class ActivityAdminForm(forms.ModelForm):
 
     def save(self, *args, **kwargs):
         activity = super(ActivityAdminForm, self).save(*args, **kwargs)
-
+        activity.type = "activity"
         activity.save()
         cache_mgr.clear()
 
@@ -231,17 +231,21 @@ class EventAdminForm(forms.ModelForm):
         return cleaned_data
 
     def save(self, *args, **kwargs):
-        activity = super(EventAdminForm, self).save(*args, **kwargs)
+        event = super(EventAdminForm, self).save(*args, **kwargs)
+        if event.is_excursion:
+            event.type = "excursion"
+        else:
+            event.type = "event"
+        event.save()
 
-        activity.save()
         cache_mgr.clear()
 
         # Generate confirmation codes if needed.
         if self.cleaned_data.get("num_codes") > 0:
-            ConfirmationCode.generate_codes_for_activity(activity,
+            ConfirmationCode.generate_codes_for_activity(event,
                 self.cleaned_data.get("num_codes"))
 
-        return activity
+        return event
 
 
 class CommitmentAdminForm(forms.ModelForm):
@@ -257,12 +261,30 @@ class CommitmentAdminForm(forms.ModelForm):
         return data
 
     def save(self, *args, **kwargs):
-        activity = super(CommitmentAdminForm, self).save(*args, **kwargs)
-
-        activity.save()
+        commitment = super(CommitmentAdminForm, self).save(*args, **kwargs)
+        commitment.type = "commitment"
+        commitment.save()
         cache_mgr.clear()
 
-        return activity
+        return commitment
+
+
+class FillerAdminForm(forms.ModelForm):
+    """admin form"""
+    class Meta:
+        """meta"""
+        model = Filler
+
+    def save(self, *args, **kwargs):
+        filler = super(FillerAdminForm, self).save(*args, **kwargs)
+        filler.type = "filler"
+        filler.unlock_condition = "False"
+        filler.unlock_condition_text = "This cell is here only to fill out the grid. " \
+                                       "There is no action associated with it."
+        filler.save()
+        cache_mgr.clear()
+
+        return filler
 
 
 class LevelAdminForm(forms.ModelForm):
@@ -336,7 +358,7 @@ class ActionAdmin(admin.ModelAdmin):
     actions = ["delete_selected", "increment_priority", "decrement_priority",
                "change_level", "change_category", "clear_level", "clear_category",
                "clear_level_category"]
-    list_display = ["title", "level", "category", "priority", "type", "point_value"]
+    list_display = ["slug", "title", "level", "category", "priority", "type", "point_value"]
 
     def delete_selected(self, request, queryset):
         """override the delete selected."""
@@ -418,7 +440,7 @@ class ActivityAdmin(admin.ModelAdmin):
     """Activity Admin"""
     fieldsets = (
         ("Basic Information",
-         {'fields': (('name', 'type'),
+         {'fields': (('name', ),
                      ('slug', 'related_resource'),
                      ('title', 'duration'),
                      'image',
@@ -455,7 +477,7 @@ class EventAdmin(admin.ModelAdmin):
     """Event Admin"""
     fieldsets = (
         ("Basic Information",
-         {'fields': (('name', 'type'),
+         {'fields': (('name', "is_excursion"),
                      ('slug', 'related_resource'),
                      ('title', 'duration'),
                      'image',
@@ -487,7 +509,7 @@ class CommitmentAdmin(admin.ModelAdmin):
     """Commitment Admin."""
     fieldsets = (
         ("Basic Information", {
-            'fields': ('name',
+            'fields': (('name', ),
                        ('slug', 'related_resource'),
                        ('title', 'duration'),
                        'image',
@@ -512,6 +534,33 @@ class CommitmentAdmin(admin.ModelAdmin):
 
 
 admin.site.register(Commitment, CommitmentAdmin)
+
+
+class FillerAdmin(admin.ModelAdmin):
+    """Commitment Admin."""
+    fieldsets = (
+        ("Basic Information", {
+            'fields': (('name', ),
+                       ('slug', ),
+                       ('title', ),
+                       ),
+            }),
+        ("Ordering", {"fields": (("level", "category", "priority"), )}),
+        )
+    prepopulated_fields = {"slug": ("name",)}
+
+    form = FillerAdminForm
+
+    formfield_overrides = {
+        models.CharField: {'widget': TextInput(attrs={'size': '80'})},
+        }
+
+    def get_urls(self):
+        """override the url definition."""
+        return redirect_urls(self, "changelist")
+
+
+admin.site.register(Filler, FillerAdmin)
 
 
 class ActionMemberAdminForm(forms.ModelForm):
