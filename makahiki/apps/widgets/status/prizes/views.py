@@ -3,6 +3,7 @@
 from apps.managers.challenge_mgr import challenge_mgr
 from apps.managers.score_mgr.models import ScoreboardEntry
 from apps.widgets.raffle.models import RafflePrize
+import operator
 
 
 def supply(request, page_name):
@@ -16,10 +17,10 @@ def supply(request, page_name):
         raffle_prizes[round_name] = RafflePrize.objects.filter(round_name=round_name).all()
 
     # Calculate unused raffle tickets for every user.
-    round_name = challenge_mgr.get_round_name()
     elig_entries = ScoreboardEntry.objects.filter(
         points__gte=25,
-        round_name=round_name)
+        round_name=challenge_mgr.get_round_name())
+
     unused = 0
     errors = []
     for entry in elig_entries:
@@ -28,9 +29,25 @@ def supply(request, page_name):
             errors.append(entry.profile)
         unused += available
 
+    # get user/ticket pairings
+    unused_tickets = {}
+    temp = {}
+    for item in ScoreboardEntry.objects.all():
+        if(item.profile.id in temp):
+            temp[item.profile.id] = (item.profile, temp[item.profile.id][1] + item.points)
+        else:
+            temp[item.profile.id] = (item.profile, item.points)
+
+    for item, key in temp.iteritems():
+        unused_tickets[key[0]] = key[1] / 25 - key[0].user.raffleticket_set.count()
+
+    sorted_list = sorted(unused_tickets.iteritems(), key=operator.itemgetter(1))
+    sorted_list.reverse()
+
     return {
         "raffle_prizes": raffle_prizes,
         "unused": unused,
+        "unused_tickets": sorted_list,
         "has_error": len(errors) > 0,
         "errors": errors,
         }
