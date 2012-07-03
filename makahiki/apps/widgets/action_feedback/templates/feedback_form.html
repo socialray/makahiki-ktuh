@@ -2,8 +2,12 @@
 <div id="task-feedback">
 <form action="{% url add_activity_feedback action.type action.slug %}" method="post">
 <div style="text-align:left; margin-left:10px;">
+<h3>Your feedback on this action</h3>
+{% if not feedback_p %}
 Please provide feedback:
-
+{% else %}
+Your current feedback. Please update if desired
+{% endif %}
     {% csrf_token %}
     <table class="">
         <tr>

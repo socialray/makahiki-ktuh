@@ -21,6 +21,7 @@
         <div class="activity-task-details-info">
             <p/>
             <div style="text-align:left; margin-left:10px;">
+            <h3>Action Completion Status</h3>
             Congratulations! You did it and earned {{ action.member.points_awarded }}
              points! <br/>
             {% if action.member.social_bonus_awarded %}
@@ -33,6 +34,7 @@
                 <span style="color:orange">{{ action.member.admin_comment }}</span> <br/>
             {% endif %}
             </div>
+            <hr/>
             {% include "widgets/action_feedback/templates/feedback_form.html" %}
         </div>
     {% else %}
@@ -40,6 +42,7 @@
             <div class="activity-task-details-info">
                 <p/>
                 <div style="text-align:left; margin-left:10px;">
+                    <h3>Action Completion Status</h3>
                 {% if action.event.is_event_completed %}
                     Thank you for attending the event. 
                     Click on the "I Did it" button to get the rest of your points.
@@ -53,6 +56,7 @@
                     <br/>
                 {% endif %}
                 </div>
+                <hr/>
                 {% include "widgets/action_feedback/templates/feedback_form.html" %}
             </div>
         {% endif %}
@@ -60,6 +64,7 @@
             <div class="activity-task-details-info">
                 <p/>
                 <div style="text-align:left; margin-left:10px;">
+                <h3>Action Completion Status</h3>                
                 {% if action.member.days_left > 0 %}
                     Thank you! You've earned 2 points by committing.
                     Please come back on {{ action.member.completion_date|date:"l m/d" }}
@@ -73,6 +78,7 @@
                     <br/>
                 {% endif %}
                 </div>
+                <hr/>
                 {% include "widgets/action_feedback/templates/feedback_form.html" %}
             </div>
         {% endif %}
@@ -81,10 +87,12 @@
                 <div class="activity-task-details-info">
                     <p/>
                     <div style="text-align:left; margin-left:10px;">
+                    <h3>Action Completion Status</h3>
                     Thank you for submitting your response.
                     An administrator is reviewing your response.
                     Come back soon to see your new total.
                     </div>
+                    <hr/>
                     {% include "widgets/action_feedback/templates/feedback_form.html" %}
                 </div>
             {% else %}
@@ -92,6 +100,7 @@
                     <p/>
 
                     <div style="text-align:left; margin-left:10px;">
+                        <h3>Action Completion Status</h3>
                         Administrator feels that there is a problem with your
                         submission. <br/>
                         Please try again.
@@ -100,6 +109,7 @@
                         <span style="color:orange">{{ action.member.admin_comment }}</span>
                         {% endif %}
                     </div>
+                    <hr/>
                     {% include "widgets/action_feedback/templates/feedback_form.html" %}
                 </div>
             {% endif %}
