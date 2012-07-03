@@ -24,11 +24,12 @@ def get_challenge_mgr_predicates():
 def get_smartgrid_predicates():
     """Returns the predicates defined in smartgrid module."""
     from apps.widgets.smartgrid.predicates import completed_action, approved_action, \
-        completed_some_of, completed_all_of, completed_level, unlock_on_date, \
-        unlock_on_event, approved_all_of, approved_some_of
+        completed_some_of, completed_some_of_level, completed_all_of, completed_level, \
+        unlock_on_date, unlock_on_event, approved_all_of, approved_some_of
     return {
             "completed_action": completed_action,
             "completed_some_of": completed_some_of,
+            "completed_some_of_level": completed_some_of_level,
             "completed_all_of": completed_all_of,
             "completed_level": completed_level,
             "unlock_on_date": unlock_on_date,
