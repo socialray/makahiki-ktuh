@@ -41,7 +41,7 @@ def action_feedback(request, action_type, slug):
     form = ActionFeedbackForm(request.POST)
     if form.is_valid():
         print form.cleaned_data
-    feedback, _ = ActionFeedback.objects.get_or_create(action=action, user=user)
+    feedback, created = ActionFeedback.objects.get_or_create(action=action, user=user)
 
     if 'Score' in request.POST:
         feedback.rating = request.POST['Score']
@@ -54,10 +54,11 @@ def action_feedback(request, action_type, slug):
     feedback.changed = datetime.datetime.now()
     feedback.save()
 
-    # Give the user points for providing feedback
-    profile.add_points(score_mgr.feedback_points(),
-                       datetime.datetime.today(),
-                       "%s provided feedback about %s" % (user.username, action.name))
+    if created:
+        # Give the user points for providing feedback
+        profile.add_points(score_mgr.feedback_points(),
+                           datetime.datetime.today(),
+                           "%s provided feedback about %s" % (user.username, action.name))
     # Take them back to the action page.
     return HttpResponseRedirect(reverse("activity_task", args=(action.type, action.slug,)))
 
