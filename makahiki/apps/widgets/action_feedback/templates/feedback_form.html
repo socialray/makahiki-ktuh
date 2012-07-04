@@ -2,7 +2,7 @@
 <div id="task-feedback">
 <form action="{% url add_activity_feedback action.type action.slug %}" method="post">
 <div style="text-align:left; margin-left:10px;">
-<h3>Your feedback on this action</h3>
+<b>Your feedback on this action</b><br/>
 {% if not feedback_p %}
 Please provide feedback:
 {% else %}

@@ -21,7 +21,7 @@
         <div class="activity-task-details-info">
             <p/>
             <div style="text-align:left; margin-left:10px;">
-            <h3>Action Completion Status</h3>
+            <b>Action Completion Status</b><br/>
             Congratulations! You did it and earned {{ action.member.points_awarded }}
              points! <br/>
             {% if action.member.social_bonus_awarded %}
@@ -42,7 +42,7 @@
             <div class="activity-task-details-info">
                 <p/>
                 <div style="text-align:left; margin-left:10px;">
-                    <h3>Action Completion Status</h3>
+                    <b>Action Completion Status</b><br/>
                 {% if action.event.is_event_completed %}
                     Thank you for attending the event. 
                     Click on the "I Did it" button to get the rest of your points.
@@ -64,7 +64,7 @@
             <div class="activity-task-details-info">
                 <p/>
                 <div style="text-align:left; margin-left:10px;">
-                <h3>Action Completion Status</h3>                
+                <b>Action Completion Status</b><br/>
                 {% if action.member.days_left > 0 %}
                     Thank you! You've earned 2 points by committing.
                     Please come back on {{ action.member.completion_date|date:"l m/d" }}
@@ -87,7 +87,7 @@
                 <div class="activity-task-details-info">
                     <p/>
                     <div style="text-align:left; margin-left:10px;">
-                    <h3>Action Completion Status</h3>
+                    <b>Action Completion Status</b><br/>
                     Thank you for submitting your response.
                     An administrator is reviewing your response.
                     Come back soon to see your new total.
@@ -100,7 +100,7 @@
                     <p/>
 
                     <div style="text-align:left; margin-left:10px;">
-                        <h3>Action Completion Status</h3>
+                        <b>Action Completion Status</b><br/>
                         Administrator feels that there is a problem with your
                         submission. <br/>
                         Please try again.
