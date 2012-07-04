@@ -1,7 +1,7 @@
 """Predicates indicating if a level or cell should be unlocked."""
 
 from datetime import datetime, timedelta
-from apps.widgets.smartgrid.models import Action, Category, Event
+from apps.widgets.smartgrid.models import Action, Event
 
 
 def completed_action(user, slug):
@@ -9,12 +9,12 @@ def completed_action(user, slug):
     return user.actionmember_set.filter(action__slug=slug).count() > 0
 
 
-def completed_all_of(user, category_slug=None, action_type=None, resource=None):
-    """Returns true if completed all of specified type."""
+def completed_all_of(user, category_slug=None, action_type=None, resource=None, level_name=None):
+    """Returns true if completed all of the specified type."""
 
     if category_slug:
         return user.actionmember_set.filter(action__category__slug=category_slug).count() ==\
-           Category.objects.filter(slug=category_slug).count()
+            Action.objects.filter(category__slug=category_slug).count()
 
     if action_type:
         return user.actionmember_set.filter(action__type=action_type).count() ==\
@@ -24,11 +24,21 @@ def completed_all_of(user, category_slug=None, action_type=None, resource=None):
         return user.actionmember_set.filter(action__related_resource=resource).count() ==\
             Action.objects.filter(related_resource=resource).count()
 
+    if level_name:
+        return user.actionmember_set.filter(action__level__name=level_name).count() ==\
+           Action.objects.filter(level__name=level_name).count()
+
     return user.actionmember_set.all().count() ==\
            Action.objects.all().count()
 
 
-def completed_some_of(user, some=1, category_slug=None, action_type=None, resource=None):
+def completed_some_of_level(user, some=1, level_name=None):
+    """Returns true if completed some of the specified level."""
+    return completed_some_of(user, some=some, level_name=level_name)
+
+
+def completed_some_of(user, some=1, category_slug=None, action_type=None, resource=None,
+                      level_name=None):
     """Returns true if completed some of the specified type.
     some is default to 1 if not specified."""
     if category_slug:
@@ -39,6 +49,9 @@ def completed_some_of(user, some=1, category_slug=None, action_type=None, resour
 
     if resource:
         return user.actionmember_set.filter(action__related_resource=resource).count() >= some
+
+    if level_name:
+        return user.actionmember_set.filter(action__level__name=level_name).count() >= some
 
     return user.actionmember_set.all().count() >= some
 
@@ -84,7 +97,8 @@ def approved_action(user, slug):
     return user.actionmember_set.filter(action__slug=slug, approval_status="approved").count() > 0
 
 
-def approved_some_of(user, some=1, category_slug=None, action_type=None, resource=None):
+def approved_some_of(user, some=1, category_slug=None, action_type=None, resource=None,
+                     level_name=None):
     """Returns true if some actions of the specified type is approved."""
 
     if category_slug:
@@ -99,16 +113,20 @@ def approved_some_of(user, some=1, category_slug=None, action_type=None, resourc
         return user.actionmember_set.filter(action__related_resource=resource,
                                             approval_status="approved").count() >= some
 
+    if level_name:
+        return user.actionmember_set.filter(action__level__name=level_name,
+                                            approval_status="approved").count() >= some
+
     return user.actionmember_set.filter(approval_status="approved").count() >= some
 
 
-def approved_all_of(user, category_slug=None, action_type=None, resource=None):
+def approved_all_of(user, category_slug=None, action_type=None, resource=None, level_name=None):
     """Returns true if all actions of the specified type is approved."""
 
     if category_slug:
         return user.actionmember_set.filter(action__category__slug=category_slug,
                                             approval_status="approved").count() ==\
-               Category.objects.filter(slug=category_slug).count()
+               Action.objects.filter(category__slug=category_slug).count()
 
     if action_type:
         return user.actionmember_set.filter(action__type=action_type,
@@ -119,6 +137,11 @@ def approved_all_of(user, category_slug=None, action_type=None, resource=None):
         return user.actionmember_set.filter(action__related_resource=resource,
                                             approval_status="approved").count() ==\
                Action.objects.filter(related_resource=resource).count()
+
+    if level_name:
+        return user.actionmember_set.filter(action__level__name=level_name,
+                                            approval_status="approved").count() ==\
+               Action.objects.filter(level__name=level_name).count()
 
     return user.actionmember_set.filter(approval_status="approved").count() ==\
            Action.objects.all().count()
