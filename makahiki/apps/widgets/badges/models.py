@@ -59,7 +59,7 @@ class BadgeAward(models.Model):
     def save(self, *args, **kwargs):
         """custom save method."""
 
-        message = "Congratulations, You have been awarded the %s badge." % self.badge.name
+        message = "Congratulations, You have been awarded the %s badge.  " % self.badge.name
         message += "Check it out <a href= %s >here</a>" % "/profile/?ref=dialog"
         UserNotification.create_info_notification(
             self.profile.user,

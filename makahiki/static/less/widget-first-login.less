@@ -94,6 +94,10 @@ iframe {
     width: 180px;
 }
 
+#setup-dialog .modal-body {
+    max-height: none;
+}
+
 #setup-dialog .progress {
     margin-bottom: 5px;
 }
@@ -105,7 +109,7 @@ iframe {
 
 #setup-terms-content {
     padding: 5px;
-    max-height: 200px;
+    max-height: 350px;
 }
 
 #setup-welcome-info {
@@ -121,10 +125,6 @@ iframe {
     }
 }
 
-//.modal-header {
-//    margin: 0px 15px;
-//}
-
 @media (max-width: 350px) {
     iframe {
         width: 100%;
@@ -134,13 +134,7 @@ iframe {
     #setup-dialog {
         margin-top: 0px;
         position: fixed;
-        max-height: 410px;
         min-width: 270px;
-    }
-
-    #setup-dialog .modal-body {
-        max-height: 165px;
-        overflow-y: scroll;
     }
 
     #setup-dialog .modal-header > h2 {
@@ -149,21 +143,14 @@ iframe {
     }
 
     #setup-dialog .modal-footer {
-        max-height: 155px;
         padding-bottom: 0px;
         padding-top: 5px;
     }
 }
 
-@media (min-width: 350px) { 
-
-    #setup-dialog .modal-body {
-        height: 40%;  
-    }
-
+@media (min-width: 350px) {
     #setup-dialog .modal-header {
         height: 5%;
-        max-height: 30px;
     }
 
     #setup-dialog .modal-footer {
@@ -171,3 +158,9 @@ iframe {
     }
 }
 
+@media (max-width: 650px) {
+    #setup-terms-content {
+        max-height: none;
+        padding: 5px;
+    }
+}
