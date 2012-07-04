@@ -1,78 +1,64 @@
-{% with all_lounges=view_objects.status__wattdepot.all_lounges group_lounges=view_objects.status__wattdepot.group_lounges %}
-
-<div id="PowerMeter">
-    <center><b>Power Meters</b></center>
+{% with interval=view_objects.status__wattdepot.interval all_lounges=view_objects.status__wattdepot.data.all_lounges group_lounges=view_objects.status__wattdepot.data.group_lounges %}
+<div class="content-box-title">
+      Watt-Depot Status
 </div>
-
-<p/>
-
+<div class="widget-content">
     <div class="row-fluid">
-    {% for team in group_lounges %}
-        <div style="min-width:80px;display:block;float:left;margin-left:10px;">
-            <div id="loading_{{ forloop.counter }}"><img src="{{STATIC_URL}}images/spinner.gif"/></div>
-
-            <div id="visualization_{{ forloop.counter }}"></div>
-            <div>
-                <select id='lounge_{{ forloop.counter }}'
-                        onchange="updateLounge('{{ forloop.counter }}');">
-                    {% for lounge in all_lounges %}
-                        <option {% if team == lounge or team == lounge.name %}
-                            selected {% endif %}
-                            value='{{ lounge.name}}'>{{ lounge.name }}
-                        </option>
-                    {% endfor %}
-                </select>
-            </div>
+        <div id="status" style="color:green;">
+        OK
         </div>
-    {% endfor %}
+        <div>
+        Refresh Interval: {{interval}} s
+        </div>
+        <table class="table-striped">
+            <thead>
+                  <tr>
+                      <th class="column-text">Meter</th>
+                      <th class="column-number">Timestamp Age</th>
+                  </tr>
+            </thead>
+            <tbody>
+                {% for team in all_lounges %}
+                <tr>
+                    <td class="column-text">{{ team }}</td>
+                    <td id="visualization_{{ forloop.counter }}" class="column-number">
+                                
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
     </div>
 
-<div>
-    <p>
-        This visualization shows the real time power meters of 5 lounges. Note that the middle of
-        each gauge represents the typical
-        power for this lounge at this time of day.
+    <script type="text/javascript" src="{{STATIC_URL}}js/PowerMeterStatus.js"></script>
 
-    <p/>
-    You can use this visualization to look at the real time power consumption of any lounge and
-    compare the usages of 5 lounges at a time.
 
-</div>
- {% endwith %}
+    <script type="text/javascript">
+        // Wrap this code in an anonymous self-invoking function to avoid polluting global namespace.
+         
+         var done = true;
+        (function () {      
+            {% for team in all_lounges %}
+                drawOne({{forloop.counter}}, "{{team}}")
+            {% endfor %}
+        })();
 
-<script type="text/javascript" src="http://www.google.com/jsapi"></script>
-<script type="text/javascript" src="{{STATIC_URL}}js/org.wattdepot.makahiki.PowerMeter.js"></script>
+        function drawOne(id, team) {
+            var refreshInterval = {{interval}};
+            var server_url = "{{ CHALLENGE.wattdepot_server_url }}";
+            var source = team;
+            var options = {
+                source: source,
+                width: 200,
+                powerRange: 2000};
 
-<script type="text/javascript">
-    // Wrap this code in an anonymous self-invoking function to avoid polluting global namespace.
-    (function () {
-        for (i = 1; i <= 5; i++)
-        {
-            drawOne(i)
+            new Makahiki_PowerMeterStatus( server_url,
+                    source,
+                    refreshInterval,
+                    "visualization_" + id,
+                    options);
         }
-    })();
+    </script>
+</div>
 
-    function drawOne(id) {
-        var refreshInterval = 15;
-        var server_url = "{{ CHALLENGE.wattdepot_server_url }}";
-        var source = document.getElementById("lounge_" + id).value;
-        var options = {
-            source: source,
-            width: 200,
-            powerRange: 2000};
-
-        new Makahiki_PowerMeter( server_url,
-                source,
-                refreshInterval,
-                'visualization_' + id,
-                options);
-        document.getElementById('loading_' + id).style.display = 'none';
-    }
-
-    function updateLounge(id) {
-        document.getElementById("visualization_" + id).innerHTML = "";
-        document.getElementById("loading_" + id).style.display = '';
-        drawOne(id);
-    }
-
-</script>
+     {% endwith %}
