@@ -24,13 +24,15 @@
                 {% with awarded_badges=view_objects.badges.awarded_badges locked_badges=view_objects.badges.locked_badges %}
                 {% for badge in awarded_badges %}
                     <tr class="{% cycle '' 'alt-row' as cycle_class %}">
-                        {% include "catalog-item.html" with badge=badge awarded_badges=awarded_badges %}
+                        {%  with badge=badge awarded_badges=awarded_badges class="awarded" %}
+                            {% include "catalog-item.html" %}
+                        {% endwith %}
                     </tr>
                 {% endfor %}
 
                 {% for badge in locked_badges %}
                     <tr class="{% cycle cycle_class %}">
-                        {% include "catalog-item.html" with badge=badge awarded_badges=awarded_badges %}
+                        {% include "catalog-item.html" with badge=badge awarded_badges=awarded_badges awarded=False %}
                     </tr>
                 {% endfor %}
                 {% endwith %}

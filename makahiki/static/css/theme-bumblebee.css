@@ -970,6 +970,7 @@ ul{list-style:none;}
 @charset "UTF-8";
 #badge-nav a.activeSlide{outline:1px solid;}
 @charset "UTF-8";
+.awarded{line-height:10px;}
 .badge-image{width:36px;height:1px;float:left;}
 .content-col{width:60%;}
 .date-col{width:35%;}
