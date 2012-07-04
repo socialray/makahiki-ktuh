@@ -46,6 +46,11 @@ class Badge(models.Model):
         help_text="Point award for getting badge."
     )
 
+    priority = models.IntegerField(
+        default=0,
+        help_text="Point award for getting badge."
+    )
+
     def __unicode__(self):
         return self.name
 

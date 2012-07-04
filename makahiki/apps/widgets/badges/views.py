@@ -36,7 +36,10 @@ def get_badge_catalog(request):
     for awarded in BadgeAward.objects.filter(profile=profile):
         awarded_badges.append(awarded.badge)
 
-    for badge in Badge.objects.all():
+    awarded_badges = sorted(awarded_badges, key=lambda badge: badge.priority)
+    awarded_badges.reverse()
+
+    for badge in Badge.objects.order_by('-priority'):
         if not badge in awarded_badges:
             locked_badges.append(badge)
 
