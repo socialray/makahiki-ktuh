@@ -22,6 +22,58 @@ def get_feedback_comments(action):
     return comments
 
 
+def get_ordered_actions_with_feedback():
+    """returns the actions with feedback ordered by level, category, and priority."""
+    with_feedback = get_actions_with_feedback()
+    return with_feedback.order_by('level', 'category', 'priority')
+
+
+def build_feedback_data():
+    """Builds the data for graphing the feedback as a horizontal stacked
+    bar chart."""
+    d = {}
+    ordered_actions = get_ordered_actions_with_feedback()
+    d['height'] = ordered_actions.count() * 50
+    f_5 = []  # holds data for feedback with score = 5
+    f_4 = []  # holds data for feedback with score = 4
+    temp = []  # holds data for feedback with score = 3
+    f_2 = []  # holds data for feedback with score = 2
+    f_1 = []  # holds data for feedback with score = 1
+    ticks = []
+    max_pos = 0
+    max_neg = 0
+    for counter, action in enumerate(ordered_actions):
+        ticks.append([counter + 1, str(action.slug)])
+        feedback = get_action_feedback(action)
+        if feedback.filter(rating=5).count() +\
+         feedback.filter(rating=4).count() > max_pos:
+            max_pos = feedback.filter(rating=5).count() +\
+                        feedback.filter(rating=4).count()
+        f_5.append([feedback.filter(rating=5).count(), 0.7 + counter])
+        f_4.append([feedback.filter(rating=4).count(), 0.7 + counter])
+        temp.append([feedback.filter(rating=2).count() +\
+                      feedback.filter(rating=1).count(), 0.7 + counter])
+        if feedback.filter(rating=2).count() +\
+         feedback.filter(rating=1).count() > max_neg:
+            max_neg = feedback.filter(rating=2).count() +\
+                        feedback.filter(rating=1).count()
+        f_2.append([-feedback.filter(rating=2).count(), 0.7 + counter])
+        f_1.append([-feedback.filter(rating=1).count(), 0.7 + counter])
+    d['d5'] = f_5
+    d['d4'] = f_4
+    d['d3'] = temp
+    d['d2'] = f_2
+    d['d1'] = f_1
+    d['yticks'] = ticks
+    ticks = []
+    if max_neg > 0:
+        ticks.append([-max_neg / 2, 'Negative'])
+    if max_pos > 0:
+        ticks.append([max_pos / 2, 'Positive'])
+    d['xticks'] = ticks
+    return d
+
+
 def get_likert_scale_totals(action):
     """returns the totals for the Likert scale for the given action."""
     query_set = get_action_feedback(action)

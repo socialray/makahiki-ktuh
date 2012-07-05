@@ -25,7 +25,9 @@ def supply(request, page_name):
 
     return {
         "action_feedback": feedback_analysis.get_action_likert_scales(),
-        "analysis": feedback_analysis.get_analysis()
+        "analysis": feedback_analysis.get_analysis(),
+        "stacked": feedback_analysis.build_feedback_data()
+
     }
 
 
@@ -73,7 +75,7 @@ def view_feedback(request, action_type, slug):
     return render_to_response("feedback_details.html", {
         "action": action,
         "feedback": feedback_analysis.get_action_feedback(action),
-        "scale": feedback_analysis.get_likert_scale_totals(action)
+        "scale": feedback_analysis.get_likert_scale_totals(action),
         }, context_instance=RequestContext(request))
 
 

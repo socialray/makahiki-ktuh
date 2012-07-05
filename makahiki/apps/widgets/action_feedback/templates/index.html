@@ -3,6 +3,40 @@
     </div>
     <div class="content-box-contents widget-content">
     <script type="text/javascript" src="{{STATIC_URL}}js/flot/jquery.flot.js"></script>
+    <div class="container-fluid">
+        <div class="row-fluid">
+            <div id="graph_placeholder" class="span12" style="height:{{view_objects.action_feedback.stacked.height}}px"></div>
+<script type="text/javascript">
+    $(document).ready(function() {
+    	function plotWithOptions() {
+    		$.plot($("#graph_placeholder"), [{{view_objects.action_feedback.stacked.d5}},
+    		                                 {{view_objects.action_feedback.stacked.d4}},
+     		                                 {data: {{view_objects.action_feedback.stacked.d3}},
+     		                                  color: "rgba(255, 255, 255, 0.0)"},
+    		                                 {{view_objects.action_feedback.stacked.d2}},
+    		                                 {{view_objects.action_feedback.stacked.d1}}
+    		                                ], {
+    			series: {
+    				stack: true,
+    				bars: { show: true, barWidth: 0.6, horizontal: true}
+    			},
+    			yaxis: {
+    				ticks: {{view_objects.action_feedback.stacked.yticks|safe}}
+    			},
+    			xaxis: {
+    				ticks: {{view_objects.action_feedback.stacked.xticks|safe}}
+    			}
+    		} 
+    				
+    				);
+    	}
+    	
+    	plotWithOptions();
+    })    
+</script>            
+        </div>
+    </div>
+    
     <table class="table">
     <thead>
         <th>Action</th>
