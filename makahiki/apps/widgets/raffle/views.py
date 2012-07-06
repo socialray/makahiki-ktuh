@@ -1,5 +1,6 @@
 """Handle rendering of the raffle widget."""
 import datetime
+import random
 
 from django.http import HttpResponseRedirect, Http404
 from django.shortcuts import render_to_response, get_object_or_404
@@ -10,6 +11,7 @@ from django.views.decorators.cache import never_cache
 from django.template.context import RequestContext
 
 from apps.managers.challenge_mgr import  challenge_mgr
+from apps.widgets.notifications.models import NoticeTemplate, UserNotification
 from apps.widgets.raffle.models import  RafflePrize, RaffleTicket, POINTS_PER_TICKET, \
                                         RAFFLE_END_PERIOD
 
@@ -91,7 +93,7 @@ def remove_ticket(request, prize_id):
 
 
 @never_cache
-@user_passes_test(lambda u: u.is_staff, login_url="/account/cas/login")
+@user_passes_test(lambda u: u.is_staff, login_url="/landing")
 def raffle_form(request, prize_id):
     """Supply the raffle form."""
     _ = request
@@ -99,8 +101,8 @@ def raffle_form(request, prize_id):
     return render_to_response('view_prizes/form.txt', {
         'raffle': True,
         'prize': prize,
-        'round': prize.deadline.round_name
-    }, mimetype='text/plain')
+        'round': prize.round_name
+    }, context_instance=RequestContext(request), mimetype='text/plain')
 
 
 def raffle_prize_list(request):
@@ -109,3 +111,38 @@ def raffle_prize_list(request):
     return render_to_response("raffle_prize_list.html", {
         "raffle_list": raffle_prizes
         }, context_instance=RequestContext(request))
+
+
+@user_passes_test(lambda u: u.is_staff, login_url="/landing")
+def notify_winner(request):
+    """Sends an email to the user notifying them that they are a winner."""
+    _ = request
+
+    round_name = challenge_mgr.get_round_name()
+    prizes = RafflePrize.objects.filter(round_name=round_name)
+    for prize in prizes:
+        if prize.winner:
+            # Notify winner using the template.
+            template = NoticeTemplate.objects.get(notice_type='raffle-winner')
+            message = template.render({'PRIZE': prize})
+            UserNotification.create_info_notification(prize.winner, message, True, prize)
+
+    return HttpResponseRedirect("/admin/raffle/raffleprize/")
+
+
+@user_passes_test(lambda u: u.is_staff, login_url="/landing")
+def pick_winner(request):
+    """Picks the raffle game winners for the raffle deadline that has passed."""
+    _ = request
+    round_name = challenge_mgr.get_round_name()
+    prizes = RafflePrize.objects.filter(round_name=round_name)
+    for prize in prizes:
+        if not prize.winner:
+            # Randomly order the tickets and then pick a random ticket.
+            tickets = prize.raffleticket_set.order_by("?").all()
+            if tickets.count():
+                ticket = random.randint(0, tickets.count() - 1)
+                user = tickets[ticket].user
+                prize.winner = user
+                prize.save()
+    return HttpResponseRedirect("/admin/raffle/raffleprize/")

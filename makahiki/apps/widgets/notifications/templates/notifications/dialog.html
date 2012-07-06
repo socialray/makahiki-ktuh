@@ -55,38 +55,10 @@
                 </li>
                 <script type="text/javascript">
                     jQuery(document).ready(function ($) {
-//             $(".modal-footer .btn").click(function () {
-//                 $.post("{% url notifications_read notification.id %}", function (data) {
-                 //   $("#notification-item-{{notification.id}}").fadeOut();
-//                 });
-//             });
-
-            $(".notification-options .notification-share").click(function () {
-                log_js_action("notification", "{{notification.id}}", "share");
-                FB.ui(
-                        {
-                            method:'feed',
-                            name:'Kukui Cup',
-                            link:'http://{{request.META.HTTP_HOST}}',
-                            picture:'http://{{request.META.HTTP_HOST}}{{STATIC_URL}}images/old-logo.png',
-                            description:'{{notification.contents}}',
-                            display:'popup'
-                        },
-
-                        function (response) {
-                            if (response && response.post_id) {
-                                log_js_action("notification", "{{notification.id}}", "shared");
-                                $.post("{% url notifications_read notification.id %}", function (data) {
-                                    $("#notification-item-{{notification.id}}").fadeOut();
-                                });
-                            }
-                            else {
-                                log_js_action("notification", "{{notification.id}}", "share-canceled");
-                            }
-                        }
-                );
-            });
-        });
+                        $("#notification-dialog-{{notification.id}} .notification-options .notification-share").click(function () {
+                            fb_share('{{notification.id}}', '{{ notification.fb_contents }}');
+                        });
+                    });
                 </script>
             {% endfor %}
         </ul>
@@ -96,16 +68,8 @@
     </div>
 
 </div>
-<div id="purr-container"></div>
 <script type="text/javascript">
     $(document).ready(function () {
-//         $("#notification-dialog").dialog({
-//             modal:true,
-//             width:700,
-//             closeOnEscape:false,
-//             position:["center", 150]
-//         });
-
         var modalElement = $('#notificationModal');
         modalElement.modal({
             backdrop: true,
@@ -121,12 +85,7 @@
             log_js_action("notifications", "alert", 'view-lock-close');
         });
         modalElement.css('margin-top', (modalElement.outerHeight() / 2) * -1);
-        modalElement.modal('show');
-        
-//         $("#notification-dialog button").click(function () {
-//             log_js_action("notifications", "alert", "close");
-//             $("#notification-dialog").dialog("close");
-//         });
+        modalElement.modal('show')
             
     });
 </script>

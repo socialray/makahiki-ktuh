@@ -1,6 +1,28 @@
 {% with DEFAULT_VIEW_OBJECTS.notifications as notifications %}
 
 {% if notifications %}
+    <script type="text/javascript">
+            function fb_share(notification_id, text) {
+                log_js_action("notification", notification_id, "share");
+
+                var publish = {
+                    method: 'feed',
+                    name: 'Kukui Cup',
+                    link:'http://{{request.META.HTTP_HOST}}',
+                    description: text,
+                    display: 'popup'
+                };
+
+                FB.ui(publish, function(response) {
+                    if (response && response.post_id) {
+                        log_js_action("notification", notification_id, "shared");
+                    } else {
+                        log_js_action("notification", notification_id, "share-canceled");
+                    }
+                });
+            };
+    </script>
+
     {% if notifications.unread %}
     <div id="notification-unread">
         <span style="float: right;">
@@ -20,13 +42,12 @@
                 });
             });
         });
-        </script>
-
+    </script>
     {% endif %}
 
     {% if notifications.alerts %}
         {% include "widgets/notifications/templates/notifications/dialog.html" %}
     {% endif %}
+
 {% endif %}
 {% endwith %}
-
