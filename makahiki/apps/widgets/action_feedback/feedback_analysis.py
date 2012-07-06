@@ -1,7 +1,7 @@
 """Provides analysis functions for Action_Feedback widget."""
 from apps.widgets.action_feedback.models import ActionFeedback
 from apps.widgets.smartgrid.models import Action
-from django.db.models.aggregates import Count
+from django.db.models.aggregates import Count, Avg
 
 
 def get_action_feedback(action):
@@ -11,7 +11,9 @@ def get_action_feedback(action):
 
 def get_actions_with_feedback():
     """returns the actions with feedback."""
-    return Action.objects.annotate(num_feedback=Count('actionfeedback')).filter(num_feedback__gt=0)
+    return Action.objects.annotate(num_feedback=Count('actionfeedback'))\
+        .filter(num_feedback__gt=0)\
+        .annotate(ave_rating=Avg('actionfeedback__rating'))
 
 
 def get_feedback_comments(action):
@@ -25,7 +27,7 @@ def get_feedback_comments(action):
 def get_ordered_actions_with_feedback():
     """returns the actions with feedback ordered by level, category, and priority."""
     with_feedback = get_actions_with_feedback()
-    return with_feedback.order_by('level', 'category', 'priority')
+    return with_feedback.order_by('-ave_rating')   
 
 
 def build_feedback_data():
@@ -43,7 +45,9 @@ def build_feedback_data():
     max_pos = 0
     max_neg = 0
     for counter, action in enumerate(ordered_actions):
-        ticks.append([counter + 1, str(action.slug)])
+        ticks.append([counter + 1, str("<a href=\"/action_feedback/") +\
+                       str(action.type) + "/" + str(action.slug) +\
+                       "/view_feedback/\">" + str(action.slug) + "</a>"])
         feedback = get_action_feedback(action)
         if feedback.filter(rating=5).count() +\
          feedback.filter(rating=4).count() > max_pos:
