@@ -27,7 +27,7 @@ def get_feedback_comments(action):
 def get_ordered_actions_with_feedback():
     """returns the actions with feedback ordered by level, category, and priority."""
     with_feedback = get_actions_with_feedback()
-    return with_feedback.order_by('-ave_rating')   
+    return with_feedback.order_by('-ave_rating')
 
 
 def build_feedback_data():
