@@ -1,0 +1,37 @@
+{% if not action.completed %}
+    You will earn 2 points for making this commitment.
+    <p/>
+    You will need to come back after {{ action.duration }} days to get the rest of your
+    points.
+    {% if action.social_bonus > 0 %}
+        <p/>
+        (Optional) If you want to do this with a friend or friends, please enter
+        one of their Kukui Cup email addresses here for a social bonus:<br/>
+        {{ form.social_email.errors }}
+        {{ form.social_email }}
+    {% endif %}
+    <div class="activity-task-form-content-button">
+        <button id="submit_form_button3" class="btn btn-widget" style="cursor:pointer;"
+                onclick='$("#submit_form_button3").attr("disabled", "disabled");javascript:this.form.submit(); return false;'>
+            OK, accept commitment
+        </button>
+    </div>
+{% else %}
+    Thank you for the commitment.
+    <p/>
+    You will earned {{ action.point_value }} points.
+    {% if action.social_bonus > 0 %}
+        <p/>
+        (Optional) If you did this with a friend or friends, please enter
+        one of their Kukui Cup email addresses here for a social bonus:<br/>
+        {{ form.social_email.errors }}
+        {{ form.social_email }}
+    {% endif %}
+
+    <div class="activity-task-form-content-button">
+        <button id="submit_form_button4" class="btn btn-widget" style="cursor:pointer;"
+                onclick='$("#submit_form_button4").attr("disabled", "disabled");javascript:this.form.submit(); return false;'>
+            OK
+        </button>
+    </div>
+{% endif %}

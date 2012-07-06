@@ -691,7 +691,8 @@ class ActionMemberAdmin(admin.ModelAdmin):
                     "approval_status", "admin_comment")
             else:
                 self.fields = (
-                        "user", "action", "admin_link", "social_email", "approval_status")
+                        "user", "action", "admin_link", "social_email", "completion_date",
+                        "approval_status")
 
         return super(ActionMemberAdmin, self).get_form(request, obj, **kwargs)
 
