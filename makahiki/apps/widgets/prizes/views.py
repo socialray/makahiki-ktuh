@@ -51,6 +51,7 @@ def prize_form(request, prize_id):
     """Supply the prize form."""
     _ = request
     prize = get_object_or_404(Prize, pk=prize_id)
+    prize.winner = prize.leader().user
     return render_to_response('view_prizes/form.txt', {
         'raffle': False,
         'prize': prize,
