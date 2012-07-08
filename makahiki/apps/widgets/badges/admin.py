@@ -6,7 +6,7 @@ from apps.widgets.badges.models import Badge
 
 class BadgeAdmin(admin.ModelAdmin):
     """Category Admin"""
-    list_display = ["name", "points", "award_condition"]
+    list_display = ["name", "points", "award_condition", "priority"]
     prepopulated_fields = {"slug": ("name",)}
 
 admin.site.register(Badge, BadgeAdmin)

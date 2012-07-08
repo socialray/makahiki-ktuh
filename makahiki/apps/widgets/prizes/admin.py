@@ -13,7 +13,7 @@ class PrizeAdmin(admin.ModelAdmin):
     def winner(self, obj):
         """return the winner and link to pickup form."""
         leader = obj.leader()
-        if obj.award_to in ('individual_overall', 'individual_team'):
+        if leader and obj.award_to in ('individual_overall', 'individual_team'):
             return "%s (<a href='%s'>View pickup form</a>)" % (leader,
             reverse('prize_view_form', args=(obj.pk,)))
         else:
