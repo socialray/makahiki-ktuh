@@ -30,6 +30,26 @@ def get_ordered_actions_with_feedback():
     return with_feedback.order_by('-ave_rating')
 
 
+def build_google_chart_data():
+    """Builds the data for graphing the feedback in google visualizations."""
+    d = {}
+    ordered_actions = get_ordered_actions_with_feedback()
+    d['height'] = ordered_actions.count() * 50
+    action_feedback = []
+    for counter, action in enumerate(ordered_actions):
+        temp = []
+        temp.append(str(action.slug))
+        _ = counter
+        feedback = get_action_feedback(action)
+        temp.append(-feedback.filter(rating=2).count())
+        temp.append(-feedback.filter(rating=1).count())
+        temp.append(feedback.filter(rating=4).count())
+        temp.append(feedback.filter(rating=5).count())
+        action_feedback.append(temp)
+    d['data'] = action_feedback
+    return d
+
+
 def build_feedback_data():
     """Builds the data for graphing the feedback as a horizontal stacked
     bar chart."""
@@ -93,11 +113,11 @@ def get_likert_scale_totals(action):
 # temp['data'] = [query_set.filter(rating=i).count(), 1]
 # scale.append(temp)
 
-    scale.append([0.7, query_set.filter(rating=1).count()])
-    scale.append([1.7, query_set.filter(rating=2).count()])
-    scale.append([2.7, query_set.filter(rating=3).count()])
-    scale.append([3.7, query_set.filter(rating=4).count()])
-    scale.append([4.7, query_set.filter(rating=5).count()])
+    scale.append(['1', query_set.filter(rating=1).count()])
+    scale.append(['2', query_set.filter(rating=2).count()])
+    scale.append(['3', query_set.filter(rating=3).count()])
+    scale.append(['4', query_set.filter(rating=4).count()])
+    scale.append(['5', query_set.filter(rating=5).count()])
     return scale
 
 

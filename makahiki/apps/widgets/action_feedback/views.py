@@ -26,8 +26,8 @@ def supply(request, page_name):
     return {
         "action_feedback": feedback_analysis.get_action_likert_scales(),
         "analysis": feedback_analysis.get_analysis(),
-        "stacked": feedback_analysis.build_feedback_data()
-
+        "stacked": feedback_analysis.build_feedback_data(),
+        "google": feedback_analysis.build_google_chart_data()
     }
 
 
