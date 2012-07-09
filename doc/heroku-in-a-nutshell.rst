@@ -181,7 +181,7 @@ Make sure your public keys are available to heroku::
     Uploading SSH public key /Users/johnson/.ssh/id_rsa.pub
 
 Now invoke the script to push the master to Heroku, update requirements, sync the
-database, and move static media to S3:
+database, and move static media to S3::
 
   % scripts/update_instance.py -r kukuicup-uh
     Counting objects: 15, done.
@@ -194,41 +194,39 @@ database, and move static media to S3:
     -----> Python/Django app detected
     -----> Preparing Python interpreter (2.7.2)
     -----> Creating Virtualenv version 1.7
-       New python executable in .heroku/venv/bin/python2.7
-       Not overwriting existing python script .heroku/venv/bin/python (you must use .heroku/venv/bin/python2.7)
-       Installing distribute.....done.
-       Installing pip...............done.
+    New python executable in .heroku/venv/bin/python2.7
+    Not overwriting existing python script .heroku/venv/bin/python (you must use .heroku/venv/bin/python2.7)
+    Installing distribute.....done.
+    Installing pip...............done.
              :
     -----> Noticed pylibmc. Bootstrapping libmemcached.
     -----> Activating virtualenv
     -----> Installing dependencies using pip version 1.0.2
              :
-       Cleaning up...
+    Cleaning up...
     -----> Installing dj-database-url...
-       Cleaning up...
+    Cleaning up...
     -----> Injecting Django settings...
     -----> Discovering process types
-           Procfile declares types -> web
     -----> Compiled slug size is 26.1MB
     -----> Launching... done, v37
-           http://kukuicup-uh.herokuapp.com deployed to Heroku
 
     To git@heroku.com:kukuicup-uh.git
-       dec36d4..3313850  master -> master
+    dec36d4..3313850  master -> master
 
-       Running python makahiki/manage.py syncdb attached to terminal... up, run.1
-       Syncing...
-       Creating tables ...
-       Installing custom SQL ...
-       Installing indexes ...
-       Installed 0 object(s) from 0 fixture(s)
+    Running python makahiki/manage.py syncdb attached to terminal... up, run.1
+    Syncing...
+    Creating tables ...
+    Installing custom SQL ...
+    Installing indexes ...
+    Installed 0 object(s) from 0 fixture(s)
 
-       Synced:
-        > apps.lib.avatar
-          :
-       Migrated:
-        - apps.managers.challenge_mgr
-          :
+    Synced:
+     > apps.lib.avatar
+       :
+    Migrated:
+    - apps.managers.challenge_mgr
+       :
 
 
 

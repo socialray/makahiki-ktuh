@@ -289,6 +289,9 @@ specified, and the background color variables are commented out::
   //@page-bkg-color-start: @forest-gold; 
   //@page-bkg-color-end: lighten(@forest-gold, 10%); 
 
+Images should be stored in makahiki/site_media/static/images. By convention, name them
+<name>-theme-background.jpg, and make sure they are small in file size (around 50 KB).
+
 The background for the Google theme is (you guessed it), white.  So, we change these
 definitions so that `use-bkg-image` is false, and provide white as the background color::
 

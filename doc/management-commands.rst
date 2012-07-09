@@ -87,6 +87,11 @@ generate_forms
 
 .. automodule:: apps.widgets.prizes.management.commands.generate_forms
 
+cal_energy_baseline
+-------------------
+
+.. automodule:: apps.widgets.resource_goal.management.commands.cal_energy_baseline
+
 
 Automated management
 ********************

@@ -16,6 +16,11 @@ initialize_postgres
 -------------------
 .. automodule:: scripts.initialize_postgres
 
+update_instance
+---------------
+.. automodule:: scripts.update_instance
+
+
 Development scripts
 *******************
 
