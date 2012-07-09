@@ -21,11 +21,6 @@ import types
 sys.path.append(os.path.abspath('../makahiki'))
 #sys.path.append(os.path.abspath('../makahiki/apps'))
 
-#setup django
-import settings
-from django.core.management import setup_environ
-setup_environ(settings)
-
 # -- General configuration -----------------------------------------------------
 
 # If your documentation needs a minimal Sphinx version, state it here.
@@ -331,13 +326,23 @@ class Mock(object):
         else:
             return Mock()
 
+    @staticmethod
+    def parse(url):
+        return {}
+
 on_rtd = os.environ.get('READTHEDOCS', None) == 'True'
 if on_rtd:
-    TYPE_MODULES = ['south', 'staticfiles', 'django_nose', 'dj_database_url']
+    TYPE_MODULES = ['south', 'staticfiles', 'django_nose']
     for mod_name in TYPE_MODULES:
         sys.modules[mod_name] = types.ModuleType(mod_name)
         sys.modules[mod_name].__path__ = '/dev/null'
 
-    MOCK_MODULES = ['markdown']
+    MOCK_MODULES = ['markdown', 'dj_database_url']
     for mod_name in MOCK_MODULES:
         sys.modules[mod_name] = Mock()
+
+
+#setup django
+import settings
+from django.core.management import setup_environ
+setup_environ(settings)

@@ -17,9 +17,3 @@ Module :mod:`apps.managers.player_mgr.middleware`
 .. automodule:: apps.managers.player_mgr.middleware
    :members:
 
-Module :mod:`apps.managers.player_mgr.admin`
---------------------------------------------
-
-.. automodule:: apps.managers.player_mgr.admin
-   :members:
-
