@@ -333,11 +333,11 @@ class Mock(object):
 
 on_rtd = os.environ.get('READTHEDOCS', None) == 'True'
 if on_rtd:
-    TYPE_MODULES = ['south', 'staticfiles', 'django_nose']
+    TYPE_MODULES = ['south', 'staticfiles', 'django_nose', 'dj_database_url']
     for mod_name in TYPE_MODULES:
         sys.modules[mod_name] = types.ModuleType(mod_name)
         sys.modules[mod_name].__path__ = '/dev/null'
 
-    MOCK_MODULES = ['markdown','dj_database_url']
+    MOCK_MODULES = ['markdown']
     for mod_name in MOCK_MODULES:
         sys.modules[mod_name] = Mock()
