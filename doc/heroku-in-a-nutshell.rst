@@ -160,6 +160,8 @@ First, go to the makahiki directory, workon makahiki, and get the latest version
   % workon makahiki
   % git pull origin master
 
+You may want to run tests to make sure the master is appropriate for pushing to Heroku.
+
 Next, find out what remotes you have already. Make sure the app of interest is not already in
 your remotes::
 
@@ -178,9 +180,10 @@ Make sure your public keys are available to heroku::
     Found existing public key: /Users/johnson/.ssh/id_rsa.pub
     Uploading SSH public key /Users/johnson/.ssh/id_rsa.pub
 
-Now push the master to heroku::
+Now invoke the script to push the master to Heroku, update requirements, sync the
+database, and move static media to S3:
 
-  % git push kukuicup-uh master
+  % scripts/update_instance.py -r kukuicup-uh
     Counting objects: 15, done.
     Delta compression using up to 4 threads.
     Compressing objects: 100% (3/3), done.
@@ -213,10 +216,6 @@ Now push the master to heroku::
     To git@heroku.com:kukuicup-uh.git
        dec36d4..3313850  master -> master
 
-It is usually a good idea to sync and migrate the db after each push, which you accomplish
-in this way::
-
-    %  heroku run --app kukuicup-uh python makahiki/manage.py syncdb --noinput --migrate
        Running python makahiki/manage.py syncdb attached to terminal... up, run.1
        Syncing...
        Creating tables ...
