@@ -1,5 +1,5 @@
 // Visualization to show current power data.
-Makahiki_PowerMeterStatus = function (server_url, source, refresh_interval, viz_id, options) {
+Makahiki_PowerMeterStatus = function (server_url, source, refresh_interval, viz_name, options, id) {
     return callback();
 
     function callback() {
@@ -11,12 +11,12 @@ Makahiki_PowerMeterStatus = function (server_url, source, refresh_interval, viz_
 
         // Set a callback to run when the data has been retrieved.
         query.send(function (response) {
-            responseHandler(response, viz_id, refresh_interval);
+            responseHandler(response, viz_name + ""+ id, refresh_interval);
         });
     }
 
     /** Once dorm data is retrieved, create and display the chart with tooltips. */
-    function responseHandler(response, viz_id, rf_interval) {
+    function responseHandler(response, viz_name, rf_interval) {
         // Process errors, if any.
         if (response.isError()) {
             debug('Error in query: ' + response.getMessage() + ' ' + response.getDetailedMessage());
@@ -31,14 +31,15 @@ Makahiki_PowerMeterStatus = function (server_url, source, refresh_interval, viz_
         var now = new Date();
         var then = new Date(lastUpdate);
         var diff = now.getTime() - then.getTime();
-        $("#"+ viz_id).html(format_num(diff/1000) + " s");
-        if(diff/1000 > 2 * rf_interval) {
-            $("#"+ viz_id).css('color', 'red');
-            $("#"+ viz_id).css('font-face', 'bold');
-            $("#status").html('<blink>ERROR!</blink>');
-            $("#status").css('font-face', 'bold');
-            $("#status").css('color', 'red');
-      }
+          
+        $("#"+ viz_name).html(parseInt(format_num(diff / 1000)) + " s");
+        if (diff / 1000 > 2 * rf_interval) {
+            $("#" + viz_name).css('color', 'red');
+            $("#" + viz_name).css('font-face', 'bold');
+       }
+       else {
+          $("#"+ viz_name).css('color', 'black');
+      } 
     }
 
     // Add baseline value to the power data table

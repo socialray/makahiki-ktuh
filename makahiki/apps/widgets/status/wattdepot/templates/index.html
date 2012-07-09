@@ -2,11 +2,7 @@
 <div class="content-box-title">
       Watt-Depot Status
 </div>
-<div class="widget-content">
     <div class="row-fluid">
-        <div id="status" style="color:green;">
-        OK
-        </div>
         <div>
         Refresh Interval: {{interval}} s
         </div>
@@ -55,10 +51,9 @@
             new Makahiki_PowerMeterStatus( server_url,
                     source,
                     refreshInterval,
-                    "visualization_" + id,
-                    options);
+                    "visualization_",
+                    options, id);
         }
     </script>
-</div>
 
      {% endwith %}

@@ -1147,4 +1147,4 @@ td.energy-status-how-activities-content{vertical-align:text-top;}
 .wallpost-username{font-weight:bold;}
 .wallpost-posted{font-style:italic;font-size:0.9em;}
 #id_post{box-sizing:border-box;-webkit-box-sizing:border-box;-moz-box-sizing:border-box;-ms-box-sizing:border-box;width:92%;margin-left:4%;}
-@media (max-width:767px){.wall-posts .wallpost-image{float:left;display:inline;}}
+@media (max-width:767px){.wall-posts .wallpost-image{float:left;display:inline;}}#status,.float-left{display:inline-block;}
