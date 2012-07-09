@@ -3,6 +3,8 @@ All variables corresponding to environment variables have documentation for Read
 
 import os
 import sys
+import dj_database_url
+import djcelery
 
 ###############
 # PATH settings
@@ -318,7 +320,6 @@ COMPETITION_ROUNDS = None
 ##########
 BROKER_URL = "django://"  # tell kombu to use the Django database as the message queue
 
-import djcelery
 djcelery.setup_loader()
 
 CELERYBEAT_SCHEDULER = 'djcelery.schedulers.DatabaseScheduler'
@@ -339,7 +340,6 @@ MAKAHIKI_DATABASE_URL = env('MAKAHIKI_DATABASE_URL', '')
 """[Required if MAKAHIKI_USE_HEROKU is not true] Specify the Database URL.
 Example: postgres://username:password@db_host:db_port/db_name"""
 
-import dj_database_url
 if MAKAHIKI_USE_HEROKU:
     DATABASE_URL = env('DATABASE_URL', '')
     DATABASES = {'default': dj_database_url.parse(DATABASE_URL)}
