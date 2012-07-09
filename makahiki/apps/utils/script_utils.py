@@ -4,9 +4,9 @@ import os
 import sys
 
 
-def exit_with_help():
+def exit_with_help(msg):
     """Print usage of the command, then exit with error code."""
-    print __doc__
+    print msg
     sys.exit(2)
 
 

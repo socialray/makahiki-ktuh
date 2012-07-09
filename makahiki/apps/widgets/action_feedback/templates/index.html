@@ -3,6 +3,36 @@
     </div>
     <div class="content-box-contents widget-content">
     <script type="text/javascript" src="{{STATIC_URL}}js/flot/jquery.flot.js"></script>
+    <script type="text/javascript" src="https://www.google.com/jsapi"></script>
+    <script type="text/javascript">
+      google.load("visualization", "1", {packages:["corechart"]});
+      google.setOnLoadCallback(drawChart);
+      function drawChart() {
+        var data = new google.visualization.DataTable();
+        data.addColumn('string', 'Action');
+        data.addColumn('number', 'Disliked');
+        data.addColumn('number', 'Hated');
+        data.addColumn('number', 'Liked');
+        data.addColumn('number', 'Loved');
+        data.addRows({{view_objects.action_feedback.google.data|safe}});
+        
+        var options = {
+                title: 'Action Feedback',
+                isStacked: true,
+                backgroundColor: 'transparent',
+                vAxis: {title: 'Action',  titleTextStyle: {color: 'red'}}
+        };
+
+        var chart = new google.visualization.BarChart(document.getElementById('graph_placeholder'));
+        chart.draw(data, options);        
+      }
+    </script>
+    <div class="container-fluid">
+        <div id="feedback_graph" class="row-fluid">
+            <div id="graph_placeholder" class="span12" style="height:{{view_objects.action_feedback.google.height}}px"></div>
+        </div>
+    </div>
+    
     <table class="table">
     <thead>
         <th>Action</th>
@@ -14,28 +44,53 @@
     {% for key,value in view_objects.action_feedback.analysis.items %}
     {% if key != 'overall_average' %}
     <tr {% if value.average < view_objects.action_feedback.analysis.overall_average %} style="color: red" {%endif%}>
-        <td><a href="{% url view_feedback value.action.type value.action.slug %}">{{key}}</a> </td>
-        <td>{{value.average}}</td>
-        <td>{{value.count}}</td>
-        <td><div class="row-fluid"><div id="graph{{forloop.counter}}" class="span12" style="height: 45px;"> </div></div></td>
+        <td width="30%"><a href="{% url view_feedback value.action.type value.action.slug %}">{{key}}</a> </td>
+        <td width="20%">{{value.average}}</td>
+        <td width="20%">{{value.count}}</td>
+        <td width="30%"><div class="row-fluid"><div id="graph{{forloop.counter}}" class="span12" style="height: 45px;"> </div></div></td>
     </tr>
     <script type="text/javascript">
-    $(document).ready(function () {
-    var data = {{value.scale}}
-    var options = {
-    	   bars: {show: true, barWidth: 0.6},
-    	   grid: {show: false}
-        };
+    google.load("visualization", "1", {packages:["corechart"]});
+    google.setOnLoadCallback(drawIndividualChart{{forloop.counter}});
+    function drawIndividualChart{{forloop.counter}}() {
+      var data = new google.visualization.DataTable();
+      data.addColumn('string', 'Rating');
+      data.addColumn('number', 'Count');
+      data.addRows({{value.scale|safe}});
+      
+      var options = {
+              backgroundColor: 'transparent',
+//               hAxis: {gridlines: {color: 'transparent'},
+//             	      viewWindow: {min: 0, max: 6},
+//             	      viewWindowMode: 'pretty'
+//             	     },
+              legend: 'none',
+              vAxis: {baselineColor: 'transparent', 
+            	      format: "###",
+            	      gridlines: {color: 'transparent', count: 2}}
+            
+      };
 
-    var plotarea = $("#graph{{forloop.counter}}");
-//    $.plot(plotarea, data, options);
-    $.plot($("#graph{{forloop.counter}}"), [data], {
-    	bars: {show: true, barWidth: 0.6}, 
-    	grid: {show: false}
-    	});
-//    $.plot($("#graph{{forloop.counter}}"), data, options); 
+      var chart = new google.visualization.ColumnChart(document.getElementById('graph{{forloop.counter}}'));
+      chart.draw(data, options);        
+    }
 
-});
+//     $(document).ready(function () {
+//     var data = {{value.scale}}
+//     var options = {
+//     	   bars: {show: true, barWidth: 0.6},
+//     	   grid: {show: false}
+//         };
+
+//     var plotarea = $("#graph{{forloop.counter}}");
+// //    $.plot(plotarea, data, options);
+//     $.plot($("#graph{{forloop.counter}}"), [data], {
+//     	bars: {show: true, barWidth: 0.6}, 
+//     	grid: {show: false}
+//     	});
+// //    $.plot($("#graph{{forloop.counter}}"), data, options); 
+
+// });
 </script>
     {% endif %}
     {% endfor %}

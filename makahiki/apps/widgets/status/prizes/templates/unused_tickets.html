@@ -5,19 +5,39 @@
             Unused Tickets
         </div>
 
-        <div class="content-body"
-             style='font-weight: bold;{% if pending_members > 50 %}color: red{% endif %}'>
-            <center>There are {{ unused }} tickets that have not been allocated.<br/></center>
+        <div class="content-body">
+            <center>
+                <div style='font-weight: bold;{% if pending_members > 50 %}color: red{% endif %}'>
+                    There are {{ view_objects.status__prizes.unused }} unallocated .<br/>
+                </div>
+            </center>
             {% if has_errors %}
                 <div style='color: red; font-weight: bold'>
                     The following users have more tickets than points
                     <ul class="table-striped">
                         {% for profile in errors %}
-                            <li>{{ profile.name }} ({{ profile.user.username }})</li>
+                            <li>{{ view_objects.status__prizes.profile.name }} ({{ view_objects.status__prizes.profile.user.username }})</li>
                         {% endfor %}
                     </ul>
                 </div>
             {% endif %}
+            <table class="table-striped">
+                <tr>
+                    <th class="column-text" width="60%">Player</th>
+                    <th class="column-number" width="20%">Unused Tickets</th>
+                </tr>
+                {% for item in view_objects.status__prizes.unused_tickets%} 
+                    <tr>
+                        <td class="column-text" width="60%">
+                            {{ item.0 }}
+                        </td>
+                        <td class="column-number" width="20%">
+                            {{ item.1 }}   
+                        </td>
+                    </tr>
+                {% endfor %}
+            </table>
+
         </div>
     </div>
 </div> 

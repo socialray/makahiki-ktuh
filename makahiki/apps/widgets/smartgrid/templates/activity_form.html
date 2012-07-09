@@ -1,0 +1,47 @@
+{% if form.image_response %}         {# image #}
+    {{ action.activity.confirm_prompt }} <p/>
+    {% if form.response %}
+        {{ form.response.errors }}
+        {{ form.response }}
+    {% endif %}
+    {{ form.image_response.errors }}
+    {{ form.image_response }}
+
+{% else %}
+    {% if form.action_question %}                                {# question #}
+        Please answer the following question(s) and submit your answer(s).
+        <br>You can also click on the "Cancel" button to go back to review the information.
+        <p/>
+        {{ action.activity.confirm_prompt }} <p/>
+        {{ form.question }}
+        <b>{{ form.action_question.question }}</b> <br/>
+        {% if form.action_question.questionchoice_set.count > 0 %}    {# choice response question #}
+            {{ form.choice_response.errors }}
+            {{ form.choice_response }}
+        {% else %}                                        {# text response question #}
+            {{ form.response.errors }}
+            {{ form.response }}
+        {% endif %}
+    {% else %}                                       {# free text #}
+        {{ action.activity.confirm_prompt }} <p/>
+        {{ form.response.errors }}
+        {{ form.response }}
+    {% endif %}
+{% endif %}
+{% if action.social_bonus > 0 %}
+    <p/>
+    (Optional) If you did this with a friend or friends, please enter
+    one of their Kukui Cup email addresses here for a social bonus: <br/>
+    {{ form.social_email.errors }}
+    {{ form.social_email }}
+{% endif %}
+
+<div class="activity-task-form-content-button">
+    <button id="submit_form_button5" class="btn btn-widget" style="cursor:pointer;"
+            onclick='$("#submit_form_button5").attr("disabled", "disabled");javascript:this.form.submit(); return false;'>
+        Submit
+    </button>
+    <button id="cancel_form_button5" class="btn btn-widget" style="cursor:pointer;"
+            onclick='$("#taskModal").modal("hide"); return false;'>Cancel
+    </button>
+</div>

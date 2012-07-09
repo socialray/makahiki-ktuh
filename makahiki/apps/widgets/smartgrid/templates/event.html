@@ -1,0 +1,72 @@
+{% extends "task_base.html" %}
+
+{% block action_completed_info %}
+                <b>Action Completion Status</b><br/>
+                {% if action.event.is_event_completed %}
+                    Thank you for attending the event.
+                    Click on the "I Did it" button to get the rest of your points.
+                    <br/>
+                {% else %}
+                    Thank you! You've earned 2 bonus points by signing up.
+                    After the {{ action.type }}, please come back here within 2 days to
+                    get your points.
+                    If you sign up but do not attend, you will lose the 2 point
+                    signing bonus and pay a 2 point "no-show" penalty.
+                    <br/>
+                {% endif %}
+{% endblock %}
+
+
+{% block action_not_completed %}
+        {% if action.event.is_event_completed %}
+            <b>This event was already completed at {{ action.event.event_date }} <br/>
+                If you attended the event, Click on the "I Did it" button to get
+                your points. <p/>
+                <a onclick="task_form_overlay(event)">
+                    <button style="cursor:pointer;" class="btn btn-widget">
+                        I Did it
+                        <img src="{{ STATIC_URL}}images/right.png"
+                             width="25" align="center">
+                    </button>
+                </a>
+            </b>
+        {% else %}
+            {% if action.available_seat > 0 %}
+                {# <a href="{% url activity_add_task action.type action.slug %}"> #}
+                <form action='{% url activity_add_task action.type action.slug %}'
+                      method='post'>
+                    {% csrf_token %}
+                    <button id="submit_button5" style="cursor:pointer;" class="btn btn-widget"
+                            onclick='$("#submit_button5").attr("disabled", "disabled");javascript:this.form.submit(); return false;'>
+                        I want to sign up
+                        <img src="{{ STATIC_URL }}images/right.png"
+                             width="25" align="center"/>
+                    </button>
+                </form>
+                {# </a> #}
+            {% else %}
+                <b>This {{ action.type }} is full. You can still try to attend on
+                    a space available basis.</b>
+            {% endif %}
+        {% endif %}
+{% endblock %}
+
+{% block action_completed_button %}
+        {% if action.event.is_event_completed %}
+            <a onclick="task_form_overlay(event)">
+                <button style="cursor:pointer;" class="btn btn-wdiget">I Did it
+                    <img src="{{ STATIC_URL}}images/right.png" width="25" align="center">
+                </button>
+            </a>
+        {% else %}
+            <form action='{% url activity_drop_task action.type action.slug %}'
+                  method='post'>
+                {% csrf_token %}
+                <button id="submit_button1" style="cursor:pointer;" class="btn btn-widget"
+                        onclick='$("#submit_button1").attr("disabled", "disabled");javascript:this.form.submit(); return false;'>
+                    Take me off the signup list
+                    <img src="{{ STATIC_URL}}images/left.png" width="25" align="center">
+                </button>
+            </form>
+        {% endif %}
+{% endblock %}

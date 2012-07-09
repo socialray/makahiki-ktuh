@@ -10,7 +10,7 @@
                     /></a>
         <br style="clear: both"/>
     </div>
-    <div class="content-box-contents">
+    <div class="scrollable">
         <ul>
         {% for member in view_objects.team_members.team_members %}
         <li>
@@ -35,9 +35,10 @@
             </div>
         {% endfor %}
         </ul>
-        <div class='news-members-link'>
-            <a href="{% url news_team_members %}">View all members</a>
-        </div>
+    </div>
+
+    <div class='news-members-link'>
+        <a href="{% url news_team_members %}">View Details</a>
     </div>
 </div>
 

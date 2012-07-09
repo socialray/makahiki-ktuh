@@ -1,0 +1,11 @@
+{% extends "admin/change_list.html" %}
+{% load i18n admin_static admin_list %}
+{% load url from future %}
+{% load admin_urls %}
+
+{% block object-tools-items %}
+    <li><a href="/admin/smartgrid/activity/add">Add Activity</a></li>
+    <li><a href="/admin/smartgrid/commitment/add">Add Commitment</a></li>
+    <li><a href="/admin/smartgrid/event/add">Add Event</a></li>
+    <li><a href="/admin/smartgrid/filler/add">Add Filler</a></li>
+{% endblock %}

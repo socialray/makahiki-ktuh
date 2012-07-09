@@ -1,0 +1,187 @@
+{% load markup %}
+<div class="content-box">
+<div class="content-box-title">
+    <table>
+        <tr>
+            <td>About the {{ action.type }}</td>
+            <td width="1%">
+                <a href="#">
+                    <img src="{{ STATIC_URL}}images/icons/icon-help-sm.png"
+                         width="20" align="center"
+                         title="Click to get help about this window"
+                         onclick="toggleHelp(event, 'widget', '{{action.type}}-details'); return false;"
+                            /></a>
+            </td>
+        </tr>
+    </table>
+</div>
+<div class="content-box-contents">
+{% if action.completed %}
+    {% if action.member.approval_status == "approved" or action.member.award_date %}
+        <div class="activity-task-details-info">
+            <p/>
+            <div style="text-align:left; margin-left:10px;">
+                <b>Action Completion Status</b><br/>
+                Congratulations! You did it and earned {{ action.member.points_awarded }}
+                points! <br/>
+                {% if action.member.social_bonus_awarded %}
+                    <span style="color:orange"> Plus {{ action.social_bonus }} social bonus points!</span> <br/>
+                {% endif %}
+                You may have unlocked new activities in the smart grid game.<br/>
+
+                {% if action.member.admin_comment %}
+                    Here is the feedback: <br/>
+                    <span style="color:orange">{{ action.member.admin_comment }}</span> <br/>
+                {% endif %}
+            </div>
+            <hr/>
+            {% include "widgets/action_feedback/templates/feedback_form.html" %}
+        </div>
+    {% else %}
+        <div class="activity-task-details-info">
+            <p/>
+            <div style="text-align:left; margin-left:10px;">
+                {% block action_completed_info %} {% endblock %}
+            </div>
+            <hr/>
+            {% include "widgets/action_feedback/templates/feedback_form.html" %}
+        </div>
+    {% endif %}
+
+
+{% endif %}
+
+
+<p/>
+<center><b>{{ action.title }}</b></center>
+
+<p/>
+{% if action.image %}
+    <center><img src="{{ action.image.url }}" /> </center>
+{% endif %}
+
+<p/>
+{{ action.description|markdown }}
+
+<p/>
+{% if action.video_id %}
+    {% include "components/action_video.html" with action=action %}
+{% endif %}
+
+{% if action.embedded_widget %}
+    {% include view_objects.embedded_widget_template %}
+{% endif %}
+
+<p/>
+<center>
+
+{% if not action.completed %}              <!-- not done yet  -->
+    {% block action_not_completed %} {% endblock %}
+{% else %}
+    {% block action_completed_button %} {% endblock %}
+{% endif %}
+<br/> <br/>
+</center>
+<p>
+</div>
+</div>
+
+<div class="modal hide fade" id="taskModal">
+    <div class="modal-header">
+        <a class="close" data-dismiss="modal">x</a>
+        <h3>{{form.form_title}}</h3>
+    </div>
+    <div class="modal-body" id="modal-body">
+        {% include "task_form.html" %}
+    </div>
+    <div class="modal-footer">
+        <a href="#" class="btn btn-widget" data-dismiss="modal">Close dialog box</a>
+    </div>
+</div>
+
+<div id="purr-container"></div>
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        var notification = getCookie("task_notify");
+        if (notification != null) {
+            notification = notification.replace(/"/g, '');
+
+            var notice = '<div class="notice">'
+                    + '<img src="{{ STATIC_URL}}images/icons/icon-notify.png" width="30" align="center" />'
+                    + '<div class="body">'
+                    + notification
+                    + '</div>'
+                    + '</div>';
+
+            $('#purr-container').css({
+                position:'absolute',
+                left: ($(window).width() - $(notice).outerWidth())/2,
+                top: ($(window).height() - $(notice).outerHeight())/2
+            });
+
+            $(notice).purr(
+                    {
+                        usingTransparentPNG:true,
+                        fadeInSpeed:600,
+                        fadeOutSpeed:600,
+                        removeTimer:2500,
+                        isSticky:false
+                    });
+//             console.log('notice width ' + $(notice).outerWidth());
+//             console.log('purr width ' + $('#purr-container').outerWidth());
+            $('#purr-container').css({
+                position:'absolute',
+                left: ($(window).width() - $('#purr-container').outerWidth())/2,
+                top: ($(window).height() - $('#purr-container').outerHeight())/2
+            });
+
+            deleteCookie("task_notify");
+        }
+
+        {% if display_form %}
+            task_form_overlay();
+        {% endif %}
+    });
+
+    function hasClass(ele,cls) {
+        return ele.className.match(new RegExp('(\\s|^)'+cls+'(\\s|$)'));
+    }
+
+    function addClass(ele,cls) {
+        if (!this.hasClass(ele,cls)) ele.className += " "+cls;
+    }
+
+    function removeClass(ele,cls) {
+        if (hasClass(ele,cls)) {
+            var reg = new RegExp('(\\s|^)'+cls+'(\\s|$)');
+            ele.className=ele.className.replace(reg,' ');
+        }
+    }
+
+    function task_form_overlay(event) {
+        var modalElement = $('#taskModal');
+
+        modalElement.modal({
+            backdrop: true,
+            keyboard: true,
+            show: false
+        });
+        // set up event logging
+        modalElement.on('shown', function() {
+            log_js_action("smartgrid", "{{action.slug}}", "shown-form");
+        });
+        modalElement.on('hidden', function() {
+            log_js_action("smartgrid", "{{action.slug}}", "close-form");
+        });
+        modalElement.css('margin-top', (modalElement.outerHeight() / 2) * -1);
+        modalElement.modal('show');
+
+        $('#id_response').focus();
+
+        removeClass(document.getElementById('task-feedback'), 'hidden');
+        return false;
+
+    }
+
+</script>

@@ -21,7 +21,13 @@
     </div>
 
     <div class="span7">
-        {% include "task_content.html" %}
+        {% if action.type == "commitment" %}
+            {% include "commitment.html" %}
+        {% elif action.type == "event" or action.type == "excursion" %}
+            {% include "event.html" %}
+        {% elif action.type == "activity" %}
+            {% include "activity.html" %}
+        {% endif %}
     </div>
     </div>
 </div>    

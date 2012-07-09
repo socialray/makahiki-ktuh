@@ -271,6 +271,11 @@ class Action(models.Model):
         ordering = ("level", "category", "priority")
 
 
+class Filler(Action):
+    """Filler action. It is always locked"""
+    pass
+
+
 class Commitment(Action):
     """Commitments involve non-verifiable actions that a user can commit to.
     Typically, they will be worth fewer points than activities."""
@@ -278,10 +283,6 @@ class Commitment(Action):
         default=5,
         help_text="Duration of commitment, in days."
     )
-
-    class Meta:
-        """meta"""
-        verbose_name_plural = "action: Commitments"
 
 
 class Activity(Action):
@@ -347,7 +348,7 @@ class Activity(Action):
 
     class Meta:
         """meta"""
-        verbose_name_plural = "action: Activities"
+        verbose_name_plural = "Activities"
 
 
 class Event(Action):
@@ -375,16 +376,14 @@ class Event(Action):
         help_text="Specify the max number of seats available to the event."
     )
 
+    is_excursion = models.BooleanField(default=False, help_text="Is excursion?")
+
     def is_event_completed(self):
         """Determines if the event is completed."""
         result = datetime.datetime.today() - self.event_date
         if result.days >= 0 and result.seconds >= 0:
             return True
         return False
-
-    class Meta:
-        """meta"""
-        verbose_name_plural = "action: Events"
 
 
 class ActionMember(models.Model):
@@ -561,24 +560,25 @@ class ActionMember(models.Model):
 
         # award social bonus to others who referenced my email and successfully completed
         # the activity
-        ref_members = ActionMember.objects.filter(action=self.action,
-                                                  approval_status="approved",
-                                                  social_email=self.user.email)
-        for m in ref_members:
-            if not m.social_bonus_awarded:
-                ref_profile = m.user.get_profile()
-                ref_profile.add_points(m.action.social_bonus,
-                                       m.award_date,
-                                       social_message, self)
-                m.social_bonus_awarded = True
-                m.save()
+        if self.user.email:
+            ref_members = ActionMember.objects.filter(action=self.action,
+                                                      approval_status="approved",
+                                                      social_email=self.user.email)
+            for m in ref_members:
+                if not m.social_bonus_awarded:
+                    ref_profile = m.user.get_profile()
+                    ref_profile.add_points(m.action.social_bonus,
+                                           m.award_date,
+                                           social_message, self)
+                    m.social_bonus_awarded = True
+                    m.save()
 
         ## award social bonus to myself if the ref user had successfully completed the activity
         if self.social_email and not self.social_bonus_awarded:
             ref_members = ActionMember.objects.filter(social_email=self.social_email,
                                                       approval_status="approved",
                                                       action=self.action)
-            for m in ref_members:
+            if ref_members:
                 profile.add_points(self.action.social_bonus,
                                    self.award_date,
                                    social_message, self)
@@ -639,12 +639,12 @@ class ActionMember(models.Model):
 
         # Construct the message to be sent.
         status_nicely = 'not approved' if status != 'approved' else status
-        message = "Your response to <a href='%s'>%s</a> %s was %s." % (
+        message = 'Your response to <a href="%s">"%s"</a> %s was %s.' % (
             reverse("activity_task", args=(self.action.type, self.action.slug,)),
             self.action.title,
             # The below is to tell the javascript to convert into a pretty date.
             # See the prettyDate function in media/js/makahiki.js
-            "<span class='rejection-date' title='%s'></span>" % self.submission_date.isoformat(),
+            '<span class="rejection-date" title="%s"></span>' % self.submission_date.isoformat(),
             status_nicely,
             )
 

@@ -126,7 +126,12 @@ def update_fake_water_usage():
             # assume the average water usage is 80 gallon per person per day
             average_usage = 80
             actual_usage = average_usage * 0.9
-            water, _ = WaterUsage.objects.get_or_create(team=team, date=date.date())
+            water = WaterUsage.objects.filter(team=team, date=date.date())
+            if water:
+                water = water[0]
+            else:
+                water = WaterUsage(team=team, date=date.date())
+
             water.time = date.time()
             water.usage = actual_usage * count
             water.save()

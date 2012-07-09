@@ -16,37 +16,16 @@
             <a class="notification-share" href="javascript:void(0);">Click here to share on Facebook</a>
         {% endif %}
 
-<!--         <br style="clear: both"/> -->
+
+        <!--         <br style="clear: both"/> -->
     </div>
     <div style="clear:both"></div>
-
-    <script type="text/javascript">
-        jQuery(document).ready(function ($) {
-            $("#notification-item-{{notification.id}} .notification-share").click(function () {
-                log_js_action("notification", "{{notification.id}}", "share");
-                FB.ui(
-                        {
-                            method:'feed',
-                            name:'Kukui Cup',
-                            link:'http://{{request.META.HTTP_HOST}}',
-                            picture:'http://{{request.META.HTTP_HOST}}{{STATIC_URL}}images/old-logo.png',
-                            description:'{{notification.contents}}',
-                            display:'popup'
-                        },
-
-                        function (response) {
-                            if (response && response.post_id) {
-                                log_js_action("notification", "{{notification.id}}", "shared");
-                                $.post("{% url notifications_read notification.id %}", function (data) {
-                                    $("#notification-item-{{notification.id}}").fadeOut();
-                                });
-                            }
-                            else {
-                                log_js_action("notification", "{{notification.id}}", "share-canceled");
-                            }
-                        }
-                );
-            });
-        });
-    </script>
 </li>
+
+<script type="text/javascript">
+    jQuery(document).ready(function ($) {
+        $("#notification-item-{{notification.id}} .notification-options .notification-share").click(function () {
+            fb_share('{{notification.id}}', '{{ notification.fb_contents }}');
+        });
+    });
+</script>

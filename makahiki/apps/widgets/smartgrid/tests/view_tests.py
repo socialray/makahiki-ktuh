@@ -112,7 +112,7 @@ class ActivitiesFunctionalTest(TransactionTestCase):
         )
         member.save()
         response = self.client.get(reverse("learn_index"))
-        self.assertContains(response, "Your response to <a href='%s'>%s</a>" % (
+        self.assertContains(response, 'Your response to <a href="%s">"%s"</a>' % (
             reverse("activity_task", args=(activity.type, activity.slug,)),
             activity.title,
             ))

@@ -69,6 +69,12 @@
                                                         {% endif %}
                                                         {# ------- end task.type #}
                                                     </a>
+                                                {% elif task.type == 'filler' %}
+                                                    <br/>
+                                                    <a href="javascript:void(0);"
+                                                       onclick="showFillerModal(event); return false;">
+                                                        <h3>X</h3>
+                                                    </a>
                                                 {% else %}        {# ------ is lock #}
                                                     <br/>
                                                     <a class="whatever"
@@ -90,7 +96,6 @@
                                     </td>
                                 </tr>
                             {% endfor %}
-
                         </table>
                     </td>
                 {% endfor %}
@@ -120,6 +125,10 @@
                     <div class="excursion-legend"></div>
                 </td>
                 <td width=100>excursion</td>
+                <td>
+                    <div class="filler-legend"></div>
+                </td>
+                <td width=100>filler</td>
             </tr>
         </table>
 

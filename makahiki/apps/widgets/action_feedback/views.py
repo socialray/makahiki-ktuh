@@ -25,7 +25,9 @@ def supply(request, page_name):
 
     return {
         "action_feedback": feedback_analysis.get_action_likert_scales(),
-        "analysis": feedback_analysis.get_analysis()
+        "analysis": feedback_analysis.get_analysis(),
+        "stacked": feedback_analysis.build_feedback_data(),
+        "google": feedback_analysis.build_google_chart_data()
     }
 
 
@@ -41,7 +43,7 @@ def action_feedback(request, action_type, slug):
     form = ActionFeedbackForm(request.POST)
     if form.is_valid():
         print form.cleaned_data
-    feedback, _ = ActionFeedback.objects.get_or_create(action=action, user=user)
+    feedback, created = ActionFeedback.objects.get_or_create(action=action, user=user)
 
     if 'Score' in request.POST:
         feedback.rating = request.POST['Score']
@@ -54,10 +56,11 @@ def action_feedback(request, action_type, slug):
     feedback.changed = datetime.datetime.now()
     feedback.save()
 
-    # Give the user points for providing feedback
-    profile.add_points(score_mgr.feedback_points(),
-                       datetime.datetime.today(),
-                       "%s provided feedback about %s" % (user.username, action.name))
+    if created:
+        # Give the user points for providing feedback
+        profile.add_points(score_mgr.feedback_points(),
+                           datetime.datetime.today(),
+                           "%s provided feedback about %s" % (user.username, action.name))
     # Take them back to the action page.
     return HttpResponseRedirect(reverse("activity_task", args=(action.type, action.slug,)))
 
@@ -72,7 +75,7 @@ def view_feedback(request, action_type, slug):
     return render_to_response("feedback_details.html", {
         "action": action,
         "feedback": feedback_analysis.get_action_feedback(action),
-        "scale": feedback_analysis.get_likert_scale_totals(action)
+        "scale": feedback_analysis.get_likert_scale_totals(action),
         }, context_instance=RequestContext(request))
 
 

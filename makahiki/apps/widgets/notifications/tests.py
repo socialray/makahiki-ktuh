@@ -30,6 +30,7 @@ class NotificationUnitTests(TransactionTestCase):
         notifications = get_unread_notifications(user)
         self.assertEqual(notifications["alerts"][0], alert,
             "Alert notification should have been returned.")
+        unread = notifications["unread"]
         self.assertEqual(unread.count(), 4, "There should be four unread notifications.")
 
 

@@ -46,14 +46,14 @@ def main(argv):
     try:
         opts, args = getopt.getopt(argv, "t:r:h", ["type=", "heroku=", "help"])
     except getopt.GetoptError:
-        script_utils.exit_with_help()
+        script_utils.exit_with_help(__doc__)
 
     if not opts:
-        script_utils.exit_with_help()
+        script_utils.exit_with_help(__doc__)
 
     for opt in opts:
         if opt[0] == "-h" or opt[0] == "--help":
-            script_utils.exit_with_help()
+            script_utils.exit_with_help(__doc__)
         if opt[0] == "-t" or opt[0] == "--type":
             instance_type = opt[1]
         if opt[0] == "-r" or opt[0] == "--heroku":
@@ -62,7 +62,7 @@ def main(argv):
             fixture_path = "makahiki/fixtures"
 
     if not instance_type in ("default", "demo", "test"):
-        script_utils.exit_with_help()
+        script_utils.exit_with_help(__doc__)
 
     _ = args
 
