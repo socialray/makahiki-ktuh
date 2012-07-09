@@ -180,8 +180,8 @@ Make sure your public keys are available to heroku::
     Found existing public key: /Users/johnson/.ssh/id_rsa.pub
     Uploading SSH public key /Users/johnson/.ssh/id_rsa.pub
 
-Now invoke the script to push the master to Heroku, update requirements, sync the
-database, and move static media to S3::
+Now invoke the script to push the master to Heroku.  This also updates requirements, syncs the
+database, and moves static media to S3::
 
   % scripts/update_instance.py -r kukuicup-uh
     Counting objects: 15, done.
