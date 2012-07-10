@@ -53,16 +53,10 @@ verify_quests
 
 .. automodule:: apps.widgets.quests.management.commands.verify_quests
 
-add_codes
----------
-
-.. automodule:: apps.widgets.smartgrid.management.commands.add_codes
-
-regenerate_codes
+verify_smartgrid
 ----------------
 
-.. automodule:: apps.widgets.smartgrid.management.commands.regenerate_codes
-
+.. automodule:: apps.widgets.smartgrid.management.commands.verify_smartgrid
 
 Challenge management
 ********************
@@ -103,19 +97,6 @@ check_water_goal
 ----------------
 
 .. automodule:: apps.widgets.resource_goal.management.commands.check_water_goal
-
-process_notices
----------------
-
-.. automodule:: apps.widgets.smartgrid.management.commands.process_notices
-
-send_reminders
---------------
-
-.. automodule:: apps.widgets.smartgrid.management.commands.send_reminders
-
-
-
 
 
 

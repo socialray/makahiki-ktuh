@@ -156,13 +156,15 @@ def available_widgets():
 
 
 def get_all_round_info():
-    """Returns a dictionary containing all the round information."""
+    """Returns a dictionary containing all the round information,
+    example: {"Round 1": {"start": start_date, "end": end_date,}}"""
     return settings.COMPETITION_ROUNDS
 
 
 def get_round_info(round_name=None):
     """Returns a dictionary containing round information, if round_name is not specified,
-    returns the current round info."""
+    returns the current round info.
+    example: {"name": round_name, "start": start_date, "end": end_date,} """
     rounds = get_all_round_info()
     if not round_name:
         round_name = get_round_name()
