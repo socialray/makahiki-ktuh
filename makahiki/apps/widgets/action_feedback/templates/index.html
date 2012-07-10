@@ -1,3 +1,4 @@
+{% load humanize %}
     <div class="content-box-title">
     Activity, Commitment, Event, and Excursion Feedback
     </div>
@@ -36,17 +37,16 @@
     <table class="table">
     <thead>
         <th>Action</th>
-        <th>Average Rating ({{view_objects.action_feedback.analysis.overall_average}}) </th>
+        <th>Average Rating ({{view_objects.action_feedback.analysis.overall_average|floatformat:2}}) </th>
         <th># Feedback</th>
         <th>Feedback</th>
     </thead>
     <tbody>
-    {% for key,value in view_objects.action_feedback.analysis.items %}
-    {% if key != 'overall_average' %}
-    <tr {% if value.average < view_objects.action_feedback.analysis.overall_average %} style="color: red" {%endif%}>
-        <td width="30%"><a href="{% url view_feedback value.action.type value.action.slug %}">{{key}}</a> </td>
-        <td width="20%">{{value.average}}</td>
-        <td width="20%">{{value.count}}</td>
+    {% for analysis in view_objects.action_feedback.analysis.data %}
+    <tr {% if analysis.average < view_objects.action_feedback.analysis.overall_average %} style="color: red" {%endif%}>
+        <td width="30%"><a href="{% url view_feedback analysis.action.type analysis.action.slug %}">{{analysis.action.name}}</a> </td>
+        <td width="20%">{{analysis.average|floatformat:2}}</td>
+        <td width="20%">{{analysis.count}}</td>
         <td width="30%"><div class="row-fluid"><div id="graph{{forloop.counter}}" class="span12" style="height: 45px;"> </div></div></td>
     </tr>
     <script type="text/javascript">
@@ -56,7 +56,7 @@
       var data = new google.visualization.DataTable();
       data.addColumn('string', 'Rating');
       data.addColumn('number', 'Count');
-      data.addRows({{value.scale|safe}});
+      data.addRows({{analysis.scale|safe}});
       
       var options = {
               backgroundColor: 'transparent',
@@ -76,7 +76,7 @@
     }
 
 //     $(document).ready(function () {
-//     var data = {{value.scale}}
+//     var data = {{analysis.scale}}
 //     var options = {
 //     	   bars: {show: true, barWidth: 0.6},
 //     	   grid: {show: false}
@@ -92,7 +92,6 @@
 
 // });
 </script>
-    {% endif %}
     {% endfor %}
     </tbody>
     </table>

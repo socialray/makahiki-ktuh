@@ -130,7 +130,7 @@ def get_feedback_average(action):
     count = query_set.count()
     if count == 0:
         count = 1
-    return total / count
+    return 1.0 * total / count
 
 
 def get_total_feedback_average():
@@ -141,7 +141,7 @@ def get_total_feedback_average():
     count = get_actions_with_feedback().count()
     if count == 0:
         count = 1
-    return running_total / count
+    return 1.0 * running_total / count
 
 
 def get_action_likert_scales():
@@ -167,7 +167,10 @@ def get_analysis():
     """returns the feedback analysis for each of the actions as a dictionary
 keyed with the action name."""
     analysis = {}
-    for action in get_actions_with_feedback():
-        analysis[action.name] = build_analysis(action)
+    data = []
+    for action in get_ordered_actions_with_feedback():
+        data.append(build_analysis(action))
+        # analysis[action.name] = build_analysis(action)
     analysis['overall_average'] = get_total_feedback_average()
+    analysis['data'] = data
     return analysis
