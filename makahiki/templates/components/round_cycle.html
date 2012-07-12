@@ -1,22 +1,23 @@
-{% if IN_COMPETITION %}
 <div>
+{% if IN_COMPETITION %}
     <div class="rib-set-width-outer-width">
     <h4>{{ CURRENT_ROUND_INFO.name }}</h4>
     Ends on {{CURRENT_ROUND_INFO.end}}
     </div>
-</div>
+{% else %}
+    {% if CURRENT_ROUND_INFO %}
+        <h4>Competition Ended.</h4>
+        Ends on {{CURRENT_ROUND_INFO.end}}
+    {% else %}
+        <h4>Competition Not Start Yet</h4>
+    {% endif %}
 {% endif %}
+</div>
 {% for event in AVAILABLE_EVENTS %}
 <div style="display:none;">
     <div class="rib-set-width-outer-width">
-<h4><a href="{% url activity_task event.type event.slug %}">{{ event.title }}</a></h4>
-{{event.event_date}}
-    </div>
-</div>
-{% empty %}
-<div style="display:none;">
-    <div class="rib-set-width-outer-width">
-<p>Sorry, no upcoming events. Check back later.</p>
+    <h4><a href="{% url activity_task event.type event.slug %}">{{ event.title }}</a></h4>
+    {{event.event_date}}
     </div>
 </div>
 {% endfor %}

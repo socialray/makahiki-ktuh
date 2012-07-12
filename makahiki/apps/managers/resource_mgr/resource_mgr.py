@@ -192,6 +192,8 @@ def resource_ranks(name, round_name=None):
         ordering = "-total"
 
     round_info = challenge_mgr.get_round_info(round_name)
+    if not round_info:
+        return None
 
     start = settings.COMPETITION_START
     end = round_info["end"]
@@ -207,9 +209,11 @@ def resource_team_rank_info(team, resource):
     """Get the overall rank for the team. Return a dict of the rank number and usage."""
     unit = get_resource_setting(resource).unit
     if team:
-        for idx, rank in enumerate(resource_ranks(resource)):
-            if rank["team__name"] == team.name:
-                return {"rank": idx + 1, "usage": rank["total"], "unit": unit, }
+        ranks = resource_ranks(resource)
+        if ranks:
+            for idx, rank in enumerate(ranks):
+                if rank["team__name"] == team.name:
+                    return {"rank": idx + 1, "usage": rank["total"], "unit": unit, }
     else:
         return None
 

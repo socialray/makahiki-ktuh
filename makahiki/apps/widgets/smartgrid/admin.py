@@ -6,7 +6,8 @@ from apps.managers.challenge_mgr import challenge_mgr
 from apps.utils import utils
 from apps.widgets.smartgrid.models import ActionMember, Activity, Category, Event, \
                                      Commitment, ConfirmationCode, TextPromptQuestion, \
-                                     QuestionChoice, Level, Action, Filler
+                                     QuestionChoice, Level, Action, Filler, \
+                                     EmailReminder, TextReminder
 from apps.widgets.smartgrid.views import action_admin, action_admin_list
 
 from django.contrib import admin
@@ -698,3 +699,23 @@ class ActionMemberAdmin(admin.ModelAdmin):
 
 admin.site.register(ActionMember, ActionMemberAdmin)
 challenge_mgr.register_game_admin_model("smartgrid", ActionMember)
+
+
+class EmailReminderAdmin(admin.ModelAdmin):
+    """reminder admin"""
+    readonly_fields = ('user', 'action', 'sent')
+    fields = ("send_at", "email_address", 'user', 'action', 'sent')
+    list_display = ('send_at', 'user', 'email_address', 'sent')
+
+
+class TextReminderAdmin(admin.ModelAdmin):
+    """reminder admin"""
+    readonly_fields = ('user', 'action', 'sent')
+    fields = ("send_at", "text_number", 'user', 'action', 'sent')
+    list_display = ('send_at', 'user', 'text_number', 'sent')
+
+
+admin.site.register(EmailReminder, EmailReminderAdmin)
+admin.site.register(TextReminder, TextReminderAdmin)
+challenge_mgr.register_sys_admin_model("Notifications", EmailReminder)
+challenge_mgr.register_sys_admin_model("Notifications", TextReminder)

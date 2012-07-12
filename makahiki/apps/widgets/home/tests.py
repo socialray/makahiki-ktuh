@@ -67,7 +67,7 @@ class CompetitionMiddlewareTestCase(TransactionTestCase):
         self.failUnlessEqual(response.status_code, 200)
         self.assertTemplateUsed(response,
                                 "widgets/home/templates/restricted.html")
-        self.assertContains(response, "The 2011 Kukui Cup is now over")
+        self.assertContains(response, "The Kukui Cup is now over")
 
     def tearDown(self):
         settings.COMPETITION_START = self.saved_start

@@ -163,7 +163,7 @@ def get_all_round_info():
 
 def get_round_info(round_name=None):
     """Returns a dictionary containing round information, if round_name is not specified,
-    returns the current round info.
+    returns the current round info. if competition end, return the last round.
     example: {"name": round_name, "start": start_date, "end": end_date,} """
     rounds = get_all_round_info()
     if not round_name:
@@ -180,19 +180,25 @@ def get_round_info(round_name=None):
 
 def get_round_name(submission_date=None):
     """Return the round name associated with the specified date, or else return None.
-    if submission_date is not specified, return the current round name."""
+    if submission_date is not specified, return the current round name.
+    if competition not started, return None,
+    if competition end, return the last round."""
     rounds = get_all_round_info()
     if not submission_date:
         submission_date = datetime.datetime.today()
 
+    if submission_date < settings.COMPETITION_START:
+        return None
+
     # Find which round this belongs to.
+    key = None
     for key in rounds:
         start = rounds[key]["start"]
         end = rounds[key]["end"]
         if submission_date >= start and submission_date < end:
             return key
 
-    return None
+    return key
 
 
 def in_competition():

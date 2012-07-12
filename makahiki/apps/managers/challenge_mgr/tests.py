@@ -47,6 +47,7 @@ class BaseUnitTestCase(TransactionTestCase):
         end = start + datetime.timedelta(days=7)
         settings.COMPETITION_ROUNDS = {
             "Round 1": {"start": start, "end": end, }, }
+        settings.COMPETITION_START = start
 
         current_round = challenge_mgr.get_round_name()
         self.assertTrue(current_round is None,
