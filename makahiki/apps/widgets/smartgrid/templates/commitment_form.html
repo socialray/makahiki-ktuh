@@ -1,4 +1,4 @@
-{% if not action.completed %}
+{% if not action.completed or action.member.approval_status == "approved" %}
     You will earn 2 points for making this commitment.
     <p/>
     You will need to come back after {{ action.duration }} days to get the rest of your

@@ -17,6 +17,15 @@
         }
     },
     {
+        "pk": 2,
+        "model": "djcelery.crontabschedule",
+        "fields": {
+            "day_of_week": "*",
+            "hour": "0",
+            "minute": "5"
+        }
+    },
+    {
         "pk": 1,
         "model": "djcelery.periodictask",
         "fields": {
@@ -70,6 +79,86 @@
         "fields": {
             "task": "apps.managers.resource_mgr.tasks.update_fake_water_usage",
             "name": "update_fake_water_usage",
+            "args": "[]",
+            "enabled": true,
+            "crontab": null,
+            "interval": 1,
+            "expires": null,
+            "kwargs": "{}",
+            "date_changed": "2012-06-30T14:18:46.151",
+            "description": ""
+        }
+    },
+    {
+        "pk": 5,
+        "model": "djcelery.periodictask",
+        "fields": {
+            "task": "apps.widgets.status.tasks.update_daily_status",
+            "name": "update_daily_status",
+            "args": "[]",
+            "enabled": true,
+            "crontab": 1,
+            "interval": null,
+            "expires": null,
+            "kwargs": "{}",
+            "date_changed": "2012-06-30T14:18:46.151",
+            "description": ""
+        }
+    },
+    {
+        "pk": 6,
+        "model": "djcelery.periodictask",
+        "fields": {
+            "task": "apps.widgets.smartgrid.tasks.notify_commitment_end",
+            "name": "notify_commitment_end",
+            "args": "[]",
+            "enabled": true,
+            "crontab": 2,
+            "interval": null,
+            "expires": null,
+            "kwargs": "{}",
+            "date_changed": "2012-06-30T14:18:46.151",
+            "description": ""
+        }
+    },
+    {
+        "pk": 7,
+        "model": "djcelery.periodictask",
+        "fields": {
+            "task": "apps.widgets.smartgrid.tasks.notify_round_started",
+            "name": "notify_round_started",
+            "args": "[]",
+            "enabled": true,
+            "crontab": 2,
+            "interval": null,
+            "expires": null,
+            "kwargs": "{}",
+            "date_changed": "2012-06-30T14:18:46.151",
+            "description": ""
+        }
+    },
+    {
+        "pk": 8,
+        "model": "djcelery.periodictask",
+        "fields": {
+            "task": "apps.widgets.smartgrid.tasks.process_rsvp",
+            "name": "process_rsvp",
+            "args": "[]",
+            "enabled": true,
+            "crontab": 2,
+            "interval": null,
+            "expires": null,
+            "kwargs": "{}",
+            "date_changed": "2012-06-30T14:18:46.151",
+            "description": ""
+        }
+    },
+    {
+        "pk": 9,
+        "model": "djcelery.periodictask",
+        "fields": {
+            "task": "apps.widgets.smartgrid.tasks.send_reminders",
+            "name": "send_reminders",
             "args": "[]",
             "enabled": true,
             "crontab": null,

@@ -47,7 +47,7 @@ def annotate_action_status(user, action):
     action.is_unlock = is_unlock(user, action)
     action.completed = completed_action(user, action.slug)
 
-    members = ActionMember.objects.filter(user=user, action=action)
+    members = ActionMember.objects.filter(user=user, action=action).order_by("-submission_date")
     if members:
         action.member = members[0]
     else:
@@ -296,12 +296,12 @@ def notify_round_started():
     today = datetime.datetime.today()
     current_round = None
     previous_round = None
-
-    for key, value in challenge_mgr.get_all_round_info():
+    rounds = challenge_mgr.get_all_round_info()
+    for key in rounds.keys():
         # We're looking for a round that ends today and another that starts
         # today (or overall)
-        start = value["start"]
-        end = value["end"]
+        start = rounds[key]["start"]
+        end = rounds[key]["end"]
         # Check yesterday's round and check for the current round.
         if start < (today - datetime.timedelta(days=1)) < end:
             previous_round = key
@@ -336,14 +336,12 @@ def notify_commitment_end():
         pass
 
     for member in members:
-        message = None
         if template:
             message = template.render({"COMMITMENT": member.action})
         else:
             message = "Your commitment <a href='%s'>%s</a> has end." % (
                 reverse("activity_task",
-                        args=(member.action.type, member.action.slug,
-                            )),
+                        args=(member.action.type, member.action.slug)),
                 member.action.title)
 
             message += "You can click on the link to claim your points."

@@ -37,7 +37,7 @@ class NoticeTemplate(models.Model):
     def render(self, context_dict=None):
         """Renders the message first using Django's templating system, then using Markdown.
            The template renderer uses the passed in context to insert variables."""
-        if context_dict:
+        if not context_dict:
             context_dict = {}
         template = Template(self.template)
         template = template.render(Context(context_dict))
