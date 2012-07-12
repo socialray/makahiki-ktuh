@@ -49,7 +49,7 @@ def logout(request):
     # Sets a logout variable so that we can capture it in the logger.
     request.session["logged-out-user"] = username
 
-    if settings.CHALLENGE.use_cas_auth:
+    if settings.CAS_SERVER_URL:
         return HttpResponseRedirect(reverse("cas_logout") + "?next=" + reverse("landing"))
     else:
         return HttpResponseRedirect(reverse("landing"))

@@ -1,11 +1,11 @@
 """Provide the view of the prizes widget."""
 import datetime
 
-from django.conf import settings
 from django.contrib.auth.decorators import user_passes_test
 from django.shortcuts import render_to_response, get_object_or_404
 from django.template.context import RequestContext
 from django.views.decorators.cache import never_cache
+from apps.managers.challenge_mgr import challenge_mgr
 from apps.widgets.prizes.models import Prize
 
 
@@ -24,7 +24,7 @@ def supply(request, page_name):
 def _get_prizes(team):
     """Private method to process the prizes half of the page.
        Takes the user's team and returns a dictionary to be used in the template."""
-    rounds = settings.COMPETITION_ROUNDS
+    rounds = challenge_mgr.get_all_round_info()
     prize_dict = {}
     today = datetime.datetime.today()
     for key in rounds.keys():

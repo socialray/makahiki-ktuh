@@ -3,7 +3,6 @@ test score_mgr
 """
 
 import datetime
-from django.conf import settings
 from django.test import TransactionTestCase
 from django.contrib.auth.models import User
 from apps.managers.score_mgr import score_mgr
@@ -20,7 +19,6 @@ class ScoreboardEntryUnitTests(TransactionTestCase):
         self.user = User(username="test_user", password="changeme")
         self.user.save()
 
-        self.saved_rounds = settings.COMPETITION_ROUNDS
         self.current_round = "Round 1"
         test_utils.set_competition_round()
 
@@ -224,10 +222,6 @@ class ScoreboardEntryUnitTests(TransactionTestCase):
                                                         self.current_round),
                          team_rank + 1,
                          "Check that the user's team rank has moved down.")
-
-    def tearDown(self):
-        """Restore the saved settings."""
-        settings.COMPETITION_ROUNDS = self.saved_rounds
 
 
 class PointsLogTest(TransactionTestCase):

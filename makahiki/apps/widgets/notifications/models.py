@@ -11,6 +11,8 @@ from django.template import Template, Context
 from markdown import markdown
 
 # Notification Levels
+from apps.managers.challenge_mgr import challenge_mgr
+
 constants = message_constants
 
 TYPE_CHOICES = (
@@ -162,8 +164,8 @@ class UserNotification(models.Model):
     def create_email_notification(recipient_email, subject, message, html_message=None):
         """Create an email notification."""
 
-        if settings.EMAIL_BACKEND == 'django.core.mail.backends.locmem.EmailBackend' or \
-           settings.CHALLENGE.email_enabled:
+        if settings.EMAIL_BACKEND == 'django.core.mail.backends.locmem.EmailBackend' or\
+           challenge_mgr.get_challenge().email_enabled:
             msg = EmailMultiAlternatives(subject,
                                          message,
                                          settings.SERVER_EMAIL,

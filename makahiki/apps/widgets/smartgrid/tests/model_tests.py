@@ -3,7 +3,6 @@ import datetime
 from django.contrib.auth.models import User
 from django.test import TransactionTestCase
 from django.core import mail
-from django.conf import settings
 from apps.managers.challenge_mgr import challenge_mgr
 from apps.managers.score_mgr import score_mgr
 from apps.utils import test_utils
@@ -25,7 +24,6 @@ class ActivitiesTest(TransactionTestCase):
         self.activity = test_utils.create_activity()
         self.event = test_utils.create_event()
 
-        self.saved_rounds = settings.COMPETITION_ROUNDS
         self.current_round = "Round 1"
 
         test_utils.set_competition_round()
@@ -160,10 +158,6 @@ class ActivitiesTest(TransactionTestCase):
         notice = activity_member.notifications.all()[0]
         self.assertFalse(notice.unread, "Notification should be marked as read.")
 
-    def tearDown(self):
-        """Restore the saved settings."""
-        settings.COMPETITION_ROUNDS = self.saved_rounds
-
 
 class CommitmentsUnitTestCase(TransactionTestCase):
     """Commitment Test."""
@@ -182,7 +176,6 @@ class CommitmentsUnitTestCase(TransactionTestCase):
         )
         self.commitment.save()
 
-        self.saved_rounds = settings.COMPETITION_ROUNDS
         self.current_round = "Round 1"
         test_utils.set_competition_round()
 
@@ -263,10 +256,6 @@ class CommitmentsUnitTestCase(TransactionTestCase):
         self.assertEqual(round_points, entry.points)
         self.assertTrue(
             entry.last_awarded_submission is None or entry.last_awarded_submission < award_date)
-
-    def tearDown(self):
-        """Restore the saved settings."""
-        settings.COMPETITION_ROUNDS = self.saved_rounds
 
 
 class RemindersUnitTest(TransactionTestCase):

@@ -1,7 +1,6 @@
 """Implements the Smart Grid Game widget."""
 
 import datetime
-from django.conf import settings
 from django.contrib.auth.models import User
 from django.core.urlresolvers import reverse
 from django.db.models import  Count
@@ -425,7 +424,7 @@ def process_rsvp():
                           "click on the link to claim your points." % (
                     profile.name,
                     action.type.capitalize(),
-                    settings.CHALLENGE.site_domain,
+                    challenge_mgr.get_challenge().site_domain,
                     reverse("activity_task", args=(action.type, action.slug,)),
                     action.title)
                 message += "<p/>Because you signed up for the "\

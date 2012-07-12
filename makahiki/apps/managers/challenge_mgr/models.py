@@ -2,6 +2,7 @@
 import datetime
 from django.conf import settings
 from django.db import models
+from apps.managers.cache_mgr import cache_mgr
 from apps.utils.utils import media_file_path
 
 
@@ -139,49 +140,19 @@ class ChallengeSetting(models.Model):
     def __unicode__(self):
         return self.site_name
 
+    def is_multi_auth(self):
+        """returns true if use_cas and either use ldap or internal."""
+        if self.use_cas_auth:
+            if self.use_ldap_auth or self.use_internal_auth:
+                return True
+        elif self.use_ldap_auth and self.use_internal_auth:
+            return True
+        return False
+
     def save(self, *args, **kwargs):
         """Custom save method."""
         super(ChallengeSetting, self).save(*args, **kwargs)
-        ChallengeSetting.set_settings()
-
-    @staticmethod
-    def set_settings():
-        """get the CALLENGE setting from DB and set the global django settings."""
-        settings.CHALLENGE, _ = ChallengeSetting.objects.get_or_create(pk=1)
-
-        # email settings
-        if settings.CHALLENGE.email_enabled:
-            settings.SERVER_EMAIL = settings.CHALLENGE.contact_email
-            settings.EMAIL_HOST = settings.CHALLENGE.email_host
-            settings.EMAIL_PORT = settings.CHALLENGE.email_port
-            settings.EMAIL_USE_TLS = settings.CHALLENGE.email_use_tls
-            settings.ADMINS = (('Admin', settings.CHALLENGE.contact_email),)
-
-        # set the is_multi_auth to true if use_cas and either use ldap or internal
-        settings.CHALLENGE.is_multi_auth = False
-        if settings.CHALLENGE.use_cas_auth:
-            if settings.CHALLENGE.use_ldap_auth or settings.CHALLENGE.use_internal_auth:
-                settings.CHALLENGE.is_multi_auth = True
-        elif settings.CHALLENGE.use_ldap_auth and settings.CHALLENGE.use_internal_auth:
-            settings.CHALLENGE.is_multi_auth = True
-
-        # setting for the CAS authentication service.
-        if settings.CHALLENGE.use_cas_auth:
-            settings.CAS_SERVER_URL = settings.CHALLENGE.cas_server_url
-            settings.CAS_REDIRECT_URL = '/'
-            settings.CAS_IGNORE_REFERER = True
-            settings.LOGIN_URL = "/account/cas/login/"
-        else:
-            settings.LOGIN_URL = "/account/login/"
-
-        # ldap settings
-        if settings.CHALLENGE.use_ldap_auth:
-            from django_auth_ldap.config import LDAPSearch
-            import ldap
-
-            settings.AUTH_LDAP_SERVER_URI = settings.CHALLENGE.ldap_server_url
-            settings.AUTH_LDAP_USER_SEARCH = LDAPSearch("%s" % settings.CHALLENGE.ldap_search_base,
-                                               ldap.SCOPE_SUBTREE, "(uid=%(user)s)")
+        cache_mgr.delete("challenge")
 
 
 class UploadImage(models.Model):
@@ -253,30 +224,7 @@ class RoundSetting(models.Model):
     def save(self, *args, **kwargs):
         """Custom save method."""
         super(RoundSetting, self).save(*args, **kwargs)
-        RoundSetting.set_settings()
-
-    @staticmethod
-    def set_settings():
-        """set the round info in the system settings."""
-        rounds = RoundSetting.objects.all()
-        if not rounds:
-            RoundSetting.objects.create()
-            rounds = RoundSetting.objects.all()
-
-        #store in a round dictionary and calculate start and end
-        rounds_dict = {}
-        settings.COMPETITION_START = None
-        last_round = None
-        for r in rounds:
-            if settings.COMPETITION_START is None:
-                settings.COMPETITION_START = r.start
-            rounds_dict[r.name] = {
-                "start": r.start,
-                "end": r.end, }
-            last_round = r
-        if last_round:
-            settings.COMPETITION_END = last_round.end
-        settings.COMPETITION_ROUNDS = rounds_dict
+        cache_mgr.delete("rounds")
 
 
 class PageInfo(models.Model):

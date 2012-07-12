@@ -5,6 +5,7 @@ from django.conf import settings
 from django.contrib.auth.models import User
 from django.core.exceptions import ObjectDoesNotExist
 from django.utils.text import capfirst
+from apps.managers.cache_mgr import cache_mgr
 from apps.managers.challenge_mgr.models import ChallengeSetting, RoundSetting, PageSetting, \
     PageInfo, GameInfo, GameSetting
 from apps.utils import utils
@@ -36,14 +37,8 @@ def init():
     #    logger.addHandler(logging.StreamHandler())
     #    logger.setLevel(logging.DEBUG)
 
-    if settings.CHALLENGE.competition_name is not None:
-        return
-
-    # set the CHALLENGE setting from DB
-    ChallengeSetting.set_settings()
-
-    # get the Round settings from DB
-    RoundSetting.set_settings()
+    # set the CHALLENGE setting from DB or cache
+    set_challenge_settings(get_challenge())
 
     # create the admin
     create_admin_user()
@@ -69,22 +64,47 @@ def create_admin_user():
 def info():
     """Returns the challenge name and site."""
     init()
-    return "Challenge name : %s @ %s" % (settings.CHALLENGE.competition_name,
-                                            settings.CHALLENGE.site_name)
+    challenge = get_challenge()
+    return "Challenge name : %s @ %s" % (challenge.competition_name,
+                                         challenge.site_name)
 
 
-def rounds_info():
-    """Returns round info for this challenge."""
-    init()
+def get_challenge():
+    """returns the ChallengeSetting object, from cache if cache is enabled"""
+    challenge = cache_mgr.get_cache('challenge')
+    if not challenge:
+        challenge, _ = ChallengeSetting.objects.get_or_create(pk=1)
+        cache_mgr.set_cache('challenge', challenge)
+    return challenge
 
-    info_str = ""
-    rounds = get_all_round_info()
-    for r in rounds.keys():
-        info_str += r + " ["
-        info_str += "start: %s" % rounds[r]["start"].date().isoformat()
-        info_str += ", end: %s" % rounds[r]["end"].date().isoformat()
-        info_str += "]"
-    return info_str
+
+def set_challenge_settings(challenge):
+    """set the challenge related settings as django settings."""
+    # email settings
+    if challenge.email_enabled:
+        settings.SERVER_EMAIL = challenge.contact_email
+        settings.EMAIL_HOST = challenge.email_host
+        settings.EMAIL_PORT = challenge.email_port
+        settings.EMAIL_USE_TLS = challenge.email_use_tls
+        settings.ADMINS = (('Admin', challenge.contact_email),)
+
+    # setting for the CAS authentication service.
+    if challenge.use_cas_auth:
+        settings.CAS_SERVER_URL = challenge.cas_server_url
+        settings.CAS_REDIRECT_URL = '/'
+        settings.CAS_IGNORE_REFERER = True
+        settings.LOGIN_URL = "/account/cas/login/"
+    else:
+        settings.LOGIN_URL = "/account/login/"
+
+    # ldap settings
+    if challenge.use_ldap_auth:
+        from django_auth_ldap.config import LDAPSearch
+        import ldap
+
+        settings.AUTH_LDAP_SERVER_URI = challenge.ldap_server_url
+        settings.AUTH_LDAP_USER_SEARCH = LDAPSearch("%s" % challenge.ldap_search_base,
+                                           ldap.SCOPE_SUBTREE, "(uid=%(user)s)")
 
 
 def pages():
@@ -156,9 +176,50 @@ def available_widgets():
 
 
 def get_all_round_info():
-    """Returns a dictionary containing all the round information,
-    example: {"Round 1": {"start": start_date, "end": end_date,}}"""
-    return settings.COMPETITION_ROUNDS
+    """Returns a dictionary containing all the round information, from cache if available.
+    example: {"Round 1": {"start": start_date, "end": end_date,},
+              "competition_start": start_date,
+              "competition_end": end_date}
+    """
+    rounds = cache_mgr.get_cache('rounds')
+    if not rounds:
+        roundsettings = RoundSetting.objects.all()
+        if not roundsettings:
+            RoundSetting.objects.create()
+            roundsettings = RoundSetting.objects.all()
+        rounds = {}
+        for r in roundsettings:
+            rounds[r.name] = {
+                "start": r.start,
+                "end": r.end, }
+        cache_mgr.set_cache('rounds', rounds)
+    return rounds
+
+
+def get_competition_start():
+    """return the start date of competition."""
+    rounds = get_all_round_info()
+    start = None
+    for key in rounds:
+        round_start = rounds[key]["start"]
+        if not start:
+            start = round_start
+        elif start > round_start:
+            start = round_start
+    return start
+
+
+def get_competition_end():
+    """return the end date of competition."""
+    rounds = get_all_round_info()
+    end = None
+    for key in rounds:
+        round_end = rounds[key]["end"]
+        if not end:
+            end = round_end
+        elif end < round_end:
+            end = round_end
+    return end
 
 
 def get_round_info(round_name=None):
@@ -187,7 +248,7 @@ def get_round_name(submission_date=None):
     if not submission_date:
         submission_date = datetime.datetime.today()
 
-    if submission_date < settings.COMPETITION_START:
+    if submission_date < get_competition_start():
         return None
 
     # Find which round this belongs to.
@@ -204,7 +265,7 @@ def get_round_name(submission_date=None):
 def in_competition():
     """Return True if we are currently in the competition."""
     today = datetime.datetime.today()
-    return settings.COMPETITION_START < today and today < settings.COMPETITION_END
+    return get_competition_start() < today and today < get_competition_end()
 
 
 def get_game_admin_models():

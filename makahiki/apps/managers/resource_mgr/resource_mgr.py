@@ -2,7 +2,6 @@
 
 import datetime
 from xml.etree.ElementTree import ParseError
-from django.conf import settings
 from django.core.exceptions import ObjectDoesNotExist
 from django.db.models.aggregates import Sum
 import requests
@@ -61,7 +60,7 @@ def team_resource_usage(date, team, resource):
 def get_energy_usage(session, source):
     """Return the energy usage from wattdepot."""
     rest_url = "%s/wattdepot/sources/%s/energy/" % (
-        settings.CHALLENGE.wattdepot_server_url, source)
+        challenge_mgr.get_challenge().wattdepot_server_url, source)
 
     #session.config['verbose'] = sys.stderr
     session.timeout = 5
@@ -195,12 +194,8 @@ def resource_ranks(name, round_name=None):
     if not round_info:
         return None
 
-    start = settings.COMPETITION_START
-    end = round_info["end"]
-
     ranks = resource_usage.objects.filter(
-        date__gte=start.date,
-        date__lt=end.date).values("team__name").annotate(
+        date__lt=round_info["end"].date).values("team__name").annotate(
             total=Sum("usage")).order_by(ordering)
     return ranks
 

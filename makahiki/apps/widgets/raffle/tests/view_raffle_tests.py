@@ -4,8 +4,8 @@ import re
 
 from django.test import TransactionTestCase
 from django.core.urlresolvers import reverse
-from django.conf import settings
 from apps.managers.challenge_mgr import challenge_mgr
+from apps.managers.challenge_mgr.models import RoundSetting
 from apps.utils import test_utils
 
 from apps.widgets.raffle.models import RafflePrize
@@ -170,8 +170,9 @@ class RafflePrizesTestCase(TransactionTestCase):
         Test what happens when the page is accessed after the deadline.
         """
         end = datetime.datetime.today() + datetime.timedelta(hours=1)
-        settings.COMPETITION_ROUNDS["Round 2"]["end"] = end
-        settings.COMPETITION_END = end
+        rounds = RoundSetting.objects.get(name="Round 2")
+        rounds.end = end
+        rounds.save()
 
         response = self.client.get(reverse("win_index"))
         self.failUnlessEqual(response.status_code, 200)
@@ -204,8 +205,9 @@ class RafflePrizesTestCase(TransactionTestCase):
         raffle_prize.save()
 
         end = datetime.datetime.today() + datetime.timedelta(hours=1)
-        settings.COMPETITION_ROUNDS["Round 2"]["end"] = end
-        settings.COMPETITION_END = end
+        rounds = RoundSetting.objects.get(name="Round 2")
+        rounds.end = end
+        rounds.save()
 
         response = self.client.post(reverse("raffle_add_ticket", args=(raffle_prize.id,)),
             follow=True)

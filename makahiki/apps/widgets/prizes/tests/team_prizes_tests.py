@@ -88,7 +88,6 @@ class DormTeamPrizeTests(TransactionTestCase):
         """
         Deletes the created image file in prizes.
         """
-        #settings.COMPETITION_ROUNDS = self.saved_rounds
         self.prize.image.delete()
         self.prize.delete()
 

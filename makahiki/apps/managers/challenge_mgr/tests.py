@@ -5,9 +5,9 @@ from django.contrib.auth.models import User
 
 from django.test import TransactionTestCase
 from django.core.urlresolvers import reverse
-from django.conf import settings
 
 from apps.managers.challenge_mgr import challenge_mgr
+from apps.managers.challenge_mgr.models import RoundSetting
 from apps.utils import test_utils
 
 
@@ -45,9 +45,10 @@ class BaseUnitTestCase(TransactionTestCase):
 
         start = datetime.datetime.today() + datetime.timedelta(days=1)
         end = start + datetime.timedelta(days=7)
-        settings.COMPETITION_ROUNDS = {
-            "Round 1": {"start": start, "end": end, }, }
-        settings.COMPETITION_START = start
+        rounds = RoundSetting.objects.get(name="Round 1")
+        rounds.start = start
+        rounds.end = end
+        rounds.save()
 
         current_round = challenge_mgr.get_round_name()
         self.assertTrue(current_round is None,

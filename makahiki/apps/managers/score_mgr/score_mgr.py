@@ -1,6 +1,5 @@
 """The manager for defining and managing scores."""
 import datetime
-from django.conf import settings
 
 from django.db.models import Q
 from django.core.exceptions import ObjectDoesNotExist
@@ -8,19 +7,6 @@ from django.db.models.aggregates import Sum, Max
 from apps.managers.challenge_mgr import challenge_mgr
 from apps.managers.score_mgr.models import ScoreboardEntry, PointsTransaction, ScoreSetting
 from apps.managers.cache_mgr import cache_mgr
-
-
-def init():
-    """initialize score settings and store it in the system challenge settings."""
-
-    if not hasattr(settings.CHALLENGE, "score_setting"):
-        all_score_setting = ScoreSetting.objects.all()
-        if all_score_setting:
-            s = all_score_setting[0]
-        else:
-            s = ScoreSetting.objects.create()
-
-        settings.CHALLENGE.score_setting = s
 
 
 def info():
@@ -36,8 +22,11 @@ def info():
 
 def score_setting():
     """returns the score settings."""
-    init()
-    return settings.CHALLENGE.score_setting
+    score = cache_mgr.get_cache('score_setting')
+    if not score:
+        score, _ = ScoreSetting.objects.get_or_create(pk=1)
+        cache_mgr.set_cache('score_setting', score)
+    return score
 
 
 def referral_points():

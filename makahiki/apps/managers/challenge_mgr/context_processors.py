@@ -21,7 +21,9 @@ def competition(request):
     available_events = None
     default_view_objects = None
     all_page_info = None
-    css_theme = settings.CHALLENGE.theme
+
+    challenge = challenge_mgr.get_challenge()
+    css_theme = challenge.theme
     page_name = request.path[1:][:-1]
     if user.is_authenticated():
         profile = user.get_profile()
@@ -40,9 +42,9 @@ def competition(request):
             css_theme = profile.theme
 
     return {
-        "CHALLENGE": settings.CHALLENGE,
+        "CHALLENGE": challenge,
         "CSS_THEME": css_theme,
-        "TEAM_LABEL": settings.CHALLENGE.competition_team_label,
+        "TEAM_LABEL": challenge.competition_team_label,
         "MAKAHIKI_FACEBOOK_APP_ID":
             settings.MAKAHIKI_FACEBOOK_APP_ID if settings.MAKAHIKI_USE_FACEBOOK else '',
         "MAKAHIKI_USE_LESS": settings.MAKAHIKI_USE_LESS,

@@ -10,7 +10,7 @@ class MakahikiLDAPBackend(LDAPBackend):
     def authenticate(self, username, password):
         """authenticate with LDAP server."""
 
-        if settings.CHALLENGE.ldap_server_url:
+        if settings.AUTH_LDAP_SERVER_URI:
             username = super(MakahikiLDAPBackend, self).authenticate(username, password)
             if not username:
                 return None

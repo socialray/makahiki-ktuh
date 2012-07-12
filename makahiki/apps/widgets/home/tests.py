@@ -8,10 +8,11 @@ import datetime
 from django.test import TransactionTestCase
 from django.core.urlresolvers import reverse
 from django.contrib.auth.models import User
-from django.conf import settings
 from apps.managers.challenge_mgr import challenge_mgr
+from apps.managers.challenge_mgr.models import RoundSetting
 
 from apps.managers.player_mgr.models import Profile
+from apps.utils import test_utils
 
 
 class HomeFunctionalTestCase(TransactionTestCase):
@@ -19,6 +20,7 @@ class HomeFunctionalTestCase(TransactionTestCase):
 
     def testIndex(self):
         """Check that we can load the index."""
+        test_utils.set_competition_round()
         User.objects.create_user("user", "user@test.com", password="changeme")
         self.client.login(username="user", password="changeme")
 
@@ -35,19 +37,13 @@ class CompetitionMiddlewareTestCase(TransactionTestCase):
         User.objects.create_user("user", "user@test.com", password="changeme")
         self.client.login(username="user", password="changeme")
 
-        challenge_mgr.init()
-
-        # Save settings that will be restored later.
-        self.saved_start = settings.COMPETITION_START
-        self.saved_end = settings.COMPETITION_END
-
     def testBeforeCompetition(self):
         """
         Check that the user is redirected before the competition starts.
         """
         start = datetime.datetime.today() + datetime.timedelta(days=1)
-        settings.COMPETITION_START = start
-        settings.COMPETITION_END = start + datetime.timedelta(days=7)
+        end = start + datetime.timedelta(days=7)
+        RoundSetting.objects.create(name="Round 1", start=start, end=end)
 
         response = self.client.get(reverse("home_index"), follow=True)
         self.failUnlessEqual(response.status_code, 200)
@@ -60,18 +56,14 @@ class CompetitionMiddlewareTestCase(TransactionTestCase):
         Check that the user is redirected after the competition ends.
         """
         start = datetime.datetime.today() - datetime.timedelta(days=8)
-        settings.COMPETITION_START = start
-        settings.COMPETITION_END = start - datetime.timedelta(days=7)
+        end = start - datetime.timedelta(days=7)
+        RoundSetting.objects.create(name="Round 1", start=start, end=end)
 
         response = self.client.get(reverse("home_index"), follow=True)
         self.failUnlessEqual(response.status_code, 200)
         self.assertTemplateUsed(response,
                                 "widgets/home/templates/restricted.html")
         self.assertContains(response, "The Kukui Cup is now over")
-
-    def tearDown(self):
-        settings.COMPETITION_START = self.saved_start
-        settings.COMPETITION_END = self.saved_end
 
 
 class SetupWizardFunctionalTestCase(TransactionTestCase):
@@ -80,6 +72,8 @@ class SetupWizardFunctionalTestCase(TransactionTestCase):
 
     def setUp(self):
         """setup."""
+        test_utils.set_competition_round()
+
         self.user = User.objects.create_user("user",
                                              "user@test.com",
                                              password="changeme")

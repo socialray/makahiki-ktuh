@@ -7,7 +7,8 @@ from django.utils import importlib
 from django.views.decorators.cache import never_cache
 from django.http import HttpResponseRedirect, HttpResponseForbidden, Http404
 from django.core.urlresolvers import reverse
-from django.contrib.auth.decorators import login_required
+from django.contrib.auth.decorators import login_required, user_passes_test
+from apps.managers.cache_mgr import cache_mgr
 from apps.managers.challenge_mgr import challenge_mgr
 from apps.managers.resource_mgr import resource_mgr
 
@@ -78,3 +79,11 @@ def supply_view_objects(request, page_name, view_objects):
         view_objects['widget_templates'].append(widget_template)
 
     return True
+
+
+@user_passes_test(lambda u: u.is_staff, login_url="/landing")
+def clear_cache(request):
+    """clear all cached content."""
+    _ = request
+    cache_mgr.clear()
+    return HttpResponseRedirect("/admin")

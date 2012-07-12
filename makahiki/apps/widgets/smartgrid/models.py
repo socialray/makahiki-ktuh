@@ -11,6 +11,7 @@ from django.conf import settings
 from django.template.loader import render_to_string
 from django.contrib.localflavor.us.models import PhoneNumberField
 import os
+from apps.managers.challenge_mgr import challenge_mgr
 
 from apps.managers.score_mgr import score_mgr
 from apps.managers.score_mgr.models import PointsTransaction
@@ -649,24 +650,25 @@ class ActionMember(models.Model):
             )
 
         if status != 'approved':
+            challenge = challenge_mgr.get_challenge()
             message += " You can still get points by clicking on the link and trying again."
             UserNotification.create_error_notification(self.user, message, display_alert=True,
                                                        content_object=self)
 
             # only send out email notification for rejected action
             subject = "[%s] Your response to '%s' was %s" % (
-                settings.CHALLENGE.competition_name, self.action.title, status_nicely)
+                challenge.competition_name, self.action.title, status_nicely)
 
             message = render_to_string("email/rejected_activity.txt", {
                 "object": self,
-                "COMPETITION_NAME": settings.CHALLENGE.competition_name,
-                "domain": settings.CHALLENGE.site_domain,
+                "COMPETITION_NAME": challenge.competition_name,
+                "domain": challenge.site_domain,
                 "status_nicely": status_nicely,
                 })
             html_message = render_to_string("email/rejected_activity.html", {
                 "object": self,
-                "COMPETITION_NAME": settings.CHALLENGE.competition_name,
-                "domain": settings.CHALLENGE.site_domain,
+                "COMPETITION_NAME": challenge.competition_name,
+                "domain": challenge.site_domain,
                 "status_nicely": status_nicely,
                 })
 
@@ -773,19 +775,20 @@ class EmailReminder(Reminder):
         Sends a reminder email to the user.
         """
         if not self.sent:
-            subject = "[%s] Reminder for %s" % (settings.CHALLENGE.competition_name,
+            challenge = challenge_mgr.get_challenge()
+            subject = "[%s] Reminder for %s" % (challenge.competition_name,
                                                 self.action.title)
             message = render_to_string("email/activity_reminder.txt", {
                 "action": self.action,
                 "user": self.user,
-                "COMPETITION_NAME": settings.CHALLENGE.competition_name,
-                "domain": settings.CHALLENGE.site_domain,
+                "COMPETITION_NAME": challenge.competition_name,
+                "domain": challenge.site_domain,
                 })
             html_message = render_to_string("email/activity_reminder.html", {
                 "action": self.action,
                 "user": self.user,
-                "COMPETITION_NAME": settings.CHALLENGE.competition_name,
-                "domain": settings.CHALLENGE.site_domain,
+                "COMPETITION_NAME": challenge.competition_name,
+                "domain": challenge.site_domain,
                 })
 
             UserNotification.create_email_notification(self.email_address, subject, message,

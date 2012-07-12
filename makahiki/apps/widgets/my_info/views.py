@@ -1,5 +1,5 @@
 """Provides the view of the My_Info widget, which both displays profile info and allows updates."""
-from django.conf import settings
+from apps.managers.challenge_mgr import challenge_mgr
 from apps.widgets.my_info.forms import ProfileForm
 
 
@@ -39,7 +39,7 @@ def supply(request, page_name):
         profile = user.get_profile()
         user_theme = profile.theme
         if not user_theme:
-            user_theme = settings.CHALLENGE.theme
+            user_theme = challenge_mgr.get_challenge().theme
         form = ProfileForm(initial={
             "display_name": profile.name,
             "contact_email": user.email,

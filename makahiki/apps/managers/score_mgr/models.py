@@ -1,10 +1,10 @@
 """The model definition for scores."""
-from django.conf import settings
 
 from django.db import models
 from django.contrib.auth.models import User
 from django.contrib.contenttypes import generic
 from django.contrib.contenttypes.models import ContentType
+from apps.managers.cache_mgr import cache_mgr
 
 
 class ScoreSetting(models.Model):
@@ -43,7 +43,7 @@ class ScoreSetting(models.Model):
     def save(self, *args, **kwargs):
         """Custom save method."""
         super(ScoreSetting, self).save(*args, **kwargs)
-        settings.CHALLENGE.score_setting = self
+        cache_mgr.delete("score_setting")
 
 
 class ScoreboardEntry(models.Model):

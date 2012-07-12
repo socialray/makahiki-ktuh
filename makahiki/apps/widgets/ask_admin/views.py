@@ -6,7 +6,7 @@ import simplejson as json
 from django.http import Http404, HttpResponse
 from django.template.loader import render_to_string
 from django.core.mail.message import EmailMultiAlternatives
-from django.conf import settings
+from apps.managers.challenge_mgr import challenge_mgr
 
 from apps.widgets.ask_admin.forms import FeedbackForm
 
@@ -41,14 +41,15 @@ def send_feedback(request):
                 "question": form.cleaned_data["question"],
                 })
 
+            challenge = challenge_mgr.get_challenge()
             # Using adapted version from Django source code
             subject = u'[%s] %s asked a question' % (
-                settings.CHALLENGE.competition_name,
+                challenge.competition_name,
                 request.user.get_profile().name)
 
-            if settings.CHALLENGE.email_enabled:
+            if challenge.email_enabled:
                 mail = EmailMultiAlternatives(subject, message, FROM_EMAIL,
-                    [settings.CHALLENGE.contact_email, ], headers={
+                    [challenge.contact_email, ], headers={
                     "Reply-To": request.user.email})
 
                 mail.attach_alternative(html_message, 'text/html')

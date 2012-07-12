@@ -49,11 +49,12 @@ def restricted(request):
     # If we are in the competition, bring them back to the home page.
     if challenge_mgr.in_competition():
         return HttpResponseRedirect(reverse('home_index'))
-    start = settings.COMPETITION_START
+    start = challenge_mgr.get_competition_start()
+    end = challenge_mgr.get_competition_end()
     return render_to_response("widgets/home/templates/restricted.html", {
         "before": datetime.datetime.today() < start,
         "start": start,
-        "end": settings.COMPETITION_END,
+        "end": end,
         }, context_instance=RequestContext(request))
 
 

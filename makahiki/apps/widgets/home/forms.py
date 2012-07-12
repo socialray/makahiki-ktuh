@@ -3,8 +3,8 @@
 import re
 
 from django import forms
-from django.conf import settings
 from django.contrib.auth.models import User
+from apps.managers.challenge_mgr import challenge_mgr
 
 from apps.managers.player_mgr.models import Profile
 
@@ -15,7 +15,7 @@ class FacebookForm(forms.Form):
         required=False,
         initial=True,
         label="%s can post to my Facebook feed (at most 2 posts per day)" %
-              (settings.CHALLENGE.competition_name)
+              challenge_mgr.get_challenge().competition_name
     )
 
 

@@ -1,9 +1,9 @@
 """handles request for user status."""
 import datetime
 from django.contrib.auth.models import User
-from django.conf import settings
 from django.db.models import Min
 from django.db.models.aggregates import Count
+from apps.managers.challenge_mgr import challenge_mgr
 from apps.managers.player_mgr.models import Profile
 
 
@@ -15,7 +15,7 @@ def supply(request, page_name):
     todays_users = Profile.objects.filter(last_visit_date=datetime.datetime.today())
 
     # Approximate logins by their first points transaction.
-    start = settings.COMPETITION_START
+    start = challenge_mgr.get_competition_start()
     today = datetime.datetime.today()
 
     users_anno = User.objects.annotate(login_date=Min('pointstransaction__transaction_date'))
