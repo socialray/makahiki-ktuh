@@ -38,7 +38,7 @@
         </table>
         <p/>
 
-        <form action="{% url activity_attend_code %}"
+        <form id="event-code-form" action="{% url activity_attend_code %}"
                                                          method="POST">
             {% csrf_token %}
             <div class="event-code">

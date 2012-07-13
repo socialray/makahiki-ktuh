@@ -576,7 +576,7 @@ class ActionMember(models.Model):
 
         ## award social bonus to myself if the ref user had successfully completed the activity
         if self.social_email and not self.social_bonus_awarded:
-            ref_members = ActionMember.objects.filter(social_email=self.social_email,
+            ref_members = ActionMember.objects.filter(user__email=self.social_email,
                                                       approval_status="approved",
                                                       action=self.action)
             if ref_members:
