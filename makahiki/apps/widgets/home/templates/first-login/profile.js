@@ -1,4 +1,5 @@
 $(document).ready(function () {
+    fixForms();
     //bind 'myForm' and provide a simple callback function
     $('#profile-form').ajaxForm();
 

@@ -8,10 +8,11 @@
         {{ TEAM_LABEL }}'s energy usage and standing in the competition, as well as additional activities you
         can perform to get more points.</p>
 
-    <p>Your home page will contain your first set of quests. Follow the quests (as shown below) to
+    <p>Your home page will contain your first set of quests. Use the questbar (as shown below) to
         learn more about the Kukui Cup and earn points and prizes.</p>
       <div style="margin-bottom: 10px; width: 100%; text-align: center">
       <!--start questbar-->
+    <div class="quest-frame">
       <div class="quest-box">
           <div class="makahiki-box-title">
               <h3 class="makahiki-box-title">Your Quests</h3> 
@@ -19,25 +20,19 @@
           <div>
           <img class="quest-pad" src="{{ STATIC_URL}}images/spacer.png" width="20"> 
               <ul class="quest-list">
+              <li>  
+                          Watch Intro Video&nbsp; &nbsp;
+              </li>
               <li> 
-                     <a class="quest-title quest-user-quest">
-                          Watch Intro Video
-                     </a>
+                          Get Social &nbsp;&nbsp;
               </li>
-              <li>
-                    <a class="quest-title quest-user-quest">
-                          Get Social
-                     </a>
-              </li>
-              <li>
-                    <a class="quest-title quest-user-quest">
-                           Learn about energy
-                     </a>
+              <li> 
+                           Learn about energy &nbsp;
               </li>
               </ul>
           </div> 
       </div>
-
+    </div>
       <!--end questbar-->
   </div>
 </div>
@@ -53,7 +48,7 @@
       <button id="gohome" class="btn btn-success" >
            <a class="white" href="{% url home_index %}">
            <img src="{{ STATIC_URL}}images/right.png" width="24" align="top"/>
-           Go home
+           Game On!
            </a>
       </button>
   </div>
@@ -68,7 +63,9 @@
       </div>
   </div>
   <script type="text/javascript">
+      
       $(document).ready(function () {
+          fixForms();
           var s = 7.0/7.0*100 + "%";
         $(".bar").width(s);
 

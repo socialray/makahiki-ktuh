@@ -79,6 +79,36 @@
 </div>
 
 
+<script type="text/javascript">
+/*Deal with pressing return key in forms*/
+$("form").each(function() { 
+        $(this).bind("keydown", function(e) {
+        if (e.keyCode == 13) {
+            if(! $(document.activeElement).is("textarea")) { 
+                e.stopPropagation();    
+                return false;
+            }
+        }
+  });
+});
+function fixForms() {
+    $("form").each(function() { 
+            $(this).bind("keydown", function(e) {
+                if (e.keyCode == 13) {
+                    if(! $(document.activeElement).is("textarea")) { 
+                        e.stopPropagation();    
+                        return false;
+                    }
+                }
+      });
+    });
+    
+    $("textarea").each(function() { 
+        $(this).unbind("keydown");
+        alert("unbound");
+    });
+}
+</script>
 {% block extra_body %}
   {% block page_cycles %}{% endblock page_cycles %}
 {% endblock %}
