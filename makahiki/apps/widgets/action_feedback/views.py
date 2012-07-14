@@ -60,7 +60,8 @@ def action_feedback(request, action_type, slug):
         # Give the user points for providing feedback
         profile.add_points(score_mgr.feedback_points(),
                            datetime.datetime.today(),
-                           "%s provided feedback about %s" % (user.username, action.name))
+                           "{0}: {1} (Provide feedback)"\
+                            .format(action.type.capitalize(), action.title), action)
     # Take them back to the action page.
     return HttpResponseRedirect(reverse("activity_task", args=(action.type, action.slug,)))
 

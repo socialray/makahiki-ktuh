@@ -13,6 +13,13 @@
                             </td>
                             <td>{{ log.points }}{% if member.action.is_canopy %}&nbsp;
                                 (Karma){% endif %}</td>
+                {% elif member.type %} <!-- !!! Bad assumption should check the type of member -->
+                            <td>
+                                <a href="{% url activity_task member.type member.slug %}">
+                                    {{ log.message }}
+                                </a>
+                            </td>
+                            <td>{{ log.points }}</td>
                 {% else %}
                     <td>{{ log.message }}</td>
                     <td>{{ log.points }}</td>

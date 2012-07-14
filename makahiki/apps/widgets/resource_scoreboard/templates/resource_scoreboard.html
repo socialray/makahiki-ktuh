@@ -37,7 +37,7 @@
                         <img src="{{ STATIC_URL}}images/icons/icon-help-sm.png" width="20"
                          align="center"
                          title="Click to get help about this window"
-                         onclick="toggleHelp(event, 'widget', 'resource-scoreboard'); return false;"/>
+                         onclick="toggleHelp(event, 'widget', '{{resource_help}}'); return false;"/>
                     </a> 
             </div> 
             {% endif %}
@@ -78,7 +78,7 @@
          <div id="{{resource.name}}-goal" class="tab-pane fade active in{% if goals_scoreboard and goals_scoreboard|length > 0 %}wrap{%endif%}"> 
     {% endif %}
             <div class="content-box-title">
-                Completed Energy Goals
+                Completed {{ resource.name|capfirst }} Goals
                 {% if not no_carousel %}
                     <a href="#" style="float: right">
                         <img src="{{ STATIC_URL}}images/icons/icon-help-sm.png" width="20"
@@ -116,12 +116,9 @@ $('#{{resource.name}}-tab.nav-tabs a:first').tab('show');
 </script> 
 {% else %} 
     <center>
-        
         {% if range > 1 %}
         <div id="nav" class="nav nav-page-list"> 
-          {% for i in range  %} 
-              <a class="" href="#">{{i}}</a> 
-          {% endfor %}
+             
         </div>  
         {% endif %}
     </center>

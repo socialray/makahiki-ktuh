@@ -11,8 +11,6 @@ class LoginForm(forms.Form):
                                widget=forms.TextInput())
     password = forms.CharField(label="Password",
                                widget=forms.PasswordInput(render_value=False))
-    remember = forms.BooleanField(label="Remember Me", required=False)
-
     user = None
 
     def clean(self):

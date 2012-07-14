@@ -17,6 +17,7 @@ from apps.widgets.smartgrid import smartgrid, view_commitments, view_events, vie
 from apps.widgets.action_feedback.models import ActionFeedback
 from apps.widgets.smartgrid.forms import ChangeLevelForm
 from apps.widgets.smartgrid.models import Action, Level, Category
+from apps.widgets.quests.quests import get_quests
 
 
 def supply(request, page_name):
@@ -75,6 +76,8 @@ def view_action(request, action_type, slug):
         feedback = ActionFeedback.objects.get(user=user.pk, action=action.pk)
     except ObjectDoesNotExist:
         feedback = None
+
+    view_objects['quests'] = get_quests(user)
 
     return render_to_response("task.html", {
         "action": action,
