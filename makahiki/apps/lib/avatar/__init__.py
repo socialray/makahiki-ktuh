@@ -16,8 +16,10 @@ AVATAR_RESIZE_METHOD = getattr(settings, 'AVATAR_RESIZE_METHOD',
     Image.ANTIALIAS)
 AVATAR_STORAGE_DIR = getattr(settings, 'AVATAR_STORAGE_DIR', 'avatars')
 AVATAR_GRAVATAR_BACKUP = getattr(settings, 'AVATAR_GRAVATAR_BACKUP', False)
-AVATAR_DEFAULT_NO_URL = getattr(settings, 'AVATAR_DEFAULT_NO_URL',
+AVATAR_DEFAULT_NO_LG_URL = getattr(settings, 'AVATAR_DEFAULT_NO_LG_URL',
     settings.STATIC_URL + os.path.join('images', 'no_login_avatar_lg.png'))
+AVATAR_DEFAULT_NO_URL = getattr(settings, 'AVATAR_DEFAULT_NO_URL',
+    settings.STATIC_URL + os.path.join('images', 'no_login_avatar.png'))
 AVATAR_DEFAULT_YES_URL = getattr(settings, 'AVATAR_DEFAULT_YES_URL',
     settings.STATIC_URL + os.path.join('images', 'login_avatar.png'))
 

@@ -5,7 +5,8 @@ from django.contrib.auth.models import User
 from django.utils.translation import ugettext as _
 from django.utils.hashcompat import md5_constructor
 
-from apps.lib.avatar import AVATAR_DEFAULT_NO_URL, AVATAR_DEFAULT_YES_URL, AVATAR_GRAVATAR_BACKUP
+from apps.lib.avatar import AVATAR_DEFAULT_NO_URL, AVATAR_DEFAULT_YES_URL, AVATAR_GRAVATAR_BACKUP,\
+    AVATAR_DEFAULT_NO_LG_URL
 from apps.managers.score_mgr import score_mgr
 
 register = template.Library()
@@ -37,7 +38,10 @@ def avatar_url(user, size=80):
             if score_mgr.player_points(user.get_profile()) > 0:
                 return AVATAR_DEFAULT_YES_URL
             else:
-                return AVATAR_DEFAULT_NO_URL
+                if size > 60:
+                    return AVATAR_DEFAULT_NO_LG_URL
+                else:
+                    return AVATAR_DEFAULT_NO_URL
 register.simple_tag(avatar_url)
 
 def avatar(user, size=80):

@@ -83,7 +83,20 @@
 
 <script type="text/javascript">
     $(document).ready(function () {
-    	$('#sgg-levels-tab a:first').tab('show');
+    	var current_level = getCookie("current-level");
+//     	var temp = $('#sgg-levels-tab a:first');
+//         $('#sgg-levels-tab a:first').tab('show');
+    	if (current_level != null)
+    	{
+//             console.log("got level cookie " + current_level)
+//             temp = $('#sgg-levels-tab a:nth('+current_level+')');
+    		$('#sgg-levels-tab a:nth('+current_level+')').tab('show');
+    	}
+    	else
+    	{
+//             console.log("no level cookie");
+            $('#sgg-levels-tab a:first').tab('show');
+    	}
         var task_unlock_condition = getCookie("task_unlock_condition");
         if (task_unlock_condition != null)
         {
