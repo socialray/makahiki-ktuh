@@ -12,11 +12,11 @@ Your current feedback. Please update if desired
     <table class="">
         <tr>
             <td>Loved it</td>
-            <td>5 <input id="radScoreStart" type="radio" name="Score" value="5" {% if feedback_p and feedback_p.rating == 5 %} checked {% endif %}/></label></td>
-            <td>4 <input type="radio" name="Score" value="4" {% if feedback_p and feedback_p.rating == 4 %} checked {% endif %}/></td>
-            <td>3 <input type="radio" name="Score" value="3" {% if feedback_p and feedback_p.rating == 3 %} checked {% endif %}/></td>
-            <td>2 <input type="radio" name="Score" value="2" {% if feedback_p and feedback_p.rating == 2 %} checked {% endif %}/></td>
-            <td>1 <input id="radScoreEnd" type="radio" name="Score" value="1" {% if feedback_p and feedback_p.rating == 1 %} checked {% endif %}/></td>
+            <td><input id="radScoreStart" type="radio" name="Score" value="5" {% if feedback_p and feedback_p.rating == 5 %} checked {% endif %}/> 5</label></td>
+            <td><input type="radio" name="Score" value="4" {% if feedback_p and feedback_p.rating == 4 %} checked {% endif %}/> 4</td>
+            <td><input type="radio" name="Score" value="3" {% if feedback_p and feedback_p.rating == 3 %} checked {% endif %}/> 3</td>
+            <td><input type="radio" name="Score" value="2" {% if feedback_p and feedback_p.rating == 2 %} checked {% endif %}/> 2</td>
+            <td><input id="radScoreEnd" type="radio" name="Score" value="1" {% if feedback_p and feedback_p.rating == 1 %} checked {% endif %}/> 1</td>
             <td>Hated it</td>
         </tr>
     </table>
