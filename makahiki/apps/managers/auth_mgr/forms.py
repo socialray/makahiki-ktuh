@@ -33,9 +33,5 @@ class LoginForm(forms.Form):
         """Logs the user in."""
         if self.is_valid():
             login(request, self.user)
-            if self.cleaned_data['remember']:
-                request.session.set_expiry(60 * 60 * 24 * 7 * 3)
-            else:
-                request.session.set_expiry(0)
             return True
         return False
