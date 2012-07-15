@@ -20,7 +20,14 @@
     </fb:login-button>
 </div>
 
-    <script>
+    <script type="text/javascript">
+        FB.init({
+            appId      : '{{ MAKAHIKI_FACEBOOK_APP_ID }}',
+            status     : true, // check login status
+            cookie     : true, // enable cookies to allow the server to access the session
+            xfbml      : true  // parse XFBML
+        });
+
         // listen for and handle auth.statusChange events
         FB.Event.subscribe('auth.statusChange', function(response) {
             if (response.authResponse) {

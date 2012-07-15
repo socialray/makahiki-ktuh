@@ -32,14 +32,6 @@
     <div id="fb-root"></div>
 
     <script src="//connect.facebook.net/en_US/all.js"></script>
-    <script type="text/javascript">
-        FB.init({
-            appId      : '{{ MAKAHIKI_FACEBOOK_APP_ID }}',
-            status     : true, // check login status
-            cookie     : true, // enable cookies to allow the server to access the session
-            xfbml      : true  // parse XFBML
-        });
-    </script>
 
  {% include "components/RIB.html" %}
  {% include "components/navbar.html" %}
@@ -105,7 +97,7 @@ function fixForms() {
     
     $("textarea").each(function() { 
         $(this).unbind("keydown");
-        alert("unbound");
+        //alert("unbound");
     });
 }
 </script>
