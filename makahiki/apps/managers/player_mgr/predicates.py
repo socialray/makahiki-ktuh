@@ -1,4 +1,5 @@
 """Predicates providing information about the state of the current player."""
+from apps.managers.challenge_mgr import challenge_mgr
 from apps.widgets.badges.models import BadgeAward
 
 
@@ -42,3 +43,8 @@ def set_profile_pic(user):
 def daily_visit_count(user, count):
     """Returns True if the number of the user daily visit equals to count."""
     return user.get_profile().daily_visit_count >= count
+
+
+def change_theme(user):
+    """returns True if the user change their theme."""
+    return user.get_profile().theme != challenge_mgr.get_challenge().theme
