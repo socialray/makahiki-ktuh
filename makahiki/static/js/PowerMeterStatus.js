@@ -32,8 +32,8 @@ Makahiki_PowerMeterStatus = function (server_url, source, refresh_interval, viz_
         var then = new Date(lastUpdate);
         var diff = now.getTime() - then.getTime();
         then = then.toString();
-        $("#timestamp_" + id).html(then.substring(0,then.length-15));
-        $("#"+ viz_name).html(format_num( Math.round(diff / 1000)) + " s  ");
+        $("#timestamp_" + id).html();
+        $("#"+ viz_name).html("Last Check: " + then.substring(0,then.length-15) + "&nbsp;&nbsp;&nbsp;&nbsp;" + format_num( Math.round(diff / 1000)) + " s  ");
         if (diff / 1000 > 2 * rf_interval) {
             $("#" + viz_name).css('color', 'red');
             $("#" + viz_name).css('font-face', 'bold');
