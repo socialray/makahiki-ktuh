@@ -84,7 +84,11 @@ def view(request, action):
     form = CommitmentCommentForm(
         initial={"social_email": None, "social_email2": None},
         request=request)
-    form.form_title = "Make this commitment"
+
+    if not action.completed or action.member.approval_status == "approved":
+        form.form_title = "Make this commitment"
+    else:
+        form.form_title = "Complete this commitment"
 
     action.can_commit = smartgrid.can_add_commitment(request.user)
     return form
