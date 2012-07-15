@@ -11,12 +11,12 @@ Makahiki_PowerMeterStatus = function (server_url, source, refresh_interval, viz_
 
         // Set a callback to run when the data has been retrieved.
         query.send(function (response) {
-            responseHandler(response, viz_name + ""+ id, refresh_interval);
+            responseHandler(response, viz_name + ""+ id, refresh_interval, id);
         });
     }
 
     /** Once dorm data is retrieved, create and display the chart with tooltips. */
-    function responseHandler(response, viz_name, rf_interval) {
+    function responseHandler(response, viz_name, rf_interval, id) {
         // Process errors, if any.
         if (response.isError()) {
             debug('Error in query: ' + response.getMessage() + ' ' + response.getDetailedMessage());
@@ -31,7 +31,8 @@ Makahiki_PowerMeterStatus = function (server_url, source, refresh_interval, viz_
         var now = new Date();
         var then = new Date(lastUpdate);
         var diff = now.getTime() - then.getTime();
-          
+        then = then.toString();
+        $("#timestamp_" + id).html(then.substring(0,then.length-15));
         $("#"+ viz_name).html(format_num( Math.round(diff / 1000)) + " s  ");
         if (diff / 1000 > 2 * rf_interval) {
             $("#" + viz_name).css('color', 'red');

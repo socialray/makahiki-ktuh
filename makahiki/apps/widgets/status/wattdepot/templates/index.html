@@ -10,6 +10,7 @@
             <thead>
                   <tr>
                       <th class="column-text">Meter</th>
+                      <th class="column-number">Last Check</th>
                       <th class="column-number">Timestamp Age</th>
                   </tr>
             </thead>
@@ -17,6 +18,7 @@
                 {% for team in all_lounges %}
                 <tr>
                     <td class="column-text">{{ team }}</td>
+                    <td id="timestamp_{{ forloop.counter }}" class="column-number"></td>
                     <td id="visualization_{{ forloop.counter }}" class="column-number">
                                 
                     </td>
