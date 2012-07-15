@@ -26,6 +26,15 @@
         }
     },
     {
+        "pk": 3,
+        "model": "djcelery.crontabschedule",
+        "fields": {
+            "day_of_week": "*",
+            "hour": "15",
+            "minute": "0"
+        }
+    },
+    {
         "pk": 1,
         "model": "djcelery.periodictask",
         "fields": {
@@ -81,8 +90,8 @@
             "name": "update_fake_water_usage",
             "args": "[]",
             "enabled": true,
-            "crontab": null,
-            "interval": 1,
+            "crontab": 3,
+            "interval": null,
             "expires": null,
             "kwargs": "{}",
             "date_changed": "2012-06-30T14:18:46.151",

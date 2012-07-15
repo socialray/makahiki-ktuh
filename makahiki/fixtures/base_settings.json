@@ -3,13 +3,13 @@
         "pk": 1,
         "model": "score_mgr.scoresetting",
         "fields": {
+            "feedback_bonus_points": 2,
             "active_threshold_points": 50,
             "quest_bonus_points": 0,
             "setup_points": 5,
             "signup_bonus_points": 2,
             "noshow_penalty_points": 4,
-            "referral_bonus_points": 10,
-            "feedback_bonus_points": 2
+            "referral_bonus_points": 10
         }
     },
     {

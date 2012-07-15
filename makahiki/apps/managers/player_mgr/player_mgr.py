@@ -75,7 +75,7 @@ def points_leaders(num_results=None, round_name=None):
         return results
 
 
-def create_player(username, email, firstname, lastname, team_name, is_ra):
+def create_player(username, password, email, firstname, lastname, team_name, is_ra):
     """Create a player with the assigned team"""
     try:
         user = User.objects.get(username=username)
@@ -84,7 +84,7 @@ def create_player(username, email, firstname, lastname, team_name, is_ra):
     except ObjectDoesNotExist:
         pass
 
-    user = User.objects.create_user(username, email)
+    user = User.objects.create_user(username, email, password)
     user.first_name = firstname
     user.last_name = lastname
     user.save()
@@ -94,7 +94,6 @@ def create_player(username, email, firstname, lastname, team_name, is_ra):
     profile.is_ra = is_ra
 
     try:
-        Team.objects.get(name=team_name)
         profile.team = Team.objects.get(name=team_name)
     except ObjectDoesNotExist:
         print "Can not find team '%s', set the team of the player '%s' to None." % \

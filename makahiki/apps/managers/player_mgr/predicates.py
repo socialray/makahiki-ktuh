@@ -47,4 +47,5 @@ def daily_visit_count(user, count):
 
 def change_theme(user):
     """returns True if the user change their theme."""
-    return user.get_profile().theme != challenge_mgr.get_challenge().theme
+    theme = user.get_profile().theme
+    return theme and theme != challenge_mgr.get_challenge().theme

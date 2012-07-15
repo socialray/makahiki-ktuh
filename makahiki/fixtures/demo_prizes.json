@@ -3,42 +3,14 @@
         "pk": 1,
         "model": "prizes.prize",
         "fields": {
-            "title": "Bookstore Certificate",
+            "title": "Amazon Certificate",
             "round_name": "Round 1",
-            "image": "media/prizes/uh-bookstore.2.jpg",
+            "image": "media/prizes/amazon2.jpg",
             "award_to": "individual_overall",
-            "value": 25,
+            "value": 20,
             "competition_type": "points",
-            "short_description": "$25 UH Bookstore Gift Certificate for the individual with the highest number of points at the end of Round 1.",
-            "long_description": "Books, notebooks, magazines, art supplies, computers... you name it, the UH Bookstore's got it. With this gift certificate you'll be able to pick something up that you need (or maybe just want!).\r\n\r\nThis $25 gift certificate goes to the individual across all four towers with the highest point total at the end of Round 1."
-        }
-    },
-    {
-        "pk": 2,
-        "model": "prizes.prize",
-        "fields": {
-            "title": "Cupcake Extravaganza",
-            "round_name": "Round 1",
-            "image": "media/prizes/hokulani.2.jpg",
-            "award_to": "team_overall",
-            "value": 125,
-            "competition_type": "points",
-            "short_description": "Cupcakes by Hokulani Bakery for the lounge that earns the most points during the week of Round 1.",
-            "long_description": "Many people believe Hokulani bakes Honolulu's best selection of cupcakes: carrot cake, coconut, snicker doodle, lilikoi, red velvet guava, vanilla, even lychee (when in season)! \r\n\r\nTo win this cupcake party, your lounge members must earn more points than any other lounge across all four towers during the week of Round 1. "
-        }
-    },
-    {
-        "pk": 3,
-        "model": "prizes.prize",
-        "fields": {
-            "title": "Ice Cream Party",
-            "round_name": "Round 1",
-            "image": "media/prizes/bubbies-mochi.3.jpg",
-            "award_to": "team_overall",
-            "value": 125,
-            "competition_type": "energy",
-            "short_description": "Mochi Ice Cream Party by Bubbies for lounge that consumes the least amount of energy usage during the week of Round 1.",
-            "long_description": "Imagine a harmonious combination of creamy gourmet ice cream wrapped in a sweetened rice confection, all resulting in a delectable bite-sized, one and a quarter ounce ball of happiness. As the lounge with the lowest energy usage for this round, you'll snack out on a selection of Bubbies Mochi Ice Cream balls.\r\n\r\nTo win this prize, your lounge must consume less energy than any other lounge across all four towers during the week of Round 1. "
+            "short_description": "$20 Amazon Gift Certificate for the individual with the highest number of points at the end of the Beta Test.",
+            "long_description": "Books, notebooks, magazines, art supplies, computers... you name it, Amazon's got it. With this gift certificate you'll be able to pick something up that you need (or maybe just want!).\r\n\r\nThis $20 gift certificate goes to the individual with the highest point total at the end of the Beta Test."
         }
     },
     {
@@ -48,11 +20,11 @@
             "title": "Bubbies Certificate",
             "round_name": "Round 1",
             "image": "media/prizes/bubbies-logo.2.jpg",
-            "award_to": "individual_team",
+            "award_to": "team_overall",
             "value": 5,
             "competition_type": "points",
-            "short_description": "$5 Bubbies Gift Certificate for the individual who earns the most points in each lounge during the week of Round 1.",
-            "long_description": "This gift certificate will score you one free ice cream cone from Bubbie's Ice Cream, just a short walk from the residence halls and one of the best ice cream parlors in Hawaii. \r\n\r\nTo win this $5 gift certificate, you must earn more points than any other person in your lounge during the week of Round 1. "
+            "short_description": "A $5 Bubbies Gift Certificate (gets you a single scoop cone) for each member of the team with the most points earned during the Beta Test.",
+            "long_description": "This gift certificate will score you one free ice cream cone from Bubbie's Ice Cream, just a short walk from the residence halls and one of the best ice cream parlors in Hawaii. \r\n\r\nTo win this $5 gift certificate, your team must earn more points than any other team during the Beta Test."
         }
     },
     {
@@ -61,58 +33,10 @@
         "fields": {
             "description": "Bid on this to rock your very own Jack Johnson t-shirt from his To The Sea Tour.  Size: L",
             "title": "JJ tshirt (L)",
+            "round_name": "Round 1",
             "image": "media/prizes/jack-johnson-tshirt_1.jpg",
             "winner": null,
-            "value": 20,
-            "round_name": "Round 1"
-        }
-    },
-    {
-        "pk": 4,
-        "model": "raffle.raffleprize",
-        "fields": {
-            "description": "You'll be the envy of your friends when you cruise campus on this custom Endless Summer 39\" Bomber skateboard with a custom Kukui Cup logo.  It features a gray sand friction surface, a gloss finish bottom, with laminated wood substrate, polyurethane wheels, and performance bearings. ",
-            "title": "Skateboard",
-            "image": "media/prizes/kukuicup-skateboard-back.jpg",
-            "winner": null,
-            "value": 180,
-            "round_name": "Round 1"
-        }
-    },
-    {
-        "pk": 5,
-        "model": "raffle.raffleprize",
-        "fields": {
-            "description": "Ever need to throw a few things on your back for that quick trip to the beach?  HIC has got you covered (well, it's got your back covered, at least) with this drawstring backpack. ",
-            "title": "Backpack",
-            "image": "media/prizes/hic-backpack.jpg",
-            "winner": null,
-            "value": 15,
-            "round_name": "Round 1"
-        }
-    },
-    {
-        "pk": 6,
-        "model": "raffle.raffleprize",
-        "fields": {
-            "description": "Fresh. Healthy. Local.  Aloha Salads strives to serve the highest quality food at affordable prices.  And you'll be able to sample their culinary creations with this $10 gift card.   Locations in Kailua, Kapolei, and Kahala.",
-            "title": "Aloha Salads",
-            "image": "media/prizes/aloha-salads.jpg",
-            "winner": null,
-            "value": 10,
-            "round_name": "Round 1"
-        }
-    },
-    {
-        "pk": 7,
-        "model": "raffle.raffleprize",
-        "fields": {
-            "description": "Papa Luck's is located on campus, in front of Miller Hall. They're known for their organic brewed coffee drinks but also offer great grinds like bagels, breads, ciabatta sandwiches, and quiche.  But don't take our word for it, find out for yourself with this $8 gift certificate.",
-            "title": "Papa Luck's",
-            "image": "media/prizes/papa-lucks.jpg",
-            "winner": null,
-            "value": 8,
-            "round_name": "Round 1"
+            "value": 20
         }
     },
     {
@@ -121,10 +45,10 @@
         "fields": {
             "description": "Bid on this to rock your very own Jack Johnson t-shirt from his To The Sea Tour.  Size: S",
             "title": "JJ tshirt (S)",
+            "round_name": "Round 1",
             "image": "media/prizes/jack-johnson-tshirt_3.jpg",
             "winner": null,
-            "value": 20,
-            "round_name": "Round 1"
+            "value": 20
         }
     },
     {
@@ -133,10 +57,10 @@
         "fields": {
             "description": "Use this gift certificate to score your very own double dip cone at Bubbies Ice Cream Parlor, or else use it on a down payment for a larger purchase!",
             "title": "Bubbies Cone",
+            "round_name": "Round 1",
             "image": "media/prizes/bubbies-storefront.jpg",
             "winner": null,
-            "value": 5,
-            "round_name": "Round 1"
+            "value": 5
         }
     },
     {
@@ -145,94 +69,22 @@
         "fields": {
             "description": "Want to keep learning about your energy consumption even after the Kukui Cup is over?  Bid on your very own Belkin Conserve Insight Energy Monitor!",
             "title": "Energy Meter",
+            "round_name": "Round 1",
             "image": "media/prizes/belkin-energy-monitor.jpg",
             "winner": null,
-            "value": 30,
-            "round_name": "Round 1"
+            "value": 30
         }
     },
     {
-        "pk": 17,
+        "pk": 25,
         "model": "raffle.raffleprize",
         "fields": {
-            "description": "Didn't score a water bottle at the Play at the Cafe event?  Here's your chance to bid on one. It's stainless steel, emblazoned with the Kukui Cup logo, and totally reusable. ",
-            "title": "Water Bottle",
-            "image": "media/prizes/kukuicup-water-bottle.jpg",
+            "description": "What do beer cans, car tires and water bottles have in common? Not much unless you're renegade architect Michael Reynolds, in which case they are tools of choice for producing thermal mass and energy-independent housing. For 30 years New Mexico-based Reynolds and his green disciples have devoted their time to advancing the art of \"Earthship Biotecture\" by building self-sufficient, off-the-grid communities where design and function converge in eco-harmony. However, these experimental structures that defy state standards create conflict between Reynolds and the authorities, who are backed by big business. Frustrated by antiquated legislation, Reynolds lobbies for the right to create a sustainable living test site. While politicians hum and ha, Mother Nature strikes, leaving communities devastated by tsunamis and hurricanes. Reynolds and his crew seize the opportunity to lend their pioneering skills to those who need it most. Shot over three years and in four countries, Garbage Warrior is a timely portrait of a determined visionary, a hero of the 21st century.",
+            "title": "Garbage Warrior",
+            "round_name": "Round 1",
+            "image": "media/prizes/garbage-warrior.png",
             "winner": null,
-            "value": 10,
-            "round_name": "Round 1"
-        }
-    },
-    {
-        "pk": 18,
-        "model": "raffle.raffleprize",
-        "fields": {
-            "description": "You'll be stylin' on campus when you rock your very own Kukui Cup eco-tote with our 2011 logo.  And, it's reusable so you can say \"No Way\" when they ask you, \"Paper or Plastic\"?",
-            "title": "Eco-Tote",
-            "image": "media/prizes/kukuicup-eco-tote.jpg",
-            "winner": null,
-            "value": 10,
-            "round_name": "Round 1"
-        }
-    },
-    {
-        "pk": 19,
-        "model": "raffle.raffleprize",
-        "fields": {
-            "description": "The Tea Farm cafe is just a short walk away in Puck's Alley.  It provides tea and a range of delicious snacks. You'll get a packet of 5 gift certificates, each worth one cup of tea, so you can invite your friends along!",
-            "title": "Tea Farm",
-            "image": "media/prizes/tea-farm.jpg",
-            "winner": null,
-            "value": 13,
-            "round_name": "Round 1"
-        }
-    },
-    {
-        "pk": 20,
-        "model": "raffle.raffleprize",
-        "fields": {
-            "description": "Are you feeling irie?  You will be if you're wearing this spaghetti strap tank with Bob himself on the front.  Zion Sportswear. Size: S",
-            "title": "BM Cami",
-            "image": "media/prizes/women-bobmarley.jpg",
-            "winner": null,
-            "value": 15,
-            "round_name": "Round 1"
-        }
-    },
-    {
-        "pk": 21,
-        "model": "raffle.raffleprize",
-        "fields": {
-            "description": "Shred your way into the finals with these camouflage board shorts from Planet Surf.  Size 7",
-            "title": "Board Shorts",
-            "image": "media/prizes/planetsurf-board-shorts.jpg",
-            "winner": null,
-            "value": 15,
-            "round_name": "Round 1"
-        }
-    },
-    {
-        "pk": 22,
-        "model": "raffle.raffleprize",
-        "fields": {
-            "description": "Protect your skin during those long surf sesh's with this Da Kine rash guard.  Size: L",
-            "title": "Rash Guard",
-            "image": "media/prizes/da-kine-rash-guard.jpg",
-            "winner": null,
-            "value": 18,
-            "round_name": "Round 1"
-        }
-    },
-    {
-        "pk": 24,
-        "model": "raffle.raffleprize",
-        "fields": {
-            "description": "Learn the basics of belly dance with a free lesson by Naia Raks, one of Hawaii's premier performers of middle eastern dance. ",
-            "title": "Belly Dance",
-            "image": "media/prizes/belly-dance.jpg",
-            "winner": null,
-            "value": 15,
-            "round_name": "Round 1"
+            "value": 20
         }
     }
 ]

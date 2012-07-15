@@ -1,16 +1,5 @@
 [
     {
-        "pk": 1,
-        "model": "help.helptopic",
-        "fields": {
-            "category": "rules",
-            "parent_topic": null,
-            "slug": "what-kukui-cup",
-            "contents": "The Kukui Cup residence hall energy competition is a blend of real world and virtual world activities. In the real world, participants attend events, engage in real-world activities like parties, scavenger hunts, and artistic/musical events, win prizes, and most importantly, modify their energy-related behaviors. In the virtual world of the Kukui Cup web application, participants earn points, achieve badges, increase their energy literacy through readings and videos, and use social networking mechanisms to engage with friends about the event. Our hope is that this combination of real and virtual activities complement and reinforce each other.",
-            "title": "What is the Kukui Cup?"
-        }
-    },
-    {
         "pk": 11,
         "model": "help.helptopic",
         "fields": {
@@ -66,17 +55,6 @@
         }
     },
     {
-        "pk": 3,
-        "model": "help.helptopic",
-        "fields": {
-            "category": "rules",
-            "parent_topic": null,
-            "slug": "competitions",
-            "contents": "The Kukui Cup consists of two types of competitions: point competitions and lounge energy competitions. ",
-            "title": "Competitions"
-        }
-    },
-    {
         "pk": 2,
         "model": "help.helptopic",
         "fields": {
@@ -88,17 +66,6 @@
         }
     },
     {
-        "pk": 4,
-        "model": "help.helptopic",
-        "fields": {
-            "category": "rules",
-            "parent_topic": 3,
-            "slug": "lounge-energy-competition",
-            "contents": "In a lounge energy competition, pairs of floors compete as a unit. Each tower is divided into five lounges consisting of floors 3-4 (lounge A), 5-6 (lounge B), 7-8 (lounge C), 9-10 (lounge D), and 11-12 (lounge E). To win in the lounge energy competition, your lounge must use the least energy across all the lounges in the 4 Hale Aloha towers.",
-            "title": "Lounge Energy Competition"
-        }
-    },
-    {
         "pk": 5,
         "model": "help.helptopic",
         "fields": {
@@ -107,6 +74,39 @@
             "slug": "point-competitions",
             "contents": "In an individual competition, you compete to accumulate the most points by performing various actions, including activities, events, and commitments. To win in the individual competition, you simply have to accumulate the most points. \r\n\r\nLounges are also ranked by how many points their residents earned, and there are prizes for lounges too.",
             "title": "Point competitions"
+        }
+    },
+    {
+        "pk": 39,
+        "model": "help.helptopic",
+        "fields": {
+            "category": "widget",
+            "parent_topic": null,
+            "slug": "my-achievements",
+            "contents": "This panel shows what you have accomplished in the Kukui Cup so far. The top portion of the window shows things that are pending, such as current commitments and activities that are waiting for verification from the administrators. The bottom portion shows activities that are completed, along with how many points you earned for each one.\r\n\r\nYou can go to the activity page by clicking on the name of the activity.",
+            "title": "My Achievements"
+        }
+    },
+    {
+        "pk": 3,
+        "model": "help.helptopic",
+        "fields": {
+            "category": "rules",
+            "parent_topic": null,
+            "slug": "competitions",
+            "contents": "The Kukui Cup supports a variety of competitions:\r\n<ul>\r\n<li> The \"literacy\" competition encourages you to learn about energy, water, and other resource usage through the smart grid game and other activities, all which earn you points.\r\n<li> The \"energy\" competition tracks your energy usage through meters installed in your team's residence. \r\n<li> The \"water\" competition tracks your water usage through meters installed in your team's residence.\r\n</ul>\r\n\r\nNot all Kukui Cup challenges support all competitions.",
+            "title": "Competitions"
+        }
+    },
+    {
+        "pk": 4,
+        "model": "help.helptopic",
+        "fields": {
+            "category": "rules",
+            "parent_topic": 3,
+            "slug": "lounge-energy-competition",
+            "contents": "In the lounge energy competition, pairs of floors in each Hale Aloha tower compete as a unit. Each tower is divided into five lounges consisting of floors 3-4 (lounge A), 5-6 (lounge B), 7-8 (lounge C), 9-10 (lounge D), and 11-12 (lounge E). To win in the lounge energy competition, your lounge must use the least energy across all the lounges in the 4 Hale Aloha towers.",
+            "title": "Lounge Energy Competition"
         }
     },
     {
@@ -239,6 +239,17 @@
             "slug": "activity-details",
             "contents": "This panel describes an activity that you can perform to earn points. Some activities involve watching a video, others will require you to go off and do something.\r\n\r\nWhen you complete an activity, click the **I Did This!** button at the bottom of the panel, and you will be prompted for some sort of verification: answering a question, uploading a picture, etc. An administrator will then review your answer (usually within a few hours), and if your answer is approved, you will receive your points.",
             "title": "Activity help"
+        }
+    },
+    {
+        "pk": 40,
+        "model": "help.helptopic",
+        "fields": {
+            "category": "widget",
+            "parent_topic": null,
+            "slug": "canopy-quests",
+            "contents": "The Canopy quest bar is like the regular quest bar: it shows 3 quests that you can undertake. Clicking on the title of a quest causes the quest bar to show the details of that particular quest. A second click on the title will hide the details.\r\n\r\nCanopy quests are intended to explore the Hale Aloha real-time energy data in more depth. Each quest will ask you to examine the advanced energy visualizations and answer some questions. You can post your answers to the Canopy Feed for other Canopy members to comment on.",
+            "title": "Canopy Quests"
         }
     },
     {
@@ -418,28 +429,6 @@
         }
     },
     {
-        "pk": 39,
-        "model": "help.helptopic",
-        "fields": {
-            "category": "widget",
-            "parent_topic": null,
-            "slug": "my-achievements",
-            "contents": "This panel shows what you have accomplished in the Kukui Cup so far. The top portion of the window shows things that are pending, such as current commitments and activities that are waiting for verification from the administrators. The bottom portion shows activities that are completed, along with how many points you earned for each one.\r\n\r\nYou can go to the activity page by clicking on the name of the activity.",
-            "title": "My Achievements"
-        }
-    },
-    {
-        "pk": 40,
-        "model": "help.helptopic",
-        "fields": {
-            "category": "widget",
-            "parent_topic": null,
-            "slug": "canopy-quests",
-            "contents": "The Canopy quest bar is like the regular quest bar: it shows 3 quests that you can undertake. Clicking on the title of a quest causes the quest bar to show the details of that particular quest. A second click on the title will hide the details.\r\n\r\nCanopy quests are intended to explore the Hale Aloha real-time energy data in more depth. Each quest will ask you to examine the advanced energy visualizations and answer some questions. You can post your answers to the Canopy Feed for other Canopy members to comment on.",
-            "title": "Canopy Quests"
-        }
-    },
-    {
         "pk": 41,
         "model": "help.helptopic",
         "fields": {
@@ -504,6 +493,38 @@
             "contents": "The Canopy Karma scoreboard shows you the amount of Karma earned by each member of the Canopy. Canopy Karma is separate from normal Kukui Cup points, and does not earn you raffle tickets. Mostly, it's for bragging rights, though there is a prize for the person with the most Canopy Karma at the end of the competition.",
             "title": "Canopy Scoreboard"
         }
+    },
+    {
+        "pk": 1,
+        "model": "help.helptopic",
+        "fields": {
+            "category": "rules",
+            "parent_topic": null,
+            "slug": "what-kukui-cup",
+            "contents": "The Kukui Cup residence hall energy competition is a blend of real world and online activities. In the real world, participants attend events, engage in real-world activities like parties, scavenger hunts, and artistic/musical events, win prizes, and most importantly, modify their energy-related behaviors. In the online world of the Kukui Cup web application, participants earn points, achieve badges, increase their energy literacy through readings and videos, and use social networking mechanisms to engage with friends about the event. Our hope is that this combination of real and virtual activities complement and reinforce each other.",
+            "title": "What is the Kukui Cup?"
+        }
+    },
+    {
+        "pk": 49,
+        "model": "help.helptopic",
+        "fields": {
+            "category": "widget",
+            "parent_topic": null,
+            "slug": "water-goal-game",
+            "contents": "The daily water goal game is designed to reward you for conserving water.  Each day, a Kukui Cup administrator will read your team's water meter and record the results.  If you can conserve water beyond a baseline value calculated for your team, then every participating team member will receive points!",
+            "title": "Water Goal Game"
+        }
+    },
+    {
+        "pk": 50,
+        "model": "help.helptopic",
+        "fields": {
+            "category": "widget",
+            "parent_topic": null,
+            "slug": "water-scoreboard",
+            "contents": "The water scoreboard shows how your lounge is doing in the water competition. The goal of the water competition is to be the lounge that uses the least amount of water.\r\n\r\nThe scoreboard alternates between showing the amount of water used by each team during the current round, and the amount of water used overall.",
+            "title": "Water Scoreboard"
+        }
     }
-
 ]
