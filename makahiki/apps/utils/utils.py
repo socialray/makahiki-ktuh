@@ -43,7 +43,8 @@ def get_smartgrid_predicates():
 def get_player_mgr_predicates():
     """Returns the predicates defined in player_mgr module."""
     from apps.managers.player_mgr.predicates import badge_awarded, posted_to_wall, \
-        set_profile_pic, has_points, is_admin, allocated_ticket, daily_visit_count
+        set_profile_pic, has_points, is_admin, allocated_ticket, daily_visit_count, \
+        change_theme
     return {
         "is_admin": is_admin,
         "has_points": has_points,
@@ -52,6 +53,7 @@ def get_player_mgr_predicates():
         "posted_to_wall": posted_to_wall,
         "set_profile_pic": set_profile_pic,
         "daily_visit_count": daily_visit_count,
+        "change_theme": change_theme
         }
 
 

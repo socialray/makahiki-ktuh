@@ -62,7 +62,7 @@ class QuestFunctionalTestCase(TransactionTestCase):
 
     def testOptOutOfQuest(self):
         """Test that a user can opt out of the quest."""
-        quest = test_utils.create_quest(completion_conditions=True)
+        quest = test_utils.create_quest(completion_conditions=False)
 
         response = self.client.get(reverse("home_index"))
         self.assertContains(response, "Test quest",
