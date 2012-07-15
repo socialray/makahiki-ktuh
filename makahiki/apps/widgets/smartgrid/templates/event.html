@@ -52,6 +52,7 @@
 {% endblock %}
 
 {% block action_completed_button %}
+    {% if action.member.approval_status != "approved" %}
         {% if action.event.is_event_completed %}
             <a onclick="task_form_overlay(event)">
                 <button style="cursor:pointer;" class="btn btn-wdiget">I Did it
@@ -69,4 +70,5 @@
                 </button>
             </form>
         {% endif %}
+    {% endif %}
 {% endblock %}

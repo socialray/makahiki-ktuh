@@ -20,7 +20,7 @@
                                             <div class="{{task.type}}">
                                                 {% if task.is_unlock %}
                                                     <a href="{% url activity_task task.type task.slug %}"
-                                                       title="{{task.name}}">
+                                                       title="{{task.name}}" onClick="setLevel({{level.priority}})">
                                                         {% if task.type != 'commitment' %}
                                                             {% if task.completed %}
                                                                 {% if task.member.approval_status == "rejected" %}
@@ -133,3 +133,9 @@
         </table>
 
 
+<script type="text/javascript">
+    function setLevel(lvl) {
+//     	console.log("setting current-level cookie to " + lvl);
+        setCookie("current-level", lvl - 1);
+    }
+</script>
