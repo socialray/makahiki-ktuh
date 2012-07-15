@@ -152,7 +152,7 @@ class QuestTest(TransactionTestCase):
             description="test quest",
             level=1,
             unlock_conditions="#Hello World\nTrue",
-            completion_conditions="#Hello World\nTrue",
+            completion_conditions="#Hello World\nFalse",
         )
         quest.save()
 
@@ -160,6 +160,9 @@ class QuestTest(TransactionTestCase):
         self.assertEqual(len(quests["available_quests"]), 1, "User should now have one quest.")
 
         quests["available_quests"][0].accept(self.user)
+
+        quest.completion_conditions = "#Hello World\nTrue"
+        quest.save()
 
         possibly_completed_quests(self.user)
         complete_quests = self.user.quest_set.filter(questmember__completed=True)
