@@ -1,4 +1,5 @@
 
+
 <div id="avatar-fb-form" style="display: none">
   <h4 style="margin-top: 0px">Use your picture from Facebook:</h4>
   <form action="{% url avatar_upload_fb %}" method="POST">
@@ -19,6 +20,13 @@
 </div>
 
 <script>
+    FB.init({
+        appId      : '{{ MAKAHIKI_FACEBOOK_APP_ID }}',
+        status     : true, // check login status
+        cookie     : true, // enable cookies to allow the server to access the session
+        xfbml      : true  // parse XFBML
+    });
+
     // listen for and handle auth.statusChange events
     FB.Event.subscribe('auth.statusChange', function(response) {
         if (response.authResponse) {

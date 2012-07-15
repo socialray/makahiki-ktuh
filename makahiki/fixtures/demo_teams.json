@@ -1,55 +1,72 @@
 [
-  {
-    "pk": 1, 
-    "model": "team_mgr.group",
-    "fields": {
-      "name": "Lehua", 
-      "slug": "hale-lehua"
+    {
+        "pk":1,
+        "model":"team_mgr.group",
+        "fields":{
+            "name":"Lehua",
+            "slug":"hale-lehua"
+        }
+    },
+    {
+        "pk":2,
+        "model":"team_mgr.group",
+        "fields":{
+            "name":"Ilima",
+            "slug":"hale-ilima"
+        }
+    },
+    {
+        "pk":1,
+        "model":"team_mgr.team",
+        "fields":{
+            "group":1,
+            "name":"Lehua-A",
+            "slug":"lehua-a"
+        }
+    },
+    {
+        "pk":2,
+        "model":"team_mgr.team",
+        "fields":{
+            "group":1,
+            "name":"Lehua-B",
+            "slug":"lehua-b"
+        }
+    },
+    {
+        "pk":3,
+        "model":"team_mgr.team",
+        "fields":{
+            "group":1,
+            "name":"Lehua-C",
+            "slug":"lehua-c"
+        }
+    },
+    {
+        "pk":4,
+        "model":"team_mgr.team",
+        "fields":{
+            "group":1,
+            "name":"Lehua-D",
+            "slug":"lehua-d"
+        }
+    },
+    {
+        "pk":5,
+        "model":"team_mgr.team",
+        "fields":{
+            "group":1,
+            "name":"Lehua-E",
+            "slug":"lehua-e"
+        }
+    },
+    {
+        "pk":6,
+        "model":"team_mgr.team",
+        "fields":{
+            "group":1,
+            "name":"Ilima-A",
+            "slug":"ilima-a"
+        }
     }
-  },
-  {
-    "pk": 1, 
-    "model": "team_mgr.team",
-    "fields": {
-      "group": 1,
-      "name": "Lehua-A",
-      "slug": "Lehua-A"
-    }
-  },
-  {
-    "pk": 2,
-    "model": "team_mgr.team",
-    "fields": {
-      "group": 1,
-      "name": "Lehua-B",
-      "slug": "Lehua-B"
-    }
-  },
-  {
-    "pk": 3,
-    "model": "team_mgr.team",
-    "fields": {
-      "group": 1,
-      "name": "Lehua-C",
-        "slug": "Lehua-C"
-    }
-  },
-  {
-    "pk": 4,
-    "model": "team_mgr.team",
-    "fields": {
-      "group": 1,
-      "name": "Lehua-D",
-        "slug": "Lehua-D"
-    }
-  },
-  {
-    "pk": 5,
-    "model": "team_mgr.team",
-    "fields": {
-      "group": 1,
-      "name": "Lehua-E",
-        "slug": "Lehua-E"
-    }
-  }
 ]

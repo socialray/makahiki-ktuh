@@ -13,7 +13,7 @@ from apps.managers.team_mgr.models import Team
 from apps.widgets.resource_goal.models import EnergyBaselineDaily, EnergyBaselineHourly
 
 
-BASELINE_PERIOD_WEEKS = 2
+BASELINE_PERIOD_WEEKS = 1
 """number of weeks of the history data used for baseline calculation."""
 
 

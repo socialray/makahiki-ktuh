@@ -59,7 +59,6 @@ def main(argv):
         if opt[0] == "-r" or opt[0] == "--heroku":
             heroku_app = opt[1]
             manage_command = "heroku run --app %s python makahiki/manage.py" % heroku_app
-            fixture_path = "makahiki/fixtures"
 
     if not instance_type in ("default", "demo", "test"):
         script_utils.exit_with_help(__doc__)

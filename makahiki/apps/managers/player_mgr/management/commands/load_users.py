@@ -2,7 +2,7 @@
 
 Load and create the users from a csv file. The format of the csv file is:
 
-team, firstname, lastname, email[, RA]
+team, firstname, lastname, email, username, password[, RA]
 
 quoting around the column is supported.
 
@@ -21,6 +21,7 @@ class Command(management.base.BaseCommand):
     firstname = None
     username = None
     email = None
+    password = None
     team = None
     is_ra = False
 
@@ -42,7 +43,7 @@ class Command(management.base.BaseCommand):
         reader = csv.reader(infile)
         for row in reader:
             self.parse(row)
-            player_mgr.create_player(self.username, self.email, self.firstname,
+            player_mgr.create_player(self.username, self.password, self.email, self.firstname,
                                      self.lastname, self.team, self.is_ra)
             load_count += 1
 
@@ -52,16 +53,17 @@ class Command(management.base.BaseCommand):
     def parse(self, items):
         """Parse the line."""
 
-        self.team = items[0].strip().capitalize()
+        self.team = items[0].strip()
 
         self.firstname = items[1].strip().capitalize()
         self.lastname = items[2].strip().capitalize()
 
         self.email = items[3].strip()
-        self.username = self.email.split("@")[0]
+        self.username = items[4].strip()
+        self.password = items[5].strip()
 
-        if len(items) == 5:
-            self.is_ra = True if items[4].strip().lower() == "ra" else False
+        if len(items) == 7:
+            self.is_ra = True if items[6].strip().lower() == "ra" else False
         else:
             self.is_ra = False
 

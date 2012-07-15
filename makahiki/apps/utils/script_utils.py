@@ -80,7 +80,7 @@ def reset_db(heroku_app):
     if not heroku_app:
         os.system("python scripts/initialize_postgres.py")
     else:
-        os.system("heroku pg:reset SHARED_DATABASE --app %s  --confirm %s" % (
+        os.system("heroku pg:reset HEROKU_POSTGRESQL_AQUA --app %s  --confirm %s" % (
             heroku_app, heroku_app))
 
 
@@ -108,7 +108,10 @@ def load_fixtures(manage_command, fixture_path, prefix):
     """load fixture files."""
     for name in os.listdir(fixture_path):
         if name.startswith(prefix) and name.endswith(".json"):
-            os.system("%s loaddata %s" % (manage_command, os.path.join(fixture_path, name)))
+            fixture = os.path.join(fixture_path, name)
+            if manage_command.startswith("heroku"):
+                fixture = os.path.join("makahiki", fixture)
+            os.system("%s loaddata %s" % (manage_command, fixture))
 
 
 def load_data(manage_command, instance_type, fixture_path):
