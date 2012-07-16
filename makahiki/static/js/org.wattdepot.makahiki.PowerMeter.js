@@ -1,19 +1,38 @@
+google.load("visualization", "1", {packages:['corechart', 'imagechart']});
+
 // Visualization to show current power data.
-Makahiki_PowerMeter = function (server_url, source, refresh_interval, viz_id, options) {
+function Makahiki_PowerMeter(server_url, source, refresh_interval, viz_id, options) {
     // http://code.google.com/apis/visualization/documentation/gallery/genericimagechart.html
-    google.load("visualization", "1", {packages:['corechart', 'imagechart']});
+
+    var query = null;
+    var source = source;
 
     // Set a callback to run when the Google Visualization API is loaded.
-    google.setOnLoadCallback(callback);
+    google.setOnLoadCallback(callback(source));
 
-    function callback() {
+    return change_source;
+
+    function callback(source) {
         var gviz_url = server_url + "/wattdepot/sources/" +
             source + "/gviz/sensordata/latest?tq=select%20timePoint%2C%20powerConsumed";
 
-        var query = new google.visualization.Query(gviz_url);
+        query = new google.visualization.Query(gviz_url);
         query.setRefreshInterval(refresh_interval);
 
         // Set a callback to run when the data has been retrieved.
+        query.send(function (response) {
+            responseHandler(response);
+        });
+    }
+
+    function change_source(new_source) {
+        source = new_source
+        gviz_url = server_url + "/wattdepot/sources/" +
+            source + "/gviz/sensordata/latest?tq=select%20timePoint%2C%20powerConsumed";
+
+        query.abort()
+        query = new google.visualization.Query(gviz_url);
+        query.setRefreshInterval(refresh_interval);
         query.send(function (response) {
             responseHandler(response);
         });

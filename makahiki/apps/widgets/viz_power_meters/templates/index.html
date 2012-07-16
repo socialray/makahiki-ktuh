@@ -1,4 +1,4 @@
-{% with all_lounges=view_objects.viz_power_meters.all_lounges group_lounges=view_objects.viz_power_meters.group_lounges %}
+{% with all_lounges=view_objects.viz_power_meters.all_lounges group_lounges=view_objects.viz_power_meters.group_lounges group_lounges_count=view_objects.viz_power_meters.group_lounges_count %}
 
 <div id="PowerMeter">
     <center><b>Power Meters</b></center>
@@ -29,51 +29,55 @@
 
 <div>
     <p>
-        This visualization shows the real time power meters of 5 lounges. Note that the middle of
-        each gauge represents the typical
-        power for this lounge at this time of day.
-
+        This visualization shows the real time power meters of {{ group_lounges_count }} lounges.
+        Note that the middle of each gauge represents the typical power for this lounge at this time of day.
     <p/>
     You can use this visualization to look at the real time power consumption of any lounge and
-    compare the usages of 5 lounges at a time.
+    compare the usages of {{ group_lounges_count }} lounges at a time.
 
 </div>
-
-{% endwith %}
 
 <script type="text/javascript" src="http://www.google.com/jsapi"></script>
 <script type="text/javascript" src="{{STATIC_URL}}js/org.wattdepot.makahiki.PowerMeter.js"></script>
 
 <script type="text/javascript">
     // Wrap this code in an anonymous self-invoking function to avoid polluting global namespace.
+    var viz_powermeters = new Array();
     (function () {
-        for (i = 1; i <= 5; i++)
+        for (i = 1; i <= {{ group_lounges_count }}; i++)
         {
-            drawOne(i)
+            viz_powermeters[i] = drawOne(i, i);
         }
     })();
 
-    function drawOne(id) {
+    function drawOne(id, selected) {
         var refreshInterval = 15;
         var server_url = "{{ CHALLENGE.wattdepot_server_url }}";
-        var source = document.getElementById("lounge_" + id).value;
+        var source = document.getElementById("lounge_" + id).options[selected].value;
         var options = {
             source: source,
             width: 200,
             powerRange: 2000};
 
-        new Makahiki_PowerMeter( server_url,
+        document.getElementById('loading_' + id).style.display = 'none';
+
+        return Makahiki_PowerMeter( server_url,
                 source,
                 refreshInterval,
                 'visualization_' + id,
                 options);
-        document.getElementById('loading_' + id).style.display = 'none';
     }
 
     function updateLounge(id) {
         document.getElementById("visualization_" + id).innerHTML = "";
         document.getElementById("loading_" + id).style.display = '';
-        drawOne(id);
+        selected = document.getElementById("lounge_" + id).selectedIndex
+        source = document.getElementById("lounge_" + id).options[selected].value;
+
+        viz_powermeters[id](source);
+        document.getElementById('loading_' + id).style.display = 'none';
+
     }
 
 </script>
+{% endwith %}

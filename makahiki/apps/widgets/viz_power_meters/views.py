@@ -7,18 +7,36 @@ def supply(request, page_name):
     """ Handle the viz request."""
 
     _ = page_name
-    _ = request
 
+    team = request.user.get_profile().team
+    group_lounges_count = 5
     all_lounges = Team.objects.order_by('name').all()
+    group_lounges_list = []
 
-    if request.user.get_profile().team:
-        group_lounges = request.user.get_profile().team.group.team_set.order_by('name').all()
+    if team:
+        group_lounges = team.group.team_set.order_by('name').all()[:group_lounges_count]
+        remainer = group_lounges_count - group_lounges.count()
+        print remainer
+        if remainer:
+            remainer_lounges = Team.objects.exclude(group=team.group).order_by('name')[:remainer]
+            if remainer_lounges.count():
+                for l in group_lounges:
+                    group_lounges_list.append(l)
+                for l in remainer_lounges:
+                    group_lounges_list.append(l)
     else:
-        group_lounges = all_lounges[:5]
+        group_lounges = all_lounges[:group_lounges_count]
+
+    if group_lounges_list:
+        group_lounges = group_lounges_list
+        group_lounges_count = len(group_lounges)
+    else:
+        group_lounges_count = group_lounges.count()
 
     return  {
         "all_lounges": all_lounges,
         "group_lounges": group_lounges,
+        "group_lounges_count": group_lounges_count,
         }
 
 
