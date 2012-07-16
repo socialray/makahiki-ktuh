@@ -109,6 +109,12 @@ def add(request, activity):
             return response
 
         # invalid form
+        # rebuild the form
+        form.form_title = "Get your points"
+        if activity.confirm_type == "text":
+            qid = form.data["question"]
+            question = TextPromptQuestion.objects.get(pk=qid)
+            form.action_question = question
         return render_to_response("task.html", {
             "action": activity,
             "form": form,
