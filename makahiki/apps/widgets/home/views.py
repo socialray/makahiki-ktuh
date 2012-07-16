@@ -177,6 +177,7 @@ def setup_profile(request):
                 fb_url = form.cleaned_data["facebook_photo"]
                 photo_temp.write(urllib2.urlopen(fb_url).read())
                 photo_temp.flush()
+                photo_temp.seek(0)
 
                 path = avatar_file_path(user=request.user,
                     filename="fb_photo.jpg")

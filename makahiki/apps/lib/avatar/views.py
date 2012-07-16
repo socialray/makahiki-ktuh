@@ -47,6 +47,7 @@ def upload_fb(request):
             fb_url = form.cleaned_data["facebook_photo"]
             photo_temp.write(urllib2.urlopen(fb_url).read())
             photo_temp.flush()
+            photo_temp.seek(0)
 
             # Delete old avatars if they exist
             # avatars = Avatar.objects.filter(user=request.user)
@@ -115,7 +116,7 @@ def change(request, extra_context=None, next_override=None):
                 return HttpResponseRedirect(
                     reverse("profile_index") + "?changed_avatar=True")
             except Exception:  # pylint: disable=W0703
-                file_error = "Uploaded file is larger than 1 MB."
+                file_error = "Uploaded file is larger than 2 MB."
 
         if 'choice' in request.POST and primary_avatar_form.is_valid():
             avatar = Avatar.objects.get(id=
