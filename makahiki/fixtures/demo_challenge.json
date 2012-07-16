@@ -14,7 +14,7 @@
             "theme": "theme-forest",
             "use_cas_auth": false,
             "email_host": "smtp.gmail.com",
-            "site_domain": "localhost",
+            "site_domain": "kukuicup-uh.herokuapp.com",
             "landing_slogan": "The Kukui Cup: <br/> Lights Off.  Game On!",
             "internal_auth_text": "###Others",
             "site_logo": "",

@@ -3,14 +3,14 @@
         "pk": 12,
         "model": "quests.quest",
         "fields": {
-            "completion_conditions": "badge_awarded('fully_committed')",
-            "name": "Get the Fully Committed badge",
+            "completion_conditions": "badge_awarded('super-committed')",
+            "name": "Get the Super Committed badge",
             "level": 6,
-            "unlock_conditions": "completed_some_of(action_type='commitment') and not badge_awarded('fully_committed')",
+            "unlock_conditions": "completed_some_of(action_type='commitment') and not badge_awarded('super-committed')",
             "created_at": "2011-04-19T21:26:15",
             "updated_at": "2012-07-14T21:05:33.080",
-            "quest_slug": "get-fully-committed-badge",
-            "description": "While earning points and conserving energy is great, wouldn't it be awesome if there was a way to get a little recognition for all your hard work? Lucky for you, there is: **BADGES**. Badges represent achievements reached during the game, both big and small.\r\n\r\nFor the most part, you'll have to discover the badges on your own, but we're going to give you a hint on this one. You will receive the Fully Committed badge when you make 5 commitments (the maximum allowed by law). To complete this quest, you just need to get the badge by topping off your commitments to 5.\r\n\r\nYou know the drill by now: go to the Get Nutz page, click on a commitment square in the Smart Grid Game, and get your badge. *Note:* you may have to complete some other activities to get unlock all 5 commitments."
+            "quest_slug": "get-super-committed-badge",
+            "description": "While earning points and conserving energy is great, wouldn't it be awesome if there was a way to get a little recognition for all your hard work? Lucky for you, there is: **BADGES**. Badges represent achievements reached during the game, both big and small.\r\n\r\nFor the most part, you'll have to discover the badges on your own, but we're going to give you a hint on this one. You will receive the Super Committed badge when you make 5 commitments (the maximum allowed by law). To complete this quest, you just need to get the badge by topping off your commitments to 5.\r\n\r\nYou know the drill by now: go to the Get Nutz page, click on a commitment square in the Smart Grid Game, and get your badge. *Note:* you may have to complete some other activities to get unlock all 5 commitments."
         }
     },
     {
@@ -115,10 +115,10 @@
         "pk": 16,
         "model": "quests.quest",
         "fields": {
-            "completion_conditions": "change_theme()",
+            "completion_conditions": "completed_action('intro-video') and change_theme()",
             "name": "Find your theme",
             "level": 3,
-            "unlock_conditions": "not change_theme()",
+            "unlock_conditions": "not completed_action('intro-video') and not change_theme()",
             "created_at": "2012-07-14T15:10:44.792",
             "updated_at": "2012-07-14T21:08:08.050",
             "quest_slug": "find-your-theme",
