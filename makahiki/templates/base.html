@@ -40,5 +40,27 @@
         },false);
     }
     </script>
+
+    <!--[if lt IE 9]>
+         <script type="text/javascript"
+         src="http://ajax.googleapis.com/ajax/libs/chrome-frame/1/CFInstall.min.js"></script>
+
+
+        <script>
+          // The conditional ensures that this code will only execute in IE,
+          // Therefore we can use the IE-specific attachEvent without worry
+          window.attachEvent("onload", function() {
+            CFInstall.check({
+              preventPrompt: true,
+              preventInstallDetection: true,
+              onmissing: function() {
+                jQuery('#landing-button-participant').unbind('click').click(function() {
+                  location.href='{% url browser_check %}';
+                });
+              }
+           });
+          });
+        </script>
+    <![endif]-->
 </body>
 </html>

@@ -618,7 +618,7 @@ class ActionMemberAdmin(admin.ModelAdmin):
         "user", "action", "admin_link", "question", "response", "image", "social_email",
         "approval_status", "admin_comment",)
     readonly_fields = (
-        "user", "action", "admin_link", "question", "response", "image", "social_email")
+        "user", "action", "admin_link", "question", "response", "social_email")
     list_display = (
         "action", "submission_date", "approval_status", "short_question", "short_response")
     list_filter = ["approval_status", "action__type"]
