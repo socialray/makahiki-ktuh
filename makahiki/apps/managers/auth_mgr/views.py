@@ -44,12 +44,19 @@ def logout(request):
     """
     username = request.user.username
     from django.contrib import auth
-    auth.logout(request)
 
     # Sets a logout variable so that we can capture it in the logger.
     request.session["logged-out-user"] = username
+    referer = request.META['HTTP_REFERER'].split("/")
+    referer = referer[len(referer) - 2]
+    if  referer == "home" and not request.user.profile.get(user=request.user).setup_complete:
+        destination = "about"
+    else:
+        destination = "landing"
+
+    auth.logout(request)
 
     if settings.CAS_SERVER_URL:
-        return HttpResponseRedirect(reverse("cas_logout") + "?next=" + reverse("landing"))
+        return HttpResponseRedirect(reverse("cas_logout") + "?next=" + reverse(destination))
     else:
-        return HttpResponseRedirect(reverse("landing"))
+        return HttpResponseRedirect(reverse(destination))
