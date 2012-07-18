@@ -1,5 +1,8 @@
 // Visualization to show current power data.
 Makahiki_PowerMeterStatus = function (server_url, source, refresh_interval, viz_name, options, id) {
+    var testDate = new Date();
+    var catLength = testDate.toString().indexOf("GMT");
+    var yearLoc = testDate.toString().indexOf(testDate.getFullYear()) + 4;
     return callback();
 
     function callback() {
@@ -32,9 +35,11 @@ Makahiki_PowerMeterStatus = function (server_url, source, refresh_interval, viz_
         var then = new Date(lastUpdate);
         var diff = now.getTime() - then.getTime();
         then = then.toString();
-        $("#timestamp_" + id).html();
-        $("#"+ viz_name).html("Last Check: " + then.substring(0,then.length-15) + "&nbsp;&nbsp;&nbsp;&nbsp;" + format_num( Math.round(diff / 1000)) + " s  ");
+        
+        $("#last-check").html("Last Check: " + now.toString().substr(yearLoc,catLength-yearLoc));
+        $("#"+ viz_name).html(format_num( Math.round(diff / 1000)) + " s  ");
         if (diff / 1000 > 2 * rf_interval) {
+            $("#"+ viz_name).html("Last Reported: " + lastUpdate + "&nbsp;&nbsp;&nbsp;&nbsp;" + format_num( Math.round(diff / 1000)) + " s  ");
             $("#" + viz_name).css('color', 'red');
             $("#" + viz_name).css('font-face', 'bold');
        }
