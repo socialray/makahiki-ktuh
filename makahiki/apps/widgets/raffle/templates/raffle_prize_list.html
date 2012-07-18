@@ -29,12 +29,21 @@
               <div class="content-body"> 
                       <table class="table-striped">
                                   <thead>
-                                      <tr><td style="width: 20%;"><b>Raffle Prize</b></td><td><b>Description</b></td></tr>
+                                      <tr><td class="column-text"><b>Raffle Prize</b></td>
+                                          <td class="column-text"><b>Description</b></td>
+                                      </tr>
                                   </thead>
 
                                   {% for item in round_name.list|dictsort:"title" %}  
                                       <tr>
-                                        <td><b>{{ item.title }}</b></td><td style="text-align:left;">{{item.description}}</td>
+                                        <td class="column-text">
+                                          <div><b>{{ item.title }}</b></div>
+                                           <image class="raffle-icon" src="{{item.image.url}}"></image>
+
+                                        </td>
+
+                                        <td class="column-text">{{item.description}}
+                                        </td>
                                       </tr>
                                   {% endfor %} 
                           
