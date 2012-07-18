@@ -32,7 +32,7 @@
     <div id="fb-root"></div>
 
     <script src="//connect.facebook.net/en_US/all.js"></script>
-
+{% if user.get_profile.setup_complete %}
  {% include "components/RIB.html" %}
  {% include "components/navbar.html" %}
  <div class="notifications makahiki-box">
@@ -50,13 +50,14 @@
     </ul>
   </div>
  {% endif %}
+{% endif %}
 {% endblock %}
 
 
 {% block extra_body_base %}
-
+{% if user.get_profile.setup_complete %}
 {% include "feedback_dialog.html" %}
-
+{% endif %}
 <div class="modal hide fade" id="helpModal">
     <div class="modal-header">
         <a class="close" data-dismiss="modal">x</a>
