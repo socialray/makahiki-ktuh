@@ -9,6 +9,9 @@ from apps.managers.log_mgr.models import MakahikiLog
 class MakahikiLogAdmin(admin.ModelAdmin):
     """admin"""
     list_display = ('request_url', "remote_user", 'remote_ip', 'request_time', 'response_status')
+    list_filter = ('remote_user', 'remote_ip', 'response_status')
+    search_fields = ('request_url',)
+    ordering = ["-request_time"]
     formfield_overrides = {
         models.CharField: {'widget': TextInput(attrs={'size': '100'})},
         }

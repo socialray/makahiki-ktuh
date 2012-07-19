@@ -12,8 +12,7 @@ from django.template.context import RequestContext
 
 from apps.managers.challenge_mgr import  challenge_mgr
 from apps.widgets.notifications.models import NoticeTemplate, UserNotification
-from apps.widgets.raffle.models import  RafflePrize, RaffleTicket, POINTS_PER_TICKET, \
-                                        RAFFLE_END_PERIOD
+from apps.widgets.raffle.models import  RafflePrize, RaffleTicket, POINTS_PER_TICKET
 
 
 def supply(request, page_name):
@@ -25,7 +24,7 @@ def supply(request, page_name):
         # no in any round
         return {}
 
-    deadline = current_round_info["end"] - datetime.timedelta(hours=RAFFLE_END_PERIOD)
+    deadline = current_round_info["end"]
     today = datetime.datetime.today()
 
     # Get the user's tickets.
@@ -60,7 +59,7 @@ def add_ticket(request, prize_id):
         prize = get_object_or_404(RafflePrize, id=prize_id)
         user = request.user
         current_round_info = challenge_mgr.get_round_info()
-        deadline = current_round_info["end"] - datetime.timedelta(hours=RAFFLE_END_PERIOD)
+        deadline = current_round_info["end"]
         in_deadline = datetime.datetime.today() <= deadline
 
         if RaffleTicket.available_tickets(user) > 0 and in_deadline:

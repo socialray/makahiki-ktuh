@@ -193,7 +193,7 @@ class Sponsor(models.Model):
         ordering = ['priority', 'name', ]
 
     def __unicode__(self):
-        return self.name
+        return ""
 
 
 class RoundSetting(models.Model):

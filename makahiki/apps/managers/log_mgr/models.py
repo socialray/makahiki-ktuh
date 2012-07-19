@@ -14,7 +14,3 @@ class MakahikiLog(models.Model):
     http_referer = models.CharField(max_length=1000, blank=True, null=True)
     http_user_agent = models.CharField(max_length=300, blank=True, null=True)
     post_content = models.TextField(blank=True, null=True)
-
-    class Meta:
-        """meta"""
-        ordering = ['-request_time']

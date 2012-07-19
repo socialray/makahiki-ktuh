@@ -18,7 +18,7 @@ constants = message_constants
 TYPE_CHOICES = (
     ('round-transition', 'Round Transition'),
     ('raffle-winner', 'Raffle Winner'),
-    ('canopy-elevation', 'Canopy Elevation'),
+    ('prize-winner', 'Prize Winner'),
     ('commitment-ready', 'Commitment Ready'),
     )
 """Possible notification types."""

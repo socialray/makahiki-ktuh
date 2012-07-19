@@ -36,11 +36,11 @@ def main(argv):
         theme_name, _ = os.path.splitext(theme)
         if verbose == 1:
             print "Compiling %s.less" % theme_name
-        os.system("lessc %s.less > ../css/%s.css" % (theme_name, theme_name))
+        os.system("lessc -x --yui-compress %s.less > ../css/%s.css" % (theme_name, theme_name))
     for page in page_names:
         if verbose == 1:
             print "Compiling %s.less" % page
-        os.system("lessc %s.less > ../css/%s.css" % (page, page))
+        os.system("lessc -x --yui-compress %s.less > ../css/%s.css" % (page, page))
 
 if __name__ == '__main__':
     main(sys.argv[1:])

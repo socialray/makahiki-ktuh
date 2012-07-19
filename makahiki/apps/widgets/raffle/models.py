@@ -7,9 +7,6 @@ from apps.utils.utils import media_file_path
 POINTS_PER_TICKET = 25
 """Number of points required to earn a raffle ticket"""
 
-RAFFLE_END_PERIOD = 2
-"""Number of hours prior to the end of a round that the raffle closes."""
-
 _MEDIA_LOCATION = "prizes"
 """location for uploaded files."""
 
@@ -69,6 +66,9 @@ class RaffleTicket(models.Model):
     raffle_prize = models.ForeignKey(RafflePrize)
     created_at = models.DateTimeField(auto_now_add=True, editable=False)
     updated_at = models.DateTimeField(auto_now=True, editable=False)
+
+    def __unicode__(self):
+        return ""
 
     @staticmethod
     def available_tickets(user):
