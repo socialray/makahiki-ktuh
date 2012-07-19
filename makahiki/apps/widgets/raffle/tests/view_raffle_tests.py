@@ -44,16 +44,8 @@ class RafflePrizesTestCase(TransactionTestCase):
         self.assertContains(response,
             "Your total raffle tickets: 0 Allocated right now: 0 Available: 0",
             msg_prefix="User should not have any raffle tickets.")
-        deadline = challenge_mgr.get_round_info()["end"] - datetime.timedelta(hours=2)
-        date_string = deadline.strftime("%A, %B %d, %Y, ")
-        # Workaround since strftime doesn't remove the leading 0 in hours.
-        hour = deadline.hour
-        if hour == 0:
-            hour = hour + 12
-        elif hour > 12:
-            hour = hour - 12
-        date_string = date_string + str(hour) + deadline.strftime("%p")
-        # Another workaround for days because of the leading 0
+        deadline = challenge_mgr.get_round_info()["end"]
+        date_string = deadline.strftime("%B %d, %Y, %I:%M ")
         date_string = re.sub(r"\b0", "", date_string)
         self.assertContains(response, "Deadline for Round 2 submissions: " + date_string,
             msg_prefix="Raffle should have the correct deadline.")
@@ -169,7 +161,7 @@ class RafflePrizesTestCase(TransactionTestCase):
         """
         Test what happens when the page is accessed after the deadline.
         """
-        end = datetime.datetime.today() + datetime.timedelta(hours=1)
+        end = datetime.datetime.today() - datetime.timedelta(hours=1)
         rounds = RoundSetting.objects.get(name="Round 2")
         rounds.end = end
         rounds.save()
@@ -204,7 +196,7 @@ class RafflePrizesTestCase(TransactionTestCase):
         )
         raffle_prize.save()
 
-        end = datetime.datetime.today() + datetime.timedelta(hours=1)
+        end = datetime.datetime.today() - datetime.timedelta(hours=1)
         rounds = RoundSetting.objects.get(name="Round 2")
         rounds.end = end
         rounds.save()
