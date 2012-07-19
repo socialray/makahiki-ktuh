@@ -126,7 +126,33 @@
   .carousel-caption {
     position: static;
   }
+  // !!! CAM 07/18/2012: moved .navbar .nav-collapse from 980 to this
+  // !!! media query 480px.
+  // Nav collapse clears brand
+  .navbar .nav-collapse {
+    clear: left;
+  }
+  // !!! CAM 07/18/2012 End change
+  // !!! CAM 07/18/2012: Removing .navbar .nav > li from 980 to this
+  // !!! media query 480px.
+  .navbar .nav > li {
+    float: none;
+  }
+  // !!! CAM 07/18/2012 End of change
 
+  // !!! CAM 07/18/2012 moved the .btn-navbar and .nav-collapse from media
+  // !!! query 979
+  // Navbar button
+  .btn-navbar {
+    display: block;
+  }
+
+  // Hide everything in the navbar save .brand and toggle button */
+  .nav-collapse {
+    overflow: hidden;
+    height: 0;
+  }
+  // !!! CAM 07/18/2012 End of change
 }
 
 
@@ -240,18 +266,24 @@
     padding-right: 10px;
     margin: 0 0 0 -5px;
   }
+  // !!! CAM 07/18/2012: Removing .navbar .nav-collapse from this
+  // !!! media query moving them to 480px.
   // Nav collapse clears brand
-  .navbar .nav-collapse {
-    clear: left;
-  }
+//  .navbar .nav-collapse {
+//    clear: left;
+//  }
+  // !!! CAM 07/18/2012 End change
   // Block-level the nav
   .navbar .nav {
     float: none;
     margin: 0 0 (@baseLineHeight / 2);
   }
-  .navbar .nav > li {
-    float: none;
-  }
+  // !!! CAM 07/18/2012: Removing .navbar .nav > li from this
+  // !!! media query moving them to 480px.
+//  .navbar .nav > li {
+//    float: none;
+//  }
+  // !!! CAM 07/18/2012 End of change
   .navbar .nav > li > a {
     margin-bottom: 2px;
   }
@@ -320,16 +352,20 @@
     padding-left:  10px;
     padding-right: 10px;
   }
+
+  // !!! CAM 07/18/2012: Removing .btn-navbar and .nav-collapse from this
+  // !!! media query moving them to 480px.
   // Navbar button
-  .btn-navbar {
-    display: block;
-  }
+//  .btn-navbar {
+//    display: block;
+//  }
 
   // Hide everything in the navbar save .brand and toggle button */
-  .nav-collapse {
-    overflow: hidden;
-    height: 0;
-  }
+//  .nav-collapse {
+//    overflow: hidden;
+//    height: 0;
+//  }
+  // !!! CAM 07/18/2012 End of change
 }
 
 
