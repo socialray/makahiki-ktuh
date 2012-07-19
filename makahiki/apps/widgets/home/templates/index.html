@@ -7,10 +7,11 @@
       {% if page.is_unlock %}
       <li>
         <div class="home-item">
+            <center>
             <a href="{{ page.url }}/?ref=home-page">
-                <img class="home-{{ page.name }}-icon"
-                     src="{{STATIC_URL}}images/spacer.png"/>
+                <div class="home-{{ page.name }}-icon"></div>
             </a>
+            </center>
             <div class='tile'>
                 <h6>{{ page.label }}</h6>
                   {{ page.introduction|markdown }}

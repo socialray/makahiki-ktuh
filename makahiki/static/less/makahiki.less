@@ -16,112 +16,67 @@
 @navbarBackgroundHighlight: fadeout(@navbar-bkg-color-start, @navbar-transparency);
 @navbarBackground: fadeout(@navbar-bkg-color-end, @navbar-transparency);
 @navbarLinkBackgroundActive: darken(@navbarBackground, 15%);
-//@iconSpritePath:          "../images/glyphicons-halflings.png";
-//@iconWhiteSpritePath:     "../images/glyphicons-halflings-white.png";
+@iconSpritePath:          "../images/glyphicons-halflings.png";
+@iconWhiteSpritePath:     "../images/glyphicons-halflings-white.png";
 
 a {
     color: @page-link-color;
 }
 
-a.admin img {
-    background: transparent url(../images/icons/icon-admin.png) top left no-repeat;
-    .show
-}
+a .home {
+    display:block; width:54px; height:54px;
+    background: url("../images/icons/icon-home.png");}
+a .home:hover { background-position: 54px 0px;}
 
-a.admin:hover img {
-    background: transparent url(../images/icons/icon-admin-over.png) top left no-repeat;
-    .show
-}
+a .admin {
+    display:block; width:54px; height:54px;
+    background: url("../images/icons/icon-admin.png");}
+a .admin:hover { background-position: 54px 0px;}
 
-a.energy img {
-    background: transparent url(../images/icons/icon-go-low.png) top left no-repeat;
-    .show
-}
+a .help {
+    display:block; width:54px; height:54px;
+    background: url("../images/icons/icon-help.png");}
+a .help:hover { background-position: 54px 0px;}
 
-a.energy:hover img {
-    background: transparent url(../images/icons/icon-go-low-over.png) top left no-repeat;
-    .show
-}
+a .learn {
+    display:block; width:54px; height:54px;
+    background: url("../images/icons/icon-learn.png");}
+a .learn:hover { background-position: 54px 0px;}
 
-a.help img {
-    background: transparent url(../images/icons/icon-help.png) top left no-repeat;
-    .show
-}
+a .news {
+    display:block; width:54px; height:54px;
+    background: url("../images/icons/icon-news.png");}
+a .news:hover { background-position: 54px 0px;}
 
-a.help:hover img {
-    background: transparent url(../images/icons/icon-help-over.png) top left no-repeat;
-    .show
-}
+a .win {
+    display:block; width:54px; height:54px;
+    background: url("../images/icons/icon-win.png");}
+a .win:hover { background-position: 54px 0px;}
 
-a.home img {
-    background: transparent url(../images/icons/icon-home.png) top left no-repeat;
-    .show
-}
+a .learn {
+    display:block; width:54px; height:54px;
+    background: url("../images/icons/icon-learn.png");}
+a .learn:hover { background-position: 54px 0px;}
 
-a.home:hover img {
-    background: transparent url(../images/icons/icon-home-over.png) top left no-repeat;
-    .show
-}
+a .energy {
+    display:block; width:54px; height:54px;
+    background: url("../images/icons/icon-energy.png");}
+a .energy:hover { background-position: 54px 0px;}
 
-a.learn img {
-    background: transparent url(../images/icons/icon-scoreboard.png) top left no-repeat;
-    .show
-}
+a .water {
+    display:block; width:54px; height:54px;
+    background: url("../images/icons/icon-water.png");}
+a .water:hover { background-position: 54px 0px;}
 
-a.learn:hover img {
-    background: transparent url(../images/icons/icon-scoreboard-over.png) top left no-repeat;
-    .show
-}
+a .profile {
+    display:block; width:54px; height:54px;
+    background: url("../images/icons/icon-profile.png");}
+a .profile:hover { background-position: 54px 0px;}
 
-a.news img {
-    background: transparent url(../images/icons/icon-news.png) top left no-repeat;
-    .show
-}
-
-a.news:hover img {
-    background: transparent url(../images/icons/icon-news-over.png) top left no-repeat;
-    .show
-}
-
-a.profile img {
-    background: transparent url(../images/icons/icon-profile.png) top left no-repeat;
-    .show
-}
-
-a.profile:hover img {
-    background: transparent url(../images/icons/icon-profile-over.png) top left no-repeat;
-    .show
-}
-
-a.status img {
-    background: transparent url(../images/icons/icon-status.png) top left no-repeat;
-    .show
-}
-
-a.status:hover img {
-    background: transparent url(../images/icons/icon-status-over.png) top left no-repeat;
-    .show
-}
-
-a.water img {
-    background: transparent url(../images/icons/icon-water.png) top left no-repeat;
-    .show
-}
-
-a.water:hover img {
-    background: transparent url(../images/icons/icon-water-over.png) top left no-repeat;
-    .show
-}
-
-a.win img {
-    background: transparent url(../images/icons/icon-prizes.png) top left no-repeat;
-    .show
-}
-
-a.win:hover img {
-    background: transparent url(../images/icons/icon-prizes-over.png) top left no-repeat;
-    .show
-}
+a .status {
+    display:block; width:54px; height:54px;
+    background: url("../images/icons/icon-status.png");}
+a .status:hover { background-position: 54px 0px;}
 
 body {
     height: 100%;
