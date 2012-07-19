@@ -34,7 +34,7 @@ def build_google_chart_data():
     """Builds the data for graphing the feedback in google visualizations."""
     d = {}
     ordered_actions = get_ordered_actions_with_feedback()
-    d['height'] = ordered_actions.count() * 50
+    d['height'] = ordered_actions.count() * 35
     action_feedback = []
     for counter, action in enumerate(ordered_actions):
         temp = []
