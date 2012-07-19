@@ -18,10 +18,10 @@
         {% for prize in prizes %}
         <tr>
             <td class="prize">
-                {% if prize.image %}<img src="{{prize.image.url}}" width="100"/>{% endif %}
-                <a id="{{name|slugify}}-{{prize.title|slugify}}-link" 
+                <a id="{{name|slugify}}-{{prize.title|slugify}}-link"
                    onClick="togglePrize(event, '{{name|slugify}}', '{{prize.title|slugify}}'); return false;"
                         href="#">
+                    {% if prize.image %}<img src="{{prize.image.url}}" width="100"/>{% endif %}
                     {{ prize.title }}
                 </a>
             </td>
@@ -57,6 +57,7 @@
                <h3>{{name}}: {{prize.title}}</h3>
            </div>
            <div class="modal-body">
+               {% if prize.image %}<img src="{{prize.image.url}}"/>{% endif %}
                {{ prize.long_description|markdown }}
            </div>
            <div class="modal-footer">
