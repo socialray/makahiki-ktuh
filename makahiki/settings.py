@@ -197,6 +197,7 @@ INSTALLED_WIDGET_APPS = (
     'status.gchart',
     'status.wattdepot',
     'status.twitter',
+    'status.badges',
 )
 
 for widget in INSTALLED_WIDGET_APPS:
