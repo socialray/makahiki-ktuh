@@ -1,3 +1,4 @@
+{% load markup %}
 {% if form.image_response %}         {# image #}
     {{ action.activity.confirm_prompt }} <p/>
     {% if form.response %}
@@ -12,7 +13,7 @@
         Please answer the following question(s) and submit your answer(s).
         <br>You can also click on the "Cancel" button to go back to review the information.
         <p/>
-        {{ action.activity.confirm_prompt }} <p/>
+        {{ action.activity.confirm_prompt|markdown }} <p/>
         {{ form.question }}
         <b>{{ form.action_question.question }}</b> <br/>
         {% if form.action_question.questionchoice_set.count > 0 %}    {# choice response question #}
@@ -23,7 +24,7 @@
             {{ form.response }}
         {% endif %}
     {% else %}                                       {# free text #}
-        {{ action.activity.confirm_prompt }} <p/>
+        {{ action.activity.confirm_prompt|markdown }} <p/>
         {{ form.response.errors }}
         {{ form.response }}
     {% endif %}

@@ -321,7 +321,7 @@ class Activity(Action):
     confirm_prompt = models.TextField(
         blank=True,
         verbose_name="Confirmation prompt",
-        help_text="Text to display to user when asking for response."
+        help_text=settings.MARKDOWN_TEXT  
     )
 
     def is_active(self):
