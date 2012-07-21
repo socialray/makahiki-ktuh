@@ -11,7 +11,7 @@ from apps.managers.score_mgr import score_mgr
 
 register = template.Library()
 
-def avatar_url(user, size=80):
+def avatar_url(user, size=80, first_login=False):
     if not isinstance(user, User):
         try:
             user = User.objects.get(username=user)
@@ -39,12 +39,19 @@ def avatar_url(user, size=80):
                 return AVATAR_DEFAULT_YES_URL
             else:
                 if size > 60:
-                    return AVATAR_DEFAULT_NO_LG_URL
+                    if first_login:
+                        return AVATAR_DEFAULT_YES_URL
+                    else:
+                        return AVATAR_DEFAULT_NO_LG_URL
                 else:
-                    return AVATAR_DEFAULT_NO_URL
+                    if first_login:
+                        return AVATAR_DEFAULT_YES_URL
+                    else:
+                        return AVATAR_DEFAULT_NO_URL
 register.simple_tag(avatar_url)
 
-def avatar(user, size=80):
+def avatar(user, size=80, *args, **kwargs):
+    first_login = kwargs['first_login']
     if not isinstance(user, User):
         try:
             user = User.objects.get(username=user)
@@ -55,7 +62,7 @@ def avatar(user, size=80):
             alt = _("Default Avatar")
     else:
         alt = unicode(user)
-        url = avatar_url(user, size)
+        url = avatar_url(user, size, first_login)
     return """<img src="%s" alt="%s" width="%s" height="%s" />""" % (url, alt,
         size, size)
 register.simple_tag(avatar)
