@@ -27,42 +27,10 @@
                         {# Item is not pending and is not approved, so it should be rejected. #}
                         <td title="Your request has not been approved.">
                         <a id="{{activity.title|slugify}}-rejected"
-                           href="#">{{ member.approval_status.capitalize }}</a>
-
-                        <div id="{{activity.title|slugify}}-rejected-dialog"
-                             title="{{activity.title}}" style="display:none">
-                            <p>Your response for this activity was not approved. Here's the
-                                feedback from the administrator:</p>
-
-                            <div style="font-style:italic">{{ member.admin_comment|markdown }}</div>
-                            <p>
-                                <a href="{% url activity_task activity.type activity.slug %}">Go
-                                    to the activity page</a> to try again.</p>
-
-                            <input type="submit" value="OK"
-                                   onclick='$("#{{activity.title|slugify}}-rejected-dialog").dialog("close");'/>
-                        </div>
-                        <script type="text/javascript">
-                            $(document).ready(function () {
-                                $("#{{activity.title|slugify}}-rejected-dialog").dialog({
-                                    modal:true,
-                                    autoOpen:false,
-                                    open:function (event, ui) {
-                                        log_js_action("profile", "{{activity.title|slugify}}-rejected", "dialog-open");
-                                    },
-                                    close:function (event, ui) {
-                                        log_js_action("profile", "{{activity.title|slugify}}-rejected", "dialog-close");
-                                    }
-                                });
-
-                                $("#{{activity.title|slugify}}-rejected").click(function () {
-                                    $("#{{activity.title|slugify}}-rejected-dialog").dialog("open");
-                                });
-                            });
-                        </script>
+                           href="{% url activity_task activity.type activity.slug %}">{{ member.approval_status.capitalize }}</a>
                     {% endif %}
+                    </td>
                 {% endif %}
-                </td>
             </tr>
             {% endwith %}
         {% else %}
