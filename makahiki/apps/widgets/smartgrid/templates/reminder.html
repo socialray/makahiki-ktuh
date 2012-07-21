@@ -6,7 +6,7 @@
                     Email reminder: {{ reminders.email.send_at }}<br/>
                 {% endif %}
                 {% if reminders.text %}
-                    Text reminder: {{ reminders.text.send_at }}<br/>
+                    SMS Text reminder: {{ reminders.text.send_at }}<br/>
                 {% endif %}
                 <button id="task-reminder-button" class="btn btn-widget" onclick="toggleReminder(event); return false;">Change Reminder</button>
             {% else %}
