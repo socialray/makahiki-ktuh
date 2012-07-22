@@ -155,6 +155,11 @@ ul {
     list-style: none;
 }
 
+.avatar-box img {
+    padding: 4px
+}
+
+
 .background-choice () when (@use-bkg-image) {
     background: url("@{page-bkg-image}") center fixed;
     background-repeat: no-repeat;
@@ -854,3 +859,4 @@ ul {
 @import "widget-upcoming-events.less";
 @import "widget-wallpost.less";
 @import "widget-wattdepot.less";
+@import "lib-change-avatar.less";
