@@ -15,6 +15,7 @@ from apps.widgets.action_feedback.forms import ActionFeedbackForm
 from django.shortcuts import render_to_response
 from django.template.context import RequestContext
 from apps.managers.score_mgr import score_mgr
+from apps.widgets.notifications.models import UserNotification
 #from django.db.models.aggregates import Count
 
 
@@ -44,17 +45,26 @@ def action_feedback(request, action_type, slug):
     if form.is_valid():
         print form.cleaned_data
     feedback, created = ActionFeedback.objects.get_or_create(action=action, user=user)
-
+    has_comment = False
+    has_score = False
     if 'Score' in request.POST:
         feedback.rating = request.POST['Score']
+        has_score = True
     else:
         feedback.rating = 0
     if 'comments' in request.POST:
         feedback.comment = request.POST['comments']
+        if len(feedback.comment.strip()) > 0:  # ignore pure whitespace comments
+            has_comment = True
     else:
         feedback.comment = ""
     feedback.changed = datetime.datetime.now()
-    feedback.save()
+    if has_comment or has_score:
+        feedback.save()  # only save if they provided any feedback
+    else:
+        if created:
+            feedback.delete()  # remove the feedback
+            created = False  # reset created for giving points
 
     if created:
         # Give the user points for providing feedback
@@ -62,6 +72,15 @@ def action_feedback(request, action_type, slug):
                            datetime.datetime.today(),
                            "{0}: {1} (Provide feedback)"\
                             .format(action.type.capitalize(), action.title), action)
+        if score_mgr.feedback_points() > 0:
+            message = "Thank you for your feedback on {0}: {1} you've earned {2} points"\
+            .format(action.type.capitalize(), action.title, score_mgr.feedback_points())
+        else:
+            message = "Thank you for your feedback on {0}: {1}"\
+                .format(action.type.capitalize(), action.title)
+        UserNotification.create_info_notification(user, message,
+                                                  display_alert=True,
+                                                  content_object=action)
     # Take them back to the action page.
     return HttpResponseRedirect(reverse("activity_task", args=(action.type, action.slug,)))
 

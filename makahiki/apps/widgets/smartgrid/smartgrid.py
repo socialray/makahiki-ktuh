@@ -339,7 +339,7 @@ def notify_commitment_end():
         if template:
             message = template.render({"COMMITMENT": member.action})
         else:
-            message = "Your commitment <a href='%s'>%s</a> has end." % (
+            message = "Your commitment <a href='%s'>%s</a> has ended." % (
                 reverse("activity_task",
                         args=(member.action.type, member.action.slug)),
                 member.action.title)
