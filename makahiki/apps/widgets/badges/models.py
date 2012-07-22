@@ -64,8 +64,11 @@ class BadgeAward(models.Model):
     def save(self, *args, **kwargs):
         """custom save method."""
 
-        message = "Congratulations, You have been awarded the %s badge.  " % self.badge.name
-        message += "Check it out <a href= %s >here</a>" % "/profile/?ref=dialog"
+        message = "Congratulations, You have been awarded the {0} badge.  "\
+        .format(self.badge.name)
+        message += "<div class=\"badge-theme-{0}-small\"><p>{1}</p></div>"\
+        .format(self.badge.theme, self.badge.label)
+        message += "Check out your badges <a href= %s >here</a>" % "/profile/?ref=dialog"
         UserNotification.create_info_notification(
             self.profile.user,
             message,
