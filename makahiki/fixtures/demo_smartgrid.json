@@ -3801,7 +3801,7 @@
             "point_range_end": null,
             "confirm_type": "free",
             "point_range_start": null,
-            "confirm_prompt": "Answer these questions:\r\n1. What interesting differences do you notice in energy use when looking at the 3 different timescales?\r\n2. What how different are the graphs of power and energy?\r\n3. Pick 2 lounges and compare their energy use across 2 different time scales.\r\n4. What are your thoughts on this visualization? What are its strengths and weaknesses?"
+            "confirm_prompt": "Answer these questions:\r\n\r\n1.  What interesting differences do you notice in energy use when looking at the 3 different timescales?\r\n2.  What how different are the graphs of power and energy?\r\n3.  Pick 2 lounges and compare their energy use across 2 different time scales.\r\n4.  What are your thoughts on this visualization? What are its strengths and weaknesses?"
         }
     },
     {
