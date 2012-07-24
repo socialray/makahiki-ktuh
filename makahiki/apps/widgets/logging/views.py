@@ -8,7 +8,7 @@ def supply(request, page_name):
     _ = page_name
     _ = request
 
-    entries = MakahikiLog.objects.all()[:20]
+    entries = MakahikiLog.objects.all().order_by("-request_time")[:20]
 
     return {
         "entries": entries,

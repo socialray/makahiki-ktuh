@@ -12,5 +12,9 @@ def supply(request, page_name):
         interval = resource_goal.team_goal_settings(team, "energy").power_meter_interval
     else:
         interval = None
-
-    return {"interval": interval}
+    width = 300
+    height = 100
+    return {"interval": interval,
+            "width": width,
+            "height": height
+            }
