@@ -54,5 +54,17 @@
             "logo": "",
             "logo_url": "http://www.nsf.gov/images/logos/nsf1sm.gif"
         }
-    }
+    },
+    {
+        "pk": 7,
+        "model": "challenge_mgr.sponsor",
+        "fields": {
+            "name": "HEI Charitable Foundation",
+            "url": "http://www.hei.com/heicf/heicf.html",
+            "challenge": 1,
+            "priority": 6,
+            "logo": "",
+            "logo_url": "http://www.hei.com/heicf/heilogo_bluesteel.gif"
+        }
+    }        
 ]
