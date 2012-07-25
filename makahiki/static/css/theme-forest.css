@@ -977,6 +977,7 @@ ul{list-style:none;}
 @charset "UTF-8";
 .awarded{line-height:10px;margin-left:41px;}
 .badge-image{width:36px;height:1px;float:left;}
+.badge-name{line-height:34px;}
 .content-col{width:60%;}
 .date-col{width:35%;}
 .margin-one-third{margin-left:35%;margin-right:35%;}

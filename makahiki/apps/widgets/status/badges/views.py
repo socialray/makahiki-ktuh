@@ -3,16 +3,19 @@ Created on Jul 19, 2012
 
 @author: Cam Moore
 '''
-from apps.managers.player_mgr.models import Profile
-from django.db.models.aggregates import Count
+from apps.widgets.badges.models import Badge, BadgeAward
 
 
 def supply(request, page_name):
     """supply the view objects for the badge status widget."""
     _ = page_name
     _ = request
-    profiles_with_badges = Profile.objects.annotate(num_badges=Count('badgeaward'))\
-        .order_by('-num_badges').filter(num_badges__gt=0)
+    badgeAward = {}
+    for badge in Badge.objects.all():
+        badgeAward[badge] = BadgeAward.objects.filter(badge=badge).count()
+    badgeAward = sorted(badgeAward.items(), key=lambda x: -x[1])
+    badges = Badge.objects.all()
     return {
-            "profiles": profiles_with_badges
+            "badge_awards": badgeAward,
+            "badges": badges,
             }

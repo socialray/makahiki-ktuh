@@ -1,4 +1,5 @@
-{% with profiles=view_objects.status__badges.profiles %}
+{% with badge_awards=view_objects.status__badges.badge_awards %}
+<div class="content-box widget">
     <div class="content-box-title">
     Awarded Badges
     </div>
@@ -6,22 +7,19 @@
         <table class="table-striped">
             <thead>
                 <tr>
-                    <th class="column-text" width="25%">Player</th>
-                    <th class="column-text" width="75%">Badges</th>
+                    <th class="column-text" >Badge</th>
+                    <th class="column-number" width="25%">#Users Awarded</th>
                 </tr>
             </thead>
             <tbody>
-            {% for p in profiles %}
+            {% for badge, awarded in badge_awards%}
                 <tr>
-                    <td class="column-text">{{p.name}}</td>
-                    <td>
-                    {% for ba in p.badgeaward_set.all %}
-                        <div class="badge-theme-{{ba.badge.theme}}"><p>{{ba.badge.label}}</p></div>
-                    {% endfor %}
-                    </td>
+                    <td class="column-text"><div class="badge-theme-{{badge.theme}}"><p>{{badge.label}}</p></div><div class="badge-name">{{badge.name}}</div></td>
+                    <td class="column-number">{{awarded}}</td>
                 </tr>
             {% endfor %}
             </tbody>
         </table>
     </div>
+</div>
 {% endwith %}

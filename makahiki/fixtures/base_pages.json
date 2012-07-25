@@ -528,6 +528,16 @@
             "enabled": true,
             "page": 10
         }
+    },    
+    {
+        "pk": 56,
+        "model": "challenge_mgr.pagesetting",
+        "fields": {
+            "widget": "status.badges",
+            "game": null,
+            "enabled": true,
+            "page": 10
+        }
     },
     {
         "pk": 1,
