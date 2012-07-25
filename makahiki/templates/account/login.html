@@ -1,30 +1,17 @@
-{% extends "site_base.html" %}
+{% extends "logo_bar_base.html" %}
+
+{% load markup %}
 
 {% block page_title %}
   Welcome to KukuiCup!
 {% endblock %}
 
-{% block extra_head %}
-    {% if not MAKAHIKI_USE_LESS %}
-        <link rel="stylesheet" href="{{STATIC_URL}}css/{{CSS_THEME}}.css">
-        <link rel="stylesheet" href="{{STATIC_URL}}css/landing.css">
-    {% else %}
-        <link rel="stylesheet/less" type="text/css" href="{{STATIC_URL}}less/{{CSS_THEME}}.less">
-        <link rel="stylesheet/less" type="text/css" href="{{STATIC_URL}}less/landing.less">
-        <script src="{{STATIC_URL}}js/less-1.3.0.min.js" type="text/javascript"></script>
-    {% endif %}
-{% endblock %}
 
-{% block body %}
+
+{% block content %}
 <div class="container-fluid">
     <div class="row-fluid">
-       {% include "components/logo-header.html" %}
-    </div>
-    <div class="row-fluid">
         <div class="content-box">
-            <div class="content-box-title">
-                <h3>Log In</h3>
-            </div>
             <div class="content-box-contents  landing-body">
                 <form class="login" method="POST" action="{% url account_login %}">
                     <fieldset class="inlineLabels">

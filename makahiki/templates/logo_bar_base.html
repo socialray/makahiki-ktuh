@@ -24,7 +24,8 @@
 {% block body %} 
 <div class="container-fluid">
     <div class="row-fluid">
-        <div class="content-box logo-header-box">
+      <a href="{% url landing %}">
+        <div class="content-box logo-header-box" >
             <img class="logo" src="{{STATIC_URL}}images/old-logo.png"/>
 
             {% if CHALLENGE.site_logo %}
@@ -37,6 +38,7 @@
                 {{ CHALLENGE.landing_slogan|markdown }} 
             </div>
         </div>
+      </a>
     </div> 
     {% block content %}
     {% endblock %}

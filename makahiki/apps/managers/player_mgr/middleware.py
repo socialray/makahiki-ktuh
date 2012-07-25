@@ -65,7 +65,7 @@ class LoginMiddleware(object):
             # We need to check if the user is going to the home page so we don't
             # get caught in a redirect loop. We do need to filter out requests
             # for CSS and other resources.
-            pattern = "^/(home|admin|log|account|tc|site_media|media|favicon.ico)/"
+            pattern = "^/(home|admin|log|about|account|tc|site_media|media|favicon.ico)/"
 
             if not profile.setup_complete and \
                not re.compile(pattern).match(path):
@@ -80,7 +80,7 @@ class LoginMiddleware(object):
         if request.user.is_authenticated():
             path = request.path
 
-            pattern = "^/(home\/restricted|admin|log|account|site_media|media|favicon.ico)/"
+            pattern = "^/(home\/restricted|admin|about|log|account|site_media|media|favicon.ico)/"
 
             staff_user = request.user.is_staff or request.session.get('staff', False)
             if not staff_user and \
