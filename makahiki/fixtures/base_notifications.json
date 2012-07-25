@@ -30,5 +30,5 @@
             "notice_type": "prize-winner",
             "template": "Congratulations, you won a prize '{{PRIZE.title}}' for {{PRIZE.round_name}} !  Please come to the upcoming awards party to claim your prize."
         }
-    },
+    }
 ]

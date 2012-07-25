@@ -5,7 +5,7 @@
         "fields": {
             "site_name": "July Beta Test",
             "use_internal_auth": true,
-            "email_enabled": true,
+            "email_enabled": false,
             "landing_introduction": "## Aloha! Welcome to the July Beta Test of the Kukui Cup.",
             "wattdepot_server_url": "http://server.wattdepot.org:8194",
             "cas_auth_text": "###I have a CAS email",
