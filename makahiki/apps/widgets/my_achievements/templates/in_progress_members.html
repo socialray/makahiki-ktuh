@@ -2,30 +2,30 @@
 
 <table>
     <tr>
-        <th class="profile-history-current-date-header achievement-date-column">Date</th>
-        <th class="profile-history-current-task-header achievement-content-column">Task</th>
-        <th class="profile-history-current-status-header" >Status</th>
+        <th class="profile-history-current-date-header achievement-date-column column-text">Date</th>
+        <th class="profile-history-current-task-header achievement-content-column column-text">Task</th>
+        <th class="profile-history-current-status-header column-text" >Status</th>
     </tr>
     {% for member in view_objects.my_achievements.in_progress_members %}
         {% if member.action.activity or member.action.event %}
             {% with member.action.activity as activity %}
             <tr>
-                <td>{{ member.created_at|date:"n/j/y" }}</td>
-                <td>
+                <td class="column-text">{{ member.created_at|date:"n/j/y" }}</td>
+                <td class="column-text">
                     <a href="{% url activity_task member.action.type member.action.slug %}">
                         {{ member.action.type.capitalize }}: {{ member.action.name }}
                     </a>
                 </td>
                 {% if member.approval_status == "pending" and member.action.activity %}
-                    <td title="Your request needs administrator approval.">
+                    <td class="column-text" title="Your request needs administrator approval.">
                         {{ member.approval_status.capitalize }}
                 {% else %}
                     {% if member.approval_status == "pending" %}
-                        <td title="You have signed up for the {{member.action.type}}">
+                        <td class="column-text" title="You have signed up for the {{member.action.type}}">
                             Signed up
                     {% else %}
                         {# Item is not pending and is not approved, so it should be rejected. #}
-                        <td title="Your request has not been approved.">
+                        <td  class="column-text" title="Your request has not been approved.">
                         <a id="{{activity.title|slugify}}-rejected"
                            href="{% url activity_task activity.type activity.slug %}">{{ member.approval_status.capitalize }}</a>
                     {% endif %}
@@ -35,13 +35,13 @@
             {% endwith %}
         {% else %}
             <tr>
-                <td>{{ member.created_at|date:"n/j/y" }}</td>
-                <td>
+                <td class="column-text">{{ member.created_at|date:"n/j/y" }}</td>
+                <td class="column-text">
                     <a href="{% url activity_task 'commitment' member.action.slug %}">
                         Commitment: {{ member.action.name }}
                     </a>
                 </td>
-                <td title="The commitment is still active.">In Progress</td>
+                <td class="column-text" title="The commitment is still active.">In Progress</td>
             </tr>
         {% endif %}
     {% endfor %}

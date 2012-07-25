@@ -1,33 +1,33 @@
 {% for log in view_objects.my_achievements.points_logs %}
     <tr>
-        <td>{{ log.transaction_date|date:"n/j/y" }}</td>
+        <td class="column-text">{{ log.transaction_date|date:"n/j/y" }}</td>
         {# Determine if the log is an activity #}
         {% if log.related_object %}
             {# Need to handle the various types of objects #}
             {% with log.related_object as member %}
                 {% if member.action %}
-                            <td>
+                            <td class="column-text">
                                 <a href="{% url activity_task member.action.type member.action.slug %}">
                                     {{ log.message }}
                                 </a>
                             </td>
-                            <td>{{ log.points }}{% if member.action.is_canopy %}&nbsp;
+                            <td class="column-text">{{ log.points }}{% if member.action.is_canopy %}&nbsp;
                                 (Karma){% endif %}</td>
                 {% elif member.type %} <!-- !!! Bad assumption should check the type of member -->
-                            <td>
+                            <td class="column-text">
                                 <a href="{% url activity_task member.type member.slug %}">
                                     {{ log.message }}
                                 </a>
                             </td>
-                            <td>{{ log.points }}</td>
+                            <td class="column-text">{{ log.points }}</td>
                 {% else %}
-                    <td>{{ log.message }}</td>
-                    <td>{{ log.points }}</td>
+                    <td class="column-text">{{ log.message }}</td>
+                    <td class="column-text">{{ log.points }}</td>
                 {% endif %}
             {% endwith %}
         {% else %}
-            <td>{{ log.message }}</td>
-            <td >{{ log.points }}</td>
+            <td class="column-text">{{ log.message }}</td>
+            <td class="column-text">{{ log.points }}</td>
         {% endif %}
     </tr>
 {% endfor %}

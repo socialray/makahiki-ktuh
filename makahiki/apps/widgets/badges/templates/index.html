@@ -20,7 +20,7 @@
       {% if awarded_badges.count > 0 %}
           {% for awarded in awarded_badges %}
               <tr>
-                  <td><div class="badge-theme-{{awarded.theme}}"><p>{{ awarded.label }}</p></div><div style="line-height:34px;">&nbsp;&nbsp;{{ awarded.name }}</div></td>
+                  <td><div class="badge-theme-{{awarded.theme}}"><p>{{ awarded.label }}</p></div><div class="badge-name">&nbsp;&nbsp;{{ awarded.name }}</div></td>
                   <td>{{ awarded.description }}</td>
               </tr>
           {% endfor %}
