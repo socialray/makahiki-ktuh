@@ -86,45 +86,36 @@ li {
     float: left;
     margin-left: 2.5%;
     margin-right: 2.5%;
-    height: 113px;
-    width: 106px;
+    height: 100px;
     display: block;
 }
 
 .logo-branding {
-    margin-top: 8px;
     margin-right: 2%;
     display: block;
     float: right;
     height: 100px;
-    width: 100px;
-}
-
-.logo-header-box {
-    margin-left: 5%;
-    min-height: 115px;
-    width: 90%;
-    display: block;
-}
-
-.logo-header-box.logo-header-text {
-    display: block;
-    padding-top: 10%;
-    padding-left: 3%;
-    width: 58%;
-}
-
-.logo-header-text p {
-    font-weight: bold;
-    font-size: 32pt;
-    line-height: 42px;
-    padding-top: 25px;
 }
 
 @media (max-width: 500px) {
     .logo-branding {
         display: none;
     }
+}
+
+.logo-header-text p {
+    font-weight: bold;
+    font-size: 32pt;
+    line-height: 42px;
+}
+
+
+.logo-header-box {
+    margin-left: 5%;
+    padding-bottom: 0px;
+    min-height: 115px;
+    width: 90%;
+    display: block;
 }
 
 @media (max-width: 460px) {
@@ -136,59 +127,35 @@ li {
     }
 }
 
-@media (max-width: 699px) {
-    .logo-header-text {
-        font-size: 15pt;
-        width: 90%;
-    }
+.logo-header-text {
+    display:table-cell;
+    padding-left: 3%;
+    width: 58%;
+    text-align: center;
+    vertical-align:middle;
 }
 
 @media (max-width: 1198px) {
     .logo-header-text p {
-        padding-top: 25px;
     }
 }
 
-@media (max-width: 960px) {
+@media (max-width: 864px) {
     .logo-header-text p {
-        font-size: 24pt;
-        line-height: 32px;
-        padding-top: 25px;
+        font-size: 25pt;
+        line-height: 35px;
     }
 }
 
-@media (max-width: 683px) {
-    .logo-header-text p {
-        padding-top: 14px;
-    }
-}
 
-@media (max-width: 393px) {
+@media (max-width: 690px) {
     .logo-header-text p {
-        padding-top: 0px;
-    }
-}
-
-@media (max-width: 339px) {
-    .logo-header-text p {
-        padding-top: 0px;
         font-size: 18pt;
+        line-height: 24px;
     }
 }
 
-@media (max-width: 830px) {
-    .header-text p {
-        font-size: 24pt;
-        line-height: 24pt;
-    }
-}
 
-@media (max-width: 440px) {
-    .header-text p {
-        font-size: 15pt;
-        line-height: 15pt;
-    }
-}
 
 @media (min-width: 1020px) {
     .tabbed {

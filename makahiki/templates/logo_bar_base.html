@@ -26,17 +26,23 @@
     <div class="row-fluid">
       <a href="{% url landing %}">
         <div class="content-box logo-header-box" >
-            <img class="logo" src="{{STATIC_URL}}images/old-logo.png"/>
-
-            {% if CHALLENGE.site_logo %}
-                <img class="logo-branding" src="{{CHALLENGE.site_logo.url }}"/>
-            {% else %}
-                <img class="logo-branding" src="{{STATIC_URL}}images/old-logo.png"/>
-            {% endif %}
-
-            <div class="logo-header-text" style="text-align: center;"> 
+        <table>
+          <tr>
+            <td>
+              <img class="logo" src="{{STATIC_URL}}images/old-logo.png"/>
+            </td>
+            <td class="logo-header-text"> 
                 {{ CHALLENGE.landing_slogan|markdown }} 
-            </div>
+            </td>
+            <td>
+                {% if CHALLENGE.site_logo %}
+                    <img class="logo-branding" src="{{CHALLENGE.site_logo.url }}"/>
+                {% else %}
+                    <img class="logo-branding" src="{{STATIC_URL}}images/old-logo.png"/>
+                {% endif %}
+            </td>
+          </tr>
+        </table>
         </div>
       </a>
     </div> 
