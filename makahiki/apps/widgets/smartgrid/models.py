@@ -640,7 +640,7 @@ class ActionMember(models.Model):
 
         # Construct the message to be sent.
         status_nicely = 'not approved' if status != 'approved' else status
-        message = 'Your response to <a href="%s">"%s"</a> %s was %s.' % (
+        message = 'Your response to <a href="%s#action-details">"%s"</a> %s was %s.' % (
             reverse("activity_task", args=(self.action.type, self.action.slug,)),
             self.action.title,
             # The below is to tell the javascript to convert into a pretty date.
