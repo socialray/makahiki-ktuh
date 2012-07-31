@@ -99,22 +99,6 @@
         }
     },
     {
-        "pk": 5,
-        "model": "djcelery.periodictask",
-        "fields": {
-            "task": "apps.widgets.status.tasks.update_daily_status",
-            "name": "update_daily_status",
-            "args": "[]",
-            "enabled": true,
-            "crontab": 1,
-            "interval": null,
-            "expires": null,
-            "kwargs": "{}",
-            "date_changed": "2012-06-30T14:18:46.151",
-            "description": ""
-        }
-    },
-    {
         "pk": 6,
         "model": "djcelery.periodictask",
         "fields": {

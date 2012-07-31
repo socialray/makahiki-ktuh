@@ -8,4 +8,5 @@ class DailyStatus(models.Model):
     daily_visitors = models.IntegerField(
         blank=True, null=True,
         help_text="Number of visitors.")
-    date = models.DateTimeField(editable=False, auto_now_add=True)
+    date = models.CharField('name', unique=True, max_length=50,
+                            help_text="Date of the count.")

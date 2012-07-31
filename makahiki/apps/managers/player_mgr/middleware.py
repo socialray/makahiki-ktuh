@@ -5,6 +5,8 @@ import datetime
 from django.core.urlresolvers import reverse
 from django.http import HttpResponseRedirect
 from apps.managers.challenge_mgr import challenge_mgr
+from apps.widgets.status.models import DailyStatus
+from django.core.exceptions import ObjectDoesNotExist
 
 
 class LoginMiddleware(object):
@@ -41,18 +43,31 @@ class LoginMiddleware(object):
             today = datetime.date.today()
 
             # Look for a previous login.
+            if not last_visit:
+                try:
+                    entry = DailyStatus.objects.get(date=today.isoformat())
+                    entry.daily_visitors = entry.daily_visitors + 1
+                except ObjectDoesNotExist:
+                    entry = DailyStatus(date=today.isoformat(), daily_visitors=1)
+                entry.save()
+
             if last_visit and (today - last_visit) == datetime.timedelta(
                 days=1):
                 profile.last_visit_date = today
                 profile.daily_visit_count += 1
                 profile.save()
+                try:
+                    entry = DailyStatus.objects.get(date=today.isoformat())
+                    entry.daily_visitors = entry.daily_visitors + 1
+                except ObjectDoesNotExist:
+                    entry = DailyStatus(date=today.isoformat(), daily_visitors=1)
+                entry.save()
             elif not last_visit or (today - last_visit) > datetime.timedelta(
                 days=1):
                 # Reset the daily login count.
                 profile.last_visit_date = today
                 profile.daily_visit_count = 1
                 profile.save()
-
         return None
 
     def check_setup_completed(self, request):
@@ -70,7 +85,6 @@ class LoginMiddleware(object):
             if not profile.setup_complete and \
                not re.compile(pattern).match(path):
                 return HttpResponseRedirect(reverse("home_index"))
-
         return None
 
     def check_competition_period(self, request):
