@@ -87,9 +87,11 @@ def reset_db(heroku_app):
 def create_heroku_app(heroku_app):
     """create the heroku application."""
     print "create heroku app..."
+    os.system("heroku labs:enable default-heroku-postgresql-dev")
     os.system("heroku create %s --stack cedar --remote %s" % (heroku_app, heroku_app))
+    os.system("git remote add %s git@heroku.com:%s.git" % (heroku_app, heroku_app))
 
-    os.system("heroku config:add --app $1 MAKAHIKI_ADMIN_INFO=$MAKAHIKI_ADMIN_INFO "\
+    os.system("heroku config:add --app %s MAKAHIKI_ADMIN_INFO=$MAKAHIKI_ADMIN_INFO "\
                 "MAKAHIKI_USE_MEMCACHED=$MAKAHIKI_USE_MEMCACHED "\
                 "MAKAHIKI_USE_HEROKU=True "\
                 "MAKAHIKI_USE_S3=$MAKAHIKI_USE_S3 "\
@@ -99,7 +101,8 @@ def create_heroku_app(heroku_app):
                 "MAKAHIKI_EMAIL_INFO=$MAKAHIKI_EMAIL_INFO "\
                 "MAKAHIKI_USE_FACEBOOK=$MAKAHIKI_USE_FACEBOOK "\
                 "MAKAHIKI_FACEBOOK_APP_ID=$MAKAHIKI_FACEBOOK_APP_ID "\
-                "MAKAHIKI_FACEBOOK_SECRET_KEY=$MAKAHIKI_FACEBOOK_SECRET_KEY" % heroku_app)
+                "MAKAHIKI_FACEBOOK_SECRET_KEY=$MAKAHIKI_FACEBOOK_SECRET_KEY" % (heroku_app,
+                                                                                heroku_app))
 
     os.system("heroku addons:add --app %s memcache" % heroku_app)
 
