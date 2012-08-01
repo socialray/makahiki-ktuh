@@ -215,6 +215,7 @@ INSTALLED_THEMES = (
     'theme-bumblebee',
     'theme-forest',
     'theme-google',
+    'theme-hpu',
     'theme-sonora',
     'theme-space',
     'theme-wave',
