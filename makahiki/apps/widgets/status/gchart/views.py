@@ -12,7 +12,7 @@ def supply(request, page_name):
     daily_login_data = []
     result = remote_supply(request, page_name)
     result = result['logins']
-    template_date_format = "%m/%d"
+    #template_date_format = "%m/%d"
 
     for item in result:
         point = {'x': item['date'], 'y': item['logins']}
@@ -25,7 +25,7 @@ def supply(request, page_name):
     }
 
     for item in DailyStatus.objects.all():
-        point = {'x': item.date.strftime(template_date_format), 'y': item.daily_visitors}
+        point = {'x': item.date[5:].replace('-', '/'), 'y': item.daily_visitors}
         daily_login_data.append(point)
 
     daily_login_series = {
