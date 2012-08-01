@@ -69,6 +69,7 @@ def main(argv):
         script_utils.install_requirements()
     else:
         script_utils.create_heroku_app(heroku_app)
+        script_utils.push_to_heroku(heroku_app)
 
     script_utils.reset_db(heroku_app)
 
