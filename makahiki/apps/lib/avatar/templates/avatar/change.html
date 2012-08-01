@@ -7,13 +7,13 @@
   <div id="avatar-change-content" class="content-box-contents">
     <div class="row-fluid">
       <div class="span3 avatar-box tab">
-        <h4 style="margin-top: 0px">Your current profile picture: </h4>
-        {% avatar user %}
+        <h4 class="no-top center">Your current profile picture: </h4>
+        <center>{% avatar user %}</center>
       </div>
       <!-- Avatar Upload -->
       <div class="span5 offset1 avatar-box">
-        <h4 style="margin-top: 0px">Upload a new profile picture.</h4>
-        <p>
+        <h4 class="no-top center">Upload a new profile picture.</h4>
+        <p class="center">
           Click the Choose File button to select a picture on your computer that will be used as your 
           profile picture.  The picture should be square and less than 2MB in size.
         </p>
@@ -22,8 +22,8 @@
             {% if file_error %}
             <div style="color: red">{{file_error}}</div>
             {% endif %}
-            <input type="file" name="avatar" value="Avatar Image" />
-            <button class="btn" type="submit">Upload New Image</button>
+            <input id="browser" type="file" name="avatar" value="Avatar Image" />
+            <button id="submit" class="btn" type="submit">Upload New Image</button>
         </form>
       </div>
       <!--Avatar-Facebook-->
