@@ -1,5 +1,6 @@
 """Defines the class for administration of players."""
 from django.contrib import admin
+from django.contrib.auth.admin import UserAdmin
 from django.contrib.auth.models import User
 from apps.managers.challenge_mgr import challenge_mgr
 from apps.managers.player_mgr.models import Profile
@@ -53,4 +54,17 @@ class ProfileAdmin(admin.ModelAdmin):
 
 admin.site.register(Profile, ProfileAdmin)
 challenge_mgr.register_site_admin_model("Players", Profile)
+
+
+class MakahikiUserAdmin(UserAdmin):
+    list_display = ('username', 'email', 'first_name', 'last_name', 'team', 'is_staff')
+
+    def team(self, obj):
+        """return the user last_name."""
+        return obj.get_profile().team
+    team.short_description = 'Team'
+
+
+admin.site.unregister(User)
+admin.site.register(User, MakahikiUserAdmin)
 challenge_mgr.register_site_admin_model("Players", User)
