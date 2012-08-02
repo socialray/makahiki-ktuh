@@ -57,6 +57,7 @@ challenge_mgr.register_site_admin_model("Players", Profile)
 
 
 class MakahikiUserAdmin(UserAdmin):
+    """extends the UserAdmin for the user admin interface."""
     list_display = ('username', 'email', 'first_name', 'last_name', 'is_staff', "profile", 'team')
 
     def team(self, obj):
