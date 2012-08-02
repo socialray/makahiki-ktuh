@@ -57,12 +57,20 @@ challenge_mgr.register_site_admin_model("Players", Profile)
 
 
 class MakahikiUserAdmin(UserAdmin):
-    list_display = ('username', 'email', 'first_name', 'last_name', 'team', 'is_staff')
+    list_display = ('username', 'email', 'first_name', 'last_name', 'is_staff', "profile", 'team')
 
     def team(self, obj):
-        """return the user last_name."""
+        """return the user name."""
         return obj.get_profile().team
     team.short_description = 'Team'
+
+    def profile(self, obj):
+        """return the user profile."""
+        return '<a href="%s/%d">%s</a>' % ("/admin/player_mgr/profile",
+                                           obj.get_profile().pk,
+                                           obj.get_profile().name)
+    profile.allow_tags = True
+    profile.short_description = 'Link to Profile'
 
 
 admin.site.unregister(User)

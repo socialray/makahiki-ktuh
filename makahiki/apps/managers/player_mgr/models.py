@@ -109,8 +109,14 @@ class Profile(models.Model):
 def create_profile(sender, instance=None, **kwargs):
     """ Create a profile automatically when creating a user."""
     _ = sender
-    if (kwargs.get('created', True) and not kwargs.get('raw', False)):
-        Profile.objects.get_or_create(user=instance, name=instance.username)
+    if not kwargs.get('raw', False):
+        profile, _ = Profile.objects.get_or_create(user=instance)
+        if instance.first_name or instance.last_name:
+            profile.name = "%s %s." % (instance.first_name.capitalize(),
+                                       instance.last_name[:1].capitalize())
+        else:
+            profile.name = instance.username
+        profile.save()
 
 
 post_save.connect(create_profile, sender=User)
