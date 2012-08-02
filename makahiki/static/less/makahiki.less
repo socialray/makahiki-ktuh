@@ -575,13 +575,19 @@ ul {
     padding: 5px 0px;
 }
 
+.nav-tabs {
+    border-bottom: 1px solid @widget-body-font-color;
+}
+
 .nav-tabs > .active > a, .nav-tabs > .active > a:hover {
     border-color: @widget-body-font-color @widget-body-font-color transparent;
-    border-width: 2px;    
+    background: @widget-body-bkg-color;
+    border-width: 1px;    
+    color: @widget-body-font-color;
 }
 
 .nav-tabs > li > a {
-    border: 2px solid @widget-body-font-color;
+    border: 1px solid fade(@widget-body-font-color, 50%);
     font-weight: bold;    
 }
 

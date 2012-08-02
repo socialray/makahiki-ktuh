@@ -16,7 +16,7 @@ from apps.widgets.smartgrid.models import Action, Category, ActionMember, Level,
     TextReminder
 from apps.widgets.smartgrid.models import Event
 from apps.widgets.smartgrid import  MAX_COMMITMENTS
-from apps.widgets.smartgrid.predicates import completed_action
+from apps.widgets.smartgrid.predicates import completed_action, completed_level
 
 
 def get_setup_activity():
@@ -105,6 +105,7 @@ def get_level_actions(user):
                 if categories:
                     level.cat_list = categories
 
+            level.is_complete = completed_level(user, level.priority)
             levels.append(level)
 
         # Cache the categories for an hour (or until they are invalidated)

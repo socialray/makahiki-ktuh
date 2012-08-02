@@ -8,6 +8,7 @@
                     /></a>
     </div>
     <div class="content-box-contents">
+        <p></p>
         <!-- Tabs for the levels -->
         <ul id="sgg-levels-tab" class="nav nav-tabs">
         {% for level in view_objects.smartgrid.levels %}
@@ -20,6 +21,12 @@
                       onclick="toggleLocked(event, '{{ level.unlock_condition_text }}'); return false;"
                   {% endif %}
                   href="#sgg-level-{{forloop.counter}}" rel="tooltip" >
+                  {% if level.is_complete %}
+                      <img src="{{ STATIC_URL}}images/icons/icon-done.png" width="12" align="left"/>                  
+                  {% endif %}
+                  {% if not level.is_unlock %}
+                      <img src="{{ STATIC_URL}}images/lock24.png" width="12" align="left"/>
+                  {% endif %}
                     {{ level.name }}
                 </a>
         {% endfor %}
