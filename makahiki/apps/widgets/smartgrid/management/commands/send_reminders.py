@@ -14,5 +14,6 @@ class Command(MakahikiBaseCommand):
 
     def handle(self, *args, **options):
         """send reminders"""
-        print '****** Processing send_reminders at %s *******\n' % datetime.datetime.today()
+        print '****** Processing send_reminders at %s *******' % datetime.datetime.today()
         smartgrid.send_reminders()
+        smartgrid.check_new_submissions()

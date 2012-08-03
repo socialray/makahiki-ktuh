@@ -2,6 +2,7 @@
 
 import datetime
 import random
+from django.core.exceptions import ObjectDoesNotExist
 
 from django.db import models, IntegrityError
 from django.contrib.auth.models import User
@@ -633,11 +634,6 @@ class ActionMember(models.Model):
         This also creates an email message if it is configured.
         """
 
-        # don't create notification if the action is the SETUP_WIZARD_ACTIVITY
-        # that is used in the setup wizard.
-        if self.action.slug == SETUP_WIZARD_ACTIVITY:
-            return
-
         # Construct the message to be sent.
         status_nicely = 'not approved' if status != 'approved' else status
         message = 'Your response to <a href="%s#action-details">"%s"</a> %s was %s.' % (
@@ -680,6 +676,22 @@ class ActionMember(models.Model):
 
             UserNotification.create_success_notification(self.user, message, display_alert=True,
                                                          content_object=self)
+
+            # if admin approve an activity (action_type==activity),
+            # check to the submission queue is empty,
+            # if so, remove the admin reminder object.
+            if self.action.type == "activity":
+                submission_count = ActionMember.objects.filter(
+                    action__type="activity",
+                    approval_status="pending").count()
+                if not submission_count:
+                    # get a admin user
+                    try:
+                        admin = User.objects.get(username=settings.ADMIN_USER)
+                        action = Action.objects.get(slug=SETUP_WIZARD_ACTIVITY)
+                        EmailReminder.objects.filter(user=admin, action=action).delete()
+                    except ObjectDoesNotExist:
+                        pass
 
     def post_to_wall(self):
         """post to team wall as system post."""
