@@ -3,6 +3,8 @@
 import datetime
 from django.conf import settings
 from django.contrib.auth.models import User
+from django.core.exceptions import ObjectDoesNotExist
+from django.core.mail.message import EmailMultiAlternatives
 from django.core.urlresolvers import reverse
 from django.db.models import  Count
 from django.db.models.query_utils import Q
@@ -459,26 +461,28 @@ def check_new_submissions():
         approval_status="pending").count()
 
     if submission_count:
-        # get a admin user
-        admin = User.objects.get(username=settings.ADMIN_USER)
-        action = Action.objects.get(slug=SETUP_WIZARD_ACTIVITY)
-        reminder = EmailReminder.objects.filter(user=admin, action=action)
-        if not reminder:
-            EmailReminder.objects.create(user=admin,
-                                         action=action,
-                                         send_at=datetime.datetime.today(),
-                                         sent=True)
+        try:
+            admin = User.objects.get(username=settings.ADMIN_USER)
+            action = Action.objects.get(slug=SETUP_WIZARD_ACTIVITY)
+            reminder = EmailReminder.objects.filter(user=admin, action=action)
+            if not reminder:
+                EmailReminder.objects.create(user=admin,
+                                             action=action,
+                                             send_at=datetime.datetime.today(),
+                                             sent=True)
 
-            challenge = challenge_mgr.get_challenge()
-            subject = "[%s] %d New Pending Action Submissions" % (challenge.competition_name,
-                                                                  submission_count)
-            message = "There are %d new pending action submissions now." % submission_count
-            users = User.objects.filter(is_staff=True)
-            for user in users:
-                if user.email:
-                    print "Sending new submission notification to %s" % user.email
-                    UserNotification.create_email_notification(
-                        user.email, subject, message, message)
+                challenge = challenge_mgr.get_challenge()
+                subject = "[%s] %d New Pending Action Submissions" % (challenge.competition_name,
+                                                                      submission_count)
+                message = "There are %d new pending action submissions now." % submission_count
+
+                if challenge.email_enabled and challenge.contact_email:
+                    print "Sending new submission notification to %s" % challenge.contact_email
+                    mail = EmailMultiAlternatives(subject, message, challenge.contact_email,
+                        [challenge.contact_email, ])
+                    mail.send()
+        except ObjectDoesNotExist:
+            pass
 
 
 def check_daily_submissions():
@@ -496,8 +500,9 @@ def check_daily_submissions():
         subject = "[%s] %d Remaining Pending Action Submissions" % (challenge.competition_name,
                                                                     submission_count)
         message = "There are %d remaining pending action submissions for today." % submission_count
-        users = User.objects.filter(is_staff=True)
-        for user in users:
-            if user.email:
-                print "Sending daily submission notification to %s" % user.email
-                UserNotification.create_email_notification(user.email, subject, message, message)
+
+        if challenge.email_enabled and challenge.contact_email:
+            print "Sending new submission notification to %s" % challenge.contact_email
+            mail = EmailMultiAlternatives(subject, message, challenge.contact_email,
+                [challenge.contact_email, ])
+            mail.send()

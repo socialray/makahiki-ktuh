@@ -685,7 +685,6 @@ class ActionMember(models.Model):
                     action__type="activity",
                     approval_status="pending").count()
                 if not submission_count:
-                    # get a admin user
                     try:
                         admin = User.objects.get(username=settings.ADMIN_USER)
                         action = Action.objects.get(slug=SETUP_WIZARD_ACTIVITY)
