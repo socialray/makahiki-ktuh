@@ -65,7 +65,7 @@ def avatar(user, size=80, *args, **kwargs):
             alt = _("Default Avatar")
     else:
         alt = unicode(user)
-        url = avatar_url(user, size)
+        url = avatar_url(user, size, first_login)
     return """<img src="%s" alt="%s" width="%s" height="%s" />""" % (url, alt,
         size, size)
 register.simple_tag(avatar)

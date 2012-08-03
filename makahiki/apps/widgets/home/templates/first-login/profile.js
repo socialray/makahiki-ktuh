@@ -2,8 +2,7 @@ $(document).ready(function () {
     fixForms();
     //bind 'myForm' and provide a simple callback function
     $('#profile-form').ajaxForm();
-
-    
+    $('#id_avatar').change(enableSubmit);
         var s = 4.0/7.0*100 + "%";
         $(".bar").width(s);
 
@@ -15,7 +14,7 @@ $(document).ready(function () {
         });
     });
 
-    $("#next").button().click(function () {
+    $("#profile-submit").button().click(function () {
         $(this).button("option", "disabled", true);
         $('#profile-form').ajaxSubmit({
             //beforeSubmit: showRequest,
@@ -25,6 +24,18 @@ $(document).ready(function () {
         });
         $(this).button("option", "disabled", false);
     });
+
+    $("#next").button().click(function () {
+        $(this).button("option", "disabled", true);
+        $.get("{% url setup_activity %}",showResponse);
+        $(this).button("option", "disabled", false);
+    });
+
+    function enableSubmit() {
+        if($('#id_avatar').val() != ''){
+           $('#profile-submit').removeAttr('disabled');
+        }
+    }
 
     // Useful for debugging.
     function showRequest(formData, jqForm, options) {

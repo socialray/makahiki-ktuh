@@ -189,11 +189,11 @@ def setup_profile(request):
                 avatar.avatar.storage.save(path, File(photo_temp))
                 avatar.save()
 
-            return HttpResponseRedirect(reverse("setup_activity"))
+            return HttpResponseRedirect(reverse("setup_profile"))
 
         return _get_profile_form(request, form=form, non_xhr=True)
 
-    raise Http404
+    return _get_profile_form(request)
 
 
 @never_cache

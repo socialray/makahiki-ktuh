@@ -1,7 +1,10 @@
 """Implements the Smart Grid Game widget."""
 
 import datetime
+from django.conf import settings
 from django.contrib.auth.models import User
+from django.core.exceptions import ObjectDoesNotExist
+from django.core.mail.message import EmailMultiAlternatives
 from django.core.urlresolvers import reverse
 from django.db.models import  Count
 from django.db.models.query_utils import Q
@@ -16,7 +19,7 @@ from apps.widgets.smartgrid.models import Action, Category, ActionMember, Level,
     TextReminder
 from apps.widgets.smartgrid.models import Event
 from apps.widgets.smartgrid import  MAX_COMMITMENTS
-from apps.widgets.smartgrid.predicates import completed_action
+from apps.widgets.smartgrid.predicates import completed_action, completed_level
 
 
 def get_setup_activity():
@@ -105,6 +108,7 @@ def get_level_actions(user):
                 if categories:
                     level.cat_list = categories
 
+            level.is_complete = completed_level(user, level.priority)
             levels.append(level)
 
         # Cache the categories for an hour (or until they are invalidated)
@@ -444,3 +448,61 @@ def process_rsvp():
                                                        message, message)
             print "sent post event email reminder to %s for %s" % (
                 profile.name, action.title)
+
+
+def check_new_submissions():
+    """Check the action submission queue and send out notifications to admin when there is new
+    submissions in the queue.
+    algorithm for queue processing:
+      1. on zero to one transition: send email unless email already sent within N minutes.
+    """
+    submission_count = ActionMember.objects.filter(
+        action__type="activity",
+        approval_status="pending").count()
+
+    if submission_count:
+        try:
+            admin = User.objects.get(username=settings.ADMIN_USER)
+            action = Action.objects.get(slug=SETUP_WIZARD_ACTIVITY)
+            reminder = EmailReminder.objects.filter(user=admin, action=action)
+            if not reminder:
+                EmailReminder.objects.create(user=admin,
+                                             action=action,
+                                             send_at=datetime.datetime.today(),
+                                             sent=True)
+
+                challenge = challenge_mgr.get_challenge()
+                subject = "[%s] %d New Pending Action Submissions" % (challenge.competition_name,
+                                                                      submission_count)
+                message = "There are %d new pending action submissions now." % submission_count
+
+                if challenge.email_enabled and challenge.contact_email:
+                    print "Sending new submission notification to %s" % challenge.contact_email
+                    mail = EmailMultiAlternatives(subject, message, challenge.contact_email,
+                        [challenge.contact_email, ])
+                    mail.send()
+        except ObjectDoesNotExist:
+            pass
+
+
+def check_daily_submissions():
+    """Check the action submission queue and send out notifications to admin when there are still
+    submission in the queue.
+    algorithm for queue processing:
+      2. every 24 hours: send email with queue size unless queue size is zero.
+    """
+    submission_count = ActionMember.objects.filter(
+        action__type="activity",
+        approval_status="pending").count()
+
+    if submission_count:
+        challenge = challenge_mgr.get_challenge()
+        subject = "[%s] %d Remaining Pending Action Submissions" % (challenge.competition_name,
+                                                                    submission_count)
+        message = "There are %d remaining pending action submissions for today." % submission_count
+
+        if challenge.email_enabled and challenge.contact_email:
+            print "Sending new submission notification to %s" % challenge.contact_email
+            mail = EmailMultiAlternatives(subject, message, challenge.contact_email,
+                [challenge.contact_email, ])
+            mail.send()

@@ -12,23 +12,25 @@
       </div>
       <!-- Avatar Upload -->
       <div class="span5 offset1 avatar-box">
-        <h4 class="no-top center">Upload a new profile picture.</h4>
-        <p class="center">
-          Click the Choose File button to select a picture on your computer that will be used as your 
-          profile picture.  The picture should be square and less than 2MB in size.
-        </p>
-        <form enctype="multipart/form-data" method="POST" action="">
-            {% csrf_token %}
-            {% if file_error %}
-            <div style="color: red">{{file_error}}</div>
-            {% endif %}
-            <input id="browser" type="file" name="avatar" value="Avatar Image" />
-            <button id="submit" class="btn" type="submit">Upload New Image</button>
-        </form>
+        <div>
+            <h4 class="no-top center">Upload a new profile picture.</h4>
+            <p class="center">
+              Click the Choose File button to select a picture on your computer that will be used as your 
+              profile picture.  The picture should be square and less than 2MB in size.
+            </p>
+            <form enctype="multipart/form-data" method="POST" action="">
+                {% csrf_token %}
+                {% if file_error %}
+                <div style="color: red">{{file_error}}</div>
+                {% endif %}
+                <input id="browser" type="file" name="avatar" value="Avatar Image" onChange='enableSubmit()'/></br>
+                <button id="submit" class="btn" type="submit" style="" disabled="disabled">Upload New Image</button>
+            </form>
+        </div>
       </div>
       <!--Avatar-Facebook-->
       {% if MAKAHIKI_FACEBOOK_APP_ID %}
-        <div class="span3 offset1 avatar-box"
+        <div class="span3 offset1 avatar-box">
           {% include "avatar/avatar_facebook.html" %}
         </div>
       {% endif %}
@@ -46,4 +48,11 @@
     
   </div>
 </div>
+<script type="text/javascript">
+    function enableSubmit() {
+        if($('#browser').val() != ''){
+           $('#submit').removeAttr('disabled');
+        }
+    }
+</script>
 {% endblock %}

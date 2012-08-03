@@ -937,8 +937,9 @@ ul{list-style:none;}
 .modal-footer{background-color:#c1d8eb;color:#000000;}
 .modal-header{background:#4f95cd;filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#ff4f95cd', endColorstr='#ff4f95cd', GradientType=0);-ms-filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#ff4f95cd', endColorstr='#ff4f95cd', GradientType=0);background-image:-webkit-gradient(linear, 0 0, 0 100%, from(#4f95cd), to(#4f95cd));background-image:-webkit-linear-gradient(top, #4f95cd, #4f95cd);background-image:-moz-linear-gradient(top, #4f95cd, #4f95cd);background-image:-ms-linear-gradient(top, #4f95cd, #4f95cd);background-image:-o-linear-gradient(top, #4f95cd, #4f95cd);background-image:linear-gradient(top, #4f95cd, #4f95cd);color:#000000;}
 .nav-page-list a{padding:5px 0px;}
-.nav-tabs>.active>a,.nav-tabs>.active>a:hover{border-color:#000000 #000000 transparent;border-width:2px;}
-.nav-tabs>li>a{border:2px solid #000000;font-weight:bold;}
+.nav-tabs{border-bottom:1px solid #000000;}
+.nav-tabs>.active>a,.nav-tabs>.active>a:hover{border-color:#000000 #000000 transparent;background:#c1d8eb;border-width:1px;color:#000000;}
+.nav-tabs>li>a{border:1px solid rgba(0, 0, 0, 0.5);font-weight:bold;}
 .navbar{color:#ffffff;}
 .navbar .brand{color:#ffffff;}
 .navbar .nav>li>a{color:#ffffff;text-align:center;font-size:13px;}
@@ -973,6 +974,11 @@ ul{list-style:none;}
 #info-bar-single button{float:left;}
 #info-bar-single h4 a{float:none;text-align:center;}
 @media (max-width:979px){.navbar .nav>li>a,.navbar .dropdown-menu a{color:#000000;} .navbar .nav>li>a:hover,.navbar .dropdown-menu a:hover{background-color:transparent;}}@media (max-width:767px){#info-bar-wide{display:none;visibility:hidden;} #info-bar-single{display:block;visibility:visible;}}@media (min-width:641px) and (max-width:979px){.nav img{display:none;}}@media (max-width:640px){a.learn img,a.learn:hover img,a.admin img,a.admin:hover img,a.energy img,a.energy:hover img,a.help img,a.help:hover img,a.home img,a.home:hover img,a.news img,a.news:hover img,a.win img,a.win:hover img,a.profile img,a.profile:hover img,a.water img,a.water:hover img,a.status img,a.status:hover img{display:none;visibility:hidden;} body{padding-left:0;padding-right:0;} .brand img{display:none;} .container-fluid{padding-left:0px;padding-right:0px;} .makahiki-box{margin-bottom:5px;} .navbar{margin-bottom:5px;} #info-bar-wide{display:none;visibility:hidden;} #info-bar-single{display:block;visibility:visible;} .quest-list{padding:0px;} .quest-list li{display:block;margin:5px;padding:0px;}}@charset "UTF-8";
+#avatar-change-content button{vertical-align:top;}
+.center{text-align:center;}
+.no-top{margin-top:0px;}
+#submit{display:block;margin-left:138px;margin-bottom:20px;}
+@charset "UTF-8";
 #task-feedback textarea{width:80%;}
 @charset "UTF-8";
 #badge-nav a.activeSlide{outline:1px solid;}
