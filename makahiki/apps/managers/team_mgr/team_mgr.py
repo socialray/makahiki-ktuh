@@ -19,7 +19,11 @@ def team_points_leader(round_name=None):
     if team_id:
         return Team.objects.get(id=team_id)
     else:
-        return Team.objects.all()[0]
+        teams = Team.objects.all()
+        if teams:
+            return teams[0]
+        else:
+            return None
 
 
 def team_points_leaders(num_results=None, round_name=None):
