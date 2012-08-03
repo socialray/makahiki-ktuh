@@ -85,6 +85,12 @@ To initialize your Makahiki instance with the default data set, invoke the follo
 When deploying to Heroku, the "default" Makahiki configuration is normally the only one you will
 want to use. 
 
+.. warning:: Invoke initialize_instance only once!
+
+   The initialize_instance script should be run only a single time in production
+   scenarios, because any subsequent configuration will be lost if initialize_instance is
+   invoked again.   Use update_instance (discussed below) after performing configuration. 
+
 Start the server
 ----------------
 
@@ -108,6 +114,30 @@ Configure your Makahiki instance
 
 Now that you have a running Makahiki instance, it is time to configure it for your
 challenge, as documented in :ref:`section-configuration`.
+
+Updating your Makahiki instance
+-------------------------------
+
+Makahiki is designed to support post-installation updating of your configured system when bug fixes or
+system enhancements become available.   Updating an installed Makahiki instance is quite
+simple, and consists of the following steps.
+
+1. Get the updated source code::
+
+   % git pull origin master
+
+2. Send the updated source code to Heroku::
+
+   % git push heroku master
+
+3. Run the update_instance script to update your Heroku configuration::
+
+   % heroku run python scripts/update_instance.py
+
+4. Finally, restart your server::
+
+     % heroku ps:restart
+
 
 
 

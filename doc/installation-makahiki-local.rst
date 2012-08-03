@@ -215,9 +215,6 @@ This command will:
   * Initialize the system with data.
   * Set up static files. 
 
-Under normal circumstances, invoking this script after pulling any new changes from the
-repository is sufficient to bring your local installation up to date. 
-
 If you instead want to create a demo instance to facilitate training or sample use, you can invoke
 the initialize_instance script as::
 
@@ -226,8 +223,12 @@ the initialize_instance script as::
 This will create a demo instance that enables people to play a simple version of the Kukui
 Cup with minimal additional configuration.
 
-Makahiki has several other scripts useful for development. For complete
-documentation, see :ref:`section-scripts`.
+.. warning:: Invoke initialize_instance only once!
+
+   The initialize_instance script should be run only a single time in production
+   scenarios, because any subsequent configuration will be lost if initialize_instance is
+   invoked again.   Use update_instance (discussed below) after performing configuration. 
+
 
 Start the server
 --------------------
@@ -260,6 +261,38 @@ Configure your Makahiki instance
 Now that you have a running Makahiki instance, it is time to configure it for your
 challenge, as documented in :ref:`section-configuration`.
 
+Updating your Makahiki instance
+-------------------------------
+
+Makahiki is designed to support post-installation updating of your configured system when bug fixes or
+system enhancements become available.   Updating an installed Makahiki instance is quite
+simple, and consists of the following steps.
+
+1. Bring down the running server in the shell process running Makahiki::
+
+   % (type control-c in the shell running the makahiki server process)
+ 
+2. In that shell or a new shell, go to your Makahiki installation directory, and ensure
+   the Makahiki virtual environment is set up::
+
+   % cd makahiki
+   % workon makahiki
+
+3. Download the updated source code into your Makahiki installation::
+
+   % git pull origin master
+
+4. Run the update_instance script to update your local configuration::
+
+   % ./scripts/update_instance.py
+
+5. Finally, restart your server, using either::
+
+     % ./manage.py run_gunicorn
+
+   or::
+
+     % ./manage.py runserver
 
 
 
