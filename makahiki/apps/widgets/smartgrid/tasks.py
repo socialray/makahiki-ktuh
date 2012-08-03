@@ -8,21 +8,14 @@ from apps.widgets.smartgrid import smartgrid
 def send_reminders():
     """send reminders."""
     smartgrid.send_reminders()
+    smartgrid.check_new_submissions()
 
 
 @task
-def notify_round_started():
-    """notify round transition."""
+def process_notices():
+    """Send out notifications such as round transition, commitment end,
+    and process rsvp reminder and penalty."""
     smartgrid.notify_round_started()
-
-
-@task
-def notify_commitment_end():
-    """notify commitment end."""
     smartgrid.notify_commitment_end()
-
-
-@task
-def process_rsvp():
-    """process rsvp reminder and penalty."""
     smartgrid.process_rsvp()
+    smartgrid.check_daily_submissions()
