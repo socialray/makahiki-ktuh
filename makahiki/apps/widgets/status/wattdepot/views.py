@@ -9,8 +9,14 @@ def supply(request, page_name):
 
     _ = page_name
     _ = request
-    setting = EnergyGoalSetting.objects.all()[1]
-    interval = setting.power_meter_interval
+
+    goal_settings = EnergyGoalSetting.objects.all()
+    if goal_settings:
+        setting = goal_settings[1]
+        interval = setting.power_meter_interval
+    else:
+        interval = 10
+
     return {
         "interval": interval,
         "data": remote_supply(request, page_name)

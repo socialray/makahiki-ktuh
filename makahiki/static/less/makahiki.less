@@ -580,8 +580,8 @@ ul {
 }
 
 .nav-tabs > .active > a, .nav-tabs > .active > a:hover {
-    border-color: @widget-body-font-color @widget-body-font-color transparent;
-    background: @widget-body-bkg-color;
+    border-color: @widget-body-font-color @widget-body-font-color fadeout(@widget-body-bkg-color, @widget-body-transparency);
+    background: fadeout(@widget-body-bkg-color, 2 * @widget-body-transparency);
     border-width: 1px;    
     color: @widget-body-font-color;
 }
