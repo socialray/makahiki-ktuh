@@ -563,6 +563,16 @@ the link text stands out on this page.
 To see your the results of your theme, you can navigate to the special page "theme-display". 
 It has all of the theme-able elements in a single page.
 
+Seeing everything at once: the theme-display page
+-------------------------------------------------
+
+If you want to see virtually all of your theme's elements in a single page, retrieve the
+"theme-display" page, which looks like this:
+
+.. figure:: figs/theme-dev/theme-dev-theme-display.png
+   :width: 600 px
+   :align: center
+
 
 Cleanup:  Delete the prior theme's variable definitions
 -------------------------------------------------------
