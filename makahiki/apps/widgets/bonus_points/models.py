@@ -29,7 +29,7 @@ class BonusPoints(models.Model):
         header += str(point_value)
         header += "-"
         for _ in range(0, num_codes):
-            bonus = BonusPoints(point_value=point_value, code=header)
+            bonus = BonusPoints(point_value=point_value, code=header.lower())
             valid = False
             while not valid:
                 for value in random.sample(values, 5):

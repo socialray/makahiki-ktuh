@@ -1,0 +1,49 @@
+<div class="content-box">
+    <div class="content-box-title">
+        Turn In Bonus Points
+        <a href="#" style="float: right">
+            <img src="{{ STATIC_URL}}images/icons/icon-help-sm.png" width="20" align="center"
+                 title="Click to get help about this window"
+                 onclick="toggleHelp(event, 'widget', 'bonus_points'); return false;"
+                    /></a>
+    </div>
+    <div class="content-box-contents">
+        <p/>
+
+        <form id="bonus-code-form" action="{% url bonus_points_code %}"
+                                                         method="POST">
+            {% csrf_token %}
+            <div class="bonus-code">
+                <b>Enter Bonus Points Code:</b>
+                {{ view_objects.bonus_points.bonus_form.response }}
+
+                <button class="btn btn-widget" id="bonus-code-submit">
+                    Submit
+                </button>
+
+            </div>
+            <br/>
+
+            <div id="bonus-code-errors" style="color:red; display:None"></div>
+        </form>
+
+    </div>
+</div>
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        $("#bonus-code-submit").click(function () {
+            $.post("{% url bonus_points_code %}", $("#bonus-code-form").serialize(), function (data) {
+                if (data.message) {
+                    $("#bonus-code-errors").html(data.message);
+                    $("#bonus-code-errors").show();
+                }
+                else {
+                    window.location.replace(data.redirectUrl);
+                }
+            });
+
+            return false;
+        });
+    });
+</script>

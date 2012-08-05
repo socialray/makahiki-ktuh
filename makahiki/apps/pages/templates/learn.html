@@ -27,11 +27,54 @@
                     {% include "widgets/upcoming_events/templates/index.html" %}
                 </div>
                 {% endif %}
+                {% if view_objects.bonus_points %}
+                    {% include "widgets/bonus_points/templates/index.html" %}
+                {% endif %}
                 {% if view_objects.scoreboard %}
                     {% include "widgets/scoreboard/templates/index.html" %}
                 {% endif %}
             </div>
         </div>
     </div>
+    <div id="purr-container"></div>
+<script type="text/javascript">
+    $(document).ready(function () {
+        var notification = getCookie("bonus_notify");
+        if (notification != null) {
+            notification = notification.replace(/"/g, '');
+
+            var notice = '<div class="notice">'
+                    + '<img src="{{ STATIC_URL}}images/icons/icon-notify.png" width="30" align="center" />'
+                    + '<div class="body">'
+                    + notification
+                    + '</div>'
+                    + '</div>';
+
+            $('#purr-container').css({
+                position:'absolute',
+                left: ($(window).width() - $(notice).outerWidth())/2,
+                top: ($(window).height() - $(notice).outerHeight())/2
+            });
+
+            $(notice).purr(
+                    {
+                        usingTransparentPNG:true,
+                        fadeInSpeed:600,
+                        fadeOutSpeed:600,
+                        removeTimer:2500,
+                        isSticky:false
+                    });
+//             console.log('notice width ' + $(notice).outerWidth());
+//             console.log('purr width ' + $('#purr-container').outerWidth());
+            $('#purr-container').css({
+                position:'absolute',
+                left: ($(window).width() - $('#purr-container').outerWidth())/2,
+                top: ($(window).height() - $('#purr-container').outerHeight())/2
+            });
+
+            deleteCookie("bonus_notify");
+        }
+    });
+</script>
 {% endblock %}
 
