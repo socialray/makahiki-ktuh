@@ -9,13 +9,16 @@ import random
 from django.db import models, IntegrityError
 
 
-class BonusPoints(models.Model):
+class BonusPoint(models.Model):
     """Represents universal bonus points."""
     point_value = models.IntegerField(default=5)
     code = models.CharField(max_length=50, unique=True, db_index=True,
                             help_text="The confirmation code.")
     is_active = models.BooleanField(default=True, editable=False,
                                     help_text="Is the bonus points still active?")
+
+    def __unicode__(self):
+        return self.code
 
     @staticmethod
     def generate_bonus_points(point_value, num_codes):
@@ -29,7 +32,7 @@ class BonusPoints(models.Model):
         header += str(point_value)
         header += "-"
         for _ in range(0, num_codes):
-            bonus = BonusPoints(point_value=point_value, code=header.lower())
+            bonus = BonusPoint(point_value=point_value, code=header.lower())
             valid = False
             while not valid:
                 for value in random.sample(values, 5):

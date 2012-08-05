@@ -1,5 +1,5 @@
 """Prepare the rendering for the bonus_points widget."""
-from apps.widgets.bonus_points.models import BonusPoints
+from apps.widgets.bonus_points.models import BonusPoint
 from django.core.urlresolvers import reverse
 import datetime
 from apps.widgets.notifications.models import UserNotification
@@ -10,7 +10,7 @@ Created on Aug 5, 2012
 '''
 
 import simplejson as json
-from apps.widgets.bonus_points.forms import BonusPointsForm
+from apps.widgets.bonus_points.forms import BonusPointForm
 from django.http import HttpResponse, Http404
 
 
@@ -18,7 +18,7 @@ def supply(request, page_name):
     """Supply the view_objects for the Bonus Points widget."""
     _ = request
     _ = page_name
-    bonus_form = BonusPointsForm()
+    bonus_form = BonusPointForm()
 
     return {"bonus_form": bonus_form}
 
@@ -30,11 +30,11 @@ def _check_bonus_code(user, form):
     message = None
 
     try:
-        code = BonusPoints.objects.get(code=form.cleaned_data['response'].lower())
+        code = BonusPoint.objects.get(code=form.cleaned_data['response'].lower())
         if not code.is_active:
             message = "This code has already been used."
 
-    except BonusPoints.DoesNotExist:
+    except BonusPoint.DoesNotExist:
         message = "This code is not valid."
     except KeyError:
         message = "Please input code."
@@ -49,7 +49,7 @@ def bonus_code(request):
     profile = user.get_profile()
 
     if request.is_ajax() and request.method == "POST":
-        form = BonusPointsForm(request.POST)
+        form = BonusPointForm(request.POST)
         if form.is_valid():
             message, code = _check_bonus_code(user, form)
 

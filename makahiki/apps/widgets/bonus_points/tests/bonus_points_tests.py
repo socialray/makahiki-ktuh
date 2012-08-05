@@ -6,11 +6,11 @@ Created on Aug 4, 2012
 from apps.utils import test_utils
 from apps.managers.challenge_mgr import challenge_mgr
 from django.test.testcases import TransactionTestCase
-from apps.widgets.bonus_points.models import BonusPoints
+from apps.widgets.bonus_points.models import BonusPoint
 from django.core.urlresolvers import reverse
 
 
-class BonusPointsTest(TransactionTestCase):
+class BonusPointTest(TransactionTestCase):
     """Bonus Points Test."""
 
     def setUp(self):
@@ -21,11 +21,11 @@ class BonusPointsTest(TransactionTestCase):
 
         self.client.login(username="user", password="changeme")
 
-    def testViewBonusPoints(self):
+    def testViewBonusPoint(self):
         """Test view bonus points."""
-        BonusPoints.generate_bonus_points(5, 5)
-        BonusPoints.generate_bonus_points(10, 2)
-        BonusPoints.generate_bonus_points(20, 3)
+        BonusPoint.generate_bonus_points(5, 5)
+        BonusPoint.generate_bonus_points(10, 2)
+        BonusPoint.generate_bonus_points(20, 3)
 
         response = self.client.get(reverse('bonus_view_codes'))
         self.failUnlessEqual(response.status_code, 404)
