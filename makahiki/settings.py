@@ -164,6 +164,7 @@ INSTALLED_WIDGET_APPS = (
     'ask_admin',
     'badge_scoreboard',
     'badges',
+    'bonus_points',
     'home',
     'resource_goal',
     'resource_goal.energy',

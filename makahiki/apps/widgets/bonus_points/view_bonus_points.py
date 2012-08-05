@@ -6,7 +6,7 @@ Created on Aug 4, 2012
 from django.views.decorators.cache import never_cache
 from django.contrib.auth.decorators import login_required
 from django.http import Http404
-from apps.widgets.smartgrid.models import BonusPoints
+from apps.widgets.bonus_points.models import BonusPoints
 from django.shortcuts import render_to_response
 from django.template.context import RequestContext
 

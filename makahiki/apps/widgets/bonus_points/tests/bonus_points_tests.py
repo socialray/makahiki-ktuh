@@ -6,7 +6,7 @@ Created on Aug 4, 2012
 from apps.utils import test_utils
 from apps.managers.challenge_mgr import challenge_mgr
 from django.test.testcases import TransactionTestCase
-from apps.widgets.smartgrid.models import BonusPoints
+from apps.widgets.bonus_points.models import BonusPoints
 from django.core.urlresolvers import reverse
 
 

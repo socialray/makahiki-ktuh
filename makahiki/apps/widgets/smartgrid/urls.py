@@ -27,7 +27,4 @@ urlpatterns = patterns('',
     url(r'^bulk_change/(?P<action_type>[\w]+)/(?P<attribute>[\w]+)/$',
         'apps.widgets.smartgrid.views.bulk_change',
         name="bulk_change"),
-    url(r'^view_bonus_points/$',
-        'apps.widgets.smartgrid.view_bonus_points.view_codes',
-        name='bonus_view_codes'),
 )
