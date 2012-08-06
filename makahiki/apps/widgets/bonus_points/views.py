@@ -1,8 +1,13 @@
 """Prepare the rendering for the bonus_points widget."""
 from apps.widgets.bonus_points.models import BonusPoint
+from apps.widgets.bonus_points.forms import GenerateBonusPointsForm
 from django.core.urlresolvers import reverse
 import datetime
 from apps.widgets.notifications.models import UserNotification
+from django.views.decorators.cache import never_cache
+from django.contrib.auth.decorators import login_required
+from django.template.context import RequestContext
+from django.shortcuts import render_to_response
 '''
 Created on Aug 5, 2012
 
@@ -11,7 +16,7 @@ Created on Aug 5, 2012
 
 import simplejson as json
 from apps.widgets.bonus_points.forms import BonusPointForm
-from django.http import HttpResponse, Http404
+from django.http import HttpResponse, Http404, HttpResponseRedirect
 
 
 def supply(request, page_name):
@@ -79,5 +84,30 @@ def bonus_code(request):
         return HttpResponse(json.dumps({
             "message": "Please input bonus points code."
         }), mimetype="application/json")
+
+    raise Http404
+
+
+@never_cache
+@login_required
+def generate_codes_form(request):
+    """Sets up the Generate Bonus Points page."""
+    form = GenerateBonusPointsForm()
+    return render_to_response("generate_bonus.html", {
+        "form": form,
+        }, context_instance=RequestContext(request))
+
+
+def generate_codes(request):
+    """Handles the generate_codes_form from and creates the BonusPoints."""
+    if request.method == "POST":
+        form = GenerateBonusPointsForm(request.POST)
+        if form.is_valid():
+            points = form.cleaned_data['point_value']
+            num = form.cleaned_data['num_codes']
+            BonusPoint.generate_bonus_points(points, num)
+
+            response = HttpResponseRedirect("/admin/bonus_points/bonuspoint/")
+            return response
 
     raise Http404

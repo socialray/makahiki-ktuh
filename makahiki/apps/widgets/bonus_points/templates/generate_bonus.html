@@ -12,7 +12,8 @@
 {% endblock %}
 
 {% block content %}
-        <form action="" method="post">{% csrf_token %}
+        <form action="{% url 'bonus_codes_add' %}" method="post">
+            {% csrf_token %}
             <div style="background-color: white;">
                 How many Bonus Point codes do you want to generate?
                 {{ form.num_codes }} <br/>
