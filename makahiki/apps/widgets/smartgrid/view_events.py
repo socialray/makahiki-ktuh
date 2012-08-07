@@ -17,6 +17,9 @@ from apps.managers.score_mgr import score_mgr
 from apps.widgets.smartgrid.models import  ActionMember, \
     Action, Event, ConfirmationCode
 from apps.widgets.smartgrid.forms import EventCodeForm, ActivityCodeForm
+from apps.widgets.bonus_points.models import BonusPoint
+import datetime
+from apps.widgets.notifications.models import UserNotification
 
 
 def view(request, action):
@@ -168,6 +171,7 @@ def _check_attend_code(user, form):
     social_email = None
     code = None
     message = None
+    is_bonus = False
 
     try:
         code = ConfirmationCode.objects.get(code=form.cleaned_data["response"].lower())
@@ -187,14 +191,21 @@ def _check_attend_code(user, form):
                     social_email = "true"
 
     except ConfirmationCode.DoesNotExist:
-        message = "This code is not valid."
+        try:
+            code = BonusPoint.objects.get(code=form.cleaned_data['response'].lower())
+            is_bonus = True
+            if not code.is_active:
+                message = "This code has already been used."
+
+        except BonusPoint.DoesNotExist:
+            message = "This code is not valid."
     except KeyError:
         message = "Please input code."
-    return message, social_email, code
+    return message, social_email, code, is_bonus
 
 
 def attend_code(request):
-    """Claim the attendance code"""
+    """Claim the attendance code or the Bonus Points code"""
 
     user = request.user
     action_member = None
@@ -204,7 +215,7 @@ def attend_code(request):
     if request.is_ajax() and request.method == "POST":
         form = EventCodeForm(request.POST)
         if form.is_valid():
-            message, social_email, code = _check_attend_code(user, form)
+            message, social_email, code, is_bonus = _check_attend_code(user, form)
 
             if message:
                 return HttpResponse(json.dumps({
@@ -212,29 +223,46 @@ def attend_code(request):
                     "social_email": social_email
                 }), mimetype="application/json")
 
-            try:
-                action_member = ActionMember.objects.get(user=user, action=code.action)
-            except ObjectDoesNotExist:
-                action_member = ActionMember(user=user, action=code.action)
+            if not is_bonus:  # It was an event code.
+                try:
+                    action_member = ActionMember.objects.get(user=user, action=code.action)
+                except ObjectDoesNotExist:
+                    action_member = ActionMember(user=user, action=code.action)
 
-            action_member.approval_status = "approved"
-            value = code.action.point_value
+                action_member.approval_status = "approved"
+                value = code.action.point_value
 
-            if "social_email" in form.cleaned_data and \
-               form.cleaned_data["social_email"] != "Email":
-                action_member.social_email = form.cleaned_data["social_email"]
+                if "social_email" in form.cleaned_data and \
+                    form.cleaned_data["social_email"] != "Email":
+                    action_member.social_email = form.cleaned_data["social_email"]
 
-            # Model save method will award the points.
-            action_member.save()
+                # Model save method will award the points.
+                action_member.save()
+            else:  # It was a bonus point code.
+                profile = user.get_profile()
+                value = code.point_value
+                s = "Bonus Points: claimed {0} points".format(value)
+                profile.add_points(value,
+                                   datetime.datetime.today(),
+                                   s)
+                code.user = user
 
             code.is_active = False
             code.save()
 
-            response = HttpResponse(json.dumps({
-                "redirectUrl": reverse("activity_task", args=(code.action.type, code.action.slug))
-            }), mimetype="application/json")
             notification = "You just earned " + str(value) + " points."
-            response.set_cookie("task_notify", notification)
+            if not is_bonus:
+                response = HttpResponse(json.dumps({
+                            "redirectUrl": reverse("activity_task",
+                                                   args=(code.action.type, code.action.slug))
+                            }), mimetype="application/json")
+                response.set_cookie("task_notify", notification)
+            else:
+                response = HttpResponse(json.dumps({
+                            "redirectUrl": reverse("learn_index")}),
+                                        mimetype="application/json")
+                response.set_cookie("bonus_notify", notification)
+                UserNotification.create_info_notification(user, s)
             return response
 
         # At this point there is a form validation error.

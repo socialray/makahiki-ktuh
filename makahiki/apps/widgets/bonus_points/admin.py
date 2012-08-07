@@ -15,10 +15,6 @@ from apps.managers.challenge_mgr import challenge_mgr
 
 class BonusPointAdminForm(forms.ModelForm):
     """Bonus Points Admin Form."""
-    num_codes = forms.IntegerField(required=False,
-        label="Number of Bonus Points codes.",
-        help_text="Number of Bonus Points codes to generate.",
-        initial=0)
     point_value = forms.IntegerField(initial=5,
         label="Number of bonus points to award.",
         help_text="The number of bonus points the player earns.")
@@ -41,9 +37,8 @@ class BonusPointAdminForm(forms.ModelForm):
 class BonusPointAdmin(admin.ModelAdmin):
     """admin for Bonus Points."""
     actions = ["delete_selected", "deactivate_selected"]
-    list_display = ["code", "point_value", "is_active"]
+    list_display = ["code", "point_value", "is_active", "user"]
 
-    add_form_template = 'admin/add_form.html'
     form = BonusPointAdminForm
 
     def delete_selected(self, request, queryset):

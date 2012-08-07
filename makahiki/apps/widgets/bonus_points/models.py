@@ -7,6 +7,7 @@ Created on Aug 5, 2012
 
 import random
 from django.db import models, IntegrityError
+from django.contrib.auth.models import User
 
 
 class BonusPoint(models.Model):
@@ -16,6 +17,8 @@ class BonusPoint(models.Model):
                             help_text="The confirmation code.")
     is_active = models.BooleanField(default=True, editable=False,
                                     help_text="Is the bonus points still active?")
+    user = models.ForeignKey(User, null=True,
+                             help_text="The user who claimed the bonus points.")
 
     def __unicode__(self):
         return self.code
