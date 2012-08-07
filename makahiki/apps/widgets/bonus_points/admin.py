@@ -40,7 +40,7 @@ class BonusPointAdminForm(forms.ModelForm):
 
 class BonusPointAdmin(admin.ModelAdmin):
     """admin for Bonus Points."""
-    actions = ["delete_selected", "deactivate_selected", "view_codes"]
+    actions = ["delete_selected", "deactivate_selected"]
     list_display = ["code", "point_value", "is_active"]
 
     add_form_template = 'admin/add_form.html'
