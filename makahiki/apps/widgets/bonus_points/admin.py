@@ -37,7 +37,8 @@ class BonusPointAdminForm(forms.ModelForm):
 class BonusPointAdmin(admin.ModelAdmin):
     """admin for Bonus Points."""
     actions = ["delete_selected", "deactivate_selected"]
-    list_display = ["code", "point_value", "is_active", "user"]
+    list_display = ["pk", "code", "point_value", "create_date", "is_active", "user"]
+    ordering = ["create_date", "is_active"]
 
     form = BonusPointAdminForm
 

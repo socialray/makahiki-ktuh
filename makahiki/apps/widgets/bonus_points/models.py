@@ -1,4 +1,5 @@
 """Bonus Points model definition."""
+import datetime
 '''
 Created on Aug 5, 2012
 
@@ -17,8 +18,13 @@ class BonusPoint(models.Model):
                             help_text="The confirmation code.")
     is_active = models.BooleanField(default=True, editable=False,
                                     help_text="Is the bonus points still active?")
-    user = models.ForeignKey(User, null=True,
+    user = models.ForeignKey(User, null=True, blank=True,
                              help_text="The user who claimed the bonus points.")
+    claim_date = models.DateTimeField(null=True, blank=True,
+                                      help_text="The date the user claimed the points.")
+    create_date = models.DateTimeField(default=datetime.datetime.now(),
+                                       verbose_name="Date created",
+                                       help_text="Date Bonus Point code was created.")
 
     def __unicode__(self):
         return self.code
@@ -35,7 +41,8 @@ class BonusPoint(models.Model):
         header += str(point_value)
         header += "-"
         for _ in range(0, num_codes):
-            bonus = BonusPoint(point_value=point_value, code=header.lower())
+            bonus = BonusPoint(point_value=point_value, code=header.lower(),
+                               create_date=datetime.datetime.now())
             valid = False
             while not valid:
                 for value in random.sample(values, 5):

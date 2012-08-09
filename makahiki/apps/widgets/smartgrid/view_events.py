@@ -246,6 +246,7 @@ def attend_code(request):
                                    datetime.datetime.today(),
                                    s)
                 code.user = user
+                code.claim_date = datetime.datetime.now()
 
             code.is_active = False
             code.save()
