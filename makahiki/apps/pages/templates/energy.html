@@ -17,8 +17,8 @@
                 {% if view_objects.resource_goal__energy %}
                     {% include "widgets/resource_goal/energy/templates/index.html" %}
                 {% endif %}
-                {% if view_objects.wallpost %}
-                    {% include "widgets/wallpost/templates/index.html" %}
+                {% if view_objects.wallpost__user_wallpost %}
+                      {% include "widgets/wallpost/user_wallpost/templates/index.html" %}
                 {% endif %}
             </div>
 

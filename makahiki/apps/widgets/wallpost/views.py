@@ -14,30 +14,29 @@ DEFAULT_POST_COUNT = 10
 
 def supply(request, page_name):
     """supply the view_objects."""
+    return {
+            "default_post_count": DEFAULT_POST_COUNT,
+            "request": request,
+            "page_name": page_name,
+            }
+
+
+def super_supply(request, page_name, agent):
+    """supply the view_objects."""
+    agent_post = agent + "_post"
     user = request.user
     team = user.get_profile().team
 
-    if page_name == "energy":
-        if "last_post" in request.GET:
-            posts = Post.objects.filter(
-                        team=team,
-                        style_class="user_post",
-                        id__lt=int(request.GET["last_post"])).select_related(
-                            'user__profile').order_by("-id")
-        else:
-            posts = Post.objects.filter(team=team, style_class="user_post").select_related(
-                'user__profile').order_by("-id")
-
-        title = "Organize with your team peeps"
-        description = "Got ideas on how to conserve energy? Share it with your team:"
-
-    elif page_name == "advanced":
+    if page_name == "advanced":
         if "last_post" in request.GET:
             posts = CanopyPost.objects.filter(
+                style_class=agent_post,
                 id__lt=int(request.GET["last_post"])).select_related(
                 'user__profile').order_by("-id")
         else:
-            posts = CanopyPost.objects.filter().select_related('user__profile').order_by("-id")
+            posts = CanopyPost.objects.filter(
+              style_class=agent_post
+              ).select_related('user__profile').order_by("-id")
 
         title = "Canopy News Feed"
         description = "Share with your fellow canopy members:"
@@ -45,13 +44,17 @@ def supply(request, page_name):
     else:
         if "last_post" in request.GET:
             posts = Post.objects.filter(
+                        style_class=agent_post,
                         team=team,
                         id__lt=int(request.GET["last_post"])).select_related(
                             'user__profile').order_by("-id")
         else:
-            posts = Post.objects.filter(team=team).select_related('user__profile').order_by("-id")
+            posts = Post.objects.filter(
+                style_class=agent_post,
+                team=team
+            ).select_related('user__profile').order_by("-id")
 
-        title = "News Feed"
+        title = "Team News Feed"
         description = ""
 
     post_count = posts.count()
@@ -68,6 +71,27 @@ def supply(request, page_name):
         "more_posts": is_more_posts,
         "wall_form": wall_form,
         }
+
+
+@login_required
+def super_more_posts(request, agent):
+    """handle more post link"""
+    if request.is_ajax():
+        view_objects = {}
+        view_objects["wallpost__" + agent + "_wallpost"] = super_supply(
+            request,
+            request.GET["page_name"],
+            agent
+        )
+        template = render_to_string("news_posts.html", {
+            "view_objects": view_objects,
+            }, context_instance=RequestContext(request))
+
+        return HttpResponse(json.dumps({
+            "contents": template,
+            }), mimetype='application/json')
+
+    raise Http404
 
 
 @login_required
@@ -101,22 +125,5 @@ def post(request):
         return HttpResponse(json.dumps({
             "message": "This should not be blank."
         }), mimetype="application/json")
-
-    raise Http404
-
-
-@login_required
-def more_posts(request):
-    """handle more post link"""
-    if request.is_ajax():
-        view_objects = {}
-        view_objects["wallpost"] = supply(request, request.GET["page_name"])
-        template = render_to_string("news_posts.html", {
-            "view_objects": view_objects,
-            }, context_instance=RequestContext(request))
-
-        return HttpResponse(json.dumps({
-            "contents": template,
-            }), mimetype='application/json')
 
     raise Http404

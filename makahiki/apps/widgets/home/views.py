@@ -162,7 +162,6 @@ def setup_profile(request):
 
             if form.cleaned_data["pic_method"] == 0:
                 name = request.user
-                user = User.objects.filter(username=name)
                 for avatar in Avatar.objects.filter(user=name):
                     avatar.delete()
 

@@ -1,0 +1,21 @@
+{% with wallpost=view_objects.wallpost__system_wallpost %}
+{% for post in wallpost.posts %}
+    <!-- {% cycle 'alt-row' '' as cycle_class %} -->
+    {% if post.style_class == "user_post" %}
+        {% include "user_post.html" %}
+    {% else %}
+        {% include "system_post.html" %}
+    {% endif %}
+
+    {% if forloop.last and wallpost.more_posts %}
+        <li id="view-more-system-posts">
+            <a href="#" onclick='
+                    $.get("{% url news_more_system_posts %}?last_post={{post.id}}&page_name={{ wallpost.page_name }}", function(data) {
+                    $("#view-more-system-posts").remove();
+                    $(".system-wall-posts").append(data.contents);
+                    });
+                    return false;'>See more</a>
+        </li>
+    {% endif %}
+{% endfor %}
+{% endwith %}

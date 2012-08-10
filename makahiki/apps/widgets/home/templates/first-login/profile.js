@@ -31,6 +31,7 @@ $(document).ready(function () {
         $(this).button("option", "disabled", false);
     });
 
+
     function enableSubmit() {
         if($('#id_avatar').val() != ''){
            $('#profile-submit').removeAttr('disabled');

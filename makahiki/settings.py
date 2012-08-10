@@ -199,6 +199,8 @@ INSTALLED_WIDGET_APPS = (
     'status.wattdepot',
     'status.twitter',
     'status.badges',
+    'wallpost.user_wallpost',
+    'wallpost.system_wallpost',
 )
 
 for widget in INSTALLED_WIDGET_APPS:

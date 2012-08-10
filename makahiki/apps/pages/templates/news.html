@@ -24,11 +24,14 @@
                     {% include "widgets/badge_scoreboard/templates/index.html" %}
                 </div>
                 {% endif %}
-                {% if view_objects.wallpost %}
-                <div>
-                    {% include "widgets/wallpost/templates/index.html" %}
-                </div>
+
+                {% if view_objects.wallpost__user_wallpost %}
+                      {% include "widgets/wallpost/user_wallpost/templates/index.html" %}
                 {% endif %}
+                {% if view_objects.wallpost__system_wallpost %}
+                      {% include "widgets/wallpost/system_wallpost/templates/index.html" %}
+                {% endif %}
+
             </div>
             <!-- right column -->
             <div class="span6">

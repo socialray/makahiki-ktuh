@@ -1,7 +1,8 @@
+{% with wallpost=view_objects.wallpost__user_wallpost %}
 <div class="content-box">
     <div>
         <div class="content-box-title">
-            {{ view_objects.wallpost.title }}
+            {{ wallpost.title }}
             <a href="#" style="float: right">
                 <img src="{{ STATIC_URL}}images/icons/icon-help-sm.png" width="20"
                      align="center"
@@ -10,7 +11,7 @@
                         /></a>
         </div>
         <div class="content-box-content wallpost-content">
-            {{ view_objects.wallpost.description }}
+            {{ wallpost.description }}
             <div>
               <form id="news-post-form" action="{% url news_post %}" method="POST">
                   {% csrf_token %}
@@ -20,24 +21,20 @@
                       <textarea rows="2" id="id_post" name="post" placeholder="What's on your mind?"/></textarea>
                     </div>
                   </div>
-                  {{ view_objects.wallpost.wall_form.page_name }}
+                  {{ wallpost.wall_form.page_name }}
 
                   <div>
-                    <button id="wall-post-submit" class="btn btn-widget padded">
+                    <button id="user-wall-post-submit" class="btn btn-widget padded">
                         Post
                     </button>
                   </div>
                 </form>
             </div>
             </br>
-            <div class="btn-group">
-                <button id="user-post" class="btn btn-primary" style="">Hide User Posts</button>
-                <button id="system-post" class="btn btn-primary" style="">Hide System Posts</button>  
-            </div>
-            <ul class="wall-posts">
-                {% include "news_posts.html" %}
+            <ul class="user-wall-posts">
+                {% include "widgets/wallpost/user_wallpost/templates/news_posts.html" %}
             </ul>
-            {% if not view_objects.wallpost.posts %}
+            {% if not wallpost.posts %}
                 <p id="wall-no-posts" style="padding: 7px;">There are no posts yet!</p>
             {% endif %}
         </div>
@@ -46,40 +43,7 @@
 <script>
 $(document).ready(function() {
 	  var textarea = $("#id_post");
-	  var post_button = $("#wall-post-submit");
-    var user_colored = true;
-    var system_colored = true;
-    var btnClass = "";
-    var highlight_class = 'btn btn-primary';
-    var normal_class = 'btn btn-info';
-
-    $('#user-post').click( function() {
-        $('.user-post').toggle();
-        if(user_colored) {
-          btnClass = normal_class;
-          $('#user-post').html('Display User Posts');
-        }
-        else {
-          btnClass = highlight_class;
-          $('#user-post').html('Hide User Posts');
-        }
-        user_colored = !user_colored;
-        document.getElementById("user-post").setAttribute("class", btnClass);
-    })
-
-    $('#system-post').click( function() {
-        $('.system-post').toggle();
-        if(system_colored) {
-          btnClass = normal_class;
-          $('#system-post').html('Display System Posts');
-        }
-        else {
-          btnClass = highlight_class;
-          $('#system-post').html('Hide System Posts');
-        }
-        system_colored = !system_colored;
-        document.getElementById("system-post").setAttribute("class", btnClass);
-    })
+	  var post_button = $("#user-wall-post-submit");
 
 
 	  if (textarea) {
@@ -107,7 +71,7 @@ $(document).ready(function() {
 	                      if ($("#wall-no-posts").is(":visible")) {
 	                          $("#wall-no-posts").hide();
 	                      }
-	                      $(data.contents).prependTo(".wall-posts");
+	                      $(data.contents).prependTo(".user-wall-posts");
 	                      textarea.val("");
 	                      post_button.addClass("disabled");
 	                  }
@@ -119,3 +83,4 @@ $(document).ready(function() {
      
 	});
 </script>
+{% endwith %}

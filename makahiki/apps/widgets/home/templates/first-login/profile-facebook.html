@@ -7,9 +7,11 @@
 
 <div id="avatar-fb-form" style="display: none">
     <h4 style="margin-top: 0px">
-                  <input type="radio" name="pic_method" value="2" > Use your picture from Facebook:</h4>
+                  <input type="radio" name="pic_method" value="2" onChange="showform()"> Use your picture from Facebook:</h4>
         <img src=""/>
-    {{ form.facebook_photo }}
+    <div id="fbupload" style="">
+      {{ form.facebook_photo }}
+    </div>
 </div>
 <div id="avatar-fb-login">
     <p id="avatar-fb-error" style='margin-top: 0'></p>

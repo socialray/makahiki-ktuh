@@ -540,6 +540,46 @@
         }
     },
     {
+        "pk": 57,
+        "model": "challenge_mgr.pagesetting",
+        "fields": {
+            "widget": "wallpost.user_wallpost",
+            "game": null,
+            "enabled": true,
+            "page": 3
+        }
+    },
+    {
+        "pk": 58,
+        "model": "challenge_mgr.pagesetting",
+        "fields": {
+            "widget": "wallpost.user_wallpost",
+            "game": null,
+            "enabled": true,
+            "page": 4
+        }
+    },
+    {
+        "pk": 59,
+        "model": "challenge_mgr.pagesetting",
+        "fields": {
+            "widget": "wallpost.user_wallpost",
+            "game": null,
+            "enabled": true,
+            "page": 6
+        }
+    },
+    {
+        "pk": 60,
+        "model": "challenge_mgr.pagesetting",
+        "fields": {
+            "widget": "wallpost.system_wallpost",
+            "game": null,
+            "enabled": true,
+            "page": 6
+        }
+    },
+    {
         "pk": 1,
         "model": "challenge_mgr.gameinfo",
         "fields": {

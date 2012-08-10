@@ -35,13 +35,16 @@
       <div class="row-fluid">
           <div class="span12">
               <div class="setup-form-photo">
-                  <div class="upload-form">
+                  <div class="upload-form" style="">
                       
-                      <input type="radio" name="pic_method" value="0" {% if not av_changed %}checked {% endif %}> Use Default Picture 
-                      {% avatar user size=80 first_login='True' default='True' %}
-
-                      <p><input type="radio" name="pic_method" value="1" {% if av_changed %}checked {% endif %}> Upload a new picture (optional):</p>
-                      {{ form.avatar }} 
+                      <input type="radio" name="pic_method" value="0" onChange="showform()" {% if not av_changed %}checked {% endif %}> Use Default Picture 
+                      <div id="defpic" style="">
+                          {% avatar user size=80 first_login='True' default='True' %}
+                      </div>
+                      <p><input type="radio" name="pic_method" value="1" onChange="showform()" {% if av_changed %}checked {% endif %}> Upload a new picture (optional):</p>
+                      <div id="upload" style="">                      
+                        {{ form.avatar }} 
+                      </div>
                   </div>
                   {% if MAKAHIKI_FACEBOOK_APP_ID %}
                     <div id="profile-picture-facebook">
@@ -80,6 +83,25 @@
   
   <script type="text/javascript">
       {% include "first-login/profile.js" %}
+
+    function showform() {
+        var button_val = $('input[name=pic_method]:checked').val();
+        if (button_val == "0") {
+            document.getElementById("defpic").style.display = 'block';
+            document.getElementById("upload").style.display = 'none';
+            document.getElementById("fbupload").style.display = 'none';
+        } 
+        else if (button_val == "1") {
+            document.getElementById("defpic").style.display = 'none';
+            document.getElementById("upload").style.display = 'block';
+            document.getElementById("fbupload").style.display = 'none';
+        }
+        else if (button_val == "2") {   
+            document.getElementById("defpic").style.display = 'none';
+            document.getElementById("upload").style.display = 'none';
+            document.getElementById("fbupload").style.display = 'block';
+        }
+    }
   </script>
 </div>
 
