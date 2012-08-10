@@ -37,11 +37,11 @@
               <div class="setup-form-photo">
                   <div class="upload-form" style="">
                       
-                      <input type="radio" name="pic_method" value="0" onChange="showform()" {% if not av_changed %}checked {% endif %}> Use Default Picture 
+                      <input type="radio" name="pic_method" class="radio-input" value="0" onChange="showform()" {% if not av_changed %}checked {% endif %}> Use Default Picture 
                       <div id="defpic" style="">
                           {% avatar user size=80 first_login='True' default='True' %}
                       </div>
-                      <p><input type="radio" name="pic_method" value="1" onChange="showform()" {% if av_changed %}checked {% endif %}> Upload a new picture (optional):</p>
+                      <p><input type="radio" name="pic_method" class="radio-input" value="1" onChange="showform()" {% if av_changed %}checked {% endif %}> Upload a new picture (optional):</p>
                       <div id="upload" style="">                      
                         {{ form.avatar }} 
                       </div>
