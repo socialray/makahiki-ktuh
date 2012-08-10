@@ -1,14 +1,13 @@
 
 {% if fb_id %}
-<div id="avatar-fb-form" class="radio-input" style="display: none">
+    <input type="radio" name="pic_method" value="2" onChange="showform()"> Use your picture from Facebook:</h4>
     <h4 style="margin-top: 0px">Use your picture from Facebook:</h4>
     <img src="http://graph.facebook.com/{{fb_id}}/picture"/>
     {{ form.facebook_photo }}
 {% else %}
-
-
+<input type="radio" name="pic_method" value="2" onChange="showform()"> Use your picture from Facebook:</h4>
+<div id="avatar-fb-form" style="display: none">
     <h4 style="margin-top: 0px">
-                  <input type="radio" name="pic_method" value="2" onChange="showform()"> Use your picture from Facebook:</h4>
         <img src=""/>
     <div id="fbupload" style="">
       {{ form.facebook_photo }}

@@ -1000,7 +1000,7 @@ ul{list-style:none;}
 .canopy-viz-list li.selected a{text-decoration:none;}
 .energy-power-meter{height:150px;}
 iframe{width:100%;}
-.radio-input{width:20px;}
+input .radio-input{width:20px;}
 .setup-form-photo{float:left;width:40%;padding-right:5px;}
 .setup-form-photo p{margin:5px 0;}
 .setup-profile-help-text{font-style:italic;font-size:0.8em;margin:5px 0;}
