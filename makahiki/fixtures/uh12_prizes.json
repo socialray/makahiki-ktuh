@@ -1,0 +1,170 @@
+[
+    {
+        "pk": 1,
+        "model": "prizes.prize",
+        "fields": {
+            "title": "Bookstore Certificate ($25)",
+            "round_name": "Round 1",
+            "image": "media/prizes/uh-bookstore.2.jpg",
+            "award_to": "individual_overall",
+            "value": 25,
+            "competition_type": "points",
+            "short_description": "$25 UH Bookstore Gift Certificate for the individual with the highest number of points at the end of Round 1.",
+            "long_description": "Books, notebooks, magazines, art supplies, computers... you name it, the UH Bookstore's got it. With this gift certificate you'll be able to pick something up that you need (or maybe just want!).\r\n\r\nThis $25 gift certificate goes to the individual across all four towers with the highest point total at the end of Round 1."
+        }
+    },
+    {
+        "pk": 2,
+        "model": "prizes.prize",
+        "fields": {
+            "title": "Cupcake Extravaganza",
+            "round_name": "Round 1",
+            "image": "media/prizes/hokulani.2.jpg",
+            "award_to": "team_overall",
+            "value": 125,
+            "competition_type": "points",
+            "short_description": "Cupcakes by Hokulani Bakery for the lounge that earns the most points during the week of Round 1.",
+            "long_description": "Many people believe Hokulani bakes Honolulu's best selection of cupcakes: carrot cake, coconut, snicker doodle, lilikoi, red velvet guava, vanilla, even lychee (when in season)! \r\n\r\nTo win this cupcake party, your lounge members must earn more points than any other lounge across all four towers during the week of Round 1. "
+        }
+    },
+    {
+        "pk": 3,
+        "model": "prizes.prize",
+        "fields": {
+            "title": "Ice Cream Party",
+            "round_name": "Round 1",
+            "image": "media/prizes/bubbies-mochi.3.jpg",
+            "award_to": "team_overall",
+            "value": 125,
+            "competition_type": "energy",
+            "short_description": "Mochi Ice Cream Party by Bubbies for lounge that consumes the least amount of energy usage during the week of Round 1.",
+            "long_description": "Imagine a harmonious combination of creamy gourmet ice cream wrapped in a sweetened rice confection, all resulting in a delectable bite-sized, one and a quarter ounce ball of happiness. As the lounge with the lowest energy usage for this round, you'll snack out on a selection of Bubbies Mochi Ice Cream balls.\r\n\r\nTo win this prize, your lounge must consume less energy than any other lounge across all four towers during the week of Round 1. "
+        }
+    },
+    {
+        "pk": 5,
+        "model": "prizes.prize",
+        "fields": {
+            "title": "Milano Freezer Card",
+            "round_name": "Round 2",
+            "image": "media/prizes/milano-freezer-small.jpg",
+            "award_to": "individual_team",
+            "value": 5,
+            "competition_type": "points",
+            "short_description": "$5 Milano Freezer Gift Card for the individual who earns the most points in each lounge during the week of Round 2.",
+            "long_description": "Milano Freezer in Manoa Marketplace specializes in high quality gelato, yogurt, and smoothies with all the freshest ingredients. Everything is made in the store daily and there is a wide variety of flavors.\r\n\r\nTo win this $5 gift certificate, you must earn more points than any other person in your lounge during the week of Round 2. Note that the points you earn during the week of Round 1 do not count toward this prize!"
+        }
+    },
+    {
+        "pk": 6,
+        "model": "prizes.prize",
+        "fields": {
+            "title": "Sodexo Flash Cash",
+            "round_name": "Round 2",
+            "image": "media/prizes/sodexo.2.jpg",
+            "award_to": "individual_overall",
+            "value": 25,
+            "competition_type": "points",
+            "short_description": "$25 Sodexo Flash Cash for the individual with the highest number of points at the end of Round 1.",
+            "long_description": "You've got plenty on your mind: classes, sports, clubs, community service, etc., so Sodexo's goal is to make sure that you won't have to worry about finding something great to eat when you want it. \r\n\r\nTo win this $25 gift certificate, you must earn more points than any other individual across all four towers during the week of Round 2.  Note that the points you earn during Round 1 do not count toward this prize. "
+        }
+    },
+    {
+        "pk": 9,
+        "model": "prizes.prize",
+        "fields": {
+            "title": "iPad",
+            "round_name": "Round 3",
+            "image": "media/prizes/iPad.2.jpg",
+            "award_to": "individual_overall",
+            "value": 500,
+            "competition_type": "points",
+            "short_description": "iPad 2 for the individual with the greatest number of points across all four towers at the end of the Quest for the Kukui Cup.",
+            "long_description": "Thin, light design. Fast A5 chip. FaceTime video calling. 10-hour battery. It's not a tablet, it's iPad 2\r\n\r\nTo win this iPad, you must earn more points than any other individual in all four towers during the three weeks of the Quest for the Kukui Cup. "
+        }
+    },
+    {
+        "pk": 8,
+        "model": "prizes.prize",
+        "fields": {
+            "title": "Malasada Madness",
+            "round_name": "Round 2",
+            "image": "media/prizes/malasada.jpg",
+            "award_to": "team_overall",
+            "value": 125,
+            "competition_type": "points",
+            "short_description": "Malasadas for the lounge with the lowest energy consumption during the week of Round 2.",
+            "long_description": "Malasadas are Hawaii's favorite doughnut, and Leonard's Bakery has been perfecting the malasada since 1952.\r\n\r\nTo win this malasada party, your lounge members must consume less energy than any other lounge across all four towers during the week of Round 2.  Your lounge's energy consumption during Round 1 does not matter for the purpose of this prize!"
+        }
+    },
+    {
+        "pk": 13,
+        "model": "prizes.prize",
+        "fields": {
+            "title": "Bookstore Certificate ($5)",
+            "round_name": "Round 1",
+            "image": "media/prizes/uh-bookstore.2_2.jpg",
+            "award_to": "individual_team",
+            "value": 5,
+            "competition_type": "points",
+            "short_description": "$5 UH Bookstore Gift Certificate for the individual who earns the most points in each lounge during the week of Round 1.",
+            "long_description": "Books, notebooks, magazines, art supplies, computers... you name it, the UH Bookstore's got it. With this gift certificate you'll be able to pick something up that you need (or maybe just want!).\\r\\n\\r\\nTo win this $5 gift certificate, you must earn more points than any other person in your lounge during the week of Round 1."
+        }
+    },
+    {
+        "pk": 14,
+        "model": "prizes.prize",
+        "fields": {
+            "title": "Mochi Party",
+            "round_name": "Round 2",
+            "image": "media/prizes/bubbies-mochi.3_2.jpg",
+            "award_to": "team_overall",
+            "value": 125,
+            "competition_type": "energy",
+            "short_description": "Mochi Ice Cream Party by Bubbies for lounge that consumes the least amount of energy usage during the week of Round 1.",
+            "long_description": "Imagine a harmonious combination of creamy gourmet ice cream wrapped in a sweetened rice confection, all resulting in a delectable bite-sized, one and a quarter ounce ball of happiness. As the lounge with the lowest energy usage for this round, you'll snack out on a selection of Bubbies Mochi Ice Cream balls.\\r\\n\\r\\nTo win this prize, your lounge must consume less energy than any other lounge across all four towers during the week of Round 1."
+        }
+    },
+    {
+        "pk": 15,
+        "model": "prizes.prize",
+        "fields": {
+            "title": "Hawaii Adventure Sports",
+            "round_name": "Round 4",
+            "image": "",
+            "award_to": "individual_overall",
+            "value": 125,
+            "competition_type": "points",
+            "short_description": "????",
+            "long_description": "????"
+        }
+    },
+    {
+        "pk": 12,
+        "model": "prizes.prize",
+        "fields": {
+            "title": "Point Pool Party",
+            "round_name": "Round 3",
+            "image": "",
+            "award_to": "team_overall",
+            "value": 250,
+            "competition_type": "points",
+            "short_description": "Pool party for the lounge whose members earned the greatest number of points by the end of Round 3 of the Kukui Cup.",
+            "long_description": "You did it!  As the lounge that earned the most points out of all four towers, you'll be attending a pool party. \r\n\r\nTo win this pool party, your lounge must earn more points than any other lounge across all four towers by the end of Round 3."
+        }
+    },
+    {
+        "pk": 11,
+        "model": "prizes.prize",
+        "fields": {
+            "title": "Energy Pool Party",
+            "round_name": "Round 3",
+            "image": "",
+            "award_to": "team_overall",
+            "value": 250,
+            "competition_type": "energy",
+            "short_description": "Pool party for the lounge whose members used the least energy, in Kilowatt hours, by the end of Round 3 of the Kukui Cup.",
+            "long_description": "You did it!  As the lounge that earned the most points out of all four towers, you'll be attending a pool party. \r\n\r\nTo win this pool party, your lounge must earn more points than any other lounge across all four towers by the end of Round 3."
+        }
+    }
+]
