@@ -160,7 +160,13 @@ def setup_profile(request):
 
             profile.save()
 
-            if 'avatar' in request.FILES:
+            if form.cleaned_data["pic_method"] == 0:
+                name = request.user
+                user = User.objects.filter(username=name)
+                for avatar in Avatar.objects.filter(user=name):
+                    avatar.delete()
+
+            if form.cleaned_data["pic_method"] == 1 and 'avatar' in request.FILES:
                 path = avatar_file_path(user=request.user,
                     filename=request.FILES['avatar'].name)
                 avatar = Avatar(
@@ -171,7 +177,7 @@ def setup_profile(request):
                 avatar.avatar.storage.save(path, request.FILES['avatar'])
                 avatar.save()
 
-            elif form.cleaned_data["facebook_photo"]:
+            elif form.cleaned_data["pic_method"] == 2 and form.cleaned_data["facebook_photo"]:
                 # Need to download the image from the url and save it.
                 photo_temp = NamedTemporaryFile(delete=True)
                 fb_url = form.cleaned_data["facebook_photo"]

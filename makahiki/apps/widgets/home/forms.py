@@ -71,6 +71,7 @@ class ProfileForm(forms.Form):
     facebook_photo = forms.URLField(widget=forms.HiddenInput, required=False)
     use_fb_photo = forms.BooleanField(required=False)
     avatar = forms.ImageField(required=False)
+    pic_method = forms.IntegerField(widget=forms.widgets.RadioSelect(), required=False)
 
     def __init__(self, *args, **kwargs):
         """Allow init to take a user argument."""

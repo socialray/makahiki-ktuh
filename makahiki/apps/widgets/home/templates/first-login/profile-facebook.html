@@ -6,15 +6,13 @@
 {% else %}
 
 <div id="avatar-fb-form" style="display: none">
-    <h4 style="margin-top: 0px">Use your picture from Facebook:</h4>
+    <h4 style="margin-top: 0px">
+                  <input type="radio" name="pic_method" value="2" > Use your picture from Facebook:</h4>
         <img src=""/>
     {{ form.facebook_photo }}
 </div>
 <div id="avatar-fb-login">
-    <p id="avatar-fb-error" style='margin-top: 0'>
-        Or, to use your Facebook picture,
-        click here to log in:
-    </p>
+    <p id="avatar-fb-error" style='margin-top: 0'></p>
     <fb:login-button style="display: block"
                      id="fb_login" length="long">
     </fb:login-button>

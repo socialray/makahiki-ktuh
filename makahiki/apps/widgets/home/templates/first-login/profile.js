@@ -20,7 +20,7 @@ $(document).ready(function () {
             //beforeSubmit: showRequest,
             dataType:"json",
             success:showResponse,
-            error:handleError
+            //error:handleError
         });
         $(this).button("option", "disabled", false);
     });
