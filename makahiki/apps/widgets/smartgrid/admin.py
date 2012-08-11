@@ -689,7 +689,7 @@ class ActionMemberAdmin(admin.ModelAdmin):
             if obj.action.type == "activity":
                 self.fields = (
                     "user", "action", "admin_link", "question", "response", "image", "social_email",
-                    "approval_status", "admin_comment")
+                    "approval_status", "points_awarded", "admin_comment")
             else:
                 self.fields = (
                         "user", "action", "admin_link", "social_email", "completion_date",

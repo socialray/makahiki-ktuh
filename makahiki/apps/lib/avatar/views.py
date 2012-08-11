@@ -50,10 +50,11 @@ def upload_fb(request):
             photo_temp.seek(0)
 
             # Delete old avatars if they exist
-            # avatars = Avatar.objects.filter(user=request.user)
-            # for avatar in avatars:
-            #   avatar.avatar.delete()
-            #   avatar.delete()
+            avatars = Avatar.objects.filter(user=request.user)
+            for avatar in avatars:
+                avatar.avatar.storage.delete(avatar.avatar.name)
+                avatar.avatar.delete()
+                avatar.delete()
 
             path = avatar_file_path(user=request.user,
                 filename="fb_photo.jpg")
@@ -79,10 +80,11 @@ def __handle_uploaded_file(uploaded_file, user):
         raise Exception("File is too large")
 
     # Delete old avatars if they exist
-    # avatars = Avatar.objects.filter(user=user)
-    # for avatar in avatars:
-    #   avatar.avatar.delete()
-    #   avatar.delete()
+    avatars = Avatar.objects.filter(user=user)
+    for avatar in avatars:
+        avatar.avatar.storage.delete(avatar.avatar.name)
+        avatar.avatar.delete()
+        avatar.delete()
 
     path = avatar_file_path(user=user,
         filename=uploaded_file.name)

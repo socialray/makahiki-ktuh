@@ -75,11 +75,16 @@ class Avatar(models.Model):
             thumb_file = ContentFile(thumb.getvalue())
         else:
             thumb_file = ContentFile(orig)
+        self.avatar.storage.delete(self.avatar_name(size))
         thumb = self.avatar.storage.save(self.avatar_name(size), thumb_file)
 
     def avatar_url(self, size):
         return self.avatar.storage.url(self.avatar_name(size))
 
     def avatar_name(self, size):
-        return os.path.join(AVATAR_STORAGE_DIR, self.user.username,
-            'resized', str(size), self.avatar.name)
+        return os.path.join(settings.MAKAHIKI_MEDIA_PREFIX,
+                            AVATAR_STORAGE_DIR,
+                            self.user.username,
+                            'resized',
+                            str(size),
+                            self.avatar.name)
