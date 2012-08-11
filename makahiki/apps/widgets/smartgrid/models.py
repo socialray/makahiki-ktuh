@@ -541,9 +541,9 @@ class ActionMember(models.Model):
         """Custom save method to award points."""
         profile = self.user.get_profile()
 
-        points = self.action.point_value
+        points = self.points_awarded
         if not points:
-            points = self.points_awarded
+            points = self.action.point_value
 
         if self.action.type == "activity":
             transaction_date = self.submission_date
@@ -671,7 +671,7 @@ class ActionMember(models.Model):
             UserNotification.create_email_notification(
                 self.user.email, subject, message, html_message)
         else:
-            points = self.action.point_value if self.action.point_value else self.points_awarded
+            points = self.points_awarded if self.points_awarded else self.action.point_value
             message += " You earned %d points!" % points
 
             UserNotification.create_success_notification(self.user, message, display_alert=True,

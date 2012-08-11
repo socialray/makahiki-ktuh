@@ -603,10 +603,6 @@ class ActionMemberAdminForm(forms.ModelForm):
                     action.activity.point_range_start, action.activity.point_range_end)
                 self._errors["points_awarded"] = ErrorList([message])
                 del cleaned_data["points_awarded"]
-        elif status == "approved" and "points_awarded" in cleaned_data:
-            self._errors["points_awarded"] = ErrorList(
-                [u"This field is only required for activities with variable point values."])
-            del cleaned_data["points_awarded"]
 
         return cleaned_data
 
