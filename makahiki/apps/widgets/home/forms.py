@@ -64,7 +64,7 @@ class ReferralForm(forms.Form):
 class ProfileForm(forms.Form):
     """Form for modified profile info"""
     display_name = forms.CharField(
-        max_length=20,
+        max_length=16,
         help_text="This is the name others in your lounge will see, and how you"\
                   " will be identified on scoreboards"
     )
