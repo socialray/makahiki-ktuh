@@ -83,7 +83,7 @@ def super_more_posts(request, agent):
             request.GET["page_name"],
             agent
         )
-        template = render_to_string("news_posts.html", {
+        template = render_to_string(agent + "_news_posts.html", {
             "view_objects": view_objects,
             }, context_instance=RequestContext(request))
 
