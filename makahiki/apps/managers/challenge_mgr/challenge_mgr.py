@@ -71,10 +71,11 @@ def info():
 
 def get_challenge():
     """returns the ChallengeSetting object, from cache if cache is enabled"""
-    challenge = cache_mgr.get_cache('challenge')
-    if not challenge:
-        challenge, _ = ChallengeSetting.objects.get_or_create(pk=1)
-        cache_mgr.set_cache('challenge', challenge)
+    #challenge = cache_mgr.get_cache('challenge')
+    #if not challenge:
+    #    challenge, _ = ChallengeSetting.objects.get_or_create(pk=1)
+    #    cache_mgr.set_cache('challenge', challenge)
+    challenge, _ = ChallengeSetting.objects.get_or_create(pk=1)
     return challenge
 
 
@@ -175,24 +176,30 @@ def available_widgets():
     return settings.INSTALLED_WIDGET_APPS
 
 
+def get_all_round_info_from_cache():
+    """Returns all the round information from cache if available."""
+    rounds = cache_mgr.get_cache('rounds')
+    if not rounds:
+        rounds = get_all_round_info()
+        cache_mgr.set_cache('rounds', rounds)
+    return rounds
+
+
 def get_all_round_info():
-    """Returns a dictionary containing all the round information, from cache if available.
+    """Returns a dictionary containing all the round information.
     example: {"Round 1": {"start": start_date, "end": end_date,},
               "competition_start": start_date,
               "competition_end": end_date}
     """
-    rounds = cache_mgr.get_cache('rounds')
-    if not rounds:
+    roundsettings = RoundSetting.objects.all()
+    if not roundsettings:
+        RoundSetting.objects.create()
         roundsettings = RoundSetting.objects.all()
-        if not roundsettings:
-            RoundSetting.objects.create()
-            roundsettings = RoundSetting.objects.all()
-        rounds = {}
-        for r in roundsettings:
-            rounds[r.name] = {
-                "start": r.start,
-                "end": r.end, }
-        cache_mgr.set_cache('rounds', rounds)
+    rounds = {}
+    for r in roundsettings:
+        rounds[r.name] = {
+            "start": r.start,
+            "end": r.end, }
     return rounds
 
 
