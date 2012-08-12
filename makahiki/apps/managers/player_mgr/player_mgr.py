@@ -2,7 +2,6 @@
 
 from django.contrib.auth.models import User
 from django.core.exceptions import ObjectDoesNotExist
-from django.db.models.query_utils import Q
 from django.db.utils import IntegrityError
 from apps.managers.player_mgr.models import Profile
 from apps.managers.score_mgr import score_mgr
@@ -27,24 +26,6 @@ def players(num_results=None):
     if num_results:
         results = results[:num_results]
     return results
-
-
-def canopy_members():
-    """returns the canopy memebers, which are the top 50 points leaders, plus admin."""
-
-    members = []
-    entries = score_mgr.player_points_leaders(num_results=50)
-    if entries:
-        for entry in entries:
-            member = User.objects.get(profile__id=entry["profile"])
-            members.append(member)
-
-    entries = User.objects.filter(Q(is_superuser=True) |
-                                  Q(is_staff=True)).select_related('profile')
-    for entry in entries:
-        members.append(entry)
-
-    return members
 
 
 def points_leader(round_name=None):

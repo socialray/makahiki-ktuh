@@ -25,7 +25,7 @@ def get_smartgrid_predicates():
     """Returns the predicates defined in smartgrid module."""
     from apps.widgets.smartgrid.predicates import completed_action, approved_action, \
         completed_some_of, completed_some_of_level, completed_all_of, completed_level, \
-        unlock_on_date, unlock_on_event, approved_all_of, approved_some_of
+        unlock_on_date, unlock_on_event, approved_all_of, approved_some_of, social_bonus_count
     return {
             "completed_action": completed_action,
             "completed_some_of": completed_some_of,
@@ -37,6 +37,7 @@ def get_smartgrid_predicates():
             "approved_action": approved_action,
             "approved_some_of": approved_some_of,
             "approved_all_of": approved_all_of,
+            "social_bonus_count": social_bonus_count,
             }
 
 
@@ -44,7 +45,7 @@ def get_player_mgr_predicates():
     """Returns the predicates defined in player_mgr module."""
     from apps.managers.player_mgr.predicates import badge_awarded, posted_to_wall, \
         set_profile_pic, has_points, is_admin, allocated_ticket, daily_visit_count, \
-        change_theme
+        change_theme, daily_energy_goal_count, referring_count, team_member_point_percent
     return {
         "is_admin": is_admin,
         "has_points": has_points,
@@ -53,7 +54,10 @@ def get_player_mgr_predicates():
         "posted_to_wall": posted_to_wall,
         "set_profile_pic": set_profile_pic,
         "daily_visit_count": daily_visit_count,
-        "change_theme": change_theme
+        "change_theme": change_theme,
+        "daily_energy_goal_count": daily_energy_goal_count,
+        "referring_count": referring_count,
+        "team_member_point_percent": team_member_point_percent,
         }
 
 
@@ -69,7 +73,6 @@ def eval_predicates(predicates, user):
         if "%s(" % key in predicates:
             predicates = predicates.replace("%s(" % key, "%s(user," % key)
 
-    print predicates
     return eval(predicates, {"__builtins__": None}, ALLOW_DICT)
 
 

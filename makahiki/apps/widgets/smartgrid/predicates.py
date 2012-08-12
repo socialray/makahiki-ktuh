@@ -145,3 +145,8 @@ def approved_all_of(user, category_slug=None, action_type=None, resource=None, l
 
     return user.actionmember_set.filter(approval_status="approved").count() ==\
            Action.objects.all().count()
+
+
+def social_bonus_count(user, count):
+    """Returns True if the number of social bonus the user received equals to count."""
+    return user.actionmember_set.filter(social_bonus_awarded=True).count() >= count

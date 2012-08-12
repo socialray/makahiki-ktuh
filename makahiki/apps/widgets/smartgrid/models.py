@@ -633,6 +633,10 @@ class ActionMember(models.Model):
         """Creates a notification for rejected or approved tasks.
         This also creates an email message if it is configured.
         """
+        # don't create notification if the action is the SETUP_WIZARD_ACTIVITY
+        # that is used in the setup wizard.
+        if self.action.slug == SETUP_WIZARD_ACTIVITY:
+            return
 
         # Construct the message to be sent.
         status_nicely = 'not approved' if status != 'approved' else status

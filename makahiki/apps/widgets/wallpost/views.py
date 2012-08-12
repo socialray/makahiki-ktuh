@@ -100,18 +100,11 @@ def post(request):
     if request.is_ajax() and request.method == "POST":
         form = WallForm(request.POST)
         if form.is_valid():
-            print form.cleaned_data
-            if form.cleaned_data["page_name"] == "advanced":
-                wall_post = CanopyPost(
-                    user=request.user,
-                    text=form.cleaned_data["post"]
-                )
-            else:
-                wall_post = Post(
-                    user=request.user,
-                    team=request.user.get_profile().team,
-                    text=form.cleaned_data["post"]
-                )
+            wall_post = Post(
+                user=request.user,
+                team=request.user.get_profile().team,
+                text=form.cleaned_data["post"]
+            )
             wall_post.save()
 
             # Render the post and send it as a response.

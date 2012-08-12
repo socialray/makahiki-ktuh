@@ -92,7 +92,6 @@ class SetupWizardFunctionalTestCase(TransactionTestCase):
         response = self.client.get(reverse("setup_terms"), {},
             HTTP_X_REQUESTED_WITH='XMLHttpRequest')
         self.assertTemplateUsed(response, "first-login/terms.html")
-        self.assertContains(response, reverse("account_logout"))
         try:
             json.loads(response.content)
         except ValueError:
@@ -205,7 +204,7 @@ class SetupWizardFunctionalTestCase(TransactionTestCase):
             "display_name": "Test User",
             }, follow=True)
         self.failUnlessEqual(response.status_code, 200)
-        self.assertTemplateUsed(response, "first-login/activity.html")
+        self.assertTemplateUsed(response, "first-login/profile.html")
 
         user = User.objects.get(username="user")
         self.assertEqual(points + 5, user.get_profile().points(),
@@ -221,7 +220,7 @@ class SetupWizardFunctionalTestCase(TransactionTestCase):
         self.assertEqual(points + 5, user.get_profile().points(),
             "Check that the user was not awarded any more points.")
         self.failUnlessEqual(response.status_code, 200)
-        self.assertTemplateUsed(response, "first-login/activity.html")
+        self.assertTemplateUsed(response, "first-login/profile.html")
 
     def testSetupProfileWithoutName(self):
         """Test that there is an error when the user does not supply a

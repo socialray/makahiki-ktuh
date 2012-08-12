@@ -20,7 +20,8 @@ class NewsFunctionalTestCase(TransactionTestCase):
 
         challenge_mgr.register_page_widget("news", "popular_tasks")
         challenge_mgr.register_page_widget("news", "my_commitments")
-        challenge_mgr.register_page_widget("news", "wallpost")
+        challenge_mgr.register_page_widget("news", "wallpost.system_wallpost")
+        challenge_mgr.register_page_widget("news", "wallpost.user_wallpost")
 
         self.client.login(username="user", password="changeme")
 
@@ -116,7 +117,7 @@ class NewsFunctionalTestCase(TransactionTestCase):
             post.save()
 
         second_post = Post.objects.all().order_by("-pk")[0]
-        response = self.client.get(reverse("news_more_posts") + "?page_name=news",
+        response = self.client.get(reverse("news_more_user_posts") + "?page_name=news",
             HTTP_X_REQUESTED_WITH='XMLHttpRequest')
         self.failUnlessEqual(response.status_code, 200)
         self.assertNotContains(response, "Testing AJAX response 0.")
@@ -124,7 +125,7 @@ class NewsFunctionalTestCase(TransactionTestCase):
         for i in range(1, DEFAULT_POST_COUNT + 1):
             self.assertContains(response, "Testing AJAX response %d" % i)
 
-        response = self.client.get(reverse("news_more_posts") +
+        response = self.client.get(reverse("news_more_user_posts") +
                                    ("?last_post=%d&page_name=news" % second_post.id),
             HTTP_X_REQUESTED_WITH='XMLHttpRequest')
         self.assertContains(response, "Testing AJAX response 0.")

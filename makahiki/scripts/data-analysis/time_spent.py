@@ -401,17 +401,6 @@ def calculate_admin_time():
     admin_file.close()
 
 
-def calculate_canopy_time():
-    users = User.objects.filter(profile__canopy_member=True, is_staff=False)
-    canopy_date = '2011-10-31 17:50:40'  # Time last canopy notification went
-    # out.
-    for user in users:
-        logs = MakahikiLog.objects.filter(remote_user=user.username).order_by(
-            'request_time')
-        total_time = _time_spent(logs, start_date=canopy_date)
-        canopy_time = _page_time('/canopy', logs, start_date=canopy_date)
-        print '%d,%d,%d' % (user.id, canopy_time, total_time)
-
 if __name__ == "__main__":
     calculate_user_time()
     # calculate_admin_time()

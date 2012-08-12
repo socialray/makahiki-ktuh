@@ -1,6 +1,10 @@
 """Predicates providing information about the state of the current player."""
+import datetime
 from apps.managers.challenge_mgr import challenge_mgr
+from apps.managers.player_mgr.models import Profile
+from apps.managers.score_mgr.models import ScoreboardEntry
 from apps.widgets.badges.models import BadgeAward
+from apps.widgets.resource_goal.models import EnergyGoal
 
 
 def has_points(user, points):
@@ -52,3 +56,40 @@ def change_theme(user):
         return False
     else:
         return theme != challenge_mgr.get_challenge().theme
+
+
+def daily_energy_goal_count(user, count):
+    """Returns True if the number of consecutively meeting daily energy goal equals to count."""
+    team = user.get_profile().team
+    if team:
+        goals = EnergyGoal.objects.filter(team=team, goal_status='Below the goal').order_by("date")
+        if goals:
+            date = goals[0].date
+            count = 0
+            for goal in goals:
+                if (goal.date - date) == datetime.timedelta(days=1):
+                    count += 1
+                else:
+                    count = 0
+
+                if count == 2:
+                    return True
+
+                date = goal.date
+
+    return False
+
+
+def referring_count(user, count):
+    """Returns True if the user have referred at least [count] new players."""
+    return Profile.objects.filter(referring_user=user).count() >= count
+
+
+def team_member_point_percent(user, points, percent):
+    """Returns True if the user's team has at least [percent] members got at least [points]."""
+    team = user.get_profile().team
+    point_member_count = team.profile_set.count() * percent / 100
+    if team:
+        return ScoreboardEntry.objects.filter(profile__team=team,
+                                       points__gte=points).count >= point_member_count
+    return False

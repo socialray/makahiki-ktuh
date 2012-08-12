@@ -17,14 +17,14 @@
         "pk": 2,
         "model": "prizes.prize",
         "fields": {
-            "title": "Cupcake Extravaganza",
+            "title": "Bubbies Certificate",
             "round_name": "Round 1",
-            "image": "media/prizes/hokulani.2.jpg",
-            "award_to": "team_overall",
-            "value": 125,
+            "image": "media/prizes/bubbies-logo.2.jpg",
+            "award_to": "individual_team",
+            "value": 5,
             "competition_type": "points",
-            "short_description": "Cupcakes by Hokulani Bakery for the lounge that earns the most points during the week of Round 1.",
-            "long_description": "Many people believe Hokulani bakes Honolulu's best selection of cupcakes: carrot cake, coconut, snicker doodle, lilikoi, red velvet guava, vanilla, even lychee (when in season)! \r\n\r\nTo win this cupcake party, your lounge members must earn more points than any other lounge across all four towers during the week of Round 1. "
+            "short_description": "$5 Bubbies Gift Certificate for the individual who earns the most points in each lounge during the week of Round 1.",
+            "long_description": "This gift certificate will score you one free ice cream cone from Bubbie's Ice Cream, just a short walk from the residence halls and one of the best ice cream parlors in Hawaii. \r\n\r\nTo win this $5 gift certificate, you must earn more points than any other person in your lounge during the week of Round 1. "
         }
     },
     {
@@ -45,14 +45,14 @@
         "pk": 4,
         "model": "prizes.prize",
         "fields": {
-            "title": "Bubbies Certificate",
+            "title": "Cupcake Extravaganza",
             "round_name": "Round 1",
-            "image": "media/prizes/bubbies-logo.2.jpg",
-            "award_to": "individual_team",
-            "value": 5,
+            "image": "media/prizes/hokulani.2.jpg",
+            "award_to": "team_overall",
+            "value": 125,
             "competition_type": "points",
-            "short_description": "$5 Bubbies Gift Certificate for the individual who earns the most points in each lounge during the week of Round 1.",
-            "long_description": "This gift certificate will score you one free ice cream cone from Bubbie's Ice Cream, just a short walk from the residence halls and one of the best ice cream parlors in Hawaii. \r\n\r\nTo win this $5 gift certificate, you must earn more points than any other person in your lounge during the week of Round 1. "
+            "short_description": "Cupcakes by Hokulani Bakery for the lounge that earns the most points during the week of Round 1.",
+            "long_description": "Many people believe Hokulani bakes Honolulu's best selection of cupcakes: carrot cake, coconut, snicker doodle, lilikoi, red velvet guava, vanilla, even lychee (when in season)! \r\n\r\nTo win this cupcake party, your lounge members must earn more points than any other lounge across all four towers during the week of Round 1. "
         }
     },
     {

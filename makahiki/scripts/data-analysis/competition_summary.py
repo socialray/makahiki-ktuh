@@ -42,10 +42,8 @@ def competition_summary():
     with open(sys.argv[1], "w") as out:
         for team in Team.objects.all():
             posts = team.post_set.filter(style_class="user_post").count()
-            canopy_members = team.profile_set.filter(canopy_member=True)\
-            .count()
-            out.write("%s,%d,%d,%d\n" % (
-                team.name, team.points(), posts, canopy_members))
+            out.write("%s,%d,%d\n" % (
+                team.name, team.points(), posts))
 
 
 if __name__ == "__main__":

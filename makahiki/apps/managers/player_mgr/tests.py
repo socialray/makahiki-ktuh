@@ -96,6 +96,12 @@ class ProfileLeadersTests(TransactionTestCase):
 
 class ProfileUnitTests(TransactionTestCase):
     """profile unit test"""
+    def setUp(self):
+        """
+        test case setup
+        """
+        test_utils.set_competition_round()
+
     def testDisplayNameUnique(self):
         """
         test displayname uniqueness.

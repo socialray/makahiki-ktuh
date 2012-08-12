@@ -45,7 +45,7 @@ class RafflePrizesTestCase(TransactionTestCase):
             "Your total raffle tickets: 0 Allocated right now: 0 Available: 0",
             msg_prefix="User should not have any raffle tickets.")
         deadline = challenge_mgr.get_round_info()["end"]
-        date_string = deadline.strftime("%B %d, %Y, %I:%M ")
+        date_string = deadline.strftime("%b. %d, %Y, %I:%M ")
         date_string = re.sub(r"\b0", "", date_string)
         self.assertContains(response, "Deadline for Round 2 submissions: " + date_string,
             msg_prefix="Raffle should have the correct deadline.")
