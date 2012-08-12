@@ -19,95 +19,99 @@ class LoginMiddleware(object):
     def process_request(self, request):
         """Check the competition period and that setup is completed."""
 
+        user = request.user
+        if not user.is_authenticated():
+            return None
+        else:
+            path = request.path
+            pattern = "^/(home\/restricted|admin|about|log|account|site_media|favicon.ico)/"
+            if re.compile(pattern).match(path):
+                return None
+
+        # now the user is authenticated and going to the non-trivial pages.
         # load the db settings if not done yet.
         challenge_mgr.init()
 
         response = self.check_competition_period(request)
         if response is None:
             response = self.check_setup_completed(request)
-
-        if response is None:
-            response = self.track_login(request)
-
-        if response is None and "badges" in challenge_mgr.get_enabled_widgets():
-            self.award_possible_badges(request)
+            if response is None:
+                response = self.track_login(request)
+                if response is None:
+                    self.award_possible_badges(request)
 
         return response
 
     def track_login(self, request):
         """Checks if the user is logged in and updates the tracking field."""
-        user = request.user
-        if user.is_authenticated():
-            profile = request.user.get_profile()
-            last_visit = request.user.get_profile().last_visit_date
-            today = datetime.date.today()
+        profile = request.user.get_profile()
+        last_visit = request.user.get_profile().last_visit_date
+        today = datetime.date.today()
 
-            # Look for a previous login.
-            if not last_visit:
-                try:
-                    entry = DailyStatus.objects.get(date=today.isoformat())
-                    entry.daily_visitors = entry.daily_visitors + 1
-                except ObjectDoesNotExist:
-                    entry = DailyStatus(date=today.isoformat(), daily_visitors=1)
-                entry.save()
+        # Look for a previous login.
+        if not last_visit:
+            try:
+                entry = DailyStatus.objects.get(date=today.isoformat())
+                entry.daily_visitors = entry.daily_visitors + 1
+            except ObjectDoesNotExist:
+                entry = DailyStatus(date=today.isoformat(), daily_visitors=1)
+            entry.save()
 
-            if last_visit and (today - last_visit) == datetime.timedelta(
-                days=1):
-                profile.last_visit_date = today
-                profile.daily_visit_count += 1
-                profile.save()
-                try:
-                    entry = DailyStatus.objects.get(date=today.isoformat())
-                    entry.daily_visitors = entry.daily_visitors + 1
-                except ObjectDoesNotExist:
-                    entry = DailyStatus(date=today.isoformat(), daily_visitors=1)
-                entry.save()
-            elif not last_visit or (today - last_visit) > datetime.timedelta(
-                days=1):
-                # Reset the daily login count.
-                profile.last_visit_date = today
-                profile.daily_visit_count = 1
-                profile.save()
+        if last_visit and (today - last_visit) == datetime.timedelta(days=1):
+            profile.last_visit_date = today
+            profile.daily_visit_count += 1
+            profile.save()
+            try:
+                entry = DailyStatus.objects.get(date=today.isoformat())
+                entry.daily_visitors = entry.daily_visitors + 1
+            except ObjectDoesNotExist:
+                entry = DailyStatus(date=today.isoformat(), daily_visitors=1)
+            entry.save()
+        elif not last_visit or (today - last_visit) > datetime.timedelta(
+            days=1):
+            # Reset the daily login count.
+            profile.last_visit_date = today
+            profile.daily_visit_count = 1
+            profile.save()
+
         return None
 
     def check_setup_completed(self, request):
         """ Check to see if setup has been completed."""
         user = request.user
         path = request.path
-        if user.is_authenticated():
-            profile = user.get_profile()
+        profile = user.get_profile()
 
-            # We need to check if the user is going to the home page so we don't
-            # get caught in a redirect loop. We do need to filter out requests
-            # for CSS and other resources.
-            pattern = "^/(home|admin|log|about|account|tc|site_media|media|favicon.ico)/"
+        # We need to check if the user is going to the home page so we don't
+        # get caught in a redirect loop. We do need to filter out requests
+        # for CSS and other resources.
+        pattern = "^/(home|admin|log|about|account|tc|site_media|media|favicon.ico)/"
 
-            if not profile.setup_complete and \
-               not re.compile(pattern).match(path):
-                return HttpResponseRedirect(reverse("home_index"))
+        if not profile.setup_complete and \
+           not re.compile(pattern).match(path):
+            return HttpResponseRedirect(reverse("home_index"))
+
         return None
 
     def check_competition_period(self, request):
         """Checks if we are still in the competition. If the user is logged in,
         they are redirected to a competition status page.
         """
-        if request.user.is_authenticated():
-            path = request.path
+        path = request.path
+        pattern = "^/(home\/restricted|admin|about|log|account|site_media|media|favicon.ico)/"
+        staff_user = request.user.is_staff or request.session.get('staff', False)
 
-            pattern = "^/(home\/restricted|admin|about|log|account|site_media|media|favicon.ico)/"
+        if not staff_user and \
+           not re.compile(pattern).match(path) and \
+           not challenge_mgr.in_competition():
+            return HttpResponseRedirect(reverse("home_restricted"))
 
-            staff_user = request.user.is_staff or request.session.get('staff', False)
-            if not staff_user and \
-               not re.compile(pattern).match(path) and \
-               not challenge_mgr.in_competition():
-                return HttpResponseRedirect(reverse("home_restricted"))
         return None
 
     def award_possible_badges(self, request):
         """award any possible badges for a login user."""
-        user = request.user
-        if user.is_authenticated():
+        if "badges" in challenge_mgr.get_enabled_widgets():
             from apps.widgets.badges import badges
-            badges.award_possible_badges(user)
+            badges.award_possible_badges(request.user)
 
         return None

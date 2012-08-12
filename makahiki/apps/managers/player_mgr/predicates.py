@@ -91,5 +91,5 @@ def team_member_point_percent(user, points, percent):
     if team:
         point_member_count = team.profile_set.count() * percent / 100
         return ScoreboardEntry.objects.filter(profile__team=team,
-                                              points__gte=points).count >= point_member_count
+                                              points__gte=points).count() >= point_member_count
     return False
