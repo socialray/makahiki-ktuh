@@ -23,7 +23,7 @@ def view_codes(request):
     if "rows" in request.GET:
         per_page = int(request.GET['rows'])
 
-    codes = BonusPoint.objects.all()
+    codes = BonusPoint.objects.order_by('pk')
     if len(codes) == 0:
         raise Http404
 
