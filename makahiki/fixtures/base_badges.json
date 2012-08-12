@@ -10,7 +10,7 @@
             "priority": 112,
             "theme": "3",
             "points": 10,
-            "award_condition": "False",
+            "award_condition": "team_member_point_percent(75, 75)",
             "slug": "mega-team",
             "name": "Mega Team"
         }
@@ -26,7 +26,7 @@
             "priority": 113,
             "theme": "2",
             "points": 10,
-            "award_condition": "False",
+            "award_condition": "team_member_point_percent(50, 50)",
             "slug": "super-team",
             "name": "Super Team"
         }
@@ -58,7 +58,7 @@
             "priority": 131,
             "theme": "5",
             "points": 20,
-            "award_condition": "False",
+            "award_condition": "referring_count(30)",
             "slug": "ultra-referrer",
             "name": "Ultra Referrer"
         }
@@ -74,7 +74,7 @@
             "priority": 132,
             "theme": "4",
             "points": 20,
-            "award_condition": "False",
+            "award_condition": "referring_count(20)",
             "slug": "mega-referrer",
             "name": "Mega Referrer"
         }
@@ -90,7 +90,7 @@
             "priority": 133,
             "theme": "3",
             "points": 20,
-            "award_condition": "False",
+            "award_condition": "referring_count(10)",
             "slug": "super-referrer",
             "name": "Super Referrer"
         }
@@ -106,7 +106,7 @@
             "priority": 111,
             "theme": "4",
             "points": 10,
-            "award_condition": "False",
+            "award_condition": "team_member_point_percent(90, 90)",
             "slug": "ultra-team",
             "name": "Ultra Team"
         }
@@ -122,7 +122,7 @@
             "priority": 140,
             "theme": "2",
             "points": 20,
-            "award_condition": "False",
+            "award_condition": "social_bonus_count(5)",
             "slug": "super-social",
             "name": "Super Social"
         }
@@ -138,7 +138,7 @@
             "priority": 150,
             "theme": "1",
             "points": 20,
-            "award_condition": "False",
+            "award_condition": "completed_level(4)",
             "slug": "level-4-master",
             "name": "Level 4 Master"
         }
@@ -154,7 +154,7 @@
             "priority": 151,
             "theme": "5",
             "points": 20,
-            "award_condition": "False",
+            "award_condition": "completed_level(3)",
             "slug": "level-3-master",
             "name": "Level 3 Master"
         }
@@ -170,7 +170,7 @@
             "priority": 152,
             "theme": "4",
             "points": 20,
-            "award_condition": "False",
+            "award_condition": "completed_level(2)",
             "slug": "level-2-master",
             "name": "Level 2 Master"
         }
@@ -186,7 +186,7 @@
             "priority": 153,
             "theme": "3",
             "points": 20,
-            "award_condition": "False",
+            "award_condition": "completed_level(1)",
             "slug": "level-1-master",
             "name": "Level 1 Master"
         }
@@ -298,7 +298,7 @@
             "priority": 170,
             "theme": "5",
             "points": 10,
-            "award_condition": "False",
+            "award_condition": "daily_energy_goal_count(3)",
             "slug": "energy-hat-trick",
             "name": "Energy Hat Trick"
         }
