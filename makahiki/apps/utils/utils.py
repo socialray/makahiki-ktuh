@@ -60,14 +60,17 @@ def get_player_mgr_predicates():
 def eval_predicates(predicates, user):
     """Returns the boolean evaluation result of the predicates against the user."""
 
-    user_predicates = predicates.replace("(", "(user,")
+    ALLOW_DICT = {"True": True, "False": False, "user": user}
+    ALLOW_DICT.update(get_player_mgr_predicates())
+    ALLOW_DICT.update(get_challenge_mgr_predicates())
+    ALLOW_DICT.update(get_smartgrid_predicates())
 
-    allow_dict = {"True": True, "False": False, "user": user}
-    allow_dict.update(get_player_mgr_predicates())
-    allow_dict.update(get_challenge_mgr_predicates())
-    allow_dict.update(get_smartgrid_predicates())
+    for key in ALLOW_DICT:
+        if "%s(" % key in predicates:
+            predicates = predicates.replace("%s(" % key, "%s(user," % key)
 
-    return eval(user_predicates, {"__builtins__": None}, allow_dict)
+    print predicates
+    return eval(predicates, {"__builtins__": None}, ALLOW_DICT)
 
 
 def validate_predicates(predicates):
@@ -101,4 +104,9 @@ def validate_form_predicates(predicates):
         if type(result) != type(True):
             raise forms.ValidationError("Expected boolean value but got %s" % type(result))
     except Exception:
-        raise forms.ValidationError("Received exception: %s" % sys.exc_info()[0])
+        info = sys.exc_info()
+        if len(info) > 1:
+            raise forms.ValidationError("Received exception: %s:%s" % (sys.exc_info()[0],
+                                        sys.exc_info()[1]))
+        else:
+            raise forms.ValidationError("Received exception: %s" % sys.exc_info()[0])
