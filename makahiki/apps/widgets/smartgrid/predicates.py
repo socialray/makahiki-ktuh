@@ -13,23 +13,27 @@ def completed_all_of(user, category_slug=None, action_type=None, resource=None, 
     """Returns true if completed all of the specified type."""
 
     if category_slug:
-        return user.actionmember_set.filter(action__category__slug=category_slug).count() ==\
-            Action.objects.filter(category__slug=category_slug).count()
+        count = Action.objects.filter(category__slug=category_slug).count()
+        return not count and \
+               user.actionmember_set.filter(action__category__slug=category_slug).count() == count
 
     if action_type:
-        return user.actionmember_set.filter(action__type=action_type).count() ==\
-            Action.objects.filter(type=action_type).count()
+        count = Action.objects.filter(type=action_type).count()
+        return not count and \
+               user.actionmember_set.filter(action__type=action_type).count() == count
 
     if resource:
-        return user.actionmember_set.filter(action__related_resource=resource).count() ==\
-            Action.objects.filter(related_resource=resource).count()
+        count = Action.objects.filter(related_resource=resource).count()
+        return not count and \
+               user.actionmember_set.filter(action__related_resource=resource).count() == count
 
     if level_name:
-        return user.actionmember_set.filter(action__level__name=level_name).count() ==\
-           Action.objects.filter(level__name=level_name).count()
+        count = Action.objects.filter(level__name=level_name).count()
+        return not count and \
+               user.actionmember_set.filter(action__level__name=level_name).count() == count
 
-    return user.actionmember_set.all().count() ==\
-           Action.objects.all().count()
+    count = Action.objects.all().count()
+    return not count and user.actionmember_set.all().count() == count
 
 
 def completed_some_of_level(user, some=1, level_name=None):
@@ -124,27 +128,27 @@ def approved_all_of(user, category_slug=None, action_type=None, resource=None, l
     """Returns true if all actions of the specified type is approved."""
 
     if category_slug:
-        return user.actionmember_set.filter(action__category__slug=category_slug,
-                                            approval_status="approved").count() ==\
-               Action.objects.filter(category__slug=category_slug).count()
+        count = Action.objects.filter(category__slug=category_slug).count()
+        return not count and user.actionmember_set.filter(action__category__slug=category_slug,
+                                            approval_status="approved").count() == count
 
     if action_type:
-        return user.actionmember_set.filter(action__type=action_type,
-                                            approval_status="approved").count() ==\
-               Action.objects.filter(type=action_type).count()
+        count = Action.objects.filter(type=action_type).count()
+        return not count and user.actionmember_set.filter(action__type=action_type,
+                                            approval_status="approved").count() == count
 
     if resource:
-        return user.actionmember_set.filter(action__related_resource=resource,
-                                            approval_status="approved").count() ==\
-               Action.objects.filter(related_resource=resource).count()
+        count = Action.objects.filter(related_resource=resource).count()
+        return not count and user.actionmember_set.filter(action__related_resource=resource,
+                                            approval_status="approved").count() == count
 
     if level_name:
-        return user.actionmember_set.filter(action__level__name=level_name,
-                                            approval_status="approved").count() ==\
-               Action.objects.filter(level__name=level_name).count()
+        count = Action.objects.filter(level__name=level_name).count()
+        return not count and user.actionmember_set.filter(action__level__name=level_name,
+                                            approval_status="approved").count() == count
 
-    return user.actionmember_set.filter(approval_status="approved").count() ==\
-           Action.objects.all().count()
+    count = Action.objects.all().count()
+    return not count and user.actionmember_set.filter(approval_status="approved").count() == count
 
 
 def social_bonus_count(user, count):
