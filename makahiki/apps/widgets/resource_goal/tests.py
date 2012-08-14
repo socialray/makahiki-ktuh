@@ -8,6 +8,7 @@ from django.test import TransactionTestCase
 from django.contrib.auth.models import User
 
 from apps.managers.team_mgr.models import Team
+from apps.utils import test_utils
 from apps.widgets.resource_goal import resource_goal
 from apps.widgets.resource_goal.models import EnergyGoalSetting, EnergyBaselineDaily
 from apps.managers.resource_mgr.models import EnergyUsage
@@ -17,6 +18,8 @@ class TeamEnergyGoalTest(TransactionTestCase):
     """Team Energy Goal Test"""
     def setUp(self):
         """setup"""
+        test_utils.set_competition_round()
+
         group = Group.objects.create(name="Test Group")
         group.save()
         self.team = Team.objects.create(

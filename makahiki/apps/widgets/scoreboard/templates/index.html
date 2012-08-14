@@ -105,39 +105,6 @@
             </div>
         </div>
         {% endif %}
-        <div class="item">
-            <div class="content-box-title set-width-outer-width">
-                 Participation ({{ round_name }})
-                {% if not view_objects.scoreboard.no_carousel %}
-                   <a href="#" style="float: right">
-                       <img src="{{ STATIC_URL}}images/icons/icon-help-sm.png"
-                            width="20" align="center"
-                            title="Click to get help about this window"
-                            onclick="toggleHelp(event, 'widget', 'points-scoreboard'); return false;" />
-                   </a>
-                {% endif %}
-            </div>
-            <div class="set-width-outer-width">
-            <table class="table table-striped">
-                <thead>
-                    <tr>
-                        <th class="column-number" width="10%">Rank</th>
-                        <th class="column-text" width="75%">{{ TEAM_LABEL.capitalize }}</th>
-                        <th class="column-number" width="15%">Participation</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {% for f in standings.team_participation %}
-                    <tr>
-                        <td class="column-number" width="10%">{{ forloop.counter }}</td>
-                        <td class="column-text" width="75%">{{ f }}</td>
-                        <td class="column-number" width="15%">{{ f.active_participation }}%</td>
-                    </tr>
-                    {% endfor %}
-                </tbody>
-            </table>
-            </div>
-        </div>
         {% endfor %}
         {% if not view_objects.scoreboard.no_carousel %}
         </div>

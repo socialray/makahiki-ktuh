@@ -1,6 +1,7 @@
 """Celery Task definitions for smartgrid game."""
 
 from celery.task import task
+from apps.widgets.participation import participation
 from apps.widgets.smartgrid import smartgrid
 
 
@@ -9,6 +10,7 @@ def send_reminders():
     """send reminders."""
     smartgrid.send_reminders()
     smartgrid.check_new_submissions()
+    participation.award_participation()
 
 
 @task

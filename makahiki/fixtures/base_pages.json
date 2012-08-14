@@ -160,6 +160,16 @@
         }
     },
     {
+        "pk": 62,
+        "model": "challenge_mgr.pagesetting",
+        "fields": {
+            "widget": null,
+            "game": 8,
+            "enabled": true,
+            "page": 2
+        }
+    },
+    {
         "pk": 43,
         "model": "challenge_mgr.pagesetting",
         "fields": {
@@ -625,10 +635,19 @@
         }
     },
     {
-        "pk": 6,
+        "pk": 8,
         "model": "challenge_mgr.gameinfo",
         "fields": {
             "priority": 6,
+            "enabled": true,
+            "name": "Participation Game"
+        }
+    },
+    {
+        "pk": 6,
+        "model": "challenge_mgr.gameinfo",
+        "fields": {
+            "priority": 7,
             "enabled": true,
             "name": "Quest Game Mechanics"
         }
@@ -637,7 +656,7 @@
         "pk": 7,
         "model": "challenge_mgr.gameinfo",
         "fields": {
-            "priority": 7,
+            "priority": 8,
             "enabled": true,
             "name": "Badge Game Mechanics"
         }
@@ -766,6 +785,15 @@
             "game": 7,
             "enabled": true,
             "widget": "badge_scoreboard"
+        }
+    },
+    {
+        "pk": 17,
+        "model": "challenge_mgr.gamesetting",
+        "fields": {
+            "game": 8,
+            "enabled": true,
+            "widget": "participation"
         }
     }
 ]

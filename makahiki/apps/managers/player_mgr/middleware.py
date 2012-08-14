@@ -19,19 +19,25 @@ class LoginMiddleware(object):
     def process_request(self, request):
         """Check the competition period and that setup is completed."""
 
+        # load the db settings if not done yet.
+        challenge_mgr.init()
+
         user = request.user
         if not user.is_authenticated():
             return None
         else:
             path = request.path
+
+            # if user logged in and go to landing page, re-direct to home page
+            if path.startswith("/landing/"):
+                return HttpResponseRedirect(reverse("home_index"))
+
+            # pass through for trivial requests
             pattern = "^/(home\/restricted|admin|about|log|account|site_media|favicon.ico)/"
             if re.compile(pattern).match(path):
                 return None
 
         # now the user is authenticated and going to the non-trivial pages.
-        # load the db settings if not done yet.
-        challenge_mgr.init()
-
         response = self.check_competition_period(request)
         if response is None:
             response = self.check_setup_completed(request)

@@ -5,9 +5,6 @@ from apps.managers.challenge_mgr import challenge_mgr
 from apps.managers.score_mgr.models import ScoreSetting, ScoreboardEntry, PointsTransaction
 
 
-admin.site.register(ScoreSetting)
-
-
 class PointsTransactionAdmin(admin.ModelAdmin):
     """PointsTransaction administrator interface definition."""
     list_display = ["user", "transaction_date", "points", "message"]
@@ -20,6 +17,15 @@ class ScoreboardEntryAdmin(admin.ModelAdmin):
     list_display = ["round_name", "profile", "points", "last_awarded_submission"]
 
 admin.site.register(ScoreboardEntry, ScoreboardEntryAdmin)
+
+
+class ScoreSettingAdmin(admin.ModelAdmin):
+    """PointsTransaction administrator interface definition."""
+    list_display = ["setup_points", "referral_bonus_points", "active_threshold_points",
+                    "signup_bonus_points", "noshow_penalty_points", "feedback_bonus_points", ]
+
+admin.site.register(ScoreSetting, ScoreSettingAdmin)
+
 
 challenge_mgr.register_site_admin_model("Challenge", ScoreSetting)
 challenge_mgr.register_sys_admin_model("Logs", PointsTransaction)

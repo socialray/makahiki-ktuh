@@ -63,15 +63,19 @@ def completed_some_of(user, some=1, category_slug=None, action_type=None, resour
 def completed_level(user, lvl=1):
     """Returns true if the user has performed all activities successfully, and
       attempted all commitments."""
-    num_completed_activities = \
-    user.actionmember_set.filter(action__type='activity', action__level__priority=lvl).count()
-    num_attempted_commitments = \
-    user.actionmember_set.filter(action__type='commitment', action__level__priority=lvl).count()
+    num_completed_activities = user.actionmember_set.filter(action__type='activity',
+                                                            action__level__priority=lvl).count()
+    num_attempted_commitments = user.actionmember_set.filter(action__type='commitment',
+                                                             action__level__priority=lvl).count()
     num_level_activities = Action.objects.filter(type='activity', level__priority=lvl).count()
     num_level_commitments = Action.objects.filter(type='commitment', level__priority=lvl).count()
-    ret = (num_completed_activities == num_level_activities) and \
-    (num_attempted_commitments == num_level_commitments)
-    return ret
+
+    # check if there is any activity or commitment
+    if not num_level_activities and not num_level_activities:
+        return False
+
+    return num_completed_activities == num_level_activities and \
+           num_attempted_commitments == num_level_commitments
 
 
 def unlock_on_date(user, date_string):
