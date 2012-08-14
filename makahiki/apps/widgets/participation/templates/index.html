@@ -1,0 +1,97 @@
+{% with team_participation=view_objects.participation.team_participation %}
+<div id="outer-box" class="content-box">
+            <div class="content-box-title">
+                 Active Participation Game ({{ CURRENT_ROUND_INFO.name }})
+                   <a href="#" style="float: right">
+                       <img src="{{ STATIC_URL}}images/icons/icon-help-sm.png"
+                            width="20" align="center"
+                            title="Click to get help about this window"
+                            onclick="toggleHelp(event, 'widget', 'participation-game'); return false;" />
+                   </a>
+            </div>
+            <h4 class="content-box-subtitle">100% participation (10 extra points)</h4>
+            <table class="table table-striped">
+                <thead>
+                <tr>
+                    <td width="4%"></td>
+                    <th width="80%">{{ TEAM_LABEL.capitalize }}</th>
+                    <th class="column-number" width="10%">Participation</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for f in team_participation %}
+                    {% if f.participation == 100 %}
+                        <tr>
+                            <td></td>
+                            <td>{% if f.team == user.get_profile.team %}<b>{% endif %}{{ f.team }}</td>
+                            <td class="column-number">{% if f.team == user.get_profile.team %}<b>{% endif %}{{ f.participation }}%</td>
+                        </tr>
+                    {% endif %}
+                {% endfor %}
+                </tbody>
+            </table>
+            <h4 class="content-box-subtitle">75% participation (5 extra points)</h4>
+            <table class="table table-striped">
+                <thead>
+                <tr>
+                    <td width="4%"></td>
+                    <th width="80%">{{ TEAM_LABEL.capitalize }}</th>
+                    <th class="column-number" width="10%">Participation</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for f in team_participation %}
+                    {% if f.participation >= 75 and f.participation < 100 %}
+                        <tr>
+                            <td></td>
+                            <td>{% if f.team == user.get_profile.team %}<b>{% endif %}{{ f.team }}</td>
+                            <td class="column-number">{% if f.team == user.get_profile.team %}<b>{% endif %}{{ f.participation }}%</td>
+                        </tr>
+                    {% endif %}
+                {% endfor %}
+                </tbody>
+            </table>
+            <h4 class="content-box-subtitle">50% participation (5 points)</h4>
+            <table class="table table-striped">
+                <thead>
+                <tr>
+                    <td width="4%"></td>
+                    <th width="80%">{{ TEAM_LABEL.capitalize }}</th>
+                    <th class="column-number" width="10%">Participation</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for f in team_participation %}
+                    {% if f.participation >= 50 and f.participation < 75 %}
+                        <tr>
+                            <td></td>
+                            <td>{% if f.team == user.get_profile.team %}<b>{% endif %}{{ f.team }}</td>
+                            <td class="column-number">{% if f.team == user.get_profile.team %}<b>{% endif %}{{ f.participation }}%</td>
+                        </tr>
+                    {% endif %}
+                {% endfor %}
+                </tbody>
+            </table>
+            <h4 class="content-box-subtitle">Below 50% participation</h4>
+            <table class="table table-striped">
+                <thead>
+                <tr>
+                    <td width="4%"></td>
+                    <th width="80%">{{ TEAM_LABEL.capitalize }}</th>
+                    <th class="column-number" width="10%">Participation</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for f in team_participation %}
+                    {% if f.participation < 50 %}
+                        <tr>
+                            <td></td>
+                            <td>{% if f.team == user.get_profile.team %}<b>{% endif %}{{ f.team }}</td>
+                            <td class="column-number">{% if f.team == user.get_profile.team %}<b>{% endif %}{{ f.participation }}%</td>
+                        </tr>
+                    {% endif %}
+                {% endfor %}
+                </tbody>
+            </table>
+</div>
+{% endwith %}

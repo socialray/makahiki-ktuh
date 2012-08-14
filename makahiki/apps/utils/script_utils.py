@@ -114,7 +114,8 @@ def load_fixtures(manage_command, fixture_path, prefix):
             fixture = os.path.join(fixture_path, name)
             if manage_command.startswith("heroku"):
                 fixture = os.path.join("makahiki", fixture)
-            os.system("%s loaddata %s" % (manage_command, fixture))
+            print "loading fixture %s..." % name
+            os.system("%s loaddata -v 0 %s" % (manage_command, fixture))
 
 
 def load_data(manage_command, instance_type, fixture_path):
@@ -123,15 +124,17 @@ def load_data(manage_command, instance_type, fixture_path):
     print "loading base data..."
     load_fixtures(manage_command, fixture_path, "base_")
 
-    if instance_type == "demo":
+    if instance_type == "default":
+        print "setting up default data..."
+        load_fixtures(manage_command, fixture_path, "default_")
+    elif instance_type == "demo":
         print "setting up demo data..."
         load_fixtures(manage_command, fixture_path, "demo_")
         # setup 2 user per team, and 1 one-week round
         os.system("%s setup_test_data all 2 1" % manage_command)
         # change the commitment duration to 1 day
         os.system("%s setup_test_data commitment_durations 1" % manage_command)
-
-    if instance_type == "test":
+    elif instance_type == "test":
         print "setting up test data..."
         load_fixtures(manage_command, fixture_path, "test_")
         # setup 2 user per team, and 3 one-week round

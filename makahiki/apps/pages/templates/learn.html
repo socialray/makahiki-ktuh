@@ -15,23 +15,20 @@
             <!-- left column -->
             <div class="span7">
                 {% if view_objects.smartgrid %}
-                <div>
                     {% include "widgets/smartgrid/templates/index.html" %}
-                </div>
+                {% endif %}
+                {% if view_objects.upcoming_events %}
+                    {% include "widgets/upcoming_events/templates/index.html" %}
                 {% endif %}
             </div>
             <!-- right column -->
             <div class="span5">
-                {% if view_objects.upcoming_events %}
-                <div>
-                    {% include "widgets/upcoming_events/templates/index.html" %}
-                </div>
-                {% endif %}
-                {% if view_objects.bonus_points %}
-                    {% include "widgets/bonus_points/templates/index.html" %}
-                {% endif %}
+
                 {% if view_objects.scoreboard %}
                     {% include "widgets/scoreboard/templates/index.html" %}
+                {% endif %}
+                {% if view_objects.participation %}
+                    {% include "widgets/participation/templates/index.html" %}
                 {% endif %}
             </div>
         </div>

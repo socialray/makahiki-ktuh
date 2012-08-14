@@ -38,5 +38,14 @@
             "name": "waste",
             "unit": "ton"
         }
+    },
+    {
+        "pk": 1,
+        "model": "participation.participationsetting",
+        "fields": {
+            "points_50_percent": 5,
+            "points_75_percent": 5,
+            "points_100_percent": 10
+        }
     }
 ]

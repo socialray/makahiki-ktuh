@@ -1,4 +1,5 @@
 """The manager for managing team."""
+import datetime
 from django.db.models.aggregates import Count
 from apps.managers.challenge_mgr import challenge_mgr
 from apps.managers.score_mgr import score_mgr
@@ -70,3 +71,25 @@ def team_active_participation(num_results=None, round_name=None):
             participation.append(t)
 
     return participation
+
+
+def award_member_points(team, points, reason):
+    """Award points to the members of the team."""
+    count = 0
+    for profile in team.profile_set.all():
+        if profile.setup_complete:
+            today = datetime.datetime.today()
+            # Hack to get around executing this script at midnight.  We want to award
+            # points earlier to ensure they are within the round they were completed.
+            if today.hour == 0:
+                today = today - datetime.timedelta(hours=1)
+
+            date = "%d/%d/%d" % (today.month, today.day, today.year)
+            profile.add_points(points, today, "%s for %s" % (reason, date))
+            profile.save()
+            count += 1
+    print '%d users in %s are awarded %s points for %s.' % (
+        count,
+        team,
+        points,
+        reason)

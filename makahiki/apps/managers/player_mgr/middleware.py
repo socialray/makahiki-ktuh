@@ -19,6 +19,9 @@ class LoginMiddleware(object):
     def process_request(self, request):
         """Check the competition period and that setup is completed."""
 
+        # load the db settings if not done yet.
+        challenge_mgr.init()
+
         user = request.user
         if not user.is_authenticated():
             return None
@@ -29,9 +32,6 @@ class LoginMiddleware(object):
                 return None
 
         # now the user is authenticated and going to the non-trivial pages.
-        # load the db settings if not done yet.
-        challenge_mgr.init()
-
         response = self.check_competition_period(request)
         if response is None:
             response = self.check_setup_completed(request)
