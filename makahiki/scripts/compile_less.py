@@ -28,6 +28,7 @@ def main(argv):
 
     page_names = ['landing',
                   'status',
+                  'admin-base',
                   'admin']
     less_path = "static/less"
     os.chdir(less_path)
