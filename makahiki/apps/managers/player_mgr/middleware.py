@@ -27,6 +27,12 @@ class LoginMiddleware(object):
             return None
         else:
             path = request.path
+
+            # if user logged in and go to landing page, re-direct to home page
+            if path.startswith("/landing/"):
+                return HttpResponseRedirect(reverse("home_index"))
+
+            # pass through for trivial requests
             pattern = "^/(home\/restricted|admin|about|log|account|site_media|favicon.ico)/"
             if re.compile(pattern).match(path):
                 return None
