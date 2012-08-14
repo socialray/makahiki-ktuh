@@ -8,10 +8,9 @@ def supply(request, page_name):
 
     _ = request
     _ = page_name
-    num_results = 10
-    team_participation = TeamParticipation.objects.all()[:num_results]
+    team_participation = TeamParticipation.objects.all()
     if not team_participation:
-        team_participation = Team.objects.all()[:num_results]
+        team_participation = Team.objects.all()
         for t in team_participation:
             t.team = t
             t.participation = 0
