@@ -28,7 +28,8 @@
                 {% for f in standings.team_standings %}
                     <tr>
                         <td class="column-number" width="10%">{{ forloop.counter }}</td>
-                        <td class="column-text" width="75%">{{ f.profile__team__name }}</td>
+                        <td class="column-text" width="75%">{% if view_objects.scoreboard.profile.team.name == f.profile__team__name %}<b>{% endif %}
+                        {{ f.profile__team__name }}{% if view_objects.scoreboard.profile.team.name == f.profile__team__name %}</b>{% endif %}</td>
                         <td class="column-number" width="15%">{{ f.points }}</td>
                     </tr>
                 {% endfor %}
