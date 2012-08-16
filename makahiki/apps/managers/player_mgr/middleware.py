@@ -51,7 +51,6 @@ class LoginMiddleware(object):
         """Checks if the user is logged in and updates the tracking field."""
         profile = request.user.get_profile()
         last_visit = request.user.get_profile().last_visit_date
-        print last_visit
         today = datetime.date.today()
 
         if last_visit:
@@ -59,7 +58,6 @@ class LoginMiddleware(object):
         else:
             day_diff = datetime.timedelta(days=30)
 
-        print day_diff
         if day_diff > datetime.timedelta(days=0):
             # if it is the first visit of the day
             if day_diff == datetime.timedelta(days=1):
