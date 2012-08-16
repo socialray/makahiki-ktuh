@@ -15,7 +15,7 @@
         "fields": {
             "priority": 2,
             "name": "Level 2",
-            "unlock_condition": "completed_some_of_level(2, \"Level 1\") and completed_action(\"power-energy\")",
+            "unlock_condition": "completed_level(1)",
             "unlock_condition_text": "Level 2 can be unlocked by viewing all Level 1 videos and doing two Level 1 commitments."
         }
     },
@@ -25,7 +25,7 @@
         "fields": {
             "priority": 3,
             "name": "Level 3",
-            "unlock_condition": "completed_some_of_level(2, \"Level 2\") or True",
+            "unlock_condition": "unlock_on_date(\"09/16/12\")",
             "unlock_condition_text": "Level 3 will be unlocked at the start of Round 4 (Sept 17)"
         }
     },
@@ -35,7 +35,7 @@
         "fields": {
             "priority": 4,
             "name": "Level 4",
-            "unlock_condition": "True",
+            "unlock_condition": "completed_level(3)",
             "unlock_condition_text": "Level 4 can be unlocked by viewing all Level 3 videos, the take-survey activity, and doing 2 commitments from Level 3."
         }
     },
@@ -45,7 +45,7 @@
         "fields": {
             "priority": 5,
             "name": "Level 5",
-            "unlock_condition": "True",
+            "unlock_condition": "unlock_on_date(\"10/01/12\")",
             "unlock_condition_text": "Level 5 will be unlocked on the start of Round 3 (Oct 1)"
         }
     },
@@ -55,7 +55,7 @@
         "fields": {
             "priority": 6,
             "name": "Level 6",
-            "unlock_condition": "True",
+            "unlock_condition": "unlock_on_date(\"12/31/12\")",
             "unlock_condition_text": "Level 6 will be unlocked on January 1st."
         }
     },
@@ -65,7 +65,7 @@
         "fields": {
             "priority": 7,
             "name": "Level 7",
-            "unlock_condition": "True",
+            "unlock_condition": "unlock_on_date(\"02/28/13\")",
             "unlock_condition_text": "Level 7 will be unlocked on March 1st."
         }
     },
