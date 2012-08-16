@@ -12,7 +12,7 @@ def supply(request, page_name):
        :return: empty dictionary."""
     _ = page_name
 
-    return get_badge_catalog(request)
+    return get_awarded_badges(request)
 
 
 @login_required
@@ -25,6 +25,13 @@ def badge_catalog(request):
         }, context_instance=RequestContext(request))
 
 
+def get_awarded_badges(request):
+    """returns the awarded badge for the user."""
+    user = request.user
+    profile = user.get_profile()
+    return profile.badgeaward_set.order_by("-badge__priority")
+
+
 def get_badge_catalog(request):
     """Returns the badge catalog."""
 
@@ -33,11 +40,8 @@ def get_badge_catalog(request):
     awarded_badges = []
     locked_badges = []
 
-    for awarded in BadgeAward.objects.filter(profile=profile):
+    for awarded in get_awarded_badges(request):
         awarded_badges.append(awarded.badge)
-
-    awarded_badges = sorted(awarded_badges, key=lambda badge: badge.priority)
-    awarded_badges.reverse()
 
     for badge in Badge.objects.order_by('-priority'):
         if not badge in awarded_badges:

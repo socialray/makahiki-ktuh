@@ -1,7 +1,10 @@
-{% load avatar_tags %} 
+{% load avatar_tags %}
 {% if user.is_authenticated %}
+{% load cache %}
+{% cache 600 RIB user.username %}
+
 {% with user.get_profile as profile %}
-{% with user.get_profile.team as team %}
+{% with profile.team as team %}
 <div id="info-bar-wide" class="container-fluid makahiki-box info-bar">
     <div class="row-fluid">
             <div class="span1">
@@ -115,4 +118,5 @@ $(document).ready(function() {
 </script>
 {% endwith %}
 {% endwith %}
+{% endcache %}
 {% endif %}

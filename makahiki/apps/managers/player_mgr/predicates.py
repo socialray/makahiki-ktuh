@@ -89,7 +89,10 @@ def team_member_point_percent(user, points, percent):
     """Returns True if the user's team has at least [percent] members got at least [points]."""
     team = user.get_profile().team
     if team:
-        point_member_count = team.profile_set.count() * percent / 100
-        return ScoreboardEntry.objects.filter(profile__team=team,
-                                              points__gte=points).count() >= point_member_count
+        current_round = challenge_mgr.get_round_name()
+        point_count = ScoreboardEntry.objects.filter(profile__team=team,
+                                                     points__gte=points,
+                                                     round_name=current_round,
+                                                     ).count()
+        return  point_count * 100 / team.profile_set.count() >= percent
     return False

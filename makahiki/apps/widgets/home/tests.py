@@ -13,6 +13,9 @@ from apps.managers.challenge_mgr.models import RoundSetting
 
 from apps.managers.player_mgr.models import Profile
 from apps.utils import test_utils
+from apps.widgets.help.models import HelpTopic
+from apps.widgets.smartgrid import SETUP_WIZARD_ACTIVITY
+from apps.widgets.smartgrid.models import Activity
 
 
 class HomeFunctionalTestCase(TransactionTestCase):
@@ -68,17 +71,19 @@ class CompetitionMiddlewareTestCase(TransactionTestCase):
 
 class SetupWizardFunctionalTestCase(TransactionTestCase):
     """setup widzard test cases."""
-    fixtures = ["test_smartgrid.json", "base_help.json"]
 
     def setUp(self):
         """setup."""
         test_utils.set_competition_round()
+        self.user = User.objects.create_user("user", "user@test.com", password="changeme")
 
-        self.user = User.objects.create_user("user",
-                                             "user@test.com",
-                                             password="changeme")
+        # create the term help-topic
+        HelpTopic.objects.create(title="", slug="terms-and-conditions", category="faq", contents="")
+
+        # create the setup activity
+        Activity.objects.create(slug=SETUP_WIZARD_ACTIVITY, name="", title="", duration=5)
+
         challenge_mgr.register_page_widget("home", "home")
-
         self.client.login(username="user", password="changeme")
 
     def testDisplaySetupWizard(self):

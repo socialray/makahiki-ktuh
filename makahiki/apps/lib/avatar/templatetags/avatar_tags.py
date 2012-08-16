@@ -35,7 +35,7 @@ def avatar_url(user, size=80, first_login=False):
                 md5_constructor(user.email).hexdigest(),
                 urllib.urlencode({'s': str(size)}),)
         else:
-            if score_mgr.player_points(user.get_profile()) > 0:
+            if user.get_profile().setup_profile:
                 return AVATAR_DEFAULT_YES_URL
             else:
                 if size > 60:

@@ -1,6 +1,5 @@
 {% load avatar_tags %} 
 {% load cache %}
-{# {% cache 600 infobar request.user.username %} #}
   {% with user.get_profile as profile %}
     <div>
             <h4>{{profile.name}}</h4>
@@ -46,4 +45,3 @@
         Check back later.
     </div>
     {% endfor %}    
-{# {% endcache %} #}

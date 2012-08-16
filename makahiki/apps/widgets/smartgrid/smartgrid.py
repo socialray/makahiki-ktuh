@@ -89,7 +89,7 @@ def get_action_members(action):
 def get_level_actions(user):
     """Return the level list with the action info in categories"""
     levels = cache_mgr.get_cache('smartgrid-levels-%s' % user.username)
-    if not levels:
+    if levels is None:
         levels = []
         for level in Level.objects.all().order_by("priority"):
             level.is_unlock = utils.eval_predicates(level.unlock_condition, user)
@@ -111,9 +111,8 @@ def get_level_actions(user):
             level.is_complete = completed_level(user, level.priority)
             levels.append(level)
 
-        # Cache the categories for an hour (or until they are invalidated)
-        cache_mgr.set_cache('smartgrid-levels-%s' % user,
-            levels, 60 * 60)
+        # Cache the categories for 30 minutes (or until they are invalidated)
+        cache_mgr.set_cache('smartgrid-levels-%s' % user, levels, 1800)
 
     return levels
 
@@ -152,29 +151,32 @@ def get_current_commitment_members(user):
 
 
 def get_available_golow_actions(user, related_resource):
-    """Retrieves only the golow activities that a user can participate in (excluding events)."""
+    """Retrieves only the golow activities that a user can participate in."""
 
-    actions = Action.objects.exclude(
-        actionmember__user=user,
-    ).filter(
-        Q(expire_date__isnull=True) | Q(expire_date__gte=datetime.date.today()),
-        related_resource=related_resource,
-        pub_date__lte=datetime.date.today(),
-    ).order_by("type", "priority")
+    golow_actions = cache_mgr.get_cache('golow_actions-%s' % user.username)
+    if golow_actions is None:
+        actions = Action.objects.exclude(
+            actionmember__user=user,
+        ).filter(
+            Q(expire_date__isnull=True) | Q(expire_date__gte=datetime.date.today()),
+            related_resource=related_resource,
+            pub_date__lte=datetime.date.today(),
+        ).order_by("type", "priority")
 
-    # pick one activity per type, until reach NUM_GOLOW_ACTIONS
-    action_type = None
-    golow_actions = []
-    for action in actions:
-        if action_type == action.type:
-            continue
+        # pick one activity per type, until reach NUM_GOLOW_ACTIONS
+        action_type = None
+        golow_actions = []
+        for action in actions:
+            if action_type == action.type:
+                continue
 
-        if is_unlock(user, action):
-            golow_actions.append(action)
-            action_type = action.type
+            if is_unlock(user, action):
+                golow_actions.append(action)
+                action_type = action.type
 
-            if len(golow_actions) == NUM_GOLOW_ACTIONS:
-                break
+                if len(golow_actions) == NUM_GOLOW_ACTIONS:
+                    break
+        cache_mgr.set_cache('golow_actions-%s' % user.username, golow_actions, 1800)
 
     return golow_actions
 
@@ -192,7 +194,7 @@ def afterPublished(user, action_slug):
 def is_unlock(user, action):
     """Returns the unlock status of the user action."""
     levels = cache_mgr.get_cache('smartgrid-levels-%s' % user.username)
-    if not levels:
+    if levels is None:
         return eval_unlock(user, action)
 
     for level in levels:
@@ -240,7 +242,7 @@ def get_available_events(user):
     """Retrieves only the events that a user can participate in."""
 
     events = cache_mgr.get_cache('user_events-%s' % user.username)
-    if not events:
+    if events is None:
         events = Event.objects.filter(
             Q(expire_date__isnull=True) | Q(expire_date__gte=datetime.date.today()),
             pub_date__lte=datetime.date.today(),
@@ -253,8 +255,8 @@ def get_available_events(user):
                 unlock_events.append(event)
 
         events = unlock_events
-        # Cache the user_event for a day
-        cache_mgr.set_cache('user_events-%s' % user.username, events, 60 * 60)
+        # Cache the user_event
+        cache_mgr.set_cache('user_events-%s' % user.username, events, 1800)
 
     return events
 
@@ -262,7 +264,8 @@ def get_available_events(user):
 def get_next_available_event(user):
     """retrieves the next available event as of current time."""
 
-    for event in get_available_events(user):
+    events = get_available_events(user)
+    for event in events:
         if event.event_date > datetime.datetime.today():
             return [event, ]
 

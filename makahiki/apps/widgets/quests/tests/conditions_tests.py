@@ -442,7 +442,7 @@ class QuestConditionsTest(TransactionTestCase):
         profile.daily_visit_count = 3
         profile.save()
         badge = badges.get_badge("three-peater")
-        badges.award_badge(user=self.user, badge=badge)
+        badges.award_badge(profile=profile, badge=badge)
         self.assertTrue(badge_awarded(self.user, "three-peater"),
             "User should have been awarded the three-peater badge.")
         self.assertTrue(self.quest in possibly_completed_quests(self.user),

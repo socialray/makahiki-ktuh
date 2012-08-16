@@ -1,4 +1,5 @@
 """Implements the quest widget."""
+from apps.managers.cache_mgr import cache_mgr
 
 from apps.widgets.quests import MAX_AVAILABLE_QUESTS
 
@@ -25,12 +26,23 @@ def possibly_completed_quests(user):
     return completed
 
 
+def get_quests_from_cache(user):
+    """
+    get the quests for the user and store in cache.
+    """
+    return_dict = cache_mgr.get_cache("get_quests-%s" % user.username)
+    if return_dict is None:
+        return_dict = get_quests(user)
+        cache_mgr.set_cache("get_quests-%s" % user.username, return_dict, 1800)
+    return return_dict
+
+
 def get_quests(user):
     """Loads the quests for the user.
        Returns a dictionary of two things:
-
          * The user's current quests (user_quests).
          * Quests the user can participate in (available_quests)."""
+
     return_dict = {}
 
     # Check for completed quests.

@@ -1,9 +1,10 @@
 {% load markup %}
 <div id="prizes-carousel" class="span12">
 
-{% for name, prizes in view_objects.prizes.prizes.items reversed %}
+{% for name, prizes in view_objects.prizes.prizes.items reversed%}
 {# note: This is NOT an extraneous div! These classes cannot go into the table! #}
-<div class="item">
+
+<div class="item {% if name != CURRENT_ROUND_INFO.name %}hide{% endif %}">
     <table class="table table-striped set-width-outer-width">
         <thead>
             <tr>
@@ -48,7 +49,7 @@
 </div>
 {% endfor %}
 </div>
-{% for name, prizes in view_objects.prizes.prizes.items reversed %}
+{% for name, prizes in view_objects.prizes.prizes.items %}
     {% for prize in prizes %}
        <!-- Modal Dialog stuff -->
        <div id="{{name|slugify}}-{{prize.title|slugify}}" class="modal hide fade">
@@ -65,7 +66,7 @@
            </div>
         </div>
     {% endfor %}
-{% endfor %}    
+{% endfor %}
 <center>
     <div id="nav" class="nav nav-page-list"> 
     {% for i in range  %} 

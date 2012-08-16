@@ -53,7 +53,7 @@ class RafflePrize(models.Model):
     def allocated_tickets(self, user=None):
         """Returns the number of tickets allocated to this prize.
            Takes an optional argument to return the number of tickets allocated by the user."""
-        query = self.raffleticket_set.filter(raffle_prize=self)
+        query = self.raffleticket_set
         if user:
             query = query.filter(user=user)
 

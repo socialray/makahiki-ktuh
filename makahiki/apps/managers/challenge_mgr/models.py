@@ -292,6 +292,11 @@ class PageSetting(models.Model):
     def __unicode__(self):
         return ""
 
+    def save(self, *args, **kwargs):
+        """Custom save method."""
+        super(PageSetting, self).save(*args, **kwargs)
+        cache_mgr.delete("enabled_widgets")
+
 
 class GameInfo(models.Model):
     """Defines the game info."""
@@ -311,6 +316,11 @@ class GameInfo(models.Model):
 
     def __unicode__(self):
         return self.name
+
+    def save(self, *args, **kwargs):
+        """Custom save method."""
+        super(GameInfo, self).save(*args, **kwargs)
+        cache_mgr.delete("enabled_widgets")
 
 
 class GameSetting(models.Model):
@@ -335,3 +345,8 @@ class GameSetting(models.Model):
 
     def __unicode__(self):
         return ""
+
+    def save(self, *args, **kwargs):
+        """Custom save method."""
+        super(GameSetting, self).save(*args, **kwargs)
+        cache_mgr.delete("enabled_widgets")

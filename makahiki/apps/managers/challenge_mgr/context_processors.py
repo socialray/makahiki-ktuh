@@ -21,6 +21,9 @@ def competition(request):
     available_events = None
     default_view_objects = None
     all_page_info = None
+    site_admin_models = None
+    sys_admin_models = None
+    game_admin_models = None
 
     challenge = challenge_mgr.get_challenge()
     css_theme = challenge.theme
@@ -32,7 +35,7 @@ def competition(request):
         all_page_info = challenge_mgr.all_page_info(user)
 
         if profile.team:
-            team_member_count = user.get_profile().team.profile_set.count()
+            team_member_count = profile.team.profile_set.count()
             team_count = Team.objects.count()
             overall_member_count = Profile.objects.count()
             available_events = smartgrid.get_next_available_event(user)
@@ -40,6 +43,11 @@ def competition(request):
         # override the site theme if there is any
         if profile.theme:
             css_theme = profile.theme
+
+        if page_name == "admin":
+            site_admin_models = challenge_mgr.get_site_admin_models()
+            sys_admin_models = challenge_mgr.get_sys_admin_models()
+            game_admin_models = challenge_mgr.get_game_admin_models()
 
     return {
         "CHALLENGE": challenge,
@@ -56,9 +64,9 @@ def competition(request):
         "DEFAULT_VIEW_OBJECTS": default_view_objects,
         "AVAILABLE_EVENTS": available_events,
         "ALL_PAGE_INFO": all_page_info,
-        "MAKAHIKI_SITE_ADMIN_MODELS": challenge_mgr.get_site_admin_models(),
-        "MAKAHIKI_SYS_ADMIN_MODELS": challenge_mgr.get_sys_admin_models(),
-        "MAKAHIKI_GAME_ADMIN_MODELS": challenge_mgr.get_game_admin_models(),
+        "MAKAHIKI_SITE_ADMIN_MODELS": site_admin_models,
+        "MAKAHIKI_SYS_ADMIN_MODELS": sys_admin_models,
+        "MAKAHIKI_GAME_ADMIN_MODELS": game_admin_models,
         "ACTIVE_PAGE": page_name
     }
 

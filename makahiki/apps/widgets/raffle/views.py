@@ -38,6 +38,10 @@ def supply(request, page_name):
         prizes = RafflePrize.objects.filter(
             round_name=current_round_info["name"]).order_by("-value")
 
+        for prize in prizes:
+            prize.total_tickets = prize.allocated_tickets()
+            prize.user_tickets = prize.allocated_tickets(user)
+
     return {
         "round_name": current_round_info["name"],
         "deadline": deadline,

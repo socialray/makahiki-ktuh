@@ -71,6 +71,9 @@ MIDDLEWARE_CLASSES = (
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
 
+    # comment out only for debug_toolbar
+    #'debug_toolbar.middleware.DebugToolbarMiddleware',
+
     'apps.lib.django_cas.middleware.CASMiddleware',
     'apps.managers.player_mgr.middleware.LoginMiddleware',
     'apps.managers.log_mgr.middleware.LoggingMiddleware',
@@ -79,13 +82,15 @@ MIDDLEWARE_CLASSES = (
     #always end with this for caching
     )
 
+# comment out only for debug_toolbar
+#INTERNAL_IPS = ('127.0.0.1',)
+
 ######################
 # AUTH settings
 ######################
 AUTHENTICATION_BACKENDS = (
     'django.contrib.auth.backends.ModelBackend',
     'apps.managers.auth_mgr.cas_backend.MakahikiCASBackend',
-    #'apps.managers.auth_mgr.ldap_backend.MakahikiLDAPBackend',
     )
 
 AUTH_PROFILE_MODULE = 'player_mgr.Profile'
@@ -143,6 +148,9 @@ INSTALLED_APPS = (
     'storages',
     'kombu.transport.django',
     'djcelery',
+
+    # comment out only for debug_toolbar
+    #'debug_toolbar',
 )
 
 ################################
@@ -319,7 +327,6 @@ class Challenge():
     competition_name = None
 
 CHALLENGE = Challenge()
-COMPETITION_ROUNDS = None
 
 ##########
 # Celery
@@ -432,12 +439,17 @@ MAKAHIKI_USE_LESS = env('MAKAHIKI_USE_LESS', '').lower() == "true"
 
 # LDAP settings
 MAKAHIKI_LDAP_BIND_DN = env('MAKAHIKI_LDAP_BIND_DN', '')
-"""[Required for LDAP services] Provide the Bind domain name."""
+"""[Required for LDAP services] Provide the Bind DN."""
 AUTH_LDAP_BIND_DN = MAKAHIKI_LDAP_BIND_DN
 
 MAKAHIKI_LDAP_BIND_PASSWORD = env('MAKAHIKI_LDAP_BIND_PWD', '')
 """[Required for LDAP services] Provide the Bind password."""
 AUTH_LDAP_BIND_PASSWORD = MAKAHIKI_LDAP_BIND_PASSWORD
+
+if AUTH_LDAP_BIND_DN and AUTH_LDAP_BIND_PASSWORD:
+    AUTHENTICATION_BACKENDS += (
+        'apps.managers.auth_mgr.ldap_backend.MakahikiLDAPBackend',
+        )
 
 MAKAHIKI_SECRET_KEY = env('MAKAHIKI_SECRET_KEY', '')
 """[Optional] Specifies the Django secret key setting.

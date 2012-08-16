@@ -15,12 +15,7 @@
         </div>
 
         {% if raffle.today < raffle.deadline %}
-            {% if raffle.prizes.count > 0 %}
-                {% include "raffle_table.html" %}
-            {% else %}
-                <h4 style="text-align: center">There are no raffle prizes for this round
-                    yet. Please check back later.</h4>
-            {% endif %}
+            {% include "raffle_table.html" %}
         {% else %}
             <h4 style="text-align: center">
                 The raffle is now over.

@@ -24,26 +24,7 @@
 </div>
 <script type="text/javascript">
     $(window).load(function() {
-    	 // executes when complete page is fully loaded, including all frames, objects and images
-        // Calculate the height of the items in the scoreboard.
-        // Fix the height of all items to that height.
-        var maxHeight = 45;
-        var height = 0;
-        $("#prizes-carousel .item").each(function(index, item) {
-          height = $(item).height();
-//           console.log("height of item is " + height);
-          if (height > maxHeight){
-            maxHeight = height;
-          }
-        });
-        
-//         console.log("maxHeight = " + maxHeight);
-        $("#outer-box").height(maxHeight + 10);
 
-        var outerWidth = $("#prizes-list").width();
-        $(".set-width-outer-width").each (function(index, item) {
-            item.style.width = outerWidth + "px";
-        });
         
 //       $("#prizes-carousel").carousel();
         $("#prizes-carousel").cycle({
@@ -52,20 +33,12 @@
           delay:  -1000,
           sync: true,
           pager: '#nav',
-          pause: 1          
+          pause: 2
         });
    	});
 
 
-    $(window).resize(function() {
-        var outerWidth = $("#prizes-list").width();
-//         console.log("Outer width is " + outerWidth);
-        $(".set-width-outer-width").each (function(index, item) {
-//          console.log("Setting " + item + "'s width to " + outerWidth);
-            item.style.width = outerWidth + "px";
-        });
-        
-    });    
+
 var togglePrize = function(event, name, title) {
     var modalElement = $('#' + name + '-' + title);
     // set up event logging
@@ -79,4 +52,3 @@ var togglePrize = function(event, name, title) {
     modalElement.modal('show');
 }   
 </script>
-

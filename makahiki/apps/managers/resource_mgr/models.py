@@ -1,6 +1,7 @@
 """The model for the resource manager."""
 import datetime
 from django.db import models
+from apps.managers.cache_mgr import cache_mgr
 
 from apps.managers.team_mgr.models import Team
 
@@ -34,6 +35,11 @@ class ResourceSetting(models.Model):
     class Meta:
         """Meta"""
         unique_together = ("name",)
+
+    def save(self, *args, **kwargs):
+        """Custom save method."""
+        super(ResourceSetting, self).save(*args, **kwargs)
+        cache_mgr.delete("resource_setting-%s" % self.name)
 
 
 class ResourceUsage(models.Model):

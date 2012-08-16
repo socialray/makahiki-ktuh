@@ -1,3 +1,6 @@
+{% load cache %}
+{% cache 1800 participation request.user.username %}
+
 {% with team_participation=view_objects.participation.team_participation %}
 <div id="outer-box" class="content-box">
             <div class="content-box-title">
@@ -95,3 +98,5 @@
             </table>
 </div>
 {% endwith %}
+
+{% endcache %}

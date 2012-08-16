@@ -45,8 +45,6 @@ class Avatar(models.Model):
             .exclude(id=self.id)
             avatars.update(primary=False)
 
-        # Invalidate avatar cache
-        cache_mgr.delete('avatar-%s' % self.user.username)
         super(Avatar, self).save(*args, **kwargs)
 
     def thumbnail_exists(self, size):

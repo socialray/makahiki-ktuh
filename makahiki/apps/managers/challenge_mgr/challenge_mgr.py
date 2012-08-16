@@ -27,15 +27,15 @@ _sys_admin_models = {}
 def init():
     """Initialize the challenge."""
 
-    #if settings.DEBUG:
-    #    import logging
+    if settings.DEBUG:
+        import logging
     #    logger = logging.getLogger('django.db.backends')
     #    logger.setLevel(logging.DEBUG)
     #    logger.addHandler(logging.StreamHandler())
 
-    #    logger = logging.getLogger('django_auth_ldap')
-    #    logger.addHandler(logging.StreamHandler())
-    #    logger.setLevel(logging.DEBUG)
+        logger = logging.getLogger('django_auth_ldap')
+        logger.addHandler(logging.StreamHandler())
+        logger.setLevel(logging.DEBUG)
 
     # set the CHALLENGE setting from DB or cache
     set_challenge_settings(get_challenge())
@@ -71,11 +71,10 @@ def info():
 
 def get_challenge():
     """returns the ChallengeSetting object, from cache if cache is enabled"""
-    #challenge = cache_mgr.get_cache('challenge')
-    #if not challenge:
-    #    challenge, _ = ChallengeSetting.objects.get_or_create(pk=1)
-    #    cache_mgr.set_cache('challenge', challenge)
-    challenge, _ = ChallengeSetting.objects.get_or_create(pk=1)
+    challenge = cache_mgr.get_cache('challenge')
+    if not challenge:
+        challenge, _ = ChallengeSetting.objects.get_or_create(pk=1)
+        cache_mgr.set_cache('challenge', challenge, 2592000)
     return challenge
 
 
@@ -124,43 +123,54 @@ def eval_page_unlock(user, page):
 
 def all_page_info(user):
     """Returns a list of all pages with their current lock state."""
-    all_pages = PageInfo.objects.exclude(name="home").order_by("priority")
-    for page in all_pages:
-        page.is_unlock = eval_page_unlock(user, page)
+    all_pages = cache_mgr.get_cache("all_page_info-%s" % user.username)
+    if not all_pages:
+        all_pages = PageInfo.objects.exclude(name="home").order_by("priority")
+        for page in all_pages:
+            page.is_unlock = eval_page_unlock(user, page)
+        cache_mgr.set_cache("all_page_info-%s" % user.username, all_pages, 1800)
+
     return all_pages
 
 
 def page_info(user, page_name):
     """Returns the specific page info object with its current lock state."""
-    page = PageInfo.objects.filter(name=page_name)
-    if page:
-        page = page[0]
-        page.is_unlock = eval_page_unlock(user, page)
-        return page
-    else:
-        return None
+    page = cache_mgr.get_cache("page_info-%s-%s" % (user.username, page_name))
+    if not page:
+        page = PageInfo.objects.filter(name=page_name)
+        if page:
+            page = page[0]
+            page.is_unlock = eval_page_unlock(user, page)
+            cache_mgr.set_cache("page_info-%s-%s" % (user.username, page_name), page, 1800)
+    return page
 
 
-def get_enabled_widgets(page_name=None):
+def get_enabled_widgets(page_name):
     """Returns the enabled widgets for the specified page, taking into account of the PageSetting
-    and GameSetting. if page_name is not specified, get all the enabled widgets from pageSetting
     and GameSetting."""
+    return get_all_enabled_widgets()[page_name]
 
-    widgets = []
 
-    if page_name:
-        page_setting = PageSetting.objects.filter(page__name=page_name, enabled=True)
-    else:
+def get_all_enabled_widgets():
+    """Returns the enabled widgets for each page, taking into account of the PageSetting
+    and GameSetting."""
+    page_widgets = cache_mgr.get_cache("enabled_widgets")
+    if page_widgets is None:
         page_setting = PageSetting.objects.filter(enabled=True)
+        page_widgets = {}
+        for ps in page_setting:
+            name = ps.page.name
+            if not name in page_widgets:
+                page_widgets[name] = []
 
-    for ps in page_setting:
-        if ps.widget:
-            widgets.append(ps.widget)
-        if ps.game and GameInfo.objects.filter(name=ps.game, enabled=True).count():
-            for gs in GameSetting.objects.filter(game=ps.game, enabled=True):
-                widgets.append(gs.widget)
-
-    return widgets
+            widgets = page_widgets[name]
+            if ps.widget:
+                widgets.append(ps.widget)
+            if ps.game and GameInfo.objects.filter(name=ps.game, enabled=True).count():
+                for gs in GameSetting.objects.filter(game=ps.game, enabled=True):
+                    widgets.append(gs.widget)
+        cache_mgr.set_cache("enabled_widgets", page_widgets, 2592000)
+    return page_widgets
 
 
 def register_page_widget(page_name, widget, label=None):
@@ -176,30 +186,24 @@ def available_widgets():
     return settings.INSTALLED_WIDGET_APPS
 
 
-def get_all_round_info_from_cache():
-    """Returns all the round information from cache if available."""
-    rounds = cache_mgr.get_cache('rounds')
-    if not rounds:
-        rounds = get_all_round_info()
-        cache_mgr.set_cache('rounds', rounds)
-    return rounds
-
-
 def get_all_round_info():
     """Returns a dictionary containing all the round information.
     example: {"Round 1": {"start": start_date, "end": end_date,},
               "competition_start": start_date,
               "competition_end": end_date}
     """
-    roundsettings = RoundSetting.objects.all()
-    if not roundsettings:
-        RoundSetting.objects.create()
+    rounds = cache_mgr.get_cache('rounds')
+    if not rounds:
         roundsettings = RoundSetting.objects.all()
-    rounds = {}
-    for r in roundsettings:
-        rounds[r.name] = {
-            "start": r.start,
-            "end": r.end, }
+        if not roundsettings:
+            RoundSetting.objects.create()
+            roundsettings = RoundSetting.objects.all()
+        rounds = {}
+        for r in roundsettings:
+            rounds[r.name] = {
+                "start": r.start,
+                "end": r.end, }
+        cache_mgr.set_cache('rounds', rounds, 2592000)
     return rounds
 
 

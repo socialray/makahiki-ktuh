@@ -11,6 +11,7 @@ from django.template import Template, Context
 from markdown import markdown
 
 # Notification Levels
+from apps.managers.cache_mgr import cache_mgr
 from apps.managers.challenge_mgr import challenge_mgr
 
 constants = message_constants
@@ -174,3 +175,8 @@ class UserNotification(models.Model):
                 msg.attach_alternative(html_message, "text/html")
 
             msg.send()
+
+    def save(self, *args, **kwargs):
+        """Custom save method."""
+        super(UserNotification, self).save(*args, **kwargs)
+        cache_mgr.delete("notification-%s" % self.recipient.username)

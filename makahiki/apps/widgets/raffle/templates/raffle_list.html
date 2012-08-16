@@ -2,7 +2,6 @@
 {% load markup %}
 
 {% for prize in raffle.prizes %}
-{% with prize|user_tickets:user as user_tickets %}
 <tr>
     <td class="raffle-prize">
         <a href="#raffle-{{prize.title|slugify}}-description" onclick="toggleRafflePrize(event,  'raffle-{{prize.title|slugify}}-description')" >
@@ -24,9 +23,9 @@
         </div>
     </td>
     <td class="number">{{ prize.value|currency }}</td>
-    <td class="number condensed-tickets">{{ user_tickets }} / {{prize.allocated_tickets}}</td>
-    <td class="number user-tickets">{{ user_tickets }}</td>
-    <td class="number total-tickets">{{ prize.allocated_tickets }}</td>
+    <td class="number condensed-tickets">{{ prize.user_tickets }} / {{prize.total_tickets}}</td>
+    <td class="number user-tickets">{{ prize.user_tickets }}</td>
+    <td class="number total-tickets">{{ prize.total_tickets }}</td>
     <td class="number user-odds">{# {{prize|user_odds:user}} #}</td>
     <td class="ticket-add-remove">
         {% if raffle.tickets.available > 0 %}
@@ -38,7 +37,7 @@
         {% else %}
             <div class="disabled ticket-add circle">+1</div>
         {% endif %}
-        {% if user_tickets > 0 %}
+        {% if prize.user_tickets > 0 %}
         <form action="{% url raffle_remove_ticket prize.id %}" method="POST">
             {% csrf_token %}
             <a class="enabled ticket-remove circle" href="#"
@@ -49,7 +48,6 @@
         {% endif %}
     </td>
 </tr>
-{% endwith %}
 {% endfor %}
 
 <script type='text/javascript'>

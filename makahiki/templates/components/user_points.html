@@ -1,6 +1,4 @@
-{% load cache %}
 
-{% cache 600 infobar request.user.username %}
 {% with user.get_profile as profile %}
 <div>
     <div class="rib-set-width-outer-width">
@@ -14,4 +12,3 @@
 </div>
 
 {% endwith %}
-{% endcache %}

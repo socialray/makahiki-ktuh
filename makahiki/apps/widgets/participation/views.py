@@ -8,6 +8,7 @@ def supply(request, page_name):
 
     _ = request
     _ = page_name
+
     team_participation = TeamParticipation.objects.all()
     if not team_participation:
         team_participation = Team.objects.all()

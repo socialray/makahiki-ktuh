@@ -45,16 +45,15 @@ def index(request):
     if not is_page_defined:
         raise Http404
 
-    # sets the active page
-    view_objects['active'] = page_name
-
     # get user resource rank and usage
-    energy_rank_info = resource_mgr.resource_team_rank_info(request.user.get_profile().team,
-                                                            "energy")
-    view_objects["energy_rank_info"] = energy_rank_info
-    water_rank_info = resource_mgr.resource_team_rank_info(request.user.get_profile().team,
-                                                           "water")
-    view_objects["water_rank_info"] = water_rank_info
+    team = request.user.get_profile().team
+    if team:
+        energy_page = challenge_mgr.page_info(request.user, "energy")
+        water_page = challenge_mgr.page_info(request.user, "water")
+        if energy_page and energy_page.is_unlock:
+            view_objects["energy_rank_info"] = resource_mgr.resource_team_rank_info(team, "energy")
+        if water_page and water_page.is_unlock:
+            view_objects["water_rank_info"] = resource_mgr.resource_team_rank_info(team, "water")
 
     return render_to_response("%s.html" % page_name, {
         "view_objects": view_objects,

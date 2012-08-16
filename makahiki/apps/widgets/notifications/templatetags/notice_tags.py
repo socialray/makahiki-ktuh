@@ -15,8 +15,9 @@ def mark_alerts_displayed(request, alerts):
     """
     for alert in alerts:
         log_mgr.write_log_entry(request, 200, "/slog/notifications/alert/%d/" % alert.pk)
+        alert.display_alert = False
+        alert.save()
 
-    alerts.update(display_alert=False)
     return ""
 
 # duration in seconds within which the time difference will be rendered as 'a moment ago'

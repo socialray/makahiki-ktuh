@@ -5,6 +5,7 @@ import datetime
 from django.core.urlresolvers import reverse
 from django.http import HttpResponseRedirect
 from apps.managers.challenge_mgr import challenge_mgr
+from apps.widgets.badges import badges
 from apps.widgets.status.models import DailyStatus
 from django.core.exceptions import ObjectDoesNotExist
 
@@ -43,8 +44,6 @@ class LoginMiddleware(object):
             response = self.check_setup_completed(request)
             if response is None:
                 response = self.track_login(request)
-                if response is None:
-                    self.award_possible_badges(request)
 
         return response
 
@@ -52,10 +51,27 @@ class LoginMiddleware(object):
         """Checks if the user is logged in and updates the tracking field."""
         profile = request.user.get_profile()
         last_visit = request.user.get_profile().last_visit_date
+        print last_visit
         today = datetime.date.today()
 
-        # Look for a previous login.
-        if not last_visit:
+        if last_visit:
+            day_diff = today - last_visit
+        else:
+            day_diff = datetime.timedelta(days=30)
+
+        print day_diff
+        if day_diff > datetime.timedelta(days=0):
+            # if it is the first visit of the day
+            if day_diff == datetime.timedelta(days=1):
+                # consecutive day visit, increase daily login count
+                profile.daily_visit_count += 1
+            else:
+                # gap day visit, reset the daily login count.
+                profile.daily_visit_count = 1
+            profile.last_visit_date = today
+            profile.save()
+
+            # increase the daily total visitor count
             try:
                 entry = DailyStatus.objects.get(date=today.isoformat())
                 entry.daily_visitors = entry.daily_visitors + 1
@@ -63,22 +79,8 @@ class LoginMiddleware(object):
                 entry = DailyStatus(date=today.isoformat(), daily_visitors=1)
             entry.save()
 
-        if last_visit and (today - last_visit) == datetime.timedelta(days=1):
-            profile.last_visit_date = today
-            profile.daily_visit_count += 1
-            profile.save()
-            try:
-                entry = DailyStatus.objects.get(date=today.isoformat())
-                entry.daily_visitors = entry.daily_visitors + 1
-            except ObjectDoesNotExist:
-                entry = DailyStatus(date=today.isoformat(), daily_visitors=1)
-            entry.save()
-        elif not last_visit or (today - last_visit) > datetime.timedelta(
-            days=1):
-            # Reset the daily login count.
-            profile.last_visit_date = today
-            profile.daily_visit_count = 1
-            profile.save()
+            # award possible badge if it is the first visit of the day
+            badges.award_possible_badges(profile)
 
         return None
 
@@ -111,13 +113,5 @@ class LoginMiddleware(object):
            not re.compile(pattern).match(path) and \
            not challenge_mgr.in_competition():
             return HttpResponseRedirect(reverse("home_restricted"))
-
-        return None
-
-    def award_possible_badges(self, request):
-        """award any possible badges for a login user."""
-        if "badges" in challenge_mgr.get_enabled_widgets():
-            from apps.widgets.badges import badges
-            badges.award_possible_badges(request.user)
 
         return None

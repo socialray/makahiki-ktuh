@@ -25,7 +25,7 @@ def score_setting():
     score = cache_mgr.get_cache('score_setting')
     if not score:
         score, _ = ScoreSetting.objects.get_or_create(pk=1)
-        cache_mgr.set_cache('score_setting', score)
+        cache_mgr.set_cache('score_setting', score, 2592000)
     return score
 
 
@@ -200,7 +200,7 @@ def player_add_points(profile, points, transaction_date, message, related_object
     _update_scoreboard_entry(profile, points, transaction_date)
 
     # Invalidate info bar cache.
-    cache_mgr.invalidate_info_bar_cache(profile.user)
+    cache_mgr.invalidate_template_cache("RIB", profile.user.username)
 
 
 def player_remove_points(profile, points, transaction_date, message, related_object=None):
@@ -224,7 +224,7 @@ def player_remove_points(profile, points, transaction_date, message, related_obj
     transaction.save()
 
     # Invalidate info bar cache.
-    cache_mgr.invalidate_info_bar_cache(profile.user)
+    cache_mgr.invalidate_template_cache("RIB", profile.user.username)
 
 
 def player_remove_related_points(profile, related_object):

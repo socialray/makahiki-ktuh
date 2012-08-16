@@ -1,6 +1,9 @@
 {% load markup %}
 
 {% if user.get_profile.setup_complete %}
+{% load cache %}
+{% cache 1800 home request.user.username %}
+
 <!-- Top Row-->
 <ul>
     {% for page in ALL_PAGE_INFO %}
@@ -21,6 +24,8 @@
       {% endif %}
     {% endfor %}
 </ul>
+
+{% endcache %}
 
 {% else %}
 <div class="first-login-content">

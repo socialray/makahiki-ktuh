@@ -1,4 +1,4 @@
-{% with awarded_badges=view_objects.badges.awarded_badges %}
+{% with awarded_badges=view_objects.badges %}
 <div class="content-box-title">
       My Badges
       <a href="#" style="float: right">
@@ -17,19 +17,24 @@
               Achievement
           </th>
       </tr> 
-      {% if awarded_badges.count > 0 %}
-          {% for awarded in awarded_badges %}
-              <tr>
-                  <td><div class="badge-theme-{{awarded.theme}}"><p>{{ awarded.label }}</p></div><div class="badge-name">&nbsp;&nbsp;{{ awarded.name }}</div></td>
-                  <td>{{ awarded.description }}</td>
-              </tr>
-          {% endfor %}
-      {% else %}
+      {% for awarded in awarded_badges %}
+          <tr>
+              <td>
+                  <div class="badge-theme-{{awarded.badge.theme}}">
+                    <p>{{ awarded.badge.label }}</p>
+                  </div>
+                  <div class="badge-name">
+                      &nbsp;&nbsp;{{ awarded.badge.name }}
+                  </div>
+              </td>
+              <td>{{ awarded.badge.description }}</td>
+          </tr>
+      {% empty %}
           <tr>
               <td colspan="3">You don't have any badges yet!</td>
           </tr>
-      {% endif %}
-  </table> 
+      {% endfor %}
+  </table>
 <div>
      <a href="{% url profile_badges %}" class="margin-one-third">See Badge Catalog</a>
   </div> 

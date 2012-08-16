@@ -6,35 +6,27 @@ from django.core.exceptions import ObjectDoesNotExist
 from django.db.models.aggregates import Sum
 import requests
 from requests.exceptions import Timeout
+from apps.managers.cache_mgr import cache_mgr
 from apps.managers.challenge_mgr import challenge_mgr
 from apps.managers.team_mgr.models import Team
 from apps.managers.resource_mgr.models import EnergyUsage, WaterUsage, ResourceSetting, \
     WasteUsage
 from xml.etree import ElementTree
-
-
-def init():
-    """Initialize the resource manager."""
-
-    if ResourceSetting.objects.count() == 0:
-        ResourceSetting.objects.create(name="energy", unit="kWh", winning_order="Ascending")
-        ResourceSetting.objects.create(name="water", unit="Gallon", winning_order="Ascending")
-        ResourceSetting.objects.create(name="waste", unit="Ton", winning_order="Descending")
-
-
-def resources_info():
-    """Returns the managed resource's name."""
-    init()
-    info = ""
-    for resource in ResourceSetting.objects.all():
-        info += resource.name + " : " + resource.unit + " : " + resource.winning_order + "\n"
-    return info
+from django.template.defaultfilters import slugify
 
 
 def get_resource_setting(name):
     """Returns the resource settings for the specified name."""
-    init()
-    return ResourceSetting.objects.get(name=name)
+    resource_setting = cache_mgr.get_cache("resource_setting-%s" % name)
+    if resource_setting is None:
+        if ResourceSetting.objects.count() == 0:
+            ResourceSetting.objects.create(name="energy", unit="kWh", winning_order="Ascending")
+            ResourceSetting.objects.create(name="water", unit="Gallon", winning_order="Ascending")
+            ResourceSetting.objects.create(name="waste", unit="Ton", winning_order="Descending")
+
+        resource_setting = ResourceSetting.objects.get(name=name)
+        cache_mgr.set_cache("resource_setting-%s" % name, resource_setting, 2592000)
+    return resource_setting
 
 
 def team_resource_data(date, team, resource):
@@ -182,21 +174,30 @@ def _get_resource_usage(name):
 
 def resource_ranks(name, round_name=None):
     """Return the ranking of resource use for all teams."""
-    resource_usage = _get_resource_usage(name)
 
-    resource_setting = get_resource_setting(name)
-    if resource_setting.winning_order == "Ascending":
-        ordering = "total"
-    else:
-        ordering = "-total"
+    cache_key = "resource_ranks-%s-%s" % (name, slugify(round_name))
+    ranks = cache_mgr.get_cache(cache_key)
+    if ranks is None:
+        resource_usage = _get_resource_usage(name)
 
-    round_info = challenge_mgr.get_round_info(round_name)
-    if not round_info:
-        return None
+        resource_setting = get_resource_setting(name)
+        if resource_setting.winning_order == "Ascending":
+            ordering = "total"
+        else:
+            ordering = "-total"
 
-    ranks = resource_usage.objects.filter(
-        date__lt=round_info["end"].date).values("team__name").annotate(
-            total=Sum("usage")).order_by(ordering)
+        round_info = challenge_mgr.get_round_info(round_name)
+        if not round_info:
+            return None
+
+        usage_ranks = resource_usage.objects.filter(
+            date__lt=round_info["end"].date).values("team__name").annotate(
+                total=Sum("usage")).order_by(ordering)
+
+        ranks = []
+        for rank in usage_ranks:
+            ranks.append(rank)
+        cache_mgr.set_cache(cache_key, ranks, 3600)
     return ranks
 
 

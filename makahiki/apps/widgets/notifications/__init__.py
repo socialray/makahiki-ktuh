@@ -1,5 +1,6 @@
 """Provides the notification service."""
 import re
+from apps.managers.cache_mgr import cache_mgr
 
 from apps.widgets.notifications.models import UserNotification
 
@@ -18,23 +19,26 @@ def get_unread_notifications(user, limit=None):
     if not user:
         return None
 
-    notifications = {"has_more": False}
+    notifications = cache_mgr.get_cache("notification-%s" % user.username)
+    if notifications is None:
+        notifications = {"has_more": False}
 
-    # Find undisplayed alert notifications.
-    notifications.update({"alerts": get_user_alert_notifications(user)})
+        # Find undisplayed alert notifications.
+        notifications.update({"alerts": get_user_alert_notifications(user)})
 
-    # Get unread notifications
-    unread_notifications = user.usernotification_set.filter(
-        unread=True,).order_by("-level", "-created_at")
-    if limit:
-        if unread_notifications.count() > limit:
-            notifications.update({"has_more": True})
-        unread_notifications = unread_notifications[:limit]
+        # Get unread notifications
+        unread_notifications = user.usernotification_set.filter(
+            unread=True,).order_by("-level", "-created_at")
+        if limit:
+            if unread_notifications.count() > limit:
+                notifications.update({"has_more": True})
+            unread_notifications = unread_notifications[:limit]
 
-    for item in unread_notifications:
-        item.fb_contents = _strip_html_tag(item.contents)
-    notifications.update({"unread": unread_notifications})
+        for item in unread_notifications:
+            item.fb_contents = _strip_html_tag(item.contents)
+        notifications.update({"unread": unread_notifications})
 
+        cache_mgr.set_cache("notification-%s" % user.username, notifications, 1800)
     return notifications
 
 

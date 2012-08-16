@@ -18,6 +18,7 @@ from apps.managers.score_mgr import score_mgr
 from apps.managers.score_mgr.models import PointsTransaction
 from apps.managers.team_mgr.models import Post
 from apps.utils.utils import media_file_path
+from apps.widgets.badges import badges
 from apps.widgets.notifications.models import UserNotification
 from apps.managers.cache_mgr import cache_mgr
 from apps.widgets.smartgrid import NOSHOW_PENALTY_DAYS, SETUP_WIZARD_ACTIVITY
@@ -533,9 +534,9 @@ class ActionMember(models.Model):
 
                 self._handle_activity_notification(self.approval_status)
 
-                # generate notification if feedback is present
         self.post_to_wall()
         self.invalidate_cache()
+        badges.award_possible_badges(self.user.get_profile())
 
     def _award_points(self):
         """Custom save method to award points."""
@@ -717,10 +718,16 @@ class ActionMember(models.Model):
 
     def invalidate_cache(self):
         """Invalidate the categories cache."""
-        cache_mgr.delete('smartgrid-levels-%s' % self.user.username)
-        cache_mgr.delete('user_events-%s' % self.user.username)
-        cache_mgr.invalidate_team_avatar_cache(self.action, self.user)
-        cache_mgr.invalidate_commitments_cache(self.user)
+        username = self.user.username
+        cache_mgr.delete('smartgrid-levels-%s' % username)
+        cache_mgr.delete('user_events-%s' % username)
+        cache_mgr.delete('get_quests-%s' % username)
+        cache_mgr.delete('golow_actions-%s' % username)
+
+        team = self.user.get_profile().team
+        if team:
+            cache_mgr.invalidate_template_cache("team_avatar", self.action.id, team.id)
+        cache_mgr.invalidate_template_cache("commitments", username)
 
     def delete(self, using=None):
         """Custom delete method to remove the points for completed action."""
