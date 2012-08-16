@@ -36,7 +36,7 @@
     text-align: left;
 }
 
-.activity , .commitment , .event , .excursion, .filler {
+.activity , .commitment , .event , .excursion , .filler {
     height: 48px;
     border: 1px solid #000;
     border-radius: 8px;
@@ -82,14 +82,14 @@
     padding: 2px;
     position: relative;
     top: 50%;
-    margin-top:-6px
+    margin-top: -6px
 }
 
 .activity-legend {
     background-color: @sgg-activity-cell-bkg-color;
 }
 
-.activity-legend , .commitment-legend , .event-legend , .excursion-legend, .filler-legend {
+.activity-legend , .commitment-legend , .event-legend , .excursion-legend , .filler-legend {
     width: 12px;
     height: 12px;
     border: 1px solid #000;
@@ -108,7 +108,6 @@
     float: center;
     -moz-border-radius: 6px;
     -webkit-border-radius: 6px;
-//    font-weight: bold;
     text-align: center;
     line-height: 20px;
     display: block;
@@ -152,7 +151,7 @@
     background-color: @sgg-excursion-cell-bkg-color;
 }
 
-.filler, .filler-legend, .filler a {
+.filler , .filler-legend , .filler a {
     background-color: @sgg-filler-cell-bkg-color;
     color: @sgg-entry-font-color;
 }
@@ -170,5 +169,13 @@
 #task-reminder-form li {
     clear: both;
     padding-top: 15px;
+}
+
+@media (max-width: 640px) {
+    #sgg-levels-tab > li > a {
+        padding-left: 2px;
+        padding-right: 2px;
+        font-size: 11px;
+    }
 }
 
