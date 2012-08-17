@@ -1,7 +1,4 @@
-{% load cache %}
-{% cache 1800 participation request.user.username %}
-
-{% with team_participation=view_objects.participation.team_participation %}
+{% with p_settings=view_objects.participation.p_settings %}
 <div id="outer-box" class="content-box">
             <div class="content-box-title">
                  Active Participation Game ({{ CURRENT_ROUND_INFO.name }})
@@ -12,91 +9,23 @@
                             onclick="toggleHelp(event, 'widget', 'participation-game'); return false;" />
                    </a>
             </div>
-            <h4 class="content-box-subtitle">100% participation (10 extra points)</h4>
-            <table class="table table-striped">
-                <thead>
-                <tr>
-                    <td width="4%"></td>
-                    <th width="80%">{{ TEAM_LABEL.capitalize }}</th>
-                    <th class="column-number" width="10%">Participation</th>
-                </tr>
-                </thead>
-                <tbody>
-                {% for f in team_participation %}
-                    {% if f.participation == 100 %}
-                        <tr>
-                            <td></td>
-                            <td>{% if f.team == user.get_profile.team %}<b>{% endif %}{{ f.team }}</td>
-                            <td class="column-number">{% if f.team == user.get_profile.team %}<b>{% endif %}{{ f.participation }}%</td>
-                        </tr>
-                    {% endif %}
-                {% endfor %}
-                </tbody>
-            </table>
-            <h4 class="content-box-subtitle">75% participation (5 extra points)</h4>
-            <table class="table table-striped">
-                <thead>
-                <tr>
-                    <td width="4%"></td>
-                    <th width="80%">{{ TEAM_LABEL.capitalize }}</th>
-                    <th class="column-number" width="10%">Participation</th>
-                </tr>
-                </thead>
-                <tbody>
-                {% for f in team_participation %}
-                    {% if f.participation >= 75 and f.participation < 100 %}
-                        <tr>
-                            <td></td>
-                            <td>{% if f.team == user.get_profile.team %}<b>{% endif %}{{ f.team }}</td>
-                            <td class="column-number">{% if f.team == user.get_profile.team %}<b>{% endif %}{{ f.participation }}%</td>
-                        </tr>
-                    {% endif %}
-                {% endfor %}
-                </tbody>
-            </table>
-            <h4 class="content-box-subtitle">50% participation (5 points)</h4>
-            <table class="table table-striped">
-                <thead>
-                <tr>
-                    <td width="4%"></td>
-                    <th width="80%">{{ TEAM_LABEL.capitalize }}</th>
-                    <th class="column-number" width="10%">Participation</th>
-                </tr>
-                </thead>
-                <tbody>
-                {% for f in team_participation %}
-                    {% if f.participation >= 50 and f.participation < 75 %}
-                        <tr>
-                            <td></td>
-                            <td>{% if f.team == user.get_profile.team %}<b>{% endif %}{{ f.team }}</td>
-                            <td class="column-number">{% if f.team == user.get_profile.team %}<b>{% endif %}{{ f.participation }}%</td>
-                        </tr>
-                    {% endif %}
-                {% endfor %}
-                </tbody>
-            </table>
-            <h4 class="content-box-subtitle">Below 50% participation</h4>
-            <table class="table table-striped">
-                <thead>
-                <tr>
-                    <td width="4%"></td>
-                    <th width="80%">{{ TEAM_LABEL.capitalize }}</th>
-                    <th class="column-number" width="10%">Participation</th>
-                </tr>
-                </thead>
-                <tbody>
-                {% for f in team_participation %}
-                    {% if f.participation < 50 %}
-                        <tr>
-                            <td></td>
-                            <td>{% if f.team == user.get_profile.team %}<b>{% endif %}{{ f.team }}</td>
-                            <td class="column-number">{% if f.team == user.get_profile.team %}<b>{% endif %}{{ f.participation }}%</td>
-                        </tr>
-                    {% endif %}
-                {% endfor %}
-                </tbody>
-            </table>
+            <h4 class="content-box-subtitle">100% participation ({{ p_settings.points_100_percent }} points)</h4>
+                {% with participation=view_objects.participation.participation_100 %}
+                    {% include "participation.html" %}
+                {% endwith %}
+            <h4 class="content-box-subtitle">75% participation ({{ p_settings.points_75_percent }} points)</h4>
+                {% with participation=view_objects.participation.participation_75 %}
+                    {% include "participation.html" %}
+                {% endwith %}
+            <h4 class="content-box-subtitle">50% participation ({{ p_settings.points_50_percent }} points)</h4>
+                {% with participation=view_objects.participation.participation_50 %}
+                    {% include "participation.html" %}
+                {% endwith %}
+            {% with participation=view_objects.participation.participation_0 %}
+            {% if participation %}
+                <h4 class="content-box-subtitle">Below 50% participation</h4>
+                {% include "participation.html" %}
+            {% endif %}
+            {% endwith %}
 </div>
 {% endwith %}
-
-{% endcache %}

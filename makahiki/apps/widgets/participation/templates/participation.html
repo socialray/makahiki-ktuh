@@ -1,0 +1,26 @@
+<table class="table table-striped">
+    {% if not participation %}
+        <tr>
+            <td width="4%"></td>
+            <td>Be the first team to achieve this level</td>
+        </tr>
+    {% else %}
+        <thead>
+        <tr>
+            <td width="4%"></td>
+            <th width="80%">{{ TEAM_LABEL.capitalize }}</th>
+            <th class="column-number" width="10%">Participation</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for f in participation %}
+            <tr>
+                <td></td>
+                <td>{% if f.team == user.get_profile.team %}<b>{% endif %}{{ f.team }}</td>
+                <td class="column-number">{% if f.team == user.get_profile.team %}<b>{% endif %}{{ f.participation }}%</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    {% endif %}
+
+</table>
