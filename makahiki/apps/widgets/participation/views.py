@@ -43,7 +43,6 @@ def get_participations():
                 else:
                     return_dict["participation_0"].append(p)  # less than 50
         cache_mgr.set_cache("team_participation", return_dict, 3600)
-    print return_dict
     return return_dict
 
 

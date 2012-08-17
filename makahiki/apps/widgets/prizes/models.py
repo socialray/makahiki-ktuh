@@ -6,6 +6,7 @@ from apps.managers.resource_mgr import resource_mgr
 from apps.managers.team_mgr import team_mgr
 from apps.managers.team_mgr.models import Group, Team
 from apps.utils.utils import media_file_path
+from apps.widgets.resource_goal import resource_goal
 
 
 _MEDIA_LOCATION = "prizes"
@@ -23,7 +24,9 @@ class Prize(models.Model):
     AWARD_CRITERIA_CHOICES = (
         ("points", "Points"),
         ("energy", "Energy"),
+        ("energy_goal", "Energy Goal"),
         ("water", "Water"),
+        ("water_goal", "Water Goal"),
         )
 
     title = models.CharField(max_length=50, help_text="The title of your prize.")
@@ -83,10 +86,14 @@ class Prize(models.Model):
         """Return the prize leader."""
         if self.competition_type == "points":
             return self._points_leader(team)
-        if self.competition_type == "energy":
+        elif self.competition_type == "energy":
             return resource_mgr.resource_leader("energy", round_name=self.round_name)
-        if self.competition_type == "water":
+        elif self.competition_type == "energy_goal":
+            return resource_goal.resource_goal_leader("energy", round_name=self.round_name)
+        elif self.competition_type == "water":
             return resource_mgr.resource_leader("water", round_name=self.round_name)
+        elif self.competition_type == "water_goal":
+            return resource_goal.resource_goal_leader("water", round_name=self.round_name)
 
     def _points_leader(self, team=None):
         """Return the point leader."""

@@ -191,7 +191,7 @@ def resource_ranks(name, round_name=None):
             return None
 
         usage_ranks = resource_usage.objects.filter(
-            date__lt=round_info["end"].date).values("team__name").annotate(
+            date__lte=round_info["end"].date).values("team__name").annotate(
                 total=Sum("usage")).order_by(ordering)
 
         ranks = []

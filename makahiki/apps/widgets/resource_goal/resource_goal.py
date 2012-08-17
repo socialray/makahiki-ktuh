@@ -1,7 +1,10 @@
 """Implements the Daily Energy (or Water) Goal Game."""
 
 import datetime
-from django.db.models.aggregates import Count
+from django.db.models.aggregates import Count, Avg
+from django.template.defaultfilters import slugify
+from apps.managers.cache_mgr import cache_mgr
+from apps.managers.challenge_mgr import challenge_mgr
 from apps.managers.resource_mgr import resource_mgr
 from apps.managers.team_mgr.models import Team
 from apps.widgets.resource_goal.models import EnergyGoal, WaterGoal, WaterGoalSetting, \
@@ -114,13 +117,16 @@ def check_daily_resource_goal(team, resource):
     goal, _ = goal.objects.get_or_create(team=team, date=date)
 
     if goal and actual_usage:
-        if actual_usage <= goal_usage:
+        if actual_usage < goal_usage:
             # if already awarded, do nothing
             if goal.goal_status != "Below the goal":
                 goal.goal_status = "Below the goal"
-                goal_points = goal_settings.goal_points
+
+                # record the reduction percentage
+                goal.percent_reduction = (goal_usage - actual_usage) * 100 / goal_usage
 
                 # Award points to the members of the team.
+                goal_points = goal_settings.goal_points
                 for profile in team.profile_set.all():
                     if profile.setup_complete:
                         today = datetime.datetime.today()
@@ -161,11 +167,47 @@ def check_all_daily_resource_goals(resource):
         print 'No user are awarded daily goal points.'
 
 
-def resource_goal_ranks(resource):
+def resource_goal_ranks(resource, round_name=None):
     """Generate the scoreboard for resource goals."""
-    goal = _get_resource_goal(resource)
-    return goal.objects.filter(
-        goal_status="Below the goal"
-    ).values(
-        "team__name"
-    ).annotate(completions=Count("team")).order_by("-completions")
+    cache_key = "resource_goal_ranks-%s-%s" % (resource, slugify(round_name))
+    goal_ranks = cache_mgr.get_cache(cache_key)
+    if goal_ranks is None:
+        goal_ranks = []
+        goal = _get_resource_goal(resource)
+
+        round_info = challenge_mgr.get_round_info(round_name)
+        if not round_info:
+            return None
+
+        ranks = goal.objects.filter(
+            goal_status="Below the goal",
+            date__lte=round_info["end"].date).values("team__name").annotate(
+                completions=Count("team"),
+                average_reduction=Avg("percent_reduction")).order_by(
+                    "-completions", "-average_reduction")
+
+        total_count = Team.objects.count()
+        if ranks.count() != total_count:
+            for rank in ranks:
+                goal_ranks.append(rank)
+
+            for t in Team.objects.all():
+                if len(goal_ranks) == total_count:
+                    break
+
+                if not t.name in goal_ranks:
+                    rank = {"team__name": t.name,
+                            "completions": 0,
+                            "average_reduction": 0}
+                    goal_ranks.append(rank)
+        cache_mgr.set_cache(cache_key, goal_ranks, 3600 * 24)
+    return goal_ranks
+
+
+def resource_goal_leader(name, round_name=None):
+    """Returns the leader (team name) of the resource use."""
+    ranks = resource_goal_ranks(name, round_name)
+    if ranks:
+        return ranks[0]["team__name"]
+    else:
+        return None

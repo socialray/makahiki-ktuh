@@ -10,7 +10,7 @@ class GoalSettingsAdmin(admin.ModelAdmin):
 
 class GoalAdmin(admin.ModelAdmin):
     """EnergyGoal administrator interface definition."""
-    list_display = ["team", "date", "goal_status"]
+    list_display = ["team", "date", "goal_status", "percent_reduction", ]
 
 
 class BaselineDailyAdmin(admin.ModelAdmin):

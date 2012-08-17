@@ -19,21 +19,19 @@ def resource_supply(request, resource, page_name):
     user = request.user
     team = user.get_profile().team
     round_resource_ranks = {}
+    round_resource_goal_ranks = {}
 
     current_round = challenge_mgr.get_round_name()
     rounds = challenge_mgr.get_all_round_info()
     for key in rounds.keys():
         if key == current_round or page_name == "status":
             round_resource_ranks[key] = resource_mgr.resource_ranks(resource, key)
-
-    goals_scoreboard = resource_goal.resource_goal_ranks(resource)
+            round_resource_goal_ranks[key] = resource_goal.resource_goal_ranks(resource, key)
 
     resource_setting = resource_mgr.get_resource_setting(resource)
-    count = len(rounds) + 1
     return {
         "team": team,
         "resource": resource_setting,
-        "goals_scoreboard": goals_scoreboard,
+        "round_resource_goal_ranks": round_resource_goal_ranks,
         "round_resource_ranks": round_resource_ranks,
-        "range": count,
         }

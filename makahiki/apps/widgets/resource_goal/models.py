@@ -25,6 +25,10 @@ class ResourceGoal(models.Model):
         max_length=20,
         help_text="The status of the goal.")
 
+    percent_reduction = models.IntegerField(
+        default=0,
+        help_text="The percentage of reduction.")
+
     class Meta:
         """Meta"""
         abstract = True
