@@ -1,21 +1,21 @@
 {% load markup %}
 <div id="action-details" class="content-box">
-<div class="content-box-title">
-    <table>
-        <tr>
-            <td>About the {{ action.type }}</td>
-            <td width="1%">
-                <a href="#">
-                    <img src="{{ STATIC_URL}}images/icons/icon-help-sm.png"
-                         width="20" align="center"
-                         title="Click to get help about this window"
-                         onclick="toggleHelp(event, 'widget', '{{action.type}}-details'); return false;"
+    <div class="content-box-title">
+        <table>
+            <tr>
+                <td>About the {{ action.type }}</td>
+                <td width="1%">
+                    <a href="#">
+                        <img src="{{ STATIC_URL}}images/icons/icon-help-sm.png"
+                             width="20" align="center"
+                             title="Click to get help about this window"
+                             onclick="toggleHelp(event, 'widget', '{{action.type}}-details'); return false;"
                             /></a>
-            </td>
-        </tr>
-    </table>
-</div>
-<div class="content-box-contents">
+                </td>
+            </tr>
+        </table>
+    </div>
+    <div class="content-box-contents">
 {% if action.completed %}
     {% if action.member.approval_status == "approved" or action.member.award_date %}
         <div class="activity-task-details-info">
@@ -47,54 +47,43 @@
             {% include "widgets/action_feedback/templates/feedback_form.html" %}
         </div>
     {% endif %}
-
-
 {% endif %}
-
-
-<p/>
-<center><b>{{ action.title }}</b></center>
-
-<p/>
+        <p/>
+        <center><b>{{ action.title }}</b></center>
+        <p/>
 {% if action.image %}
-    <center><img src="{{ action.image.url }}" /> </center>
+        <center><img src="{{ action.image.url }}" /> </center>
 {% endif %}
-
-<p/>
+        <p/>
 {{ action.description|markdown }}
-
-<p/>
+        <p/>
 {% if action.video_id %}
     {% include "components/action_video.html" with action=action %}
 {% endif %}
-
 {% if action.embedded_widget %}
     {% include view_objects.embedded_widget_template %}
 {% endif %}
-
-<p/>
-<center>
-
+        <p/>
+        <center>
 {% if not action.completed %}              <!-- not done yet  -->
     {% block action_not_completed %} {% endblock %}
 {% else %}
     {% block action_completed_button %} {% endblock %}
 {% endif %}
-<br/> <br/>
-</center>
-<p>
-</div>
+            <br/> <br/>
+        </center>
+        <p/>
+        <div class="hidden" id="taskModal">
+            <div class="modal-header">
+                <h3>{{form.form_title}}</h3>
+            </div>
+            <div class="modal-body" id="modal-body">
+            {% include "task_form.html" %}
+            </div>
+        </div>
+    </div>
 </div>
 
-<div class="modal hide fade" id="taskModal">
-    <div class="modal-header">
-        <a class="close" data-dismiss="modal">x</a>
-        <h3>{{form.form_title}}</h3>
-    </div>
-    <div class="modal-body" id="modal-body">
-        {% include "task_form.html" %}
-    </div>
-</div>
 
 <div id="purr-container"></div>
 
@@ -158,21 +147,21 @@
 
     function task_form_overlay(event) {
         var modalElement = $('#taskModal');
-
-        modalElement.modal({
-            backdrop: true,
-            keyboard: true,
-            show: false
-        });
-        // set up event logging
-        modalElement.on('shown', function() {
-            log_js_action("smartgrid", "{{action.slug}}", "shown-form");
-        });
-        modalElement.on('hidden', function() {
-            log_js_action("smartgrid", "{{action.slug}}", "close-form");
-        });
-        modalElement.css('margin-top', (modalElement.outerHeight() / 2) * -1);
-        modalElement.modal('show');
+        removeClass(document.getElementById('taskModal'), 'hidden');
+//         modalElement.modal({
+//             backdrop: true,
+//             keyboard: true,
+//             show: false
+//         });
+//         // set up event logging
+//         modalElement.on('shown', function() {
+//             log_js_action("smartgrid", "{{action.slug}}", "shown-form");
+//         });
+//         modalElement.on('hidden', function() {
+//             log_js_action("smartgrid", "{{action.slug}}", "close-form");
+//         });
+//         modalElement.css('margin-top', (modalElement.outerHeight() / 2) * -1);
+//         modalElement.modal('show');
 
         $('#id_response').focus();
 
