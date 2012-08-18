@@ -35,6 +35,6 @@ class ParticipationTest(TransactionTestCase):
         response = self.client.get(reverse("learn_index"))
 
         self.assertEqual(response.context["view_objects"]["participation"][
-            "team_participation"][0].team,
+            "participation_100"][0].team,
             profile.team,
             "The user's team should be leading.")

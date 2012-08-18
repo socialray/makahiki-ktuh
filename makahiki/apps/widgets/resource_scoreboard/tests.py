@@ -3,6 +3,7 @@ import datetime
 
 from django.test import TransactionTestCase
 from django.core.urlresolvers import reverse
+from apps.managers.cache_mgr import cache_mgr
 from apps.managers.challenge_mgr import challenge_mgr
 
 from apps.utils import test_utils
@@ -16,6 +17,7 @@ class EnergyFunctionalTestCase(TransactionTestCase):
         """Initialize a user and log them in."""
         self.user = test_utils.setup_user(username="user", password="changeme")
         self.team = self.user.get_profile().team
+        test_utils.set_competition_round()
 
         challenge_mgr.register_page_widget("energy", "resource_scoreboard.energy")
         self.client.login(username="user", password="changeme")
@@ -27,8 +29,10 @@ class EnergyFunctionalTestCase(TransactionTestCase):
 
     def testEnergyScoreboard(self):
         """test Energy scoreboard."""
+        cache_mgr.clear()
         response = self.client.get(reverse("energy_index"))
-        goals = response.context["view_objects"]["resource_scoreboard__energy"]["goals_scoreboard"]
+        goals = response.context["view_objects"]["resource_scoreboard__energy"][
+                "round_resource_goal_ranks"]["Round 1"]
         for goal in goals:
             self.assertEqual(goal["completions"], 0, "No team should have completed a goal.")
 
@@ -39,15 +43,18 @@ class EnergyFunctionalTestCase(TransactionTestCase):
         )
 
         response = self.client.get(reverse("energy_index"))
-        goals = response.context["view_objects"]["resource_scoreboard__energy"]["goals_scoreboard"]
+        goals = response.context["view_objects"]["resource_scoreboard__energy"][
+                "round_resource_goal_ranks"]["Round 1"]
         for goal in goals:
             self.assertEqual(goal["completions"], 0, "No team should have completed a goal.")
 
-        energy_goal.goal_status = "Below the goal",
+        energy_goal.goal_status = "Below the goal"
         energy_goal.save()
+        cache_mgr.clear()
 
         response = self.client.get(reverse("energy_index"))
-        goals = response.context["view_objects"]["resource_scoreboard__energy"]["goals_scoreboard"]
+        goals = response.context["view_objects"]["resource_scoreboard__energy"][
+                "round_resource_goal_ranks"]["Round 1"]
         for team in goals:
             if team["team__name"] == self.team.name:
                 # print team.teamenergygoal_set.all()

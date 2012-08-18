@@ -175,7 +175,7 @@ def _get_resource_usage(name):
 def resource_ranks(name, round_name=None):
     """Return the ranking of resource use for all teams."""
 
-    cache_key = "resource_ranks-%s-%s" % (name, slugify(round_name))
+    cache_key = "%s_ranks-%s" % (name, slugify(round_name))
     ranks = cache_mgr.get_cache(cache_key)
     if ranks is None:
         resource_usage = _get_resource_usage(name)

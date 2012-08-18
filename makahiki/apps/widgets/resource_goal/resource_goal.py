@@ -169,7 +169,7 @@ def check_all_daily_resource_goals(resource):
 
 def resource_goal_ranks(resource, round_name=None):
     """Generate the scoreboard for resource goals."""
-    cache_key = "resource_goal_ranks-%s-%s" % (resource, slugify(round_name))
+    cache_key = "%s_goal_ranks-%s" % (resource, slugify(round_name))
     goal_ranks = cache_mgr.get_cache(cache_key)
     if goal_ranks is None:
         goal_ranks = []
@@ -186,20 +186,19 @@ def resource_goal_ranks(resource, round_name=None):
                 average_reduction=Avg("percent_reduction")).order_by(
                     "-completions", "-average_reduction")
 
+        for rank in ranks:
+            goal_ranks.append(rank)
+
         total_count = Team.objects.count()
-        if ranks.count() != total_count:
-            for rank in ranks:
-                goal_ranks.append(rank)
-
+        if len(goal_ranks) != total_count:
             for t in Team.objects.all():
-                if len(goal_ranks) == total_count:
-                    break
-
                 if not t.name in goal_ranks:
                     rank = {"team__name": t.name,
                             "completions": 0,
                             "average_reduction": 0}
                     goal_ranks.append(rank)
+                    if len(goal_ranks) == total_count:
+                        break
         cache_mgr.set_cache(cache_key, goal_ranks, 3600 * 24)
     return goal_ranks
 
