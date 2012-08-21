@@ -139,3 +139,8 @@ def load_data(manage_command, instance_type, fixture_path):
         load_fixtures(manage_command, fixture_path, "test_")
         # setup 2 user per team, and 3 one-week round
         os.system("%s setup_test_data all 2 3" % manage_command)
+    elif instance_type == "uh12":
+        print "setting up uh12 data..."
+        load_fixtures(manage_command, fixture_path, "uh12_")
+        # setup 2 user per team, and 3 one-week round
+        os.system("%s setup_test_data all 2 3" % manage_command)

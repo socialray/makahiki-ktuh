@@ -35,7 +35,9 @@
         <div class="tab-content">
         {% for level in view_objects.smartgrid.levels %}
             <div id="sgg-level-{{forloop.counter}}" class="tab-pane">
-            {% include "level-table.html" with categories=level.cat_list%}
+                {% if level.is_unlock %}
+                  {% include "level-table.html" with categories=level.cat_list %}
+                {% endif %}
             </div>
         {% endfor %}
         </div>
