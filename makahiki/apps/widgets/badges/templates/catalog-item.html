@@ -4,15 +4,19 @@
 <td>
     {% if badge in awarded_badges %}
     <div class="badge-theme-{{badge.theme}}">
-        <p>
+        <p class= "badge-name">
             {{ badge.label }}
        </p>    
     </div>
+    &nbsp;&nbsp;<div class="badge-name" >{{ badge.name }}</div>
     {% else %}
-    <div class="badge-image"></div>
+    <div class="badge-image">
+            <img class="locked-img" src="{{ STATIC_URL}}images/lock24.png"/>
+    </div>
+    &nbsp;&nbsp;<div class="badge-name left" >{{ badge.name }}</div>
     {% endif %}
 
-     &nbsp;&nbsp;<div class="{{class}}" >{{ badge.name }}</div>
+     
 </td>
 
 <!--Badge Description-->
