@@ -77,7 +77,7 @@
         <div class="item">
             <div class="set-width-outer-width">
     {% else %}
-         <div id="{{resource.name}}-goal" class="tab-pane fade active in{% if round_resource_goal_ranks %}wrap{%endif%}">
+        <div id="{{resource.name}}-{{round_name|cut:" "}}-goal" class="tab-pane fade active in {% if round_resource_goal_ranks %}wrap{%endif%}">
     {% endif %}
         {% if not no_carousel %}
             <div class="content-box-title">

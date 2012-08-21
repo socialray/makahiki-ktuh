@@ -5,12 +5,15 @@ from django.contrib import admin
 
 class GoalSettingsAdmin(admin.ModelAdmin):
     """EnergyGoal administrator interface definition."""
+    fields = ("team", "goal_percent_reduction", 'goal_points', 'baseline_method',
+              ('manual_entry', 'manual_entry_time'), 'realtime_meter_interval')
     list_display = ["team", "goal_percent_reduction", "goal_points", "manual_entry", ]
 
 
 class GoalAdmin(admin.ModelAdmin):
     """EnergyGoal administrator interface definition."""
-    list_display = ["team", "date", "goal_status", "percent_reduction", ]
+    list_display = ["team", "date", "goal_status", "percent_reduction",
+                    "current_goal_percent_reduction"]
 
 
 class BaselineDailyAdmin(admin.ModelAdmin):

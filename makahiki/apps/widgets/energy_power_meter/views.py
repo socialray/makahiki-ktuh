@@ -9,7 +9,7 @@ def supply(request, page_name):
 
     team = request.user.get_profile().team
     if team:
-        interval = resource_goal.team_goal_settings(team, "energy").power_meter_interval
+        interval = resource_goal.team_goal_settings(team, "energy").realtime_meter_interval
     else:
         interval = None
     width = 300

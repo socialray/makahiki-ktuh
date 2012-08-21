@@ -2,7 +2,8 @@
 from django.contrib import admin
 from apps.managers.challenge_mgr import challenge_mgr
 
-from apps.managers.resource_mgr.models import EnergyUsage, WaterUsage, ResourceSetting
+from apps.managers.resource_mgr.models import EnergyUsage, WaterUsage, ResourceSetting, \
+    ResourceBlackoutDate
 
 
 class UsageAdmin(admin.ModelAdmin):
@@ -18,5 +19,12 @@ class ResourceSettingsAdmin(admin.ModelAdmin):
     list_display = ["name", "unit", "winning_order", ]
 
 admin.site.register(ResourceSetting, ResourceSettingsAdmin)
-
 challenge_mgr.register_sys_admin_model("Other Settings", ResourceSetting)
+
+
+class ResourceBlackoutDateAdmin(admin.ModelAdmin):
+    """EnergyGoal administrator interface definition."""
+    list_display = ["date", "description"]
+
+admin.site.register(ResourceBlackoutDate, ResourceBlackoutDateAdmin)
+challenge_mgr.register_sys_admin_model("Other Settings", ResourceBlackoutDate)

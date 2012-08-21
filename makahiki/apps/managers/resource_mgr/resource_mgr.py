@@ -10,7 +10,7 @@ from apps.managers.cache_mgr import cache_mgr
 from apps.managers.challenge_mgr import challenge_mgr
 from apps.managers.team_mgr.models import Team
 from apps.managers.resource_mgr.models import EnergyUsage, WaterUsage, ResourceSetting, \
-    WasteUsage
+    WasteUsage, ResourceBlackoutDate
 from xml.etree import ElementTree
 from django.template.defaultfilters import slugify
 
@@ -29,13 +29,21 @@ def get_resource_setting(name):
     return resource_setting
 
 
+def is_blackout(date):
+    """Returns true if the date falls in the Resource Blackout dates."""
+    return ResourceBlackoutDate.objects.filter(date=date).exists()
+
+
 def team_resource_data(date, team, resource):
     """Returns the latest data for the specified resource on the current date."""
 
-    usage = _get_resource_usage(resource)
-    energy_data = usage.objects.filter(team=team, date=date)
-    if energy_data:
-        return energy_data[0]
+    if not is_blackout(date):
+        usage = _get_resource_usage(resource)
+        energy_data = usage.objects.filter(team=team, date=date)
+        if energy_data:
+            return energy_data[0]
+        else:
+            return None
     else:
         return None
 
@@ -49,11 +57,21 @@ def team_resource_usage(date, team, resource):
         return 0
 
 
+def team_hourly_energy_usage(date, hour, team):
+    """Returns the latest usage of the specified resource for the current date and hour."""
+    session = requests.session()
+    start_time = date.strftime("%Y-%m-%dT00:00:00")
+    end_time = date.strftime("%Y-%m-%dT") + "%.2d:00:00" % hour
+    session.params = {'startTime': start_time, 'endTime': end_time}
+    return get_energy_usage(session, team.name)
+
+
 def get_energy_usage(session, source):
     """Return the energy usage from wattdepot."""
     rest_url = "%s/wattdepot/sources/%s/energy/" % (
         challenge_mgr.get_challenge().wattdepot_server_url, source)
 
+    #import sys
     #session.config['verbose'] = sys.stderr
     session.timeout = 5
 
@@ -127,37 +145,6 @@ def update_fake_water_usage():
             water.usage = actual_usage * count
             water.save()
             print 'team %s fake water usage updated at %s.' % (team, date)
-
-
-def get_daily_energy_baseline_usage(session, team, day, start_date, weeks):
-    """Returns the daily energy baseline usage from the history data."""
-    usage = 0
-    for i in range(0, weeks):
-        start_date += datetime.timedelta(days=(i * 7 + day))
-        end_date = start_date + datetime.timedelta(days=1)
-        start_time = start_date.strftime("%Y-%m-%dT00:00:00")
-        end_time = end_date.strftime("%Y-%m-%dT00:00:00")
-
-        session.params = {'startTime': start_time, 'endTime': end_time}
-
-        usage += get_energy_usage(session, team.name)
-
-    return usage / weeks
-
-
-def get_hourly_energy_baseline_usage(session, team, day, hour, start_date, weeks):
-    """Returns the hourly energy baseline usage from the history data."""
-    usage = 0
-    for i in range(0, weeks):
-        start_date += datetime.timedelta(days=(i * 7 + day))
-        start_time = start_date.strftime("%Y-%m-%dT00:00:00")
-        end_time = start_date.strftime("%Y-%m-%dT") + "%.2d:00:00" % hour
-
-        session.params = {'startTime': start_time, 'endTime': end_time}
-
-        usage += get_energy_usage(session, team.name)
-
-    return usage / weeks
 
 
 def _get_resource_usage(name):

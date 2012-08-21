@@ -29,6 +29,10 @@ class ResourceGoal(models.Model):
         default=0,
         help_text="The percentage of reduction.")
 
+    current_goal_percent_reduction = models.IntegerField(
+        default=0,
+        help_text="The current goal percentage of reduction when using dynamic baseline method.")
+
     class Meta:
         """Meta"""
         abstract = True
@@ -49,6 +53,9 @@ class WaterGoal(ResourceGoal):
 class ResourceGoalSetting(models.Model):
     """Team Resource Goal Setting Model"""
 
+    BASELINE_CHOICES = (("Dynamic", "Dynamic"),
+                    ("Fixed", "Fixed"))
+
     team = models.ForeignKey(
         Team,
         help_text="The team which this goal is related to.")
@@ -57,9 +64,11 @@ class ResourceGoalSetting(models.Model):
         default=5,
         help_text="The goal percentage of reduction.")
 
-    warning_percent_reduction = models.IntegerField(
-        default=3,
-        help_text="The warning percentage of reduction.")
+    baseline_method = models.CharField(
+        default="Dynamic",
+        choices=BASELINE_CHOICES,
+        max_length=20,
+        help_text="The method of calculating the baseline.")
 
     goal_points = models.IntegerField(
         default=20,
@@ -73,6 +82,11 @@ class ResourceGoalSetting(models.Model):
         blank=True, null=True,
         help_text="The time for manual data entry.",)
 
+    realtime_meter_interval = models.IntegerField(
+        default=10,
+        help_text="The refresh interval (in seconds) for the real-time meter display. " \
+                  "not applicable when the Manual Entry is checked.")
+
     class Meta:
         """Meta"""
         abstract = True
@@ -82,9 +96,7 @@ class ResourceGoalSetting(models.Model):
 
 class EnergyGoalSetting(ResourceGoalSetting):
     """Energy goal settings."""
-    power_meter_interval = models.IntegerField(
-            default=10,
-            help_text="The refresh interval (in seconds) for the power meter display.")
+    pass
 
 
 class WaterGoalSetting(ResourceGoalSetting):
