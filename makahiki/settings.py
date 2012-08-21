@@ -397,8 +397,22 @@ TEMPLATE_DEBUG = MAKAHIKI_DEBUG
 MAKAHIKI_USE_MEMCACHED = env('MAKAHIKI_USE_MEMCACHED', '').lower() == "true"
 """[Optional] If "true", use memcache. Otherwise no caching is used."""
 if MAKAHIKI_USE_MEMCACHED:
-    CACHES = {'default':
-                {'BACKEND': 'django_pylibmc.memcached.PyLibMCCache'}}
+    if os.environ.get('MEMCACHIER_SERVERS', ''):
+        os.environ['MEMCACHE_SERVERS'] = os.environ.get('MEMCACHIER_SERVERS', '')
+        os.environ['MEMCACHE_USERNAME'] = os.environ.get('MEMCACHIER_USERNAME', '')
+        os.environ['MEMCACHE_PASSWORD'] = os.environ.get('MEMCACHIER_PASSWORD', '')
+
+        CACHES = {
+            'default': {
+                'BACKEND': 'django_pylibmc.memcached.PyLibMCCache',
+                'LOCATION': os.environ.get('MEMCACHIER_SERVERS', ''),
+                'TIMEOUT': 500,
+                'BINARY': True,
+                }
+        }
+    else:
+        CACHES = {'default':
+                    {'BACKEND': 'django_pylibmc.memcached.PyLibMCCache'}}
 else:
     CACHES = {'default':
                 {'BACKEND': 'django.core.cache.backends.dummy.DummyCache'}}
