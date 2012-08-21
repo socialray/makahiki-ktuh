@@ -34,6 +34,7 @@ def supply(request, page_name):
         "round_standings": round_standings,
         "no_carousel": page_name == "status",
         "range": count,
+        "user": user,
     }
 
 

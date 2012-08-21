@@ -51,14 +51,17 @@
             </thead>
             {% for entry in ranks %}
             <tr>
-                <td class="column-number" width="10%">{%  if entry.team__name == team.name %}<b>{% endif %}
+                <td class="column-number" width="10%">{% if entry.team__name == team.name %}<b>{% endif %}
                        {{ forloop.counter }}
+                       {% if entry.team__name == team.name %}</b>{% endif %}
                 </td>
-                <td class="column-text" width="75%">
+                <td class="column-text" width="75%">{% if entry.team__name == team.name %}<b>{% endif %}
                        {{ entry.team__name }}
+                       {% if entry.team__name == team.name %}</b>{% endif %}
                 </td>
-                <td class="column-number" width="15%">
+                <td class="column-number" width="15%">{% if entry.team__name == team.name %}<b>{% endif %}
                        {{ entry.total }}
+                       {% if entry.team__name == team.name %}</b>{% endif %}
                 </td>
             </tr>
             {% endfor %}
@@ -98,11 +101,14 @@
                 </tr>
                 {% for entry in ranks %}
                 <tr>
+                    <td class="column-number">{% if entry.team__name == team.name %}<b>{% endif %}
+                        {{ forloop.counter }}{%  if entry.team__name == team.name %}</b>{% endif %}</td>
+                    <td class="column-text">{%  if entry.team__name == team.name %}<b>{% endif %}
+                    {{ entry.team__name }}{%  if entry.team__name == team.name %}</b>{% endif %}</td>
                     <td class="column-number">{%  if entry.team__name == team.name %}<b>{% endif %}
-                        {{ forloop.counter }}</td>
-                    <td class="column-text">{{ entry.team__name }}</td>
-                    <td class="column-number">{{ entry.completions }}</td>
-                    <td class="column-number">{{ entry.average_reduction|floatformat }}%</td>
+                    {{ entry.completions }}{%  if entry.team__name == team.name %}</b>{% endif %}</td>
+                    <td class="column-number">{%  if entry.team__name == team.name %}<b>{% endif %}
+                    {{ entry.average_reduction|floatformat }}%{%  if entry.team__name == team.name %}</b>{% endif %}</td>
                 </tr>
                 {% endfor %}
             </table>

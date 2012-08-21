@@ -27,10 +27,12 @@
                 <tbody>
                 {% for f in standings.team_standings %}
                     <tr>
-                        <td class="column-number" width="10%">{{ forloop.counter }}</td>
+                        <td class="column-number" width="10%">{% if view_objects.scoreboard.profile.team.name == f.profile__team__name %}<b>{% endif %}
+                        {{ forloop.counter }}{% if view_objects.scoreboard.profile.team.name == f.profile__team__name %}</b>{% endif %}</td>
                         <td class="column-text" width="75%">{% if view_objects.scoreboard.profile.team.name == f.profile__team__name %}<b>{% endif %}
                         {{ f.profile__team__name }}{% if view_objects.scoreboard.profile.team.name == f.profile__team__name %}</b>{% endif %}</td>
-                        <td class="column-number" width="15%">{{ f.points }}</td>
+                        <td class="column-number" width="15%">{% if view_objects.scoreboard.profile.team.name == f.profile__team__name %}<b>{% endif %}
+                        {{ f.points }}{% if view_objects.scoreboard.profile.team.name == f.profile__team__name %}</b>{% endif %}</td>
                     </tr>
                 {% endfor %}
                 </tbody>
@@ -61,9 +63,11 @@
                 <tbody>
                     {% for p in standings.profile_standings %}
                     <tr>
-                        <td class="column-number" width="10%">{{ forloop.counter }}</td>
-                        <td class="column-text" width="75%">{{ p.profile__name }}</td>
-                        <td class="column-number" width="15%">{{ p.points }}</td>
+                        
+                        <td class="column-number" width="10%">{% if view_objects.scoreboard.profile.name == p.profile__name %}<b>{% endif %}{{ forloop.counter }}{% if view_objects.scoreboard.profile.name == p.profile__name %}</b>{% endif %}</td>
+                        <td class="column-text" width="75%">{% if view_objects.scoreboard.profile.name == p.profile__name %}<b>{% endif %}{{ p.profile__name }}{% if view_objects.scoreboard.profile.name == p.profile__name %}</b>{% endif %}</td>
+                        <td class="column-number" width="15%">{% if view_objects.scoreboard.profile.name == p.profile__name %}<b>{% endif %}{{ p.points }}{% if view_objects.scoreboard.profile.name == p.profile__name %}</b>{% endif %}</td>
+         
                     </tr> 
                     {% endfor %}
                 </tbody>
@@ -95,9 +99,9 @@
                 <tbody>
                 {% for p in standings.user_team_standings %}
                     <tr>
-                        <td class="column-number" width="10%">{{ forloop.counter }}</td>
-                        <td class="column-text" width="75%">{{ p.name }}</td>
-                        <td class="column-number" width="15%">{{ p.current_round_points }}</td>
+                        <td class="column-number" width="10%">{% if view_objects.scoreboard.profile.name == p.name %}<b>{% endif %}{{ forloop.counter }}{% if view_objects.scoreboard.profile.name == p.name %}</b>{% endif %}</td>
+                        <td class="column-text" width="75%">{% if view_objects.scoreboard.profile.name == p.name %}<b>{% endif %}{{ p.name }}{% if view_objects.scoreboard.profile.name == p.name %}</b>{% endif %}</td>
+                        <td class="column-number" width="15%">{% if view_objects.scoreboard.profile.name == p.name %}<b>{% endif %}{{ p.current_round_points }}{% if view_objects.scoreboard.profile.name == p.name %}</b>{% endif %}</td>
                     </tr>
                 {% endfor %}
                 </tbody>
