@@ -4,7 +4,6 @@ import datetime
 from apps.managers.challenge_mgr import challenge_mgr
 from apps.managers.resource_mgr import resource_mgr
 from apps.widgets.resource_goal import resource_goal
-
 from apps.widgets.smartgrid import smartgrid
 
 
@@ -42,15 +41,27 @@ def resource_supply(request, page_name):
 def get_hourly_goal_data(team, resource):
     """:return: the energy goal data for the user's team."""
     date = datetime.datetime.today()
-    data = resource_mgr.team_resource_data(date=date.date(), team=team, resource=resource)
+    if resource_mgr.is_blackout(date):
+        return {"is_blackout": True}
 
+    data = resource_mgr.team_resource_data(date=date.date(), team=team, resource=resource)
     if data:
         goal_settings = resource_goal.team_goal_settings(team, resource)
         goal_percentage = goal_settings.goal_percent_reduction
-        warning_percentage = goal_settings.warning_percent_reduction
-        baseline = resource_goal.team_hourly_resource_baseline(date, team, resource)
+        baseline = 0
+        if goal_settings.baseline_method == "Fixed":
+            baseline = resource_goal.team_fixed_hourly_resource_baseline(date, team, resource)
+        elif goal_settings.baseline_method == "Dynamic":
+            baseline = resource_goal.team_dynamic_hourly_resource_baseline(date, team, resource)
+
+            # get previous day's goal result and the current goal percent
+            previous_goal_result = resource_goal.team_goal(date - datetime.timedelta(days=1),
+                                                           team, resource)
+            if previous_goal_result and previous_goal_result.current_goal_percent_reduction:
+                goal_percentage = previous_goal_result.current_goal_percent_reduction
+
         goal = {"goal_usage": (baseline * 100 - baseline * goal_percentage) / 100,
-                "warning_usage": (baseline * 100 - baseline * warning_percentage) / 100,
+                "warning_usage": (baseline * 100 - baseline * goal_percentage / 2) / 100,
                 "actual_usage": data.usage,
                 "updated_at": datetime.datetime.combine(date=data.date, time=data.time)
                }
@@ -85,8 +96,9 @@ def get_daily_goal_data(team, resource):
             goal_info["filler_days"] = range(0, 6 - date.weekday())
 
         goal = resource_goal.team_goal(date, team, resource)
+        goal_settings = resource_goal.team_goal_settings(team, resource)
         unit = resource_mgr.get_resource_setting(resource).unit
-        goal_usage = resource_goal.team_daily_goal_usage(date, team, resource)
+        goal_usage = resource_goal.team_daily_goal_usage(date, team, resource, goal_settings)
         goal_info["goal_info"] = "%d %s" % (goal_usage, unit)
         if goal:
             goal_info["goal_status"] = goal.goal_status
@@ -94,7 +106,7 @@ def get_daily_goal_data(team, resource):
                                         "The goal is %d %s." % (
                 resource_mgr.team_resource_usage(date, team, resource),
                 unit,
-                resource_goal.team_goal_settings(team, resource).manual_entry_time,
+                goal_settings.manual_entry_time,
                 goal_usage,
                 unit
             )

@@ -20,8 +20,9 @@ class LoggingMiddleware(object):
 
         # Filter out the following paths.  Logs will not be created for these
         # paths.
-        if re.match(MEDIA_REGEXP, request.path) or re.match(SENTRY_REGEXP,
-            request.path) or request.path in URL_FILTER:
+        if re.match(MEDIA_REGEXP, request.path) or \
+           re.match(SENTRY_REGEXP, request.path) or \
+           request.path in URL_FILTER:
             return response
 
         log_mgr.write_log_entry(request=request, response_status_code=response.status_code)

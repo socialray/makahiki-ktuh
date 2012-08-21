@@ -41,6 +41,7 @@ class TeamEnergyGoalTest(TransactionTestCase):
             team=self.team,
             goal_percent_reduction=5,
             goal_points=20,
+            baseline_method="Fixed",
             manual_entry=True,
             manual_entry_time=datetime.time(hour=15),
         )

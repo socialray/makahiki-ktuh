@@ -1,10 +1,16 @@
-{% if not hourly_goal.actual_usage %}
-<table >
-    <tr width="300"><td height="100" valign="center">
-        <b>Current {{ resource.name }} data is not available.</b> <br/><br/>
-        Please contact administrator to report this problem.
-    </td></tr>
-</table>
+{% if hourly_goal.is_blackout %}
+    <table >
+        <tr width="300"><td height="100" valign="center">
+            <b>Today's data does not count due to holiday. </b> <br/><br/>
+        </td></tr>
+    </table>
+{% elif not hourly_goal.actual_usage %}
+    <table >
+        <tr width="300"><td height="100" valign="center">
+            <b>Current {{ resource.name }} data is not available.</b> <br/><br/>
+            Please contact administrator to report this problem.
+        </td></tr>
+    </table>
 {% else %}
 <div>
     <table cellpadding="5"

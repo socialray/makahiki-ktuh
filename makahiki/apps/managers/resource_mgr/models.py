@@ -42,6 +42,16 @@ class ResourceSetting(models.Model):
         cache_mgr.delete("resource_setting-%s" % self.name)
 
 
+class ResourceBlackoutDate(models.Model):
+    """defines the blackout dates for the resource related games."""
+    date = models.DateField(
+        help_text="The date when the resource usage should be ignored.")
+    description = models.CharField(
+        blank=True, null=True,
+        max_length=20,
+        help_text="The description of the date.")
+
+
 class ResourceUsage(models.Model):
     """abstract resource usage model."""
     team = models.ForeignKey(Team)
