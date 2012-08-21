@@ -28,7 +28,7 @@
                     {% if p.badgeaward_set.count > 0 %}
                     <tr>
                         <td class="column-number" width="10%">{{ forloop.counter }}</td>
-                        <td class="column-text" width="25%">{{ p.name }}</td>
+                        <td class="column-text" width="25%">{% if user.name == p.name %}<b>{% endif %}{{ p.name }}{% if user.name == p.name %}</b>{% endif %}</td>
                         <td class="column-text" width="65%">
                         {% for ba in p.badgeaward_set.all %}
                         <div class="badge-theme-{{ba.badge.theme}}-small"><p>{{ba.badge.label}}</p></div>
@@ -66,7 +66,7 @@
                     {% if p.badgeaward_set.count > 0 %}
                     <tr>
                         <td class="column-number" width="10%">{{ forloop.counter }}</td>
-                        <td class="column-text" width="25%">{{ p.name }}</td>
+                        <td class="column-text" width="25%">{% if user.name == p.name %}<b>{% endif %}{{ p.name }}{% if user.name == p.name %}</b>{% endif %}</td>
                         <td class="column-text" width="65%">
                         {% for ba in p.badgeaward_set.all %}
                         <div class="badge-theme-{{ba.badge.theme}}-small"><p>{{ba.badge.label}}</p></div>

@@ -30,6 +30,7 @@ def resource_supply(request, resource, page_name):
 
     resource_setting = resource_mgr.get_resource_setting(resource)
     return {
+        "profile": user.get_profile(),
         "team": team,
         "resource": resource_setting,
         "round_resource_goal_ranks": round_resource_goal_ranks,
