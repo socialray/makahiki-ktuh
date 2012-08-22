@@ -1,19 +1,27 @@
 {% load avatar_tags %}
 
 <!--Badge Image-->
-<td>
+
     {% if badge in awarded_badges %}
-    <div class="badge-theme-{{badge.theme}}">
-        <p class= "badge-name">
-            {{ badge.label }}
-       </p>    
-    </div>
-    &nbsp;&nbsp;<div class="badge-name" >{{ badge.name }}</div>
+    <td>
+        <div class="badge-theme-{{badge.theme}}">
+            <p>
+                {{ badge.label }}
+           </p>    
+        </div>
+    </td>
+    <td  class="badge-name">
+       {{ badge.name }}
+    </td>
     {% else %}
-    <div class="badge-image">
-            <img class="locked-img" src="{{ STATIC_URL}}images/lock24.png"/>
-    </div>
-    &nbsp;&nbsp;<div class="badge-name left" >{{ badge.name }}</div>
+    <td>
+        <div class="badge-image">
+                <center><img class="locked-img" src="{{ STATIC_URL}}images/lock24.png"/></center>
+        </div>    
+    </td>
+    <td  class="badge-name">
+        {{ badge.name }}
+    </td>
     {% endif %}
 
      
