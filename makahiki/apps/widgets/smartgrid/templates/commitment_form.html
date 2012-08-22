@@ -15,6 +15,9 @@
                 onclick='$("#submit_form_button3").attr("disabled", "disabled");javascript:this.form.submit(); return false;'>
             OK, accept commitment
         </button>
+        <button class="btn btn-widget" style="cursor:pointer;"
+            onclick='hide_task_form_overlay(); return false;'>Cancel
+        </button>        
     </div>
 {% else %}
     Thank you for completing the commitment.
@@ -33,5 +36,8 @@
                 onclick='$("#submit_form_button4").attr("disabled", "disabled");javascript:this.form.submit(); return false;'>
             OK
         </button>
+        <button class="btn btn-widget" style="cursor:pointer;"
+            onclick='hide_task_form_overlay(); return false;'>Cancel
+        </button>        
     </div>
 {% endif %}
