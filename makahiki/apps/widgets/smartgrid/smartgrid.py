@@ -19,7 +19,7 @@ from apps.widgets.smartgrid.models import Action, Category, ActionMember, Level,
     TextReminder
 from apps.widgets.smartgrid.models import Event
 from apps.widgets.smartgrid import  MAX_COMMITMENTS
-from apps.widgets.smartgrid.predicates import completed_action, completed_level
+from apps.widgets.smartgrid.predicates import completed_action
 
 
 def get_setup_activity():
@@ -93,14 +93,19 @@ def get_level_actions(user):
         levels = []
         for level in Level.objects.all().order_by("priority"):
             level.is_unlock = utils.eval_predicates(level.unlock_condition, user)
-
             if level.is_unlock:
+                level.is_complete = True
                 categories = []
                 for cat in Category.objects.all().order_by("priority"):
                     action_list = []
                     for action in cat.action_set.filter(level=level).order_by("priority"):
                         action = annotate_action_status(user, action)
                         action_list.append(action)
+
+                        # if there is one action is not completed, set the level to in-completed
+                        if not action.completed:
+                            level.is_complete = False
+
                     if action_list:
                         cat.task_list = action_list
                         categories.append(cat)
@@ -108,7 +113,6 @@ def get_level_actions(user):
                 if categories:
                     level.cat_list = categories
 
-                level.is_complete = completed_level(user, level.priority)
             levels.append(level)
 
         # Cache the categories for 30 minutes (or until they are invalidated)
@@ -303,7 +307,7 @@ def notify_round_started():
     today = datetime.datetime.today()
     current_round = None
     previous_round = None
-    rounds = challenge_mgr.get_all_round_info()
+    rounds = challenge_mgr.get_all_round_info()["rounds"]
     for key in rounds.keys():
         # We're looking for a round that ends today and another that starts
         # today (or overall)

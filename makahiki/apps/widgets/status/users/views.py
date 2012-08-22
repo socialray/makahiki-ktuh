@@ -15,7 +15,8 @@ def supply(request, page_name):
     todays_users = Profile.objects.filter(last_visit_date=datetime.datetime.today())
 
     # Approximate logins by their first points transaction.
-    start = challenge_mgr.get_competition_start()
+    rounds_info = challenge_mgr.get_all_round_info()
+    start = rounds_info["competition_start"]
     today = datetime.datetime.today()
 
     users_anno = User.objects.annotate(login_date=Min('pointstransaction__transaction_date'))

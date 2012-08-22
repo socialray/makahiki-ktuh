@@ -24,7 +24,7 @@ def supply(request, page_name):
 def _get_prizes(team):
     """Private method to process the prizes half of the page.
        Takes the user's team and returns a dictionary to be used in the template."""
-    rounds = challenge_mgr.get_all_round_info()
+    rounds = challenge_mgr.get_all_round_info()["rounds"]
     prize_dict = {}
     today = datetime.datetime.today()
     for key in rounds.keys():

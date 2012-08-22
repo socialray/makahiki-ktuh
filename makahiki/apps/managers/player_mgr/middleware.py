@@ -20,28 +20,31 @@ class LoginMiddleware(object):
     def process_request(self, request):
         """Check the competition period and that setup is completed."""
 
+        path = request.path
+
+        # pass through for trivial requests
+        pattern = "^/(home\/restricted|admin|about|log|account|site_media|favicon.ico)/"
+        if re.compile(pattern).match(path):
+            return None
+
         # load the db settings if not done yet.
         challenge_mgr.init()
 
         user = request.user
         if not user.is_authenticated():
             return None
-        else:
-            path = request.path
 
-            # if user logged in and go to landing page, re-direct to home page
-            if path.startswith("/landing/"):
-                return HttpResponseRedirect(reverse("home_index"))
-
-            # pass through for trivial requests
-            pattern = "^/(home\/restricted|admin|about|log|account|site_media|favicon.ico)/"
-            if re.compile(pattern).match(path):
-                return None
+        # user logged in
+        # if user logged in and go to landing page, re-direct to home page
+        if path.startswith("/landing/"):
+            return HttpResponseRedirect(reverse("home_index"))
 
         # now the user is authenticated and going to the non-trivial pages.
         response = self.check_competition_period(request)
+
         if response is None:
             response = self.check_setup_completed(request)
+
             if response is None:
                 response = self.track_login(request)
 
@@ -91,7 +94,7 @@ class LoginMiddleware(object):
         # We need to check if the user is going to the home page so we don't
         # get caught in a redirect loop. We do need to filter out requests
         # for CSS and other resources.
-        pattern = "^/(home|admin|log|about|account|tc|site_media|media|favicon.ico)/"
+        pattern = "^/home/"
 
         if not profile.setup_complete and \
            not re.compile(pattern).match(path):
@@ -103,12 +106,9 @@ class LoginMiddleware(object):
         """Checks if we are still in the competition. If the user is logged in,
         they are redirected to a competition status page.
         """
-        path = request.path
-        pattern = "^/(home\/restricted|admin|about|log|account|site_media|media|favicon.ico)/"
         staff_user = request.user.is_staff or request.session.get('staff', False)
 
         if not staff_user and \
-           not re.compile(pattern).match(path) and \
            not challenge_mgr.in_competition():
             return HttpResponseRedirect(reverse("home_restricted"))
 

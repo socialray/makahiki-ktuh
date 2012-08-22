@@ -728,6 +728,7 @@ class ActionMember(models.Model):
         if team:
             cache_mgr.invalidate_template_cache("team_avatar", self.action.id, team.id)
         cache_mgr.invalidate_template_cache("commitments", username)
+        cache_mgr.invalidate_template_cache("smartgrid", username)
 
     def delete(self, using=None):
         """Custom delete method to remove the points for completed action."""
