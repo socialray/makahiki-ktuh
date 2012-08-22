@@ -17,9 +17,8 @@
             Submit
         </button>
         <button class="btn btn-widget" style="cursor:pointer;"
-                onclick='$("#taskModal").modal("hide"); return false;'>Cancel
-        </button>
-
+                onclick='hide_task_form_overlay(); return false;'>Cancel
+        </button>        
     </div>
 {% else %}
     You will earn 2 points for signing up for
@@ -30,7 +29,7 @@
             OK
         </button>
         <button class="btn btn-widget" style="cursor:pointer;"
-                onclick='$("#taskModal").modal("hide"); return false;'>Cancel
+                onclick='hide_task_form_overlay(); return false;'>Cancel
         </button>
     </div>
 {% endif %}

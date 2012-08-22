@@ -20,6 +20,7 @@
 
 
 {% block action_not_completed %}
+    <div id="go-button">
         <b>
             Once you are done, click the button below to get your points!
         </b>
@@ -30,14 +31,17 @@
                 <img src="{{ STATIC_URL}}images/right.png"
                      width="25" align="center"></button>
         </a>
+    </div>
 {% endblock %}
 
 {% block action_completed_button %}
     {% if action.member.approval_status == "rejected" %}
-        <a onclick="task_form_overlay(event)">
+    <div id="go-button">
+        <a id="go-button" onclick="task_form_overlay(event)">
             <button style="cursor:pointer;" class="btn btn-widget">I will try again
                 <img src="{{ STATIC_URL}}images/right.png" width="25" align="center">
             </button>
         </a>
+    </div>
     {% endif %}
 {% endblock %}
