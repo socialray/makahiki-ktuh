@@ -230,7 +230,6 @@ class Command(MakahikiBaseCommand):
         for team in Team.objects.all():
             EnergyGoalSetting(team=team,
                               goal_percent_reduction=5,
-                              warning_percent_reduction=3,
                               manual_entry=False,
                               manual_entry_time=datetime.time(15),
                               goal_points=20).save()
@@ -244,7 +243,6 @@ class Command(MakahikiBaseCommand):
         for team in Team.objects.all():
             WaterGoalSetting(team=team,
                               goal_percent_reduction=5,
-                              warning_percent_reduction=3,
                               manual_entry=True,
                               manual_entry_time=datetime.time(15),
                               goal_points=20).save()

@@ -108,7 +108,7 @@ def get_level_actions(user):
                 if categories:
                     level.cat_list = categories
 
-            level.is_complete = completed_level(user, level.priority)
+                level.is_complete = completed_level(user, level.priority)
             levels.append(level)
 
         # Cache the categories for 30 minutes (or until they are invalidated)

@@ -146,6 +146,7 @@
     }
 
     function task_form_overlay(event) {
+    	addClass(document.getElementById('go-button'), 'hidden');
         var modalElement = $('#taskModal');
         removeClass(document.getElementById('taskModal'), 'hidden');
 //         modalElement.modal({
@@ -170,4 +171,9 @@
 
     }
 
+    function hide_task_form_overlay() {
+        removeClass(document.getElementById('go-button'), 'hidden');
+    	addClass(document.getElementById('taskModal'), 'hidden');
+    	return false;
+    }
 </script>

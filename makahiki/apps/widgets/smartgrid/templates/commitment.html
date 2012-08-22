@@ -21,7 +21,7 @@
     {% if action.can_commit %}
         {% if action.social_bonus > 0 %}
             <a onclick="task_form_overlay(event)">
-                <button style="cursor:pointer;" class="btn btn-widget">I will do this!
+                <button id="go-button" style="cursor:pointer;" class="btn btn-widget">I will do this!
                     <img src="{{ STATIC_URL}}images/right.png"
                          width="25" align="center">
                 </button>
@@ -50,7 +50,7 @@
     {% if action.member.approval_status == "approved" and action.can_commit %}
         {% if action.can_commit %}
             <a onclick="task_form_overlay(event)">
-                <button style="cursor:pointer;" class="btn btn-widget">I will do this again!
+                <button id="go-button" style="cursor:pointer;" class="btn btn-widget">I will do this again!
                     <img src="{{ STATIC_URL}}images/right.png" width="25" align="center">
                 </button>
             </a>
@@ -69,7 +69,7 @@
             </form>
         {% else %}
             <a onclick="task_form_overlay(event)">
-                <button style="cursor:pointer;" class="btn btn-widget">I Did it
+                <button id="go-button" style="cursor:pointer;" class="btn btn-widget">I Did it
                     <img src="{{ STATIC_URL}}images/right.png" width="25" align="center">
                 </button>
             </a>

@@ -1,0 +1,390 @@
+[
+  {
+    "pk": 1, 
+    "model": "team_mgr.group",
+    "fields": {
+      "name": "Lehua", 
+      "slug": "hale-lehua"
+    }
+  }, 
+  {
+    "pk": 2, 
+    "model": "team_mgr.group",
+    "fields": {
+      "name": "Ilima", 
+      "slug": "hale-ilima"
+    }
+  }, 
+  {
+    "pk": 3, 
+    "model": "team_mgr.group",
+    "fields": {
+      "name": "Mokihana", 
+      "slug": "hale-mokihana"
+    }
+  }, 
+  {
+    "pk": 4,
+    "model": "team_mgr.group",
+    "fields": {
+      "name": "Lokelani",
+      "slug": "hale-lokelani"
+    }
+  },
+  {
+    "pk": 1, 
+    "model": "team_mgr.team",
+    "fields": {
+      "group": 1,
+      "name": "Lehua-A",
+      "slug": "Lehua-A"
+    }
+  },
+  {
+    "pk": 2,
+    "model": "team_mgr.team",
+    "fields": {
+      "group": 2,
+      "name": "Ilima-A",
+      "slug": "Ilima-A"
+    }
+  },
+  {
+    "pk": 3,
+    "model": "team_mgr.team",
+    "fields": {
+      "group": 3,
+      "name": "Mokihana-A",
+      "slug": "Mokihana-A"
+    }
+  },
+  {
+    "pk": 4,
+    "model": "team_mgr.team",
+    "fields": {
+      "group": 1,
+      "name": "Lehua-B",
+      "slug": "Lehua-B"
+    }
+  },
+  {
+    "pk": 5,
+    "model": "team_mgr.team",
+    "fields": {
+      "group": 1,
+      "name": "Lehua-C",
+        "slug": "Lehua-C"
+    }
+  },
+  {
+    "pk": 6,
+    "model": "team_mgr.team",
+    "fields": {
+      "group": 1,
+      "name": "Lehua-D",
+        "slug": "Lehua-D"
+    }
+  },
+  {
+    "pk": 7,
+    "model": "team_mgr.team",
+    "fields": {
+      "group": 1,
+      "name": "Lehua-E",
+        "slug": "Lehua-E"
+    }
+  },
+  {
+    "pk": 8,
+    "model": "team_mgr.team",
+    "fields": {
+      "group": 2,
+      "name": "Ilima-B",
+        "slug": "Ilima-B"
+    }
+  },
+  {
+    "pk": 9,
+    "model": "team_mgr.team",
+    "fields": {
+      "group": 2,
+      "name": "Ilima-C",
+        "slug": "Ilima-C"
+    }
+  },
+  {
+    "pk": 10,
+    "model": "team_mgr.team",
+    "fields": {
+      "group": 2,
+      "name": "Ilima-D",
+        "slug": "Ilima-D"
+    }
+  },
+  {
+    "pk": 11,
+    "model": "team_mgr.team",
+    "fields": {
+      "group": 2,
+      "name": "Ilima-E",
+        "slug": "Ilima-E"
+    }
+  },
+  {
+    "pk": 12,
+    "model": "team_mgr.team",
+    "fields": {
+      "group": 3,
+      "name": "Mokihana-B",
+        "slug": "Mokihana-B"
+    }
+  },
+  {
+    "pk": 13,
+    "model": "team_mgr.team",
+    "fields": {
+      "group": 3,
+      "name": "Mokihana-C",
+        "slug": "Mokihana-C"
+    }
+  },
+  {
+    "pk": 14,
+    "model": "team_mgr.team",
+    "fields": {
+      "group": 3,
+      "name": "Mokihana-D",
+        "slug": "Mokihana-D"
+    }
+  },
+  {
+    "pk": 15,
+    "model": "team_mgr.team",
+    "fields": {
+      "group": 3,
+      "name": "Mokihana-E",
+        "slug": "Mokihana-E"
+    }
+  },
+  {
+    "pk": 16,
+    "model": "team_mgr.team",
+    "fields": {
+      "group": 4,
+      "name": "Lokelani-A",
+        "slug": "Lokelani-A"
+    }
+  },
+  {
+    "pk": 17,
+    "model": "team_mgr.team",
+    "fields": {
+      "group": 4,
+      "name": "Lokelani-B",
+        "slug": "Lokelani-B"
+    }
+  },
+  {
+    "pk": 18,
+    "model": "team_mgr.team",
+    "fields": {
+      "group": 4,
+      "name": "Lokelani-C",
+        "slug": "Lokelani-C"
+    }
+  },
+  {
+    "pk": 19,
+    "model": "team_mgr.team",
+    "fields": {
+      "group": 4,
+      "name": "Lokelani-D",
+        "slug": "Lokelani-D"
+    }
+  },
+  {
+    "pk": 20,
+    "model": "team_mgr.team",
+    "fields": {
+      "group": 4,
+      "name": "Lokelani-E",
+        "slug": "Lokelani-E"
+    }
+  },
+  {
+    "pk": 1,
+    "model": "auth.user",
+    "fields": {
+      "username": "gelee",
+      "first_name": "George",
+      "last_name": "Lee",
+      "is_active": true,
+      "is_superuser": true,
+      "is_staff": true,
+      "groups": [],
+      "user_permissions": [],
+      "email": "gelee@hawaii.edu",
+      "date_joined": "2010-06-24 22:01:32"
+    }
+  },
+  {
+    "pk": 2,
+    "model": "auth.user",
+    "fields": {
+      "username": "johnson",
+      "first_name": "Philip",
+      "last_name": "Johnson",
+      "is_active": true,
+      "is_superuser": true,
+      "is_staff": true,
+      "groups": [],
+      "user_permissions": [],
+      "email": "johnson@hawaii.edu",
+      "date_joined": "2010-06-24 22:11:13"
+    }
+  },
+    {
+        "pk": 3,
+        "model": "auth.user",
+        "fields": {
+            "username": "rbrewer",
+            "first_name": "Robert",
+            "last_name": "Brewer",
+            "is_active": true,
+            "is_superuser": true,
+            "is_staff": true,
+            "groups": [],
+            "user_permissions": [],
+            "email": "rbrewer@hawaii.edu",
+            "date_joined": "2011-07-01 21:09:03"
+        }
+    },
+    {
+        "pk": 4,
+        "model": "auth.user",
+        "fields": {
+            "username": "yxu",
+            "first_name": "Yongwen",
+            "last_name": "Xu",
+            "is_active": true,
+            "is_superuser": true,
+            "is_staff": true,
+            "groups": [],
+            "user_permissions": [],
+            "email": "yxu@hawaii.edu",
+            "date_joined": "2011-06-30 13:46:27"
+        }
+    },
+    {
+    "pk": 5,
+    "model": "auth.user",
+    "fields": {
+      "username": "gburgess",
+      "first_name": "Greg",
+      "last_name": "Burgess",
+      "is_active": true,
+      "is_superuser": true,
+      "is_staff": true,
+      "groups": [],
+      "user_permissions": [],
+      "email": "gburgess@hawaii.edu",
+      "date_joined": "2011-06-29 17:53:01"
+    }
+  },
+  {
+    "pk": 7,
+    "model": "auth.user",
+    "fields": {
+      "username": "cmoore",
+      "first_name": "Cam",
+      "last_name": "Moore",
+      "is_active": true,
+      "is_superuser": true,
+      "is_staff": true,
+      "groups": [],
+      "user_permissions": [],
+      "password": "sha1$7c360$6fccb69328988b8a57b5debf73b2704b1917c26c",
+      "email": "cammymoore07@gmail.com",
+      "date_joined": "2012-02-15 22:01:32"
+    }
+  },
+  {
+    "pk": 1,
+    "model": "player_mgr.profile",
+    "fields": {
+      "name": "George L.",
+      "team": 10,
+      "setup_complete": false,
+      "contact_text": "",
+      "user": 1,
+      "contact_carrier": null,
+      "setup_profile": false
+    }
+  },
+  {
+    "pk": 2,
+    "model": "player_mgr.profile",
+    "fields": {
+      "name": "pmj",
+      "team": 11,
+      "setup_complete": false,
+      "contact_text": "808-888-8888",
+      "user": 2,
+      "contact_carrier": "verizon",
+      "setup_profile": false
+    }
+  },
+
+  {
+    "pk": 3,
+    "model": "player_mgr.profile",
+    "fields": {
+      "name": "Robert McFly",
+      "team": 12,
+      "setup_complete": false,
+      "contact_text": "",
+      "user": 3,
+      "contact_carrier": null,
+      "setup_profile": false
+    }
+  },
+    {
+        "pk": 4,
+        "model": "player_mgr.profile",
+        "fields": {
+            "name": "Yongwen X.",
+            "team": 13,
+            "setup_complete": false,
+            "contact_text": "",
+            "user": 4,
+            "contact_carrier": null,
+            "setup_profile": false
+        }
+    },
+    {
+        "pk": 5,
+        "model": "player_mgr.profile",
+        "fields": {
+            "name": "Greg B.",
+            "team": 14,
+            "setup_complete": true,
+            "contact_text": "",
+            "user": 5,
+            "contact_carrier": null,
+            "setup_profile": false
+        }
+    },
+  {
+    "pk": 7,
+    "model": "player_mgr.profile",
+    "fields": {
+      "name": "Cam",
+      "team": 11,
+      "setup_complete": false,
+      "contact_text": "",
+      "user": 7,
+      "contact_carrier": null,
+      "setup_profile": false
+    }
+  }
+]

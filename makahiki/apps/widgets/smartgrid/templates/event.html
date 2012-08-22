@@ -19,6 +19,7 @@
 
 {% block action_not_completed %}
         {% if action.event.is_event_completed %}
+        <div id="go-button">
             <b>This event was already completed at {{ action.event.event_date }} <br/>
                 If you attended the event, Click on the "I Did it" button to get
                 your points. <p/>
@@ -30,6 +31,7 @@
                     </button>
                 </a>
             </b>
+        </div>
         {% else %}
             {% if action.available_seat > 0 %}
                 {# <a href="{% url activity_add_task action.type action.slug %}"> #}
@@ -54,11 +56,13 @@
 {% block action_completed_button %}
     {% if action.member.approval_status != "approved" %}
         {% if action.event.is_event_completed %}
+        <div id='go-button'>
             <a onclick="task_form_overlay(event)">
                 <button style="cursor:pointer;" class="btn btn-wdiget">I Did it
                     <img src="{{ STATIC_URL}}images/right.png" width="25" align="center">
                 </button>
             </a>
+        </div>
         {% else %}
             <form action='{% url activity_drop_task action.type action.slug %}'
                   method='post'>
