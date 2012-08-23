@@ -47,6 +47,10 @@ class Avatar(models.Model):
 
         super(Avatar, self).save(*args, **kwargs)
 
+        # Invalidate info bar cache.
+        cache_mgr.invalidate_template_cache("RIB", self.user.username)
+
+
     def thumbnail_exists(self, size):
         return self.avatar.storage.exists(self.avatar_name(size))
 
