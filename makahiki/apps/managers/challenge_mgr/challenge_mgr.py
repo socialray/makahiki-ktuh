@@ -27,21 +27,18 @@ _sys_admin_models = {}
 def init():
     """Initialize the challenge."""
 
-    if settings.DEBUG:
-        import logging
+    #if settings.DEBUG:
+    #    import logging
     #    logger = logging.getLogger('django.db.backends')
     #    logger.setLevel(logging.DEBUG)
     #    logger.addHandler(logging.StreamHandler())
 
-        logger = logging.getLogger('django_auth_ldap')
-        logger.addHandler(logging.StreamHandler())
-        logger.setLevel(logging.DEBUG)
+    #    logger = logging.getLogger('django_auth_ldap')
+    #    logger.addHandler(logging.StreamHandler())
+    #    logger.setLevel(logging.DEBUG)
 
     # set the CHALLENGE setting from DB or cache
     set_challenge_settings(get_challenge())
-
-    # create the admin
-    create_admin_user()
 
 
 def create_admin_user():
@@ -49,7 +46,8 @@ def create_admin_user():
     Creates the admin user if it does not exist. Otherwise, reset the password to the ENV."""
     try:
         user = User.objects.get(username=settings.ADMIN_USER)
-        if not user.check_password(settings.ADMIN_PASSWORD):
+
+        if settings.MAKAHIKI_DEBUG and not user.check_password(settings.ADMIN_PASSWORD):
             user.set_password(settings.ADMIN_PASSWORD)
             user.save()
     except ObjectDoesNotExist:
@@ -74,6 +72,10 @@ def get_challenge():
     challenge = cache_mgr.get_cache('challenge')
     if not challenge:
         challenge, _ = ChallengeSetting.objects.get_or_create(pk=1)
+
+        # create the admin
+        create_admin_user()
+
         cache_mgr.set_cache('challenge', challenge, 2592000)
     return challenge
 
@@ -188,66 +190,57 @@ def available_widgets():
 
 def get_all_round_info():
     """Returns a dictionary containing all the round information.
-    example: {"Round 1": {"start": start_date, "end": end_date,},
+    example: {"rounds": {"Round 1": {"start": start_date, "end": end_date,},},
               "competition_start": start_date,
               "competition_end": end_date}
     """
-    rounds = cache_mgr.get_cache('rounds')
-    if not rounds:
+    rounds_info = cache_mgr.get_cache('rounds')
+    if not rounds_info:
         roundsettings = RoundSetting.objects.all()
         if not roundsettings:
             RoundSetting.objects.create()
             roundsettings = RoundSetting.objects.all()
+        rounds_info = {}
         rounds = {}
+        index = 0
+        # roundsettings is ordered by "start"
+        r = None
         for r in roundsettings:
             rounds[r.name] = {
                 "start": r.start,
                 "end": r.end, }
-        cache_mgr.set_cache('rounds', rounds, 2592000)
-    return rounds
+            if index == 0:
+                rounds_info["competition_start"] = r.start
+            index += 1
 
+        rounds_info["competition_end"] = r.end
+        rounds_info["rounds"] = rounds
+        cache_mgr.set_cache('rounds', rounds_info, 2592000)
 
-def get_competition_start():
-    """return the start date of competition."""
-    rounds = get_all_round_info()
-    start = None
-    for key in rounds:
-        round_start = rounds[key]["start"]
-        if not start:
-            start = round_start
-        elif start > round_start:
-            start = round_start
-    return start
-
-
-def get_competition_end():
-    """return the end date of competition."""
-    rounds = get_all_round_info()
-    end = None
-    for key in rounds:
-        round_end = rounds[key]["end"]
-        if not end:
-            end = round_end
-        elif end < round_end:
-            end = round_end
-    return end
+    return rounds_info
 
 
 def get_round_info(round_name=None):
     """Returns a dictionary containing round information, if round_name is not specified,
     returns the current round info. if competition end, return the last round.
     example: {"name": round_name, "start": start_date, "end": end_date,} """
-    rounds = get_all_round_info()
+    rounds = get_all_round_info()["rounds"]
     if not round_name:
-        round_name = get_round_name()
+        # Find which round this belongs to.
+        today = datetime.datetime.today()
+        key = None
+        for key in rounds:
+            start = rounds[key]["start"]
+            end = rounds[key]["end"]
+            if start <= today < end:
+                break
 
-    if round_name in rounds:
-        return {"name": round_name,
-                "start": rounds[round_name]['start'],
-                "end": rounds[round_name]['end'],
-                }
-    else:
-        return None
+        round_name = key
+
+    return {"name": round_name,
+            "start": rounds[round_name]['start'],
+            "end": rounds[round_name]['end'],
+            }
 
 
 def get_round_name(submission_date=None):
@@ -255,19 +248,20 @@ def get_round_name(submission_date=None):
     if submission_date is not specified, return the current round name.
     if competition not started, return None,
     if competition end, return the last round."""
-    rounds = get_all_round_info()
+    rounds_info = get_all_round_info()
     if not submission_date:
         submission_date = datetime.datetime.today()
 
-    if submission_date < get_competition_start():
+    if submission_date < rounds_info["competition_start"]:
         return None
 
     # Find which round this belongs to.
     key = None
+    rounds = rounds_info["rounds"]
     for key in rounds:
         start = rounds[key]["start"]
         end = rounds[key]["end"]
-        if submission_date >= start and submission_date < end:
+        if start <= submission_date < end:
             return key
 
     return key
@@ -276,7 +270,8 @@ def get_round_name(submission_date=None):
 def in_competition():
     """Return True if we are currently in the competition."""
     today = datetime.datetime.today()
-    return get_competition_start() < today and today < get_competition_end()
+    rounds_info = get_all_round_info()
+    return rounds_info["competition_start"] < today < rounds_info["competition_end"]
 
 
 def get_game_admin_models():

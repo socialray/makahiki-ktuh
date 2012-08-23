@@ -1,0 +1,15 @@
+{% extends "admin/change_list.html" %}
+{% load i18n admin_static admin_list %}
+{% load url from future %}
+{% load admin_urls %}
+
+{% block object-tools-items %}
+    <li>
+        <a href="{% url cl.opts|admin_urlname:'add' %}" class="addlink">
+            {% blocktrans with cl.opts.verbose_name as name %}Add {{ name }}{% endblocktrans %}
+        </a>
+    </li>
+    <li>
+        <a href="/player/bulk_upload_form/" class="addlink">Bulk create users</a>
+    </li>
+{% endblock %}

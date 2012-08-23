@@ -1,3 +1,6 @@
+{% load cache %}
+{% cache 1800 smartgrid request.user %}
+
 <div class="content-box-centered">
     <div class="content-box-title">
         The Smart Grid Game
@@ -182,3 +185,4 @@
         modalElement.modal('show');     
     }
 </script>
+{%  endcache %}

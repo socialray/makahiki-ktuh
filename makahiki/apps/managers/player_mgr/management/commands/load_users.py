@@ -7,7 +7,6 @@ team, firstname, lastname, email, username, password[, RA]
 quoting around the column is supported.
 
 """
-import csv
 from django.core import management
 from apps.managers.player_mgr import player_mgr
 
@@ -16,14 +15,6 @@ class Command(management.base.BaseCommand):
     """Load user command."""
 
     help = "manage.py load_users <file.csv> \n load and create the users from a csv file."
-
-    lastname = None
-    firstname = None
-    username = None
-    email = None
-    password = None
-    team = None
-    is_ra = False
 
     def handle(self, *args, **options):
         """Load and create the users from a csv file containing team, name, and email."""
@@ -39,33 +30,7 @@ class Command(management.base.BaseCommand):
                 "Can not open the file: %s , Aborting.\n" % (filename))
             return
 
-        load_count = 0
-        reader = csv.reader(infile)
-        for row in reader:
-            self.parse(row)
-            player_mgr.create_player(self.username, self.password, self.email, self.firstname,
-                                     self.lastname, self.team, self.is_ra)
-            load_count += 1
+        load_count = player_mgr.bulk_create_players(infile)
 
         infile.close()
         print "---- total loaded: %d" % (load_count)
-
-    def parse(self, items):
-        """Parse the line."""
-
-        self.team = items[0].strip()
-
-        self.firstname = items[1].strip().capitalize()
-        self.lastname = items[2].strip().capitalize()
-
-        self.email = items[3].strip()
-        self.username = items[4].strip()
-        self.password = items[5].strip()
-
-        if len(items) == 7:
-            self.is_ra = True if items[6].strip().lower() == "ra" else False
-        else:
-            self.is_ra = False
-
-        print "%s,%s,%s,%s,%s,%s" % (self.team, self.firstname, self.lastname, self.email,
-          self.username, self.is_ra)

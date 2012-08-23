@@ -53,7 +53,7 @@ class ProfileAdmin(admin.ModelAdmin):
 
 
 admin.site.register(Profile, ProfileAdmin)
-challenge_mgr.register_site_admin_model("Players", Profile)
+#challenge_mgr.register_site_admin_model("Players", Profile)
 
 
 class MakahikiUserAdmin(UserAdmin):

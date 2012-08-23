@@ -1,0 +1,29 @@
+{% extends "admin/base_site.html" %}
+{% load i18n l10n %}
+{% load url from future %}
+{% load admin_urls %}
+
+{% block breadcrumbs %}
+    <div class="breadcrumbs">
+        <a href="{% url 'admin:index' %}">{% trans 'Home' %}</a>
+        &rsaquo; <a href="/admin/auth/user/">User</a>
+        &rsaquo; Add Bonus Points
+    </div>
+{% endblock %}
+
+{% block content %}
+        <div style="background-color: white;">
+            <h4 class="no-top">Upload a CSV file.</h4>
+            <p>
+                Click the Choose File button to select the CSV file that contains user information.
+            </p>
+            <form enctype="multipart/form-data" method="POST" action="{% url 'bulk_create' %}">
+                {% csrf_token %}
+                {% if file_error %}
+                    <div style="color: red">{{file_error}}</div>
+                {% endif %}
+                <input id="browser" type="file" name="csvfile" value="CSV File" /></br>
+                <button id="submit" class="btn" type="submit" style="" >Upload</button>
+            </form>
+        </div>
+{% endblock %}

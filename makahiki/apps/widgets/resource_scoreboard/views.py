@@ -22,7 +22,7 @@ def resource_supply(request, resource, page_name):
     round_resource_goal_ranks = {}
 
     current_round = challenge_mgr.get_round_name()
-    rounds = challenge_mgr.get_all_round_info()
+    rounds = challenge_mgr.get_all_round_info()["rounds"]
     for key in rounds.keys():
         if key == current_round or page_name == "status":
             round_resource_ranks[key] = resource_mgr.resource_ranks(resource, key)
