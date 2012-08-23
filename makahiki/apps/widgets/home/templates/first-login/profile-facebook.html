@@ -2,50 +2,53 @@
 {% if fb_id %}
     <input type="radio" name="pic_method" value="2" class="radio-input" onChange="showform()"> Use your picture from Facebook:</h4>
     <h4 style="margin-top: 0px">Use your picture from Facebook:</h4>
-    <img src="http://graph.facebook.com/{{fb_id}}/picture"/>
-    {{ form.facebook_photo }}
+    <div id="fbupload">
+        <img src="http://graph.facebook.com/{{fb_id}}/picture"/>
+        {{ form.facebook_photo }}
+    </div>
 {% else %}
 <input type="radio" name="pic_method" value="2" class="radio-input" onChange="showform()"> Use your picture from Facebook:</h4>
-<div id="avatar-fb-form" style="display: none">
-    <h4 style="margin-top: 0px">
-        <img src=""/>
-    <div id="fbupload" style="">
-      {{ form.facebook_photo }}
+<div id="fbupload">
+    <div id="avatar-fb-form" style="display: none">
+        <h4 style="margin-top: 0px">
+            <img src=""/>
+        <div id="fbupload" style="">
+          {{ form.facebook_photo }}
+        </div>
     </div>
+    <div id="avatar-fb-login">
+        <p id="avatar-fb-error" style='margin-top: 0'></p>
+        <fb:login-button style="display: block"
+                         id="fb_login" length="long">
+        </fb:login-button>
+    </div>
+
+        <script type="text/javascript">
+            FB.init({
+                appId      : '{{ MAKAHIKI_FACEBOOK_APP_ID }}',
+                status     : true, // check login status
+                cookie     : true, // enable cookies to allow the server to access the session
+                xfbml      : true  // parse XFBML
+            });
+
+            // listen for and handle auth.statusChange events
+            FB.Event.subscribe('auth.statusChange', function(response) {
+                if (response.authResponse) {
+                    // user has auth'd your app and is logged into Facebook
+                    FB.api('/me', function(me){
+                        if (me.id) {
+                            var pictureUrl = "http://graph.facebook.com/" + me.id + "/picture";
+                            $("#avatar-fb-form img").attr("src", pictureUrl);
+                            $("#id_facebook_photo").attr("value", pictureUrl);
+                        }
+                    });
+
+                    $("#avatar-fb-form").fadeIn();
+                    $("#avatar-fb-login").fadeOut();
+                    $('#profile-submit').removeAttr('disabled');
+                }
+            });
+
+        </script>
 </div>
-<div id="avatar-fb-login">
-    <p id="avatar-fb-error" style='margin-top: 0'></p>
-    <fb:login-button style="display: block"
-                     id="fb_login" length="long">
-    </fb:login-button>
-</div>
-
-    <script type="text/javascript">
-        FB.init({
-            appId      : '{{ MAKAHIKI_FACEBOOK_APP_ID }}',
-            status     : true, // check login status
-            cookie     : true, // enable cookies to allow the server to access the session
-            xfbml      : true  // parse XFBML
-        });
-
-        // listen for and handle auth.statusChange events
-        FB.Event.subscribe('auth.statusChange', function(response) {
-            if (response.authResponse) {
-                // user has auth'd your app and is logged into Facebook
-                FB.api('/me', function(me){
-                    if (me.id) {
-                        var pictureUrl = "http://graph.facebook.com/" + me.id + "/picture";
-                        $("#avatar-fb-form img").attr("src", pictureUrl);
-                        $("#id_facebook_photo").attr("value", pictureUrl);
-                    }
-                });
-
-                $("#avatar-fb-form").fadeIn();
-                $("#avatar-fb-login").fadeOut();
-                $('#profile-submit').removeAttr('disabled');
-            }
-        });
-
-    </script>
-
 {%  endif %}

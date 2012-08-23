@@ -24,7 +24,7 @@
       
       <div class="row-fluid">
           <div class="span12">
-                <h3>Choose A Profile Picture</h3>
+                <h3>Choose A Profile Picture (optional)</h3>
                 <div class="setup-form-photo">
                     <p>Current profile picture:</p>
                     {% avatar user size=80 first_login='True' %}
@@ -41,7 +41,7 @@
                       <div id="defpic" style="">
                           {% avatar user size=80 first_login='True' default='True' %}
                       </div>
-                      <p><input type="radio" name="pic_method" class="radio-input" value="1" onChange="showform()" {% if av_changed %}checked {% endif %}> Upload a new picture (optional):</p>
+                      <p><input type="radio" name="pic_method" class="radio-input" value="1" onChange="showform()" {% if av_changed %}checked {% endif %}> Upload a new picture:</p>
                       <div id="upload" style="">                      
                         {{ form.avatar }} 
                       </div>
