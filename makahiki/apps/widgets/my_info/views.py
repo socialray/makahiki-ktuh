@@ -1,4 +1,5 @@
 """Provides the view of the My_Info widget, which both displays profile info and allows updates."""
+from apps.managers.cache_mgr import cache_mgr
 from apps.managers.challenge_mgr import challenge_mgr
 from apps.widgets.my_info.forms import ProfileForm
 
@@ -29,6 +30,10 @@ def supply(request, page_name):
             profile.contact_carrier = form.cleaned_data["contact_carrier"]
 
             profile.save()
+
+            # Invalidate info bar cache.
+            cache_mgr.invalidate_template_cache("RIB", user.username)
+
             form.message = "Your changes have been saved"
 
         else:
