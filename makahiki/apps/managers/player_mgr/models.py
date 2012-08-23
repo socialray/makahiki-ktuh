@@ -116,7 +116,7 @@ def create_profile(sender, instance=None, **kwargs):
             lastname = instance.last_name.capitalize()
             profile.name = "%s %s." % (firstname, lastname[:1])
 
-            if Profile.objects.filter(name=profile.name).exists():
+            if Profile.objects.filter(name=profile.name).exclude(user=instance).exists():
                 profile.name = firstname + " " + lastname
         else:
             profile.name = instance.username
