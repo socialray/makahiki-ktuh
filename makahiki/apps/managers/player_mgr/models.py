@@ -111,9 +111,13 @@ def create_profile(sender, instance=None, **kwargs):
     _ = sender
     if not kwargs.get('raw', False):
         profile, _ = Profile.objects.get_or_create(user=instance)
-        if instance.first_name or instance.last_name:
-            profile.name = "%s %s." % (instance.first_name.capitalize(),
-                                       instance.last_name[:1].capitalize())
+        if instance.first_name and instance.last_name:
+            firstname = instance.first_name.capitalize()
+            lastname = instance.last_name.capitalize()
+            profile.name = "%s %s." % (firstname, lastname[:1])
+
+            if Profile.objects.filter(name=profile.name).exists():
+                profile.name = firstname + " " + lastname
         else:
             profile.name = instance.username
         profile.save()

@@ -1,8 +1,8 @@
 """The manager for managing players."""
+import csv
 
 from django.contrib.auth.models import User
 from django.core.exceptions import ObjectDoesNotExist
-from django.db.utils import IntegrityError
 from apps.managers.player_mgr.models import Profile
 from apps.managers.score_mgr import score_mgr
 from apps.managers.team_mgr.models import Team
@@ -66,7 +66,6 @@ def create_player(username, password, email, firstname, lastname, team_name, is_
     user.save()
 
     profile = user.get_profile()
-    profile.name = firstname + " " + lastname[:1] + "."
     profile.is_ra = is_ra
 
     try:
@@ -75,11 +74,34 @@ def create_player(username, password, email, firstname, lastname, team_name, is_
         print "Can not find team '%s', set the team of the player '%s' to None." % \
               (team_name, profile.name)
 
-    try:
-        profile.save()
-    except IntegrityError:
-        profile.name = firstname + " " + lastname
-        profile.save()
+    profile.save()
+
+
+def bulk_create_players(infile):
+    """bulk create players from a csv file. Returns the number of user created."""
+
+    load_count = 0
+    reader = csv.reader(infile)
+    for items in reader:
+        team = items[0].strip()
+
+        firstname = items[1].strip().capitalize()
+        lastname = items[2].strip().capitalize()
+
+        email = items[3].strip()
+        username = items[4].strip()
+        password = items[5].strip()
+
+        if len(items) == 7:
+            is_ra = True if items[6].strip().lower() == "ra" else False
+        else:
+            is_ra = False
+
+        #print "%s,%s,%s,%s,%s,%s" % (team, firstname, lastname, email, username, is_ra)
+        create_player(username, password, email, firstname, lastname, team, is_ra)
+
+        load_count += 1
+    return load_count
 
 
 def reset_user(user):
