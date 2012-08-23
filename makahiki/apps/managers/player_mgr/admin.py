@@ -58,7 +58,25 @@ admin.site.register(Profile, ProfileAdmin)
 
 class MakahikiUserAdmin(UserAdmin):
     """extends the UserAdmin for the user admin interface."""
-    list_display = ('username', 'email', 'first_name', 'last_name', 'is_staff', "profile", 'team')
+    list_display = ('username', 'email', 'first_name', 'last_name', 'is_active',
+                    'is_staff', "profile", 'team')
+    actions = ["set_active", "set_inactive"]
+
+    def set_active(self, request, queryset):
+        """set the active flag priority."""
+        _ = request
+        for obj in queryset:
+            obj.is_active = True
+            obj.save()
+    set_active.short_description = "Activate the selected users."
+
+    def set_inactive(self, request, queryset):
+        """set the active flag priority."""
+        _ = request
+        for obj in queryset:
+            obj.is_active = False
+            obj.save()
+    set_inactive.short_description = "Deactivate the selected users."
 
     def team(self, obj):
         """return the user name."""

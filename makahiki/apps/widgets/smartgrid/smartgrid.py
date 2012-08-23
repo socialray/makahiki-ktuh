@@ -481,7 +481,8 @@ def check_new_submissions():
                 challenge = challenge_mgr.get_challenge()
                 subject = "[%s] %d New Pending Action Submissions" % (challenge.competition_name,
                                                                       submission_count)
-                message = "There are %d new pending action submissions now." % submission_count
+                message = "There are %d new pending action submissions as of %s." % (
+                    submission_count, datetime.datetime.today())
 
                 if challenge.email_enabled and challenge.contact_email:
                     print "Sending new submission notification to %s" % challenge.contact_email
@@ -506,7 +507,8 @@ def check_daily_submissions():
         challenge = challenge_mgr.get_challenge()
         subject = "[%s] %d Remaining Pending Action Submissions" % (challenge.competition_name,
                                                                     submission_count)
-        message = "There are %d remaining pending action submissions for today." % submission_count
+        message = "There are %d remaining pending action submissions as of %s." % (
+            submission_count, datetime.datetime.today())
 
         if challenge.email_enabled and challenge.contact_email:
             print "Sending new submission notification to %s" % challenge.contact_email
