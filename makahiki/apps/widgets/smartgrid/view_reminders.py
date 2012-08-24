@@ -105,7 +105,7 @@ def reminder(request, action_type, slug):
 def load_reminders(action, user):
     """Load the reminders."""
     reminders = {}
-    if action.type == "event" or action.type == "excursion":
+    if action.type in ("event", "excursion"):
         # Store initial reminder fields.
         reminder_init = {"email": user.email,
             "text_number": user.get_profile().contact_text,

@@ -75,9 +75,6 @@ def get_username(request):
     # Retrieve the username either from a cookie (when logging out) or
     # the authenticated user.
     username = "not-login"
-    if hasattr(request, "session") and "logged-out-user" in request.session:
-        username = request.session["logged-out-user"]
-        del request.session["logged-out-user"]
-    elif hasattr(request, "user") and request.user.is_authenticated():
-        username = request.user.username
+    if hasattr(request, "user"):
+        username = request.user
     return username

@@ -58,7 +58,7 @@ class Profile(models.Model):
 
     def user_link(self):
         """return the user first_name."""
-        return '<a href="%s/%d">%s</a>' % ("/admin/auth/user", self.user.pk, self.user.username)
+        return '<a href="%s/%d/">%s</a>' % ("/admin/auth/user", self.user.pk, self.user.username)
     user_link.allow_tags = True
     user_link.short_description = 'Link to User'
 
@@ -110,17 +110,18 @@ def create_profile(sender, instance=None, **kwargs):
     """ Create a profile automatically when creating a user."""
     _ = sender
     if not kwargs.get('raw', False):
-        profile, _ = Profile.objects.get_or_create(user=instance)
-        if instance.first_name and instance.last_name:
-            firstname = instance.first_name.capitalize()
-            lastname = instance.last_name.capitalize()
-            profile.name = "%s %s." % (firstname, lastname[:1])
+        profile, is_create = Profile.objects.get_or_create(user=instance)
+        if is_create or profile.name == instance.username:
+            if instance.first_name and instance.last_name:
+                firstname = instance.first_name.capitalize()
+                lastname = instance.last_name.capitalize()
+                profile.name = "%s %s." % (firstname, lastname[:1])
 
-            if Profile.objects.filter(name=profile.name).exclude(user=instance).exists():
-                profile.name = firstname + " " + lastname
-        else:
-            profile.name = instance.username
-        profile.save()
+                if Profile.objects.filter(name=profile.name).exclude(user=instance).exists():
+                    profile.name = firstname + " " + lastname
+            else:
+                profile.name = instance.username
+            profile.save()
 
 
 post_save.connect(create_profile, sender=User)

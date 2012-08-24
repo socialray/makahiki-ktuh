@@ -85,7 +85,7 @@ class MakahikiUserAdmin(UserAdmin):
 
     def profile(self, obj):
         """return the user profile."""
-        return '<a href="%s/%d">%s</a>' % ("/admin/player_mgr/profile",
+        return '<a href="%s/%d/">%s</a>' % ("/admin/player_mgr/profile",
                                            obj.get_profile().pk,
                                            obj.get_profile().name)
     profile.allow_tags = True

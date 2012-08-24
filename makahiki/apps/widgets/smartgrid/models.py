@@ -515,7 +515,7 @@ class ActionMember(models.Model):
                 self.award_date = datetime.datetime.today()
 
                 if self.submission_date:
-                    if self.action.type == "event":
+                    if self.action.type in ("event", "excursion"):
                         # this is an event with signup
                         # must save before awarding point due to the generic foreign key relation
                         super(ActionMember, self).save(args, kwargs)

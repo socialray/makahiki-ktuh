@@ -77,7 +77,7 @@ class ResourceUsage(models.Model):
         """Meta"""
         abstract = True
         unique_together = (("date", "team",),)
-        ordering = ("date", "team")
+        ordering = ("-date", "team")
 
 
 class EnergyUsage(ResourceUsage):

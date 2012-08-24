@@ -20,7 +20,7 @@
                 <div class="nav-collapse">
                     <ul class="nav">
                         <li {% if ACTIVE_PAGE == "home" %}class="active" {% endif %}>
-                                <a href="/home?ref=nav-button">
+                                <a href="/home/?ref=nav-button">
                                   <div class="home"></div>
                                     Home
                                 </a>
@@ -30,7 +30,7 @@
                           {% if page.is_unlock  %}
                             <!-- Choose the correct active page by adding active to the class list -->
                             <li {% if ACTIVE_PAGE == page.name %}class="active" {% endif %}>
-                                <a href="{{ page.url }}?ref=nav-button">
+                                <a href="{{ page.url }}/?ref=nav-button">
                                     <div class="{{ page.name }}"></div>
                                     {{ page.label }}
                                 </a>

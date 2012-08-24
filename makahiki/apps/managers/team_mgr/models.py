@@ -66,6 +66,10 @@ class Team(models.Model):
         else:
             return None
 
+    class Meta:
+        """Meta"""
+        ordering = ("group", "name")
+
 
 class Post(models.Model):
     """Represents a wall post on a user's wall."""

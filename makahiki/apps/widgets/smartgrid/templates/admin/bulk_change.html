@@ -6,7 +6,7 @@
 {% block breadcrumbs %}
     <div class="breadcrumbs">
         <a href="{% url 'admin:index' %}">{% trans 'Home' %}</a>
-        &rsaquo; <a href="/admin/smartgrid/{{ action_type }}">{{ action_type }}</a>
+        &rsaquo; <a href="/admin/smartgrid/{{ action_type }}/">{{ action_type }}</a>
         &rsaquo; Change {{ attribute }}
     </div>
 {% endblock %}

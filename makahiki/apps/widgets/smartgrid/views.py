@@ -63,7 +63,7 @@ def view_action(request, action_type, slug):
                 view_module_name).supply(request, None)
             view_objects['embedded_widget_template'] = "widgets/" + \
                 action.embedded_widget + "/templates/index.html"
-    elif action_type == "event" or action_type == "excursion":  # action.event:
+    elif action.type in ("event", "excursion"):  # action.event:
         form = view_events.view(request, action)
         # calculate available seat
         action.available_seat = action.event.event_max_seat - completed_count
@@ -161,7 +161,7 @@ def bulk_change(request, action_type, attribute):
                     action.category = None
                 action.save()
 
-        return HttpResponseRedirect("/admin/smartgrid/" + action_type)
+        return HttpResponseRedirect("/admin/smartgrid/%s/" % action_type)
     else:
         form = ChangeLevelForm(initial={"ids": action_ids})
         return render_to_response("admin/bulk_change.html", {
@@ -180,7 +180,7 @@ def action_admin(request, pk):
     action = Action.objects.get(pk=pk)
     action_type = action.type if action.type != "excursion" else "event"
 
-    return HttpResponseRedirect("/admin/smartgrid/%s/%s" % (action_type, pk))
+    return HttpResponseRedirect("/admin/smartgrid/%s/%s/" % (action_type, pk))
 
 
 @never_cache

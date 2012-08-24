@@ -63,7 +63,7 @@ def annotate_action_status(user, action):
         if action.type == "activity":
             duration = action.activity.duration
         else:  # is event
-            if action.type == "event":
+            if action.type in ("event", "excursion"):
                 duration = action.event.duration
             else:
                 duration = 0

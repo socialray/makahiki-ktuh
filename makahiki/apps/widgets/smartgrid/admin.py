@@ -212,10 +212,9 @@ class EventAdminForm(forms.ModelForm):
         cleaned_data = self.cleaned_data
 
         #1 Check that an event has an event date.
-        is_event = cleaned_data.get("type") == "event"
         event_date = cleaned_data.get("event_date")
         has_date = "event_date" in cleaned_data   # Check if this is in the data dict.
-        if is_event and has_date and not event_date:
+        if has_date and not event_date:
             self._errors["event_date"] = ErrorList([u"Events require an event date."])
             del cleaned_data["event_date"]
 

@@ -8,8 +8,7 @@ import re
 # Filter out requests to media and site_media.
 from apps.managers.log_mgr import log_mgr
 
-MEDIA_REGEXP = r'^\/(site_)?media'
-SENTRY_REGEXP = r'^\/sentry\/'
+MEDIA_REGEXP = r'^\/site_media'
 URL_FILTER = ("/favicon.ico", "/admin/jsi18n/")
 
 
@@ -21,7 +20,6 @@ class LoggingMiddleware(object):
         # Filter out the following paths.  Logs will not be created for these
         # paths.
         if re.match(MEDIA_REGEXP, request.path) or \
-           re.match(SENTRY_REGEXP, request.path) or \
            request.path in URL_FILTER:
             return response
 
