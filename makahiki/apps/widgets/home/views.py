@@ -143,8 +143,6 @@ def referral(request):
 @login_required
 def setup_profile(request):
     """Display page 4 (profile) of the first login wizard."""
-    if request.is_ajax():
-        return _get_profile_form(request)
 
     # Fields with file uploads are not AJAX requests.
     if request.method == "POST":
@@ -166,17 +164,6 @@ def setup_profile(request):
                 for avatar in Avatar.objects.filter(user=name):
                     avatar.delete()
 
-            if form.cleaned_data["pic_method"] == 1 and 'avatar' in request.FILES:
-                path = avatar_file_path(user=request.user,
-                    filename=request.FILES['avatar'].name)
-                avatar = Avatar(
-                    user=request.user,
-                    primary=True,
-                    avatar=path,
-                )
-                avatar.avatar.storage.save(path, request.FILES['avatar'])
-                avatar.save()
-
             elif form.cleaned_data["pic_method"] == 2 and form.cleaned_data["facebook_photo"]:
                 # Need to download the image from the url and save it.
                 photo_temp = NamedTemporaryFile(delete=True)
@@ -194,11 +181,8 @@ def setup_profile(request):
                 )
                 avatar.avatar.storage.save(path, File(photo_temp))
                 avatar.save()
-
-            return HttpResponseRedirect(reverse("setup_profile"))
-
-        return _get_profile_form(request, form=form, non_xhr=True)
-
+            return HttpResponseRedirect(reverse("setup_activity"))
+        return _get_profile_form(request, form=form, non_xhr=False)
     return _get_profile_form(request)
 
 

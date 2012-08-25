@@ -25,13 +25,6 @@ $(document).ready(function () {
         $(this).button("option", "disabled", false);
     });
 
-    $("#next").button().click(function () {
-        $(this).button("option", "disabled", true);
-        $.get("{% url setup_activity %}",showResponse);
-        $(this).button("option", "disabled", false);
-    });
-
-
     function enableSubmit() {
         if($('#id_avatar').val() != ''){
            $('#profile-submit').removeAttr('disabled');
