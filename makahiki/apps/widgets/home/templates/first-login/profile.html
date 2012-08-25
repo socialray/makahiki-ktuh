@@ -73,23 +73,9 @@
   <script type="text/javascript">
       {% include "first-login/profile.js" %}
 
-    function showform() {
-        var button_val = $('input[name=pic_method]:checked').val();
-        if (button_val == "0") {
+    function showform() { 
             document.getElementById("defpic").style.display = 'block';
-            document.getElementById("upload").style.display = 'none';
-            document.getElementById("fbupload").style.display = 'none';
-        } 
-        else if (button_val == "1") {
-            document.getElementById("defpic").style.display = 'none';
-            document.getElementById("upload").style.display = 'block';
-            document.getElementById("fbupload").style.display = 'none';
-        }
-        else if (button_val == "2") {   
-            document.getElementById("defpic").style.display = 'none';
-            document.getElementById("upload").style.display = 'none';
             document.getElementById("fbupload").style.display = 'block';
-        }
     }
   </script>
 </div>
