@@ -5,7 +5,7 @@
         "fields": {
             "title": "Bookstore Certificate ($25)",
             "round_name": "Round 1",
-            "image": "media/prizes/uh-bookstore.2.jpg",
+            "image": "media/prizes/uh-bookstore.jpg",
             "award_to": "individual_overall",
             "value": 25,
             "competition_type": "points",
@@ -19,7 +19,7 @@
         "fields": {
             "title": "Bookstore Certificate ($5)",
             "round_name": "Round 1",
-            "image": "media/prizes/uh-bookstore.2.jpg",
+            "image": "media/prizes/uh-bookstore.jpg",
             "award_to": "individual_team",
             "value": 5,
             "competition_type": "points",
@@ -33,7 +33,7 @@
         "fields": {
             "title": "Mochi Ice Cream Party",
             "round_name": "Round 1",
-            "image": "media/prizes/bubbies-mochi.3.jpg",
+            "image": "media/prizes/bubbies-mochi.jpg",
             "award_to": "team_overall",
             "value": 125,
             "competition_type": "points",
@@ -47,7 +47,7 @@
         "fields": {
             "title": "Cupcake Extravaganza",
             "round_name": "Round 1",
-            "image": "media/prizes/hokulani.2.jpg",
+            "image": "media/prizes/hokulani.jpg",
             "award_to": "team_overall",
             "value": 125,
             "competition_type": "energy",
@@ -61,7 +61,7 @@
         "fields": {
             "title": "iPad",
             "round_name": "Round 2",
-            "image": "media/prizes/iPad.2.jpg",
+            "image": "media/prizes/iPad.jpg",
             "award_to": "individual_overall",
             "value": 500,
             "competition_type": "points",
@@ -75,7 +75,7 @@
         "fields": {
             "title": "Yogurtland ($5)",
             "round_name": "Round 2",
-            "image": "media/prizes/bubbies-storefront_6.jpg",
+            "image": "media/prizes/yogurtland.jpg",
             "award_to": "individual_team",
             "value": 5,
             "competition_type": "points",
@@ -103,7 +103,7 @@
         "fields": {
             "title": "Energy Pizza Party",
             "round_name": "Round 2",
-            "image": "media/prizes/pizza.2.jpg",
+            "image": "media/prizes/pizza.jpg",
             "award_to": "team_overall",
             "value": 250,
             "competition_type": "energy",
@@ -117,7 +117,7 @@
         "fields": {
             "title": "Bookstore Certificate ($100)",
             "round_name": "Round 3",
-            "image": "media/prizes/uh-bookstore.2.jpg",
+            "image": "media/prizes/uh-bookstore.jpg",
             "award_to": "individual_overall",
             "value": 100,
             "competition_type": "points",
@@ -159,7 +159,7 @@
         "fields": {
             "title": "Mochi Party",
             "round_name": "Round 3",
-            "image": "media/prizes/bubbies-mochi.3.jpg",
+            "image": "media/prizes/bubbies-mochi.jpg",
             "award_to": "team_overall",
             "value": 125,
             "competition_type": "energy",

@@ -5,7 +5,7 @@
         "fields": {
             "title": "Amazon Certificate",
             "round_name": "Round 1",
-            "image": "media/prizes/amazon2.jpg",
+            "image": "media/prizes/amazon.jpg",
             "award_to": "individual_overall",
             "value": 20,
             "competition_type": "points",
@@ -19,7 +19,7 @@
         "fields": {
             "title": "Bubbies Certificate",
             "round_name": "Round 1",
-            "image": "media/prizes/bubbies-logo.2.jpg",
+            "image": "media/prizes/bubbies-logo.jpg",
             "award_to": "team_overall",
             "value": 5,
             "competition_type": "points",
@@ -34,7 +34,7 @@
             "description": "Bid on this to rock your very own Jack Johnson t-shirt from his To The Sea Tour.  Size: L",
             "title": "JJ tshirt (L)",
             "round_name": "Round 1",
-            "image": "media/prizes/jack-johnson-tshirt_1.jpg",
+            "image": "media/prizes/jack-johnson-tshirt.jpg",
             "winner": null,
             "value": 20
         }
@@ -46,7 +46,7 @@
             "description": "Bid on this to rock your very own Jack Johnson t-shirt from his To The Sea Tour.  Size: S",
             "title": "JJ tshirt (S)",
             "round_name": "Round 1",
-            "image": "media/prizes/jack-johnson-tshirt_3.jpg",
+            "image": "media/prizes/jack-johnson-tshirt.jpg",
             "winner": null,
             "value": 20
         }
