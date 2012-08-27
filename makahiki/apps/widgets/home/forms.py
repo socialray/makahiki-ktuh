@@ -93,6 +93,6 @@ class ProfileForm(forms.Form):
         if Profile.objects.exclude(user=self.user).filter(
             name=name).count() > 0:
             raise forms.ValidationError(
-                "%s is taken.  Please use another name.")
+                "'%s' is already taken.  Please use another name." % name)
 
         return name
