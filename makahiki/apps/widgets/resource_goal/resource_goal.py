@@ -111,8 +111,9 @@ def team_hourly_resource_baseline(date, team, resource):
     else:
         return 0
 
+
 def update_energy_baseline(end_date, weeks, method):
-    """calculate the energy baseline from the specified start_date and week period."""
+    """calculate the energy baseline from the specified end_date and week period."""
     session = requests.session()
 
     for team in Team.objects.all():
@@ -122,7 +123,7 @@ def update_energy_baseline(end_date, weeks, method):
 
 
 def cal_energy_baseline(session, team, method, end_date, weeks):
-    """calculate the fixed energy baseline from the specified start_date and week period."""
+    """calculate the fixed energy baseline from the specified end_date and week period."""
 
     # energy daily
     if method == "Fixed":
@@ -137,8 +138,6 @@ def cal_energy_baseline(session, team, method, end_date, weeks):
         baseline, _ = EnergyBaselineDaily.objects.get_or_create(team=team, day=date.weekday())
         baseline.usage = usage
         baseline.save()
-        print "created %d" % baseline.day
-    print 'team %s energy fixed baseline daily usage updated.' % team
 
     # energy hourly
     date = end_date
@@ -151,8 +150,8 @@ def cal_energy_baseline(session, team, method, end_date, weeks):
                                                                      hour=hour)
             baseline.usage = usage
             baseline.save()
-            print "created %d %d" % (baseline.day, baseline.hour)
-    print 'team %s energy fixed baseline hourly usage updated.' % team
+
+    print 'team %s energy baseline usage updated.' % team
 
 
 def get_energy_baseline_usage(session, team, end_date, weeks, hour):
@@ -160,8 +159,9 @@ def get_energy_baseline_usage(session, team, end_date, weeks, hour):
     usage = 0
     count = 0
     date = end_date
-    for i in range(1, weeks + 1):
-        date -= datetime.timedelta(days=(i * 7))
+    for week in range(0, weeks):
+        _ = week
+        date = _get_baseline_date(date)
         start_time = date.strftime("%Y-%m-%dT00:00:00")
         if hour:
             end_time = date.strftime("%Y-%m-%dT") + "%.2d:00:00" % hour
@@ -169,8 +169,6 @@ def get_energy_baseline_usage(session, team, end_date, weeks, hour):
             end_time = (date + datetime.timedelta(days=1)).strftime("%Y-%m-%dT00:00:00")
 
         session.params = {'startTime': start_time, 'endTime': end_time}
-        print "%s %s" % (start_time, end_time)
-
         usage += resource_mgr.get_energy_usage(session, team.name)
         if usage:
             count += 1
@@ -193,12 +191,16 @@ def check_daily_resource_goal(team, resource):
     """Check the daily goal, award points to the team members if the goal is met.
     Returns the number of players in the team that got the award."""
 
-    date = datetime.date.today()
     # because the check is scheduled at midnight, we should check the previous day's data
     today = datetime.datetime.today()
     if today.hour == 0:
-        date -= datetime.timedelta(days=1)
+        today = today - datetime.timedelta(hours=1)
+    # do nothing if out of round
+    rounds_info = challenge_mgr.get_all_round_info()
+    if not rounds_info["competition_start"] < today < rounds_info["competition_end"]:
+        return 0
 
+    date = today.date()
     actual_usage = None
 
     resource_data = resource_mgr.team_resource_data(date, team, resource)

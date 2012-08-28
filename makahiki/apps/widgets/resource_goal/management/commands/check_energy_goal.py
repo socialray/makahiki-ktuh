@@ -23,7 +23,7 @@ class Command(MakahikiBaseCommand):
         # update the latest resource usage before checking
         resource_mgr.update_energy_usage()
 
+        resource_goal.check_all_daily_resource_goals("energy")
+
         # update the dynamic baseline if they are dynamic
         resource_goal.update_energy_baseline(today.date(), 2, "Dynamic")
-
-        resource_goal.check_all_daily_resource_goals("energy")

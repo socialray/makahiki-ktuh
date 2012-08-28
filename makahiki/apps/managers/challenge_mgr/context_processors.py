@@ -92,4 +92,3 @@ def _pass_through(request):
     path = request.path
     pattern = "^/(log|site_media|favicon.ico)/"
     return re.compile(pattern).match(path)
-
