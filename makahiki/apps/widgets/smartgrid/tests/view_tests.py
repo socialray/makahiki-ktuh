@@ -18,6 +18,9 @@ class ActivitiesFunctionalTest(TransactionTestCase):
 
         challenge_mgr.register_page_widget("learn", "smartgrid")
 
+        from apps.managers.cache_mgr import cache_mgr
+        cache_mgr.clear()
+
         self.client.login(username="user", password="changeme")
 
     def testIndex(self):

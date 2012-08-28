@@ -38,9 +38,6 @@ class RafflePrize(models.Model):
     def add_ticket(self, user):
         """Adds a ticket from the user if they have one.
           Throws an exception if they cannot add a ticket."""
-        if RaffleTicket.available_tickets(user) <= 0:
-            raise Exception("This user does not have any tickets to allocate.")
-
         ticket = RaffleTicket(raffle_prize=self, user=user)
         ticket.save()
 

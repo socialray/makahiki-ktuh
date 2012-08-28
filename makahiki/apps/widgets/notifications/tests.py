@@ -44,6 +44,9 @@ class NotificationFunctionalTests(TransactionTestCase):
         challenge_mgr.register_page_widget("help", "help.faq")
         challenge_mgr.register_page_widget("home", "home")
 
+        from apps.managers.cache_mgr import cache_mgr
+        cache_mgr.clear()
+
         self.client.login(username="user", password="test")
 
     def testShowNotifications(self):

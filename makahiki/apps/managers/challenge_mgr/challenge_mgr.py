@@ -82,6 +82,10 @@ def get_challenge():
 
 def set_challenge_settings(challenge):
     """set the challenge related settings as django settings."""
+    # round info
+    settings.COMPETITION_ROUNDS = get_all_round_info_from_cache()
+    settings.CURRENT_ROUND_INFO = get_current_round_info_from_cache()
+
     # email settings
     if challenge.email_enabled:
         settings.SERVER_EMAIL = challenge.contact_email
@@ -135,16 +139,12 @@ def all_page_info(user):
     return all_pages
 
 
-def page_info(user, page_name):
-    """Returns the specific page info object with its current lock state."""
-    page = cache_mgr.get_cache("page_info-%s-%s" % (user.username, page_name))
-    if not page:
-        page = PageInfo.objects.filter(name=page_name)
-        if page:
-            page = page[0]
-            page.is_unlock = eval_page_unlock(user, page)
-            cache_mgr.set_cache("page_info-%s-%s" % (user.username, page_name), page, 1800)
-    return page
+def is_page_unlock(user, page_name):
+    """Returns the specific page unlock info."""
+    for page in all_page_info(user):
+        if page.name == page_name:
+            return page.is_unlock
+    return False
 
 
 def get_enabled_widgets(page_name):
@@ -158,8 +158,11 @@ def get_all_enabled_widgets():
     and GameSetting."""
     page_widgets = cache_mgr.get_cache("enabled_widgets")
     if page_widgets is None:
-        page_setting = PageSetting.objects.filter(enabled=True)
+        page_setting = PageSetting.objects.filter(enabled=True).select_related("page", "game")
         page_widgets = {}
+
+        enabled_gs = GameSetting.objects.filter(enabled=True).select_related("game")
+
         for ps in page_setting:
             name = ps.page.name
             if not name in page_widgets:
@@ -168,11 +171,17 @@ def get_all_enabled_widgets():
             widgets = page_widgets[name]
             if ps.widget:
                 widgets.append(ps.widget)
-            if ps.game and GameInfo.objects.filter(name=ps.game, enabled=True).count():
-                for gs in GameSetting.objects.filter(game=ps.game, enabled=True):
-                    widgets.append(gs.widget)
+            if ps.game and ps.game.enabled:
+                for gs in enabled_gs:
+                    if gs.game.id == ps.game.id:
+                        widgets.append(gs.widget)
         cache_mgr.set_cache("enabled_widgets", page_widgets, 2592000)
     return page_widgets
+
+
+def get_enabled_games():
+    """returns all the enabled game setting objects."""
+    return GameSetting.objects.filter(enabled=True)
 
 
 def register_page_widget(page_name, widget, label=None):
@@ -194,8 +203,17 @@ def get_all_round_info():
               "competition_start": start_date,
               "competition_end": end_date}
     """
+    return settings.COMPETITION_ROUNDS
+
+
+def get_all_round_info_from_cache():
+    """Returns a dictionary containing all the round information.
+    example: {"rounds": {"Round 1": {"start": start_date, "end": end_date,},},
+              "competition_start": start_date,
+              "competition_end": end_date}
+    """
     rounds_info = cache_mgr.get_cache('rounds')
-    if not rounds_info:
+    if rounds_info is None:
         roundsettings = RoundSetting.objects.all()
         if not roundsettings:
             RoundSetting.objects.create()
@@ -220,22 +238,35 @@ def get_all_round_info():
     return rounds_info
 
 
-def get_round_info(round_name=None):
-    """Returns a dictionary containing round information, if round_name is not specified,
-    returns the current round info. if competition end, return the last round.
+def get_current_round_info():
+    """Returns a dictionary containing the current round information,
+    if competition end, return the last round.
     example: {"name": round_name, "start": start_date, "end": end_date,} """
-    rounds = get_all_round_info()["rounds"]
-    if not round_name:
-        # Find which round this belongs to.
-        today = datetime.datetime.today()
-        key = None
-        for key in rounds:
-            start = rounds[key]["start"]
-            end = rounds[key]["end"]
-            if start <= today < end:
-                break
+    return settings.CURRENT_ROUND_INFO
 
-        round_name = key
+
+def get_current_round_info_from_cache():
+    """Returns a dictionary containing the current round information,
+    if competition end, return the last round.
+    example: {"name": round_name, "start": start_date, "end": end_date,} """
+
+    rounds_info = get_all_round_info()
+
+    # Find which round this belongs to.
+    today = datetime.datetime.today()
+    if today < rounds_info["competition_start"]:
+        return None
+
+    rounds = rounds_info["rounds"]
+
+    key = None
+    for key in rounds:
+        start = rounds[key]["start"]
+        end = rounds[key]["end"]
+        if start <= today < end:
+            break
+
+    round_name = key
 
     return {"name": round_name,
             "start": rounds[round_name]['start'],
@@ -243,15 +274,33 @@ def get_round_info(round_name=None):
             }
 
 
+def get_round_info(round_name=None):
+    """Returns a dictionary containing round information, if round_name is not specified,
+    returns the current round info. if competition end, return the last round.
+    example: {"name": round_name, "start": start_date, "end": end_date,} """
+    if not round_name:
+        return get_current_round_info()
+    else:
+        rounds = get_all_round_info()["rounds"]
+        return {"name": round_name,
+                "start": rounds[round_name]['start'],
+                "end": rounds[round_name]['end'],
+                }
+
+
 def get_round_name(submission_date=None):
     """Return the round name associated with the specified date, or else return None.
     if submission_date is not specified, return the current round name.
     if competition not started, return None,
     if competition end, return the last round."""
-    rounds_info = get_all_round_info()
     if not submission_date:
-        submission_date = datetime.datetime.today()
+        rounds_info = get_current_round_info()
+        if rounds_info:
+            return rounds_info["name"]
+        else:
+            return None
 
+    rounds_info = get_all_round_info()
     if submission_date < rounds_info["competition_start"]:
         return None
 

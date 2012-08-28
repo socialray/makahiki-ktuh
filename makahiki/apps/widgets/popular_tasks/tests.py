@@ -23,6 +23,9 @@ class NewsFunctionalTestCase(TransactionTestCase):
         challenge_mgr.register_page_widget("news", "wallpost.system_wallpost")
         challenge_mgr.register_page_widget("news", "wallpost.user_wallpost")
 
+        from apps.managers.cache_mgr import cache_mgr
+        cache_mgr.clear()
+
         self.client.login(username="user", password="changeme")
 
     def testIndex(self):

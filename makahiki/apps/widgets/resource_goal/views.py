@@ -48,12 +48,8 @@ def get_hourly_goal_data(team, resource):
     if data:
         goal_settings = resource_goal.team_goal_settings(team, resource)
         goal_percentage = goal_settings.goal_percent_reduction
-        baseline = 0
-        if goal_settings.baseline_method == "Fixed":
-            baseline = resource_goal.team_fixed_hourly_resource_baseline(date, team, resource)
-        elif goal_settings.baseline_method == "Dynamic":
-            baseline = resource_goal.team_dynamic_hourly_resource_baseline(date, team, resource)
-
+        baseline = resource_goal.team_hourly_resource_baseline(date, team, resource)
+        if goal_settings.baseline_method == "Dynamic":
             # get previous day's goal result and the current goal percent
             previous_goal_result = resource_goal.team_goal(date - datetime.timedelta(days=1),
                                                            team, resource)

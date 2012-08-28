@@ -1,6 +1,7 @@
 """CAS authentication middleware"""
 
 from urllib import urlencode
+import datetime
 
 from django.http import HttpResponseRedirect, HttpResponseForbidden
 from django.conf import settings
@@ -17,12 +18,8 @@ class CASMiddleware(object):
 
     def process_request(self, request):
         """Checks that the authentication middleware is installed"""
-
-        error = ("The Django CAS middleware requires authentication "
-                 "middleware to be installed. Edit your MIDDLEWARE_CLASSES "
-                 "setting to insert 'django.contrib.auth.middleware."
-                 "AuthenticationMiddleware'.")
-        #assert hasattr(request, 'user'), error
+        time_start = datetime.datetime.now()
+        print "%s timestamp: %s" % ("Start CAS middleware", time_start)
 
     def process_view(self, request, view_func, view_args, view_kwargs):
         """Forwards unauthenticated requests to the admin page to the CAS

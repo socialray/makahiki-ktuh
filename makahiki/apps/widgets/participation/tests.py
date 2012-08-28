@@ -20,6 +20,8 @@ class ParticipationTest(TransactionTestCase):
         self.user = test_utils.setup_user(username="user", password="changeme")
         test_utils.set_competition_round()
         challenge_mgr.register_page_widget("learn", "participation")
+        from apps.managers.cache_mgr import cache_mgr
+        cache_mgr.clear()
         self.client.login(username="user", password="changeme")
 
     def testParticipation(self):

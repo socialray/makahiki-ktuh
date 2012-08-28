@@ -2,6 +2,7 @@
 
 from django.test import TransactionTestCase
 from django.core.urlresolvers import reverse
+from apps.managers.cache_mgr import cache_mgr
 from apps.managers.challenge_mgr import challenge_mgr
 from apps.utils import test_utils
 
@@ -15,6 +16,7 @@ class HelpFunctionalTestCase(TransactionTestCase):
         self.user = test_utils.setup_user(username="user", password="changeme")
 
         challenge_mgr.register_page_widget("help", "help.rule")
+        cache_mgr.clear()
 
         self.client.login(username="user", password="changeme")
 

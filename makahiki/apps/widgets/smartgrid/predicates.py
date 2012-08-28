@@ -2,12 +2,13 @@
 
 from datetime import datetime, timedelta
 from django.db.models.query_utils import Q
+from apps.widgets.smartgrid import smartgrid
 from apps.widgets.smartgrid.models import Action, Event
 
 
 def completed_action(user, slug):
     """Returns true if the user complete the action."""
-    return user.actionmember_set.filter(action__slug=slug).count() > 0
+    return slug in smartgrid.get_completed_actions(user)
 
 
 def completed_all_of(user, category_slug=None, action_type=None, resource=None, level_name=None):

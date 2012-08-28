@@ -75,9 +75,10 @@ class Command(MakahikiBaseCommand):
             user_count = int(args[1])
             round_count = int(args[2])
 
+            self.setup_rounds(round_count)
+
             self.delete_users()
             self.create_users(user_count)
-            self.setup_rounds(round_count)
             self.setup_event_dates()
             self.setup_resource_usages()
             self.setup_resource_baselines()

@@ -1,17 +1,12 @@
 <div>
-{% if IN_COMPETITION %}
     <div class="rib-set-width-outer-width">
-    <h4>{{ CURRENT_ROUND_INFO.name }}</h4>
-    Ends on {{CURRENT_ROUND_INFO.end}}
-    </div>
-{% else %}
     {% if CURRENT_ROUND_INFO %}
-        <h4>Competition Ended.</h4>
+        <h4>{{ CURRENT_ROUND_INFO.name }}</h4>
         Ends on {{CURRENT_ROUND_INFO.end}}
     {% else %}
         <h4>Competition Not Start Yet</h4>
     {% endif %}
-{% endif %}
+    </div>
 </div>
 {% for event in AVAILABLE_EVENTS %}
 <div style="display:none;">

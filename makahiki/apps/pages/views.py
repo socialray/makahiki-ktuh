@@ -34,10 +34,7 @@ def index(request):
 
     view_objects = {}
 
-    page_info = challenge_mgr.page_info(request.user, page_name)
-    if not page_info:
-        raise Http404
-    elif not page_info.is_unlock:
+    if page_name != "home" and not challenge_mgr.is_page_unlock(request.user, page_name):
         return HttpResponseForbidden('<h1>Permission denied</h1>')
 
     # get the view_objects
@@ -49,11 +46,9 @@ def index(request):
     # get user resource rank and usage
     team = request.user.get_profile().team
     if team:
-        energy_page = challenge_mgr.page_info(request.user, "energy")
-        water_page = challenge_mgr.page_info(request.user, "water")
-        if energy_page and energy_page.is_unlock:
+        if challenge_mgr.is_page_unlock(request.user, "energy"):
             view_objects["energy_rank_info"] = resource_mgr.resource_team_rank_info(team, "energy")
-        if water_page and water_page.is_unlock:
+        if challenge_mgr.is_page_unlock(request.user, "water"):
             view_objects["water_rank_info"] = resource_mgr.resource_team_rank_info(team, "water")
 
     time_start = datetime.datetime.now()
@@ -62,7 +57,6 @@ def index(request):
         }, context_instance=RequestContext(request))
     time_end = datetime.datetime.now()
     print "%s time: %s" % ("render", (time_end - time_start))
-
     return response
 
 

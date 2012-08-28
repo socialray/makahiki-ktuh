@@ -15,11 +15,10 @@ from apps.managers.score_mgr import score_mgr
 from apps.utils import utils
 from apps.widgets.notifications.models import NoticeTemplate, UserNotification
 from apps.widgets.smartgrid import NUM_GOLOW_ACTIONS, SETUP_WIZARD_ACTIVITY, NOSHOW_PENALTY_DAYS
-from apps.widgets.smartgrid.models import Action, Category, ActionMember, Level, EmailReminder, \
+from apps.widgets.smartgrid.models import Action, ActionMember, Level, EmailReminder, \
     TextReminder
 from apps.widgets.smartgrid.models import Event
 from apps.widgets.smartgrid import  MAX_COMMITMENTS
-from apps.widgets.smartgrid.predicates import completed_action
 
 
 def get_setup_activity():
@@ -45,21 +44,17 @@ def get_action(slug):
     return get_object_or_404(Action, slug=slug)
 
 
-def annotate_action_status(user, action):
-    """retrieve the action status for the user."""
-    action.is_unlock = is_unlock(user, action)
-    action.completed = completed_action(user, action.slug)
-
-    members = ActionMember.objects.filter(user=user, action=action).order_by("-submission_date")
-    if members:
-        action.member = members[0]
-    else:
-        action.member = None
-
-    # calculate the task duration
+def annotate_action_details(user, action):
+    """retrieve the action details for the user."""
     if action.type == "commitment":
+        members = ActionMember.objects.filter(user=user, action=action).order_by("-submission_date")
+
+        # calculate the task duration
         action.duration = action.commitment.duration
     else:
+        members = ActionMember.objects.filter(user=user, action=action)
+
+        # calculate the task duration
         if action.type == "activity":
             duration = action.activity.duration
         else:  # is event
@@ -78,6 +73,15 @@ def annotate_action_status(user, action):
         if minutes > 0:
             action.duration += " %d minutes" % minutes
 
+    if members:
+        action.member = members[0]
+        action.is_unlock = True
+        action.completed = True
+    else:
+        action.member = None
+        action.is_unlock = is_unlock(user, action)
+        action.completed = False
+
     return action
 
 
@@ -86,33 +90,61 @@ def get_action_members(action):
     return ActionMember.objects.filter(action=action)
 
 
+def get_completed_actions(user):
+    """returns the completed action for the user. It is stored as a list of action slugs."""
+    actions = cache_mgr.get_cache('smartgrid-completed-%s' % user.username)
+    if actions is None:
+        actions = []
+        for member in ActionMember.objects.filter(user=user).select_related("action"):
+            actions.append(member.action.slug)
+        cache_mgr.set_cache('smartgrid-completed-%s' % user, actions, 1800)
+    return actions
+
+
 def get_level_actions(user):
     """Return the level list with the action info in categories"""
     levels = cache_mgr.get_cache('smartgrid-levels-%s' % user.username)
+
     if levels is None:
+        completed_actions = get_completed_actions(user)
         levels = []
-        for level in Level.objects.all().order_by("priority"):
+        for level in Level.objects.all():
             level.is_unlock = utils.eval_predicates(level.unlock_condition, user)
             if level.is_unlock:
                 level.is_complete = True
                 categories = []
-                for cat in Category.objects.all().order_by("priority"):
-                    action_list = []
-                    for action in cat.action_set.filter(level=level).order_by("priority"):
-                        action = annotate_action_status(user, action)
-                        action_list.append(action)
+                action_list = None
+                category = None
+                for action in level.action_set.all().select_related("category"):
+                    if action.slug in completed_actions:
+                        action.is_unlock = True
+                        action.completed = True
+                    else:
+                        action.is_unlock = is_unlock(user, action)
+                        action.completed = False
 
-                        # if there is one action is not completed, set the level to in-completed
-                        if not action.completed:
-                            level.is_complete = False
+                    # if there is one action is not completed, set the level to in-completed
+                    if not action.completed:
+                        level.is_complete = False
 
-                    if action_list:
-                        cat.task_list = action_list
-                        categories.append(cat)
+                    # the action are ordered by level and category
+                    if category != action.category:
+                        if category:
+                            # a new category
+                            category.task_list = action_list
+                            categories.append(category)
 
-                if categories:
-                    level.cat_list = categories
+                        action_list = []
+                        category = action.category
 
+                    action_list.append(action)
+
+                if category:
+                    # last category
+                    category.task_list = action_list
+                    categories.append(category)
+
+                level.cat_list = categories
             levels.append(level)
 
         # Cache the categories for 30 minutes (or until they are invalidated)
@@ -188,10 +220,10 @@ def get_available_golow_actions(user, related_resource):
 def afterPublished(user, action_slug):
     """Return true if the event/excursion has been published"""
     _ = user
-    actions = Action.objects.filter(slug=action_slug)
-    if actions:
-        return actions[0].pub_date <= datetime.date.today()
-    else:
+    try:
+        action = Action.objects.get(slug=action_slug)
+        return action.pub_date <= datetime.date.today()
+    except ObjectDoesNotExist:
         return False
 
 
@@ -219,8 +251,8 @@ def eval_unlock(user, action):
         return False
 
     # after published is the default unlock rule for action
-    if not afterPublished(user, action.slug):
-        return False
+    #if not afterPublished(user, action.slug):
+    #    return False
 
     return utils.eval_predicates(predicates,
                                  user)

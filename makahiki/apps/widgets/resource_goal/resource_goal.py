@@ -116,7 +116,7 @@ def team_fixed_daily_resource_baseline(date, team, resource):
         return 0
 
 
-def team_dynamic_hourly_resource_baseline(date, team, resource):
+def update_dynamic_hourly_resource_baseline(date, team, resource):
     """Returns the dynamic baseline usage for the date and resource. It is obtained real-time from
     wattdepot server."""
 
@@ -136,8 +136,8 @@ def team_dynamic_hourly_resource_baseline(date, team, resource):
         return 0
 
 
-def team_fixed_hourly_resource_baseline(date, team, resource):
-    """Returns the fixed baseline usage for the date and resource."""
+def team_hourly_resource_baseline(date, team, resource):
+    """Returns the baseline usage for the date and resource."""
     if resource == "energy":
         hourly_baseline = EnergyBaselineHourly
     elif resource == "water":

@@ -7,6 +7,7 @@ from django.contrib.auth.models import User
 from django.core.files.base import ContentFile
 from django.utils.translation import ugettext as _
 from apps.managers.cache_mgr import cache_mgr
+from apps.widgets.smartgrid.models import ActionMember
 
 try:
     from cStringIO import StringIO
@@ -48,8 +49,13 @@ class Avatar(models.Model):
         super(Avatar, self).save(*args, **kwargs)
 
         # Invalidate info bar cache.
-        cache_mgr.invalidate_template_cache("RIB", self.user.username)
-
+        user = self.user
+        cache_mgr.invalidate_template_cache("RIB", user.username)
+        # Invalidate team action avatar cache.
+        team = user.get_profile().team
+        if team:
+            for member in ActionMember.objects.filter(user=user):
+                cache_mgr.invalidate_template_cache("team_avatar", member.action.id, team.id)
 
     def thumbnail_exists(self, size):
         return self.avatar.storage.exists(self.avatar_name(size))

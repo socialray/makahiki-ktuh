@@ -6,8 +6,6 @@ from django.core.urlresolvers import reverse
 from django.http import HttpResponseRedirect
 from apps.managers.challenge_mgr import challenge_mgr
 from apps.widgets.badges import badges
-from apps.widgets.status.models import DailyStatus
-from django.core.exceptions import ObjectDoesNotExist
 
 
 class LoginMiddleware(object):
@@ -19,6 +17,7 @@ class LoginMiddleware(object):
 
     def process_request(self, request):
         """Check the competition period and that setup is completed."""
+        time_start = datetime.datetime.now()
 
         path = request.path
 
@@ -48,6 +47,8 @@ class LoginMiddleware(object):
             if response is None:
                 response = self.track_login(request)
 
+        time_end = datetime.datetime.now()
+        print "%s time: %s" % ("player middleware", (time_end - time_start))
         return response
 
     def track_login(self, request):
@@ -72,16 +73,10 @@ class LoginMiddleware(object):
             profile.last_visit_date = today
             profile.save()
 
-            # increase the daily total visitor count
-            try:
-                entry = DailyStatus.objects.get(date=today.isoformat())
-                entry.daily_visitors = entry.daily_visitors + 1
-            except ObjectDoesNotExist:
-                entry = DailyStatus(date=today.isoformat(), daily_visitors=1)
-            entry.save()
-
-            # award possible badge if it is the first visit of the day
-            badges.award_possible_badges(profile)
+            if last_visit:
+                # award possible badge if it is the first visit of the day and
+                # not the first visit ever
+                badges.award_possible_badges(profile)
 
         return None
 

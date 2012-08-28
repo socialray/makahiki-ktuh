@@ -64,6 +64,7 @@ class Prize(models.Model):
     class Meta:
         """meta"""
         unique_together = ("round_name", "award_to", "competition_type")
+        ordering = ("round_name", "award_to", "competition_type")
 
     def num_awarded(self, team=None):
         """Returns the number of prizes that will be awarded for this prize."""

@@ -56,8 +56,7 @@ def competition(request):
         "MAKAHIKI_FACEBOOK_APP_ID":
             settings.MAKAHIKI_FACEBOOK_APP_ID if settings.MAKAHIKI_USE_FACEBOOK else '',
         "MAKAHIKI_USE_LESS": settings.MAKAHIKI_USE_LESS,
-        "CURRENT_ROUND_INFO": challenge_mgr.get_round_info(),
-        "IN_COMPETITION": challenge_mgr.in_competition(),
+        "CURRENT_ROUND_INFO": settings.CURRENT_ROUND_INFO,
         "TEAM_COUNT": team_count,
         "TEAM_MEMBER_COUNT": team_member_count,
         "OVERALL_MEMBER_COUNT": overall_member_count,

@@ -720,6 +720,7 @@ class ActionMember(models.Model):
         """Invalidate the categories cache."""
         username = self.user.username
         cache_mgr.delete('smartgrid-levels-%s' % username)
+        cache_mgr.delete('smartgrid-completed-%s' % username)
         cache_mgr.delete('user_events-%s' % username)
         cache_mgr.delete('get_quests-%s' % username)
         cache_mgr.delete('golow_actions-%s' % username)

@@ -20,6 +20,9 @@ class PrizesFunctionalTestCase(TransactionTestCase):
 
         challenge_mgr.register_page_widget("win", "prizes")
 
+        from apps.managers.cache_mgr import cache_mgr
+        cache_mgr.clear()
+
         profile = self.user.get_profile()
         profile.add_points(10, datetime.datetime.today(), "test")
         profile.save()
@@ -38,7 +41,10 @@ class PrizesFunctionalTestCase(TransactionTestCase):
 
     def testLeadersInRound1(self):
         """Test that the leaders are displayed correctly in round 1."""
-        test_utils.set_competition_round()
+        test_utils.set_two_rounds()
+
+        from apps.managers.cache_mgr import cache_mgr
+        cache_mgr.clear()
 
         profile = self.user.get_profile()
         profile.name = "Test User"
@@ -74,7 +80,7 @@ class PrizesFunctionalTestCase(TransactionTestCase):
         profile.save()
 
         response = self.client.get(reverse("win_index"))
-        self.assertContains(response, "Winner: ", count=3,
+        self.assertContains(response, "Winner: ", count=2,
             msg_prefix="There should be winners for three prizes.")
         self.assertContains(response, "Current leader: " + str(profile), count=2,
             msg_prefix="Individual prizes should have user as the leader.")

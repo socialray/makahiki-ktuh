@@ -45,7 +45,7 @@ def view_action(request, action_type, slug):
         response.set_cookie("task_unlock_condition", action.unlock_condition_text)
         return response
 
-    action = smartgrid.annotate_action_status(user, action)
+    action = smartgrid.annotate_action_details(user, action)
     completed_members = smartgrid.get_action_members(action)
     completed_count = completed_members.count()
     team_members = completed_members.select_related('user__profile').filter(

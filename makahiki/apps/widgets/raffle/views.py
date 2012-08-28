@@ -1,6 +1,7 @@
 """Handle rendering of the raffle widget."""
 import datetime
 import random
+from django.db.models.aggregates import Count
 
 from django.http import HttpResponseRedirect, Http404
 from django.shortcuts import render_to_response, get_object_or_404
@@ -28,19 +29,24 @@ def supply(request, page_name):
     today = datetime.datetime.today()
 
     # Get the user's tickets.
-    available_tickets = RaffleTicket.available_tickets(user)
     total_tickets = RaffleTicket.total_tickets(user)
-    allocated_tickets = total_tickets - available_tickets
+
+    user_tickets = RaffleTicket.objects.filter(user=user).select_related("raffle_prize")
+    allocated_tickets = user_tickets.count()
+    available_tickets = total_tickets - allocated_tickets
 
     prizes = None
     if today < deadline:
         # Get the prizes for the raffle.
         prizes = RafflePrize.objects.filter(
-            round_name=current_round_info["name"]).order_by("-value")
+            round_name=current_round_info["name"]).annotate(
+            total_tickets=Count("raffleticket")).order_by("-value")
 
         for prize in prizes:
-            prize.total_tickets = prize.allocated_tickets()
-            prize.user_tickets = prize.allocated_tickets(user)
+            prize.user_tickets = 0
+            for ticket in user_tickets:
+                if ticket.raffle_prize == prize:
+                    prize.user_tickets += 1
 
     return {
         "round_name": current_round_info["name"],

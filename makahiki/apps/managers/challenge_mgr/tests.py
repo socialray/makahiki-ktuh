@@ -23,6 +23,7 @@ class ContextProcessorFunctionalTestCase(TransactionTestCase):
         User.objects.create_user("user", "user@test.com", password="changeme")
         self.client.login(username="user", password="changeme")
 
+        challenge_mgr.register_page_widget("home", "home")
         response = self.client.get(reverse("home_index"))
         # Response context should have round info corresponding to the past days.
 
@@ -50,6 +51,7 @@ class BaseUnitTestCase(TransactionTestCase):
         rounds.end = end
         rounds.save()
 
+        challenge_mgr.init()
         current_round = challenge_mgr.get_round_name()
         self.assertTrue(current_round is None,
             "Test that there is no current round.")

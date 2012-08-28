@@ -24,23 +24,29 @@ def supply(request, page_name):
 def _get_prizes(team):
     """Private method to process the prizes half of the page.
        Takes the user's team and returns a dictionary to be used in the template."""
-    rounds = challenge_mgr.get_all_round_info()["rounds"]
+
     prize_dict = {}
     today = datetime.datetime.today()
-    for key in rounds.keys():
-        prizes = Prize.objects.filter(round_name=key)
-        for prize in prizes:
-            if today < rounds[key]["start"]:
-                # If the round happens in the future, we don't care who the leader is.
-                prize.current_leader = "TBD"
-            else:
-                # If we are in the middle of the round, display the current leader.
-                if today < rounds[key]["end"]:
-                    prize.current_leader = prize.leader(team)
-                else:
-                    prize.winner = prize.leader(team)
+    rounds = challenge_mgr.get_all_round_info()["rounds"]
 
-        prize_dict[key] = prizes
+    round_name = None
+    for prize in Prize.objects.all():
+        if round_name != prize.round_name:
+            # a new round
+            round_name = prize.round_name
+            prize_dict[round_name] = []
+
+        if today < rounds[round_name]["start"]:
+            # If the round happens in the future, we don't care who the leader is.
+            prize.current_leader = "TBD"
+        else:
+            # If we are in the middle of the round, display the current leader.
+            if today < rounds[round_name]["end"]:
+                prize.current_leader = prize.leader(team)
+            else:
+                prize.winner = prize.leader(team)
+
+        prize_dict[round_name].append(prize)
 
     return prize_dict
 

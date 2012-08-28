@@ -3,6 +3,7 @@
 import datetime
 from django.core.urlresolvers import reverse
 from django.test import TransactionTestCase
+from apps.managers.cache_mgr import cache_mgr
 from apps.managers.challenge_mgr import challenge_mgr
 from apps.utils import test_utils
 
@@ -20,6 +21,7 @@ class ScoreboardTest(TransactionTestCase):
 
         challenge_mgr.register_page_widget("learn", "smartgrid")
         challenge_mgr.register_page_widget("learn", "scoreboard")
+        cache_mgr.clear()
 
         self.client.login(username="user", password="changeme")
 

@@ -15,11 +15,13 @@ class Command(MakahikiBaseCommand):
 
     def handle(self, *args, **options):
         """Update the number of users that logged in today."""
-        print '****** Processing todays users.*******\n'
-
         today = datetime.datetime.today()
-        count = Profile.objects.all().filter(last_visit_date__gte=today,
-            last_visit_date__lt=today + datetime.timedelta(days=1)).count()
+        print '****** Processing daily user count update at %s.*******\n' % today
+
+        count = Profile.objects.filter(last_visit_date=today.date()).count()
         print '****** %s visitor(s) today!.*******\n' % count
-        state = DailyStatus(date=today, daily_visitors=count)
-        state.save()
+
+        # increase the daily total visitor count
+        entry, _ = DailyStatus.objects.get_or_create(date=today.isoformat())
+        entry.daily_visitors = count
+        entry.save()

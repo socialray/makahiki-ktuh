@@ -4,6 +4,7 @@ import os
 from django.conf import settings
 from django.contrib.auth.models import User
 from django.core.files.images import ImageFile
+from apps.managers.challenge_mgr import challenge_mgr
 from apps.managers.challenge_mgr.models import RoundSetting
 from apps.managers.team_mgr.models import Team, Group
 from apps.widgets.prizes.models import Prize
@@ -33,6 +34,7 @@ def set_competition_round():
     RoundSetting.objects.all().delete()
     RoundSetting.objects.create(name="Round 1", start=start, end=end)
     RoundSetting.objects.create(name="Round 2", start=end, end=end2)
+    challenge_mgr.init()
 
 
 def set_two_rounds():
@@ -45,6 +47,7 @@ def set_two_rounds():
     RoundSetting.objects.create(name="Round 1", start=start, end=end1)
     RoundSetting.objects.create(name="Round 2", start=end1, end=end2)
     RoundSetting.objects.create(name="Round 3", start=end2, end=end3)
+    challenge_mgr.init()
 
 
 def create_activity():
