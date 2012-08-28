@@ -17,7 +17,7 @@ class LoginMiddleware(object):
 
     def process_request(self, request):
         """Check the competition period and that setup is completed."""
-        time_start = datetime.datetime.now()
+        #time_start = datetime.datetime.now()
 
         path = request.path
 
@@ -47,8 +47,8 @@ class LoginMiddleware(object):
             if response is None:
                 response = self.track_login(request)
 
-        time_end = datetime.datetime.now()
-        print "%s time: %s" % ("player middleware", (time_end - time_start))
+        #time_end = datetime.datetime.now()
+        #print "%s time: %s" % ("player middleware", (time_end - time_start))
         return response
 
     def track_login(self, request):

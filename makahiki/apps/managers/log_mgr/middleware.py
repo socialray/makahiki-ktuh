@@ -1,6 +1,6 @@
 """A middleware class to support logging of interactions with logged in users."""
 import traceback
-import datetime
+#import datetime
 from django.core.signals import got_request_exception
 from django.dispatch.dispatcher import receiver
 import re
@@ -18,7 +18,8 @@ class LoggingMiddleware(object):
     def process_response(self, request, response):
         """Log the actions of logged in users."""
 
-        time_start = datetime.datetime.now()
+        #time_start = datetime.datetime.now()
+
         # Filter out the following paths.  Logs will not be created for these
         # paths.
         if re.match(MEDIA_REGEXP, request.path) or \
@@ -26,9 +27,10 @@ class LoggingMiddleware(object):
             return response
 
         log_mgr.write_log_entry(request=request, response_status_code=response.status_code)
-        time_end = datetime.datetime.now()
-        print "%s time: %s" % ("logging", (time_end - time_start))
-        print "%s timestamp: %s" % ("End logging middleware", time_end)
+
+        #time_end = datetime.datetime.now()
+        #print "%s time: %s" % ("logging", (time_end - time_start))
+        #print "%s timestamp: %s" % ("End logging middleware", time_end)
         return response
 
 

@@ -11,12 +11,20 @@ from apps.widgets.prizes.models import Prize
 
 class PrizesFunctionalTestCase(TransactionTestCase):
     """test prize page view"""
-    fixtures = ["test_prizes.json"]
 
     def setUp(self):
         """Set up a team and log in."""
         challenge_mgr.init()
         self.user = test_utils.setup_user(username="user", password="changeme")
+
+        test_utils.setup_round_prize("Round 1", "team_overall", "energy")
+        test_utils.setup_round_prize("Round 2", "team_overall", "energy")
+        test_utils.setup_round_prize("Round 1", "team_overall", "points")
+        test_utils.setup_round_prize("Round 2", "team_overall", "points")
+        test_utils.setup_round_prize("Round 1", "individual_overall", "points")
+        test_utils.setup_round_prize("Round 2", "individual_overall", "points")
+        test_utils.setup_round_prize("Round 1", "individual_team", "points")
+        test_utils.setup_round_prize("Round 2", "individual_team", "points")
 
         challenge_mgr.register_page_widget("win", "prizes")
 
@@ -31,7 +39,7 @@ class PrizesFunctionalTestCase(TransactionTestCase):
 
     def testIndex(self):
         """Check that we can load the index page."""
-        test_utils.set_two_rounds()
+        test_utils.set_competition_round()
 
         response = self.client.get(reverse("win_index"))
         self.failUnlessEqual(response.status_code, 200)
@@ -41,7 +49,7 @@ class PrizesFunctionalTestCase(TransactionTestCase):
 
     def testLeadersInRound1(self):
         """Test that the leaders are displayed correctly in round 1."""
-        test_utils.set_two_rounds()
+        test_utils.set_competition_round()
 
         from apps.managers.cache_mgr import cache_mgr
         cache_mgr.clear()
@@ -79,8 +87,11 @@ class PrizesFunctionalTestCase(TransactionTestCase):
         team = profile.team
         profile.save()
 
+        from apps.managers.cache_mgr import cache_mgr
+        cache_mgr.clear()
+
         response = self.client.get(reverse("win_index"))
-        self.assertContains(response, "Winner: ", count=2,
+        self.assertContains(response, "Winner: ", count=3,
             msg_prefix="There should be winners for three prizes.")
         self.assertContains(response, "Current leader: " + str(profile), count=2,
             msg_prefix="Individual prizes should have user as the leader.")

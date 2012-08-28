@@ -1,7 +1,7 @@
 """
 main views module to render pages.
 """
-import datetime
+#import datetime
 from django.shortcuts import render_to_response
 from django.template import RequestContext
 from django.utils import importlib
@@ -51,12 +51,12 @@ def index(request):
         if challenge_mgr.is_page_unlock(request.user, "water"):
             view_objects["water_rank_info"] = resource_mgr.resource_team_rank_info(team, "water")
 
-    time_start = datetime.datetime.now()
+    #time_start = datetime.datetime.now()
     response = render_to_response("%s.html" % page_name, {
         "view_objects": view_objects,
         }, context_instance=RequestContext(request))
-    time_end = datetime.datetime.now()
-    print "%s time: %s" % ("render", (time_end - time_start))
+    #time_end = datetime.datetime.now()
+    #print "%s time: %s" % ("render", (time_end - time_start))
     return response
 
 
@@ -73,10 +73,10 @@ def supply_view_objects(request, page_name, view_objects):
         page_views = importlib.import_module(view_module_name)
         widget = widget.replace(".", "__")
 
-        time_start = datetime.datetime.now()
+        #time_start = datetime.datetime.now()
         view_objects[widget] = page_views.supply(request, page_name)
-        time_end = datetime.datetime.now()
-        print "%s time: %s" % (view_module_name, (time_end - time_start))
+        #time_end = datetime.datetime.now()
+        #print "%s time: %s" % (view_module_name, (time_end - time_start))
 
         widget_template = "widgets/" + widget.replace(".", "/") + "/templates/index.html"
         view_objects['widget_templates'].append(widget_template)

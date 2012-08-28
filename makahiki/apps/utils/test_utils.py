@@ -119,6 +119,21 @@ def setup_prize(award_to, competition_type):
     return prize
 
 
+def setup_round_prize(round_name, award_to, competition_type):
+    """set the prize for testing"""
+    prize = Prize(
+        title="Super prize!",
+        short_description="A test prize",
+        long_description="A test prize",
+        award_to=award_to,
+        round_name=round_name,
+        competition_type=competition_type,
+        value=5,
+        )
+    prize.save()
+    return prize
+
+
 def create_quest(completion_conditions):
     """create the test quest"""
     quest = Quest(
