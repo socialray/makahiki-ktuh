@@ -1,5 +1,6 @@
 """Provides competition settings in the request context to be used within a template."""
 from django.utils import importlib
+import re
 from apps.managers.challenge_mgr import challenge_mgr
 from apps.managers.player_mgr.models import Profile
 from apps.managers.team_mgr.models import Team
@@ -13,6 +14,9 @@ def competition(request):
     :param request: The request object.
     :return: a dictionary of game settings."""
     # Get user-specific information.
+
+    if _pass_through(request):
+        return {}
 
     user = request.user
     team_member_count = None
@@ -81,3 +85,11 @@ def _get_default_view_objects(request):
         widget = widget.replace(".", "_")
         default_view_objects[widget] = page_views.supply(request, None)
     return default_view_objects
+
+
+def _pass_through(request):
+    """pass through for trivial requests."""
+    path = request.path
+    pattern = "^/(log|site_media|favicon.ico)/"
+    return re.compile(pattern).match(path)
+

@@ -22,12 +22,17 @@ class LoginMiddleware(object):
         path = request.path
 
         # pass through for trivial requests
-        pattern = "^/(home\/restricted|admin|about|log|account|site_media|favicon.ico)/"
+        pattern = "^/(log|site_media|favicon.ico)/"
         if re.compile(pattern).match(path):
             return None
 
         # load the db settings if not done yet.
         challenge_mgr.init()
+
+        # pass through for trivial requests
+        pattern = "^/(home\/restricted|admin|about|account)/"
+        if re.compile(pattern).match(path):
+            return None
 
         user = request.user
         if not user.is_authenticated():

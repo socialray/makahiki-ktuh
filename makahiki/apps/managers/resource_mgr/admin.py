@@ -8,7 +8,7 @@ from apps.managers.resource_mgr.models import EnergyUsage, WaterUsage, ResourceS
 
 class UsageAdmin(admin.ModelAdmin):
     """Administrator display list: team, date, and energy."""
-    list_display = ["date", "team", "time", "usage"]
+    list_display = ["date", "team", "time", "usage", "updated_at"]
 
 admin.site.register(EnergyUsage, UsageAdmin)
 admin.site.register(WaterUsage, UsageAdmin)

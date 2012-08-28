@@ -71,8 +71,10 @@ def get_energy_usage(session, source):
     rest_url = "%s/wattdepot/sources/%s/energy/" % (
         challenge_mgr.get_challenge().wattdepot_server_url, source)
 
+    # comment out for debug
     #import sys
     #session.config['verbose'] = sys.stderr
+
     session.timeout = 5
 
     try:
