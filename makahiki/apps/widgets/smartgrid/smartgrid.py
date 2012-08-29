@@ -91,12 +91,21 @@ def get_action_members(action):
 
 
 def get_completed_actions(user):
-    """returns the completed action for the user. It is stored as a list of action slugs."""
+    """returns the completed action for the user. It is stored as a dict of action slugs and
+    its member status."""
     actions = cache_mgr.get_cache('smartgrid-completed-%s' % user.username)
     if actions is None:
-        actions = []
-        for member in ActionMember.objects.filter(user=user).select_related("action"):
-            actions.append(member.action.slug)
+        actions = {}
+        for member in ActionMember.objects.filter(
+            user=user).select_related("action").order_by("-submission_date"):
+            slug = member.action.slug
+            if  member.action.type != "commitment":
+                actions[slug] = {"approval_status": member.approval_status,
+                                 }
+            elif slug not in actions:
+                actions[slug] = {"days_left": member.days_left(),
+                                 "award_date": member.award_date,
+                                 }
         cache_mgr.set_cache('smartgrid-completed-%s' % user, actions, 1800)
     return actions
 
@@ -117,6 +126,7 @@ def get_level_actions(user):
                 category = None
                 for action in level.action_set.all().select_related("category"):
                     if action.slug in completed_actions:
+                        action.member = completed_actions[action.slug]
                         action.is_unlock = True
                         action.completed = True
                     else:

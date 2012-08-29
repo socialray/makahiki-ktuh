@@ -11,6 +11,12 @@
             Please contact administrator to report this problem.
         </td></tr>
     </table>
+{% elif not hourly_goal.goal_usage %}
+    <table >
+        <tr width="300"><td height="100" valign="center">
+            No baseline data found for your team. The Daily Energy Goal Game is disabled for today.
+        </td></tr>
+    </table>
 {% else %}
 <div>
     <table cellpadding="5"

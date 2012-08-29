@@ -19,8 +19,12 @@ class GoalAdmin(admin.ModelAdmin):
 class BaselineDailyAdmin(admin.ModelAdmin):
     """EnergyGoal administrator interface definition."""
     list_display = ["team", "day", "usage", "updated_at"]
+    search_fields = ["team__name", ]
+    list_filter = ['team', 'day']
 
 
 class BaselineHourlyAdmin(admin.ModelAdmin):
     """EnergyGoal administrator interface definition."""
     list_display = ["team", "day", "hour", "usage", "updated_at"]
+    search_fields = ["team__name", ]
+    list_filter = ['team', 'day', 'hour']

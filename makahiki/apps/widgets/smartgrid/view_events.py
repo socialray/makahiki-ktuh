@@ -35,7 +35,10 @@ def view(request, action):
             initial={"social_email": social_email, "social_email2": social_email2},
             request=request)
 
-    form.form_title = "Sign up for this event"
+    if not action.event.is_event_completed():
+        form.form_title = "Sign up for this event"
+    else:
+        form.form_title = "Get your points"
 
     return form
 
@@ -109,6 +112,8 @@ def complete(request, event):
             return response
 
         # invalid form
+        # rebuild the form
+        form.form_title = "Get your points"
         return render_to_response("task.html", {
             "action": event,
             "form": form,

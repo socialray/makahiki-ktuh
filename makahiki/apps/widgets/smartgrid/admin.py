@@ -359,6 +359,8 @@ class ActionAdmin(admin.ModelAdmin):
                "change_level", "change_category", "clear_level", "clear_category",
                "clear_level_category"]
     list_display = ["slug", "title", "level", "category", "priority", "type", "point_value"]
+    search_fields = ["slug", "title"]
+    list_filter = ["type", 'level', 'category']
 
     def delete_selected(self, request, queryset):
         """override the delete selected."""

@@ -9,6 +9,8 @@ from apps.managers.resource_mgr.models import EnergyUsage, WaterUsage, ResourceS
 class UsageAdmin(admin.ModelAdmin):
     """Administrator display list: team, date, and energy."""
     list_display = ["date", "team", "time", "usage", "updated_at"]
+    search_fields = ["team__name", ]
+    list_filter = ['team', 'date']
 
 admin.site.register(EnergyUsage, UsageAdmin)
 admin.site.register(WaterUsage, UsageAdmin)

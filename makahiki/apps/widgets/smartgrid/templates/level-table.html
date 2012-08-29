@@ -28,7 +28,7 @@
                                                                          width="12"
                                                                          align="left"/>
                                                                  {% else %}
-                                                                    {% if task.member.approval_status == "pending" and task.is_event_pau %}
+                                                                    {% if task.member.approval_status == "pending" and task.event.is_event_completed %}
                                                                         <img src="{{ STATIC_URL}}images/icons/icon-exclamation2.png"
                                                                              width="12"
                                                                              align="left"/>
