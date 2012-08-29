@@ -7,14 +7,13 @@
 
     <form id="setup-activity-form" class="well">
         {% csrf_token %}
-        <label for="activity-select">Question: Which level of student can participate in the Kukui
-            Cup?</label>
+        <label for="activity-select">Question: What US state is most dependent upon oil for its energy?</label>
         Answer: <select name="activity-select" id="activity-select">
         <option></option>
-        <option value="first-years">First-year students</option>
-        <option value="sophomores">Sophomores</option>
-        <option value="juniors">Juniors</option>
-        <option value="seniors">Seniors</option>
+        <option value="Hawaii">Hawaii</option>
+        <option value="Illinois">Illinois</option>
+        <option value="Michigan">Michigan</option>
+        <option value="Alaska">Alaska</option>
     </select>
         <span id="question-response"></span>
         <input id="response-correct" type="hidden" name="response-correct" value="false">
@@ -51,7 +50,7 @@
         var s = 6.0/7.0*100 + "%";
         $(".bar").width(s);
         $("#activity-select").change(function () {
-            if ($("#activity-select option:selected").val() == "first-years") {
+            if ($("#activity-select option:selected").val() == "Hawaii") {
                 $("#response-correct").val("true");
                 $("#question-response").html("<span style='color: green'>Correct!</span>")
             }

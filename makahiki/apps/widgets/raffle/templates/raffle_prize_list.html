@@ -1,5 +1,7 @@
 {% extends "logged_in_base.html" %}
 
+{% load markup %}
+
 {% block page_title %}
     Raffle Prize List
 {% endblock %}
@@ -38,11 +40,18 @@
                                       <tr>
                                         <td class="column-text">
                                           <div><b>{{ item.title }}</b></div>
-                                           <image class="raffle-icon" src="{{item.image.url}}" width="100"></image>
+                                            <image class="raffle-icon"
+                                                   {% if item.image %}
+                                                      src="{{item.image.url}}"
+                                                   {% else %}
+                                                      src="{{ MEDIA_URL }}media/prizes/mystery-box.jpg"
+                                                   {% endif %}
+                                                   width="100"></image>
+
 
                                         </td>
 
-                                        <td class="column-text">{{item.description}}
+                                        <td class="column-text">{{item.description|markdown}}
                                         </td>
                                       </tr>
                                   {% endfor %} 
