@@ -8,14 +8,17 @@
         </div>
         <div class='notice-list-content'>
             {{ notification.contents|safe }}
-
-            {% if notification.is_success %}
-                <a href="javascript:void(0);">Click here to share on Facebook</a>
-            {% endif %}
         </div>
-
     </div>
 
+    <div class="notification-options">
+        {% if notification.is_success %}
+            <a class="notification-share" href="javascript:void(0);">Click here to share on Facebook</a>
+        {% endif %}
+
+
+        <!--         <br style="clear: both"/> -->
+    </div>
     <div style="clear:both"></div>
 </li>
 

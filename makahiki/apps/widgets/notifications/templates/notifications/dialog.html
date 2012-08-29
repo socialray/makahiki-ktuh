@@ -10,13 +10,20 @@
             {% for notification in notifications.alerts %}
                 <li id="notification-dialog-{{notification.id}}"
                     class="{{notification.style_class}} notification-item">
+                    <div class="notification-contents">
+                        <div class='notice-icon'>
                             <i class="{{notification.icon_class}}"></i>
+                        </div>
+                        <div class='notice-content'>
                             {{ notification.contents|safe }}
-                            {% if notification.is_success %}
-                                <a href="javascript:void(0);">Click here to share on
-                                    Facebook</a>&nbsp;
-                            {% endif %}
-                            <br/>
+                        </div>
+                    </div>
+                    {% if notification.is_success %}
+                        <div class="notification-options">
+                            <a class="notification-share" href="javascript:void(0);">Click here to share on
+                                Facebook</a>&nbsp;
+                        </div>
+                    {% endif %}
                 </li>
                 <script type="text/javascript">
                     jQuery(document).ready(function ($) {

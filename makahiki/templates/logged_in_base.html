@@ -3,6 +3,7 @@
 {% load markup %}
 
 {% block extra_head_base %}
+  <link rel="stylesheet" href="{{STATIC_URL}}jquery-ui/jquery-ui.css">
 
   {% if not MAKAHIKI_USE_LESS %}
     <link rel="stylesheet" href="{{STATIC_URL}}css/{{CSS_THEME}}.css">
