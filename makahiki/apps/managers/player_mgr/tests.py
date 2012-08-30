@@ -147,14 +147,14 @@ class ProfileUnitTests(TransactionTestCase):
         self.assertEqual(points1, Profile.objects.get(user=user1).points(),
             'User 1 should not have received any points.')
 
+        points2 = profile2.points()
         profile2.add_points(40, datetime.datetime.today(),
             'Trigger referral bonus.')
-        points2 = profile2.points()
         profile2.save()
 
         self.assertEqual(points1 + 10, Profile.objects.get(user=user1).points(),
             'User 1 should have the referral bonus')
-        self.assertEqual(points2 + 10, Profile.objects.get(user=user2).points(),
+        self.assertEqual(points2 + 50, Profile.objects.get(user=user2).points(),
             'User 2 should have the referral bonus')
         self.assertTrue(Profile.objects.get(user=user2).referrer_awarded,
             'User 2 should have the referral awarded.')

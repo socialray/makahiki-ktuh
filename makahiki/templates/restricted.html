@@ -12,36 +12,46 @@
         Thank you for your interest in the Kukui Cup!
         <p/>
             <div>
+                {% if CURRENT_ROUND_INFO.name == "Round 0" %}
                     <h3>The competition has not yet started.
                         It starts at {{ CURRENT_ROUND_INFO.end }}, in: </h3></he></br>
                     <h2><span id='restricted-countdown'></span>.</h2> </br>
                     <h3>Come back then!</h3>
+                {% else %}
+                    You don't have access to the Kukui Cup yet. please <a href="mailto:{{ CHALLENGE.contact_email }}">
+                    email the Kukui Cup administrators.</a> for more info.
+                {% endif %}
 
-                <script src="{{STATIC_URL}}js/jquery.countdown.pack.js" type="text/javascript"></script>
-                <script type="text/javascript">
-                    var startDate = new Date("{{CURRENT_ROUND_INFO.end.ctime}}");
-                    var today = new Date();
-                    // Calculate the number of days in the difference.
-                    var hourDiff = (startDate - today) / (1000 * 60 * 60);
-                    //             console.log('today: ' + today + ' start: ' + startDate);
-                    if (hourDiff > 24) {
-                        $("#restricted-countdown").countdown({
-                            until:startDate,
-                            tickInterval:60,
-                            layout:'{dn} {dl}, {hn} {hl}, and {mn} {ml}'
-                        });
-                    }
-                    else {
-                        $("#restricted-countdown").countdown({
-                            until:startDate,
-                            layout:'{hn} {hl}, {mn} {ml}, and {sn} {sl}'
-                        });
-                    }
-                </script>
+                <p/> <p/>
+
+                <a href="{% url landing %}">Back to the home page</a>
+
             </div>
 
         <p/>
         </div>
     </div>
 </div>
+
+    <script src="{{STATIC_URL}}js/jquery.countdown.pack.js" type="text/javascript"></script>
+    <script type="text/javascript">
+        var startDate = new Date("{{CURRENT_ROUND_INFO.end.ctime}}");
+        var today = new Date();
+        // Calculate the number of days in the difference.
+        var hourDiff = (startDate - today) / (1000 * 60 * 60);
+        //             console.log('today: ' + today + ' start: ' + startDate);
+        if (hourDiff > 24) {
+            $("#restricted-countdown").countdown({
+                until:startDate,
+                tickInterval:60,
+                layout:'{dn} {dl}, {hn} {hl}, and {mn} {ml}'
+            });
+        }
+        else {
+            $("#restricted-countdown").countdown({
+                until:startDate,
+                layout:'{hn} {hl}, {mn} {ml}, and {sn} {sl}'
+            });
+        }
+    </script>
 {% endblock %}

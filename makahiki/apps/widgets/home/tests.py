@@ -52,7 +52,7 @@ class CompetitionMiddlewareTestCase(TransactionTestCase):
         self.failUnlessEqual(response.status_code, 200)
         self.assertTemplateUsed(response,
                                 "widgets/home/templates/restricted.html")
-        self.assertContains(response, "The competition starts in")
+        self.assertContains(response, "The competition starts at")
 
     def testAfterCompetition(self):
         """

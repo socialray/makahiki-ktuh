@@ -364,8 +364,9 @@ def team_points_leaders(num_results=None, round_name=None):
     if not round_name:
         round_name = challenge_mgr.get_round_name()
 
-    entries = ScoreboardEntry.objects.values("profile__team__name").filter(
-        round_name=round_name).annotate(
+    entries = ScoreboardEntry.objects.filter(
+        round_name=round_name, profile__team__isnull=False).values(
+        "profile__team__name").annotate(
             points=Sum("points"),
             last=Max("last_awarded_submission")).order_by("-points", "-last")
     if entries:

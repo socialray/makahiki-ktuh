@@ -2,7 +2,7 @@
 from django.conf import settings
 from django.db import models
 from django.contrib.auth.models import User
-from django.db.models.signals import post_save, pre_save
+from django.db.models.signals import post_save
 from django.contrib.localflavor.us.models import PhoneNumberField
 from apps.managers.challenge_mgr import challenge_mgr
 from apps.managers.score_mgr import score_mgr
@@ -96,6 +96,17 @@ class Profile(models.Model):
     def add_points(self, points, transaction_date, message, related_object=None):
         """Adds points based on the point value of the submitted object."""
         score_mgr.player_add_points(self, points, transaction_date, message, related_object)
+        self._award_possible_referral_bonus()
+
+    def _award_possible_referral_bonus(self):
+        """award possible referral bonus."""
+
+        has_referral = self.referring_user is not None and not self.referrer_awarded
+        if has_referral and self.points() >= score_mgr.active_threshold_points():
+            self.referrer_awarded = True
+            self.save()
+            referrer = self.referring_user.get_profile()
+            score_mgr.award_referral_bonus(self, referrer)
 
     def remove_points(self, points, transaction_date, message, related_object=None):
         """Removes points from the user."""
@@ -125,17 +136,3 @@ def create_profile(sender, instance=None, **kwargs):
 
 
 post_save.connect(create_profile, sender=User)
-
-
-def award_possible_referral_bonus(sender, instance=None, **kwargs):
-    """award possible referral bonus when creating profile."""
-    _ = sender
-    _ = kwargs
-    has_referral = instance.referring_user is not None and not instance.referrer_awarded
-    if has_referral and instance.points() >= score_mgr.active_threshold_points():
-        instance.referrer_awarded = True
-        referrer = Profile.objects.get(user=instance.referring_user)
-        score_mgr.award_referral_bonus(instance, referrer)
-
-
-pre_save.connect(award_possible_referral_bonus, sender=Profile)
