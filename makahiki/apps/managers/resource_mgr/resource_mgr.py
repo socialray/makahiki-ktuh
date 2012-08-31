@@ -83,7 +83,7 @@ def get_energy_usage(session, source):
             if key_value and key_value[0].text == "energyConsumed":
                 usage = key_value[1].text
 
-        return int(round(float(usage) / 1000))
+        return int(round(float(usage)))
 
     except Timeout:
         print 'team %s energy usage update error with connection timeout.' % source
@@ -94,16 +94,12 @@ def get_energy_usage(session, source):
 
 
 def update_energy_usage():
-    """Update the energy usage from WattDepot server."""
+    """Update the latest energy usage from WattDepot server."""
 
     challenge_mgr.init()
     date = datetime.datetime.today()
-
-    # workaround the issue that wattdepot might not have the latest data yet.
-    date = date - datetime.timedelta(minutes=5)
-
     start_time = date.strftime("%Y-%m-%dT00:00:00")
-    end_time = date.strftime("%Y-%m-%dT%H:%M:%S")
+    end_time = "latest"
 
     s = requests.session()
     s.params = {'startTime': start_time, 'endTime': end_time}
@@ -180,7 +176,7 @@ def resource_ranks(name, round_name=None):
 
         ranks = []
         for rank in usage_ranks:
-            ranks.append(rank)
+            ranks.append({"team__name": rank["team__name"], "total": rank["total"] / 100 / 10.0})
         cache_mgr.set_cache(cache_key, ranks, 3600)
     return ranks
 

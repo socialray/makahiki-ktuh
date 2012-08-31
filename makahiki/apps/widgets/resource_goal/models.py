@@ -17,7 +17,7 @@ class ResourceGoal(models.Model):
         help_text="The team which this goal is related to.")
 
     date = models.DateField(
-        help_text="The date of the month.")
+        help_text="The date of the goal.")
 
     goal_status = models.CharField(
         default="Not available",
@@ -187,11 +187,11 @@ class EnergyBaselineHourly(ResourceBaselineHourly):
     """Hourly Team energy baseline Model for a week"""
     class Meta:
         """meta"""
-        verbose_name_plural = "Energy Hourly baselines"
+        verbose_name_plural = "Energy hourly baselines"
 
 
 class WaterBaselineHourly(ResourceBaselineHourly):
     """Hourly Team water baseline Model for a week"""
     class Meta:
         """meta"""
-        verbose_name_plural = "Water Hourly baselines"
+        verbose_name_plural = "Water hourly baselines"

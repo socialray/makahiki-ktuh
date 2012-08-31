@@ -56,9 +56,9 @@ def get_hourly_goal_data(team, resource):
             if previous_goal_result and previous_goal_result.current_goal_percent_reduction:
                 goal_percentage = previous_goal_result.current_goal_percent_reduction
 
-        goal = {"goal_usage": (baseline * 100 - baseline * goal_percentage) / 100,
-                "warning_usage": (baseline * 100 - baseline * goal_percentage / 2) / 100,
-                "actual_usage": data.usage,
+        goal = {"goal_usage": baseline * (100 - goal_percentage) / 100 / 100 / 10.0,
+                "warning_usage": baseline * (100 - goal_percentage / 2) / 100 / 100 / 10.0,
+                "actual_usage": data.usage / 100 / 10.0,
                 "updated_at": datetime.datetime.combine(date=data.date, time=data.time)
                }
         goal["actual_diff"] = abs(goal["actual_usage"] - goal["goal_usage"])
