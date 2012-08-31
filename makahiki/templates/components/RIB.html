@@ -10,19 +10,17 @@
             <div class="span1">
                 <img src="{% avatar_url user 60 %}" />
             </div>
-            <div class="span3">
-                <div id="rib-outer-box" style="width=100%">
+            <div id="rib-outer-box" class="span3">
                 <div id="wide-personal-cycle">
                     {% include "components/user_points.html" %}
                 </div>
-                </div>
             </div>
-            <div class="span3">
+            <div id="rib-outer-box" class="span3">
                 <div id="wide-team-cycle">
                     {% include "components/team_points.html" %}
                 </div>
             </div>
-            <div class="span3">
+            <div id="rib-outer-box" class="span3">
                 <div id="wide-round-cycle">
                     {% include "components/round_cycle.html" %}
                 </div>
@@ -51,6 +49,13 @@
     </div>
 </div>
 <script type="text/javascript">
+$(document).ready(function() {
+
+	var outerWidth = $("#rib-outer-box").width();
+    $(".rib-set-width-outer-width").each (function(index, item) {
+        item.style.width = outerWidth + "px";
+    });
+
     $('#wide-personal-cycle').cycle({
         fx: "fade",
         timeout: 3500,
@@ -77,6 +82,27 @@
         delay:  -1000,
         sync: true
         });
+});
+    $(window).resize(function() {
+        // see if we need to expand the RIB height.
+        var maxHeight = $("#info-bar-wide").height();
+        var oldHeight = maxHeight;
+        var height = 0;
+        $("#info-bar-wide .rib-set-width-outer-width").each(function(index, item) {
+            height = $(item).height();
+            if (height > maxHeight) {
+                maxHeight = height;
+            }
+        });
+        if (oldHeight < maxHeight) {
+            $("#info-bar-wide").height(maxHeight);
+        }
+
+        var outerWidth = $("#rib-outer-box").width();
+        $(".rib-set-width-outer-width").each (function(index, item) {
+            item.style.width = outerWidth + "px";
+        });
+    });
 </script>
 {% endwith %}
 {% endwith %}

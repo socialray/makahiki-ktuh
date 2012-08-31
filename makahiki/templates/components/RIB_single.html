@@ -2,42 +2,42 @@
             <h4>{{profile.name}}</h4>
             {{profile_points}} points <br/>#{{profile_team_rank}} of {{TEAM_MEMBER_COUNT}} in {{team.name}}.
     </div>
-    <div>
+    <div style="display:none;">
             <h4>{{profile.name}}</h4>
             {{profile_points}} points <br/>#{{profile_overall_rank}} of {{OVERALL_MEMBER_COUNT}} overall.
     </div>
 
-    <div>
+    <div style="display:none;">
             <h4>{{team}}</h4>
             {{team_points}} points. <br/>#{{team_rank}} of {{TEAM_COUNT}}.
     </div>
 
     {% if view_objects.energy_rank_info %}
-    <div>
+    <div style="display:none;">
             <h4>{{team}}</h4>
             {{ view_objects.energy_rank_info.usage }} kWh. <br/>#{{ view_objects.energy_rank_info.rank }} of {{TEAM_COUNT}}.
     </div>
     {% endif %}
 
     {% if view_objects.water_rank_info %}
-        <div>
+        <div style="display:none;">
             <h4>{{team}}</h4>
             {{ view_objects.water_rank_info.usage }} kWh. <br/>#{{ view_objects.water_rank_info.rank }} of {{TEAM_COUNT}}.
         </div>
     {% endif %}
 
-    <div>
+    <div style="display:none;">
             <h4>{{ CURRENT_ROUND_INFO.name }}</h4>
             Ends on {{CURRENT_ROUND_INFO.end}}
     </div>
 
     {% for event in AVAILABLE_EVENTS %}
-    <div>
+    <div style="display:none;">
             <h4><a href="{% url activity_task event.type event.slug %}">{{ event.title }}</a></h4>
             {{event.event_date}}
     </div>
     {% empty %}
-    <div>
+    <div style="display:none;">
         Sorry, no upcoming events.<br>
         Check back later.
     </div>
