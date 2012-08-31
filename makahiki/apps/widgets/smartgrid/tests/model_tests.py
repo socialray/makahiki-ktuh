@@ -152,12 +152,6 @@ class ActivitiesTest(TransactionTestCase):
         notice = activity_member.notifications.all()[0]
         self.assertTrue(notice.unread, "Notification should be unread.")
 
-        activity_member.approval_status = "pending"
-        activity_member.save()
-
-        notice = activity_member.notifications.all()[0]
-        self.assertFalse(notice.unread, "Notification should be marked as read.")
-
 
 class CommitmentsUnitTestCase(TransactionTestCase):
     """Commitment Test."""

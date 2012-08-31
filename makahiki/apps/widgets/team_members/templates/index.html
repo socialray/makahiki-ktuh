@@ -1,4 +1,5 @@
 {% load avatar_tags %}
+{% load cache %}
 
 <div class="content-box news">
     <div class="content-box-title">
@@ -12,6 +13,7 @@
     </div>
     <div class="scrollable">
         <ul>
+        {% cache 2592000 team_member_avatar user.get_profile.team_id %}
         {% for member in view_objects.team_members.team_members %}
         <li>
             <div style="position:relative;top:0;left:0;">  
@@ -34,6 +36,7 @@
                 </a>
             </div>
         {% endfor %}
+        {% endcache %}
         </ul>
     </div>
 

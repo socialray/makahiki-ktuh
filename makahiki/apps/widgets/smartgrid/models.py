@@ -494,9 +494,6 @@ class ActionMember(models.Model):
 
             self._handle_activity_notification(self.approval_status)
         else:
-            # Check for any notifications and mark them as read.
-            self.notifications.update(unread=False)
-
             if self.approval_status == u"pending":
                 # Mark pending items as submitted.
 
@@ -536,7 +533,7 @@ class ActionMember(models.Model):
 
         self.post_to_wall()
         self.invalidate_cache()
-        badges.award_possible_badges(self.user.get_profile())
+        badges.award_possible_badges(self.user.get_profile(), "smartgrid")
 
     def _award_points(self):
         """Custom save method to award points."""
@@ -728,7 +725,8 @@ class ActionMember(models.Model):
         team = self.user.get_profile().team
         if team:
             cache_mgr.invalidate_template_cache("team_avatar", self.action.id, team.id)
-        cache_mgr.invalidate_template_cache("commitments", username)
+        cache_mgr.invalidate_template_cache("my_commitments", username)
+        cache_mgr.invalidate_template_cache("my_achievements", username)
         cache_mgr.invalidate_template_cache("smartgrid", username)
 
     def delete(self, using=None):

@@ -10,6 +10,7 @@ from django.template import RequestContext
 from django.contrib.auth.decorators import login_required
 from django.utils import importlib
 from django.views.decorators.cache import never_cache
+from apps.managers.challenge_mgr import challenge_mgr
 from apps.managers.score_mgr import score_mgr
 
 from apps.widgets.smartgrid import smartgrid, view_commitments, view_events, view_activities, \
@@ -77,7 +78,8 @@ def view_action(request, action_type, slug):
     except ObjectDoesNotExist:
         feedback = None
 
-    view_objects['quests'] = get_quests(user)
+    if challenge_mgr.is_game_enabled("Quest Game Mechanics"):
+        view_objects['quests'] = get_quests(user)
 
     return render_to_response("task.html", {
         "action": action,

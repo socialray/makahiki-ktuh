@@ -321,6 +321,7 @@ class GameInfo(models.Model):
         """Custom save method."""
         super(GameInfo, self).save(*args, **kwargs)
         cache_mgr.delete("enabled_widgets")
+        cache_mgr.delete("enabled_games")
 
 
 class GameSetting(models.Model):

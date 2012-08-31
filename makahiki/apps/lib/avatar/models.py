@@ -54,6 +54,7 @@ class Avatar(models.Model):
         # Invalidate team action avatar cache.
         team = user.get_profile().team
         if team:
+            cache_mgr.invalidate_template_cache("team_member_avatar", team.id)
             for member in ActionMember.objects.filter(user=user):
                 cache_mgr.invalidate_template_cache("team_avatar", member.action.id, team.id)
 

@@ -24,7 +24,7 @@ def get_participations():
             "participation_50": [],
             "participation_0": [],
             "p_settings": p_settings}
-        team_participation = TeamParticipation.objects.all()
+        team_participation = TeamParticipation.objects.all().select_related("team")
 
         if not team_participation:
             team_participation = Team.objects.all()

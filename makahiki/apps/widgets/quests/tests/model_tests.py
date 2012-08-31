@@ -1,6 +1,7 @@
 """Quest Test"""
 from django.test import TransactionTestCase
 from django.contrib.auth.models import User
+from apps.managers.challenge_mgr import challenge_mgr
 from apps.utils import test_utils
 
 from apps.widgets.quests.quests import get_quests, possibly_completed_quests
@@ -10,6 +11,7 @@ from apps.widgets.quests.models import Quest, QuestMember
 class QuestTest(TransactionTestCase):
     """Quest Test"""
     def setUp(self):
+        challenge_mgr.init()
         self.user = User(username="testuser", password="password")
         self.user.save()
 

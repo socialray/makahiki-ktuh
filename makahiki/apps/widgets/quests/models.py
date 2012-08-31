@@ -5,6 +5,7 @@ from django.conf import settings
 
 from django.db import models
 from django.contrib.auth.models import User
+from apps.managers.cache_mgr import cache_mgr
 from apps.managers.score_mgr import score_mgr
 from apps.utils import utils
 
@@ -89,3 +90,9 @@ class QuestMember(models.Model):
             message = "Quest: %s" % self.quest.name
             self.user.get_profile().add_points(score_mgr.quest_points(),
                                                datetime.datetime.today(), message, self)
+        cache_mgr.delete('get_quests-%s' % self.user.username)
+
+    def delete(self, *args, **kwargs):
+        """Custom delete method."""
+        cache_mgr.delete('get_quests-%s' % self.user.username)
+        super(QuestMember, self).delete(*args, **kwargs)

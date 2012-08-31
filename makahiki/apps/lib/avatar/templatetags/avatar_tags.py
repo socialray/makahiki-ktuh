@@ -18,10 +18,7 @@ def avatar_url(user, size=80, first_login=False):
         except User.DoesNotExist:
             return AVATAR_DEFAULT_NO_URL
     avatars = user.avatar_set.order_by('-date_uploaded')
-    primary = avatars.filter(primary=True)
-    if primary.count() > 0:
-        avt = primary[0]
-    elif avatars.count() > 0:
+    if avatars:
         avt = avatars[0]
     else:
         avt = None

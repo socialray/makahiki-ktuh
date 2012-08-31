@@ -5,7 +5,6 @@ import datetime
 from django.core.urlresolvers import reverse
 from django.http import HttpResponseRedirect
 from apps.managers.challenge_mgr import challenge_mgr
-from apps.widgets.badges import badges
 
 
 class LoginMiddleware(object):
@@ -77,11 +76,6 @@ class LoginMiddleware(object):
                 profile.daily_visit_count = 1
             profile.last_visit_date = today
             profile.save()
-
-            if last_visit:
-                # award possible badge if it is the first visit of the day and
-                # not the first visit ever
-                badges.award_possible_badges(profile)
 
         return None
 

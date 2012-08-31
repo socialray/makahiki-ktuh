@@ -33,6 +33,7 @@ def supply(request, page_name):
 
             # Invalidate info bar cache.
             cache_mgr.invalidate_template_cache("RIB", user.username)
+            cache_mgr.delete('get_quests-%s' % user.username)
 
             form.message = "Your changes have been saved"
 

@@ -185,7 +185,7 @@ def get_in_progress_members(user):
     """Get the user's incomplete activity members."""
     return user.actionmember_set.filter(
         award_date=None,
-    ).order_by("submission_date")
+    ).order_by("submission_date").select_related("action")
 
 
 def get_current_commitment_members(user):
@@ -193,7 +193,7 @@ def get_current_commitment_members(user):
     return user.actionmember_set.filter(
         action__type="commitment",
         award_date=None,
-    ).order_by("submission_date")
+    ).order_by("submission_date").select_related("action")
 
 
 def get_available_golow_actions(user, related_resource):

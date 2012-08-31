@@ -54,22 +54,16 @@ def add(request, event):
 def signup(request, event):
     """Commit the current user to the activity."""
     user = request.user
-    value = None
 
-    # Search for an existing activity for this user
-    if event not in user.action_set.all():
-        action_member = ActionMember(user=user, action=event)
-        action_member.save()
+    action_member = ActionMember(user=user, action=event)
+    action_member.save()
 
-        response = HttpResponseRedirect(
-            reverse("activity_task", args=(event.type, event.slug,)))
-        value = score_mgr.signup_points()
-        notification = "You just earned " + str(value) + " points."
-        response.set_cookie("task_notify", notification)
-        return response
-
-    # adding to the existing activity results in redirecting to the task page
-    return HttpResponseRedirect(reverse("activity_task", args=(event.type, event.slug,)))
+    response = HttpResponseRedirect(
+        reverse("activity_task", args=(event.type, event.slug,)))
+    value = score_mgr.signup_points()
+    notification = "You just earned " + str(value) + " points."
+    response.set_cookie("task_notify", notification)
+    return response
 
 
 def complete(request, event):

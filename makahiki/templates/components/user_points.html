@@ -1,14 +1,12 @@
 
-{% with user.get_profile as profile %}
+
 <div>
     <div class="rib-set-width-outer-width">
-<h4>{{profile.name}}</h4>{{profile.current_round_points}} points <br/>#{{profile.current_round_team_rank}} of {{TEAM_MEMBER_COUNT}} in {{profile.team.name}}.
+<h4>{{profile.name}}</h4>{{profile_points}} points <br/>#{{profile_team_rank}} of {{TEAM_MEMBER_COUNT}} in {{team.name}}.
     </div>
 </div>
 <div style="display:none;">
     <div class="rib-set-width-outer-width">
-<h4>{{profile.name}}</h4>{{profile.current_round_points}} points <br/>#{{profile.current_round_overall_rank}} of {{OVERALL_MEMBER_COUNT}} overall.
+<h4>{{profile.name}}</h4>{{profile_points}} points <br/>#{{profile_overall_rank}} of {{OVERALL_MEMBER_COUNT}} overall.
     </div>
 </div>
-
-{% endwith %}

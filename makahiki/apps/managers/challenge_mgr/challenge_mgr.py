@@ -179,9 +179,20 @@ def get_all_enabled_widgets():
     return page_widgets
 
 
-def get_enabled_games():
-    """returns all the enabled game setting objects."""
-    return GameSetting.objects.filter(enabled=True)
+def is_game_enabled(name):
+    """returns True if the game is enabled."""
+    return name in get_all_enabled_games()
+
+
+def get_all_enabled_games():
+    """Returns the enabled games."""
+    games = cache_mgr.get_cache("enabled_games")
+    if games is None:
+        games = []
+        for game in GameInfo.objects.filter(enabled=True):
+            games.append(game.name)
+        cache_mgr.set_cache("enabled_games", games, 2592000)
+    return games
 
 
 def register_page_widget(page_name, widget, label=None):

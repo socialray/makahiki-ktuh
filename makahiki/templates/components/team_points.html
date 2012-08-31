@@ -1,8 +1,6 @@
-{% with team=user.get_profile.team %}
-    {% if team %}
         <div>
             <div class="rib-set-width-outer-width">
-                <h4>{{team}}</h4>{{team.current_round_points}} points. <br/>#{{team.current_round_rank}} of {{TEAM_COUNT}}.
+                <h4>{{team}}</h4>{{team_points}} points. <br/>#{{team_rank}} of {{TEAM_COUNT}}.
             </div>
         </div>
 
@@ -24,5 +22,3 @@
                 </div>
             {% endif %}
         {% endwith %}
-    {% endif %}
-{% endwith %}

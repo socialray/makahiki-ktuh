@@ -37,7 +37,7 @@ class ResourceGoal(models.Model):
         """Meta"""
         abstract = True
         unique_together = (("team", "date",),)
-        ordering = ("team", "date")
+        ordering = ("team", "-date")
 
 
 class EnergyGoal(ResourceGoal):
@@ -136,12 +136,16 @@ class ResourceBaselineDaily(models.Model):
 
 class EnergyBaselineDaily(ResourceBaselineDaily):
     """Daily Team energy baseline Model for a week"""
-    pass
+    class Meta:
+        """meta"""
+        verbose_name_plural = "Energy daily baselines"
 
 
 class WaterBaselineDaily(ResourceBaselineDaily):
     """Daily Team water baseline Model for a week"""
-    pass
+    class Meta:
+        """meta"""
+        verbose_name_plural = "Water daily baselines"
 
 
 class ResourceBaselineHourly(models.Model):
@@ -181,9 +185,13 @@ class ResourceBaselineHourly(models.Model):
 
 class EnergyBaselineHourly(ResourceBaselineHourly):
     """Hourly Team energy baseline Model for a week"""
-    pass
+    class Meta:
+        """meta"""
+        verbose_name_plural = "Energy Hourly baselines"
 
 
 class WaterBaselineHourly(ResourceBaselineHourly):
     """Hourly Team water baseline Model for a week"""
-    pass
+    class Meta:
+        """meta"""
+        verbose_name_plural = "Water Hourly baselines"

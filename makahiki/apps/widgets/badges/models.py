@@ -20,7 +20,9 @@ class Badge(models.Model):
                      ('4', "theme 4"),
                      ('5', "theme 5"),
                      )
-
+    TRIGGER_CHOICES = (('daily', 'daily'),
+                       ('smartgrid', 'smartgrid'),
+                      )
     name = models.CharField(max_length=255,
                             help_text="The name of the badge")
     label = models.CharField(max_length=20,
@@ -39,6 +41,10 @@ class Badge(models.Model):
         max_length=1024,
         help_text="if the condition is True, the badge will be awarded. " +
                    settings.PREDICATE_DOC_TEXT)
+
+    award_trigger = models.CharField(max_length=10, choices=TRIGGER_CHOICES, default='daily',
+                                     help_text="The trigger of evaluating the award condition.")
+
     theme = models.CharField(max_length=1, choices=THEME_CHOICES, default='6',
                              help_text="The theme for the badge.")
     points = models.IntegerField(

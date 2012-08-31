@@ -19,11 +19,6 @@ def get_resource_setting(name):
     """Returns the resource settings for the specified name."""
     resource_setting = cache_mgr.get_cache("resource_setting-%s" % name)
     if resource_setting is None:
-        if ResourceSetting.objects.count() == 0:
-            ResourceSetting.objects.create(name="energy", unit="kWh", winning_order="Ascending")
-            ResourceSetting.objects.create(name="water", unit="Gallon", winning_order="Ascending")
-            ResourceSetting.objects.create(name="waste", unit="Ton", winning_order="Descending")
-
         resource_setting = ResourceSetting.objects.get(name=name)
         cache_mgr.set_cache("resource_setting-%s" % name, resource_setting, 2592000)
     return resource_setting

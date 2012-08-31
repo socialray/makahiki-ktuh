@@ -2,6 +2,7 @@
 from django.contrib.auth.models import User
 from django.core.urlresolvers import reverse
 from django.test import TransactionTestCase
+from apps.managers.cache_mgr import cache_mgr
 from apps.managers.challenge_mgr import challenge_mgr
 from apps.utils import test_utils
 from apps.widgets.quests.quests import get_quests
@@ -23,6 +24,7 @@ class QuestFunctionalTestCase(TransactionTestCase):
 
     def testNoQuests(self):
         """Test that the appropriate text is displayed when there are no quests."""
+        cache_mgr.clear()
         response = self.client.get(reverse("home_index"))
         self.assertContains(response,
             "There are no quests available at this time.  Please check back later!")
@@ -32,6 +34,7 @@ class QuestFunctionalTestCase(TransactionTestCase):
         quest = test_utils.create_quest(completion_conditions=False)
         quest.unlock_conditions = "False"
         quest.save()
+        cache_mgr.clear()
 
         response = self.client.get(reverse("home_index"))
         self.failUnlessEqual(response.status_code, 200)
@@ -40,6 +43,7 @@ class QuestFunctionalTestCase(TransactionTestCase):
 
         quest.unlock_conditions = "True"
         quest.save()
+        cache_mgr.clear()
         response = self.client.get(reverse("home_index"))
         self.assertContains(response, "Test quest",
             msg_prefix="Test quest should be available to the user.")
@@ -47,6 +51,7 @@ class QuestFunctionalTestCase(TransactionTestCase):
     def testAcceptQuest(self):
         """Test that a user can accept a quest using a url."""
         quest = test_utils.create_quest(completion_conditions=False)
+        cache_mgr.clear()
 
         response = self.client.get(reverse("home_index"))
         self.assertContains(response, "Test quest",
@@ -63,6 +68,7 @@ class QuestFunctionalTestCase(TransactionTestCase):
     def testOptOutOfQuest(self):
         """Test that a user can opt out of the quest."""
         quest = test_utils.create_quest(completion_conditions=False)
+        cache_mgr.clear()
 
         response = self.client.get(reverse("home_index"))
         self.assertContains(response, "Test quest",
@@ -80,6 +86,7 @@ class QuestFunctionalTestCase(TransactionTestCase):
     def testCancelQuest(self):
         """Test that a user can cancel their participation in a quest."""
         quest = test_utils.create_quest(completion_conditions=False)
+        cache_mgr.clear()
 
         response = self.client.post(
             reverse("quests_accept", args=(quest.quest_slug,)),
@@ -104,6 +111,7 @@ class QuestFunctionalTestCase(TransactionTestCase):
     def testQuestCompletion(self):
         """Test that a user gets a dialog box when they complete a quest."""
         quest = test_utils.create_quest(completion_conditions=True)
+        cache_mgr.clear()
 
         response = self.client.get(reverse("home_index"))
         self.assertEqual(len(response.context["DEFAULT_VIEW_OBJECTS"]["notifications"]["alerts"]),

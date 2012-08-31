@@ -12,6 +12,8 @@ from apps.widgets.prizes.models import Prize
 class PrizesFunctionalTestCase(TransactionTestCase):
     """test prize page view"""
 
+    fixtures = ["base_settings.json"]
+
     def setUp(self):
         """Set up a team and log in."""
         challenge_mgr.init()

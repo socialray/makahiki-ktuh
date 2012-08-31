@@ -1,6 +1,7 @@
 """Celery Task definitions for smartgrid game."""
 
 from celery.task import task
+from apps.widgets.badges import badges
 from apps.widgets.participation import participation
 from apps.widgets.smartgrid import smartgrid
 
@@ -21,3 +22,4 @@ def process_notices():
     smartgrid.notify_commitment_end()
     smartgrid.process_rsvp()
     smartgrid.check_daily_submissions()
+    badges.award_possible_daily_badges()

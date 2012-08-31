@@ -1,5 +1,5 @@
 {% load cache %}
-{% cache 1800 commitments request.user %}
+{% cache 1800 my_commitments request.user %}
 
     <div class="content-box-contents">
     {% if view_objects.my_commitments.commitment_members %}

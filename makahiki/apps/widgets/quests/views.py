@@ -7,14 +7,14 @@ from django.http import HttpResponseRedirect, Http404
 from django.shortcuts import get_object_or_404
 
 from apps.widgets.quests.models import Quest, QuestMember
-from apps.widgets.quests.quests import get_quests
+from apps.widgets.quests.quests import get_quests_from_cache
 
 
 def supply(request, page_name):
     """supply the quest view_objects"""
 
     _ = page_name
-    return get_quests(request.user)
+    return get_quests_from_cache(request.user)
 
 
 @login_required

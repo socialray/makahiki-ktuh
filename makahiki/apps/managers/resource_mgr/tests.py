@@ -10,6 +10,8 @@ from apps.utils import test_utils
 class ResourceManagerTestCase(TransactionTestCase):
     """ResourceManager Test"""
 
+    fixtures = ["base_settings.json"]
+
     def setUp(self):
         """Initialize a user and log them in."""
         self.user = test_utils.setup_user("user", "changeme")

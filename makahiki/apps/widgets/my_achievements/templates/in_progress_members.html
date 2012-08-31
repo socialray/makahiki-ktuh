@@ -7,8 +7,7 @@
         <th class="profile-history-current-status-header column-text" >Status</th>
     </tr>
     {% for member in view_objects.my_achievements.in_progress_members %}
-        {% if member.action.activity or member.action.event %}
-            {% with member.action.activity as activity %}
+        {% if member.action.type != "commitment" %}
             <tr>
                 <td class="column-text">{{ member.created_at|date:"n/j/y" }}</td>
                 <td class="column-text">
@@ -16,7 +15,7 @@
                         {{ member.action.type.capitalize }}: {{ member.action.name }}
                     </a>
                 </td>
-                {% if member.approval_status == "pending" and member.action.activity %}
+                {% if member.approval_status == "pending" and member.action.type == "activity" %}
                     <td class="column-text" title="Your request needs administrator approval.">
                         {{ member.approval_status.capitalize }}
                 {% else %}
@@ -26,13 +25,12 @@
                     {% else %}
                         {# Item is not pending and is not approved, so it should be rejected. #}
                         <td  class="column-text" title="Your request has not been approved.">
-                        <a id="{{activity.title|slugify}}-rejected"
-                           href="{% url activity_task activity.type activity.slug %}">{{ member.approval_status.capitalize }}</a>
+                        <a id="{{member.action.title|slugify}}-rejected"
+                           href="{% url activity_task member.action.type member.action.slug %}">{{ member.approval_status.capitalize }}</a>
                     {% endif %}
                     </td>
                 {% endif %}
             </tr>
-            {% endwith %}
         {% else %}
             <tr>
                 <td class="column-text">{{ member.created_at|date:"n/j/y" }}</td>

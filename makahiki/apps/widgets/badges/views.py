@@ -29,7 +29,7 @@ def get_awarded_badges(request):
     """returns the awarded badge for the user."""
     user = request.user
     profile = user.get_profile()
-    return profile.badgeaward_set.order_by("-badge__priority")
+    return profile.badgeaward_set.order_by("-badge__priority").select_related("badge")
 
 
 def get_badge_catalog(request):

@@ -2,6 +2,7 @@
 
 from django.db import models
 from django.contrib.auth.models import User
+from apps.managers.cache_mgr import cache_mgr
 from apps.utils.utils import media_file_path
 
 POINTS_PER_TICKET = 25
@@ -40,6 +41,7 @@ class RafflePrize(models.Model):
           Throws an exception if they cannot add a ticket."""
         ticket = RaffleTicket(raffle_prize=self, user=user)
         ticket.save()
+        cache_mgr.delete('get_quests-%s' % user.username)
 
     def remove_ticket(self, user):
         """Removes an allocated ticket."""
