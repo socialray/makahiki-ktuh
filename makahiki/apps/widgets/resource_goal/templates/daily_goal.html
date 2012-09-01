@@ -59,19 +59,20 @@
                                         <img rel="tooltip" title="{{ goal.verbose_info }}"
                                              src="{{ STATIC_URL }}images/energy/unknown32.png"/>
                                     </div>
+                                {% elif goal.goal_status == "Not available" %}
+                                    <div class="goal_tooltip">
+                                        <img rel="tooltip" title="{{ goal.verbose_info }}" width=32
+                                             src="{{ STATIC_URL }}images/energy/disabled32.png"/>
+                                    </div>
                                 {% else %}
-                                    <table>
-                                        <tr>
-                                            <td height="25"></td>
-                                        </tr>
-                                    </table>
+                                    <div class="goal_tooltip">
+                                        <div style="height: 32px;"></div>
+                                    </div>
                                 {% endif %}
                             </div>
-                            {% if goal.goal_info %}
                             <span style="font-size: 0.7em;">
-                                  goal: {{ goal.goal_info }}
+                                  {{ goal.goal_info }}
                             </span>
-                            {% endif %}
                         </td>
                         {% if forloop.last %}
                             {% for day in goal.filler_days %}
@@ -87,10 +88,9 @@
         <td style="font-size: 0.8em; text-align: center;">
             <img src="{{ STATIC_URL }}images/energy/good32.png" width="16"/>: Awarded
             (Made the goal)
-            <img src="{{ STATIC_URL }}images/energy/bad32.png" width="16"/>: Not awarded
-            (Did not make the goal)
-            <img src="{{ STATIC_URL }}images/energy/unknown32.png" width="16"/>: Not
-            awarded (Can not determine)
+            <img src="{{ STATIC_URL }}images/energy/bad32.png" width="16"/>: Did not make the goal
+            <img src="{{ STATIC_URL }}images/energy/unknown32.png" width="16"/>: No usage data
+            <img src="{{ STATIC_URL }}images/energy/disabled32.png" width="16"/>: No baseline data
         </td>
     </tr>
 </table>

@@ -11,6 +11,8 @@ from apps.widgets.participation import participation
 class ParticipationTest(TransactionTestCase):
     """Scoreboard Test."""
 
+    fixtures = ["base_settings.json", "base_pages.json"]
+
     def setUp(self):
         """
         setup

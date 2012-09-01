@@ -91,21 +91,36 @@ def get_daily_goal_data(team, resource):
             # cal and store the filler_days in the last day goal_info
             goal_info["filler_days"] = range(0, 6 - date.weekday())
 
-        goal = resource_goal.team_goal(date, team, resource)
-        goal_settings = resource_goal.team_goal_settings(team, resource)
-        unit = resource_mgr.get_resource_setting(resource).unit
-        goal_usage = resource_goal.team_daily_goal_usage(date, team, resource, goal_settings)
-        goal_info["goal_info"] = "%d %s" % (goal_usage, unit)
-        if goal:
-            goal_info["goal_status"] = goal.goal_status
-            goal_info["verbose_info"] = "%d %s used within the last 24 hours (ends at %s). " \
-                                        "The goal is %d %s." % (
-                resource_mgr.team_resource_usage(date, team, resource),
-                unit,
-                goal_settings.manual_entry_time,
-                goal_usage,
-                unit
-            )
+        if date <= datetime.date.today():
+            goal = resource_goal.team_goal(date, team, resource)
+            goal_settings = resource_goal.team_goal_settings(team, resource)
+            unit = resource_mgr.get_resource_setting(resource).unit
+            goal_usage = resource_goal.team_daily_goal_usage(date, team, resource, goal_settings)
+            if goal_usage:
+                goal_info["goal_info"] = "Goal: %d %s" % (goal_usage, unit)
+            else:
+                goal_info["goal_info"] = "No baseline data"
+                goal_info["goal_status"] = "Not available"
+
+            if goal:
+                goal_info["goal_status"] = goal.goal_status
+
+            if "goal_status" in goal_info:
+                if goal_info["goal_status"] == "Not available":
+                    goal_info["verbose_info"] = "Game disabled for today because baseline data " \
+                                                "not available."
+                elif goal_info["goal_status"] == "Unknown":
+                    goal_info["verbose_info"] = "Game disabled for today because usage data " \
+                                                "not available."
+                else:
+                    goal_info["verbose_info"] = "%d %s used within the last 24 hours" \
+                                                    " (ends at %s). The goal is %d %s." % (
+                            resource_mgr.team_resource_usage(date, team, resource),
+                            unit,
+                            goal_settings.manual_entry_time,
+                            goal_usage,
+                            unit
+                        )
 
         data_table.append(goal_info)
 

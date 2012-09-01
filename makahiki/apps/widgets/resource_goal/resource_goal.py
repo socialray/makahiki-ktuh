@@ -239,7 +239,10 @@ def check_daily_resource_goal(team, resource):
     print "=== %s goal_usage: %d, actual_usage: %d on %s" % (
         team.name, goal_usage, actual_usage, date)
 
-    if actual_usage:
+    if not goal_usage:
+        goal.goal_status = "Not available"
+        goal.save()
+    elif actual_usage:
         if actual_usage <= goal_usage:
             # if already awarded, do nothing
             if goal.goal_status != "Below the goal":
