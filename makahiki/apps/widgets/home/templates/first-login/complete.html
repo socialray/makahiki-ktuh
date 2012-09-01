@@ -1,36 +1,43 @@
 <div class="modal-header">
-  <h2>Start the Quests</h2>
+  {% if quest_enabled %}
+        <h2>Start the Quests</h2>
+  {% else %}
+        <h2>Setup Compeleted</h2>
+  {% endif %}
 </div>
 <div id="setup-content" class="modal-body">
-    <p>Use the Quest Bar (as shown below) to learn more about the Kukui Cup and earn points and prizes.</p>
-
-    <p>Click "Game On" to go to your home page. </p>
+  {% if quest_enabled %}
+      <p>Use the Quest Bar (as shown below) to learn more about the Kukui Cup and earn points and prizes.</p>
 
       <div style="margin-bottom: 10px; width: 100%; text-align: center">
-      <!--start questbar-->
-    <div class="quest-frame">
-      <div class="quest-box-flogin">
-          <div class="makahiki-box-title">
-              <h3 class="makahiki-box-title">Your Quests</h3> 
-          </div>
-          <div>
-          <img class="quest-pad" src="{{ STATIC_URL}}images/spacer.png" width="20"> 
-              <ul class="quest-list">
-              <li>  
-                          Watch Intro Video&nbsp; &nbsp;
-              </li>
-              <li> 
-                          Get Social &nbsp;&nbsp;
-              </li>
-              <li> 
-                           Learn about energy &nbsp;
-              </li>
-              </ul>
-          </div> 
+            <!--start questbar-->
+            <div class="quest-frame">
+              <div class="quest-box-flogin">
+                  <div class="makahiki-box-title">
+                      <h3 class="makahiki-box-title">Your Quests</h3>
+                  </div>
+                  <div>
+                  <img class="quest-pad" src="{{ STATIC_URL}}images/spacer.png" width="20">
+                      <ul class="quest-list">
+                      <li>
+                                  Watch Intro Video&nbsp; &nbsp;
+                      </li>
+                      <li>
+                                  Get Social &nbsp;&nbsp;
+                      </li>
+                      <li>
+                                   Learn about energy &nbsp;
+                      </li>
+                      </ul>
+                  </div>
+              </div>
+            </div>
+            <!--end questbar-->
       </div>
-    </div>
-      <!--end questbar-->
-  </div>
+  {% endif %}
+
+  <p>Click "Game On" to go to your home page. </p>
+
 </div>
 <div class="modal-footer"> 
   <div style="float: left">

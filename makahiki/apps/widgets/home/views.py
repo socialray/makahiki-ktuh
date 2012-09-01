@@ -291,8 +291,12 @@ def setup_complete(request):
         profile.setup_complete = True
         profile.completion_date = datetime.datetime.today()
         profile.save()
-        template = render_to_string("first-login/complete.html", {},
-            context_instance=RequestContext(request))
+
+        quest_enabled = challenge_mgr.is_game_enabled("Quest Game Mechanics")
+
+        template = render_to_string("first-login/complete.html",
+                {"quest_enabled": quest_enabled,},
+                context_instance=RequestContext(request))
 
         response = HttpResponse(json.dumps({
             "title": "Introduction: Step 7 of 7",
