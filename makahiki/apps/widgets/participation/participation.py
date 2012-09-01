@@ -1,11 +1,16 @@
 """participation game related functions."""
 from apps.managers.cache_mgr import cache_mgr
+from apps.managers.challenge_mgr import challenge_mgr
 from apps.managers.team_mgr import team_mgr
 from apps.widgets.participation.models import ParticipationSetting, TeamParticipation
 
 
 def award_participation():
     """award the participation rate for all team."""
+
+    if not challenge_mgr.is_game_enabled("Participation Game"):
+        return
+
     p_setting, _ = ParticipationSetting.objects.get_or_create(pk=1)
 
     for team in team_mgr.team_active_participation():

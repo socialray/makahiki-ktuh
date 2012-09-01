@@ -67,10 +67,11 @@
                                     </table>
                                 {% endif %}
                             </div>
-
+                            {% if goal.goal_info %}
                             <span style="font-size: 0.7em;">
                                   goal: {{ goal.goal_info }}
                             </span>
+                            {% endif %}
                         </td>
                         {% if forloop.last %}
                             {% for day in goal.filler_days %}

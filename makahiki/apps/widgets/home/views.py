@@ -295,7 +295,7 @@ def setup_complete(request):
         quest_enabled = challenge_mgr.is_game_enabled("Quest Game Mechanics")
 
         template = render_to_string("first-login/complete.html",
-                {"quest_enabled": quest_enabled,},
+                {"quest_enabled": quest_enabled, },
                 context_instance=RequestContext(request))
 
         response = HttpResponse(json.dumps({

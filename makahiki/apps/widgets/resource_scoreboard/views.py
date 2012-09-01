@@ -34,5 +34,5 @@ def resource_supply(request, resource, page_name):
         "team": team,
         "resource": resource_setting,
         "round_resource_goal_ranks": round_resource_goal_ranks,
-        "round_resource_ranks": round_resource_ranks,
+        "round_resource_ranks": {},
         }
