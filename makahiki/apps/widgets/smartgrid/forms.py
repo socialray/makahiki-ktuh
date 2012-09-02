@@ -157,19 +157,20 @@ class ActivityFreeResponseImageForm(forms.Form):
 
 class CommitmentCommentForm(forms.Form):
     """commitment comment form."""
-    comment = forms.CharField(widget=forms.Textarea(attrs={'rows': '3'}), required=False)
-    social_email = forms.CharField(widget=forms.TextInput(attrs={'size': '30'}), required=False)
-    social_email2 = forms.CharField(widget=forms.TextInput(attrs={'size': '30'}), required=False)
+    social_email = forms.EmailField(required=False)
 
     def __init__(self, *args, **kwargs):
-        self.request = kwargs.pop('request', None)
-        self.action = kwargs.pop('action', None)
+        self.user = kwargs.pop('user', None)
         super(CommitmentCommentForm, self).__init__(*args, **kwargs)
 
-    def clean(self):
-        cleaned_data = self.cleaned_data
-        _validate_social_email(self.request, self.action, cleaned_data, self._errors)
-        return cleaned_data
+    def clean_social_email(self):
+        """Check if this social_email is valid."""
+        email = self.cleaned_data['social_email'].strip().lower()
+        if email:
+            user = player_mgr.get_user_by_email(email)
+            if user == None or user == self.user:
+                raise forms.ValidationError('Can not find a registered user with such email.')
+        return email
 
 
 class SurveyForm(forms.Form):

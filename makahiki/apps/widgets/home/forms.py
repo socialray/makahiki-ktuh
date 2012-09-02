@@ -33,31 +33,27 @@ class ReferralForm(forms.Form):
         self.user = kwargs.pop('user', None)
         super(ReferralForm, self).__init__(*args, **kwargs)
 
-    def clean(self):
-        """Check to make sure the user is not submitting their own email."""
-        cleaned_data = self.cleaned_data
-        if self.user.email == cleaned_data.get('referrer_email'):
-            raise forms.ValidationError(
-                "Please use another user's email address, not your own.")
-
-        return cleaned_data
-
     def clean_referrer_email(self):
         """Check to make sure the referring user is part of the competition."""
-        email = self.cleaned_data['referrer_email']
+        email = self.cleaned_data['referrer_email'].lower()
         if email:
-            # Check if referer is staff.
-            try:
-                User.objects.get(email=email, is_staff=True)
+            """Check to make sure the user is not submitting their own email."""
+            if self.user.email == email:
                 raise forms.ValidationError(
-                    "Sorry, but admins are invalid referers.")
-            except User.DoesNotExist:
-            # Check to see if they exist as players.
+                    "Please use another user's email address, not your own.")
+            else:
+                # Check if referer is staff.
                 try:
-                    User.objects.get(email=email, is_staff=False)
-                except User.DoesNotExist:
+                    User.objects.get(email=email, is_staff=True)
                     raise forms.ValidationError(
-                        "Sorry, but that user is not a part of the competition.")
+                        "Sorry, but admins are invalid referers.")
+                except User.DoesNotExist:
+                    # Check to see if they exist as players.
+                    try:
+                        User.objects.get(email=email, is_staff=False)
+                    except User.DoesNotExist:
+                        raise forms.ValidationError(
+                            "Sorry, but that user is not a part of the competition.")
         return email
 
 

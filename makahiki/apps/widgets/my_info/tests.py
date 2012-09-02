@@ -39,7 +39,7 @@ class ProfileFunctionalTestCase(TransactionTestCase):
             "contact_carrier": "tmobile",
             }
         # Test posting a valid form.
-        response = self.client.post(reverse("profile_index"), user_form, follow=True)
+        response = self.client.post(reverse("profile_save"), user_form, follow=True)
         self.assertContains(response, "Your changes have been saved",
             msg_prefix="Successful form update should have a success message.")
 
@@ -53,38 +53,38 @@ class ProfileFunctionalTestCase(TransactionTestCase):
             msg_prefix="Carrier should be saved.")
 
         # Try posting the form again.
-        response = self.client.post(reverse("profile_index"), user_form, follow=True)
+        response = self.client.post(reverse("profile_save"), user_form, follow=True)
         self.assertContains(response, "Your changes have been saved",
             msg_prefix="Second form update should have a success message.")
 
         # Test posting without a name
         user_form.update({"display_name": ""})
-        response = self.client.post(reverse("profile_index"), user_form, follow=True)
+        response = self.client.post(reverse("profile_save"), user_form, follow=True)
         self.assertContains(response, "This field is required",
             msg_prefix="User should not have a valid display name.")
 
         # Test posting with whitespace as a name
         user_form.update({"display_name": "    "})
-        response = self.client.post(reverse("profile_index"), user_form, follow=True)
+        response = self.client.post(reverse("profile_save"), user_form, follow=True)
         self.assertContains(response, "This field is required",
             msg_prefix="User should not have a valid display name.")
 
         # Test posting a name that is too long.
         letters = "abcdefghijklmnopqrstuvwxyz"
         user_form.update({"display_name": letters})
-        response = self.client.post(reverse("profile_index"), user_form, follow=True)
+        response = self.client.post(reverse("profile_save"), user_form, follow=True)
         self.assertNotContains(response, "Your changes have been saved",
             msg_prefix="Profile with long name should not be valid.")
 
         # Test posting without a valid email
         user_form.update({"display_name": "Test User", "contact_email": "foo"})
-        response = self.client.post(reverse("profile_index"), user_form, follow=True)
+        response = self.client.post(reverse("profile_save"), user_form, follow=True)
         self.assertContains(response, "Enter a valid e-mail address",
             msg_prefix="User should not have a valid email address")
 
         # Test posting without a valid phone number
         user_form.update({"contact_email": "user@test.com", "contact_text": "foo"})
-        response = self.client.post(reverse("profile_index"), user_form, follow=True)
+        response = self.client.post(reverse("profile_save"), user_form, follow=True)
         self.assertContains(response, "Phone numbers must be in XXX-XXX-XXXX format.",
             msg_prefix="User should not have a valid contact number.")
 
@@ -104,13 +104,13 @@ class ProfileFunctionalTestCase(TransactionTestCase):
             "contact_carrier": "tmobile",
             }
         # Test posting form with dup name.
-        response = self.client.post(reverse("profile_index"), user_form, follow=True)
+        response = self.client.post(reverse("profile_save"), user_form, follow=True)
         self.assertContains(response, "Please use another name.",
             msg_prefix="Duplicate name should raise an error.")
 
         user_form.update({"display_name": "  Test U.     "})
         # Test posting a form with a dup name with a lot of whitespace.
-        response = self.client.post(reverse("profile_index"), user_form, follow=True)
+        response = self.client.post(reverse("profile_save"), user_form, follow=True)
         # print response.content
         self.assertContains(response, "Please use another name.",
             msg_prefix="Duplicate name with whitespace should raise an error.")
@@ -118,7 +118,7 @@ class ProfileFunctionalTestCase(TransactionTestCase):
             msg_prefix="This should only be in the form and in the error message.")
 
         user_form.update({"display_name": "Test   U."})
-        response = self.client.post(reverse("profile_index"), user_form, follow=True)
+        response = self.client.post(reverse("profile_save"), user_form, follow=True)
         # print response.content
         self.assertContains(response, "Please use another name.",
             msg_prefix="Duplicate name with internal whitespace should raise an error.")

@@ -23,10 +23,13 @@ def add(request, commitment):
         return  HttpResponseRedirect(
             reverse("activity_task", args=(commitment.type, commitment.slug,)))
 
-    form = CommitmentCommentForm(request.POST, request=request, action=commitment)
+    form = CommitmentCommentForm(request.POST, user=request.user)
     if not form.is_valid():
+        # invalid form
+        request.session['form'] = form
         return  HttpResponseRedirect(
-            reverse("activity_task", args=(commitment.type, commitment.slug,)))
+            reverse("activity_task",
+                    args=(commitment.type, commitment.slug,)) + "?display_form=True")
 
     # now we have a valid form
     if smartgrid.can_complete_commitment(user, commitment):
@@ -43,8 +46,6 @@ def add(request, commitment):
 
         if form.cleaned_data["social_email"]:
             member.social_email = form.cleaned_data["social_email"]
-        if form.cleaned_data["social_email2"]:
-            member.social_email2 = form.cleaned_data["social_email2"]
         member.save()
         value = commitment.point_value
 
@@ -55,7 +56,6 @@ def add(request, commitment):
 
         if form:
             member.social_email = form.cleaned_data["social_email"]
-            member.social_email2 = form.cleaned_data["social_email2"]
 
         try:
             member.save()
@@ -81,9 +81,14 @@ def add(request, commitment):
 def view(request, action):
     """Returns commitment info."""
 
-    form = CommitmentCommentForm(
-        initial={"social_email": None, "social_email2": None},
-        request=request)
+    session = request.session
+    form = None
+    if "form" in session:
+        form = session.pop('form')
+    else:
+        form = CommitmentCommentForm(
+            initial={
+                'social_email': action.member.social_email if action.member else None})
 
     if not action.completed or action.member.approval_status == "approved":
         form.form_title = "Make this commitment"

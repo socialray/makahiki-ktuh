@@ -20,7 +20,7 @@
         {% if action.point_value %}
             <b>{{ action.point_value }}</b>
         {% else %}
-            from <b>{{ action.point_range_start }}</b> to <b>{{ action.point_range_end }}</b>
+            from <b>{{ action.activity.point_range_start }}</b> to <b>{{ action.activity.point_range_end }}</b>
         {% endif %}
         points.
         {% if action.type == "commitment" %}

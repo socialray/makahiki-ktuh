@@ -45,3 +45,7 @@ class ProfileForm(forms.Form):
             raise forms.ValidationError("%s is taken.  Please use another name.")
 
         return name
+
+    def clean_contact_email(self):
+        """make the email lower case."""
+        return self.cleaned_data['contact_email'].lower()

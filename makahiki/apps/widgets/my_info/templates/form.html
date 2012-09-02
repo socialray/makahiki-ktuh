@@ -1,7 +1,7 @@
 {% load avatar_tags %}
 {%  with view_objects.my_info.form as form %}
 <div class="content-box-contents">
-<form action="{% url profile_index %}" method="post">
+<form action="{% url profile_save %}" method="post">
     {% csrf_token %}
     {% if form.message %}
         <div style="text-align: center">
