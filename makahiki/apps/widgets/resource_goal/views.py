@@ -152,9 +152,9 @@ def _set_goal_info(goal_info, resource, team, date):
     else:
         goal_info["verbose_info"] = "%d %s used within the last 24 hours" \
                                         " (ends at %s). The goal is %d%s." % (
-                goal.actual_usage,
+                goal.actual_usage / rate,
                 unit,
                 goal_settings.manual_entry_time,
-                goal.goal_usage,
+                goal.goal_usage / rate,
                 unit
             )
