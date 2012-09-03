@@ -215,6 +215,16 @@ def get_goal_percent(date, team, resource, goal_settings):
     return goal_percent
 
 
+def update_realtime_resource_usage(resource, date):
+    """update the real time resource usage."""
+    session = requests.session()
+    for team in Team.objects.all():
+        # update the latest resource usage before checking if the team goal settings is manual
+        goal_settings = team_goal_settings(team, resource)
+        if resource == "energy" and not goal_settings.manual_entry:
+            resource_mgr.update_team_energy_usage(session, date, team)
+
+
 def check_resource_goals(resource, date):
     """Check the daily resource goal for all teams."""
 
@@ -223,8 +233,7 @@ def check_resource_goals(resource, date):
     if not rounds_info["competition_start"] < date < rounds_info["competition_end"]:
         return 0
 
-    # update the latest resource usage before checking
-    resource_mgr.update_resource_usage(resource, date)
+    update_realtime_resource_usage(resource, date)
 
     is_awarded = False
     for team in Team.objects.all():
@@ -314,7 +323,7 @@ def _award_goal_points(team, resource, goal_points, goal, date):
             award_date = datetime.datetime(date.year, date.month, date.day,
                                            hour=23, minute=59, second=59)
             profile.add_points(goal_points, award_date,
-                               "Team %s Goal for %s" % (resource, date), goal)
+                               "Team %s Goal for %s" % (resource, award_date.date()), goal)
             count += 1
 
     return count
