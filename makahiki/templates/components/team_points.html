@@ -1,6 +1,8 @@
         <div>
             <div class="rib-set-width-outer-width">
-                <h4>{{team}}</h4>{{team_points}} points. <br/>#{{team_rank}} of {{TEAM_COUNT}}.
+                <h4>{{team}}</h4>
+                <b>{{team_points}}</b> points. <br/>
+                <b>#{{team_rank}}</b> of {{TEAM_COUNT}}.
             </div>
         </div>
 
@@ -8,7 +10,9 @@
             {% if energy_rank_info %}
                 <div style="display:none;">
                     <div class="rib-set-width-outer-width">
-                        <h4>{{team}}</h4>{{ energy_rank_info.usage }} {{ energy_rank_info.unit }}. <br/>#{{ energy_rank_info.rank }} of {{TEAM_COUNT}}.
+                        <h4>{{team}}</h4>
+                        <b>{{ energy_rank_info.usage }}</b> {{ energy_rank_info.unit }}. <br/>
+                        <b>#{{ energy_rank_info.rank }}</b> of {{TEAM_COUNT}}.
                     </div>
                 </div>
             {% endif %}
@@ -17,7 +21,9 @@
             {% if water_rank_info %}
                 <div style="display:none;">
                     <div class="rib-set-width-outer-width">
-                        <h4>{{team}}</h4>{{ water_rank_info.usage }} {{ water_rank_info.unit }}. <br/>#{{ water_rank_info.rank }} of {{TEAM_COUNT}}.
+                        <h4>{{team}}</h4>
+                        <b>{{ water_rank_info.usage }}</b> {{ water_rank_info.unit }}. <br/>
+                        <b>#{{ water_rank_info.rank }}</b> of {{TEAM_COUNT}}.
                     </div>
                 </div>
             {% endif %}
