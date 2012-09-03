@@ -372,3 +372,26 @@ def resource_goal_leader(name, round_name=None):
         return ranks[0]["team__name"]
     else:
         return None
+
+
+def resource_goal_rank_info(team, resource):
+    """Get the overall rank for the team. Return a dict of the rank number and usage."""
+    if team:
+        info = {}
+        ranks = resource_goal_ranks(resource)
+        if ranks:
+            for idx, rank in enumerate(ranks):
+                if rank["team__name"] == team.name:
+                    info["rank"] = idx + 1
+                    break
+
+        ranks = resource_mgr.resource_ranks(resource)
+        if ranks:
+            for idx, rank in enumerate(ranks):
+                if rank["team__name"] == team.name:
+                    info["usage"] = rank["total"]
+                    info["unit"] = resource_mgr.get_resource_setting(resource).unit
+                    break
+        return info
+    else:
+        return None

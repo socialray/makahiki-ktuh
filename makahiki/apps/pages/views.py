@@ -11,7 +11,7 @@ from django.core.urlresolvers import reverse
 from django.contrib.auth.decorators import login_required, user_passes_test
 from apps.managers.cache_mgr import cache_mgr
 from apps.managers.challenge_mgr import challenge_mgr
-from apps.managers.resource_mgr import resource_mgr
+from apps.widgets.resource_goal import resource_goal
 
 
 @never_cache
@@ -47,9 +47,9 @@ def index(request):
     team = request.user.get_profile().team
     if team:
         if challenge_mgr.is_page_unlock(request.user, "energy"):
-            view_objects["energy_rank_info"] = resource_mgr.resource_team_rank_info(team, "energy")
+            view_objects["energy_rank_info"] = resource_goal.resource_goal_rank_info(team, "energy")
         if challenge_mgr.is_page_unlock(request.user, "water"):
-            view_objects["water_rank_info"] = resource_mgr.resource_team_rank_info(team, "water")
+            view_objects["water_rank_info"] = resource_goal.resource_goal_rank_info(team, "water")
 
     #time_start = datetime.datetime.now()
     response = render_to_response("%s.html" % page_name, {
