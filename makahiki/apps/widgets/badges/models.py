@@ -54,7 +54,7 @@ class Badge(models.Model):
 
     priority = models.IntegerField(
         default=0,
-        help_text="Point award for getting badge."
+        help_text="sorting order in the badge list, "
     )
 
     def __unicode__(self):

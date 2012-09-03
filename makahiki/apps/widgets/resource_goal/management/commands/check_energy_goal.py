@@ -6,7 +6,6 @@ at the end of the day."""
 import datetime
 
 from apps.managers.challenge_mgr.challenge_mgr import MakahikiBaseCommand
-from apps.managers.resource_mgr import resource_mgr
 from apps.widgets.resource_goal import resource_goal
 
 
@@ -20,10 +19,8 @@ class Command(MakahikiBaseCommand):
 
         print '****** Processing check_energy_goal for %s *******\n' % today
 
-        # update the latest resource usage before checking
-        resource_mgr.update_energy_usage()
+        # check the previous day's data and goal
+        resource_goal.check_resource_goals("energy", today - datetime.timedelta(days=1))
 
-        resource_goal.check_all_daily_resource_goals("energy")
-
-        # update the dynamic baseline if they are dynamic
-        resource_goal.update_energy_baseline(today.date(), 2, "Dynamic")
+        # update the baseline
+        resource_goal.update_resource_baseline("energy", today.date(), 2)

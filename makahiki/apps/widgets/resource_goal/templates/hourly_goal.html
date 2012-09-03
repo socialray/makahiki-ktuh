@@ -28,7 +28,7 @@
                      Consumption Today <br>(So Far)
                      </td></tr>
                  <tr><td class="energy-display-text">
-                     {{ hourly_goal.actual_usage }} kWh
+                     {{ hourly_goal.actual_usage }} {{ hourly_goal.unit }}
                      </td></tr>
              </table>
          </td>
@@ -47,7 +47,7 @@
                      Goal for Today <br>(So Far)
                  </td></tr>
                  <tr><td class="energy-display-text">
-                     {{ hourly_goal.goal_usage }} kWh
+                     {{ hourly_goal.goal_usage }} {{ hourly_goal.unit }}
                  </td></tr>
              </table>
          </td>

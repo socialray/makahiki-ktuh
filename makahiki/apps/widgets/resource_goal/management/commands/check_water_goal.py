@@ -15,6 +15,12 @@ class Command(MakahikiBaseCommand):
 
     def handle(self, *args, **options):
         """check the energy goal for all teams"""
-        print '****** Processing check_water_goal for %s *******\n' % datetime.datetime.today()
+        today = datetime.datetime.today()
 
-        resource_goal.check_all_daily_resource_goals("water")
+        print '****** Processing check_water_goal for %s *******\n' % today
+
+        # check the previous day's data and goal
+        resource_goal.check_resource_goals("water", today - datetime.timedelta(days=1))
+
+        # update the baseline for today
+        resource_goal.update_resource_baseline("water", today.date(), 2)

@@ -1,4 +1,5 @@
 """Energy goal model definition."""
+import datetime
 
 from django.db import models
 
@@ -19,25 +20,42 @@ class ResourceGoal(models.Model):
     date = models.DateField(
         help_text="The date of the goal.")
 
+    actual_usage = models.IntegerField(
+        default=0,
+        help_text="The actual usage, cache of the usage in ResourceUsage.")
+
+    baseline_usage = models.IntegerField(
+        default=0,
+        help_text="The baseline usage, cache of the usage in BaselineDaily.")
+
+    goal_usage = models.IntegerField(
+        default=0,
+        help_text="The goal usage, derived from baseline and goal percentage.")
+
+    percent_reduction = models.IntegerField(
+        default=0,
+        help_text="The percentage of reduction, derived from actual and goal usage ")
+
+    current_goal_percent_reduction = models.IntegerField(
+        default=0,
+        help_text="The current goal percentage of reduction, calculated from the initial value" \
+                  "in GoalSetting.")
+
     goal_status = models.CharField(
         default="Not available",
         choices=STATUS_CHOICES,
         max_length=20,
         help_text="The status of the goal.")
 
-    percent_reduction = models.IntegerField(
-        default=0,
-        help_text="The percentage of reduction.")
-
-    current_goal_percent_reduction = models.IntegerField(
-        default=0,
-        help_text="The current goal percentage of reduction when using dynamic baseline method.")
+    updated_at = models.DateTimeField(
+        default=datetime.datetime.today(),
+        editable=False, auto_now=True)
 
     class Meta:
         """Meta"""
         abstract = True
-        unique_together = (("team", "date",),)
-        ordering = ("team", "-date")
+        unique_together = (("date", "team",),)
+        ordering = ("-date", "team",)
 
 
 class EnergyGoal(ResourceGoal):

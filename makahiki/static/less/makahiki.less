@@ -532,7 +532,7 @@ ul {
 .makahiki-box {
     .border-radius (@makahikiBorderRadius);
     .box-shadow (3px 3px @makahikiBorderRadius @black);
-    margin-bottom: @gridGutterWidth;
+    margin-bottom: 10px;
 }
 
 .makahiki-box-title {
@@ -776,6 +776,35 @@ ul {
 #info-bar-single h4 a {
     float: none;
     text-align: center;
+}
+
+ul.errorlist {
+    margin: 0 !important;
+    padding: 0 !important;
+}
+
+.errorlist li {
+    font-size: 12px !important;
+    display: block;
+    padding: 4px 5px 4px 25px;
+    margin: 0 0 3px 0;
+    font-weight: bold;
+    color: @red;
+    background: url(../images/icons/icon_alert.gif) 5px .3em no-repeat;
+}
+
+.errorlist li a {
+    color: white;
+    text-decoration: underline;
+}
+
+td ul.errorlist {
+    margin: 0 !important;
+    padding: 0 !important;
+}
+
+td ul.errorlist li {
+    margin: 0 !important;
 }
 
 @media (max-width: 979px) {

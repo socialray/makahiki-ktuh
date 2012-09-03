@@ -10,7 +10,7 @@ from django.contrib.auth.models import User
 from apps.managers.team_mgr.models import Team
 from apps.utils import test_utils
 from apps.widgets.resource_goal import resource_goal
-from apps.widgets.resource_goal.models import EnergyGoalSetting, EnergyBaselineDaily
+from apps.widgets.resource_goal.models import EnergyGoalSetting, EnergyBaselineDaily, EnergyGoal
 from apps.managers.resource_mgr.models import EnergyUsage
 
 
@@ -60,7 +60,8 @@ class TeamEnergyGoalTest(TransactionTestCase):
         )
         energy_data.save()
 
-        resource_goal.check_daily_resource_goal(self.team, "energy")
+        today = datetime.date.today()
+        resource_goal.check_team_resource_goal("energy", self.team, today)
 
         profile = Profile.objects.get(user__username="user")
         self.assertEqual(profile.points(), points,
@@ -71,7 +72,9 @@ class TeamEnergyGoalTest(TransactionTestCase):
 
         energy_data.usage = 150
         energy_data.save()
-        resource_goal.check_daily_resource_goal(self.team, "energy")
+
+        EnergyGoal.objects.filter(team=self.team, date=today).delete()
+        resource_goal.check_team_resource_goal("energy", self.team, today)
 
         profile = Profile.objects.get(user__username="user")
         self.assertEqual(profile.points(), points,
@@ -79,7 +82,8 @@ class TeamEnergyGoalTest(TransactionTestCase):
 
         energy_data.usage = 100
         energy_data.save()
-        resource_goal.check_daily_resource_goal(self.team, "energy")
+        EnergyGoal.objects.filter(team=self.team, date=today).delete()
+        resource_goal.check_team_resource_goal("energy", self.team, today)
 
         profile = Profile.objects.get(user__username="user")
         self.assertEqual(profile.points(), points + goal_settings.goal_points,

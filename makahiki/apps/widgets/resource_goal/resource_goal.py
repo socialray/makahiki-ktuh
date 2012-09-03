@@ -53,26 +53,6 @@ def team_goal(date, team, resource):
         return None
 
 
-def _get_goal_percent(date, team, resource, goal_settings):
-    """return the current goal percent from the goal settings or previous calculated
-    dynamic goal."""
-    goal_percent = goal_settings.goal_percent_reduction
-    if goal_settings.baseline_method == "Dynamic":
-        # get previous day's goal result and the current goal percent
-        previous_goal_result = team_goal(date - datetime.timedelta(days=1), team, resource)
-        if previous_goal_result and previous_goal_result.current_goal_percent_reduction:
-            goal_percent = previous_goal_result.current_goal_percent_reduction
-    return goal_percent
-
-
-def team_daily_goal_usage(date, team, resource, goal_settings):
-    """Returns the goal usage of the current date and resource."""
-    baseline_usage = team_daily_resource_baseline(date, team, resource)
-    goal_percent = _get_goal_percent(date, team, resource, goal_settings)
-    usage = baseline_usage * (100 - goal_percent) / 100
-    return usage
-
-
 def _get_baseline_date(date, depth=0):
     """Returns a non-blackout date that is one weeks prior. only look back maximum 3 weeks.
     otherwise, return None."""
@@ -87,14 +67,30 @@ def _get_baseline_date(date, depth=0):
         return baseline_date
 
 
-def team_daily_resource_baseline(date, team, resource):
-    """Returns the baseline usage for the date and resource."""
+def _get_resource_baselinedaily(resource):
+    """returns the specific resource baselinedaily object."""
     if resource == "energy":
-        daily_baseline = EnergyBaselineDaily
+        return EnergyBaselineDaily
     elif resource == "water":
-        daily_baseline = WaterBaselineDaily
+        return WaterBaselineDaily
     else:
         return None
+
+
+def _get_resource_baselinehourly(resource):
+    """returns the specific resource baselinehourly object."""
+    if resource == "energy":
+        return EnergyBaselineHourly
+    elif resource == "water":
+        return WaterBaselineHourly
+    else:
+        return None
+
+
+def team_daily_resource_baseline(date, team, resource):
+    """Returns the baseline usage for the date and resource."""
+
+    daily_baseline = _get_resource_baselinedaily(resource)
 
     day = date.weekday()
     baselines = daily_baseline.objects.filter(team=team, day=day)
@@ -106,12 +102,7 @@ def team_daily_resource_baseline(date, team, resource):
 
 def team_hourly_resource_baseline(date, team, resource):
     """Returns the baseline usage for the date and resource."""
-    if resource == "energy":
-        hourly_baseline = EnergyBaselineHourly
-    elif resource == "water":
-        hourly_baseline = WaterBaselineHourly
-    else:
-        return None
+    hourly_baseline = _get_resource_baselinehourly(resource)
 
     day = date.weekday()
     hour = date.time().hour
@@ -122,49 +113,45 @@ def team_hourly_resource_baseline(date, team, resource):
         return 0
 
 
-def update_energy_baseline(end_date, weeks, method):
-    """calculate the energy baseline from the specified end_date and week period."""
+def update_resource_baseline(resource, date, weeks):
+    """calculate all team's resource baseline for the specified date and week period.
+    if dynamic, always update the baseline,
+    if fixed, only update if the baseline does not exist
+    """
     session = requests.session()
-
     for team in Team.objects.all():
-        goal_settings = team_goal_settings(team, "energy")
-        if goal_settings.baseline_method == method:
-            cal_energy_baseline(session, team, method, end_date, weeks)
+        update_team_resource_baseline(resource, session, team, date, weeks)
 
 
-def cal_energy_baseline(session, team, method, end_date, weeks):
-    """calculate the fixed energy baseline from the specified end_date and week period."""
+def update_team_resource_baseline(resource, session, team, date, weeks):
+    """calculate the resource baseline from the specified end_date and week period."""
 
-    # energy daily
-    if method == "Fixed":
-        day_range = 7
-    else:
-        day_range = 1
+    goal_settings = team_goal_settings(team, resource)
 
-    date = end_date
-    for day in range(0, day_range):
-        date -= datetime.timedelta(days=day)
-        usage = get_energy_baseline_usage(session, team, date, weeks, None)
-        baseline, _ = EnergyBaselineDaily.objects.get_or_create(team=team, day=date.weekday())
+    # daily
+    daily_baseline = _get_resource_baselinedaily(resource)
+    baseline, is_create = daily_baseline.objects.get_or_create(team=team, day=date.weekday())
+    if is_create or goal_settings.baseline_method == "Dynamic":
+        # if dynamic, always update the baseline,
+        # if fixed, only update if the baseline does not exist
+        usage = get_resource_baseline_usage(resource, session, team, date, weeks, None)
         baseline.usage = usage
         baseline.save()
 
-    # energy hourly
-    date = end_date
-    for day in range(0, day_range):
-        date -= datetime.timedelta(days=day)
+    # hourly, only update for real time resource
+    if not goal_settings.manual_entry:
+        hourly_baseline = _get_resource_baselinehourly(resource)
         for hour in range(1, 25):
-            usage = get_energy_baseline_usage(session, team, date, weeks, hour)
-            baseline, _ = EnergyBaselineHourly.objects.get_or_create(team=team,
+            baseline, is_create = hourly_baseline.objects.get_or_create(team=team,
                                                                      day=date.weekday(),
                                                                      hour=hour)
-            baseline.usage = usage
-            baseline.save()
+            if is_create or goal_settings.baseline_method == "Dynamic":
+                usage = get_resource_baseline_usage(resource, session, team, date, weeks, hour)
+                baseline.usage = usage
+                baseline.save()
 
-    print 'team %s energy baseline usage updated.' % team
 
-
-def get_energy_baseline_usage(session, team, end_date, weeks, hour):
+def get_resource_baseline_usage(resource, session, team, end_date, weeks, hour):
     """Returns the daily or hourly energy baseline usage from the history data."""
     total_usage = 0
     count = 0
@@ -172,21 +159,14 @@ def get_energy_baseline_usage(session, team, end_date, weeks, hour):
         date = end_date - datetime.timedelta(days=(week * 7))
         date = _get_baseline_date(date)
         if date:
-            start_time = date.strftime("%Y-%m-%dT00:00:00")
-            if hour:
-                end_time = date.strftime("%Y-%m-%dT") + "%.2d:00:00" % hour
-            else:
-                end_time = (date + datetime.timedelta(days=1)).strftime("%Y-%m-%dT00:00:00")
-
-            session.params = {'startTime': start_time, 'endTime': end_time}
-            usage = resource_mgr.get_energy_usage(session, team.name)
+            usage = get_history_resource_usage(resource, session, team, date, hour)
         else:
             # can not find a good baseline date
             usage = 0
 
         if not hour:
-            print "=== %s wattdepot prior data on %s:%d is %d" % (
-                team.name, date, hour if hour else 0, usage)
+            print "=== %s:%d %s baseline prior: %d" % (
+                date, hour if hour else 0, team.name, usage)
 
         if usage:
             total_usage += usage
@@ -198,112 +178,57 @@ def get_energy_baseline_usage(session, team, end_date, weeks, hour):
         baseline = 0
 
     if not hour:
-        print "=== %s baseline on %s:%d is %d" % (
-            team.name, end_date, hour if hour else 0, baseline)
+        print "=== %s:%d %s baseline final: %d" % (
+           end_date, hour if hour else 0, team.name, baseline)
+
     return baseline
 
 
-def check_daily_resource_goal(team, resource):
-    """Check the daily goal, award points to the team members if the goal is met.
-    Returns the number of players in the team that got the award."""
+def get_history_resource_usage(resource, session, team, date, hour):
+    """returns the team's resource usage based on team's goal settings."""
+    goal_settings = team_goal_settings(team, resource)
 
-    # because the check is scheduled at midnight, we should check the previous day's data
-    today = datetime.datetime.today()
-    if today.hour == 0:
-        today = today - datetime.timedelta(hours=1)
+    usage = 0
+    if not hour:
+        # for daily data, try to get it from resource usage table
+        # if not found, get if from wattdepot)
+        usage = resource_mgr.team_resource_usage(date, team, resource)
+        if not usage and not goal_settings.manual_entry and resource == "energy":
+            usage = resource_mgr.get_history_energy_data(session, team, date, None)
+    else:
+        # for hourly data, always get it from wattdepot)
+        if not goal_settings.manual_entry and resource == "energy":
+            usage = resource_mgr.get_history_energy_data(session, team, date, hour)
+
+    return usage
+
+
+def get_goal_percent(date, team, resource, goal_settings):
+    """return the current goal percent from the goal settings or previous calculated
+    dynamic goal."""
+    goal_percent = goal_settings.goal_percent_reduction
+    if goal_settings.baseline_method == "Dynamic":
+        # get previous day's goal result and the current goal percent
+        previous_goal_result = team_goal(date - datetime.timedelta(days=1), team, resource)
+        if previous_goal_result and previous_goal_result.current_goal_percent_reduction:
+            goal_percent = previous_goal_result.current_goal_percent_reduction
+    return goal_percent
+
+
+def check_resource_goals(resource, date):
+    """Check the daily resource goal for all teams."""
+
     # do nothing if out of round
     rounds_info = challenge_mgr.get_all_round_info()
-    if not rounds_info["competition_start"] < today < rounds_info["competition_end"]:
+    if not rounds_info["competition_start"] < date < rounds_info["competition_end"]:
         return 0
 
-    date = today.date()
-    actual_usage = 0
-    goal_usage = 0
-    resource_data = resource_mgr.team_resource_data(date, team, resource)
-    if resource_data:
-        goal_settings = team_goal_settings(team, resource)
-        goal_usage = team_daily_goal_usage(date, team, resource, goal_settings)
+    # update the latest resource usage before checking
+    resource_mgr.update_resource_usage(resource, date)
 
-        # check if the manual entry time is within the target time,
-        # otherwise can not determine the actual usage
-        if not goal_settings.manual_entry or  \
-            (goal_settings.manual_entry_time.hour <= resource_data.time.hour and\
-             resource_data.time.hour <= (goal_settings.manual_entry_time.hour + 1)):
-            actual_usage = resource_data.usage
-
-    count = 0
-
-    goal = _get_resource_goal(resource)
-    goal, _ = goal.objects.get_or_create(team=team, date=date)
-
-    print "=== %s goal_usage: %d, actual_usage: %d on %s" % (
-        team.name, goal_usage, actual_usage, date)
-
-    if not goal_usage:
-        goal.goal_status = "Not available"
-        goal.save()
-    elif actual_usage:
-        if actual_usage <= goal_usage:
-            # if already awarded, do nothing
-            if goal.goal_status != "Below the goal":
-                goal.goal_status = "Below the goal"
-
-                # record the reduction percentage
-                goal.percent_reduction = (goal_usage - actual_usage) * 100 / goal_usage
-
-                #adjust the dynamimc goal percent.
-                #the current goal percent is 1 percent less from the previous day's goal percent
-                # unless the previous goal percent is already 1.
-                current_goal_percent = _get_goal_percent(date, team, resource, goal_settings)
-                if current_goal_percent > 1:
-                    new_goal_percent = current_goal_percent - 1
-                else:
-                    new_goal_percent = current_goal_percent
-
-                print "=== %s reduction: %d, old_goal: %d, new goal: %d on %s" % (
-                    team.name, goal.percent_reduction, current_goal_percent, new_goal_percent, date
-                )
-
-                goal.current_goal_percent_reduction = new_goal_percent
-                goal.save()
-                count = _award_goal_points(team, resource, goal_settings.goal_points, goal)
-        else:
-            goal.goal_status = "Over the goal"
-            goal.save()
-    else:
-        # if can not determine the actual usage, set the status to unknown
-        goal.goal_status = "Unknown"
-        goal.save()
-
-    return count
-
-
-def _award_goal_points(team, resource, goal_points, goal):
-    """award goal points to team member."""
-    count = 0
-    # Award points to the members of the team.
-    for profile in team.profile_set.all():
-        if profile.setup_complete:
-            today = datetime.datetime.today()
-            # Hack to get around executing this script at midnight.  We want to award
-            # points earlier to ensure they are within the round they were completed.
-            if today.hour == 0:
-                today = today - datetime.timedelta(hours=1)
-
-            date = "%d/%d/%d" % (today.month, today.day, today.year)
-            profile.add_points(goal_points, today,
-                               "Team %s Goal for %s" % (resource, date), goal)
-            profile.save()
-            count += 1
-
-    return count
-
-
-def check_all_daily_resource_goals(resource):
-    """Check the daily resource goal for all teams."""
     is_awarded = False
     for team in Team.objects.all():
-        count = check_daily_resource_goal(team, resource)
+        count = check_team_resource_goal(resource, team, date)
         if count:
             print '%s users in %s are awarded %s points each.' % (
                 count,
@@ -313,6 +238,86 @@ def check_all_daily_resource_goals(resource):
 
     if not is_awarded:
         print 'No user are awarded daily goal points.'
+
+
+def check_team_resource_goal(resource, team, date):
+    """Check the daily goal, award points to the team members if the goal is met.
+    Returns the number of players in the team that got the award."""
+    count = 0
+    goal = _get_resource_goal(resource)
+    goal, _ = goal.objects.get_or_create(team=team, date=date)
+
+    if goal.actual_usage:
+        # if there is already actual_usage in the goal, do nothing
+        print "=== %s %s goal already checked." % (date, team.name)
+        return 0
+
+    goal_settings = team_goal_settings(team, resource)
+    goal.current_goal_percent_reduction = get_goal_percent(date, team, resource, goal_settings)
+
+    goal.baseline_usage = team_daily_resource_baseline(date, team, resource)
+    goal.goal_usage = goal.baseline_usage * (100 - goal.current_goal_percent_reduction) / 100
+
+    resource_data = resource_mgr.team_resource_data(date, team, resource)
+    # check if the manual entry time is within the target time,
+    # otherwise can not determine the actual usage
+    if resource_data and (not goal_settings.manual_entry or
+        goal_settings.manual_entry_time.hour == resource_data.time.hour):
+        goal.actual_usage = resource_data.usage
+    else:
+        goal.actual_usage = 0
+
+    if not goal.actual_usage:
+        # if can not determine the actual usage, set the status to unknown
+        goal.goal_status = "Unknown"
+    elif not goal.baseline_usage:
+        # if no baseline, set the status to not available
+        goal.goal_status = "Not available"
+    else:
+        # there are actual and goal usage
+        if goal.actual_usage <= goal.goal_usage:
+            # if already awarded, do nothing
+            if goal.goal_status != "Below the goal":
+                goal.goal_status = "Below the goal"
+
+                # record the reduction percentage
+                goal.percent_reduction = (goal.goal_usage -
+                                          goal.actual_usage) * 100 / goal.goal_usage
+
+                #adjust the dynamimc goal percent.
+                #the current goal percent is 1 percent less from the previous day's goal percent
+                # unless the previous goal percent is already 1.
+                if goal.current_goal_percent_reduction > 1:
+                    goal.current_goal_percent_reduction -= 1
+
+                count = _award_goal_points(team, resource, goal_settings.goal_points, goal, date)
+        else:
+            goal.goal_status = "Over the goal"
+
+    print "=== %s %s actual: %d, goal_usage: %d, reduction: %d, goal: %d" % (
+        date, team.name, goal.actual_usage, goal.goal_usage,
+        goal.percent_reduction, goal.current_goal_percent_reduction
+    )
+
+    goal.save()
+
+    return count
+
+
+def _award_goal_points(team, resource, goal_points, goal, date):
+    """award goal points to team member. It is always award for the end of the day"""
+
+    count = 0
+    # Award points to the members of the team.
+    for profile in team.profile_set.all():
+        if profile.setup_complete:
+            award_date = datetime.datetime(date.year, date.month, date.day,
+                                           hour=23, minute=59, second=59)
+            profile.add_points(goal_points, award_date,
+                               "Team %s Goal for %s" % (resource, date), goal)
+            count += 1
+
+    return count
 
 
 def resource_goal_ranks(resource, round_name=None):

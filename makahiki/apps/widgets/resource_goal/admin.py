@@ -12,8 +12,8 @@ class GoalSettingsAdmin(admin.ModelAdmin):
 
 class GoalAdmin(admin.ModelAdmin):
     """EnergyGoal administrator interface definition."""
-    list_display = ["team", "date", "goal_status", "percent_reduction",
-                    "current_goal_percent_reduction"]
+    list_display = ["date", "team", "goal_status", "actual_usage", "goal_usage",
+                    "percent_reduction", "current_goal_percent_reduction", "updated_at"]
     search_fields = ["team__name", ]
     list_filter = ['team', 'date', 'goal_status']
 

@@ -18,4 +18,4 @@ class Command(MakahikiBaseCommand):
         """Update the fake water usage for all teams"""
         date = datetime.datetime.today()
         print '****** Processing fake water usage update at %s *******\n' % date
-        resource_mgr.update_fake_water_usage()
+        resource_mgr.update_fake_water_usage(date)

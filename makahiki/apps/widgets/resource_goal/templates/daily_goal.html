@@ -37,7 +37,11 @@
                             <tr>
                         {% endif %}
                         <td width="50">
-                            <span style="float: left; font-size: 0.7em; font-weight: bold;">
+                            <span style="float: left; font-size: 0.7em; font-weight: bold;
+                              {% if goal.is_today %}
+                                  color:blue;
+                              {% endif %}
+                            ">
                                   {{ goal.date|date:"n/j" }} </span>
                             <br/>
 
@@ -89,8 +93,7 @@
             <img src="{{ STATIC_URL }}images/energy/good32.png" width="16"/>: Awarded
             (Made the goal)
             <img src="{{ STATIC_URL }}images/energy/bad32.png" width="16"/>: Did not make the goal
-            <img src="{{ STATIC_URL }}images/energy/unknown32.png" width="16"/>: No usage data
-            <img src="{{ STATIC_URL }}images/energy/disabled32.png" width="16"/>: No baseline data
+            <img src="{{ STATIC_URL }}images/energy/disabled32.png" width="16"/>: Disabled
         </td>
     </tr>
 </table>

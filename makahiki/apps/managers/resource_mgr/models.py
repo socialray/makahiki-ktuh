@@ -26,6 +26,11 @@ class ResourceSetting(models.Model):
         max_length=20,
         help_text="The unit of the resource, such as kWh, Gallon, etc.",
     )
+    conversion_rate = models.IntegerField(
+        default=1,
+        help_text="The rate of converting the usage data into the unit. such as 1000, is to " \
+                  "convert usage data recorded in Wh to kWh.",
+    )
     winning_order = models.CharField(
         max_length=10,
         choices=WINNING_ORDER_CHOICE,

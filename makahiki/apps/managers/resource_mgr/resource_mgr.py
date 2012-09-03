@@ -52,15 +52,6 @@ def team_resource_usage(date, team, resource):
         return 0
 
 
-def team_hourly_energy_usage(date, hour, team):
-    """Returns the latest usage of the specified resource for the current date and hour."""
-    session = requests.session()
-    start_time = date.strftime("%Y-%m-%dT00:00:00")
-    end_time = date.strftime("%Y-%m-%dT") + "%.2d:00:00" % hour
-    session.params = {'startTime': start_time, 'endTime': end_time}
-    return get_energy_usage(session, team.name)
-
-
 def get_energy_usage(session, source):
     """Return the energy usage from wattdepot."""
     rest_url = "%s/wattdepot/sources/%s/energy/" % (
@@ -93,35 +84,60 @@ def get_energy_usage(session, source):
     return 0
 
 
-def update_energy_usage():
-    """Update the latest energy usage from WattDepot server."""
+def get_history_energy_data(session, team, date, hour):
+    """Return the history energy usage of the team for the date and hour."""
+    start_time = date.strftime("%Y-%m-%dT00:00:00")
+    if hour:
+        end_time = date.strftime("%Y-%m-%dT") + "%.2d:00:00" % hour
+    else:
+        end_time = (date + datetime.timedelta(days=1)).strftime("%Y-%m-%dT00:00:00")
 
-    challenge_mgr.init()
-    date = datetime.datetime.today()
+    session.params = {'startTime': start_time, 'endTime': end_time}
+    return get_energy_usage(session, team.name)
+
+
+def get_latest_energy_data(session, date, team):
+    """Returns the latest usage of the specified resource for the current date."""
     start_time = date.strftime("%Y-%m-%dT00:00:00")
     end_time = "latest"
 
-    s = requests.session()
-    s.params = {'startTime': start_time, 'endTime': end_time}
+    session.params = {'startTime': start_time, 'endTime': end_time}
+    return get_energy_usage(session, team.name)
 
+
+def update_resource_usage(resource, date):
+    """update the latest resource usage."""
+
+    # we only have real time energy data so far.
+    if resource == "energy":
+        update_energy_usage(date)
+
+
+def update_energy_usage(date):
+    """Update the latest energy usage from WattDepot server."""
+
+    session = requests.session()
     for team in Team.objects.all():
-        usage = get_energy_usage(s, team.name)
-        if usage:
-            try:
-                latest_usage = EnergyUsage.objects.get(team=team, date=date.date())
-            except ObjectDoesNotExist:
-                latest_usage = EnergyUsage(team=team, date=date.date())
-
-            latest_usage.time = date.time()
-            latest_usage.usage = usage
-            latest_usage.save()
-            print 'team %s energy usage updated at %s.' % (team, date)
+        update_team_energy_usage(session, date, team)
 
 
-def update_fake_water_usage():
+def update_team_energy_usage(session, date, team):
+    """update the latest energy usage for the team."""
+    usage = get_latest_energy_data(session, date, team)
+    if usage:
+        try:
+            latest_usage = EnergyUsage.objects.get(team=team, date=date.date())
+        except ObjectDoesNotExist:
+            latest_usage = EnergyUsage(team=team, date=date.date())
+
+        latest_usage.time = date.time()
+        latest_usage.usage = usage
+        latest_usage.save()
+        print 'team %s energy usage updated at %s.' % (team, date)
+
+
+def update_fake_water_usage(date):
     """update fake water usage."""
-    challenge_mgr.init()
-    date = datetime.datetime.today()
     for team in Team.objects.all():
         count = team.profile_set.count()
         if count:
@@ -161,6 +177,7 @@ def resource_ranks(name, round_name=None):
         resource_usage = _get_resource_usage(name)
 
         resource_setting = get_resource_setting(name)
+        rate = resource_setting.conversion_rate
         if resource_setting.winning_order == "Ascending":
             ordering = "total"
         else:
@@ -170,13 +187,17 @@ def resource_ranks(name, round_name=None):
         if not round_info:
             return None
 
+        all_rounds_info = challenge_mgr.get_all_round_info()
+
         usage_ranks = resource_usage.objects.filter(
-            date__lte=round_info["end"].date).values("team__name").annotate(
+            date__lte=round_info["end"].date,
+            date__gte=all_rounds_info["competition_start"]).values("team__name").annotate(
                 total=Sum("usage")).order_by(ordering)
 
         ranks = []
         for rank in usage_ranks:
-            ranks.append({"team__name": rank["team__name"], "total": rank["total"] / 100 / 10.0})
+            ranks.append({"team__name": rank["team__name"], "total": rank["total"] / rate})
+
         cache_mgr.set_cache(cache_key, ranks, 3600)
     return ranks
 
