@@ -590,6 +590,16 @@
         }
     },
     {
+        "pk": 63,
+        "model": "challenge_mgr.pagesetting",
+        "fields": {
+            "widget": "status.DEGG",
+            "game": null,
+            "enabled": true,
+            "page": 10
+        }
+    },
+    {
         "pk": 1,
         "model": "challenge_mgr.gameinfo",
         "fields": {

@@ -209,6 +209,7 @@ INSTALLED_WIDGET_APPS = (
     'status.wattdepot',
     'status.twitter',
     'status.badges',
+    'status.DEGG',
     'wallpost.user_wallpost',
     'wallpost.system_wallpost',
 )

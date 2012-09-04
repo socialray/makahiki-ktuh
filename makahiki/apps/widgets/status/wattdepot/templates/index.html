@@ -1,60 +1,61 @@
 {% with interval=view_objects.status__wattdepot.interval all_lounges=view_objects.status__wattdepot.data.all_lounges group_lounges=view_objects.status__wattdepot.data.group_lounges %}
-<div class="content-box-title">
-      Watt-Depot Status
-</div>
-    <div class="row-fluid">
-        <div>
-        Refresh Interval: <b>{{interval}} s</b></br>
-        <div id="last-check"> </div>
-        </div>
-        <table class="table-striped">
-            <thead>
-                  <tr>
-                      <th class="column-text">Meter</th>
-                      <th class="column-number">Timestamp Age</th>
-                  </tr>
-            </thead>
-            <tbody>
-                {% for team in all_lounges %}
-                <tr>
-                    <td class="column-text">{{ team }}</td>
-                    <td id="visualization_{{ forloop.counter }}" class="column-number">
-                                
-                    </td>
-                </tr>
-                {% endfor %}
-            </tbody>
-        </table>
+<div class="content-box demi-widget">
+    <div class="content-box-title">
+          Watt-Depot Status
     </div>
+        <div class="row-fluid">
+            <div>
+            Refresh Interval: <b>{{interval}} s</b></br>
+            <div id="last-check"> </div>
+            </div>
+            <table class="table-striped">
+                <thead>
+                      <tr>
+                          <th class="column-text">Meter</th>
+                          <th class="column-number">Timestamp Age</th>
+                      </tr>
+                </thead>
+                <tbody>
+                    {% for team in all_lounges %}
+                    <tr>
+                        <td class="column-text">{{ team }}</td>
+                        <td id="visualization_{{ forloop.counter }}" class="column-number">
+                                    
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
 
-    <script type="text/javascript" src="{{STATIC_URL}}js/PowerMeterStatus.js"></script>
+        <script type="text/javascript" src="{{STATIC_URL}}js/PowerMeterStatus.js"></script>
 
 
-    <script type="text/javascript">
-        // Wrap this code in an anonymous self-invoking function to avoid polluting global namespace.
-         
-         var done = true;
-        (function () {      
-            {% for team in all_lounges %}
-                drawOne({{forloop.counter}}, "{{team}}")
-            {% endfor %}
-        })();
+        <script type="text/javascript">
+            // Wrap this code in an anonymous self-invoking function to avoid polluting global namespace.
+             
+             var done = true;
+            (function () {      
+                {% for team in all_lounges %}
+                    drawOne({{forloop.counter}}, "{{team}}")
+                {% endfor %}
+            })();
 
-        function drawOne(id, team) {
-            var refreshInterval = {{interval}};
-            var server_url = "{{ CHALLENGE.wattdepot_server_url }}";
-            var source = team;
-            var options = {
-                source: source,
-                width: 200,
-                powerRange: 2000};
+            function drawOne(id, team) {
+                var refreshInterval = {{interval}};
+                var server_url = "{{ CHALLENGE.wattdepot_server_url }}";
+                var source = team;
+                var options = {
+                    source: source,
+                    width: 200,
+                    powerRange: 2000};
 
-            new Makahiki_PowerMeterStatus( server_url,
-                    source,
-                    refreshInterval,
-                    "visualization_",
-                    options, id);
-        }
-    </script>
-
-     {% endwith %}
+                new Makahiki_PowerMeterStatus( server_url,
+                        source,
+                        refreshInterval,
+                        "visualization_",
+                        options, id);
+            }
+        </script>
+</div>
+{% endwith %}
