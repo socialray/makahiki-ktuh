@@ -1,7 +1,6 @@
 
 {% if fb_id %}
     <input type="radio" name="pic_method" value="2" class="radio-input" onChange="showform()"> Use your picture from Facebook:</h4>
-    <h4 style="margin-top: 0px">Use your picture from Facebook:</h4>
     <div id="fbupload">
         <img src="http://graph.facebook.com/{{fb_id}}/picture"/>
         {{ form.facebook_photo }}
