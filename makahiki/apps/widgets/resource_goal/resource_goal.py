@@ -354,13 +354,23 @@ def resource_goal_ranks(resource, round_name=None):
         total_count = Team.objects.count()
         if len(goal_ranks) != total_count:
             for t in Team.objects.all():
-                if not t.name in goal_ranks:
+                # find the team in the goal_ranks
+                count = 0
+                for goal_rank in goal_ranks:
+                    if t.name == goal_rank["team__name"]:
+                        break
+                    else:
+                        count += 1
+                if count == len(goal_ranks):
+                    # not found
                     rank = {"team__name": t.name,
                             "completions": 0,
                             "average_reduction": 0}
                     goal_ranks.append(rank)
+
                     if len(goal_ranks) == total_count:
                         break
+
         cache_mgr.set_cache(cache_key, goal_ranks, 3600 * 24)
     return goal_ranks
 

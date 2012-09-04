@@ -8,7 +8,7 @@ from apps.managers.score_mgr.models import ScoreSetting, ScoreboardEntry, Points
 class PointsTransactionAdmin(admin.ModelAdmin):
     """PointsTransaction administrator interface definition."""
     list_display = ["user", "transaction_date", "points", "message"]
-    search_fields = ["user", "message"]
+    search_fields = ["user__username", "message"]
     list_filter = ['transaction_date']
 
 admin.site.register(PointsTransaction, PointsTransactionAdmin)

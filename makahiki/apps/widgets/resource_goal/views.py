@@ -22,8 +22,10 @@ def resource_supply(request, page_name):
     golow_activities = smartgrid.get_available_golow_actions(user, page_name)
     hourly_goal = None
     daily_goal = None
+
     if team:
-        if not resource_goal.is_manual_entry(team, page_name):
+        if not resource_goal.is_manual_entry(team, page_name) and\
+            not "calendar_view" in request.GET:
             hourly_goal = get_hourly_goal_data(team, page_name)
         else:
             daily_goal = get_daily_goal_data(team, page_name)
@@ -41,8 +43,9 @@ def resource_supply(request, page_name):
 def get_hourly_goal_data(team, resource):
     """:return: the energy goal data for the user's team."""
     date = datetime.datetime.today()
+    goal = {"resource": resource}
     if resource_mgr.is_blackout(date):
-        return {"is_blackout": True}
+        return goal.update({"is_blackout": True})
 
     data = resource_mgr.team_resource_data(date=date.date(), team=team, resource=resource)
     if data:
@@ -60,16 +63,16 @@ def get_hourly_goal_data(team, resource):
         unit = resource_setting.unit
         rate = resource_setting.conversion_rate
 
-        goal = {"goal_usage": baseline * (100 - goal_percentage) / 100 / rate,
+        goal.update({"goal_usage": baseline * (100 - goal_percentage) / 100 / rate,
                 "warning_usage": baseline * (100 - goal_percentage / 2) / rate,
                 "actual_usage": data.usage / rate,
                 "updated_at": datetime.datetime.combine(date=data.date, time=data.time),
                 "unit": unit,
-               }
+               })
         goal["actual_diff"] = abs(goal["actual_usage"] - goal["goal_usage"])
         return goal
     else:
-        return {"actual_usage": None}
+        return goal.update({"actual_usage": None})
 
 
 def get_daily_goal_data(team, resource):
@@ -86,7 +89,7 @@ def get_daily_goal_data(team, resource):
     data_table = []
     for day in range(0, delta):
         date = start + datetime.timedelta(days=day)
-        goal_info = {"date": date}
+        goal_info = {"date": date, "resource": resource}
 
         if day == 0:
             # cal and store the filler_days in the first day goal_info
@@ -97,6 +100,9 @@ def get_daily_goal_data(team, resource):
             goal_info["filler_days"] = range(0, 6 - date.weekday())
 
         if date <= today:
+            if date == datetime.date.today():
+                goal_info["is_today"] = True
+
             if resource_mgr.is_blackout(date):
                 # the game is disabled for the blackout dates
                 goal_info["goal_status"] = "Not available"
@@ -116,12 +122,16 @@ def _set_goal_info(goal_info, resource, team, date):
     rate = resource_setting.conversion_rate
     goal_settings = resource_goal.team_goal_settings(team, resource)
     goal = resource_goal.team_goal(date, team, resource)
+    goal_info["goal_points"] = goal_settings.goal_points
+    goal_info["is_manual"] = goal_settings.manual_entry
+    goal_percent = resource_goal.get_goal_percent(date, team, resource, goal_settings)
     if goal:
         goal_info["goal_status"] = goal.goal_status
         if goal.actual_usage:
-            goal_info["goal_info"] = "usage: %d %s" % (goal.actual_usage / rate, unit)
+            goal_info["goal_info"] = "usage:<br/>%d %s" % (goal.actual_usage / rate, unit)
         elif goal.goal_usage:
-            goal_info["goal_info"] = "goal: %d %s" % (goal.goal_usage / rate, unit)
+            goal_info["goal_info"] = "goal:%d %s<br/>(reduce %d%%)" % (
+                goal.goal_usage / rate, unit, goal_percent)
     else:
         goal_info["goal_status"] = "Unknown"
 
@@ -132,15 +142,13 @@ def _set_goal_info(goal_info, resource, team, date):
         if date == datetime.date.today():
             # if there is baseline, display the expected goal,
             # otherwise, display disabled with no baseline, as unavailable
-            goal_info["is_today"] = True
             baseline = resource_goal.team_daily_resource_baseline(
                 date, team, resource)
             if baseline:
-                goal_percent = resource_goal.get_goal_percent(
-                    date, team, resource, goal_settings)
                 goal_usage = baseline * (100 - goal_percent) / 100
                 goal_info["goal_status"] = None
-                goal_info["goal_info"] = "goal: %d %s" % (goal_usage / rate, unit)
+                goal_info["goal_info"] = "goal:%d %s<br/>(reduce %d%%)" % (
+                    goal_usage / rate, unit, goal_percent)
             else:
                 goal_info["goal_status"] = "Not available"
                 goal_info["verbose_info"] = "Game disabled for today because " \
@@ -150,11 +158,12 @@ def _set_goal_info(goal_info, resource, team, date):
             goal_info["verbose_info"] = "Game disabled for today because usage data " \
                                     "not available."
     else:
-        goal_info["verbose_info"] = "%d %s used within the last 24 hours" \
-                                        " (ends at %s). The goal is %d%s." % (
+        goal_info["verbose_info"] = "%d %s used within the last 24 hours (ends at %s). " \
+        "<br/>The goal is %d %s (reduce %d%%)." % (
                 goal.actual_usage / rate,
                 unit,
                 goal_settings.manual_entry_time,
                 goal.goal_usage / rate,
-                unit
+                unit,
+                goal_percent
             )

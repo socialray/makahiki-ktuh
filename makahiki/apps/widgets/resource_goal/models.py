@@ -34,7 +34,8 @@ class ResourceGoal(models.Model):
 
     percent_reduction = models.IntegerField(
         default=0,
-        help_text="The percentage of reduction, derived from actual and goal usage ")
+        help_text="The percentage of reduction over the goal usage, " \
+                  "derived from actual and goal usage ")
 
     current_goal_percent_reduction = models.IntegerField(
         default=0,

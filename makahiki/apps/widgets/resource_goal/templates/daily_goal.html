@@ -37,46 +37,60 @@
                             <tr>
                         {% endif %}
                         <td width="50">
-                            <span style="float: left; font-size: 0.7em; font-weight: bold;
+                            {% if goal.is_today and not goal.is_manual %}
+                                <a href="/{{ goal.resource }}/">
+                            {% endif %}
+                            <span style="float: left; font-weight: bold;
                               {% if goal.is_today %}
-                                  color:blue;
+                                  font-size: 1em;
+                              {% else %}
+                                  font-size: 0.7em;
                               {% endif %}
                             ">
-                                  {{ goal.date|date:"n/j" }} </span>
+                                {{ goal.date|date:"n/j" }}
+                            </span>
                             <br/>
-
                             <p/>
 
                             <div class="goal_tooltip">
                                 {% if goal.goal_status == "Over the goal" %}
                                     <div class="goal_tooltip">
-                                        <img rel="tooltip" title="{{ goal.verbose_info }}"
+                                        <img rel="tooltip" title="{{ goal.verbose_info }}" width=32 height="32"
                                              src="{{ STATIC_URL }}images/energy/bad32.png"/>
                                     </div>
                                 {% elif goal.goal_status == "Below the goal" %}
                                     <div class="goal_tooltip">
-                                        <img rel="tooltip" title="{{ goal.verbose_info }}"
+                                        <img rel="tooltip" title="{{ goal.verbose_info }}" width=32 height="32"
                                              src="{{ STATIC_URL }}images/energy/good32.png"/>
                                     </div>
                                 {% elif goal.goal_status == "Unknown" %}
                                     <div class="goal_tooltip">
-                                        <img rel="tooltip" title="{{ goal.verbose_info }}"
+                                        <img rel="tooltip" title="{{ goal.verbose_info }}" width=32 height="32"
                                              src="{{ STATIC_URL }}images/energy/unknown32.png"/>
                                     </div>
                                 {% elif goal.goal_status == "Not available" %}
                                     <div class="goal_tooltip">
-                                        <img rel="tooltip" title="{{ goal.verbose_info }}" width=32
+                                        <img rel="tooltip" title="{{ goal.verbose_info }}" width=32 height="32"
                                              src="{{ STATIC_URL }}images/energy/disabled32.png"/>
                                     </div>
                                 {% else %}
                                     <div class="goal_tooltip">
-                                        <div style="height: 32px;"></div>
+                                        <img width=32 height="32"
+                                            src="{{ STATIC_URL }}images/spacer.png"/>
                                     </div>
                                 {% endif %}
                             </div>
-                            <span style="font-size: 0.7em;">
-                                  {{ goal.goal_info }}
-                            </span>
+                            {% if goal.goal_info %}
+                                <span style="font-size: 0.7em; height: 32px;">
+                                  {{ goal.goal_info|safe }}
+                                </span>
+                            {% else %}
+                                <img width=32 height="32"
+                                     src="{{ STATIC_URL }}images/spacer.png"/>
+                            {% endif %}
+                            {% if goal.is_today and not goal.is_manual %}
+                                </a>
+                            {% endif %}
                         </td>
                         {% if forloop.last %}
                             {% for day in goal.filler_days %}
@@ -90,6 +104,7 @@
     </tr>
     <tr>
         <td style="font-size: 0.8em; text-align: center;">
+            <b>Each member receives {{ goal.goal_points }} points each day that we make our goal.</b><br/>
             <img src="{{ STATIC_URL }}images/energy/good32.png" width="16"/>: Awarded
             (Made the goal)
             <img src="{{ STATIC_URL }}images/energy/bad32.png" width="16"/>: Did not make the goal
