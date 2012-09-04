@@ -105,7 +105,7 @@ def team_hourly_resource_baseline(date, team, resource):
     hourly_baseline = _get_resource_baselinehourly(resource)
 
     day = date.weekday()
-    hour = date.time().hour
+    hour = date.time().hour + 1
     baselines = hourly_baseline.objects.filter(team=team, day=day, hour=hour)
     if baselines:
         return baselines[0].usage
