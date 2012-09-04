@@ -3,6 +3,7 @@ from django.utils import importlib
 import re
 from apps.managers.challenge_mgr import challenge_mgr
 from apps.managers.player_mgr.models import Profile
+from apps.managers.score_mgr import score_mgr
 from apps.managers.team_mgr.models import Team
 from apps.widgets.smartgrid import smartgrid
 from django.conf import settings
@@ -55,6 +56,7 @@ def competition(request):
 
     return {
         "CHALLENGE": challenge,
+        "SCORE_SETTINGS": score_mgr.score_setting(),
         "CSS_THEME": css_theme,
         "TEAM_LABEL": challenge.competition_team_label,
         "MAKAHIKI_FACEBOOK_APP_ID":

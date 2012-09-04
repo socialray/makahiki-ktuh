@@ -1,7 +1,7 @@
-"""Invocation:  python manage.py update_energy_usage
+"""Invocation:  python manage.py update_daily_status
 
-For each team, queries WattDepot server to find out cumulative energy usage from
-midnight to now. Used for updating the status of the Energy Goal Game."""
+Update the number of users that logged in today.
+"""
 
 import datetime
 from apps.managers.player_mgr.models import Profile
@@ -18,10 +18,18 @@ class Command(MakahikiBaseCommand):
         today = datetime.datetime.today()
         print '****** Processing daily user count update at %s.*******\n' % today
 
-        count = Profile.objects.filter(last_visit_date=today.date()).count()
-        print '****** %s visitor(s) today!.*******\n' % count
+        date = today.date()
+
+        # if it is run on mid night, we should count previous day's data
+        if today.hour == 0:
+            date -= datetime.timedelta(days=1)
+        count = Profile.objects.filter(last_visit_date=date).count()
+
+        date_string = "%s" % date
+
+        print '****** %s visitor(s) for %s *******\n' % (count, date_string)
 
         # increase the daily total visitor count
-        entry, _ = DailyStatus.objects.get_or_create(date=today.isoformat())
+        entry, _ = DailyStatus.objects.get_or_create(date=date_string)
         entry.daily_visitors = count
         entry.save()

@@ -84,7 +84,6 @@ class ActivitiesFunctionalTest(TransactionTestCase):
             "response": code.code,
             "code": 1,
             }, follow=True)
-        print response
         self.assertContains(response, "You have already redeemed a code for this action.")
 
         # Try creating a new activity with codes and see if we can submit a code for one activity

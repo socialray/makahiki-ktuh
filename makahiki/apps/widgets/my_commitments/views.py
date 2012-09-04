@@ -7,7 +7,6 @@ def supply(request, page_name):
     _ = page_name
     # Get the user's current commitments.
     commitment_members = smartgrid.get_current_commitment_members(request.user)
-
     return {
         "commitment_members": commitment_members,
         }

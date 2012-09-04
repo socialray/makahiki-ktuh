@@ -42,8 +42,12 @@ def action_feedback(request, action_type, slug):
     profile = request.user.get_profile()
 
     form = ActionFeedbackForm(request.POST)
+
     if form.is_valid():
-        print form.cleaned_data
+        #print form.cleaned_data
+        # should do something ??
+        pass
+
     feedback, created = ActionFeedback.objects.get_or_create(action=action, user=user)
     has_comment = False
     has_score = False

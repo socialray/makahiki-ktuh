@@ -1,4 +1,4 @@
-{% with resource=view_objects.resource_goal__water.resource hourly_goal=view_objects.resource_goal__water.hourly_goal daily_goal=view_objects.resource_goal__water.daily_goal golow_activities=view_objects.resource_goal__water.golow_activities %}
+{% with goal_settings=view_objects.resource_goal__water.goal_settings resource=view_objects.resource_goal__water.resource hourly_goal=view_objects.resource_goal__water.hourly_goal daily_goal=view_objects.resource_goal__water.daily_goal golow_activities=view_objects.resource_goal__water.golow_activities %}
 
     {% include "resource_goal.html" %}
 

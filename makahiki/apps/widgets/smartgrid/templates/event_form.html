@@ -21,7 +21,7 @@
         </button>        
     </div>
 {% else %}
-    You will earn 2 points for signing up for
+    You will earn {{ SCORE_SETTINGS.signup_bonus_points }} points for signing up for
     the {{ action.type }}.
     <div class="activity-task-form-content-button">
         <button id="submit_form_button2" class="btn btn-widget" style="cursor:pointer;"

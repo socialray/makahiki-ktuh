@@ -37,7 +37,7 @@
                             <tr>
                         {% endif %}
                         <td width="50">
-                            {% if goal.is_today and not goal.is_manual %}
+                            {% if goal.is_today and not goal_settings.manual_entry %}
                                 <a href="/{{ goal.resource }}/">
                             {% endif %}
                             <span style="float: left; font-weight: bold;
@@ -88,7 +88,7 @@
                                 <img width=32 height="32"
                                      src="{{ STATIC_URL }}images/spacer.png"/>
                             {% endif %}
-                            {% if goal.is_today and not goal.is_manual %}
+                            {% if goal.is_today and not goal_settings.manual_entry %}
                                 </a>
                             {% endif %}
                         </td>
@@ -104,11 +104,15 @@
     </tr>
     <tr>
         <td style="font-size: 0.8em; text-align: center;">
-            <b>Each member receives {{ goal.goal_points }} points each day that we make our goal.</b><br/>
+            <b>Each member receives {{ goal_settings.goal_points }} points each day that we make our goal.</b><br/>
             <img src="{{ STATIC_URL }}images/energy/good32.png" width="16"/>: Awarded
             (Made the goal)
             <img src="{{ STATIC_URL }}images/energy/bad32.png" width="16"/>: Did not make the goal
             <img src="{{ STATIC_URL }}images/energy/disabled32.png" width="16"/>: Disabled
+            {% if not goal_settings.manual_entry %}
+                <br/><a href="/{{ resource.name }}/"><b>Click here to return to today's stoplight view</b></a>
+            {% endif %}
+
         </td>
     </tr>
 </table>

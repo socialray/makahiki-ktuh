@@ -16,7 +16,6 @@ def supply(request, page_name):
     if team:
         group_lounges = team.group.team_set.order_by('name').all()[:group_lounges_count]
         remainer = group_lounges_count - group_lounges.count()
-        print remainer
         if remainer:
             remainer_lounges = Team.objects.exclude(group=team.group).order_by('name')[:remainer]
             if remainer_lounges.count():

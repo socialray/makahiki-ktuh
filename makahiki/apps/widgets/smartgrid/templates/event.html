@@ -7,11 +7,11 @@
                     Click on the "I Did it" button to get the rest of your points.
                     <br/>
                 {% else %}
-                    Thank you! You've earned 2 bonus points by signing up.
+                    Thank you! You've earned {{ SCORE_SETTINGS.signup_bonus_points }} bonus points by signing up.
                     After the {{ action.type }}, please come back here within 2 days to
                     get your points.
-                    If you sign up but do not attend, you will lose the 2 point
-                    signing bonus and pay a 2 point "no-show" penalty.
+                    If you sign up but do not attend, you will lose the {{ SCORE_SETTINGS.signup_bonus_points }} point
+                    signing bonus and pay a {{ SCORE_SETTINGS.noshow_penalty_points }} point "no-show" penalty.
                     <br/>
                 {% endif %}
 {% endblock %}

@@ -617,7 +617,7 @@ class ActionMemberAdmin(admin.ModelAdmin):
     readonly_fields = (
         "user", "action", "admin_link", "question", "response", "social_email")
     list_display = (
-        "action", "submission_date", "approval_status", "short_question", "short_response")
+        "action", "submission_date", "user", "approval_status")
     list_filter = ["approval_status", "action__type"]
     actions = ["delete_selected"]
     date_hierarchy = "submission_date"
