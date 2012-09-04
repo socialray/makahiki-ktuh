@@ -16,7 +16,6 @@ def supply(request, page_name):
 
 def resource_supply(request, page_name):
     """Supply the view_objects content for this widget."""
-    _ = page_name
     user = request.user
     team = user.get_profile().team
     golow_activities = smartgrid.get_available_golow_actions(user, page_name)
@@ -24,8 +23,8 @@ def resource_supply(request, page_name):
     daily_goal = None
 
     if team:
-        if not resource_goal.is_manual_entry(team, page_name) and\
-            not "calendar_view" in request.GET:
+        goal_settings = resource_goal.team_goal_settings(team, page_name)
+        if not goal_settings.manual_entry and not "calendar_view" in request.GET:
             hourly_goal = get_hourly_goal_data(team, page_name)
         else:
             daily_goal = get_daily_goal_data(team, page_name)
@@ -37,6 +36,7 @@ def resource_supply(request, page_name):
         "hourly_goal": hourly_goal,
         "daily_goal": daily_goal,
         "resource": resource_setting,
+        "goal_settings": goal_settings,
         }
 
 
@@ -122,8 +122,6 @@ def _set_goal_info(goal_info, resource, team, date):
     rate = resource_setting.conversion_rate
     goal_settings = resource_goal.team_goal_settings(team, resource)
     goal = resource_goal.team_goal(date, team, resource)
-    goal_info["goal_points"] = goal_settings.goal_points
-    goal_info["is_manual"] = goal_settings.manual_entry
     goal_percent = resource_goal.get_goal_percent(date, team, resource, goal_settings)
     if goal:
         goal_info["goal_status"] = goal.goal_status

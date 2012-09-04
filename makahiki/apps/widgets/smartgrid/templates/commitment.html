@@ -3,7 +3,7 @@
 {% block action_completed_info %}
             <b>Action Completion Status</b><br/>
             {% if action.member.days_left > 0 %}
-                Thank you! You've earned 2 points by committing.
+                Thank you! You've earned {{ SCORE_SETTINGS.signup_bonus_points }} points by committing.
                 Please come back on {{ action.member.completion_date|date:"l m/d" }}
                 ({{ action.member.days_left }} days left) to get the rest of your
                 points.

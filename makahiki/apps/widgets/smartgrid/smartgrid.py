@@ -438,11 +438,10 @@ def process_rsvp():
         diff = datetime.date.today() - action.event.event_date.date()
         if diff.days > NOSHOW_PENALTY_DAYS:
             message = "%s: %s (No Show)" % (action.type.capitalize(), action.title)
-            profile.remove_points(noshow_penalty_points,
+            profile.remove_points(noshow_penalty_points + signup_points,
                                   datetime.datetime.today() - datetime.timedelta(minutes=1),
                                   message,
                                   member)
-            profile.save()
             print "removed noshow penalty points from %s for '%s'" % (profile.name, message)
 
             if template_noshow:
@@ -487,7 +486,7 @@ def process_rsvp():
                            "enter your confirmation code early to avoid the "\
                            "penalty." % (
                     NOSHOW_PENALTY_DAYS,
-                    noshow_penalty_points + score_mgr.signup_points,
+                    noshow_penalty_points + signup_points,
                     noshow_penalty_points,
                     signup_points,
                 )

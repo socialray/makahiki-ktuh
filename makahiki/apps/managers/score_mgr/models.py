@@ -32,7 +32,7 @@ class ScoreSetting(models.Model):
         help_text="The point amount for completing a quest."
     )
     noshow_penalty_points = models.IntegerField(
-        default=4,
+        default=2,
         help_text="The point amount for no show penalty."
     )
     feedback_bonus_points = models.IntegerField(

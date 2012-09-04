@@ -612,10 +612,11 @@ class ActionMember(models.Model):
         """ reverse event/excursion noshow penalty."""
         if self._has_noshow_penalty():
             message = "%s (Reverse No Show Penalty)" % self.action
-            self.user.get_profile().add_points(score_mgr.noshow_penalty_points(),
-                               self.award_date,
-                               message,
-                               self)
+            self.user.get_profile().add_points(
+                score_mgr.noshow_penalty_points() + score_mgr.signup_points(),
+                self.award_date,
+                message,
+                self)
 
     def _has_noshow_penalty(self):
         """if NOSHOW_PENALTY_DAYS past and has submission_date (signed up),
