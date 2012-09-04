@@ -21,7 +21,7 @@ def resource_supply(request, page_name):
     golow_activities = smartgrid.get_available_golow_actions(user, page_name)
     hourly_goal = None
     daily_goal = None
-
+    goal_settings = None
     if team:
         goal_settings = resource_goal.team_goal_settings(team, page_name)
         if not goal_settings.manual_entry and not "calendar_view" in request.GET:
