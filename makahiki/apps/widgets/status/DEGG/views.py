@@ -1,10 +1,12 @@
 """Power meters visualization."""
 
 import datetime
+from django.shortcuts import get_object_or_404
 from apps.widgets.resource_goal.models import EnergyGoal
 from apps.widgets.resource_goal.resource_goal import team_goal_settings, get_goal_percent
 from apps.widgets.resource_goal.resource_goal import team_daily_resource_baseline
 from apps.widgets.resource_goal.views import get_hourly_goal_data
+from apps.managers.resource_mgr.models import ResourceSetting
 from apps.managers.team_mgr.models import Team
 
 
@@ -34,7 +36,7 @@ def createDateList(hist_size):
     datelist = []
     today = datetime.datetime.today()
     hist_time = (today - datetime.timedelta(days=hist_size))
-    while hist_time < today:
+    while hist_time <= today:
         datelist.append(hist_time)
         hist_time += datetime.timedelta(days=1)
     datelist.reverse()
@@ -54,11 +56,16 @@ def createDataTable(teams, datelist, resource):
         goal_value = dict()
         goal_value["goal_usage"] = (100 - goal_percent) * team_daily_resource_baseline(today,
         team, resource) / 100
+        rate = get_object_or_404(ResourceSetting, name=resource)
+        rate = rate.conversion_rate
+        goal_value["goal_usage"] = goal_value["goal_usage"] / rate
 
         #calculate today's usage
         hourly_goal = get_hourly_goal_data(team, resource)
         goal_value["actual_usage"] = hourly_goal["actual_usage"]
+        goal_value["hourly_goal"] = hourly_goal["goal_usage"]
         goal_value["net_usage"] = goal_value["goal_usage"] - goal_value["actual_usage"]
+        goal_value["today"] = True
         vals.append((today, goal_value))
 
         goals = EnergyGoal.objects.filter(team_id=team.id).order_by('-date')
