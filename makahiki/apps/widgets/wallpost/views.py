@@ -38,7 +38,7 @@ def super_supply(request, page_name, agent):
               style_class=agent_post
               ).select_related('user__profile').order_by("-id")
 
-        title = "Canopy News Feed"
+        user_title = "Canopy News Feed"
         description = "Share with your fellow canopy members:"
 
     else:
@@ -54,7 +54,8 @@ def super_supply(request, page_name, agent):
                 team=team
             ).select_related('user__profile').order_by("-id")
 
-        title = "Team News Feed"
+        user_title = "Team News Feed"
+        system_title = "Game Feed"
         description = ""
 
     post_count = posts.count()
@@ -65,7 +66,8 @@ def super_supply(request, page_name, agent):
 
     return {
         "page_name": page_name,
-        "title": title,
+        "user_title": user_title,
+        "system_title": system_title,
         "description": description,
         "posts": posts,
         "more_posts": is_more_posts,

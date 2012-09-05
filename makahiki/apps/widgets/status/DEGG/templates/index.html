@@ -27,8 +27,15 @@
                                             </td>
                                         {% else %}
                                             <td class = "column-number">
-                                            <font {% if goal.net_usage < 0 %} color=red 
-                                                  {% elif goal.net_usage >= 0 %} color=green
+                                            <font 
+                                                  {% if goal.today %}
+                                                      {% if   goal.actual_usage > goal.hourly_goal %} color=red 
+                                                      {% elif   goal.actual_usage <= goal.hourly_goal%} color=green
+                                                      {% endif %}
+                                                  {% else %}
+                                                      {% if goal.net_usage < 0 %} color=red 
+                                                      {% elif goal.net_usage >= 0 %} color=green
+                                                      {% endif %}
                                                   {%endif %}>
                                                {{goal.net_usage|intcomma}}
                                             </font>
