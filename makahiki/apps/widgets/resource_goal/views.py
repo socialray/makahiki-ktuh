@@ -160,7 +160,7 @@ def _set_goal_info(goal_info, resource, team, date):
         "<br/>The goal is %d %s (reduce %d%%)." % (
                 goal.actual_usage / rate,
                 unit,
-                goal_settings.manual_entry_time,
+                goal_settings.manual_entry_time if goal_settings.manual_entry else "midnight",
                 goal.goal_usage / rate,
                 unit,
                 goal_percent
