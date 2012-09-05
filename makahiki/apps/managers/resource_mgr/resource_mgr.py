@@ -111,6 +111,9 @@ def update_resource_usage(resource, date):
     # we only have real time energy data so far.
     if resource == "energy":
         update_energy_usage(date)
+        # clear the cache for energy ranking, and RIB where it displays
+        round_name = challenge_mgr.get_round_name(date)
+        cache_mgr.delete("energy_ranks-%s" % slugify(round_name))
 
 
 def update_energy_usage(date):

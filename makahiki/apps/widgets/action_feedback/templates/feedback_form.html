@@ -1,10 +1,10 @@
 {% load markup %}
 <div id="task-feedback">
+<br/>
 <form action="{% url add_activity_feedback action.type action.slug %}" method="post">
 <div style="text-align:left; margin-left:10px;">
-<b>Your feedback on this action</b><br/>
 {% if not feedback_p %}
-Please provide feedback:
+You can also provide feedback and get more points:
 {% else %}
 Your current feedback. Please update if desired
 {% endif %}
@@ -23,8 +23,6 @@ Your current feedback. Please update if desired
     Any comments?<br/>
     <div class="controls">
         <textarea rows="1" name="comments">{% if feedback_p %} {{ feedback_p.comment }} {% endif %}</textarea>
-    </div>
-    <div>
         <input id="feedback-submit-button" type="submit" value="Submit" class="btn btn-widget"/>
     </div>
 </div>

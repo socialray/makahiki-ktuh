@@ -79,7 +79,7 @@ def annotate_action_details(user, action):
         action.completed = True
     else:
         action.member = None
-        action.is_unlock = is_unlock(user, action)
+        action.is_unlock = is_unlock(user, action) and is_level_unlock(user, action.level)
         action.completed = False
 
     return action
@@ -216,7 +216,7 @@ def get_available_golow_actions(user, related_resource):
             if action_type == action.type:
                 continue
 
-            if is_unlock(user, action):
+            if is_unlock(user, action) and is_level_unlock(user, action.level):
                 golow_actions.append(action)
                 action_type = action.type
 
@@ -225,6 +225,11 @@ def get_available_golow_actions(user, related_resource):
         cache_mgr.set_cache('golow_actions-%s' % user.username, golow_actions, 1800)
 
     return golow_actions
+
+
+def is_level_unlock(user, level):
+    """return True if the level is unlock."""
+    return utils.eval_predicates(level.unlock_condition, user)
 
 
 def afterPublished(user, action_slug):

@@ -41,12 +41,13 @@ def view_action(request, action_type, slug):
     team = user.get_profile().team
     view_objects = {}
 
-    if not smartgrid.is_unlock(user, action):
+    action = smartgrid.annotate_action_details(user, action)
+
+    if not action.is_unlock:
         response = HttpResponseRedirect(reverse("learn_index", args=()))
         response.set_cookie("task_unlock_condition", action.unlock_condition_text)
         return response
 
-    action = smartgrid.annotate_action_details(user, action)
     completed_members = smartgrid.get_action_members(action)
     completed_count = completed_members.count()
     team_members = completed_members.select_related('user__profile').filter(

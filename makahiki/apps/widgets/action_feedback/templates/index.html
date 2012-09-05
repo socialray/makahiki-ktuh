@@ -3,6 +3,7 @@
     Activity, Commitment, Event, and Excursion Feedback
     </div>
     <div class="content-box-contents widget-content">
+<!--
     <script type="text/javascript" src="{{STATIC_URL}}js/flot/jquery.flot.js"></script>
     <script type="text/javascript" src="https://www.google.com/jsapi"></script>
     <script type="text/javascript">
@@ -33,7 +34,7 @@
             <div id="graph_placeholder" class="span12" style="border: 1px solid; height:{{view_objects.action_feedback.google.height}}px"></div>
         </div>
     </div>
-    
+-->
     <table class="table">
     <thead>
         <th>Action</th>
@@ -49,6 +50,8 @@
         <td width="20%">{{analysis.count}}</td>
         <td width="30%"><div class="row-fluid"><div id="graph{{forloop.counter}}" class="span12" style="height: 45px;"> </div></div></td>
     </tr>
+
+<!--
     <script type="text/javascript">
     google.load("visualization", "1", {packages:["corechart"]});
     google.setOnLoadCallback(drawIndividualChart{{forloop.counter}});
@@ -92,6 +95,7 @@
 
 // });
 </script>
+-->
     {% endfor %}
     </tbody>
     </table>

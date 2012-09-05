@@ -1,18 +1,15 @@
 {% extends "task_base.html" %}
 
 {% block action_completed_info %}
-            <b>Action Completion Status</b><br/>
             {% if action.member.days_left > 0 %}
-                Thank you! You've earned {{ SCORE_SETTINGS.signup_bonus_points }} points by committing.
-                Please come back on {{ action.member.completion_date|date:"l m/d" }}
-                ({{ action.member.days_left }} days left) to get the rest of your
+                <b>Thank you!</b> You've earned <b>{{ SCORE_SETTINGS.signup_bonus_points }}</b> points by committing.
+                <br/>
+                Please come back on <b>{{ action.member.completion_date|date:"l m/d" }}
+                ({{ action.member.days_left }} days left)</b> to get the rest of your
                 points.
-                <br/>
             {% else %}
-                Thank you for committing to this for {{ action.duration }} days.
-                <br/>
-                Click on the "I Did it" button to get the rest of your points.
-                <br/>
+                <b>Thank you for committing to this for {{ action.duration }} days.</b>
+                Click on the "<b>I Did it</b>" button to get the rest of your points.
             {% endif %}
 {% endblock %}
 

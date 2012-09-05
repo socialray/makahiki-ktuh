@@ -1,18 +1,16 @@
 {% extends "task_base.html" %}
 
 {% block action_completed_info %}
-                <b>Action Completion Status</b><br/>
                 {% if action.event.is_event_completed %}
-                    Thank you for attending the event.
-                    Click on the "I Did it" button to get the rest of your points.
-                    <br/>
+                    <b>Thank you for attending the event.</b>
+                    Click on the "<b>I Did it</b>" button to get the rest of your points.
                 {% else %}
-                    Thank you! You've earned {{ SCORE_SETTINGS.signup_bonus_points }} bonus points by signing up.
-                    After the {{ action.type }}, please come back here within 2 days to
+                    <b>Thank you!</b> You've earned <b>{{ SCORE_SETTINGS.signup_bonus_points }}</b> bonus points
+                    by signing up.<br/>
+                    After the {{ action.type }}, please come back here within <b>2 days</b> to
                     get your points.
                     If you sign up but do not attend, you will lose the {{ SCORE_SETTINGS.signup_bonus_points }} point
                     signing bonus and pay a {{ SCORE_SETTINGS.noshow_penalty_points }} point "no-show" penalty.
-                    <br/>
                 {% endif %}
 {% endblock %}
 

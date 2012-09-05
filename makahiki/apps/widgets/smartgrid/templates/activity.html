@@ -5,15 +5,15 @@
                     <b>Action Completion Status</b><br/>
                     Thank you for submitting your response.
                     An administrator is reviewing your response.
-                    Come back soon to see your new total.
+                    Come back soon to see your new total points.
         {% else %}
                     <b>Action Completion Status</b><br/>
                     Administrator feels that there is a problem with your
-                    submission. <br/>
-                    Please try again by pressing the 'I will try again' button below.<br/>
+                    submission.
+                    Please try again by pressing the '<b>I will try again</b>' button below.
                     {% if action.member.admin_comment %}
-                        Here is their feedback: <br/>
-                        <span style="color:orange">{{ action.member.admin_comment }}</span>
+                        Here is the comment:
+                        <div class="ui-state-error">{{ action.member.admin_comment }}</div>
                     {% endif %}
         {% endif %}
 {% endblock %}

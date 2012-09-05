@@ -21,20 +21,18 @@
         <div class="activity-task-details-info">
             <p/>
             <div style="text-align:left; margin-left:10px;">
-                <b>Action Completion Status</b><br/>
-                Congratulations! You did it and earned {{ action.member.points_awarded }}
-                points! <br/>
+                <b>Congratulations!</b> You did it and earned <b>{{ action.member.points_awarded }}</b>
+                points!
                 {% if action.member.social_bonus_awarded %}
-                    <span style="color:orange"> Plus {{ action.social_bonus }} social bonus points!</span> <br/>
+                    <span style="color:orange"> Plus {{ action.social_bonus }} social bonus points!</span>
                 {% endif %}
-                You may have unlocked new activities in the smart grid game.<br/>
+                <br/>You may have unlocked new activities in the smart grid game.
 
                 {% if action.member.admin_comment %}
-                    Here is the feedback: <br/>
-                    <span style="color:orange">{{ action.member.admin_comment }}</span> <br/>
+                    Here is the comment:
+                    <div class="ui-state-error">{{ action.member.admin_comment }}</div>
                 {% endif %}
             </div>
-            <hr/>
             {% include "widgets/action_feedback/templates/feedback_form.html" %}
         </div>
     {% else %}
@@ -43,7 +41,6 @@
             <div style="text-align:left; margin-left:10px;">
                 {% block action_completed_info %} {% endblock %}
             </div>
-            <hr/>
             {% include "widgets/action_feedback/templates/feedback_form.html" %}
         </div>
     {% endif %}
