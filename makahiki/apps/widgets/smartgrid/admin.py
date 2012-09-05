@@ -16,6 +16,7 @@ from django.forms.models import BaseInlineFormSet
 from django.forms.util import ErrorList
 from django.forms import TextInput, Textarea
 from django.core.urlresolvers import reverse
+from django.contrib import messages
 
 
 class TextQuestionInlineFormSet(BaseInlineFormSet):
@@ -617,9 +618,12 @@ class ActionMemberAdmin(admin.ModelAdmin):
     readonly_fields = (
         "user", "action", "admin_link", "question", "response", "social_email")
     list_display = (
-        "action", "submission_date", "user", "approval_status")
+        "action", "submission_date", "user", "approval_status", "short_question", "short_response")
+
     list_filter = ["approval_status", "action__type"]
-    actions = ["delete_selected"]
+    actions = ["approve_selected", "delete_selected"]
+    search_fields = ["action__slug", "action__title", "user__username"]
+
     date_hierarchy = "submission_date"
     ordering = ["submission_date"]
 
@@ -633,7 +637,7 @@ class ActionMemberAdmin(admin.ModelAdmin):
 
     def short_response(self, obj):
         """return the short response"""
-        return "%s %s" % (obj.response, obj.image)
+        return "%s" % (obj.response if len(obj.response) < 100 else "(See in detail view)")
 
     short_response.short_description = 'Response'
 
@@ -666,6 +670,16 @@ class ActionMemberAdmin(admin.ModelAdmin):
 
         return super(ActionMemberAdmin, self).changelist_view(request,
             extra_context=extra_context)
+
+    def approve_selected(self, request, queryset):
+        """delete priority."""
+        _ = request
+        for obj in queryset:
+            obj.approval_status = "approved"
+            obj.save()
+            messages.success(request, "%s approved." % obj.action)
+
+    approve_selected.short_description = "Approve the selected objects (USE CAUTIONS)"
 
     def delete_selected(self, request, queryset):
         """override the delete selected."""

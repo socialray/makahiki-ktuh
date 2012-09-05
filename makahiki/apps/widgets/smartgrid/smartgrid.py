@@ -229,7 +229,7 @@ def get_available_golow_actions(user, related_resource):
 
 def is_level_unlock(user, level):
     """return True if the level is unlock."""
-    return utils.eval_predicates(level.unlock_condition, user)
+    return level and utils.eval_predicates(level.unlock_condition, user)
 
 
 def afterPublished(user, action_slug):
