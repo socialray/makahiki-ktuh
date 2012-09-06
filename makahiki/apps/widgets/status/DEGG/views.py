@@ -60,10 +60,13 @@ def createData(teams, date_list, resource, today):
 
         #calculate today's usage
         hourly_goal = get_hourly_goal_data(team, resource)
-        goal_value["actual_usage"] = hourly_goal["actual_usage"]
-        goal_value["hourly_goal"] = hourly_goal["goal_usage"]
-        goal_value["net_usage"] = goal_value["goal_usage"] - goal_value["actual_usage"]
-        goal_value["today"] = True
+        if hourly_goal["actual_usage"]:
+            goal_value["actual_usage"] = hourly_goal["actual_usage"]
+            goal_value["hourly_goal"] = hourly_goal["goal_usage"]
+            goal_value["net_usage"] = goal_value["goal_usage"] - goal_value["actual_usage"]
+            goal_value["today"] = True
+        else:
+            goal_value = "N/A"
         vals.append((today, goal_value))
 
         goals = EnergyGoal.objects.filter(team_id=team.id).order_by('-date')
