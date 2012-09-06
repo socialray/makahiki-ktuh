@@ -60,7 +60,7 @@ def createData(teams, date_list, resource, today):
 
         #calculate today's usage
         hourly_goal = get_hourly_goal_data(team, resource)
-        if hourly_goal["actual_usage"]:
+        if 'actual_usage' in hourly_goal:
             goal_value["actual_usage"] = hourly_goal["actual_usage"]
             goal_value["hourly_goal"] = hourly_goal["goal_usage"]
             goal_value["net_usage"] = goal_value["goal_usage"] - goal_value["actual_usage"]

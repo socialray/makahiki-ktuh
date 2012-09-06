@@ -58,6 +58,11 @@
               <div class="span2">
                       {% include "widgets/resource_scoreboard/water/templates/index.html" %} 
               </div>
+
+          {% elif view_objects.status__badges %}
+              <div class="span2">
+                    {% include "widgets/status/badges/templates/index.html" %}
+              </div>
           {% endif %} 
 
           <!--Prizes--> 
@@ -119,40 +124,30 @@
                 </div>
                 </div> 
             
+            <div class="span4">
+                {% include "widgets/status/DEGG/templates/index.html" %}  
+                {% include "widgets/status/wattdepot/templates/index.html" %} 
+            </div>
 
             <div class="span4">  
               {% with img='http://a0.twimg.com/profile_images/1361689451/kukuicup_logo_normal.jpg' user="kukuicup" id=0%}
                   {% include "widgets/status/twitter/templates/index.html" %} 
               {% endwith %}
-                <div class="content-box demi-widget">
-                    {% include "widgets/status/iframe/templates/index.html" %}
-                </div>
-            </div>
+                                                  <!--div class="content-box demi-widget">
+                                                      {% include "widgets/status/iframe/templates/index.html" %}
+                                                  </div->
+                                              </div>
 
-            <div class="span4"> 
-                {% with   user="herokustatus" img='https://twimg0-a.akamaihd.net/profile_images/2343972517/heroku-logo-for-facebook_normal.png' id=1%}
-                    {% include "widgets/status/twitter/templates/index.html" %}
-                {% endwith %}
-
+                                              <div class="span4"> 
+                                                  {% with   user="herokustatus" img='https://twimg0-a.akamaihd.net/profile_images/2343972517/heroku-logo-for-facebook_normal.png' id=1%}
+                                                      {% include "widgets/status/twitter/templates/index.html" %}
+                                                  {% endwith %}
+                                              -->
                 {% if view_objects.logging %}
                     {% include "widgets/logging/templates/index.html" %}
                 {% endif %}
             </div>
-      </div>  
-      <div class="row-fluid">
-          <div class="span4">  
-                    {% include "widgets/status/wattdepot/templates/index.html" %}
-          </div>
 
-
-          <div class="span4">
-                {% include "widgets/status/DEGG/templates/index.html" %}          
-          </div>
-
-
-          <div class="span2">
-                {% include "widgets/status/badges/templates/index.html" %}
-          </div>
-      </div>
+      </div>   
 {% endblock %}
 

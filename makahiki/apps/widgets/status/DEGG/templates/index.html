@@ -1,12 +1,11 @@
 {% load markup %}
 {% load humanize %}
 {% with energy_goals=view_objects.status__DEGG.energy_goals teams_unique=view_objects.status__DEGG.teams_unique date_list=view_objects.status__DEGG.date_list %}
-<div class="content-box widget">
-
+<div class="content-box demi-widget">
     <div class="content-box-title">
           DEGG Status
     </div>
-    <div class="row-fluid">
+    <div class="widget-content">
         <table class="table-striped">
                                   <thead>
                                       <tr><td class="column-text"><b>Team</b></td>
