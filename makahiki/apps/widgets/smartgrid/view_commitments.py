@@ -45,7 +45,7 @@ def add(request, commitment):
         member.approval_status = "approved"
 
         if form.cleaned_data["social_email"]:
-            member.social_email = form.cleaned_data["social_email"]
+            member.social_email = form.cleaned_data["social_email"].lower()
         member.save()
         value = commitment.point_value
 
@@ -55,7 +55,7 @@ def add(request, commitment):
         member = ActionMember(user=user, action=commitment)
 
         if form:
-            member.social_email = form.cleaned_data["social_email"]
+            member.social_email = form.cleaned_data["social_email"].lower()
 
         try:
             member.save()

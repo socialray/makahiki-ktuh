@@ -4,11 +4,11 @@
             <b>Today's data does not count due to holiday. </b> <br/><br/>
         </td></tr>
     </table>
-{% elif not hourly_goal.actual_usage %}
+{% elif hourly_goal.no_data %}
     <table >
         <tr width="300"><td height="100" valign="center">
-            <b>Current {{ resource.name }} data is not available.</b> <br/><br/>
-            Please contact administrator to report this problem.
+            <b>Current {{ resource.name }} data is not available yet. Please come back later</b> <br/><br/>
+            If the data is still not available after 10 minutes, Please contact administrator to report this problem.
         </td></tr>
     </table>
 {% elif not hourly_goal.goal_usage %}

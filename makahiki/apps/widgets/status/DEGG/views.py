@@ -8,6 +8,7 @@ from apps.widgets.resource_goal.resource_goal import team_daily_resource_baselin
 from apps.widgets.resource_goal.views import get_hourly_goal_data
 from apps.managers.resource_mgr.models import ResourceSetting
 from apps.managers.team_mgr.models import Team
+from apps.utils import utils
 
 
 def supply(request, page_name):
@@ -58,7 +59,7 @@ def createDataTable(teams, datelist, resource):
         team, resource) / 100
         rate = get_object_or_404(ResourceSetting, name=resource)
         rate = rate.conversion_rate
-        goal_value["goal_usage"] = goal_value["goal_usage"] / rate
+        goal_value["goal_usage"] = utils.format_usage(goal_value["goal_usage"], rate)
 
         #calculate today's usage
         hourly_goal = get_hourly_goal_data(team, resource)

@@ -210,7 +210,7 @@ def _validate_social_email(request, action, cleaned_data, errors):
 def _validate_one_email(request, cleaned_data, email, errors):
     """validate one email."""
     if cleaned_data[email]:
-        user = player_mgr.get_user_by_email(cleaned_data[email])
+        user = player_mgr.get_user_by_email(cleaned_data[email].lower())
         if user == None or user == request.user:
             errors[email] = ErrorList(["Invalid email. Please input only one valid email."])
             del cleaned_data[email]

@@ -77,7 +77,7 @@ def complete(request, event):
         if form.is_valid():
             # Approve the activity (confirmation code is validated in
             # forms.ActivityTextForm.clean())
-            code = ConfirmationCode.objects.get(code=form.cleaned_data["response"])
+            code = ConfirmationCode.objects.get(code=form.cleaned_data["response"].lower())
             code.is_active = False
             code.save()
 
@@ -89,7 +89,7 @@ def complete(request, event):
             action_member.approval_status = "approved"
             value = event.point_value
 
-            action_member.social_email = form.cleaned_data["social_email"]
+            action_member.social_email = form.cleaned_data["social_email"].lower()
             try:
                 action_member.save()
             except IntegrityError:
@@ -181,7 +181,8 @@ def _check_attend_code(user, form):
         elif code.action.social_bonus:
             if form.cleaned_data["social_email"]:
                 if form.cleaned_data["social_email"] != "Email":
-                    ref_user = player_mgr.get_user_by_email(form.cleaned_data["social_email"])
+                    ref_user = player_mgr.get_user_by_email(
+                        form.cleaned_data["social_email"].lower())
                     if ref_user == None or ref_user == user:
                         message = "Invalid email. Please input only one valid email."
                         social_email = "true"
@@ -233,7 +234,7 @@ def attend_code(request):
 
                 if "social_email" in form.cleaned_data and \
                     form.cleaned_data["social_email"] != "Email":
-                    action_member.social_email = form.cleaned_data["social_email"]
+                    action_member.social_email = form.cleaned_data["social_email"].lower()
 
                 # Model save method will award the points.
                 action_member.save()

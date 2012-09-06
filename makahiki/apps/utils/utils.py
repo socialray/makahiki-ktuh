@@ -113,3 +113,15 @@ def validate_form_predicates(predicates):
                                         sys.exc_info()[1]))
         else:
             raise forms.ValidationError("Received exception: %s" % sys.exc_info()[0])
+
+
+def format_usage(usage, rate):
+    """format the resource usage to show integer if greater than the rate, otherwise
+    show one decimal place."""
+    usage = float(usage) / rate
+
+    if usage < 1:
+        usage = round(usage, 1)
+    else:
+        usage = int(round(usage, 0))
+    return usage

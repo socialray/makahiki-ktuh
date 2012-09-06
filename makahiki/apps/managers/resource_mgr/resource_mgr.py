@@ -13,6 +13,7 @@ from apps.managers.resource_mgr.models import EnergyUsage, WaterUsage, ResourceS
     WasteUsage, ResourceBlackoutDate
 from xml.etree import ElementTree
 from django.template.defaultfilters import slugify
+from apps.utils import utils
 
 
 def get_resource_setting(name):
@@ -199,9 +200,10 @@ def resource_ranks(name, round_name=None):
 
         ranks = []
         for rank in usage_ranks:
-            ranks.append({"team__name": rank["team__name"], "total": rank["total"] / rate})
+            ranks.append({"team__name": rank["team__name"],
+                          "total": utils.format_usage(rank["total"], rate)})
 
-        cache_mgr.set_cache(cache_key, ranks, 3600)
+        cache_mgr.set_cache(cache_key, ranks, 600)
     return ranks
 
 

@@ -90,7 +90,7 @@ def add(request, activity):
                 action_member.response = form.cleaned_data["response"]
                 action_member.approval_status = "pending"
 
-            action_member.social_email = form.cleaned_data["social_email"]
+            action_member.social_email = form.cleaned_data["social_email"].lower()
             try:
                 action_member.save()
             except IntegrityError:

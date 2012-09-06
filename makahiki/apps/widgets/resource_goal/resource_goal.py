@@ -100,17 +100,28 @@ def team_daily_resource_baseline(date, team, resource):
         return 0
 
 
-def team_hourly_resource_baseline(date, team, resource):
+def team_hourly_resource_baseline(resource, team, date, time):
     """Returns the baseline usage for the date and resource."""
     hourly_baseline = _get_resource_baselinehourly(resource)
 
     day = date.weekday()
-    hour = date.time().hour + 1
-    baselines = hourly_baseline.objects.filter(team=team, day=day, hour=hour)
-    if baselines:
-        return baselines[0].usage
+    hour = time.hour
+    baseline_start = hourly_baseline.objects.filter(team=team, day=day, hour=hour)
+    if baseline_start:
+        baseline_start = baseline_start[0].usage
     else:
-        return 0
+        baseline_start = 0
+
+    hour = hour + 1
+    baseline_end = hourly_baseline.objects.filter(team=team, day=day, hour=hour)
+    if baseline_end:
+        baseline_end = baseline_end[0].usage
+    else:
+        baseline_end = 0
+
+    # calculate baseline_usage proportionally to the time within the hour
+    minute = time.minute if time.minute else 1
+    return baseline_start + (baseline_end - baseline_start) * minute / 60
 
 
 def update_resource_baseline(resource, date, weeks):
@@ -206,13 +217,15 @@ def get_history_resource_usage(resource, session, team, date, hour):
 def get_goal_percent(date, team, resource, goal_settings):
     """return the current goal percent from the goal settings or previous calculated
     dynamic goal."""
-    goal_percent = goal_settings.goal_percent_reduction
+
     if goal_settings.baseline_method == "Dynamic":
-        # get previous day's goal result and the current goal percent
-        previous_goal_result = team_goal(date - datetime.timedelta(days=1), team, resource)
+        # get previous week's goal result and the goal percent
+        previous_goal_result = team_goal(date - datetime.timedelta(days=7), team, resource)
         if previous_goal_result and previous_goal_result.current_goal_percent_reduction:
-            goal_percent = previous_goal_result.current_goal_percent_reduction
-    return goal_percent
+            return previous_goal_result.current_goal_percent_reduction
+
+    # otherwise, use the default
+    return goal_settings.goal_percent_reduction
 
 
 def update_realtime_resource_usage(resource, date):

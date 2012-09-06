@@ -59,7 +59,7 @@ admin.site.register(Profile, ProfileAdmin)
 class MakahikiUserAdmin(UserAdmin):
     """extends the UserAdmin for the user admin interface."""
     list_display = ('username', 'email', 'first_name', 'last_name', 'is_active',
-                    'is_staff', "profile", 'team')
+                    'is_staff', "profile", 'team', 'referred_by')
     actions = ["set_active", "set_inactive"]
 
     def set_active(self, request, queryset):
@@ -82,6 +82,12 @@ class MakahikiUserAdmin(UserAdmin):
         """return the user name."""
         return obj.get_profile().team
     team.short_description = 'Team'
+
+    def referred_by(self, obj):
+        """return the name of the referrer."""
+        return obj.get_profile().referring_user
+
+    referred_by.short_description = 'Referred by'
 
     def profile(self, obj):
         """return the user profile."""
