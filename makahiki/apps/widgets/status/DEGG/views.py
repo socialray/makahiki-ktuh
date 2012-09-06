@@ -19,24 +19,23 @@ def supply(request, page_name):
 
     hist_size = 7
     resource = 'energy'
-    #establish dates of interest
-    datelist = createDateList(hist_size)
-
-    #create the table
     teams = Team.objects.all()
-    table = createDataTable(teams, datelist, resource)
+
+    #establish dates of interest
+    today = datetime.datetime.today()
+    date_list = createDateList(hist_size, today)
+    energy_goals = createData(teams, date_list, resource, today)
 
     return {
-        "energy_goals": table["energy_goals"],
-        "date_list": table["date_list"],
+        "date_list": date_list,
+        "energy_goals": energy_goals,
     }
 
 
-def createDateList(hist_size):
+def createDateList(hist_size, today):
     """Sets up dates of interest."""
     datelist = []
-    today = datetime.datetime.today()
-    hist_time = (today - datetime.timedelta(days=hist_size))
+    hist_time = (today - datetime.timedelta(days=hist_size - 1))
     while hist_time <= today:
         datelist.append(hist_time)
         hist_time += datetime.timedelta(days=1)
@@ -44,10 +43,8 @@ def createDateList(hist_size):
     return datelist
 
 
-def createDataTable(teams, datelist, resource):
+def createData(teams, date_list, resource, today):
     """Creates the datatable to be used."""
-
-    today = datetime.datetime.today()
     energy_goals = []
     for team in teams:
         vals = []
@@ -73,20 +70,20 @@ def createDataTable(teams, datelist, resource):
         data = dict()
         data["name"] = team.name
 
-        for date in datelist:
-            entries = goals.filter(date=date)
-            if entries.count() < 1:
-                entries = "N/A"
-            else:
-                #strip off the queryset wrapper
-                entries = entries[0]
-                #calculate net usage
-                entries.net_usage = entries.goal_usage - entries.actual_usage
-            vals.append((date, entries))
+        for date in date_list:
+            #We already did today's value
+            if date != today:
+                entries = goals.filter(date=date)
+                if entries.count() < 1:
+                    entries = "N/A"
+                else:
+                    #strip off the queryset wrapper
+                    entries = entries[0]
+                    #calculate net usage
+                    entries.net_usage = (entries.goal_usage - entries.actual_usage) / rate
+                    entries.goal_usage = entries.goal_usage / rate
+                vals.append((date, entries))
 
         data["vals"] = vals
         energy_goals.append(data)
-    return {
-        "energy_goals": energy_goals,
-        "date_list": datelist,
-    }
+    return energy_goals
