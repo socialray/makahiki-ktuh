@@ -8,12 +8,12 @@
           {{ resource.name|capfirst }} Scoreboard
         </div>
         <ul id="{{resource.name}}-tab" class="nav nav-tabs">
-            {% for round_name, ranks in round_resource_ranks.items %}
+            {% for round_name, ranks in round_resource_ranks.items reversed %}
             <li class="">
                 <a data-toggle="tab" href="#{{resource.name}}-{{round_name|cut:" "}}">{{round_name }}</a>
             </li>
             {% endfor %}
-            {% for round_name, ranks in round_resource_goal_ranks.items %}
+            {% for round_name, ranks in round_resource_goal_ranks.items reversed %}
                 <li class="">
                     <a data-toggle="tab" href="#{{resource.name}}-{{round_name|cut:" "}}-goal">{{round_name }} Goal</a>
                 </li>

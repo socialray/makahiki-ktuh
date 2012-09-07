@@ -6,14 +6,14 @@
     Raffle Prizes
   </div>
   <ul id="prize-tab" class="nav nav-tabs">
-  {% for round_name, raffle_prizes in raffle_prizes.items %}
+  {% for round_name, raffle_prizes in raffle_prizes.items reversed %}
     <li class="">
     <a data-toggle="tab" href="#prize{{round_name|cut:" "}}">{{round_name }}</a>
     </li>
   {% endfor %}  
   </ul>
   <div class="tab-content">
-    {% for round_name, raffle_prizes in raffle_prizes.items %}
+    {% for round_name, raffle_prizes in raffle_prizes.items reversed %}
       <div id="prize{{round_name|cut:" "}}" class="tab-pane fade active in">   
               <div class="content-body">
                   <table class="table-striped">

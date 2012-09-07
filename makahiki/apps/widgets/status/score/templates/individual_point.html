@@ -5,7 +5,7 @@
 
     <!--Tabs-->
     <ul id="ind-point-tab" class="nav nav-tabs">
-        {% for round_name, standings in view_objects.scoreboard.round_standings.items %}
+        {% for round_name, standings in view_objects.scoreboard.round_standings.items reversed %}
             <li class="">
                 <a data-toggle="tab" href="#ind-point-{{round_name|cut:" "}}">{{round_name }}</a>
             </li>
