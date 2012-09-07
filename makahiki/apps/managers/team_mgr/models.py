@@ -32,6 +32,9 @@ class Team(models.Model):
     group = models.ForeignKey(Group, help_text="The group this team belongs to.")
     name = models.CharField(help_text="The team name", max_length=50)
     slug = models.SlugField(help_text="Automatically generated if left blank.", null=True)
+    size = models.IntegerField(null=True, blank=True, default=0,
+                               help_text="The size of the team. It is the total number of "
+                                         "residents in the team.")
     logo = models.ImageField(
         max_length=1024, blank=True, null=True,
         upload_to=media_file_path(_MEDIA_LOCATION),

@@ -1,6 +1,6 @@
 """The manager for managing team."""
 import datetime
-from django.db.models.aggregates import Count
+from django.db.models.aggregates import Count, Max
 from apps.managers.challenge_mgr import challenge_mgr
 from apps.managers.score_mgr import score_mgr
 from apps.managers.team_mgr.models import Team
@@ -9,6 +9,11 @@ from apps.managers.team_mgr.models import Team
 def team_members(team):
     """Get the team members."""
     return team.profile_set.all()
+
+
+def team_normalize_size():
+    """returns the normalize size for all the teams. It is the max team size across all teams."""
+    return Team.objects.all().aggregate(max=Max('size'))["max"]
 
 
 def team_points_leader(round_name=None):
@@ -31,9 +36,15 @@ def team_points_leaders(num_results=None, round_name=None):
     """Returns the team points leaders across all groups, as a dictionary profile__team__name
     and points.
     """
-    entry = score_mgr.team_points_leaders(num_results=num_results, round_name=round_name)
-    if entry:
-        return entry
+    entries = score_mgr.team_points_leaders(num_results=num_results, round_name=round_name)
+    if entries:
+        for entry in entries:
+            size = team_normalize_size()
+            if size:
+                team = Team.objects.get(name=entry["profile__team__name"])
+                if team.size:
+                    entry["points"] = int(entry["points"] * float(size / team.size))
+        return entries
     else:
         results = Team.objects.all().extra(
             select={'profile__team__name': 'name', 'points': 0}).values(
@@ -59,7 +70,10 @@ def team_active_participation(num_results=None, round_name=None):
 
     participation = []
     for t in active_participation:
-        t.active_participation = (t.user_count * 100) / t.profile_set.count()
+        if t.size:
+            t.active_participation = (t.user_count * 100) / t.size
+        else:
+            t.active_participation = (t.user_count * 100) / t.profile_set.count()
         participation.append(t)
 
     for t in Team.objects.all():

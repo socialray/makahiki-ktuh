@@ -13,6 +13,7 @@ admin.site.register(Group, GroupAdmin)
 
 class TeamAdmin(admin.ModelAdmin):
     """Category Admin"""
+    list_display = ["name", "size"]
     prepopulated_fields = {"slug": ("name",)}
 
 admin.site.register(Team, TeamAdmin)
