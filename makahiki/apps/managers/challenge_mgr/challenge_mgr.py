@@ -27,15 +27,15 @@ _sys_admin_models = {}
 def init():
     """Initialize the challenge."""
 
-    #if settings.DEBUG:
-    #    import logging
+    if settings.DEBUG:
+        import logging
     #    logger = logging.getLogger('django.db.backends')
     #    logger.setLevel(logging.DEBUG)
     #    logger.addHandler(logging.StreamHandler())
 
-    #    logger = logging.getLogger('django_auth_ldap')
-    #    logger.addHandler(logging.StreamHandler())
-    #    logger.setLevel(logging.DEBUG)
+        logger = logging.getLogger('django_auth_ldap')
+        logger.addHandler(logging.StreamHandler())
+        logger.setLevel(logging.DEBUG)
 
     # set the CHALLENGE setting from DB or cache
     set_challenge_settings(get_challenge())

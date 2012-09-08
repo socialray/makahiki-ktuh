@@ -18,7 +18,7 @@ class LoginForm(forms.Form):
 
         if self._errors:
             return
-        user = authenticate(username=self.cleaned_data["username"],
+        user = authenticate(username=self.cleaned_data["username"].lower(),
                             password=self.cleaned_data["password"])
         if user:
             if user.is_active:

@@ -676,6 +676,7 @@ class ActionMemberAdmin(admin.ModelAdmin):
         _ = request
         for obj in queryset:
             obj.approval_status = "approved"
+            obj.admin_comment = ""
             obj.save()
             messages.success(request, "%s approved." % obj.action)
 

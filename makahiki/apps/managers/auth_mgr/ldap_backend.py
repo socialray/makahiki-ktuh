@@ -11,10 +11,10 @@ class MakahikiLDAPBackend(LDAPBackend):
         """authenticate with LDAP server."""
 
         if hasattr(settings, "AUTH_LDAP_SERVER_URI"):
-            username = super(MakahikiLDAPBackend, self).authenticate(username, password)
-            if not username:
+            user = super(MakahikiLDAPBackend, self).authenticate(username, password)
+            if not user:
                 return None
             else:
-                return get_active_player(username)
+                return get_active_player(user.username)
         else:
             return None

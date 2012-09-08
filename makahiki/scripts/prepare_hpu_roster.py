@@ -32,16 +32,16 @@ def main(args):
             # skip the first row
             continue
 
-        # roster format: row id,Student Id,Last Name,First Name,Assigned Room,E-mail
-        lastname = items[2].strip().capitalize()
-        firstname = items[3].strip().capitalize()
+        # roster format: row id,Last Name,First Name,Assigned Room,E-mail
+        lastname = items[1].strip().capitalize()
+        firstname = items[2].strip().capitalize()
 
-        team = items[4].strip().split(" - ")[0].capitalize()
+        team = items[3].split("-")[0].strip().capitalize()
         if not team:
             print "==== ERROR ==== no team assign for user %s,%s" % (
                 lastname, firstname)
 
-        email = items[5].strip()
+        email = items[4].strip()
         if not email.endswith("@my.hpu.edu"):
             print "==== ERROR ==== non-hpu edu email: %s for user %s,%s" % (
                 email, lastname, firstname)

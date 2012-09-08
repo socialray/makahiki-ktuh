@@ -18,6 +18,7 @@
         "fields": {
             "winning_order": "Ascending",
             "name": "energy",
+            "conversion_rate": 1000,
             "unit": "kWh"
         }
     },
