@@ -35,6 +35,7 @@
 {% block body %}   
       <div class="row-fluid"> 
           <!--point scoreboards-->   
+          {% if view_objects.scoreboard %} 
           <div class="scoreboard span2 ">
               {% include "widgets/status/score/templates/team_point.html" %}
           </div>
@@ -44,6 +45,8 @@
           <div class="scoreboard span2 ">
               {% include "widgets/status/score/templates/team_participation.html" %}
           </div>
+          {% endif %}
+
 
           <!--energy--> 
           {% if view_objects.resource_scoreboard__energy %} 
@@ -83,8 +86,10 @@
                 <div class="span2">  
                     {% include "widgets/status/actions/templates/approval_queue.html" %}  
                 {% endif %} 
-     
-                  {% include "widgets/status/prizes/templates/unused_tickets.html" %} 
+
+                {% if view_objects.status__prizes %}
+                    {% include "widgets/status/prizes/templates/unused_tickets.html" %} 
+                {% endif %} 
                 </div> 
 
                  <!--RSVPs-->
@@ -106,10 +111,9 @@
                {% endif %}    
 
                {% if view_objects.status__users %} 
-
                <div class="span2">
                   {% include "widgets/status/users/templates/referrals.html" %} 
-              </div>
+               </div>
                {% endif %}
         </div>
 
@@ -118,19 +122,29 @@
             <!--Users -->
              
                 <div class="span4">
+                {% if view_objects.status__gchart %}
                     {% include "widgets/status/gchart/templates/index.html" %}
+                {% endif %}
+                {% if view_objects.action_feedback %}
                     {%include "widgets/action_feedback/templates/index.html" %}
+                {% endif %}
                 </div> 
             
-            <div class="span4">
-                {% include "widgets/status/DEGG/templates/index.html" %}  
-                {% include "widgets/status/wattdepot/templates/index.html" %} 
-            </div>
+                <div class="span4">
+                {% if view_objects.status__DEGG %}
+                    {% include "widgets/status/DEGG/templates/index.html" %}  
+                {% endif %}
+                {% if view_objects.status__wattdepot %}
+                    {% include "widgets/status/wattdepot/templates/index.html" %} 
+                {% endif %}
+                </div>
 
             <div class="span4">  
+              {% if view_objects.status__twitter %}
               {% with img='http://a0.twimg.com/profile_images/1361689451/kukuicup_logo_normal.jpg' user="kukuicup" id=0%}
                   {% include "widgets/status/twitter/templates/index.html" %} 
               {% endwith %}
+              {% endif %}
                                                   <!--div class="content-box demi-widget">
                                                       {% include "widgets/status/iframe/templates/index.html" %}
                                                   </div->
