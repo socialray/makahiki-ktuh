@@ -137,7 +137,7 @@ def update_team_energy_usage(session, date, team):
         latest_usage.time = date.time()
         latest_usage.usage = usage
         latest_usage.save()
-        print 'team %s energy usage updated at %s.' % (team, date)
+        print 'team %s energy usage: %d at %s.' % (team, usage, date)
 
 
 def update_fake_water_usage(date):

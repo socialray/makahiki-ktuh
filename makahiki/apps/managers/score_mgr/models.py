@@ -54,7 +54,7 @@ class ScoreboardEntry(models.Model):
         max_length="30", editable=False,
         help_text="The name of the round")
     points = models.IntegerField(
-        default=0, editable=False,
+        default=0,
         help_text="Points for this round")
     last_awarded_submission = models.DateTimeField(
         null=True, blank=True, editable=False,

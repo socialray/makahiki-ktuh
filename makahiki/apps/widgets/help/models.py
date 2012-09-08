@@ -18,6 +18,10 @@ class HelpTopic(models.Model):
     slug = models.SlugField(help_text="Automatically generated if left blank.")
     category = models.CharField(max_length=50, choices=HELP_CATEGORIES,
                                 help_text="One of the HELP_CATEGORIES.")
+    priority = models.IntegerField(
+        default=0,
+        help_text="sorting order within the category. lower priority first "
+    )
     contents = models.TextField(
         help_text="The content of the help topic. %s" % settings.MARKDOWN_TEXT)
     parent_topic = models.ForeignKey("HelpTopic",
@@ -34,3 +38,7 @@ class HelpTopic(models.Model):
 
     def __unicode__(self):
         return "%s: %s" % (self.category.capitalize(), self.title)
+
+    class Meta:
+        """Meta"""
+        ordering = ["category", "priority", ]

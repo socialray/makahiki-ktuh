@@ -459,6 +459,14 @@ class ActionMember(models.Model):
         """return active member"""
         return self.approval_status == "approved"
 
+    def user_link(self):
+        """return the user first_name."""
+        return '<a href="%s/%d/">%s</a>' % ("/admin/player_mgr/profile",
+                                            self.user.get_profile().pk,
+                                            self.user.username)
+    user_link.allow_tags = True
+    user_link.short_description = 'Link to profile'
+
     def days_left(self):
         """
         Returns how many days are left before the user can submit the activity.

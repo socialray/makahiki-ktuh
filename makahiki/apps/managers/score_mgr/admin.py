@@ -17,7 +17,7 @@ admin.site.register(PointsTransaction, PointsTransactionAdmin)
 class ScoreboardEntryAdmin(admin.ModelAdmin):
     """PointsTransaction administrator interface definition."""
     list_display = ["round_name", "profile", "points", "last_awarded_submission"]
-    search_fields = ["profile"]
+    search_fields = ["profile__name", "profile__user__username"]
 
 admin.site.register(ScoreboardEntry, ScoreboardEntryAdmin)
 

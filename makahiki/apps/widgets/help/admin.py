@@ -33,6 +33,8 @@ class HelpTopicAdmin(admin.ModelAdmin):
     # Automatically populates the slug field.
     prepopulated_fields = {"slug": ("title",)}
     list_filter = ["category", ]
+    search_fields = ["slug", "title"]
+    list_display = ["slug", "category", "priority", "parent_topic"]
 
     form = HelpAdminForm
 

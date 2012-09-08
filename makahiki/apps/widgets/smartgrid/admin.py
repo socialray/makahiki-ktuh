@@ -618,7 +618,8 @@ class ActionMemberAdmin(admin.ModelAdmin):
     readonly_fields = (
         "user", "action", "admin_link", "question", "response", "social_email")
     list_display = (
-        "action", "submission_date", "user", "approval_status", "short_question", "short_response")
+        "action", "submission_date", "user_link", "approval_status", "short_question",
+        "short_response")
 
     list_filter = ["approval_status", "action__type"]
     actions = ["approve_selected", "delete_selected"]
@@ -656,20 +657,23 @@ class ActionMemberAdmin(admin.ModelAdmin):
         """
         if 'HTTP_REFERER' in request.META and 'PATH_INFO' in request.META:
             test = request.META['HTTP_REFERER'].split(request.META['PATH_INFO'])
-            if test[-1] and not test[-1].startswith('?'):
-                if not 'approval_status__exact' in request.GET:
-                    q = request.GET.copy()
-                    q['approval_status__exact'] = 'pending'
-                    request.GET = q
-                    request.META['QUERY_STRING'] = request.GET.urlencode()
-                if not 'action__type__exact' in request.GET:
-                    q = request.GET.copy()
-                    q['action__type__exact'] = 'activity'
-                    request.GET = q
-                    request.META['QUERY_STRING'] = request.GET.urlencode()
+            if test[-1] and test[-1].startswith('?'):
+                return super(ActionMemberAdmin, self).changelist_view(request,
+                                                                      extra_context=extra_context)
+
+        if not 'approval_status__exact' in request.GET:
+            q = request.GET.copy()
+            q['approval_status__exact'] = 'pending'
+            request.GET = q
+            request.META['QUERY_STRING'] = request.GET.urlencode()
+        if not 'action__type__exact' in request.GET:
+            q = request.GET.copy()
+            q['action__type__exact'] = 'activity'
+            request.GET = q
+            request.META['QUERY_STRING'] = request.GET.urlencode()
 
         return super(ActionMemberAdmin, self).changelist_view(request,
-            extra_context=extra_context)
+                                                              extra_context=extra_context)
 
     def approve_selected(self, request, queryset):
         """delete priority."""
