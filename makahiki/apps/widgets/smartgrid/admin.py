@@ -638,7 +638,7 @@ class ActionMemberAdmin(admin.ModelAdmin):
 
     def short_response(self, obj):
         """return the short response"""
-        return "%s" % (obj.response if len(obj.response) < 100 else "(See in detail view)")
+        return "%s" % obj.response[:160]
 
     short_response.short_description = 'Response'
 
