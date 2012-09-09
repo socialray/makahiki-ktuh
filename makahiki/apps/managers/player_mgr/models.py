@@ -102,11 +102,13 @@ class Profile(models.Model):
         """award possible referral bonus."""
 
         has_referral = self.referring_user is not None and not self.referrer_awarded
+
         if has_referral and self.points() >= score_mgr.active_threshold_points():
-            self.referrer_awarded = True
-            self.save()
             referrer = self.referring_user.get_profile()
-            score_mgr.award_referral_bonus(self, referrer)
+            if referrer.setup_profile:
+                self.referrer_awarded = True
+                self.save()
+                score_mgr.award_referral_bonus(self, referrer)
 
     def remove_points(self, points, transaction_date, message, related_object=None):
         """Removes points from the user."""

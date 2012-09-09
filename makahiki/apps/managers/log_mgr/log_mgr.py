@@ -76,5 +76,8 @@ def get_username(request):
     # the authenticated user.
     username = "not-login"
     if hasattr(request, "user"):
-        username = request.user
+        username = request.user.username
+        if request.session.get('staff', False):
+            username = "%s(*)" % username
+
     return username
