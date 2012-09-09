@@ -16,7 +16,8 @@ def supply(request, page_name):
     current_round = challenge_mgr.get_round_name()
     rounds = challenge_mgr.get_all_round_info()["rounds"]
     for key in rounds.keys():
-        if key == current_round or page_name == "status":
+        if key == current_round or \
+           (page_name == "status" and key < current_round):
             round_standings[key] = {
                 "team_standings": team_mgr.team_points_leaders(num_results, key),
                 "profile_standings": player_mgr.points_leaders(num_results, key),

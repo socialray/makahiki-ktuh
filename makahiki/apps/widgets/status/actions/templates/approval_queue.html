@@ -1,12 +1,12 @@
 {% with pending_members=view_objects.status__actions.pending_members oldest_member=view_objects.status__actions.oldest_member %}
 <div class="content-box-centered demi-widget"> 
     <div class="content-box-title">
-        Approval Queue
+        Current Status
     </div> 
     <div class="widget-content">
         <div style='font-weight: bold;{% if pending_members > 50 %}color: red{% endif %}'>
             {% if pending_members > 0 %}
-                There are {{ pending_members }} pending ActivityMember(s) in the queue.
+                There are {{ pending_members }} pending ActivityMember(s) in the approval queue.
                 <br/>
                 {% if oldest_member %}The oldest item was submitted
                     at {{ oldest_member.submission_date }}
@@ -16,6 +16,23 @@
             {% endif %}
             
         </div>
+
+        <hr/>
+
+        <div style='font-weight: bold;{% if pending_members > 50 %}color: red{% endif %}'>
+            There are {{ view_objects.status__actions.unused }} unallocated tickets.<br/>
+        </div>
+
+        {% if has_errors %}
+            <div style='color: red; font-weight: bold'>
+                The following users have more tickets than points
+                <ul class="table-striped">
+                    {% for profile in errors %}
+                        <li>{{ profile.name }} ({{ profile.user.username }})</li>
+                    {% endfor %}
+                </ul>
+            </div>
+        {% endif %}
     </div>
 </div> 
 {% endwith %}

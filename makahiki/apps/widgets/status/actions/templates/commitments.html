@@ -1,27 +1,3 @@
-{% with pending_members=view_objects.status__actions.pending_members oldest_member=view_objects.status__actions.oldest_member quests=view_objects.status__actions.quests popular_tasks=view_objects.status__actions.popular_tasks%}
- 
-     <div class="content-box demi-widget">
-            <div class="content-box-title">
-                Popular Commitments
-            </div>
-                
-                <div class="widget-content">
-                <table class="table-striped">
-                    <tr>
-                        <th class="column-text" width="60%">Commitment</th>
-                        <th class="column-number" width="20%">Submts</th>
-                        <th class="column-number" width="20%">Cmpltd</th>
-                    </tr>
-                    {% for task in popular_tasks.commitment %}
-                        <tr>
-                            <td class="column-text" width="60%">
-                                <a href="{% url activity_task task.type task.slug %}">{{ task.title }}</a>
-                            </td>
-                            <td class="column-number" width="20%">{{ task.submissions }}</td>
-                            <td class="column-number" width="20%">{{ task.completions }}</td>
-                        </tr>
-                    {% endfor %}
-                </table>
-          </div>
-      </div>    
+{% with type="commitment" tasks=view_objects.status__actions.popular_tasks.commitment%}
+     {% include "widgets/status/actions/templates/index.html" %}
 {% endwith %}

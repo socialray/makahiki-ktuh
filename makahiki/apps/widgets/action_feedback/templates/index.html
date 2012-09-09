@@ -1,7 +1,8 @@
 {% load humanize %}
-<div class="content-box demi-widget">
+<div class="content-box widget">
     <div class="content-box-title">
-    Activity, Commitment, Event, and Excursion Feedback
+    Feedback
+    (rating:{{view_objects.action_feedback.analysis.overall_average|floatformat:2}})
     </div>
     <div class="widget-content">
 <!--
@@ -39,17 +40,15 @@
     <table class="table">
     <thead>
         <th>Action</th>
-        <th>Average Rating ({{view_objects.action_feedback.analysis.overall_average|floatformat:2}}) </th>
-        <th># Feedback</th>
-        <th>Feedback</th>
+        <th>Avg Rating</th>
+        <th>#Feedback</th>
     </thead>
     <tbody>
     {% for analysis in view_objects.action_feedback.analysis.data %}
     <tr {% if analysis.average < view_objects.action_feedback.analysis.overall_average %} style="color: red" {%endif%}>
-        <td width="30%"><a href="{% url view_feedback analysis.action.type analysis.action.slug %}">{{analysis.action.name}}</a> </td>
+        <td width="60%"><a href="{% url view_feedback analysis.action.type analysis.action.slug %}">{{analysis.action.name}}</a> </td>
         <td width="20%">{{analysis.average|floatformat:2}}</td>
         <td width="20%">{{analysis.count}}</td>
-        <td width="30%"><div class="row-fluid"><div id="graph{{forloop.counter}}" class="span12" style="height: 45px;"> </div></div></td>
     </tr>
 
 <!--

@@ -18,4 +18,4 @@ class MakahikiLogAdmin(admin.ModelAdmin):
         }
 
 admin.site.register(MakahikiLog, MakahikiLogAdmin)
-challenge_mgr.register_sys_admin_model("Logs", MakahikiLog)
+challenge_mgr.register_sys_admin_model("Status", MakahikiLog)

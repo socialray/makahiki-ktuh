@@ -21,7 +21,7 @@ class ResourceSettingsAdmin(admin.ModelAdmin):
     list_display = ["name", "unit", "winning_order", ]
 
 admin.site.register(ResourceSetting, ResourceSettingsAdmin)
-challenge_mgr.register_sys_admin_model("Resource Settings", ResourceSetting)
+challenge_mgr.register_site_admin_model("Challenge", ResourceSetting)
 
 
 class ResourceBlackoutDateAdmin(admin.ModelAdmin):
@@ -29,4 +29,4 @@ class ResourceBlackoutDateAdmin(admin.ModelAdmin):
     list_display = ["date", "description"]
 
 admin.site.register(ResourceBlackoutDate, ResourceBlackoutDateAdmin)
-challenge_mgr.register_sys_admin_model("Resource Settings", ResourceBlackoutDate)
+challenge_mgr.register_site_admin_model("Challenge", ResourceBlackoutDate)

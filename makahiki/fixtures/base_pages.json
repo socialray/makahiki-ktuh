@@ -480,20 +480,10 @@
         }
     },
     {
-        "pk": 53,
-        "model": "challenge_mgr.pagesetting",
-        "fields": {
-            "widget": "status.flot",
-            "game": null,
-            "enabled": true,
-            "page": 10
-        }
-    },
-    {
         "pk": 54,
         "model": "challenge_mgr.pagesetting",
         "fields": {
-            "widget": "status.gchart",
+            "widget": "status.referrals",
             "game": null,
             "enabled": true,
             "page": 10

@@ -5,6 +5,7 @@ from django.test import TransactionTestCase
 from django.core.urlresolvers import reverse
 from apps.managers.cache_mgr import cache_mgr
 from apps.managers.challenge_mgr import challenge_mgr
+from apps.managers.challenge_mgr.models import GameInfo
 
 from apps.utils import test_utils
 from apps.widgets.resource_goal.models import EnergyGoal
@@ -22,6 +23,10 @@ class EnergyFunctionalTestCase(TransactionTestCase):
         test_utils.set_competition_round()
 
         challenge_mgr.register_page_widget("energy", "resource_scoreboard.energy")
+        game, _ = GameInfo.objects.get_or_create(name="Energy Game")
+        game.enabled = True
+        game.save()
+
         self.client.login(username="user", password="changeme")
 
     def testIndex(self):

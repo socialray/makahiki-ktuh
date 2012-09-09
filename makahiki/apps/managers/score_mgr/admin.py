@@ -31,5 +31,5 @@ admin.site.register(ScoreSetting, ScoreSettingAdmin)
 
 
 challenge_mgr.register_site_admin_model("Challenge", ScoreSetting)
-challenge_mgr.register_sys_admin_model("Logs", PointsTransaction)
-challenge_mgr.register_sys_admin_model("Logs", ScoreboardEntry)
+challenge_mgr.register_sys_admin_model("Status", PointsTransaction)
+challenge_mgr.register_sys_admin_model("Status", ScoreboardEntry)

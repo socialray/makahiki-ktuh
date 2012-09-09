@@ -1,33 +1,25 @@
-{% with pending_members=view_objects.status__actions.pending_members oldest_member=view_objects.status__actions.oldest_member quests=view_objects.status__actions.quests popular_tasks=view_objects.status__actions.popular_tasks%}
+            <div class="content-box demi-widget">
+                <div class="content-box-title">
+                    Popular {{ type|capfirst }}
+                </div>
 
-{% for key, value in popular_tasks.items%}
-  {% if key != "commitment" and key != "filler" %}
-    {% if key != "excursion" %}<div class="span2 ">{%endif%}
-     <div class="content-box {% if key == "excursion" or key == "event"%}demi-{% endif %}widget">
-            <div class="content-box-title">
-                Popular {{ key|capfirst }}
-            </div>
-                
                 <div class="widget-content">
-                <table class="table-striped">
-                    <tr>
-                        <th class="column-text" width="60%">{{ key }}</th>
-                        <th class="column-number" width="20%">Submts</th>
-                        <th class="column-number" width="20%">Cmpltd</th>
-                    </tr>
-                    {% for task in value %}
+                    <table class="table-striped">
                         <tr>
-                            <td class="column-text" width="60%">
-                                <a href="{% url activity_task task.type task.slug %}">{{ task.title }}</a>
-                            </td>
-                            <td class="column-number" width="20%">{{ task.submissions }}</td>
-                            <td class="column-number" width="20%">{{ task.completions }}</td>
+                            <th class="column-text" width="60%">{{ type }}</th>
+                            <th class="column-number" width="20%">Submts</th>
+                            <th class="column-number" width="20%">Cmpltd</th>
                         </tr>
-                    {% endfor %}
-                </table>
-          </div>
-      </div> 
-  {% if key != "event" %} </div> {%endif%}
-  {% endif %}
-{% endfor %}
-{% endwith %}
+                        {% for task in tasks %}
+                            <tr>
+                                <td class="column-text" width="60%">
+                                    <a href="{% url activity_task task.type task.slug %}">
+                                        {{ task.name }}</a>
+                                </td>
+                                <td class="column-number" width="20%">{{ task.submissions }}</td>
+                                <td class="column-number" width="20%">{{ task.completions }}</td>
+                            </tr>
+                        {% endfor %}
+                    </table>
+                </div>
+            </div>

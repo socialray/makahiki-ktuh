@@ -344,6 +344,9 @@ def _award_goal_points(team, resource, goal_points, goal, date):
 
 def resource_goal_ranks(resource, round_name=None):
     """Generate the scoreboard for resource goals."""
+    if not challenge_mgr.is_game_enabled("%s Game" % resource.capitalize()):
+        return None
+
     cache_key = "%s_goal_ranks-%s" % (resource, slugify(round_name))
     goal_ranks = cache_mgr.get_cache(cache_key)
     if goal_ranks is None:

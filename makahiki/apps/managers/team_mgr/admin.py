@@ -36,4 +36,4 @@ admin.site.register(Post, PostAdmin)
 
 challenge_mgr.register_site_admin_model("Players", Group)
 challenge_mgr.register_site_admin_model("Players", Team)
-challenge_mgr.register_site_admin_model("Players", Post)
+challenge_mgr.register_sys_admin_model("Status", Post)

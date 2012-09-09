@@ -14,5 +14,4 @@ admin.site.register(WaterBaselineDaily, BaselineDailyAdmin)
 challenge_mgr.register_game_admin_model("resource_goal.water", WaterGoalSetting)
 challenge_mgr.register_game_admin_model("resource_goal.water", WaterUsage)
 challenge_mgr.register_game_admin_model("resource_goal.water", WaterGoal)
-
-challenge_mgr.register_sys_admin_model("Resource Settings", WaterBaselineDaily)
+challenge_mgr.register_game_admin_model("resource_goal.water", WaterBaselineDaily)
