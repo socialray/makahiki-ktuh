@@ -1,5 +1,6 @@
 """Handle rendering of energy goal widget."""
 import datetime
+from apps.managers.cache_mgr import cache_mgr
 
 from apps.managers.challenge_mgr import challenge_mgr
 from apps.managers.resource_mgr import resource_mgr
@@ -43,41 +44,47 @@ def resource_supply(request, page_name):
 
 def get_hourly_goal_data(team, resource):
     """:return: the energy goal data for the user's team."""
-    date = datetime.datetime.today()
-    goal = {"resource": resource}
-    if resource_mgr.is_blackout(date):
-        goal.update({"is_blackout": True})
-        return goal
 
-    resource_setting = resource_mgr.get_resource_setting(resource)
-    unit = resource_setting.unit
-    rate = resource_setting.conversion_rate
+    hourly_goal = cache_mgr.get_cache("hgoal-%s-%d" % (resource, team.id))
+    if hourly_goal is None:
+        date = datetime.datetime.today()
+        hourly_goal = {"resource": resource}
+        if resource_mgr.is_blackout(date):
+            hourly_goal.update({"is_blackout": True})
+        else:
+            resource_setting = resource_mgr.get_resource_setting(resource)
+            unit = resource_setting.unit
+            rate = resource_setting.conversion_rate
 
-    date = datetime.datetime(date.year, date.month, date.day, 0, 0, 1)
-    usage_data = resource_mgr.team_resource_data(date=date.date(), team=team, resource=resource)
-    if usage_data:
-        actual_usage = utils.format_usage(usage_data.usage, rate)
+            usage_data = resource_mgr.team_resource_data(date=date.date(),
+                                                         team=team,
+                                                         resource=resource)
+            if usage_data:
+                actual_usage = utils.format_usage(usage_data.usage, rate)
 
-        goal_settings = resource_goal.team_goal_settings(team, resource)
-        goal_percent = resource_goal.get_goal_percent(date, team, resource, goal_settings)
+                goal_settings = resource_goal.team_goal_settings(team, resource)
+                goal_percent = resource_goal.get_goal_percent(date, team, resource, goal_settings)
 
-        baseline = resource_goal.team_hourly_resource_baseline(
-            resource, team, usage_data.date, usage_data.time)
-        goal_usage = utils.format_usage(baseline * (100 - goal_percent) / 100, rate)
-        warning_usage = utils.format_usage(baseline * (100 - goal_percent / 2) / 100, rate)
-        actual_diff = abs(actual_usage - goal_usage)
+                baseline = resource_goal.team_hourly_resource_baseline(
+                    resource, team, usage_data.date, usage_data.time)
+                goal_usage = utils.format_usage(baseline * (100 - goal_percent) / 100, rate)
+                warning_usage = utils.format_usage(baseline * (100 - goal_percent / 2) / 100, rate)
+                actual_diff = abs(actual_usage - goal_usage)
 
-        goal.update({"goal_usage": goal_usage,
-            "warning_usage": warning_usage,
-            "actual_usage": actual_usage,
-            "actual_diff": actual_diff,
-            "updated_at": datetime.datetime.combine(date=usage_data.date, time=usage_data.time),
-            "unit": unit,
-           })
-        return goal
-    else:
-        goal.update({"no_data": True})
-        return goal
+                hourly_goal.update({"goal_usage": goal_usage,
+                    "warning_usage": warning_usage,
+                    "actual_usage": actual_usage,
+                    "actual_diff": actual_diff,
+                    "updated_at": datetime.datetime.combine(date=usage_data.date,
+                                                            time=usage_data.time),
+                    "unit": unit,
+                   })
+            else:
+                hourly_goal.update({"no_data": True})
+
+        cache_mgr.set_cache("hgoal-%s-%d" % (resource, team.id), hourly_goal, 600)
+
+    return hourly_goal
 
 
 def get_daily_goal_data(team, resource):

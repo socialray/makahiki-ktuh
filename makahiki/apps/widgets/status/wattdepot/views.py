@@ -1,7 +1,7 @@
 """Power meters visualization."""
 
-from apps.widgets.viz_power_meters.views import remote_supply
 from apps.widgets.resource_goal.models import EnergyGoalSetting
+from apps.managers.team_mgr.models import Team
 
 
 def supply(request, page_name):
@@ -17,7 +17,9 @@ def supply(request, page_name):
     else:
         interval = 10
 
+    all_lounges = Team.objects.order_by('name').all()
+
     return {
         "interval": interval,
-        "data": remote_supply(request, page_name)
+        "data": {"all_lounges": all_lounges, }
     }

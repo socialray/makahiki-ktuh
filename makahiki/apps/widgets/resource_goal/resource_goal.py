@@ -20,11 +20,13 @@ def team_goal_settings(team, resource):
     elif resource == "water":
         goalsetting = WaterGoalSetting
 
-    goalsettings = goalsetting.objects.filter(team=team)
-    if goalsettings:
-        return goalsettings[0]
-    else:
-        return None
+    goalsettings = cache_mgr.get_cache("goal_setting-%s-%s" % (resource, team.name))
+    if goalsettings is None:
+        goalsettings = goalsetting.objects.filter(team=team)
+        if goalsettings:
+            goalsettings = goalsettings[0]
+            cache_mgr.set_cache("goal_setting-%s-%s" % (resource, team.name), goalsettings, 2592000)
+    return goalsettings
 
 
 def is_manual_entry(team, resource):

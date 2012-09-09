@@ -1,6 +1,8 @@
 """The manager for managing team."""
 import datetime
 from django.db.models.aggregates import Count, Max
+from django.template.defaultfilters import slugify
+from apps.managers.cache_mgr import cache_mgr
 from apps.managers.challenge_mgr import challenge_mgr
 from apps.managers.score_mgr import score_mgr
 from apps.managers.team_mgr.models import Team
@@ -13,7 +15,13 @@ def team_members(team):
 
 def team_normalize_size():
     """returns the normalize size for all the teams. It is the max team size across all teams."""
-    return Team.objects.all().aggregate(max=Max('size'))["max"]
+    size = cache_mgr.get_cache('team_normalize_size')
+    if size is None:
+        size = Team.objects.all().aggregate(max=Max('size'))["max"]
+        if not size:
+            size = 0
+        cache_mgr.set_cache('team_normalize_size', size, 2592000)
+    return size
 
 
 def team_points_leader(round_name=None):
@@ -59,31 +67,32 @@ def team_active_participation(num_results=None, round_name=None):
     if not round_name:
         round_name = challenge_mgr.get_round_name()
 
-    active_participation = Team.objects.filter(
-        profile__scoreboardentry__points__gte=score_mgr.active_threshold_points(),
-        profile__scoreboardentry__round_name=round_name).annotate(
-            user_count=Count('profile')).order_by('-user_count').select_related(
-                'group')
+    participation = cache_mgr.get_cache('active_p-%s' % slugify(round_name))
+    if participation is None:
+        active_participation = Team.objects.filter(
+            profile__scoreboardentry__points__gte=score_mgr.active_threshold_points(),
+            profile__scoreboardentry__round_name=round_name).annotate(
+                user_count=Count('profile')).order_by('-user_count')
 
-    if num_results:
-        active_participation = active_participation[:num_results]
+        if num_results:
+            active_participation = active_participation[:num_results]
 
-    participation = []
-    for t in active_participation:
-        if t.size:
-            t.active_participation = (t.user_count * 100) / t.size
-        else:
-            t.active_participation = (t.user_count * 100) / t.profile_set.count()
-        participation.append(t)
-
-    for t in Team.objects.all():
-        if len(participation) == num_results:
-            break
-
-        if not t in active_participation:
-            t.active_participation = 0
+        participation = []
+        for t in active_participation:
+            if t.size:
+                t.active_participation = (t.user_count * 100) / t.size
+            else:
+                t.active_participation = (t.user_count * 100) / t.profile_set.count()
             participation.append(t)
 
+        for t in Team.objects.all():
+            if len(participation) == num_results:
+                break
+
+            if not t in active_participation:
+                t.active_participation = 0
+                participation.append(t)
+        cache_mgr.set_cache('active_p-%s' % slugify(round_name), participation, 3600)
     return participation
 
 

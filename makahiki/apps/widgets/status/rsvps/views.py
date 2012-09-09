@@ -13,11 +13,11 @@ def supply(request, page_name):
     events = Action.objects.filter(
         type="event",
         actionmember__approval_status="pending",
-    ).annotate(rsvps=Count('actionmember')).order_by('-rsvps')
+    ).annotate(rsvps=Count('actionmember')).order_by('-rsvps').select_related('event')
     excursions = Action.objects.filter(
         type="excursion",
         actionmember__approval_status="pending",
-    ).annotate(rsvps=Count('actionmember')).order_by('-rsvps')
+    ).annotate(rsvps=Count('actionmember')).order_by('-rsvps').select_related('event')
 
     return {
         "events": events,

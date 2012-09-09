@@ -21,20 +21,12 @@
                           <tr>
                               <th class="column-text" width="50%">Prize</th>
                               <th class="column-number" width="20%">Tickets</th>
-                              <th class="column-text" width="30%">Winner</th>
                           </tr>
                       </thead>
                       {% for prize in raffle_prizes %}
                           <tr>
-                              <td class="column-text" width="50%">{{ prize.title }}</td>
-                              <td class="column-number" width="20%">{{ prize.raffleticket_set.count }}</td>
-                              <td class="column-text" width="30%">
-                                  {% if prize.winner %}
-                                      {{ prize.winner.get_profile.name }}
-                                  {% else %}
-                                      N/A
-                                  {% endif %}
-                              </td>
+                              <td class="column-text" width="70%">{{ prize.title }}</td>
+                              <td class="column-number" width="30%">{{ prize.count }}</td>
                           </tr>
                       {% endfor %}
                   </table>

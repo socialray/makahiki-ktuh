@@ -12,13 +12,12 @@
             </tr>
             </thead>
             <tbody>
-            {% for badge, awarded in badge_awards %}
+            {% for badge in badge_awards%}
                 <tr>
                     <td class="column-text">
-                        <div class="badge-theme-{{ badge.theme }}"><p>{{ badge.label }}</p></div>
-                        <div class="badge-name">{{ badge.name }}</div>
-                    </td>
-                    <td class="column-number">{{ awarded }}</td>
+                        <div class="badge-theme-{{badge.badge__theme}}"><p>{{badge.badge__label}}</p></div>
+                        <div class="badge-name">{{badge.badge__name}}</div></td>
+                    <td class="column-number">{{badge.count}}</td>
                 </tr>
             {% endfor %}
             </tbody>
