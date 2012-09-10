@@ -44,15 +44,24 @@ def team_points_leaders(num_results=None, round_name=None):
     """Returns the team points leaders across all groups, as a dictionary profile__team__name
     and points.
     """
-    entries = score_mgr.team_points_leaders(num_results=num_results, round_name=round_name)
+    size = team_normalize_size()
+    if size:
+        entries = score_mgr.team_points_leaders(round_name=round_name)
+    else:
+        entries = score_mgr.team_points_leaders(num_results=num_results, round_name=round_name)
+
     if entries:
-        for entry in entries:
-            size = team_normalize_size()
-            if size:
+        if size:
+            for entry in entries:
                 team = Team.objects.get(name=entry["profile__team__name"])
                 if team.size:
                     entry["points"] = int(entry["points"] * float(size / team.size))
-        return entries
+                    print entry["points"]
+            # resort the entries after the normalization
+            entries = sorted(entries, key=lambda e: e["points"], reverse=True)
+            return entries[:num_results]
+        else:
+            return entries
     else:
         results = Team.objects.all().extra(
             select={'profile__team__name': 'name', 'points': 0}).values(
