@@ -61,4 +61,4 @@ class PrizeAdmin(admin.ModelAdmin):
 
 
 admin.site.register(Prize, PrizeAdmin)
-challenge_mgr.register_game_admin_model("prizes", Prize)
+challenge_mgr.register_game_admin_model("Top Score Game", Prize)

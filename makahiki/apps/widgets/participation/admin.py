@@ -10,7 +10,7 @@ class ParticipationSettingAdmin(admin.ModelAdmin):
 
 
 admin.site.register(ParticipationSetting, ParticipationSettingAdmin)
-challenge_mgr.register_game_admin_model("participation", ParticipationSetting)
+challenge_mgr.register_game_admin_model("Participation Game", ParticipationSetting)
 
 
 class TeamParticipationAdmin(admin.ModelAdmin):
@@ -19,4 +19,4 @@ class TeamParticipationAdmin(admin.ModelAdmin):
 
 
 admin.site.register(TeamParticipation, TeamParticipationAdmin)
-challenge_mgr.register_game_admin_model("participation", TeamParticipation)
+challenge_mgr.register_game_admin_model("Participation Game", TeamParticipation)

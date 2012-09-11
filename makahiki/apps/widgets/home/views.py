@@ -127,7 +127,7 @@ def referral(request):
 
         response = render_to_string('first-login/referral.html', {
             'form': form,
-            'referral_points': score_mgr.referral_points(),
+            'referral_points': score_mgr.referral_points(profile),
             'active_threshold_points': score_mgr.active_threshold_points(),
             }, context_instance=RequestContext(request))
 

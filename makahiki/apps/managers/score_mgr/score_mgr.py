@@ -5,19 +5,19 @@ from django.db.models import Q
 from django.core.exceptions import ObjectDoesNotExist
 from django.db.models.aggregates import Sum, Max
 from apps.managers.challenge_mgr import challenge_mgr
-from apps.managers.score_mgr.models import ScoreboardEntry, PointsTransaction, ScoreSetting
+from apps.managers.score_mgr.models import ScoreboardEntry, PointsTransaction, ScoreSetting, \
+    ReferralSetting
 from apps.managers.cache_mgr import cache_mgr
 
 
 def info():
     """returns the score_mgr info."""
     s = score_setting()
-    return  "referral_points: %d \n" \
-            "signup_points: %d \n" \
+    return  "signup_points: %d \n" \
             "setup_points: %d \n" \
             "noshow_penalty_points: %d \n" \
-            "quest_points: %d" % (s.referral_bonus_points, s.signup_bonus_points,
-                                s.setup_points, s.noshow_penalty_points, s.quest_bonus_points)
+            "quest_points: %d" % (s.signup_bonus_points,
+                                  s.setup_points, s.noshow_penalty_points, s.quest_bonus_points)
 
 
 def score_setting():
@@ -29,9 +29,41 @@ def score_setting():
     return score
 
 
-def referral_points():
-    """returns the referral point amount from settings."""
-    return score_setting().referral_bonus_points
+def referral_setting():
+    """returns the referral settings."""
+    referral = cache_mgr.get_cache('referral_setting')
+    if not referral:
+        referral, _ = ReferralSetting.objects.get_or_create(pk=1)
+        cache_mgr.set_cache('referral_setting', referral, 2592000)
+    return referral
+
+
+def referral_points(referral):
+    """returns the referral point amount from referral settings, depends on if the dynamic bonus
+    starts and the participation rate of the referral's team.
+    """
+    points, _ = referral_points_and_type(referral)
+    return points
+
+
+def referral_points_and_type(referral):
+    """returns the referral point amount from referral settings, depends on if the dynamic bonus
+    starts and the participation rate of the referral's team.
+    """
+    rs = referral_setting()
+    if referral:
+        team = referral.team
+        if rs.start_dynamic_bonus and team:
+            participation = referral.team.teamparticipation_set.all()
+            if participation:
+                rate = participation[0].participation
+                if rate < 20:
+                    return rs.mega_referral_points, "mega"
+                elif rate <= 40:
+                    return rs.super_referral_points, "super"
+
+    # everything else, return the normal referral points
+    return referral_setting().normal_referral_points, ""
 
 
 def active_threshold_points():
@@ -392,10 +424,12 @@ def team_points_leaders_in_group(group, num_results=None, round_name=None):
     return results
 
 
-def award_referral_bonus(instance, referrer):
+def award_referral_bonus(referral, referrer):
     """award the referral bonus to both party."""
-    points = referral_points()
-    player_add_points(instance, points, datetime.datetime.today(),
-                                      'Referred by %s' % referrer.name, instance)
+    #depends on the referred's team's participation, the bonus point could be different.
+    points, ref_type = referral_points_and_type(referral)
+    player_add_points(referral, points, datetime.datetime.today(),
+                                      '%s Referred by %s' % (ref_type.capitalize(), referrer.name),
+                                                             referral)
     player_add_points(referrer, points, datetime.datetime.today(),
-                      'Referred %s' % instance.name, referrer)
+                      '%s Referred %s' % (ref_type.capitalize(), referral.name), referrer)

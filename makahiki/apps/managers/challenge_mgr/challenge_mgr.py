@@ -339,11 +339,7 @@ def get_game_admin_models():
 
     game_admins = ()
     for game in GameInfo.objects.all().order_by("priority"):
-        game_admin = (game.name, game.enabled, game.pk,)
-        for game_setting in game.gamesetting_set.all():
-            widget = game_setting.widget
-            if widget in _game_admin_models:
-                game_admin += (_game_admin_models[widget],)
+        game_admin = (game.name, game.enabled, game.pk, _game_admin_models[game.name],)
         game_admins += (game_admin,)
     return game_admins
 
@@ -372,9 +368,12 @@ def _get_model_admin_info(model):
             "url": "%s/%s" % (model._meta.app_label, model._meta.module_name)}
 
 
-def register_game_admin_model(widget, model):
+def register_game_admin_model(game, model):
     """Register the model of the game for admin purpose."""
-    register_admin_model(_game_admin_models, widget, model)
+    register_admin_model(_game_admin_models, game, model)
+    print _game_admin_models
+    print game
+    print model
 
 
 def register_sys_admin_model(group, model):

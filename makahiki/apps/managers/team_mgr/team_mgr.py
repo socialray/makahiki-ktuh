@@ -56,7 +56,6 @@ def team_points_leaders(num_results=None, round_name=None):
                 team = Team.objects.get(name=entry["profile__team__name"])
                 if team.size:
                     entry["points"] = int(entry["points"] * float(size / team.size))
-                    print entry["points"]
             # resort the entries after the normalization
             entries = sorted(entries, key=lambda e: e["points"], reverse=True)
             return entries[:num_results]

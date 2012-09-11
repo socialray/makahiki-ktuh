@@ -10,4 +10,4 @@ class BadgeAdmin(admin.ModelAdmin):
     prepopulated_fields = {"slug": ("name",)}
 
 admin.site.register(Badge, BadgeAdmin)
-challenge_mgr.register_game_admin_model("badges", Badge)
+challenge_mgr.register_game_admin_model("Badge Game Mechanics", Badge)

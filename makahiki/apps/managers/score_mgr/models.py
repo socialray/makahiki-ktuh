@@ -14,10 +14,6 @@ class ScoreSetting(models.Model):
         default=5,
         help_text="The point amount for setting up the profile."
     )
-    referral_bonus_points = models.IntegerField(
-        default=10,
-        help_text="The point amount for referral bonus.",
-    )
     active_threshold_points = models.IntegerField(
         default=50,
         help_text="The threshold point amount for active participation.It is also the threshold"
@@ -44,6 +40,34 @@ class ScoreSetting(models.Model):
         """Custom save method."""
         super(ScoreSetting, self).save(*args, **kwargs)
         cache_mgr.delete("score_setting")
+
+
+class ReferralSetting(models.Model):
+    """Defines the model of the dynamic referral settings."""
+    normal_referral_points = models.IntegerField(
+        default=10,
+        help_text="The point amount for normal referral bonus.",
+    )
+    super_referral_points = models.IntegerField(
+        default=20,
+        help_text="The point amount for supper referral bonus, when the referral is from a team "
+                  "of participation rate from 20% to 40%",
+    )
+    mega_referral_points = models.IntegerField(
+        default=30,
+        help_text="The point amount for mega referral bonus, when the referrals is from a team of"
+                  " participation rate les than 20%",
+    )
+    start_dynamic_bonus = models.BooleanField(
+        default=False,
+        help_text="Start rewarding the dynamic referral bonus. set it to true if you want to "
+                  "reward referral bonus depends on referral's team participation."
+    )
+
+    def save(self, *args, **kwargs):
+        """Custom save method."""
+        super(ReferralSetting, self).save(*args, **kwargs)
+        cache_mgr.delete("referral_setting")
 
 
 class ScoreboardEntry(models.Model):

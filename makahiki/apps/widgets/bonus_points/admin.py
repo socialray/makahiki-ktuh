@@ -66,4 +66,4 @@ class BonusPointAdmin(admin.ModelAdmin):
 
 
 admin.site.register(BonusPoint, BonusPointAdmin)
-challenge_mgr.register_game_admin_model("smartgrid", BonusPoint)
+challenge_mgr.register_game_admin_model("Smartgrid Game", BonusPoint)
