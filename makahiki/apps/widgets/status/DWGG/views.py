@@ -1,4 +1,4 @@
-"""Handle the rendering of the energy DEGG widget."""
+"""Handle the rendering of the water DEGG widget."""
 from apps.widgets.status import status
 
 
@@ -7,4 +7,4 @@ def supply(request, page_name):
     _ = request
     _ = page_name
 
-    return status.resource_goal_status("energy")
+    return status.resource_goal_status("water")

@@ -1,0 +1,44 @@
+{% load markup %}
+<div class="content-box demi-widget">
+    <div class="content-box-title">
+        {{ resource|capfirst }} Goal Status
+    </div>
+    <div class="widget-content">
+        <table class="table-striped">
+            <thead>
+            <tr>
+                <td class="column-text"><b>Team</b></td>
+                {% for date in date_list %}
+                    <td class="column-number"><b>{{ date|date:"m/d" }}</b></td>
+                {% endfor %}
+            </tr>
+            </thead>
+            <tr>
+                {% for team in resource_goals %}
+                    <td class="column-text">
+                        <div><b>{{ team.name }}</b></div>
+                    </td>
+                    {% for goal_date, goal in team.vals %}
+                        {% if goal == "N/A" %}
+                            <td class="column-number">
+                                {{ goal }}
+                            </td>
+                        {% else %}
+                            <td class="column-number">
+                                <font
+                                        {% if goal.net_usage < 0 %} color=red
+                                        {% elif  goal.net_usage >= 0 %} color=green
+                                        {% endif %}>
+                                    {{ goal.net_usage }}
+                                </font>
+                                </br>
+                                {{ goal.goal_usage }}
+                            </td>
+                        {% endif %}
+                    {% endfor %}
+                    </tr>
+                {% endfor %}
+
+        </table>
+    </div>
+</div>

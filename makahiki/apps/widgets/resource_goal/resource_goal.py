@@ -35,7 +35,7 @@ def is_manual_entry(team, resource):
     return gs.manual_entry if gs else None
 
 
-def _get_resource_goal(resource):
+def get_resource_goal(resource):
     """Return the resource goal object."""
     if resource == "energy":
         return EnergyGoal
@@ -47,7 +47,7 @@ def _get_resource_goal(resource):
 
 def team_goal(date, team, resource):
     """Returns the team's goal status for the given resource."""
-    goal = _get_resource_goal(resource)
+    goal = get_resource_goal(resource)
     goals = goal.objects.filter(date=date, team=team)
     if goals:
         return goals[0]
@@ -273,7 +273,7 @@ def check_team_resource_goal(resource, team, date):
     """Check the daily goal, award points to the team members if the goal is met.
     Returns the number of players in the team that got the award."""
     count = 0
-    goal = _get_resource_goal(resource)
+    goal = get_resource_goal(resource)
     goal, _ = goal.objects.get_or_create(team=team, date=date)
 
     if goal.actual_usage:
@@ -358,7 +358,7 @@ def resource_goal_ranks(resource, round_name=None):
     goal_ranks = cache_mgr.get_cache(cache_key)
     if goal_ranks is None:
         goal_ranks = []
-        goal = _get_resource_goal(resource)
+        goal = get_resource_goal(resource)
 
         round_info = challenge_mgr.get_round_info(round_name)
         if not round_info:

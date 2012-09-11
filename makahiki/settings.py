@@ -209,6 +209,7 @@ INSTALLED_WIDGET_APPS = (
     'status.twitter',
     'status.badges',
     'status.DEGG',
+    'status.DWGG',
     'wallpost.user_wallpost',
     'wallpost.system_wallpost',
 )

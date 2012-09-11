@@ -138,8 +138,10 @@
                 {% include "widgets/status/DEGG/templates/index.html" %}
             {% endif %}
         </div>
-
         <div class="span4">
+            {% if view_objects.status__DWGG %}
+                {% include "widgets/status/DWGG/templates/index.html" %}
+            {% endif %}
             {% if view_objects.status__wattdepot %}
                 {% include "widgets/status/wattdepot/templates/index.html" %}
             {% endif %}
