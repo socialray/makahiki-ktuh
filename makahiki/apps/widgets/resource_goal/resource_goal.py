@@ -241,7 +241,12 @@ def update_realtime_resource_usage(resource, date):
 
 
 def check_resource_goals(resource, date):
-    """Check the daily resource goal for all teams."""
+    """Check the previous day's resource goal for all teams."""
+
+    # check the previous day's data and goal
+    date = date - datetime.timedelta(days=1)
+    date = datetime.datetime(date.year, date.month, date.day,
+                                   hour=23, minute=59, second=59)
 
     # do nothing if out of round
     rounds_info = challenge_mgr.get_all_round_info()
