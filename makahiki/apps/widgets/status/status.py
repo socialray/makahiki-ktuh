@@ -23,6 +23,7 @@ def update_daily_status():
 
     # update the daily total visitor count, and total setup user count
     entry, _ = DailyStatus.objects.get_or_create(short_date=date)
+    entry.date = "%s" % date
     entry.daily_visitors = count
     entry.setup_users = total
 
