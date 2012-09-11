@@ -8,8 +8,17 @@
             "quest_bonus_points": 0,
             "setup_points": 5,
             "signup_bonus_points": 2,
-            "noshow_penalty_points": 4,
-            "referral_bonus_points": 10
+            "noshow_penalty_points": 4
+        }
+    },
+    {
+        "pk": 1,
+        "model": "score_mgr.referralsetting",
+        "fields": {
+            "normal_referral_points": 10,
+            "super_referral_points": 20,
+            "mega_referral_points": 30,
+            "start_dynamic_bonus": false
         }
     },
     {
