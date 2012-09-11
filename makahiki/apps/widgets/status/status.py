@@ -107,8 +107,11 @@ def _createData(date_list, resource, today):
             data = _init_data(goal.team, resource, today)
 
         goal.goal_usage = utils.format_usage(goal.goal_usage, rate)
-        goal.actual_usage = utils.format_usage(goal.actual_usage, rate)
-        goal.net_usage = goal.goal_usage - goal.actual_usage
+        if goal.actual_usage:
+            goal.actual_usage = utils.format_usage(goal.actual_usage, rate)
+            goal.net_usage = goal.goal_usage - goal.actual_usage
+        else:
+            goal.net_usage = 'N/A'
         data["vals"].append((goal.date, goal))
 
     # need to store the last team data
