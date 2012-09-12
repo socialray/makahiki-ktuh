@@ -109,8 +109,13 @@ def set_challenge_settings(challenge):
         import ldap
 
         settings.AUTH_LDAP_SERVER_URI = challenge.ldap_server_url
+        if settings.MAKAHIKI_LDAP_USE_CN:
+            search_filter = "(cn=%(user)s)"
+        else:
+            search_filter = "(uid=%(user)s)"
         settings.AUTH_LDAP_USER_SEARCH = LDAPSearch("%s" % challenge.ldap_search_base,
-                                           ldap.SCOPE_SUBTREE, "(uid=%(user)s)")
+                                           ldap.SCOPE_SUBTREE, search_filter)
+        settings.AUTH_LDAP_ALWAYS_UPDATE_USER = False
 
 
 def pages():

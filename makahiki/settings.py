@@ -462,6 +462,8 @@ MAKAHIKI_LDAP_BIND_PASSWORD = env('MAKAHIKI_LDAP_BIND_PWD', '')
 """[Required for LDAP services] Provide the Bind password."""
 AUTH_LDAP_BIND_PASSWORD = MAKAHIKI_LDAP_BIND_PASSWORD
 
+MAKAHIKI_LDAP_USE_CN = env('MAKAHIKI_LDAP_USE_CN', '').lower() == "true"
+
 if AUTH_LDAP_BIND_DN and AUTH_LDAP_BIND_PASSWORD:
     AUTHENTICATION_BACKENDS += (
         'apps.managers.auth_mgr.ldap_backend.MakahikiLDAPBackend',
