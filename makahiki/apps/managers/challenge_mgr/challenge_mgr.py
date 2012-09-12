@@ -371,9 +371,6 @@ def _get_model_admin_info(model):
 def register_game_admin_model(game, model):
     """Register the model of the game for admin purpose."""
     register_admin_model(_game_admin_models, game, model)
-    print _game_admin_models
-    print game
-    print model
 
 
 def register_sys_admin_model(group, model):
