@@ -29,7 +29,8 @@ class QuestAdminForm(forms.ModelForm):
 
 class QuestAdmin(admin.ModelAdmin):
     """Admin"""
-    list_display = ["name", "level", ]
+    list_display = ["name", "level", "unlock_conditions"]
+    ordering = ["level"]
 
     # Automatically populates the slug field.
     prepopulated_fields = {"quest_slug": ("name",)}

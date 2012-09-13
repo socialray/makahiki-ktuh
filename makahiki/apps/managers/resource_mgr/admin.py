@@ -10,7 +10,8 @@ class UsageAdmin(admin.ModelAdmin):
     """Administrator display list: team, date, and energy."""
     list_display = ["date", "team", "time", "usage", "updated_at"]
     search_fields = ["team__name", ]
-    list_filter = ['team', 'date']
+    list_filter = ['team']
+    date_hierarchy = "date"
 
 admin.site.register(EnergyUsage, UsageAdmin)
 admin.site.register(WaterUsage, UsageAdmin)
@@ -18,7 +19,7 @@ admin.site.register(WaterUsage, UsageAdmin)
 
 class ResourceSettingsAdmin(admin.ModelAdmin):
     """Administrator display list: team, date, and energy."""
-    list_display = ["name", "unit", "winning_order", ]
+    list_display = ["name", "unit", "winning_order", "conversion_rate"]
 
 admin.site.register(ResourceSetting, ResourceSettingsAdmin)
 challenge_mgr.register_site_admin_model("Challenge", ResourceSetting)

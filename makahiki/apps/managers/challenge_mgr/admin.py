@@ -21,7 +21,7 @@ class PageSettingInline(admin.TabularInline):
 
 class PageInfoAdmin(admin.ModelAdmin):
     """PageSetting administrator interface definition."""
-    list_display = ["name", "unlock_condition"]
+    list_display = ["name", "unlock_condition", "priority"]
 
     fieldsets = (
         (None,
@@ -60,7 +60,7 @@ class GameSettingInline(admin.TabularInline):
 
 class GameInfoAdmin(admin.ModelAdmin):
     """PageSetting administrator interface definition."""
-    list_display = ["name", "enabled"]
+    list_display = ["name", "enabled", "priority"]
     fieldsets = (
         (None,
             {"fields":

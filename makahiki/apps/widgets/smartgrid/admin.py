@@ -315,7 +315,7 @@ class LevelAdminForm(forms.ModelForm):
 
 class LevelAdmin(admin.ModelAdmin):
     """Level Admin"""
-    list_display = ["name", "priority"]
+    list_display = ["name", "priority", "unlock_condition"]
     form = LevelAdminForm
 
 
