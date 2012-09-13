@@ -80,6 +80,7 @@ def complete(request, event):
             # forms.ActivityTextForm.clean())
             code = ConfirmationCode.objects.get(code=form.cleaned_data["response"].lower())
             code.is_active = False
+            code.user = user
             code.save()
 
             try:
@@ -216,7 +217,7 @@ def _check_attend_code(user, form):
         if not code.is_active:
             message = "This code has already been used."
         elif code.action in user.action_set.filter(actionmember__award_date__isnull=False):
-            message = "You have already redemmed a code for this event/excursion."
+            message = "You have already redeemed a code for this event/excursion."
         elif code.action.social_bonus:
             if form.cleaned_data["social_email"]:
                 if form.cleaned_data["social_email"] != "Email":
@@ -284,10 +285,10 @@ def attend_code(request):
                 profile.add_points(value,
                                    datetime.datetime.today(),
                                    s)
-                code.user = user
                 code.claim_date = datetime.datetime.now()
 
             code.is_active = False
+            code.user = user
             code.save()
 
             notification = "You just earned " + str(value) + " points."
