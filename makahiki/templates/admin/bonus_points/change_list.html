@@ -1,0 +1,9 @@
+{% extends "admin/change_list.html" %}
+{% load i18n admin_static admin_list %}
+{% load url from future %}
+{% load admin_urls %}
+
+{% block object-tools-items %}
+    <li><a href="/bonus_points/generate_codes/">Add Bonus Point Codes</a></li>
+    <li><a href="/bonus_points/view_codes/">View All Codes</a>
+{% endblock %}

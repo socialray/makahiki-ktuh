@@ -42,7 +42,7 @@ class BonusPointAdmin(admin.ModelAdmin):
     """admin for Bonus Points."""
     actions = ["delete_selected", "deactivate_selected", "view_selected"]
     list_display = ["pk", "code", "point_value", "create_date", "is_active", "user"]
-    ordering = ["create_date", "is_active"]
+    ordering = ["-create_date", "is_active"]
     list_filter = ["point_value", "is_active"]
     date_hierarchy = "create_date"
 
