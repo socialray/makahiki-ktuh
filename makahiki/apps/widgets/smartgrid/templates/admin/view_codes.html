@@ -61,6 +61,8 @@
                     <tr style='border-collapse: collapse; border-width: 1px; border-color: black; border-style: solid;'>
                 {% endif %}
             {% endif %}
+        {% empty %}
+            There is no confirmation code for this event yet. Please generate them first.
         {% endfor %}
         </table>
 </body>

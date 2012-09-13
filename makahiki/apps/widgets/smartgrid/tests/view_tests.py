@@ -35,24 +35,24 @@ class ActivitiesFunctionalTest(TransactionTestCase):
         ConfirmationCode.generate_codes_for_activity(activity, 5)
 
         response = self.client.get(
-            reverse('activity_view_codes', args=(activity.type, activity.slug)))
+            reverse('activity_view_codes', args=(activity.type, activity.id)))
         self.failUnlessEqual(response.status_code, 404)
         response = self.client.get(
-            reverse('activity_view_rsvps', args=(activity.type, activity.slug)))
+            reverse('activity_view_rsvps', args=(activity.type, activity.id)))
         self.assertEqual(response.status_code, 404)
 
         self.user.is_staff = True
         self.user.save()
 
         response = self.client.get(
-            reverse('activity_view_codes', args=(activity.type, activity.slug)))
+            reverse('activity_view_codes', args=(activity.type, activity.id)))
         self.assertEqual(response.status_code, 200)
-        self.assertTemplateUsed(response, 'view_codes.html')
+        self.assertTemplateUsed(response, 'admin/view_codes.html')
 
         response = self.client.get(
-            reverse('activity_view_rsvps', args=(activity.type, activity.slug)))
+            reverse('activity_view_rsvps', args=(activity.type, activity.id)))
         self.assertEqual(response.status_code, 200)
-        self.assertTemplateUsed(response, 'rsvps.html')
+        self.assertTemplateUsed(response, 'admin/rsvps.html')
 
     def testConfirmationCode(self):
         """

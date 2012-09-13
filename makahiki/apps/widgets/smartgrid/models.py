@@ -125,6 +125,11 @@ class ConfirmationCode(models.Model):
                             help_text="The confirmation code.")
     is_active = models.BooleanField(default=True, editable=False,
                                     help_text="Is the confirmation code still active?")
+    user = models.ForeignKey(User, null=True, blank=True,
+                             help_text="The user who claimed the code.")
+    create_date = models.DateTimeField(default=datetime.datetime.now(),
+                                   verbose_name="Date created",
+                                   help_text="Date the code was created.")
 
     @staticmethod
     def generate_codes_for_activity(event, num_codes):

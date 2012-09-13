@@ -1,4 +1,8 @@
 """Admin definition for Bonus Points widget."""
+from django.shortcuts import render_to_response
+from django.template import RequestContext
+
+
 '''
 Created on Aug 5, 2012
 
@@ -36,9 +40,11 @@ class BonusPointAdminForm(forms.ModelForm):
 
 class BonusPointAdmin(admin.ModelAdmin):
     """admin for Bonus Points."""
-    actions = ["delete_selected", "deactivate_selected"]
+    actions = ["delete_selected", "deactivate_selected", "view_selected"]
     list_display = ["pk", "code", "point_value", "create_date", "is_active", "user"]
     ordering = ["create_date", "is_active"]
+    list_filter = ["point_value", "is_active"]
+    date_hierarchy = "create_date"
 
     form = BonusPointAdminForm
 
@@ -57,10 +63,23 @@ class BonusPointAdmin(admin.ModelAdmin):
 
     deactivate_selected.short_description = "Deactivate the selected Bonus Points."
 
+    def view_selected(self, request, queryset):
+        """Views the Bonus Points Codes for printing."""
+        _ = request
+        _ = queryset
+
+        return render_to_response("view_bonus_points.html", {
+            "codes": queryset,
+            "per_page": 10,
+        }, context_instance=RequestContext(request))
+
+    view_selected.short_description = "view the selected Bonus Points."
+
     def view_codes(self, request, queryset):
         """Views the Bonus Points Codes for printing."""
         _ = request
         _ = queryset
+
         response = HttpResponseRedirect(reverse("bonus_view_codes", args=()))
         return response
 

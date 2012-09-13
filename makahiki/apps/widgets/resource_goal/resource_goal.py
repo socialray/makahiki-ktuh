@@ -234,7 +234,7 @@ def update_realtime_resource_usage(resource, date):
     """update the real time resource usage."""
     session = requests.session()
     for team in Team.objects.all():
-        # update the latest resource usage before checking if the team goal settings is manual
+        # update the latest resource usage before checking if the team goal settings is not manual
         goal_settings = team_goal_settings(team, resource)
         if resource == "energy" and not goal_settings.manual_entry:
             resource_mgr.update_team_energy_usage(session, date, team)

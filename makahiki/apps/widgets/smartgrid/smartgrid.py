@@ -440,36 +440,8 @@ def process_rsvp():
         profile = user.get_profile()
 
         diff = datetime.date.today() - action.event.event_date.date()
-        if diff.days > NOSHOW_PENALTY_DAYS:
-            message = "%s: %s (No Show)" % (action.type.capitalize(), action.title)
-            profile.remove_points(noshow_penalty_points + signup_points,
-                                  datetime.datetime.today() - datetime.timedelta(minutes=1),
-                                  message,
-                                  member)
-            print "removed noshow penalty points from %s for '%s'" % (profile.name, message)
-
-            if template_noshow:
-                message = template_noshow.render({"ACTIVITY": action})
-            else:
-                message = "%d points had been deducted from you, "\
-                          "because you signed up but did not enter the "\
-                          "confirmation code %d days after the %s <a "\
-                          "href='%s'>%s</a>, " % (
-                    noshow_penalty_points + signup_points,
-                    NOSHOW_PENALTY_DAYS,
-                    action.type.capitalize(),
-                    reverse("activity_task", args=(action.type, action.slug,)),
-                    action.title)
-                message += " If you did attend, please click on the link to "\
-                           "claim your points and reverse the deduction."
-
-            UserNotification.create_info_notification(user, message,
-                                                      display_alert=True,
-                                                      content_object=member)
-            print "created no-show penalty notification for %s for %s" % (
-                profile.name, action.title)
-
         if diff.days == NOSHOW_PENALTY_DAYS:
+            # send out notification to remind the penalty
             if template_reminder:
                 message = template_reminder.render({"ACTIVITY": action})
             else:
@@ -499,6 +471,35 @@ def process_rsvp():
             UserNotification.create_email_notification(user.email, subject,
                                                        message, message)
             print "sent post event email reminder to %s for %s" % (
+                profile.name, action.title)
+        elif diff.days == (NOSHOW_PENALTY_DAYS + 1):
+            # the day after the penalty day, process the penalty reduction
+            message = "%s: %s (No Show)" % (action.type.capitalize(), action.title)
+            profile.remove_points(noshow_penalty_points + signup_points,
+                                  datetime.datetime.today() - datetime.timedelta(minutes=1),
+                                  message,
+                                  member)
+            print "removed noshow penalty points from %s for '%s'" % (profile.name, message)
+
+            if template_noshow:
+                message = template_noshow.render({"ACTIVITY": action})
+            else:
+                message = "%d points had been deducted from you, "\
+                          "because you signed up but did not enter the "\
+                          "confirmation code %d days after the %s <a "\
+                          "href='%s'>%s</a>, " % (
+                    noshow_penalty_points + signup_points,
+                    NOSHOW_PENALTY_DAYS,
+                    action.type.capitalize(),
+                    reverse("activity_task", args=(action.type, action.slug,)),
+                    action.title)
+                message += " If you did attend, please click on the link to "\
+                           "claim your points and reverse the deduction."
+
+            UserNotification.create_info_notification(user, message,
+                                                      display_alert=True,
+                                                      content_object=member)
+            print "created no-show penalty notification for %s for %s" % (
                 profile.name, action.title)
 
 

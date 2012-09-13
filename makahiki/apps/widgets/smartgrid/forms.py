@@ -8,6 +8,12 @@ from apps.widgets.smartgrid.models import ConfirmationCode, QuestionChoice, Text
 from apps.managers.player_mgr import player_mgr
 
 
+class GenerateCodeForm(forms.Form):
+    """Form for generating confirmation codes."""
+    event_id = forms.IntegerField(widget=forms.HiddenInput(), required=False)
+    num_codes = forms.IntegerField(initial=0)
+
+
 class ChangeLevelForm(forms.Form):
     """change level form."""
     level_choice = forms.ModelChoiceField(queryset=Level.objects.all(), required=True)

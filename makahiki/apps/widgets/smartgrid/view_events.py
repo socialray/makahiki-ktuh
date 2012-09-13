@@ -1,4 +1,5 @@
 """handles rendering events."""
+import urlparse
 
 import simplejson as json
 
@@ -16,7 +17,7 @@ from apps.managers.score_mgr import score_mgr
 
 from apps.widgets.smartgrid.models import  ActionMember, \
     Action, Event, ConfirmationCode
-from apps.widgets.smartgrid.forms import EventCodeForm, ActivityCodeForm
+from apps.widgets.smartgrid.forms import EventCodeForm, ActivityCodeForm, GenerateCodeForm
 from apps.widgets.bonus_points.models import BonusPoint
 import datetime
 from apps.widgets.notifications.models import UserNotification
@@ -120,25 +121,39 @@ def complete(request, event):
     return HttpResponseRedirect(reverse("activity_task", args=(event.type, event.slug,)))
 
 
+def _get_event_id_from_request(request):
+    """return the event id from the request."""
+    event_id = None
+    if 'HTTP_REFERER' in request.META and 'PATH_INFO' in request.META:
+        qs = request.META['HTTP_REFERER'].split('?')
+        qs = urlparse.parse_qs(qs[-1])  # remove the '?'
+        if "action__exact" in qs:
+            event_id = int(qs['action__exact'][0])
+    return event_id
+
+
 @never_cache
 @login_required
-def view_codes(request, action_type, slug):
+def view_codes(request, action_type, event_id):
     """View the confirmation codes for a given activity."""
     _ = action_type
+
     if not request.user or not request.user.is_staff:
         raise Http404
 
+    if not event_id or event_id == '0':
+        event_id = _get_event_id_from_request(request)
+
     per_page = 10
+
     # Check for a rows parameter
     if "rows" in request.GET:
         per_page = int(request.GET['rows'])
 
-    event = get_object_or_404(Event, slug=slug)
+    event = get_object_or_404(Event, pk=event_id)
     codes = ConfirmationCode.objects.filter(action=event)
-    if len(codes) == 0:
-        raise Http404
 
-    return render_to_response("view_codes.html", {
+    return render_to_response("admin/view_codes.html", {
         "activity": event,
         "codes": codes,
         "per_page": per_page,
@@ -147,19 +162,43 @@ def view_codes(request, action_type, slug):
 
 @never_cache
 @login_required
-def view_rsvps(request, action_type, slug):
+def generate_codes(request):
+    """Handles the generate_codes_form from and creates the BonusPoints."""
+
+    if request.method == "POST":
+        form = GenerateCodeForm(request.POST)
+        if form.is_valid():
+            num = form.cleaned_data['num_codes']
+            event_id = form.cleaned_data['event_id']
+            event = get_object_or_404(Event, pk=event_id)
+            ConfirmationCode.generate_codes_for_activity(event, num)
+            url = "/admin/smartgrid/confirmationcode/?action__exact=%d" % event.id
+            response = HttpResponseRedirect(url)
+            return response
+    else:
+        event_id = _get_event_id_from_request(request)
+        form = GenerateCodeForm(initial={"event_id": event_id})
+        return render_to_response("admin/generate_code.html", {
+            "form": form,
+        }, context_instance=RequestContext(request))
+
+
+@never_cache
+@login_required
+def view_rsvps(request, action_type, event_id):
     """View the RSVP list"""
     _ = action_type
     if not request.user or not request.user.is_staff:
         raise Http404
 
-    action = get_object_or_404(Action, slug=slug)
+    action = get_object_or_404(Action, pk=event_id)
+
     rsvps = ActionMember.objects.filter(
         action=action,
         approval_status='pending'
     ).order_by('user__last_name', 'user__first_name')
 
-    return render_to_response("rsvps.html", {
+    return render_to_response("admin/rsvps.html", {
         "activity": action,
         "rsvps": rsvps,
         }, context_instance=RequestContext(request))

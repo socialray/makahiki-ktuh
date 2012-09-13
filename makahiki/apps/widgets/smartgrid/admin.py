@@ -1,6 +1,8 @@
 """Admin definition for Smart Grid Game widget."""
 from django.db import models
 from django.http import HttpResponseRedirect
+from django.shortcuts import render_to_response
+from django.template import RequestContext
 from apps.managers.cache_mgr import cache_mgr
 from apps.managers.challenge_mgr import challenge_mgr
 from apps.utils import utils
@@ -17,6 +19,44 @@ from django.forms.util import ErrorList
 from django.forms import TextInput, Textarea
 from django.core.urlresolvers import reverse
 from django.contrib import messages
+
+
+class ConfirmationCodeAdmin(admin.ModelAdmin):
+    """admin for Bonus Points."""
+    actions = ["delete_selected", "view_selected"]
+    list_display = ["pk", "code", "create_date", "is_active", "user"]
+    ordering = ["-create_date", "is_active"]
+    list_filter = ["is_active"]
+    date_hierarchy = "create_date"
+
+    def delete_selected(self, request, queryset):
+        """override the delete selected method."""
+        _ = request
+        for obj in queryset:
+            obj.delete()
+
+    delete_selected.short_description = "Delete the selected codes."
+
+    def view_selected(self, request, queryset):
+        """Views the Codes for printing."""
+        return render_to_response("admin/view_codes.html", {
+            "activity": queryset[0],
+            "codes": queryset,
+            "per_page": 10,
+        }, context_instance=RequestContext(request))
+
+    view_selected.short_description = "view the selected codes."
+
+    def view_codes(self, request, queryset):
+        """Views the Codes for printing."""
+        _ = request
+        _ = queryset
+
+        response = HttpResponseRedirect(reverse("activity_view_codes", args=()))
+        return response
+
+
+admin.site.register(ConfirmationCode, ConfirmationCodeAdmin)
 
 
 class TextQuestionInlineFormSet(BaseInlineFormSet):
@@ -167,29 +207,6 @@ class ActivityAdminForm(forms.ModelForm):
 
 class EventAdminForm(forms.ModelForm):
     """Event Admin Form."""
-    num_codes = forms.IntegerField(required=False,
-        label="Number of codes",
-        help_text="Number of confirmation codes to generate",
-        initial=0
-    )
-
-    def __init__(self, *args, **kwargs):
-        """
-        Override to change number of codes help text if we are editing an activity and add in a
-        list of RSVPs.
-        """
-        super(EventAdminForm, self).__init__(*args, **kwargs)
-
-        # Instance points to an instance of the model.
-        # Check if it is created and if it has a code confirmation type.
-        if self.instance and self.instance.type:
-            url = reverse("activity_view_codes", args=(self.instance.type, self.instance.slug,))
-            self.fields["num_codes"].help_text = "Number of additional codes to generate " \
-                "<a href=\"%s\" target=\"_blank\">View codes</a>" % url
-
-            url = reverse("activity_view_rsvps", args=(self.instance.type, self.instance.slug,))
-            self.fields["event_max_seat"].help_text += \
-                " <a href='%s' target='_blank'>View RSVPs</a>" % url
 
     class Meta:
         """Meta"""
@@ -240,11 +257,6 @@ class EventAdminForm(forms.ModelForm):
         event.save()
 
         cache_mgr.clear()
-
-        # Generate confirmation codes if needed.
-        if self.cleaned_data.get("num_codes") > 0:
-            ConfirmationCode.generate_codes_for_activity(event,
-                self.cleaned_data.get("num_codes"))
 
         return event
 
@@ -491,7 +503,6 @@ class EventAdmin(admin.ModelAdmin):
                      )}),
         ("Points", {"fields": (("point_value", "social_bonus"),)}),
         ("Ordering", {"fields": (("level", "category", "priority"), )}),
-        ("Confirmation Code", {'fields': ('num_codes',)}),
         )
     prepopulated_fields = {"slug": ("name",)}
 

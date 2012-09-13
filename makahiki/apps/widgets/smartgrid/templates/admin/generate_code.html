@@ -1,0 +1,24 @@
+{% extends "admin/base_site.html" %}
+{% load i18n l10n %}
+{% load url from future %}
+{% load admin_urls %}
+
+{% block breadcrumbs %}
+    <div class="breadcrumbs">
+        <a href="{% url 'admin:index' %}">{% trans 'Home' %}</a>
+        &rsaquo; <a href="/admin/smartgrid/">Smartgrid</a>
+        &rsaquo; Generate Confirmation Codes
+    </div>
+{% endblock %}
+
+{% block content %}
+    <form action="{% url 'activity_generate_codes' %}" method="post">
+        {% csrf_token %}
+        <div style="background-color: white;">
+            How many Confirmation codes do you want to generate?
+            {{ form.num_codes }} <br/>
+            {{ form.event_id }}
+            <input type="submit" value="Generate"/>
+        </div>
+    </form>
+{% endblock %}
