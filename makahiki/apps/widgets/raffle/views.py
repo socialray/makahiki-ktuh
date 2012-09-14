@@ -3,7 +3,7 @@ import datetime
 import random
 from django.db.models.aggregates import Count
 
-from django.http import HttpResponseRedirect, Http404
+from django.http import HttpResponseRedirect, Http404, HttpResponse
 from django.shortcuts import render_to_response, get_object_or_404
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required, user_passes_test
@@ -107,11 +107,26 @@ def raffle_form(request, prize_id):
     """Supply the raffle form."""
     _ = request
     prize = get_object_or_404(RafflePrize, pk=prize_id)
-    return render_to_response('view_prizes/form.txt', {
+    challenge = challenge_mgr.get_challenge()
+
+    try:
+        template = NoticeTemplate.objects.get(notice_type='raffle-winner-receipt')
+    except NoticeTemplate.DoesNotExist:
+        return render_to_response('view_prizes/form.txt', {
         'raffle': True,
         'prize': prize,
-        'round': prize.round_name
-    }, context_instance=RequestContext(request), mimetype='text/plain')
+        'round': prize.round_name,
+        'competition_name': challenge.competition_name,
+        }, context_instance=RequestContext(request), mimetype='text/plain')
+
+    message = template.render({
+        'raffle': True,
+        'prize': prize,
+        'round': prize.round_name,
+        'competition_name': challenge.competition_name,
+    })
+
+    return HttpResponse(message, content_type="text", mimetype='text/html')
 
 
 def raffle_prize_list(request):

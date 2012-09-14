@@ -6,34 +6,30 @@
         <h3>Notifications</h3>
     </div>
     <div class="modal-body" id="modal-body">
-        <ul id="notification-dialog-list">
+        <div id="notification-dialog-list">
             {% for notification in notifications.alerts %}
-                <li id="notification-dialog-{{notification.id}}"
-                    class="{{notification.style_class}} notification-item">
+                <div class="{{notification.style_class}} notification-item">
                     <div class="notification-contents">
-                        <div class='notice-icon'>
                             <i class="{{notification.icon_class}}"></i>
-                        </div>
-                        <div class='notice-content'>
-                            {{ notification.contents|safe }}
+                        <div class='notice-list-content'>
+                        {{ notification.contents|safe }}
+                        {% if notification.is_success %}
+                            <a id="notification-share-{{notification.id}}" href="javascript:void(0);">
+                                Click here to share on Facebook</a>
+                        {% endif %}
                         </div>
                     </div>
-                    {% if notification.is_success %}
-                        <div class="notification-options">
-                            <a class="notification-share" href="javascript:void(0);">Click here to share on
-                                Facebook</a>&nbsp;
-                        </div>
-                    {% endif %}
-                </li>
+                </div>
                 <script type="text/javascript">
                     jQuery(document).ready(function ($) {
-                        $("#notification-dialog-{{notification.id}} .notification-options .notification-share").click(function () {
+                        $("#notification-share-{{notification.id}}").click(function () {
                             fb_share('{{notification.id}}', '{{ notification.fb_contents }}');
                         });
                     });
                 </script>
+                <br/>
             {% endfor %}
-        </ul>
+        </div>
     </div>
     <div class="modal-footer">
         <a href="#" class="btn btn-widget" data-dismiss="modal">OK</a>
@@ -62,4 +58,6 @@
     });
 </script>
 
-{% mark_alerts_displayed request notifications.alerts %}
+{% if not request.session.staff %}
+    {% mark_alerts_displayed request notifications.alerts %}
+{% endif %}

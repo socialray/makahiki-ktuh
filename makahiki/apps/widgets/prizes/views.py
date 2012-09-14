@@ -2,10 +2,12 @@
 import datetime
 
 from django.contrib.auth.decorators import user_passes_test
+from django.http import HttpResponse
 from django.shortcuts import render_to_response, get_object_or_404
 from django.template.context import RequestContext
 from django.views.decorators.cache import never_cache
 from apps.managers.challenge_mgr import challenge_mgr
+from apps.widgets.notifications.models import NoticeTemplate
 from apps.widgets.prizes.models import Prize
 
 
@@ -58,8 +60,22 @@ def prize_form(request, prize_id):
     _ = request
     prize = get_object_or_404(Prize, pk=prize_id)
     prize.winner = prize.leader().user
-    return render_to_response('view_prizes/form.txt', {
+    challenge = challenge_mgr.get_challenge()
+
+    try:
+        template = NoticeTemplate.objects.get(notice_type='prize-winner-receipt')
+    except NoticeTemplate.DoesNotExist:
+        return render_to_response('view_prizes/form.txt', {
+            'raffle': False,
+            'prize': prize,
+            'round': prize.round_name,
+            'competition_name': challenge.competition_name,
+        }, context_instance=RequestContext(request), mimetype='text/plain')
+
+    message = template.render({
         'raffle': False,
         'prize': prize,
-        'round': prize.round_name
-    }, context_instance=RequestContext(request), mimetype='text/plain')
+        'round': prize.round_name,
+        'competition_name': challenge.competition_name,
+    })
+    return HttpResponse(message, content_type="text", mimetype='text/html')

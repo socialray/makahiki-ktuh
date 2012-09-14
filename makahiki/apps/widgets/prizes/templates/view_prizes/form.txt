@@ -1,6 +1,6 @@
-{% if round %}{{round}} {%endif%}{{ CHALLENGE.competition_name }} {% if raffle %}Raffle {% endif %}Prize Winner
+{% if round %}{{round}} {%endif%}{{ competition_name }} {% if raffle %}Raffle {% endif %}Prize Winner
 
-I, {{prize.winner.first_name}} {{prize.winner.last_name}}, acknowledge receipt of the {% if raffle %}raffle {% endif %}prize '{{prize.title}}' for participation in {% if round %}{{round}} of {% endif %}the {{ CHALLENGE.competition_name }}.
+I, {{prize.winner.first_name}} {{prize.winner.last_name}}, acknowledge receipt of the {% if raffle %}raffle {% endif %}prize '{{prize.title}}' for participation in {% if round %}{{round}} of {% endif %}the {{ competition_name }}.
 
 
 Signed: _______________________________

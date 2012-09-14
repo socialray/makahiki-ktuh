@@ -21,6 +21,8 @@ TYPE_CHOICES = (
     ('raffle-winner', 'Raffle Winner'),
     ('prize-winner', 'Prize Winner'),
     ('commitment-ready', 'Commitment Ready'),
+    ('prize-winner-receipt', 'Prize Winner Receipt Form'),
+    ('raffle-winner-receipt', 'Raffle Winner Receipt Form'),
     )
 """Possible notification types."""
 
