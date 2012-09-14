@@ -9,6 +9,8 @@ from apps.managers.resource_mgr import resource_mgr
 def update_energy_usage():
     """update energy usage."""
     date = datetime.datetime.today()
+    print '****** Processing energy usage update at %s *******\n' % date
+
     resource_mgr.update_energy_usage(date)
 
 
@@ -16,4 +18,6 @@ def update_energy_usage():
 def update_fake_water_usage():
     """update fake water usage."""
     date = datetime.datetime.today()
+    print '****** Processing water usage update at %s *******\n' % date
+
     resource_mgr.update_fake_water_usage(date)

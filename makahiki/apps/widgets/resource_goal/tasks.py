@@ -2,6 +2,7 @@
 
 from celery.task import task
 import datetime
+from apps.managers.challenge_mgr import challenge_mgr
 from apps.widgets.resource_goal import resource_goal
 
 
@@ -11,6 +12,7 @@ def check_energy_goal():
     today = datetime.datetime.today()
     print '****** Processing check_energy_goal and update baseline for %s *******\n' % today
 
+    challenge_mgr.init()
     today = today.date()
     resource_goal.check_resource_goals("energy", today)
 
@@ -24,6 +26,7 @@ def check_water_goal():
     today = datetime.datetime.today()
     print '****** Processing check_water_goal and update baseline for %s *******\n' % today
 
+    challenge_mgr.init()
     today = today.date()
     resource_goal.check_resource_goals("water", today)
 
