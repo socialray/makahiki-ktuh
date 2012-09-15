@@ -4,10 +4,9 @@ Namespace("org.wattdepot.makahiki");
   /**loads the visualization for both annotated timelines and for table. */
   google.load('visualization','1',{'packages':['annotatedtimeline', 'table']}); 
 
- google.setOnLoadCallback(initialize); 
-  
- var host_uri = 'http://server.wattdepot.org:8194/wattdepot';
-      
+ google.setOnLoadCallback(initialize);
+
+ var host_uri = SERVER_URL + '/wattdepot';
  var powerSource;      
  var table;
  var sourceNo;       
@@ -38,7 +37,7 @@ Namespace("org.wattdepot.makahiki");
           for (i = 0; i<lounges.length; i++)
             if (lounges[i].checked) 
               powerSource.push(lounges[i].value);
-          
+
           // Depending on the data range selected,
           // changed the sample-interval to WattDepot to compensate for daily or hourly values.
           // Only need to overwrite for last7 and last 14 days since defaults are already set for 24 hours.

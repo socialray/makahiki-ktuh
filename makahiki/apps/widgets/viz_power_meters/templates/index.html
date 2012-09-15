@@ -29,11 +29,11 @@
 
 <div>
     <p>
-        This visualization shows the real time power meters of {{ group_lounges_count }} lounges.
-        Note that the middle of each gauge represents the typical power for this lounge at this time of day.
+        This visualization shows the real time power meters of {{ group_lounges_count }} {{ TEAM_LABEL }}.
+        Note that the middle of each gauge represents the typical power for this {{ TEAM_LABEL }} at this time of day.
     <p/>
-    You can use this visualization to look at the real time power consumption of any lounge and
-    compare the usages of {{ group_lounges_count }} lounges at a time.
+    You can use this visualization to look at the real time power consumption of any {{ TEAM_LABEL }} and
+    compare the usages of {{ group_lounges_count }} {{ TEAM_LABEL }} at a time.
 
 </div>
 
@@ -46,7 +46,7 @@
     (function () {
         for (i = 1; i <= {{ group_lounges_count }}; i++)
         {
-            viz_powermeters[i] = drawOne(i, i);
+            viz_powermeters[i] = drawOne(i, i-1);
         }
     })();
 

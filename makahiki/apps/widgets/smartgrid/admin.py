@@ -431,18 +431,16 @@ class ActionAdmin(admin.ModelAdmin):
 
     def change_level(self, request, queryset):
         """change level."""
-        action_type = queryset[0].type
         selected = request.POST.getlist(admin.ACTION_CHECKBOX_NAME)
-        return HttpResponseRedirect(reverse("bulk_change", args=(action_type, "level",)) +
+        return HttpResponseRedirect(reverse("bulk_change", args=("action", "level",)) +
                                     "?ids=%s" % (",".join(selected)))
 
     change_level.short_description = "Change the level."
 
     def change_category(self, request, queryset):
         """change level."""
-        action_type = queryset[0].type
         selected = request.POST.getlist(admin.ACTION_CHECKBOX_NAME)
-        return HttpResponseRedirect(reverse("bulk_change", args=(action_type, "category",)) +
+        return HttpResponseRedirect(reverse("bulk_change", args=("action", "category",)) +
                                     "?ids=%s" % (",".join(selected)))
 
     change_category.short_description = "Change the category."

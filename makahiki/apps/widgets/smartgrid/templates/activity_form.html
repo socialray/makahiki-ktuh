@@ -1,6 +1,6 @@
 {% load markup %}
 {% if form.image_response %}         {# image #}
-    {{ action.activity.confirm_prompt }} <p/>
+    {{ action.activity.confirm_prompt|markdown }} <p/>
     {% if form.response %}
         {{ form.response.errors }}
         {{ form.response }}
