@@ -1,6 +1,6 @@
 {% load avatar_tags %}
 {% load cache %}
-
+{% with team_members=view_objects.team_members%}
 <div class="content-box news">
     <div class="content-box-title">
         <h3>{{ TEAM_LABEL }} members</h3>
@@ -14,19 +14,19 @@
     <div class="scrollable">
         <ul>
         {% cache 2592000 team_member_avatar user.get_profile.team_id %}
-        {% for member in view_objects.team_members.team_members %}
+        {% for member in team_members.team_members %}
         <li>
             <div style="position:relative;top:0;left:0;">  
-                <a href="{% url news_team_members %}#{{member.name|slugify}}">
-                    <img src="{% avatar_url member.user 40 %}" alt="Photo of {{ member.name }}"
-                         title="Photo of {{ member.name }}" align="top"/>
-                    {{ member.name }}
+                <a href="{% url news_team_members %}#{{member.profile.name|slugify}}">
+                    <img src="{% avatar_url member.profile.user 40 %}" alt="Photo of {{ member.profile.name }}"
+                         title="Photo of {{ member.profile.name }}" align="top"/>
+                    {{ member.profile.name }}
                 </a>
-                <div class="badge-theme-summary-small" style="position:absolute;left:0px;top:0px;"><p>{{member.badgeaward_set.all.count}}</p></div>
+                <div class="badge-theme-summary-small" style="position:absolute;left:0px;top:0px;"><p>{{member.profile.badgeaward_set.all.count}}</p></div>
             </div>    
         </li>
         {% endfor %}
-        {% for member in view_objects.team_members.zero_members %}
+        {% for member in team_members.zero_members %}
         <li>
             <div>
                 <a href="{% url news_team_members %}#{{member.name|slugify}}">
@@ -44,4 +44,5 @@
         <a href="{% url news_team_members %}">View Details</a>
     </div>
 </div>
+{% endwith%}
 

@@ -34,9 +34,17 @@
                     </tr>
                 </thead>
                 <tbody>
-                    {% for member in team_members %}
+                    {% for member in team_members.team_members %}
                     <tr>
-                        {% include "member.html" %}
+                        {% with member=member.profile %}
+                          {% include "member.html" %}
+                        {% endwith %}
+                    </tr>
+                    {% endfor %}
+
+                    {% for member in team_members.zero_members %}
+                    <tr>
+                          {% include "member.html" %}
                     </tr>
                     {% endfor %}
                 </tbody>
