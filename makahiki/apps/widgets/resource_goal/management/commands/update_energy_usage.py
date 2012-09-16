@@ -6,7 +6,7 @@ midnight to now. Used for updating the status of the Energy Goal Game."""
 import datetime
 
 from apps.managers.challenge_mgr.challenge_mgr import MakahikiBaseCommand
-from apps.managers.resource_mgr import resource_mgr
+from apps.widgets.resource_goal import resource_goal
 
 
 class Command(MakahikiBaseCommand):
@@ -17,4 +17,4 @@ class Command(MakahikiBaseCommand):
         """Update the energy usage for all teams."""
         date = datetime.datetime.today()
         print '****** Processing energy usage update at %s *******\n' % date
-        resource_mgr.update_energy_usage(date)
+        resource_goal.update_resource_usage("energy", date)

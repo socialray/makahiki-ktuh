@@ -1,17 +1,12 @@
 """Provides services for a specific sustainability "resource" such as energy or water."""
 
-import datetime
-from xml.etree.ElementTree import ParseError
 from django.core.exceptions import ObjectDoesNotExist
 from django.db.models.aggregates import Sum
-import requests
-from requests.exceptions import Timeout
 from apps.managers.cache_mgr import cache_mgr
 from apps.managers.challenge_mgr import challenge_mgr
 from apps.managers.team_mgr.models import Team
 from apps.managers.resource_mgr.models import EnergyUsage, WaterUsage, ResourceSetting, \
     WasteUsage, ResourceBlackoutDate
-from xml.etree import ElementTree
 from django.template.defaultfilters import slugify
 from apps.utils import utils
 
@@ -53,91 +48,25 @@ def team_resource_usage(date, team, resource):
         return 0
 
 
-def get_energy_usage(session, source):
-    """Return the energy usage from wattdepot."""
-    rest_url = "%s/wattdepot/sources/%s/energy/" % (
-        challenge_mgr.get_challenge().wattdepot_server_url, source)
-
-    # comment out for debug
-    #import sys
-    #session.config['verbose'] = sys.stderr
-
-    session.timeout = 5
-
-    try:
-        response = session.get(url=rest_url)
-
-        #print response.text
-        usage = 0
-        property_elements = ElementTree.XML(response.text).findall(".//Property")
-        for p in property_elements:
-            key_value = p.getchildren()
-            if key_value and key_value[0].text == "energyConsumed":
-                usage = key_value[1].text
-
-        return int(round(float(usage)))
-
-    except Timeout:
-        print 'team %s energy usage update error with connection timeout.' % source
-    except ParseError as exception:
-        print 'team %s energy usage update with ParseError : %s' % (source, exception)
-
-    return 0
-
-
-def get_history_energy_data(session, team, date, hour):
-    """Return the history energy usage of the team for the date and hour."""
-    start_time = date.strftime("%Y-%m-%dT00:00:00")
-    if hour:
-        end_time = date.strftime("%Y-%m-%dT") + "%.2d:00:00" % hour
-    else:
-        end_time = (date + datetime.timedelta(days=1)).strftime("%Y-%m-%dT00:00:00")
-
-    session.params = {'startTime': start_time, 'endTime': end_time}
-    return get_energy_usage(session, team.name)
-
-
-def get_latest_energy_data(session, date, team):
-    """Returns the latest usage of the specified resource for the current date."""
-    start_time = date.strftime("%Y-%m-%dT00:00:00")
-    end_time = "latest"
-
-    session.params = {'startTime': start_time, 'endTime': end_time}
-    return get_energy_usage(session, team.name)
-
-
-def update_resource_usage(resource, date):
-    """update the latest resource usage."""
-
-    # we only have real time energy data so far.
-    if resource == "energy":
-        update_energy_usage(date)
-        # clear the cache for energy ranking, and RIB where it displays
-        round_name = challenge_mgr.get_round_name(date)
-        cache_mgr.delete("energy_ranks-%s" % slugify(round_name))
-
-
-def update_energy_usage(date):
-    """Update the latest energy usage from WattDepot server."""
-
-    session = requests.session()
-    for team in Team.objects.all():
-        update_team_energy_usage(session, date, team)
-
-
-def update_team_energy_usage(session, date, team):
+def update_team_resource_usage(resource, session, date, team, storage):
     """update the latest energy usage for the team."""
-    usage = get_latest_energy_data(session, date, team)
+    usage = storage.get_latest_resource_data(session, team, date)
     if usage:
+        resource_usage = _get_resource_usage(resource)
         try:
-            latest_usage = EnergyUsage.objects.get(team=team, date=date.date())
+            latest_usage = resource_usage.objects.get(team=team, date=date.date())
         except ObjectDoesNotExist:
-            latest_usage = EnergyUsage(team=team, date=date.date())
+            latest_usage = resource_usage(team=team, date=date.date())
 
         latest_usage.time = date.time()
         latest_usage.usage = usage
         latest_usage.save()
-        print 'team %s energy usage: %d at %s.' % (team, usage, date)
+        print 'team %s energy usage from %s: %d at %s.' % (team, storage.name(), usage, date)
+
+
+def get_history_resource_data(session, team, date, hour, storage):
+    """Return the history energy usage of the team for the date and hour."""
+    return storage.get_history_resource_data(session, team, date, hour)
 
 
 def update_fake_water_usage(date):

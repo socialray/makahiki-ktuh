@@ -7,6 +7,8 @@ import requests
 from apps.managers.cache_mgr import cache_mgr
 from apps.managers.challenge_mgr import challenge_mgr
 from apps.managers.resource_mgr import resource_mgr
+from apps.managers.resource_mgr.egauge import EGauge
+from apps.managers.resource_mgr.wattdepot import Wattdepot
 from apps.managers.team_mgr.models import Team
 from apps.widgets.resource_goal.models import EnergyGoal, WaterGoal, WaterGoalSetting, \
     EnergyGoalSetting, EnergyBaselineDaily, WaterBaselineDaily, EnergyBaselineHourly, \
@@ -41,6 +43,16 @@ def get_resource_goal(resource):
         return EnergyGoal
     elif resource == "water":
         return WaterGoal
+    else:
+        return None
+
+
+def get_resource_storage(name):
+    """Returns the resource data storage service by name."""
+    if name == "Wattdepot":
+        return Wattdepot()
+    elif name == "eGauge":
+        return EGauge()
     else:
         return None
 
@@ -144,7 +156,7 @@ def update_team_resource_baseline(resource, session, team, date, weeks):
     # daily
     daily_baseline = _get_resource_baselinedaily(resource)
     baseline, is_create = daily_baseline.objects.get_or_create(team=team, day=date.weekday())
-    if is_create or goal_settings.baseline_method == "Dynamic":
+    if is_create or (goal_settings and goal_settings.baseline_method == "Dynamic"):
         # if dynamic, always update the baseline,
         # if fixed, only update if the baseline does not exist
         usage = get_resource_baseline_usage(resource, session, team, date, weeks, None)
@@ -152,7 +164,7 @@ def update_team_resource_baseline(resource, session, team, date, weeks):
         baseline.save()
 
     # hourly, only update for real time resource
-    if not goal_settings.manual_entry:
+    if goal_settings and not goal_settings.manual_entry:
         hourly_baseline = _get_resource_baselinehourly(resource)
         for hour in range(1, 25):
             baseline, is_create = hourly_baseline.objects.get_or_create(team=team,
@@ -204,14 +216,12 @@ def get_history_resource_usage(resource, session, team, date, hour):
     usage = 0
     if not hour:
         # for daily data, try to get it from resource usage table
-        # if not found, get if from wattdepot)
+        # if not found, get if from ResourceStorage
         usage = resource_mgr.team_resource_usage(date, team, resource)
-        if not usage and not goal_settings.manual_entry and resource == "energy":
-            usage = resource_mgr.get_history_energy_data(session, team, date, None)
-    else:
-        # for hourly data, always get it from wattdepot)
-        if not goal_settings.manual_entry and resource == "energy":
-            usage = resource_mgr.get_history_energy_data(session, team, date, hour)
+
+    if not usage and goal_settings and not goal_settings.manual_entry:
+        storage = get_resource_storage(goal_settings.data_storage)
+        usage = resource_mgr.get_history_resource_data(session, team, date, hour, storage)
 
     return usage
 
@@ -230,14 +240,20 @@ def get_goal_percent(date, team, resource, goal_settings):
     return goal_settings.goal_percent_reduction
 
 
-def update_realtime_resource_usage(resource, date):
-    """update the real time resource usage."""
+def update_resource_usage(resource, date):
+    """Update the latest resource usage from Storage server."""
+
     session = requests.session()
+
     for team in Team.objects.all():
-        # update the latest resource usage before checking if the team goal settings is not manual
         goal_settings = team_goal_settings(team, resource)
-        if resource == "energy" and not goal_settings.manual_entry:
-            resource_mgr.update_team_energy_usage(session, date, team)
+        if not goal_settings.manual_entry:
+            storage = get_resource_storage(goal_settings.data_storage)
+            resource_mgr.update_team_resource_usage(resource, session, date, team, storage)
+
+    # clear the cache for energy ranking, and RIB where it displays
+    round_name = challenge_mgr.get_round_name(date)
+    cache_mgr.delete("%s_ranks-%s" % (resource, slugify(round_name)))
 
 
 def check_resource_goals(resource, date):
@@ -253,7 +269,7 @@ def check_resource_goals(resource, date):
     if not rounds_info["competition_start"] < date < rounds_info["competition_end"]:
         return 0
 
-    update_realtime_resource_usage(resource, date)
+    update_resource_usage(resource, date)
 
     is_awarded = False
     for team in Team.objects.all():

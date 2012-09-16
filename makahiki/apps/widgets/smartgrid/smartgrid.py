@@ -301,7 +301,9 @@ def get_available_events(user):
 
         unlock_events = []
         for event in events:
-            if is_unlock(user, event) and not event.is_event_completed():
+            if is_unlock(user, event) and \
+               is_level_unlock(user, event.level) and \
+               not event.is_event_completed():
                 unlock_events.append(event)
 
         events = unlock_events

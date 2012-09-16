@@ -2,6 +2,7 @@
 import datetime
 
 from django.db import models
+from apps.managers.cache_mgr import cache_mgr
 
 from apps.managers.team_mgr.models import Team
 
@@ -75,6 +76,9 @@ class ResourceGoalSetting(models.Model):
     BASELINE_CHOICES = (("Dynamic", "Dynamic"),
                     ("Fixed", "Fixed"))
 
+    STORAGE_CHOICES = (("Wattdepot", "Wattdepot"),
+                        ("eGauge", "eGauge"))
+
     team = models.ForeignKey(
         Team,
         help_text="The team which this goal is related to.")
@@ -89,6 +93,13 @@ class ResourceGoalSetting(models.Model):
         max_length=20,
         help_text="The method of calculating the baseline.")
 
+    data_storage = models.CharField(
+        default="Wattdepot",
+        blank=True, null=True,
+        choices=STORAGE_CHOICES,
+        max_length=20,
+        help_text="The storage service of the usage data."
+    )
     goal_points = models.IntegerField(
         default=20,
         help_text="The amount of points to award for completing a goal.")
@@ -115,12 +126,20 @@ class ResourceGoalSetting(models.Model):
 
 class EnergyGoalSetting(ResourceGoalSetting):
     """Energy goal settings."""
-    pass
+
+    def save(self, *args, **kwargs):
+        """Custom save method to set fields."""
+        super(EnergyGoalSetting, self).save(args, kwargs)
+        cache_mgr.delete("goal_setting-%s-%s" % ("energy", self.team.name))
 
 
 class WaterGoalSetting(ResourceGoalSetting):
     """Water goal settings"""
-    pass
+
+    def save(self, *args, **kwargs):
+        """Custom save method to set fields."""
+        super(WaterGoalSetting, self).save(args, kwargs)
+        cache_mgr.delete("goal_setting-%s-%s" % ("water", self.team.name))
 
 
 class ResourceBaselineDaily(models.Model):
