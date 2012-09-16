@@ -332,11 +332,13 @@ def get_round_name(submission_date=None):
     return key
 
 
-def in_competition():
+def in_competition(submission_date=None):
     """Return True if we are currently in the competition."""
-    today = datetime.datetime.today()
+    if not submission_date:
+        submission_date = datetime.datetime.today()
+
     rounds_info = get_all_round_info()
-    return rounds_info["competition_start"] < today < rounds_info["competition_end"]
+    return rounds_info["competition_start"] < submission_date < rounds_info["competition_end"]
 
 
 def get_game_admin_models():

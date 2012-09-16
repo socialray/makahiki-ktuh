@@ -36,6 +36,7 @@ class QuestConditionsTest(TransactionTestCase):
         self.user.save()
 
         self.quest = test_utils.create_quest(completion_conditions=False)
+        test_utils.set_competition_round()
 
     def testAllocatedTicket(self):
         """

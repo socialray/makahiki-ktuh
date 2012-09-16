@@ -216,6 +216,12 @@ def player_last_awarded_submission(profile):
 
 def player_add_points(profile, points, transaction_date, message, related_object=None):
     """Adds points based on the point value of the submitted object."""
+
+    # player won't get points if outside of the competitions.
+    # ignore the transaction
+    if not challenge_mgr.in_competition(transaction_date):
+        return
+
     # Create a transaction first.
     transaction = PointsTransaction(
         user=profile.user,
@@ -240,6 +246,9 @@ def player_remove_points(profile, points, transaction_date, message, related_obj
     If the submission date is the same as the last_awarded_submission
     field, we rollback to a previously completed task.
     """
+
+    if not challenge_mgr.in_competition(transaction_date):
+        return
 
     # update the scoreboard entry
     _update_scoreboard_entry(profile, points * -1, transaction_date)
