@@ -10,9 +10,6 @@ from apps.managers.challenge_mgr import challenge_mgr
 
 from apps.widgets.ask_admin.forms import FeedbackForm
 
-ADMINS = (("Makahiki Developers", "makahiki-dev@googlegroups.com"),)
-FROM_EMAIL = ADMINS[0][1]
-
 
 def supply(request, page_name):
     """Supply view_objects for widget rendering, returns form."""
@@ -47,12 +44,13 @@ def send_feedback(request):
                 challenge.competition_name,
                 request.user.get_profile().name)
 
-            if challenge.email_enabled:
-                mail = EmailMultiAlternatives(subject, message, FROM_EMAIL,
+            if challenge.email_enabled or True:
+                mail = EmailMultiAlternatives(subject, message, challenge.contact_email,
                     [challenge.contact_email, ], headers={
                     "Reply-To": request.user.email})
 
                 mail.attach_alternative(html_message, 'text/html')
+                print html_message
                 mail.send()
 
             #print "email sent %s" % html_message
