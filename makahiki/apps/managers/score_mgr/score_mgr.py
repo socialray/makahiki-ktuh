@@ -442,3 +442,13 @@ def award_referral_bonus(referral, referrer):
                                                              referral)
     player_add_points(referrer, points, datetime.datetime.today(),
                       '%s Referred %s' % (ref_type.capitalize(), referral.name), referrer)
+
+
+def copy_scoreboard_entry(previous_round, current_round):
+    """copy the scoreboardentry to the new round."""
+    for entry in ScoreboardEntry.objects.filter(round_name=previous_round):
+        ScoreboardEntry.objects.create(
+            profile=entry.profile,
+            round_name=current_round,
+            points=entry.points,
+            last_awarded_submission=entry.last_awarded_submission)

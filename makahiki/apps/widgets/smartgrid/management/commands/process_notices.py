@@ -17,7 +17,6 @@ class Command(MakahikiBaseCommand):
     def handle(self, *args, **options):
         """process daily notices"""
         print '****** Processing notices at %s *******' % datetime.datetime.today()
-        smartgrid.notify_round_started()
         smartgrid.notify_commitment_end()
         smartgrid.process_rsvp()
         smartgrid.check_daily_submissions()
