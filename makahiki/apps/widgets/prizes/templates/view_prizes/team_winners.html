@@ -1,0 +1,36 @@
+{% extends "admin/base_site.html" %}
+{% load i18n l10n %}
+{% load url from future %}
+{% load admin_urls %}
+{% load admin_static %}
+
+
+{% block breadcrumbs %}
+    <div class="breadcrumbs">
+        <a href="{% url 'admin:index' %}">{% trans 'Home' %}</a>
+        &rsaquo; <a href="/admin/prizes/prize">Prizes</a>
+        &rsaquo; {{ prize }} - {{ prize.award_to }} winners
+    </div>
+{% endblock %}
+
+{% block content %}
+    <div class="module">
+        <table>
+            <tr>
+                <th>Team</th>
+                <th>Winner</th>
+            </tr>
+            {% for team in prize_team_winners %}
+                <tr>
+                    <td>{{ team }}</td>
+                    <td>
+                        <a href='/prizes/{{ team.prize.pk }}/{{ team.leader.user.pk }}/view-form/'>
+                            {{ team.leader }} (View pickup form)
+                        </a>
+                    </td>
+
+                </tr>
+            {% endfor %}
+        </table>
+    </div>
+{% endblock %}

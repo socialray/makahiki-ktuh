@@ -1,0 +1,14 @@
+2012-09-16 23:33:49 [37315] [INFO] Starting gunicorn 0.13.4
+2012-09-16 23:33:49 [37315] [INFO] Listening at: http://127.0.0.1:8000 (37315)
+2012-09-16 23:33:49 [37315] [INFO] Using worker: sync
+2012-09-16 23:33:49 [37318] [INFO] Booting worker with pid: 37318
+2012-09-16 23:33:49 [37319] [INFO] Booting worker with pid: 37319
+2012-09-16 23:33:49 [37320] [INFO] Booting worker with pid: 37320
+2012-09-16 23:33:53 [37315] [INFO] Handling signal: int
+2012-09-16 23:33:54 [37315] [INFO] Shutting down: Master
+2012-09-16 23:33:57 [37321] [INFO] Starting gunicorn 0.13.4
+2012-09-16 23:33:57 [37321] [INFO] Listening at: http://127.0.0.1:8000 (37321)
+2012-09-16 23:33:57 [37321] [INFO] Using worker: sync
+2012-09-16 23:33:57 [37324] [INFO] Booting worker with pid: 37324
+2012-09-16 23:33:57 [37325] [INFO] Booting worker with pid: 37325
+2012-09-16 23:33:57 [37326] [INFO] Booting worker with pid: 37326

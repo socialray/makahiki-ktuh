@@ -2,11 +2,13 @@
 import datetime
 
 from django.contrib.auth.decorators import user_passes_test
+from django.contrib.auth.models import User
 from django.http import HttpResponse
 from django.shortcuts import render_to_response, get_object_or_404
 from django.template.context import RequestContext
 from django.views.decorators.cache import never_cache
 from apps.managers.challenge_mgr import challenge_mgr
+from apps.managers.team_mgr.models import Team
 from apps.widgets.notifications.models import NoticeTemplate
 from apps.widgets.prizes.models import Prize
 
@@ -55,11 +57,11 @@ def _get_prizes(team):
 
 @never_cache
 @user_passes_test(lambda u: u.is_staff, login_url="/landing")
-def prize_form(request, prize_id):
+def prize_form(request, prize_id, user_id):
     """Supply the prize form."""
     _ = request
     prize = get_object_or_404(Prize, pk=prize_id)
-    prize.winner = prize.leader().user
+    prize.winner = get_object_or_404(User, pk=user_id)
     challenge = challenge_mgr.get_challenge()
 
     try:
@@ -79,3 +81,17 @@ def prize_form(request, prize_id):
         'competition_name': challenge.competition_name,
     })
     return HttpResponse(message, content_type="text", mimetype='text/html')
+
+
+def prize_team_winners(request, prize_id):
+    """display the winner for the individual team prize winner."""
+    prize = get_object_or_404(Prize, pk=prize_id)
+    teams = Team.objects.all()
+    for team in teams:
+        team.leader = prize.leader(team=team)
+        team.prize = prize
+
+    return render_to_response("view_prizes/team_winners.html", {
+        "prize": prize,
+        "prize_team_winners": teams,
+    }, context_instance=RequestContext(request))

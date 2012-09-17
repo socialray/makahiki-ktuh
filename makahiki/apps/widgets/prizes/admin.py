@@ -3,6 +3,7 @@ from django.contrib.contenttypes.models import ContentType
 from django.core.urlresolvers import reverse
 from django.contrib import admin
 from apps.managers.challenge_mgr import challenge_mgr
+from apps.managers.team_mgr.models import Team
 from apps.widgets.notifications.models import UserNotification, NoticeTemplate
 
 from apps.widgets.prizes.models import Prize
@@ -15,48 +16,71 @@ class PrizeAdmin(admin.ModelAdmin):
     list_filter = ['round_name']
     actions = ["notify_winner"]
 
+    def _send_winner_notification(self, prize, leader):
+        """send notification."""
+        if leader and not self._notification_exists(prize, leader):
+            # Notify winner using the template.
+            template = NoticeTemplate.objects.get(notice_type='prize-winner')
+            message = template.render({'PRIZE': prize})
+            UserNotification.create_info_notification(leader.user, message, True, prize)
+
+            challenge = challenge_mgr.get_challenge()
+            subject = "[%s] Congratulations, you won a prize!" % challenge.competition_name
+            UserNotification.create_email_notification(
+                leader.user.email, subject, message, message)
+
+    def _notification_exists(self, prize, leader):
+        """returns true if the notification already created."""
+        return leader and UserNotification.objects.filter(
+            recipient=leader.user,
+            content_type=ContentType.objects.get(model="prize"),
+            object_id=prize.id).exists()
+
     def notify_winner(self, request, queryset):
         """pick winner."""
         _ = request
         for obj in queryset:
-            leader = obj.leader()
-            if leader and obj.award_to in ('individual_overall', 'individual_team')\
-                and not self.notice_sent(obj):
-                # Notify winner using the template.
-                template = NoticeTemplate.objects.get(notice_type='prize-winner')
-                message = template.render({'PRIZE': obj})
-                UserNotification.create_info_notification(leader.user, message, True, obj)
-
-                challenge = challenge_mgr.get_challenge()
-                subject = "[%s] Congratulations, you won a prize!" % challenge.competition_name
-                UserNotification.create_email_notification(
-                    leader.user.email, subject, message, message)
-
+            if obj.award_to == 'individual_overall':
+                leader = obj.leader()
+                self._send_winner_notification(obj, leader)
+            elif obj.award_to == 'individual_team':
+                teams = Team.objects.all()
+                for team in teams:
+                    leader = obj.leader(team=team)
+                    self._send_winner_notification(obj, leader)
         self.message_user(request, "Winners notification sent.")
 
     notify_winner.short_description = "Notify winner for selected prizes."
 
     def winner(self, obj):
         """return the winner and link to pickup form."""
-        leader = obj.leader()
-        if leader and obj.award_to in ('individual_overall', 'individual_team'):
-            return "%s (<a href='%s'>View pickup form</a>)" % (leader,
-            reverse('prize_view_form', args=(obj.pk,)))
+        if obj.award_to == 'individual_overall':
+            leader = obj.leader()
+            if leader:
+                return "%s (<a href='%s'>View pickup form</a>)" % (leader,
+                    reverse('prize_view_form', args=(obj.pk, leader.user.pk)))
+        elif obj.award_to == 'individual_team':
+            return "<a href='%s'>View winners</a>" % reverse('prize_team_winners', args=(obj.pk, ))
         else:
+            leader = obj.leader()
             return leader
+
     winner.allow_tags = True
-    winner.short_description = 'Winner'
+    winner.short_description = 'Current Winner'
 
     def notice_sent(self, obj):
         """return True if the notification had been sent."""
-        leader = obj.leader()
-        if leader and obj.award_to in ('individual_overall', 'individual_team'):
-            return UserNotification.objects.filter(
-                recipient=leader.user,
-                content_type=ContentType.objects.get(model="prize"),
-                object_id=obj.id).exists()
+        if obj.award_to == 'individual_overall':
+            leader = obj.leader()
+            return self._notification_exists(obj, leader)
+        elif obj.award_to == 'individual_team':
+            teams = Team.objects.all()
+            for team in teams:
+                leader = obj.leader(team=team)
+                return self._notification_exists(obj, leader)
         else:
             return "N/A"
+
     notice_sent.short_description = 'Winner Notice Sent'
 
 
