@@ -21,13 +21,21 @@ def send_reminders():
 
 @task
 def process_notices():
-    """Send out notifications such as round transition, commitment end,
+    """Send out notifications such as commitment end,
     and process rsvp reminder and penalty."""
     print '****** Processing notices at %s *******' % datetime.datetime.today()
 
     challenge_mgr.init()
-    smartgrid.notify_round_started()
     smartgrid.notify_commitment_end()
     smartgrid.process_rsvp()
     smartgrid.check_daily_submissions()
     badges.award_possible_daily_badges()
+
+
+@task
+def process_rounds():
+    """Send out notifications such as round transition."""
+    print '****** Processing rounds at %s *******' % datetime.datetime.today()
+
+    challenge_mgr.init()
+    smartgrid.notify_round_started()
