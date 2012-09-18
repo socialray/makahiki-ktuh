@@ -702,8 +702,9 @@ ul {
 }
 
 .quest-list li.selected a {
-    color: @questbar-bkg-color-start;
-    background-color: @questbar-font-color;
+    color: @questbar-font-color;
+    .background-gradient (fadeout(@questbar-bkg-color-start, @questbar-transparency) , fadeout(@questbar-bkg-color-end, @questbar-transparency));
+//    background-color: fadeout(@questbar-bkg-color-start, (@questbar-transparency / 2))
     .makahiki-box;
     padding: 4px;
 }
