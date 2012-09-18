@@ -732,14 +732,16 @@ class EmailReminderAdmin(admin.ModelAdmin):
     """reminder admin"""
     readonly_fields = ('user', 'action', 'sent')
     fields = ("send_at", "email_address", 'user', 'action', 'sent')
-    list_display = ('send_at', 'user', 'email_address', 'sent')
+    list_display = ('send_at', 'user', 'email_address', 'action', 'sent')
+    search_fields = ('user__username', 'email_address', 'action__title')
 
 
 class TextReminderAdmin(admin.ModelAdmin):
     """reminder admin"""
     readonly_fields = ('user', 'action', 'sent')
     fields = ("send_at", "text_number", 'user', 'action', 'sent')
-    list_display = ('send_at', 'user', 'text_number', 'sent')
+    list_display = ('send_at', 'user', 'text_number', 'action', 'sent')
+    search_fields = ('user__username', 'text_number', 'action__title')
 
 
 admin.site.register(EmailReminder, EmailReminderAdmin)

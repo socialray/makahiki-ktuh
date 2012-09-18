@@ -13,7 +13,7 @@ class ProfileForm(forms.Form):
     """Define the form for the My_Info widget."""
     def __init__(self, *args, **kwargs):
         """Override init to take a user argument."""
-        self.user = kwargs.pop('user', None)
+        self.username = kwargs.pop('user', None)
         self.message = None
         super(ProfileForm, self).__init__(*args, **kwargs)
 
@@ -41,7 +41,7 @@ class ProfileForm(forms.Form):
             raise forms.ValidationError('This field is required')
 
         # Check for duplicate name
-        if Profile.objects.exclude(user=self.user).filter(name=name).count() > 0:
+        if Profile.objects.exclude(user__username=self.username).filter(name=name).count() > 0:
             raise forms.ValidationError("%s is taken.  Please use another name.")
 
         return name
