@@ -16,15 +16,19 @@ def supply(request, page_name):
     team = request.user.get_profile().team
     current_round = challenge_mgr.get_round_name()
     if team and current_round:
-        members_with_points = []
-        zero_point_members = []
         members_with_points = ScoreboardEntry.objects.filter(
             round_name=current_round).select_related(
-            'profile').filter(profile__team=team).order_by(
-            '-points')
+            'profile').filter(profile__team=team)
         zero_point_members = team.profile_set.exclude(
             id__in=members_with_points.values_list(
             'profile__id', flat=True))
+
+        # calculate and sort by rank
+        members_with_points = sorted(list(members_with_points),
+            key=lambda member: member.profile.overall_rank())
+
+        zero_point_members = sorted(list(zero_point_members),
+            key=lambda member: member.overall_rank())
 
     else:
         members_with_points = None
