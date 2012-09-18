@@ -166,7 +166,7 @@ class CommitmentCommentForm(forms.Form):
     social_email = forms.EmailField(required=False)
 
     def __init__(self, *args, **kwargs):
-        self.user = kwargs.pop('user', None)
+        self.username = kwargs.pop('user', None)
         super(CommitmentCommentForm, self).__init__(*args, **kwargs)
 
     def clean_social_email(self):
@@ -174,8 +174,10 @@ class CommitmentCommentForm(forms.Form):
         email = self.cleaned_data['social_email'].strip().lower()
         if email:
             user = player_mgr.get_user_by_email(email)
-            if user == None or user == self.user:
+            if user == None:
                 raise forms.ValidationError('Can not find a registered user with such email.')
+            elif user.username == self.username:
+                raise forms.ValidationError('Can not use your own email.')
         return email
 
 

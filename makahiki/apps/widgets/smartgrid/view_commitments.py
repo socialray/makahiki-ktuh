@@ -23,7 +23,7 @@ def add(request, commitment):
         return  HttpResponseRedirect(
             reverse("activity_task", args=(commitment.type, commitment.slug,)))
 
-    form = CommitmentCommentForm(request.POST, user=request.user)
+    form = CommitmentCommentForm(request.POST, user=request.user.username)
     if not form.is_valid():
         # invalid form
         request.session['form'] = form

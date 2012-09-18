@@ -42,7 +42,7 @@ def save(request):
     form = None
     if request.method == "POST":
         user = request.user
-        form = ProfileForm(request.POST, user=request.user)
+        form = ProfileForm(request.POST, user=request.user.username)
         if form.is_valid():
             profile = user.get_profile()
             name = form.cleaned_data["display_name"].strip()
