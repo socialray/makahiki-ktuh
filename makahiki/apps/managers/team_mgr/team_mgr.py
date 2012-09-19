@@ -100,7 +100,7 @@ def team_active_participation(num_results=None, round_name=None):
             if not t in active_participation:
                 t.active_participation = 0
                 participation.append(t)
-        cache_mgr.set_cache('active_p-%s' % slugify(round_name), participation, 3600)
+        cache_mgr.set_cache('active_p-%s' % slugify(round_name), participation, 1800)
     return participation
 
 
@@ -110,11 +110,6 @@ def award_member_points(team, points, reason):
     for profile in team.profile_set.all():
         if profile.setup_complete:
             today = datetime.datetime.today()
-            # Hack to get around executing this script at midnight.  We want to award
-            # points earlier to ensure they are within the round they were completed.
-            if today.hour == 0:
-                today = today - datetime.timedelta(hours=1)
-
             date = "%d/%d/%d" % (today.month, today.day, today.year)
             profile.add_points(points, today, "%s for %s" % (reason, date))
             profile.save()

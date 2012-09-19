@@ -15,7 +15,7 @@ challenge_mgr.register_game_admin_model("Participation Game", ParticipationSetti
 
 class TeamParticipationAdmin(admin.ModelAdmin):
     """EnergyGoal administrator interface definition."""
-    list_display = ["team", "participation", "updated_at"]
+    list_display = ["team", "participation", "awarded_percent", "updated_at"]
 
 
 admin.site.register(TeamParticipation, TeamParticipationAdmin)

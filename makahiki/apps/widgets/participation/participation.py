@@ -19,19 +19,26 @@ def award_participation():
         # check if the participation rate change
         if team_participation.participation != team.active_participation:
             # save the new participation rate
-            team_participation.participation = team.active_participation
-            team_participation.save()
-            cache_mgr.delete("team_participation")
 
             if team.active_participation == 100:
-                team_mgr.award_member_points(team,
+                if team_participation.awarded_percent != "100":
+                    team_participation.awarded_percent = "100"
+                    team_mgr.award_member_points(team,
                                              p_setting.points_100_percent,
                                              "Team 100% participation")
             elif team.active_participation >= 75:
-                team_mgr.award_member_points(team,
+                if team_participation.awarded_percent != "75":
+                    team_participation.awarded_percent = "75"
+                    team_mgr.award_member_points(team,
                                              p_setting.points_75_percent,
                                              "Team 75% participation")
             elif team.active_participation >= 50:
-                team_mgr.award_member_points(team,
+                if not team_participation.awarded_percent:
+                    team_participation.awarded_percent = "50"
+                    team_mgr.award_member_points(team,
                                              p_setting.points_50_percent,
                                              "Team 50% participation")
+
+            team_participation.participation = team.active_participation
+            team_participation.save()
+            cache_mgr.delete("team_participation")

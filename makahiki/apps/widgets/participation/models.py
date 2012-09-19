@@ -31,6 +31,12 @@ class TeamParticipation(models.Model):
         default=0,
         help_text="The participate rate of the team.",)
 
+    awarded_percent = models.CharField(
+        max_length=10,
+        null=True, blank=True,
+        help_text="The awarded percentage."
+    )
+
     updated_at = models.DateTimeField(editable=False, auto_now=True)
 
     class Meta:
