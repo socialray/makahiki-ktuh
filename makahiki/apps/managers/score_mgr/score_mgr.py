@@ -194,7 +194,8 @@ def player_points_leaders(num_results=None, round_name=None):
     if not round_name:
         round_name = challenge_mgr.get_round_name()
 
-    entries = ScoreboardEntry.objects.filter(round_name=round_name,).order_by(
+    entries = ScoreboardEntry.objects.filter(round_name=round_name,).select_related(
+    'profile', 'user__is_staff').filter(profile__user__is_staff=False).order_by(
         "-points",
         "-last_awarded_submission").values('profile', 'profile__name', 'points')
     if entries:
