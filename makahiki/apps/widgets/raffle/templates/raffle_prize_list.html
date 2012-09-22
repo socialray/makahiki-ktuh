@@ -32,11 +32,12 @@
                       <table class="table-striped">
                                   <thead>
                                       <tr><td class="column-text"><b>Raffle Prize</b></td>
+                                          <td class="column-text"><b>Value</b>
                                           <td class="column-text"><b>Description</b></td>
                                       </tr>
                                   </thead>
 
-                                  {% for item in round_name.list|dictsort:"title" %}  
+                                  {% for item in round_name.list|dictsort:"value" reversed %}  
                                       <tr>
                                         <td class="column-text">
                                           <div><b>{{ item.title }}</b></div>
@@ -50,8 +51,10 @@
 
 
                                         </td>
-
-                                        <td class="column-text">{{item.description|markdown}}
+                                        <td class="column-text">
+                                            <b>${{item.value}}</b>
+                                        </td>
+                                        <td class="column-text"> &nbsp; {{item.description|markdown}}
                                         </td>
                                       </tr>
                                   {% endfor %} 
