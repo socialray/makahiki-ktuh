@@ -87,16 +87,23 @@ def unlock_on_date(user, date_string):
     return today >= unlock_date
 
 
-def unlock_on_event(user, event_slug, days=0):
+def unlock_on_event(user, event_slug, days=0, lock_after_days=0):
     """Returns true if the current date is equal to or after the date of the Event
-    defined by the event_slug, optionally days before. days should be a negative number."""
+    defined by the event_slug, optionally days before. days should be a negative number.
+    Optionally lock_after_days, if not zero then will return false lock_after_days
+    after the event."""
     _ = user
     today = datetime.today()
     day_delta = timedelta(days=days)
     event = Event.objects.get(slug=event_slug)
     if event:
         unlock_date = event.event_date + day_delta
-        return today >= unlock_date
+        if lock_after_days != 0:
+            day_after = timedelta(days=lock_after_days)
+            lock_date = event.event_date + day_after
+            return today >= unlock_date and today <= lock_date
+        else:
+            return today >= unlock_date
     else:
         return True
 
