@@ -42,6 +42,7 @@ class RafflePrizeAdmin(admin.ModelAdmin):
     """raffle admin"""
     form = RafflePrizeAdminForm
     list_display = ('title', 'round_name', 'value', 'winner_form', 'notice_sent')
+    ordering = ('round_name', 'value', 'title')
     actions = ["pick_winner", "notify_winner"]
     inlines = [RaffleTicketInline]
     list_filter = ['round_name']
@@ -84,7 +85,7 @@ class RafflePrizeAdmin(admin.ModelAdmin):
     def winner_form(self, obj):
         """return the winner and link to pickup form."""
         if obj.winner:
-            return "%s (<a href='%s'>View pickup form</a>)" % (obj.winner,
+            return "%s (<a href='%s'>View pickup form</a>)" % (obj.winner.get_profile(),
             reverse('raffle_view_form', args=(obj.pk,)))
         else:
             return '(None)'
