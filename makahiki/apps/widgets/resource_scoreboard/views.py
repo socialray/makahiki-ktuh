@@ -24,8 +24,9 @@ def resource_supply(request, resource, page_name):
     current_round = challenge_mgr.get_round_name()
     rounds = challenge_mgr.get_all_round_info()["rounds"]
     for key in rounds.keys():
-        if key == current_round or \
-           (page_name == "status" and key < current_round):
+        if key == current_round or\
+           (rounds[key]["start"] < rounds[current_round]["start"] and\
+            (rounds[key]["display_scoreboard"] or page_name == "status")):
             #round_resource_ranks[key] = resource_mgr.resource_ranks(resource, key)
             round_resource_goal_ranks[key] = resource_goal.resource_goal_ranks(resource, key)
 

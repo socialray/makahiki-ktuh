@@ -2,10 +2,10 @@
     {% if not view_objects.scoreboard.no_carousel %}
     <div id="score-carousel">
     {% endif %}
-        {% for round_name, standings in view_objects.scoreboard.round_standings.items %}
+        {% for round_name, standings in view_objects.scoreboard.round_standings.items reversed %}
         <div class="item">
             <div class="content-box-title set-width-outer-width">
-                Top Score Game ({{ round_name }})
+                Top Score Game (Team, {{ round_name }})
                 {% if not view_objects.scoreboard.no_carousel %}
                     <a href="#" style="float: right">
                        <img src="{{ STATIC_URL}}images/icons/icon-help-sm.png"
@@ -113,11 +113,11 @@
         {% if not view_objects.scoreboard.no_carousel %}
         </div>
         <center>
-            <div id="nav" class="nav nav-page-list"> 
-            {% for i in range  %} 
-                <a class="" href="#">{{i}}</a> 
-            {% endfor %}
-            </div> 
+            <div id="nav" class="nav nav-page-list">
+                {% for i in range  %}
+                    <a class="" href="#">{{i}}</a>
+                {% endfor %}
+            </div>
         </center>
         {% endif %}
     </div>

@@ -1,31 +1,63 @@
-{% with p_settings=view_objects.participation.p_settings %}
 <div id="outer-box" class="content-box">
-            <div class="content-box-title">
-                 Active Participation Game ({{ CURRENT_ROUND_INFO.name }})
-                   <a href="#" style="float: right">
-                       <img src="{{ STATIC_URL}}images/icons/icon-help-sm.png"
-                            width="20" align="center"
-                            title="Click to get help about this window"
-                            onclick="toggleHelp(event, 'widget', 'participation-game'); return false;" />
-                   </a>
+    <div id="participation-cycle">
+        {% for round_name, ranks in view_objects.participation.round_participation_ranks.items reversed %}
+            <div class="item">
+                {% with p_settings=ranks.p_settings %}
+                        <div class="content-box-title">
+                            Active Participation Game ({{ round_name }})
+                            <a href="#" style="float: right">
+                                <img src="{{ STATIC_URL }}images/icons/icon-help-sm.png"
+                                     width="20" align="center"
+                                     title="Click to get help about this window"
+                                     onclick="toggleHelp(event, 'widget', 'participation-game'); return false;"/>
+                            </a>
+                        </div>
+                        <h4 class="content-box-subtitle">100% participation
+                                                         ({{ p_settings.points_100_percent }}
+                                                         points)</h4>
+                        {% with participation=ranks.participation_100 %}
+                            {% include "participation.html" %}
+                        {% endwith %}
+                        <h4 class="content-box-subtitle">75% participation
+                                                         ({{ p_settings.points_75_percent }}
+                                                         points)</h4>
+                        {% with participation=ranks.participation_75 %}
+                            {% include "participation.html" %}
+                        {% endwith %}
+                        <h4 class="content-box-subtitle">50% participation
+                                                         ({{ p_settings.points_50_percent }}
+                                                         points)</h4>
+                        {% with participation=ranks.participation_50 %}
+                            {% include "participation.html" %}
+                        {% endwith %}
+                        {% with participation=ranks.participation_0 %}
+                            {% if participation %}
+                                <h4 class="content-box-subtitle">Below 50% participation</h4>
+                                {% include "participation.html" %}
+                            {% endif %}
+                        {% endwith %}
+                {% endwith %}
             </div>
-            <h4 class="content-box-subtitle">100% participation ({{ p_settings.points_100_percent }} points)</h4>
-                {% with participation=view_objects.participation.participation_100 %}
-                    {% include "participation.html" %}
-                {% endwith %}
-            <h4 class="content-box-subtitle">75% participation ({{ p_settings.points_75_percent }} points)</h4>
-                {% with participation=view_objects.participation.participation_75 %}
-                    {% include "participation.html" %}
-                {% endwith %}
-            <h4 class="content-box-subtitle">50% participation ({{ p_settings.points_50_percent }} points)</h4>
-                {% with participation=view_objects.participation.participation_50 %}
-                    {% include "participation.html" %}
-                {% endwith %}
-            {% with participation=view_objects.participation.participation_0 %}
-            {% if participation %}
-                <h4 class="content-box-subtitle">Below 50% participation</h4>
-                {% include "participation.html" %}
-            {% endif %}
-            {% endwith %}
-</div>
-{% endwith %}
+        {% endfor %}
+    </div>
+        <center>
+            <div id="p-nav" class="nav nav-page-list">
+                {% for i in range  %}
+                    <a class="" href="#">{{i}}</a>
+                {% endfor %}
+            </div>
+        </center>
+    </div>
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $("#participation-cycle").cycle({
+                fx:"fade",
+                timeout:3500,
+                delay:-1000,
+                sync:true,
+                pager:'#p-nav',
+                pause:1
+            });
+        });
+    </script>

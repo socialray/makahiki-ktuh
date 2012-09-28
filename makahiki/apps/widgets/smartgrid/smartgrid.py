@@ -372,8 +372,10 @@ def notify_round_started():
     print 'Current Round: %s' % current_round
 
     if current_round and previous_round and current_round != previous_round:
-        print "carry over scoreboard entry to new round."
-        score_mgr.copy_scoreboard_entry(previous_round, current_round)
+        # only carry over the scoreboard entry if the round don't need to be reset
+        if not rounds[current_round]["round_reset"]:
+            print "carry over scoreboard entry to new round."
+            score_mgr.copy_scoreboard_entry(previous_round, current_round)
 
         print 'Sending out round transition notices.'
         template = NoticeTemplate.objects.get(notice_type="round-transition")

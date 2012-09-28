@@ -16,8 +16,13 @@ def supply(request, page_name):
     current_round = challenge_mgr.get_round_name()
     rounds = challenge_mgr.get_all_round_info()["rounds"]
     for key in rounds.keys():
+        # 1. always display current round
+        # 2. if not future round
+        #    a. display the round with the "display_scoreboard" flag
+        #    b. display in the status page
         if key == current_round or \
-           (page_name == "status" and key < current_round):
+           (rounds[key]["start"] < rounds[current_round]["start"] and \
+            (rounds[key]["display_scoreboard"] or page_name == "status")):
             round_standings[key] = {
                 "team_standings": team_mgr.team_points_leaders(num_results, key),
                 "profile_standings": player_mgr.points_leaders(num_results, key),

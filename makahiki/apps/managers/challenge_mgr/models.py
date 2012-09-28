@@ -213,6 +213,14 @@ class RoundSetting(models.Model):
     end = models.DateTimeField(
         default=datetime.datetime.today() + datetime.timedelta(7),
         help_text="The end date of the round.")
+    round_reset = models.BooleanField(
+        default=False,
+        help_text="Reset the points for this round?"
+    )
+    display_scoreboard = models.BooleanField(
+        default=True,
+        help_text="Display the round in scoreboard?"
+    )
 
     class Meta:
         """Meta"""

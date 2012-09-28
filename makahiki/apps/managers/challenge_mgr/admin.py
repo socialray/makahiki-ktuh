@@ -74,7 +74,7 @@ admin.site.register(GameInfo, GameInfoAdmin)
 
 class RoundSettingAdmin(admin.ModelAdmin):
     """PageSetting administrator interface definition."""
-    list_display = ["name", "start", "end"]
+    list_display = ["name", "start", "end", "round_reset", "display_scoreboard"]
 
 admin.site.register(RoundSetting, RoundSettingAdmin)
 

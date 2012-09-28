@@ -1,6 +1,9 @@
 """The model definition for scores."""
 
 from django.db import models
+from django.template.defaultfilters import slugify
+from apps.managers.cache_mgr import cache_mgr
+from apps.managers.challenge_mgr import challenge_mgr
 from apps.managers.team_mgr.models import Team
 
 
@@ -23,6 +26,11 @@ class ParticipationSetting(models.Model):
 
 class TeamParticipation(models.Model):
     """participation for each team."""
+    round_name = models.CharField(
+        null=True, blank=True,
+        help_text="The name of the round.",
+        max_length=50,)
+
     team = models.ForeignKey(
         Team,
         help_text="The team.")
@@ -42,3 +50,9 @@ class TeamParticipation(models.Model):
     class Meta:
         """Meta"""
         ordering = ["-participation", ]
+
+    def save(self, *args, **kwargs):
+        """Custom save method."""
+        super(TeamParticipation, self).save(*args, **kwargs)
+        for round_name in challenge_mgr.get_all_round_info()["rounds"].keys():
+            cache_mgr.delete("p_ranks-%s" % slugify(round_name))

@@ -22,7 +22,7 @@
         <div class="tab-content">
 {% endif %}
 
-{% for round_name, ranks in round_resource_ranks.items %}
+{% for round_name, ranks in round_resource_ranks.items reversed %}
     {%if not no_carousel %}
         <div class="item">
             <div class="set-width-outer-width">
@@ -127,7 +127,11 @@
     </script>
 {% else %} 
     <center>
-        <div id="nav" class="nav nav-page-list"></div>
+        <div id="nav" class="nav nav-page-list">
+            {% for i in range  %}
+                <a class="" href="#">{{i}}</a>
+            {% endfor %}
+        </div>
     </center>
     </div>
     <script type="text/javascript">

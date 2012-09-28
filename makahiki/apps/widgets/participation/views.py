@@ -1,7 +1,6 @@
 """Prepares the views for participation widget."""
-from apps.managers.cache_mgr import cache_mgr
-from apps.managers.team_mgr.models import Team
-from apps.widgets.participation.models import TeamParticipation, ParticipationSetting
+from apps.managers.challenge_mgr import challenge_mgr
+from apps.widgets.participation import participation
 
 
 def supply(request, page_name):
@@ -10,40 +9,19 @@ def supply(request, page_name):
     _ = request
     _ = page_name
 
-    return get_participations()
+    round_participation_ranks = {}
 
+    current_round = challenge_mgr.get_round_name()
+    rounds = challenge_mgr.get_all_round_info()["rounds"]
+    for key in rounds.keys():
+        if key == current_round or\
+           (rounds[key]["start"] < rounds[current_round]["start"] and\
+            (rounds[key]["display_scoreboard"] or page_name == "status")):
+            round_participation_ranks[key] = participation.participation_ranks(key)
 
-def get_participations():
-    """returns the team participation in categories."""
-    return_dict = cache_mgr.get_cache("team_participation")
-    if return_dict is None:
-        p_settings, _ = ParticipationSetting.objects.get_or_create(pk=1)
-        return_dict = {
-            "participation_100": [],
-            "participation_75": [],
-            "participation_50": [],
-            "participation_0": [],
-            "p_settings": p_settings}
-        team_participation = TeamParticipation.objects.all().select_related("team")
-
-        if not team_participation:
-            team_participation = Team.objects.all()
-            for p in team_participation:
-                p.team = p
-                p.participation = 0
-                return_dict["participation_0"].append(p)
-        else:
-            for p in team_participation:
-                if p.participation >= 100:
-                    return_dict["participation_100"].append(p)
-                elif p.participation >= 75:
-                    return_dict["participation_75"].append(p)
-                elif p.participation >= 50:
-                    return_dict["participation_50"].append(p)
-                else:
-                    return_dict["participation_0"].append(p)  # less than 50
-        cache_mgr.set_cache("team_participation", return_dict, 3600)
-    return return_dict
+    return {
+        "round_participation_ranks": round_participation_ranks,
+    }
 
 
 def remote_supply(request, page_name):

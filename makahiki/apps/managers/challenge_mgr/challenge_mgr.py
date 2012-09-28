@@ -242,7 +242,9 @@ def get_all_round_info_from_cache():
         for r in roundsettings:
             rounds[r.name] = {
                 "start": r.start,
-                "end": r.end, }
+                "end": r.end,
+                "round_reset": r.round_reset,
+                "display_scoreboard": r.display_scoreboard}
             if index == 0:
                 rounds_info["competition_start"] = r.start
             index += 1

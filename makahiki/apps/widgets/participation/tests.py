@@ -6,6 +6,7 @@ from django.test import TransactionTestCase
 from apps.managers.challenge_mgr import challenge_mgr
 from apps.utils import test_utils
 from apps.widgets.participation import participation
+from apps.managers.cache_mgr import cache_mgr
 
 
 class ParticipationTest(TransactionTestCase):
@@ -22,7 +23,6 @@ class ParticipationTest(TransactionTestCase):
         self.user = test_utils.setup_user(username="user", password="changeme")
         test_utils.set_competition_round()
         challenge_mgr.register_page_widget("learn", "participation")
-        from apps.managers.cache_mgr import cache_mgr
         cache_mgr.clear()
         self.client.login(username="user", password="changeme")
 
@@ -39,6 +39,6 @@ class ParticipationTest(TransactionTestCase):
         response = self.client.get(reverse("learn_index"))
 
         self.assertEqual(response.context["view_objects"]["participation"][
-            "participation_100"][0].team,
+            "round_participation_ranks"]["Round 1"]["participation_100"][0].team,
             profile.team,
             "The user's team should be leading.")
