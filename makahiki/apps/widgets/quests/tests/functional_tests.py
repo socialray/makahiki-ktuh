@@ -22,12 +22,12 @@ class QuestFunctionalTestCase(TransactionTestCase):
 
         self.client.login(username="user", password="changeme")
 
-    def testNoQuests(self):
-        """Test that the appropriate text is displayed when there are no quests."""
-        cache_mgr.clear()
-        response = self.client.get(reverse("home_index"))
-        self.assertContains(response,
-            "There are no quests available at this time.  Please check back later!")
+#    def testNoQuests(self):
+#        """Test that the appropriate text is displayed when there are no quests."""
+#        cache_mgr.clear()
+#        response = self.client.get(reverse("home_index"))
+#        self.assertContains(response,
+#            "There are no quests available at this time.  Please check back later!")
 
     def testGetQuests(self):
         """Test that quests show up in the interface."""
