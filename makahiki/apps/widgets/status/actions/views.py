@@ -1,7 +1,6 @@
 """handles the request for action status."""
 
 from django.db.models import Count
-from apps.managers.challenge_mgr import challenge_mgr
 
 from apps.widgets.quests.models import Quest
 from apps.widgets.smartgrid import smartgrid
@@ -59,10 +58,10 @@ def supply(request, page_name):
     if pending_members > 0:
         oldest_member = members[0]
 
-    # Calculate unused raffle tickets for current round.
+    # Calculate unused raffle tickets.
     elig_entries = ScoreboardEntry.objects.filter(
         points__gte=25,
-        round_name=challenge_mgr.get_round_name()).annotate(
+        round_name="Overall").annotate(
         count=Count('profile__user__raffleticket'))
 
     unused = 0

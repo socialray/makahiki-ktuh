@@ -68,8 +68,8 @@ class Profile(models.Model):
         return score_mgr.player_points(self, round_name=current_round)
 
     def points(self):
-        """Returns the total number of points for the user.  Optional parameter for a round."""
-        return score_mgr.player_points(self)
+        """Returns the overall total number of points for the user."""
+        return score_mgr.player_points(self, round_name="Overall")
 
     def last_awarded_submission(self):
         """Returns the last awarded submission date."""

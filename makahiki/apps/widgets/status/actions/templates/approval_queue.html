@@ -23,11 +23,11 @@
             There are {{ view_objects.status__actions.unused }} unallocated tickets.<br/>
         </div>
 
-        {% if has_errors %}
+        {% if view_objects.status__actions.has_errors %}
             <div style='color: red; font-weight: bold'>
                 The following users have more tickets than points
                 <ul class="table-striped">
-                    {% for profile in errors %}
+                    {% for profile in view_objects.status__actions.errors %}
                         <li>{{ profile.name }} ({{ profile.user.username }})</li>
                     {% endfor %}
                 </ul>

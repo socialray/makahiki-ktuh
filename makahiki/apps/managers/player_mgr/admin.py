@@ -47,7 +47,7 @@ class ProfileAdmin(admin.ModelAdmin):
     first_name.short_description = 'First_name'
 
     def points(self, obj):
-        """return the user first_name."""
+        """return the user overall points."""
         return obj.points()
     points.short_description = 'Points'
 
