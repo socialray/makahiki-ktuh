@@ -338,7 +338,8 @@ def player_has_points(profile, points, round_name=None):
 
 
 def player_points_leaders_in_team(team, num_results=None, round_name=None):
-    """Gets the individual points leaders for the team, as Profile objects and scoreboardentry_points"""
+    """Gets the individual points leaders for the team, as Profile objects and
+    scoreboardentry_points"""
     if not round_name:
         round_name = challenge_mgr.get_round_name()
 
