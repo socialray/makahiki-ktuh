@@ -72,7 +72,7 @@
     {% endif %}
 {% endfor %}
     {# Additional scoreboard entry for the energy goals #}
-{% for round_name, ranks in round_resource_goal_ranks.items %}
+{% for round_name, ranks in round_resource_goal_ranks.items reversed %}
     {% if not no_carousel %}
         <div class="item">
             <div class="set-width-outer-width">
