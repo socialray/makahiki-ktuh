@@ -1,0 +1,45 @@
+{% extends "admin/base_site.html" %}
+{% load i18n l10n %}
+{% load url from future %}
+{% load admin_urls %}
+{% load admin_static %}
+
+
+{% block breadcrumbs %}
+    <div class="breadcrumbs">
+        <a href="{% url 'admin:index' %}">{% trans 'Home' %}</a>
+        &rsaquo; <a href="/admin/prizes/prize/">Prizes</a>
+        &rsaquo; Summary
+    </div>
+{% endblock %}
+
+{% block content %}
+    <div class="module">
+        <b>Team energy goal winner:</b> {{ team_energy_goal_prize.leader }} with {{ goal }} goals completed <br/>
+        RAs:
+        {% for ra in energy_team_ra %}
+            {{ ra.user.first_name }} {{ ra.user.last_name }},
+        {% endfor %} <br/>
+        Prize: {{ team_energy_goal_prize.title }} <br/>
+        <br/>
+
+        <b>Team point winner:</b> {{ team_points_prize.leader }} with {{ team_point }} points and {{ team_participation }}% participation <br/>
+        RAs:
+        {% for ra in point_team_ra %}
+            {{ ra.user.first_name }} {{ ra.user.last_name }},
+        {% endfor %} <br/>
+        Prize: {{ team_points_prize.title }} <br/>
+        <br/>
+
+        <b>Individual point winner:</b> {{ individual_overall_prize.leader }}
+            ({{ individual_overall_prize.leader.user.first_name }} {{ individual_overall_prize.leader.user.last_name }}) with {{ individual_point }} points <br/>
+        Prize: {{ individual_overall_prize.title }} <br/>
+        <br/>
+
+        <b>Team individual winners:</b> <br/>
+        Prize: {{ individual_team_prize.title }} <br/>
+        {% for team in teams %}
+        {{ team }}: {{ team.leader }} ({{ team.leader.user.first_name }} {{ team.leader.user.last_name}}) <br/>
+        {% endfor %}
+    </div>
+{% endblock %}

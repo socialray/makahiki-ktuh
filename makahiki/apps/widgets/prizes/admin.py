@@ -11,7 +11,7 @@ from apps.widgets.prizes.models import Prize
 
 class PrizeAdmin(admin.ModelAdmin):
     """raffle admin"""
-    list_display = ('title', 'round_name', 'value', 'award_to', 'competition_type',
+    list_display = ('round_name', 'title', 'value', 'award_to', 'competition_type',
                     'winner', 'notice_sent')
     list_filter = ['round_name']
     actions = ["notify_winner"]

@@ -170,3 +170,13 @@ def pick_winner(request):
                 prize.winner = user
                 prize.save()
     return HttpResponseRedirect("/admin/raffle/raffleprize/")
+
+
+def prize_summary(request, round_name):
+    """display summary of the winners."""
+
+    round_name = round_name.replace('-', ' ').capitalize()
+
+    return render_to_response("summary.html", {
+        "raffles": RafflePrize.objects.filter(round_name=round_name).order_by("value")
+    }, context_instance=RequestContext(request))

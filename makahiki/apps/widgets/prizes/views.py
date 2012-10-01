@@ -8,9 +8,13 @@ from django.shortcuts import render_to_response, get_object_or_404
 from django.template.context import RequestContext
 from django.views.decorators.cache import never_cache
 from apps.managers.challenge_mgr import challenge_mgr
+from apps.managers.player_mgr.models import Profile
+from apps.managers.score_mgr import score_mgr
+from apps.managers.team_mgr import team_mgr
 from apps.managers.team_mgr.models import Team
 from apps.widgets.notifications.models import NoticeTemplate
 from apps.widgets.prizes.models import Prize
+from apps.widgets.resource_goal import resource_goal
 
 
 def supply(request, page_name):
@@ -94,4 +98,58 @@ def prize_team_winners(request, prize_id):
     return render_to_response("view_prizes/team_winners.html", {
         "prize": prize,
         "prize_team_winners": teams,
+    }, context_instance=RequestContext(request))
+
+
+def prize_summary(request, round_name):
+    """display summary of the winners."""
+
+    round_name = round_name.replace('-', ' ').capitalize()
+    individual_team_prize = Prize.objects.filter(round_name=round_name,
+                         competition_type="points",
+                         award_to="individual_team")
+    teams = Team.objects.all()
+
+    if individual_team_prize:
+        individual_team_prize = individual_team_prize[0]
+        for team in teams:
+            team.leader = individual_team_prize.leader(team=team)
+
+    team_energy_goal_prize = Prize.objects.filter(round_name=round_name,
+                         competition_type="energy_goal",
+                         award_to="team_overall")
+    if team_energy_goal_prize:
+        team_energy_goal_prize = team_energy_goal_prize[0]
+        energy_team_ra = Profile.objects.filter(team__name=team_energy_goal_prize.leader(),
+                               is_ra=True)
+
+    team_points_prize = Prize.objects.filter(round_name=round_name,
+                                             competition_type="points",
+                                             award_to="team_overall")
+    if team_points_prize:
+        team_points_prize = team_points_prize[0]
+        point_team_ra = Profile.objects.filter(team__name=team_points_prize.leader(),
+                                                is_ra=True)
+
+    points_leader = score_mgr.player_points_leaders(round_name=round_name)
+    if points_leader:
+        points_leader = points_leader[0]
+    return render_to_response("view_prizes/summary.html", {
+        "team_energy_goal_prize": team_energy_goal_prize,
+        "energy_team_ra": energy_team_ra,
+        "goal": resource_goal.resource_goal_ranks("energy", round_name)[0]["completions"],
+
+        "team_points_prize": team_points_prize,
+        "team_point": team_mgr.team_points_leaders(round_name=round_name)[0]["points"],
+        "team_participation": team_mgr.team_active_participation(
+            round_name=round_name)[0].active_participation,
+        "point_team_ra": point_team_ra,
+
+        "individual_overall_prize": Prize.objects.filter(round_name=round_name,
+                                                  competition_type="points",
+                                                  award_to="individual_overall")[0],
+        "individual_point": points_leader["points"] if points_leader else None,
+
+        "individual_team_prize": individual_team_prize,
+        "teams": teams
     }, context_instance=RequestContext(request))

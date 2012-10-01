@@ -149,6 +149,10 @@ class ChallengeSetting(models.Model):
             return True
         return False
 
+    def round_info(self):
+        """returns the info for all rounds."""
+        return settings.COMPETITION_ROUNDS
+
     def save(self, *args, **kwargs):
         """Custom save method."""
         super(ChallengeSetting, self).save(*args, **kwargs)
