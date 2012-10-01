@@ -18,10 +18,10 @@
             <li class="">
                 <a
                   {% if level.is_unlock %}
-                      data-toggle="tab" style="padding-right: 6px; padding-left: 6px;" title="{{ level.name }} Actions"
+                      class="level-unlocked" data-toggle="tab" style="padding-right: 6px; padding-left: 6px;" title="{{ level.name }} Actions"
                   {% else %}
-                      style="cursor:no-drop; padding-right: 6px; padding-left: 6px;" title="{{ level.unlock_condition_text }}"
-                      onclick="toggleLocked(event, '{{ level.unlock_condition_text }}'); return false;"
+                      class="level-locked" style="cursor:no-drop; padding-right: 6px; padding-left: 6px;" title="{{ level.unlock_condition_text }}"
+                      onclick="toggleLocked(event, '{{ level.unlock_condition_text|safe }}'); return false;"
                   {% endif %}
                   href="#sgg-level-{{forloop.counter}}" rel="tooltip" >
                   {% if level.is_complete %}
@@ -100,9 +100,18 @@
 //         $('#sgg-levels-tab a:first').tab('show');
     	if (current_level != null)
     	{
+    		var foo = $('#sgg-levels-tab a:nth('+current_level+')');
+    		if (foo.hasClass('level-unlocked')) {
+//     			console.log("got unlocked class " + foo);
+                $('#sgg-levels-tab a:nth('+current_level+')').tab('show');
+    		}
+    		else 
+    		{
+//     			console.log("showing first tab event though cookie said " + current_level);
+                $('#sgg-levels-tab a:first').tab('show');    			
+    		}
 //             console.log("got level cookie " + current_level)
 //             temp = $('#sgg-levels-tab a:nth('+current_level+')');
-    		$('#sgg-levels-tab a:nth('+current_level+')').tab('show');
     	}
     	else
     	{
