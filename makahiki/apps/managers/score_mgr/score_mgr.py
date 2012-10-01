@@ -292,6 +292,9 @@ def _update_scoreboard_entry(profile, points, transaction_date):
     current_round = challenge_mgr.get_round_name(transaction_date)
     _update_round_scoreboard_entry(profile, current_round, points, transaction_date)
 
+    # also update for the overall round
+    _update_round_scoreboard_entry(profile, "Overall", points, transaction_date)
+
 
 def _update_round_scoreboard_entry(profile, round_name, points, transaction_date):
     """update the round scoreboard entry for the transaction."""
@@ -335,16 +338,19 @@ def player_has_points(profile, points, round_name=None):
 
 
 def player_points_leaders_in_team(team, num_results=None, round_name=None):
-    """Gets the individual points leaders for the team, as Profile objects"""
+    """Gets the individual points leaders for the team, as Profile objects and scoreboardentry_points"""
     if not round_name:
         round_name = challenge_mgr.get_round_name()
 
     results = team.profile_set.select_related('scoreboardentry').filter(
         scoreboardentry__round_name=round_name
     ).order_by("-scoreboardentry__points",
-               "-scoreboardentry__last_awarded_submission", )
+               "-scoreboardentry__last_awarded_submission", ).annotate(
+        scoreboardentry_points=Sum("scoreboardentry__points"))
+
     if num_results:
         results = results[:num_results]
+
     return results
 
 

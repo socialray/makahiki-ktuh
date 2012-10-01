@@ -101,7 +101,7 @@
                     <tr>
                         <td class="column-number" width="10%">{% if view_objects.scoreboard.profile.name == p.name %}<b>{% endif %}{{ forloop.counter }}{% if view_objects.scoreboard.profile.name == p.name %}</b>{% endif %}</td>
                         <td class="column-text" width="75%">{% if view_objects.scoreboard.profile.name == p.name %}<b>{% endif %}{{ p.name }}{% if view_objects.scoreboard.profile.name == p.name %}</b>{% endif %}</td>
-                        <td class="column-number" width="15%">{% if view_objects.scoreboard.profile.name == p.name %}<b>{% endif %}{{ p.points }}{% if view_objects.scoreboard.profile.name == p.name %}</b>{% endif %}</td>
+                        <td class="column-number" width="15%">{% if view_objects.scoreboard.profile.name == p.name %}<b>{% endif %}{{ p.scoreboardentry_points }}{% if view_objects.scoreboard.profile.name == p.name %}</b>{% endif %}</td>
                     </tr>
                 {% endfor %}
                 </tbody>

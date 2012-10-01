@@ -41,7 +41,7 @@ class RaffleTicketInline(admin.TabularInline):
 class RafflePrizeAdmin(admin.ModelAdmin):
     """raffle admin"""
     form = RafflePrizeAdminForm
-    list_display = ('title', 'round_name', 'value', 'winner_form', 'notice_sent')
+    list_display = ('round_name', 'title', 'value', 'winner_form', 'notice_sent')
     ordering = ('round_name', 'value', 'title')
     actions = ["pick_winner", "notify_winner"]
     inlines = [RaffleTicketInline]
