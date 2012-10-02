@@ -84,9 +84,9 @@
                                                              title="Click to see how to unlock"
                                                              onclick="unlock_dialog(event, '{{task.type}}','{{task.slug}}',
                                                                      {% if task.unlock_condition_text %}
-                                                                         '{{task.unlock_condition_text}}'
+                                                                         '{{task.unlock_condition_text|escapejs}}'
                                                                      {% else %}
-                                                                         '{{task.unlock_condition}}'
+                                                                         '{{task.unlock_condition|escapejs}}'
                                                                      {% endif %}
                                                                      )">
                                                     </a>
