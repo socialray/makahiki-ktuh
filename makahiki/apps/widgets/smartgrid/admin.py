@@ -23,10 +23,11 @@ from django.contrib import messages
 
 class ConfirmationCodeAdmin(admin.ModelAdmin):
     """admin for Bonus Points."""
-    actions = ["delete_selected", "view_selected"]
-    list_display = ["pk", "code", "create_date", "is_active", "user"]
+    actions = ["delete_selected", "view_selected", "print_selected"]
+    list_display = ["pk", "code", "create_date", "is_active",
+                    "printed_or_distributed", "user"]
     ordering = ["-create_date", "is_active"]
-    list_filter = ["is_active"]
+    list_filter = ["is_active", "printed_or_distributed"]
     date_hierarchy = "create_date"
 
     def delete_selected(self, request, queryset):
@@ -46,6 +47,14 @@ class ConfirmationCodeAdmin(admin.ModelAdmin):
         }, context_instance=RequestContext(request))
 
     view_selected.short_description = "view the selected codes."
+
+    def print_selected(self, request, queryset):
+        """Changes the printed_or_distributed flag to True for the selected
+        Confirmation Codes."""
+        _ = request
+        queryset.update(printed_or_distributed=True)
+
+    print_selected.short_description = "Set the printed or distributed flag."
 
     def view_codes(self, request, queryset):
         """Views the Codes for printing."""

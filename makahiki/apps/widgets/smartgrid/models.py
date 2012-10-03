@@ -130,6 +130,8 @@ class ConfirmationCode(models.Model):
     create_date = models.DateTimeField(default=datetime.datetime.now(),
                                    verbose_name="Date created",
                                    help_text="Date the code was created.")
+    printed_or_distributed = models.BooleanField(default=False, editable=True,
+                                help_text="Has the code been printed or distributed.")
 
     @staticmethod
     def generate_codes_for_activity(event, num_codes):
