@@ -25,6 +25,8 @@ class BonusPoint(models.Model):
     create_date = models.DateTimeField(default=datetime.datetime.now(),
                                        verbose_name="Date created",
                                        help_text="Date Bonus Point code was created.")
+    printed_or_distributed = models.BooleanField(default=False, editable=True,
+                                help_text="Has the code been printed or distributed.")
 
     def __unicode__(self):
         return self.code

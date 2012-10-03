@@ -40,10 +40,12 @@ class BonusPointAdminForm(forms.ModelForm):
 
 class BonusPointAdmin(admin.ModelAdmin):
     """admin for Bonus Points."""
-    actions = ["delete_selected", "deactivate_selected", "view_selected"]
-    list_display = ["pk", "code", "point_value", "create_date", "is_active", "user"]
+    actions = ["delete_selected", "deactivate_selected", "view_selected",
+               "print_selected"]
+    list_display = ["pk", "code", "point_value", "create_date", "is_active",
+                    "printed_or_distributed", "user"]
     ordering = ["-create_date", "is_active"]
-    list_filter = ["point_value", "is_active"]
+    list_filter = ["point_value", "is_active", "printed_or_distributed"]
     date_hierarchy = "create_date"
 
     form = BonusPointAdminForm
@@ -63,6 +65,14 @@ class BonusPointAdmin(admin.ModelAdmin):
 
     deactivate_selected.short_description = "Deactivate the selected Bonus Points."
 
+    def print_selected(self, request, queryset):
+        """Changes the printed_or_distributed flag to True for the selected
+        Bonus Points."""
+        _ = request
+        queryset.update(printed_or_distributed=True)
+
+    print_selected.short_description = "Set the printed or distributed flag."
+
     def view_selected(self, request, queryset):
         """Views the Bonus Points Codes for printing."""
         _ = request
@@ -73,7 +83,7 @@ class BonusPointAdmin(admin.ModelAdmin):
             "per_page": 10,
         }, context_instance=RequestContext(request))
 
-    view_selected.short_description = "view the selected Bonus Points."
+    view_selected.short_description = "View the selected Bonus Points."
 
     def view_codes(self, request, queryset):
         """Views the Bonus Points Codes for printing."""
