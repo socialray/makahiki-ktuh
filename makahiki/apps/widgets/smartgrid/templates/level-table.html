@@ -28,10 +28,16 @@
                                                                          width="12"
                                                                          align="left"/>
                                                                  {% else %}
-                                                                    {% if task.member.approval_status == "pending" and task.event.is_event_completed %}
-                                                                        <img src="{{ STATIC_URL}}images/icons/icon-exclamation2.png"
-                                                                             width="12"
-                                                                             align="left"/>
+                                                                    {% if task.member.approval_status == "pending" %}
+                                                                        {% if task.event.is_event_completed %}
+                                                                            <img src="{{ STATIC_URL}}images/icons/icon-exclamation2.png"
+                                                                                 width="12"
+                                                                                align="left"/>
+                                                                        {% else %}
+                                                                            <img src="{{ STATIC_URL}}images/icons/icon-submit.png"
+                                                                                 width="12"
+                                                                                align="left"/>
+                                                                        {% endif %}
                                                                      {% else %}
                                                                          <img src="{{ STATIC_URL}}images/icons/icon-done.png"
                                                                               width="12"
@@ -51,7 +57,11 @@
                                                         {% else %}
                                                             {# ------ is commitment #}
                                                             {% if task.completed %}
-                                                                {% if task.member.days_left != 0 or task.member.award_date %}
+                                                                {% if task.member.days_left != 0 %}
+                                                                    <img src="{{ STATIC_URL}}images/icons/icon-submit.png"
+                                                                         width="12"
+                                                                         align="left"/>                                                                
+                                                                {% elif task.member.award_date %}
                                                                     <img src="{{ STATIC_URL}}images/icons/icon-done.png"
                                                                          width="12"
                                                                          align="left">
