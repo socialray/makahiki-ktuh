@@ -289,7 +289,9 @@ def get_current_round_info_from_cache():
     return {"name": round_name,
             "start": rounds[round_name]['start'],
             "end": rounds[round_name]['end'],
-            }
+            "round_reset": rounds[round_name]['round_reset'],
+            "display_scoreboard": rounds[round_name]['display_scoreboard'],
+    }
 
 
 def get_round_info(round_name=None):
@@ -303,7 +305,9 @@ def get_round_info(round_name=None):
         return {"name": round_name,
                 "start": rounds[round_name]['start'],
                 "end": rounds[round_name]['end'],
-                }
+                "round_reset": rounds[round_name]['round_reset'],
+                "display_scoreboard": rounds[round_name]['display_scoreboard'],
+        }
 
 
 def get_round_name(submission_date=None):

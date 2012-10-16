@@ -365,6 +365,27 @@ def _award_goal_points(team, resource, goal_points, goal, date):
     return count
 
 
+def _get_round_start_end(round_name=None):
+    """return the start and end date of a round regarding the round_reset."""
+    if round_name == "Overall":
+        all_round_info = challenge_mgr.get_all_round_info()
+        start = all_round_info["competition_start"]
+        end = all_round_info["competition_end"]
+    else:
+        round_info = challenge_mgr.get_round_info(round_name)
+        if not round_info:
+            return None
+
+        end = round_info["end"].date
+        if round_info["round_reset"]:
+            start = round_info["start"].date
+        else:
+            # if no round reset, use the competition_start as start date
+            start = challenge_mgr.get_all_round_info()["competition_start"]
+
+    return start, end
+
+
 def resource_goal_ranks(resource, round_name=None):
     """Generate the scoreboard for resource goals."""
     if not challenge_mgr.is_game_enabled("%s Game" % resource.capitalize()):
@@ -376,13 +397,12 @@ def resource_goal_ranks(resource, round_name=None):
         goal_ranks = []
         goal = get_resource_goal(resource)
 
-        round_info = challenge_mgr.get_round_info(round_name)
-        if not round_info:
-            return None
+        start, end = _get_round_start_end(round_name)
 
         ranks = goal.objects.filter(
             goal_status="Below the goal",
-            date__lte=round_info["end"].date).values("team__name").annotate(
+            date__gte=start,
+            date__lte=end).values("team__name").annotate(
                 completions=Count("team"),
                 average_reduction=Avg("percent_reduction")).order_by(
                     "-completions", "-average_reduction")

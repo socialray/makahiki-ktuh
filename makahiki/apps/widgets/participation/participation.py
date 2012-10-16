@@ -81,3 +81,13 @@ def award_participation():
 
             team_participation.participation = team.active_participation
             team_participation.save()
+
+    # store the overall participation rate
+    for team in team_mgr.team_active_participation(round_name="Overall"):
+        team_participation, _ = TeamParticipation.objects.get_or_create(
+            team=team, round_name="Overall")
+        # check if the participation rate change
+        if team_participation.participation != team.active_participation:
+            # save the new participation rate
+            team_participation.participation = team.active_participation
+            team_participation.save()

@@ -14,20 +14,20 @@
                         </div>
                         <div class="set-width-outer-width">
                         <h4 class="content-box-subtitle">100% participation
-                                                         ({{ p_settings.points_100_percent }}
-                                                         points)</h4>
+                          {% if round_name != "Overall" %} ({{ p_settings.points_100_percent }} points){% endif %}
+                                                         </h4>
                         {% with participation=ranks.participation_100 %}
                             {% include "participation.html" %}
                         {% endwith %}
                         <h4 class="content-box-subtitle">75% participation
-                                                         ({{ p_settings.points_75_percent }}
-                                                         points)</h4>
+                            {% if round_name != "Overall" %} ({{ p_settings.points_75_percent }} points){% endif %}
+                                                         </h4>
                         {% with participation=ranks.participation_75 %}
                             {% include "participation.html" %}
                         {% endwith %}
                         <h4 class="content-box-subtitle">50% participation
-                                                         ({{ p_settings.points_50_percent }}
-                                                         points)</h4>
+                            {% if round_name != "Overall" %} ({{ p_settings.points_50_percent }} points){% endif %}
+                                                         </h4>
                         {% with participation=ranks.participation_50 %}
                             {% include "participation.html" %}
                         {% endwith %}

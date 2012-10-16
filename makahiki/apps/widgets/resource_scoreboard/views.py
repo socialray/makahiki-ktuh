@@ -30,6 +30,8 @@ def resource_supply(request, resource, page_name):
             #round_resource_ranks[key] = resource_mgr.resource_ranks(resource, key)
             round_resource_goal_ranks[key] = resource_goal.resource_goal_ranks(resource, key)
 
+    round_resource_goal_ranks["Overall"] = resource_goal.resource_goal_ranks(resource, "Overall")
+
     resource_setting = resource_mgr.get_resource_setting(resource)
     return {
         "profile": user.get_profile(),

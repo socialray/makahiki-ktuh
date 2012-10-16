@@ -35,6 +35,8 @@ def supply(request, page_name):
     round_standings["Overall"] = {
         "team_standings": team_mgr.team_points_leaders(num_results, "Overall"),
         "profile_standings": player_mgr.points_leaders(num_results, "Overall"),
+        "team_participation": team_mgr.team_active_participation(num_results, "Overall") if\
+            page_name == "status" else None,
     }
 
     count = len(rounds)
