@@ -3,6 +3,7 @@ from django.db import models
 from django.http import HttpResponseRedirect
 from django.shortcuts import render_to_response
 from django.template import RequestContext
+import markdown
 from apps.managers.cache_mgr import cache_mgr
 from apps.managers.challenge_mgr import challenge_mgr
 from apps.utils import utils
@@ -478,6 +479,7 @@ class ActivityAdmin(admin.ModelAdmin):
          {"fields": (("point_value", "social_bonus"), ("point_range_start", "point_range_end"), )}),
         ("Ordering", {"fields": (("level", "category", "priority"), )}),
         ("Confirmation Type", {'fields': ('confirm_type', 'confirm_prompt')}),
+        ("Admin Note", {'fields': ('admin_note',)}),
     )
     prepopulated_fields = {"slug": ("name",)}
 
@@ -632,11 +634,8 @@ class ActionMemberAdminForm(forms.ModelForm):
 class ActionMemberAdmin(admin.ModelAdmin):
     """ActionMember Admin."""
     radio_fields = {"approval_status": admin.HORIZONTAL}
-    fields = (
-        "user", "action", "admin_link", "question", "response", "image", "social_email",
-        "approval_status", "admin_comment",)
     readonly_fields = (
-        "user", "action", "admin_link", "question", "response", "social_email")
+        "user", "action", "admin_link", "question", "admin_note", "full_response", "social_email")
     list_display = (
         "action", "submission_date", "user_link", "approval_status", "short_question",
         "short_response")
@@ -668,6 +667,18 @@ class ActionMemberAdmin(admin.ModelAdmin):
 
     full_response.short_description = 'Response'
     full_response.allow_tags = True
+
+    def admin_note(self, obj):
+        """return the short question."""
+        if obj.action.activity.admin_note:
+            note = markdown.markdown(obj.action.activity.admin_note)
+        else:
+            note = None
+        return "%s<a href='/admin/smartgrid/activity/%d'> [Edit Admin Note]</a>" % \
+               (note, obj.action.pk)
+
+    admin_note.short_description = 'Admin note'
+    admin_note.allow_tags = True
 
     def changelist_view(self, request, extra_context=None):
         """
@@ -719,12 +730,14 @@ class ActionMemberAdmin(admin.ModelAdmin):
         does not have variable points."""
         if obj and not obj.action.point_value:
             self.fields = (
-                "user", "action", "admin_link", "question", "response", "image", "social_email",
+                "user", "action", "admin_link", "question", "admin_note", "full_response",
+                "image", "social_email",
                 "approval_status", "points_awarded", "admin_comment")
         else:
             if obj.action.type == "activity":
                 self.fields = (
-                    "user", "action", "admin_link", "question", "response", "image", "social_email",
+                    "user", "action", "admin_link", "question", "admin_note", "full_response",
+                    "image", "social_email",
                     "approval_status", "points_awarded", "admin_comment")
             else:
                 self.fields = (

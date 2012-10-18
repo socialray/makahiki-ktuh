@@ -332,6 +332,9 @@ class Activity(Action):
         verbose_name="Confirmation prompt",
         help_text=settings.MARKDOWN_TEXT
     )
+    admin_note = models.TextField(
+        null=True, blank=True,
+        help_text=settings.MARKDOWN_TEXT)
 
     def is_active(self):
         """Determines if the activity is available for users to participate."""
