@@ -41,7 +41,7 @@ def supply(request, page_name):
     if today < deadline:
         # Get the prizes for the raffle.
         prizes = RafflePrize.objects.filter(
-            round_name=current_round_info["name"]).annotate(
+            round__name=current_round_info["name"]).annotate(
             total_tickets=Count("raffleticket")).order_by("-value")
 
         for prize in prizes:
@@ -117,14 +117,14 @@ def raffle_form(request, prize_id):
         return render_to_response('view_prizes/form.txt', {
         'raffle': True,
         'prize': prize,
-        'round': prize.round_name,
+        'round': prize.round__name,
         'competition_name': challenge.competition_name,
         }, context_instance=RequestContext(request), mimetype='text/plain')
 
     message = template.render({
         'raffle': True,
         'prize': prize,
-        'round': prize.round_name,
+        'round': prize.round__name,
         'competition_name': challenge.competition_name,
     })
 
@@ -133,7 +133,7 @@ def raffle_form(request, prize_id):
 
 def raffle_prize_list(request):
     """Generates the raffle prize list and renders to page."""
-    raffle_prizes = RafflePrize.objects.all().order_by('round_name')
+    raffle_prizes = RafflePrize.objects.all().order_by('round__name')
     return render_to_response("raffle_prize_list.html", {
         "raffle_list": raffle_prizes
         }, context_instance=RequestContext(request))
@@ -145,7 +145,7 @@ def notify_winner(request):
     _ = request
 
     round_name = challenge_mgr.get_round_name()
-    prizes = RafflePrize.objects.filter(round_name=round_name)
+    prizes = RafflePrize.objects.filter(round__name=round_name)
     for prize in prizes:
         if prize.winner:
             # Notify winner using the template.
