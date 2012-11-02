@@ -16,5 +16,7 @@ urlpatterns = patterns('',
         name="raffle_notify_winner"),
     url(r'^summary/(?P<round_name>[\w\d\-]+)/$', 'apps.widgets.raffle.views.prize_summary',
         name="prize_summary"),
-
+    url(r'^bulk_change/(?P<action_type>[\w]+)/(?P<attribute>[\w]+)/$',
+        'apps.widgets.raffle.views.bulk_round_change',
+        name="bulk_round_change"),
 )

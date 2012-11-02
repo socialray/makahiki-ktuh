@@ -4,6 +4,7 @@ from django.db import models
 from django.contrib.auth.models import User
 from apps.managers.cache_mgr import cache_mgr
 from apps.utils.utils import media_file_path
+from apps.managers.challenge_mgr.models import RoundSetting
 
 POINTS_PER_TICKET = 25
 """Number of points required to earn a raffle ticket"""
@@ -27,14 +28,14 @@ class RafflePrize(models.Model):
         blank=True,
         help_text="A picture of your raffle prize."
     )
-    round_name = models.CharField(
-        max_length=50,
-        verbose_name="Round"
-    )
+    round = models.ForeignKey(RoundSetting, null=True, blank=True)
     winner = models.ForeignKey(User, null=True, blank=True)
 
     def __unicode__(self):
-        return "%s: %s" % (self.round_name, self.title)
+        if self.round == None:
+            return "%s: %s" % (self.round, self.title)
+        else:
+            return "%s: %s" % (self.round.name, self.title)
 
     def add_ticket(self, user):
         """Adds a ticket from the user if they have one.

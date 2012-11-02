@@ -9,6 +9,7 @@ from apps.managers.challenge_mgr import challenge_mgr
 from apps.widgets.notifications.models import NoticeTemplate, UserNotification
 
 from apps.widgets.raffle.models import RafflePrize, RaffleTicket
+from django.http import HttpResponseRedirect
 
 
 class RafflePrizeAdminForm(forms.ModelForm):
@@ -41,11 +42,11 @@ class RaffleTicketInline(admin.TabularInline):
 class RafflePrizeAdmin(admin.ModelAdmin):
     """raffle admin"""
     form = RafflePrizeAdminForm
-    list_display = ('round_name', 'title', 'value', 'winner_form', 'notice_sent')
-    ordering = ('round_name', 'value', 'title')
-    actions = ["pick_winner", "notify_winner"]
+    list_display = ('round', 'title', 'value', 'winner_form', 'notice_sent')
+    ordering = ('round', 'value', 'title')
+    actions = ["pick_winner", "notify_winner", "change_round"]
     inlines = [RaffleTicketInline]
-    list_filter = ['round_name']
+    list_filter = ['round']
 
     def pick_winner(self, request, queryset):
         """pick winner."""
@@ -81,6 +82,14 @@ class RafflePrizeAdmin(admin.ModelAdmin):
         self.message_user(request, "Winners notification sent.")
 
     notify_winner.short_description = "Notify winner for selected raffle prizes."
+
+    def change_round(self, request, queryset):
+        """Change the round for the selected Raffle Prizes."""
+        _ = queryset
+        selected = request.POST.getlist(admin.ACTION_CHECKBOX_NAME)
+        return HttpResponseRedirect(reverse("bulk_round_change", args=("raffleprize", "round",)) +
+                                    "?ids=%s" % (",".join(selected)))
+    change_round.short_description = "Change the round"
 
     def winner_form(self, obj):
         """return the winner and link to pickup form."""

@@ -14,6 +14,8 @@ from django.template.context import RequestContext
 from apps.managers.challenge_mgr import  challenge_mgr
 from apps.widgets.notifications.models import NoticeTemplate, UserNotification
 from apps.widgets.raffle.models import  RafflePrize, RaffleTicket, POINTS_PER_TICKET
+from apps.widgets.raffle.forms import ChangeRoundForm
+from apps.managers.challenge_mgr.models import RoundSetting
 
 
 def supply(request, page_name):
@@ -159,7 +161,7 @@ def pick_winner(request):
     """Picks the raffle game winners for the raffle deadline that has passed."""
     _ = request
     round_name = challenge_mgr.get_round_name()
-    prizes = RafflePrize.objects.filter(round_name=round_name)
+    prizes = RafflePrize.objects.filter(round__name=round_name)
     for prize in prizes:
         if not prize.winner:
             # Randomly order the tickets and then pick a random ticket.
@@ -178,5 +180,32 @@ def prize_summary(request, round_name):
     round_name = round_name.replace('-', ' ').capitalize()
 
     return render_to_response("summary.html", {
-        "raffles": RafflePrize.objects.filter(round_name=round_name).order_by("value", "title")
+        "raffles": RafflePrize.objects.filter(round__name=round_name).order_by("value", "title")
     }, context_instance=RequestContext(request))
+
+
+@never_cache
+@login_required
+def bulk_round_change(request, action_type, attribute):
+    """Handle change Round from the admin interface."""
+# Not sure we need the prize_type and attribute parameters.
+    prize_ids = request.GET["ids"]
+    prizes = []
+    for pk in prize_ids.split(","):
+        prizes.append(RafflePrize.objects.get(pk=pk))
+
+    if request.method == "POST":
+        r = request.POST["round_choice"]
+        for prize in prizes:
+            prize.round = RoundSetting.objects.get(pk=r)
+            prize.save()
+
+        return HttpResponseRedirect("/admin/raffle/raffleprize/")
+    else:
+        form = ChangeRoundForm(initial={"ids": prize_ids})
+        return render_to_response("admin/bulk_change.html", {
+            "attribute": "Round",
+            "prizes": prizes,
+            "action_type": None,
+            "form": form,
+            }, context_instance=RequestContext(request))
