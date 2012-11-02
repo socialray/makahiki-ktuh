@@ -189,6 +189,8 @@ def prize_summary(request, round_name):
 def bulk_round_change(request, action_type, attribute):
     """Handle change Round from the admin interface."""
 # Not sure we need the prize_type and attribute parameters.
+    _ = action_type
+    _ = attribute
     prize_ids = request.GET["ids"]
     prizes = []
     for pk in prize_ids.split(","):
@@ -197,7 +199,10 @@ def bulk_round_change(request, action_type, attribute):
     if request.method == "POST":
         r = request.POST["round_choice"]
         for prize in prizes:
-            prize.round = RoundSetting.objects.get(pk=r)
+            if r != '':
+                prize.round = RoundSetting.objects.get(pk=r)
+            else:
+                prize.round = None
             prize.save()
 
         return HttpResponseRedirect("/admin/raffle/raffleprize/")
