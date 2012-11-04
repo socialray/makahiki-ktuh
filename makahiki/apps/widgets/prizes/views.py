@@ -150,7 +150,8 @@ def prize_summary(request, round_name):
             round_name=round_name)[0].active_participation,
         "point_team_ra": point_team_ra,
 
-        "individual_overall_prize": Prize.objects.filter(round=RoundSetting.objects.get(name=round_name),
+        "individual_overall_prize": Prize.objects.filter(
+                                    round=RoundSetting.objects.get(name=round_name),
                                                   competition_type="points",
                                                   award_to="individual_overall")[0],
         "individual_point": points_leader["points"] if points_leader else None,

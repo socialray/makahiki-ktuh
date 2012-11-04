@@ -87,7 +87,8 @@ class RafflePrizeAdmin(admin.ModelAdmin):
         """Change the round for the selected Raffle Prizes."""
         _ = queryset
         selected = request.POST.getlist(admin.ACTION_CHECKBOX_NAME)
-        return HttpResponseRedirect(reverse("bulk_raffle_round_change", args=("raffleprize", "round",)) +
+        return HttpResponseRedirect(reverse("bulk_raffle_round_change",
+                                            args=("raffleprize", "round",)) +
                                     "?ids=%s" % (",".join(selected)))
     change_round.short_description = "Change the round"
 
