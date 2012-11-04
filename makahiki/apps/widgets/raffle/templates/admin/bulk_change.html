@@ -16,7 +16,7 @@
             <div style="background-color: white;">
                 You've selected the following prizes:
                 <ul>
-                {% for obj in prizes %}
+                {% for obj in raffle_prizes %}
                     <li> {{ obj.title }}: {{obj.round}} - {{ obj.description }}
                     </li>
                 {% endfor %}

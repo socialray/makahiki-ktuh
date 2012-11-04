@@ -9,6 +9,6 @@ from django import forms
 from apps.managers.challenge_mgr.models import RoundSetting
 
 
-class ChangeRoundForm(forms.Form):
-    """change round form."""
+class ChangePrizeRoundForm(forms.Form):
+    """change prize round form."""
     round_choice = forms.ModelChoiceField(queryset=RoundSetting.objects.all(), required=True)

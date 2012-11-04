@@ -191,26 +191,26 @@ def bulk_round_change(request, action_type, attribute):
 # Not sure we need the prize_type and attribute parameters.
     _ = action_type
     _ = attribute
-    prize_ids = request.GET["ids"]
-    prizes = []
-    for pk in prize_ids.split(","):
-        prizes.append(RafflePrize.objects.get(pk=pk))
+    raffle_ids = request.GET["ids"]
+    raffles = []
+    for pk in raffle_ids.split(","):
+        raffles.append(RafflePrize.objects.get(pk=pk))
 
     if request.method == "POST":
         r = request.POST["round_choice"]
-        for prize in prizes:
+        for raffle_prize in raffles:
             if r != '':
-                prize.round = RoundSetting.objects.get(pk=r)
+                raffle_prize.round = RoundSetting.objects.get(pk=r)
             else:
-                prize.round = None
-            prize.save()
+                raffle_prize.round = None
+            raffle_prize.save()
 
         return HttpResponseRedirect("/admin/raffle/raffleprize/")
     else:
-        form = ChangeRoundForm(initial={"ids": prize_ids})
+        form = ChangeRoundForm(initial={"ids": raffle_ids})
         return render_to_response("admin/bulk_change.html", {
             "attribute": "Round",
-            "prizes": prizes,
             "action_type": None,
             "form": form,
+            "raffle_prizes": raffles,
             }, context_instance=RequestContext(request))

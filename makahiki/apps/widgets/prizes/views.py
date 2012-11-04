@@ -16,7 +16,7 @@ from apps.widgets.notifications.models import NoticeTemplate
 from apps.widgets.prizes.models import Prize
 from apps.widgets.resource_goal import resource_goal
 from apps.managers.challenge_mgr.models import RoundSetting
-from apps.widgets.prizes.forms import ChangeRoundForm
+from apps.widgets.prizes.forms import ChangePrizeRoundForm
 
 
 def supply(request, page_name):
@@ -183,7 +183,7 @@ def bulk_round_change(request, action_type, attribute):
 
         return HttpResponseRedirect("/admin/prizes/prize")
     else:
-        form = ChangeRoundForm(initial={"ids": prize_ids})
+        form = ChangePrizeRoundForm(initial={"ids": prize_ids})
         return render_to_response("admin/bulk_change.html", {
             "attribute": "Round",
             "prizes": prizes,
