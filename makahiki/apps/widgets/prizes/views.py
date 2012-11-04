@@ -108,7 +108,7 @@ def prize_summary(request, round_name):
     """display summary of the winners."""
 
     round_name = round_name.replace('-', ' ').capitalize()
-    individual_team_prize = Prize.objects.filter(round_name=round_name,
+    individual_team_prize = Prize.objects.filter(round=RoundSetting.objects.get(name=round_name),
                          competition_type="points",
                          award_to="individual_team")
     teams = Team.objects.all()
@@ -118,17 +118,19 @@ def prize_summary(request, round_name):
         for team in teams:
             team.leader = individual_team_prize.leader(team=team)
 
-    team_energy_goal_prize = Prize.objects.filter(round_name=round_name,
+    team_energy_goal_prize = Prize.objects.filter(round=RoundSetting.objects.get(name=round_name),
                          competition_type="energy_goal",
                          award_to="team_overall")
+    energy_team_ra = None
     if team_energy_goal_prize:
         team_energy_goal_prize = team_energy_goal_prize[0]
         energy_team_ra = Profile.objects.filter(team__name=team_energy_goal_prize.leader(),
                                is_ra=True)
 
-    team_points_prize = Prize.objects.filter(round_name=round_name,
+    team_points_prize = Prize.objects.filter(round=RoundSetting.objects.get(name=round_name),
                                              competition_type="points",
                                              award_to="team_overall")
+    point_team_ra = None
     if team_points_prize:
         team_points_prize = team_points_prize[0]
         point_team_ra = Profile.objects.filter(team__name=team_points_prize.leader(),
@@ -148,7 +150,7 @@ def prize_summary(request, round_name):
             round_name=round_name)[0].active_participation,
         "point_team_ra": point_team_ra,
 
-        "individual_overall_prize": Prize.objects.filter(round_name=round_name,
+        "individual_overall_prize": Prize.objects.filter(round=RoundSetting.objects.get(name=round_name),
                                                   competition_type="points",
                                                   award_to="individual_overall")[0],
         "individual_point": points_leader["points"] if points_leader else None,

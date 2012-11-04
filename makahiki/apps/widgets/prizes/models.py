@@ -57,7 +57,10 @@ class Prize(models.Model):
         help_text="The 'competition' this prize is awarded to.")
 
     def __unicode__(self):
-        return self.round.name + ": " + self.title
+        if self.round == None:
+            return "%s: %s" % (self.round, self.title)
+        else:
+            return "%s: %s" % (self.round.name, self.title)
 
     class Meta:
         """meta"""
@@ -83,20 +86,27 @@ class Prize(models.Model):
 
     def leader(self, team=None):
         """Return the prize leader."""
+        if self.round == None:
+            round_name = "Round 1"
+        else:
+            round_name = self.round.name
         if self.competition_type == "points":
             return self._points_leader(team)
         elif self.competition_type == "energy":
-            return resource_mgr.resource_leader("energy", round_name=self.round.name)
+            return resource_mgr.resource_leader("energy", round_name=round_name)
         elif self.competition_type == "energy_goal":
-            return resource_goal.resource_goal_leader("energy", round_name=self.round.name)
+            return resource_goal.resource_goal_leader("energy", round_name=round_name)
         elif self.competition_type == "water":
-            return resource_mgr.resource_leader("water", round_name=self.round.name)
+            return resource_mgr.resource_leader("water", round_name=round_name)
         elif self.competition_type == "water_goal":
-            return resource_goal.resource_goal_leader("water", round_name=self.round.name)
+            return resource_goal.resource_goal_leader("water", round_name=round_name)
 
     def _points_leader(self, team=None):
         """Return the point leader."""
-        round_name = self.round.name
+        if self.round == None:
+            round_name = "Round 1"
+        else:
+            round_name = self.round.name
         if self.award_to == "individual_overall":
             return player_mgr.points_leader(round_name=round_name)
 
