@@ -130,7 +130,7 @@ def setup_round_prize(round_name, award_to, competition_type):
         short_description="A test prize",
         long_description="A test prize",
         award_to=award_to,
-        round_name=round_name,
+        round=RoundSetting.objects.get(name=round_name),
         competition_type=competition_type,
         value=5,
         )

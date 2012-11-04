@@ -8,6 +8,8 @@ from django.db import IntegrityError
 
 from apps.widgets.prizes.models import Prize
 from django.db import transaction
+from apps.managers.challenge_mgr.models import RoundSetting
+from apps.utils import test_utils
 
 
 class PrizeTest(TransactionTestCase):
@@ -20,10 +22,12 @@ class PrizeTest(TransactionTestCase):
         Tests that the uniqueness constraints are enforced.
         A prize with the same round_name, award_to, and competition_type as another cannot be created.
         """
+        test_utils.set_competition_round()
+
         image_path = os.path.join(settings.PROJECT_ROOT, "fixtures", "test_images", "test.jpg")
         image = ImageFile(open(image_path, "r"))
         prize = Prize(
-            round_name="Round 1",
+            round=RoundSetting.objects.get(name="Round 1"),
             title="Super prize!",
             image=image,
             award_to="individual_overall",
@@ -42,11 +46,11 @@ class PrizeTest(TransactionTestCase):
             image=image,
             award_to="individual_overall",
             competition_type="points",
-            round_name="Round 1",
+            round=RoundSetting.objects.get(name="Round 1"),
             value=5,
         )
 
-        prize2.round_name = "Round 1"
+        prize2.round = RoundSetting.objects.get(name="Round 1")
         prize2.competition_type = "energy"
         try:
             prize2.save()
@@ -60,7 +64,7 @@ class PrizeTest(TransactionTestCase):
         except IntegrityError:
             self.fail("IntegrityError exception should not be thrown.")
 
-        prize2.round_name = "Round 1"
+        prize2.round = RoundSetting.objects.get(name="Round 1")
         prize2.competition_type = "points"
         prize2.award_to = "individual_overall"
         try:

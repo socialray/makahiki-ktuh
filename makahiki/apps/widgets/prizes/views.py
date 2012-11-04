@@ -1,9 +1,9 @@
 """Provide the view of the prizes widget."""
 import datetime
 
-from django.contrib.auth.decorators import user_passes_test
+from django.contrib.auth.decorators import user_passes_test, login_required
 from django.contrib.auth.models import User
-from django.http import HttpResponse
+from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render_to_response, get_object_or_404
 from django.template.context import RequestContext
 from django.views.decorators.cache import never_cache
@@ -15,6 +15,8 @@ from apps.managers.team_mgr.models import Team
 from apps.widgets.notifications.models import NoticeTemplate
 from apps.widgets.prizes.models import Prize
 from apps.widgets.resource_goal import resource_goal
+from apps.managers.challenge_mgr.models import RoundSetting
+from apps.widgets.prizes.forms import ChangeRoundForm
 
 
 def supply(request, page_name):
@@ -39,22 +41,23 @@ def _get_prizes(team):
 
     round_name = None
     for prize in Prize.objects.all():
-        if round_name != prize.round_name:
-            # a new round
-            round_name = prize.round_name
-            prize_dict[round_name] = []
+        if prize.round:
+            if round_name != prize.round.name:
+                # a new round
+                round_name = prize.round.name
+                prize_dict[round_name] = []
 
-        if today < rounds[round_name]["start"]:
-            # If the round happens in the future, we don't care who the leader is.
-            prize.current_leader = "TBD"
-        else:
-            # If we are in the middle of the round, display the current leader.
-            if today < rounds[round_name]["end"]:
-                prize.current_leader = prize.leader(team)
+            if today < rounds[round_name]["start"]:
+                # If the round happens in the future, we don't care who the leader is.
+                prize.current_leader = "TBD"
             else:
-                prize.winner = prize.leader(team)
+                # If we are in the middle of the round, display the current leader.
+                if today < rounds[round_name]["end"]:
+                    prize.current_leader = prize.leader(team)
+                else:
+                    prize.winner = prize.leader(team)
 
-        prize_dict[round_name].append(prize)
+            prize_dict[round_name].append(prize)
 
     return prize_dict
 
@@ -74,14 +77,14 @@ def prize_form(request, prize_id, user_id):
         return render_to_response('view_prizes/form.txt', {
             'raffle': False,
             'prize': prize,
-            'round': prize.round_name,
+            'round': prize.round.name,
             'competition_name': challenge.competition_name,
         }, context_instance=RequestContext(request), mimetype='text/plain')
 
     message = template.render({
         'raffle': False,
         'prize': prize,
-        'round': prize.round_name,
+        'round': prize.round.name,
         'competition_name': challenge.competition_name,
     })
     return HttpResponse(message, content_type="text", mimetype='text/html')
@@ -153,3 +156,34 @@ def prize_summary(request, round_name):
         "individual_team_prize": individual_team_prize,
         "teams": teams
     }, context_instance=RequestContext(request))
+
+
+@never_cache
+@login_required
+def bulk_round_change(request, action_type, attribute):
+    """Handle change Round for selected prizes from Admin interface."""
+    _ = action_type
+    _ = attribute
+    prize_ids = request.GET["ids"]
+    prizes = []
+    for pk in prize_ids.split(","):
+        prizes.append(Prize.objects.get(pk=pk))
+
+    if request.method == "POST":
+        r = request.POST["round_choice"]
+        for prize in prizes:
+            if r != '':
+                prize.round = RoundSetting.objects.get(pk=r)
+            else:
+                prize.round = None
+            prize.save()
+
+        return HttpResponseRedirect("/admin/prizes/prize")
+    else:
+        form = ChangeRoundForm(initial={"ids": prize_ids})
+        return render_to_response("admin/bulk_change.html", {
+            "attribute": "Round",
+            "prizes": prizes,
+            "action_type": None,
+            "form": form,
+            }, context_instance=RequestContext(request))

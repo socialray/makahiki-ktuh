@@ -7,6 +7,7 @@ from apps.managers.team_mgr import team_mgr
 from apps.managers.team_mgr.models import Group, Team
 from apps.utils.utils import media_file_path
 from apps.widgets.resource_goal import resource_goal
+from apps.managers.challenge_mgr.models import RoundSetting
 
 
 _MEDIA_LOCATION = "prizes"
@@ -44,10 +45,7 @@ class Prize(models.Model):
         blank=True,
         help_text="A picture of your prize."
     )
-    round_name = models.CharField(
-        max_length=50,
-        help_text="The round in which this prize can be won."
-    )
+    round = models.ForeignKey(RoundSetting, null=True, blank=True)
     award_to = models.CharField(
         max_length=50,
         choices=AWARD_TO_CHOICES,
@@ -59,12 +57,12 @@ class Prize(models.Model):
         help_text="The 'competition' this prize is awarded to.")
 
     def __unicode__(self):
-        return self.round_name + ": " + self.title
+        return self.round.name + ": " + self.title
 
     class Meta:
         """meta"""
-        unique_together = ("round_name", "award_to", "competition_type")
-        ordering = ("round_name", "award_to", "competition_type")
+        unique_together = ("round", "award_to", "competition_type")
+        ordering = ("round__name", "award_to", "competition_type")
 
     def num_awarded(self, team=None):
         """Returns the number of prizes that will be awarded for this prize."""
@@ -88,17 +86,17 @@ class Prize(models.Model):
         if self.competition_type == "points":
             return self._points_leader(team)
         elif self.competition_type == "energy":
-            return resource_mgr.resource_leader("energy", round_name=self.round_name)
+            return resource_mgr.resource_leader("energy", round_name=self.round.name)
         elif self.competition_type == "energy_goal":
-            return resource_goal.resource_goal_leader("energy", round_name=self.round_name)
+            return resource_goal.resource_goal_leader("energy", round_name=self.round.name)
         elif self.competition_type == "water":
-            return resource_mgr.resource_leader("water", round_name=self.round_name)
+            return resource_mgr.resource_leader("water", round_name=self.round.name)
         elif self.competition_type == "water_goal":
-            return resource_goal.resource_goal_leader("water", round_name=self.round_name)
+            return resource_goal.resource_goal_leader("water", round_name=self.round.name)
 
     def _points_leader(self, team=None):
         """Return the point leader."""
-        round_name = self.round_name
+        round_name = self.round.name
         if self.award_to == "individual_overall":
             return player_mgr.points_leader(round_name=round_name)
 

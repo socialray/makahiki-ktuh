@@ -6,6 +6,7 @@ from django.contrib.auth.models import User
 
 from apps.managers.player_mgr.models import Profile
 from apps.utils import test_utils
+from apps.managers.challenge_mgr.models import RoundSetting
 
 
 class OverallPrizeTest(TransactionTestCase):
@@ -32,7 +33,7 @@ class OverallPrizeTest(TransactionTestCase):
         """
         Simple test to check that the number of prizes to be awarded is one.
         """
-        self.prize.round_name = "Round 1"
+        self.prize.round = RoundSetting.objects.get(name="Round 1")
         self.prize.save()
 
         self.assertEqual(self.prize.num_awarded(), 1,
@@ -42,7 +43,7 @@ class OverallPrizeTest(TransactionTestCase):
         """
         Tests that we can retrieve the overall individual points leader for a round prize.
         """
-        self.prize.round_name = "Round 1"
+        self.prize.round = RoundSetting.objects.get(name="Round 1")
         self.prize.save()
 
         # Test one user
@@ -102,7 +103,7 @@ class TeamPrizeTest(TransactionTestCase):
         """
         Tests that the number of prizes awarded corresponds to the number of teams.
         """
-        self.prize.round_name = "Round 1"
+        self.prize.round = RoundSetting.objects.get(name="Round 1")
         self.prize.save()
 
         self.assertEqual(self.prize.num_awarded(), len(self.teams),
@@ -112,7 +113,7 @@ class TeamPrizeTest(TransactionTestCase):
         """
         Tests that we can retrieve the overall individual points leader for a round prize.
         """
-        self.prize.round_name = "Round 1"
+        self.prize.round = RoundSetting.objects.get(name="Round 1")
         self.prize.save()
 
         # Test one user

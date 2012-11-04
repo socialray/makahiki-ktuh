@@ -18,5 +18,5 @@ urlpatterns = patterns('',
         name="prize_summary"),
     url(r'^bulk_change/(?P<action_type>[\w]+)/(?P<attribute>[\w]+)/$',
         'apps.widgets.raffle.views.bulk_round_change',
-        name="bulk_round_change"),
+        name="bulk_raffle_round_change"),
 )

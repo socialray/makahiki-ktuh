@@ -7,14 +7,15 @@ from apps.managers.team_mgr.models import Team
 from apps.widgets.notifications.models import UserNotification, NoticeTemplate
 
 from apps.widgets.prizes.models import Prize
+from django.http import HttpResponseRedirect
 
 
 class PrizeAdmin(admin.ModelAdmin):
     """raffle admin"""
-    list_display = ('round_name', 'title', 'value', 'award_to', 'competition_type',
+    list_display = ('round', 'title', 'value', 'award_to', 'competition_type',
                     'winner', 'notice_sent')
-    list_filter = ['round_name']
-    actions = ["notify_winner"]
+    list_filter = ['round']
+    actions = ["notify_winner", "change_round"]
 
     def _send_winner_notification(self, prize, leader):
         """send notification."""
@@ -52,6 +53,15 @@ class PrizeAdmin(admin.ModelAdmin):
 
     notify_winner.short_description = "Notify winner for selected prizes."
 
+    def change_round(self, request, queryset):
+        """Change the round for the selected Prizes."""
+        _ = queryset
+        selected = request.POST.getlist(admin.ACTION_CHECKBOX_NAME)
+        return HttpResponseRedirect(reverse("bulk_prize_round_change",
+                                            args=("prize", "round",)) +
+                                     "?ids=%s" % (",".join(selected)))
+    change_round.short_description = "Change the round"
+
     def winner(self, obj):
         """return the winner and link to pickup form."""
         if obj.award_to == 'individual_overall':
@@ -60,7 +70,8 @@ class PrizeAdmin(admin.ModelAdmin):
                 return "%s (<a href='%s'>View pickup form</a>)" % (leader,
                     reverse('prize_view_form', args=(obj.pk, leader.user.pk)))
         elif obj.award_to == 'individual_team':
-            return "<a href='%s'>View winners</a>" % reverse('prize_team_winners', args=(obj.pk, ))
+            return "<a href='%s'>View winners</a>" % reverse('prize_team_winners',
+                                                             args=(obj.pk, ))
         else:
             leader = obj.leader()
             return leader

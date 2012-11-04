@@ -32,7 +32,7 @@ class RafflePrizesTestCase(TransactionTestCase):
         raffle_prize = RafflePrize(
             title="Test raffle prize",
             description="A raffle prize for testing",
-            round_name="Round 2",
+            round=RoundSetting.objects.get(name="Round 3"),
             value=5,
         )
         raffle_prize.save()
@@ -64,7 +64,7 @@ class RafflePrizesTestCase(TransactionTestCase):
         raffle_prize = RafflePrize(
             title="Test raffle prize",
             description="A raffle prize for testing",
-            round_name="Round 2",
+            round=RoundSetting.objects.get(name="Round 2"),
             value=5,
         )
         raffle_prize.save()
@@ -116,7 +116,7 @@ class RafflePrizesTestCase(TransactionTestCase):
         raffle_prize = RafflePrize(
             title="Test raffle prize",
             description="A raffle prize for testing",
-            round_name="Round 1",
+            round=RoundSetting.objects.get(name="Round 1"),
             value=5,
         )
         raffle_prize.save()
@@ -140,7 +140,7 @@ class RafflePrizesTestCase(TransactionTestCase):
         raffle_prize = RafflePrize(
             title="Test raffle prize",
             description="A raffle prize for testing",
-            round_name="Round 1",
+            round=RoundSetting.objects.get(name="Round 1"),
             value=5,
         )
         raffle_prize.save()
@@ -178,7 +178,7 @@ class RafflePrizesTestCase(TransactionTestCase):
         raffle_prize = RafflePrize(
             title="Test raffle prize",
             description="A raffle prize for testing",
-            round_name="Round 1",
+            round=RoundSetting.objects.get(name="Round 1"),
             value=5,
         )
         raffle_prize.save()
@@ -191,7 +191,7 @@ class RafflePrizesTestCase(TransactionTestCase):
         raffle_prize = RafflePrize(
             title="Test raffle prize",
             description="A raffle prize for testing",
-            round_name="Round 2",
+            round=RoundSetting.objects.get(name="Round 2"),
             value=5,
         )
         raffle_prize.save()

@@ -9,6 +9,7 @@ from django.contrib.auth.models import User
 from apps.utils import test_utils
 
 from apps.widgets.raffle.models import RafflePrize, RaffleTicket
+from apps.managers.challenge_mgr.models import RoundSetting
 
 
 class RafflePrizeTests(TransactionTestCase):
@@ -33,15 +34,15 @@ class RafflePrizeTests(TransactionTestCase):
             title="Super prize!",
             description="A test prize",
             image=image,
+            round=RoundSetting.objects.get(name="Round 1"),
             value=5,
-            round_name="Round 1",
         )
 
     def testTicketAllocation(self):
         """
         Tests that a user can allocate a ticket.
         """
-        self.prize.round_name = "Round 1"
+        self.prize.round = RoundSetting.objects.get(name="Round 1")
         self.prize.save()
 
         profile = self.user.get_profile()

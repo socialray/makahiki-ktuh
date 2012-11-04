@@ -1,0 +1,29 @@
+{% extends "admin/base_site.html" %}
+{% load i18n l10n %}
+{% load url from future %}
+{% load admin_urls %}
+
+{% block breadcrumbs %}
+    <div class="breadcrumbs">
+        <a href="{% url 'admin:index' %}">{% trans 'Home' %}</a>
+        &rsaquo; <a href="/admin/raffle/raffleprize/">Raffle prizes</a>
+        &rsaquo; Change {{ attribute }}
+    </div>
+{% endblock %}
+
+{% block content %}
+        <form action="" method="post">{% csrf_token %}
+            <div style="background-color: white;">
+                You've selected the following prizes:
+                <ul>
+                {% for obj in prizes %}
+                    <li> {{ obj.title }}: {{obj.round}} - {{ obj.description }}
+                    </li>
+                {% endfor %}
+                </ul>
+                Please select a Round for the prizes: <br/>
+                {{ form.round_choice }}
+                <input type="submit" value="Change" />
+            </div>
+        </form>
+{% endblock %}
