@@ -22,6 +22,7 @@ from apps.lib.avatar.models import Avatar, avatar_file_path
 from apps.widgets.raffle.models import RafflePrize, RaffleTicket
 from apps.widgets.smartgrid.predicates import approved_some_of, completed_action, \
     completed_some_of, approved_action
+from apps.managers.challenge_mgr.models import RoundSetting
 
 
 class QuestConditionsTest(TransactionTestCase):
@@ -43,10 +44,11 @@ class QuestConditionsTest(TransactionTestCase):
         Test that allocated_ticket works.
         """
         # Create a raffle prize.
+        r = RoundSetting.objects.get(name="Round 1")
         prize = RafflePrize(
             title="Super prize!",
             description="A test prize",
-            round_name="Round 1",
+            round=r,
             value=5,
         )
         prize.save()

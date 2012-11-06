@@ -16,7 +16,8 @@ class PrizesFunctionalTestCase(TransactionTestCase):
 
     def setUp(self):
         """Set up a team and log in."""
-        challenge_mgr.init()
+#        challenge_mgr.init()
+        test_utils.set_competition_round()
         self.user = test_utils.setup_user(username="user", password="changeme")
 
         test_utils.setup_round_prize("Round 1", "team_overall", "energy")
@@ -27,6 +28,8 @@ class PrizesFunctionalTestCase(TransactionTestCase):
         test_utils.setup_round_prize("Round 2", "individual_overall", "points")
         test_utils.setup_round_prize("Round 1", "individual_team", "points")
         test_utils.setup_round_prize("Round 2", "individual_team", "points")
+
+        print "setUp prize count %d" % Prize.objects.count()
 
         challenge_mgr.register_page_widget("win", "prizes")
 
@@ -46,12 +49,14 @@ class PrizesFunctionalTestCase(TransactionTestCase):
         response = self.client.get(reverse("win_index"))
         self.failUnlessEqual(response.status_code, 200)
 
+        print "testIndex prize count %d" % Prize.objects.count()
+
         for prize in Prize.objects.all():
             self.assertContains(response, prize.title, msg_prefix="Prize not found on prize page")
 
     def testLeadersInRound1(self):
         """Test that the leaders are displayed correctly in round 1."""
-        test_utils.set_competition_round()
+        #test_utils.set_competition_round()
 
         from apps.managers.cache_mgr import cache_mgr
         cache_mgr.clear()
@@ -81,7 +86,18 @@ class PrizesFunctionalTestCase(TransactionTestCase):
     def testLeadersInRound2(self):
         """Test that the leaders are displayed correctly in round 2."""
 
+        print "testLeadersInRound2.1 prize count %d" % Prize.objects.count()
         test_utils.set_two_rounds()
+        print "testLeadersInRound2.2 prize count %d" % Prize.objects.count()
+        test_utils.setup_round_prize("Round 1", "team_overall", "energy")
+        test_utils.setup_round_prize("Round 2", "team_overall", "energy")
+        test_utils.setup_round_prize("Round 1", "team_overall", "points")
+        test_utils.setup_round_prize("Round 2", "team_overall", "points")
+        test_utils.setup_round_prize("Round 1", "individual_overall", "points")
+        test_utils.setup_round_prize("Round 2", "individual_overall", "points")
+        test_utils.setup_round_prize("Round 1", "individual_team", "points")
+        test_utils.setup_round_prize("Round 2", "individual_team", "points")
+        print "testLeadersInRound2.3 prize count %d" % Prize.objects.count()
 
         profile = self.user.get_profile()
         profile.add_points(10, datetime.datetime.today(), "test")
@@ -91,6 +107,7 @@ class PrizesFunctionalTestCase(TransactionTestCase):
 
         from apps.managers.cache_mgr import cache_mgr
         cache_mgr.clear()
+        print "testLeadersInRound2.4 prize count %d" % Prize.objects.count()
 
         response = self.client.get(reverse("win_index"))
         self.assertContains(response, "Winner: ", count=3,

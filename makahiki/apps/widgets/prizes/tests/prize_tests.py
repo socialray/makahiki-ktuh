@@ -17,12 +17,15 @@ class PrizeTest(TransactionTestCase):
     Tests basic methods of a prize.
     """
 
+    def setUp(self):
+        """Sets up the test infrastructure."""
+        test_utils.set_competition_round()
+
     def testConstraints(self):
         """
         Tests that the uniqueness constraints are enforced.
         A prize with the same round_name, award_to, and competition_type as another cannot be created.
         """
-        test_utils.set_competition_round()
 
         image_path = os.path.join(settings.PROJECT_ROOT, "fixtures", "test_images", "test.jpg")
         image = ImageFile(open(image_path, "r"))
