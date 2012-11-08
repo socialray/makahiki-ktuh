@@ -214,10 +214,13 @@ def _check_attend_code(user, form):
 
     try:
         code = ConfirmationCode.objects.get(code=form.cleaned_data["response"].lower())
-        if not code.is_active:
-            message = "This code has already been used."
+        # CAM 11/08/12 this assumes that ConfirmationCodes are only for events.
+        if code.action.event.event_date > datetime.datetime():
+            message = "The Event has not occurred, Please wait till after the event date to submit."
         elif code.action in user.action_set.filter(actionmember__award_date__isnull=False):
             message = "You have already redeemed a code for this event/excursion."
+        elif not code.is_active:
+            message = "This code has already been used."
         elif code.action.social_bonus:
             if form.cleaned_data["social_email"]:
                 if form.cleaned_data["social_email"] != "Email":
