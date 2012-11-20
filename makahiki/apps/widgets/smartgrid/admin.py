@@ -149,6 +149,8 @@ class ActivityAdminForm(forms.ModelForm):
             3.  Either points or a point range needs to be specified.
         """
 
+        super(ActivityAdminForm, self).clean()
+
         # Data that has passed validation.
         cleaned_data = self.cleaned_data
 

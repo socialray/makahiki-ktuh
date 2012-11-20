@@ -192,6 +192,7 @@ class Action(models.Model):
         help_text="The name of the action.")
     slug = models.SlugField(
         help_text="Automatically generated if left blank.",
+        unique=True,
         )
     title = models.CharField(
         max_length=200,
