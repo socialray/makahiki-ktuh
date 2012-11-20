@@ -504,9 +504,6 @@ class ActionMember(models.Model):
             super(ActionMember, self).save(args, kwargs)
             return
 
-        if not self.points_awarded:
-            self.points_awarded = self.action.point_value
-
         if self.approval_status == u"rejected":
             self.award_date = None
             super(ActionMember, self).save(args, kwargs)
@@ -527,6 +524,9 @@ class ActionMember(models.Model):
                 self._award_signup_points()
 
             else:    # is approved
+                if not self.points_awarded:
+                    self.points_awarded = self.action.point_value
+
                 # Record dates.
                 self.award_date = datetime.datetime.today()
 

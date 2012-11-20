@@ -598,10 +598,16 @@ class ActionMemberAdminForm(forms.ModelForm):
         super(ActionMemberAdminForm, self).__init__(*args, **kwargs)
         # Instance points to an instance of the model.
         member = self.instance
-        if member and member.action and not member.action.point_value:
+        if member and member.action:
             action = member.action
-            message = "Specify the number of points to award.  This value must be between %d and %d"
-            message = message % (action.activity.point_range_start, action.activity.point_range_end)
+            message = "Specify the number of points to award. "
+            if not action.point_value:
+                message += "This default points for this action should be between %d and %d." % (
+                    action.activity.point_range_start, action.activity.point_range_end)
+            else:
+                message += "The default points for this action is %d." % (
+                    action.point_value)
+
             self.fields["points_awarded"].help_text = message
 
     class Meta:
@@ -650,6 +656,12 @@ class ActionMemberAdmin(admin.ModelAdmin):
     ordering = ["submission_date"]
 
     form = ActionMemberAdminForm
+
+    def get_object(self, request, object_id):
+        obj = super(ActionMemberAdmin, self).get_object(request, object_id)
+        if obj and not obj.points_awarded:
+            obj.points_awarded = obj.action.point_value
+        return obj
 
     def short_question(self, obj):
         """return the short question."""
@@ -744,7 +756,7 @@ class ActionMemberAdmin(admin.ModelAdmin):
             else:
                 self.fields = (
                         "user", "action", "admin_link", "social_email", "completion_date",
-                        "approval_status")
+                        "points_awarded", "approval_status")
 
         return super(ActionMemberAdmin, self).get_form(request, obj, **kwargs)
 
