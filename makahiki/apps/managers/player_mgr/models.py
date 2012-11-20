@@ -47,6 +47,8 @@ class Profile(models.Model):
                                        help_text="The referring user")
     referrer_awarded = models.BooleanField(default=False, editable=False,
                                            help_text="Has the referral bonus awarded?")
+    properties = models.TextField(blank=True,
+                               help_text="Optional properties for the profile.")
 
     class Meta:
         """Meta sets verbosse name and plural."""

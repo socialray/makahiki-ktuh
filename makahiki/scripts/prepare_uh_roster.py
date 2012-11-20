@@ -52,6 +52,9 @@ def main(args):
 
         # output format: team, firstname, lastname, email, username, password[, RA]
         writer.writerow([team, firstname, lastname, email, username, ''])
+        # output the room number as the optional properties file
+        #writer.writerow([username, 'room=%s;' % room])
+
     infile.close()
     outfile.close()
 

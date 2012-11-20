@@ -44,7 +44,8 @@ def points_leaders(num_results=None, round_name=None):
     if entries:
         return entries
     else:
-        results = Profile.objects.all().extra(select={'profile__name': 'name', 'points': 0}).values(
+        results = Profile.objects.all().extra(
+            select={'profile__name': 'name', 'points': 0}).values(
             'profile__name', 'points')
         if num_results:
             results = results[:num_results]
@@ -104,6 +105,24 @@ def bulk_create_players(infile):
     return load_count
 
 
+def bulk_load_player_properties(infile):
+    """bulk load player profile properties from a csv file. Returns the number of
+    properties loaded."""
+
+    load_count = 0
+    reader = csv.reader(infile)
+    for items in reader:
+        username = items[0].strip()
+        properties = items[1].strip()
+
+        p = Profile.objects.get(user__username=username)
+        p.properties = properties
+        p.save()
+
+        load_count += 1
+    return load_count
+
+
 def reset_user(user):
     """Resets the given user by deleting them and then restoring them. """
     username = user.username
@@ -132,6 +151,7 @@ def reset_user(user):
 
 def get_user_by_email(email):
     """Return the user from given email"""
+    email = email.lower()
     try:
         return User.objects.get(email=email)
     except ObjectDoesNotExist:

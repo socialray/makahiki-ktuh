@@ -1,7 +1,6 @@
 """Provides the view of a help topic."""
 from django.http import HttpResponse
-from apps.widgets.status.analysis import calculate_summary_stats, calculate_action_stats, \
-    calculate_user_stats
+from apps.widgets.status import analysis
 
 
 def supply(request, page_name):
@@ -13,12 +12,22 @@ def supply(request, page_name):
     return {}
 
 
-def analysis(request):
+def analysis_view(request, command):
     """analysis"""
     _ = request
 
-    message = calculate_summary_stats()
-    message += calculate_action_stats()
-    message += calculate_user_stats()
+    if command == "summary":
+        result = analysis.calculate_summary_stats()
+    elif command == "actions":
+        result = analysis.calculate_action_stats()
+    elif command == "users":
+        result = analysis.calculate_user_stats()
+    elif command == "timestamps":
+        team = request.GET.get("team", "")
+        date_start = request.GET.get("date_start", "")
+        date_end = request.GET.get("date_end", "")
+        result = analysis.user_timestamps(team, date_start, date_end)
+    else:
+        result = "please specify an analysis command."
 
-    return HttpResponse(message, content_type="text", mimetype='text/plain')
+    return HttpResponse(result, content_type="text", mimetype='text/plain')
