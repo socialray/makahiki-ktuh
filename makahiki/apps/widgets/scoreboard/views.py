@@ -1,4 +1,5 @@
 """Prepares the views for point scoreboard widget."""
+import datetime
 from apps.managers.challenge_mgr import challenge_mgr
 from apps.managers.player_mgr import player_mgr
 from apps.managers.team_mgr import team_mgr
@@ -14,15 +15,15 @@ def supply(request, page_name):
     round_standings = {}
 
     current_round = challenge_mgr.get_round_name()
+    today = datetime.datetime.today()
     rounds = challenge_mgr.get_all_round_info()["rounds"]
     for key in rounds.keys():
         # 1. always display current round
         # 2. if not future round
         #    a. display the round with the "display_scoreboard" flag
         #    b. display in the status page
-        if key == current_round or \
-           (rounds[key]["start"] < rounds[current_round]["start"] and \
-            (rounds[key]["display_scoreboard"] or page_name == "status")):
+        if rounds[key]["start"] <= today and \
+            (rounds[key]["display_scoreboard"] or page_name == "status"):
             round_standings[key] = {
                 "team_standings": team_mgr.team_points_leaders(num_results, key),
                 "profile_standings": player_mgr.points_leaders(num_results, key),

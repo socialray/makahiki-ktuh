@@ -1,4 +1,5 @@
 """Prepares the views for participation widget."""
+import datetime
 from apps.managers.challenge_mgr import challenge_mgr
 from apps.widgets.participation import participation
 
@@ -11,12 +12,11 @@ def supply(request, page_name):
 
     round_participation_ranks = {}
 
-    current_round = challenge_mgr.get_round_name()
+    today = datetime.datetime.today()
     rounds = challenge_mgr.get_all_round_info()["rounds"]
     for key in rounds.keys():
-        if key == current_round or\
-           (rounds[key]["start"] < rounds[current_round]["start"] and\
-            (rounds[key]["display_scoreboard"] or page_name == "status")):
+        if rounds[key]["start"] <= today and\
+            (rounds[key]["display_scoreboard"] or page_name == "status"):
             round_participation_ranks[key] = participation.participation_ranks(key)
 
     round_participation_ranks["Overall"] = participation.participation_ranks("Overall")

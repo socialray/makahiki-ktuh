@@ -157,19 +157,6 @@ class RafflePrizesTestCase(TransactionTestCase):
         self.assertNotContains(response, reverse("raffle_remove_ticket", args=(raffle_prize.id,)),
             msg_prefix="There should not be a url to remove a ticket.")
 
-    def testAfterDeadline(self):
-        """
-        Test what happens when the page is accessed after the deadline.
-        """
-        end = datetime.datetime.today() - datetime.timedelta(hours=1)
-        rounds = RoundSetting.objects.get(name="Round 2")
-        rounds.end = end
-        rounds.save()
-
-        response = self.client.get(reverse("win_index"))
-        self.failUnlessEqual(response.status_code, 200)
-        self.assertContains(response, "The raffle is now over.")
-
     def testPrizeOutsideOfRound(self):
         """
         Test that a raffle prize outside of the round does not appear in the list.
@@ -186,22 +173,3 @@ class RafflePrizesTestCase(TransactionTestCase):
         response = self.client.get(reverse("win_index"))
         self.failUnlessEqual(response.status_code, 200)
         self.assertNotContains(response, "Test raffle prize")
-
-        # Try allocating a ticket to this prize.
-        raffle_prize = RafflePrize(
-            title="Test raffle prize",
-            description="A raffle prize for testing",
-            round=RoundSetting.objects.get(name="Round 2"),
-            value=5,
-        )
-        raffle_prize.save()
-
-        end = datetime.datetime.today() - datetime.timedelta(hours=1)
-        rounds = RoundSetting.objects.get(name="Round 2")
-        rounds.end = end
-        rounds.save()
-
-        response = self.client.post(reverse("raffle_add_ticket", args=(raffle_prize.id,)),
-            follow=True)
-        self.failUnlessEqual(response.status_code, 200)
-        self.assertContains(response, "The raffle is now over.")

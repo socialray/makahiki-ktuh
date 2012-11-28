@@ -5,14 +5,16 @@
 {% endblock %}
 
 {% block content %}
-    <div>
+    <div class="landing-intro">
         {% if before %}
             <h3>You have logged in successfully, but the competition has not yet started.
-                The competition starts at {{ start }}, in: </h3></he></br>
-                <h2><span id='restricted-countdown'></span>.</h2> </br>
+                The competition starts at {{ start }}, in: </h3><br/>
+                <h2><span id='restricted-countdown'></span>.</h2> <br/>
                 <h3>Come back then!</h3>
-        {% else %}
+        {% elif end %}
             <h3>The Kukui Cup is now over. Thank you for your participation.</h3>
+        {% else %}
+            <h3>The current round of the Kukui Cup is now over. The Kukui Cup will resume at {{ start }}, with new ways to earn points and more prizes to win. Enjoy your break!</h3>
         {% endif %}
 
         <script src="{{STATIC_URL}}js/jquery.countdown.pack.js" type="text/javascript"></script>

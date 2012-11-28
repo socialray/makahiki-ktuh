@@ -50,10 +50,17 @@ def restricted(request):
     if challenge_mgr.in_competition():
         return HttpResponseRedirect(reverse('home_index'))
     rounds_info = challenge_mgr.get_all_round_info()
+    today = datetime.datetime.today()
     start = rounds_info["competition_start"]
-    end = rounds_info["competition_end"]
+    before = today < start
+    end = today > rounds_info["competition_end"]
+    if not before:
+        next_round = challenge_mgr.get_next_round_info()
+        if next_round:
+            start = next_round["start"]
+
     return render_to_response("widgets/home/templates/restricted.html", {
-        "before": datetime.datetime.today() < start,
+        "before": before,
         "start": start,
         "end": end,
         }, context_instance=RequestContext(request))

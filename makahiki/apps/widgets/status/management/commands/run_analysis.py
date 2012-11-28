@@ -20,16 +20,16 @@ class Command(MakahikiBaseCommand):
         #print analysis.calculate_action_stats()
         #print analysis.calculate_user_stats()
 
-        #outfile = open('user_timestamps.csv', 'w')
-        #analysis.user_timestamps(None, "2012-09-04", "2012-09-24", outfile)
-        #outfile.close()
+        outfile = open('user_timestamps.csv', 'w')
+        analysis.user_timestamps(None, "2012-09-04", "2012-10-01", outfile)
+        outfile.close()
 
-        #outfile = open('user_point_timestamps.csv', 'w')
-        #analysis.user_point_timestamps("2012-09-04", "2012-09-24", outfile)
-        #outfile.close()
+        outfile = open('user_point_timestamps.csv', 'w')
+        analysis.user_point_timestamps("2012-09-04", "2012-10-01", outfile)
+        outfile.close()
 
         outfile = open('energy_goal_timestamps.csv', 'w')
-        analysis.energy_goal_timestamps("2012-09-04", "2012-09-24", outfile)
+        analysis.energy_goal_timestamps("2012-09-04", "2012-10-01", outfile)
         outfile.close()
 
         today = datetime.datetime.today()

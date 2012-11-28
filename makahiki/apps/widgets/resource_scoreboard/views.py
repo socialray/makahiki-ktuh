@@ -1,4 +1,5 @@
 """Handle the rendering of the energy scoreboard widget."""
+import datetime
 
 from apps.managers.challenge_mgr import challenge_mgr
 from apps.managers.resource_mgr import resource_mgr
@@ -21,12 +22,12 @@ def resource_supply(request, resource, page_name):
     round_resource_ranks = {}
     round_resource_goal_ranks = {}
 
-    current_round = challenge_mgr.get_round_name()
+    today = datetime.datetime.today()
+
     rounds = challenge_mgr.get_all_round_info()["rounds"]
     for key in rounds.keys():
-        if key == current_round or\
-           (rounds[key]["start"] < rounds[current_round]["start"] and\
-            (rounds[key]["display_scoreboard"] or page_name == "status")):
+        if rounds[key]["start"] <= today and\
+            (rounds[key]["display_scoreboard"] or page_name == "status"):
             #round_resource_ranks[key] = resource_mgr.resource_ranks(resource, key)
             round_resource_goal_ranks[key] = resource_goal.resource_goal_ranks(resource, key)
 

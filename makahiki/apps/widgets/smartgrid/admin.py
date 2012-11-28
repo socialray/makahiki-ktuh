@@ -42,7 +42,7 @@ class ConfirmationCodeAdmin(admin.ModelAdmin):
     def view_selected(self, request, queryset):
         """Views the Codes for printing."""
         return render_to_response("admin/view_codes.html", {
-            "activity": queryset[0],
+            "activity": queryset[0].action,
             "codes": queryset,
             "per_page": 10,
         }, context_instance=RequestContext(request))

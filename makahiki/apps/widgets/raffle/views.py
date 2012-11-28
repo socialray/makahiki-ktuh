@@ -22,13 +22,13 @@ def supply(request, page_name):
     """Supply the view_objects contents, which provides all raffle data."""
     _ = page_name
     user = request.user
+    today = datetime.datetime.today()
     current_round_info = challenge_mgr.get_round_info()
     if not current_round_info:
         # no in any round
-        return {}
+        return {"today": today}
 
     deadline = current_round_info["end"]
-    today = datetime.datetime.today()
 
     # Get the user's tickets.
     total_tickets = RaffleTicket.total_tickets(user)

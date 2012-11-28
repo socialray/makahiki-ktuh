@@ -277,21 +277,47 @@ def get_current_round_info_from_cache():
 
     rounds = rounds_info["rounds"]
 
-    key = None
+    round_name = None
     for key in rounds:
         start = rounds[key]["start"]
         end = rounds[key]["end"]
         if start <= today < end:
+            round_name = key
             break
 
-    round_name = key
+    if round_name:
+        return {"name": round_name,
+                "start": rounds[round_name]['start'],
+                "end": rounds[round_name]['end'],
+                "round_reset": rounds[round_name]['round_reset'],
+                "display_scoreboard": rounds[round_name]['display_scoreboard'],
+        }
+    else:
+        return None
 
-    return {"name": round_name,
-            "start": rounds[round_name]['start'],
-            "end": rounds[round_name]['end'],
-            "round_reset": rounds[round_name]['round_reset'],
-            "display_scoreboard": rounds[round_name]['display_scoreboard'],
-    }
+
+def get_next_round_info():
+    """returns the next round info."""
+    today = datetime.datetime.today()
+    rounds_info = get_all_round_info()
+    rounds = rounds_info["rounds"]
+
+    next_round_name = None
+    for key in rounds:
+        start = rounds[key]["start"]
+        if today <= start:
+            next_round_name = key
+            break
+
+    if next_round_name:
+        return {"name": next_round_name,
+                "start": rounds[next_round_name]['start'],
+                "end": rounds[next_round_name]['end'],
+                "round_reset": rounds[next_round_name]['round_reset'],
+                "display_scoreboard": rounds[next_round_name]['display_scoreboard'],
+        }
+    else:
+        return None
 
 
 def get_round_info(round_name=None):
@@ -327,24 +353,20 @@ def get_round_name(submission_date=None):
         return None
 
     # Find which round this belongs to.
-    key = None
+    round_name = None
     rounds = rounds_info["rounds"]
     for key in rounds:
         start = rounds[key]["start"]
         end = rounds[key]["end"]
         if start <= submission_date < end:
-            return key
+            round_name = key
 
-    return key
+    return round_name
 
 
 def in_competition(submission_date=None):
     """Return True if we are currently in the competition."""
-    if not submission_date:
-        submission_date = datetime.datetime.today()
-
-    rounds_info = get_all_round_info()
-    return rounds_info["competition_start"] < submission_date < rounds_info["competition_end"]
+    return get_round_name(submission_date) is not None
 
 
 def get_game_admin_models():

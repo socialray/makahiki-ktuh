@@ -1,4 +1,5 @@
 """Handles request for prize status."""
+import datetime
 from django.db.models import Count
 
 from apps.managers.challenge_mgr import challenge_mgr
@@ -12,12 +13,13 @@ def supply(request, page_name):
 
     # get the raffle_prizes for all rounds
     raffle_prizes = {}
-    current_round = challenge_mgr.get_round_name()
+    today = datetime.datetime.today()
+
     rounds = challenge_mgr.get_all_round_info()["rounds"]
     for key in rounds.keys():
-        if key <= current_round:
+        if rounds[key]["start"] <= today:
             raffle_prizes[key] = RafflePrize.objects.filter(
-                round_name=key).annotate(count=Count('raffleticket')).order_by('-count')
+                round__name=key).annotate(count=Count('raffleticket')).order_by('-count')
 
     return {
         "raffle_prizes": raffle_prizes,
