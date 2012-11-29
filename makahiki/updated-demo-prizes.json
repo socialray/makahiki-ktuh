@@ -1,0 +1,30 @@
+[
+    {
+        "pk": 1, 
+        "model": "prizes.prize", 
+        "fields": {
+            "title": "Amazon Certificate", 
+            "image": "media/prizes/amazon2.jpg", 
+            "award_to": "individual_overall", 
+            "value": 20, 
+            "round": 2, 
+            "short_description": "$20 Amazon Gift Certificate for the individual with the highest number of points at the end of the Beta Test.", 
+            "competition_type": "points", 
+            "long_description": "Books, notebooks, magazines, art supplies, computers... you name it, Amazon's got it. With this gift certificate you'll be able to pick something up that you need (or maybe just want!).\r\n\r\nThis $20 gift certificate goes to the individual with the highest point total at the end of the Beta Test."
+        }
+    }, 
+    {
+        "pk": 4, 
+        "model": "prizes.prize", 
+        "fields": {
+            "title": "Bubbies Certificate", 
+            "image": "media/prizes/bubbies-logo.2.jpg", 
+            "award_to": "team_overall", 
+            "value": 5, 
+            "round": 2, 
+            "short_description": "A $5 Bubbies Gift Certificate (gets you a single scoop cone) for each member of the team with the most points earned during the Beta Test.", 
+            "competition_type": "points", 
+            "long_description": "This gift certificate will score you one free ice cream cone from Bubbie's Ice Cream, just a short walk from the residence halls and one of the best ice cream parlors in Hawaii. \r\n\r\nTo win this $5 gift certificate, your team must earn more points than any other team during the Beta Test."
+        }
+    }
+]
