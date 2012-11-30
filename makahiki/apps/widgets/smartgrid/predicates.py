@@ -43,6 +43,15 @@ def completed_some_of_level(user, some=1, level_name=None):
     return completed_some_of(user, some=some, level_name=level_name)
 
 
+def completed_some_full_spectrum(user, some=1):
+    """Returns true if the user has completed some activities, commitments, and
+    events."""
+    ret = completed_some_of(user, some=some, action_type='activity')
+    ret = ret and completed_some_of(user, some=some, action_type='commitment')
+    ret = ret and completed_some_of(user, some=some, action_type='event')
+    return ret
+
+
 def completed_some_of(user, some=1, category_slug=None, action_type=None, resource=None,
                       level_name=None):
     """Returns true if completed some of the specified type.
