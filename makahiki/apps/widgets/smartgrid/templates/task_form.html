@@ -41,11 +41,15 @@ $(document).ready(function() {
 if((navigator.userAgent.match(/iPhone/i)) || 
    (navigator.userAgent.match(/iPod/i)) ||
    (navigator.userAgent.match(/iPad/i))) {
+	if (navigator.userAgent.match(/OS 6(_\d)+ like Mac OS X/i)) {
+		// do nothing.
+	} else {
 //      Picup.convertFileInput('id_image_response', currentParams);
-    id_image_response.style.visibility = 'hidden';
-    submit_button.style.visibility = 'hidden'; 
-    cancel_button.style.visibility = 'hidden';
-    ios_mobile_div.innerHTML = "<p>File upload on iPhone not available. Please upload your file from your laptop. Click <button class=\"btn btn-widget\" style=\"cursor:pointer;\" onclick='complain();'>here</button> if you are unhappy with this workaround.</p>";
+        id_image_response.style.visibility = 'hidden';
+        submit_button.style.visibility = 'hidden'; 
+        cancel_button.style.visibility = 'hidden';
+        ios_mobile_div.innerHTML = "<p>File upload on iPhone not available. Please upload your file from your laptop. Click <button class=\"btn btn-widget\" style=\"cursor:pointer;\" onclick='complain();'>here</button> if you are unhappy with this workaround.</p>";
+	}
    };
 });
 </script>
