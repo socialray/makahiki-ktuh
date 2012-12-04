@@ -38,14 +38,12 @@
                     click on Get Nutz, and enter the following code at the bottom of the 'Upcoming
                     Events' box:
                     <center><h4>{{ code.code }}</h4></center>
-                </p>
                 {% if activity.social_bonus and activity.social_bonus > 0 %}
-                    <p>
                         Remember, you can earn {{ activity.social_bonus }} social bonus points by
                         providing the Kukui Cup email address of a friend who attended
                         the {{ activity.type }}.
-                    </p>
                 {% endif %}
+                </p>
                 <div style="float: right;font-size:8">{{code.pk}}</div>
             </td>
             {% if forloop.counter|divisibleby:"2" %}
