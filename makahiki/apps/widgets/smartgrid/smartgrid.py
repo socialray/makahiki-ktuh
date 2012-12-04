@@ -133,6 +133,7 @@ def get_level_actions(user):
                         action.is_unlock = is_unlock(user, action)
                         action.completed = False
 
+                    action.availablity = availablity(action)
                     # if there is one action is not completed, set the level to in-completed
                     if not action.completed:
                         level.is_complete = False
@@ -568,3 +569,19 @@ def check_daily_submissions():
             mail = EmailMultiAlternatives(subject, message, challenge.contact_email,
                 [challenge.contact_email, ])
             mail.send()
+
+
+def availablity(action):
+    """Returns -1 if the current date is before pub_date, 0 if action is available,
+    and 1 if action is expired."""
+    today = datetime.date.today()
+    ret_val = 0
+    if action.pub_date != None:
+        if today < action.pub_date:
+            # before pub_date
+            ret_val = -1
+
+    if action.expire_date != None:
+        if today > action.expire_date and ret_val == 0:
+            ret_val = 1
+    return ret_val

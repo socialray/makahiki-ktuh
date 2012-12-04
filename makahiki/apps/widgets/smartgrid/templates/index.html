@@ -93,6 +93,22 @@
     </div>
 </div>
 
+<div class="modal hide fade" id="expiredModal">
+    <div class="modal-header">
+        <a class="close" data-dismiss="modal">x</a>
+        <h3>Expired Activity</h3>
+    </div>
+    <div class="modal-body" id="modal-body">
+        <p><b>This activity is expired.</b></p>
+        <div id="expire_msg">
+        </div>
+        </p>
+    </div>
+    <div class="modal-footer">
+        <a href="#" class="btn btn-widget" data-dismiss="modal">Close</a>
+    </div>
+</div>
+
 <script type="text/javascript">
     $(document).ready(function () {
     	var current_level = getCookie("current-level");
@@ -154,6 +170,26 @@
         });
         modalElement.css('margin-top', (modalElement.outerHeight() / 2) * -1);
         modalElement.modal('show');
+    }
+    
+    function expired_dialog(event, type, slug, expire_msg) {
+        var modalElement = $('#expiredModal');
+        
+        modalElement.modal({
+            backdrop: true,
+            keyboard: true,
+            show: false
+        }); 
+        modalElement.find('#expire_msg').html(expire_msg);
+        // set up event logging
+        modalElement.on('shown', function() {
+            log_js_action(type, slug, 'view-expire-open');
+        });
+        modalElement.on('hidden', function() {
+            log_js_action(type, slug, 'view-expire-close');
+        });
+        modalElement.css('margin-top', (modalElement.outerHeight() / 2) * -1);
+        modalElement.modal('show');    	
     }
     
     function toggleLocked(event, unlock_condition) {
