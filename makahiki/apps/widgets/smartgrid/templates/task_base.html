@@ -15,7 +15,7 @@
             </tr>
         </table>
     </div>
-    <div class="content-box-contents">
+    <div class="content-box-contents activity-task">
 {% if action.completed %}
     {% if action.member.approval_status == "approved" or action.member.award_date %}
         <div class="activity-task-details-info">
@@ -46,7 +46,12 @@
     {% endif %}
 {% endif %}
         <p/>
-        <center><b>{{ action.title }}</b></center>
+        <center>
+{% if action.availablity == 1 %}
+{# --- expired --- #}
+        <div class="expired-activity">Expired</div>
+{% endif %}        
+        <b>{{ action.title }}</b></center>
         <p/>
 {% if action.image %}
         <center><img src="{{ action.image.url }}" /> </center>
@@ -62,10 +67,12 @@
 {% endif %}
         <p/>
         <center>
-{% if not action.completed %}              <!-- not done yet  -->
-    {% block action_not_completed %} {% endblock %}
-{% else %}
-    {% block action_completed_button %} {% endblock %}
+{% if action.availablity < 1 %}        
+    {% if not action.completed %}              <!-- not done yet  -->
+        {% block action_not_completed %} {% endblock %}
+    {% else %}
+        {% block action_completed_button %} {% endblock %}
+    {% endif %}
 {% endif %}
             <br/> <br/>
         </center>
@@ -78,6 +85,7 @@
             {% include "task_form.html" %}
             </div>
         </div>
+
     </div>
 </div>
 

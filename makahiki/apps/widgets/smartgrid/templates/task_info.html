@@ -9,12 +9,6 @@
         {{ action.type|capfirst }} : {{ action.name }}
     </div>
     <div class="content-box-contents">
-        {% if action.is_canopy %}
-            <p/> This is a Canopy {{ action.type|capfirst }}.
-        {% endif %}
-        {% if action.is_group %}
-            <p/>This is a Group {{ action.type|capfirst }}.
-        {% endif %}
         <p/>
         This {{ action.type }} is worth
         {% if action.point_value %}
@@ -28,7 +22,7 @@
         {% else %}
             <p/>
             {% if action.type == "event" or action.type == "excursion" %}
-                <b>When</b> : {{ action.event.event_date }} <br/>
+                <b>When</b> : {% if action.event.event_date == None %} TBD {% else %} {{ action.event.event_date }} {% endif %} <br/>
                 <b>Where</b> : {{ action.event.event_location }} <br/>
                 <b>Estimated duration</b> : {{ action.duration }} <br/>
                 <b>Space(s) still available</b> : {{ action.available_seat }}

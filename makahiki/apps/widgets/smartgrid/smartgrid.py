@@ -82,6 +82,7 @@ def annotate_action_details(user, action):
         action.is_unlock = is_unlock(user, action) and is_level_unlock(user, action.level)
         action.completed = False
 
+    action.availablity = availablity(action)
     return action
 
 

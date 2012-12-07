@@ -150,12 +150,9 @@
                                                             </a>
                                                     {% else %}
                                                     <br/>
-                                                    <a class="whatever"
-                                                       href="javascript:void(0);"
-                                                       onclick="expired_dialog(event, '{{task.type}}','{{task.slug}}',
-                                                               '{{task.name|escapejs}} has expired and is no longer available.'
-                                                               )">
-                                                               <b>Expired</b>
+                                                    <a href="{% url activity_task task.type task.slug %}"
+                                                           title="{{task.name}}" onClick="setLevel({{level.priority}})">
+                                                                <b>Expired</b>
                                                         </a>  
                                                     {% endif %}                                              
                                                 {% endif %}
