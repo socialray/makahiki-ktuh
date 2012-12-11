@@ -28,6 +28,8 @@ $(document).ready(function() {
       $("#help-ask-spinner").show();
       $.post(this.form.action, $("#help-ask-form").serialize(), function(data) {
 //        $("#feedback-success").dialog("open");
+    	var modalElement = $('#successModal');
+        modalElement.css('margin-top', (modalElement.outerHeight() / 2) * -1);
     	$('#successModal').modal('show');
         $("#help-ask-spinner").hide();
         $("#help-ask-form textarea").val("");
