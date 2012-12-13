@@ -6,7 +6,7 @@ Makahiki Installation (Local)
 Note that these instructions have only been tested on Mac OS X and Linux. The
 Makahiki developers all work on Unix platforms, so we do not regularly test for
 Windows compatibility. When we are aware of special steps required for Windows,
-they have been noted below.
+they have been noted below.  See :ref:`section-installation-makahiki-windows`.
 
 These instructions also assume that you are using a Bourne-type shell (such as
 bash), which is the default on Mac OS X and Linux. Using a C-shell variant
