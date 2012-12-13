@@ -126,21 +126,25 @@ def load_data(manage_command, instance_type, fixture_path):
 
     if instance_type == "default":
         print "setting up default data..."
+        os.system("%s setup_test_data rounds 1" % manage_command)
         load_fixtures(manage_command, fixture_path, "default_")
     elif instance_type == "demo":
         print "setting up demo data..."
+        os.system("%s setup_test_data rounds 1" % manage_command)
         load_fixtures(manage_command, fixture_path, "demo_")
-        # setup 2 user per team, and 1 one-week round
-        os.system("%s setup_test_data all 2 1" % manage_command)
+        # setup 2 user per team
+        os.system("%s setup_test_data all 2" % manage_command)
         # change the commitment duration to 1 day
         os.system("%s setup_test_data commitment_durations 1" % manage_command)
     elif instance_type == "test":
         print "setting up test data..."
+        os.system("%s setup_test_data rounds 3" % manage_command)
         load_fixtures(manage_command, fixture_path, "test_")
-        # setup 2 user per team, and 3 one-week round
-        os.system("%s setup_test_data all 2 3" % manage_command)
+        # setup 2 user per team
+        os.system("%s setup_test_data all 2" % manage_command)
     elif instance_type == "uh12":
         print "setting up uh12 data..."
+        os.system("%s setup_test_data rounds 4" % manage_command)
         load_fixtures(manage_command, fixture_path, "uh12_")
-        # setup 2 user per team, and 3 one-week round
-        os.system("%s setup_test_data all 2 3" % manage_command)
+        # setup 2 user per team
+        os.system("%s setup_test_data all 2" % manage_command)

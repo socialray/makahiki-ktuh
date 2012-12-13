@@ -38,7 +38,7 @@ class Command(MakahikiBaseCommand):
            "  resource_usages \n" \
            "  resource_baselines \n" \
            "  resource_goalsettings \n" \
-           "  all <number_of_users for each team> <number_of_rounds>\n"
+           "  all <number_of_users for each team>\n"
 
     def handle(self, *args, **options):
         """set up the test data"""
@@ -68,14 +68,10 @@ class Command(MakahikiBaseCommand):
         elif operation == 'resource_goalsettings':
             self.setup_resource_goalsettings()
         elif operation == 'all':
-            if len(args) < 2:
-                self.stdout.write("Please specify the number of test users for each team "
-                                  "and number of rounds.\n")
+            if len(args) < 1:
+                self.stdout.write("Please specify the number of test users for each team.\n")
                 return
             user_count = int(args[1])
-            round_count = int(args[2])
-
-            self.setup_rounds(round_count)
 
             self.delete_users()
             self.create_users(user_count)
@@ -146,7 +142,8 @@ class Command(MakahikiBaseCommand):
             end = start + delta
             end_time = datetime.datetime(year=end.year, month=end.month, day=end.day) - \
                        datetime.timedelta(seconds=1)
-            RoundSetting(name="Round %d" % (i + 1),
+            RoundSetting(id=i + 1,
+                         name="Round %d" % (i + 1),
                          start=start,
                          end=end_time
                         ).save()

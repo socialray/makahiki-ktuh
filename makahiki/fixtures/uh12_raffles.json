@@ -8,7 +8,7 @@
             "image": "media/prizes/jack-johnson-tshirt.jpg",
             "winner": null,
             "value": 20,
-            "round_name": "Round 1"
+            "round": 1
         }
     },
     {
@@ -20,7 +20,7 @@
             "image": "media/prizes/jack-johnson-tshirt.jpg",
             "winner": null,
             "value": 20,
-            "round_name": "Round 1"
+            "round": 1
         }
     },
     {
@@ -32,7 +32,7 @@
             "image": "media/prizes/jake-ukulele.jpg",
             "winner": null,
             "value": 200,
-            "round_name": "Round 3"
+            "round": 3
         }
     },
     {
@@ -44,7 +44,7 @@
             "image": "media/prizes/kukuicup-skateboard-back.jpg",
             "winner": null,
             "value": 180,
-            "round_name": "Round 1"
+            "round": 1
         }
     },
     {
@@ -56,7 +56,7 @@
             "image": "media/prizes/hic-backpack.jpg",
             "winner": null,
             "value": 15,
-            "round_name": "Round 1"
+            "round": 1
         }
     },
     {
@@ -68,7 +68,7 @@
             "image": "media/prizes/aloha-salads.jpg",
             "winner": null,
             "value": 10,
-            "round_name": "Round 1"
+            "round": 1
         }
     },
     {
@@ -80,7 +80,7 @@
             "image": "media/prizes/papa-lucks.jpg",
             "winner": null,
             "value": 8,
-            "round_name": "Round 1"
+            "round": 1
         }
     },
     {
@@ -92,7 +92,7 @@
             "image": "media/prizes/jack-johnson-tshirt.jpg",
             "winner": null,
             "value": 20,
-            "round_name": "Round 1"
+            "round": 1
         }
     },
     {
@@ -104,7 +104,7 @@
             "image": "media/prizes/jack-johnson-tshirt.jpg",
             "winner": null,
             "value": 20,
-            "round_name": "Round 1"
+            "round": 1
         }
     },
     {
@@ -116,7 +116,7 @@
             "image": "media/prizes/bubbies-storefront.jpg",
             "winner": null,
             "value": 5,
-            "round_name": "Round 1"
+            "round": 1
         }
     },
     {
@@ -128,7 +128,7 @@
             "image": "media/prizes/bubbies-storefront.jpg",
             "winner": null,
             "value": 5,
-            "round_name": "Round 1"
+            "round": 1
         }
     },
     {
@@ -140,7 +140,7 @@
             "image": "media/prizes/bubbies-storefront.jpg",
             "winner": null,
             "value": 5,
-            "round_name": "Round 1"
+            "round": 1
         }
     },
     {
@@ -152,7 +152,7 @@
             "image": "media/prizes/bubbies-storefront.jpg",
             "winner": null,
             "value": 5,
-            "round_name": "Round 3"
+            "round": 3
         }
     },
     {
@@ -164,7 +164,7 @@
             "image": "media/prizes/belkin-energy-monitor.jpg",
             "winner": null,
             "value": 30,
-            "round_name": "Round 1"
+            "round": 1
         }
     },
     {
@@ -176,7 +176,7 @@
             "image": "media/prizes/belkin-energy-monitor.jpg",
             "winner": null,
             "value": 30,
-            "round_name": "Round 1"
+            "round": 1
         }
     },
     {
@@ -188,7 +188,7 @@
             "image": "media/prizes/belkin-energy-monitor.jpg",
             "winner": null,
             "value": 30,
-            "round_name": "Round 1"
+            "round": 1
         }
     },
     {
@@ -200,7 +200,7 @@
             "image": "media/prizes/kukuicup-water-bottle.jpg",
             "winner": null,
             "value": 10,
-            "round_name": "Round 1"
+            "round": 1
         }
     },
     {
@@ -212,7 +212,7 @@
             "image": "media/prizes/kukuicup-eco-tote.jpg",
             "winner": null,
             "value": 10,
-            "round_name": "Round 1"
+            "round": 1
         }
     },
     {
@@ -224,7 +224,7 @@
             "image": "media/prizes/tea-farm.jpg",
             "winner": null,
             "value": 13,
-            "round_name": "Round 1"
+            "round": 1
         }
     },
     {
@@ -236,7 +236,7 @@
             "image": "media/prizes/women-bobmarley.jpg",
             "winner": null,
             "value": 15,
-            "round_name": "Round 1"
+            "round": 1
         }
     },
     {
@@ -248,7 +248,7 @@
             "image": "media/prizes/planetsurf-board-shorts.jpg",
             "winner": null,
             "value": 15,
-            "round_name": "Round 1"
+            "round": 1
         }
     },
     {
@@ -260,7 +260,7 @@
             "image": "media/prizes/da-kine-rash-guard.jpg",
             "winner": null,
             "value": 18,
-            "round_name": "Round 1"
+            "round": 1
         }
     },
     {
@@ -272,7 +272,7 @@
             "image": "media/prizes/northshore-tshirt.jpg",
             "winner": null,
             "value": 10,
-            "round_name": "Round 1"
+            "round": 1
         }
     },
     {
@@ -284,7 +284,7 @@
             "image": "media/prizes/belly-dance.jpg",
             "winner": null,
             "value": 15,
-            "round_name": "Round 1"
+            "round": 1
         }
     },
     {
@@ -296,7 +296,7 @@
             "image": "media/prizes/belly-dance.jpg",
             "winner": null,
             "value": 15,
-            "round_name": "Round 1"
+            "round": 1
         }
     },
     {
@@ -308,7 +308,7 @@
             "image": "media/prizes/logitech.revue.jpg",
             "winner": null,
             "value": 250,
-            "round_name": "Round 3"
+            "round": 3
         }
     },
     {
@@ -320,7 +320,7 @@
             "image": "media/prizes/aloha-salads.jpg",
             "winner": null,
             "value": 10,
-            "round_name": "Round 3"
+            "round": 3
         }
     },
     {
@@ -332,7 +332,7 @@
             "image": "media/prizes/LandL-tshirt.jpg",
             "winner": null,
             "value": 10,
-            "round_name": "Round 3"
+            "round": 3
         }
     },
     {
@@ -344,7 +344,7 @@
             "image": "media/prizes/jack-johnson-tshirt.jpg",
             "winner": null,
             "value": 20,
-            "round_name": "Round 3"
+            "round": 3
         }
     },
     {
@@ -356,7 +356,7 @@
             "image": "media/prizes/jack-johnson-tshirt.jpg",
             "winner": null,
             "value": 20,
-            "round_name": "Round 3"
+            "round": 3
         }
     },
     {
@@ -368,7 +368,7 @@
             "image": "media/prizes/jack-johnson-tshirt.jpg",
             "winner": null,
             "value": 20,
-            "round_name": "Round 3"
+            "round": 3
         }
     },
     {
@@ -380,7 +380,7 @@
             "image": "media/prizes/jack-johnson-tshirt.jpg",
             "winner": null,
             "value": 20,
-            "round_name": "Round 3"
+            "round": 3
         }
     },
     {
@@ -392,7 +392,7 @@
             "image": "media/prizes/bubbies-storefront.jpg",
             "winner": null,
             "value": 5,
-            "round_name": "Round 3"
+            "round": 3
         }
     },
     {
@@ -404,7 +404,7 @@
             "image": "media/prizes/bubbies-storefront.jpg",
             "winner": null,
             "value": 5,
-            "round_name": "Round 3"
+            "round": 3
         }
     },
     {
@@ -416,7 +416,7 @@
             "image": "media/prizes/belkin-energy-monitor.jpg",
             "winner": null,
             "value": 30,
-            "round_name": "Round 3"
+            "round": 3
         }
     },
     {
@@ -428,7 +428,7 @@
             "image": "media/prizes/belkin-energy-monitor.jpg",
             "winner": null,
             "value": 30,
-            "round_name": "Round 3"
+            "round": 3
         }
     },
     {
@@ -440,7 +440,7 @@
             "image": "media/prizes/belkin-energy-monitor.jpg",
             "winner": null,
             "value": 30,
-            "round_name": "Round 3"
+            "round": 3
         }
     },
     {
@@ -452,7 +452,7 @@
             "image": "media/prizes/kukuicup-water-bottle.jpg",
             "winner": null,
             "value": 10,
-            "round_name": "Round 3"
+            "round": 3
         }
     },
     {
@@ -464,7 +464,7 @@
             "image": "media/prizes/kukuicup-eco-tote.jpg",
             "winner": null,
             "value": 10,
-            "round_name": "Round 3"
+            "round": 3
         }
     },
     {
@@ -476,7 +476,7 @@
             "image": "media/prizes/tea-farm.jpg",
             "winner": null,
             "value": 13,
-            "round_name": "Round 3"
+            "round": 3
         }
     },
     {
@@ -488,7 +488,7 @@
             "image": "media/prizes/rastaplanet-shirt.jpg",
             "winner": null,
             "value": 25,
-            "round_name": "Round 3"
+            "round": 3
         }
     },
     {
@@ -500,7 +500,7 @@
             "image": "media/prizes/hinano-shirt.jpg",
             "winner": null,
             "value": 20,
-            "round_name": "Round 3"
+            "round": 3
         }
     },
     {
@@ -512,7 +512,7 @@
             "image": "media/prizes/island-energy-board-shorts.jpg",
             "winner": null,
             "value": 25,
-            "round_name": "Round 3"
+            "round": 3
         }
     },
     {
@@ -524,7 +524,7 @@
             "image": "media/prizes/belly-dance.jpg",
             "winner": null,
             "value": 15,
-            "round_name": "Round 3"
+            "round": 3
         }
     },
     {
@@ -536,7 +536,7 @@
             "image": "media/prizes/belly-dance.jpg",
             "winner": null,
             "value": 15,
-            "round_name": "Round 3"
+            "round": 3
         }
     },
     {
@@ -548,7 +548,7 @@
             "image": "media/prizes/plantsurf-camo-board-shorts.jpg",
             "winner": null,
             "value": 20,
-            "round_name": "Round 3"
+            "round": 3
         }
     },
     {
@@ -560,7 +560,7 @@
             "image": "media/prizes/jack-guitar.jpg",
             "winner": null,
             "value": 250,
-            "round_name": "Round 2"
+            "round": 2
         }
     },
     {
@@ -572,7 +572,7 @@
             "image": "media/prizes/aloha-salads.jpg",
             "winner": null,
             "value": 10,
-            "round_name": "Round 2"
+            "round": 2
         }
     },
     {
@@ -584,7 +584,7 @@
             "image": "media/prizes/aloha-salads.jpg",
             "winner": null,
             "value": 10,
-            "round_name": "Round 2"
+            "round": 2
         }
     },
     {
@@ -596,7 +596,7 @@
             "image": "media/prizes/jack-johnson-tshirt.jpg",
             "winner": null,
             "value": 20,
-            "round_name": "Round 2"
+            "round": 2
         }
     },
     {
@@ -608,7 +608,7 @@
             "image": "media/prizes/jack-johnson-tshirt.jpg",
             "winner": null,
             "value": 20,
-            "round_name": "Round 2"
+            "round": 2
         }
     },
     {
@@ -620,7 +620,7 @@
             "image": "media/prizes/jack-johnson-tshirt_10.jpg",
             "winner": null,
             "value": 20,
-            "round_name": "Round 2"
+            "round": 2
         }
     },
     {
@@ -632,7 +632,7 @@
             "image": "media/prizes/jack-johnson-tshirt_11.jpg",
             "winner": null,
             "value": 20,
-            "round_name": "Round 2"
+            "round": 2
         }
     },
     {
@@ -644,7 +644,7 @@
             "image": "media/prizes/bubbies-storefront.jpg",
             "winner": null,
             "value": 5,
-            "round_name": "Round 2"
+            "round": 2
         }
     },
     {
@@ -656,7 +656,7 @@
             "image": "media/prizes/bubbies-storefront.jpg",
             "winner": null,
             "value": 5,
-            "round_name": "Round 2"
+            "round": 2
         }
     },
     {
@@ -668,7 +668,7 @@
             "image": "media/prizes/bubbies-storefront.jpg",
             "winner": null,
             "value": 5,
-            "round_name": "Round 2"
+            "round": 2
         }
     },
     {
@@ -680,7 +680,7 @@
             "image": "media/prizes/belkin-energy-monitor.jpg",
             "winner": null,
             "value": 30,
-            "round_name": "Round 2"
+            "round": 2
         }
     },
     {
@@ -692,7 +692,7 @@
             "image": "media/prizes/belkin-energy-monitor.jpg",
             "winner": null,
             "value": 30,
-            "round_name": "Round 2"
+            "round": 2
         }
     },
     {
@@ -704,7 +704,7 @@
             "image": "media/prizes/belkin-energy-monitor.jpg",
             "winner": null,
             "value": 30,
-            "round_name": "Round 2"
+            "round": 2
         }
     },
     {
@@ -716,7 +716,7 @@
             "image": "media/prizes/kukuicup-water-bottle.jpg",
             "winner": null,
             "value": 10,
-            "round_name": "Round 2"
+            "round": 2
         }
     },
     {
@@ -728,7 +728,7 @@
             "image": "media/prizes/kukuicup-eco-tote.jpg",
             "winner": null,
             "value": 10,
-            "round_name": "Round 2"
+            "round": 2
         }
     },
     {
@@ -740,7 +740,7 @@
             "image": "media/prizes/tea-farm.jpg",
             "winner": null,
             "value": 13,
-            "round_name": "Round 2"
+            "round": 2
         }
     },
     {
@@ -752,7 +752,7 @@
             "image": "media/prizes/da-kine-rash-guard.jpg",
             "winner": null,
             "value": 18,
-            "round_name": "Round 2"
+            "round": 2
         }
     },
     {
@@ -764,7 +764,7 @@
             "image": "media/prizes/rastaplanet-shirt.jpg",
             "winner": null,
             "value": 25,
-            "round_name": "Round 2"
+            "round": 2
         }
     },
     {
@@ -776,7 +776,7 @@
             "image": "media/prizes/planetsurf-blue-board-shorts.jpg",
             "winner": null,
             "value": 20,
-            "round_name": "Round 2"
+            "round": 2
         }
     },
     {
@@ -788,7 +788,7 @@
             "image": "media/prizes/planetsurf-board-shorts.jpg",
             "winner": null,
             "value": 15,
-            "round_name": "Round 2"
+            "round": 2
         }
     },
     {
@@ -800,7 +800,7 @@
             "image": "media/prizes/belly-dance.jpg",
             "winner": null,
             "value": 15,
-            "round_name": "Round 2"
+            "round": 2
         }
     },
     {
@@ -812,7 +812,7 @@
             "image": "media/prizes/honu-print.jpg",
             "winner": null,
             "value": 52,
-            "round_name": "Round 3"
+            "round": 3
         }
     },
     {
@@ -824,7 +824,7 @@
             "image": "media/prizes/navigation-print.jpg",
             "winner": null,
             "value": 52,
-            "round_name": "Round 2"
+            "round": 2
         }
     }
 ]
