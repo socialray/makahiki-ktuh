@@ -4,32 +4,41 @@ Dual Booting Linux and Windows
 ==============================
 !!WARNING!!
 -----------
-Creating a dual boot environment will overwrite the bootstrap on your computer.  This can (and most likely will) prevent you from accessing a recovery partition on your computer.  Therefore, it is highly recommended that you backup your data (both now, and regularly thereafter).  This can be achieved by using the built in `Windows Backup <http://windows.microsoft.com/en-US/windows7/Back-up-your-files>`_, or simply saving important files off to an external hard drive.  Creating a full backup will allow you to restore your system, programs, and files should anything go wrong (now or ever).
+Creating a dual boot environment will overwrite the bootstrap on your computer.  This can (and most likely will) prevent you from accessing a recovery partition on your computer.  While some users have had success restoring their recovery partition after installation, restoration of said partition is neither guaranteed nor supported.  If you're determined to maintain your recovery partition, it is advisable that you find a separate guide to dual booting (as installation details are crucial).
 
-While some users have had success restoring their recovery partition after installation, restoration of said partition is neither guaranteed nor supported.  If you're determined to maintain your recovery partition, it is advisable that you find a separate guide to dual booting (as installation details are crucial).  Otherwise, continue to the steps below.
+To compensate for the loss of the recovery partition, we suggest using Windows Backup tool to create a system image(full backup) and a System Repair Disk.  Should anything go wrong, you can use your System Repair Disk and system image to restore your computer to the state it was in when the image was taken.
 
-
-
-
-1. Create a Partition
----------------------
-If you have an EMPTY partition on your hard drive (about 15 GB or so), you can skip this step.  Otherwise, create a new partition using the `Windows Disk Management tool <http://technet.microsoft.com/en-us/magazine/gg309170.aspx>`_.
-
-2. Download Ubuntu 12.10
+1.  Create a Repair Disk
 ------------------------
-Makahiki supporrts Ubuntu 12.10, the .iso for which can be found `here <http://www.ubuntu.com/download/help/install-desktop-latest>`_.  Be sure to select the right option for x86 (32 bit) or x64 (64 bit) based systems (drop down on the right side of the page).
+See `<http://windows.microsoft.com/en-US/windows7/Create-a-system-repair-disc>`_.
+
+2. Create a System Image
+------------------------
+See `<http://windows.microsoft.com/en-US/windows7/Back-up-your-files>`_.
+
+
+3. Create a Partition
+---------------------
+Create a new partition using the `Windows Disk Management tool <http://technet.microsoft.com/en-us/magazine/gg309170.aspx>`_.  Ubuntu will require two partitions, one for the OS (~15GB recommended), and one for swap space (~2GB recommended).  
+
+4. Download Ubuntu 12.10
+------------------------
+Makahiki supports Ubuntu 12.10, the .iso for which can be found `here <http://www.ubuntu.com/download/help/install-desktop-latest>`_.  Be sure to select the right option for x86 (32 bit) or x64 (64 bit) based systems (drop down on the right side of the page).
 
 Download the .iso file, and `burn the image to a dvd <http://www.ubuntu.com/download/help/burn-a-dvd-on-windows>`_ or `make a bootable flash drive <http://www.ubuntu.com/download/help/create-a-usb-stick-on-windows>`_.
 
-3. Install Ubuntu 12.10
+5. Install Ubuntu 12.10
 -----------------------
 Follow the `Ubuntu installation guide <http://www.ubuntu.com/download/help/install-desktop-latest>`_, choosing to "Install Ubuntu Alongside Windows <version>" in Step 4.
 
-Point Ubuntu to the empty partition you designated earlier, and let it install (use default settings)
+Point Ubuntu to the empty partition you designated earlier, and let it install (use default settings).  It is recommended that you use the ext2 format for formatting the partition, as it is supported by the Linux OS, and can be accessed in Windows (using Ext2Fsd, a third party program).
 
 After restarting, your computer will load using the `GRUB <https://help.ubuntu.com/community/Grub2 boot loader>`_.  From here, you can choose to access either your Windows or Ubuntu Operating System.  
 
-4. Mount Windows Drives (Optional)
+6. Mount Windows Drives (Optional)
 ----------------------------------
 Optionally, if you wish to be able to interact with the files on your Windows partition, this `guide on mounting <https://help.ubuntu.com/community/MountingWindowsPartitions>`_ will walk you through the somewhat complicated process.
 
+7. Mount Linux Drives in Windows (Optional)
+-------------------------------------------
+Windows cannot natively read the ext2 file format, however the third party program Ext2Fsd will allow Windows to mount ext2 formatted drives. Ext2Fsd can be found here: <http://www.ext2fsd.com/>`_.
