@@ -8,7 +8,7 @@ class BadgeAdmin(admin.ModelAdmin):
     """Category Admin"""
     list_display = ["name", "points", "award_condition", "award_trigger", "priority"]
     prepopulated_fields = {"slug": ("name",)}
-    ordering = ["-priority"]
+    ordering = ["priority"]
 
 admin.site.register(Badge, BadgeAdmin)
 challenge_mgr.register_game_admin_model("Badge Game Mechanics", Badge)
