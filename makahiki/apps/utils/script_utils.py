@@ -2,6 +2,7 @@
 
 import os
 import sys
+import getopt
 
 
 def exit_with_help(msg):
@@ -13,12 +14,13 @@ def exit_with_help(msg):
 def copy_static_media(heroku_app):
     """copy static media."""
     print "collecting static and media files..."
-    os.system("rm -rf site_media/static")
+    base_dir = manage_py_dir()
+    os.system("cd " + base_dir + "; rm -rf site_media/static")
 
-    os.system("python manage.py collectstatic --noinput --verbosity 0")
+    os.system("python " + manage_py_command() + " collectstatic --noinput --verbosity 0")
 
     if not heroku_app:
-        os.system("cp -r media site_media")
+        os.system("cd " + base_dir + "; cp -r media site_media")
     else:
         # always use S3 in heorku, need to upload the media directory to S3 bucket
         if 'MAKAHIKI_AWS_ACCESS_KEY_ID' in os.environ and\
@@ -48,13 +50,13 @@ def copy_static_media(heroku_app):
 def install_requirements():
     """install requirements."""
     print "installing requirements..."
-    os.system("pip install -r ../requirements.txt --quiet")
+    os.system("cd " + manage_py_dir() + "; pip install -r ../requirements.txt --quiet")
 
 
 def push_to_heroku(heroku_app):
     """push to heroku."""
     print "push to heroku..."
-    os.system("git push %s master" % heroku_app)
+    os.system("cd " + manage_py_dir() + "; git push %s master" % heroku_app)
 
 
 def syncdb(manage_command):
@@ -78,7 +80,7 @@ def reset_db(heroku_app):
 
     print "resetting the db..."
     if not heroku_app:
-        os.system("python scripts/initialize_postgres.py")
+        os.system("cd " + manage_py_dir() + "; python scripts/initialize_postgres.py")
     else:
         os.system("heroku pg:reset HEROKU_POSTGRESQL_AQUA --app %s  --confirm %s" % (
             heroku_app, heroku_app))
@@ -148,3 +150,26 @@ def load_data(manage_command, instance_type, fixture_path):
         load_fixtures(manage_command, fixture_path, "uh12_")
         # setup 2 user per team
         os.system("%s setup_test_data all 2" % manage_command)
+
+
+def has_verbose_flag(argv):
+    """Returns True if the -v | --verbose flag is set in argv."""
+    try:
+        opts, _ = getopt.getopt(argv, "v", ["verbose"])
+    except getopt.GetoptError:
+        return False
+
+    for opt, _ in opts:
+        if opt in ("-v", "--verbose"):
+            return True
+
+
+def manage_py_dir():
+    """Returns the directory holding the manage.py file as a string."""
+    return os.path.normpath(os.path.dirname(os.path.realpath(__file__)) + os.sep + os.pardir +\
+                            os.sep + os.pardir + os.sep) + os.sep
+
+
+def manage_py_command():
+    """Returns the full path to manage.py as a String."""
+    return manage_py_dir() + "manage.py"
