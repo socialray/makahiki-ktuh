@@ -9,36 +9,27 @@ containing all necessary definitions."""
 
 import os
 import glob
-import getopt
 import sys
+sys.path.append(os.path.dirname(os.path.realpath(__file__)) + os.sep + os.pardir + os.sep)
+from apps.utils import script_utils
 
 
 def main(argv):
     """Compile Less main function. Usage: compile_less.py [-v | --verbose]"""
-    verbose = 0
-    try:
-        opts, _ = getopt.getopt(argv, "v", ["verbose"])
-    except getopt.GetoptError:
-        print "Usage: compile_less.py [-v | --verbose]"
-        sys.exit(2)
-
-    for opt, _ in opts:
-        if opt in ("-v", "--verbose"):
-            verbose = 1
-
+    verbose = script_utils.has_verbose_flag(argv)
     page_names = ['landing',
                   'status',
                   'admin']
-    less_path = "static/less"
+    less_path = script_utils.manage_py_dir() + "static/less"
     os.chdir(less_path)
     theme_names = glob.glob('theme-*.less')
     for theme in theme_names:
         theme_name, _ = os.path.splitext(theme)
-        if verbose == 1:
+        if verbose:
             print "Compiling %s.less" % theme_name
         os.system("lessc -x --yui-compress %s.less > ../css/%s.css" % (theme_name, theme_name))
     for page in page_names:
-        if verbose == 1:
+        if verbose:
             print "Compiling %s.less" % page
         os.system("lessc -x --yui-compress %s.less > ../css/%s.css" % (page, page))
 
