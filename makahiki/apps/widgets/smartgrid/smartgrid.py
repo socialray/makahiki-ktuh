@@ -121,6 +121,11 @@ def get_level_actions(user):
         for level in Level.objects.all():
             level.is_unlock = utils.eval_predicates(level.unlock_condition, user)
             if level.is_unlock:
+                if level.unlock_condition != "True":
+                    contents = "%s is unlocked." % level
+                    UserNotification.objects.get_or_create(recipient=user, contents=contents,
+                                                           level=UserNotification.LEVEL_CHOICES[2][0],
+                                                           display_alert=True)
                 level.is_complete = True
                 categories = []
                 action_list = None

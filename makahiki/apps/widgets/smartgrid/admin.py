@@ -242,11 +242,11 @@ class EventAdminForm(forms.ModelForm):
         cleaned_data = self.cleaned_data
 
         #1 Check that an event has an event date.
-        event_date = cleaned_data.get("event_date")
-        has_date = "event_date" in cleaned_data   # Check if this is in the data dict.
-        if has_date and not event_date:
-            self._errors["event_date"] = ErrorList([u"Events require an event date."])
-            del cleaned_data["event_date"]
+#        event_date = cleaned_data.get("event_date")
+#        has_date = "event_date" in cleaned_data   # Check if this is in the data dict.
+#        if has_date and not event_date:
+#            self._errors["event_date"] = ErrorList([u"Events require an event date."])
+#            del cleaned_data["event_date"]
 
         #2 Publication date must be before the expiration date.
         if "pub_date" in cleaned_data and "expire_date" in cleaned_data:

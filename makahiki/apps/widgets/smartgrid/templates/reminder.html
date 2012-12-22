@@ -64,8 +64,17 @@
                 if (minutes < 10) {
                     minutes = "0" + minutes;
                 }
-                var timeString = "" + hour + ":" + minutes + " " + ampm;
-                return d.toDateString() + ", " + timeString;
+                if ( isNaN( hour ) ) {
+                	var foo = " hours ";
+                	if (offset == 1) {
+                		foo = " hour "
+                	} 
+                    return offset + foo + "before TBD."	
+                }
+                else {
+                    var timeString = "" + hour + ":" + minutes + " " + ampm;
+                    return d.toDateString() + ", " + timeString;
+                }
             }
 
             // Function for binding the reminder form elements. This is needed when there are form errors to process the
