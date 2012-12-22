@@ -9,49 +9,47 @@ If any errors, prints output from unsuccessful programs and exits with non-zero 
 
 import sys
 import os
-import getopt
+
+sys.path.append(os.path.dirname(os.path.realpath(__file__)) + os.sep + os.pardir + os.sep)
+from apps.utils import script_utils
 
 
 def main(argv):
     """Verify main function. Usage: verify.py [-v | --verbose]"""
-    verbose = 0
-    try:
-        opts, _ = getopt.getopt(argv, "v", ["verbose"])
-    except getopt.GetoptError:
-        print "Usage verify.py [-v | --verbose]"
-        sys.exit(2)
 
-    for opt, _ in opts:
-        if opt in ("-v", "--verbose"):
-            verbose = 1
+    current_dir = os.getcwd()
+    manage_dir = script_utils.manage_py_dir()
+    manage_py = script_utils.manage_py_command()
 
-    if verbose == 1:
+    verbose = script_utils.has_verbose_flag(argv)
+
+    if verbose:
         print "running pep8"
     pep8_command = os.path.join("scripts", "run_pep8.sh")
-    status = os.system(pep8_command)
+    status = os.system("cd " + manage_dir + "; " + pep8_command)
     if status:
         sys.exit(1)
 
-    if verbose == 1:
+    if verbose:
         print "running pylint"
     pylint_command = os.path.join("scripts", "run_pylint.sh")
-    status = os.system(pylint_command)
+    status = os.system("cd " + manage_dir + "; " + pylint_command)
     if status:
         sys.exit(1)
 
-    if verbose == 1:
+    if verbose:
         print "cleaning"
-    os.system("python manage.py clean_pyc")
+    os.system("python " + manage_py + " clean_pyc")
 
-    if verbose == 1:
+    if verbose:
         print "running tests"
-    status = os.system("python manage.py test")
+    status = os.system("python " + manage_py + " test")
     if status:
         sys.exit(1)
 
-    if verbose == 1:
+    if verbose:
         print "building docs"
-    status = os.system("pushd .; cd ../doc; make clean html; popd;")
+    status = os.system("cd " + manage_dir + "; " + "cd ../doc; make clean html; cd " + current_dir)
     if status:
         sys.exit(1)
 

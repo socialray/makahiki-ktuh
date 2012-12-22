@@ -8,6 +8,9 @@ This state can be loaded into a new instance using load_data.
 
 import commands
 import os
+import sys
+sys.path.append(os.path.dirname(os.path.realpath(__file__)) + os.sep + os.pardir + os.sep)
+from apps.utils import script_utils
 
 state_pairs = [("teams.group teams.team", "base_teams"),
                ("activities", "base_activities"),
@@ -20,17 +23,25 @@ state_pairs = [("teams.group teams.team", "base_teams"),
 """Tuples of (<state info to extract>, <json file name in which to write the data>)."""
 
 
-def main():
+def main(argv):
     """main"""
 
+    verbose = script_utils.has_verbose_flag(argv)
+    manage_dir = script_utils.manage_py_dir()
+    manage_py = script_utils.manage_py_command()
+
     # Ensure dump_dir/ exists, creating it if not found.
-    dump_dir = os.path.dirname("dumped_data/")
+    dump_dir = os.path.dirname(manage_dir + "dumped_data" + os.sep)
     if not os.path.exists(dump_dir):
+        if verbose:
+            print "Creating " + dump_dir
         os.makedirs(dump_dir)
 
     #Loop through all state_types, dump the data, then write it out.
     for state_pair in state_pairs:
-        command = "python manage.py dumpdata --indent=2 " + state_pair[0]
+        command = "python " + manage_py + " dumpdata --indent=2 " + state_pair[0]
+        if verbose:
+            print command
         (status, output) = commands.getstatusoutput(command)
         if status:
             print "Error obtaining " + state_pair[0] + " skipping. (" + output + ")"
@@ -42,4 +53,4 @@ def main():
 
 
 if __name__ == '__main__':
-    main()
+    main(sys.argv[1:])

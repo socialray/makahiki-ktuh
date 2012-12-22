@@ -4,7 +4,7 @@
         "model": "prizes.prize",
         "fields": {
             "title": "Bookstore Certificate ($25)",
-            "round_name": "Round 1",
+            "round": 1,
             "image": "media/prizes/uh-bookstore.jpg",
             "award_to": "individual_overall",
             "value": 25,
@@ -18,7 +18,7 @@
         "model": "prizes.prize",
         "fields": {
             "title": "Bookstore Certificate ($5)",
-            "round_name": "Round 1",
+            "round": 1,
             "image": "media/prizes/uh-bookstore.jpg",
             "award_to": "individual_team",
             "value": 5,
@@ -32,7 +32,7 @@
         "model": "prizes.prize",
         "fields": {
             "title": "Mochi Ice Cream Party",
-            "round_name": "Round 1",
+            "round": 1,
             "image": "media/prizes/bubbies-mochi.jpg",
             "award_to": "team_overall",
             "value": 125,
@@ -46,7 +46,7 @@
         "model": "prizes.prize",
         "fields": {
             "title": "Cupcake Extravaganza",
-            "round_name": "Round 1",
+            "round": 1,
             "image": "media/prizes/hokulani.jpg",
             "award_to": "team_overall",
             "value": 125,
@@ -60,7 +60,7 @@
         "model": "prizes.prize",
         "fields": {
             "title": "iPad",
-            "round_name": "Round 2",
+            "round": 2,
             "image": "media/prizes/iPad.jpg",
             "award_to": "individual_overall",
             "value": 500,
@@ -74,7 +74,7 @@
         "model": "prizes.prize",
         "fields": {
             "title": "Yogurtland ($5)",
-            "round_name": "Round 2",
+            "round": 2,
             "image": "media/prizes/yogurtland.jpg",
             "award_to": "individual_team",
             "value": 5,
@@ -88,7 +88,7 @@
         "model": "prizes.prize",
         "fields": {
             "title": "Pool Party",
-            "round_name": "Round 2",
+            "round": 2,
             "image": "",
             "award_to": "team_overall",
             "value": 250,
@@ -102,7 +102,7 @@
         "model": "prizes.prize",
         "fields": {
             "title": "Energy Pizza Party",
-            "round_name": "Round 2",
+            "round": 2,
             "image": "media/prizes/pizza.jpg",
             "award_to": "team_overall",
             "value": 250,
@@ -116,7 +116,7 @@
         "model": "prizes.prize",
         "fields": {
             "title": "Bookstore Certificate ($100)",
-            "round_name": "Round 3",
+            "round": 3,
             "image": "media/prizes/uh-bookstore.jpg",
             "award_to": "individual_overall",
             "value": 100,
@@ -130,7 +130,7 @@
         "model": "prizes.prize",
         "fields": {
             "title": "Milano Freezer Card",
-            "round_name": "Round 3",
+            "round": 3,
             "image": "media/prizes/milano-freezer-small.jpg",
             "award_to": "individual_team",
             "value": 5,
@@ -144,7 +144,7 @@
         "model": "prizes.prize",
         "fields": {
             "title": "Malasada Madness",
-            "round_name": "Round 3",
+            "round": 3,
             "image": "media/prizes/malasada.jpg",
             "award_to": "team_overall",
             "value": 125,
@@ -158,7 +158,7 @@
         "model": "prizes.prize",
         "fields": {
             "title": "Mochi Party",
-            "round_name": "Round 3",
+            "round": 3,
             "image": "media/prizes/bubbies-mochi.jpg",
             "award_to": "team_overall",
             "value": 125,
@@ -172,7 +172,7 @@
         "model": "prizes.prize",
         "fields": {
             "title": "Individual Overall Prize",
-            "round_name": "Round 4",
+            "round": 4,
             "image": "media/prizes/mystery-box.jpg",
             "award_to": "individual_overall",
             "value": 0,
@@ -186,7 +186,7 @@
         "model": "prizes.prize",
         "fields": {
             "title": "Individual Team Prize",
-            "round_name": "Round 4",
+            "round": 4,
             "image": "media/prizes/mystery-box.jpg",
             "award_to": "individual_team",
             "value": 0,
@@ -200,7 +200,7 @@
         "model": "prizes.prize",
         "fields": {
             "title": "Team Overall Prize",
-            "round_name": "Round 4",
+            "round": 4,
             "image": "media/prizes/mystery-box.jpg",
             "award_to": "team_overall",
             "value": 0,
@@ -214,7 +214,7 @@
         "model": "prizes.prize",
         "fields": {
             "title": "Team Overall Prize",
-            "round_name": "Round 4",
+            "round": 4,
             "image": "media/prizes/mystery-box.jpg",
             "award_to": "team_overall",
             "value": 0,

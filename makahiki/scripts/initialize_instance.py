@@ -32,15 +32,17 @@ import getopt
 import sys
 import os
 
-sys.path.append(os.path.abspath('.'))
+sys.path.append(os.path.dirname(os.path.realpath(__file__)) + os.sep + os.pardir + os.sep)
 from apps.utils import script_utils
 
 
 def main(argv):
     """main function."""
+
     instance_type = None
     heroku_app = None
-    manage_command = "python manage.py"
+    manage_py = script_utils.manage_py_command()
+    manage_command = "python " + manage_py
     fixture_path = "fixtures"
 
     try:
