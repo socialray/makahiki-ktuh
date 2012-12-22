@@ -3,6 +3,7 @@ Developer Guide
 
 .. toctree::
 
+   development-environment
    coding-standards
    theme-development
    heroku-in-a-nutshell

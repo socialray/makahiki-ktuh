@@ -71,10 +71,10 @@ award_badge
 .. automodule:: apps.widgets.badges.management.commands.award_badge
 
 
-cal_energy_baseline
--------------------
+update_energy_baseline
+----------------------
 
-.. automodule:: apps.widgets.resource_goal.management.commands.cal_energy_baseline
+.. automodule:: apps.widgets.resource_goal.management.commands.update_energy_baseline
 
 
 Automated management
@@ -86,7 +86,7 @@ to manage resource and game data.
 update_energy_usage
 -------------------
 
-.. automodule:: apps.managers.resource_mgr.management.commands.update_energy_usage
+.. automodule:: apps.widgets.resource_goal.management.commands.update_energy_usage
 
 check_energy_goal
 -----------------

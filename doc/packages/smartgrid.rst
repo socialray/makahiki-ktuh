@@ -28,22 +28,10 @@ Module :mod:`apps.widgets.smartgrid.admin`
 .. automodule:: apps.widgets.smartgrid.admin
    :members:
 
-Module :mod:`apps.widgets.smartgrid.management.commands.add_codes`
-------------------------------------------------------------------
-
-.. automodule:: apps.widgets.smartgrid.management.commands.add_codes
-   :members:
-
 Module :mod:`apps.widgets.smartgrid.management.commands.process_notices`
 -------------------------------------------------------------------------
 
 .. automodule:: apps.widgets.smartgrid.management.commands.process_notices
-   :members:
-
-Module :mod:`apps.widgets.smartgrid.management.commands.regenerate_codes`
---------------------------------------------------------------------------
-
-.. automodule:: apps.widgets.smartgrid.management.commands.regenerate_codes
    :members:
 
 Module :mod:`apps.widgets.smartgrid.management.commands.send_reminders`
