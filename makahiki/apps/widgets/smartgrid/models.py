@@ -373,8 +373,8 @@ class Event(Action):
         help_text="Time (in minutes) that the activity is expected to take."
     )
     event_date = models.DateTimeField(
-        null=True,
-        blank=True,
+#        null=True,
+#        blank=True,
         verbose_name="Date and time of the event",
         help_text="Required for events."
     )

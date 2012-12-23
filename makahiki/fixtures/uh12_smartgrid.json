@@ -7636,7 +7636,7 @@
         "model": "smartgrid.event",
         "fields": {
             "duration": 30,
-            "event_date": null,
+            "event_date": "2012-21-12T12:00:00",
             "event_max_seat": 1000,
             "event_location": "",
             "is_excursion": false
@@ -7647,7 +7647,7 @@
         "model": "smartgrid.event",
         "fields": {
             "duration": 30,
-            "event_date": null,
+            "event_date": "2012-21-12T12:00:00",
             "event_max_seat": 1000,
             "event_location": "",
             "is_excursion": false
@@ -7658,7 +7658,7 @@
         "model": "smartgrid.event",
         "fields": {
             "duration": 120,
-            "event_date": null,
+            "event_date": "2012-21-12T12:00:00",
             "event_max_seat": 1000,
             "event_location": "",
             "is_excursion": false
@@ -7669,7 +7669,7 @@
         "model": "smartgrid.event",
         "fields": {
             "duration": 30,
-            "event_date": null,
+            "event_date": "2012-21-12T12:00:00",
             "event_max_seat": 1000,
             "event_location": "",
             "is_excursion": false
@@ -7680,7 +7680,7 @@
         "model": "smartgrid.event",
         "fields": {
             "duration": 30,
-            "event_date": null,
+            "event_date": "2012-21-12T12:00:00",
             "event_max_seat": 1000,
             "event_location": "",
             "is_excursion": false
@@ -7691,7 +7691,7 @@
         "model": "smartgrid.event",
         "fields": {
             "duration": 30,
-            "event_date": null,
+            "event_date": "2012-21-12T12:00:00",
             "event_max_seat": 1000,
             "event_location": "",
             "is_excursion": false
@@ -7702,7 +7702,7 @@
         "model": "smartgrid.event",
         "fields": {
             "duration": 30,
-            "event_date": null,
+            "event_date": "2012-21-12T12:00:00",
             "event_max_seat": 1000,
             "event_location": "",
             "is_excursion": false
@@ -7713,7 +7713,7 @@
         "model": "smartgrid.event",
         "fields": {
             "duration": 30,
-            "event_date": null,
+            "event_date": "2012-21-12T12:00:00",
             "event_max_seat": 1000,
             "event_location": "",
             "is_excursion": false
@@ -7724,7 +7724,7 @@
         "model": "smartgrid.event",
         "fields": {
             "duration": 30,
-            "event_date": null,
+            "event_date": "2012-21-12T12:00:00",
             "event_max_seat": 1000,
             "event_location": "",
             "is_excursion": false
@@ -7735,7 +7735,7 @@
         "model": "smartgrid.event",
         "fields": {
             "duration": 60,
-            "event_date": null,
+            "event_date": "2012-21-12T12:00:00",
             "event_max_seat": 1000,
             "event_location": "",
             "is_excursion": false
@@ -7746,7 +7746,7 @@
         "model": "smartgrid.event",
         "fields": {
             "duration": 120,
-            "event_date": null,
+            "event_date": "2012-21-12T12:00:00",
             "event_max_seat": 1000,
             "event_location": "",
             "is_excursion": true
@@ -7757,7 +7757,7 @@
         "model": "smartgrid.event",
         "fields": {
             "duration": 30,
-            "event_date": null,
+            "event_date": "2012-21-12T12:00:00",
             "event_max_seat": 1000,
             "event_location": "",
             "is_excursion": false
@@ -7768,7 +7768,7 @@
         "model": "smartgrid.event",
         "fields": {
             "duration": 30,
-            "event_date": null,
+            "event_date": "2012-21-12T12:00:00",
             "event_max_seat": 1000,
             "event_location": "",
             "is_excursion": false
@@ -7779,7 +7779,7 @@
         "model": "smartgrid.event",
         "fields": {
             "duration": 30,
-            "event_date": null,
+            "event_date": "2012-21-12T12:00:00",
             "event_max_seat": 1000,
             "event_location": "",
             "is_excursion": false
@@ -7790,7 +7790,7 @@
         "model": "smartgrid.event",
         "fields": {
             "duration": 30,
-            "event_date": null,
+            "event_date": "2012-21-12T12:00:00",
             "event_max_seat": 1000,
             "event_location": "",
             "is_excursion": false
@@ -7801,7 +7801,7 @@
         "model": "smartgrid.event",
         "fields": {
             "duration": 30,
-            "event_date": null,
+            "event_date": "2012-21-12T12:00:00",
             "event_max_seat": 1000,
             "event_location": "",
             "is_excursion": false
@@ -7812,7 +7812,7 @@
         "model": "smartgrid.event",
         "fields": {
             "duration": 60,
-            "event_date": null,
+            "event_date": "2012-21-12T12:00:00",
             "event_max_seat": 1000,
             "event_location": "",
             "is_excursion": true
@@ -7823,7 +7823,7 @@
         "model": "smartgrid.event",
         "fields": {
             "duration": 30,
-            "event_date": null,
+            "event_date": "2012-21-12T12:00:00",
             "event_max_seat": 1000,
             "event_location": "",
             "is_excursion": false
@@ -7834,7 +7834,7 @@
         "model": "smartgrid.event",
         "fields": {
             "duration": 30,
-            "event_date": null,
+            "event_date": "2012-21-12T12:00:00",
             "event_max_seat": 1000,
             "event_location": "",
             "is_excursion": false
@@ -7845,7 +7845,7 @@
         "model": "smartgrid.event",
         "fields": {
             "duration": 120,
-            "event_date": null,
+            "event_date": "2012-21-12T12:00:00",
             "event_max_seat": 1000,
             "event_location": "",
             "is_excursion": false
@@ -7856,7 +7856,7 @@
         "model": "smartgrid.event",
         "fields": {
             "duration": 120,
-            "event_date": null,
+            "event_date": "2012-21-12T12:00:00",
             "event_max_seat": 1000,
             "event_location": "",
             "is_excursion": false
@@ -7867,7 +7867,7 @@
         "model": "smartgrid.event",
         "fields": {
             "duration": 120,
-            "event_date": null,
+            "event_date": "2012-21-12T12:00:00",
             "event_max_seat": 1000,
             "event_location": "",
             "is_excursion": false
@@ -7878,7 +7878,7 @@
         "model": "smartgrid.event",
         "fields": {
             "duration": 120,
-            "event_date": null,
+            "event_date": "2012-21-12T12:00:00",
             "event_max_seat": 1000,
             "event_location": "",
             "is_excursion": false
@@ -7889,7 +7889,7 @@
         "model": "smartgrid.event",
         "fields": {
             "duration": 480,
-            "event_date": null,
+            "event_date": "2012-21-12T12:00:00",
             "event_max_seat": 1000,
             "event_location": "",
             "is_excursion": true
@@ -7900,7 +7900,7 @@
         "model": "smartgrid.event",
         "fields": {
             "duration": 120,
-            "event_date": null,
+            "event_date": "2012-21-12T12:00:00",
             "event_max_seat": 1000,
             "event_location": "",
             "is_excursion": false
@@ -7911,7 +7911,7 @@
         "model": "smartgrid.event",
         "fields": {
             "duration": 120,
-            "event_date": null,
+            "event_date": "2012-21-12T12:00:00",
             "event_max_seat": 1000,
             "event_location": "",
             "is_excursion": false
@@ -7922,7 +7922,7 @@
         "model": "smartgrid.event",
         "fields": {
             "duration": 120,
-            "event_date": null,
+            "event_date": "2012-21-12T12:00:00",
             "event_max_seat": 1000,
             "event_location": "",
             "is_excursion": false
@@ -7933,7 +7933,7 @@
         "model": "smartgrid.event",
         "fields": {
             "duration": 120,
-            "event_date": null,
+            "event_date": "2012-21-12T12:00:00",
             "event_max_seat": 1000,
             "event_location": "",
             "is_excursion": false
@@ -7944,7 +7944,7 @@
         "model": "smartgrid.event",
         "fields": {
             "duration": 480,
-            "event_date": null,
+            "event_date": "2012-21-12T12:00:00",
             "event_max_seat": 1000,
             "event_location": "",
             "is_excursion": true
@@ -7955,7 +7955,7 @@
         "model": "smartgrid.event",
         "fields": {
             "duration": 120,
-            "event_date": null,
+            "event_date": "2012-21-12T12:00:00",
             "event_max_seat": 1000,
             "event_location": "",
             "is_excursion": false
@@ -7966,7 +7966,7 @@
         "model": "smartgrid.event",
         "fields": {
             "duration": 120,
-            "event_date": null,
+            "event_date": "2012-21-12T12:00:00",
             "event_max_seat": 1000,
             "event_location": "",
             "is_excursion": false
@@ -7977,7 +7977,7 @@
         "model": "smartgrid.event",
         "fields": {
             "duration": 120,
-            "event_date": null,
+            "event_date": "2012-21-12T12:00:00",
             "event_max_seat": 1000,
             "event_location": "",
             "is_excursion": false
@@ -7988,7 +7988,7 @@
         "model": "smartgrid.event",
         "fields": {
             "duration": 120,
-            "event_date": null,
+            "event_date": "2012-21-12T12:00:00",
             "event_max_seat": 1000,
             "event_location": "",
             "is_excursion": false
@@ -7999,7 +7999,7 @@
         "model": "smartgrid.event",
         "fields": {
             "duration": 120,
-            "event_date": null,
+            "event_date": "2012-21-12T12:00:00",
             "event_max_seat": 1000,
             "event_location": "",
             "is_excursion": false
@@ -8010,7 +8010,7 @@
         "model": "smartgrid.event",
         "fields": {
             "duration": 120,
-            "event_date": null,
+            "event_date": "2012-21-12T12:00:00",
             "event_max_seat": 1000,
             "event_location": "",
             "is_excursion": false
@@ -8021,7 +8021,7 @@
         "model": "smartgrid.event",
         "fields": {
             "duration": 120,
-            "event_date": null,
+            "event_date": "2012-21-12T12:00:00",
             "event_max_seat": 1000,
             "event_location": "",
             "is_excursion": false
@@ -8032,7 +8032,7 @@
         "model": "smartgrid.event",
         "fields": {
             "duration": 120,
-            "event_date": null,
+            "event_date": "2012-21-12T12:00:00",
             "event_max_seat": 1000,
             "event_location": "",
             "is_excursion": false
@@ -8043,7 +8043,7 @@
         "model": "smartgrid.event",
         "fields": {
             "duration": 480,
-            "event_date": null,
+            "event_date": "2012-21-12T12:00:00",
             "event_max_seat": 1000,
             "event_location": "",
             "is_excursion": true
@@ -8054,7 +8054,7 @@
         "model": "smartgrid.event",
         "fields": {
             "duration": 120,
-            "event_date": null,
+            "event_date": "2012-21-12T12:00:00",
             "event_max_seat": 1000,
             "event_location": "",
             "is_excursion": false
@@ -8065,7 +8065,7 @@
         "model": "smartgrid.event",
         "fields": {
             "duration": 120,
-            "event_date": null,
+            "event_date": "2012-21-12T12:00:00",
             "event_max_seat": 1000,
             "event_location": "",
             "is_excursion": false
@@ -8076,7 +8076,7 @@
         "model": "smartgrid.event",
         "fields": {
             "duration": 120,
-            "event_date": null,
+            "event_date": "2012-21-12T12:00:00",
             "event_max_seat": 1000,
             "event_location": "",
             "is_excursion": false
@@ -8087,7 +8087,7 @@
         "model": "smartgrid.event",
         "fields": {
             "duration": 120,
-            "event_date": null,
+            "event_date": "2012-21-12T12:00:00",
             "event_max_seat": 1000,
             "event_location": "",
             "is_excursion": false
@@ -8098,7 +8098,7 @@
         "model": "smartgrid.event",
         "fields": {
             "duration": 120,
-            "event_date": null,
+            "event_date": "2012-21-12T12:00:00",
             "event_max_seat": 1000,
             "event_location": "",
             "is_excursion": false
@@ -8109,7 +8109,7 @@
         "model": "smartgrid.event",
         "fields": {
             "duration": 120,
-            "event_date": null,
+            "event_date": "2012-21-12T12:00:00",
             "event_max_seat": 1000,
             "event_location": "",
             "is_excursion": false
@@ -8120,7 +8120,7 @@
         "model": "smartgrid.event",
         "fields": {
             "duration": 120,
-            "event_date": null,
+            "event_date": "2012-21-12T12:00:00",
             "event_max_seat": 1000,
             "event_location": "",
             "is_excursion": false
@@ -8131,7 +8131,7 @@
         "model": "smartgrid.event",
         "fields": {
             "duration": 120,
-            "event_date": null,
+            "event_date": "2012-21-12T12:00:00",
             "event_max_seat": 1000,
             "event_location": "",
             "is_excursion": false
