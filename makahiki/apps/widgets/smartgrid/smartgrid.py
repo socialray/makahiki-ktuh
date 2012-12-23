@@ -123,9 +123,11 @@ def get_level_actions(user):
             if level.is_unlock:
                 if level.unlock_condition != "True":
                     contents = "%s is unlocked." % level
-                    UserNotification.objects.get_or_create(recipient=user, contents=contents,
-                                                           level=UserNotification.LEVEL_CHOICES[2][0],
-                                                           display_alert=True)
+                    UserNotification.objects.\
+                        get_or_create(recipient=user,
+                                      contents=contents,
+                                      level=UserNotification.LEVEL_CHOICES[2][0],
+                                      display_alert=True)
                 level.is_complete = True
                 categories = []
                 action_list = None
@@ -272,7 +274,7 @@ def eval_unlock(user, action):
         return False
 
     # after published is the default unlock rule for action
-    #if not afterPublished(user, action.slug):
+    # if not afterPublished(user, action.slug):
     #    return False
 
     return utils.eval_predicates(predicates,
@@ -390,7 +392,7 @@ def notify_round_started():
                                    "CURRENT_ROUND": current_round, })
         for user in User.objects.all():
             UserNotification.create_info_notification(user, message,
-                                                      display_alert=True, )
+                                                      display_alert=True,)
 
 
 def notify_commitment_end():
