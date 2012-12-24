@@ -65,6 +65,7 @@ class MyAchievementsTestCase(TransactionTestCase):
             pub_date=datetime.datetime.today(),
             expire_date=datetime.datetime.today() + datetime.timedelta(days=7),
             type="event",
+            event_date=datetime.datetime.today() + datetime.timedelta(days=3),
         )
         event.save()
 
