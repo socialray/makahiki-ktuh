@@ -30,6 +30,7 @@
                 <a href="{% url avatar_change %}" style="padding-left: 15px">change picture</a>
             </td>
         </tr>
+        {# Want to wrap the row with an if that checks if the player is able to change their theme #}
         <tr class="profile-section">
             <td class="profile-form-label">{{ form.theme.label_tag }}</td>
             <td class="profile-form-body">{{ form.theme }}</td>

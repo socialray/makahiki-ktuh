@@ -41,8 +41,15 @@ class RafflePrizesTestCase(TransactionTestCase):
         self.failUnlessEqual(response.status_code, 200)
         self.assertContains(response, "Round 2 Raffle",
             msg_prefix="We should be in round 2 of the raffle.")
+        print response
         self.assertContains(response,
-            "Your total raffle tickets: 0 Allocated right now: 0 Available: 0",
+            "Your Total Raffle Tickets: <em class=\"raffle-ticket-num\">0</em>,",
+            msg_prefix="User should not have any raffle tickets.")
+        self.assertContains(response,
+            "Allocated:  <em class=\"raffle-ticket-num\">0</em>,",
+            msg_prefix="User should not have any raffle tickets.")
+        self.assertContains(response,
+            "Available: <em class=\"raffle-ticket-num\">0</em>",
             msg_prefix="User should not have any raffle tickets.")
         deadline = challenge_mgr.get_round_info()["end"]
         date_string = deadline.strftime("%b. %d, %Y, %I:%M ")
@@ -56,7 +63,13 @@ class RafflePrizesTestCase(TransactionTestCase):
         profile.save()
         response = self.client.get(reverse("win_index"))
         self.assertContains(response,
-            "Your total raffle tickets: 1 Allocated right now: 0 Available: 1",
+            "Your Total Raffle Tickets: <em class=\"raffle-ticket-num\">1</em>",
+            msg_prefix="User should have 1 raffle ticket.")
+        self.assertContains(response,
+            "Allocated:  <em class=\"raffle-ticket-num\">0</em>,",
+            msg_prefix="User should have 1 raffle ticket.")
+        self.assertContains(response,
+            "Available: <em class=\"raffle-ticket-num\">1</em>",
             msg_prefix="User should have 1 raffle ticket.")
 
     def testAddRemoveTicket(self):
@@ -83,7 +96,13 @@ class RafflePrizesTestCase(TransactionTestCase):
             follow=True)
         self.failUnlessEqual(response.status_code, 200)
         self.assertContains(response,
-            "Your total raffle tickets: 1 Allocated right now: 1 Available: 0",
+            "Your Total Raffle Tickets: <em class=\"raffle-ticket-num\">1</em>",
+            msg_prefix="User should have one allocated ticket.")
+        self.assertContains(response,
+            "Allocated:  <em class=\"raffle-ticket-num\">1</em>,",
+            msg_prefix="User should have one allocated ticket.")
+        self.assertContains(response,
+            "Available: <em class=\"raffle-ticket-num\">0</em>",
             msg_prefix="User should have one allocated ticket.")
         self.assertContains(response, reverse("raffle_remove_ticket", args=(raffle_prize.id,)),
             msg_prefix="There should be an url to remove a ticket.")
@@ -96,14 +115,26 @@ class RafflePrizesTestCase(TransactionTestCase):
         response = self.client.post(reverse("raffle_add_ticket", args=(raffle_prize.id,)),
             follow=True)
         self.assertContains(response,
-            "Your total raffle tickets: 2 Allocated right now: 2 Available: 0",
+            "Your Total Raffle Tickets: <em class=\"raffle-ticket-num\">2</em>",
+            msg_prefix="User should have two allocated tickets.")
+        self.assertContains(response,
+            "Allocated:  <em class=\"raffle-ticket-num\">2</em>,",
+            msg_prefix="User should have two allocated tickets.")
+        self.assertContains(response,
+            "Available: <em class=\"raffle-ticket-num\">0</em>",
             msg_prefix="User should have two allocated tickets.")
 
         # Test removing a ticket.
         response = self.client.post(reverse("raffle_remove_ticket", args=(raffle_prize.id,)),
             follow=True)
         self.assertContains(response,
-            "Your total raffle tickets: 2 Allocated right now: 1 Available: 1",
+            "Your Total Raffle Tickets: <em class=\"raffle-ticket-num\">2</em>",
+            msg_prefix="User should have one allocated ticket and one available.")
+        self.assertContains(response,
+            "Allocated:  <em class=\"raffle-ticket-num\">1</em>,",
+            msg_prefix="User should have one allocated ticket and one available.")
+        self.assertContains(response,
+            "Available: <em class=\"raffle-ticket-num\">1</em>",
             msg_prefix="User should have one allocated ticket and one available.")
         self.assertContains(response, reverse("raffle_add_ticket", args=(raffle_prize.id,)),
             msg_prefix="There should be a url to add a ticket.")
@@ -126,7 +157,13 @@ class RafflePrizesTestCase(TransactionTestCase):
             follow=True)
         self.failUnlessEqual(response.status_code, 200)
         self.assertContains(response,
-            "Your total raffle tickets: 0 Allocated right now: 0 Available: 0",
+            "Your Total Raffle Tickets: <em class=\"raffle-ticket-num\">0</em>",
+            msg_prefix="User should have no tickets available")
+        self.assertContains(response,
+            "Allocated:  <em class=\"raffle-ticket-num\">0</em>,",
+            msg_prefix="User should have no tickets available")
+        self.assertContains(response,
+            "Available: <em class=\"raffle-ticket-num\">0</em>",
             msg_prefix="User should have no tickets available")
         self.assertNotContains(response, reverse("raffle_add_ticket", args=(raffle_prize.id,)),
             msg_prefix="There should not be a url to add a ticket.")
@@ -150,7 +187,13 @@ class RafflePrizesTestCase(TransactionTestCase):
             follow=True)
         self.failUnlessEqual(response.status_code, 200)
         self.assertContains(response,
-            "Your total raffle tickets: 0 Allocated right now: 0 Available: 0",
+            "Your Total Raffle Tickets: <em class=\"raffle-ticket-num\">0</em>",
+            msg_prefix="User should have no tickets available")
+        self.assertContains(response,
+            "Allocated:  <em class=\"raffle-ticket-num\">0</em>,",
+            msg_prefix="User should have no tickets available")
+        self.assertContains(response,
+            "Available: <em class=\"raffle-ticket-num\">0</em>",
             msg_prefix="User should have no tickets available")
         self.assertNotContains(response, reverse("raffle_add_ticket", args=(raffle_prize.id,)),
             msg_prefix="There should not be a url to add a ticket.")
