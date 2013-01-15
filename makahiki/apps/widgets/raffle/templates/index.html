@@ -11,7 +11,7 @@
     </div>
     <div>
         <div class="prizes-raffle-info">
-            Your total raffle tickets: {{ raffle.tickets.total }} Allocated right now: {{ raffle.tickets.allocated }} Available: {{ raffle.tickets.available }}
+            Your Total Raffle Tickets: <em class="raffle-ticket-num">{{ raffle.tickets.total }}</em>,  Allocated:  <em class="raffle-ticket-num">{{ raffle.tickets.allocated }}</em>,  Available: <em class="raffle-ticket-num">{{ raffle.tickets.available }}</em>
         </div>
 
         {% if raffle.today < raffle.deadline %}
