@@ -20,6 +20,7 @@ from django.forms.util import ErrorList
 from django.forms import TextInput, Textarea
 from django.core.urlresolvers import reverse
 from django.contrib import messages
+from django.db.utils import IntegrityError
 
 
 class ConfirmationCodeAdmin(admin.ModelAdmin):
@@ -382,7 +383,7 @@ class ActionAdmin(admin.ModelAdmin):
     """abstract admin for action."""
     actions = ["delete_selected", "increment_priority", "decrement_priority",
                "change_level", "change_category", "clear_level", "clear_category",
-               "clear_level_category"]
+               "clear_level_category", "copy_action"]
     list_display = ["slug", "title", "level", "category", "priority", "type", "point_value"]
     search_fields = ["slug", "title"]
     list_filter = ["type", 'level', 'category']
@@ -458,6 +459,20 @@ class ActionAdmin(admin.ModelAdmin):
                                     "?ids=%s" % (",".join(selected)))
 
     change_category.short_description = "Change the category."
+
+    def copy_action(self, request, queryset):
+        """Copy the selected Actions."""
+        _ = request
+        for obj in queryset:
+            obj.id = None
+            slug = obj.slug
+            obj.slug = slug + "-copy"
+            try:
+                obj.save()
+            except IntegrityError:
+                # How do we indicate an error to the admin?
+                None
+    copy_action.short_description = "Copy selected Action(s)"
 
     def get_urls(self):
         return redirect_urls(self, "change")

@@ -8,6 +8,7 @@ from apps.widgets.notifications.models import UserNotification, NoticeTemplate
 
 from apps.widgets.prizes.models import Prize
 from django.http import HttpResponseRedirect
+from django.db.utils import IntegrityError
 
 
 class PrizeAdmin(admin.ModelAdmin):
@@ -15,7 +16,7 @@ class PrizeAdmin(admin.ModelAdmin):
     list_display = ('round', 'title', 'value', 'award_to', 'competition_type',
                     'winner', 'notice_sent')
     list_filter = ['round']
-    actions = ["notify_winner", "change_round"]
+    actions = ["notify_winner", "change_round", "copy_prize"]
 
     def _send_winner_notification(self, prize, leader):
         """send notification."""
@@ -61,6 +62,19 @@ class PrizeAdmin(admin.ModelAdmin):
                                             args=("prize", "round",)) +
                                      "?ids=%s" % (",".join(selected)))
     change_round.short_description = "Change the round"
+
+    def copy_prize(self, request, queryset):
+        """Copy the selected Prize(s)."""
+        _ = request
+        for obj in queryset:
+            obj.id = None
+            obj.round = None
+            try:
+                obj.save()
+            except IntegrityError:
+                # How do we indicate an error to the admin?
+                None
+    copy_prize.short_description = "Copy selected Prize(s)"
 
     def winner(self, obj):
         """return the winner and link to pickup form."""

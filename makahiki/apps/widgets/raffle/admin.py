@@ -10,6 +10,7 @@ from apps.widgets.notifications.models import NoticeTemplate, UserNotification
 
 from apps.widgets.raffle.models import RafflePrize, RaffleTicket
 from django.http import HttpResponseRedirect
+from django.db.utils import IntegrityError
 
 
 class RafflePrizeAdminForm(forms.ModelForm):
@@ -44,7 +45,7 @@ class RafflePrizeAdmin(admin.ModelAdmin):
     form = RafflePrizeAdminForm
     list_display = ('round', 'title', 'value', 'winner_form', 'notice_sent')
     ordering = ('round', 'value', 'title')
-    actions = ["pick_winner", "notify_winner", "change_round"]
+    actions = ["pick_winner", "notify_winner", "change_round", "copy_raffle_prize"]
     inlines = [RaffleTicketInline]
     list_filter = ['round']
 
@@ -91,6 +92,18 @@ class RafflePrizeAdmin(admin.ModelAdmin):
                                             args=("raffleprize", "round",)) +
                                     "?ids=%s" % (",".join(selected)))
     change_round.short_description = "Change the round"
+
+    def copy_raffle_prize(self, request, queryset):
+        """Copies the selected Raffle Prizes."""
+        _ = request
+        for obj in queryset:
+            obj.id = None
+            try:
+                obj.save()
+            except IntegrityError:
+                # How do we indicate an error to the admin?
+                None
+    copy_raffle_prize.short_description = "Copy selected Raffle Prizes"
 
     def winner_form(self, obj):
         """return the winner and link to pickup form."""
