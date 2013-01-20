@@ -184,7 +184,7 @@ def bulk_round_change(request, action_type, attribute):
                 prize.save()
             except IntegrityError:
                 # what should we do? Redirect to error page?
-                None
+                pass
 
         return HttpResponseRedirect("/admin/prizes/prize")
     else:

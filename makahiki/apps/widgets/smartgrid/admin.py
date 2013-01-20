@@ -471,7 +471,7 @@ class ActionAdmin(admin.ModelAdmin):
                 obj.save()
             except IntegrityError:
                 # How do we indicate an error to the admin?
-                None
+                pass
     copy_action.short_description = "Copy selected Action(s)"
 
     def get_urls(self):

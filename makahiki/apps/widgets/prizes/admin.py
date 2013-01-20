@@ -73,7 +73,7 @@ class PrizeAdmin(admin.ModelAdmin):
                 obj.save()
             except IntegrityError:
                 # How do we indicate an error to the admin?
-                None
+                pass
     copy_prize.short_description = "Copy selected Prize(s)"
 
     def winner(self, obj):
