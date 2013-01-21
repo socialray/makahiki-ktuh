@@ -265,8 +265,7 @@ def check_resource_goals(resource, date):
                                    hour=23, minute=59, second=59)
 
     # do nothing if out of round
-    rounds_info = challenge_mgr.get_all_round_info()
-    if not rounds_info["competition_start"] < date < rounds_info["competition_end"]:
+    if not challenge_mgr.in_competition(date):
         return 0
 
     update_resource_usage(resource, date)

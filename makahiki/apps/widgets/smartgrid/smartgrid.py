@@ -364,7 +364,8 @@ def notify_round_started():
     today = datetime.datetime.today()
     current_round = None
     previous_round = None
-    rounds = challenge_mgr.get_all_round_info()["rounds"]
+    all_round_info = challenge_mgr.get_all_round_info()
+    rounds = all_round_info["rounds"]
     for key in rounds.keys():
         # We're looking for a round that ends today and another that starts
         # today (or overall)
@@ -386,6 +387,9 @@ def notify_round_started():
             print "carry over scoreboard entry to new round."
             score_mgr.copy_scoreboard_entry(previous_round, current_round)
 
+    # if there is a gap, previous_round is null, check if it is not out of round
+    if current_round and current_round != previous_round and\
+       all_round_info["competition_start"] <= today <= all_round_info["competition_end"]:
         print 'Sending out round transition notices.'
         template = NoticeTemplate.objects.get(notice_type="round-transition")
         message = template.render({"PREVIOUS_ROUND": previous_round,
