@@ -123,11 +123,13 @@ def get_level_actions(user):
             if level.is_unlock:
                 if level.unlock_condition != "True":
                     contents = "%s is unlocked." % level
-                    UserNotification.objects.\
+                    obj, created = UserNotification.objects.\
                         get_or_create(recipient=user,
                                       contents=contents,
-                                      level=UserNotification.LEVEL_CHOICES[2][0],
-                                      display_alert=True)
+                                      level=UserNotification.LEVEL_CHOICES[2][0])
+                    if created:  # only show the notification if it is new
+                        obj.display_alert = True
+                        obj.save()
                 level.is_complete = True
                 categories = []
                 action_list = None
