@@ -18,30 +18,30 @@ class ChallengeSetting(models.Model):
 
     THEME_CHOICES = ((key, key) for key in settings.INSTALLED_THEMES)
 
-    site_name = models.CharField(
-        default="My site",
-        help_text="The name of the site.",
+    location = models.CharField(
+        default="",
+        help_text="The location of the challenge. e.g. University of Hawaii",
         max_length=50,)
-    site_domain = models.CharField(
+    domain = models.CharField(
         default="localhost",
-        help_text="The domain name of the site.",
+        help_text="The domain name of this challenge.",
         max_length=100,)
-    site_logo = models.ImageField(
+    logo = models.ImageField(
         upload_to=media_file_path(_MEDIA_LOCATION),
         max_length=255, blank=True, null=True,
-        help_text="The logo of the site.",)
-    competition_name = models.CharField(
+        help_text="The logo of the challenge.",)
+    name = models.CharField(
         default="Kukui Cup",
-        help_text="The name of the competition.",
+        help_text="The name of the challenge.",
         max_length=50,)
     theme = models.CharField(
         default="theme-forest",
-        help_text="The UI theme for this installation.",
+        help_text="The default theme for this challenge.",
         choices=THEME_CHOICES,
         max_length=50,)
-    competition_team_label = models.CharField(
+    team_label = models.CharField(
         default="Team",
-        help_text="The display label for team.",
+        help_text="The display label for 'teams'.",
         max_length=50,)
 
     # CAS settings
@@ -138,7 +138,7 @@ class ChallengeSetting(models.Model):
                   settings.MARKDOWN_TEXT)
 
     def __unicode__(self):
-        return self.site_name
+        return self.name
 
     def is_multi_auth(self):
         """returns true if use_cas and either use ldap or internal."""

@@ -326,7 +326,7 @@ SERIALIZATION_MODULES = {
 # This object will be instantiated for real from the DB ChallengeSetting object.
 class Challenge():
     "Encapsulates settings for the challenge."
-    competition_name = None
+    name = None
 
 CHALLENGE = Challenge()
 

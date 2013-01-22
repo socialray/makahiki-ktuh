@@ -63,8 +63,8 @@ def info():
     """Returns the challenge name and site."""
     init()
     challenge = get_challenge()
-    return "Challenge name : %s @ %s" % (challenge.competition_name,
-                                         challenge.site_name)
+    return "Challenge name : %s @ %s" % (challenge.name,
+                                         challenge.location)
 
 
 def get_challenge():

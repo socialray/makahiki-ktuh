@@ -118,14 +118,14 @@ def raffle_form(request, prize_id):
         'raffle': True,
         'prize': prize,
         'round': prize.round,
-        'competition_name': challenge.competition_name,
+        'competition_name': challenge.name,
         }, context_instance=RequestContext(request), mimetype='text/plain')
 
     message = template.render({
         'raffle': True,
         'prize': prize,
         'round': prize.round,
-        'competition_name': challenge.competition_name,
+        'competition_name': challenge.name,
     })
 
     return HttpResponse(message, content_type="text", mimetype='text/html')
