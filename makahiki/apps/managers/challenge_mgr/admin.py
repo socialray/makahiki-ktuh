@@ -90,8 +90,7 @@ class ChallengeSettingAdmin(admin.ModelAdmin):
 
     fieldsets = (
         ("Challenge",
-            {"description": "<div class='content-box'>I have no idea what this does<br>does it look ok?</div>",
-             "fields":
+            {"fields":
                   (("name", "location"),
                    ("logo", "domain"),
                    ("team_label", "theme"),
@@ -126,8 +125,8 @@ class ChallengeSettingAdmin(admin.ModelAdmin):
     formfield_overrides = {
         models.TextField: {'widget': Textarea(attrs={'rows': 2, 'cols': 70})},
         }
-    page_text = "Under normal circumstances, there is only one challenge instance per system.  <br>" +\
-"By default, this is called 'Kukui Cup/UH'. <br> " +\
+    page_text = "Under normal circumstances, there is only one challenge instance " +\
+"per system.  <br>By default, this is called 'Kukui Cup/UH'. <br> " +\
 "Select this instance; you will be able to change its name below."
 
 admin.site.register(ChallengeSetting, ChallengeSettingAdmin)
