@@ -215,7 +215,7 @@ def _check_attend_code(user, form):
     try:
         code = ConfirmationCode.objects.get(code=form.cleaned_data["response"].lower())
         # CAM 11/08/12 this assumes that ConfirmationCodes are only for events.
-        if code.action.event.event_date > datetime.datetime():
+        if code.action.event.event_date > datetime.datetime.today():
             message = "The Event has not occurred, Please wait till after the event date to submit."
         elif code.action in user.action_set.filter(actionmember__award_date__isnull=False):
             message = "You have already redeemed a code for this event/excursion."
