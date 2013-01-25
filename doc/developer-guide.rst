@@ -11,4 +11,5 @@ Developer Guide
    plugin-development
    testing
    design-review-march-2012
+   hello-world-widget-development
 
