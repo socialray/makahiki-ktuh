@@ -12,9 +12,9 @@ After clicking on the "Challenge Settings" link in the Challenge Admin widget, a
    :width: 600 px
    :align: center
 
-Under normal circumstances, there is only one challenge instance per system.  By default, this is called "University of Hawaii at Manoa".  Select this instance; you will be able to change its name below.
+Under normal circumstances, there is only one challenge instance per system.  By default, this is called "Kukui Cup/UH".  Select this instance; you will be able to change its name below.
 
-The following sections detail each part of the page that appears after selecting "University of Hawaii at Manoa".   
+The following sections detail each part of the page that appears after selecting "Kukui Cup/UH".   
 
 Configure names
 ---------------
@@ -23,7 +23,7 @@ Configure names
    :width: 600 px
    :align: center
 
-This section of the page enables you to change the name of the site, the logo, the competition name, the team label, the domain, and the default theme.  
+This section of the page enables you to change the name, the location, the logo, the domain name, team label, and the default theme.  
 
 Configure authentication
 ------------------------
