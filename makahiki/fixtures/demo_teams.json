@@ -4,7 +4,6 @@
         "model":"team_mgr.group",
         "fields":{
             "name":"Lehua",
-            "slug":"hale-lehua"
         }
     },
     {
@@ -12,7 +11,6 @@
         "model":"team_mgr.group",
         "fields":{
             "name":"Ilima",
-            "slug":"hale-ilima"
         }
     },
     {
@@ -21,7 +19,6 @@
         "fields":{
             "group":1,
             "name":"Lehua-A",
-            "slug":"lehua-a"
         }
     },
     {
@@ -30,7 +27,6 @@
         "fields":{
             "group":1,
             "name":"Lehua-B",
-            "slug":"lehua-b"
         }
     },
     {
@@ -39,7 +35,6 @@
         "fields":{
             "group":1,
             "name":"Lehua-C",
-            "slug":"lehua-c"
         }
     },
     {
@@ -48,7 +43,6 @@
         "fields":{
             "group":1,
             "name":"Lehua-D",
-            "slug":"lehua-d"
         }
     },
     {
@@ -57,7 +51,6 @@
         "fields":{
             "group":1,
             "name":"Lehua-E",
-            "slug":"lehua-e"
         }
     },
     {
@@ -66,7 +59,6 @@
         "fields":{
             "group":1,
             "name":"Ilima-A",
-            "slug":"ilima-a"
         }
     }
 ]

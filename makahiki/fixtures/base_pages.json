@@ -656,14 +656,6 @@
         }
     },
     {
-        "pk": 4,
-        "model": "challenge_mgr.gamesetting",
-        "fields": {
-            "game": 1,
-            "widget": "wallpost"
-        }
-    },
-    {
         "pk": 5,
         "model": "challenge_mgr.gamesetting",
         "fields": {
@@ -677,14 +669,6 @@
         "fields": {
             "game": 2,
             "widget": "resource_scoreboard.water"
-        }
-    },
-    {
-        "pk": 7,
-        "model": "challenge_mgr.gamesetting",
-        "fields": {
-            "game": 2,
-            "widget": "wallpost"
         }
     },
     {
@@ -723,7 +707,7 @@
         "pk": 14,
         "model": "challenge_mgr.gamesetting",
         "fields": {
-            "game": 6,
+            "game": 7,
             "widget": "quests"
         }
     },
@@ -731,23 +715,15 @@
         "pk": 15,
         "model": "challenge_mgr.gamesetting",
         "fields": {
-            "game": 7,
+            "game": 8,
             "widget": "badges"
-        }
-    },
-    {
-        "pk": 16,
-        "model": "challenge_mgr.gamesetting",
-        "fields": {
-            "game": 7,
-            "widget": "badge_scoreboard"
         }
     },
     {
         "pk": 17,
         "model": "challenge_mgr.gamesetting",
         "fields": {
-            "game": 8,
+            "game": 6,
             "widget": "participation"
         }
     }

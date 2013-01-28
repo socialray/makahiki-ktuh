@@ -16,7 +16,6 @@ class Group(models.Model):
     """Defines the group that a team belongs to."""
 
     name = models.CharField(max_length=200, help_text="The name of the group.")
-    slug = models.SlugField(help_text="Automatically generated if left blank.", null=True)
 
     def __unicode__(self):
         return self.name
@@ -31,7 +30,6 @@ class Team(models.Model):
 
     group = models.ForeignKey(Group, help_text="The group this team belongs to.")
     name = models.CharField(help_text="The team name", max_length=50)
-    slug = models.SlugField(help_text="Automatically generated if left blank.", null=True)
     size = models.IntegerField(null=True, blank=True, default=0,
                                help_text="The size of the team. It is the total number of "
                                          "residents in the team.")
@@ -90,21 +88,6 @@ class Post(models.Model):
     class Meta:
         """meta"""
         verbose_name_plural = "Wall Posts"
-
-    def date_string(self):
-        """Formats the created date into a pretty string."""
-        return self.created_at.strftime("%m/%d %I:%M %p")
-
-
-class CanopyPost(models.Model):
-    """Canopy wall post."""
-    user = models.ForeignKey(User, help_text="The user who submit the post.")
-    text = models.TextField(help_text="The content of the post.")
-    created_at = models.DateTimeField(editable=False, auto_now_add=True,
-                                      help_text="The create timestamp")
-
-    def __unicode__(self):
-        return "%s (%s): %s" % (self.team, self.user.username, self.text)
 
     def date_string(self):
         """Formats the created date into a pretty string."""

@@ -3,6 +3,8 @@
 {% load url from future %}
 {% load admin_urls %}
 
-{% block object-tools-items %}
-    <li><a href="/pages/clear_cache/">Clear Cache</a></li>
+{% block object-tools %}
+        <ul class="object-tools">
+            <li><a href="/pages/clear_cache/">Clear Cache</a></li>
+        </ul>
 {% endblock %}
