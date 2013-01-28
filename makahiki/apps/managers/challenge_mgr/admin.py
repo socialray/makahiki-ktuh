@@ -11,7 +11,7 @@ class PageSettingInline(admin.TabularInline):
     """PageSettingInline admin."""
     model = PageSetting
     #can_delete = False
-    fields = ['game', 'widget', 'enabled', ]
+    fields = ['widget', 'location', 'priority', 'enabled', ]
     #readonly_fields = ['widget', ]
     extra = 0
 
@@ -45,8 +45,8 @@ admin.site.register(PageInfo, PageInfoAdmin)
 
 class PageSettingAdmin(admin.ModelAdmin):
     """PageSetting administrator interface definition."""
-    list_display = ["page", "game", "widget", "enabled"]
-    list_editable = ["game", "widget", "enabled"]
+    list_display = ["page", "widget", "enabled"]
+    list_editable = ["widget", "enabled"]
 
 admin.site.register(PageSetting, PageSettingAdmin)
 
@@ -54,7 +54,7 @@ admin.site.register(PageSetting, PageSettingAdmin)
 class GameSettingInline(admin.TabularInline):
     """PageSettingInline admin."""
     model = GameSetting
-    fields = ['widget', 'enabled', ]
+    fields = ['widget', ]
     extra = 0
 
 

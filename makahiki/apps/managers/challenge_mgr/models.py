@@ -279,12 +279,10 @@ class PageInfo(models.Model):
 class PageSetting(models.Model):
     """Defines widgets in a page."""
     WIDGET_CHOICES = ((key, key) for key in settings.INSTALLED_WIDGET_APPS)
+    LOCATION_CHOICES = (("Left", "Left"),
+                        ("Right", "Right"))
 
     page = models.ForeignKey("PageInfo")
-
-    game = models.ForeignKey("GameInfo",
-        blank=True, null=True,
-        help_text="The name of the game in the page.")
 
     widget = models.CharField(
         blank=True, null=True,
@@ -292,14 +290,25 @@ class PageSetting(models.Model):
         choices=WIDGET_CHOICES,
         max_length=50,)
 
+    location = models.CharField(
+        default="Left",
+        blank=True, null=True,
+        help_text="The location of the widget in the page.",
+        choices=LOCATION_CHOICES,
+        max_length=10,)
+
+    priority = models.IntegerField(
+        default=1,
+        help_text="The priority (ordering) of widget in the location of the page.")
+
     enabled = models.BooleanField(
         default=True,
         help_text="Enable ?",)
 
     class Meta:
         """meta"""
-        unique_together = (("page", "game", "widget", ), )
-        ordering = ['page', "game", 'widget', ]
+        unique_together = (("page", "widget", ), )
+        ordering = ['page', 'location', 'priority']
 
     def __unicode__(self):
         return ""
@@ -320,7 +329,7 @@ class GameInfo(models.Model):
         help_text="Enable ?",)
     priority = models.IntegerField(
         default=1,
-        help_text="The priority (ordering) of the game.")
+        help_text="The priority (ordering) of the game in the admin interface.")
 
     class Meta:
         """meta"""
@@ -346,10 +355,6 @@ class GameSetting(models.Model):
         help_text="The name of the widget in the page.",
         choices=WIDGET_CHOICES,
         max_length=50,)
-
-    enabled = models.BooleanField(
-        default=True,
-        help_text="Enable ?",)
 
     class Meta:
         """meta"""

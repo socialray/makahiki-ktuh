@@ -1,5 +1,6 @@
 {% with view_objects.raffle as raffle %}
-<div class="content-box span12 prizes-raffle">
+<div class="row-fluid">
+  <div class="content-box span12 prizes-raffle">
     <div class="content-box-title">
         <h3>{{ raffle.round_name }} Raffle Game</h3>
         <a href="#" style="float: right">
@@ -27,5 +28,6 @@
                 raffle prizes</a>
         </div>
     </div>
+  </div>
 </div>
 {% endwith %}

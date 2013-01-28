@@ -163,10 +163,8 @@ def get_all_enabled_widgets():
     and GameSetting."""
     page_widgets = cache_mgr.get_cache("enabled_widgets")
     if page_widgets is None:
-        page_setting = PageSetting.objects.filter(enabled=True).select_related("page", "game")
+        page_setting = PageSetting.objects.filter(enabled=True).select_related("page")
         page_widgets = {}
-
-        enabled_gs = GameSetting.objects.filter(enabled=True).select_related("game")
 
         for ps in page_setting:
             name = ps.page.name
@@ -174,12 +172,17 @@ def get_all_enabled_widgets():
                 page_widgets[name] = []
 
             widgets = page_widgets[name]
-            if ps.widget:
-                widgets.append(ps.widget)
-            if ps.game and ps.game.enabled:
-                for gs in enabled_gs:
-                    if gs.game.id == ps.game.id:
-                        widgets.append(gs.widget)
+            # check if the game this widget belongs to is enabled in the game info
+            game_enabled = False
+            gss = GameSetting.objects.filter(widget=ps.widget).select_related("game")
+            for gs in gss:
+                if gs.game.enabled:
+                    game_enabled = True
+                    break
+
+            if not gss or game_enabled:
+                widgets.append(ps)
+
         cache_mgr.set_cache("enabled_widgets", page_widgets, 2592000)
     return page_widgets
 

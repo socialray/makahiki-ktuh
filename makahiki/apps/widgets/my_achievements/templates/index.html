@@ -1,6 +1,6 @@
 {% load cache %}
 {% cache 1800 my_achievements request.user %}
-
+<div class="content-box">
 <div class="content-box-title">
   My Achievements
   <a href="#" style="float: right">
@@ -41,5 +41,5 @@
               anything yet!</p>
       {% endif %}  
   </div>
-
+</div>
 {% endcache %}

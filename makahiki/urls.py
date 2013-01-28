@@ -60,13 +60,11 @@ urlpatterns = patterns('',
     url(r'^500/$', 'django.views.defaults.server_error'),
     )
 
-for widget in settings.INSTALLED_DEFAULT_WIDGET_APPS:
-    if os.path.isfile(
-        "%s/apps/widgets/%s/urls.py" % (settings.PROJECT_ROOT, widget)):
-        urlpatterns += patterns('',
-            (r'^%s/' % widget, include('apps.widgets.%s.urls' % widget)), )
+widgets = settings.INSTALLED_DEFAULT_WIDGET_APPS + \
+          settings.INSTALLED_COMMON_WIDGET_APPS + \
+          settings.INSTALLED_WIDGET_APPS
 
-for widget in settings.INSTALLED_WIDGET_APPS:
+for widget in widgets:
     if os.path.isfile(
         "%s/apps/widgets/%s/urls.py" % (settings.PROJECT_ROOT, widget)):
         urlpatterns += patterns('',

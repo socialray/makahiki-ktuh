@@ -160,9 +160,22 @@ INSTALLED_APPS = (
 INSTALLED_DEFAULT_WIDGET_APPS = (
     'notifications',
     'ask_admin',
-    'help',
+    'quests',
 )
 for widget in INSTALLED_DEFAULT_WIDGET_APPS:
+    INSTALLED_APPS += ("apps.widgets." + widget, )
+
+##########################
+# INSTALLED common Widgets
+##########################
+INSTALLED_COMMON_WIDGET_APPS = (
+    'help',
+    'resource_goal',
+    'resource_scoreboard',
+    'wallpost',
+    'status',
+)
+for widget in INSTALLED_COMMON_WIDGET_APPS:
     INSTALLED_APPS += ("apps.widgets." + widget, )
 
 ################################
@@ -175,13 +188,7 @@ INSTALLED_WIDGET_APPS = (
     'badges',
     'bonus_points',
     'home',
-    'resource_goal',
-    'resource_goal.energy',
-    'resource_goal.water',
     'energy_power_meter',
-    'resource_scoreboard',
-    'resource_scoreboard.energy',
-    'resource_scoreboard.water',
     'my_achievements',
     'my_commitments',
     'my_info',
@@ -194,24 +201,26 @@ INSTALLED_WIDGET_APPS = (
     'smartgrid',
     'team_members',
     'upcoming_events',
-    'wallpost',
+    'logging',
     'help.intro',
     'help.faq',
     'help.rule',
-    'status',
+    'resource_goal.energy',
+    'resource_goal.water',
+    'resource_scoreboard.energy',
+    'resource_scoreboard.water',
+    'wallpost.user_wallpost',
+    'wallpost.system_wallpost',
     'status.prizes',
     'status.rsvps',
     'status.users',
     'status.actions',
-    'logging',
     'status.referrals',
     'status.wattdepot',
     'status.twitter',
     'status.badges',
     'status.DEGG',
     'status.DWGG',
-    'wallpost.user_wallpost',
-    'wallpost.system_wallpost',
 )
 
 for widget in INSTALLED_WIDGET_APPS:

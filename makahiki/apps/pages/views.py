@@ -63,23 +63,30 @@ def index(request):
 def supply_view_objects(request, page_name, view_objects):
     """ Returns view_objects supplied widgets defined in PageSetting. """
 
-    widgets = challenge_mgr.get_enabled_widgets(page_name)
-    if not widgets:
+    widget_infos = challenge_mgr.get_enabled_widgets(page_name)
+    if not widget_infos:
         return False
 
-    view_objects['widget_templates'] = []
-    for widget in widgets:
-        view_module_name = 'apps.widgets.' + widget + '.views'
+    view_objects['left_templates'] = []
+    view_objects['right_templates'] = []
+
+    for widget_info in widget_infos:
+        view_module_name = 'apps.widgets.' + widget_info.widget + '.views'
         page_views = importlib.import_module(view_module_name)
-        widget = widget.replace(".", "__")
 
         #time_start = datetime.datetime.now()
-        view_objects[widget] = page_views.supply(request, page_name)
+        widget_name = widget_info.widget.replace(".", "__")
+        view_objects[widget_name] = page_views.supply(request, page_name)
         #time_end = datetime.datetime.now()
         #print "%s time: %s" % (view_module_name, (time_end - time_start))
 
-        widget_template = "widgets/" + widget.replace(".", "/") + "/templates/index.html"
-        view_objects['widget_templates'].append(widget_template)
+        widget_template = "widgets/" + \
+                          widget_info.widget.replace(".", "/") + \
+                          "/templates/index.html"
+        if widget_info.location == "Left":
+            view_objects['left_templates'].append(widget_template)
+        if widget_info.location == "Right":
+            view_objects['right_templates'].append(widget_template)
 
     return True
 
