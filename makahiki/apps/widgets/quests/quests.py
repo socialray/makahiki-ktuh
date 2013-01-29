@@ -1,5 +1,6 @@
 """Implements the quest widget."""
 from apps.managers.cache_mgr import cache_mgr
+from apps.managers.challenge_mgr import challenge_mgr
 
 from apps.widgets.quests import MAX_AVAILABLE_QUESTS
 
@@ -11,6 +12,7 @@ def possibly_completed_quests(user):
     """Check if the user may have completed one of their quests.
        Returns an array of the completed quests."""
     user_quests = user.quest_set.filter(questmember__completed=False, questmember__opt_out=False)
+
     completed = []
     for quest in user_quests:
         if quest.completed_quest(user):
@@ -30,6 +32,9 @@ def get_quests_from_cache(user):
     """
     get the quests for the user and store in cache.
     """
+    if not challenge_mgr.is_game_enabled("Quest Game Mechanics"):
+        return {}
+
     return_dict = cache_mgr.get_cache("get_quests-%s" % user.username)
     if return_dict is None:
         return_dict = get_quests(user)

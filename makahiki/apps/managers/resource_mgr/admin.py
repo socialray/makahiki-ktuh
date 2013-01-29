@@ -20,9 +20,16 @@ admin.site.register(WaterUsage, UsageAdmin)
 class ResourceSettingsAdmin(admin.ModelAdmin):
     """Administrator display list: team, date, and energy."""
     list_display = ["name", "unit", "winning_order", "conversion_rate"]
+    readonly_fields = ["name"]
+
+    def has_add_permission(self, request):
+        return False
+
+    def has_delete_permission(self, request, obj=None):
+        return False
 
 admin.site.register(ResourceSetting, ResourceSettingsAdmin)
-challenge_mgr.register_site_admin_model("Challenge", ResourceSetting)
+challenge_mgr.register_sys_admin_model("Other Settings", ResourceSetting)
 
 
 class ResourceBlackoutDateAdmin(admin.ModelAdmin):
@@ -30,4 +37,4 @@ class ResourceBlackoutDateAdmin(admin.ModelAdmin):
     list_display = ["date", "description"]
 
 admin.site.register(ResourceBlackoutDate, ResourceBlackoutDateAdmin)
-challenge_mgr.register_site_admin_model("Challenge", ResourceBlackoutDate)
+challenge_mgr.register_sys_admin_model("Other Settings", ResourceBlackoutDate)

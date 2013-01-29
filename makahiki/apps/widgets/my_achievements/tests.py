@@ -19,7 +19,9 @@ class MyAchievementsTestCase(TransactionTestCase):
         challenge_mgr.init()
         self.user = test_utils.setup_user(username="user", password="changeme")
         test_utils.set_competition_round()
-        challenge_mgr.register_page_widget("home", "quests")
+
+        test_utils.enable_quest()
+        challenge_mgr.register_page_widget("home", "home")
         challenge_mgr.register_page_widget("profile", "my_achievements")
         challenge_mgr.register_page_widget("profile", "my_commitments")
 
@@ -211,4 +213,4 @@ class MyAchievementsTestCase(TransactionTestCase):
         )
         response = self.client.get(reverse("profile_index"))
         self.assertContains(response, "Quest: Test quest", count=1,
-            msg_prefix="Achievements should contain a social bonus entry")
+            msg_prefix="Achievements should contain a quest entry")

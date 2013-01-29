@@ -4,7 +4,7 @@ from django.contrib.auth.decorators import login_required
 from django.http import Http404, HttpResponse
 from django.template.context import RequestContext
 from django.template.loader import render_to_string
-from apps.managers.team_mgr.models import Post, CanopyPost
+from apps.managers.team_mgr.models import Post
 from apps.widgets.wallpost.forms import WallForm
 import simplejson as json
 
@@ -27,36 +27,21 @@ def super_supply(request, page_name, agent):
     user = request.user
     team = user.get_profile().team
 
-    if page_name == "advanced":
-        if "last_post" in request.GET:
-            posts = CanopyPost.objects.filter(
-                style_class=agent_post,
-                id__lt=int(request.GET["last_post"])).select_related(
-                'user__profile').order_by("-id")
-        else:
-            posts = CanopyPost.objects.filter(
-              style_class=agent_post
-              ).select_related('user__profile').order_by("-id")
-
-        user_title = "Canopy News Feed"
-        description = "Share with your fellow canopy members:"
-
+    if "last_post" in request.GET:
+        posts = Post.objects.filter(
+                    style_class=agent_post,
+                    team=team,
+                    id__lt=int(request.GET["last_post"])).select_related(
+                        'user__profile').order_by("-id")
     else:
-        if "last_post" in request.GET:
-            posts = Post.objects.filter(
-                        style_class=agent_post,
-                        team=team,
-                        id__lt=int(request.GET["last_post"])).select_related(
-                            'user__profile').order_by("-id")
-        else:
-            posts = Post.objects.filter(
-                style_class=agent_post,
-                team=team
-            ).select_related('user__profile').order_by("-id")
+        posts = Post.objects.filter(
+            style_class=agent_post,
+            team=team
+        ).select_related('user__profile').order_by("-id")
 
-        user_title = "Team News Feed"
-        system_title = "Game Feed"
-        description = ""
+    user_title = "Team News Feed"
+    system_title = "Game Feed"
+    description = ""
 
     post_count = posts.count()
     posts = posts[:DEFAULT_POST_COUNT]

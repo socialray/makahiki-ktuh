@@ -5,7 +5,7 @@ from django.conf import settings
 from django.contrib.auth.models import User
 from django.core.files.images import ImageFile
 from apps.managers.challenge_mgr import challenge_mgr
-from apps.managers.challenge_mgr.models import RoundSetting
+from apps.managers.challenge_mgr.models import RoundSetting, GameInfo, GameSetting
 from apps.managers.team_mgr.models import Team, Group
 from apps.widgets.prizes.models import Prize
 from apps.widgets.quests.models import Quest
@@ -150,3 +150,9 @@ def create_quest(completion_conditions):
             )
     quest.save()
     return quest
+
+
+def enable_quest():
+    """enable quest in the page."""
+    game, _ = GameInfo.objects.get_or_create(name="Quest Game Mechanics")
+    GameSetting.objects.get_or_create(game=game, widget="quests")

@@ -14,22 +14,15 @@
         <div class="row-fluid">
             <!-- left column -->
             <div class="span7">
-                {% if view_objects.smartgrid %}
-                    {% include "widgets/smartgrid/templates/index.html" %}
-                {% endif %}
-                {% if view_objects.upcoming_events %}
-                    {% include "widgets/upcoming_events/templates/index.html" %}
-                {% endif %}
+                {% for template in view_objects.left_templates %}
+                    {% include template %}
+                {% endfor %}
             </div>
             <!-- right column -->
             <div class="span5">
-
-                {% if view_objects.scoreboard %}
-                    {% include "widgets/scoreboard/templates/index.html" %}
-                {% endif %}
-                {% if view_objects.participation %}
-                    {% include "widgets/participation/templates/index.html" %}
-                {% endif %}
+                {% for template in view_objects.right_templates %}
+                    {% include template %}
+                {% endfor %}
             </div>
         </div>
     </div>

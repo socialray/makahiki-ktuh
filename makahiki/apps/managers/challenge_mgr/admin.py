@@ -11,7 +11,7 @@ class PageSettingInline(admin.TabularInline):
     """PageSettingInline admin."""
     model = PageSetting
     #can_delete = False
-    fields = ['game', 'widget', 'enabled', ]
+    fields = ['widget', 'location', 'priority', 'enabled', ]
     #readonly_fields = ['widget', ]
     extra = 0
 
@@ -45,8 +45,8 @@ admin.site.register(PageInfo, PageInfoAdmin)
 
 class PageSettingAdmin(admin.ModelAdmin):
     """PageSetting administrator interface definition."""
-    list_display = ["page", "game", "widget", "enabled"]
-    list_editable = ["game", "widget", "enabled"]
+    list_display = ["page", "widget", "enabled"]
+    list_editable = ["widget", "enabled"]
 
 admin.site.register(PageSetting, PageSettingAdmin)
 
@@ -54,7 +54,7 @@ admin.site.register(PageSetting, PageSettingAdmin)
 class GameSettingInline(admin.TabularInline):
     """PageSettingInline admin."""
     model = GameSetting
-    fields = ['widget', 'enabled', ]
+    fields = ['widget', ]
     extra = 0
 
 
@@ -125,9 +125,13 @@ class ChallengeSettingAdmin(admin.ModelAdmin):
     formfield_overrides = {
         models.TextField: {'widget': Textarea(attrs={'rows': 2, 'cols': 70})},
         }
-    page_text = "Under normal circumstances, there is only one challenge instance " +\
-"per system.  <br>By default, this is called 'Kukui Cup/UH'. <br> " +\
-"Select this instance; you will be able to change its name below."
+    page_text = "Click on the name of the challenge to change the settings."
+
+    def has_add_permission(self, request):
+        return False
+
+    def has_delete_permission(self, request, obj=None):
+        return False
 
 admin.site.register(ChallengeSetting, ChallengeSettingAdmin)
 admin.site.register(UploadImage)
@@ -135,9 +139,8 @@ admin.site.register(UploadImage)
 challenge_mgr.register_site_admin_model("Challenge", ChallengeSetting)
 challenge_mgr.register_site_admin_model("Challenge", RoundSetting)
 challenge_mgr.register_sys_admin_model("Other Settings", PageInfo)
-challenge_mgr.register_sys_admin_model("Other Settings", GameInfo)
 
 from djcelery.models import CrontabSchedule, PeriodicTask, IntervalSchedule
-challenge_mgr.register_sys_admin_model("Celery Scheduler", CrontabSchedule)
-challenge_mgr.register_sys_admin_model("Celery Scheduler", IntervalSchedule)
-challenge_mgr.register_sys_admin_model("Celery Scheduler", PeriodicTask)
+challenge_mgr.register_sys_admin_model("Scheduler (Celery)", CrontabSchedule)
+challenge_mgr.register_sys_admin_model("Scheduler (Celery)", IntervalSchedule)
+challenge_mgr.register_sys_admin_model("Scheduler (Celery)", PeriodicTask)

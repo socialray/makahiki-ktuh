@@ -28,9 +28,14 @@ class ScoreSettingAdmin(admin.ModelAdmin):
     """PointsTransaction administrator interface definition."""
     list_display = ["setup_points", "active_threshold_points",
                     "signup_bonus_points", "noshow_penalty_points", "feedback_bonus_points", ]
-    page_text = "Under normal circumstances, there is only one score setting " +\
-"instance per challenge.  <br>Select this instance; you will be able to change " +\
-"the score settings for this challenge."
+    list_display_links = ["setup_points", "active_threshold_points",
+                          "signup_bonus_points", "noshow_penalty_points", "feedback_bonus_points", ]
+
+    def has_add_permission(self, request):
+        return False
+
+    def has_delete_permission(self, request, obj=None):
+        return False
 
 admin.site.register(ScoreSetting, ScoreSettingAdmin)
 
@@ -39,6 +44,14 @@ class ReferralSettingAdmin(admin.ModelAdmin):
     """PointsTransaction administrator interface definition."""
     list_display = ["normal_referral_points", "super_referral_points",
                     "mega_referral_points", "start_dynamic_bonus", ]
+    list_display_links = ["normal_referral_points", "super_referral_points",
+                    "mega_referral_points", "start_dynamic_bonus", ]
+
+    def has_add_permission(self, request):
+        return False
+
+    def has_delete_permission(self, request, obj=None):
+        return False
 
 admin.site.register(ReferralSetting, ReferralSettingAdmin)
 

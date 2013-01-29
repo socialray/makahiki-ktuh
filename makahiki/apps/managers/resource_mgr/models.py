@@ -28,13 +28,13 @@ class ResourceSetting(models.Model):
     )
     conversion_rate = models.IntegerField(
         default=1,
-        help_text="The rate of converting the usage data into the unit. such as 1000, is to " \
-                  "convert usage data recorded in Wh to kWh.",
+        help_text="The rate of converting the usage data into the unit. For example, 1000 could be "
+                  "specified to convert usage data recorded in Wh to kWh.",
     )
     winning_order = models.CharField(
         max_length=10,
         choices=WINNING_ORDER_CHOICE,
-        help_text="The winning order.",
+        help_text="The winning order. Ascending indicates the lesser/smaller wins."
     )
 
     class Meta:

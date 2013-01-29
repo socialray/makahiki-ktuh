@@ -3,32 +3,28 @@
     "pk": 1, 
     "model": "team_mgr.group",
     "fields": {
-      "name": "Lehua", 
-      "slug": "hale-lehua"
+      "name": "Lehua"
     }
   }, 
   {
     "pk": 2, 
     "model": "team_mgr.group",
     "fields": {
-      "name": "Ilima", 
-      "slug": "hale-ilima"
+      "name": "Ilima"
     }
   }, 
   {
     "pk": 3, 
     "model": "team_mgr.group",
     "fields": {
-      "name": "Mokihana", 
-      "slug": "hale-mokihana"
+      "name": "Mokihana"
     }
   }, 
   {
     "pk": 4,
     "model": "team_mgr.group",
     "fields": {
-      "name": "Lokelani",
-      "slug": "hale-lokelani"
+      "name": "Lokelani"
     }
   },
   {
@@ -36,8 +32,7 @@
     "model": "team_mgr.team",
     "fields": {
       "group": 1,
-      "name": "Lehua-A",
-      "slug": "Lehua-A"
+      "name": "Lehua-A"
     }
   },
   {
@@ -45,8 +40,7 @@
     "model": "team_mgr.team",
     "fields": {
       "group": 2,
-      "name": "Ilima-A",
-      "slug": "Ilima-A"
+      "name": "Ilima-A"
     }
   },
   {
@@ -54,8 +48,7 @@
     "model": "team_mgr.team",
     "fields": {
       "group": 3,
-      "name": "Mokihana-A",
-      "slug": "Mokihana-A"
+      "name": "Mokihana-A"
     }
   },
   {
@@ -63,8 +56,7 @@
     "model": "team_mgr.team",
     "fields": {
       "group": 1,
-      "name": "Lehua-B",
-      "slug": "Lehua-B"
+      "name": "Lehua-B"
     }
   },
   {
@@ -72,8 +64,7 @@
     "model": "team_mgr.team",
     "fields": {
       "group": 1,
-      "name": "Lehua-C",
-        "slug": "Lehua-C"
+      "name": "Lehua-C"
     }
   },
   {
@@ -81,8 +72,7 @@
     "model": "team_mgr.team",
     "fields": {
       "group": 1,
-      "name": "Lehua-D",
-        "slug": "Lehua-D"
+      "name": "Lehua-D"
     }
   },
   {
@@ -90,8 +80,7 @@
     "model": "team_mgr.team",
     "fields": {
       "group": 1,
-      "name": "Lehua-E",
-        "slug": "Lehua-E"
+      "name": "Lehua-E"
     }
   },
   {
@@ -99,8 +88,7 @@
     "model": "team_mgr.team",
     "fields": {
       "group": 2,
-      "name": "Ilima-B",
-        "slug": "Ilima-B"
+      "name": "Ilima-B"
     }
   },
   {
@@ -108,8 +96,7 @@
     "model": "team_mgr.team",
     "fields": {
       "group": 2,
-      "name": "Ilima-C",
-        "slug": "Ilima-C"
+      "name": "Ilima-C"
     }
   },
   {
@@ -117,8 +104,7 @@
     "model": "team_mgr.team",
     "fields": {
       "group": 2,
-      "name": "Ilima-D",
-        "slug": "Ilima-D"
+      "name": "Ilima-D"
     }
   },
   {
@@ -126,8 +112,7 @@
     "model": "team_mgr.team",
     "fields": {
       "group": 2,
-      "name": "Ilima-E",
-        "slug": "Ilima-E"
+      "name": "Ilima-E"
     }
   },
   {
@@ -135,8 +120,7 @@
     "model": "team_mgr.team",
     "fields": {
       "group": 3,
-      "name": "Mokihana-B",
-        "slug": "Mokihana-B"
+      "name": "Mokihana-B"
     }
   },
   {
@@ -144,8 +128,7 @@
     "model": "team_mgr.team",
     "fields": {
       "group": 3,
-      "name": "Mokihana-C",
-        "slug": "Mokihana-C"
+      "name": "Mokihana-C"
     }
   },
   {
@@ -153,8 +136,7 @@
     "model": "team_mgr.team",
     "fields": {
       "group": 3,
-      "name": "Mokihana-D",
-        "slug": "Mokihana-D"
+      "name": "Mokihana-D"
     }
   },
   {
@@ -162,8 +144,7 @@
     "model": "team_mgr.team",
     "fields": {
       "group": 3,
-      "name": "Mokihana-E",
-        "slug": "Mokihana-E"
+      "name": "Mokihana-E"
     }
   },
   {
@@ -171,8 +152,7 @@
     "model": "team_mgr.team",
     "fields": {
       "group": 4,
-      "name": "Lokelani-A",
-        "slug": "Lokelani-A"
+      "name": "Lokelani-A"
     }
   },
   {
@@ -180,8 +160,7 @@
     "model": "team_mgr.team",
     "fields": {
       "group": 4,
-      "name": "Lokelani-B",
-        "slug": "Lokelani-B"
+      "name": "Lokelani-B"
     }
   },
   {
@@ -189,8 +168,7 @@
     "model": "team_mgr.team",
     "fields": {
       "group": 4,
-      "name": "Lokelani-C",
-        "slug": "Lokelani-C"
+      "name": "Lokelani-C"
     }
   },
   {
@@ -198,8 +176,7 @@
     "model": "team_mgr.team",
     "fields": {
       "group": 4,
-      "name": "Lokelani-D",
-        "slug": "Lokelani-D"
+      "name": "Lokelani-D"
     }
   },
   {
@@ -207,8 +184,7 @@
     "model": "team_mgr.team",
     "fields": {
       "group": 4,
-      "name": "Lokelani-E",
-        "slug": "Lokelani-E"
+      "name": "Lokelani-E"
     }
   },
   {

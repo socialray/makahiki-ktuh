@@ -18,8 +18,7 @@ properties of the challenge.  The pages relevent to configuring a challenge are 
    configuration-challenge-admin-score-settings
    configuration-challenge-admin-groups-settings
    configuration-challenge-admin-teams-settings
-
-The Profiles, Users, and Wall Posts pages are documented in :ref:`section-execution`.
+   configuration-challenge-admin-players-settings
 
 
 

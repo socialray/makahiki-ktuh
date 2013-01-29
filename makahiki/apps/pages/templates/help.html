@@ -14,21 +14,15 @@
         <div class="row-fluid">
             <!-- left column -->
             <div class="span6">
-                {% if view_objects.help__intro %}
-                    {% include "widgets/help/intro/templates/index.html" %}
-                {% endif %}
-                {% if view_objects.help__faq %}
-                    {% include "widgets/help/faq/templates/index.html" %}
-                {% endif %}
+                {% for template in view_objects.left_templates %}
+                    {% include template %}
+                {% endfor %}
             </div>
             <!-- right column -->
             <div class="span6">
-                {% if view_objects.help__rule %}
-                    {% include "widgets/help/rule/templates/index.html" %}
-                {% endif %}
-                {% if view_objects.ask_admin %}
-                    {% include "widgets/ask_admin/templates/index.html" %}
-                {% endif %}
+                {% for template in view_objects.right_templates %}
+                    {% include template %}
+                {% endfor %}
             </div>
         </div>
     </div>

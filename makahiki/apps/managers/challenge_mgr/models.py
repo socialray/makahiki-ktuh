@@ -55,7 +55,8 @@ class ChallengeSetting(models.Model):
         max_length=100,)
     cas_auth_text = models.TextField(
         default="###I have a CAS email",
-        help_text="The CAS login button text in the landing page. " + settings.MARKDOWN_TEXT,
+        help_text="A button will appear if there is other auth method(s) selected. "
+                  "This is the text for the CAS auth button. " + settings.MARKDOWN_TEXT,
         max_length=255,)
 
     # LDAP settings
@@ -72,7 +73,8 @@ class ChallengeSetting(models.Model):
         max_length=100,)
     ldap_auth_text = models.TextField(
         default="###I have a LDAP email",
-        help_text="The LDAP login button text in the landing page. " + settings.MARKDOWN_TEXT,
+        help_text="A button will appear if there is other auth method(s) selected. "
+                  "This is the text for the LDAP auth button. " + settings.MARKDOWN_TEXT,
         max_length=255,)
 
     # internal authentication
@@ -81,14 +83,15 @@ class ChallengeSetting(models.Model):
         help_text="Use internal authentication ?")
     internal_auth_text = models.TextField(
         default="###Others",
-        help_text="The internal login button text in the landing page. " + settings.MARKDOWN_TEXT,
+        help_text="A button will appear if there is other auth method(s) selected. "
+                  "This is the text for the internal auth button. " + settings.MARKDOWN_TEXT,
         max_length=255,)
 
     # Wattdepot server
     wattdepot_server_url = models.CharField(
         null=True, blank=True,
         help_text="The URL for Wattdepot service. " \
-                  "Example: http://localhost:<port>",
+                  "Example: http://localhost:8194",
         max_length=100,)
 
     # email settings
@@ -219,7 +222,8 @@ class RoundSetting(models.Model):
         help_text="The end date of the round.")
     round_reset = models.BooleanField(
         default=False,
-        help_text="Reset the points for this round?"
+        help_text="Reset the points for this round? if reset, the points from previous round"
+                  "will not be carried over to this round."
     )
     display_scoreboard = models.BooleanField(
         default=True,
@@ -279,12 +283,10 @@ class PageInfo(models.Model):
 class PageSetting(models.Model):
     """Defines widgets in a page."""
     WIDGET_CHOICES = ((key, key) for key in settings.INSTALLED_WIDGET_APPS)
+    LOCATION_CHOICES = (("Left", "Left"),
+                        ("Right", "Right"))
 
     page = models.ForeignKey("PageInfo")
-
-    game = models.ForeignKey("GameInfo",
-        blank=True, null=True,
-        help_text="The name of the game in the page.")
 
     widget = models.CharField(
         blank=True, null=True,
@@ -292,14 +294,25 @@ class PageSetting(models.Model):
         choices=WIDGET_CHOICES,
         max_length=50,)
 
+    location = models.CharField(
+        default="Left",
+        blank=True, null=True,
+        help_text="The location of the widget in the page.",
+        choices=LOCATION_CHOICES,
+        max_length=10,)
+
+    priority = models.IntegerField(
+        default=1,
+        help_text="The priority (ordering) of widget in the location of the page.")
+
     enabled = models.BooleanField(
         default=True,
         help_text="Enable ?",)
 
     class Meta:
         """meta"""
-        unique_together = (("page", "game", "widget", ), )
-        ordering = ['page', "game", 'widget', ]
+        unique_together = (("page", "widget", ), )
+        ordering = ['page', 'location', 'priority']
 
     def __unicode__(self):
         return ""
@@ -320,7 +333,7 @@ class GameInfo(models.Model):
         help_text="Enable ?",)
     priority = models.IntegerField(
         default=1,
-        help_text="The priority (ordering) of the game.")
+        help_text="The priority (ordering) of the game in the admin interface.")
 
     class Meta:
         """meta"""
@@ -346,10 +359,6 @@ class GameSetting(models.Model):
         help_text="The name of the widget in the page.",
         choices=WIDGET_CHOICES,
         max_length=50,)
-
-    enabled = models.BooleanField(
-        default=True,
-        help_text="Enable ?",)
 
     class Meta:
         """meta"""

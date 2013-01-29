@@ -14,17 +14,15 @@
         <div class="row-fluid">
             <!-- left column -->
             <div class="span6">
-                {% if view_objects.prizes %} 
-                    {% include "widgets/prizes/templates/index.html" %} 
-                {% endif %}
+                {% for template in view_objects.left_templates %}
+                    {% include template %}
+                {% endfor %}
             </div>
             <!-- right column -->
             <div class="span6">
-                <div class="row-fluid">
-                    {% if view_objects.raffle %}
-                    {% include "widgets/raffle/templates/index.html" %}
-                    {% endif %}
-                </div>
+                {% for template in view_objects.right_templates %}
+                    {% include template %}
+                {% endfor %}
             </div>
         </div>
     </div>

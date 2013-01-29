@@ -18,5 +18,8 @@ class MakahikiLogAdmin(admin.ModelAdmin):
         models.CharField: {'widget': TextInput(attrs={'size': '100'})},
         }
 
+    def has_add_permission(self, request):
+        return False
+
 admin.site.register(MakahikiLog, MakahikiLogAdmin)
 challenge_mgr.register_sys_admin_model("Status", MakahikiLog)

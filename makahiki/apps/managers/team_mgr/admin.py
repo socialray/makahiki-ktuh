@@ -6,15 +6,15 @@ from apps.managers.team_mgr.models import Group, Team, Post
 
 class GroupAdmin(admin.ModelAdmin):
     """Category Admin"""
-    prepopulated_fields = {"slug": ("name",)}
+    list_display = ["name", ]
 
 admin.site.register(Group, GroupAdmin)
 
 
 class TeamAdmin(admin.ModelAdmin):
     """Category Admin"""
-    list_display = ["name", "size"]
-    prepopulated_fields = {"slug": ("name",)}
+    list_display = ["name", "size", "group"]
+    fields = ["name", "size", "group"]
 
 admin.site.register(Team, TeamAdmin)
 

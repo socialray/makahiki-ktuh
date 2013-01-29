@@ -485,8 +485,8 @@ class QuestConditionsTest(TransactionTestCase):
         """
         Tests that this predicate is completed when the user posts something to their wall.
         """
-        group = Group.objects.create(name="test", slug="test")
-        team = Team.objects.create(name="a", slug="a", group=group)
+        group = Group.objects.create(name="test")
+        team = Team.objects.create(name="a", group=group)
         profile = self.user.get_profile()
         profile.team = team
         profile.save()

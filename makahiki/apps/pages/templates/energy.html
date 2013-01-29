@@ -14,22 +14,16 @@
         <div class="row-fluid">
             <!-- left column -->
             <div class="span7">
-                {% if view_objects.resource_goal__energy %}
-                    {% include "widgets/resource_goal/energy/templates/index.html" %}
-                {% endif %}
-                {% if view_objects.wallpost__user_wallpost %}
-                      {% include "widgets/wallpost/user_wallpost/templates/index.html" %}
-                {% endif %}
+                {% for template in view_objects.left_templates %}
+                    {% include template %}
+                {% endfor %}
             </div>
 
             <!-- right column -->
             <div class="span5">
-                {% if view_objects.energy_power_meter %}
-                    {% include "widgets/energy_power_meter/templates/index.html" %}
-                {% endif %}
-                {% if view_objects.resource_scoreboard__energy %}
-                    {% include "widgets/resource_scoreboard/energy/templates/index.html" %}
-                {% endif %}
+                {% for template in view_objects.right_templates %}
+                    {% include template %}
+                {% endfor %}
             </div>
 
         </div>
