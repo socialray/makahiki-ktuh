@@ -56,30 +56,25 @@ Create the hello world widget package
 -------------------------------------
 
 The first step to create the hello_world widget is to create the new
-PyDev package. 
+widget package. Makahiki's manage.py supplies an easy way to start a new
+widget. Simply run the following command::
 
-* In eclipse right click on apps/widgets and select "New, PyDev
-  Package", type the name "hello_world" in the dialog box and press
-  finish.
+  % manage.py startwidget hello_world
 
-* Create the ``templates`` directory. This directory will hold the
-  template that defines the view for our widget. By Makahiki
-  convention the widget's base page is named ``index.html``.
 
-* All Makahiki widgets must have a ``views.py`` file to supply the
-  data for the Django template user interface, so create it also.
-  We'll discuss the contents of this file a little bit later.
-
-The widget's package should look like::
+The startwidget command will create the base files and directories necessary for building
+a new widge. The directory structure should look like::
 
   hello_world/
               templates/
                         index.html
               __init__.py
+              tests.py
               views.py
 
 
-``__init__.py`` describes the purpose of the widget. Here's the contents for our widget.::
+``__init__.py`` describes the purpose of the widget. Edit the default description to something
+like.::
 
   """The hello_world widget provides an simple example Makahiki widget showing
   player's name, team and current point total."""
@@ -94,8 +89,23 @@ Let's build a simple UI for our Hello World widget.  Since we are
 going to put our widget in an existing page, the widget only needs
 enough ``html`` to show itself.
 
-Makahiki provides many different styles and CSS classes.  Here is
-template for our Hello World widget::
+The ``startwidget`` command gives you the following default ``index.html``::
+
+  <div class="content-box">
+      <div class="content-box-title">
+          Widget name
+      </div>
+      <div class="content-box-contents">
+          Widget content
+      </div>
+  </div>
+
+Makahiki provides many different styles and CSS classes.  Normally, widgets are contained in 
+a ``content-box`` .  The ``context-box`` is a rounded, shaded box with two parts, 
+``content-box-title``, and ``content-box-contents``. We just need to edit the ``index.html`` file
+to provide the view for our widget. 
+
+Here is the template for our Hello World widget::
 
   <div class="content-box">
         <div class="content-box-title">
@@ -114,21 +124,20 @@ template for our Hello World widget::
         </div> 
   </div>
 
-Notice the outter ``content-box``, this provides a rounded, shadowed
-box for our widget.  The ``content-box-title`` gives us a highlighted
-title and a help icon that will pop-up a help dialog box.  The
-``content-box-contents`` div is the main body of our widget.  We get
-the player's name, team, and points from the Django template.
+Notice the link in the ``content-box-title`` it gives us a help icon that uses JavaScript to pop-up
+a help dialog box. We will add the contents of the dialog later in the tutorial.
+The ``content-box-contents`` is the main body of our widget showing the player's
+name, team, and points. The view gets these values from the Django template layer.
 
 Providing data to the UI ``views.py``
------------------------------------------
+-------------------------------------
 
-Makahiki has a standard way of getting data to the widgets:
+Makahiki has a standard way of getting data to all the widgets:
 
 * When the player/user loads a page the ``apps.pages.views.index``
   function is called. The ``index`` function determines the name of
-  the page and creates a dictionary of ``view_objects``, then calls
-  ``supply_view_objects``.
+  the page and creates a dictionary of ``view_objects``, then calls the function
+  ``supply_view_objects`` with the ``request``,  ``page_name`` and ``view_objects`` dictionary.
 
 * The ``supply_view_objects`` function determines which widgets are
   enabled for the given page. It then loops over each and calls their
@@ -136,9 +145,38 @@ Makahiki has a standard way of getting data to the widgets:
   current ``request`` and ``page_name``.
 
 So go get the player's name, team, and points to the Hello World
-widget we need to implement the ``supply`` function. The function
-needs to create a dictionary with the keys ``name``, ``team``, and
-``points``. Let's take a look at a start to the ``supply`` function::
+widget we need to implement the ``supply`` function. The ``startwidget`` command provides us with an
+empty ``supply`` function::
+
+  """Provides the view of the widget."""
+
+
+  def supply(request, page_name):
+      """ supply view_objects for widget rendering."""
+      _ = request
+      _ = page_name
+      return {}
+ 
+
+We need to edit the return value to include the keys ``name``, ``team``, and
+``points``. Let's add those keys to the ``supply`` function::
+
+  """Provide the view for the Hello_World widget."""
+
+
+  def supply(request, page_name):
+      """Supply view_objects contents, which are the player name, team and points."""
+      _ = request
+      _ = page_name
+      return {
+          "name": None,
+          "team": None,
+          "points": None,
+      }
+
+Now how do we get the values? We can get the user who made the request from the request. Makahiki
+provides a user profile that has the player's name and team. Let's add that information to the 
+``supply`` function::
 
   """Provide the view for the Hello_World widget."""
 
@@ -148,12 +186,15 @@ needs to create a dictionary with the keys ``name``, ``team``, and
       _ = page_name
       profile = request.user.get_profile()
       name = profile.name
-      team = profile.team
+      team = profile.team      
+      return {
+          "name": name,
+          "team": team,
+          "points": None,
+      }
+ 
 
-
-We got the user from the request then got their profile.  The profile
-has the player's name and team. Now how are we going to get the
-player's points?  Makahiki provides a ``score_mgr`` that encapsulates
+Now how are we going to get the player's points?  Makahiki provides a ``score_mgr`` that encapsulates
 scores. The function we want is ``players_points``. Let's take a look
 at the supply function again::
 
@@ -170,13 +211,12 @@ at the supply function again::
       team = profile.team
       points = score_mgr.player_points(profile)
       return {
-              "name": name,
-	      "team": team,
-	      "points": points,
-	     }
+          "name": name,
+          "team": team,
+          "points": points,
+      }
 
 *Notice:* we have to import the score_mgr to be able to use it.
-Setting up the dictionary is the last step for our supply function.
 
 
 Add your widget to the installed widget apps
@@ -242,96 +282,39 @@ In other words, add the name of your new widget to this list.
 Add the widget to a page
 ------------------------
 
-There are two steps to adding a new widget to an existing page.
+Add the widget to the page in the admin interface.  Go to the Admin interface, "Settings" page, and 
+select ``Page infos``. It is in the ``Internal Admin`` section.
 
-1. Edit the Html for the page to include the widget.
+.. figure:: figs/hello-world-dev/page-infos.png
+   :width: 600 px
+   :align: center
 
-   For this tutorial we'll be adding the Hello World widget to the
-   profile page. Let's add the widget to the left-hand column. Here's
-   the body of the profile page::
+   *The Admin Settings Page.*
 
-      {% block body %}
-      <div class="container-fluid">
-        <div class="row-fluid">
-            <!-- left column -->
-            <div class="span6">
-                {% if view_objects.my_info %}
-                    {% include "widgets/my_info/templates/index.html" %}
-                {% endif %}
-            </div>
+Select the ``profile`` row in the ``Page Info`` page. The ``Page Settings`` section lists the 
+Widgets for the selected page.
 
-            <!-- right column -->
-            <div class="span6">
-                {% if view_objects.badges != None %}
-                <div class="content-box">
-                    {% include "widgets/badges/templates/index.html" %}
-                </div>
-                {% endif %}
-                {% if view_objects.my_commitments %}
-                    {% include "widgets/my_commitments/templates/index.html" %}
-                {% endif %}
-                {% if view_objects.my_achievements %}
-                <div class="content-box">
-                    {% include "widgets/my_achievements/templates/index.html" %}
-                </div>
-                {% endif %}
-            </div>
-        </div>
-      </div>
-      {% endblock %}
+.. figure:: figs/hello-world-dev/page-settings.png
+   :width: 600px
+   :align: center
 
-   Currently, the left-hand column only has one widget in it,
-   ``my_info``. The right-hand column has three widgets, ``badges``,
-   ``my_commitments``, and ``my_achievements``. To add the hello_world
-   widget we just have to follow the template and add::
+   *The default Widgets on the Profile page.*
 
-                {% if view_objects.hello_world %}
-                    {% include "widgets/hello_world/templates/index.html" %}
-                {% endif %}
-     
-   After the ``my_info`` widget.  The HTML of the page shows all the
-   possible widgets displayed on the page. Not all of them may appear.
-   
-   If we run the server and take a look at the profile page we can see
-   that the Hello World widget doesn't appear.
+We are going to add the ``hello-world`` widget to the left-hand location by pressing *Add another 
+Page Setting*. Then use the *widget* dropdown and select the ``hello-world`` widget. Leave the 
+*Location* setting on "Left". Set the *Priority* to "2".  Save the ``profile`` page setting.
 
-   .. figure:: figs/hello-world-dev/profile-before.png
-      :width: 600 px
-      :align: center
+.. figure:: figs/hello-world-dev/pageinfo-w-hello.png
+   :width: 600px
+   :align: center
 
-   We need to complete the next step to enable the widget.
+   *The Hello World Widget added to the Left-hand column.*
 
-2. Add the widget to the page in the admin interface.  Go to the Admin
-   interface, "Settings" page, and select ``Page infos``. It is the
-   tenth item in the ``Internal Admin`` section.
-
-   .. figure:: figs/hello-world-dev/page-infos.png
-      :width: 600 px
-      :align: center
-
-   Select the ``profile`` row in the ``Page Info`` page. The ``Page
-   Settings`` section lists the Games and Widgets for the selected
-   page.
-
-   .. figure:: figs/hello-world-dev/page-settings.png
-      :width: 600px
-      :align: center
-
-   Add the ``hello-world`` widget by pressing *Add another Page
-   Setting*. Then use the *widget* dropdown and select the
-   ``hello-world`` widget. Save the ``profile`` page setting.
-
-   .. figure:: figs/hello-world-dev/pageinfo-w-hello.png
-      :width: 600px
-      :align: center
-
-   Once the widget is added to the Page Settings the Game Designer may
-   enable or disable the widget.
-
+Once the widget is added to the Page Settings the Game Designer may enable or disable the widget.
 
 
 Verify your widget installation
-------------------------------
+-------------------------------
 
 Go to the Profile page, and see the Hello World widget.
  
@@ -344,11 +327,99 @@ The following figure shows a portion of the Profile page after choosing the bran
    *The newly installed and enabled Hello World Widget.*
 
 
+Enter the help text for the Hello World Widget
+----------------------------------------------
+
+We need to add the contents of the Help Dialog for the Hello World Widget.  Go back to the 
+``Settings`` page and select ``Help topics`` from the ``Internal Admin`` section.
+
+Press the "Add Help Topic" button in the upper right-hand corner.
+
+.. figure:: figs/hello-world-dev/help-topic.png
+   :width: 600px
+   :align: center
+   
+   *Add New Help Topic Button.*
+
+This will bring up the Add New Help Topic page.
+
+.. figure:: figs/hello-world-dev/add-help-topic.png
+   :width: 600px
+   :align: center
+   
+   *Add New Help Topic Page.*
+
+1. Enter the Title for the help topic. In our case enter "Hello World". The form automatically fills 
+out the Slug field based upon the Title.  The slug must match the third parameter in the 
+``toggleHelp`` function call in the ``index.html`` help link.::
+
+  <img src="{{ STATIC_URL}}images/icons/icon-help-sm.png" width="20"
+       align="center"
+       title="Click to get help about this window"
+       onclick="toggleHelp(event, 'widget', 'hello-world'); return false;" />
+
+2. Select the "Widget Help" Category from the drop down. This matches the second parameter in the
+   ``toggleHelp`` function.
+   
+3. Enter the Help Contents. 
+
+4. Save the Help Topic.
+
+.. figure:: figs/hello-world-dev/filled-help-topic.png
+   :width: 600px
+   :align: center
+   
+   *Filled out Help Topic*
+
+5. Verify the Help Dialog. Go to the Profile page and click the Hello World's help icon. You should
+   see the help dialog box with our contents.
+   
+.. figure:: figs/hello-world-dev/help-dialog.png
+   :width: 600px
+   :align: center
+   
+   *Hello World Widget Help Dialog.* 
 Push your changes
 -----------------
 
 The final step is to use git to add your new widget and push your changes to your GitHub repository.
 
+The following files were modified or added during this tutorial: 
+
+* settings.py
+* apps/widgets/hello_world
+
+The changes to the database, to add the Hello World widget and Help Topic are not permanent. If you
+re-initialize the database the script will erase the page settings and help topic. To make the 
+changes permanent edit "fixtures/base_pages.json" to add the page_settings item for the Hello World
+Widget. Here is the entry::
+
+    {
+        "pk": 114,
+        "model": "challenge_mgr.pagesetting",
+        "fields": {
+            "priority": 2,
+            "widget": "hello_world",
+            "enabled": true,
+            "page": 8,
+            "location": "Left"
+        }
+    },
+
+Edit "fixtures/base_help.json" to add the Hello World's help topic. That entry looks like::
+
+    {
+        "pk": 51,
+        "model": "help.helptopic",
+        "fields": {
+            "category": "widget",
+            "title": "Hello World",
+            "parent_topic": null,
+            "priority": 0,
+            "slug": "hello-world",
+            "contents": "Help for the Hello World Widget."
+        }
+    },
 
 
 
