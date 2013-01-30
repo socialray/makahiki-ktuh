@@ -16,12 +16,12 @@ class ScoreSetting(models.Model):
     )
     active_threshold_points = models.IntegerField(
         default=50,
-        help_text="The threshold point amount for active participation.It is also the threshold"
-                  "for awarding referral bonus.",
+        help_text="The point amount for considering an active participant. It is also the "
+                  "threshold point amount for awarding referral bonus.",
     )
     signup_bonus_points = models.IntegerField(
         default=2,
-        help_text="The point amount for signing up a commitment or activity."
+        help_text="The point amount for signing up a commitment or event/excursion."
     )
     quest_bonus_points = models.IntegerField(
         default=0,

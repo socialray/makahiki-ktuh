@@ -24,37 +24,42 @@ class Prize(models.Model):
         )
     AWARD_CRITERIA_CHOICES = (
         ("points", "Points"),
-        ("energy", "Energy"),
+        ("energy_usage", "Energy Usage"),
         ("energy_goal", "Energy Goal"),
-        ("water", "Water"),
+        ("water_usage", "Water Usage"),
         ("water_goal", "Water Goal"),
         )
 
-    title = models.CharField(max_length=50, help_text="The title of your prize.")
+    round = models.ForeignKey(RoundSetting, null=True, blank=True,
+                              help_text="The round of the prize")
+
+    title = models.CharField(max_length=50, help_text="The title of the prize.")
     short_description = models.TextField(
-        help_text="Short description of the prize. This should include information about who " \
-                  "can win it."
+        help_text="Short description of the prize. This should include information about who "
+                  "can win it. It is usually displayed in the prize list page."
     )
     long_description = models.TextField(
-        help_text="Additional details about the prize."
+        help_text="Detailed information about the prize. It is usually displayed in the details "
+                  "view of the prize."
     )
     value = models.IntegerField(help_text="The value of the prize.")
+
     image = models.ImageField(
         max_length=1024,
         upload_to=media_file_path(_MEDIA_LOCATION),
         blank=True,
-        help_text="A picture of your prize."
+        help_text="A picture of the prize."
     )
-    round = models.ForeignKey(RoundSetting, null=True, blank=True)
     award_to = models.CharField(
         max_length=50,
         choices=AWARD_TO_CHOICES,
-        help_text="Who the prize is awarded to.  This is used to calculate who's winning."
+        help_text="The category of the award. This is used to calculated who or which team is "
+                  "winning for which category."
     )
     competition_type = models.CharField(
         max_length=50,
         choices=AWARD_CRITERIA_CHOICES,
-        help_text="The 'competition' this prize is awarded to.")
+        help_text="The competition type of the award.")
 
     def __unicode__(self):
         if self.round == None:

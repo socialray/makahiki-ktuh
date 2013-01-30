@@ -18,33 +18,30 @@ def view(request, action):
     """Returns the activity info"""
 
     social_email = None
-    social_email2 = None
     if action.member:
         social_email = action.member.social_email
-        social_email2 = action.member.social_email2
 
     confirm_type = action.activity.confirm_type
     if confirm_type == "image":
         form = ActivityImageForm(
-            initial={"social_email": social_email, "social_email2": social_email2},
+            initial={"social_email": social_email, },
             request=request)
     elif confirm_type == "text":
         question = action.activity.pick_question(request.user.id)
         if question:
             form = ActivityTextForm(
                 initial={"question": question.pk,
-                         "social_email": social_email,
-                         "social_email2": social_email2},
+                         "social_email": social_email, },
                 question_id=question.pk,
                 request=request)
             form.action_question = question
     elif confirm_type == "free":
         form = ActivityFreeResponseForm(
-            initial={"social_email": social_email, "social_email2": social_email2},
+            initial={"social_email": social_email, },
             request=request)
     elif confirm_type == "free_image":
         form = ActivityFreeResponseImageForm(
-            initial={"social_email": social_email, "social_email2": social_email2},
+            initial={"social_email": social_email, },
             request=request)
 
     form.form_title = "Get your points"

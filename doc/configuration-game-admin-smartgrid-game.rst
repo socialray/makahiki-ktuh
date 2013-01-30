@@ -52,13 +52,53 @@ By clicking on the "Actions" link, you will see a page similar to the following:
 
 You can see that the actions are uniquely identified by their slug. They are organized in the order of "Level, Category, and Priority", which corresponding to the layout of the smart grid. You can select (use the checkbox on the left of the action) some actions, then click on the "Action" dropdown, to perform several group operations to the selected actions, such as changing their levels, increase priority etc.
 
-You can click on the "Add ..." buttons on the top right corner of the page to add a new actions with specific type.
-
 You can also click on the "Slug" link to change the content of the action, as shown in the following screenshot:
 
 .. figure:: figs/configuration/configuration-game-admin-smartgrid-game-action-change.png
    :width: 600 px
    :align: center
+
+
+Adding an Activity
+------------------
+
+You can click on the "Add Activity" button on the top right corner of the page to add a new activity that normally requires player submit the answer and response.
+
+The following page is an example of an activity type action:
+
+.. figure:: figs/configuration/configuration-game-admin-smartgrid-game-activity.png
+   :width: 600 px
+   :align: center
+
+
+Adding an Event/Excursion
+-------------------------
+
+You can click on the "Add Event/Excursion" button on the top right corner of the page to add a new event or excursion.
+
+The following page is an example of an activity type action:
+
+.. figure:: figs/configuration/configuration-game-admin-smartgrid-game-event.png
+   :width: 600 px
+   :align: center
+
+For excursion, the "is excursion" checkbox need to be set.
+
+
+Adding an Commitment
+--------------------
+
+You can click on the "Add Commitment" button on the top right corner of the page to add a new commitment.
+
+The following page is an example of an activity type action:
+
+.. figure:: figs/configuration/configuration-game-admin-smartgrid-game-commitment.png
+   :width: 600 px
+   :align: center
+
+
+Click "Save" when finished
+--------------------------
 
 Remember to click the Save button at the bottom of the page when finished to save your changes.
 

@@ -32,7 +32,8 @@ class Badge(models.Model):
     hint = models.CharField(max_length=255,
                             help_text="The Hint of the badge")
     slug = models.CharField(max_length=255,
-                            help_text="Automatically generated if left blank.")
+                            help_text="A unique identifier of the badge. Automatically generated "
+                                      "if left blank.")
     image = models.ImageField(
         max_length=255, blank=True, null=True,
         upload_to=media_file_path(_MEDIA_LOCATION),
@@ -49,12 +50,12 @@ class Badge(models.Model):
                              help_text="The theme for the badge.")
     points = models.IntegerField(
         default=0,
-        help_text="Point award for getting badge."
+        help_text="Points awarded for getting badge."
     )
 
     priority = models.IntegerField(
         default=0,
-        help_text="sorting order in the badge list, "
+        help_text="sorting order in the badge list, lower value (higher priority) appears first."
     )
 
     def __unicode__(self):

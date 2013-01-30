@@ -15,10 +15,13 @@ _MEDIA_LOCATION = "prizes"
 
 class RafflePrize(models.Model):
     """RafflePrize model"""
-    title = models.CharField(max_length=50, help_text="The title of your prize.")
-    value = models.IntegerField(help_text="The value of your prize")
+    round = models.ForeignKey(RoundSetting, null=True, blank=True,
+                              help_text="The round of the raffle prize.")
+
+    title = models.CharField(max_length=50, help_text="The title of the raffle prize.")
+    value = models.IntegerField(help_text="The value of the raffle prize")
     description = models.TextField(
-        help_text="Description of the prize.  Uses " \
+        help_text="Description of the raffle prize.  Uses " \
                   "<a href='http://daringfireball.net/projects/markdown/syntax'>Markdown</a> " \
                   "formatting."
     )
@@ -26,10 +29,11 @@ class RafflePrize(models.Model):
         max_length=1024,
         upload_to=media_file_path(_MEDIA_LOCATION),
         blank=True,
-        help_text="A picture of your raffle prize."
+        help_text="A picture of the raffle prize."
     )
-    round = models.ForeignKey(RoundSetting, null=True, blank=True)
-    winner = models.ForeignKey(User, null=True, blank=True)
+    winner = models.ForeignKey(User, null=True, blank=True,
+                               help_text="The winner of the raffle prize. Normally, this is "
+                                         "randomly picked by the system at the end of the round.")
 
     def __unicode__(self):
         if self.round == None:

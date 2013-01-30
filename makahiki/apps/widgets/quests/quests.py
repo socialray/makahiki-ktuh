@@ -78,7 +78,7 @@ def get_user_quests(user):
 def get_available_quests(user, num_quests):
     """Get the quests the user could participate in."""
     quests = []
-    for quest in Quest.objects.exclude(questmember__user=user).order_by('level'):
+    for quest in Quest.objects.exclude(questmember__user=user).order_by('priority'):
         if quest.can_add_quest(user) and not quest.completed_quest(user):
             quests.append(quest)
 

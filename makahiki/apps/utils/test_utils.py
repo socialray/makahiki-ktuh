@@ -54,8 +54,8 @@ def create_activity():
     """create test activity"""
     return Activity.objects.create(
         title="Test activity",
-        description="Testing!",
         slug="test-activity",
+        description="Testing!",
         duration=10,
         point_value=10,
         pub_date=datetime.datetime.today(),
@@ -144,12 +144,17 @@ def create_quest(completion_conditions):
             name="Test quest",
             quest_slug="test_quest",
             description="test quest",
-            level=1,
+            priority=1,
             unlock_conditions="True",
             completion_conditions=completion_conditions,
             )
     quest.save()
     return quest
+
+
+def enalbe_game(name):
+    """enable a game or game mechanics."""
+    GameInfo.objects.get_or_create(name=name)
 
 
 def enable_quest():

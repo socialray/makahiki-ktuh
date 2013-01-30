@@ -34,15 +34,14 @@ class MyAchievementsTestCase(TransactionTestCase):
         """Check that the user's activity achievements are loaded."""
         activity = Activity(
             title="Test activity",
-            slug="test-activity",
             description="Testing!",
             duration=10,
             point_value=10,
+            slug="test-activity",
             pub_date=datetime.datetime.today(),
             expire_date=datetime.datetime.today() + datetime.timedelta(days=7),
             confirm_type="text",
             type="activity",
-            is_canopy=False
         )
         activity.save()
 
@@ -199,7 +198,7 @@ class MyAchievementsTestCase(TransactionTestCase):
             name="Test quest",
             quest_slug="test_quest",
             description="test quest",
-            level=1,
+            priority=1,
             unlock_conditions="True",
             completion_conditions="True",
         )

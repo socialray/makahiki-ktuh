@@ -13,21 +13,25 @@ from apps.utils import utils
 class Quest(models.Model):
     """Represents a quest in the database."""
     name = models.CharField(max_length=255, help_text="The name of the quest.")
-    quest_slug = models.SlugField()
+    quest_slug = models.SlugField(help_text="A unique identifier of the quest. Automatically "
+                                            "generated if left blank.")
     description = models.TextField(
-        help_text="Outline the steps to completing this quest. %s" % settings.MARKDOWN_TEXT)
-    level = models.IntegerField()
+        help_text="Discription of the quest. It should outline the steps to completing"
+                  " this quest. %s" % settings.MARKDOWN_TEXT)
+    priority = models.IntegerField(
+        default=1,
+        help_text="Quest with lower values (higher priority) will be listed first."
+    )
     unlock_conditions = models.TextField(
-        help_text="Conditions a user needs to meet in order to have this quest be available." +
+        help_text="Conditions a user needs to meet in order to have this quest be"
+                  " available (appeared in the Quest widget). " +
                   settings.PREDICATE_DOC_TEXT
     )
     completion_conditions = models.TextField(
-        help_text="Conditions a user needs to meet in order to complete the quest.<br/> " +
+        help_text="Conditions a user needs to meet in order to complete the quest. " +
                   settings.PREDICATE_DOC_TEXT
     )
     users = models.ManyToManyField(User, through="QuestMember")
-    created_at = models.DateTimeField(auto_now_add=True, editable=False)
-    updated_at = models.DateTimeField(auto_now=True, editable=False)
 
     def __unicode__(self):
         return self.name

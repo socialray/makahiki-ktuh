@@ -16,7 +16,7 @@ now running.
 
 
 .. toctree::
-   :maxdepth: 3
+   :maxdepth: 2
 
    configuration-settings-page
    configuration-challenge-admin

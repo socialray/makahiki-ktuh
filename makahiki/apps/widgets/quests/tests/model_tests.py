@@ -26,7 +26,7 @@ class QuestTest(TransactionTestCase):
                 name=quest_name,
                 quest_slug="test_quest_%d" % i,
                 description=quest_name,
-                level=1,
+                priority=1,
                 unlock_conditions="True",
                 completion_conditions="False"  # User cannot complete these.
             )
@@ -40,7 +40,7 @@ class QuestTest(TransactionTestCase):
             name="Another quest",
             quest_slug="another_quest",
             description="another quest",
-            level=1,
+            priority=1,
             unlock_conditions="True",
             completion_conditions="False",
         )
@@ -67,7 +67,7 @@ class QuestTest(TransactionTestCase):
             name="Another quest",
             quest_slug="another_quest",
             description="another quest",
-            level=1,
+            priority=1,
             unlock_conditions="False",  # User cannot unlock this quest
             completion_conditions="False",
         )
@@ -91,7 +91,7 @@ class QuestTest(TransactionTestCase):
             name="Another quest",
             quest_slug="another_quest",
             description="another quest",
-            level=1,
+            priority=1,
             unlock_conditions="False",  # User cannot unlock this quest
             completion_conditions="False",
         )
@@ -152,7 +152,7 @@ class QuestTest(TransactionTestCase):
             name="Test quest",
             quest_slug="test_quest",
             description="test quest",
-            level=1,
+            priority=1,
             unlock_conditions="#Hello World\nTrue",
             completion_conditions="#Hello World\nFalse",
         )

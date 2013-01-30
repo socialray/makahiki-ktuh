@@ -31,4 +31,3 @@ class TeamParticipationAdmin(admin.ModelAdmin):
         return False
 
 admin.site.register(TeamParticipation, TeamParticipationAdmin)
-challenge_mgr.register_game_admin_model("Participation Game", TeamParticipation)

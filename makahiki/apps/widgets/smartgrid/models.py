@@ -191,7 +191,7 @@ class Action(models.Model):
         max_length=20,
         help_text="The name of the action.")
     slug = models.SlugField(
-        help_text="Automatically generated if left blank.",
+        help_text="A unique identifier of the action. Automatically generated if left blank.",
         unique=True,
         )
     title = models.CharField(
@@ -200,11 +200,13 @@ class Action(models.Model):
     image = models.ImageField(
         max_length=255, blank=True, null=True,
         upload_to=media_file_path(_MEDIA_LOCATION_ACTION),
-        help_text="Uploaded image for the activity.")
+        help_text="Uploaded image for the activity. This will appear under the title when "
+                  "the action content is displayed.")
     video_id = models.CharField(
         null=True, blank=True,
         max_length=200,
-        help_text="The id of the video.")
+        help_text="The id of the video (optional). Currently only YouTube video is supported. "
+                  "This is the unique id of the video as identified by the YouTube video url.")
     video_source = models.CharField(
         null=True, blank=True,
         max_length=20,
@@ -213,9 +215,9 @@ class Action(models.Model):
     embedded_widget = models.CharField(
         null=True, blank=True,
         max_length=50,
-        help_text="The name of the embedded widget.")
+        help_text="The name of the embedded widget (optional).")
     description = models.TextField(
-        help_text=settings.MARKDOWN_TEXT)
+        help_text="The discription of the action. " + settings.MARKDOWN_TEXT)
     type = models.CharField(
         max_length=20,
         choices=TYPE_CHOICES,
@@ -229,17 +231,17 @@ class Action(models.Model):
         help_text="The category of the action.")
     priority = models.IntegerField(
         default=1000,
-        help_text="Activities with lower values (higher priority) will be listed first."
+        help_text="Actions with lower values (higher priority) will be listed first."
     )
     pub_date = models.DateField(
         default=datetime.date.today(),
         verbose_name="Publication date",
-        help_text="Date at which the action will be available for users."
+        help_text="Date from which the action will be available for users."
     )
     expire_date = models.DateField(
         null=True, blank=True,
         verbose_name="Expiration date",
-        help_text="Date at which the action will be removed."
+        help_text="Date after which the action will be marked as expired."
     )
     unlock_condition = models.CharField(
         max_length=400, null=True, blank=True,
@@ -247,24 +249,16 @@ class Action(models.Model):
                   settings.PREDICATE_DOC_TEXT)
     unlock_condition_text = models.CharField(
         max_length=400, null=True, blank=True,
-        help_text="The description of the unlock condition.")
+        help_text="The description of the unlock condition. It will be displayed to players when "
+                  "the lock icon is clicked.")
     related_resource = models.CharField(
         max_length=20,
         null=True, blank=True,
         choices=RESOURCE_CHOICES,
-        help_text="The resource this action related.")
+        help_text="The resource type this action related.")
     social_bonus = models.IntegerField(
         default=0,
-        help_text="Social bonus points.")
-    is_canopy = models.BooleanField(
-        default=False,
-        verbose_name="Canopy Activity",
-        help_text="Check this box if this is a canopy activity."
-    )
-    is_group = models.BooleanField(default=False,
-        verbose_name="Group Activity",
-        help_text="Check this box if this is a group activity."
-    )
+        help_text="Social bonus point value.")
     point_value = models.IntegerField(
         default=0,
         help_text="The point value to be awarded."
@@ -315,17 +309,19 @@ class Activity(Action):
     point_range_start = models.IntegerField(
         null=True,
         blank=True,
-        help_text="Minimum number of points possible for this activity."
+        help_text="Minimum number of points possible for a variable point activity."
     )
     point_range_end = models.IntegerField(
         null=True,
         blank=True,
-        help_text="Maximum number of points possible for this activity."
+        help_text="Maximum number of points possible for a variable point activity."
     )
     confirm_type = models.CharField(
         max_length=20,
         choices=CONFIRM_CHOICES,
         default="text",
+        help_text="If the type is 'Question and Answer', please provide the "
+                  "'Text prompt questions' section below.",
         verbose_name="Confirmation Type"
     )
     confirm_prompt = models.TextField(
@@ -335,7 +331,7 @@ class Activity(Action):
     )
     admin_note = models.TextField(
         null=True, blank=True,
-        help_text=settings.MARKDOWN_TEXT)
+        help_text="Notes for admins when approving this activity. " + settings.MARKDOWN_TEXT)
 
     def is_active(self):
         """Determines if the activity is available for users to participate."""
@@ -373,8 +369,8 @@ class Event(Action):
         help_text="Time (in minutes) that the activity is expected to take."
     )
     event_date = models.DateTimeField(
-#        null=True,
-#        blank=True,
+        null=True,
+        blank=True,
         verbose_name="Date and time of the event",
         help_text="Required for events."
     )
@@ -437,9 +433,6 @@ class ActionMember(models.Model):
         blank=True,
         help_text="The comment from user submission.")
     social_email = models.TextField(
-        blank=True, null=True,
-        help_text="Email address of the person the user went with.")
-    social_email2 = models.TextField(
         blank=True, null=True,
         help_text="Email address of the person the user went with.")
     response = models.TextField(

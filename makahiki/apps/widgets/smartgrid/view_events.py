@@ -27,13 +27,11 @@ def view(request, action):
     """Returns the activity info"""
 
     social_email = None
-    social_email2 = None
     if action.member:
         social_email = action.member.social_email
-        social_email2 = action.member.social_email2
 
     form = ActivityCodeForm(
-            initial={"social_email": social_email, "social_email2": social_email2},
+            initial={"social_email": social_email, },
             request=request)
 
     if not action.event.is_event_completed():

@@ -15,6 +15,7 @@ class PrizeAdmin(admin.ModelAdmin):
     """raffle admin"""
     list_display = ('round', 'title', 'value', 'award_to', 'competition_type',
                     'winner', 'notice_sent')
+    list_display_links = ('title',)
     list_filter = ['round']
     actions = ["notify_winner", "change_round", "copy_prize"]
 

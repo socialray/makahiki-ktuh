@@ -7,6 +7,8 @@ from apps.widgets.badges.models import Badge
 class BadgeAdmin(admin.ModelAdmin):
     """Category Admin"""
     list_display = ["name", "points", "award_condition", "award_trigger", "priority"]
+    fields = ["name", "slug", "label", "description", "hint", "points", "priority",
+              "award_condition", "award_trigger", "theme"]
     prepopulated_fields = {"slug": ("name",)}
     ordering = ["priority"]
 

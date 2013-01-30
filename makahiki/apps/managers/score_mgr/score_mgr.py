@@ -47,8 +47,8 @@ def referral_points(referral):
 
 
 def referral_points_and_type(referral):
-    """returns the referral point amount from referral settings, depends on if the dynamic bonus
-    starts and the participation rate of the referral's team.
+    """returns the referral point amount and type from referral settings, depends on if the
+    dynamic bonus starts and the participation rate of the referral's team.
     """
     rs = referral_setting()
     if referral:
@@ -63,7 +63,7 @@ def referral_points_and_type(referral):
                     return rs.super_referral_points, "super"
 
     # everything else, return the normal referral points
-    return referral_setting().normal_referral_points, ""
+    return rs.normal_referral_points, ""
 
 
 def active_threshold_points():

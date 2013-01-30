@@ -5,7 +5,7 @@
 </div>
 <div id="setup-content" class="modal-body">
     <div id="setup-terms-content">
-        {{terms.terms|markdown}}
+        {{terms|markdown}}
     </div>
 </div>
 <div class="modal-footer">
@@ -62,10 +62,17 @@
 
         $("#agree").button().click(function () {
             $(this).button("option", "disabled", true);
-            $.get("{% url setup_referral %}", function (data) {
-                $("#ui-dialog-title-setup-dialog").html(data.title);
-                $("#setup-dialog").html(data.contents);
-            });
+            {% if referral_enabled %}
+                $.get("{% url setup_referral %}", function (data) {
+                    $("#ui-dialog-title-setup-dialog").html(data.title);
+                    $("#setup-dialog").html(data.contents);
+                });
+            {% else %}
+                $.get("{% url setup_profile %}", function (data) {
+                    $("#ui-dialog-title-setup-dialog").html(data.title);
+                    $("#setup-dialog").html(data.contents);
+                });
+            {% endif %}
         });
     });
 </script>

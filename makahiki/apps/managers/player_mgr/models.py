@@ -103,6 +103,10 @@ class Profile(models.Model):
     def _award_possible_referral_bonus(self):
         """award possible referral bonus."""
 
+        # check if the referral game mechanics is enabled
+        if not challenge_mgr.is_game_enabled("Referral Game Mechanics"):
+            return
+
         has_referral = self.referring_user is not None and not self.referrer_awarded
 
         if has_referral and self.points() >= score_mgr.active_threshold_points():

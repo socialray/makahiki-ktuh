@@ -8,7 +8,7 @@ Internal Admin Configuration Widget
    :align: center
 
 The Internal Admin Configuration Widget provides access to pages to support 
-developer-level debugging. 
+developer-level configuration, monitoring and debugging.
 
 It is not further documented at this time. 
 

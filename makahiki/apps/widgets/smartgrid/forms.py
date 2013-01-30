@@ -27,7 +27,6 @@ class ActivityTextForm(forms.Form):
     response = forms.CharField(widget=forms.Textarea(attrs={'rows': '2'}), required=True)
     comment = forms.CharField(widget=forms.Textarea(attrs={'rows': '3'}), required=False)
     social_email = forms.CharField(widget=forms.TextInput(attrs={'size': '30'}), required=False)
-    social_email2 = forms.CharField(widget=forms.TextInput(attrs={'size': '30'}), required=False)
 
     def __init__(self, *args, **kwargs):
         self.request = kwargs.pop('request', None)
@@ -65,7 +64,6 @@ class ActivityCodeForm(forms.Form):
     response = forms.CharField(widget=forms.TextInput(attrs={'size': '15'}), required=True)
     comment = forms.CharField(widget=forms.Textarea(attrs={'rows': '3'}), required=False)
     social_email = forms.CharField(widget=forms.TextInput(attrs={'size': '30'}), required=False)
-    social_email2 = forms.CharField(widget=forms.TextInput(attrs={'size': '30'}), required=False)
 
     def __init__(self, *args, **kwargs):
         self.request = kwargs.pop('request', None)
@@ -111,7 +109,6 @@ class ActivityFreeResponseForm(forms.Form):
     response = forms.CharField(widget=forms.Textarea)
     comment = forms.CharField(widget=forms.Textarea(attrs={'rows': '3'}), required=False)
     social_email = forms.CharField(widget=forms.TextInput(attrs={'size': '30'}), required=False)
-    social_email2 = forms.CharField(widget=forms.TextInput(attrs={'size': '30'}), required=False)
 
     def __init__(self, *args, **kwargs):
         self.request = kwargs.pop('request', None)
@@ -129,7 +126,6 @@ class ActivityImageForm(forms.Form):
     image_response = forms.ImageField()
     comment = forms.CharField(widget=forms.Textarea(attrs={'rows': '3'}), required=False)
     social_email = forms.CharField(widget=forms.TextInput(attrs={'size': '30'}), required=False)
-    social_email2 = forms.CharField(widget=forms.TextInput(attrs={'size': '30'}), required=False)
 
     def __init__(self, *args, **kwargs):
         self.request = kwargs.pop('request', None)
@@ -148,7 +144,6 @@ class ActivityFreeResponseImageForm(forms.Form):
     image_response = forms.ImageField()
     comment = forms.CharField(widget=forms.Textarea(attrs={'rows': '3'}), required=False)
     social_email = forms.CharField(widget=forms.TextInput(attrs={'size': '30'}), required=False)
-    social_email2 = forms.CharField(widget=forms.TextInput(attrs={'size': '30'}), required=False)
 
     def __init__(self, *args, **kwargs):
         self.request = kwargs.pop('request', None)
@@ -205,14 +200,8 @@ class SurveyForm(forms.Form):
 
 def _validate_social_email(request, action, cleaned_data, errors):
     """validate the two social email."""
-    if action.is_group and \
-        (not "social_email" in cleaned_data or \
-         cleaned_data["social_email"] == None or \
-         cleaned_data["social_email"] == ""):
-        errors["social_email"] = ErrorList(["At least one email is required."])
-
+    _ = action
     _validate_one_email(request, cleaned_data, "social_email", errors)
-    _validate_one_email(request, cleaned_data, "social_email2", errors)
 
 
 def _validate_one_email(request, cleaned_data, email, errors):

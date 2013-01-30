@@ -2,7 +2,6 @@
 import random
 
 from django.contrib import admin
-from django import forms
 from django.contrib.contenttypes.models import ContentType
 from django.core.urlresolvers import reverse
 from apps.managers.challenge_mgr import challenge_mgr
@@ -13,28 +12,12 @@ from django.http import HttpResponseRedirect
 from django.db.utils import IntegrityError
 
 
-class RafflePrizeAdminForm(forms.ModelForm):
-    """raffle admin form"""
-    class Meta:
-        """meta"""
-        model = RafflePrize
-
-    def __init__(self, *args, **kwargs):
-        """Override to have a link to winner of the prize."""
-        super(RafflePrizeAdminForm, self).__init__(*args, **kwargs)
-        if self.instance and self.instance.winner:
-            self.fields['winner'].help_text = 'View pickup <a href="%s">form</a>' % reverse(
-                'raffle_view_form', args=(self.instance.id,))
-        else:
-            self.fields['winner'].help_text = ''
-
-
 class RaffleTicketInline(admin.TabularInline):
     """SponsorsInline admin."""
     model = RaffleTicket
     extra = 0
     can_delete = False
-    readonly_fields = ['user', ]
+    readonly_fields = ['user', 'created_at']
 
     def has_add_permission(self, request):
         return False
@@ -42,8 +25,8 @@ class RaffleTicketInline(admin.TabularInline):
 
 class RafflePrizeAdmin(admin.ModelAdmin):
     """raffle admin"""
-    form = RafflePrizeAdminForm
     list_display = ('round', 'title', 'value', 'winner_form', 'notice_sent')
+    list_display_links = ('title',)
     ordering = ('round', 'value', 'title')
     actions = ["pick_winner", "notify_winner", "change_round", "copy_raffle_prize"]
     inlines = [RaffleTicketInline]

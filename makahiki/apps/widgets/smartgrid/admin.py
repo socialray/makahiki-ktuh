@@ -495,8 +495,8 @@ class ActivityAdmin(admin.ModelAdmin):
         ("Points",
          {"fields": (("point_value", "social_bonus"), ("point_range_start", "point_range_end"), )}),
         ("Ordering", {"fields": (("level", "category", "priority"), )}),
-        ("Confirmation Type", {'fields': ('confirm_type', 'confirm_prompt')}),
         ("Admin Note", {'fields': ('admin_note',)}),
+        ("Confirmation Type", {'fields': ('confirm_type', 'confirm_prompt')}),
     )
     prepopulated_fields = {"slug": ("name",)}
 
