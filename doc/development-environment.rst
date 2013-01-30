@@ -5,7 +5,7 @@ This chapter describes how to setup the Makahiki development environment.
 
 Using the Makahiki VirtualBox Virtual Machine
 ---------------------------------------------
-To facilitate the development evironment setup, we create an VirtualBox virtual machine which has the necessary dependencies of the Makahiki and the development tools pre-installed. The advantage of develop using the Makahiki VM is the quick set up without the need of installing all the dependency of Makahiki. The shortcoming is of cause the performance penalty of running everything inside a virtual machine.
+To facilitate the development environment setup, we create an VirtualBox virtual machine which has the necessary dependencies of the Makahiki and the development tools pre-installed. The advantage of developing using the Makahiki VM is the quick set up without the need of installing all the dependency of Makahiki. The shortcoming is of cause the performance penalty of running everything inside a virtual machine.
 
 If you decide not to use the Makahiki virtual machine, you can skip this step. We assume that you have already gone through the local Makahiki installation
 successfully, especially, the python virtual environment has been set up.
@@ -107,33 +107,22 @@ To initialize the instance with default dataset, run::
 
   % scripts/initialize_instance.py -t default
 
-This command will:
-  * Install and/or update all Python packages required by Makahiki;
-  * Reinitialize the database contents and perform any needed database migrations.
-  * Initialize the system with data.
-  * Set up static files.
-
-If you instead want to create a demo instance to facilitate training or sample use, you can invoke
-the initialize_instance script as::
-
-  % scripts/initialize_instance.py -t demo
-
-This will create a demo instance that enables people to play a simple version of the Kukui
-Cup with minimal additional configuration.
-
-.. warning:: Invoke initialize_instance only once!
-
-   The initialize_instance script should be run only a single time in production
-   scenarios, because any subsequent configuration will be lost if initialize_instance is
-   invoked again.   Use update_instance (discussed below) after performing configuration.
-
 To update the instance from the latest downloaded source, run::
 
    % ./scripts/update_instance.py
 
 
-Import the Makahiki Project
----------------------------
+Run Makahiki outsite of Eclipse
+-------------------------------
+You can start the Makahiki server using::
+
+  % ./manage.py runserver
+
+It will start the makahiki server at http://127.0.0.1:8000.
+
+
+Import the Makahiki Project into Eclipse
+----------------------------------------
 
 Start Eclipse, go to menu::
 
@@ -154,8 +143,8 @@ file is located. See screenshot below.
    :width: 600 px
    :align: center
 
-Create a Run Confiugration
----------------------------
+Create a Run Confiugration in Eclipse
+-------------------------------------
 
 To help you start the Makahiki server conveniently, you can create a "Run Configuration" in Eclipse. To do so, select the makahiki project in the "PyDev Package Explorer", right click to bring up the context menu, select "Run As" and "PyDev Django", see the screenshot below:
 
@@ -175,6 +164,6 @@ You will see a run configuration already created for you from the previous "Run 
    :width: 600 px
    :align: center
 
-You just need to change the Name of the run configuration to the one you like, such as "Local Makahiki".
+You just need to change the name of the run configuration to the one you like, such as "Local Makahiki".
 
 Now you can stop the server from previous "Run As", and select the newly created run configuration from the menu to start the makahiki server.

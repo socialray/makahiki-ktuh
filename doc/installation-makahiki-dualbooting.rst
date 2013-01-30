@@ -42,3 +42,5 @@ Optionally, if you wish to be able to interact with the files on your Windows pa
 7. Mount Linux Drives in Windows (Optional)
 -------------------------------------------
 Windows cannot natively read the ext2 file format, however the third party program Ext2Fsd will allow Windows to mount ext2 formatted drives. Ext2Fsd can be found here: <http://www.ext2fsd.com/>`_.
+
+Once you have the Linux VM, follow the document :ref:`section-installation-makahiki-local` to install Makahiki in a Linux environment.

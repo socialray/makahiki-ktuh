@@ -5,6 +5,7 @@ Site Administration Guide
    :maxdepth: 2
 
    installation
+   installation-wattdepot
    configuration
    execution
 

@@ -52,38 +52,28 @@ First, you need to define the admin account name and password.  For example::
 
 (Add instructions for other environment variables here.)
 
-Send the Makahiki system to Heroku
--------------------------------------
-
-To upload the Makahiki source code to Heroku, do the following::
-
-  % git push heroku master
-
-This will result in a lot of output, ending with the following if all goes
-well::
-
-    Cleaning up...
-    -----> Injecting Django settings...
-           Injecting code into makahiki/settings.py to read from DATABASE_URL
-    -----> Discovering process types
-           Procfile declares types -> web
-    -----> Compiled slug size is 14.9MB
-    -----> Launching... done, v5
-           http://makahiki-hpu.herokuapp.com deployed to Heroku
-
-    To git@heroku.com:makahiki-hpu.git
-    * [new branch]      master -> master
-
-
 Initialize Makahiki
 -------------------
 
-To initialize your Makahiki instance with the default data set, invoke the following::
+To initialize your heroku application (for example, "makahiki-hpu") with the default Makahiki data set , invoke the following::
 
-  % heroku run python scripts/initialize_instance.py -t default
+  % cd makahiki
+  % scripts/initialize_instance.py -t default -r makahiki-hpu
 
-When deploying to Heroku, the "default" Makahiki configuration is normally the only one you will
-want to use. 
+This command will:
+  * Upload the Makahiki source code to Heroku
+  * Install and/or update all Python packages required by Makahiki;
+  * Reinitialize the database contents and perform any needed database migrations.
+  * Initialize the system with data.
+  * Set up static files.
+
+If you instead want to create a demo instance to facilitate training or sample use, you can invoke
+the initialize_instance script as::
+
+  % scripts/initialize_instance.py -t demo -r makahiki-hpu
+
+This will create a demo instance that enables people to play a simple version of the Kukui
+Cup with minimal additional configuration.
 
 .. warning:: Invoke initialize_instance only once!
 
@@ -102,7 +92,7 @@ Verify that Makahiki is running
 -------------------------------
 
 Open a browser and go to `http://<heroku-appname>.herokuapp.com/` (where <heroku-appname> is
-replaced by your app's name) to see the landing page, which should look like:
+replaced by your app's name, for example, makahiki-hpu) to see the landing page, which should look like:
 
 .. figure:: figs/guided-tour/guided-tour-landing.png
    :width: 600 px
@@ -126,13 +116,10 @@ simple, and consists of the following steps.
 
    % git pull origin master
 
-2. Send the updated source code to Heroku::
-
-   % git push heroku master
-
 3. Run the update_instance script to update your Heroku configuration::
 
-   % heroku run python scripts/update_instance.py
+   % cd makahiki
+   % scripts/update_instance.py -r makahiki-hpu
 
 4. Finally, restart your server::
 

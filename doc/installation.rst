@@ -18,22 +18,10 @@ Organizations can instead choose to host Makahiki with Heroku.  This incurs
 a cost (we estimate about $200 for a one month challenge), but has the benefit
 that no hardware or IT resources are required.
 
-Makahiki Installation
----------------------
 .. toctree::
+   :maxdepth: 2
 
-   Local installation <installation-makahiki-local>
+   Local installation on Mac OS X or Linux <installation-makahiki-local>
+   Local installation on Windows <installation-makahiki-windows>
    Heroku installation <installation-makahiki-heroku>
 
-
-WattDepot Installation
-----------------------
-
-If you plan to have automated collection of energy data as part of
-your energy challenge, then you will also need to install
-WattDepot. Here are similar instructions for WattDepot:
-
-.. toctree::
-
-   Local installation <installation-wattdepot-local>
-   Heroku installation <installation-wattdepot-heroku>
