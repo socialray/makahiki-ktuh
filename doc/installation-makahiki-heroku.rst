@@ -2,7 +2,7 @@ Makahiki Installation (Heroku)
 ==============================
 
 Install Heroku
------------------
+--------------
 
 Sign up for an account and install the Heroku toolbelt following
 the instructions in the `Heroku Cheat Sheet`_ 
@@ -15,6 +15,14 @@ This involves:
   * Logging in to Heroku.
 
 
+Setup Amazon S3
+---------------
+In order to use Heroku with Makahiki, and because Heroku does not host static files, you will need to set up the Amazon S3 for serving the static files in Makahiki heroku instance.
+
+Follow `Using AWS S3 to store static assets <https://devcenter.heroku.com/articles/s3>`_ for details to setup the Amazon S3.
+
+Create a S3 bucket to be used for storing the static files for Makahiki, and record the bucket name you created, the AWW access key id, and the AWS secret access key for use in setting up the environment variables for Heroku.
+
 Download the Makahiki source
 ----------------------------
 
@@ -25,22 +33,6 @@ To download the Makahiki system, type the following::
 This will create a directory called "makahiki" containing the source code
 for the system.
 
-Create your Heroku Makahiki application
-------------------------------------------
-
-Change directory to makahiki, and create the heroku application.  Heroku
-requires unique names, so if your organization is "hpu", then you might
-call your application "makahiki-hpu", and get the following output
-following these two commands::
-
-  % cd makahiki
-  % heroku create makahiki-hpu --stack cedar --remote heroku
-    Creating makahiki-hpu... done, stack is cedar
-    http://makahiki-hpu.herokuapp.com/ | git@heroku.com:makahiki-hpu.git
-    Git remote heroku added
-
-Use an application name appropriate for your organization.
-
 Setup environment variables
 ---------------------------
 
@@ -48,12 +40,21 @@ Makahiki requires several environment variables to be set.
 
 First, you need to define the admin account name and password.  For example::
 
-  % heroku config:add MAKAHIKI_ADMIN_INFO=admin:Dog4Days56
+  % export MAKAHIKI_ADMIN_INFO=admin:Dog4Days56
 
-(Add instructions for other environment variables here.)
+You will also need to define the Amazon S3 information in the following environment variables::
+
+  % export MAKAHIKI_AWS_ACCESS_KEY_ID=<AWS access key id>
+  % export MAKAHIKI_AWS_SECRET_ACCESS_KEY=<AWS secret access key>
+  % export MAKAHIKI_AWS_STORAGE_BUCKET_NAME=<AWS S3 bucket name>
+
+They are the information you gathered from the previous step.
 
 Initialize Makahiki
 -------------------
+
+Once the environment variables are setup, you can create a heroku application and initialize the application with the default Makahiki data set. Heroku application name need to be unique as required by Heroku, so if your organization is "hpu", then you might
+call your application "makahiki-hpu". Use an application name appropriate for your organization.
 
 To initialize your heroku application (for example, "makahiki-hpu") with the default Makahiki data set , invoke the following::
 
@@ -61,8 +62,11 @@ To initialize your heroku application (for example, "makahiki-hpu") with the def
   % scripts/initialize_instance.py -t default -r makahiki-hpu
 
 This command will:
+  * create the application in Heroku
+  * install necessary Heroku addons
+  * set up the Makahiki environments you defined for the application
   * Upload the Makahiki source code to Heroku
-  * Install and/or update all Python packages required by Makahiki;
+  * Install and/or update all Python packages required by Makahiki
   * Reinitialize the database contents and perform any needed database migrations.
   * Initialize the system with data.
   * Set up static files.
@@ -86,7 +90,7 @@ Start the server
 
 To start up the server with this configuration, invoke::
 
-  % heroku ps:restart
+  % heroku ps:restart -a makahiki-hpu
 
 Verify that Makahiki is running
 -------------------------------
@@ -112,16 +116,16 @@ Makahiki is designed to support post-installation updating of your configured sy
 system enhancements become available.   Updating an installed Makahiki instance is quite
 simple, and consists of the following steps.
 
-1. Get the updated source code::
+#. Get the updated source code::
 
    % git pull origin master
 
-3. Run the update_instance script to update your Heroku configuration::
+#. Run the update_instance script to update your Heroku configuration (make sure the AWS environment variables are set)::
 
    % cd makahiki
    % scripts/update_instance.py -r makahiki-hpu
 
-4. Finally, restart your server::
+#. Finally, restart your server::
 
      % heroku ps:restart
 

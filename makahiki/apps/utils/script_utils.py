@@ -82,21 +82,20 @@ def reset_db(heroku_app):
     if not heroku_app:
         os.system("cd " + manage_py_dir() + "; python scripts/initialize_postgres.py")
     else:
-        os.system("heroku pg:reset HEROKU_POSTGRESQL_AQUA --app %s  --confirm %s" % (
+        os.system("heroku pg:reset DATABASE_URL --app %s  --confirm %s" % (
             heroku_app, heroku_app))
 
 
 def create_heroku_app(heroku_app):
     """create the heroku application."""
     print "create heroku app..."
-    os.system("heroku labs:enable default-heroku-postgresql-dev")
     os.system("heroku create %s --stack cedar --remote %s" % (heroku_app, heroku_app))
     os.system("git remote add %s git@heroku.com:%s.git" % (heroku_app, heroku_app))
 
     os.system("heroku config:add --app %s MAKAHIKI_ADMIN_INFO=$MAKAHIKI_ADMIN_INFO "\
                 "MAKAHIKI_USE_MEMCACHED=$MAKAHIKI_USE_MEMCACHED "\
                 "MAKAHIKI_USE_HEROKU=True "\
-                "MAKAHIKI_USE_S3=$MAKAHIKI_USE_S3 "\
+                "MAKAHIKI_USE_S3=True "\
                 "MAKAHIKI_AWS_ACCESS_KEY_ID=$MAKAHIKI_AWS_ACCESS_KEY_ID "\
                 "MAKAHIKI_AWS_SECRET_ACCESS_KEY=$MAKAHIKI_AWS_SECRET_ACCESS_KEY "\
                 "MAKAHIKI_AWS_STORAGE_BUCKET_NAME=%s "\
@@ -106,7 +105,8 @@ def create_heroku_app(heroku_app):
                 "MAKAHIKI_FACEBOOK_SECRET_KEY=$MAKAHIKI_FACEBOOK_SECRET_KEY" % (heroku_app,
                                                                                 heroku_app))
 
-    os.system("heroku addons:add --app %s memcache" % heroku_app)
+    os.system("heroku addons:add -a %s heroku-postgresql:dev" % heroku_app)
+    os.system("heroku addons:add -a %s memcache" % heroku_app)
 
 
 def load_fixtures(manage_command, fixture_path, prefix):
