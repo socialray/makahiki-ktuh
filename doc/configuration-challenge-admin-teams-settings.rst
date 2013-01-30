@@ -17,14 +17,14 @@ Makahiki defines a three level hierarchy:
   * The second level consists of teams, which are composed of players.
   * The third level consists of groups, which are composed of teams. 
 
-This page allows you to define and manage the second level of the hierarchy, the teams.  In this example, there are twenty defined teams (although less are shown in the screen shot).
+This page allows you to define and manage the second level of the hierarchy, the teams.  In the demo instance there are six teams defined.
 
 To define a new team, click the "Add team" button in the upper right corner.
 
 Teams are a required organizational concept in Makahiki.
 
 Configure team settings
-------------------------
+-----------------------
 
 .. figure:: figs/configuration/configuration-challenge-admin-teams-settings.2.png
    :width: 600 px

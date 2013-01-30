@@ -14,7 +14,7 @@ After clicking on the "Round Settings" link in the Challenge Admin widget, a pag
 
 All challenges must contain at least one round, and can have as many rounds as desired.   The rounds basically provide the concept of a time interval at the end of which prizes are awarded or some finalization of the challenge occurs.  
 
-In this example, three rounds are specified.  To create a new round, click on the "Add round setting" in the upper right corner. 
+In this example, one round is specified.  To create a new round, click on the "Add round setting" in the upper right corner. 
 
 Configure a round
 -----------------

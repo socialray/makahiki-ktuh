@@ -32,13 +32,34 @@ This is the list of levels for the smart grid game. Clicking on the name link, w
    :width: 600 px
    :align: center
 
+The name of the level is the label shown in the smart grid game. The priority orders the levels, 
+lowest to highest. The unlock condition is a :ref:`section-predicates` that will unlock the level. 
+The unlock text is the help text presented to the player explaining what they need to accomplish to 
+unlock the level.
+
 You can also click on the "Add level" button in the list page to create a new level.
 
 Configure the Category
 ----------------------
 
-Second, you will configure the categories of your smart grid game. Similar to the  confguration of levels, you can click the "Categories" link to enter the pages to change and existing category or add a new category for the smart grid game.
+Second, you will configure the categories of your smart grid game. Similar to the  confguration of 
+levels, you can click the "Categories" link to enter the pages to change and existing category or 
+add a new category for the smart grid game.
 
+.. figure:: figs/configuration/configuration-game-admin-smartgrid-game-category-list.png
+   :width: 600 px
+   :align: center
+
+This is the list of possible categories for the smart grid game. Clicking on the name link, will 
+bring up the following screen to edit or change the category, as shown in the following screenshot:
+
+.. figure:: figs/configuration/configuration-game-admin-smartgrid-game-category-change.png
+   :width: 600 px
+   :align: center
+
+The name is the label used in the smart grid game, the slug is referenced by smart grid actions to 
+determine which category the action belongs to. The priority determins how the categories are layed 
+out in the smart grid game, lowest to highest.
 
 Configure the Action
 --------------------

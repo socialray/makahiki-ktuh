@@ -10,7 +10,7 @@ Internal Admin Configuration Widget
 The Internal Admin Configuration Widget provides access to pages to support 
 developer-level configuration, monitoring and debugging.
 
-It is not further documented at this time. 
+It is not documented at this time. 
 
 
 

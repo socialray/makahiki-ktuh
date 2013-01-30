@@ -12,9 +12,10 @@ After clicking on the "Challenge Settings" link in the Challenge Admin widget, a
    :width: 600 px
    :align: center
 
-Under normal circumstances, there is only one challenge instance per system.  By default, this is called "Kukui Cup/UH".  Select this instance; you will be able to change its name below.
+Under normal circumstances, there is only one challenge instance per system.  In the 'demo' instance
+this is called "Demo Game".  Select this instance; you will be able to change its name below.
 
-The following sections detail each part of the page that appears after selecting "Kukui Cup/UH".   
+The following sections detail each part of the page that appears after selecting "Demo Game".   
 
 Configure names
 ---------------

@@ -17,7 +17,7 @@ Makahiki defines a three level hierarchy:
   * The second level consists of teams, which are composed of players.
   * The third level consists of groups, which are composed of teams. 
 
-This page allows you to define and manage the highest level of the hierarchy, the groups.  In this example, there are four defined groups: Lehua, Ilima, Mokihana, and Lokelani.
+This page allows you to define and manage the highest level of the hierarchy, the groups.  In the demo instance, there are two defined groups: Lehua, and Ilima.
 
 To define a new group, click the "Add group" button in the upper right corner.
 
