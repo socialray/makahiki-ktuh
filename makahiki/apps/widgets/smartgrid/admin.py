@@ -465,6 +465,8 @@ class ActionAdmin(admin.ModelAdmin):
         _ = request
         for obj in queryset:
             obj.id = None
+            obj.level = None
+            obj.category = None
             slug = obj.slug
             obj.slug = slug + "-copy"
             try:
