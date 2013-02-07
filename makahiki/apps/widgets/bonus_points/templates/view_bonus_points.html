@@ -9,9 +9,9 @@
     {% endif %}
 </head>
 <body style="background: none;">
-<table cellpadding="15"
-       style='width: 800px; border-collapse: separate; border-style: none; border-spacing: 2px;'>
-    <tr style='border-collapse: collapse; border-width: 1px; border-color: black; border-style: solid;'>
+    <table cellpadding="15"
+           style='width: 800px; border-collapse: separate; border-style: none; border-spacing: 2px;'>
+        <tr style='border-collapse: collapse; border-width: 1px; border-color: black; border-style: solid;'>
         {% for code in codes %}        
             <td style="border: ridge black;" class="code-ticket">
                 <table>
@@ -31,35 +31,33 @@
                         </td>
                     </tr>
                 </table>
-                
-                <p>
-                </p>
                 <h4 style='text-align: center; margin: 0'>{{code.point_value}} Bonus Points</h4>
-                <p></p>
+
                 <p style="margin-top: 0">
                     Earn {{ code.point_value }} bonus points with this code. Go to <span
                         style='font-family: "Courier New", Courier, monospace; white-space:nowrap;'>{{CHALLENGE.challenge_domain}}</span>,
                     click on Get Nutz, and enter the following code at the bottom of the 'Upcoming
                     Events' box:
                     <center><h4>{{ code.code }}</h4></center>
-                    <div style="float: right;font-size:8">{{code.pk}}</div>
                 </p>
-
+                <div style="float: right;font-size:8">{{code.pk}}</div>
             </td>
             {% if forloop.counter|divisibleby:"2" %}
-                {% if forloop.counter|divisibleby:per_page %}
+        </tr>
+                {% if not forloop.counter|divisibleby:pre_page %}
+        <tr style='border-collapse: collapse; border-width: 1px; border-color: black; border-style: solid;'>
+                {% endif %}
+                {% if forloop.counter|divisibleby:per_page and not forloop.last %}
                     {# Create a new table #}
-                    </tr>
-                    </table>
-                    <table style='width: 800px; page-break-before: always; border-collapse: separate; border-style: none; border-spacing: 2px;'
-                           cellpadding="15">
-                    <tr style='border-collapse: collapse; border-width: 1px; border-color: black; border-style: solid;'>
-                        {% else %}
-                    </tr>
-                    <tr style='border-collapse: collapse; border-width: 1px; border-color: black; border-style: solid;'>
+    </table>
+    <table style='width: 800px; page-break-before: always; border-collapse: separate; border-style: none; border-spacing: 2px;'
+         cellpadding="15">
+        <tr style='border-collapse: collapse; border-width: 1px; border-color: black; border-style: solid;'>
                 {% endif %}
             {% endif %}
+        {% empty %}
+            There are no bonus codes yet. Please generate them first.
         {% endfor %}
-        </table>
+    </table>
 </body>
 </html>
