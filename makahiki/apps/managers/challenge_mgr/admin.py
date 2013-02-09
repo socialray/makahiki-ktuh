@@ -92,7 +92,7 @@ class SystemSettingAdmin(admin.ModelAdmin):
     """The system administrator's Challenge Administration interface definition."""
     fieldsets = (
         ("Authentication",
-            {"description": "<div class='help'>Does markdown work here? <ul><li>one</li></ul></div>",
+            {"description": "<div class='help'>###Does markdown work here?</div>",
              "fields":
                   (("use_cas_auth", "cas_server_url", "cas_auth_text"),
                    ("use_ldap_auth", "ldap_server_url", "ldap_search_base", "ldap_auth_text"),
@@ -176,6 +176,9 @@ challenge_mgr.register_designer_challenge_info_model("Challenge", RoundSetting)
 challenge_mgr.register_designer_challenge_info_model("Other Settings", PageInfo)
 
 from djcelery.models import CrontabSchedule, PeriodicTask, IntervalSchedule
-challenge_mgr.register_designer_challenge_info_model("Scheduler (Celery) - Optional", CrontabSchedule)
-challenge_mgr.register_designer_challenge_info_model("Scheduler (Celery) - Optional", IntervalSchedule)
-challenge_mgr.register_designer_challenge_info_model("Scheduler (Celery) - Optional", PeriodicTask)
+challenge_mgr.register_designer_challenge_info_model("Scheduler (Celery) - Optional", \
+                                                     CrontabSchedule)
+challenge_mgr.register_designer_challenge_info_model("Scheduler (Celery) - Optional", \
+                                                     IntervalSchedule)
+challenge_mgr.register_designer_challenge_info_model("Scheduler (Celery) - Optional", \
+                                                     PeriodicTask)

@@ -5,7 +5,7 @@ from django.conf import settings
 from django.conf.urls.defaults import url, patterns, include
 from django.contrib import admin
 from django.views.generic.simple import direct_to_template
-from apps.admin.admin import sys_admin_site, challenge_designer_site,\
+from apps.admin.admin import sys_admin_site, challenge_designer_site, \
     challenge_manager_site
 
 admin.autodiscover()
