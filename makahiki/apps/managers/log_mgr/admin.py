@@ -22,4 +22,4 @@ class MakahikiLogAdmin(admin.ModelAdmin):
         return False
 
 admin.site.register(MakahikiLog, MakahikiLogAdmin)
-challenge_mgr.register_sys_admin_model("Status", MakahikiLog)
+challenge_mgr.register_admin_challenge_info_model("Status", MakahikiLog)

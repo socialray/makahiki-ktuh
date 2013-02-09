@@ -107,4 +107,4 @@ class RafflePrizeAdmin(admin.ModelAdmin):
     notice_sent.short_description = 'Winner Notice Sent'
 
 admin.site.register(RafflePrize, RafflePrizeAdmin)
-challenge_mgr.register_game_admin_model("Raffle Game", RafflePrize)
+challenge_mgr.register_designer_game_info_model("Raffle Game", RafflePrize)

@@ -11,17 +11,19 @@ from apps.managers.challenge_mgr.models import ChallengeSetting, RoundSetting, P
 from apps.utils import utils
 from django.core import management
 
+_designer_challenge_info_models = {}
+"""private variable to store the registered models for challenge designer challenge page."""
 
-_game_admin_models = {}
-"""private variable to store the registered models for game admin page."""
-
-
-_site_admin_models = {}
-"""private variable to store the registered models for site admin page."""
+_designer_game_info_models = {}
+"""private variable to store the registered models for challenge designer game page."""
 
 
-_sys_admin_models = {}
-"""private variable to store the registered models for sys admin page."""
+_admin_challenge_info_models = {}
+"""private variable to store the registered models for challenge admin challenge page."""
+
+
+_admin_game_info_models = {}
+"""private variable to store the registered models for challenge admin game page."""
 
 
 def init():
@@ -372,24 +374,34 @@ def in_competition(submission_date=None):
     return get_round_name(submission_date) is not None
 
 
-def get_game_admin_models():
-    """Returns the game related apps' info for admin purpose."""
+def get_designer_challenge_info_models():
+    """Returns the challenge info models."""
+    return get_admin_models(_designer_challenge_info_models)
 
+
+def get_designer_game_info_models():
+    """Returns the designer's game related models."""
     game_admins = ()
     for game in GameInfo.objects.all().order_by("priority"):
-        game_admin = (game.name, game.enabled, game.pk, _game_admin_models[game.name],)
-        game_admins += (game_admin,)
+        if game.name in _designer_game_info_models:
+            game_admin = (game.name, game.enabled, game.pk, _designer_game_info_models[game.name],)
+            game_admins += (game_admin,)
     return game_admins
 
 
-def get_sys_admin_models():
-    """return the sys admin models."""
-    return get_admin_models(_sys_admin_models)
+def get_admin_challenge_info_mdoels():
+    """Returns the Challenge Admin's challenge info models."""
+    return get_admin_models(_admin_challenge_info_models)
 
 
-def get_site_admin_models():
-    """return the site admin models."""
-    return get_admin_models(_site_admin_models)
+def get_admin_game_info_models():
+    """Returns the Challenge Admin's game info models."""
+    game_admins = ()
+    for game in GameInfo.objects.all().order_by("priority"):
+        if game.name in _admin_game_info_models:
+            game_admin = (game.name, game.enabled, game.pk, _admin_game_info_models[game.name],)
+            game_admins += (game_admin,)
+    return game_admins
 
 
 def get_admin_models(registry):
@@ -406,19 +418,24 @@ def _get_model_admin_info(model):
             "url": "%s/%s" % (model._meta.app_label, model._meta.module_name)}
 
 
-def register_game_admin_model(game, model):
-    """Register the model of the game for admin purpose."""
-    register_admin_model(_game_admin_models, game, model)
+def register_designer_challenge_info_model(game, model):
+    """Register the model of the challenge info for the designer."""
+    register_admin_model(_designer_challenge_info_models, game, model)
 
 
-def register_sys_admin_model(group, model):
-    """Register the model for sys admin."""
-    register_admin_model(_sys_admin_models, group, model)
+def register_designer_game_info_model(game, model):
+    """Register the model of the game for the designer."""
+    register_admin_model(_designer_game_info_models, game, model)
 
 
-def register_site_admin_model(group, model):
-    """Register the model of site admin."""
-    register_admin_model(_site_admin_models, group, model)
+def register_admin_challenge_info_model(group, model):
+    """Register the model of the challenge info for challenge admin."""
+    register_admin_model(_admin_challenge_info_models, group, model)
+
+
+def register_admin_game_info_model(group, model):
+    """Register the model of the game for the challenge admin."""
+    register_admin_model(_admin_game_info_models, group, model)
 
 
 def register_admin_model(registry, group, model):

@@ -5,6 +5,8 @@ from django.conf import settings
 from django.conf.urls.defaults import url, patterns, include
 from django.contrib import admin
 from django.views.generic.simple import direct_to_template
+from apps.admin.admin import sys_admin_site, challenge_designer_site,\
+    challenge_manager_site
 
 admin.autodiscover()
 
@@ -38,6 +40,9 @@ urlpatterns = patterns('',
     url(r'^admin/logout/$', 'apps.managers.auth_mgr.views.logout', name='admin_logout'),
 
     url(r'^admin/', include(admin.site.urls)),
+    url(r'^sys_admin/', include(sys_admin_site.urls)),
+    url(r'^challenge_setting_admin/', include(challenge_designer_site.urls)),
+    url(r'^challenge_admin/', include(challenge_manager_site.urls)),
     url(r'^admin/login-as/(?P<user_id>\d+)/$', 'apps.managers.auth_mgr.views.login_as',
         name='account_login_as'),
     url(r'^player/bulk_upload_form/$', 'apps.managers.player_mgr.views.bulk_upload_form',

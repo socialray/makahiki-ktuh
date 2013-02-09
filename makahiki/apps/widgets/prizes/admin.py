@@ -111,4 +111,4 @@ class PrizeAdmin(admin.ModelAdmin):
 
 
 admin.site.register(Prize, PrizeAdmin)
-challenge_mgr.register_game_admin_model("Top Score Game", Prize)
+challenge_mgr.register_designer_game_info_model("Top Score Game", Prize)

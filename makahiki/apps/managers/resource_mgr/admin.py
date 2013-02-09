@@ -29,7 +29,7 @@ class ResourceSettingsAdmin(admin.ModelAdmin):
         return False
 
 admin.site.register(ResourceSetting, ResourceSettingsAdmin)
-challenge_mgr.register_sys_admin_model("Other Settings", ResourceSetting)
+challenge_mgr.register_designer_challenge_info_model("Other Settings", ResourceSetting)
 
 
 class ResourceBlackoutDateAdmin(admin.ModelAdmin):
@@ -37,4 +37,4 @@ class ResourceBlackoutDateAdmin(admin.ModelAdmin):
     list_display = ["date", "description"]
 
 admin.site.register(ResourceBlackoutDate, ResourceBlackoutDateAdmin)
-challenge_mgr.register_sys_admin_model("Other Settings", ResourceBlackoutDate)
+challenge_mgr.register_designer_challenge_info_model("Other Settings", ResourceBlackoutDate)

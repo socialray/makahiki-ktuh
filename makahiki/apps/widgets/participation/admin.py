@@ -16,7 +16,7 @@ class ParticipationSettingAdmin(admin.ModelAdmin):
         return False
 
 admin.site.register(ParticipationSetting, ParticipationSettingAdmin)
-challenge_mgr.register_game_admin_model("Participation Game", ParticipationSetting)
+challenge_mgr.register_designer_game_info_model("Participation Game", ParticipationSetting)
 
 
 class TeamParticipationAdmin(admin.ModelAdmin):

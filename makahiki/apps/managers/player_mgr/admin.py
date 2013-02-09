@@ -100,4 +100,4 @@ class MakahikiUserAdmin(UserAdmin):
 
 admin.site.unregister(User)
 admin.site.register(User, MakahikiUserAdmin)
-challenge_mgr.register_site_admin_model("Players", User)
+challenge_mgr.register_designer_challenge_info_model("Players", User)

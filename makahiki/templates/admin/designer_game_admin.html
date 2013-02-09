@@ -1,0 +1,43 @@
+{% load admin_static %}
+
+<div class="content-box">
+    <div class="content-box-title">
+        Game Settings
+    </div>
+    <div> Click on the links below to configure game related settings or administrate
+        the games.
+        Clicking on the title of a game will let you enable or disable the game and its
+        widgets.
+    </div>
+    {% for app, enabled, pk, models in MAKAHIKI_DESIGNER_GAME_MODELS %}
+        <div class="module">
+            <table>
+                <caption><a title="Click to enable or disable the game"
+                            href="/admin/challenge_mgr/gameinfo/{{ pk }}/">
+                    {{ app }}
+                                <span style="float: right;">
+                                    {% if enabled %}
+                                        <img src="{% static 'admin/img/icon_success.gif' %}" alt="True">
+                                    {% else %}
+                                        <img src="{% static 'admin/img/icon_error.gif' %}" alt="False">
+                                    {% endif %}
+                                </span>
+                </a>
+                </caption>
+                <tbody>
+                {% if enabled %}
+                    {% for model in models %}
+                        <tr>
+                            <th scope="row"><a
+                                    href="/admin/{{ model.url }}/">{{ model.name }}</a>
+                            </th>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                    {% endfor %}
+                {% endif %}
+                </tbody>
+            </table>
+        </div>
+    {% endfor %}
+</div>

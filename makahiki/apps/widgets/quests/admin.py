@@ -38,4 +38,4 @@ class QuestAdmin(admin.ModelAdmin):
     form = QuestAdminForm
 
 admin.site.register(Quest, QuestAdmin)
-challenge_mgr.register_game_admin_model("Quest Game Mechanics", Quest)
+challenge_mgr.register_designer_game_info_model("Quest Game Mechanics", Quest)

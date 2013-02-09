@@ -13,4 +13,4 @@ class BadgeAdmin(admin.ModelAdmin):
     ordering = ["priority"]
 
 admin.site.register(Badge, BadgeAdmin)
-challenge_mgr.register_game_admin_model("Badge Game Mechanics", Badge)
+challenge_mgr.register_designer_game_info_model("Badge Game Mechanics", Badge)

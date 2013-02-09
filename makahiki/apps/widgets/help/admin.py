@@ -39,4 +39,4 @@ class HelpTopicAdmin(admin.ModelAdmin):
     form = HelpAdminForm
 
 admin.site.register(HelpTopic, HelpTopicAdmin)
-challenge_mgr.register_sys_admin_model("Other Settings", HelpTopic)
+challenge_mgr.register_designer_challenge_info_model("Other Settings", HelpTopic)

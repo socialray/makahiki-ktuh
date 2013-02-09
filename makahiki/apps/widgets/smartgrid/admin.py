@@ -333,7 +333,7 @@ class LevelAdmin(admin.ModelAdmin):
 
 
 admin.site.register(Level, LevelAdmin)
-challenge_mgr.register_game_admin_model("Smartgrid Game", Level)
+challenge_mgr.register_designer_game_info_model("Smartgrid Game", Level)
 
 
 class CategoryAdmin(admin.ModelAdmin):
@@ -342,7 +342,7 @@ class CategoryAdmin(admin.ModelAdmin):
     prepopulated_fields = {"slug": ("name",)}
 
 admin.site.register(Category, CategoryAdmin)
-challenge_mgr.register_game_admin_model("Smartgrid Game", Category)
+challenge_mgr.register_designer_game_info_model("Smartgrid Game", Category)
 
 
 def redirect_urls(model_admin, url_type):
@@ -513,7 +513,7 @@ class ActivityAdmin(admin.ModelAdmin):
 
 
 admin.site.register(Action, ActionAdmin)
-challenge_mgr.register_game_admin_model("Smartgrid Game", Action)
+challenge_mgr.register_designer_game_info_model("Smartgrid Game", Action)
 
 admin.site.register(Activity, ActivityAdmin)
 
@@ -778,7 +778,7 @@ class ActionMemberAdmin(admin.ModelAdmin):
         return super(ActionMemberAdmin, self).get_form(request, obj, **kwargs)
 
 admin.site.register(ActionMember, ActionMemberAdmin)
-challenge_mgr.register_game_admin_model("Smartgrid Game", ActionMember)
+challenge_mgr.register_admin_game_info_model("Smartgrid Game", ActionMember)
 
 
 class EmailReminderAdmin(admin.ModelAdmin):
@@ -799,5 +799,5 @@ class TextReminderAdmin(admin.ModelAdmin):
 
 admin.site.register(EmailReminder, EmailReminderAdmin)
 admin.site.register(TextReminder, TextReminderAdmin)
-challenge_mgr.register_sys_admin_model("Notifications", EmailReminder)
-challenge_mgr.register_sys_admin_model("Notifications", TextReminder)
+challenge_mgr.register_admin_challenge_info_model("Notifications", EmailReminder)
+challenge_mgr.register_admin_challenge_info_model("Notifications", TextReminder)
