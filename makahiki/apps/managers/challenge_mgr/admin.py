@@ -92,17 +92,22 @@ class SystemSettingAdmin(admin.ModelAdmin):
     """The system administrator's Challenge Administration interface definition."""
     fieldsets = (
         ("Authentication",
-            {"description": "<div class='help'>###Does markdown work here?</div>",
+            {"description": "<div class='help makahiki-box content-box-contents'>Choose the " + \
+             "type or types of authentication for players</div>",
              "fields":
                   (("use_cas_auth", "cas_server_url", "cas_auth_text"),
                    ("use_ldap_auth", "ldap_server_url", "ldap_search_base", "ldap_auth_text"),
                    ("use_internal_auth", "internal_auth_text"),
                   )}),
         ("WattDepot server for real time energy data",
-            {"fields":
+            {"description": "<div class='help makahiki-box content-box-contents'>If using " + \
+             "WattDepot for energy data, provide the WattDepot Server's URL.</div>",
+             "fields":
                   ("wattdepot_server_url",)}),
         ("Email",
-             {"fields":
+             {"description": "<div class='help makahiki-box content-box-contents'>If you want " + \
+             "email notifications enable email and provide the host information.</div>",
+             "fields":
                   ("email_enabled",
                    "contact_email",
                    ("email_host", "email_port", "email_use_tls"),)}),
@@ -110,6 +115,7 @@ class SystemSettingAdmin(admin.ModelAdmin):
     formfield_overrides = {
         models.TextField: {'widget': Textarea(attrs={'rows': 2, 'cols': 70})},
         }
+    page_text = "System Settings"
 
     def has_add_permission(self, request):
         return False
@@ -125,33 +131,25 @@ class ChallengeSettingAdmin(admin.ModelAdmin):
 
     fieldsets = (
         ("Challenge",
-            {"fields":
+            {"description": "<div class='help makahiki-box content-box-contents'>Enter the " + \
+             "information for this Challenge</div>",
+             "fields":
                   (("name", "location"),
                    ("logo", "domain"),
                    ("team_label", "theme"),
                   )}),
-        ("Authentication",
-            {"fields":
-                  (("use_cas_auth", "cas_server_url", "cas_auth_text"),
-                   ("use_ldap_auth", "ldap_server_url", "ldap_search_base", "ldap_auth_text"),
-                   ("use_internal_auth", "internal_auth_text"),
-                  )}),
-        ("WattDepot server for real time energy data",
-            {"fields":
-                  ("wattdepot_server_url",)}),
-        ("Email",
-             {"fields":
-                  ("email_enabled",
-                   "contact_email",
-                   ("email_host", "email_port", "email_use_tls"),)}),
         ("Landing Page",
-             {"fields":
+            {"description": "<div class='help makahiki-box content-box-contents'>Setup the " + \
+             "Landing Page. It is the first page players see.</div>",
+             "fields":
                   ("landing_slogan",
                    "landing_introduction",
                    "landing_participant_text",
                    "landing_non_participant_text",)}),
         ("About Page",
-            {"fields":
+            {"description": "<div class='help makahiki-box content-box-contents'>The " + \
+             "About Page explains the Challenge.</div>",
+             "fields":
                   ("about_page_text",)}),
     )
 

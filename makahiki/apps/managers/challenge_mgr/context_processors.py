@@ -48,7 +48,10 @@ def competition(request):
         if profile.theme:
             css_theme = profile.theme
 
+        if page_name == "sys_admin/challenge_mgr/challengesetting/1":
+            page_name = "admin"
         if page_name == "challenge_setting_admin" or page_name == "challenge_admin":
+            page_name = "admin"
             designer_models[0] = \
                 challenge_mgr.get_designer_challenge_info_models()
             designer_models[1] = \
