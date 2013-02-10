@@ -169,14 +169,14 @@ class ChallengeSettingAdmin(admin.ModelAdmin):
 admin.site.register(ChallengeSetting, ChallengeSettingAdmin)
 admin.site.register(UploadImage)
 
-challenge_mgr.register_designer_challenge_info_model("Challenge", ChallengeSetting)
-challenge_mgr.register_designer_challenge_info_model("Challenge", RoundSetting)
-challenge_mgr.register_designer_challenge_info_model("Other Settings", PageInfo)
+challenge_mgr.register_designer_challenge_info_model("Challenge", 1, ChallengeSetting, 1)
+challenge_mgr.register_designer_challenge_info_model("Challenge", 1, RoundSetting, 2)
+challenge_mgr.register_designer_challenge_info_model("Other Settings", 3, PageInfo, 1)
 
 from djcelery.models import CrontabSchedule, PeriodicTask, IntervalSchedule
 challenge_mgr.register_designer_challenge_info_model("Scheduler (Celery) - Optional", \
-                                                     CrontabSchedule)
+                                                     5, CrontabSchedule, 5)
 challenge_mgr.register_designer_challenge_info_model("Scheduler (Celery) - Optional", \
-                                                     IntervalSchedule)
+                                                     5, IntervalSchedule, 5)
 challenge_mgr.register_designer_challenge_info_model("Scheduler (Celery) - Optional", \
-                                                     PeriodicTask)
+                                                     5, PeriodicTask, 5)

@@ -12,5 +12,5 @@ class UserNotificationAdmin(admin.ModelAdmin):
 
 admin.site.register(NoticeTemplate)
 admin.site.register(UserNotification, UserNotificationAdmin)
-challenge_mgr.register_designer_challenge_info_model("Notifications", NoticeTemplate)
-challenge_mgr.register_admin_challenge_info_model("Notifications", UserNotification)
+challenge_mgr.register_designer_challenge_info_model("Other Settings", 3, NoticeTemplate, 3)
+challenge_mgr.register_admin_challenge_info_model("Notifications", 3, UserNotification, 2)

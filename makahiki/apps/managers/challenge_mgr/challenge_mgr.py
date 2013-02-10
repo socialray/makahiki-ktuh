@@ -1,6 +1,7 @@
 """The manager for challenge related settings."""
 
 import datetime
+import operator
 from django.conf import settings
 from django.contrib.auth.models import User
 from django.core.exceptions import ObjectDoesNotExist
@@ -376,7 +377,7 @@ def in_competition(submission_date=None):
 
 def get_designer_challenge_info_models():
     """Returns the challenge info models."""
-    return get_admin_models(_designer_challenge_info_models)
+    return get_challenge_models(_designer_challenge_info_models)
 
 
 def get_designer_game_info_models():
@@ -391,7 +392,7 @@ def get_designer_game_info_models():
 
 def get_admin_challenge_info_mdoels():
     """Returns the Challenge Admin's challenge info models."""
-    return get_admin_models(_admin_challenge_info_models)
+    return get_challenge_models(_admin_challenge_info_models)
 
 
 def get_admin_game_info_models():
@@ -412,15 +413,31 @@ def get_admin_models(registry):
     return models
 
 
-def _get_model_admin_info(model):
+def get_challenge_models(registry):
+    """return the ordered tuple from the model registry, based upon priority."""
+    models = ()
+    sorted_keys = ()
+    for key in registry.keys():
+        sorted_keys += ((key, registry[key]['priority']),)
+    sorted_keys = sorted(sorted_keys, key=operator.itemgetter(1))
+    for key in sorted_keys:
+        name = key[0]
+        model = registry[key[0]]['models']
+        model = sorted(model, key=operator.itemgetter('priority'))
+        models += ((name, model),)
+    return models
+
+
+def _get_model_admin_info(model, priority):
     """return the admin info for the model."""
     return {"name": capfirst(model._meta.verbose_name_plural),
-            "url": "%s/%s" % (model._meta.app_label, model._meta.module_name)}
+            "url": "%s/%s" % (model._meta.app_label, model._meta.module_name),
+            "priority": priority}
 
 
-def register_designer_challenge_info_model(game, model):
+def register_designer_challenge_info_model(group, g_priority, model, priority):
     """Register the model of the challenge info for the designer."""
-    register_admin_model(_designer_challenge_info_models, game, model)
+    register_challenge_model(_designer_challenge_info_models, group, g_priority, model, priority)
 
 
 def register_designer_game_info_model(game, model):
@@ -428,9 +445,9 @@ def register_designer_game_info_model(game, model):
     register_admin_model(_designer_game_info_models, game, model)
 
 
-def register_admin_challenge_info_model(group, model):
+def register_admin_challenge_info_model(group, g_priority, model, m_priority):
     """Register the model of the challenge info for challenge admin."""
-    register_admin_model(_admin_challenge_info_models, group, model)
+    register_challenge_model(_admin_challenge_info_models, group, g_priority, model, m_priority)
 
 
 def register_admin_game_info_model(group, model):
@@ -438,15 +455,30 @@ def register_admin_game_info_model(group, model):
     register_admin_model(_admin_game_info_models, group, model)
 
 
-def register_admin_model(registry, group, model):
+def register_admin_model(registry, group, model, priority=None):
     """Register the model into a registry."""
-    model_admin_info = _get_model_admin_info(model)
+    model_admin_info = _get_model_admin_info(model, priority)
     if group in registry:
         registry[group] += (model_admin_info,)
     else:
         registry[group] = (model_admin_info,)
 
-    registry[group] = sorted(registry[group])
+        registry[group] = sorted(registry[group], key=operator.itemgetter('priority'))
+
+
+def register_challenge_model(registry, group, g_priority, model, m_priority):
+    """Registers the model into the group with priorities for both group and model."""
+    model_admin_info = _get_model_admin_info(model, m_priority)
+    if group in registry:
+        registry[group]['models'] += (model_admin_info,)
+        registry[group]['priority'] = g_priority
+    else:
+        registry[group] = {}
+        registry[group]['models'] = (model_admin_info,)
+        registry[group]['priority'] = g_priority
+
+        registry[group]['models'] = sorted(registry[group]['models'], \
+                                           key=operator.itemgetter('priority'))
 
 
 class MakahikiBaseCommand(management.base.BaseCommand):

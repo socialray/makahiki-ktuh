@@ -56,7 +56,7 @@ class ReferralSettingAdmin(admin.ModelAdmin):
 admin.site.register(ReferralSetting, ReferralSettingAdmin)
 
 
-challenge_mgr.register_designer_challenge_info_model("Challenge", ScoreSetting)
+challenge_mgr.register_designer_challenge_info_model("Challenge", 1, ScoreSetting, 3)
 challenge_mgr.register_designer_game_info_model("Referral Game Mechanics", ReferralSetting)
-challenge_mgr.register_admin_challenge_info_model("Status", PointsTransaction)
-challenge_mgr.register_admin_challenge_info_model("Status", ScoreboardEntry)
+challenge_mgr.register_admin_challenge_info_model("Status", 1, PointsTransaction, 4)
+challenge_mgr.register_admin_challenge_info_model("Status", 1, ScoreboardEntry, 5)

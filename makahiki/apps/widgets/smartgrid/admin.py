@@ -799,5 +799,5 @@ class TextReminderAdmin(admin.ModelAdmin):
 
 admin.site.register(EmailReminder, EmailReminderAdmin)
 admin.site.register(TextReminder, TextReminderAdmin)
-challenge_mgr.register_admin_challenge_info_model("Notifications", EmailReminder)
-challenge_mgr.register_admin_challenge_info_model("Notifications", TextReminder)
+challenge_mgr.register_admin_challenge_info_model("Notifications", 2, EmailReminder, 2)
+challenge_mgr.register_admin_challenge_info_model("Notifications", 2, TextReminder, 3)

@@ -34,6 +34,6 @@ class PostAdmin(admin.ModelAdmin):
 
 admin.site.register(Post, PostAdmin)
 
-challenge_mgr.register_designer_challenge_info_model("Players", Group)
-challenge_mgr.register_designer_challenge_info_model("Players", Team)
-challenge_mgr.register_admin_challenge_info_model("Status", Post)
+challenge_mgr.register_designer_challenge_info_model("Players", 2, Group, 2)
+challenge_mgr.register_designer_challenge_info_model("Players", 2, Team, 2)
+challenge_mgr.register_admin_challenge_info_model("Status", 1, Post, 5)
