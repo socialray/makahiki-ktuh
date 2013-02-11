@@ -12,9 +12,12 @@
     {% for app, enabled, pk, models in MAKAHIKI_DESIGNER_GAME_MODELS %}
         <div class="module">
             <table>
-                <caption><a title="Click to enable or disable the game"
-                            href="/admin/challenge_mgr/gameinfo/{{ pk }}/">
-                    {{ app }}
+                <caption>
+                    <div class="goal_tooltip">
+                        <a rel="tooltip"
+                           data-original-title="Click to enable or disable the game"
+                           href="/admin/challenge_mgr/gameinfo/{{ pk }}/">{{ app }}
+                        </a>
                                 <span style="float: right;">
                                     {% if enabled %}
                                         <img src="{% static 'admin/img/icon_success.gif' %}" alt="True">
@@ -22,14 +25,18 @@
                                         <img src="{% static 'admin/img/icon_error.gif' %}" alt="False">
                                     {% endif %}
                                 </span>
-                </a>
+                    </div>
                 </caption>
                 <tbody>
                 {% if enabled %}
                     {% for model in models %}
                         <tr>
-                            <th scope="row"><a
-                                    href="/admin/{{ model.url }}/">{{ model.name }}</a>
+                            <th scope="row">
+                                <div class="goal_tooltip">
+                                    <a rel="tooltip"
+                                       data-original-title="{{ model.tooltip }}"
+                                       href="/admin/{{ model.url }}/">{{ model.name }}</a>
+                                </div>
                             </th>
                             <td></td>
                             <td></td>
@@ -41,3 +48,12 @@
         </div>
     {% endfor %}
 </div>
+<script type="text/javascript">
+
+    // tooltip demo
+    $('.goal_tooltip').tooltip({
+        selector:"a[rel=tooltip]",
+        placement:"right"
+    })
+
+</script>

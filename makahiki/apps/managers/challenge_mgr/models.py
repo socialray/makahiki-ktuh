@@ -204,9 +204,9 @@ class Sponsor(models.Model):
 
 
 class RoundSetting(models.Model):
-    """Defines the round settings for this challenge.
+    """Defines the round settings for this challenge."""
 
-    Start means the competition will start at midnight on that date.
+    """Start means the competition will start at midnight on that date.
     End means the competition will end at one minute to midnight on the previous day.
     For example, a round that ends on "2010-08-02" will end at 11:59pm of August 1st.
     """

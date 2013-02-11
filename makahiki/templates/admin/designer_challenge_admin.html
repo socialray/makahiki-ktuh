@@ -4,6 +4,7 @@
     </div>
     <div> Click on the links below to configure the challenge.
     </div>
+
     {% for app, models in MAKAHIKI_DESIGNER_CHALLENGE_MODELS %}
         <div class="module">
             <table>
@@ -11,8 +12,13 @@
                 <tbody>
                 {% for model in models %}
                     <tr>
-                        <th scope="row"><a
-                                href="/admin/{{ model.url }}/">{{ model.name }}</a></th>
+                        <th scope="row">
+                            <div class="goal_tooltip">
+                            <a rel="tooltip"
+                               data-original-title="{{ model.tooltip }}"
+                               href="/admin/{{ model.url }}/">{{ model.name }}</a>
+                            </div>
+                        </th>
                         <td></td>
                         <td></td>
                     </tr>
@@ -22,3 +28,12 @@
         </div>
     {% endfor %}
 </div>
+<script type="text/javascript">
+
+    // tooltip demo
+    $('.goal_tooltip').tooltip({
+        selector:"a[rel=tooltip]",
+        placement:"right"
+    })
+
+</script>

@@ -431,6 +431,7 @@ def get_challenge_models(registry):
 def _get_model_admin_info(model, priority):
     """return the admin info for the model."""
     return {"name": capfirst(model._meta.verbose_name_plural),
+            "tooltip": capfirst(model.__doc__),
             "url": "%s/%s" % (model._meta.app_label, model._meta.module_name),
             "priority": priority}
 

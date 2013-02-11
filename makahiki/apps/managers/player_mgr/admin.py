@@ -99,5 +99,6 @@ class MakahikiUserAdmin(UserAdmin):
 
 
 admin.site.unregister(User)
+User.__doc__ = "Represents a player in the system."
 admin.site.register(User, MakahikiUserAdmin)
 challenge_mgr.register_designer_challenge_info_model("Players", 2, User, 2)
