@@ -246,18 +246,18 @@ class RoundSetting(models.Model):
 class PageInfo(models.Model):
     """Defines the page info."""
     name = models.CharField(
-        help_text="The name of the page.",
+        help_text="The name of the page. It is used to determine which navbar icon is used.",
         max_length=50,)
     label = models.CharField(
-        help_text="The label of the page.",
+        help_text="The label of the page. It is used on the Home page and the navbar. </br>Should be less than 10 characters long.",
         max_length=100,)
     title = models.CharField(
         blank=True, null=True,
-        help_text="The title of the page.",
+        help_text="The HTML title of the page.",
         max_length=255,)
     introduction = models.TextField(
         blank=True, null=True,
-        help_text="The introduction of the page. " + settings.MARKDOWN_TEXT,
+        help_text="This text is shown on the Home page. It should not be more than 3 lines,</br>each line should be less than 25 characters long. " + settings.MARKDOWN_TEXT,
         max_length=1000,)
     priority = models.IntegerField(
         default=1,
@@ -313,6 +313,7 @@ class PageSetting(models.Model):
         """meta"""
         unique_together = (("page", "widget", ), )
         ordering = ['page', 'location', 'priority']
+        verbose_name = "page widget"
 
     def __unicode__(self):
         return ""
