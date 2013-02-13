@@ -35,6 +35,8 @@ class ScoreSetting(models.Model):
         default=0,
         help_text="The point amount for providing action feedback."
     )
+    admin_tool_tip = "The points awarded for completing various " + \
+        "actions and how many points are needed for a player to be 'active'."
 
     def save(self, *args, **kwargs):
         """Custom save method."""

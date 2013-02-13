@@ -30,6 +30,7 @@ class HelpTopic(models.Model):
         help_text="Optional parent topic of this topic.",
         related_name="sub_topics",
     )
+    admin_tool_tip = "The set of help topics in the challenge."
 
     @models.permalink
     def get_absolute_url(self):

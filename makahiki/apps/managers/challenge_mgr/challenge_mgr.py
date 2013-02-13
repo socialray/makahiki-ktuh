@@ -390,7 +390,7 @@ def get_designer_game_info_models():
     return game_admins
 
 
-def get_admin_challenge_info_mdoels():
+def get_admin_challenge_info_models():
     """Returns the Challenge Admin's challenge info models."""
     return get_challenge_models(_admin_challenge_info_models)
 
@@ -430,8 +430,12 @@ def get_challenge_models(registry):
 
 def _get_model_admin_info(model, priority):
     """return the admin info for the model."""
+    try:
+        tooltip = model.admin_tool_tip
+    except AttributeError:
+        tooltip = model.__doc__
     return {"name": capfirst(model._meta.verbose_name_plural),
-            "tooltip": capfirst(model.__doc__),
+            "tooltip": capfirst(tooltip),
             "url": "%s/%s" % (model._meta.app_label, model._meta.module_name),
             "priority": priority}
 

@@ -36,6 +36,7 @@ class NoticeTemplate(models.Model):
   """
     notice_type = models.SlugField(max_length=50, choices=TYPE_CHOICES)
     template = models.TextField(help_text=TEMPLATE_TEXT)
+    admin_tool_tip = "Templates for build in notifications."
 
     def render(self, context_dict=None):
         """Renders the message first using Django's templating system, then using Markdown.

@@ -7,6 +7,7 @@ from apps.managers.team_mgr.models import Group, Team, Post
 class GroupAdmin(admin.ModelAdmin):
     """Category Admin"""
     list_display = ["name", ]
+    page_text = "Groups are optional in this challenge."
 
 admin.site.register(Group, GroupAdmin)
 
@@ -15,6 +16,7 @@ class TeamAdmin(admin.ModelAdmin):
     """Category Admin"""
     list_display = ["name", "size", "group"]
     fields = ["name", "size", "group"]
+    page_text = "Teams are optional in this challenge."
 
 admin.site.register(Team, TeamAdmin)
 

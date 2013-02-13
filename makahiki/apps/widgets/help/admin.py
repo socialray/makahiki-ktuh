@@ -35,6 +35,11 @@ class HelpTopicAdmin(admin.ModelAdmin):
     list_filter = ["category", ]
     search_fields = ["slug", "title"]
     list_display = ["slug", "category", "priority", "parent_topic"]
+    page_text = "Click on the slug to edit the details of the Help Topic. " + \
+    "There are three categories of Help Topic, FAQs, Rules, and Widget. " + \
+    "Widget Help Topics are displayed when a player clicks the help link for " + \
+    "an individual widget. FAQs, and Rules are used by the Help FAQ widget and " + \
+    "Help Rules widget."
 
     form = HelpAdminForm
 

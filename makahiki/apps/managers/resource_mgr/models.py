@@ -36,6 +36,7 @@ class ResourceSetting(models.Model):
         choices=WINNING_ORDER_CHOICE,
         help_text="The winning order. Ascending indicates the lesser/smaller wins."
     )
+    admin_tool_tip = ""
 
     class Meta:
         """Meta"""

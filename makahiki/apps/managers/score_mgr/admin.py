@@ -30,6 +30,9 @@ class ScoreSettingAdmin(admin.ModelAdmin):
                     "signup_bonus_points", "noshow_penalty_points", "feedback_bonus_points", ]
     list_display_links = ["setup_points", "active_threshold_points",
                           "signup_bonus_points", "noshow_penalty_points", "feedback_bonus_points", ]
+    page_text = "There must only be one Score Setting.  You can edit the amount" + \
+    " of points awarded for completing the various actions and how many points are " + \
+    "needed for a player to be 'active'."
 
     def has_add_permission(self, request):
         return False

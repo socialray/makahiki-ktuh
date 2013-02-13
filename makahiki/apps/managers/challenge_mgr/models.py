@@ -140,6 +140,9 @@ class ChallengeSetting(models.Model):
         help_text="The text of the about page. " +
                   settings.MARKDOWN_TEXT)
 
+    admin_tool_tip = "The global settings for the challenge. (Name, landing page, " + \
+    "about page, and sponsors)"
+
     def __unicode__(self):
         return self.name
 
@@ -229,6 +232,7 @@ class RoundSetting(models.Model):
         default=True,
         help_text="Display the round in scoreboard?"
     )
+    admin_tool_tip = "The Round information for the challenge. (How many, when, etc.)"
 
     class Meta:
         """Meta"""
@@ -273,6 +277,8 @@ class PageInfo(models.Model):
         max_length=255,
         help_text="if the condition is True, the page will be unlocked. " +
                   settings.PREDICATE_DOC_TEXT)
+    admin_tool_tip = "The top level page information. Defines which widgets " + \
+    "are on the page, if the page is displayed, and the ordering of the pages."
 
     class Meta:
         """meta"""

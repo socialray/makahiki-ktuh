@@ -16,6 +16,7 @@ class Group(models.Model):
     """Defines the group that a team belongs to."""
 
     name = models.CharField(max_length=200, help_text="The name of the group.")
+    admin_tool_tip = "Groupings of teams. Groups are optional."
 
     def __unicode__(self):
         return self.name
@@ -37,6 +38,7 @@ class Team(models.Model):
         max_length=1024, blank=True, null=True,
         upload_to=media_file_path(_MEDIA_LOCATION),
         help_text="The logo of the team.",)
+    admin_tool_tip = "The team a player belongs to. Teams are optional."
 
     def __unicode__(self):
         return self.name

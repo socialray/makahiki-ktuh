@@ -158,7 +158,8 @@ class ChallengeSettingAdmin(admin.ModelAdmin):
     formfield_overrides = {
         models.TextField: {'widget': Textarea(attrs={'rows': 2, 'cols': 70})},
         }
-    page_text = "Click on the name of the challenge to change the settings."
+    page_text = "Click on the name of the challenge to change the settings." +\
+    "There must be only one Challenge Setting."
 
     def has_add_permission(self, request):
         return False

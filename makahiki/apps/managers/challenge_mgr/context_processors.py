@@ -57,7 +57,7 @@ def competition(request):
             designer_models[1] = \
                 challenge_mgr.get_designer_game_info_models()
             admin_models[0] = \
-                challenge_mgr.get_admin_challenge_info_mdoels()
+                challenge_mgr.get_admin_challenge_info_models()
             admin_models[1] = challenge_mgr.get_admin_game_info_models()
 
     return {

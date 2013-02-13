@@ -61,6 +61,10 @@ class MakahikiUserAdmin(UserAdmin):
     list_display = ('username', 'email', 'first_name', 'last_name', 'is_active',
                     'is_staff', "profile", 'team', 'referred_by')
     actions = ["set_active", "set_inactive"]
+    page_text = "Click on the name in the Username column to edit a player's " + \
+    "password, personal information, roles, and site administration groups.  " + \
+    "Click on the name in the Profile column to edit a player's display name, " + \
+    "team, badges, etc."
 
     def set_active(self, request, queryset):
         """set the active flag priority."""
@@ -100,5 +104,6 @@ class MakahikiUserAdmin(UserAdmin):
 
 admin.site.unregister(User)
 User.__doc__ = "Represents a player in the system."
+User.admin_tool_tip = "Challenge Players. They must be defined before anyone can play."
 admin.site.register(User, MakahikiUserAdmin)
 challenge_mgr.register_designer_challenge_info_model("Players", 2, User, 2)
