@@ -10,6 +10,9 @@ from apps.managers.cache_mgr import cache_mgr
 class ScoreSetting(models.Model):
     """score settings models."""
 
+    name = models.CharField(default="Score Settings",
+                            max_length="30", editable=False,
+                            help_text="The settings label.")
     setup_points = models.IntegerField(
         default=5,
         help_text="The point amount for setting up the profile."

@@ -26,10 +26,8 @@ admin.site.register(ScoreboardEntry, ScoreboardEntryAdmin)
 
 class ScoreSettingAdmin(admin.ModelAdmin):
     """PointsTransaction administrator interface definition."""
-    list_display = ["setup_points", "active_threshold_points",
-                    "signup_bonus_points", "noshow_penalty_points", "feedback_bonus_points", ]
-    list_display_links = ["setup_points", "active_threshold_points",
-                          "signup_bonus_points", "noshow_penalty_points", "feedback_bonus_points", ]
+    list_display = ["name", ]
+    list_display_links = ["name", ]
     page_text = "There must only be one Score Setting.  You can edit the amount" + \
     " of points awarded for completing the various actions and how many points are " + \
     "needed for a player to be 'active'."
