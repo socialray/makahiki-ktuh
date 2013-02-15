@@ -4,11 +4,13 @@
 {% block page_title %}Settings{% endblock %}
 {% block extra_head %}
     <link rel="icon" href="{{ STATIC_URL }}images/favicon.ico"/>
-    <link rel="stylesheet" type="text/css" href="{% block stylesheet %}{% static "admin/css/base.css" %}{% endblock %}" />
-    <link rel="stylesheet" href="{{STATIC_URL}}css/landing.css">
-    
+    <link rel="stylesheet" type="text/css" href="{% block stylesheet %}{% static "admin/css/base.css" %}{% endblock %}" />    
     {% block extrastyle %}{% endblock %}
     <script type="text/javascript">window.__admin_media_prefix__ = "{% filter escapejs %}{% static "admin/" %}{% endfilter %}";</script>
+
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+    <script src="{{STATIC_URL}}bootstrap/js/bootstrap.min.js" type="text/javascript"></script>
+
     {% if not MAKAHIKI_USE_LESS %}
         <link rel="stylesheet" href="{{STATIC_URL}}css/theme-forest.css">
         <link rel="stylesheet" href="{{STATIC_URL}}css/admin.css">
@@ -42,15 +44,17 @@
 	<p></p>
         <div class="row-fluid">
             <div class="span3">
-                <a href="/sys_admin/challenge_mgr/challengesetting/1/">
+            	<div class="goal_tooltip">
+                <a rel="tooltip" data-original-title="Pre-Challenge Phase" href="/sys_admin/challenge_mgr/challengesetting/1/" >
                     <button class="btn btn-widget landing-button" style="cursor:pointer;">
-                        <h5>System Settings:</h5>
+                        <h5>System Administration:</h5>
                         User Authentication,</br>
                         Email Server,</br>
                         WattDepot Server.
                         
                     </button>
                 </a>
+                </div>
             </div>
             <div class="span3">
                 <a href="/challenge_setting_admin/">
