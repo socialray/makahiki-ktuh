@@ -5,7 +5,8 @@ from django.forms.widgets import Textarea
 from apps.managers.challenge_mgr import challenge_mgr
 from apps.managers.challenge_mgr.models import ChallengeSetting, RoundSetting, PageSetting, \
     PageInfo, Sponsor, UploadImage, GameSetting, GameInfo
-from apps.admin.admin import sys_admin_site, challenge_designer_site, challenge_manager_site
+from apps.admin.admin import sys_admin_site, challenge_designer_site, challenge_manager_site, \
+    developer_site
 
 
 class PageSettingInline(admin.TabularInline):
@@ -41,9 +42,33 @@ class PageInfoAdmin(admin.ModelAdmin):
         models.TextField: {'widget': Textarea(attrs={'rows': 3, 'cols': 70})},
         }
 
+
+class DesignerPageInfoAdmin(admin.ModelAdmin):
+    """Designer admin interface for PageInfo entries."""
+    list_display = ["name", "unlock_condition", "priority"]
+    
+    fieldsets = (
+        (None,
+            {"fields":
+                ("label",
+                 "title",
+                 "introduction",
+                 "unlock_condition",
+                 "priority",)
+             }),
+        )
+    
+    inlines = [PageSettingInline]
+    
+    formfield_overrides = {
+        models.TextField: {'widget': Textarea(attrs={'rows': 3, 'cols': 70})},
+        }
+    
+
 admin.site.register(PageInfo, PageInfoAdmin)
-challenge_designer_site.register(PageInfo, PageInfoAdmin)
-challenge_manager_site.register(PageInfo, PageInfoAdmin)
+challenge_designer_site.register(PageInfo, DesignerPageInfoAdmin)
+challenge_manager_site.register(PageInfo, DesignerPageInfoAdmin)
+developer_site.register(PageInfo, PageInfoAdmin)
 
 
 class PageSettingAdmin(admin.ModelAdmin):
@@ -187,3 +212,13 @@ challenge_mgr.register_designer_challenge_info_model("Scheduler (Celery) - Optio
 CrontabSchedule.__doc__ = "Defines the scheduled tasks."
 challenge_mgr.register_designer_challenge_info_model("Scheduler (Celery) - Optional", \
                                                      5, PeriodicTask, 5)
+
+challenge_mgr.register_developer_challenge_info_model("Challenge", 1, ChallengeSetting, 1)
+challenge_mgr.register_developer_challenge_info_model("Challenge", 1, RoundSetting, 2)
+challenge_mgr.register_developer_challenge_info_model("Other Settings", 3, PageInfo, 1)
+challenge_mgr.register_developer_challenge_info_model("Scheduler (Celery)", \
+                                                      5, CrontabSchedule, 5)
+challenge_mgr.register_developer_challenge_info_model("Scheduler (Celery)", \
+                                                      5, IntervalSchedule, 5)
+challenge_mgr.register_developer_challenge_info_model("Scheduler (Celery)", \
+                                                      5, PeriodicTask, 5)

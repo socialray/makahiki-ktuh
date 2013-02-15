@@ -28,6 +28,7 @@ def competition(request):
     all_page_info = None
     designer_models = [None, None]
     admin_models = [None, None]
+    developer_models = [None, None]
 
     challenge = challenge_mgr.get_challenge()
     css_theme = challenge.theme
@@ -50,7 +51,7 @@ def competition(request):
 
         if page_name == "sys_admin/challenge_mgr/challengesetting/1":
             page_name = "admin"
-        if page_name == "challenge_setting_admin" or page_name == "challenge_admin":
+        if page_name in ("challenge_setting_admin", "challenge_admin", "developer_admin"):
             page_name = "admin"
             designer_models[0] = \
                 challenge_mgr.get_designer_challenge_info_models()
@@ -59,6 +60,8 @@ def competition(request):
             admin_models[0] = \
                 challenge_mgr.get_admin_challenge_info_models()
             admin_models[1] = challenge_mgr.get_admin_game_info_models()
+            developer_models[0] = challenge_mgr.get_developer_challenge_info_models()
+            developer_models[1] = challenge_mgr.get_developer_game_info_models()
 
     return {
         "CHALLENGE": challenge,
@@ -79,6 +82,8 @@ def competition(request):
         "MAKAHIKI_DESIGNER_GAME_MODELS": designer_models[1],
         "MAKAHIKI_ADMIN_CHALLENGE_MODELS": admin_models[0],
         "MAKAHIKI_ADMIN_GAME_MODELS": admin_models[1],
+        "MAKAHIKI_DEVELOPER_CHALLENGE_MODELS": developer_models[0],
+        "MAKAHIKI_DEVEOLPER_GAME_MODELS": developer_models[1],
         "ACTIVE_PAGE": page_name
     }
 
