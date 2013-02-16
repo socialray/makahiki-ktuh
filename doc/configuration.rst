@@ -1,7 +1,7 @@
 .. _section-configuration:
 
 
-Configuring Makahiki
+System Configuration
 ====================
 
 This section explains how to configure a freshly initialized instance of Makahiki to suit

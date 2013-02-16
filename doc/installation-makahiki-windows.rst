@@ -1,21 +1,30 @@
 .. _section-installation-makahiki-windows:
 
-Installation on Windows
-=======================
+Local Installation on Windows
+=============================
 
-We had installed Makahiki on the Windows environment sucessfully without
-installing the memcached. It may be possible to develop Makahiki in a Windows environment, but due to the many problems we encountered during our limited experience of using Makahiki on Windows, we recommend to use a Unix platform such as Mac OS X and Linux for Makahiki development and deployment.
+First off, we must state that native installation of Makahiki on Windows is more complicated and
+error-prone than on a Unix environment, because Makahiki uses two technologies (Django and
+Memcached) that are more difficult to install in a Windows environment.  
 
-Besides install Makahiki "natively" on a windows environment, there are the two alternatives:
-  * Use a Linux virtual machine
-  * Dual boot to Linux
+We thus provide documentation for three approaches to installing Makahiki on Windows:
+dual-booting, virtual machine, and native installation. The first two approaches get
+around the difficulties of native installation by providing a Unix environment within
+Windows.   
 
-We also documented our experimental instructions on installing Makahiki directly on Windows.
+If you intend to modify or enhance the Makahiki software (i.e. you plan to be a developer
+rather than simply deploy a release of the software), we recommend you use the first two
+options which provide a unix environment. 
+
+Our estimated hardware requirements for development use are:
+  * CPU: modern dual or quad core
+  * RAM: 4 GB
+  * Disk space: 10 GB
 
 .. toctree::
    :maxdepth: 2
 
-   Use a Linux virtual machine  <installation-using-virtual-machine>
-   Dual boot to Linux <installation-makahiki-dualbooting>
-   Install directly on Windows (Experimental) <installation-native-windows>
+   installation-makahiki-windows-vm
+   installation-makahiki-windows-dualbooting
+   installation-makahiki-windows-native
 
