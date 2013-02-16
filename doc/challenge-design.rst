@@ -28,6 +28,8 @@ The following sections discuss how you use these settings to specify the design 
    challenge-design-game-admin-badge
    challenge-design-game-admin-referral
 
+.. todo:: Document the Challenge Settings widget contents. 
+
 
 
 
