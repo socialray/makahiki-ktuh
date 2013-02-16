@@ -20,8 +20,6 @@ fixture, and that the server is now running.
 
    configuration-settings-page
    configuration-challenge-admin
-   configuration-game-admin
-   configuration-internal-admin
 
 
 

@@ -1,3 +1,5 @@
+.. _section-site-administration-guide:
+
 Site Administration Guide
 =========================
 
@@ -24,7 +26,7 @@ This guide is divided into sections that follow the phases of the
 
 .. toctree::
    :maxdepth: 2
-
+   
    installation
    configuration
    challenge-design
