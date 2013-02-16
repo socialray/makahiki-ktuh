@@ -57,13 +57,13 @@ class DesignerPageInfoAdmin(admin.ModelAdmin):
                  "priority",)
              }),
         )
-    
+
     inlines = [PageSettingInline]
-    
+
     formfield_overrides = {
         models.TextField: {'widget': Textarea(attrs={'rows': 3, 'cols': 70})},
         }
-    
+
 
 admin.site.register(PageInfo, PageInfoAdmin)
 challenge_designer_site.register(PageInfo, DesignerPageInfoAdmin)
