@@ -16,7 +16,7 @@ the following page:
 The following sections discuss how you use these settings to specify the design of your challenge.
 
 .. toctree::
-   :maxdepth: 2
+   :maxdepth: 1
 
    challenge-design-game-admin-enable-disable
    challenge-design-game-admin-resource-game

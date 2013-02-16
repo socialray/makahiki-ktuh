@@ -26,7 +26,7 @@ Upon successful login, you will be taken to the home page:
 
 Note that admin accounts have two additional pages displayed in the Nav Bar:  "Status" and
 "Settings".  "Status" provides real time analytics for use in managing a running
-competition, as detailed in :ref:`section-execution`.
+competition, as detailed in :ref:`section-challenge-management`.
 
 Click on Settings page icon
 ---------------------------

@@ -16,8 +16,8 @@ This guide is divided into sections that follow the phases of the
   challenge, specifying the players, the start and end times, the rounds, the games,
   the Smart Grid Game activities, excursions, and commitments, the prizes, the default theme, and so forth. 
 
-  4. Challenge execution.  During this phase, the challenge is running and players
-  are actively using your system. Administrative activities include monitoring game play,
+  4. Challenge management.  During this phase, the challenge is running and players
+  are actively using your system. Management activities include monitoring game play,
   verifying Smart Grid Game activity submissions, and so forth.
 
   5. Challenge postmortem.  After the challenge is over, this phase focuses on analysis of
@@ -30,6 +30,6 @@ This guide is divided into sections that follow the phases of the
    installation
    configuration
    challenge-design
-   execution
+   challenge-management
    postmortem
 
