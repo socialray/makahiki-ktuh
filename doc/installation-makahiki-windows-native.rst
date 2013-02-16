@@ -3,7 +3,8 @@
 Makahiki Native Windows Installation
 ====================================
 
-.. WARNING:: This is instruction is experimental and is for advanced users only.
+.. WARNING:: Native windows installation should be viewed as "experimental" and should be
+   undertaken only by expert Windows developers. 
 
 
 Install Python
