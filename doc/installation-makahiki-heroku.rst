@@ -107,7 +107,7 @@ Configure your Makahiki instance
 --------------------------------
 
 Now that you have a running Makahiki instance, it is time to configure it for your
-challenge, as documented in :ref:`section-configuration`.
+challenge, as documented in :ref:`section-site-configuration`.
 
 Updating your Makahiki instance
 -------------------------------

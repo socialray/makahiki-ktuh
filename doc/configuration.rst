@@ -1,4 +1,4 @@
-.. _section-configuration:
+.. _section-site-configuration:
 
 
 Site Configuration
