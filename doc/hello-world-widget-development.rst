@@ -379,6 +379,7 @@ out the Slug field based upon the Title.  The slug must match the third paramete
    :align: center
    
    *Hello World Widget Help Dialog.* 
+
 Push your changes
 -----------------
 
