@@ -1,7 +1,8 @@
 .. _section-installation-makahiki-local-unix:
 
-Makahiki Installation (Local) on Mac OS X or Linux
-==================================================
+Local installation on Unix
+==========================
+
 These instructions also assume that you are using a Bourne-type shell (such as bash),
 which is the default on Mac OS X and Linux. Using a C-shell variant
 (like tcsh), is possible but not recommended.

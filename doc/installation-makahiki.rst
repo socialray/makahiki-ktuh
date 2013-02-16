@@ -15,7 +15,7 @@ and IT support to do the installation, perform backups, and monitor the
 system during the challenge and deal with any outages that occur. 
 
 Organizations can instead choose to host Makahiki with Heroku.  This incurs
-a cost (we estimate about $200 for a one month challenge), but has the benefit
+a cost (we estimate from $50-$100 per month of the challenge), but has the benefit
 that no hardware or IT resources are required.
 
 .. toctree::
