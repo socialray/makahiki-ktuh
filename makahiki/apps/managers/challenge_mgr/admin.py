@@ -46,7 +46,7 @@ class PageInfoAdmin(admin.ModelAdmin):
 class DesignerPageInfoAdmin(admin.ModelAdmin):
     """Designer admin interface for PageInfo entries."""
     list_display = ["name", "unlock_condition", "priority"]
-    
+
     fieldsets = (
         (None,
             {"fields":
