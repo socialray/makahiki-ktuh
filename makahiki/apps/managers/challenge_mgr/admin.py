@@ -46,7 +46,7 @@ class PageInfoAdmin(admin.ModelAdmin):
 class DesignerPageInfoAdmin(admin.ModelAdmin):
     """Designer admin interface for PageInfo entries."""
     list_display = ["name", "unlock_condition", "priority"]
-    
+
     fieldsets = (
         (None,
             {"fields":
@@ -57,13 +57,13 @@ class DesignerPageInfoAdmin(admin.ModelAdmin):
                  "priority",)
              }),
         )
-    
+
     inlines = [PageSettingInline]
-    
+
     formfield_overrides = {
         models.TextField: {'widget': Textarea(attrs={'rows': 3, 'cols': 70})},
         }
-    
+
 
 admin.site.register(PageInfo, PageInfoAdmin)
 challenge_designer_site.register(PageInfo, DesignerPageInfoAdmin)

@@ -1,5 +1,5 @@
-WattDepot Installation (Local)
-==============================
+Local installation of WattDepot
+===============================
 
 Hardware requirements 
 ---------------------
@@ -18,6 +18,3 @@ Follow the `WattDepot local install`_ instructions
 .. _WattDepot local install: http://code.google.com/p/wattdepot/wiki/InstallingWattDepotServerLocally
 
 
-Makahiki-specific WattDepot instructions
-----------------------------------------
-To be added in the future...

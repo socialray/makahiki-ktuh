@@ -1,27 +1,26 @@
-.. _section-installing-makahiki:
+.. _section-software-installation:
 
 
-Installing Makahiki
-===================
+Software Installation
+=====================
 
-Makahiki supports two forms of installation: local (on your own machine)
-and cloud-based (to the Heroku application hosting service).
+The first step in using Makahiki is to install the software.  In order to do this, you
+must make two decisions:
 
-Developers of Makahiki will want to install the system locally.
+  1. Will Makahiki be installed and run locally in your own IT environment, or do you want
+  Makahiki to be hosted and run "in the cloud", through the Heroku PaaS infrastructure? 
 
-Organizations will want to install Makahiki locally if they wish to host
-the system themselves.  This requires sufficient hardware resources
-and IT support to do the installation, perform backups, and monitor the
-system during the challenge and deal with any outages that occur. 
+  2. Do you desire automated, near real-time monitoring of energy data?  If so, you will
+  need to also install WattDepot, a system for collection, storage, and analysis of energy
+  data.
 
-Organizations can instead choose to host Makahiki with Heroku.  This incurs
-a cost (we estimate about $200 for a one month challenge), but has the benefit
-that no hardware or IT resources are required.
+The installation process depends upon your answers to these questions.  The following
+sections go into more detail on these issues.
+
 
 .. toctree::
    :maxdepth: 2
 
-   Local installation on Mac OS X or Linux <installation-makahiki-local>
-   Local installation on Windows <installation-makahiki-windows>
-   Heroku installation <installation-makahiki-heroku>
+   installation-makahiki
+   installation-wattdepot
 
