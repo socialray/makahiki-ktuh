@@ -215,6 +215,8 @@ challenge_mgr.register_designer_challenge_info_model("Scheduler (Celery) - Optio
 
 challenge_mgr.register_developer_challenge_info_model("Challenge", 1, ChallengeSetting, 1)
 challenge_mgr.register_developer_challenge_info_model("Challenge", 1, RoundSetting, 2)
+UploadImage.__doc__ = "Uploaded images"
+challenge_mgr.register_developer_challenge_info_model("Misc", 7, UploadImage, 1)
 challenge_mgr.register_developer_challenge_info_model("Other Settings", 3, PageInfo, 1)
 challenge_mgr.register_developer_challenge_info_model("Scheduler (Celery)", \
                                                       5, CrontabSchedule, 5)

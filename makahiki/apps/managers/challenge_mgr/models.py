@@ -166,7 +166,7 @@ class ChallengeSetting(models.Model):
 
 
 class UploadImage(models.Model):
-    """Defines the global settings for the challenge."""
+    """Defines the table for uploaded images."""
     image = models.ImageField(
         upload_to=media_file_path(_MEDIA_LOCATION_UPLOAD),
         max_length=255, blank=True, null=True,

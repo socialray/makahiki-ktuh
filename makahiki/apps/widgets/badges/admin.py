@@ -1,7 +1,7 @@
 """Administrator interface to badge."""
 from django.contrib import admin
 from apps.managers.challenge_mgr import challenge_mgr
-from apps.widgets.badges.models import Badge
+from apps.widgets.badges.models import Badge, BadgeAward
 
 
 class BadgeAdmin(admin.ModelAdmin):
@@ -13,4 +13,6 @@ class BadgeAdmin(admin.ModelAdmin):
     ordering = ["priority"]
 
 admin.site.register(Badge, BadgeAdmin)
+admin.site.register(BadgeAward)
 challenge_mgr.register_designer_game_info_model("Badge Game Mechanics", Badge)
+challenge_mgr.register_admin_game_info_model("Badge Game Mechanics", BadgeAward)
