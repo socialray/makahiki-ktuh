@@ -1,7 +1,7 @@
 .. _section-configuration-game-admin-participation-game:
 
-Configure Participation Game
-============================
+Design the Participation Game
+=============================
 
 Configure Participation Settings
 --------------------------------
@@ -14,8 +14,5 @@ After clicking on the "Participation Settings" link in the Game Admin widget, Yo
 
 You can change the points amount for each participation percentage.
 
-Click "Save" when finished
---------------------------
-
-Remember to click the Save button at the bottom of the page when finished to save your changes.
+.. note:: Remember to click the Save button at the bottom of the page when finished to save your changes.
 

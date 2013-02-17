@@ -1,9 +1,9 @@
-.. _section-execution:
+.. _section-challenge-management:
 
-Challenge Execution
-===================
+Challenge Management
+====================
 
-Running a challenge includes the following tasks:
+Managing a running challenge includes the following tasks:
 
 .. toctree::
    :maxdepth: 1

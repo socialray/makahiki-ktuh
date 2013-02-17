@@ -1,7 +1,7 @@
 .. _section-configuration-game-admin-badge:
 
-Configure Badge Game Mechanics
-==============================
+Design the Badge Game Mechanics
+===============================
 
 Select a badge
 --------------
@@ -26,8 +26,5 @@ Clicking on a badge instance brings up a page with information about the badge:
    :align: center
 
 
-Click "Save" when finished
---------------------------
-
-Remember to click the Save button at the bottom of the page when finished to save your changes.
+.. note:: Remember to click the Save button at the bottom of the page when finished to save your changes.
 

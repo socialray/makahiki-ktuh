@@ -1,14 +1,17 @@
 .. _section-configuration-game-admin-smartgrid-game:
 
-Deisgn and Congfigure the Smart Grid Game
-=========================================
+Design the Smart Grid Game
+==========================
 
-Designing the smart grid game could be complicated. You may want to farmiliar yourself about the concept of the smartgrid game by reviewing the following two pages:
+Designing the Smart Grid Game (SGG) is somewhat complicated. You can learn more about the design
+of the SGG by reviewing the following two pages:
+
   * `Introduction to smart grid game`_
   * `Designing your Smart Grid Game`_
 
-Once you design the smart grid game using the spreadsheet tool,
-You could use the Smart Grid game admin widget to configure and implementing the smartgrid game in the Makahiki instance. The following screenshot is an overview of the smart grid game admin widget.
+We recommend that you create a design of your SGG using a spreadsheet,
+then use the SGG admin widget to implement your design. 
+The following screenshot is an overview of the smart grid game admin widget:
 
 .. figure:: figs/configuration/configuration-game-admin-smartgrid-game.1.png
    :width: 600 px
@@ -17,16 +20,17 @@ You could use the Smart Grid game admin widget to configure and implementing the
 .. _Introduction to smart grid game: http://www.kukuicup.org/game-mechanics/smart-grid-game
 .. _Designing your Smart Grid Game: http://www.kukuicup.org/game-mechanics/smart-grid-game/designing-a-smart-grid-game
 
-Configure the Level
--------------------
+Configure the set of levels
+---------------------------
 
-First, you will configure the levels of your smart grid game. Click on the "Levels" link in the admin widget, a page similar to the following should appear:
+The first step is to specify the set of levels in your SGG. 
+Click on the "Levels" link in the admin widget, a page similar to the following should appear:
 
 .. figure:: figs/configuration/configuration-game-admin-smartgrid-game-level-list.png
    :width: 600 px
    :align: center
 
-This is the list of levels for the smart grid game. Clicking on the name link, will bring up the following screen to edit or change the level, as shown in the following screenshot:
+This is the list of levels for the smart grid game. Clicking on the name link will bring up the following screen to edit or change the level:
 
 .. figure:: figs/configuration/configuration-game-admin-smartgrid-game-level-change.png
    :width: 600 px
@@ -42,8 +46,8 @@ You can also click on the "Add level" button in the list page to create a new le
 Configure the Category
 ----------------------
 
-Second, you will configure the categories of your smart grid game. Similar to the  confguration of 
-levels, you can click the "Categories" link to enter the pages to change and existing category or 
+The next step is to specify the category titles in your SGG. Similar to the  configuration of 
+levels, you click the "Categories" link to change an existing category or 
 add a new category for the smart grid game.
 
 .. figure:: figs/configuration/configuration-game-admin-smartgrid-game-category-list.png
@@ -58,12 +62,12 @@ bring up the following screen to edit or change the category, as shown in the fo
    :align: center
 
 The name is the label used in the smart grid game, the slug is referenced by smart grid actions to 
-determine which category the action belongs to. The priority determins how the categories are layed 
+determine which category the action belongs to. The priority determines how the categories are layed 
 out in the smart grid game, lowest to highest.
 
-Configure the Action
---------------------
-Third, you will configure the actions for your smart grid game. It is the most complicated and time consuming part, depending on the size and complexity of your smart grid game.
+Configure the set of actions
+----------------------------
+The next step is to specify the actions for your smart grid game. It is the most complicated and time consuming part, depending on the size and complexity of your smart grid game.
 
 By clicking on the "Actions" link, you will see a page similar to the following:
 
@@ -106,8 +110,8 @@ The following page is an example of an activity type action:
 For excursion, the "is excursion" checkbox need to be set.
 
 
-Adding an Commitment
---------------------
+Adding a Commitment
+-------------------
 
 You can click on the "Add Commitment" button on the top right corner of the page to add a new commitment.
 
@@ -118,8 +122,5 @@ The following page is an example of an activity type action:
    :align: center
 
 
-Click "Save" when finished
---------------------------
-
-Remember to click the Save button at the bottom of the page when finished to save your changes.
+.. note:: Remember to click the Save button at the bottom of the page when finished to save your changes.
 

@@ -1,4 +1,4 @@
-.. _section-configuration:
+.. _section-site-configuration:
 
 
 Site Configuration
@@ -19,7 +19,9 @@ fixture, and that the server is now running.
    :maxdepth: 2
 
    configuration-settings-page
-   configuration-challenge-admin
+   configuration-system-administration-authentication
+   configuration-system-administration-wattdepot
+   configuration-system-administration-email
 
 
 

@@ -1,7 +1,7 @@
 .. _section-configuration-game-admin-raffle-game:
 
-Configure Raffle Game
-=====================
+Design the Raffle Game
+======================
 
 Select Raffle Prize
 -------------------
@@ -27,8 +27,5 @@ Clicking on a raffle prize instance brings up a page with information about the 
 
 The "Winner" of the raffle prize is normally randomly picked by the system at the end of the round. At the end of the page, you can also see a list of users that allocated raffle tickets for this raffle prize.
 
-Click "Save" when finished
---------------------------
-
-Remember to click the Save button at the bottom of the page when finished to save your changes.
+.. note:: Remember to click the Save button at the bottom of the page when finished to save your changes.
 

@@ -1,7 +1,7 @@
 .. _section-configuration-game-admin-quest:
 
-Configure Quest Game Mechanics
-==============================
+Design the Quest Game Mechanics
+===============================
 
 Select a Quest
 --------------
@@ -26,8 +26,5 @@ Clicking on a quest instance brings up a page with information about the quest:
    :align: center
 
 
-Click "Save" when finished
---------------------------
-
-Remember to click the Save button at the bottom of the page when finished to save your changes.
+.. note:: Remember to click the Save button at the bottom of the page when finished to save your changes.
 

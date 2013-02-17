@@ -15,6 +15,11 @@ Makahiki Manual
    developer-guide
    reference-guide
 
+To Do List
+----------
+
+.. todolist::
+
 Indices and tables
 ------------------
 
