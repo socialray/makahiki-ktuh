@@ -10,6 +10,7 @@ from apps.widgets.notifications.models import NoticeTemplate, UserNotification
 from apps.widgets.raffle.models import RafflePrize, RaffleTicket
 from django.http import HttpResponseRedirect
 from django.db.utils import IntegrityError
+from apps.admin.admin import challenge_designer_site, challenge_manager_site, developer_site
 
 
 class RaffleTicketInline(admin.TabularInline):
@@ -70,7 +71,7 @@ class RafflePrizeAdmin(admin.ModelAdmin):
     def change_round(self, request, queryset):
         """Change the round for the selected Raffle Prizes."""
         _ = queryset
-        selected = request.POST.getlist(admin.ACTION_CHECKBOX_NAME)
+        selected = request.RafflePrize.getlist(admin.ACTION_CHECKBOX_NAME)
         return HttpResponseRedirect(reverse("bulk_raffle_round_change",
                                             args=("raffleprize", "round",)) +
                                     "?ids=%s" % (",".join(selected)))
@@ -107,5 +108,8 @@ class RafflePrizeAdmin(admin.ModelAdmin):
     notice_sent.short_description = 'Winner Notice Sent'
 
 admin.site.register(RafflePrize, RafflePrizeAdmin)
+challenge_designer_site.register(RafflePrize, RafflePrizeAdmin)
+challenge_manager_site.register(RafflePrize, RafflePrizeAdmin)
+developer_site.register(RafflePrize, RafflePrizeAdmin)
 challenge_mgr.register_designer_game_info_model("Raffle Game", RafflePrize)
 challenge_mgr.register_developer_game_info_model("Raffle Game", RafflePrize)

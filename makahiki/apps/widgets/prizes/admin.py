@@ -9,6 +9,7 @@ from apps.widgets.notifications.models import UserNotification, NoticeTemplate
 from apps.widgets.prizes.models import Prize
 from django.http import HttpResponseRedirect
 from django.db.utils import IntegrityError
+from apps.admin.admin import challenge_designer_site, challenge_manager_site, developer_site
 
 
 class PrizeAdmin(admin.ModelAdmin):
@@ -111,5 +112,8 @@ class PrizeAdmin(admin.ModelAdmin):
 
 
 admin.site.register(Prize, PrizeAdmin)
+challenge_designer_site.register(Prize, PrizeAdmin)
+challenge_manager_site.register(Prize, PrizeAdmin)
+developer_site.register(Prize, PrizeAdmin)
 challenge_mgr.register_designer_game_info_model("Top Score Game", Prize)
 challenge_mgr.register_developer_game_info_model("Top Score Game", Prize)

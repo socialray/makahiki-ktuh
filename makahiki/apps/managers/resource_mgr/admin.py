@@ -4,6 +4,7 @@ from apps.managers.challenge_mgr import challenge_mgr
 
 from apps.managers.resource_mgr.models import EnergyUsage, WaterUsage, ResourceSetting, \
     ResourceBlackoutDate, WasteUsage
+from apps.admin.admin import challenge_designer_site, challenge_manager_site, developer_site
 
 
 class UsageAdmin(admin.ModelAdmin):
@@ -14,7 +15,13 @@ class UsageAdmin(admin.ModelAdmin):
     date_hierarchy = "date"
 
 admin.site.register(EnergyUsage, UsageAdmin)
+challenge_designer_site.register(EnergyUsage, UsageAdmin)
+challenge_manager_site.register(EnergyUsage, UsageAdmin)
+developer_site.register(EnergyUsage, UsageAdmin)
 admin.site.register(WaterUsage, UsageAdmin)
+challenge_designer_site.register(WaterUsage, UsageAdmin)
+challenge_manager_site.register(WaterUsage, UsageAdmin)
+developer_site.register(WaterUsage, UsageAdmin)
 
 
 class ResourceSettingsAdmin(admin.ModelAdmin):
@@ -29,6 +36,9 @@ class ResourceSettingsAdmin(admin.ModelAdmin):
         return False
 
 admin.site.register(ResourceSetting, ResourceSettingsAdmin)
+challenge_designer_site.register(ResourceSetting, ResourceSettingsAdmin)
+challenge_manager_site.register(ResourceSetting, ResourceSettingsAdmin)
+developer_site.register(ResourceSetting, ResourceSettingsAdmin)
 challenge_mgr.register_designer_challenge_info_model("Other Settings", 3, ResourceSetting, 5)
 
 
@@ -37,6 +47,9 @@ class ResourceBlackoutDateAdmin(admin.ModelAdmin):
     list_display = ["date", "description"]
 
 admin.site.register(ResourceBlackoutDate, ResourceBlackoutDateAdmin)
+challenge_designer_site.register(ResourceBlackoutDate, ResourceBlackoutDateAdmin)
+challenge_manager_site.register(ResourceBlackoutDate, ResourceBlackoutDateAdmin)
+developer_site.register(ResourceBlackoutDate, ResourceBlackoutDateAdmin)
 challenge_mgr.register_designer_challenge_info_model("Other Settings", 3, ResourceBlackoutDate, 4)
 
 challenge_mgr.register_developer_challenge_info_model("Resources", 5, ResourceSetting, 1)

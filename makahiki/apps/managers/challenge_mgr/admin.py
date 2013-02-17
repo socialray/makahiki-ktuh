@@ -77,6 +77,9 @@ class PageSettingAdmin(admin.ModelAdmin):
     list_editable = ["widget", "enabled"]
 
 admin.site.register(PageSetting, PageSettingAdmin)
+challenge_designer_site.register(PageSetting, PageSettingAdmin)
+challenge_manager_site.register(PageSetting, PageSettingAdmin)
+developer_site.register(PageSetting, PageSettingAdmin)
 
 
 class GameSettingInline(admin.TabularInline):
@@ -98,6 +101,9 @@ class GameInfoAdmin(admin.ModelAdmin):
     inlines = [GameSettingInline]
 
 admin.site.register(GameInfo, GameInfoAdmin)
+challenge_designer_site.register(GameInfo, GameInfoAdmin)
+challenge_manager_site.register(GameInfo, GameInfoAdmin)
+developer_site.register(GameInfo, GameInfoAdmin)
 
 
 class RoundSettingAdmin(admin.ModelAdmin):
@@ -105,6 +111,9 @@ class RoundSettingAdmin(admin.ModelAdmin):
     list_display = ["name", "start", "end", "round_reset", "display_scoreboard"]
 
 admin.site.register(RoundSetting, RoundSettingAdmin)
+challenge_designer_site.register(RoundSetting, RoundSettingAdmin)
+challenge_manager_site.register(RoundSetting, RoundSettingAdmin)
+developer_site.register(RoundSetting, RoundSettingAdmin)
 
 
 class SponsorsInline(admin.TabularInline):
@@ -193,7 +202,11 @@ class ChallengeSettingAdmin(admin.ModelAdmin):
         return False
 
 admin.site.register(ChallengeSetting, ChallengeSettingAdmin)
+challenge_designer_site.register(ChallengeSetting, ChallengeSettingAdmin)
+challenge_manager_site.register(ChallengeSetting, ChallengeSettingAdmin)
+developer_site.register(ChallengeSetting, ChallengeSettingAdmin)
 admin.site.register(UploadImage)
+developer_site.register(UploadImage)
 
 challenge_mgr.register_designer_challenge_info_model("Challenge", 1, ChallengeSetting, 1)
 challenge_mgr.register_designer_challenge_info_model("Challenge", 1, RoundSetting, 2)
@@ -217,6 +230,7 @@ challenge_mgr.register_designer_challenge_info_model("Scheduler (Celery) - Optio
 challenge_mgr.register_developer_challenge_info_model("Challenge", 1, ChallengeSetting, 1)
 challenge_mgr.register_developer_challenge_info_model("Challenge", 1, RoundSetting, 2)
 admin.site.register(Sponsor)
+developer_site.register(Sponsor)
 challenge_mgr.register_developer_challenge_info_model("Challenge", 1, Sponsor, 3)
 challenge_mgr.register_developer_challenge_info_model("Games", 3, GameInfo, 2)
 challenge_mgr.register_developer_challenge_info_model("Games", 3, PageInfo, 1)

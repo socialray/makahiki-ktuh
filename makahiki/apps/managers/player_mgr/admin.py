@@ -6,6 +6,7 @@ from apps.managers.challenge_mgr import challenge_mgr
 from apps.managers.player_mgr.models import Profile
 from apps.widgets.badges.models import BadgeAward
 from django.forms.models import BaseInlineFormSet
+from apps.admin.admin import challenge_designer_site, challenge_manager_site, developer_site
 
 
 class BadgeAwardFormSet(BaseInlineFormSet):
@@ -53,6 +54,9 @@ class ProfileAdmin(admin.ModelAdmin):
 
 
 admin.site.register(Profile, ProfileAdmin)
+challenge_designer_site.register(Profile, ProfileAdmin)
+challenge_manager_site.register(Profile, ProfileAdmin)
+developer_site.register(Profile, ProfileAdmin)
 #challenge_mgr.register_site_admin_model("Players", Profile)
 
 
@@ -106,5 +110,8 @@ admin.site.unregister(User)
 User.__doc__ = "Represents a player in the system."
 User.admin_tool_tip = "Challenge Players. They must be defined before anyone can play."
 admin.site.register(User, MakahikiUserAdmin)
+challenge_designer_site.register(User, MakahikiUserAdmin)
+challenge_manager_site.register(User, MakahikiUserAdmin)
+developer_site.register(User, MakahikiUserAdmin)
 challenge_mgr.register_designer_challenge_info_model("Players", 2, User, 2)
 challenge_mgr.register_developer_challenge_info_model("Players", 2, User, 3)

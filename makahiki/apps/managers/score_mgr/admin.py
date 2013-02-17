@@ -4,6 +4,7 @@ from apps.managers.challenge_mgr import challenge_mgr
 
 from apps.managers.score_mgr.models import ScoreSetting, ScoreboardEntry, PointsTransaction, \
     ReferralSetting
+from apps.admin.admin import challenge_designer_site, challenge_manager_site, developer_site
 
 
 class PointsTransactionAdmin(admin.ModelAdmin):
@@ -13,6 +14,9 @@ class PointsTransactionAdmin(admin.ModelAdmin):
     date_hierarchy = "transaction_date"
 
 admin.site.register(PointsTransaction, PointsTransactionAdmin)
+challenge_designer_site.register(PointsTransaction, PointsTransactionAdmin)
+challenge_manager_site.register(PointsTransaction, PointsTransactionAdmin)
+developer_site.register(PointsTransaction, PointsTransactionAdmin)
 
 
 class ScoreboardEntryAdmin(admin.ModelAdmin):
@@ -22,6 +26,9 @@ class ScoreboardEntryAdmin(admin.ModelAdmin):
     list_filter = ["round_name"]
 
 admin.site.register(ScoreboardEntry, ScoreboardEntryAdmin)
+challenge_designer_site.register(ScoreboardEntry, ScoreboardEntryAdmin)
+challenge_manager_site.register(ScoreboardEntry, ScoreboardEntryAdmin)
+developer_site.register(ScoreboardEntry, ScoreboardEntryAdmin)
 
 
 class ScoreSettingAdmin(admin.ModelAdmin):
@@ -39,6 +46,9 @@ class ScoreSettingAdmin(admin.ModelAdmin):
         return False
 
 admin.site.register(ScoreSetting, ScoreSettingAdmin)
+challenge_designer_site.register(ScoreSetting, ScoreSettingAdmin)
+challenge_manager_site.register(ScoreSetting, ScoreSettingAdmin)
+developer_site.register(ScoreSetting, ScoreSettingAdmin)
 
 
 class ReferralSettingAdmin(admin.ModelAdmin):
@@ -55,6 +65,9 @@ class ReferralSettingAdmin(admin.ModelAdmin):
         return False
 
 admin.site.register(ReferralSetting, ReferralSettingAdmin)
+challenge_designer_site.register(ReferralSetting, ReferralSettingAdmin)
+challenge_manager_site.register(ReferralSetting, ReferralSettingAdmin)
+developer_site.register(ReferralSetting, ReferralSettingAdmin)
 
 
 challenge_mgr.register_designer_challenge_info_model("Challenge", 1, ScoreSetting, 3)

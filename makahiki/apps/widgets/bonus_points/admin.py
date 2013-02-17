@@ -1,6 +1,7 @@
 """Admin definition for Bonus Points widget."""
 from django.shortcuts import render_to_response
 from django.template import RequestContext
+from apps.admin.admin import challenge_designer_site, challenge_manager_site, developer_site
 
 
 '''
@@ -95,6 +96,9 @@ class BonusPointAdmin(admin.ModelAdmin):
 
 
 admin.site.register(BonusPoint, BonusPointAdmin)
+challenge_designer_site.register(BonusPoint, BonusPointAdmin)
+challenge_manager_site.register(BonusPoint, BonusPointAdmin)
+developer_site.register(BonusPoint, BonusPointAdmin)
 challenge_mgr.register_designer_game_info_model("Smartgrid Game", BonusPoint)
 challenge_mgr.register_admin_game_info_model("Smartgrid Game", BonusPoint)
 challenge_mgr.register_developer_game_info_model("Smartgrid Game", BonusPoint)

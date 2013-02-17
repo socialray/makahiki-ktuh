@@ -6,11 +6,21 @@ from apps.managers.resource_mgr.models import WaterUsage
 from apps.widgets.resource_goal.admin import GoalSettingsAdmin, GoalAdmin, BaselineDailyAdmin
 from apps.widgets.resource_goal.models import WaterGoalSetting, WaterGoal, WaterBaselineDaily, \
     WaterBaselineHourly
+from apps.admin.admin import challenge_designer_site, challenge_manager_site, developer_site
 
 
 admin.site.register(WaterGoalSetting, GoalSettingsAdmin)
+challenge_designer_site.register(WaterGoalSetting, GoalSettingsAdmin)
+challenge_manager_site.register(WaterGoalSetting, GoalSettingsAdmin)
+developer_site.register(WaterGoalSetting, GoalSettingsAdmin)
 admin.site.register(WaterGoal, GoalAdmin)
+challenge_designer_site.register(WaterGoal, GoalAdmin)
+challenge_manager_site.register(WaterGoal, GoalAdmin)
+developer_site.register(WaterGoal, GoalAdmin)
 admin.site.register(WaterBaselineDaily, BaselineDailyAdmin)
+challenge_designer_site.register(WaterBaselineDaily, BaselineDailyAdmin)
+challenge_manager_site.register(WaterBaselineDaily, BaselineDailyAdmin)
+developer_site.register(WaterBaselineDaily, BaselineDailyAdmin)
 
 challenge_mgr.register_designer_game_info_model("Water Game", WaterGoalSetting)
 challenge_mgr.register_admin_game_info_model("Water Game", WaterUsage)

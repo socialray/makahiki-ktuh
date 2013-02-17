@@ -6,6 +6,7 @@ from apps.managers.challenge_mgr import challenge_mgr
 from apps.utils import utils
 
 from apps.widgets.quests.models import Quest
+from apps.admin.admin import challenge_designer_site, challenge_manager_site, developer_site
 
 
 class QuestAdminForm(forms.ModelForm):
@@ -38,5 +39,8 @@ class QuestAdmin(admin.ModelAdmin):
     form = QuestAdminForm
 
 admin.site.register(Quest, QuestAdmin)
+challenge_designer_site.register(Quest, QuestAdmin)
+challenge_manager_site.register(Quest, QuestAdmin)
+developer_site.register(Quest, QuestAdmin)
 challenge_mgr.register_designer_game_info_model("Quest Game Mechanics", Quest)
 challenge_mgr.register_developer_game_info_model("Quest Game Mechanics", Quest)

@@ -5,6 +5,7 @@ from django import forms
 from apps.managers.challenge_mgr import challenge_mgr
 
 from apps.widgets.help.models import HelpTopic
+from apps.admin.admin import challenge_designer_site, challenge_manager_site, developer_site
 
 
 class HelpAdminForm(forms.ModelForm):
@@ -44,5 +45,8 @@ class HelpTopicAdmin(admin.ModelAdmin):
     form = HelpAdminForm
 
 admin.site.register(HelpTopic, HelpTopicAdmin)
+challenge_designer_site.register(HelpTopic, HelpTopicAdmin)
+challenge_manager_site.register(HelpTopic, HelpTopicAdmin)
+developer_site.register(HelpTopic, HelpTopicAdmin)
 challenge_mgr.register_designer_challenge_info_model("Other Settings", 3, HelpTopic, 2)
 challenge_mgr.register_developer_challenge_info_model("Challenge", 1, HelpTopic, 5)

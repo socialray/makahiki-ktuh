@@ -21,6 +21,7 @@ from django.forms import TextInput, Textarea
 from django.core.urlresolvers import reverse
 from django.contrib import messages
 from django.db.utils import IntegrityError
+from apps.admin.admin import challenge_designer_site, challenge_manager_site, developer_site
 
 
 class ConfirmationCodeAdmin(admin.ModelAdmin):
@@ -68,6 +69,9 @@ class ConfirmationCodeAdmin(admin.ModelAdmin):
 
 
 admin.site.register(ConfirmationCode, ConfirmationCodeAdmin)
+challenge_designer_site.register(ConfirmationCode, ConfirmationCodeAdmin)
+challenge_manager_site.register(ConfirmationCode, ConfirmationCodeAdmin)
+developer_site.register(ConfirmationCode, ConfirmationCodeAdmin)
 
 
 class TextQuestionInlineFormSet(BaseInlineFormSet):
@@ -333,6 +337,9 @@ class LevelAdmin(admin.ModelAdmin):
 
 
 admin.site.register(Level, LevelAdmin)
+challenge_designer_site.register(Level, LevelAdmin)
+challenge_manager_site.register(Level, LevelAdmin)
+developer_site.register(Level, LevelAdmin)
 challenge_mgr.register_designer_game_info_model("Smartgrid Game", Level)
 challenge_mgr.register_developer_game_info_model("Smartgrid Game", Level)
 
@@ -343,6 +350,9 @@ class CategoryAdmin(admin.ModelAdmin):
     prepopulated_fields = {"slug": ("name",)}
 
 admin.site.register(Category, CategoryAdmin)
+challenge_designer_site.register(Category, CategoryAdmin)
+challenge_manager_site.register(Category, CategoryAdmin)
+developer_site.register(Category, CategoryAdmin)
 challenge_mgr.register_designer_game_info_model("Smartgrid Game", Category)
 challenge_mgr.register_developer_game_info_model("Smartgrid Game", Category)
 
@@ -515,10 +525,16 @@ class ActivityAdmin(admin.ModelAdmin):
 
 
 admin.site.register(Action, ActionAdmin)
+challenge_designer_site.register(Action, ActionAdmin)
+challenge_manager_site.register(Action, ActionAdmin)
+developer_site.register(Action, ActionAdmin)
 challenge_mgr.register_designer_game_info_model("Smartgrid Game", Action)
 challenge_mgr.register_developer_game_info_model("Smartgrid Game", Action)
 
 admin.site.register(Activity, ActivityAdmin)
+challenge_designer_site.register(Activity, ActivityAdmin)
+challenge_manager_site.register(Activity, ActivityAdmin)
+developer_site.register(Activity, ActivityAdmin)
 
 
 class EventAdmin(admin.ModelAdmin):
@@ -550,6 +566,9 @@ class EventAdmin(admin.ModelAdmin):
 
 
 admin.site.register(Event, EventAdmin)
+challenge_designer_site.register(Event, EventAdmin)
+challenge_manager_site.register(Event, EventAdmin)
+developer_site.register(Event, EventAdmin)
 
 
 class CommitmentAdmin(admin.ModelAdmin):
@@ -581,6 +600,9 @@ class CommitmentAdmin(admin.ModelAdmin):
 
 
 admin.site.register(Commitment, CommitmentAdmin)
+challenge_designer_site.register(Commitment, CommitmentAdmin)
+challenge_manager_site.register(Commitment, CommitmentAdmin)
+developer_site.register(Commitment, CommitmentAdmin)
 
 
 class FillerAdmin(admin.ModelAdmin):
@@ -608,6 +630,9 @@ class FillerAdmin(admin.ModelAdmin):
 
 
 admin.site.register(Filler, FillerAdmin)
+challenge_designer_site.register(Filler, FillerAdmin)
+challenge_manager_site.register(Filler, FillerAdmin)
+developer_site.register(Filler, FillerAdmin)
 
 
 class ActionMemberAdminForm(forms.ModelForm):
@@ -781,6 +806,10 @@ class ActionMemberAdmin(admin.ModelAdmin):
         return super(ActionMemberAdmin, self).get_form(request, obj, **kwargs)
 
 admin.site.register(ActionMember, ActionMemberAdmin)
+challenge_designer_site.register(ActionMember, ActionMemberAdmin)
+challenge_manager_site.register(ActionMember, ActionMemberAdmin)
+developer_site.register(ActionMember, ActionMemberAdmin)
+
 challenge_mgr.register_admin_game_info_model("Smartgrid Game", ActionMember)
 challenge_mgr.register_developer_game_info_model("Smartgrid Game", ActionMember)
 
@@ -802,7 +831,13 @@ class TextReminderAdmin(admin.ModelAdmin):
 
 
 admin.site.register(EmailReminder, EmailReminderAdmin)
+challenge_designer_site.register(EmailReminder, EmailReminderAdmin)
+challenge_manager_site.register(EmailReminder, EmailReminderAdmin)
+developer_site.register(EmailReminder, EmailReminderAdmin)
 admin.site.register(TextReminder, TextReminderAdmin)
+challenge_designer_site.register(TextReminder, TextReminderAdmin)
+challenge_manager_site.register(TextReminder, TextReminderAdmin)
+developer_site.register(TextReminder, TextReminderAdmin)
 challenge_mgr.register_admin_challenge_info_model("Notifications", 2, EmailReminder, 2)
 challenge_mgr.register_admin_challenge_info_model("Notifications", 2, TextReminder, 3)
 challenge_mgr.register_developer_challenge_info_model("Status", 3, EmailReminder, 7)
