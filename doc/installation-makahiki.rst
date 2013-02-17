@@ -1,8 +1,8 @@
 .. _section-installing-makahiki:
 
 
-Installing Makahiki
-===================
+Install Makahiki
+================
 
 Makahiki supports two forms of installation: local (on your own machine)
 and cloud-based (to the Heroku application hosting service).

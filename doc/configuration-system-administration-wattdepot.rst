@@ -1,8 +1,8 @@
 .. _section-configuration-system-administration-wattdepot:
 
 
-Configuring WattDepot
-=====================
+Configure WattDepot
+===================
 
 From the Settings Page, click on the System Administration button to retrieve the following
 WattDepot configuration form (it occurs below the Authentication form):

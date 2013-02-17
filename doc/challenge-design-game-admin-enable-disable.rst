@@ -1,7 +1,7 @@
 .. _section-configuration-game-admin-enable-disable:
 
-Specify the set of games to appear in your challenge
-====================================================
+Design the set of games to appear in your challenge
+===================================================
 
 The challenge design page shows the set of games available in Makahiki and whether or not
 they are currently enabled for use in your challenge via the following widget:
@@ -10,10 +10,45 @@ they are currently enabled for use in your challenge via the following widget:
    :width: 600 px
    :align: center
 
-The above image shows that this instance of Makahiki supports nine games (Energy Game
-through Referral Game).  The small green and red icons on the right side indicate whether
-a game is currently enabled for the challenge.  In this case, all of the games but one (Water
-Game) are enabled. 
+The above image shows that this instance of Makahiki supports nine games.  The small green
+and red icons on the right side indicate whether a game is currently enabled for the
+challenge.  In this case, all of the games but one (Water Game) are enabled.
+
+The pre-defined games include:
+
+  * Energy Game.  This game awards points to players depending upon their ability to lower
+    their energy consumption.
+
+  * Water Game.  This game awards points to players depending upon their ability to lower
+    their water consumption.
+
+  * Smart Grid Game.  This game is the principle interface to the educational component of
+    Makahiki. The SGG awards points to players for successfully completing activities,
+    commitments, excursions, and events. 
+
+  * Top Score Game.  This game awards prizes to players and teams for earning the highest
+    number of points during a round.
+
+  * Raffle Game.  This game awards prizes to players if they have allocated their raffle
+    tickets to a particular raffle prize, and that raffle ticket was randomly selected by
+    the system at the end of a round.
+
+  * Participation Game.  This game awards points to players if they can successfully get a
+    certain percentage of their team members to participate in the challenge.
+
+  * Quest Game Mechanics.  This game mechanic provides a way for players to learn about features of
+    the challenge by guiding them through Quests.  
+
+  * Badge Game Mechanics.  This game mechanic provides a way for players to earn badges
+    for playing the game in a variety of ways. 
+
+  * Referral Game Mechanics.  This game mechanic provides a way for players to earn points
+    by getting other people to participate in the challenge. 
+
+
+
+.. todo:: In the image above, the Smart Grid Game is spelled Smartgrid Game.  If possible,
+          change to Smart Grid Game.
 
 
 Changing the settings associated with a game

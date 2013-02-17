@@ -1,7 +1,7 @@
 .. _section-configuration-settings-page:
 
-How to retrieve the Settings (admin) Page
-=========================================
+Retrieve the Settings Page
+==========================
 
 The on-line user interface to Makahiki administrative functions is obtained via the
 Settings page.  (There are also command-line administrative functions, which are

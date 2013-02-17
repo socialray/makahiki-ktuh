@@ -1,8 +1,8 @@
 .. _section-configuration-system-administration-authentication:
 
 
-Configuring authentication
-==========================
+Configure authentication
+========================
 
 From the Settings Page, click on the System Administration button to retrieve the following
 authentication configuration form:
