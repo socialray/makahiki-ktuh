@@ -61,3 +61,7 @@ challenge_mgr.register_designer_challenge_info_model("Challenge", 1, ScoreSettin
 challenge_mgr.register_designer_game_info_model("Referral Game Mechanics", ReferralSetting)
 challenge_mgr.register_admin_challenge_info_model("Status", 1, PointsTransaction, 4)
 challenge_mgr.register_admin_challenge_info_model("Status", 1, ScoreboardEntry, 5)
+challenge_mgr.register_developer_challenge_info_model("Challenge", 1, ScoreSetting, 3)
+challenge_mgr.register_developer_challenge_info_model("Status", 4, PointsTransaction, 2)
+challenge_mgr.register_developer_challenge_info_model("Status", 4, ScoreboardEntry, 3)
+challenge_mgr.register_developer_game_info_model("Referral Game Mechanics", ReferralSetting)

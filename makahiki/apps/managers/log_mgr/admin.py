@@ -23,3 +23,4 @@ class MakahikiLogAdmin(admin.ModelAdmin):
 
 admin.site.register(MakahikiLog, MakahikiLogAdmin)
 challenge_mgr.register_admin_challenge_info_model("Status", 1, MakahikiLog, 1)
+challenge_mgr.register_developer_challenge_info_model("Status", 4, MakahikiLog, 1)

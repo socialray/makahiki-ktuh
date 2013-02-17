@@ -53,6 +53,7 @@ class Level(models.Model):
     unlock_condition_text = models.CharField(
         max_length=400, null=True, blank=True,
         help_text="The description of the unlock condition.")
+    admin_tool_tip = "Smart Grid Level"
 
     def __unicode__(self):
         return self.name
@@ -263,6 +264,7 @@ class Action(models.Model):
         default=0,
         help_text="The point value to be awarded."
     )
+    admin_tool_tip = "Smartgrid game Actions"
 
     def __unicode__(self):
         return "%s: %s" % (self.type.capitalize(), self.title)
@@ -451,6 +453,7 @@ class ActionMember(models.Model):
     created_at = models.DateTimeField(editable=False, auto_now_add=True)
     updated_at = models.DateTimeField(editable=False, auto_now=True, null=True)
     admin_link = models.CharField(max_length=100, blank=True, null=True)
+    admin_tool_tip = "Player submission for Actions"
 
     class Meta:
         """meta"""

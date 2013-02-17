@@ -454,7 +454,7 @@ def _get_model_admin_info(model, priority):
     except AttributeError:
         tooltip = model.__doc__
     url = "%s/%s" % (model._meta.app_label, model._meta.module_name)
-    if model._meta.module_name in ['challengesetting', 'scoresetting']:
+    if model._meta.module_name in ['challengesetting', 'scoresetting', 'participationsetting']:
         url = "%s/%s/1" % (model._meta.app_label, model._meta.module_name)
     return {"name": capfirst(model._meta.verbose_name_plural),
             "tooltip": capfirst(tooltip),

@@ -3,7 +3,7 @@ from django.contrib import admin
 from apps.managers.challenge_mgr import challenge_mgr
 
 from apps.managers.resource_mgr.models import EnergyUsage, WaterUsage, ResourceSetting, \
-    ResourceBlackoutDate
+    ResourceBlackoutDate, WasteUsage
 
 
 class UsageAdmin(admin.ModelAdmin):
@@ -38,3 +38,9 @@ class ResourceBlackoutDateAdmin(admin.ModelAdmin):
 
 admin.site.register(ResourceBlackoutDate, ResourceBlackoutDateAdmin)
 challenge_mgr.register_designer_challenge_info_model("Other Settings", 3, ResourceBlackoutDate, 4)
+
+challenge_mgr.register_developer_challenge_info_model("Resources", 5, ResourceSetting, 1)
+challenge_mgr.register_developer_challenge_info_model("Resources", 5, ResourceBlackoutDate, 1)
+challenge_mgr.register_developer_game_info_model("Energy Game", EnergyUsage)
+challenge_mgr.register_developer_game_info_model("Water Game", WaterUsage)
+challenge_mgr.register_developer_game_info_model("Waste Game", WasteUsage)

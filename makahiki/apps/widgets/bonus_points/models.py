@@ -27,6 +27,7 @@ class BonusPoint(models.Model):
                                        help_text="Date Bonus Point code was created.")
     printed_or_distributed = models.BooleanField(default=False, editable=True,
                                 help_text="Has the code been printed or distributed.")
+    admin_tool_tip = "Challenge Bonus Points"
 
     def __unicode__(self):
         return self.code

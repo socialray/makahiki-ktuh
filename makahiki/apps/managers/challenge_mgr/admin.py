@@ -213,14 +213,18 @@ CrontabSchedule.__doc__ = "Defines the scheduled tasks."
 challenge_mgr.register_designer_challenge_info_model("Scheduler (Celery) - Optional", \
                                                      5, PeriodicTask, 5)
 
+# Developer Admin interface.
 challenge_mgr.register_developer_challenge_info_model("Challenge", 1, ChallengeSetting, 1)
 challenge_mgr.register_developer_challenge_info_model("Challenge", 1, RoundSetting, 2)
-UploadImage.__doc__ = "Uploaded images"
+admin.site.register(Sponsor)
+challenge_mgr.register_developer_challenge_info_model("Challenge", 1, Sponsor, 3)
+challenge_mgr.register_developer_challenge_info_model("Games", 3, GameInfo, 2)
+challenge_mgr.register_developer_challenge_info_model("Games", 3, PageInfo, 1)
+challenge_mgr.register_developer_challenge_info_model("Scheduler (Celery)", \
+                                                      6, CrontabSchedule, 5)
+challenge_mgr.register_developer_challenge_info_model("Scheduler (Celery)", \
+                                                      6, IntervalSchedule, 5)
+challenge_mgr.register_developer_challenge_info_model("Scheduler (Celery)", \
+                                                      6, PeriodicTask, 5)
+UploadImage.admin_tool_tip = "Uploaded images"
 challenge_mgr.register_developer_challenge_info_model("Misc", 7, UploadImage, 1)
-challenge_mgr.register_developer_challenge_info_model("Other Settings", 3, PageInfo, 1)
-challenge_mgr.register_developer_challenge_info_model("Scheduler (Celery)", \
-                                                      5, CrontabSchedule, 5)
-challenge_mgr.register_developer_challenge_info_model("Scheduler (Celery)", \
-                                                      5, IntervalSchedule, 5)
-challenge_mgr.register_developer_challenge_info_model("Scheduler (Celery)", \
-                                                      5, PeriodicTask, 5)

@@ -60,6 +60,7 @@ class Prize(models.Model):
         max_length=50,
         choices=AWARD_CRITERIA_CHOICES,
         help_text="The competition type of the award.")
+    admin_tool_tip = "Prizes for the highest score"
 
     def __unicode__(self):
         if self.round == None:

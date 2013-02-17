@@ -334,6 +334,7 @@ class LevelAdmin(admin.ModelAdmin):
 
 admin.site.register(Level, LevelAdmin)
 challenge_mgr.register_designer_game_info_model("Smartgrid Game", Level)
+challenge_mgr.register_developer_game_info_model("Smartgrid Game", Level)
 
 
 class CategoryAdmin(admin.ModelAdmin):
@@ -343,6 +344,7 @@ class CategoryAdmin(admin.ModelAdmin):
 
 admin.site.register(Category, CategoryAdmin)
 challenge_mgr.register_designer_game_info_model("Smartgrid Game", Category)
+challenge_mgr.register_developer_game_info_model("Smartgrid Game", Category)
 
 
 def redirect_urls(model_admin, url_type):
@@ -514,6 +516,7 @@ class ActivityAdmin(admin.ModelAdmin):
 
 admin.site.register(Action, ActionAdmin)
 challenge_mgr.register_designer_game_info_model("Smartgrid Game", Action)
+challenge_mgr.register_developer_game_info_model("Smartgrid Game", Action)
 
 admin.site.register(Activity, ActivityAdmin)
 
@@ -779,6 +782,7 @@ class ActionMemberAdmin(admin.ModelAdmin):
 
 admin.site.register(ActionMember, ActionMemberAdmin)
 challenge_mgr.register_admin_game_info_model("Smartgrid Game", ActionMember)
+challenge_mgr.register_developer_game_info_model("Smartgrid Game", ActionMember)
 
 
 class EmailReminderAdmin(admin.ModelAdmin):
@@ -801,3 +805,5 @@ admin.site.register(EmailReminder, EmailReminderAdmin)
 admin.site.register(TextReminder, TextReminderAdmin)
 challenge_mgr.register_admin_challenge_info_model("Notifications", 2, EmailReminder, 2)
 challenge_mgr.register_admin_challenge_info_model("Notifications", 2, TextReminder, 3)
+challenge_mgr.register_developer_challenge_info_model("Status", 3, EmailReminder, 7)
+challenge_mgr.register_developer_challenge_info_model("Status", 3, TextReminder, 8)

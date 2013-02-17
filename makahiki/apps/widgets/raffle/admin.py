@@ -108,3 +108,4 @@ class RafflePrizeAdmin(admin.ModelAdmin):
 
 admin.site.register(RafflePrize, RafflePrizeAdmin)
 challenge_mgr.register_designer_game_info_model("Raffle Game", RafflePrize)
+challenge_mgr.register_developer_game_info_model("Raffle Game", RafflePrize)

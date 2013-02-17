@@ -6,8 +6,10 @@ from apps.widgets.participation.models import ParticipationSetting, TeamParticip
 
 class ParticipationSettingAdmin(admin.ModelAdmin):
     """EnergyGoal administrator interface definition."""
-    list_display = ["points_50_percent", "points_75_percent", "points_100_percent", ]
-    list_display_links = ["points_50_percent", "points_75_percent", "points_100_percent", ]
+    list_display = ["name", ]
+    list_display_links = ["name", ]
+    page_text = "There must only be one Participation Setting.  You can edit the amount" + \
+    " of points awarded per player for the various levels of team participation."
 
     def has_add_permission(self, request):
         return False
@@ -31,3 +33,6 @@ class TeamParticipationAdmin(admin.ModelAdmin):
         return False
 
 admin.site.register(TeamParticipation, TeamParticipationAdmin)
+
+challenge_mgr.register_developer_game_info_model("Participation Game", ParticipationSetting)
+challenge_mgr.register_developer_game_info_model("Participation Game", TeamParticipation)

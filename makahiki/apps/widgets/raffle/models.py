@@ -34,6 +34,7 @@ class RafflePrize(models.Model):
     winner = models.ForeignKey(User, null=True, blank=True,
                                help_text="The winner of the raffle prize. Normally, this is "
                                          "randomly picked by the system at the end of the round.")
+    admin_tool_tip = ""
 
     def __unicode__(self):
         if self.round == None:

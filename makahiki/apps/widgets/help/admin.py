@@ -45,3 +45,4 @@ class HelpTopicAdmin(admin.ModelAdmin):
 
 admin.site.register(HelpTopic, HelpTopicAdmin)
 challenge_mgr.register_designer_challenge_info_model("Other Settings", 3, HelpTopic, 2)
+challenge_mgr.register_developer_challenge_info_model("Challenge", 1, HelpTopic, 5)

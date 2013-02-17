@@ -10,6 +10,9 @@ from apps.managers.team_mgr.models import Team
 class ParticipationSetting(models.Model):
     """participation settings models."""
 
+    name = models.CharField(default="Participation Settings",
+                            max_length="30", editable=False,
+                            help_text="The settings label.")
     points_50_percent = models.IntegerField(
         default=5,
         help_text="The point amount for 50 percent participation."
@@ -22,6 +25,7 @@ class ParticipationSetting(models.Model):
         default=10,
         help_text="The point amount for 100 percent participation."
     )
+    admin_tool_tip = "Points for different participation levels"
 
 
 class TeamParticipation(models.Model):

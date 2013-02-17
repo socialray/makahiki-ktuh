@@ -107,3 +107,4 @@ User.__doc__ = "Represents a player in the system."
 User.admin_tool_tip = "Challenge Players. They must be defined before anyone can play."
 admin.site.register(User, MakahikiUserAdmin)
 challenge_mgr.register_designer_challenge_info_model("Players", 2, User, 2)
+challenge_mgr.register_developer_challenge_info_model("Players", 2, User, 3)

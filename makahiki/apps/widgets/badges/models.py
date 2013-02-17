@@ -57,6 +57,7 @@ class Badge(models.Model):
         default=0,
         help_text="sorting order in the badge list, lower value (higher priority) appears first."
     )
+    admin_tool_tip = "Player Badges"
 
     def __unicode__(self):
         return self.name
@@ -67,6 +68,7 @@ class BadgeAward(models.Model):
     profile = models.ForeignKey(Profile)
     badge = models.ForeignKey(Badge)
     awarded_at = models.DateTimeField(default=datetime.now)
+    admin_tool_tip = "Awarded Badges"
 
     def save(self, *args, **kwargs):
         """custom save method."""
