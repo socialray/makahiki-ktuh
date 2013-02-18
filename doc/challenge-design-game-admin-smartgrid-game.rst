@@ -6,18 +6,43 @@ Design the Smart Grid Game
 Designing the Smart Grid Game (SGG) is somewhat complicated. You can learn more about the design
 of the SGG by reviewing the following two pages:
 
-  * `Introduction to smart grid game`_
+  * `Introduction to the Smart Grid Game`_
   * `Designing your Smart Grid Game`_
 
 We recommend that you create a design of your SGG using a spreadsheet,
 then use the SGG admin widget to implement your design. 
+
+The following screen image shows a typical Smart Grid Game interface:
+
+.. figure:: figs/configuration/configuration-game-admin-smartgrid-game-interface.png
+   :width: 600 px
+   :align: center
+
+There are three basic user interface components in the Smart Grid Game:
+
+  * **Levels.**  Each Smart Grid Game can have from 1 to 7 "Levels".  The screen image above
+    has 7 levels. Players begin with
+    access to the first level.  Additional levels can be unlocked based upon players
+    completing lower levels and/or certain dates and times being reached during the
+    challenge.
+
+  * **Categories.**  Each Level of a Smart Grid Game has a set of columns, labelled with a
+    name corresponding to its category.  In this screen image, the first category is "Get Started", and there are
+    five categories total.  Each Level has different category names and can
+    even have a different number of categories. 
+
+  * **Actions.**  The cells underneath a category label correspond to "Actions".  There
+    are several action types:  Activity, Commitment, Event, Excursion, Video.  In the
+    screen image, each of the five categories has five Action cells, so this Level of
+    this Smart Grid Game has a total of 25 Actions. 
+
 The following screenshot is an overview of the smart grid game admin widget:
 
 .. figure:: figs/configuration/configuration-game-admin-smartgrid-game.1.png
    :width: 600 px
    :align: center
 
-.. _Introduction to smart grid game: http://www.kukuicup.org/game-mechanics/smart-grid-game
+.. _Introduction to the Smart Grid Game: http://www.kukuicup.org/game-mechanics/smart-grid-game
 .. _Designing your Smart Grid Game: http://www.kukuicup.org/game-mechanics/smart-grid-game/designing-a-smart-grid-game
 
 Configure the set of levels

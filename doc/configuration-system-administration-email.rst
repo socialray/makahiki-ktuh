@@ -1,8 +1,8 @@
 .. _section-configuration-system-administration-email:
 
 
-Configuring Email
-=================
+Configure Email
+===============
 
 From the Settings Page, click on the System Administration button to retrieve the following
 Email configuration form (it occurs below the WattDepot configuration form):
