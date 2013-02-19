@@ -215,20 +215,22 @@ challenge_mgr.register_designer_challenge_info_model("Other Settings", 3, PageIn
 from djcelery.models import CrontabSchedule, PeriodicTask, IntervalSchedule
 CrontabSchedule.__doc__ = "Defines the schedule in crontab format (minute/hour/day)."
 challenge_designer_site.register(CrontabSchedule)
+developer_site.register(CrontabSchedule)
 challenge_mgr.register_designer_challenge_info_model("Scheduler (Celery) - Optional", \
                                                      5, CrontabSchedule, 5)
 
 IntervalSchedule.__doc__ = "Defines the schedule in intervals, such as every hour, every minutes."
 challenge_designer_site.register(IntervalSchedule)
+developer_site.register(IntervalSchedule)
 challenge_mgr.register_designer_challenge_info_model("Scheduler (Celery) - Optional", \
                                                      5, IntervalSchedule, 5)
 
 PeriodicTask.__doc__ = "Defines the scheduled tasks."
 challenge_designer_site.register(PeriodicTask)
+developer_site.register(PeriodicTask)
 challenge_mgr.register_designer_challenge_info_model("Scheduler (Celery) - Optional", \
                                                      5, PeriodicTask, 5)
 
-# Developer Admin interface.
 challenge_mgr.register_developer_challenge_info_model("Challenge", 1, ChallengeSetting, 1)
 challenge_mgr.register_developer_challenge_info_model("Challenge", 1, RoundSetting, 2)
 admin.site.register(Sponsor)
