@@ -1,12 +1,12 @@
 .. _section-configuration-challenge-admin-players-settings:
 
-Players Settings Page
-=====================
+Set up the player roster
+========================
 
 Adding new player(s)
 --------------------
 
-After clicking on the "Users" link in the Challenge Admin widget, a page similar to the following should appear:
+After clicking on the "Users" link in the Challenge Design, a page similar to the following should appear:
 
 .. figure:: figs/configuration/configuration-challenge-admin-players-settings.1.png
    :width: 600 px
@@ -14,7 +14,7 @@ After clicking on the "Users" link in the Challenge Admin widget, a page similar
 
 To add a new player, click the "Add user" button in the upper right corner. To load a list of users defined in a csv file, the "Bulk create users" button could be used, which will prompt you to upload a csv file from your local computer.
 
-The format of the csv file is the followings::
+The format of the csv file is as follows::
 
     team, firstname, lastname, email, username, password
 
@@ -38,8 +38,5 @@ Changing the Profile of an existing player
 
 Clicking on the "profile" link brings up a page to modify the  profile information of the player.
 
-Click "Save" when finished
---------------------------
-
-Remember to click the Save button at the bottom of the page when finished to save your changes.
+.. note:: Remember to click the Save button at the bottom of the page when finished to save your changes.
 

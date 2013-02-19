@@ -1,12 +1,9 @@
 .. _section-configuration-challenge-admin-teams-settings:
 
-Teams Settings Page
-===================
+Design the teams
+================
 
-Select teams settings
----------------------
-
-After clicking on the "Teams Settings" link in the Challenge Admin widget, a page similar to the following should appear:
+After clicking on the "Teams Settings" link in the Challenge Design page, a page similar to the following should appear:
 
 .. figure:: figs/configuration/configuration-challenge-admin-teams-settings.1.png
    :width: 600 px
@@ -32,8 +29,5 @@ Configure team settings
 
 In this example, clicking on the "Lehua-A" instance brings up this page with information about the team.  As with groups, you must provide a name and a slug (unique ID).  In addition, you specify the group to which this team belongs. 
 
-Click "Save" when finished
---------------------------
-
-Remember to click the Save button at the bottom of the page when finished to save your changes. 
+.. note:: Remember to click the Save button at the bottom of the page when finished to save your changes. 
 

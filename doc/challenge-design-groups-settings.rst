@@ -1,12 +1,9 @@
 .. _section-configuration-challenge-admin-groups-settings:
 
-Groups Settings Page
-====================
+Design the groups
+=================
 
-Select groups settings
-----------------------
-
-After clicking on the "Groups Settings" link in the Challenge Admin widget, a page similar to the following should appear:
+After clicking on the "Groups Settings" link in the Challenge Design page, a page similar to the following should appear:
 
 .. figure:: figs/configuration/configuration-challenge-admin-groups-settings.1.png
    :width: 600 px
@@ -34,8 +31,6 @@ In this example, clicking on the "Lehua" instance brings up this page with infor
 
 The members of a group are specified during team configuration.
 
-Click "Save" when finished
---------------------------
 
-Remember to click the Save button at the bottom of the page when finished to save your changes. 
+.. note:: Remember to click the Save button at the bottom of the page when finished to save your changes. 
 

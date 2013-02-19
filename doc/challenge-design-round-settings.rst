@@ -1,12 +1,9 @@
 .. _section-configuration-challenge-admin-round-settings:
 
-Round Settings Page
-===================
+Design the rounds
+=================
 
-Select round settings
----------------------
-
-After clicking on the "Round Settings" link in the Challenge Admin widget, a page similar to the following should appear:
+After clicking on the "Round Settings" link in the Challenge Design page, a page similar to the following should appear:
 
 .. figure:: figs/configuration/configuration-challenge-admin-round-settings.1.png
    :width: 600 px
@@ -26,8 +23,5 @@ Configure a round
 Clicking on a round name takes you to a page containing a form that allows you to edit the round attributes or delete the round entirely. 
 
 
-Click "Save" when finished
---------------------------
-
-Remember to click the Save button at the bottom of the page when finished to save your changes. 
+.. note:: Remember to click the Save button at the bottom of the page when finished to save your changes. 
 

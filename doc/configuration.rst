@@ -16,7 +16,7 @@ fixture, and that the server is now running.
 
 
 .. toctree::
-   :maxdepth: 2
+   :maxdepth: 1
 
    configuration-settings-page
    configuration-system-administration-authentication

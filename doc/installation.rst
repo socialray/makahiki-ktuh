@@ -19,7 +19,7 @@ sections go into more detail on these issues.
 
 
 .. toctree::
-   :maxdepth: 2
+   :maxdepth: 1
 
    installation-makahiki
    installation-wattdepot
