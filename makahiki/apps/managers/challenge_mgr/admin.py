@@ -214,15 +214,17 @@ challenge_mgr.register_designer_challenge_info_model("Other Settings", 3, PageIn
 
 from djcelery.models import CrontabSchedule, PeriodicTask, IntervalSchedule
 CrontabSchedule.__doc__ = "Defines the schedule in crontab format (minute/hour/day)."
+challenge_designer_site.register(CrontabSchedule)
 challenge_mgr.register_designer_challenge_info_model("Scheduler (Celery) - Optional", \
                                                      5, CrontabSchedule, 5)
 
-CrontabSchedule.__doc__ = "Defines the schedule in intervals, such as every hour, every minutes."
-
+IntervalSchedule.__doc__ = "Defines the schedule in intervals, such as every hour, every minutes."
+challenge_designer_site.register(IntervalSchedule)
 challenge_mgr.register_designer_challenge_info_model("Scheduler (Celery) - Optional", \
                                                      5, IntervalSchedule, 5)
 
-CrontabSchedule.__doc__ = "Defines the scheduled tasks."
+PeriodicTask.__doc__ = "Defines the scheduled tasks."
+challenge_designer_site.register(PeriodicTask)
 challenge_mgr.register_designer_challenge_info_model("Scheduler (Celery) - Optional", \
                                                      5, PeriodicTask, 5)
 
@@ -235,10 +237,10 @@ challenge_mgr.register_developer_challenge_info_model("Challenge", 1, Sponsor, 3
 challenge_mgr.register_developer_challenge_info_model("Games", 3, GameInfo, 2)
 challenge_mgr.register_developer_challenge_info_model("Games", 3, PageInfo, 1)
 challenge_mgr.register_developer_challenge_info_model("Scheduler (Celery)", \
-                                                      6, CrontabSchedule, 5)
+                                                      6, CrontabSchedule, 3)
 challenge_mgr.register_developer_challenge_info_model("Scheduler (Celery)", \
-                                                      6, IntervalSchedule, 5)
+                                                      6, IntervalSchedule, 3)
 challenge_mgr.register_developer_challenge_info_model("Scheduler (Celery)", \
-                                                      6, PeriodicTask, 5)
+                                                      6, PeriodicTask, 1)
 UploadImage.admin_tool_tip = "Uploaded images"
 challenge_mgr.register_developer_challenge_info_model("Misc", 7, UploadImage, 1)

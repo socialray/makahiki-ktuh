@@ -264,7 +264,7 @@ class Action(models.Model):
         default=0,
         help_text="The point value to be awarded."
     )
-    admin_tool_tip = "Smartgrid game Actions"
+    admin_tool_tip = "Smart Grid Game Actions"
 
     def __unicode__(self):
         return "%s: %s" % (self.type.capitalize(), self.title)

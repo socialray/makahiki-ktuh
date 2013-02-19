@@ -1,4 +1,4 @@
-"""Celery Task definitions for smartgrid game."""
+"""Celery Task definitions for smart grid game."""
 
 from celery.task import task
 import datetime

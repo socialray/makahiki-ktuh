@@ -340,8 +340,8 @@ admin.site.register(Level, LevelAdmin)
 challenge_designer_site.register(Level, LevelAdmin)
 challenge_manager_site.register(Level, LevelAdmin)
 developer_site.register(Level, LevelAdmin)
-challenge_mgr.register_designer_game_info_model("Smartgrid Game", Level)
-challenge_mgr.register_developer_game_info_model("Smartgrid Game", Level)
+challenge_mgr.register_designer_game_info_model("Smart Grid Game", Level)
+challenge_mgr.register_developer_game_info_model("Smart Grid Game", Level)
 
 
 class CategoryAdmin(admin.ModelAdmin):
@@ -353,8 +353,8 @@ admin.site.register(Category, CategoryAdmin)
 challenge_designer_site.register(Category, CategoryAdmin)
 challenge_manager_site.register(Category, CategoryAdmin)
 developer_site.register(Category, CategoryAdmin)
-challenge_mgr.register_designer_game_info_model("Smartgrid Game", Category)
-challenge_mgr.register_developer_game_info_model("Smartgrid Game", Category)
+challenge_mgr.register_designer_game_info_model("Smart Grid Game", Category)
+challenge_mgr.register_developer_game_info_model("Smart Grid Game", Category)
 
 
 def redirect_urls(model_admin, url_type):
@@ -528,8 +528,8 @@ admin.site.register(Action, ActionAdmin)
 challenge_designer_site.register(Action, ActionAdmin)
 challenge_manager_site.register(Action, ActionAdmin)
 developer_site.register(Action, ActionAdmin)
-challenge_mgr.register_designer_game_info_model("Smartgrid Game", Action)
-challenge_mgr.register_developer_game_info_model("Smartgrid Game", Action)
+challenge_mgr.register_designer_game_info_model("Smart Grid Game", Action)
+challenge_mgr.register_developer_game_info_model("Smart Grid Game", Action)
 
 admin.site.register(Activity, ActivityAdmin)
 challenge_designer_site.register(Activity, ActivityAdmin)
@@ -810,8 +810,8 @@ challenge_designer_site.register(ActionMember, ActionMemberAdmin)
 challenge_manager_site.register(ActionMember, ActionMemberAdmin)
 developer_site.register(ActionMember, ActionMemberAdmin)
 
-challenge_mgr.register_admin_game_info_model("Smartgrid Game", ActionMember)
-challenge_mgr.register_developer_game_info_model("Smartgrid Game", ActionMember)
+challenge_mgr.register_admin_game_info_model("Smart Grid Game", ActionMember)
+challenge_mgr.register_developer_game_info_model("Smart Grid Game", ActionMember)
 
 
 class EmailReminderAdmin(admin.ModelAdmin):

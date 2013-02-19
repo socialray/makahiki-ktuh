@@ -32,13 +32,11 @@ The following sections document the settings accessable from the "Challenge Sett
    challenge-design-groups-settings
    challenge-design-teams-settings
    challenge-design-players-settings
+   challenge-design-scheduler-settings
 
-.. todo:: In the Challenge Design page, provide documentation for "Other Settings" and
-   "Scheduler (Celery) - Optional". I found that the Scheduler links led to an error
-   page--is that appropriate behavior? 
 
 Game Design Settings
----------------------
+--------------------
 
 The following sections document the settings accessable from the "Game Settings" widget.
 

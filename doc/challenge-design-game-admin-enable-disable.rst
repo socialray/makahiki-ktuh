@@ -47,10 +47,6 @@ The pre-defined games include:
 
 
 
-.. todo:: In the image above, the Smart Grid Game is spelled Smartgrid Game.  If possible,
-          change to Smart Grid Game.
-
-
 Changing the settings associated with a game
 --------------------------------------------
 
