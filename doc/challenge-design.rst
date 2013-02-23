@@ -4,9 +4,18 @@
 Challenge Design
 ================
 
-Along with specifying authentication, wattdepot, and email configuration (see
-:ref:`section-site-configuration`), you must also design the specific nature of your
-challenge.  Go to the Settings Page (see :ref:`section-configuration-settings-page`), and
+About challenge design
+----------------------
+
+Unlike :ref:`section-software-installation` and :ref:`section-site-configuration`,
+challenge design is not intended to need "sys admin" skills.  During this phase, the focus
+is on tailoring the default Makahiki configuration to suit the needs of your specific
+challenge goals. 
+
+Getting to the challenge design page
+------------------------------------
+
+Go to the Settings Page (see :ref:`section-configuration-settings-page`), and
 click on the Challenge Design button to retrieve the following page:
 
 .. figure:: figs/configuration/configuration-challenge-design.png

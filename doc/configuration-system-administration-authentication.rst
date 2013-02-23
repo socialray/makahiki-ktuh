@@ -4,6 +4,25 @@
 Configure authentication
 ========================
 
+About authentication
+--------------------
+
+In Makahiki, "authentication" refers to the way in which a player logs in to participate
+in a challenge.  In Makahiki, there is currently no way for people to "register"
+themselves and obtain an account to play a challenge.  Instead, the administrator must
+configure the system in advance of the challenge with the names of all potential players,
+and the teams to which they are assigned.  (This constraint could be removed in a future
+release.)
+
+Given that the system knows in advance the identities of all potential players of a
+challenge, the next question is how to verify that a given online user is one of these
+potential players?  That is the goal of authentication, and Makahiki provides a variety of
+ways to do it. 
+
+
+Getting to the authentication page
+----------------------------------
+
 From the Settings Page, click on the System Administration button to retrieve the following
 authentication configuration form:
 

@@ -3,9 +3,16 @@
 Retrieve the Settings Page
 ==========================
 
-The on-line user interface to Makahiki administrative functions is obtained via the
-Settings page.  (There are also command-line administrative functions, which are
-documented in :ref:`section-developer-guide-management-commands`.)
+In order to accomplish any online administrative tasks, you must:
+
+  * Login with an account that has administrator privileges
+  * Navigate to the "Settings" page, from which you can eventually get to the
+    administrative page of interest. 
+
+
+.. note:: In addition to the online administrator interface, there are also administative
+   capabilities available through the command line.  These are
+   documented in :ref:`section-developer-guide-management-commands`.
 
 Log in as admin
 ---------------
