@@ -13,7 +13,7 @@ function Makahiki_PowerMeter(server_url, source, refresh_interval, viz_id, optio
     return change_source;
 
     function callback(source) {
-        var gviz_url = server_url + "/wattdepot/sources/" +
+        var gviz_url = server_url + "/sources/" +
             source + "/gviz/sensordata/latest?tq=select%20timePoint%2C%20powerConsumed";
 
         query = new google.visualization.Query(gviz_url);
@@ -27,7 +27,7 @@ function Makahiki_PowerMeter(server_url, source, refresh_interval, viz_id, optio
 
     function change_source(new_source) {
         source = new_source
-        gviz_url = server_url + "/wattdepot/sources/" +
+        gviz_url = server_url + "/sources/" +
             source + "/gviz/sensordata/latest?tq=select%20timePoint%2C%20powerConsumed";
 
         query.abort()

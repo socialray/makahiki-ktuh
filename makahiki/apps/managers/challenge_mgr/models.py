@@ -91,7 +91,7 @@ class ChallengeSetting(models.Model):
     wattdepot_server_url = models.CharField(
         null=True, blank=True,
         help_text="The URL for Wattdepot service. " \
-                  "Example: http://localhost:8194",
+                  "Example: http://localhost:8194/wattdepot",
         max_length=100,)
 
     # email settings

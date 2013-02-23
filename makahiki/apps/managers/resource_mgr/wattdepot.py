@@ -36,7 +36,7 @@ class Wattdepot(ResourceStorage):
 
     def _get_energy_usage(self, session, source):
         """Return the energy usage from wattdepot."""
-        rest_url = "%s/wattdepot/sources/%s/energy/" % (
+        rest_url = "%s/sources/%s/energy/" % (
             challenge_mgr.get_challenge().wattdepot_server_url, source)
 
         # comment out for debug

@@ -80,6 +80,10 @@ def get_challenge():
     if not challenge:
         challenge, _ = ChallengeSetting.objects.get_or_create(pk=1)
 
+        # check the WattDepot URL to ensure it does't end with '/'
+        while challenge.wattdepot_server_url.endswith('/'):
+            challenge.wattdepot_server_url = challenge.wattdepot_server_url[:-1]
+
         # create the admin
         create_admin_user()
 

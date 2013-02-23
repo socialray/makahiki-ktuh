@@ -6,7 +6,7 @@ Makahiki_PowerMeterStatus = function (server_url, source, refresh_interval, viz_
     return callback();
 
     function callback() {
-        var gviz_url = server_url + "/wattdepot/sources/" +
+        var gviz_url = server_url + "/sources/" +
             source + "/gviz/sensordata/latest?tq=select%20timePoint%2C%20powerConsumed";
 
         var query = new google.visualization.Query(gviz_url);
