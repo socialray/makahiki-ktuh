@@ -1,7 +1,7 @@
 .. _section-configuration-challenge-admin-scheduler-settings:
 
-Configure the Periodic Tasks
-============================
+Design periodic tasks
+=====================
 
 After clicking on the "Periodic task Settings" link in the Challenge Design page, a page similar to the following should appear:
 

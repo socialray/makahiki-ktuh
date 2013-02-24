@@ -4,8 +4,20 @@
 Design the global settings
 ==========================
 
+About global settings
+---------------------
+
+Makahiki challenges have a few global properties: the name of the challenge, the logo that
+appears on all pages, and so forth.  Also included in the global settings is the text that
+appears on a few static pages: the Landing Page, About page, and so forth. 
+
+Getting to the global settings page
+-----------------------------------
+
 Clicking on `Challenge Settings` within the Challenge Design Page brings up a page with
 sections allowing you to specify some global properties of your challenge.
+
+.. todo:: Can we change the name of the "challenge settings" link to "global settings"?
 
 Specify the name, logo, etc.
 ----------------------------
