@@ -15,11 +15,12 @@ Makahiki uses email in the following ways:
   * Makahiki can automatically notify players via email if they have won a prize in the Top Score game
     or the Raffle Game after a round is over. 
 
-If you do not enable email, then these communication mechanisms will not be available to
-players and administrators. 
-
 .. todo:: Are there any other uses of email? Is it true that if email is not enabled, then
    these communication mechanisms will not be available? 
+
+.. note:: Configuration of email for use in a Makahiki challenge is **optional**.  
+   However, if you do not enable email, then these communication mechanisms will not be available to
+   players and administrators. 
 
 Getting to the email configuration page
 ---------------------------------------

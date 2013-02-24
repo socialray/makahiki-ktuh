@@ -4,21 +4,27 @@
 Design the global settings
 ==========================
 
-Clicking on `Challenge Settings` within the Challenge Design Page brings up a page with the
-following forms. 
+Clicking on `Challenge Settings` within the Challenge Design Page brings up a page with
+sections allowing you to specify some global properties of your challenge.
 
 Specify the name, logo, etc.
 ----------------------------
 
-The following form enables you to configure some basic properties
+The first section of the page enables you to configure the basic identify of your challenge: its
+name, logo, and so forth. 
+
+.. note:: Configuration of this section is **optional**, if you are satisfied with the
+   default values. 
 
 .. figure:: figs/configuration/configuration-challenge-design-name.png
    :width: 600 px
    :align: center
 
-Makahiki uses the Name field and the Logo to brand the Challenge.  They appear on the Left-hand side of the navigation bar of each page.
-The domain is used to in the Attendance and Bonus Codes to create the URL the player uses to collect their points. The Team label is used
-in several widgets, such as energy scoreboard.  The Theme is the default theme for the Challenge.
+Makahiki uses the Name field and the Logo to brand the Challenge.  They appear on the
+Left-hand side of the navigation bar of each page.  The domain is used to in the
+Attendance and Bonus Codes to create the URL the player uses to collect their points. The
+Team label is used in several widgets, such as energy scoreboard.  The Theme is the
+default theme for the Challenge.
  
 .. todo:: Document the challenge design name form. Specify where each of the values
    indicated in this form actually show up in the user interface. Location isn't used. 
@@ -27,7 +33,10 @@ in several widgets, such as energy scoreboard.  The Theme is the default theme f
 Specify the Landing page text
 -----------------------------
 
-This form enables you to customize the text that appears on the Landing Page:
+This form enables you to customize the text that appears on the Landing Page. 
+
+.. note:: Configuration of this section is **optional**, if you are satisfied with the
+   default values. 
 
 .. figure:: figs/configuration/configuration-challenge-design-landing-page.png
    :width: 600 px
@@ -39,7 +48,10 @@ University of Hawaii.  You should change this to reflect your own challenge circ
 Specify the About page text
 ---------------------------
 
-This form enables you to customize the text that appears on the About Page:
+This form enables you to customize the text that appears on the About Page.
+
+.. note:: Configuration of this section is **optional**, if you are satisfied with the
+   default values. 
 
 .. figure:: figs/configuration/configuration-challenge-design-about-page.png
    :width: 600 px
@@ -55,6 +67,9 @@ Specify the sponsors
 --------------------
 
 This form enables you to  specify the Sponsors that appear on the Landing page.
+
+.. note:: Configuration of this section is **optional**, if you are satisfied with the
+   default values. 
 
 .. figure:: figs/configuration/configuration-challenge-design-sponsors.png
    :width: 600 px

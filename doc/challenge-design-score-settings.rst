@@ -3,27 +3,46 @@
 Design the point rubric 
 =======================
 
+About the point rubric
+----------------------
+
+An essential part of a Makahiki challenge for players is the earning of points, and there are a
+variety of "global" actions that result in points for players, including: finishing the
+startup activity, referring other players, signing up for workshops and excursions, and so
+forth. (Of course, players also earn points by completing actions in the Smart Grid Game,
+and the number of points to be awarded for each action can be specified individually.)
+
+The "point rubric" refers to the number of points to be awarded for the various global
+actions.   By changing the number of points awarded for these actions, you change the
+level of incentive for doing them.  
+
+The default point rubric values have been determined through experience with the 2011 and
+2012 Kukui Cups, and appear to be generally appropriate when videos earn about 25 points
+and workshops earn about 50 to 100 points for attendance. 
+
+.. note:: Configuration of the point rubric is **optional**, as long as you are satisfied
+   with the default values.
+
+.. todo:: Can we rename "Score Settings" into "Point Rubric"? 
+
+
+Getting to the point rubric settings page
+-----------------------------------------
+
 After clicking on the "Score Settings" link in the Challenge Design page, a page similar to the following should appear:
 
 .. figure:: figs/configuration/configuration-challenge-admin-score-settings.1.png
    :width: 600 px
    :align: center
 
-All challenges must contain exactly one score settings object, which should be automatically created as part of the system initialization process.
+All challenges must contain exactly one score settings object, which should be
+automatically created as part of the system initialization process. Click on this link to
+bring up the following page that enables you to configure the point rubric for global actions:
 
-This score settings object defines the "point rubric", i.e. the number of points to be
-awarded for various types of actions in the game.   In most cases, the default rubric is
-fine. 
-
-Configure points
-----------------
 
 .. figure:: figs/configuration/configuration-challenge-admin-score-settings.2.png
    :width: 600 px
    :align: center
-
-Clicking on the "Score Settings" instance takes you to a page where you can configure the number of points earned by players for various actions. 
-
 
 .. note:: Remember to click the Save button at the bottom of the page when finished to save your changes. 
 

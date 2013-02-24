@@ -16,7 +16,8 @@ Getting to the challenge design page
 ------------------------------------
 
 Go to the Settings Page (see :ref:`section-configuration-settings-page`), and
-click on the Challenge Design button to retrieve the following page:
+click on the Challenge Design button to retrieve the page providing the top-level
+interface to the various aspects of Challenge Design.
 
 .. figure:: figs/configuration/configuration-challenge-design.png
    :width: 600 px

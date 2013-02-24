@@ -19,6 +19,10 @@ challenge, the next question is how to verify that a given online user is one of
 potential players?  That is the goal of authentication, and Makahiki provides a variety of
 ways to do it. 
 
+.. note:: Authentication is **required** in Makahiki.  If you want the simplest
+   authentication to configure, do internal authentication. However, that means your users
+   will have a separate account and password for the challenge, which is a barrier to participation.
+
 
 Getting to the authentication page
 ----------------------------------

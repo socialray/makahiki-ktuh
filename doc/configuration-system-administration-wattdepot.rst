@@ -15,10 +15,10 @@ meters and protocols available on the market in order to provide this capability
 delegates this responsibility to the WattDepot system, which is designed specifically to
 solve this problem.  
 
-WattDepot is not required to run a Makahiki challenge.  For example, if you do not want to
-display power consumption in near real-time, and if you are content to manually enter
-energy consumption data by each team on a daily basis during the challenge, then you do
-not have to install WattDepot and configure Makahiki to access energy data from it. 
+.. note:: Configuration of WattDepot for use in a Makahiki challenge is **optional**.  For example, if you do not want to
+   display power consumption in near real-time, and if you are content to manually enter
+   energy consumption data by each team on a daily basis during the challenge, then you do
+   not have to install WattDepot and configure Makahiki to access energy data from it. 
 
 Getting to the WattDepot configuration page
 -------------------------------------------
