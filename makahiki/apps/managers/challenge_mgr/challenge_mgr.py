@@ -71,7 +71,7 @@ def info():
     init()
     challenge = get_challenge()
     return "Challenge name : %s @ %s" % (challenge.name,
-                                         challenge.location)
+                                         challenge.domain)
 
 
 def get_challenge():

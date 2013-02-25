@@ -14,10 +14,8 @@ appears on a few static pages: the Landing Page, About page, and so forth.
 Getting to the global settings page
 -----------------------------------
 
-Clicking on `Challenge Settings` within the Challenge Design Page brings up a page with
+Clicking on `Global settings` within the Challenge Design Page brings up a page with
 sections allowing you to specify some global properties of your challenge.
-
-.. todo:: Can we change the name of the "challenge settings" link to "global settings"?
 
 Specify the name, logo, etc.
 ----------------------------
@@ -37,9 +35,6 @@ Left-hand side of the navigation bar of each page.  The domain is used to in the
 Attendance and Bonus Codes to create the URL the player uses to collect their points. The
 Team label is used in several widgets, such as energy scoreboard.  The Theme is the
 default theme for the Challenge.
- 
-.. todo:: Document the challenge design name form. Specify where each of the values
-   indicated in this form actually show up in the user interface. Location isn't used. 
 
 
 Specify the Landing page text

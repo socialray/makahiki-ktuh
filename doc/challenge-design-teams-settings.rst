@@ -23,15 +23,6 @@ future release of the system.
 .. note:: Configuration of teams is **required**.  At the very least, you should rename
    the two teams to fit your challenge.  You might also need to define more than two teams.
 
-.. todo:: Way too many teams defined in the default instance.  Cut them down to say, two.
-
-.. todo:: Does dasha load the default or the demo instance? It should load the default so
-   I can write this documentation correctly.
-
-.. todo:: I tried to delete a team, and got an uninformative error message.   Do I have to
-   delete all players associated with a team before deleting it? If so, the error should
-   maybe state that.
-
 Getting to the team settings page
 ---------------------------------
 

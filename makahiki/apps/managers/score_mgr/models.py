@@ -41,6 +41,13 @@ class ScoreSetting(models.Model):
     admin_tool_tip = "The points awarded for completing various " + \
         "actions and how many points are needed for a player to be 'active'."
 
+    class Meta:
+        """meta"""
+        verbose_name = "point rubric"
+
+    def __unicode__(self):
+        return "point rubric"
+
     def save(self, *args, **kwargs):
         """Custom save method."""
         super(ScoreSetting, self).save(*args, **kwargs)

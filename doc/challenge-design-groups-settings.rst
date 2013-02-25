@@ -30,11 +30,6 @@ The default instance defines some sample groups.
    groups to be named appropriately for your challenge, or else delete them altogether if your
    challenge does not involve competition at the group level.
 
-.. todo:: I tried to delete a group, and got a system error, and the group was not deleted.  Has anyone ever tried to delete a
-   group before?  Do you have to disassociate the group from all teams before it can be
-   deleted? Can you provide a better error message if you try to delete a group that is
-   associated with a team? The current error message is not informative.
-
 
 Getting to the group settings page
 ----------------------------------

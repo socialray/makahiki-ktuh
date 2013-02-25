@@ -49,8 +49,6 @@ After clicking on the "Users" link in the Challenge Design, a page similar to th
 
 To add a new player, click the "Add user" button in the upper right corner. 
 
-.. todo:: Can we change the number of defined players in the default configuration to,
-   say, two, so that it is easier to reconfigure for an actual challenge?
 
 Defining multiple users through file upload
 -------------------------------------------

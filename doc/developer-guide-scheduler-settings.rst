@@ -33,23 +33,6 @@ This table lists all the defined Periodic Tasks, such as checking the Energy Goa
 Configure a periodic task
 -------------------------
 
-.. todo:: This section needs to be rewritten.  Implementing a new periodic task from
-   scratch is a
-   "developer-level" capability and should not appear in this section, which is oriented
-   around the capabilities of a "challenge designer".  Instead, there should be sections
-   on this page that show the page for each of the built-in periodic tasks, under what
-   circumstances they should be enabled or disabled, and if any other parameters would ever
-   need to be modified. 
-
-.. todo:: Dasha displays only one periodic task (celery.backend_cleanup).  The default
-   configuration should provide built-in periodic tasks needed for all the built-in games
-   and game mechanics.  
-
-.. todo:: The challenge designer page shows "Crontabs" and "Intervals".  I think those are
-   "developer-level" pages and should be omitted from the challenge designer
-   interface. Presumably the built-in set of crontabs and intervals are sufficient for the
-   built-in periodic tasks, which is all a challenge designer cares about.
-
 .. figure:: figs/configuration/configuration-challenge-admin-scheduler-settings.2.png
    :width: 600 px
    :align: center

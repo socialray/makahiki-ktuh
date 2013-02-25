@@ -23,13 +23,11 @@ and workshops earn about 50 to 100 points for attendance.
 .. note:: Configuration of the point rubric is **optional**, as long as you are satisfied
    with the default values.
 
-.. todo:: Can we rename "Score Settings" into "Point Rubric"? 
-
 
 Getting to the point rubric settings page
 -----------------------------------------
 
-After clicking on the "Score Settings" link in the Challenge Design page, a page similar to the following should appear:
+After clicking on the "Point rubrics" link in the Challenge Design page, a page similar to the following should appear:
 
 .. figure:: figs/configuration/configuration-challenge-admin-score-settings.1.png
    :width: 600 px

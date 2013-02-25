@@ -3,7 +3,6 @@
         "pk": 1,
         "model": "challenge_mgr.challengesetting",
         "fields": {
-            "location": "Demo Location",
             "use_internal_auth": true,
             "email_enabled": false,
             "landing_introduction": "## Aloha! Welcome to the Kukui Cup Demo Game.",

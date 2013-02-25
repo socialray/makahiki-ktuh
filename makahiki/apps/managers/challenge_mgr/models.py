@@ -18,10 +18,6 @@ class ChallengeSetting(models.Model):
 
     THEME_CHOICES = ((key, key) for key in settings.INSTALLED_THEMES)
 
-    location = models.CharField(
-        default="",
-        help_text="The location of the challenge. e.g. University of Hawaii",
-        max_length=50,)
     domain = models.CharField(
         default="localhost",
         help_text="The domain name of this challenge.",
@@ -142,6 +138,10 @@ class ChallengeSetting(models.Model):
 
     admin_tool_tip = "The global settings for the challenge. (Name, landing page, " + \
     "about page, and sponsors)"
+
+    class Meta:
+        """meta"""
+        verbose_name = "global setting"
 
     def __unicode__(self):
         return self.name

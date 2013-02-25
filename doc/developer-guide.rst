@@ -12,4 +12,5 @@ Developer Guide
    developer-guide-testing
    developer-guide-design-review-march-2012
    developer-guide-hello-world-widget-development
+   developer-guide-scheduler-settings
 

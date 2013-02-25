@@ -39,7 +39,6 @@ admin.site.register(ResourceSetting, ResourceSettingsAdmin)
 challenge_designer_site.register(ResourceSetting, ResourceSettingsAdmin)
 challenge_manager_site.register(ResourceSetting, ResourceSettingsAdmin)
 developer_site.register(ResourceSetting, ResourceSettingsAdmin)
-challenge_mgr.register_designer_challenge_info_model("Other Settings", 3, ResourceSetting, 5)
 
 
 class ResourceBlackoutDateAdmin(admin.ModelAdmin):
