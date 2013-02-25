@@ -28,10 +28,8 @@ Settings".  Challenge settings enables you to set the global properties of the c
 (rounds, scores, users, etc.), while Game Settings enables you to configure the specific
 games to appear in the challenge and their properties. 
 
-Challenge Settings
-------------------
-
-The following sections document the settings accessable from the "Challenge Settings" widget.
+Challenge
+---------
 
 .. toctree::
    :maxdepth: 1
@@ -39,9 +37,37 @@ The following sections document the settings accessable from the "Challenge Sett
    challenge-design-name-settings
    challenge-design-round-settings
    challenge-design-score-settings
+
+Players
+-------
+
+.. toctree::
+   :maxdepth: 1
+
    challenge-design-groups-settings
    challenge-design-teams-settings
    challenge-design-players-settings
+
+
+Other settings
+--------------
+
+.. todo:: Does Resource settings need to appear for a challenge designer?  It seems this
+   info would only change based upon a "Developer" level activity.
+
+.. todo:: Pages for each of the remaining links in the Other Settings area need to be
+   provided.  Each should start with an "About" section providing a top-level explanation
+   of what the settings accomplishes.   Include a "note" specifying whether configuration
+   is optional or required.  My guess is that all of the pages linked to in this section
+   provide pages that are optional---the default configuration for these settings produces
+   a viable challenge..
+
+Scheduler
+---------
+
+.. toctree::
+   :maxdepth: 1
+
    challenge-design-scheduler-settings
 
 
@@ -62,6 +88,8 @@ The following sections document the settings accessable from the "Game Settings"
    challenge-design-game-admin-quest
    challenge-design-game-admin-badge
    challenge-design-game-admin-referral
+
+
 
 
 

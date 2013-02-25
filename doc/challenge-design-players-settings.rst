@@ -61,6 +61,8 @@ The format of the csv file is as follows::
 
     team, firstname, lastname, email, username, password
 
+About the user profile
+----------------------
 
 When a new user is created, a "Profile" is also created for this user, as shown in the "Profile" link in the list. The Profile has more detailed information about the user, such as the display name, team which this user belongs to, and the contact info etc.
 
