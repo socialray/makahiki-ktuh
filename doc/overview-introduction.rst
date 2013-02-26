@@ -3,14 +3,16 @@
    You can adapt this file completely to your liking, but it should at least
    contain the root `toctree` directive.
 
+
 Introduction
 ============
 
-.. figure:: figs/kukuicup-header.jpg
+.. figure:: figs/kukuicup-header.png
    :width: 800 px
    :align: center
 
-   *Partial screen capture from the 2011 Kukui Cup challenge, built using Makahiki 1.*
+   *Partial screenshot of the Kukui Cup challenge, built using Makahiki.*
+
 
 Goals
 -----
@@ -45,7 +47,7 @@ Makahiki 2 builds upon the prior version with the following new features:
   * Real-time game analytics to help assess the impact of game mechanics
     during challenges.
   * A-B testing to support research evaluation of components by deploying
-    alternative versions to subsets of the population.
+    alternative versions to subsets of the population. (Under development)
 
 
 Related Projects
