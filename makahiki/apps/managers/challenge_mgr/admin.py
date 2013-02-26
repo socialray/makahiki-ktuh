@@ -1,6 +1,8 @@
 """Implements the admin interface for game settings."""
 from django.contrib import admin
 from django.db import models
+from django import forms
+from django.forms.util import ErrorList
 from django.forms.widgets import Textarea
 from apps.managers.challenge_mgr import challenge_mgr
 from apps.managers.challenge_mgr.models import ChallengeSetting, RoundSetting, PageSetting, \
@@ -106,9 +108,62 @@ challenge_manager_site.register(GameInfo, GameInfoAdmin)
 developer_site.register(GameInfo, GameInfoAdmin)
 
 
+class RoundSettingAdminForm(forms.ModelForm):
+    """RoundSetting Admin Form."""
+    class Meta:
+        """Meta"""
+        model = RoundSetting
+
+    def clean(self):
+        """validate the round date."""
+
+        super(RoundSettingAdminForm, self).clean()
+
+        # Data that has passed validation.
+        cleaned_data = self.cleaned_data
+
+        start = cleaned_data.get("start")
+        end = cleaned_data.get("end")
+        name = cleaned_data.get("name")
+
+        # end date must be later than start date
+        if end <= start:
+            self._errors["end"] = ErrorList(
+                [u"This end date must be later than the start date."])
+            del cleaned_data["end"]
+
+            return cleaned_data
+
+        # can not overlap with other rounds
+        for rs in RoundSetting.objects.all():
+            if name != rs.name:
+                if rs.start < start < rs.end:
+                    self._errors["start"] = ErrorList(
+                        [u"This date is overlapped with another round."])
+                    del cleaned_data["start"]
+                    break
+                if rs.start < end < rs.end:
+                    self._errors["end"] = ErrorList(
+                        [u"This date is overlapped with another round."])
+                    del cleaned_data["end"]
+                    break
+                if start < rs.start and rs.end < end:
+                    self._errors["start"] = ErrorList(
+                        [u"This date is overlapped with another round."])
+                    del cleaned_data["start"]
+                    self._errors["end"] = ErrorList(
+                        [u"This date is overlapped with another round."])
+                    del cleaned_data["end"]
+                    break
+
+        return cleaned_data
+
+
 class RoundSettingAdmin(admin.ModelAdmin):
     """PageSetting administrator interface definition."""
     list_display = ["name", "start", "end", "round_reset", "display_scoreboard"]
+    form = RoundSettingAdminForm
+
 
 admin.site.register(RoundSetting, RoundSettingAdmin)
 challenge_designer_site.register(RoundSetting, RoundSettingAdmin)
