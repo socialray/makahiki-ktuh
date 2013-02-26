@@ -12,7 +12,7 @@ def supply(request, page_name):
 
     goal_settings = EnergyGoalSetting.objects.all()
     if goal_settings:
-        setting = goal_settings[1]
+        setting = goal_settings[0]
         interval = setting.realtime_meter_interval
     else:
         interval = 10
