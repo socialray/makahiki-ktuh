@@ -4,7 +4,7 @@ from django.db import models
 from django.forms.widgets import Textarea
 from apps.managers.challenge_mgr import challenge_mgr
 from apps.managers.challenge_mgr.models import ChallengeSetting, RoundSetting, PageSetting, \
-    PageInfo, Sponsor, UploadImage, GameSetting, GameInfo
+    PageInfo, Sponsor, UploadImage, GameSetting, GameInfo, AboutPage
 from apps.admin.admin import sys_admin_site, challenge_designer_site, challenge_manager_site, \
     developer_site
 
@@ -122,6 +122,22 @@ class SponsorsInline(admin.TabularInline):
     extra = 0
 
 
+class AboutPageInline(admin.StackedInline):
+    """AboutPage inline admin"""
+    model = AboutPage
+    extra = 0
+
+    formfield_overrides = {
+        models.TextField: {'widget': Textarea(attrs={'rows': 20, 'cols': 100})},
+    }
+
+    def has_add_permission(self, request):
+        return False
+
+    def has_delete_permission(self, request, obj=None):
+        return False
+
+
 class SystemSettingAdmin(admin.ModelAdmin):
     """The system administrator's Challenge Administration interface definition."""
     fieldsets = (
@@ -180,18 +196,15 @@ class ChallengeSettingAdmin(admin.ModelAdmin):
                    "landing_introduction",
                    "landing_participant_text",
                    "landing_non_participant_text",)}),
-        ("About Page",
-            {"description": "<div class='help makahiki-box content-box-contents'>The " + \
-             "About Page explains the Challenge.</div>",
-             "fields":
-                  ("about_page_text",)}),
+
     )
 
-    inlines = [SponsorsInline]
+    inlines = [AboutPageInline, SponsorsInline]
 
     formfield_overrides = {
         models.TextField: {'widget': Textarea(attrs={'rows': 2, 'cols': 70})},
         }
+
     page_text = "Click on the name of the challenge to change the settings." +\
     "There must be only one Challenge Setting."
 

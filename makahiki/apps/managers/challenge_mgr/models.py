@@ -130,12 +130,6 @@ class ChallengeSetting(models.Model):
         help_text="The text of the non participant button in the landing page. " +
                   settings.MARKDOWN_TEXT)
 
-    about_page_text = models.TextField(
-        default="For more information, please go to " \
-                "<a href='http://kukuicup.org'>kukuicup.org</a>.",
-        help_text="The text of the about page. " +
-                  settings.MARKDOWN_TEXT)
-
     admin_tool_tip = "The global settings for the challenge. (Name, landing page, " + \
     "about page, and sponsors)"
 
@@ -159,6 +153,11 @@ class ChallengeSetting(models.Model):
         """returns the info for all rounds."""
         return settings.COMPETITION_ROUNDS
 
+    def about_page_text(self):
+        """returns the about page text."""
+        aboutpage, _ = AboutPage.objects.get_or_create(pk=1)
+        return aboutpage.about_page_text
+
     def save(self, *args, **kwargs):
         """Custom save method."""
         super(ChallengeSetting, self).save(*args, **kwargs)
@@ -174,6 +173,24 @@ class UploadImage(models.Model):
 
     def __unicode__(self):
         return self.image.name
+
+
+class AboutPage(models.Model):
+    """Defines the sponsor for this challenge."""
+    challenge = models.ForeignKey("ChallengeSetting")
+    about_page_text = models.TextField(
+        default="For more information, please go to " \
+                "<a href='http://kukuicup.org'>kukuicup.org</a>.",
+        help_text="The text of the about page that explains the challenge. " +
+                  settings.MARKDOWN_TEXT)
+
+    class Meta:
+        """meta"""
+        verbose_name = "about page"
+        verbose_name_plural = "about page"
+
+    def __unicode__(self):
+        return ""
 
 
 class Sponsor(models.Model):

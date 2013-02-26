@@ -3,25 +3,30 @@
         "pk": 1,
         "model": "challenge_mgr.challengesetting",
         "fields": {
-            "name": "Kukui Cup/UH",
-            "domain": "kukuicup.manoa.hawaii.edu",
-            "ldap_search_base": null,
-            "landing_slogan": "The Kukui Cup: <br/> Lights off, game on!",
-            "email_use_tls": true,
-            "landing_non_participant_text": "###I'm not registered\r\n#####but I'd like to know more about the Kukui Cup",
-            "email_port": 587,
-            "theme": "theme-forest",
-            "use_cas_auth": true,
-            "cas_server_url": "https://login.its.hawaii.edu/cas/",
-            "wattdepot_server_url": "http://server.wattdepot.org:8194/wattdepot",
-            "contact_email": "kukuicup@hawaii.edu",
+            "use_internal_auth": true,
             "email_enabled": false,
-            "logo": "media/challenge/icon-uh-logo.png",
-            "ldap_server_url": null,
-            "landing_participant_text": "### I'm a registered player  \r\n##### You will be prompted for \r\n##### your UH username and password, it's safe",
-            "landing_introduction": "Aloha! The Kukui Cup is an energy challenge that can be played by all first year UH students living in the Hale Aloha residence halls.",
-            "team_label": "Lounge",
-            "email_host": "smtp.gmail.com"
+            "landing_introduction": "## Aloha! Welcome to the Kukui Cup Game.",
+            "wattdepot_server_url": "http://server.wattdepot.org:8194/wattdepot",
+            "cas_auth_text": "###I have a CAS email",
+            "ldap_search_base": "",
+            "theme": "theme-forest",
+            "use_cas_auth": false,
+            "email_host": "smtp.gmail.com",
+            "domain": "localhost",
+            "landing_slogan": "The Kukui Cup: <br/> Lights Off.  Game On!",
+            "internal_auth_text": "###Others",
+            "logo": "",
+            "contact_email": "kukuicup@hawaii.edu",
+            "use_ldap_auth": false,
+            "landing_non_participant_text": "###I stumbled onto this site somehow\r\n#####and want to know more about the Kukui Cup",
+            "name": "Kukui Cup",
+            "cas_server_url": "",
+            "email_use_tls": true,
+            "email_port": 587,
+            "ldap_auth_text": "###I have a LDAP email",
+            "ldap_server_url": "",
+            "landing_participant_text": "### I'm a participant\r\n##### Sign in using your registered username and password",
+            "team_label": "Team"
         }
     },
     {
@@ -33,7 +38,7 @@
         }
     },
     {
-        "pk": 2,
+        "pk": 1,
         "model": "challenge_mgr.sponsor",
         "fields": {
             "name": "Collaborative Software Development Laboratory",
@@ -45,63 +50,15 @@
         }
     },
     {
-        "pk": 4,
-        "model": "challenge_mgr.sponsor",
-        "fields": {
-            "name": "Student Housing Services, UH Manoa",
-            "url": "http://manoa.hawaii.edu/housing",
-            "challenge": 1,
-            "priority": 2,
-            "logo": "media/challenge/logo.manoa.2.png",
-            "logo_url": ""
-        }
-    },
-    {
-        "pk": 3,
-        "model": "challenge_mgr.sponsor",
-        "fields": {
-            "name": "Renewable Energy & Island Sustainability",
-            "url": "http://manoa.hawaii.edu/reis",
-            "challenge": 1,
-            "priority": 3,
-            "logo": "media/challenge/logo.reis.2.png",
-            "logo_url": ""
-        }
-    },
-    {
-        "pk": 5,
+        "pk": 2,
         "model": "challenge_mgr.sponsor",
         "fields": {
             "name": "National Science Foundation",
             "url": "http://www.nsf.gov",
             "challenge": 1,
-            "priority": 4,
+            "priority": 2,
             "logo": "",
             "logo_url": "http://www.nsf.gov/images/logos/nsf1sm.gif"
         }
-    },
-    {
-        "pk": 6,
-        "model": "challenge_mgr.sponsor",
-        "fields": {
-            "name": "DBEDT",
-            "url": "http://energy.hawaii.gov",
-            "challenge": 1,
-            "priority": 5,
-            "logo": "media/challenge/dbedt-logo.jpg",
-            "logo_url": ""
-        }
-    },
-    {
-        "pk": 7,
-        "model": "challenge_mgr.sponsor",
-        "fields": {
-            "name": "HEI Charitable Foundation",
-            "url": "http://www.hei.com/heicf/heicf.html",
-            "challenge": 1,
-            "priority": 6,
-            "logo": "",
-            "logo_url": "http://www.hei.com/heicf/heilogo_bluesteel.gif"
-        }
-    }    
+    }
 ]
