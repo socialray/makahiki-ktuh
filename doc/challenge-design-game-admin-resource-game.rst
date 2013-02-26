@@ -67,6 +67,33 @@ hour of each day of the week separately.  That way the stoplight visualization c
 the team's consumption throughout the day, taking into account the typical "demand curve"
 associated with the team. 
 
+Other user interfaces to the energy goal game
+*********************************************
+
+While the stoplight visualization provides good feedback to a team regarding their current
+progress toward making the current day's goal, other perspectives could be useful.
+
+The following figure shows the Energy Goal Game scoreboard, which shows how teams are
+faring relative to each other, and can incentivize teams to conserve not only to earn
+points, but also to do better than other teams:
+
+.. figure:: figs/configuration/game-design/degg-scoreboard.png
+   :width: 400 px
+   :align: center
+
+Interestingly, the scoreboard shows that the number of times that a team makes their daily
+energy goal is not perfectly correlated with their average reduction in energy consumption.
+
+Another useful perspective to a team is a historical visualization that shows when they've
+made the goal in the past, as shown in the following figure:
+
+.. figure:: figs/configuration/game-design/degg-calendar.png
+   :width: 400 px
+   :align: center
+
+
+
+
 
 
 Configure resource goal settings
