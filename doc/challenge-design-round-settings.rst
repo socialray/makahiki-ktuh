@@ -38,9 +38,6 @@ Round 1 ends on March 15 and Round 2 starts five days later on March 20.  The da
 between those two rounds create a "blackout" period when players are not able to login to
 the system.
 
-.. todo:: Will the system actually signal an error if you define a round that overlaps in time with
-   another round?
-
 .. note:: Configuration of the round(s) corresponding to a challenge is **required**.  At
    a minimum, the round specification provided in the default configuration must be edited
    to provide the start and end dates for your challenge. 

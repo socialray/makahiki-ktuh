@@ -64,11 +64,6 @@ This form enables you to customize the text that appears on the About Page.
    :width: 600 px
    :align: center
 
-.. todo:: The text field for displaying the About field should be made more than two lines
-   deep (should be 20 lines minimum if possible). This is a programming change. To just change the
-   about field is extremely difficult to do in a single admin form. We may need to have a separate
-   form for the about field.
-
 
 Specify the sponsors
 --------------------
