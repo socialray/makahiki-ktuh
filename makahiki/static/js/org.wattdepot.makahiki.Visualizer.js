@@ -6,7 +6,7 @@ Namespace("org.wattdepot.makahiki");
 
  google.setOnLoadCallback(initialize);
 
- var host_uri = SERVER_URL + '/wattdepot';
+ var host_uri = SERVER_URL;
  var powerSource;      
  var table;
  var sourceNo;       

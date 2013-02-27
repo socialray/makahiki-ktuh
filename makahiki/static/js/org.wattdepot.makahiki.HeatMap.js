@@ -4,7 +4,7 @@ google.load("visualization", "1", {packages:['corechart', 'imagechart']});
 
 // Store user preferences in corresponding variables.
 var title = "Energy Consumed";
-var host_uri = SERVER_URL + '/wattdepot';
+var host_uri = SERVER_URL;
 var dataType = "energyConsumed";
 
 // an array for collected tables which will be combined for display.

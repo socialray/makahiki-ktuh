@@ -7,7 +7,7 @@ google.load("visualization", "1", {packages:['corechart', 'imagechart']});
 google.setOnLoadCallback(initialize);
 
 var title = "Energy Consumed";
-var host_uri = SERVER_URL + '/wattdepot';
+var host_uri = SERVER_URL;
 
 var dataType = "energyConsumed";
 var dateRange = "last7days"
