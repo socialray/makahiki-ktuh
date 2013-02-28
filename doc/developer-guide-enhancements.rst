@@ -4,8 +4,8 @@ Enhancement Ideas
 This chapter describes some enhancement projects for Makahiki that we believe would be
 interesting and useful for the framework. 
 
-Display online status for users
--------------------------------
+Real-time player awareness
+--------------------------
 
 It is not possible in Makahiki to know who is currently "on line" and playing the game.
 Creating this awareness opens up new social gaming opportunities (performing tasks together), new
