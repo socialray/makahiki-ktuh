@@ -4,6 +4,7 @@ from apps.managers.challenge_mgr import challenge_mgr
 from apps.managers.player_mgr.models import Profile
 from apps.utils import utils
 from apps.widgets.badges.models import BadgeAward, Badge
+from apps.managers.cache_mgr import cache_mgr
 
 
 def get_badge(slug):
@@ -17,6 +18,8 @@ def get_badge(slug):
 def award_badge(profile, badge):
     """award the badge to the user."""
     BadgeAward(profile=profile, badge=badge).save()
+    if profile.team:
+        cache_mgr.invalidate_template_cache("team_member_avatar", profile.team.id)
 
 
 def award_possible_badges(profile, trigger):
