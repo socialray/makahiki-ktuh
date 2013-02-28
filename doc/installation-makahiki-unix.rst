@@ -117,8 +117,8 @@ In the Linux environment, you need to install the additional package "postgres-d
 in order to get the pg_config command.
 
 
-Install Memcache
--------------------
+Install Memcache (Optional)
+---------------------------
 
 Makahiki can optionally use `Memcache`_ to improve performance, especially in the
 production environment.  To avoid the need for alternative configuration files, we require
@@ -159,7 +159,7 @@ installation instructions`_. For Linux (Ubuntu), you can install the memcached b
 .. _Heroku's memcache installation instructions: http://devcenter.heroku.com/articles/memcache#local_memcache_setup
 
 Download the Makahiki source
----------------------------------
+----------------------------
 
 You can download the source by cloning or forking the `Makahiki Git repository`_::
 
@@ -170,7 +170,7 @@ This will create the new folder and download the code from the repository.
 .. _Makahiki Git repository: https://github.com/csdl/makahiki/
 
 Workon makahiki
--------------------
+---------------
 
 The remaining steps require you to be in the makahiki/ directory and to have
 activated that virtual environment::
@@ -183,12 +183,13 @@ and of course cd to the appropriate directory before continuing.
 
 Install required packages
 -------------------------
+
 You can install the required Python package for Makahiki by::
 
   % pip install -r requirements.txt
 
 Setup environment variables
--------------------------------
+---------------------------
 
 At a minimum, Makahiki requires two environment variables: MAKAHIKI_DATABASE_URL and
 MAKAHIKI_ADMIN_INFO.  

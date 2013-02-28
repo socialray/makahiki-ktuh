@@ -12,7 +12,7 @@
     </div>
 
     <div class="notification-options">
-        {% if notification.is_success %}
+        {% if notifications.use_facebook and notification.is_success %}
             <a class="notification-share" href="javascript:void(0);">Click here to share on Facebook</a>
         {% endif %}
 

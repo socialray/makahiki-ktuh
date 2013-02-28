@@ -1,6 +1,7 @@
 """Provides the notification service."""
 import re
 from apps.managers.cache_mgr import cache_mgr
+from django.conf import settings
 
 from apps.widgets.notifications.models import UserNotification
 
@@ -21,7 +22,9 @@ def get_unread_notifications(user, limit=None):
 
     notifications = cache_mgr.get_cache("notification-%s" % user.username)
     if notifications is None:
-        notifications = {"has_more": False}
+
+        notifications = {"has_more": False,
+                         "use_facebook": settings.MAKAHIKI_USE_FACEBOOK}
 
         # Find undisplayed alert notifications.
         notifications.update({"alerts": get_user_alert_notifications(user)})

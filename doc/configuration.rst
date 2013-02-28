@@ -29,6 +29,7 @@ transport, authentication, and so forth.
    configuration-system-administration-authentication
    configuration-system-administration-wattdepot
    configuration-system-administration-email
+   configuration-system-administration-facebook
 
 
 

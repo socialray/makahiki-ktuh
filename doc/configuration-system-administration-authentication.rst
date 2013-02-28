@@ -41,21 +41,51 @@ least one form of authentication, though multiple forms are also acceptable.
 CAS authentication
 ------------------
 
-.. todo:: Document CAS authentication configuration procedure
+To use CAS authentication, you can check the "**Use cas auth**" checkbox, and fill in the "**Cas server url**" field. The url is where users access the CAS authentication service, for example, https://login.its.hawaii.edu/cas
 
+You may want to check with the system admin of your organization's CAS service provider to obtain the url of the service.
+
+You can also modify the CAS login button text by changing the "**Cas auth text**" field. This text will display as the button text associated with the CAS authentication in the Landing page.
 
 LDAP authentication
 -------------------
 
-.. todo:: Document LDAP authentication configuration procedure
+.. note:: Currently Makahiki only support LDAP authentication in local installation. Because the python-ldap software package can not be installed on the Heroku environment (as of this writting), the LDAP authentication of Makahiki is not supported on Heroku.
 
+To use LDAP authentication, you can check the "**Use ldap auth**" checkbox, and fill in the following additional fields:
+
+   1. "**Ldap server url**": The url is where users access the LDAP authentication service, for example, ldap://ldap.hawaii.edu:389. You may want to check with the system admin of your organization's LDAP service provider to obtain the url of the service.
+   2. "**ldap search base**": It is the base entry for the ldap authentication search operation. For example, if all the users in the LDAP directory are located under "ou=users,ou=system", then the search base will be "ou=users,ou=system".  Again, your organization's LDAP service admin will be able to provide this information.
+
+You can also modify the LDAP login button text by changing the "Ldap auth text" field. This text will display as the button text associated with the LDAP authentication in the Landing page.
+
+
+Additionally, in order to use LDAP authentication in Makahiki, You need to install the following two software packages in your local virtual environment::
+
+    % pip install python-ldap
+    % pip install django-auth-ldap
+
+They provides client APIs for Makahiki to access an LDAP directory server.
+
+After the ldap package are installed, you will need to set the following environment variable to enable LDAP authentication::
+
+    % export MAKAHIKI_LDAP_BIND_DN = <bind_dn>
+    % export MAKAHIKI_LDAP_BIND_PASSWORD = <bind_password>
+
+The <bind_dn> is the DN of the special ldap user that have the privilege to bind to and search the ldap directory. <bind_password> is the password of the above special ldap bind user.
+
+By default, if LDAP auth is used, the Makahiki use the ldap user's "**uid**" attribute as the username to login and authenticate. If your organization's LDAP server use "**cn**" as the unique user identifier, you can set the following environment variable to let Makahiki use the ldap user's "**cn**" attribute as the username to login::
+
+    %export MAKAHIKI_LDAP_USE_CN = True
+
+After the environment variables are set, the server restart is needed to take into effect for the LDAP configurations.
 
 Internal authentication
 -----------------------
 
-.. todo:: Document internal authentication configuration procedure
+To use the built-in Django internal authentication, you can check the "**Use internal auth**" checkbox.
 
-
+You can also modify the internal login button text by changing the "Internal auth text" field. This text will display as the button text associated with the internal authentication in the Landing page.
 
 
 

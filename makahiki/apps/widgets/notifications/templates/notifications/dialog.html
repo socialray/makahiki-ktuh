@@ -13,7 +13,7 @@
                             <i class="{{notification.icon_class}}"></i>
                         <div class='notice-list-content'>
                         {{ notification.contents|safe }}
-                        {% if notification.is_success %}
+                        {% if notifications.use_facebook and notification.is_success %}
                             <a id="notification-share-{{notification.id}}" href="javascript:void(0);">
                                 Click here to share on Facebook</a>
                         {% endif %}
