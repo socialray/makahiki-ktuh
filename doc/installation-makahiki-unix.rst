@@ -101,13 +101,21 @@ Note that on Mac OS X, the installer will need to make changes in the
 installed, be sure that your PostgreSQL installation's bin/ directory is on
 $PATH so that ``pg_config`` and ``psql`` are defined.
 
-In the development environment, It will be convenient that the user "postgres" is
-"trusted" locally so that you can connect to the server as the user "postgres"
-locally without authentication. You could edit the
-pg_hba.conf file and change "local all postgres ident" to "local all postgres trust".
-Or, you may be able to create a .pgpass file containing the credentials. See
-PostgreSQL documentation for how to bypass the authentication for localhost.
+You will also need to configure authentication for the "postgres" database user.   
 
+During development, a simple way to configure authentication is to make the postgres user
+"trusted" locally.  This means that local processes such as Makahiki can connect to the
+database server as the user postgres without authentication. To configure this way, edit
+the pg_hba.conf file and change::
+
+  local all postgres ident
+
+to:: 
+
+  local all postgres trust
+
+Alternatively, you can create a .pgpass file containing the credentials for the user postgres. See
+the PostgreSQL documentation for more information on the .pgpass file.
 
 Install Memcache
 ----------------
@@ -180,11 +188,14 @@ Setup environment variables
 At a minimum, Makahiki requires two environment variables: MAKAHIKI_DATABASE_URL and
 MAKAHIKI_ADMIN_INFO.  
 
-In Unix, these environment variables can be defined this way::
+The following lines show example settings for these two environment variables, preceded by 
+a comment line describing their syntax::
 
-  % export MAKAHIKI_DATABASE_URL=postgres://db_user:password@db_host:db_port/db_name
+  % # Syntax: postgres://<db_user>:<db_password>@<db_host>:<db_port>/<db_name>
+  % export MAKAHIKI_DATABASE_URL=postgres://makahiki:makahiki@localhost:5432/makahiki
 
-  % export MAKAHIKI_ADMIN_INFO=admin:admin_password
+  % # Syntax:  <admin_name>:<admin_password>
+  % export MAKAHIKI_ADMIN_INFO=admin:admin
 
 You will want to either add these variables to a login script so they are
 always available, or you can edit the ``postactivate`` file (in Unix, found in
@@ -204,7 +215,7 @@ Next, invoke the initialize_instance script, passing it an argument to specify w
 of initial data to load.  In most cases, you will want to load the default dataset, as
 shown next::
 
-  % scripts/initialize_instance.py -t default
+  % scripts/initialize_instance.py --type default
 
 This command will:
   * Install and/or update all Python packages required by Makahiki;
@@ -212,11 +223,12 @@ This command will:
   * Initialize the system with data.
   * Set up static files. 
 
-.. warning:: Invoke initialize_instance only once!
+.. warning:: initialize_instance will wipe out all challenge configuration modifications!
 
    The initialize_instance script should be run only a single time in production
-   scenarios, because any subsequent configuration will be lost if initialize_instance is
-   invoked again.   Use update_instance (discussed below) after performing configuration. 
+   scenarios, because any subsequent configuration modifications will be lost if initialize_instance is
+   invoked again.   Use update_instance (discussed below) to update source code without
+   losing subsequent configuration actions.
 
 
 Start the server
