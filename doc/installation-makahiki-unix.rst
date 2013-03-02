@@ -84,7 +84,7 @@ Linux
 
 In Ubuntu, install PIL by typing::
 
-  % sudo apt-get install -y python-imaging libjpeg-dev
+  % sudo apt-get install -y python-imaging python-dev libjpeg-dev
 
 Make sure you have both libjpeg (for JPEG) and zlib (for PNG) in the /usr/lib directory. If not, you can make the symbolic link there. For example, in a 32bit OS, do the following::
 
@@ -109,12 +109,6 @@ Or, you may be able to create a .pgpass file containing the credentials. See
 PostgreSQL documentation for how to bypass the authentication for localhost.
 
 
-Additional install for Linux
-****************************
-In the Linux environment, you need to install the additional package "postgres-dev"
-in order to get the pg_config command.
-
-
 Install Memcache
 ----------------
 
@@ -132,16 +126,10 @@ On Mac OS X, if you have installed `Homebrew`_, you can install these by typing:
 
 Linux
 *****
-On Linux, one place to start is `Heroku's memcache
-installation instructions`_. For Ubuntu, you can install the memcached by running "sudo apt-get install memcached". But you will have to install the libmemcached from the source. Here are the commands we did on Ubuntu::
+For Ubuntu, you can install the memcached by running "sudo apt-get install memcached". In addition, you will have to install the libmemcached-dev in order to let Django use the memcached. Here are the commands::
 
-  % sudo apt-get install -y memcached libcloog-ppl0 g++
-  % wget https://launchpad.net/libmemcached/1.0/.53/+download/libmemcached-0.53.tar.gz
-  % tar xzvf libmemcached-0.53.tar.gz
-  % cd libmemcached-0.53
-  % ./configure
-  % make
-  % sudo make install
+  % sudo apt-get install memcached
+  % sudo apt-get install libmemcached-dev
 
 
 .. _Python: http://www.python.org/download/

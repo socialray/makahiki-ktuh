@@ -63,11 +63,11 @@ To initialize your heroku application (for example, "makahiki-hpu") with the def
 
 This command will:
   * create the application in Heroku
-  * install necessary Heroku addons
+  * install necessary Heroku addons such as memcache
   * set up the Makahiki environments you defined for the application
   * Upload the Makahiki source code to Heroku
   * Install and/or update all Python packages required by Makahiki
-  * Reinitialize the database contents and perform any needed database migrations.
+  * Initialize the database contents and perform any needed database migrations.
   * Initialize the system with data.
   * Set up static files.
 
