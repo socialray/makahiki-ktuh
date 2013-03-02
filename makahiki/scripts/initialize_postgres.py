@@ -26,18 +26,19 @@ def main():
         print "Environment variable MAKAHIKI_DATABASE_URL not defined. Exiting."
         sys.exit(1)
 
-    if not password:
-        print "password not in the Environment variable MAKAHIKI_DATABASE_URL. Exiting."
-        sys.exit(1)
+    if username:
+        if not password:
+            print "password not in the Environment variable MAKAHIKI_DATABASE_URL. Exiting."
+            sys.exit(1)
 
-    sqls = ("DROP DATABASE %s" % database,
-            "DROP USER %s" % username,
-            "CREATE USER %s with CREATEDB PASSWORD '%s'" % (username, password),
-            "CREATE DATABASE %s OWNER %s" % (database, username),)
+        sqls = ("DROP DATABASE %s" % database,
+                "DROP USER %s" % username,
+                "CREATE USER %s with CREATEDB PASSWORD '%s'" % (username, password),
+                "CREATE DATABASE %s OWNER %s" % (database, username),)
 
-    for sql in sqls:
-        command = 'psql -U postgres -c "%s"' % sql
-        os.system(command)
+        for sql in sqls:
+            command = 'psql -U postgres -c "%s"' % sql
+            os.system(command)
 
 
 if __name__ == '__main__':

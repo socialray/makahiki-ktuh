@@ -166,14 +166,6 @@ This command will:
   * Initialize the system with data.
   * Set up static files.
 
-If you instead want to create a demo instance to facilitate training or sample use, you can invoke
-the initialize_instance script as::
-
-  % scripts/initialize_instance.py -t demo
-
-This will create a demo instance that enables people to play a simple version of the Kukui
-Cup with minimal additional configuration.
-
 .. warning:: Invoke initialize_instance only once!
 
    The initialize_instance script should be run only a single time in production

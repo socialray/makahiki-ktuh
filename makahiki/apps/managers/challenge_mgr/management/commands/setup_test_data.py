@@ -94,6 +94,7 @@ class Command(MakahikiBaseCommand):
         total_count = 0
         for team in Team.objects.all():
             for i in range(0, count):
+                _ = i
                 username = "player%d" % total_count
                 user = User.objects.create_user(username,
                                                 username + "@test.com",
@@ -101,20 +102,11 @@ class Command(MakahikiBaseCommand):
                 user.first_name = username.capitalize()
                 user.last_name = "Test"
                 user.save()
-                # make the first user in the team to go through first-login,
-                # for the rest users, set their profile and setup as completed.
-                if i == 0:
-                    is_completed = False
-                else:
-                    is_completed = True
+
                 profile = user.get_profile()
-                profile.setup_complete = is_completed
-                profile.setup_profile = is_completed
                 profile.name = username.capitalize()
                 profile.team = team
                 profile.save()
-                if is_completed:
-                    profile.add_points(25, datetime.datetime.today(), 'setup completed')
 
                 total_count += 1
 

@@ -36,7 +36,7 @@ build certain libraries (PIL, etc.) that require GCC (which is bundled with
 Xcode). Xcode can either be found in your OS X installation DVD, or in the Mac
 App Store.
 
-If on Linux, in most cases, you will find the C/C++ compiler is already installed in your Linux environment.
+If on Linux, in most cases, you will find the C/C++ compiler is already installed in your environment.
 
 
 Install Git
@@ -61,9 +61,7 @@ Install Virtual Environment Wrapper
 
 `Virtualenvwrapper`_ allows you to install libraries separately from your global Python path.
 
-In Mac OS X and Linux, follow the `virtualenvwrapper installation instructions`_ through the Quick Start section.
-
-Once virtualenv is installed, create a virtual environment for makahiki as follows::
+Follow the `virtualenvwrapper installation instructions`_ through the Quick Start section to install virtualenv and virtualenvwrapper. Once they are installed, create a virtual environment for makahiki as follows::
 
   % mkvirtualenv makahiki
 
@@ -117,12 +115,12 @@ In the Linux environment, you need to install the additional package "postgres-d
 in order to get the pg_config command.
 
 
-Install Memcache (Optional)
----------------------------
+Install Memcache
+----------------
 
 Makahiki can optionally use `Memcache`_ to improve performance, especially in the
 production environment.  To avoid the need for alternative configuration files, we require
-local installations to install Memcache and an associated library even if they aren't
+local installations to install Memcache and an associated library even if developers aren't
 intending to use it.
 
 Mac OS X
@@ -134,8 +132,8 @@ On Mac OS X, if you have installed `Homebrew`_, you can install these by typing:
 
 Linux
 *****
-For other environments, one place to start is `Heroku's memcache
-installation instructions`_. For Linux (Ubuntu), you can install the memcached by running "sudo apt-get install memcached". But you will have to install the libmemcached from the source. Here are the commands we did on Ubuntu::
+On Linux, one place to start is `Heroku's memcache
+installation instructions`_. For Ubuntu, you can install the memcached by running "sudo apt-get install memcached". But you will have to install the libmemcached from the source. Here are the commands we did on Ubuntu::
 
   % sudo apt-get install -y memcached libcloog-ppl0 g++
   % wget https://launchpad.net/libmemcached/1.0/.53/+download/libmemcached-0.53.tar.gz
@@ -225,14 +223,6 @@ This command will:
   * Reinitialize the database contents and perform any needed database migrations. 
   * Initialize the system with data.
   * Set up static files. 
-
-If you instead want to create a demo instance to facilitate training or sample use, you can invoke
-the initialize_instance script as::
-
-  % scripts/initialize_instance.py -t demo
-
-This will create a demo instance that enables people to play a simple version of the Kukui
-Cup with minimal additional configuration.
 
 .. warning:: Invoke initialize_instance only once!
 

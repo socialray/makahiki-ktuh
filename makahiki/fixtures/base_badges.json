@@ -129,7 +129,7 @@
             "label": "SSC",
             "priority": 110,
             "theme": "2",
-            "award_trigger": "daily",
+            "award_trigger": "smartgrid",
             "award_condition": "social_bonus_count(5)",
             "slug": "super-social",
             "name": "Super Social"
@@ -146,7 +146,7 @@
             "label": "LV4",
             "priority": 100,
             "theme": "1",
-            "award_trigger": "daily",
+            "award_trigger": "smartgrid",
             "award_condition": "completed_level(4)",
             "slug": "level-4-master",
             "name": "Level 4 Master"
@@ -163,7 +163,7 @@
             "label": "LV3",
             "priority": 90,
             "theme": "5",
-            "award_trigger": "daily",
+            "award_trigger": "smartgrid",
             "award_condition": "completed_level(3)",
             "slug": "level-3-master",
             "name": "Level 3 Master"
@@ -180,7 +180,7 @@
             "label": "LV2",
             "priority": 80,
             "theme": "4",
-            "award_trigger": "daily",
+            "award_trigger": "smartgrid",
             "award_condition": "completed_level(2)",
             "slug": "level-2-master",
             "name": "Level 2 Master"
@@ -197,7 +197,7 @@
             "label": "LV1",
             "priority": 70,
             "theme": "3",
-            "award_trigger": "daily",
+            "award_trigger": "smartgrid",
             "award_condition": "completed_level(1)",
             "slug": "level-1-master",
             "name": "Level 1 Master"
@@ -214,7 +214,7 @@
             "label": "ULC",
             "priority": 60,
             "theme": "2",
-            "award_trigger": "daily",
+            "award_trigger": "smartgrid",
             "award_condition": "completed_all_of(action_type='commitment')",
             "slug": "ultra-committed",
             "name": "Ultra Committed"
@@ -231,7 +231,7 @@
             "label": "SPC",
             "priority": 50,
             "theme": "1",
-            "award_trigger": "daily",
+            "award_trigger": "smartgrid",
             "award_condition": "completed_some_of(5, action_type='commitment')",
             "slug": "super-committed",
             "name": "Super Committted"
@@ -333,7 +333,7 @@
             "label": "FSP",
             "priority": 200,
             "theme": "2",
-            "award_trigger": "daily",
+            "award_trigger": "smartgrid",
             "award_condition": "completed_some_full_spectrum()",
             "slug": "full-spectrum",
             "name": "Full Spectrum"

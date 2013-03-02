@@ -63,7 +63,6 @@ def syncdb(manage_command):
     """sync db."""
     print "syncing and migrating db..."
     os.system("%s syncdb --noinput --migrate --verbosity 0" % manage_command)
-    os.system("%s clear_cache" % manage_command)
 
 
 def reset_db(heroku_app):
@@ -130,14 +129,8 @@ def load_data(manage_command, instance_type, fixture_path):
         print "setting up default data..."
         os.system("%s setup_test_data rounds 1" % manage_command)
         load_fixtures(manage_command, fixture_path, "default_")
-    elif instance_type == "demo":
-        print "setting up demo data..."
-        os.system("%s setup_test_data rounds 1" % manage_command)
-        load_fixtures(manage_command, fixture_path, "demo_")
         # setup 2 user per team
         os.system("%s setup_test_data all 2" % manage_command)
-        # change the commitment duration to 1 day
-        os.system("%s setup_test_data commitment_durations 1" % manage_command)
     elif instance_type == "test":
         print "setting up test data..."
         os.system("%s setup_test_data rounds 3" % manage_command)
@@ -150,6 +143,8 @@ def load_data(manage_command, instance_type, fixture_path):
         load_fixtures(manage_command, fixture_path, "uh12_")
         # setup 2 user per team
         os.system("%s setup_test_data all 2" % manage_command)
+
+    os.system("%s clear_cache" % manage_command)
 
 
 def has_verbose_flag(argv):

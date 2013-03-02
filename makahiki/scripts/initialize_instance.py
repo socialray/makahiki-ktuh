@@ -10,12 +10,8 @@ Use this script to create an instance with different types of configuration:
            the settings for rounds, resources, resource goals, teams and
            users, prizes, etc. Uses internal authentication.
 
-[demo]   : includes all of the [default] configuration, with the additions of
-           demo data, such as demo rounds, resource and goal settings, demo
-           team, demo users, demo prizes. Uses internal authentication.
-
-[test]   : includes all of "demo" configuration, with more test users. Uses
-           CAS authentication.
+[test]   : includes all of "default" configuration, with more test users
+           and data. Uses CAS authentication.
 
 if -r or --heroku is specified, it will initialize the instance in the specified
 heroku app.

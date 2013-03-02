@@ -1,0 +1,134 @@
+[
+    {
+        "model": "quests.quest",
+        "fields": {
+            "completion_conditions": "completed_action('like-cup')",
+            "unlock_conditions": "completed_action('intro-video') and completed_action('cup-secrets') and not completed_action('like-cup')",
+            "name": "Get social",
+            "priority": 5,
+            "description": "To be successful, the Kukui Cup needs a lot of people to participate and we need your help. This quest is about getting the word out about the Kukui Cup to your social network.\r\n\r\nTo complete this quest, you will have to complete one activity: Like Kukui Cup on Facebook.\r\n\r\nFind this activity in the Smart Grid Game and complete it to finish off this quest.",
+            "quest_slug": "get-social"
+        },
+        "pk": 6
+    },
+    {
+        "model": "quests.quest",
+        "fields": {
+            "completion_conditions": "completed_action('cup-secrets')",
+            "unlock_conditions": "completed_action('intro-video') and not completed_action('cup-secrets')",
+            "name": "Learn Secrets of Kukui Cup Masters",
+            "priority": 1,
+            "description": "Do you want some hints about how to win the Kukui Cup? We've prepared a special video for you, called *Secrets of the Kukui Cup Masters*. Watch it to learn strategies for playing the Kukui Cup.\r\n\r\n**To complete this quest:**\r\n\r\n1. If you aren't already on the Get Nutz page, click on the Get Nutz icon in the navigation bar at the top of every page\r\n2. Click on the second square in the first column of the Smart Grid Game\r\n3. Watch the video\r\n4. Answer a question about it correctly\r\n5. Put your newly learned strategies to work",
+            "quest_slug": "learn-secrets"
+        },
+        "pk": 14
+    },
+    {
+        "model": "quests.quest",
+        "fields": {
+            "completion_conditions": "completed_action('intro-video')",
+            "unlock_conditions": "not completed_action('intro-video')",
+            "name": "Watch Intro Video",
+            "priority": 0,
+            "description": "Every quest starts with a single step, and yours should start by watching the Kukui Cup introduction video that you seem to have skipped when you logged in for the first time. The video will help you to understand what the Kukui Cup is all about, and briefly introduce you to the things you can do to win.\r\n\r\nTo watch the video:\r\n\r\n1. Click on the Get Nutz icon in the navigation bar at the top left of this web page\r\n2. Click on the first square in the first level of the Smart Grid Game (upper left corner of grid)\r\n3. Watch the video\r\n4. Answer a question about it correctly\r\n5. You are on your way to Kukui Cup domination!",
+            "quest_slug": "watch-intro-video"
+        },
+        "pk": 4
+    },
+    {
+        "model": "quests.quest",
+        "fields": {
+            "completion_conditions": "completed_some_of(action_type='event')",
+            "unlock_conditions": "completed_action('intro-video') and not completed_some_of(action_type='event')",
+            "name": "Sign up for an event",
+            "priority": 3,
+            "description": "Part of the Kukui Cup is a series of events scheduled throughout the competition. These events are designed to be fun and help you learn about energy and sustainability. You can sign up for an event to indicate your interest in attending, and see who else is going.\r\n\r\nSigning up for an event gets you 2 points. At the event, you will receive a little slip of paper that contains an attendance code. This code is like a ticket stub, it proves that you attended the event. Once the event is over, you can enter the attendance code to get the rest of your points (usually 20 points or more).\r\n\r\n**To complete this quest:**\r\n\r\n1. Go to the Get Nutz page\r\n2. Either pick an event from the **Upcoming Events** section, or click on an event square in the grid\r\n3. Read the about the event\r\n4. If you want to attend, click the \"I want to sign up\" button\r\n5. Attend the event when it happens.\r\n6. Don't forget to come back after the event with your attendance code to get the rest of your points.",
+            "quest_slug": "sign-event"
+        },
+        "pk": 8
+    },
+    {
+        "model": "quests.quest",
+        "fields": {
+            "completion_conditions": "completed_some_of(action_type='commitment')",
+            "unlock_conditions": "completed_action('intro-video') and not completed_some_of(action_type='commitment')",
+            "name": "Make a commitment",
+            "priority": 2,
+            "description": "One of the things you can do in the Kukui Cup is make a commitment. Commitments range from little things, like turning off the lights, to big things, like not eating meat. Each commitment lasts for 5 days, during which you agree to live up to the commitment. Once the 5 days are over, you come back to the site to collect your points.\r\n\r\nMaking a commitment earns you 2 points, and when you come back 5 days later to certify that you lived up to your commitment, you get another 5 points. To keep you focused, you can only commit to 5 things at a time.\r\n\r\n**To complete this quest:**\r\n\r\n1. If you aren't already on the Get Nutz page, click on the Get Nutz icon in the navigation bar at the top of every page\r\n2. Click on a commitment square (the legend shows which color squares are commitments).\r\n3. Read about the commitment you are being asked to make.\r\n4. If you are willing, click the **\"I will do this!\"** button\r\n5. Don't forget to come back in 5 days to get the rest of your points",
+            "quest_slug": "make-commitment"
+        },
+        "pk": 7
+    },
+    {
+        "model": "quests.quest",
+        "fields": {
+            "completion_conditions": "allocated_ticket()",
+            "unlock_conditions": "completed_action('intro-video') and has_points(25) and not allocated_ticket()",
+            "name": "Participate in the Raffle",
+            "priority": 4,
+            "description": "An exciting side game in the Kukui Cup is the Raffle Game, which you can find on the Prizes page. Click on the Prizes icon in the navigation bar to get to the Prizes page. The Raffle Game is on the right hand side of the Prizes page.\r\n\r\nFor every 25 points you earn, you get a raffle ticket. You can allocate your ticket(s) to any of the prizes in the raffle, and each ticket gives you one chance to win the prize at the end of the round. However, all the other players are also allocating their raffle tickets to the prizes, which lowers your odds. You can change your allocation of tickets at any time until the Raffle Game deadline shown below the list of prizes. At the end of the round, the Raffle Game randomly picks one ticket for each prize, and the owner of that ticket wins the prize!\r\n\r\n**Step by step:**\r\n\r\n1. Go to the **Prizes** page\r\n2. Pick one of the raffle prizes\r\n3. Allocate one ticket to it using the **+1** button.",
+            "quest_slug": "raffle-quest"
+        },
+        "pk": 11
+    },
+    {
+        "model": "quests.quest",
+        "fields": {
+            "completion_conditions": "completed_action('check-energy')",
+            "unlock_conditions": "completed_action('intro-video') and not completed_action('check-energy')",
+            "name": "Check lounge energy use",
+            "priority": 6,
+            "description": "While making commitments and completing activities is important, the other side of the Kukui Cup is reducing your lounge's energy usage.\r\n\r\nThe **Go Low** page can show you how much power & energy your lounge is using in real time.\r\n\r\nTo complete this quest, perform the \"Examine your lounge's energy use\" activity on the Get Nutz page. You'll find it under the **Let's Get Physical** category, on level 2 of the Smart Grid Game. You can switch between the levels by clicking on the tabs above the grid.",
+            "quest_slug": "check-lounge-energy-use"
+        },
+        "pk": 13
+    },
+    {
+        "model": "quests.quest",
+        "fields": {
+            "completion_conditions": "badge_awarded('super-committed')",
+            "unlock_conditions": "completed_some_of(action_type='commitment') and not badge_awarded('super-committed')",
+            "name": "Get the Super Committed badge",
+            "priority": 6,
+            "description": "While earning points and conserving energy is great, wouldn't it be awesome if there was a way to get a little recognition for all your hard work? Lucky for you, there is: **BADGES**. Badges represent achievements reached during the game, both big and small.\r\n\r\nFor the most part, you'll have to discover the badges on your own, but we're going to give you a hint on this one. You will receive the Super Committed badge when you make 5 commitments (the maximum allowed by law). To complete this quest, you just need to get the badge by topping off your commitments to 5.\r\n\r\nYou know the drill by now: go to the Get Nutz page, click on a commitment square in the Smart Grid Game, and get your badge. *Note:* you may have to complete some other activities or look on different levels to get unlock all 5 commitments.",
+            "quest_slug": "get-super-committed-badge"
+        },
+        "pk": 12
+    },
+    {
+        "model": "quests.quest",
+        "fields": {
+            "completion_conditions": "completed_action('power-energy') and completed_action('energy-intuition')",
+            "unlock_conditions": "completed_action('intro-video')",
+            "name": "Learn about energy",
+            "priority": 2,
+            "description": "The Kukui Cup is all about energy: learning about it and conserving it. On this quest, you will learn some basic information about power and energy, which will give you a solid foundation for all the other energy-related activities in the game.\r\n\r\n**To complete this quest:** You must watch two videos (**Power & Energy**, and **Energy Intuition**) and answer a question about each.\r\n\r\nYou can find the videos in the Smart Grid Game, which is located on the Get Nutz page. To get there:\r\n\r\n1. If you aren't already on the Get Nutz page, click on the Get Nutz icon in the navigation bar at the top of every page\r\n2. Click on the third square in the **Get Started** column of the grid\r\n3. Watch the video (pay attention, as you will answer a question about it next)\r\n4. Click the **\"I Did This!\"** button\r\n5. Answer a question about the content of the video. If you don't know the answer, click Cancel and watch the video again.\r\n6. Click the **\"Back to Smart Grid Game\"** button on left side.\r\n7. The second video is the bottom square of the same column of the Smart Grid Game\r\n8. A Kukui Cup Admin will review your answer (usually in a few hours) and if you answered correctly, you will be awarded 10 points for each video.",
+            "quest_slug": "learn-about-energy"
+        },
+        "pk": 5
+    },
+    {
+        "model": "quests.quest",
+        "fields": {
+            "completion_conditions": "change_theme()",
+            "unlock_conditions": "completed_action('intro-video') and not change_theme()",
+            "name": "Find your theme",
+            "priority": 3,
+            "description": "You may not have realized it, but it is possible to select a different \"skin\" for your personal Kukui Cup interface. The goal of this quest is for you to explore the different user interface themes and decide which one works best for you. To do it:\r\n\r\n1. Go to the Profile Page.\r\n2. In the \"My Info\" window, find the \"Theme\" pull-down menu. Select one of the other themes.\r\n3. Press \"Save Changes\" to enable your new theme.\r\n\r\nEnjoy your personalized Kukui Cup experience!",
+            "quest_slug": "find-your-theme"
+        },
+        "pk": 16
+    },
+    {
+        "model": "quests.quest",
+        "fields": {
+            "completion_conditions": "completed_action('check-participation')",
+            "unlock_conditions": "completed_action('intro-video') and not completed_action('check-participation')",
+            "name": "Check your lounge's participation",
+            "priority": 7,
+            "description": "You're playing the Kukui Cup hard, but how is the rest of your lounge doing? Are they playing the Cup? To win the lounge prizes, you need your dormies to start playing the game and reducing their energy use!\r\n\r\nIn the Smart Grid Game there is an activity to examine your lounge's participation rate in the **Just Do It** category. Find the activity and complete it to complete this quest.",
+            "quest_slug": "check-lounge-participation"
+        },
+        "pk": 17
+    }
+]
