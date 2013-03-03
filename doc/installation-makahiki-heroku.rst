@@ -14,6 +14,8 @@ This involves:
   * Install the Heroku Toolbelt (provides the "git" and "heroku" commands).
   * Logging in to Heroku.
 
+Ensure you have added your SSH keys to Heroku. Follow https://devcenter.heroku.com/articles/keys to
+upload your keys to Heroku.
 
 Setup Amazon S3
 ---------------
@@ -22,16 +24,6 @@ In order to use Heroku with Makahiki, and because Heroku does not host static fi
 Follow `Using AWS S3 to store static assets <https://devcenter.heroku.com/articles/s3>`_ for details to setup the Amazon S3.
 
 Create a S3 bucket to be used for storing the static files for Makahiki, and record the bucket name you created, the AWW access key id, and the AWS secret access key for use in setting up the environment variables for Heroku.
-
-Download the Makahiki source
-----------------------------
-
-To download the Makahiki system, type the following::
-
-  % git clone git://github.com/csdl/makahiki.git
-
-This will create a directory called "makahiki" containing the source code
-for the system.
 
 Setup environment variables
 ---------------------------
@@ -52,6 +44,17 @@ You will also need to define Amazon S3 information::
   % export MAKAHIKI_AWS_STORAGE_BUCKET_NAME=<AWS S3 bucket name>
 
 You will have obtained these values in the previous section.
+
+Download the Makahiki source
+----------------------------
+
+To download the Makahiki system, type the following::
+
+  % git clone git://github.com/csdl/makahiki.git
+
+This will create a directory called "makahiki" containing the source code
+for the system.
+
 
 Initialize Makahiki
 -------------------
@@ -76,6 +79,10 @@ This command will:
   * initialize the database contents and perform any needed database migrations.
   * initialize the system with data.
   * set up static files.
+
+This command will produce lots of output and may take more than 20 minutes to upload Makahiki to 
+Heroku.  After uploading Makahiki you will have to answer 'Y' to the question 
+"Do you wish to continue (Y/n)?" during the process.
 
 .. warning:: initialize_instance will delete any Makahiki challenge configuration actions!
 

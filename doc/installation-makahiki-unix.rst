@@ -7,7 +7,7 @@ These instructions also assume that you are using a Bourne-type shell (such as b
 which is the default on Mac OS X and Linux. Using a C-shell variant
 (like tcsh), is possible but not recommended.
 
-Hardware requirements 
+Hardware requirements
 ---------------------
 
 Our estimated hardware requirements for **production** use are:
@@ -18,7 +18,7 @@ Our estimated hardware requirements for **production** use are:
 For **development** only, a modern dual core CPU with 4 GB should be ok, although the more the better.
 
 Install Python
------------------
+--------------
 
 `Python`_ 2.7.3 or higher (but not Python 3).
 
@@ -40,13 +40,13 @@ If on Linux, in most cases, you will find the C/C++ compiler is already installe
 
 
 Install Git
---------------
+-----------
 
 Find a package for your operating system at the `GitHub install
-wiki`_.
+wiki`_. We recommend following the GitHub setup instructions at https://help.github.com/articles/set-up-git.
 
 Install Pip
---------------
+-----------
 
 Install it by typing::
 
@@ -54,10 +54,11 @@ Install it by typing::
 
 Depending on your system configuration, you may
 have to type ``sudo easy_install pip``. If you do not have easy_install,
-download and install it from the `setuptools website`_.
+download and install it from the `setuptools website`_. Linux (Ubuntu) users can use 
+``sudo apt-get install python-setuptools``.
 
 Install Virtual Environment Wrapper
----------------------------------------
+-----------------------------------
 
 `Virtualenvwrapper`_ allows you to install libraries separately from your global Python path.
 
@@ -67,7 +68,7 @@ Follow the `virtualenvwrapper installation instructions`_ through the Quick Star
 
 
 Install Python Imaging Library
----------------------------------
+------------------------------
 
 Makahiki requires the `Python Imaging Library`_ (PIL).
 
@@ -93,9 +94,9 @@ Make sure you have both libjpeg (for JPEG) and zlib (for PNG) in the /usr/lib di
 
 
 Install PostgreSQL
----------------------
+------------------
 
-Makahiki uses `PostgreSQL`_ as its standard backend database.
+Makahiki uses `PostgreSQL`_ as its standard backend database. We recommend version 9.1.3.
 Note that on Mac OS X, the installer will need to make changes in the
 ``sysctl`` settings and a reboot before installation can proceed. Once
 installed, be sure that your PostgreSQL installation's bin/ directory is on
@@ -114,8 +115,12 @@ to::
 
   local all postgres trust
 
+The first line might be: "local all postgres peer". Change it to "local all postgres trust"
+
 Alternatively, you can create a .pgpass file containing the credentials for the user postgres. See
 the PostgreSQL documentation for more information on the .pgpass file.
+
+Linux users need to install the ``libpq-dev`` package using ``sudo apt-get install libpq-dev``.
 
 Install Memcache
 ----------------
@@ -182,6 +187,8 @@ You can install the required Python package for Makahiki by::
 
   % pip install -r requirements.txt
 
+This command will cause lots of output.
+
 Setup environment variables
 ---------------------------
 
@@ -212,9 +219,10 @@ Initialize Makahiki
 -------------------
 
 Next, invoke the initialize_instance script, passing it an argument to specify what kind
-of initial data to load.  In most cases, you will want to load the default dataset, as
-shown next::
+of initial data to load. You need to be in the makahiki/makahiki directory. In most cases, 
+you will want to load the default dataset, as shown next::
 
+  % cd makahiki
   % scripts/initialize_instance.py --type default
 
 This command will:
@@ -230,9 +238,10 @@ This command will:
    invoked again.   Use update_instance (discussed below) to update source code without
    losing subsequent configuration actions.
 
-
+You will have to answer 'Y' to the question "Do you wish to continue (Y/n)?"
+ 
 Start the server
---------------------
+----------------
 
 Finally, you can start the Makahiki server using either::
 
