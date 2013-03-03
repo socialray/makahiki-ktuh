@@ -139,7 +139,7 @@ On Mac OS X, if you have installed `Homebrew`_, you can install these by typing:
 
 Linux
 *****
-For Ubuntu, you can install the memcached by running "sudo apt-get install memcached". In addition, you will have to install the libmemcached-dev in order to let Django use the memcached. Here are the commands::
+For Ubuntu, install memcached as follows::
 
   % sudo apt-get install memcached
   % sudo apt-get install libmemcached-dev
@@ -187,7 +187,7 @@ You can install the required Python package for Makahiki by::
 
   % pip install -r requirements.txt
 
-This command will cause lots of output.
+Don't worry that this command generates lots and lots of output.
 
 Setup environment variables
 ---------------------------

@@ -14,8 +14,11 @@ This involves:
   * Install the Heroku Toolbelt (provides the "git" and "heroku" commands).
   * Logging in to Heroku.
 
-Ensure you have added your SSH keys to Heroku. Follow https://devcenter.heroku.com/articles/keys to
-upload your keys to Heroku.
+Add your SSH keys to Heroku
+---------------------------
+
+You must tell Heroku about your SSH keys. Follow
+https://devcenter.heroku.com/articles/keys to upload your keys to Heroku.
 
 Setup Amazon S3
 ---------------
