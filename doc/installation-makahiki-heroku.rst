@@ -20,6 +20,19 @@ Add your SSH keys to Heroku
 You must tell Heroku about your SSH keys. Follow
 https://devcenter.heroku.com/articles/keys to upload your keys to Heroku.
 
+Verifying your Heroku account
+-----------------------------
+Heroku provides many `addons <https://addons.heroku.com/>`_ to enhance and manage the apps deployed in Heroku.
+Makahiki use the free `Memcache <https://addons.heroku.com/memcache>`_ addon on Heroku for performance enhancement.
+In order to use any addons, even the free ones, Heroku requires to verify your account by providing your credit card
+info. The verification process is free and no charge will be made as long as you don't use the paid addons or exceed
+your app's free resource usage allowance. See more about Heroku billing at: https://devcenter.heroku.com/categories/billing
+
+Follow `Account Verification <https://devcenter.heroku.com/articles/account-verification>`_ page to verify your account.
+
+If you don't verify your Heroku account, Makahiki will not be able to use Memcache and the "initialize_instance"
+step later will fail to add the "Memcache" addon to your heroku instance.
+
 Setup Amazon S3
 ---------------
 Makahiki on Heroku use Amazon S3 to store static files and support file/image upload due to the limitation of Heroku's `Ephemeral filesystem`_ in hosting static assets. You will need to set up the Amazon S3 for serving the static files in Makahiki heroku instance.
@@ -31,19 +44,6 @@ Create a S3 bucket to be used for storing the static files for Makahiki, and rec
 .. note:: You will need to sign up for an AWS S3 account with Amazon if you don't have one. AWS S3 is not a free service and requires a credit card. But if you are a new AWS customer, you can sign up for the `AWS Free Usage Tier <http://aws.amazon.com/free/>`_ which will be free for one year. And in general, the charge to S3 after the free period is very inexpensive.
 
 .. _Ephemeral filesystem: https://devcenter.heroku.com/articles/dynos#ephemeral-filesystem
-
-Verifying your Heroku account
------------------------------
-Heroku provides many `addons <https://addons.heroku.com/>`_ to enhance and manage the apps deployed in Heroku.
-Makahiki use the free `Memcache <https://addons.heroku.com/memcache>`_ addon on Heroku for performance enhancement.
-In order to use any addons, even the free ones, Heroku requires to verify your account by providing your credit card
-info. The verification process is free and no charge will be made as long as you don't use the paid addons or exceed
-your app's free resource usage allowance. See more about Heroku billing at: https://devcenter.heroku.com/categories/billing
-
-Follow `Account Verification <https://devcenter.heroku.com/articles/account-verification>`_ page to verify your account.
-
-If you don't verify your Heroku account, Makahiki will not be able to use Memcache and the following "initialize_instance"
-step will fail to add the "Memcache" addon to your heroku instance.
 
 Setup environment variables
 ---------------------------
@@ -101,7 +101,7 @@ This command will:
   * set up static files.
 
 This command will produce lots of output and may take more than 20 minutes to upload Makahiki to 
-Heroku.  After uploading Makahiki you will have to answer 'Y' to the question 
+Heroku, depending on your network.  After uploading Makahiki you will have to answer 'Y' to the question
 "Do you wish to continue (Y/n)?" during the process.
 
 .. warning:: initialize_instance will delete any Makahiki challenge configuration actions!
@@ -125,7 +125,7 @@ Start the server
 
 To start up the server on Heroku, invoke::
 
-  % heroku ps:restart -a makahiki-hpu
+  % heroku ps:restart --app makahiki-hpu
 
 Verify that Makahiki is running
 -------------------------------
@@ -158,11 +158,11 @@ simple, and consists of the following steps.
 #. Run the update_instance script to update your Heroku configuration (make sure the AWS environment variables are set)::
 
    % cd makahiki
-   % scripts/update_instance.py -r makahiki-hpu
+   % scripts/update_instance.py --heroku makahiki-hpu
 
 #. Finally, restart your server::
 
-     % heroku ps:restart
+     % heroku ps:restart --app makahiki-hpu
 
 
 
