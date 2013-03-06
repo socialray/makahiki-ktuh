@@ -52,12 +52,13 @@ Players
 Other settings
 --------------
 
-.. todo:: Pages for each of the remaining links in the Other Settings area need to be
-   provided.  Each should start with an "About" section providing a top-level explanation
-   of what the settings accomplishes.   Include a "note" specifying whether configuration
-   is optional or required.  My guess is that all of the pages linked to in this section
-   provide pages that are optional---the default configuration for these settings produces
-   a viable challenge..
+.. toctree::
+   :maxdepth: 1
+
+   challenge-design-pageinfo-settings
+   challenge-design-helptopic-settings
+   challenge-design-notice-settings
+   challenge-design-resourceblackout-settings
 
 
 Game Design Settings

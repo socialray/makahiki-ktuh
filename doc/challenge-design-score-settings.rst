@@ -29,18 +29,11 @@ Getting to the point rubric settings page
 
 After clicking on the "Point rubrics" link in the Challenge Design page, a page similar to the following should appear:
 
-.. figure:: figs/configuration/configuration-challenge-admin-score-settings.1.png
-   :width: 600 px
-   :align: center
-
-All challenges must contain exactly one score settings object, which should be
-automatically created as part of the system initialization process. Click on this link to
-bring up the following page that enables you to configure the point rubric for global actions:
-
-
 .. figure:: figs/configuration/configuration-challenge-admin-score-settings.2.png
    :width: 600 px
    :align: center
+
+They are the default point rubrics created as part of the system initialization process. You can adjust them individaully to fit your challenge's specific need.
 
 .. note:: Remember to click the Save button at the bottom of the page when finished to save your changes. 
 

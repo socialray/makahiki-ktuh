@@ -4,7 +4,7 @@
         "model": "notifications.noticetemplate",
         "fields": {
             "notice_type": "raffle-winner", 
-            "template": "Congratulations, you won a raffle prize '{{PRIZE.title}}' for {{PRIZE.round_name}} !  Please come to the upcoming awards party to claim your prize."
+            "template": "Congratulations, you won a raffle prize '{{PRIZE.title}}' for {{PRIZE.round.name}} !  Please come to the upcoming awards party to claim your prize."
         }
     }, 
     {
@@ -28,7 +28,7 @@
         "model": "notifications.noticetemplate",
         "fields": {
             "notice_type": "prize-winner",
-            "template": "Congratulations, you won a prize '{{PRIZE.title}}' for {{PRIZE.round_name}} !  Please come to the upcoming awards party to claim your prize."
+            "template": "Congratulations, you won a prize '{{PRIZE.title}}' for {{PRIZE.round.name}} !  Please come to the upcoming awards party to claim your prize."
         }
     }
 ]

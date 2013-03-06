@@ -64,7 +64,7 @@ You can download and install the pre-build 32bit binary of `PIL for windows`_.
 After the PIL is installed, if you want to use the PIL in the virtual environment you just created
 in the previous step, you need to copy the PIL package from the system python site-packages to your
 virtual environment. For example, if you have created the virtual environment called "makahiki",
-copy the directory C:\Python27\Lib\site-packages\PIL to C:\Users\myuser\Envs\makahiki\Lib\site-packages.
+copy the directory "C:\\Python27\\Lib\\site-packages\\PIL" to "C:\\Users\\myuser\\Envs\\makahiki\\Lib\\site-packages".
 This will make the PIL available in your virtual environment.
 
 
@@ -84,7 +84,7 @@ PostgreSQL documentation for how to bypass the authentication for localhost.
 
 In the Windows environment, you also need to install the `psycopg2 for windows`_ in order for the python client to use Postgres. You can download the 32bit binary for the corresponding python version and install to your system.
 
-By default, this will install the package into the system python site-packages. If you want to use it in your virtual environment, which is recommended for Makahiki, you will need to copy the psycopg2 directory from the C:\Python27\Lib\site-packages to the site-packages directory of your virutal environment.
+By default, this will install the package into the system python site-packages. If you want to use it in your virtual environment, which is recommended for Makahiki, you will need to copy the directory "C:\\Python27\\Lib\\site-packages\\psycopg2" to the site-packages directory of your virutal environment, for example: "C:\\Users\\myuser\\Envs\\makahiki\\Lib\\site-packages".
 
 .. _Python: http://www.python.org/download/
 .. _Python Imaging Library: http://www.pythonware.com/products/pil/
@@ -158,7 +158,7 @@ Next, invoke the initialize_instance script, passing it an argument to specify w
 of initial data to load.  In most cases, you will want to load the default dataset, as
 shown next::
 
-  % scripts/initialize_instance.py -t default
+  % scripts/initialize_instance.py --type default
 
 This command will:
   * install or update all Python packages required by Makahiki;
@@ -176,16 +176,9 @@ This command will:
 Start the server
 --------------------
 
-Finally, you can start the Makahiki server using either::
-
-  % ./manage.py run_gunicorn
-
-or::
+Finally, you can start the Makahiki server using::
 
   % ./manage.py runserver
-
-The first alternative (run_gunicorn) runs a more efficient web server, while the second (runserver) invokes a server
-that is better for development (for example, :ref:`section-theme-development`).
 
 Verify that Makahiki is running
 -------------------------------
@@ -229,13 +222,6 @@ simple, and consists of the following steps.
 
    % ./scripts/update_instance.py
 
-5. Finally, restart your server, using either::
-
-     % ./manage.py run_gunicorn
-
-   or::
+5. Finally, restart your server, using::
 
      % ./manage.py runserver
-
-
-
