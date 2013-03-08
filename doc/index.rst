@@ -6,6 +6,11 @@
 Makahiki Manual
 ===============
 
+This manual is available in both `PDF`_ and `HTML`_ formats.
+
+.. _PDF: https://media.readthedocs.org/pdf/makahiki/latest/makahiki.pdf
+.. _HTML: http://makahiki.readthedocs.org/en/latest/index.html
+
 .. toctree::
    :maxdepth: 2
    :numbered:
