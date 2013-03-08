@@ -28,7 +28,7 @@ Getting to the team settings page
 
 After clicking on the "Teams Settings" link in the Challenge Design page, a page similar to the following should appear:
 
-.. figure:: figs/configuration/configuration-challenge-admin-teams-settings.1.png
+.. figure:: figs/configuration/configuration-challenge-admin-teams-settings-1.png
    :width: 600 px
    :align: center
 
@@ -36,7 +36,7 @@ To define a new team, click the "Add team" button in the upper right corner. To 
 team definition, click the link which brings up a page similar to the following:
 
 
-.. figure:: figs/configuration/configuration-challenge-admin-teams-settings.2.png
+.. figure:: figs/configuration/configuration-challenge-admin-teams-settings-2.png
    :width: 600 px
    :align: center
 

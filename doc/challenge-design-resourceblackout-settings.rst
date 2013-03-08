@@ -16,7 +16,7 @@ Getting to the notice template settings page
 
 After clicking on the "Resource blackout dates" link in the Challenge Design page, You will see a list of blackout dates if there is any. You can click on the "Add resource blackout date" button to add a new black out date:
 
-.. figure:: figs/configuration/configuration-challenge-admin-resourceblackout-settings.1.png
+.. figure:: figs/configuration/configuration-challenge-admin-resourceblackout-settings-1.png
    :width: 600 px
    :align: center
 

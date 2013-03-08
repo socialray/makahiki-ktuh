@@ -16,14 +16,14 @@ Getting to the page settings page
 
 After clicking on the "Page info" link in the Challenge Design page, a page similar to the following should appear:
 
-.. figure:: figs/configuration/configuration-challenge-admin-pageinfo-settings.1.png
+.. figure:: figs/configuration/configuration-challenge-admin-pageinfo-settings-1.png
    :width: 600 px
    :align: center
 
 
 These are the default page info created as part of the system initialization process. Click on this link to bring up the following page that enables you to configure the individual page:
 
-.. figure:: figs/configuration/configuration-challenge-admin-pageinfo-settings.2.png
+.. figure:: figs/configuration/configuration-challenge-admin-pageinfo-settings-2.png
    :width: 600 px
    :align: center
 

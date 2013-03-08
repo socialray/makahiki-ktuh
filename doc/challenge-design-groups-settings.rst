@@ -36,14 +36,14 @@ Getting to the group settings page
 
 After clicking on the "Groups Settings" link in the Challenge Design page, a page similar to the following should appear:
 
-.. figure:: figs/configuration/configuration-challenge-admin-groups-settings.1.png
+.. figure:: figs/configuration/configuration-challenge-admin-groups-settings-1.png
    :width: 600 px
    :align: center
 
 In this example, clicking on the "Lehua" instance brings up this page with information about the group.  As you can see, there is not much to provide: the name (which can contain spaces and other punctuation) and the slug (which must be a unique ID). 
 
 
-.. figure:: figs/configuration/configuration-challenge-admin-groups-settings.2.png
+.. figure:: figs/configuration/configuration-challenge-admin-groups-settings-2.png
    :width: 600 px
    :align: center
 

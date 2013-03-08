@@ -48,7 +48,7 @@ Getting to the round settings page
 
 After clicking on the "Round Settings" link in the Challenge Design page, a page similar to the following appears:
 
-.. figure:: figs/configuration/configuration-challenge-admin-round-settings.1.png
+.. figure:: figs/configuration/configuration-challenge-admin-round-settings-1.png
    :width: 600 px
    :align: center
 
@@ -57,7 +57,7 @@ In this example, one round is specified.  To create a new round, click on the "A
 Configure a round
 -----------------
 
-.. figure:: figs/configuration/configuration-challenge-admin-round-settings.2.png
+.. figure:: figs/configuration/configuration-challenge-admin-round-settings-2.png
    :width: 600 px
    :align: center
 

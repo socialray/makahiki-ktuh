@@ -23,14 +23,14 @@ Getting to the notice template settings page
 
 After clicking on the "Notice templates" link in the Challenge Design page, a page similar to the following should appear:
 
-.. figure:: figs/configuration/configuration-challenge-admin-notice-settings.1.png
+.. figure:: figs/configuration/configuration-challenge-admin-notice-settings-1.png
    :width: 600 px
    :align: center
 
 
 These are the default notice templates created as part of the system initialization process. Click on this link to bring up the following page that enables you to change them:
 
-.. figure:: figs/configuration/configuration-challenge-admin-notice-settings.2.png
+.. figure:: figs/configuration/configuration-challenge-admin-notice-settings-2.png
    :width: 600 px
    :align: center
 

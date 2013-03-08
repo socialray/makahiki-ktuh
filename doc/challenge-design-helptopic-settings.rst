@@ -22,14 +22,14 @@ Getting to the help topic settings page
 
 After clicking on the "Help topic" link in the Challenge Design page, a page similar to the following should appear:
 
-.. figure:: figs/configuration/configuration-challenge-admin-helptopic-settings.1.png
+.. figure:: figs/configuration/configuration-challenge-admin-helptopic-settings-1.png
    :width: 600 px
    :align: center
 
 
 These are the default help topics created as part of the system initialization process. Click on this link to bring up the following page that enables you to change the individual help topic:
 
-.. figure:: figs/configuration/configuration-challenge-admin-helptopic-settings.2.png
+.. figure:: figs/configuration/configuration-challenge-admin-helptopic-settings-2.png
    :width: 600 px
    :align: center
 

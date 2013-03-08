@@ -6,40 +6,72 @@ Design the Smart Grid Game
 About the Smart Grid Game
 -------------------------
 
-The Smart Grid Game (SGG) is a widget provided in Makahiki to support "gamified" delivery
-of educational content.  Players use its grid interface to discover "actions" they can
+Makahiki provides the Smart Grid Game (SGG) to support "gamified" delivery of educational
+experiences.  Players use its grid interface to discover "actions" they can
 perform. Successful completion of an action earns the player a variable number of points
-depending upon the difficulty of the action.  There are five types of actions: activities,
-commitments, events, excursions, and creative.  Challenge designers tailor their SGG to
-deliver the educational content of interest, as well as tailoring the "paths" players can
-take through the SGG as they complete actions.  
+depending upon the difficulty of the action, and can potentially "unlock" additional actions in the
+SGG.  There are five types of actions: activities, commitments, events, excursions, and
+creative.  As a challenge designer, your task is to design an SGG that contains
+educational experiences suitable for your players, and also design the "path" that players
+take through the SGG through the unlocking of new actions.
 
-The following screen image shows a typical Smart Grid Game interface:
+The following screen image shows a typical Smart Grid Game interface for players:
 
 .. figure:: figs/configuration/configuration-game-admin-smartgrid-game-interface.png
    :width: 400 px
    :align: center
 
-There are three basic user interface components in the Smart Grid Game:
+This image reveals several important aspects of the SGG:
 
-  * **Levels.**  Each Smart Grid Game can have from 1 to 7 "Levels".  The screen image above
-    has 7 levels. Players begin with
-    access to the first level.  Additional levels can be unlocked based upon players
-    completing lower levels and/or certain dates and times being reached during the
-    challenge.
+**Levels.** Each Smart Grid Game can have from 1 to 7 "Levels". (More than 7 Levels
+becomes awkward when viewing the game on a mobile device.) The screen image above
+has 7 levels. In typical SGG designs, players begin with access only to the first Level.
+Higher Levels become unlocked for a player either because they completed a lower level or 
+because a Level is designed to unlock automatically when a given date is reached during
+the challenge.
 
-  * **Categories.**  Each Level of a Smart Grid Game has a set of columns, labelled with a
-    name corresponding to its category.  In this screen image, the first category is "Get Started", and there are
-    five categories total.  Each Level has different category names and can
-    even have a different number of categories. 
+**Categories.** Each Level of a Smart Grid Game has a set of columns, labelled with a name
+called its "category".  In this screen image, the first category is "Get Started",
+and there are five categories total.  For best viewing on a mobile device, we recommend no
+more than 5 categories (as in this screen image).  Levels can have differing numbers of
+categories. 
 
-  * **Actions.**  The cells underneath a category label correspond to "Actions".  There
-    are several action types:  Activity, Commitment, Event, Excursion, Video.  In the
-    screen image, each of the five categories has five Action cells, so this Level of
-    this Smart Grid Game has a total of 25 Actions. 
+**Actions.** The cells underneath a category label provide access to "Actions".  There are
+several action types: Activity, Commitment, Event, Excursion, Video.  The color of the
+cells indicates their action type.  In the screen image, each of the five categories has
+five Action cells, so this Level of this Smart Grid Game has a total of 25 Actions.  In
+order to create a rectangular grid, designers can also create "filler" actions, which
+occupy a space in the grid but cannot be otherwise manipulated by players.  There are no
+"filler" actions in the above example, but the legend shows that they would be colored
+gray if one or more were present.
+
+**State of play.** Cells are "decorated" with information that indicates the state of
+play.   
+
+  * If an action is unlocked and thus available for the player, then the cell provides
+    a number indicating the point value of that action if completed. In the image above,
+    unlocked cells indicate actions ranging in value from 5 to 100 points.  
+
+  * If an action is not yet unlocked, then instead of a number, it shows a lock icon.  
+
+  * If the cell corresponds to an an event or excursion that has already occurred, it is
+    labeled as "Expired".  
+
+  * If the action has been submitted or completed by the player, then instead of a point value, the
+    name of the action appears in the cell.  For example, the image above shows that this
+    player has completed the "Intro Video" action. 
+
+  * Finally, actions are typically in one of three states: submitted, completed, or
+    rejected (in which case the player can resubmit a revised answer to get full credit.)
+    Small icons (orange, green, or red) indicate this state. 
+
+
 
 About actions
 ------------- 
+
+Activity
+********
 
 **Activities** are the most basic action available in the Smart Grid. In order to get points
 for an activity, a player must input a response to the system, which is reviewed and
@@ -48,46 +80,73 @@ can be a short textual answer or an uploaded picture. If a submission is
 approved, the player receives the points for their submission. Otherwise, the system
 notifies the player that their submission was not approved,
 along with a comment (writte by an administrator) explaining why it was rejected. The player can
-change and resubmit their response and still earn the full point value for that task.
+change and resubmit their response and still earn the full point value for that task. The
+following figure illustrates a sample activity:
+
+.. figure:: figs/sgg/action-video.png
+   :width: 600 px
+   :align: center
+
+   *Sample activity in the Smart Grid Game*
+
+Commitment
+**********
 
 **Commitments** are pledges that the player will carry out a specific action for a
-period of five days. Examples include: reducing shower time, taking the stairs, and
-turning off the lights when leaving a room. Because these commitments are not verifiable,
-they are typically worth fewer points than activities. Furthermore, a player can only have up to
-five active commitments at any given time. After the five day period is up, the player can
-then declare that they completed the commitment and immediately earn their points. They
-can then sign up for another commitment, including the one they just completed.
+specific amount of time (typically 5 days). Examples include: reducing shower time, taking
+the stairs, and turning off the lights when leaving a room. Unlike activities, commitments
+are not easily verifiable, and so they are usually designed with fewer points than
+activities. Furthermore, a player can only enter into five commitments at any given
+time. After the commitment period is up, the player can declare that they completed the
+commitment and immediately earn the associated points. They can then enter into another
+commitment, including the one they just completed.  The following figure illustrates a
+sample commitment:
 
-**Events and excursions** are actions tied to real world meetings. Events are typically held in or near
-the challenge location while excursions typically require transportation. To help
-organizers gauge interest in events and excursions, players
-can earn points by signing up in advance. Players that do this (and then actually attend
-the event or excursion) are
-earn a 2 point signup bonus. Players can also set up a reminder that is sent to
-their email and/or their mobile phone before the meeting takes place. At the event or excursion, a
-challenge administrator provides players with "attendance codes" printed on slips of paper
-that can be later entered in the system by the player to get their points.  (The paper
-slips provide a form of verification that the player physically attended the event or excursion.)
-Attendance codes are generated by Makahiki
-and can only be used once. To discourage players from signing up and not attending, a 2
-point penalty is assessed to players who do not submit an attendance code. If the player
-submits an attendance code for the event after receiving this penalty, the penalty is
-reversed.
+.. figure:: figs/sgg/action-commitment.png
+   :width: 600 px
+   :align: center
 
-**Creative actions** enable players to exercise their artistic talents in an energy-related
-way.  These are worth a variable number of points, depending upon the effort made by the
-player and the quality of the outcome (as judged by administrators).  Examples of creative activities
-include: make a poem, make a video, write a letter to the editor, write a song, and create
-a photo blog.
+   *Sample commitment in the Smart Grid Game*
 
-Only a few of the many possible actions in the Smart Grid Game are available when a player
-logs in for the first time. Challenge designers configure each action through a set of
-predicates that determine if the action is locked or unlocked for a player at any
-given point in time. These predicates include: completed a certain number of tasks within
-a category, completed all tasks within a category, completed certain tasks, and time-based
-unlocking (available after a certain date).  Administrators can use logical operators to
-combine these predicates in order to organize the players' "path" through the Smart Grid
-Game.
+Events and Excursions
+*********************
+
+**Events and excursions** are actions tied to real world meetings. Events are typically
+held in or near the challenge location while excursions typically require
+transportation. To help organizers gauge interest in events and excursions, players can
+earn points by signing up in advance. Players that do this (and then actually attend the
+event or excursion) earn a signup bonus (typically 2 points). Players can also set up a
+reminder that is sent to their email and/or their mobile phone before the meeting takes
+place. At the event or excursion, a challenge administrator provides players with
+"attendance codes" printed on slips of paper that can be later entered in the system by
+the player to get their points.  (The paper slips provide a form of verification that the
+player physically attended the event or excursion.)  Attendance codes are generated by
+Makahiki and can only be used once. To discourage players from signing up and not
+attending, a penalty (typically 2 points) is assessed to players who do not submit an
+attendance code. If the player submits an attendance code for the event after receiving
+this penalty, the penalty is reversed.  The following figure illustrates a sample event:
+
+.. figure:: figs/sgg/action-event.png
+   :width: 600 px
+   :align: center
+
+   *Sample event in the Smart Grid Game*
+
+Creative
+********
+
+**Creative actions** enable players to exercise their artistic talents.  These are often worth a
+variable number of points, depending upon the effort made by the player and the quality of
+the outcome (as judged by administrators).  Examples of creative activities include: make
+a poem, make a video, write a letter to the editor, write a song, and create a photo
+blog. The following figure illustrates a creative activity:
+
+.. figure:: figs/sgg/action-creative.png
+   :width: 600 px
+   :align: center
+
+   *Sample creative activity in the Smart Grid Game*
+
 
 Designing a Smart Grid Game
 ---------------------------
@@ -95,32 +154,25 @@ Designing a Smart Grid Game
 Designing the Smart Grid Game is one of the most complicated parts of the Kukui Cup
 planning process, because the Smart Grid Game is the "portal" through which players get
 access to the various "actions" (activities, commitments, events, excursions, and
-creatives) of the Kukui Cup: in short, virtually all of the "real world" experiences. Here
-are the basic issues you must decide:
+creatives) of the Kukui Cup: in short, virtually all of the "real world" experiences. 
 
-  * What are the events (i.e. meetings) that you plan to organize?
-  * What are the excursions (i.e off-campus meetings that require transportation) if any? 
-  * What are the activities (regular and "creative"), and how do they work together to
-    provide a cohesive educational experience?
-  * What custom content do you need to design for your players? (The Action Library below is probably not sufficient.) 
-  * What is the "path" of actions that you wish players to follow as they move through
-    your Smart Grid Game?  In other words, what is required for an action to become
-    unlocked and accessible to players? In general, actions get unlocked either due to one
-    more more other actions being completed by a player, or because a certain date in time
-    has been reached.  By appropriate design of the "dependencies" among actions, you can
-    ensure that when players first look at the smart grid game, they have only a few
-    choices of actions to accomplish.  Then, as they achieve these, more and more actions
-    become available.
+Specify your content
+********************
 
+To design an SGG, the first step is to determine the content for your challenge, which
+means answering the following questions:
 
-The SGG Action Library
-----------------------
+  * What are the events (if any) in your challenge?
+  * What are the excursions (if any) in your challenge?
+  * What are the commitments (if any) in your challenge?
+  * What are the videos (if any) in your challenge?
+  * What are the non-video activities in your challenge? 
 
-To support the design process, we have created a library of almost 100 actions that you
-can use for inspiration in designing your Smart Grid Game.  We've organized them
-as a Google Spreadsheet with various subsheets to show different perspectives on the
-information.  The following figure shows a screen image of the spreadsheet. Click on the
-link in the caption to go to the live google spreadsheet.
+To help bootstrap your design process, we have created a library of almost 100 actions
+that you can use for inspiration.  They are organized as a Google Spreadsheet with various
+subsheets to show different perspectives on the information.  The following figure shows a
+screen image of the spreadsheet. Click on the link in the caption to go to the live google
+spreadsheet.
 
 .. figure:: figs/sgg/sgg-library-spreadsheet.png
    :width: 600 px
@@ -128,8 +180,39 @@ link in the caption to go to the live google spreadsheet.
    
    See the `action library`_ online.
 
-
 .. _action library: https://docs.google.com/spreadsheet/ccc?key=0An9ynmXUoikYdE4yaWRPVTlZdTg2Y1V5SWNTeUFjcWc#gid=2
+
+Versions of these actions are also provided in the default configuration of Makahiki, so
+you don't have to retype all of the information. 
+
+To complete this design step, create a simple document that lists the titles of all of your proposed
+content. 
+
+Specify the "path" of actions
+*****************************
+
+To make your SGG more interesting to players, and more pedagogically sophisticated, you
+will want to define "paths" through the content.   In most cases, when a new player sees
+the SGG for the first time, there should only be a few actions available to
+them---possibly only one.   All of the rest should be "locked".   
+
+Begin by specifying the initial, "seed" actions in your SGG: those that are always unlocked.
+
+Next, specify the actions that should be unlocked once one or more of the seed actions
+are successfully completed by players.  The content of these new actions can now
+potentially depend upon the information presented in the initial actions, since the game
+itself guarantees that players will have completed "dependent" actions before being
+able to see the new action.   
+
+A second way to specify that an action should be unlocked is by time and date.  For
+example, you may want to make events and excursions visible to participants starting five
+days before their actual occurrence. In this case, players don't have to complete any 
+
+
+Specify the layout
+******************
+
+
 
 
 The SGG Admin Widget
@@ -137,7 +220,7 @@ The SGG Admin Widget
 
 The following screenshot is an overview of the smart grid game admin widget:
 
-.. figure:: figs/configuration/configuration-game-admin-smartgrid-game.1.png
+.. figure:: figs/configuration/configuration-game-admin-smartgrid-game-1.png
    :width: 600 px
    :align: center
 

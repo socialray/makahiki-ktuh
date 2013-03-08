@@ -24,7 +24,7 @@ Getting to the periodic tasks page
 
 After clicking on the "Periodic Task Settings" link in the Challenge Design page, a page similar to the following should appear:
 
-.. figure:: figs/configuration/configuration-challenge-admin-scheduler-settings.1.png
+.. figure:: figs/configuration/configuration-challenge-admin-scheduler-settings-1.png
    :width: 600 px
    :align: center
 
@@ -33,7 +33,7 @@ This table lists all the defined Periodic Tasks, such as checking the Energy Goa
 Configure a periodic task
 -------------------------
 
-.. figure:: figs/configuration/configuration-challenge-admin-scheduler-settings.2.png
+.. figure:: figs/configuration/configuration-challenge-admin-scheduler-settings-2.png
    :width: 600 px
    :align: center
 

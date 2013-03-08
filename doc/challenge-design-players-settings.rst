@@ -43,7 +43,7 @@ Getting to the users page
 
 After clicking on the "Users" link in the Challenge Design, a page similar to the following should appear:
 
-.. figure:: figs/configuration/configuration-challenge-admin-players-settings.1.png
+.. figure:: figs/configuration/configuration-challenge-admin-players-settings-1.png
    :width: 600 px
    :align: center
 
@@ -66,7 +66,7 @@ When a new user is created, a "Profile" is also created for this user, as shown 
 
 The following screen shows an example of a player's profile settings looks like:
 
-.. figure:: figs/configuration/configuration-challenge-admin-players-settings.2.png
+.. figure:: figs/configuration/configuration-challenge-admin-players-settings-2.png
    :width: 600 px
    :align: center
 

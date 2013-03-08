@@ -29,7 +29,7 @@ Getting to the point rubric settings page
 
 After clicking on the "Point rubrics" link in the Challenge Design page, a page similar to the following should appear:
 
-.. figure:: figs/configuration/configuration-challenge-admin-score-settings.2.png
+.. figure:: figs/configuration/configuration-challenge-admin-score-settings-2.png
    :width: 600 px
    :align: center
 

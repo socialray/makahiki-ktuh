@@ -201,7 +201,7 @@ Energy Goal Game and the Water Goal Game in the top-level challenge design page.
 From there, clicking on Energy Goal settings
 in the Energy Game admin widget will produce a page similar to the following:
 
-.. figure:: figs/configuration/configuration-game-admin-resource-game-goalsetting.1.png
+.. figure:: figs/configuration/configuration-game-admin-resource-game-goalsetting-1.png
    :width: 600 px
    :align: center
 
@@ -211,7 +211,7 @@ for a new team using the "Add energy goal setting" in the upper right corner.
 
 Once you've clicked a team, you get the following configuration page:
 
-.. figure:: figs/configuration/configuration-game-admin-resource-game-goalsetting.2.png
+.. figure:: figs/configuration/configuration-game-admin-resource-game-goalsetting-2.png
    :width: 600 px
    :align: center
 
