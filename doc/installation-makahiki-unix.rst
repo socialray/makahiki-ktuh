@@ -115,7 +115,14 @@ to::
 
   local all postgres trust
 
-The first line might be: "local all postgres peer". Change it to "local all postgres trust"
+The first line might be: "local all postgres peer". Change it to "local all postgres trust". If
+you update the pg_hba.conf file you will have to restart the postgres server. For Linux use::
+
+  % /etc/init.d/postgresql restart
+
+or::
+
+  % sudo /etc/init.d/postgresql restart
 
 Alternatively, you can create a .pgpass file containing the credentials for the user postgres. See
 the PostgreSQL documentation for more information on the .pgpass file.
