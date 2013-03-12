@@ -85,8 +85,9 @@ and initialize the application with the default Makahiki data set. All Heroku ap
 names must be unique, so if your organization is "hpu", then you might call your
 application "makahiki-hpu". Use an application name appropriate for your organization.
 
-To initialize your heroku application (for example, "makahiki-hpu") with the default Makahiki data set, invoke the following::
+To initialize your heroku application (for example, "makahiki-hpu") with the default Makahiki data set, you need to first activate the Makahiki virtual environment and invoke the initialize_instance.py script, similar to the following::
 
+  % workon makahiki
   % cd makahiki
   % scripts/initialize_instance.py --type default --heroku makahiki-hpu
 
