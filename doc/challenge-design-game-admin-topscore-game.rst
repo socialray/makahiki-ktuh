@@ -3,6 +3,22 @@
 Design the Top Score Game
 =========================
 
+About the Top Score Game
+------------------------
+
+The Top Score Game enables you to design a challenge in which prizes are awarded to
+individuals and teams who earn the most points during the challenge (and/or each round in
+a challenge).   It also enables you to award prizes to the teams that conserved the most
+energy (or some other resource such as water) during the challenge (and/or each round in
+the challenge). 
+
+If the Top Score Game is enabled, then you can enable both a Leaderboard widget that shows the top
+players/team in contention for each round, and a Prizes widget that shows the prizes for
+for each round and the current team/individual in line to win them.
+
+.. todo:: provide screen images for the two Top Score widgets. 
+
+
 Specify a Top Score Prize
 -------------------------
 
@@ -12,7 +28,7 @@ After clicking on the "Prizes" link in the Top Score Game window, a page similar
    :width: 600 px
    :align: center
 
-This page displays the topscore prize information for each round.
+This page displays the current Top Score Game prize information for each round.
 
 To add a new prize, click the "Add prize" button in the upper right corner.
 

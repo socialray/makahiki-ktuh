@@ -148,18 +148,25 @@ blog. The following figure illustrates a creative activity:
    *Sample creative activity in the Smart Grid Game*
 
 
-Designing a Smart Grid Game
----------------------------
+Designing your Smart Grid Game
+------------------------------
 
 Designing the Smart Grid Game is one of the most complicated parts of the Kukui Cup
 planning process, because the Smart Grid Game is the "portal" through which players get
 access to the various "actions" (activities, commitments, events, excursions, and
 creatives) of the Kukui Cup: in short, virtually all of the "real world" experiences. 
 
-Specify your content
-********************
+We recommend that you begin by "roughing out" the design of your smart grid game on paper
+(or, even better, in a spreadsheet).   Once you have designed the preliminary set of
+actions and their locations in the grid, you can implement that design in the system. 
 
-To design an SGG, the first step is to determine the content for your challenge, which
+.. note:: We are working on a SGG "designer" interface with drag-and-drop functionality
+   that will greatly simplify this process.  We hope to release it in Q2 of 2013.
+
+Step 1: Design your initial content
+***********************************
+
+To design an SGG, the first step is to determine the initial content for your challenge, which
 means answering the following questions:
 
   * What are the events (if any) in your challenge?
@@ -167,36 +174,40 @@ means answering the following questions:
   * What are the commitments (if any) in your challenge?
   * What are the videos (if any) in your challenge?
   * What are the non-video activities in your challenge? 
+  * How many points is each activity worth?
+  * For video and non-video activities, what are the verification questions?
 
-To help bootstrap your design process, we have created a library of almost 100 actions
+To help bootstrap your design, we have created an action library of almost 100 actions
 that you can use for inspiration.  They are organized as a Google Spreadsheet with various
 subsheets to show different perspectives on the information.  The following figure shows a
-screen image of the spreadsheet. Click on the link in the caption to go to the live google
-spreadsheet.
+screen image of the spreadsheet. Here is a link to the `action library`_.
 
 .. figure:: figs/sgg/sgg-library-spreadsheet.png
    :width: 600 px
    :align: center
    
-   See the `action library`_ online.
+   A screenshot of the action library
 
 .. _action library: https://docs.google.com/spreadsheet/ccc?key=0An9ynmXUoikYdE4yaWRPVTlZdTg2Y1V5SWNTeUFjcWc#gid=2
 
 Versions of these actions are also provided in the default configuration of Makahiki, so
-you don't have to retype all of the information. 
+you don't have to retype all of the information if you would like to use one or more of
+these actions in your challenge.
 
-To complete this design step, create a simple document that lists the titles of all of your proposed
-content. 
+*To complete this design step*: create a document that provides the titles, descriptions,
+point values, and verification questions for all of your proposed
+content.   If you are reusing actions from the library, then just list the title and any
+attributes that you wish to change.
 
-Specify the "path" of actions
-*****************************
+Step 2: Design the "paths" that players take through the SGG
+************************************************************
 
 To make your SGG more interesting to players, and more pedagogically sophisticated, you
 will want to define "paths" through the content.   In most cases, when a new player sees
 the SGG for the first time, there should only be a few actions available to
 them---possibly only one.   All of the rest should be "locked".   
 
-Begin by specifying the initial, "seed" actions in your SGG: those that are always unlocked.
+For this design step, start by specifying the initial, "seed" actions in your SGG: those that are always unlocked.
 
 Next, specify the actions that should be unlocked once one or more of the seed actions
 are successfully completed by players.  The content of these new actions can now
@@ -204,19 +215,62 @@ potentially depend upon the information presented in the initial actions, since 
 itself guarantees that players will have completed "dependent" actions before being
 able to see the new action.   
 
-A second way to specify that an action should be unlocked is by time and date.  For
+An alternative way to specify that an action should be unlocked is by time and date.  For
 example, you may want to make events and excursions visible to participants starting five
-days before their actual occurrence. In this case, players don't have to complete any 
+days before their actual occurrence.   You can also combine the two approaches.  For
+example, you might want to make an event available only to those players who have
+successfully completed certain actions.  In this case, it gets unlocked for a player only if both the
+date/time has been reached, and the player has completed the actions. 
+
+*To complete this design step:* Augment the document created in Step 1 with the
+dependencies associated with each action.  If an action has no dependencies, it is a
+"seed" action and will be always unlocked. 
 
 
-Specify the layout
-******************
+Step 3: Design the layout
+*************************
 
+Now that you have the initial set of actions and their dependencies, it is time to figure
+out how they should appear in the grid.   A spreadsheet program is quite useful in this
+process, or you can use graph paper, or even a piece of paper in which you have drawn
+vertical lines to create a grid. In any case, you need to decide on the column labels
+(categories), and the column of actions underneath each category. If you are designing a
+game with multiple Levels, then you need to decide on the categories and actions for each
+level. 
 
+Note that you frequently don't have a "perfect" number of actions to create a rectangular
+grid.  To solve this problem, the SGG allows you to specify "Filler" cells in order to
+create a rectangular grid. For example, let's say you want to define a Level with 17
+actions.  You could create a 4 x 5 grid with your 17 actions and 3 additional "Filler"
+actions.  While the SGG allows you to create grids with a "ragged" bottom edge, we think
+that a rectangular grid is aestheticly more pleasing.   In addition, Filler cells can be
+later replaced by actual actions, enabling you to easily add content in the middle of a
+challenge without changing the structure of the grid.
 
+Here are some layout heuristics we have discovered through the design and execution of our
+own challenges:
 
-The SGG Admin Widget
---------------------
+  * Initial, unlocked (seed) actions generally go in the first Level, in the first column.
+    The intro video (used during the "first login wizard") is typically the
+    first action in the upper left corner.
+
+  * For best display on mobile devices, define no more than 5 categories per Level.
+
+  * To simplify addition of actions after the challenge is started, it is useful to always
+    have a few Filler actions on each Level.
+
+  * If you are creating a challenge with multiple rounds, you might want to have one Level
+    per round, and have each Level unlock at the start of its corresponding round.
+
+*To complete this design step:* Create a grid using a spreadsheet or paper that contains
+your layout.  Each action should appear once and only once on the grid.  If you define
+multiple Levels, you need to create a separate grid for each Level.
+
+Implementing your Smart Grid Game
+---------------------------------
+
+Once you have finished with the design of your Smart Grid Game, it is time to implement it
+in the system.  
 
 The following screenshot is an overview of the smart grid game admin widget:
 
@@ -225,10 +279,10 @@ The following screenshot is an overview of the smart grid game admin widget:
    :align: center
 
 
-Configure the set of levels
----------------------------
+Implement the Levels
+********************
 
-The first step is to specify the set of levels in your SGG. 
+Begin the implementation process by specifying the set of levels in your SGG. 
 Click on the "Levels" link in the admin widget, a page similar to the following should appear:
 
 .. figure:: figs/configuration/configuration-game-admin-smartgrid-game-level-list.png
@@ -248,8 +302,11 @@ unlock the level.
 
 You can also click on the "Add level" button in the list page to create a new level.
 
-Configure the Category
-----------------------
+Remember to click the Save button at the bottom of the page when finished to save your changes.
+
+
+Implement the Categories
+************************
 
 The next step is to specify the category titles in your SGG. Similar to the  configuration of 
 levels, you click the "Categories" link to change an existing category or 
@@ -270,8 +327,12 @@ The name is the label used in the smart grid game, the slug is referenced by sma
 determine which category the action belongs to. The priority determines how the categories are layed 
 out in the smart grid game, lowest to highest.
 
-Configure the set of actions
-----------------------------
+Remember to click the Save button at the bottom of the page when finished to save your changes.
+
+
+Implement the actions
+*********************
+
 The next step is to specify the actions for your smart grid game. It is the most complicated and time consuming part, depending on the size and complexity of your smart grid game.
 
 By clicking on the "Actions" link, you will see a page similar to the following:
@@ -288,9 +349,11 @@ You can also click on the "Slug" link to change the content of the action, as sh
    :width: 600 px
    :align: center
 
+Remember to click the Save button at the bottom of the page when finished to save your changes.
 
-Adding an Activity
-------------------
+
+Implement a new activity
+************************
 
 You can click on the "Add Activity" button on the top right corner of the page to add a new activity that normally requires player submit the answer and response.
 
@@ -300,32 +363,49 @@ The following page is an example of an activity type action:
    :width: 600 px
    :align: center
 
+Remember to click the Save button at the bottom of the page when finished to save your changes.
 
-Adding an Event/Excursion
--------------------------
+
+Implement a new event/excursion
+*******************************
 
 You can click on the "Add Event/Excursion" button on the top right corner of the page to add a new event or excursion.
 
-The following page is an example of an activity type action:
+The following page is an example of an event type action:
 
 .. figure:: figs/configuration/configuration-game-admin-smartgrid-game-event.png
    :width: 600 px
    :align: center
 
-For excursion, the "is excursion" checkbox need to be set.
+For an excursion, the "is excursion" checkbox should be set.
+
+Remember to click the Save button at the bottom of the page when finished to save your changes.
 
 
-Adding a Commitment
--------------------
+Implement a new commitment
+**************************
 
 You can click on the "Add Commitment" button on the top right corner of the page to add a new commitment.
 
-The following page is an example of an activity type action:
+The following page is an example of a commitment type action:
 
 .. figure:: figs/configuration/configuration-game-admin-smartgrid-game-commitment.png
    :width: 600 px
    :align: center
 
+Remember to click the Save button at the bottom of the page when finished to save your changes.
 
-.. note:: Remember to click the Save button at the bottom of the page when finished to save your changes.
+
+Verifying your Smart Grid Game
+------------------------------
+
+Once you have implemented your SGG, it is good to "playtest" the game.  Go through each of
+the actions, and make sure they display correctly.  Complete the initial actions to make
+sure that new actions get unlocked appropriately.  
+
+For large scale challenges, we recommend that you run a prior "pilot" challenge in which you select just a few
+people to play through the game and look for problems with your design. 
+
+
+
 
