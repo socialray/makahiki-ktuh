@@ -24,7 +24,7 @@ Install Python
 
 To check that python is installed and has the correct version::
 
-  & python --version 
+  % python --version 
     Python 2.7.3
 
 Install C Compiler
@@ -38,6 +38,10 @@ App Store.
 
 If on Linux, in most cases, you will find the C/C++ compiler is already installed in your environment.
 
+To check that C compiler is installed::
+
+  % gcc --version 
+
 
 Install Git
 -----------
@@ -45,17 +49,26 @@ Install Git
 Find a package for your operating system at the `GitHub install
 wiki`_. We recommend following the GitHub setup instructions at https://help.github.com/articles/set-up-git.
 
+To check that Git is installed::
+
+  % git --version 
+
+
 Install Pip
 -----------
 
 Install it by typing::
 
-  %  easy_install pip
+  % easy_install pip
 
 Depending on your system configuration, you may
 have to type ``sudo easy_install pip``. If you do not have easy_install,
 download and install it from the `setuptools website`_. Linux (Ubuntu) users can use 
 ``sudo apt-get install python-setuptools``.
+
+To check that Pip is installed::
+
+  % pip --version 
 
 Install Virtual Environment Wrapper
 -----------------------------------
@@ -66,6 +79,9 @@ Follow the `virtualenvwrapper installation instructions`_ through the Quick Star
 
   % mkvirtualenv makahiki
 
+To check that virtual environment wrapper is installed::
+
+  % workon makahiki
 
 Install Python Imaging Library
 ------------------------------
@@ -128,6 +144,13 @@ Alternatively, you can create a .pgpass file containing the credentials for the 
 the PostgreSQL documentation for more information on the .pgpass file.
 
 Linux users need to install the ``libpq-dev`` package using ``sudo apt-get install libpq-dev``.
+
+To check that PostgresSQL is installed and configured with "trusted" locally::
+
+  % psql -U postgres
+
+It should not prompt you for password.
+
 
 Install Memcache
 ----------------
