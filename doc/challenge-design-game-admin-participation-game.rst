@@ -25,16 +25,19 @@ participation where points are awarded.
    :align: center
 
 
-Configure Participation Settings
+Configure the Participation Game
 --------------------------------
 
-After clicking on the "Participation Settings" link in the Game Admin widget, You will see the overview of the participation settings, clicking on the link, will bring you to a page to change the settings:
+To configure the participation game, click on the "Participation Settings" link in the
+Game Admin widget. 
+You will see the overview of the participation settings. Clicking on the link will bring you to a page to change the settings:
 
 .. figure:: figs/configuration/configuration-game-admin-participation-game.png
    :width: 600 px
    :align: center
 
-You can change the points amount for each participation percentage.
+You can change the points to award for each participation percentage. Currently, the
+percentages (50, 75, and 100%) are hardwired into the system.
 
 .. note:: Remember to click the Save button at the bottom of the page when finished to save your changes.
 
