@@ -17,8 +17,13 @@ points to all active players on a team when the percentage participation by that
 reaches certain thresholds (currently 50%, 75%, and 100%).
 
 The current percentage participation by a player's team is shown in a scoreboard when this
-game is enabled, and players receive an in-game notification whenever they reach a threshold 
+game is enabled (as shown in the figure below) and players receive an in-game notification whenever they reach a threshold 
 participation where points are awarded.
+
+.. figure:: figs/configuration/challenge-design-game-admin-participation-game-scoreboard.png
+   :width: 400 px
+   :align: center
+
 
 Configure Participation Settings
 --------------------------------
