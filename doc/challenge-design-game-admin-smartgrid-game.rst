@@ -226,8 +226,24 @@ date/time has been reached, and the player has completed the actions.
 dependencies associated with each action.  If an action has no dependencies, it is a
 "seed" action and will be always unlocked. 
 
+Step 3: Decide which activities support the "social bonus"
+----------------------------------------------------------
 
-Step 3: Design the layout
+The social bonus is an optional attribute of any Smart Grid Game action which awards extra
+points if the player has done the action with someone else. Examples of actions which
+commonly include a social bonus are: attending an event, recording a song related to
+energy, or measuring a shower water flow rate.
+
+When a player submits a response for a action that supports the social bonus, the player
+can provide the email address another player who jointly completed the action. Once the
+other player also completes the task, the social bonus is awarded.  Social bonuses are not
+bi-directional; if the second player doesn't provide the first player's email address,
+only the first player will get the social bonus.
+
+*To complete this design step:*  Decide which actions should include the social bonus, and
+augment your document with this information.
+
+Step 4: Design the layout
 *************************
 
 Now that you have the initial set of actions and their dependencies, it is time to figure
