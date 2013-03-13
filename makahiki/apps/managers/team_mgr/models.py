@@ -2,10 +2,10 @@
 
 from django.db import models
 from django.contrib.auth.models import User
+from apps.managers.cache_mgr import cache_mgr
 from apps.managers.challenge_mgr import challenge_mgr
 from apps.managers.score_mgr import score_mgr
 from apps.utils.utils import media_file_path
-#from apps.widgets.badges.models import BadgeAward
 
 
 _MEDIA_LOCATION = "team"
@@ -33,12 +33,13 @@ class Team(models.Model):
     name = models.CharField(help_text="The team name", max_length=50)
     size = models.IntegerField(null=True, blank=True, default=0,
                                help_text="The size of the team. It is the total number of "
-                                         "residents in the team.")
+                                         "residents in the team. Non-zero value will be used to "
+                                         "normalize the team total score and participation rate.")
     logo = models.ImageField(
         max_length=1024, blank=True, null=True,
         upload_to=media_file_path(_MEDIA_LOCATION),
         help_text="The logo of the team.",)
-    admin_tool_tip = "The team a player belongs to. Teams are optional."
+    admin_tool_tip = "The team a player belongs to. Teams are required."
 
     def __unicode__(self):
         return self.name
@@ -68,6 +69,19 @@ class Team(models.Model):
             return entries
         else:
             return None
+
+    def save(self, *args, **kwargs):
+        """Custom save method."""
+        super(Team, self).save(*args, **kwargs)
+
+        # also create the resource goal settings
+        from apps.widgets.resource_goal.models import EnergyGoalSetting, WaterGoalSetting
+        if not EnergyGoalSetting.objects.filter(team=self):
+            EnergyGoalSetting(team=self).save()
+        if not WaterGoalSetting.objects.filter(team=self):
+            WaterGoalSetting(team=self).save()
+
+        cache_mgr.clear()
 
     class Meta:
         """Meta"""

@@ -37,15 +37,19 @@ class TeamEnergyGoalTest(TransactionTestCase):
         profile = self.user.get_profile()
         points = profile.points()
 
-        goal_settings = EnergyGoalSetting(
-            team=self.team,
-            goal_percent_reduction=5,
-            goal_points=20,
-            baseline_method="Fixed",
-            manual_entry=True,
-            manual_entry_time=datetime.time(hour=15),
-        )
-        goal_settings.save()
+        goal_settings = EnergyGoalSetting.objects.filter(team=self.team)
+        if not goal_settings:
+            goal_settings = EnergyGoalSetting(team=self.team,
+                goal_percent_reduction=5,
+                goal_points=20,
+                baseline_method="Fixed",
+                manual_entry=True,
+                manual_entry_time=datetime.time(hour=15),
+            )
+            goal_settings.save()
+        else:
+            goal_settings = goal_settings[0]
+
         goal_baseline = EnergyBaselineDaily(
             team=self.team,
             day=datetime.date.today().weekday(),

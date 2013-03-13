@@ -172,8 +172,8 @@ class Command(MakahikiBaseCommand):
 
         # add initialize data for energy and water
         for team in Team.objects.all():
-            WaterUsage(team=team, date=today.date(), time=datetime.time(15), usage=1).save()
-            EnergyUsage(team=team, date=today.date(), time=datetime.time(15), usage=1).save()
+            WaterUsage(team=team, date=today.date(), time=datetime.time(15), usage=1000).save()
+            EnergyUsage(team=team, date=today.date(), time=datetime.time(15), usage=1000).save()
 
         self.stdout.write("created initial resource usages for all teams.\n")
 
@@ -186,14 +186,15 @@ class Command(MakahikiBaseCommand):
         for team in Team.objects.all():
             for day in range(0, 7):
                 for hour in range(1, 25):
-                    EnergyBaselineHourly(team=team, day=day, hour=hour, usage=1 * hour).save()
+                    EnergyBaselineHourly(team=team, day=day, hour=hour,
+                                         usage=1 * 1000 * hour).save()
 
         # energy daily
         for baseline in EnergyBaselineDaily.objects.all():
             baseline.delete()
         for team in Team.objects.all():
             for day in range(0, 7):
-                EnergyBaselineDaily(team=team, day=day, usage=1 * 24).save()
+                EnergyBaselineDaily(team=team, day=day, usage=1 * 1000 * 24).save()
 
         # water daily
         for baseline in WaterBaselineDaily.objects.all():
@@ -218,11 +219,7 @@ class Command(MakahikiBaseCommand):
             goal_setting.delete()
 
         for team in Team.objects.all():
-            EnergyGoalSetting(team=team,
-                              goal_percent_reduction=5,
-                              manual_entry=False,
-                              manual_entry_time=datetime.time(15),
-                              goal_points=20).save()
+            EnergyGoalSetting(team=team).save()
 
         # WaterGoal
         for goal in WaterGoal.objects.all():
@@ -231,10 +228,6 @@ class Command(MakahikiBaseCommand):
             goal_setting.delete()
 
         for team in Team.objects.all():
-            WaterGoalSetting(team=team,
-                              goal_percent_reduction=5,
-                              manual_entry=True,
-                              manual_entry_time=datetime.time(15),
-                              goal_points=20).save()
+            WaterGoalSetting(team=team).save()
 
-        self.stdout.write("created test goal settings for all teams.\n")
+        self.stdout.write("created goal settings for all teams.\n")

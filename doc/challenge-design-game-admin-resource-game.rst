@@ -90,6 +90,21 @@ Interestingly, the scoreboard shows that the number of times that a team makes t
 energy goal is not perfectly correlated with their average reduction in energy
 consumption.
 
+Additional goal game interfaces: the Realtime Power meter view
+**************************************************************
+
+One useful perspective to a team is a realtime power meter visualization that
+shows the current power usage of a team, as shown
+by the following figure:
+
+.. figure:: figs/configuration/game-design/degg-powermeter.png
+   :width: 400 px
+   :align: center
+
+   *The power meter visualization*
+
+This visualization displays the realtime power consumption which updates in a specified interval. This give players the sense of energy consumption at the monent. For example, some one turns on a high power microwave, they might see a spike in the realtime power meter reflecting the power usage at that monent.
+
 Additional goal game interfaces: the calendar view
 **************************************************
 
@@ -106,7 +121,7 @@ by the following figure:
 This visualization is useful for helping teams to see if there are patterns to their
 ability to make their goal.  The above display shows that they have been making their goal
 more regularly in the recent past, indicating perhaps that they have identified a useful
-strategy for conservation. 
+strategy for conservation.
 
 Automated vs. manual data collection
 ************************************
@@ -241,14 +256,7 @@ Given the discussion above, the settings should now be understandable:
 
 You can also click on the "Add new goal settings" button in the list page to create the goal settings for a new team.
 
-.. todo:: what happens if a team does not have goal settings?  Do they not play the goal
-   game? Is the interface disabled for them alone?  Or is it required that if one team is
-   playing a resource goal game, all teams should play the resource goal game? 
+.. Note:: Every team should have the goal settings. In fact, when you create a team, the default resource (energy and water) goal settings is created for this team. The designer should check the default value to see if they are what they want and if they are consistent across other teams.
 
-.. todo:: The realtime meter interval setting seems out of place here.   I have not once
-   written about the real-time meter on this page, and it is really not relevant to the
-   energy goal game.  Perhaps there needs to be a separate configuration page for the
-   real-time meter widget?
-
-.. note:: Remember to click the Save button at the bottom of the page when finished to save your changes.
+.. Note:: Remember to click the Save button at the bottom of the page when finished to save your changes.
 
