@@ -64,12 +64,11 @@ After clicking on the "Quests" link in the Game Admin widget, a page similar to 
 This page displays all the quests in the system.  When you design a Quest, you provide a
 priority number, which imposes an ordering on the presentation of Quests.  
 
-The algorithm for Quest display is as follows: 
-The three quests with the lowest priority number whose:
+The algorithm for Quest display is as follows. The three quests with the lowest priority number whose:
+
   * unlock conditions evaluate to True
   * whose completion conditions evaluate to False
-  * have not been explicitly indicated as "uninteresting" by the player
-are shown to the player.
+  * have not been explicitly indicated as "uninteresting" by the player are shown to the player.
 
 To add a new quest, click the "Add quest" button in the upper right corner.
 
