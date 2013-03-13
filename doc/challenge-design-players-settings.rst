@@ -49,15 +49,7 @@ After clicking on the "Users" link in the Challenge Design, a page similar to th
 
 To add a new player, click the "Add user" button in the upper right corner. 
 
-
-Defining multiple users through file upload
--------------------------------------------
-
-To load a list of users defined in a csv file, the "Bulk create users" button could be used, which will prompt you to upload a csv file from your local computer.
-
-The format of the csv file is as follows::
-
-    team, firstname, lastname, email, username, password
+This is a two step processes. You will be asked to input the username and password for the user first, then, the next step will ask you to input the user's first name, last name, and other user account info.
 
 About the user profile
 ----------------------
@@ -70,6 +62,10 @@ The following screen shows an example of a player's profile settings looks like:
    :width: 600 px
    :align: center
 
+.. Note:: When creating a user, you will normally want to specify the team this player belongs to. After you create the user, you can click on the Profile link in the user list, and specify the team in this player's profile setting page.
+
+.. Note:: By default, the admin user does not belong to any team. You can temporarily assign the admin user to a team for testing purpose. For example, if you want to see Energy usage of a team, you could temporarily change the admin user to that team then go to the "Go Low" page to see the energy usage. Make sure you un-assign the admin from any team once the testing is done, otherwise, the admin will be participating in the challenge as a team member for the team he is assigned to, which may not be what your intent is.
+
 Changing the information associated with an existing user
 ---------------------------------------------------------
 
@@ -77,6 +73,17 @@ Due to Django, Makahiki stores information about a user in two places:
 
   *  Click on the "username" link to bring up a page to modify basic information about the user. 
   *  Click on the "profile" link to bring up a page to modify additional information about the user.
+
+Defining multiple users through file upload
+-------------------------------------------
+
+To load a list of users defined in a csv file, the "Bulk create users" button could be used, which will prompt you to upload a CSV file from your local computer.
+
+The format of the csv file is as follows::
+
+    team, firstname, lastname, email, username, password
+
+This step will create both the User objects and Profile objects in the system for the users specified in CSV file.
 
 .. note:: Remember to click the Save button at the bottom of the page when finished to save your changes.
 

@@ -40,7 +40,7 @@ team definition, click the link which brings up a page similar to the following:
    :width: 600 px
    :align: center
 
-Specifying the group is optional. 
+Normally, you can leave the team size as 0. An experimental feature of Makahiki is to specify a non-zero size for each team. By specifying a non-zero team size for each team, the system will use the team size to normalize the participations rate, total team points across different teams.
 
 .. note:: Remember to click the Save button at the bottom of the page when finished to save your changes. 
 
