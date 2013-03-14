@@ -40,8 +40,8 @@ The configuration setting is rather simple: just the URL to the WattDepot server
 However, for WattDepot integration with Makahiki to occur successfully, the following
 additional constraints must be met:
 
-.. todo:: Document additional constraints (such as source naming) required for WattDepot
-          configuration with Makahiki.
+* Currently, Makahiki uses the name of a team as name of the Wattdepot source to retrieve the energy data for the team. This requires that the name of the team need to be the same as the source name in Wattdepot. Otherwise, Makahiki will not be able to retrieve the team's energy data. This limitation may be resolved in the future release of Makahiki.
+
 
 
 
