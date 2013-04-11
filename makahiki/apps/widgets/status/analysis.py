@@ -330,7 +330,7 @@ def calculate_user_summary(user_list):
             all_points = 0
             for t in point_types:
                 type_points = query.filter(
-                    Q(message__startswith=type) | Q(message__startswith=" " + t)).aggregate(
+                    Q(message__startswith=t) | Q(message__startswith=" " + t)).aggregate(
                         Sum("points"))["points__sum"]
                 type_points = type_points if type_points else 0
                 all_points += type_points
