@@ -1,21 +1,27 @@
- <div class="content-box">
+ <div class="content-box demi-widget">
     <div class="content-box-title">
-        {{ TEAM_LABEL.capitalize }} Participation
+        {{ TEAM_LABEL.capitalize }}/Group Participation
      </div>
 
     <!--Tabs-->
     <ul id="team-part-tab" class="nav nav-tabs">
+
         {% for round_name, standings in view_objects.scoreboard.round_standings.items reversed %}
             <li class="">
-                <a data-toggle="tab" href="#team-part-{{round_name|cut:" "}}">{{round_name }}</a>
+                <a data-toggle="tab" href="#group-part-{{round_name|cut:" "}}">Group {{round_name }}</a>
             </li>
-        {% endfor %}  
-        </ul>
+        {% endfor %}
+        {% for round_name, standings in view_objects.scoreboard.round_standings.items reversed %}
+            <li class="">
+                <a data-toggle="tab" href="#team-part-{{round_name|cut:" "}}">{{ TEAM_LABEL.capitalize }} {{round_name }}</a>
+            </li>
+        {% endfor %}
+    </ul>
 
     <!--Contents-->
     <div class="tab-content">   
         {% for round_name, standings in view_objects.scoreboard.round_standings.items %}  
-        <div id="team-part-{{round_name|cut:" "}}" class="tab-pane">  
+        <div id="team-part-{{round_name|cut:" "}}" class="tab-pane">
             <table class="table-striped">
                 <thead>
                     <tr>
@@ -35,9 +41,29 @@
                 </tbody>
             </table>
         </div>
-
-
-        {% endfor %} 
+        {% endfor %}
+        {% for round_name, standings in view_objects.scoreboard.round_standings.items %}
+            <div id="group-part-{{round_name|cut:" "}}" class="tab-pane">
+                <table class="table-striped">
+                    <thead>
+                    <tr>
+                        <th class="column-number" width="10%">Rank</th>
+                        <th class="column-text" width="75%">Group</th>
+                        <th class="column-number" width="15%">%</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for f in standings.group_participation %}
+                        <tr>
+                            <td class="column-number" width="10%">{{ forloop.counter }}</td>
+                            <td class="column-text" width="75%">{{ f }}</td>
+                            <td class="column-number" width="15%">{{ f.active_participation }}%</td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        {% endfor %}
     </div>  
 </div>
 <script type="text/javascript">

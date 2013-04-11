@@ -1,0 +1,35 @@
+<div class="item">
+    <div class="content-box-title set-width-outer-width">
+        Top Score Game (Individual, {{round_name}})
+        {% if not view_objects.scoreboard.no_carousel %}
+            <a href="#" style="float: right">
+                <img src="{{ STATIC_URL}}images/icons/icon-help-sm.png"
+                     width="20" align="center"
+                     title="Click to get help about this window"
+                     onclick="toggleHelp(event, 'widget', 'points-scoreboard'); return false;" />
+            </a>
+        {% endif %}
+    </div>
+    <div class="set-width-outer-width">
+        <table class="table table-striped">
+            <thead>
+            <tr>
+                <th class="column-number" width="10%">Rank</th>
+                <th class="column-text" width="75%">Individual</th>
+                <th class="column-number" width="15%">Points</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for p in standings.profile_standings %}
+                <tr>
+
+                    <td class="column-number" width="10%">{% if view_objects.scoreboard.profile.name == p.profile__name %}<b>{% endif %}{{ forloop.counter }}{% if view_objects.scoreboard.profile.name == p.profile__name %}</b>{% endif %}</td>
+                    <td class="column-text" width="75%">{% if view_objects.scoreboard.profile.name == p.profile__name %}<b>{% endif %}{{ p.profile__name }}{% if view_objects.scoreboard.profile.name == p.profile__name %}</b>{% endif %}</td>
+                    <td class="column-number" width="15%">{% if view_objects.scoreboard.profile.name == p.profile__name %}<b>{% endif %}{{ p.points }}{% if view_objects.scoreboard.profile.name == p.profile__name %}</b>{% endif %}</td>
+
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>

@@ -5,7 +5,7 @@ from django.template.defaultfilters import slugify
 from apps.managers.cache_mgr import cache_mgr
 from apps.managers.challenge_mgr import challenge_mgr
 from apps.managers.score_mgr import score_mgr
-from apps.managers.team_mgr.models import Team
+from apps.managers.team_mgr.models import Team, Group
 
 
 def team_members(team):
@@ -70,6 +70,40 @@ def team_points_leaders(num_results=None, round_name=None):
         return results
 
 
+def group_points_leader(round_name=None):
+    """Returns the team points leader (the first place) across all groups, as a Team object."""
+    if not round_name:
+        round_name = challenge_mgr.get_round_name()
+
+    group_id = score_mgr.group_points_leader(round_name=round_name)
+    if group_id:
+        return Group.objects.get(id=group_id)
+    else:
+        groups = Group.objects.all()
+        if groups:
+            return groups[0]
+        else:
+            return None
+
+
+def group_points_leaders(num_results=None, round_name=None):
+    """Returns the group points leaders across all groups, as a dictionary profile__team__name
+    and points.
+    """
+
+    entries = score_mgr.group_points_leaders(num_results=num_results, round_name=round_name)
+
+    if entries:
+        return entries
+    else:
+        results = Group.objects.all().extra(
+            select={'profile__team__group__name': 'name', 'points': 0}).values(
+            'profile__team__group__name', 'points')
+        if num_results:
+            results = results[:num_results]
+        return results
+
+
 def team_active_participation(num_results=None, round_name=None):
     """Calculate active participation."""
     if not round_name:
@@ -101,6 +135,40 @@ def team_active_participation(num_results=None, round_name=None):
                 t.active_participation = 0
                 participation.append(t)
         cache_mgr.set_cache('active_p-%s' % slugify(round_name), participation, 1800)
+    return participation
+
+
+def group_active_participation(num_results=None, round_name=None):
+    """Calculate active participation."""
+    if not round_name:
+        round_name = challenge_mgr.get_round_name()
+
+    participation = cache_mgr.get_cache('group_active_p-%s' % slugify(round_name))
+    if participation is None:
+        active_participation = Group.objects.filter(
+            team__profile__scoreboardentry__points__gte=score_mgr.active_threshold_points(),
+            team__profile__scoreboardentry__round_name=round_name).annotate(
+                user_count=Count('team__profile')).order_by('-user_count')
+
+        if num_results:
+            active_participation = active_participation[:num_results]
+
+        participation = []
+        for g in active_participation:
+            group_size = 0
+            for t in g.team_set.all():
+                group_size += t.profile_set.count()
+            g.active_participation = (g.user_count * 100) / group_size
+            participation.append(g)
+
+        for g in Group.objects.all():
+            if len(participation) == num_results:
+                break
+
+            if not g in active_participation:
+                g.active_participation = 0
+                participation.append(g)
+        cache_mgr.set_cache('group_active_p-%s' % slugify(round_name), participation, 1800)
     return participation
 
 

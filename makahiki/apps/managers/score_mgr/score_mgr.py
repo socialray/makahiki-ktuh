@@ -441,6 +441,41 @@ def team_points_leaders_in_group(group, num_results=None, round_name=None):
     return results
 
 
+def group_points_leader(round_name=None):
+    """Returns the group points leader (the first place) across all groups, as a Group ID."""
+    if not round_name:
+        round_name = challenge_mgr.get_round_name()
+
+    entry = ScoreboardEntry.objects.values("profile__team__group").filter(
+        round_name=round_name).annotate(
+            points=Sum("points"),
+            last=Max("last_awarded_submission")).order_by("-points", "-last")
+    if entry:
+        return entry[0]["profile__team__group"]
+    else:
+        return None
+
+
+def group_points_leaders(num_results=None, round_name=None):
+    """Returns the group points leaders across all groups, as a dictionary profile__team__group_name
+    and points.
+    """
+    if not round_name:
+        round_name = challenge_mgr.get_round_name()
+
+    entries = ScoreboardEntry.objects.filter(
+        round_name=round_name, profile__team__isnull=False).values(
+        "profile__team__group__name").annotate(
+            points=Sum("points"),
+            last=Max("last_awarded_submission")).order_by("-points", "-last")
+    if entries:
+        if num_results:
+            entries = entries[:num_results]
+        return entries
+    else:
+        return None
+
+
 def award_referral_bonus(referral, referrer):
     """award the referral bonus to both party."""
     #depends on the referred's team's participation, the bonus point could be different.

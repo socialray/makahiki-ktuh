@@ -20,6 +20,7 @@ def resource_supply(request, resource, page_name):
     user = request.user
     team = user.get_profile().team
     round_resource_ranks = {}
+    round_group_resource_ranks = {}
     round_resource_goal_ranks = {}
 
     today = datetime.datetime.today()
@@ -28,9 +29,12 @@ def resource_supply(request, resource, page_name):
     for key in rounds.keys():
         if rounds[key]["start"] <= today and\
             (rounds[key]["display_scoreboard"] or page_name == "status"):
-            #round_resource_ranks[key] = resource_mgr.resource_ranks(resource, key)
+            round_resource_ranks[key] = resource_mgr.resource_ranks(resource, key)
+            round_group_resource_ranks[key] = resource_mgr.group_resource_ranks(resource, key)
             round_resource_goal_ranks[key] = resource_goal.resource_goal_ranks(resource, key)
 
+    round_resource_ranks["Overall"] = resource_mgr.resource_ranks(resource, "Overall")
+    round_group_resource_ranks["Overall"] = resource_mgr.group_resource_ranks(resource, "Overall")
     round_resource_goal_ranks["Overall"] = resource_goal.resource_goal_ranks(resource, "Overall")
 
     resource_setting = resource_mgr.get_resource_setting(resource)
@@ -40,4 +44,5 @@ def resource_supply(request, resource, page_name):
         "resource": resource_setting,
         "round_resource_goal_ranks": round_resource_goal_ranks,
         "round_resource_ranks": round_resource_ranks,
+        "round_group_resource_ranks": round_group_resource_ranks,
         }

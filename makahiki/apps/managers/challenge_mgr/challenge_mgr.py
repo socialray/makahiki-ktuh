@@ -351,6 +351,27 @@ def get_round_info(round_name=None):
         }
 
 
+def get_round_start_end(round_name=None):
+    """return the start and end date of a round regarding the round_reset."""
+    if round_name == "Overall":
+        all_round_info = get_all_round_info()
+        start = all_round_info["competition_start"]
+        end = all_round_info["competition_end"]
+    else:
+        round_info = get_round_info(round_name)
+        if not round_info:
+            return None
+
+        end = round_info["end"].date
+        if round_info["round_reset"]:
+            start = round_info["start"].date
+        else:
+            # if no round reset, use the competition_start as start date
+            start = get_all_round_info()["competition_start"]
+
+    return start, end
+
+
 def get_round_name(submission_date=None):
     """Return the round name associated with the specified date, or else return None.
     if submission_date is not specified, return the current round name.

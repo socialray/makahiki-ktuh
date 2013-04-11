@@ -25,8 +25,11 @@ def supply(request, page_name):
         if rounds[key]["start"] <= today and \
             (rounds[key]["display_scoreboard"] or page_name == "status"):
             round_standings[key] = {
+                "group_standings": team_mgr.group_points_leaders(num_results, key),
                 "team_standings": team_mgr.team_points_leaders(num_results, key),
                 "profile_standings": player_mgr.points_leaders(num_results, key),
+                "group_participation": team_mgr.group_active_participation(num_results, key) if \
+                    page_name == "status" else None,
                 "team_participation": team_mgr.team_active_participation(num_results, key) if \
                                       page_name == "status" else None,
                 "user_team_standings": team.points_leaders(num_results, key) if \
@@ -34,9 +37,12 @@ def supply(request, page_name):
             }
     # add an overall scoreboard
     round_standings["Overall"] = {
+        "group_standings": team_mgr.group_points_leaders(num_results, "Overall"),
         "team_standings": team_mgr.team_points_leaders(num_results, "Overall"),
         "profile_standings": player_mgr.points_leaders(num_results, "Overall"),
-        "team_participation": team_mgr.team_active_participation(num_results, "Overall") if\
+        "group_participation": team_mgr.group_active_participation(num_results, "Overall") if\
+            page_name == "status" else None,
+        "team_participation": team_mgr.team_active_participation(num_results, "Overall") if \
             page_name == "status" else None,
     }
 

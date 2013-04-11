@@ -1,0 +1,49 @@
+{% for round_name, ranks in round_resource_ranks.items reversed %}
+    {%if not no_carousel %}
+        <div class="item">
+        <div class="set-width-outer-width">
+    {% else %}
+        <div id="{{resource.name}}-{{round_name|cut:" "}}" class="tab-pane fade active in {% if round_resource_goal_ranks %}wrap{%endif%}">
+    {% endif %}
+
+{% if not no_carousel %}
+    <div class="content-box-title">
+        {{ TEAM_LABEL.capitalize }} {{ resource.name|capfirst }} Scoreboard ({{ round_name }})
+        <a href="#" style="float: right">
+            <img src="{{ STATIC_URL}}images/icons/icon-help-sm.png" width="20"
+                 align="center"
+                 title="Click to get help about this window"
+                 onclick="toggleHelp(event, 'widget', '{{resource.name}}-scoreboard'); return false;"/>
+        </a>
+    </div>
+{% endif %}
+<table class="table-striped">
+    <thead>
+    <tr>
+        <th class="column-number" width="10%">Rank</th>
+        <th class="column-text" width="75%">{{ TEAM_LABEL }}</th>
+        <th class="column-number" width="15%">{{ resource.unit  }} used</th>
+    </tr>
+    </thead>
+    {% for entry in ranks %}
+        <tr>
+            <td class="column-number" width="10%">{% if entry.team__name == team.name %}<b>{% endif %}
+            {{ forloop.counter }}
+            {% if entry.team__name == team.name %}</b>{% endif %}
+            </td>
+            <td class="column-text" width="75%">{% if entry.team__name == team.name %}<b>{% endif %}
+            {{ entry.team__name }}
+            {% if entry.team__name == team.name %}</b>{% endif %}
+            </td>
+            <td class="column-number" width="15%">{% if entry.team__name == team.name %}<b>{% endif %}
+            {{ entry.total }}
+            {% if entry.team__name == team.name %}</b>{% endif %}
+            </td>
+        </tr>
+    {% endfor %}
+</table>
+</div>
+{% if not no_carousel %}
+    </div>
+{% endif %}
+{% endfor %}

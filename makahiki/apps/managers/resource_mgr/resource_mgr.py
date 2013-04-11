@@ -116,20 +116,47 @@ def resource_ranks(name, round_name=None):
         else:
             ordering = "-total"
 
-        round_info = challenge_mgr.get_round_info(round_name)
-        if not round_info:
-            return None
-
-        all_rounds_info = challenge_mgr.get_all_round_info()
+        start, end = challenge_mgr.get_round_start_end(round_name)
 
         usage_ranks = resource_usage.objects.filter(
-            date__lte=round_info["end"].date,
-            date__gte=all_rounds_info["competition_start"]).values("team__name").annotate(
+            date__lte=end,
+            date__gte=start).values("team__name").annotate(
                 total=Sum("usage")).order_by(ordering)
 
         ranks = []
         for rank in usage_ranks:
             ranks.append({"team__name": rank["team__name"],
+                          "total": utils.format_usage(rank["total"], rate)})
+
+        cache_mgr.set_cache(cache_key, ranks, 600)
+    return ranks
+
+
+def group_resource_ranks(name, round_name=None):
+    """Return the ranking of resource use for all teams."""
+
+    cache_key = "group_%s_ranks-%s" % (name, slugify(round_name))
+    ranks = cache_mgr.get_cache(cache_key)
+    if ranks is None:
+        resource_usage = _get_resource_usage(name)
+
+        resource_setting = get_resource_setting(name)
+        rate = resource_setting.conversion_rate
+        if resource_setting.winning_order == "Ascending":
+            ordering = "total"
+        else:
+            ordering = "-total"
+
+        start, end = challenge_mgr.get_round_start_end(round_name)
+
+        usage_ranks = resource_usage.objects.filter(
+            date__lte=end,
+            date__gte=start).values("team__group__name").annotate(
+                total=Sum("usage")).order_by(ordering)
+
+        ranks = []
+        for rank in usage_ranks:
+            ranks.append({"team__group__name": rank["team__group__name"],
                           "total": utils.format_usage(rank["total"], rate)})
 
         cache_mgr.set_cache(cache_key, ranks, 600)

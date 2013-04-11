@@ -21,6 +21,7 @@ class Prize(models.Model):
         ("individual_team", "Individual (Team)"),
         ("team_overall", " Team (Overall)"),
         ("team_group", " Team (Group)"),
+        ("group", " Group"),
         )
     AWARD_CRITERIA_CHOICES = (
         ("points", "Points"),
@@ -113,24 +114,26 @@ class Prize(models.Model):
             round_name = "Round 1"
         else:
             round_name = self.round.name
-        if self.award_to == "individual_overall":
-            return player_mgr.points_leader(round_name=round_name)
 
+        leader = None
+
+        if self.award_to == "individual_overall":
+            leader = player_mgr.points_leader(round_name=round_name)
         elif self.award_to == "team_group":
             if team:
                 leaders = team.group.team_points_leaders(num_results=1, round_name=round_name)
                 if leaders:
-                    return leaders[0]
-            return None
-
+                    leader = leaders[0]
         elif self.award_to == "team_overall":
-            return team_mgr.team_points_leader(round_name=round_name)
-
+            leader = team_mgr.team_points_leader(round_name=round_name)
+        elif self.award_to == "group":
+            leader = team_mgr.group_points_leader(round_name=round_name)
         elif self.award_to == "individual_team":
             if team:
                 leaders = team.points_leaders(num_results=1, round_name=round_name)
                 if leaders:
-                    return leaders[0]
-            return None
+                    leader = leaders[0]
+        else:
+            raise Exception("'%s' is not implemented yet." % self.award_to)
 
-        raise Exception("'%s' is not implemented yet." % self.award_to)
+        return leader

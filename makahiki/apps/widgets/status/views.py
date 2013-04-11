@@ -22,6 +22,9 @@ def analysis_view(request, command):
         result = analysis.calculate_action_stats()
     elif command == "users":
         result = analysis.calculate_user_stats()
+    elif command == "user_summary":
+        users = request.GET.get("user", "")
+        result = analysis.calculate_user_summary(users)
     elif command == "timestamps":
         team = request.GET.get("team", "")
         date_start = request.GET.get("date_start", "")
