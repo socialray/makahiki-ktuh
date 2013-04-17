@@ -1,8 +1,22 @@
-<div class="content-box">
+{% with view_objects.projects as projects %}
+<div id="projects-list" class="content-box">
     <div class="content-box-title">
-        Widget name
-    </div>
-    <div class="content-box-contents">
-        Widget content
+        <h3>Project Game</h3>
+        <a href="#" style="float: right">
+            <img src="{{ STATIC_URL}}images/icons/icon-help-sm.png" width="20"
+                 title="Click to get help about this window"
+                 onclick="toggleHelp(event, 'widget', 'projects'); return false;"/></a>
     </div>
 </div>
+    <div class="content-box-contents">
+        <h1>Projects</h1>
+        {% for project in projects.projects %}
+        <div>{{ project.title }}</div>
+        {% endfor %}
+        
+        <div>
+        {% include "create_project.html" %}
+        </div>
+    </div>
+</div>
+{% endwith %}
