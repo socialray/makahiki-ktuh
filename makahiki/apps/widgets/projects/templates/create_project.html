@@ -1,0 +1,25 @@
+<form method="post">{% csrf_token %}
+<b>Do you have an idea for a project? Propose it here in the form below!</b><br><br>
+    {{ form.non_field_errors }}
+    <div class="fieldWrapper">
+        {{ form.title.errors }}
+        <label for="id_subject">Title:</label>
+        {{ form.title }}
+    </div>
+    <div class="fieldWrapper">
+        {{ form.short_description.errors }}
+        <label for="id_message">Short description in 20 words or less:</label>
+        {{ form.short_description }}
+    </div>
+    <div class="fieldWrapper">
+        {{ form.long_description.errors }}
+        <label for="id_sender">Detailed description of project (up to 3000 characters):</label>
+        {{ form.long_description }}
+    </div>
+    <div class="fieldWrapper">
+        {{ form.max_number_of_members.errors }}
+        <label for="id_cc_myself">Suggested number of project members (up to 6):</label>
+        {{ form.max_number_of_members }}
+    </div>
+    <p><input type="submit" value="Propose project" /></p>
+</form>
